@@ -62,7 +62,7 @@ export default function NotFound() {
 
   const popularPages: { name: string; href: string; icon: React.ReactNode; description: string; external?: boolean }[] = [
     { name: "Properties", href: "/properties", icon: <Building className="h-4 w-4" />, description: "Browse available rentals" },
-    { name: "Property Management Portal", href: APP_PORTAL_URL, icon: <Users className="h-4 w-4" />, description: "Owner & tenant portal", external: true },
+    { name: "Property Management Portal", href: APP_PORTAL_URL, icon: <Users className="h-4 w-4" />, description: "Owner, tenant, and staff access", external: APP_PORTAL_IS_EXTERNAL },
     { name: "Buy a Home", href: "/buy", icon: <Home className="h-4 w-4" />, description: "Find your dream home" },
     { name: "Sell a Home", href: "/sell", icon: <Home className="h-4 w-4" />, description: "Sell your property" },
     { name: "Mortgage Loans", href: "/loans", icon: <Calculator className="h-4 w-4" />, description: "Get pre-approved" },
@@ -74,7 +74,7 @@ export default function NotFound() {
   const quickActions: { name: string; href: string; icon: React.ReactNode; external?: boolean }[] = [
     { name: "Search Properties", href: "/properties", icon: <Search className="h-5 w-5" /> },
     { name: "Calculate Mortgage", href: "/calculators/mortgage-payment", icon: <Calculator className="h-5 w-5" /> },
-    { name: "Property Management Portal", href: APP_PORTAL_URL, icon: <Building className="h-5 w-5" />, external: true },
+    { name: "Property Management Portal", href: APP_PORTAL_URL, icon: <Building className="h-5 w-5" />, external: APP_PORTAL_IS_EXTERNAL },
     { name: "Get Pre-Approved", href: "/loans", icon: <Home className="h-5 w-5" /> }
   ]
 
@@ -114,8 +114,6 @@ export default function NotFound() {
                   <a
                     key={index}
                     href={action.href}
-                    target={APP_PORTAL_IS_EXTERNAL && action.href === APP_PORTAL_URL ? "_blank" : undefined}
-                    rel={APP_PORTAL_IS_EXTERNAL && action.href === APP_PORTAL_URL ? "noopener noreferrer" : undefined}
                   >
                     <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2 hover:bg-primary hover:text-primary-foreground transition-colors">
                       {action.icon}
@@ -148,8 +146,6 @@ export default function NotFound() {
                   <a
                     key={index}
                     href={page.href}
-                    target={APP_PORTAL_IS_EXTERNAL && page.href === APP_PORTAL_URL ? "_blank" : undefined}
-                    rel={APP_PORTAL_IS_EXTERNAL && page.href === APP_PORTAL_URL ? "noopener noreferrer" : undefined}
                   >
                     <div className="p-4 border rounded-lg hover:bg-primary/5 hover:border-primary transition-colors cursor-pointer">
                       <div className="flex items-center gap-3">

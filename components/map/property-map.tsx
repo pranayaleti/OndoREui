@@ -86,20 +86,6 @@ export default function PropertyMap({
     });
   }, []);
 
-  useEffect(() => {
-    if (!isClient) return;
-    // Import leaflet CSS
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-    link.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
-    link.crossOrigin = "";
-    document.head.appendChild(link);
-    return () => {
-      if (document.head.contains(link)) document.head.removeChild(link);
-    };
-  }, [isClient]);
-
   // Re-key the MapContainer whenever the outer element is resized so Leaflet
   // re-initialises with correct dimensions.
   useEffect(() => {

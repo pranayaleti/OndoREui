@@ -11,7 +11,7 @@ import { Navigation, overflowNavigationItems, primaryNavigationItems } from "@/c
 import { useAuth } from "@/lib/auth-context"
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
-import { APP_PORTAL_IS_EXTERNAL, APP_PORTAL_URL } from "@/lib/site"
+import { APP_PORTAL_URL } from "@/lib/site"
 
 const Header = memo(() => {
   const pathname = usePathname()
@@ -188,8 +188,6 @@ const Header = memo(() => {
           <Button variant="ghost" asChild>
             <Link
               href={APP_PORTAL_URL}
-              target={APP_PORTAL_IS_EXTERNAL ? "_blank" : undefined}
-              rel={APP_PORTAL_IS_EXTERNAL ? "noopener noreferrer" : undefined}
             >
               Property Management Portal
             </Link>
@@ -228,8 +226,6 @@ const Header = memo(() => {
             <div className="mt-4">
               <a
                 href={APP_PORTAL_URL}
-                target={APP_PORTAL_IS_EXTERNAL ? "_blank" : undefined}
-                rel={APP_PORTAL_IS_EXTERNAL ? "noopener noreferrer" : undefined}
                 onClick={handleMenuClose}
               >
                 <Button variant="outline" size="sm" className="w-full">

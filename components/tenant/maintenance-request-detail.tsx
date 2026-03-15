@@ -18,7 +18,7 @@ const MOCK_REQUEST = {
   title: "Leaking Kitchen Faucet",
   dateSubmitted: "2023-05-10",
   status: "in-progress",
-  priority: "normal",
+  priority: "medium",
   category: "plumbing",
   lastUpdated: "2023-05-12",
   scheduledDate: "2023-05-15",
@@ -106,10 +106,10 @@ export function MaintenanceRequestDetail({ requestId: _requestId = "req-001" }: 
     switch (priority) {
       case "emergency":
         return <Badge className="bg-red-500">Emergency</Badge>
-      case "urgent":
-        return <Badge className="bg-primary">Urgent</Badge>
-      case "normal":
-        return <Badge className="bg-primary">Normal</Badge>
+      case "high":
+        return <Badge className="bg-primary">High</Badge>
+      case "medium":
+        return <Badge className="bg-primary">Medium</Badge>
       case "low":
         return <Badge className="bg-gray-500">Low</Badge>
       default:

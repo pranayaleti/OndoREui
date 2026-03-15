@@ -4,7 +4,7 @@ This app is aligned with [WebMCP](https://developer.chrome.com/blog/webmcp-epp) 
 
 ## What we implement
 
-- **Polyfill**: `@mcp-b/global` is loaded in the root layout (`beforeInteractive`) so `navigator.modelContext` is available in all browsers until native support ships.
+- **Progressive enhancement**: WebMCP tools register only when the browser already exposes `navigator.modelContext`. We do not load a global polyfill across the marketing site.
 - **Declarative API**: The contact form on `/contact` has `toolname` and `tooldescription` (and `toolparamdescription` on inputs). Browsers that support declarative WebMCP can derive a JSON schema from the form and let agents fill it; the user confirms by submitting.
 - **Imperative API**:
   - **Contact** (`/contact`): `submit_contact_lead` (with user confirmation) and `get_company_contact_info` (read-only).
@@ -23,7 +23,7 @@ Descriptions are written so agents know when to use each tool and what to expect
 
 ## Testing
 
-- Use Chrome 146+ with the “Experimental Web Platform features” or “WebMCP” flag enabled, or rely on the polyfill in other browsers.
+- Use Chrome 146+ with the “Experimental Web Platform features” or “WebMCP” flag enabled.
 - The [Model Context Tool Inspector](https://chromewebstore.google.com/detail/model-context-tool-inspector/...) (Chrome Web Store) lets you inspect registered tools and invoke them manually.
 - Keep tool count per page low; we only register tools on the pages where they are relevant.
 
@@ -38,4 +38,3 @@ Descriptions are written so agents know when to use each tool and what to expect
 - [WebMCP EPP (Chrome blog)](https://developer.chrome.com/blog/webmcp-epp)
 - [W3C WebMCP draft](https://webmachinelearning.github.io/webmcp/)
 - [Declarative explainer (GitHub)](https://github.com/webmachinelearning/webmcp/pull/76)
-- [MCP-B polyfill](https://www.npmjs.com/package/@mcp-b/global)

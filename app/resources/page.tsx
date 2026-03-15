@@ -4,7 +4,7 @@ import SEO from "@/components/seo"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, APP_PORTAL_IS_EXTERNAL, APP_PORTAL_URL } from "@/lib/site"
+import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -285,8 +285,6 @@ export default function ResourcesPage() {
                     <Button asChild size="sm">
                       <Link
                         href={APP_PORTAL_URL}
-                        target={APP_PORTAL_IS_EXTERNAL ? "_blank" : undefined}
-                        rel={APP_PORTAL_IS_EXTERNAL ? "noopener noreferrer" : undefined}
                       >
                         Property management portal
                       </Link>
@@ -316,7 +314,7 @@ export default function ResourcesPage() {
                   </ul>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Button asChild size="sm">
-                      <Link href={APP_PORTAL_URL}>Tenant portal sign in</Link>
+                      <Link href={APP_PORTAL_URL}>Property management portal</Link>
                     </Button>
                     <Button asChild size="sm" variant="outline">
                       <Link href="/faq/tenant-faqs">Tenant FAQs</Link>

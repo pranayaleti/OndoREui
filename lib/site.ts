@@ -1,12 +1,19 @@
 export const SITE_NAME = "Ondo Real Estate"
 export const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || "https://ondorealestate.com"
 
-/** App portal (Owner/Tenant/Manager dashboard). Defaults to the first-party auth entrypoint. */
-export const APP_PORTAL_URL = process.env['NEXT_PUBLIC_DASHBOARD_URL']?.trim() || "/auth"
+const DEFAULT_DASHBOARD_URL =
+  process.env.NODE_ENV === "production" ? "https://app.ondorealestate.com" : "http://localhost:3001"
+
+/** App portal (Owner/Tenant/Manager dashboard). Must point to the separate dashboard app, not the marketing site. */
+const configuredDashboardUrl = process.env['NEXT_PUBLIC_DASHBOARD_URL']?.trim()
+export const APP_PORTAL_URL =
+  configuredDashboardUrl && /^https?:\/\//.test(configuredDashboardUrl)
+    ? configuredDashboardUrl.replace(/\/$/, "")
+    : DEFAULT_DASHBOARD_URL
 export const APP_PORTAL_IS_EXTERNAL = /^https?:\/\//.test(APP_PORTAL_URL)
 export const APP_PORTAL_LOGIN_URL = APP_PORTAL_IS_EXTERNAL
   ? `${APP_PORTAL_URL.replace(/\/$/, "")}/login`
-  : "/auth"
+  : APP_PORTAL_URL
 export const SITE_PHONE = process.env['NEXT_PUBLIC_SITE_PHONE'] || "+1-408-538-0420"
 export const SITE_HOURS = "Mo-Fr 09:00-17:00"
 export const SITE_ADDRESS = "2701 N Thanksgiving Way, Lehi, UT 84043"

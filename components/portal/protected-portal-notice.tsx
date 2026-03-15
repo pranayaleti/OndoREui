@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
 
 export function ProtectedPortalNotice({
   title,
@@ -19,7 +20,7 @@ export function ProtectedPortalNotice({
         <p className="mt-3 text-sm leading-6 text-foreground/70">{description}</p>
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Button asChild>
-            <Link href="/auth">Go to secure sign in</Link>
+            <Link href={APP_PORTAL_LOGIN_URL}>Go to Property Management Portal</Link>
           </Button>
           <Button asChild variant="outline">
             <Link href="/contact">Talk to Ondo Real Estate</Link>

@@ -77,7 +77,7 @@ const maintenanceRequests = [
     avatar: "/placeholder.svg?height=32&width=32",
     description:
       "Dishwasher fills with water but doesn't drain properly. Standing water remains after cycle completes.",
-    category: "appliance",
+    category: "appliances",
     completedDate: "2023-04-24T13:15:00",
   },
   {
@@ -141,7 +141,7 @@ const maintenanceRequests = [
     date: "2023-04-17T11:15:00",
     avatar: "/placeholder.svg?height=32&width=32",
     description: "The sliding closet door in the bedroom is off its track and won't close properly.",
-    category: "doors",
+    category: "windows",
   },
   {
     id: "M-1010",

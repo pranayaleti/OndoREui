@@ -169,9 +169,12 @@ export function MaintenanceRequestForm() {
                   <SelectItem value="plumbing">Plumbing</SelectItem>
                   <SelectItem value="electrical">Electrical</SelectItem>
                   <SelectItem value="hvac">HVAC</SelectItem>
-                  <SelectItem value="appliance">Appliance</SelectItem>
+                  <SelectItem value="appliances">Appliances</SelectItem>
+                  <SelectItem value="flooring">Flooring</SelectItem>
+                  <SelectItem value="windows">Windows & Doors</SelectItem>
                   <SelectItem value="structural">Structural</SelectItem>
-                  <SelectItem value="pest">Pest Control</SelectItem>
+                  <SelectItem value="pest_control">Pest Control</SelectItem>
+                  <SelectItem value="cleaning">Cleaning</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
@@ -188,8 +191,8 @@ export function MaintenanceRequestForm() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="emergency">Emergency (24 hours)</SelectItem>
-                  <SelectItem value="urgent">Urgent (2-3 days)</SelectItem>
-                  <SelectItem value="normal">Normal (1 week)</SelectItem>
+                  <SelectItem value="high">High (2-3 days)</SelectItem>
+                  <SelectItem value="medium">Medium (this week)</SelectItem>
                   <SelectItem value="low">Low Priority</SelectItem>
                 </SelectContent>
               </Select>

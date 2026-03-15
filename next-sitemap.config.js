@@ -17,6 +17,7 @@ const SECTION_LASTMOD = {
 
 const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString().split('T')[0]
 const PRIVATE_ROUTE_PREFIXES = ['/dashboard', '/owner', '/tenant', '/platform', '/auth', '/admin', '/api']
+const ROBOTS_DISALLOW = [...PRIVATE_ROUTE_PREFIXES, '/login', '/feedback', '/health']
 
 function getLastmod(path) {
   for (const [prefix, date] of Object.entries(SECTION_LASTMOD)) {
@@ -58,6 +59,15 @@ module.exports = {
   priority: 0.7,
   generateIndexSitemap: true,
   sitemapSize: 5000,
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+    ],
+  },
   exclude: [
     '/auth',
     '/dashboard',

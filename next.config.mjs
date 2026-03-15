@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url";
+
 /** Patch server webpack runtime: numeric chunk ids live in ./chunks/, named chunks (e.g. vendor-chunks/next) stay in ./ */
 function patchServerRuntimePlugin() {
   return {
@@ -21,6 +23,8 @@ function patchServerRuntimePlugin() {
   };
 }
 
+const projectRoot = fileURLToPath(new URL(".", import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -30,7 +34,6 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   experimental: {
-    esmExternals: 'loose',
     optimizePackageImports: [
       'lucide-react',
       '@radix-ui/react-icons',
@@ -62,6 +65,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  outputFileTracingRoot: projectRoot,
 
   transpilePackages: [],
 

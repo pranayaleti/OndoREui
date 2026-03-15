@@ -19,7 +19,7 @@ const MOCK_REQUESTS = [
     tenant: "John Smith",
     dateSubmitted: "2023-05-10",
     status: "in-progress",
-    priority: "normal",
+    priority: "medium",
     category: "plumbing",
     lastUpdated: "2023-05-12",
     scheduledDate: "2023-05-15",
@@ -32,7 +32,7 @@ const MOCK_REQUESTS = [
     tenant: "Sarah Johnson",
     dateSubmitted: "2023-05-08",
     status: "scheduled",
-    priority: "urgent",
+    priority: "high",
     category: "hvac",
     lastUpdated: "2023-05-09",
     scheduledDate: "2023-05-11",
@@ -45,7 +45,7 @@ const MOCK_REQUESTS = [
     tenant: "Michael Brown",
     dateSubmitted: "2023-05-05",
     status: "completed",
-    priority: "normal",
+    priority: "medium",
     category: "electrical",
     lastUpdated: "2023-05-07",
     scheduledDate: "2023-05-06",
@@ -58,8 +58,8 @@ const MOCK_REQUESTS = [
     tenant: "Emily Wilson",
     dateSubmitted: "2023-05-01",
     status: "pending",
-    priority: "normal",
-    category: "appliance",
+    priority: "medium",
+    category: "appliances",
     lastUpdated: "2023-05-01",
     scheduledDate: null,
     description: "The dishwasher isn't draining properly after cycles and leaves standing water.",
@@ -124,10 +124,10 @@ export function OwnerMaintenanceManagement() {
     switch (priority) {
       case "emergency":
         return <Badge className="bg-red-500">Emergency</Badge>
-      case "urgent":
-        return <Badge className="bg-primary">Urgent</Badge>
-      case "normal":
-        return <Badge className="bg-primary">Normal</Badge>
+      case "high":
+        return <Badge className="bg-primary">High</Badge>
+      case "medium":
+        return <Badge className="bg-primary">Medium</Badge>
       case "low":
         return <Badge className="bg-gray-500">Low</Badge>
       default:
@@ -209,9 +209,10 @@ export function OwnerMaintenanceManagement() {
               <SelectItem value="plumbing">Plumbing</SelectItem>
               <SelectItem value="electrical">Electrical</SelectItem>
               <SelectItem value="hvac">HVAC</SelectItem>
-              <SelectItem value="appliance">Appliance</SelectItem>
+              <SelectItem value="appliances">Appliances</SelectItem>
+              <SelectItem value="windows">Windows & Doors</SelectItem>
               <SelectItem value="structural">Structural</SelectItem>
-              <SelectItem value="pest">Pest Control</SelectItem>
+              <SelectItem value="pest_control">Pest Control</SelectItem>
             </SelectContent>
           </Select>
         </div>

@@ -51,10 +51,12 @@ export const leadFormSchema = z.object({
 export const maintenanceRequestSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  priority: z.enum(["low", "medium", "high", "urgent"], {
+  priority: z.enum(["low", "medium", "high", "emergency"], {
     required_error: "Please select a priority level",
   }),
-  category: z.string().min(1, "Please select a category"),
+  category: z.enum(["plumbing", "electrical", "hvac", "appliances", "flooring", "windows", "structural", "pest_control", "cleaning", "other"], {
+    required_error: "Please select a category",
+  }),
   preferredDate: z.string().optional(),
   preferredTimeSlot: z.string().optional(),
   entryPermission: z.enum(["yes", "no"], {

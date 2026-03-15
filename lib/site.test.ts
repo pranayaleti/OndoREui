@@ -2,6 +2,9 @@ import { describe, it, expect } from "vitest"
 import {
   SITE_NAME,
   SITE_URL,
+  APP_PORTAL_URL,
+  APP_PORTAL_IS_EXTERNAL,
+  APP_PORTAL_LOGIN_URL,
   SITE_PHONE,
   SITE_HOURS,
   SITE_HOURS_LABEL,
@@ -22,6 +25,11 @@ describe("site", () => {
   })
   it("SITE_URL is https", () => {
     expect(SITE_URL.startsWith("https://")).toBe(true)
+  })
+  it("portal URL points to the separate dashboard app", () => {
+    expect(APP_PORTAL_IS_EXTERNAL).toBe(true)
+    expect(APP_PORTAL_URL.startsWith("http")).toBe(true)
+    expect(APP_PORTAL_LOGIN_URL).toContain("/login")
   })
   it("SITE_PHONE contains digits", () => {
     expect(SITE_PHONE).toMatch(/\d/)
