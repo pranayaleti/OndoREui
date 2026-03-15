@@ -1,6 +1,16 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
 
 # Host
 Host: https://ondorealestate.com
