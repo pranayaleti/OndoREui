@@ -5,45 +5,6 @@ import type { PropertyFilters, PropertySummary } from "@/lib/api/types"
 const LAST_VIEWED_KEY = "ondo:last-viewed-properties"
 const FAVORITES_KEY = "ondo:favorites"
 
-const FALLBACK_PROPERTIES: PropertySummary[] = [
-  {
-    id: "prop-001",
-    title: "Modern Downtown Apartment",
-    location: "Salt Lake City, UT",
-    price: 2400,
-    bedrooms: 2,
-    propertyType: "apartment",
-    image: "/favicon.svg",
-    lat: 40.7608,
-    lng: -111.891,
-    description: "Walkable downtown apartment with modern finishes and secure parking.",
-  },
-  {
-    id: "prop-002",
-    title: "Family Home in Lehi",
-    location: "Lehi, UT",
-    price: 3200,
-    bedrooms: 4,
-    propertyType: "house",
-    image: "/favicon.svg",
-    lat: 40.3916,
-    lng: -111.8508,
-    description: "Spacious home with fenced yard and strong school district access.",
-  },
-  {
-    id: "prop-003",
-    title: "Townhouse Near Tech Corridor",
-    location: "Draper, UT",
-    price: 2800,
-    bedrooms: 3,
-    propertyType: "townhouse",
-    image: "/favicon.svg",
-    lat: 40.5247,
-    lng: -111.8638,
-    description: "Contemporary townhouse with garage and quick access to I-15.",
-  },
-]
-
 async function readJsonList<T>(key: string): Promise<T[]> {
   const cached = await cacheGet<T[]>(key)
   return cached ?? []
@@ -78,7 +39,7 @@ export async function fetchProperties(filters?: PropertyFilters): Promise<Proper
     const data = await networkFirstGet<PropertySummary[]>("/api/properties/public", "properties:list")
     return applyFilters(data, filters)
   } catch {
-    return applyFilters(FALLBACK_PROPERTIES, filters)
+    return []
   }
 }
 

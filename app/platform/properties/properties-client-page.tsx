@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
-import { Map, Grid3X3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -13,12 +12,9 @@ import { useOfflineStatus } from "@/hooks/use-offline-status"
 import { fetchProperties, getLastViewedProperties } from "@/lib/api/properties"
 import type { PropertyFilters, PropertySummary } from "@/lib/api/types"
 
-type ViewMode = "grid" | "map"
-
 export function PropertiesClientPage() {
   const [properties, setProperties] = useState<PropertySummary[]>([])
   const [lastViewed, setLastViewed] = useState<PropertySummary[]>([])
-  const [viewMode, setViewMode] = useState<ViewMode>("grid")
   const [filters, setFilters] = useState<PropertyFilters>({
     minPrice: 1000,
     maxPrice: 5000,
@@ -120,70 +116,36 @@ export function PropertiesClientPage() {
               onChange={(event) => setFilters((prev) => ({ ...prev, location: event.target.value }))}
             />
           </div>
-          <div className="flex items-end gap-2 md:col-span-2">
-            <Button
-              type="button"
-              variant={viewMode === "grid" ? "default" : "outline"}
-              onClick={() => setViewMode("grid")}
-            >
-              <Grid3X3 className="mr-2 h-4 w-4" />
-              Grid
-            </Button>
-            <Button
-              type="button"
-              variant={viewMode === "map" ? "default" : "outline"}
-              onClick={() => setViewMode("map")}
-            >
-              <Map className="mr-2 h-4 w-4" />
-              Map
-            </Button>
-          </div>
         </div>
       </section>
 
-      {viewMode === "map" ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>Map View</CardTitle>
-            <CardDescription>
-              Connect this panel to Mapbox/Google Maps in production. Coordinates are available in the API layer.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="rounded-md border border-dashed p-6 text-sm text-foreground/70">
-              Map placeholder: {properties.length} result(s) ready for marker rendering.
-            </div>
-          </CardContent>
-        </Card>
-      ) : (
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {properties.map((property) => (
-            <Card key={property.id} className="flex flex-col">
-              <CardHeader>
-                <CardTitle>{property.title}</CardTitle>
-                <CardDescription>{property.location}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-1 flex-col justify-between gap-4">
-                <LazyImage
-                  src={property.image}
-                  alt={property.title}
-                  width={480}
-                  height={280}
-                  className="h-40 w-full overflow-hidden rounded-md object-cover"
-                />
-                <div className="space-y-1 text-sm text-foreground/80">
-                  <p>${property.price.toLocaleString()} / month</p>
-                  <p>{property.bedrooms} bedrooms</p>
-                  <p>{property.propertyType}</p>
-                </div>
-                <Button asChild>
-                  <Link href={`/platform/properties/${property.id}`}>View Details</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </section>
-      )}
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {properties.map((property) => (
+          <Card key={property.id} className="flex flex-col">
+            <CardHeader>
+              <CardTitle>{property.title}</CardTitle>
+              <CardDescription>{property.location}</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-1 flex-col justify-between gap-4">
+              <LazyImage
+                src={property.image}
+                alt={property.title}
+                width={480}
+                height={280}
+                className="h-40 w-full overflow-hidden rounded-md object-cover"
+              />
+              <div className="space-y-1 text-sm text-foreground/80">
+                <p>${property.price.toLocaleString()} / month</p>
+                <p>{property.bedrooms} bedrooms</p>
+                <p>{property.propertyType}</p>
+              </div>
+              <Button asChild>
+                <Link href={`/platform/properties/${property.id}`}>View Details</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
 
       {lastViewed.length > 0 ? (
         <section className="space-y-3">

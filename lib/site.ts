@@ -2,7 +2,9 @@ export const SITE_NAME = "Ondo Real Estate"
 export const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || "https://ondorealestate.com"
 
 const DEFAULT_DASHBOARD_URL =
-  process.env.NODE_ENV === "production" ? "https://app.ondorealestate.com" : "http://localhost:3001"
+  process.env.NODE_ENV === "production"
+    ? "https://pranayaleti.github.io/OndoREDashboard"
+    : "http://localhost:3001"
 
 /** App portal (Owner/Tenant/Manager dashboard). Must point to the separate dashboard app, not the marketing site. */
 const configuredDashboardUrl = process.env['NEXT_PUBLIC_DASHBOARD_URL']?.trim()

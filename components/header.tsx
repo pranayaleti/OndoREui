@@ -9,7 +9,7 @@ import { Menu, X, Search, ChevronDown } from "lucide-react"
 import { Navigation, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
-import { APP_PORTAL_URL } from "@/lib/site"
+import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
 
 const Header = memo(() => {
   const pathname = usePathname()
@@ -183,7 +183,7 @@ const Header = memo(() => {
           <ModeToggle />
           <Button variant="ghost" asChild>
             <Link
-              href={APP_PORTAL_URL}
+              href={APP_PORTAL_LOGIN_URL}
             >
               Property Management Portal
             </Link>
@@ -220,7 +220,7 @@ const Header = memo(() => {
             />
             <div className="mt-4">
               <a
-                href={APP_PORTAL_URL}
+                href={APP_PORTAL_LOGIN_URL}
                 onClick={handleMenuClose}
               >
                 <Button variant="outline" size="sm" className="w-full">

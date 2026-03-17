@@ -56,7 +56,7 @@ export default function PropertiesClient() {
   const [retryCount, setRetryCount] = useState(0);
 
   const [filters, setFilters] = useState<PropertyFilters>({
-    priceRange: [0, 20000], // NOTE: your API is INR; tune UI later if needed
+    priceRange: [500, 5000],
     bedrooms: 'any',
     bathrooms: 'any',
     propertyType: 'any',
@@ -166,8 +166,6 @@ export default function PropertiesClient() {
   useEffect(() => {
     let filtered = [...allApiProperties];
 
-    // price (your UI is 500–5000; your API returns INR like 15000)
-    // If your UI slider is in INR, adjust range. For now, treat UI as INR:
     filtered = filtered.filter(
       (p) =>
         p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
@@ -308,8 +306,8 @@ export default function PropertiesClient() {
   return (
     <div className="flex flex-col min-h-screen">
       <SEO
-        title="Browse Rental Properties in India"
-        description="Explore available rental homes, apartments, condos, and townhouses managed by Ondo Real Estate."
+        title="Browse Rental Properties in Utah"
+        description="Explore available rental homes, apartments, condos, and townhomes managed by Ondo Real Estate."
         pathname="/properties"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={[
@@ -483,9 +481,8 @@ export default function PropertiesClient() {
                         quality={85}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      {/* Switch to INR display */}
                       <div className="absolute top-2 right-2 bg-primary text-foreground px-3 py-1 rounded-md font-medium">
-                        ₹{property.price.toLocaleString('en-IN')}/mo
+                        ${property.price.toLocaleString()}/mo
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -537,7 +534,7 @@ export default function PropertiesClient() {
                     <Button
                       onClick={() => {
                         setFilters({
-                          priceRange: [500, 20000],
+                          priceRange: [500, 5000],
                           bedrooms: 'any',
                           bathrooms: 'any',
                           propertyType: 'any',
