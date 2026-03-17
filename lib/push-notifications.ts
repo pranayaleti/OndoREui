@@ -7,6 +7,8 @@
  * Requires NEXT_PUBLIC_VAPID_PUBLIC_KEY in your .env.local.
  */
 
+import { backendUrl } from "@/lib/backend"
+
 export interface PushSubscriptionPayload {
   endpoint: string
   expirationTime: number | null
@@ -105,7 +107,7 @@ export async function subscribeToPush(): Promise<PushSubscriptionPayload | null>
 
   // 4. Notify the backend so it can store the subscription
   try {
-    await fetch("/api/notifications/subscribe", {
+    await fetch(backendUrl("/api/notifications/push/subscribe"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -141,7 +143,7 @@ export async function unsubscribeFromPush(): Promise<boolean> {
   // 2. Tell the backend to discard the stored subscription
   if (success && payload) {
     try {
-      await fetch("/api/notifications/subscribe", {
+      await fetch(backendUrl("/api/notifications/push/unsubscribe"), {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ endpoint: payload.endpoint }),

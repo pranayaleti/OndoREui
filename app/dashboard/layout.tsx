@@ -1,25 +1,11 @@
-import type { Metadata } from "next"
-import { ProtectedPortalNotice } from "@/components/portal/protected-portal-notice"
+import { redirect } from "next/navigation"
+import { APP_PORTAL_URL } from "@/lib/site"
 
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-  alternates: {
-    canonical: "/auth",
-  },
+// Staff portal lives in OndoREDashboard, not the marketing site.
+export default function DashboardLayout() {
+  redirect(`${APP_PORTAL_URL}/dashboard`)
 }
 
-export default function DashboardLayout() {
-  return (
-    <ProtectedPortalNotice
-      title="Staff portal access is handled in the secure app"
-      description="Dashboard routes are intentionally hidden from the public marketing site. Sign in through the secure portal to continue."
-    />
-  )
+export const metadata = {
+  robots: { index: false },
 }

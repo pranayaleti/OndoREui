@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/hooks/use-auth"
 import { PortalLoadingShell } from "@/components/portal/portal-loading-shell"
 
 export default function DashboardPortalShell({ children }: { children: ReactNode }) {

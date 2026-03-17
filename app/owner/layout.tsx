@@ -1,27 +1,11 @@
-import type { Metadata } from "next"
-import { ProtectedPortalNotice } from "@/components/portal/protected-portal-notice"
+import { redirect } from "next/navigation"
+import { APP_PORTAL_URL } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Owner Dashboard - Ondo Real Estate",
-  description: "Manage your properties and tenants",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-  alternates: {
-    canonical: "/auth",
-  },
+// Owner portal lives in OndoREDashboard, not the marketing site.
+export default function OwnerLayout() {
+  redirect(`${APP_PORTAL_URL}/owner`)
 }
 
-export default function OwnerLayout() {
-  return (
-    <ProtectedPortalNotice
-      title="Owner portal access is available after secure sign in"
-      description="Owner routes on the marketing site are gated to avoid exposing placeholder portal content. Use the secure sign-in flow to reach the live workspace."
-    />
-  )
+export const metadata = {
+  robots: { index: false },
 }

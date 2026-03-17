@@ -14,7 +14,8 @@ import Footer from "@/components/footer"
 import { ScrollProgress } from "@/components/scroll-progress"
 import ErrorBoundary from "@/components/error-boundary"
 import { CachePurge } from "@/components/cache-purge"
-import PushNotificationPrompt from "@/components/notifications/push-notification-prompt-loader"
+// Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
+// Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
 // It only works on Vercel's platform, not with static site generation
 // const Analytics = dynamic(() => import('@vercel/analytics/react').then(mod => mod.Analytics), { ssr: false })
@@ -195,8 +196,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <Footer />
           </div>
-          {/* Push notification opt-in prompt — rendered client-side only, once per user */}
-          <PushNotificationPrompt />
         </RootProvidersClient>
         <JsonLd
           id="global-jsonld"

@@ -6,7 +6,7 @@ import Link from "next/link"
 import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/hooks/use-auth"
 import {
   SidebarProvider,
   Sidebar,

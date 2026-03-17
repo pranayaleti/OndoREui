@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { OwnerSidebarNav, OwnerMobileNav } from "@/components/owner/owner-navigation"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/hooks/use-auth"
 import { PortalLoadingShell } from "@/components/portal/portal-loading-shell"
 
 export default function OwnerPortalShell({ children }: { children: ReactNode }) {

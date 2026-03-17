@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Building, FileText, Home, MessageSquare, Settings, PenToolIcon as Tool, CreditCard, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/hooks/use-auth"
 import { PortalLoadingShell } from "@/components/portal/portal-loading-shell"
 
 export default function TenantPortalShell({ children }: { children: ReactNode }) {

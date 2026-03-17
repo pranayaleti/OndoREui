@@ -1,27 +1,11 @@
-import type { Metadata } from "next"
-import { ProtectedPortalNotice } from "@/components/portal/protected-portal-notice"
+import { redirect } from "next/navigation"
+import { APP_PORTAL_URL } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Tenant Dashboard - Real Estate",
-  description: "Manage your rental property and payments",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-  alternates: {
-    canonical: "/auth",
-  },
+// Tenant portal lives in OndoREDashboard, not the marketing site.
+export default function TenantLayout() {
+  redirect(`${APP_PORTAL_URL}/tenant`)
 }
 
-export default function TenantLayout() {
-  return (
-    <ProtectedPortalNotice
-      title="Tenant portal access is available after secure sign in"
-      description="Tenant routes are intentionally gated on the public site. Sign in to the secure portal to access payments, maintenance, and lease information."
-    />
-  )
+export const metadata = {
+  robots: { index: false },
 }

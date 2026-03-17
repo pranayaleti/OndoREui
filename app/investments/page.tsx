@@ -1,8 +1,20 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
+
+export const metadata: Metadata = {
+  title: "Utah Investment Properties | Ondo Real Estate",
+  description:
+    "Discover high-yield investment properties in Utah. Turnkey rentals, multi-family, and commercial opportunities with expert management.",
+  openGraph: {
+    title: "Utah Investment Properties | Ondo Real Estate",
+    description:
+      "Discover high-yield investment properties in Utah. Turnkey rentals, multi-family, and commercial opportunities with expert management.",
+  },
+}
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"

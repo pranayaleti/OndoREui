@@ -4,7 +4,6 @@ import type { ReactNode } from "react"
 import dynamic from "next/dynamic"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { AuthProvider } from "@/lib/auth-context"
 import { BfcacheProvider } from "@/components/bfcache-provider"
 import { PwaProvider } from "@/components/pwa/pwa-provider"
 import { RoutePrefetch } from "@/components/route-prefetch"
@@ -19,13 +18,11 @@ export function RootProviders({ children }: { children: ReactNode }) {
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <PwaProvider>
         <BfcacheProvider>
-          <AuthProvider>
-            {children}
-            <RoutePrefetch />
-            <WebVitalsReporter />
-            <ClientConsultationWidget />
-            <Toaster />
-          </AuthProvider>
+          {children}
+          <RoutePrefetch />
+          <WebVitalsReporter />
+          <ClientConsultationWidget />
+          <Toaster />
         </BfcacheProvider>
       </PwaProvider>
     </ThemeProvider>

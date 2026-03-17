@@ -1,6 +1,6 @@
 "use client"
 
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/hooks/use-auth"
 import { notFound } from "next/navigation"
 import { useEffect, useState } from "react"
 import { backendUrl } from "@/lib/backend"

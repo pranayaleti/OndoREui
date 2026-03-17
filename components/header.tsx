@@ -6,9 +6,7 @@ import { useState, useEffect, useRef, useCallback, memo } from "react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X, Search, ChevronDown } from "lucide-react"
-import UserMenu from "@/components/user-menu"
 import { Navigation, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
-import { useAuth } from "@/lib/auth-context"
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_URL } from "@/lib/site"
@@ -22,8 +20,6 @@ const Header = memo(() => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const desktopMenuRef = useRef<HTMLDivElement>(null)
-  const { user } = useAuth()
-
   const handleMenuClose = useCallback(() => {
     setIsMenuOpen(false)
     setIsDesktopMenuOpen(false)
@@ -192,7 +188,6 @@ const Header = memo(() => {
               Property Management Portal
             </Link>
           </Button>
-          {user && <UserMenu />}
           {/* Mobile hamburger for full navigation */}
           <button
             className="block md:hidden p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
