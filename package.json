@@ -1,9 +1,11 @@
 {
   "name": "ondo-real-estate",
   "version": "0.1.0",
-  "engines": { "node": ">=20.0.0" },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "private": true,
-  "homepage": "https://pranayaleti.github.io/ondorealestate",
+  "homepage": "https://www.ondorealestate.com",
   "scripts": {
     "clean": "rm -rf .next node_modules/.cache",
     "clean:all": "rm -rf .next node_modules/.cache out",

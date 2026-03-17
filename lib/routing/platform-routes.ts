@@ -1,10 +1,8 @@
-import type { AppRole } from "@/lib/auth/roles"
-
 export interface PlatformRoute {
   href: string
   title: string
   description: string
-  allowedRoles: AppRole[]
+  allowedRoles: string[]
 }
 
 export const platformRoutes: PlatformRoute[] = [

@@ -1,13 +1,10 @@
 "use client"
 
-import { useAuth } from "@/hooks/use-auth"
-import { notFound } from "next/navigation"
 import { useEffect, useState } from "react"
 import { backendUrl } from "@/lib/backend"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, Server, Globe, CheckCircle, XCircle } from "lucide-react"
-import Link from "next/link"
 
 type BackendHealth = {
   ok?: boolean
@@ -15,15 +12,9 @@ type BackendHealth = {
 }
 
 export default function HealthPage() {
-  const { user, isLoading } = useAuth()
   const [backend, setBackend] = useState<{ status: "ok" | "error"; data?: BackendHealth; error?: string } | null>(null)
 
-  if (!isLoading && (!user || user.role !== "admin")) {
-    notFound()
-  }
-
   useEffect(() => {
-    if (!user || user.role !== "admin") return
     const url = backendUrl("/health")
     fetch(url, { cache: "no-store" })
       .then(async (res) => {
@@ -44,28 +35,12 @@ export default function HealthPage() {
       .catch((err) => {
         setBackend({ status: "error", error: err instanceof Error ? err.message : String(err) })
       })
-  }, [user])
-
-  if (isLoading || !user) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    )
-  }
+  }, [])
 
   return (
     <div className="min-h-screen bg-muted/30 py-8">
       <div className="container max-w-2xl space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold tracking-tight">Health</h1>
-          <Link
-            href="/dashboard"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
-            ← Dashboard
-          </Link>
-        </div>
+        <h1 className="text-2xl font-semibold tracking-tight">Health</h1>
 
         <Card>
           <CardHeader>
