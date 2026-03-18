@@ -3,6 +3,7 @@
 import { memo } from "react"
 import { HeroSection } from "@/components/landing/hero-section"
 import { HowItWorksSection } from "@/components/landing/how-it-works-section"
+import { OperatorsSection } from "@/components/landing/operators-section"
 import { FeaturedPropertiesSection } from "@/components/landing/featured-properties-section"
 import { PropertyOwnerSection } from "@/components/landing/property-owner-section"
 import { FoundersNoteSection } from "@/components/landing/founders-note-section"
@@ -14,6 +15,7 @@ function LandingPage() {
     <div className="flex flex-col min-h-screen">
       <HeroSection />
       <HowItWorksSection />
+      <OperatorsSection />
       <FeaturedPropertiesSection />
       <PropertyOwnerSection />
       <FoundersNoteSection />

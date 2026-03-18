@@ -5,6 +5,12 @@ import Image from "next/image"
 import { useState, useEffect, useRef, useCallback, memo } from "react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Menu, X, Search, ChevronDown } from "lucide-react"
 import { Navigation, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
 import { SearchDialog } from "@/components/search-dialog"
@@ -14,23 +20,16 @@ import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
 const Header = memo(() => {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const desktopMenuRef = useRef<HTMLDivElement>(null)
   const handleMenuClose = useCallback(() => {
     setIsMenuOpen(false)
-    setIsDesktopMenuOpen(false)
   }, [])
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev)
-  }, [])
-
-  const toggleDesktopMenu = useCallback(() => {
-    setIsDesktopMenuOpen(prev => !prev)
   }, [])
 
   const isHiddenPage = ["/login", "/auth", "/owner", "/tenant", "/dashboard"].some(
@@ -65,22 +64,15 @@ const Header = memo(() => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node
-
       if (menuRef.current && menuRef.current.contains(target)) return
-      if (desktopMenuRef.current && desktopMenuRef.current.contains(target)) return
-
       setIsMenuOpen(false)
-      setIsDesktopMenuOpen(false)
     }
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsMenuOpen(false)
-        setIsDesktopMenuOpen(false)
-      }
+      if (event.key === 'Escape') setIsMenuOpen(false)
     }
 
-    if (isMenuOpen || isDesktopMenuOpen) {
+    if (isMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside)
       document.addEventListener("keydown", handleEscape)
     }
@@ -89,15 +81,15 @@ const Header = memo(() => {
       document.removeEventListener("mousedown", handleClickOutside)
       document.removeEventListener("keydown", handleEscape)
     }
-  }, [isMenuOpen, isDesktopMenuOpen])
+  }, [isMenuOpen])
 
   if (isHiddenPage) return null
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-200 bg-background ${isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : ""}`}>
-      <div className="container relative flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="container flex h-16 items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo (left) */}
-        <div className="flex items-center gap-2 md:gap-4 flex-shrink-0 relative z-20">
+        <div className="flex shrink-0 items-center">
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
             <Image
               src="/logo.png"
@@ -112,85 +104,73 @@ const Header = memo(() => {
           </Link>
         </div>
 
-        {/* Centered desktop navigation */}
-        <div className="pointer-events-none absolute left-0 right-0 top-0 bottom-0 flex justify-center items-center z-0 overflow-hidden">
-          <div className="hidden md:flex w-full items-center justify-center">
-            <div className="w-full max-w-full min-w-0 px-4 sm:px-6 lg:px-8" style={{ 
-              paddingLeft: 'max(200px, 20vw)', 
-              paddingRight: 'max(280px, 25vw)' 
-            }}>
-              <Navigation
-                className="pointer-events-auto flex gap-0.5 overflow-x-auto scrollbar-hide justify-center"
-                items={primaryNavigationItems}
-              />
-            </div>
-          </div>
+        {/* Centered desktop navigation — flex-1 so it fills space between logo and controls without overlapping */}
+        <div className="hidden md:flex flex-1 min-w-0 justify-center items-center">
+          <nav
+            className="flex justify-center w-full min-w-0 overflow-x-auto scrollbar-hide"
+            aria-label="Primary navigation"
+          >
+            <Navigation
+              className="w-max flex gap-0.5 justify-center flex-shrink-0"
+              items={primaryNavigationItems}
+            />
+          </nav>
         </div>
 
         {/* Right-side controls */}
-        <div className="flex items-center gap-2 md:gap-4 flex-shrink-0 relative z-20">
+        <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
           <Button
             variant="ghost"
             size="icon"
-            className="hidden sm:flex"
+            className="hidden sm:inline-flex shrink-0"
             onClick={() => setIsSearchOpen(true)}
             aria-label="Search"
           >
             <Search className="h-5 w-5" />
           </Button>
-          {/* Desktop hamburger / overflow menu */}
-          <div
-            ref={desktopMenuRef}
-            className="hidden md:flex items-center"
-          >
-            <button
-              type="button"
-              onClick={toggleDesktopMenu}
-              className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              aria-haspopup="menu"
-              aria-expanded={isDesktopMenuOpen}
-            >
-              <ChevronDown className="h-4 w-4" aria-hidden="true" />
-              <Menu className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden lg:inline">More</span>
-            </button>
-
-            {isDesktopMenuOpen && (
-              <div
-                className="absolute right-0 top-full mt-2 w-64 rounded-md border bg-popover/95 backdrop-blur-md shadow-lg py-2 text-sm z-50"
-                role="menu"
-                aria-label="More navigation"
-              >
+          {/* Desktop overflow menu */}
+          <div className="hidden md:flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-0 bg-transparent cursor-pointer shrink-0"
+                  aria-label="More navigation"
+                  aria-haspopup="menu"
+                >
+                  <ChevronDown className="h-4 w-4 shrink-0" aria-hidden />
+                  <Menu className="h-4 w-4 shrink-0" aria-hidden />
+                  <span className="hidden lg:inline">More</span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" sideOffset={6} className="w-64 py-2 z-[100]">
                 <div className="px-3 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   Explore
                 </div>
-                <div className="flex flex-col">
-                  {overflowNavigationItems.map((item) => (
+                {overflowNavigationItems.map((item) => (
+                  <DropdownMenuItem key={item.href} asChild>
                     <Link
-                      key={item.href}
                       href={item.href}
-                      className="flex items-center px-3 py-2 hover:bg-accent rounded-md transition-colors"
-                      onClick={handleMenuClose}
+                      className="flex items-center px-3 py-2 cursor-pointer"
                     >
                       <span className="truncate">{item.label}</span>
                     </Link>
-                  ))}
-                </div>
-              </div>
-            )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <ModeToggle />
-          <Button variant="ghost" asChild>
-            <Link
-              href={APP_PORTAL_LOGIN_URL}
-            >
-              Property Management Portal
+          <Button variant="ghost" size="sm" className="shrink-0 hidden sm:inline-flex" asChild>
+            <Link href={APP_PORTAL_LOGIN_URL}>
+              <span className="hidden md:inline">Property Management Portal</span>
+              <span className="md:hidden">Portal</span>
             </Link>
           </Button>
-          {/* Mobile hamburger for full navigation */}
+          {/* Mobile hamburger */}
           <button
-            className="block md:hidden p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
+            className="flex md:hidden p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
@@ -202,7 +182,7 @@ const Header = memo(() => {
       </div>
       {isMenuOpen && isMounted && (
         <div ref={menuRef} id="mobile-menu" className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md shadow-lg border-t md:hidden z-50 py-4 pb-6 max-h-[calc(100vh-4rem)] overflow-y-auto" role="navigation" aria-label="Mobile navigation">
-          <div className="container">
+          <div className="container px-4 sm:px-6">
             <Button
               variant="outline"
               className="w-full mb-4 justify-start"
