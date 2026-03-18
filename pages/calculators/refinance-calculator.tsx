@@ -74,7 +74,6 @@ const RefinanceCalculator: React.FC = () => {
     }
 
     const currentBalance = formData.currentBalance || 200000;
-    const currentRate = formData.currentRate || 5.5;
     const currentPayment = formData.currentPayment || 1200;
     const newRate = formData.newRate || 4.0;
     const newTerm = formData.newTerm || 30;
