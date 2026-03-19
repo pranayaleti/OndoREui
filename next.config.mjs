@@ -69,9 +69,10 @@ const nextConfig = {
 
   transpilePackages: [],
 
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Deterministic moduleIds for better long-term caching (unchanged modules keep hash)
+  webpack: (config, { isServer, dev }) => {
+    if (!isServer && !dev) {
+      // Deterministic moduleIds for better long-term caching (unchanged modules keep hash).
+      // Avoid overriding Next's dev strategy — can break Fast Refresh / chunk graphs.
       config.optimization.moduleIds = 'deterministic'
     }
     // Fix server chunk resolution: runtime does require("./chunkId.js") but chunks live in ./chunks/
