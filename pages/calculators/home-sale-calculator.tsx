@@ -113,6 +113,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.homeValue || ''}
                     onChange={(e) => handleInputChange('homeValue', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -130,6 +131,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.mortgageBalance || ''}
                     onChange={(e) => handleInputChange('mortgageBalance', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -145,6 +147,7 @@ const HomeSaleCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.1"
                   value={formData.realtorCommission || ''}
                   onChange={(e) => handleInputChange('realtorCommission', Number(e.target.value))}
@@ -162,6 +165,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.closingCosts || ''}
                     onChange={(e) => handleInputChange('closingCosts', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -179,6 +183,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.repairs || ''}
                     onChange={(e) => handleInputChange('repairs', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -196,6 +201,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.movingCosts || ''}
                     onChange={(e) => handleInputChange('movingCosts', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -213,6 +219,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.capitalGainsTax || ''}
                     onChange={(e) => handleInputChange('capitalGainsTax', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -233,6 +240,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.originalPurchasePrice || ''}
                     onChange={(e) => handleInputChange('originalPurchasePrice', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -250,6 +258,7 @@ const HomeSaleCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.originalImprovements || ''}
                     onChange={(e) => handleInputChange('originalImprovements', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"

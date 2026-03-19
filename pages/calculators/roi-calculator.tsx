@@ -224,6 +224,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.purchasePrice || ''}
                     onChange={(e) => handleInputChange('purchasePrice', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -241,6 +242,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.downPayment || ''}
                     onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -256,6 +258,7 @@ const ROICalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.01"
                   value={formData.interestRate || ''}
                   onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
@@ -289,6 +292,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.monthlyRent || ''}
                     onChange={(e) => handleInputChange('monthlyRent', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -306,6 +310,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.propertyTax || ''}
                     onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -323,6 +328,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.insurance || ''}
                     onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -340,6 +346,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.maintenance || ''}
                     onChange={(e) => handleInputChange('maintenance', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -355,6 +362,7 @@ const ROICalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.1"
                   value={formData.vacancyRate || ''}
                   onChange={(e) => handleInputChange('vacancyRate', Number(e.target.value))}
@@ -372,6 +380,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.closingCosts || ''}
                     onChange={(e) => handleInputChange('closingCosts', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -389,6 +398,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.repairs || ''}
                     onChange={(e) => handleInputChange('repairs', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -404,6 +414,7 @@ const ROICalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   value={formData.holdingPeriod || ''}
                   onChange={(e) => handleInputChange('holdingPeriod', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -418,6 +429,7 @@ const ROICalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.1"
                   value={formData.appreciationRate || ''}
                   onChange={(e) => handleInputChange('appreciationRate', Number(e.target.value))}
@@ -435,6 +447,7 @@ const ROICalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.salePrice || ''}
                     onChange={(e) => handleInputChange('salePrice', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"

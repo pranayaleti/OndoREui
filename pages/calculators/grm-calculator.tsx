@@ -104,6 +104,7 @@ const GRMCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.purchasePrice || ''}
                     onChange={(e) => handleInputChange('purchasePrice', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -121,6 +122,7 @@ const GRMCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.monthlyRent || ''}
                     onChange={(e) => handleInputChange('monthlyRent', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -138,6 +140,7 @@ const GRMCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.annualRent || ''}
                     onChange={(e) => handleInputChange('annualRent', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -153,6 +156,7 @@ const GRMCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.1"
                   value={targetGRM || ''}
                   onChange={(e) => setTargetGRM(Number(e.target.value))}

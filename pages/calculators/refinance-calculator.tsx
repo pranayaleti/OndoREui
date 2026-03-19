@@ -175,6 +175,7 @@ const RefinanceCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     inputMode="numeric"
                     value={formData.currentBalance || ''}
                     onChange={(e) => handleInputChange('currentBalance', Number(e.target.value) || 0)}
@@ -191,6 +192,7 @@ const RefinanceCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.01"
                   value={formData.currentRate || ''}
                   onChange={(e) => handleInputChange('currentRate', Number(e.target.value))}
@@ -208,6 +210,7 @@ const RefinanceCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.currentPayment || ''}
                     onChange={(e) => handleInputChange('currentPayment', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -225,6 +228,7 @@ const RefinanceCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.01"
                   value={formData.newRate || ''}
                   onChange={(e) => handleInputChange('newRate', Number(e.target.value))}
@@ -258,6 +262,7 @@ const RefinanceCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.closingCosts || ''}
                     onChange={(e) => handleInputChange('closingCosts', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -275,6 +280,7 @@ const RefinanceCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.propertyTax || ''}
                     onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -292,6 +298,7 @@ const RefinanceCalculator: React.FC = () => {
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
                   <input
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.insurance || ''}
                     onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"

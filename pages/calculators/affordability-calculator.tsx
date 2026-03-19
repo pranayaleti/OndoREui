@@ -195,6 +195,7 @@ const AffordabilityCalculator: React.FC = () => {
                   <input
                     id="annualIncome"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     min={0}
                     max={10000000}
                     value={formData.annualIncome || ''}
@@ -215,6 +216,7 @@ const AffordabilityCalculator: React.FC = () => {
                   <input
                     id="monthlyDebts"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     min={0}
                     max={100000}
                     value={formData.monthlyDebts || ''}
@@ -238,6 +240,7 @@ const AffordabilityCalculator: React.FC = () => {
                   <input
                     id="downPayment"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     min={0}
                     max={10000000}
                     value={formData.downPayment || ''}
@@ -256,6 +259,7 @@ const AffordabilityCalculator: React.FC = () => {
                 <input
                   id="interestRate"
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.01"
                   min={0}
                   max={30}
@@ -291,6 +295,7 @@ const AffordabilityCalculator: React.FC = () => {
                 <input
                   id="propertyTaxRate"
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.1"
                   min={0}
                   max={10}
@@ -309,6 +314,7 @@ const AffordabilityCalculator: React.FC = () => {
                 <input
                   id="insuranceRate"
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.1"
                   min={0}
                   max={5}
@@ -345,6 +351,7 @@ const AffordabilityCalculator: React.FC = () => {
                 <input
                   id="creditScore"
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   min={300}
                   max={850}
                   value={formData.creditScore || ''}

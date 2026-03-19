@@ -174,6 +174,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                   <input
                     id="homePrice"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.homePrice || ''}
                     onChange={(e) => handleInputChange('homePrice', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -193,6 +194,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                     <input
                       id="downPaymentAmount"
                       type="number"
+                    onFocus={(e) => e.target.select()}
                       value={formData.downPayment || ''}
                       onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
                       className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -203,6 +205,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                     <input
                       id="downPaymentPercent"
                       type="number"
+                    onFocus={(e) => e.target.select()}
                       value={((formData.downPayment / formData.homePrice) * 100).toFixed(1)}
                       onChange={(e) => {
                         const percent = Number(e.target.value);
@@ -232,6 +235,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                   <input
                     id="loanAmount"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.loanAmount || ''}
                     onChange={(e) => handleInputChange('loanAmount', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -248,6 +252,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                 <input
                   id="interestRate"
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   step="0.01"
                   value={formData.interestRate || ''}
                   onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
@@ -283,6 +288,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                   <input
                     id="propertyTax"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.propertyTax || ''}
                     onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -301,6 +307,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                   <input
                     id="insurance"
                     type="number"
+                    onFocus={(e) => e.target.select()}
                     value={formData.insurance || ''}
                     onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -335,6 +342,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                 <input
                   id="creditScore"
                   type="number"
+                    onFocus={(e) => e.target.select()}
                   min={300}
                   max={850}
                   value={formData.creditScore || ''}
