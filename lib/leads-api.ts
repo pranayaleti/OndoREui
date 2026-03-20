@@ -1,4 +1,5 @@
 import { backendUrl } from "@/lib/backend"
+import type { MarketingAttribution } from "@/lib/attribution"
 
 export type ContactLeadSource = "website" | "referral" | "direct" | "social" | "ad"
 
@@ -9,6 +10,8 @@ export interface SubmitContactLeadPayload {
   message?: string
   propertyId?: string
   source?: ContactLeadSource
+  /** First/last touch UTMs and click ids from `getAttributionPayloadForApi()`. */
+  attribution?: MarketingAttribution
 }
 
 export interface SubmitContactLeadSuccess {

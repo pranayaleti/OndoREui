@@ -15,8 +15,8 @@ This app is aligned with [WebMCP](https://developer.chrome.com/blog/webmcp-epp) 
 
 Descriptions are written so agents know when to use each tool and what to expect:
 
-- **submit_contact_lead**: For property management, investments, or leasing inquiries in Utah; requires name and email; we ask for user confirmation before sending.
-- **get_company_contact_info**: Read-only; returns company name, URL, phone, address, business hours, and topic-specific emails (e.g. investors, notary, mortgage).
+- **submit_contact_lead**: For property management, investments, or leasing inquiries in Utah; requires name and email; we ask for user confirmation before sending. When the user’s tab has captured marketing params (UTMs / click ids from the landing URL), those are attached automatically on submit and stored on the lead in Supabase (`website_leads.attribution`).
+- **get_company_contact_info**: Read-only; returns company name, URL, phone, address, business hours, Calendly scheduling URL (`calendlyUrl`), and topic-specific emails (e.g. investors, notary, mortgage).
 - **list_investment_opportunities**: Read-only; returns open/coming-soon/fully-funded deals with slug, title, location, asset class, min investment, target return, hold period, status, and a short description. Optional `status` filter.
 - **get_investment_opportunity**: Read-only; returns full details for one deal by slug (title, location, description, highlights, risk factors, etc.).
 - **calculate_mortgage_payment**: Read-only; given principal (USD), annual rate (%), and term (years), returns monthly principal-and-interest payment. Does not include taxes, insurance, or PMI.

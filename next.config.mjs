@@ -51,6 +51,8 @@ const nextConfig = {
   },
 
   output: 'export',
+  /** GitHub Pages serves `/about/` as `about/index.html`. Without this, only `/about` / `about.html` work and `/about/?…` 404s (common for AI/chat links). */
+  trailingSlash: true,
 
   images: {
     unoptimized: true,

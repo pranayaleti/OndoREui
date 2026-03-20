@@ -9,6 +9,7 @@ import {
   SITE_HOURS_LABEL,
   SITE_ADDRESS,
   SITE_EMAILS,
+  SITE_CALENDLY_URL,
 } from "@/lib/site"
 
 const WEBMCP_TOOL_NAME = "get_company_contact_info"
@@ -31,7 +32,7 @@ export function WebMCPContactInfoTool() {
       modelContext.registerTool({
         name: WEBMCP_TOOL_NAME,
         description:
-          "Get Ondo Real Estate company contact information: phone, primary and topic-specific email addresses, physical address, business hours, and website URL. Use when the user asks how to reach Ondo, contact details, or where they are located.",
+          "Get Ondo Real Estate company contact information: phone, primary and topic-specific email addresses, physical address, business hours, website URL, and Calendly scheduling URL for booking a call. Use when the user asks how to reach Ondo, contact details, where they are located, or how to schedule a meeting.",
         inputSchema: {
           type: "object",
           properties: {},
@@ -47,6 +48,7 @@ export function WebMCPContactInfoTool() {
             hoursLabel: SITE_HOURS_LABEL,
             address: SITE_ADDRESS,
             emails: SITE_EMAILS,
+            calendlyUrl: SITE_CALENDLY_URL,
           }
           return {
             content: [{ type: "text", text: JSON.stringify(info) }],

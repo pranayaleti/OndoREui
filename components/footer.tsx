@@ -2,7 +2,19 @@
 import Link from "next/link"
 import Image from "next/image"
 import { memo } from "react"
-import { SITE_SOCIALS, SITE_ADDRESS, SITE_PHONE, SITE_EMAILS, SITE_HOURS_LABEL, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE } from "@/lib/site"
+import {
+  SITE_SOCIALS,
+  SITE_ADDRESS,
+  SITE_PHONE,
+  SITE_EMAILS,
+  SITE_HOURS_LABEL,
+  SITE_ADDRESS_STREET,
+  SITE_ADDRESS_CITY,
+  SITE_ADDRESS_REGION,
+  SITE_ADDRESS_POSTAL_CODE,
+  SITE_CLAUDE_ASK_ONDO_URL,
+  SITE_CHATGPT_REFERRAL_URL,
+} from "@/lib/site"
 import { usePwaInstall } from "@/lib/pwa/install-context"
 import { usePathname } from "next/navigation"
 import {
@@ -20,8 +32,11 @@ import {
   Building,
   Users,
   HelpCircle,
-  TrendingUp
+  TrendingUp,
+  Calendar,
 } from "lucide-react"
+import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
+import { ChatGptBrandIcon, ClaudeBrandIcon } from "@/components/ai-assistant-brand-icons"
 
 function EqualHousingIcon({ className }: { className?: string }) {
   return (
@@ -96,6 +111,12 @@ const Footer = memo(() => {
 
   if (isHiddenPage) return null
 
+  const path = pathname ?? ""
+  const isNotaryRoute = path === "/notary" || path.startsWith("/notary/")
+  const isContactRoute = path === "/contact" || path === "/contact/"
+  /** Pages that already include a full or dedicated inline Calendly */
+  const showFooterCalendly = path !== "/" && !isContactRoute && !isNotaryRoute
+
   // Define social media mapping in a deterministic order to prevent hydration issues
   const socialMediaMap = [
     { pattern: "facebook.com", name: "Facebook", Component: Facebook, hover: "hover:text-primary" },
@@ -155,6 +176,23 @@ const Footer = memo(() => {
           </Link>
         </div>
       </div>
+
+      {showFooterCalendly && (
+        <div className="border-b border-border bg-muted/20">
+          <div className="container mx-auto max-w-3xl px-4 py-10">
+            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-center sm:gap-3">
+              <Calendar className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+              <h2 className="text-lg font-semibold text-foreground">Book a 30-minute call</h2>
+            </div>
+            <CalendlyInlineEmbed
+              variant="compact"
+              heading={null}
+              showFallbackLink
+              className="mt-0"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-12" aria-label="Ondo Real Estate footer navigation">
@@ -418,7 +456,32 @@ const Footer = memo(() => {
                 <span className="text-foreground/70/80">The digital engine behind <Link href="/" className="text-primary hover:text-primary/80 hover:underline">Ondo Real Estate</Link>.</span>
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
+              <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-foreground/80">
+                <span className="hidden sm:inline">Ask about us:</span>
+                <a
+                  href={SITE_CLAUDE_ASK_ONDO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-foreground underline-offset-2 hover:underline"
+                  aria-label="Ask about Ondo Real Estate in Claude"
+                >
+                  <ClaudeBrandIcon className="h-4 w-4 shrink-0 text-foreground/90" />
+                  Claude
+                </a>
+                <span aria-hidden className="text-foreground/40">·</span>
+                <a
+                  href={SITE_CHATGPT_REFERRAL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-foreground underline-offset-2 hover:underline"
+                  aria-label="Ask about Ondo Real Estate in ChatGPT"
+                >
+                  <ChatGptBrandIcon className="h-4 w-4 shrink-0 text-foreground/90" />
+                  ChatGPT
+                </a>
+              </span>
+              <span className="hidden sm:inline h-4 w-px bg-foreground/20" aria-hidden />
               {pwaInstall?.isInstallable && (
                 <button
                   type="button"

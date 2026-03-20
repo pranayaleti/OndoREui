@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { NotaryBooking } from "@/components/notary-booking";
 import ConsultationModal from "@/components/ConsultationModal";
+import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed";
 
 export default function NotaryPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -592,6 +593,23 @@ export default function NotaryPage() {
             </div>
 
             <NotaryBooking />
+          </div>
+
+          <div className="mt-14 max-w-3xl mx-auto border-t border-white/10 pt-10">
+            <h3 className="text-xl font-semibold text-white text-center mb-2">
+              Or schedule a call
+            </h3>
+            <p className="text-center text-gray-400 text-sm mb-6 max-w-md mx-auto">
+              Same calendar for notary questions, loan signings, and general scheduling.
+            </p>
+            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-2">
+              <CalendlyInlineEmbed
+                variant="compact"
+                heading={null}
+                showFallbackLink
+                className="mt-0 [&_iframe]:bg-card"
+              />
+            </div>
           </div>
         </div>
       </section>
