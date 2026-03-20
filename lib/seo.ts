@@ -173,6 +173,24 @@ export function generateBreadcrumbJsonLd(items: Array<{ name: string; url: strin
   }
 }
 
+/** ItemList for HTML sitemap / discovery (search engines and structured-data consumers). */
+export function generateSitemapItemListJsonLd(
+  items: Array<{ name: string; url: string; description?: string }>,
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      description: item.description,
+      url: item.url,
+    })),
+  }
+}
+
 /**
  * Generate WebSite JSON-LD with search action
  */

@@ -60,6 +60,12 @@ function isExcludedPath(path) {
   return PRIVATE_ROUTE_PREFIXES.some((prefix) => p === prefix || p.startsWith(`${prefix}/`))
 }
 
+/** Static export writes `out/sitemap.xml` and `out/llms.txt` (no trailing slash). */
+function isFileLikeSitemapPath(path) {
+  const p = normalizeSitemapPath(path)
+  return /\.[a-z0-9]{2,8}$/i.test(p)
+}
+
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://ondorealestate.com',
   /** Must match `trailingSlash` in next.config.mjs for static export + GitHub Pages. */
@@ -110,12 +116,20 @@ module.exports = {
       return null
     }
 
-    return {
+    const base = {
       loc: path,
       changefreq: 'weekly',
       priority: getPriority(path),
       lastmod: getLastmod(path),
       alternateRefs: [],
     }
+    if (isFileLikeSitemapPath(path)) {
+      return { ...base, trailingSlash: false }
+    }
+    return base
+  },
+  additionalPaths: async (config) => {
+    const entry = await config.transform(config, '/llms.txt')
+    return entry ? [entry] : []
   },
 }

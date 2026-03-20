@@ -20,56 +20,8 @@ const POSTS: Record<string, {
   image: string
   excerpt: string
 }> = {
-  "first-time-home-buyer-guide": {
-    title: "First-Time Home Buyer Guide: Everything You Need to Know",
-    description: "Complete guide to buying your first home in Utah, from pre-approval to closing day.",
-    author: "Sarah Johnson",
-    published: "2024-12-10",
-    modified: "2024-12-10",
-    category: "Buying Guide",
-    image: "/suburban-house-garden.png",
-    excerpt: "Buying your first home is one of the biggest financial decisions you'll make. This guide walks you through every stage of the process—from getting pre-approved to handing over the keys—so you can move forward with confidence.",
-  },
-  "property-management-tips-utah-landlords": {
-    title: "Property Management Tips for Utah Landlords",
-    description: "Essential tips for managing rental properties in Utah's competitive market.",
-    author: "Michael Chen",
-    published: "2024-12-05",
-    modified: "2024-12-05",
-    category: "Property Management",
-    image: "/property-manager-meeting.png",
-    excerpt: "Utah's rental market moves fast. Whether you own a single-family rental in Lehi or a multi-unit building in Salt Lake City, these proven tactics help you reduce vacancy, protect your asset, and keep tenants happy.",
-  },
-  "mortgage-rate-trends-2025": {
-    title: "Mortgage Rate Trends: What to Expect in 2025",
-    description: "Analysis of current mortgage rate trends and predictions for the coming year.",
-    author: "Jennifer Martinez",
-    published: "2024-11-28",
-    modified: "2024-11-28",
-    category: "Mortgage",
-    image: "/modern-townhouse-garage.png",
-    excerpt: "After a volatile 2023–2024, buyers and refinancers are watching rates carefully. Here's what the data, Fed signals, and Utah-specific demand suggest for the 2025 mortgage market.",
-  },
-  "home-staging-tips-that-work": {
-    title: "Home Staging Tips That Actually Work",
-    description: "Professional staging tips to help your home sell faster and for more money.",
-    author: "Lisa Park",
-    published: "2024-11-15",
-    modified: "2024-11-15",
-    category: "Selling",
-    image: "/modern-apartment-balcony.png",
-    excerpt: "Staged homes sell up to 73% faster and often for more money. These are the moves that actually matter—from decluttering and lighting to the small details buyers notice on first walk-through.",
-  },
-  "understanding-property-taxes-utah": {
-    title: "Understanding Property Taxes in Utah",
-    description: "Complete breakdown of Utah property taxes and how they affect your investment.",
-    author: "Robert Wilson",
-    published: "2024-11-08",
-    modified: "2024-11-08",
-    category: "Taxes",
-    image: "/placeholder.jpg",
-    excerpt: "Utah property taxes are calculated differently than most states. Understanding assessment ratios, Truth in Taxation notices, and exemptions is essential for accurate underwriting—especially after a sale.",
-  },
+  // All blog posts now have dedicated static directories.
+  // Add entries here only for slugs without their own app/blog/<slug>/page.tsx.
 }
 
 type Params = { slug: string }

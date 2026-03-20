@@ -496,6 +496,7 @@ const Footer = memo(() => {
               <Link href="/terms" className="hover:text-foreground">Terms of Use</Link>
               <Link href="/accessibility" className="hover:text-foreground">Accessibility</Link>
               <Link href="/sitemap" className="hover:text-foreground">Site Map</Link>
+              <Link href="/llms.txt" className="hover:text-foreground">LLM brief</Link>
             </div>
           </div>
         </div>

@@ -4,6 +4,11 @@ import { VisitConfirmClient } from "./visit-confirm-client";
 
 interface Props { params: Promise<{ token: string }> }
 
+/** Static export requires at least one path; real tokens use the same client bundle (invalid token shows “not found”). */
+export function generateStaticParams(): { token: string }[] {
+  return [{ token: "__ondo_visit_export_shell__" }]
+}
+
 export default async function VisitConfirmPage({ params }: Props) {
   const { token } = await params;
 

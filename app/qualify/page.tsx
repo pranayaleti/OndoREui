@@ -5,8 +5,8 @@ import { Suspense } from "react";
 
 function QualifyContent() {
   const params = useSearchParams();
-  const token = params.get("token");
-  const type = (params.get("type") ?? "property") as "property" | "website";
+  const token = params?.get("token");
+  const type = (params?.get("type") ?? "property") as "property" | "website";
   if (!token) return <p className="text-center text-gray-500 mt-20">Invalid qualification link.</p>;
   return (
     <div className="min-h-screen flex items-center justify-center">
