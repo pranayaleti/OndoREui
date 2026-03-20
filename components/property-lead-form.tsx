@@ -13,6 +13,7 @@ import { CheckCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { emailValidation, phoneValidation } from "@/lib/validations";
 import { backendUrl } from "@/lib/backend";
+import { QualificationChat } from "@/components/leads/qualification-chat";
 
 interface PropertyLeadFormProps {
   open: boolean;
@@ -42,6 +43,8 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -182,6 +185,14 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
         throw new Error(errJson?.error || `Submission failed (${res.status})`);
       }
 
+      const data = await res.json().catch(() => ({})) as { leadId?: string; sessionToken?: string };
+      if (data.leadId) {
+        setLeadId(data.leadId);
+        if (data.sessionToken) {
+          setSessionToken(data.sessionToken);
+          sessionStorage.setItem(`qualify_token_${data.leadId}`, data.sessionToken);
+        }
+      }
       setIsSubmitted(true);
     } catch (err: unknown) {
       setErrors({ form: (err instanceof Error ? err.message : null) ?? "Something went wrong. Please try again." });
@@ -197,6 +208,8 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
       setStep(1);
       setIsSubmitted(false);
       setErrors({});
+      setSessionToken(null);
+      setLeadId(null);
       setFormData({
         firstName: "",
         lastName: "",
@@ -266,6 +279,9 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                   Thank you for your interest! A property manager will contact you shortly.
                 </p>
                 <Button onClick={handleClose}>Close</Button>
+                {sessionToken && (
+                  <QualificationChat sessionToken={sessionToken} leadType="property" />
+                )}
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
