@@ -8,16 +8,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Building, Mail, MapPin, Phone, Calendar, CheckCircle, AlertCircle } from "lucide-react"
+import { Building, Mail, MapPin, Phone, Calendar, CheckCircle, AlertCircle, MessageSquare } from "lucide-react"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE, SITE_EMAILS, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, SITE_HOURS_LABEL } from "@/lib/site"
-import ConsultationModal from "@/components/ConsultationModal"
+import { SITE_URL, SITE_PHONE, SITE_EMAILS, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, SITE_HOURS_LABEL, SITE_CALENDLY_URL } from "@/lib/site"
 import { backendUrl } from "@/lib/backend"
+import ConsultationModal from "@/components/ConsultationModal"
 
 export default function ContactPage() {
-  const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -29,6 +28,7 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
 
   const inquiryTypes = [
     'Property Management',
@@ -240,23 +240,41 @@ export default function ContactPage() {
                       <p className="text-foreground/70">View available times and book a free 30-minute consultation</p>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Button 
+                  <div className="flex flex-col gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button asChild className="flex-1" size="lg">
+                        <a
+                          className="inline-flex items-center justify-center"
+                          href={SITE_CALENDLY_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Calendar className="h-5 w-5 mr-2 shrink-0" />
+                          Book on Calendly
+                        </a>
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => window.open(`tel:${SITE_PHONE}`, '_self')}
+                        size="lg"
+                      >
+                        <Phone className="h-5 w-5 mr-2" />
+                        Call Now
+                      </Button>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="lg"
+                      className="w-full"
                       onClick={() => setIsConsultationModalOpen(true)}
-                      className="flex-1"
-                      size="lg"
                     >
-                      <Calendar className="h-5 w-5 mr-2" />
-                      View Available Times & Book Now
+                      <MessageSquare className="h-5 w-5 mr-2 shrink-0" />
+                      Notary &amp; other services
                     </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={() => window.open(`tel:${SITE_PHONE}`, '_self')}
-                      size="lg"
-                    >
-                      <Phone className="h-5 w-5 mr-2" />
-                      Call Now
-                    </Button>
+                    <p className="text-xs text-muted-foreground">
+                      Send a detailed request for notary, loan signing, or anything that needs follow-up from our team — or use Calendly to grab a time.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -396,10 +414,9 @@ export default function ContactPage() {
         </section>
       </main>
 
-      {/* Consultation Modal */}
-      <ConsultationModal 
-        isOpen={isConsultationModalOpen} 
-        onClose={() => setIsConsultationModalOpen(false)} 
+      <ConsultationModal
+        isOpen={isConsultationModalOpen}
+        onClose={() => setIsConsultationModalOpen(false)}
       />
 
       {/* Footer rendered globally in RootLayout */}

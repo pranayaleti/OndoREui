@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { SITE_PHONE } from "@/lib/site"
 import { submitContactLead, type ContactLeadSource } from "@/lib/leads-api"
+import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { CheckCircle, AlertCircle } from "lucide-react"
 
 const DEFAULT_SOURCE: ContactLeadSource = "website"
@@ -38,12 +39,14 @@ export function ContactLeadForm() {
     setSubmitStatus(null)
     setErrorMessage(null)
 
+    const attribution = getAttributionPayloadForApi()
     const result = await submitContactLead({
       name: formData.name.trim(),
       email: formData.email.trim(),
       ...(formData.phone.trim() && { phone: formData.phone.trim() }),
       ...(formData.message.trim() && { message: formData.message.trim() }),
       source: DEFAULT_SOURCE,
+      ...(attribution && { attribution }),
     })
 
     if ("error" in result) {
@@ -97,12 +100,14 @@ export function ContactLeadForm() {
           if (!confirmed) {
             return { content: [{ type: "text", text: JSON.stringify({ status: "cancelled" }) }] }
           }
+          const attr = getAttributionPayloadForApi()
           const result = await submitContactLead({
             name,
             email,
             ...(phone && { phone }),
             ...(message && { message }),
             source: DEFAULT_SOURCE,
+            ...(attr && { attribution: attr }),
           })
           return {
             content: [

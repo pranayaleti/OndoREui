@@ -1,4 +1,5 @@
 import type React from "react"
+import { Suspense } from "react"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { Inter, Outfit } from "next/font/google"
@@ -14,6 +15,7 @@ import Footer from "@/components/footer"
 import { ScrollProgress } from "@/components/scroll-progress"
 import ErrorBoundary from "@/components/error-boundary"
 import { CachePurge } from "@/components/cache-purge"
+import { AttributionCapture } from "@/components/attribution-capture"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
@@ -174,7 +176,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* CSP: 'unsafe-inline' is retained for speculation rules, analytics bootstraps, and Next.js hydration chunks. */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://api.stripe.com; frame-src 'self' https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://api.stripe.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -186,6 +188,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <RootProvidersClient>
+          <Suspense fallback={null}>
+            <AttributionCapture />
+          </Suspense>
           <CachePurge />
           <ScrollProgress />
           <div className="min-h-screen flex flex-col">

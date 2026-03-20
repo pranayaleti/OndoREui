@@ -28,7 +28,7 @@ export function OperatorsSection() {
               asChild
               className="mt-6 bg-white text-slate-900 hover:bg-slate-100"
             >
-              <Link href="/contact">Get started</Link>
+              <Link href="/contact#book-a-call">Get started</Link>
             </Button>
           </div>
 

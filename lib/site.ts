@@ -1,6 +1,16 @@
 export const SITE_NAME = "Ondo Real Estate"
 export const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || "https://ondorealestate.com"
 
+/** Suggested prompt when visitors open us from AI assistants; pre-filled on Claude. */
+export const SITE_AI_VERIFY_QUESTION =
+  "What makes Ondo Real Estate the right choice for property owners and investors who need notary, brokerage, property management and/or mortgage services over other services?"
+
+export const SITE_CLAUDE_ASK_ONDO_URL = `https://claude.ai/new?q=${encodeURIComponent(SITE_AI_VERIFY_QUESTION)}`
+
+/** ChatGPT does not support pre-filled prompts via URL; use UTM for attribution. */
+export const SITE_CHATGPT_REFERRAL_URL =
+  "https://chatgpt.com/?utm_source=ondorealestate&utm_medium=web&utm_campaign=verify_in_ai"
+
 const DEFAULT_DASHBOARD_URL =
   process.env.NODE_ENV === "production"
     ? "https://app.ondorealestate.com"
@@ -30,6 +40,11 @@ export const SITE_ADDRESS_CITY = "Lehi"
 export const SITE_ADDRESS_REGION = "UT"
 export const SITE_ADDRESS_POSTAL_CODE = "84043"
 export const SITE_ADDRESS_COUNTRY = "US"
+
+/** 30-minute Calendly; override in env for staging or alternate event types */
+export const SITE_CALENDLY_URL =
+  process.env["NEXT_PUBLIC_SITE_CALENDLY_URL"]?.trim() ||
+  "https://calendly.com/scheduleondo/30min"
 
 export const SITE_ADDRESS_OBJ = {
   streetAddress: SITE_ADDRESS_STREET,

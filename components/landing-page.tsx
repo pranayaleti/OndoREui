@@ -9,6 +9,7 @@ import { PropertyOwnerSection } from "@/components/landing/property-owner-sectio
 import { FoundersNoteSection } from "@/components/landing/founders-note-section"
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { CTASection } from "@/components/landing/cta-section"
+import { CalendlyBookSection } from "@/components/contact/calendly-inline-embed"
 
 function LandingPage() {
   return (
@@ -20,6 +21,7 @@ function LandingPage() {
       <PropertyOwnerSection />
       <FoundersNoteSection />
       <TestimonialsSection />
+      <CalendlyBookSection />
       <CTASection />
       {/* Footer rendered globally in RootLayout */}
     </div>

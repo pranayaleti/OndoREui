@@ -1,8 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 
-// Static lastmod dates by path prefix. Update when making meaningful content changes.
+// Static lastmod dates by path prefix (no trailing slash; paths normalized in getLastmod).
 const SECTION_LASTMOD = {
-  '/blog/': '2026-03-07',
+  '/blog': '2026-03-07',
   '/buy': '2026-03-07',
   '/sell': '2026-03-07',
   '/loans': '2026-03-07',
@@ -13,15 +13,22 @@ const SECTION_LASTMOD = {
   '/resources': '2026-03-07',
   '/about': '2026-03-07',
   '/contact': '2026-03-07',
+  '/property-management': '2026-03-20',
 }
 
 const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString().split('T')[0]
 const PRIVATE_ROUTE_PREFIXES = ['/dashboard', '/owner', '/tenant', '/platform', '/auth', '/admin', '/api']
 const ROBOTS_DISALLOW = [...PRIVATE_ROUTE_PREFIXES, '/login', '/feedback', '/health']
 
+function normalizeSitemapPath(path) {
+  if (!path || path === '/') return '/'
+  return path.replace(/\/+$/, '') || '/'
+}
+
 function getLastmod(path) {
+  const p = normalizeSitemapPath(path)
   for (const [prefix, date] of Object.entries(SECTION_LASTMOD)) {
-    if (path.startsWith(prefix)) return date
+    if (p === prefix || p.startsWith(`${prefix}/`)) return date
   }
   return BUILD_DATE
 }
@@ -33,26 +40,30 @@ function getLastmod(path) {
 //  0.7 — content pages (blog posts, calculator sub-pages, faq sub-pages)
 //  0.5 — utility pages (resources, notary, news, privacy, terms)
 function getPriority(path) {
-  if (path === '/') return 1.0
+  const p = normalizeSitemapPath(path)
+  if (p === '/') return 1.0
   const tier9 = ['/buy', '/sell', '/loans', '/contact', '/properties']
-  if (tier9.includes(path)) return 0.9
-  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes']
-  if (tier8.some(p => path === p)) return 0.8
+  if (tier9.includes(p)) return 0.9
+  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management']
+  if (tier8.some((x) => p === x)) return 0.8
   const tier5 = ['/resources', '/notary', '/news', '/privacy-policy', '/terms-of-service', '/accessibility', '/sitemap']
-  if (tier5.some(p => path.startsWith(p))) return 0.5
+  if (tier5.some((x) => p === x || p.startsWith(`${x}/`))) return 0.5
   return 0.7
 }
 
 function isExcludedPath(path) {
-  if (path === '/login' || path === '/feedback' || path === '/health') {
+  const p = normalizeSitemapPath(path)
+  if (p === '/login' || p === '/feedback' || p === '/health') {
     return true
   }
 
-  return PRIVATE_ROUTE_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))
+  return PRIVATE_ROUTE_PREFIXES.some((prefix) => p === prefix || p.startsWith(`${prefix}/`))
 }
 
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://ondorealestate.com',
+  /** Must match `trailingSlash` in next.config.mjs for static export + GitHub Pages. */
+  trailingSlash: true,
   generateRobotsTxt: true,
   outDir: 'out',
   changefreq: 'weekly',

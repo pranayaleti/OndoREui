@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useCallback, memo } from 'react';
-import { X, CheckCircle, AlertCircle, Send, Home } from 'lucide-react';
+import { X, CheckCircle, AlertCircle, Send, Home, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { SITE_PHONE } from '@/lib/site';
+import { SITE_PHONE, SITE_CALENDLY_URL } from '@/lib/site';
 import { backendUrl } from '@/lib/backend';
 
 interface FormData {
@@ -112,11 +112,11 @@ const ConsultationWidget: React.FC = memo(() => {
   return (
     <>
       {/* Floating Widget */}
-      <div className="fixed bottom-20 right-6 z-30 md:bottom-6">
+      <div className="fixed bottom-20 right-6 z-30 md:bottom-6 group">
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="group bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-16 w-16"
-          aria-label="View available times and book now"
+          className="relative bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-16 w-16"
+          aria-label="Book a consultation or send a request"
         >
           <Home className="h-6 w-6" />
           <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
@@ -125,7 +125,7 @@ const ConsultationWidget: React.FC = memo(() => {
         </Button>
         
         {/* Enhanced Tooltip */}
-        <div className="absolute bottom-full right-0 mb-3 bg-gray-900 text-white text-sm px-4 py-3 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg">
+        <div className="absolute bottom-full right-0 mb-3 bg-gray-900 text-white text-sm px-4 py-3 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg pointer-events-none">
           <div className="flex items-center space-x-2">
             <Home className="h-4 w-4" />
             <span>View Available Times & Book Now</span>
@@ -152,6 +152,18 @@ const ConsultationWidget: React.FC = memo(() => {
                 aria-label="Close modal"
               >
                 <X className="h-6 w-6" />
+              </Button>
+            </div>
+
+            <div className="px-6 py-4 border-b bg-muted/40">
+              <p className="text-sm text-foreground/80 mb-3">
+                Prefer to pick a time yourself? Same calendar for general consultations, notary, loans, and other services.
+              </p>
+              <Button asChild variant="outline" size="sm" className="gap-2">
+                <a href={SITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                  <Calendar className="h-4 w-4 shrink-0" />
+                  Book on Calendly (30 min)
+                </a>
               </Button>
             </div>
 
@@ -369,8 +381,19 @@ const ConsultationWidget: React.FC = memo(() => {
               </div>
 
               {/* Contact Info */}
-              <div className="mt-6 text-center text-sm text-foreground/70">
-                <p>Or call us directly: <a href={`tel:${SITE_PHONE}`} className="text-primary font-semibold">{SITE_PHONE}</a></p>
+              <div className="mt-6 text-center text-sm text-foreground/70 space-y-2">
+                <p>
+                  Book online:{' '}
+                  <a
+                    href={SITE_CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    Calendly (30 min)
+                  </a>
+                </p>
+                <p>Or call: <a href={`tel:${SITE_PHONE}`} className="text-primary font-semibold">{SITE_PHONE}</a></p>
               </div>
             </form>
           </div>

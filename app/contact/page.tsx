@@ -3,6 +3,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
 import { ContactLeadForm } from "@/components/contact/contact-lead-form"
+import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
 import { WebMCPContactInfoTool } from "@/components/contact/webmcp-contact-info-tool"
 import { Mail, Phone } from "lucide-react"
 
@@ -40,7 +41,7 @@ export default function ContactPage() {
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto grid gap-10 md:grid-cols-2 md:max-w-4xl">
+          <div className="max-w-2xl mx-auto grid gap-10 md:grid-cols-2 md:max-w-6xl md:gap-12 md:items-start">
             <div>
               <h2 className="text-xl font-semibold dark:text-foreground mb-4">
                 Send a message
@@ -65,6 +66,9 @@ export default function ContactPage() {
                   </a>
                 </li>
               </ul>
+              <div id="book-a-call" className="scroll-mt-24">
+                <CalendlyInlineEmbed />
+              </div>
             </div>
           </div>
         </div>

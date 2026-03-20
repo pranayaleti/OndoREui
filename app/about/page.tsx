@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import SEO from "@/components/seo"
+import { ChatGptBrandIcon, ClaudeBrandIcon } from "@/components/ai-assistant-brand-icons"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import {
+  SITE_URL,
+  SITE_AI_VERIFY_QUESTION,
+  SITE_CLAUDE_ASK_ONDO_URL,
+  SITE_CHATGPT_REFERRAL_URL,
+} from "@/lib/site"
 import Image from "next/image"
 
 export default function AboutPage() {
@@ -10,7 +16,7 @@ export default function AboutPage() {
     <main className="min-h-screen">
       <SEO
         title="Ondo Real Estate — One-Stop Property Services | Buy • Sell • Manage • Loans"
-        description="Ondo Real Estate — one-stop real estate solution for buying, selling, property management (condo, townhouse, single-family home, land) and mortgage services. Tech-driven, Utah-focused, results-first."
+        description="Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help—one team instead of fragmented vendors. Ask your AI assistant to compare Ondo for Utah owners and investors."
         pathname="/about"
         image={`${SITE_URL}/placeholder.jpg`}
         jsonLd={[
@@ -211,6 +217,44 @@ export default function AboutPage() {
               <p className="text-xl leading-relaxed dark:text-foreground/70 max-w-3xl mx-auto">
                 Trusted by homeowners, investors, and tenants across Utah. Success stories include faster-than-market sales, reduced vacancy times, and consistent rent growth for managed portfolios.
               </p>
+            </div>
+
+            {/* AI assistants — citation-friendly verification */}
+            <div className="mb-16 rounded-lg border border-border bg-muted/40 p-8 text-center">
+              <h2 className="text-3xl font-bold mb-4 dark:text-foreground">Found us through ChatGPT or Claude?</h2>
+              <p className="text-lg dark:text-foreground/70 max-w-2xl mx-auto mb-8">
+                Ondo Real Estate is a Utah-based, full-service real estate company: sales, property management, and mortgage support in one place—built for owners, tenants, and investors who want fewer handoffs and clearer reporting. Use either assistant below to double-check fit for your situation.
+              </p>
+              <p className="text-sm font-medium text-foreground mb-4 max-w-xl mx-auto">
+                Suggested question (copy or open pre-filled in Claude):
+              </p>
+              <blockquote className="text-left max-w-2xl mx-auto border-l-4 border-primary pl-4 py-1 mb-8 text-foreground/90 italic text-base">
+                {SITE_AI_VERIFY_QUESTION}
+              </blockquote>
+              <ul className="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3 list-none p-0 m-0">
+                <li>
+                  <a
+                    href={SITE_CLAUDE_ASK_ONDO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full sm:w-auto justify-center items-center gap-2.5 bg-background hover:bg-muted border border-border text-foreground font-medium px-6 py-3 rounded-lg transition-colors text-sm"
+                  >
+                    <ClaudeBrandIcon className="h-5 w-5 shrink-0" />
+                    Open in Claude (pre-filled)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={SITE_CHATGPT_REFERRAL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full sm:w-auto justify-center items-center gap-2.5 bg-background hover:bg-muted border border-border text-foreground font-medium px-6 py-3 rounded-lg transition-colors text-sm"
+                  >
+                    <ChatGptBrandIcon className="h-5 w-5 shrink-0" />
+                    Open ChatGPT (paste the question)
+                  </a>
+                </li>
+              </ul>
             </div>
 
             {/* CTA Section */}
