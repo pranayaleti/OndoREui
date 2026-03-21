@@ -12,7 +12,7 @@ type Status = "verifying" | "success" | "error" | "missing"
 
 export default function VerifyPage() {
   const params = useSearchParams()
-  const token = params.get("token")
+  const token = params?.get("token") ?? null
   const [status, setStatus] = useState<Status>(token ? "verifying" : "missing")
 
   useEffect(() => {
