@@ -450,6 +450,32 @@ export function getSiteIndexSections(): SiteIndexSection[] {
       ],
     },
     {
+      id: "solutions",
+      title: "Solutions",
+      description: "Platform capabilities by role.",
+      links: [
+        { name: "Solutions overview", href: "/solutions", description: "One platform for every stakeholder in real estate." },
+        { name: "For Investors", href: "/solutions/investors", description: "Portfolio analytics, risk scoring, and deal access." },
+        { name: "For Landlords", href: "/solutions/landlords", description: "Full-service management for property owners." },
+        { name: "For Property Managers", href: "/solutions/property-managers", description: "Scale operations with automation." },
+        { name: "For Tenants", href: "/solutions/tenants", description: "Rent, requests, and documents in one portal." },
+        { name: "Book a Demo", href: "/demo", description: "Free 15-minute platform walkthrough." },
+        { name: "Platform Tour", href: "/tour", description: "Self-serve guided tour of all platform features." },
+        { name: "Partners", href: "/partners", description: "Integrations: Stripe, Supabase, HubSpot, and more." },
+      ],
+    },
+    {
+      id: "learn",
+      title: "Learn",
+      description: "Research, education, and market data.",
+      links: [
+        { name: "Market Data", href: "/data", description: "Utah real estate stats updated quarterly." },
+        { name: "Insights", href: "/insights", description: "Research, reports, and thought leadership." },
+        { name: "Video Library", href: "/video-library", description: "Step-by-step platform walkthroughs." },
+        { name: "Academy", href: "/academy", description: "Free real estate education and guides." },
+      ],
+    },
+    {
       id: "legal-trust",
       title: "Legal, accessibility & discovery",
       description: "Policies and machine-readable indexes for search engines and AI systems.",

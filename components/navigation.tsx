@@ -47,6 +47,30 @@ export const allNavigationItems: NavigationItem[] = [
   { href: "/why-utah", label: "Why Utah" },
   { href: "/founders-letter", label: "Founder's Letter" },
 
+  // Solutions
+  {
+    href: "/solutions",
+    label: "Solutions",
+    children: [
+      { href: "/solutions/investors", label: "For Investors" },
+      { href: "/solutions/landlords", label: "For Landlords" },
+      { href: "/solutions/property-managers", label: "For Property Managers" },
+      { href: "/solutions/tenants", label: "For Tenants" },
+    ],
+  },
+  // Learn
+  {
+    href: "/tour",
+    label: "Learn",
+    children: [
+      { href: "/tour", label: "Platform Tour" },
+      { href: "/video-library", label: "Video Library" },
+      { href: "/academy", label: "Academy" },
+      { href: "/insights", label: "Insights" },
+      { href: "/partners", label: "Partners" },
+    ],
+  },
+
   // Company & about
   { href: "/about", label: "About" },
 
@@ -63,7 +87,7 @@ export const allNavigationItems: NavigationItem[] = [
 // These are the items that stay visible in the main
 // desktop navbar. The rest will live in the hamburger menu.
 export const primaryNavigationItems: NavigationItem[] = allNavigationItems.filter(item =>
-  ["/buy", "/sell", "/properties", "/loans", "/notary"].includes(item.href)
+  ["/buy", "/sell", "/properties", "/loans", "/notary", "/solutions", "/tour"].includes(item.href)
 )
 
 // Everything that is not part of the primary desktop nav.
