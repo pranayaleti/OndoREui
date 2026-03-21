@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Menu, X, Search, ChevronDown } from "lucide-react"
-import { Navigation, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
+import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
@@ -197,7 +197,28 @@ const Header = memo(() => {
             <Navigation
               className="flex flex-col gap-2"
               onLinkClick={handleMenuClose}
+              items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/tour")}
             />
+
+            {/* Solutions + Learn — mobile inline (children sourced from allNavigationItems to stay DRY) */}
+            {allNavigationItems
+              .filter(i => i.href === "/solutions" || i.href === "/tour")
+              .map(item => (
+                <div key={item.href} className="pt-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 px-3 mb-1">{item.label}</p>
+                  {item.children?.map(({ href, label }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      className="block pl-6 pr-3 py-2 text-sm text-foreground hover:bg-muted rounded-md"
+                      onClick={handleMenuClose}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+
             <div className="mt-4">
               <a
                 href={APP_PORTAL_LOGIN_URL}
