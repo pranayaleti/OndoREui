@@ -165,6 +165,22 @@ Access is invitation-only; there is no self-serve signup on the marketing site.
 - News: https://ondorealestate.com/news/ — Updates and industry notes.
 - Sweepstakes: https://ondorealestate.com/sweepstakes/ — Official rules for active promotions.
 
+### Solutions
+- Solutions overview: https://ondorealestate.com/solutions/ — One platform for every stakeholder in real estate.
+- For Investors: https://ondorealestate.com/solutions/investors/ — Portfolio analytics, risk scoring, and deal access.
+- For Landlords: https://ondorealestate.com/solutions/landlords/ — Full-service management for property owners.
+- For Property Managers: https://ondorealestate.com/solutions/property-managers/ — Scale operations with automation.
+- For Tenants: https://ondorealestate.com/solutions/tenants/ — Rent, requests, and documents in one portal.
+- Book a Demo: https://ondorealestate.com/demo/ — Free 15-minute platform walkthrough.
+- Platform Tour: https://ondorealestate.com/tour/ — Self-serve guided tour of all platform features.
+- Partners: https://ondorealestate.com/partners/ — Integrations: Stripe, Supabase, HubSpot, and more.
+
+### Learn
+- Market Data: https://ondorealestate.com/data/ — Utah real estate stats updated quarterly.
+- Insights: https://ondorealestate.com/insights/ — Research, reports, and thought leadership.
+- Video Library: https://ondorealestate.com/video-library/ — Step-by-step platform walkthroughs.
+- Academy: https://ondorealestate.com/academy/ — Free real estate education and guides.
+
 ### Legal, accessibility & discovery
 - Privacy policy: https://ondorealestate.com/privacy-policy/ — How we collect and use data.
 - Terms of service: https://ondorealestate.com/terms-of-service/ — Site and service terms.
