@@ -7,7 +7,7 @@
 
 ## Goal
 
-Expand the OndoREui public site with 14 new pages inspired by HouseCall Pro's sitemap depth, mapped to Ondo's real estate context. Every page must be SEO-optimised and AI-agent discoverable (JSON-LD, canonical URLs, `site-index.ts` registration → `sitemap.xml` + `llms.txt`).
+Expand the OndoREui public site with 14 new pages mapped to Ondo's real estate context. Every page must be SEO-optimised and AI-agent discoverable (JSON-LD, canonical URLs, `site-index.ts` registration → `sitemap.xml` + `llms.txt`).
 
 ---
 

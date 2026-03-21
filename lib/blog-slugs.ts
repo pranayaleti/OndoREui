@@ -1,52 +1,44 @@
 /**
  * Single source of truth for blog slugs used in links and tests.
- * - Slugs from app/blog/[slug]/page.tsx POSTS (dynamic route)
- * - Slugs from app/blog/<slug>/page.tsx directories (static routes)
+ * Each slug must have app/blog/<slug>/page.tsx (static route).
  * Keep in sync when adding or removing blog posts.
  */
 
-/** Slugs served by the dynamic [slug] route (POSTS in app/blog/[slug]/page.tsx). */
-const DYNAMIC_ROUTE_SLUGS = [
-  "first-time-home-buyer-guide",
-  "property-management-tips-utah-landlords",
-  "mortgage-rate-trends-2025",
-  "home-staging-tips-that-work",
-  "understanding-property-taxes-utah",
-] as const;
-
 /** Slugs with their own app/blog/<slug>/page.tsx static directory. */
 const STATIC_ROUTE_SLUGS = [
-  "why-utah-best-real-estate-investment",
-  "vacancy-risk-playbook",
-  "utah-rent-vs-buy-wasatch-front",
-  "technical-seo-for-real-estate",
-  "renting-vs-owning-hidden-math",
-  "property-management-automation-checklist",
-  "new-landlord-mistakes-systems",
-  "modernizing-notary-workflows-integration",
-  "maintenance-capex-strategy",
-  "full-stack-dev-landlord-gaps",
-  "engineering-real-estate-investment-calculators",
-  "designing-property-owner-portal",
-  "dashboards-for-landlords",
-  "crypto-and-real-estate-hedge",
-  "commercial-real-estate-101-tenant-mix",
   "building-high-performance-real-estate-nextjs-supabase",
-  "remote-online-notary-real-estate-closings",
-  "remote-online-notary-all-50-states",
-  "prepare-for-remote-online-notary-session",
+  "commercial-real-estate-101-tenant-mix",
+  "crypto-and-real-estate-hedge",
+  "dashboards-for-landlords",
+  "designing-property-owner-portal",
+  "engineering-real-estate-investment-calculators",
+  "first-time-home-buyer-guide",
+  "full-stack-dev-landlord-gaps",
+  "home-staging-tips-that-work",
+  "maintenance-capex-strategy",
   "mobile-notary-utah-county-guide",
+  "modernizing-notary-workflows-integration",
+  "mortgage-rate-trends-2025",
+  "new-landlord-mistakes-systems",
+  "prepare-for-remote-online-notary-session",
+  "property-management-automation-checklist",
+  "property-management-tips-utah-landlords",
+  "remote-online-notary-all-50-states",
+  "remote-online-notary-real-estate-closings",
+  "renting-vs-owning-hidden-math",
+  "technical-seo-for-real-estate",
+  "understanding-property-taxes-utah",
+  "utah-rent-vs-buy-wasatch-front",
+  "vacancy-risk-playbook",
+  "why-utah-best-real-estate-investment",
 ] as const;
 
-/** Every slug that must resolve (either [slug] POSTS or app/blog/<slug>/page.tsx). */
-export const ALL_VALID_BLOG_SLUGS = new Set<string>([
-  ...DYNAMIC_ROUTE_SLUGS,
-  ...STATIC_ROUTE_SLUGS,
-]);
+/** Every slug that must resolve to a built blog page. */
+export const ALL_VALID_BLOG_SLUGS = new Set<string>([...STATIC_ROUTE_SLUGS]);
 
 /**
  * Slugs linked from the blog index page (app/blog/page.tsx).
- * Every entry must be in ALL_VALID_BLOG_SLUGS or /blog/[slug] will 404.
+ * Every entry must be in ALL_VALID_BLOG_SLUGS or the link will 404 in production.
  */
 export const BLOG_INDEX_SLUGS = [
   "remote-online-notary-all-50-states",

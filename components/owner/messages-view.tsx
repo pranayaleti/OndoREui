@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Search, MessageSquare, Send, Paperclip, Phone, Video, MoreVertical, Building, Clock } from "lucide-react"
+import { Search, MessageSquare, Send, Paperclip, MoreVertical, Building, Clock } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,322 +21,119 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { NewMessageDialog } from "@/components/owner/new-message-dialog"
 import { useToast } from "@/hooks/use-toast"
 import { cn } from "@/lib/utils"
-
-// Mock conversations data
-const CONVERSATIONS = [
-  {
-    id: "conv1",
-    recipient: {
-      id: "user1",
-      name: "John Smith",
-      avatar: "/placeholder.svg?key=9xqre",
-      role: "tenant",
-      property: "2701 N Thanksgiving Way, Unit 1",
-    },
-    lastMessage: {
-      content: "Yes, I'll be available for the maintenance visit tomorrow between 2-4pm.",
-      timestamp: "2023-05-15T14:30:00",
-      sender: "user1",
-      read: true,
-    },
-    unreadCount: 0,
-  },
-  {
-    id: "conv2",
-    recipient: {
-      id: "user2",
-      name: "Sarah Johnson",
-      avatar: "/placeholder.svg?key=1g942",
-      role: "tenant",
-      property: "2701 N Thanksgiving Way, Unit 2",
-    },
-    lastMessage: {
-      content: "I've submitted the rent payment for this month. Please confirm when received.",
-      timestamp: "2023-05-14T09:15:00",
-      sender: "user2",
-      read: false,
-    },
-    unreadCount: 2,
-  },
-  {
-    id: "conv3",
-    recipient: {
-      id: "user3",
-      name: "Michael Brown",
-      avatar: "/placeholder.svg?key=3m7yt",
-      role: "tenant",
-      property: "456 Oak Avenue",
-    },
-    lastMessage: {
-      content: "When will the new refrigerator be delivered?",
-      timestamp: "2023-05-13T16:45:00",
-      sender: "user3",
-      read: false,
-    },
-    unreadCount: 1,
-  },
-  {
-    id: "conv4",
-    recipient: {
-      id: "user4",
-      name: "Quick Fix Plumbing",
-      avatar: "/placeholder.svg?key=7p9qs",
-      role: "vendor",
-      property: "Multiple Properties",
-    },
-    lastMessage: {
-      content: "We've scheduled the plumbing inspection for next Tuesday at 10am.",
-      timestamp: "2023-05-12T11:20:00",
-      sender: "user4",
-      read: true,
-    },
-    unreadCount: 0,
-  },
-  {
-    id: "conv5",
-    recipient: {
-      id: "user5",
-      name: "Elite Electric",
-      avatar: "/placeholder.svg?key=2k8lp",
-      role: "vendor",
-      property: "2701 N Thanksgiving Way",
-    },
-    lastMessage: {
-      content: "The electrical work has been completed. Here's the invoice for your records.",
-      timestamp: "2023-05-10T15:30:00",
-      sender: "user5",
-      read: true,
-    },
-    unreadCount: 0,
-  },
-  {
-    id: "conv6",
-    recipient: {
-      id: "user6",
-      name: "Emily Wilson",
-      avatar: "/placeholder.svg?key=5r3tv",
-      role: "tenant",
-      property: "456 Oak Avenue, Unit 2",
-    },
-    lastMessage: {
-      content: "I'm interested in renewing my lease. Can we discuss the terms?",
-      timestamp: "2023-05-08T10:15:00",
-      sender: "user6",
-      read: true,
-    },
-    unreadCount: 0,
-  },
-]
-
-// Mock messages for a conversation
-const MESSAGES = {
-  conv1: [
-    {
-      id: "msg1",
-      content:
-        "Hello John, I wanted to let you know that we've scheduled a maintenance visit for your unit tomorrow between 2-4pm. Will you be available?",
-      timestamp: "2023-05-15T14:15:00",
-      sender: "owner",
-      read: true,
-    },
-    {
-      id: "msg2",
-      content: "Yes, I'll be available for the maintenance visit tomorrow between 2-4pm.",
-      timestamp: "2023-05-15T14:30:00",
-      sender: "user1",
-      read: true,
-    },
-  ],
-  conv2: [
-    {
-      id: "msg3",
-      content: "Hi Sarah, just a reminder that rent is due on the 1st of the month.",
-      timestamp: "2023-05-01T09:00:00",
-      sender: "owner",
-      read: true,
-    },
-    {
-      id: "msg4",
-      content: "Thanks for the reminder! I'll make the payment today.",
-      timestamp: "2023-05-01T10:30:00",
-      sender: "user2",
-      read: true,
-    },
-    {
-      id: "msg5",
-      content: "I've submitted the rent payment for this month. Please confirm when received.",
-      timestamp: "2023-05-14T09:15:00",
-      sender: "user2",
-      read: false,
-    },
-    {
-      id: "msg6",
-      content: "I'll check with the bank and confirm once it's received. Thank you!",
-      timestamp: "2023-05-14T10:20:00",
-      sender: "owner",
-      read: true,
-    },
-  ],
-  conv3: [
-    {
-      id: "msg7",
-      content: "Hello, I noticed the refrigerator isn't cooling properly. Can we get it fixed or replaced?",
-      timestamp: "2023-05-12T11:30:00",
-      sender: "user3",
-      read: true,
-    },
-    {
-      id: "msg8",
-      content: "I'll send someone to take a look at it tomorrow. If it can't be repaired, we'll order a new one.",
-      timestamp: "2023-05-12T13:45:00",
-      sender: "owner",
-      read: true,
-    },
-    {
-      id: "msg9",
-      content: "The technician came by and said it needs to be replaced. Have you ordered a new one?",
-      timestamp: "2023-05-13T15:20:00",
-      sender: "user3",
-      read: true,
-    },
-    {
-      id: "msg10",
-      content: "When will the new refrigerator be delivered?",
-      timestamp: "2023-05-13T16:45:00",
-      sender: "user3",
-      read: false,
-    },
-  ],
-}
+import * as messagesApi from "@/lib/api/messages"
+import type { Thread, Message, MessageTemplate } from "@/lib/api/messages"
 
 export function MessagesView() {
   const [activeTab, setActiveTab] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedConversation, setSelectedConversation] = useState<string | null>(null)
-  const [conversations, setConversations] = useState(CONVERSATIONS)
-  const [messages, setMessages] = useState(MESSAGES)
-  const [newMessage, setNewMessage] = useState("")
+  const [threads, setThreads] = useState<Thread[]>([])
+  const [selectedThread, setSelectedThread] = useState<Thread | null>(null)
+  const [messages, setMessages] = useState<Message[]>([])
+  const [templates, setTemplates] = useState<MessageTemplate[]>([])
+  const [loading, setLoading] = useState(false)
+  const [replyText, setReplyText] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { toast } = useToast()
 
-  // Filter conversations based on search term and active tab
-  const filteredConversations = conversations.filter((conversation) => {
-    const matchesSearch = conversation.recipient.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Load threads and templates on mount
+  useEffect(() => {
+    setLoading(true)
+    Promise.all([
+      messagesApi.listThreads().catch(() => [] as Thread[]),
+      messagesApi.listTemplates().catch(() => [] as MessageTemplate[]),
+    ]).then(([fetchedThreads, fetchedTemplates]) => {
+      setThreads(fetchedThreads)
+      setTemplates(fetchedTemplates)
+      setLoading(false)
+    })
+  }, [])
 
-    if (activeTab === "all") return matchesSearch
-    if (activeTab === "tenants") return matchesSearch && conversation.recipient.role === "tenant"
-    if (activeTab === "vendors") return matchesSearch && conversation.recipient.role === "vendor"
-    if (activeTab === "unread") return matchesSearch && conversation.unreadCount > 0
-
-    return matchesSearch
-  })
-
-  // Scroll to bottom of messages when a conversation is selected or new message is added
+  // Scroll to bottom when messages change or thread changes
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
     }
-  }, [selectedConversation, messages])
+  }, [selectedThread, messages])
 
-  // Mark messages as read when a conversation is selected
-  useEffect(() => {
-    if (selectedConversation) {
-      // In a real app, this would call an API to mark messages as read
-      setConversations((prevConversations) =>
-        prevConversations.map((conv) =>
-          conv.id === selectedConversation
-            ? { ...conv, unreadCount: 0, lastMessage: { ...conv.lastMessage, read: true } }
-            : conv,
-        ),
+  // Filter threads based on search term and active tab
+  const filteredThreads = threads.filter((thread) => {
+    const matchesSearch = thread.subject.toLowerCase().includes(searchTerm.toLowerCase())
+
+    if (activeTab === "all") return matchesSearch
+    if (activeTab === "tenants") return matchesSearch && thread.category === "tenant"
+    if (activeTab === "vendors") return matchesSearch && thread.category === "vendor"
+    if (activeTab === "unread") return matchesSearch && thread.unreadCount > 0
+
+    return matchesSearch
+  })
+
+  const handleSelectThread = useCallback(async (thread: Thread) => {
+    setSelectedThread(thread)
+    setMessages([])
+    try {
+      const [fetchedMessages] = await Promise.all([
+        messagesApi.listMessages(thread.id),
+        messagesApi.markRead(thread.id).catch(() => {}),
+      ])
+      setMessages(fetchedMessages)
+      // Clear unread badge in state
+      setThreads((prev) =>
+        prev.map((t) => (t.id === thread.id ? { ...t, unreadCount: 0 } : t))
       )
+    } catch {
+      toast({ title: "Error", description: "Failed to load messages.", variant: "destructive" })
     }
-  }, [selectedConversation])
+  }, [toast])
 
-  const handleSendMessage = () => {
-    if (!newMessage.trim() || !selectedConversation) return
+  const handleSendMessage = async () => {
+    if (!replyText.trim() || !selectedThread) return
 
-    // In a real app, this would call an API to send the message
-    const newMsg = {
-      id: `msg${Date.now()}`,
-      content: newMessage,
-      timestamp: new Date().toISOString(),
-      sender: "owner",
-      read: true,
+    const text = replyText
+    setReplyText("")
+
+    try {
+      const sent = await messagesApi.sendMessage(selectedThread.id, text)
+      setMessages((prev) => [...prev, sent])
+      // Update last message timestamp on thread
+      setThreads((prev) =>
+        prev.map((t) =>
+          t.id === selectedThread.id ? { ...t, lastMessageAt: sent.sentAt } : t
+        )
+      )
+    } catch {
+      toast({ title: "Error", description: "Failed to send message.", variant: "destructive" })
+      setReplyText(text)
     }
-
-    // Add message to conversation
-    setMessages((prevMessages) => ({
-      ...prevMessages,
-      [selectedConversation]: [...(prevMessages[selectedConversation as keyof typeof prevMessages] || []), newMsg],
-    }))
-
-    // Update last message in conversation list
-    setConversations((prevConversations) =>
-      prevConversations.map((conv) =>
-        conv.id === selectedConversation
-          ? {
-              ...conv,
-              lastMessage: {
-                content: newMessage,
-                timestamp: new Date().toISOString(),
-                sender: "owner",
-                read: true,
-              },
-            }
-          : conv,
-      ),
-    )
-
-    setNewMessage("")
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleCreateConversation = (data: any) => {
-    // In a real app, this would call an API to create a new conversation
-    const newConversation = {
-      id: `conv${conversations.length + 1}`,
-      recipient: {
-        id: `user${conversations.length + 1}`,
-        name: data.recipient,
-        avatar: "/placeholder.svg?key=new-user",
-        role: data.recipientType,
-        property: data.property,
-      },
-      lastMessage: {
-        content: data.message,
-        timestamp: new Date().toISOString(),
-        sender: "owner",
-        read: true,
-      },
-      unreadCount: 0,
+  const handleCreateConversation = async (data: any) => {
+    try {
+      const thread = await messagesApi.createThread({
+        subject: data.recipient,
+        category: data.recipientType,
+      })
+      // Send the initial message if provided
+      if (data.message) {
+        const msg = await messagesApi.sendMessage(thread.id, data.message)
+        setMessages([msg])
+      } else {
+        setMessages([])
+      }
+      setThreads((prev) => [thread, ...prev])
+      setSelectedThread(thread)
+      toast({
+        title: "Message sent",
+        description: `Your message has been sent to ${data.recipient}.`,
+      })
+    } catch {
+      toast({ title: "Error", description: "Failed to create conversation.", variant: "destructive" })
     }
-
-    setConversations([newConversation, ...conversations])
-
-    // Add initial message to conversation
-    setMessages((prevMessages) => ({
-      ...prevMessages,
-      [newConversation.id]: [
-        {
-          id: `msg${Date.now()}`,
-          content: data.message,
-          timestamp: new Date().toISOString(),
-          sender: "owner",
-          read: true,
-        },
-      ],
-    }))
-
-    // Select the new conversation
-    setSelectedConversation(newConversation.id)
-
-    toast({
-      title: "Message sent",
-      description: `Your message has been sent to ${data.recipient}.`,
-    })
   }
 
-  const formatTimestamp = (timestamp: string) => {
+  const formatTimestamp = (timestamp?: string) => {
+    if (!timestamp) return ""
     const date = new Date(timestamp)
     const now = new Date()
     const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
@@ -351,6 +148,12 @@ export function MessagesView() {
       return date.toLocaleDateString([], { month: "short", day: "numeric" })
     }
   }
+
+  // Derive a display name initial from subject
+  const getInitial = (subject: string) => subject.charAt(0).toUpperCase()
+
+  // Collect all quick replies from all templates for the picker
+  const allQuickReplies = templates.flatMap((t) => t.quickReplies ?? [])
 
   return (
     <div className="flex flex-col md:flex-row gap-6">
@@ -381,7 +184,11 @@ export function MessagesView() {
           </Tabs>
           <CardContent className="p-0">
             <ScrollArea className="h-[calc(100vh-300px)]">
-              {filteredConversations.length === 0 ? (
+              {loading ? (
+                <div className="flex items-center justify-center py-12 text-foreground/70 text-sm">
+                  Loading conversations...
+                </div>
+              ) : filteredThreads.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
                   <MessageSquare className="h-12 w-12 text-foreground/70 mb-4" />
                   <h3 className="text-lg font-medium mb-2">No conversations found</h3>
@@ -396,38 +203,42 @@ export function MessagesView() {
                 </div>
               ) : (
                 <div>
-                  {filteredConversations.map((conversation) => (
+                  {filteredThreads.map((thread) => (
                     <button
-                      key={conversation.id}
+                      key={thread.id}
                       type="button"
                       className={cn(
                         "flex w-full items-center gap-3 p-4 hover:bg-muted/50 cursor-pointer text-left",
-                        selectedConversation === conversation.id ? "bg-muted" : "",
+                        selectedThread?.id === thread.id ? "bg-muted" : "",
                       )}
-                      onClick={() => setSelectedConversation(conversation.id)}
+                      onClick={() => handleSelectThread(thread)}
                     >
                       <Avatar className="h-10 w-10">
-                        <AvatarImage
-                          src={conversation.recipient.avatar || "/placeholder.svg"}
-                          alt={conversation.recipient.name}
-                        />
-                        <AvatarFallback>{conversation.recipient.name.charAt(0)}</AvatarFallback>
+                        <AvatarFallback>{getInitial(thread.subject)}</AvatarFallback>
                       </Avatar>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start">
-                          <div className="font-medium truncate">{conversation.recipient.name}</div>
+                          <div className="font-medium truncate">{thread.subject}</div>
                           <div className="text-xs text-foreground/70">
-                            {formatTimestamp(conversation.lastMessage.timestamp)}
+                            {formatTimestamp(thread.lastMessageAt)}
                           </div>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <div className="text-sm text-foreground/70 truncate">
-                            {conversation.lastMessage.sender === "owner" ? "You: " : ""}
-                            {conversation.lastMessage.content}
+                        <div className="flex justify-between items-center gap-1">
+                          <div className="flex gap-1 flex-wrap">
+                            {thread.status && (
+                              <Badge variant="outline" className="text-xs font-normal rounded-sm h-5 px-1 capitalize">
+                                {thread.status}
+                              </Badge>
+                            )}
+                            {thread.priority && thread.priority !== "normal" && (
+                              <Badge variant="outline" className="text-xs font-normal rounded-sm h-5 px-1 capitalize">
+                                {thread.priority}
+                              </Badge>
+                            )}
                           </div>
-                          {conversation.unreadCount > 0 && (
-                            <Badge className="ml-2 h-5 w-5 p-0 flex items-center justify-center rounded-full">
-                              {conversation.unreadCount}
+                          {thread.unreadCount > 0 && (
+                            <Badge className="ml-2 h-5 w-5 p-0 flex items-center justify-center rounded-full shrink-0">
+                              {thread.unreadCount}
                             </Badge>
                           )}
                         </div>
@@ -442,42 +253,37 @@ export function MessagesView() {
       </div>
 
       <div className="flex-1">
-        {selectedConversation ? (
+        {selectedThread ? (
           <Card className="flex flex-col h-full">
             <CardHeader className="pb-4 border-b">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage
-                      src={
-                        conversations.find((c) => c.id === selectedConversation)?.recipient.avatar || "/placeholder.svg"
-                      }
-                      alt={conversations.find((c) => c.id === selectedConversation)?.recipient.name || "User"}
-                    />
-                    <AvatarFallback>
-                      {(conversations.find((c) => c.id === selectedConversation)?.recipient.name || "U").charAt(0)}
-                    </AvatarFallback>
+                    <AvatarFallback>{getInitial(selectedThread.subject)}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <div className="font-medium">
-                      {conversations.find((c) => c.id === selectedConversation)?.recipient.name}
-                    </div>
-                    <div className="flex items-center text-xs text-foreground/70">
-                      <Badge variant="outline" className="text-xs font-normal rounded-sm h-5 px-1 mr-2 capitalize">
-                        {conversations.find((c) => c.id === selectedConversation)?.recipient.role}
-                      </Badge>
-                      <Building className="h-3 w-3 mr-1" />
-                      {conversations.find((c) => c.id === selectedConversation)?.recipient.property}
+                    <div className="font-medium">{selectedThread.subject}</div>
+                    <div className="flex items-center text-xs text-foreground/70 gap-2">
+                      {selectedThread.status && (
+                        <Badge variant="outline" className="text-xs font-normal rounded-sm h-5 px-1 capitalize">
+                          {selectedThread.status}
+                        </Badge>
+                      )}
+                      {selectedThread.priority && (
+                        <Badge variant="outline" className="text-xs font-normal rounded-sm h-5 px-1 capitalize">
+                          {selectedThread.priority}
+                        </Badge>
+                      )}
+                      {selectedThread.propertyId && (
+                        <span className="flex items-center gap-1">
+                          <Building className="h-3 w-3" />
+                          {selectedThread.propertyId}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="icon" title="Call">
-                    <Phone className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon" title="Video Call">
-                    <Video className="h-4 w-4" />
-                  </Button>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="icon">
@@ -497,33 +303,51 @@ export function MessagesView() {
               </div>
             </CardHeader>
             <CardContent className="flex-1 p-0 overflow-hidden">
-              <ScrollArea className="h-[calc(100vh-350px)] p-4">
+              <ScrollArea className="h-[calc(100vh-420px)] p-4">
                 <div className="space-y-4">
-                  {messages[selectedConversation as keyof typeof messages]?.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex ${message.sender === "owner" ? "justify-end" : "justify-start"}`}
-                    >
+                  {messages.map((message) => {
+                    const isOwn = message.senderId === "owner"
+                    return (
                       <div
-                        className={`max-w-[80%] rounded-lg p-3 ${
-                          message.sender === "owner"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted text-foreground/70"
-                        }`}
+                        key={message.id}
+                        className={`flex ${isOwn ? "justify-end" : "justify-start"}`}
                       >
-                        <div className="text-sm">{message.content}</div>
-                        <div className="text-xs mt-1 opacity-70 flex items-center justify-end gap-1">
-                          <Clock className="h-3 w-3" />
-                          {formatTimestamp(message.timestamp)}
+                        <div
+                          className={`max-w-[80%] rounded-lg p-3 ${
+                            isOwn
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted text-foreground/70"
+                          }`}
+                        >
+                          <div className="text-sm">{message.body}</div>
+                          <div className="text-xs mt-1 opacity-70 flex items-center justify-end gap-1">
+                            <Clock className="h-3 w-3" />
+                            {formatTimestamp(message.sentAt)}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                   <div ref={messagesEndRef} />
                 </div>
               </ScrollArea>
             </CardContent>
-            <div className="p-4 border-t">
+            <div className="p-4 border-t space-y-2">
+              {allQuickReplies.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {allQuickReplies.map((qr, i) => (
+                    <Button
+                      key={i}
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-7"
+                      onClick={() => setReplyText(qr)}
+                    >
+                      {qr}
+                    </Button>
+                  ))}
+                </div>
+              )}
               <div className="flex gap-2">
                 <Button variant="outline" size="icon" title="Attach File">
                   <Paperclip className="h-4 w-4" />
@@ -531,8 +355,8 @@ export function MessagesView() {
                 <Textarea
                   placeholder="Type your message..."
                   className="flex-1 min-h-[40px] resize-none"
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
                       e.preventDefault()
@@ -540,7 +364,7 @@ export function MessagesView() {
                     }
                   }}
                 />
-                <Button size="icon" disabled={!newMessage.trim()} onClick={handleSendMessage} title="Send Message">
+                <Button size="icon" disabled={!replyText.trim()} onClick={handleSendMessage} title="Send Message">
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
@@ -560,3 +384,5 @@ export function MessagesView() {
     </div>
   )
 }
+
+export default MessagesView

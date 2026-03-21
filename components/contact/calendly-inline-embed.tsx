@@ -66,6 +66,7 @@ export function CalendlyInlineEmbed({
   showFullscreenToggle = true,
 }: CalendlyInlineEmbedProps) {
   const shellRef = useRef<HTMLDivElement>(null);
+  const pointerInShellRef = useRef(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
@@ -95,6 +96,44 @@ export function CalendlyInlineEmbed({
     }
   }, []);
 
+  useEffect(() => {
+    if (!showFullscreenToggle) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      const shell = shellRef.current;
+      if (!shell) return;
+      const inThisShell = getFullscreenElement() === shell;
+
+      if (e.key === "Escape" && inThisShell) {
+        e.preventDefault();
+        void toggleFullscreen();
+        return;
+      }
+
+      const isFsShortcutShift =
+        (e.key === "f" || e.key === "F") && e.shiftKey && (e.ctrlKey || e.metaKey);
+      // Ctrl+F / ⌘F only while pointer is over this embed so browser Find still works elsewhere.
+      const isFsShortcutPlainF =
+        (e.key === "f" || e.key === "F") &&
+        !e.shiftKey &&
+        (e.ctrlKey || e.metaKey) &&
+        pointerInShellRef.current;
+      if (!isFsShortcutShift && !isFsShortcutPlainF) return;
+
+      const target = e.target;
+      if (
+        target instanceof Element &&
+        target.closest("input, textarea, select, [contenteditable=true]")
+      ) {
+        return;
+      }
+
+      e.preventDefault();
+      void toggleFullscreen();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [showFullscreenToggle, toggleFullscreen]);
+
   const iframeSizeWhenInline =
     variant === "compact"
       ? "h-[480px] min-h-[420px] sm:h-[520px]"
@@ -117,6 +156,12 @@ export function CalendlyInlineEmbed({
       )}
       <div
         ref={shellRef}
+        onPointerEnter={() => {
+          pointerInShellRef.current = true;
+        }}
+        onPointerLeave={() => {
+          pointerInShellRef.current = false;
+        }}
         className={cn(
           "relative w-full overflow-hidden rounded-lg border border-border bg-card",
           isFullscreen
@@ -125,7 +170,7 @@ export function CalendlyInlineEmbed({
         )}
       >
         {showFullscreenToggle && (
-          <div className="absolute left-2 top-2 z-10">
+          <div className="absolute right-2 top-2 z-10">
             <Button
               type="button"
               variant="secondary"
@@ -133,6 +178,12 @@ export function CalendlyInlineEmbed({
               className="h-9 gap-1.5 border border-border/80 bg-background/95 shadow-sm backdrop-blur-sm sm:px-3"
               onClick={() => void toggleFullscreen()}
               aria-pressed={isFullscreen}
+              aria-keyshortcuts="Control+Shift+F Meta+Shift+F"
+              title={
+                isFullscreen
+                  ? "Exit fullscreen (Escape, Ctrl+F over calendar, or Ctrl+Shift+F)"
+                  : "Fullscreen — Ctrl+F (⌘F) while cursor is over the calendar, or Ctrl+Shift+F anywhere"
+              }
               aria-label={
                 isFullscreen
                   ? "Exit fullscreen scheduling calendar"
