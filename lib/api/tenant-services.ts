@@ -194,3 +194,55 @@ export async function requestSmsVerification(phoneNumber: string) {
 export async function verifySmsCode(code: string) {
   return postJson("/sms/verify", { code })
 }
+
+// ── Credit Reporting ───────────────────────────────────────────────────────────
+export async function getCreditReportingStatus() {
+  return networkFirstGet("/tenant/credit-reporting/status", "credit-reporting-status")
+}
+export async function enrollCreditReporting(data: Record<string, unknown>) {
+  return postJson("/tenant/credit-reporting/enroll", data)
+}
+
+// ── Pet Registration ──────────────────────────────────────────────────────────
+export async function getTenantPets() {
+  return networkFirstGet("/tenant/pets", "tenant-pets")
+}
+export async function addPet(data: Record<string, unknown>) {
+  return postJson("/tenant/pets", data)
+}
+export async function updatePet(petId: string, data: Record<string, unknown>) {
+  return putJson(`/tenant/pets/${petId}`, data)
+}
+
+// ── Financial Wellness ────────────────────────────────────────────────────────
+export async function getFinancialWellness() {
+  return networkFirstGet("/tenant/financial-wellness", "financial-wellness")
+}
+export async function getPaymentScore() {
+  return networkFirstGet("/tenant/financial-wellness/payment-score", "payment-score")
+}
+export async function updateSavingsGoal(data: Record<string, unknown>) {
+  return putJson("/tenant/financial-wellness/savings-goals", data)
+}
+
+// ── CAM Charges ───────────────────────────────────────────────────────────────
+export async function getTenantCamCharges() {
+  return networkFirstGet("/tenant/cam-charges", "cam-charges")
+}
+
+// ── Tenant Self-Inspection ────────────────────────────────────────────────────
+export async function createSelfInspection(data: Record<string, unknown>) {
+  return postJson("/tenant/inspections", data)
+}
+export async function getSelfInspections() {
+  return networkFirstGet("/tenant/inspections", "self-inspections")
+}
+export async function getSelfInspection(id: string) {
+  return networkFirstGet(`/tenant/inspections/${id}`, `inspection-${id}`)
+}
+export async function addInspectionRoom(inspectionId: string, data: Record<string, unknown>) {
+  return postJson(`/tenant/inspections/${inspectionId}/rooms`, data)
+}
+export async function submitSelfInspection(inspectionId: string) {
+  return postJson(`/tenant/inspections/${inspectionId}/submit`, {})
+}
