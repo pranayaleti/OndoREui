@@ -73,3 +73,35 @@ export async function postJson<TResponse = unknown, TBody = unknown>(
     throw error
   }
 }
+
+export async function putJson<TResponse = unknown, TBody = unknown>(
+  path: string,
+  body: TBody,
+  options?: RequestOptions
+): Promise<TResponse> {
+  const response = await fetchWithTimeout(backendUrl(path), {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    ...options?.init,
+  })
+  if (!response.ok) throw new Error(`Request failed: ${response.status}`)
+  const contentType = response.headers.get("content-type") ?? ""
+  if (contentType.includes("application/json")) return (await response.json()) as TResponse
+  return {} as TResponse
+}
+
+export async function deleteJson<TResponse = unknown>(
+  path: string,
+  options?: RequestInit
+): Promise<TResponse> {
+  const response = await fetchWithTimeout(backendUrl(path), {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  })
+  if (!response.ok) throw new Error(`Request failed: ${response.status}`)
+  const contentType = response.headers.get("content-type") ?? ""
+  if (contentType.includes("application/json")) return (await response.json()) as TResponse
+  return {} as TResponse
+}
