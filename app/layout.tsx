@@ -8,7 +8,7 @@ import "leaflet/dist/leaflet.css"
 import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -39,11 +39,11 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Utah Property Management, Buying, Selling, Loans`,
-    template: `%s | ${SITE_NAME}`,
+    default: `${SITE_BRAND_SHORT} | ${SITE_NAME} — Utah real estate & property management`,
+    template: `%s | ${SITE_BRAND_SHORT}`,
   },
   description:
-    "Utah real estate experts for property management, buying, selling, and home loans. Local service across the Wasatch Front.",
+    "Ondo RE (Ondo Real Estate): Utah property management, mortgages, buying & selling, and investor tools—modern software with local expertise.",
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -56,6 +56,9 @@ export const metadata: Metadata = {
     shortcut: '/favicon.svg',
   },
   keywords: [
+    SITE_BRAND_SHORT,
+    "Ondo RE",
+    "Ondo Real Estate",
     // Core market/service
     "Utah real estate",
     "real estate Utah",
@@ -97,23 +100,23 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Utah Property Management, Buying, Selling, Loans`,
+    title: `${SITE_BRAND_SHORT} | ${SITE_NAME} — Utah real estate & property management`,
     description:
-      "Utah real estate services: property management, buying, selling, refinancing, and mortgages.",
+      "Ondo RE: Utah property management, mortgages, and real estate services across the Wasatch Front.",
     images: [
       {
         url: `${SITE_URL}/modern-office-building.webp`,
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} office building`,
+        alt: `${SITE_BRAND_SHORT} (${SITE_NAME}) — Utah headquarters and services`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Utah Property Management, Buying, Selling, Loans`,
+    title: `${SITE_BRAND_SHORT} | ${SITE_NAME} — Utah real estate & property management`,
     description:
-      "Utah real estate services: property management, buying, selling, refinancing, and mortgages.",
+      "Ondo RE: Utah property management, mortgages, and real estate services across the Wasatch Front.",
     images: [`${SITE_URL}/modern-office-building.webp`],
   },
   robots: {

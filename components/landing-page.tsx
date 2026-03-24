@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/landing/hero-section"
 import { HowItWorksSection } from "@/components/landing/how-it-works-section"
 import { OperatorsSection } from "@/components/landing/operators-section"
 import { FeaturedPropertiesSection } from "@/components/landing/featured-properties-section"
+import { AudienceSolutionsSection } from "@/components/landing/audience-solutions-section"
 import { PropertyOwnerSection } from "@/components/landing/property-owner-section"
 import { FoundersNoteSection } from "@/components/landing/founders-note-section"
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
@@ -16,6 +17,7 @@ function LandingPage() {
     <div className="flex flex-col min-h-screen">
       <HeroSection />
       <HowItWorksSection />
+      <AudienceSolutionsSection />
       <OperatorsSection />
       <FeaturedPropertiesSection />
       <PropertyOwnerSection />

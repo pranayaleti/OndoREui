@@ -1,4 +1,13 @@
-import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_HOURS, SITE_SOCIALS, SITE_ADDRESS_OBJ, SITE_EMAILS } from "./site"
+import {
+  SITE_NAME,
+  SITE_URL,
+  SITE_PHONE,
+  SITE_HOURS,
+  SITE_SOCIALS,
+  SITE_ADDRESS_OBJ,
+  SITE_EMAILS,
+  SITE_BRAND_SHORT,
+} from "./site"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 
@@ -23,13 +32,22 @@ export interface ServiceData {
   }
 }
 
+/** Schema.org Place / area served (state, county, or string label). */
+export type SchemaAreaServed =
+  | string
+  | Array<
+      | { "@type": "State"; name: string }
+      | { "@type": "AdministrativeArea"; name: string }
+    >
+
 export interface LocalBusinessData {
   name: string
+  alternateName?: string | string[]
   url: string
   telephone?: string
   image?: string
   logo?: string
-  areaServed?: string
+  areaServed?: SchemaAreaServed
   openingHours?: string
   sameAs?: string[]
   address?: {
@@ -65,6 +83,7 @@ export function generateServiceJsonLd(service: ServiceData) {
     provider: {
       '@type': 'Organization',
       name: SITE_NAME,
+      alternateName: [SITE_BRAND_SHORT, "OnDo"],
       url: SITE_URL,
     },
     areaServed: service.areaServed ? {
@@ -108,10 +127,17 @@ export function generateLocalBusinessJsonLd(business: LocalBusinessData) {
   const absoluteImage = toAbsoluteUrl(business.image)
   const absoluteLogo = toAbsoluteUrl(business.logo)
 
+  const alternateName = business.alternateName
+    ? Array.isArray(business.alternateName)
+      ? business.alternateName
+      : [business.alternateName]
+    : undefined
+
   return {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'LocalBusiness', 'RealEstateAgent'],
     name: business.name,
+    ...(alternateName?.length ? { alternateName } : {}),
     url: absoluteUrl,
     telephone: business.telephone,
     image: absoluteImage,
@@ -128,11 +154,16 @@ export function generateLocalBusinessJsonLd(business: LocalBusinessData) {
 export function generateOrganizationJsonLd() {
   return generateLocalBusinessJsonLd({
     name: SITE_NAME,
+    alternateName: [SITE_BRAND_SHORT, "OnDo"],
     url: SITE_URL,
     telephone: SITE_PHONE,
     image: `${SITE_URL}/logo-favicon.png`,
     logo: `${SITE_URL}/logo-favicon.png`,
-    areaServed: "Utah",
+    areaServed: [
+      { "@type": "State", name: "Utah" },
+      { "@type": "AdministrativeArea", name: "Salt Lake County" },
+      { "@type": "AdministrativeArea", name: "Utah County" },
+    ],
     openingHours: SITE_HOURS,
     sameAs: SITE_SOCIALS,
     address: {

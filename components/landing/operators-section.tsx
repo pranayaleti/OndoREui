@@ -15,7 +15,7 @@ export function OperatorsSection() {
               id="operators-heading"
               className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl"
             >
-              Why operators switch to Ondo Real Estate
+              Why operators switch to Ondo RE
             </h2>
             <p className="mt-4 text-lg text-slate-300 sm:text-xl">
               Purpose-built for lean teams running 1–20 units (and scaling).

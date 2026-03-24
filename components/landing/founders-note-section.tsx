@@ -21,7 +21,7 @@ export function FoundersNoteSection() {
             </div>
           </div>
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-3">Founder's Note</h3>
+            <h2 className="text-2xl font-bold mb-3">Founder&apos;s note</h2>
             <p className="text-foreground/70 mb-6 max-w-3xl">
               "Real estate is more than property—it's about people, growth, and legacy. At Ondo, we're building a modern
               platform rooted in trust, transparency, and technology so owners can rest easy and tenants feel right at home."

@@ -20,11 +20,11 @@ export function HeroSection() {
       <div className="container relative z-10 mx-auto px-4 text-center">
         <header>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Make life easy
+            Ondo RE — real estate, simplified for Utah and beyond
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/70">
-            Ondo Real Estate helps you find the ideal rental home with professional property management services and makes
-            your life easier.
+            Ondo Real Estate unites property management, home loans, and investing in one modern platform—so owners keep
+            clarity, tenants stay supported, and investors see how assets are run.
           </p>
         </header>
         <section aria-label="Property search" className="flex justify-center">
