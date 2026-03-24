@@ -119,7 +119,7 @@ export function FeaturedPropertiesSection() {
       <div className="container mx-auto px-4">
         <div className="mb-12 flex items-center justify-between gap-4">
           <h2 id="properties-heading" className="text-3xl font-bold dark:text-foreground">
-            Featured Utah rentals
+            Featured Utah rental properties
           </h2>
           <button
             type="button"

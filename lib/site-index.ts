@@ -166,6 +166,56 @@ const BLOG_POSTS: SiteIndexLink[] = [
     href: "/blog/understanding-property-taxes-utah",
     description: "Assessments, Truth in Taxation, and investor implications.",
   },
+  {
+    name: "How to Choose a Property Management Company in Utah",
+    href: "/blog/how-to-choose-property-management-company-utah",
+    description: "Step-by-step guide to evaluating Utah property management companies — fees, services, and red flags.",
+  },
+  {
+    name: "Utah Landlord-Tenant Law Guide",
+    href: "/blog/utah-landlord-tenant-law-guide",
+    description: "Security deposits, eviction timelines, habitability, and Fair Housing requirements in Utah.",
+  },
+  {
+    name: "Salt Lake City Rental Market Report",
+    href: "/blog/salt-lake-city-rental-market-report",
+    description: "Vacancy rates, rents by submarket, and demand drivers for SLC landlords and investors.",
+  },
+  {
+    name: "Property Management Fees in Utah",
+    href: "/blog/property-management-fees-utah",
+    description: "Transparent breakdown of Utah property management pricing — management fee, leasing fee, and markup structures.",
+  },
+  {
+    name: "Best Neighborhoods to Invest in Utah Real Estate",
+    href: "/blog/best-neighborhoods-invest-utah-real-estate",
+    description: "Wasatch Front submarket breakdown: cash flow, appreciation, and vacancy by neighborhood.",
+  },
+  {
+    name: "First-Time Landlord Checklist for Utah",
+    href: "/blog/first-time-landlord-checklist-utah",
+    description: "Everything to do before, during, and after your first tenant moves in to a Utah rental.",
+  },
+  {
+    name: "FHA vs Conventional Loans in Utah",
+    href: "/blog/fha-vs-conventional-loans-utah",
+    description: "Side-by-side comparison of FHA and conventional mortgages for Utah home buyers.",
+  },
+  {
+    name: "How Ondo RE Uses Technology to Manage Utah Rentals",
+    href: "/blog/how-ondo-re-uses-technology-property-management",
+    description: "Behind-the-scenes look at AI, owner portal, and automated workflows at Ondo RE.",
+  },
+  {
+    name: "Provo and Orem Rental Market Guide",
+    href: "/blog/provo-orem-rental-market-guide",
+    description: "BYU, UVU, and Silicon Slopes demand — what landlords need to know in Utah County.",
+  },
+  {
+    name: "Wasatch Front Real Estate Forecast 2026",
+    href: "/blog/wasatch-front-real-estate-forecast-2026",
+    description: "Interest rates, inventory, rent trends, and strategic positioning for Utah property owners.",
+  },
 ]
 
 function calculatorLinks(): SiteIndexLink[] {
@@ -361,6 +411,36 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           name: "Templates & forms",
           href: "/resources/templates",
           description: "Utah-compliant landlord templates: lease, move-in checklist, maintenance form, and playbook.",
+        },
+        {
+          name: "PM in Salt Lake City",
+          href: "/property-management/salt-lake-city",
+          description: "Full-service property management in Salt Lake City, UT.",
+        },
+        {
+          name: "PM in Provo",
+          href: "/property-management/provo",
+          description: "Rental management serving Provo neighborhoods and BYU area.",
+        },
+        {
+          name: "PM in Orem",
+          href: "/property-management/orem",
+          description: "Rental management in Orem, Utah County.",
+        },
+        {
+          name: "PM in Draper",
+          href: "/property-management/draper",
+          description: "Property management in Draper, near Silicon Slopes.",
+        },
+        {
+          name: "PM in Sandy",
+          href: "/property-management/sandy",
+          description: "Sandy rental property management and tenant placement.",
+        },
+        {
+          name: "PM in Payson",
+          href: "/property-management/payson",
+          description: "Property management in Payson and southern Utah County.",
         },
       ],
     },

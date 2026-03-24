@@ -189,6 +189,82 @@ export function generateOrganizationJsonLd() {
 }
 
 /**
+ * Generate RealEstateBusiness JSON-LD (richer than Organization — includes
+ * foundingDate, founder, openingHoursSpecification, and hasOfferCatalog).
+ */
+export function generateRealEstateBusinessJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'RealEstateBusiness', 'RealEstateAgent'],
+    '@id': `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    alternateName: [SITE_BRAND_SHORT, "OnDo", "Ondo RE"],
+    url: SITE_URL,
+    telephone: SITE_PHONE,
+    image: `${SITE_URL}/logo-favicon.png`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/logo-favicon.png`,
+      width: 512,
+      height: 512,
+    },
+    description:
+      'Full-service Utah real estate company offering property management, mortgage lending, home buying and selling, and notary services across the Wasatch Front.',
+    foundingDate: '2024',
+    founder: {
+      '@type': 'Person',
+      name: 'Pranay Reddy Aleti',
+    },
+    areaServed: [
+      { '@type': 'State', name: 'Utah' },
+      { '@type': 'AdministrativeArea', name: 'Salt Lake County' },
+      { '@type': 'AdministrativeArea', name: 'Utah County' },
+      { '@type': 'AdministrativeArea', name: 'Davis County' },
+      { '@type': 'AdministrativeArea', name: 'Weber County' },
+    ],
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      ...SITE_ADDRESS_OBJ,
+    },
+    sameAs: SITE_SOCIALS,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Real Estate Services',
+      itemListElement: [
+        { '@type': 'OfferCatalog', name: 'Property Management' },
+        { '@type': 'OfferCatalog', name: 'Mortgage Lending' },
+        { '@type': 'OfferCatalog', name: 'Home Buying & Selling' },
+        { '@type': 'OfferCatalog', name: 'Mobile Notary' },
+        { '@type': 'OfferCatalog', name: 'Investment Services' },
+      ],
+    },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        telephone: SITE_PHONE,
+        email: SITE_EMAILS?.primary,
+        areaServed: 'US',
+        availableLanguage: ['en'],
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        telephone: SITE_PHONE,
+        email: SITE_EMAILS?.realEstate,
+        areaServed: 'Utah',
+      },
+    ],
+  }
+}
+
+/**
  * Generate breadcrumb JSON-LD
  */
 export function generateBreadcrumbJsonLd(items: Array<{ name: string; url: string }>) {

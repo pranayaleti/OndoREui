@@ -10,11 +10,19 @@ export function CTASection() {
           Ready to work with {SITE_BRAND_SHORT}?
         </h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto text-foreground/80">
-          Search rentals by ZIP—or{" "}
-          <Link href="/contact" className="font-medium text-primary underline-offset-4 hover:underline">
-            talk to our team
-          </Link>{" "}
-          about management, lending, or investments.
+          Search Utah rental properties by ZIP — or talk to our team about{" "}
+          <Link href="/property-management" className="font-medium text-primary underline-offset-4 hover:underline">
+            property management
+          </Link>
+          ,{" "}
+          <Link href="/loans" className="font-medium text-primary underline-offset-4 hover:underline">
+            home loans
+          </Link>
+          , or{" "}
+          <Link href="/investments" className="font-medium text-primary underline-offset-4 hover:underline">
+            real estate investments
+          </Link>
+          .
         </p>
         <div className="mx-auto max-w-md">
           <form className="flex gap-2">

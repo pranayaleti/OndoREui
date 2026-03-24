@@ -9,10 +9,11 @@ export function PropertyOwnerSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold mb-6 dark:text-foreground">Property owners &amp; landlords</h2>
+            <h2 className="text-3xl font-bold mb-6 dark:text-foreground">Property management for Utah owners &amp; landlords</h2>
             <p className="text-lg mb-6 dark:text-foreground/70">
-              Let Ondo RE handle day-to-day management with owner-grade reporting—leasing, maintenance, and financials in
-              one place across the Wasatch Front and expanding markets.
+              Ondo RE delivers full-service property management across the Wasatch Front — leasing, tenant screening,
+              rent collection, maintenance, and real-time owner reporting. From Salt Lake City to Payson, we handle the
+              operations so you focus on growing your portfolio.
             </p>
             <h3 className="sr-only">Property management services</h3>
             <ul className="space-y-4 mb-8">
@@ -33,14 +34,19 @@ export function PropertyOwnerSection() {
                 <span className="dark:text-foreground/70">Regular property inspections and detailed owner reports</span>
               </li>
             </ul>
-            <Button asChild className="bg-background hover:bg-muted dark:hover:bg-muted text-foreground">
-              <Link href="/contact">Learn More</Link>
-            </Button>
+            <div className="flex gap-3">
+              <Button asChild className="bg-background hover:bg-muted dark:hover:bg-muted text-foreground">
+                <Link href="/property-management">Property management services</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/contact">Talk to our team</Link>
+              </Button>
+            </div>
           </div>
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <LazyImage
               src="/city-map-with-pin.webp"
-              alt="Utah property management service areas map showing Salt Lake City, Holladay, Midvale and surrounding communities served by Ondo Real Estate"
+              alt="Ondo RE property management service area — Salt Lake City, Provo, Draper, Sandy, and Wasatch Front communities in Utah"
               fill
               className="object-cover"
               quality={80}

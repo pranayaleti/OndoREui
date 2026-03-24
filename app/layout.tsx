@@ -7,7 +7,7 @@ import "./globals.css"
 import "leaflet/dist/leaflet.css"
 import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
-import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
+import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
 import Header from "@/components/header"
@@ -89,7 +89,13 @@ export const metadata: Metadata = {
     "Utah County real estate",
     "Salt Lake County real estate",
     "Davis County real estate",
+    "Payson real estate",
+    "Spanish Fork real estate",
+    "Springville real estate",
     // Topics
+    "property management company Utah",
+    "best property management Utah",
+    "rental property manager near me",
     "Utah housing market",
     "MLS listings Utah",
   ],
@@ -207,7 +213,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </RootProvidersClient>
         <JsonLd
           id="global-jsonld"
-          data={[generateOrganizationJsonLd(), generateWebsiteJsonLd()].filter(Boolean)}
+          data={[generateRealEstateBusinessJsonLd(), generateWebsiteJsonLd()].filter(Boolean)}
         />
         {/* Google Analytics - Deferred to reduce render blocking and unused JS */}
         {process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'] ? (

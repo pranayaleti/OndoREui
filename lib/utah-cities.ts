@@ -2,6 +2,8 @@ export type UtahCity = {
   name: string
   county?: string
   zips: string[]
+  lat?: number
+  lng?: number
 }
 
 export const utahCitiesFromNorthOgdenToNephi: UtahCity[] = [
@@ -24,7 +26,7 @@ export const utahCitiesFromNorthOgdenToNephi: UtahCity[] = [
   { name: "Bountiful", zips: ["84010", "84011"] },
   { name: "Woods Cross", zips: ["84087"] },
   { name: "North Salt Lake", zips: ["84054"] },
-  { name: "Salt Lake City", zips: ["84101", "84102", "84103", "84104", "84105", "84106", "84107", "84108", "84109", "84111", "84112", "84113", "84115", "84116", "84117", "84119", "84121", "84123", "84124", "84129", "84158"] },
+  { name: "Salt Lake City", zips: ["84101", "84102", "84103", "84104", "84105", "84106", "84107", "84108", "84109", "84111", "84112", "84113", "84115", "84116", "84117", "84119", "84121", "84123", "84124", "84129", "84158"], lat: 40.7608, lng: -111.8910 },
   { name: "West Valley City", zips: ["84119", "84120", "84128"] },
   { name: "Magna", zips: ["84044"] },
   { name: "Kearns", zips: ["84118"] },
@@ -35,13 +37,13 @@ export const utahCitiesFromNorthOgdenToNephi: UtahCity[] = [
   { name: "Holladay", zips: ["84117", "84124"] },
   { name: "Cottonwood Heights", zips: ["84121"] },
   { name: "Midvale", zips: ["84047", "84070"] },
-  { name: "Sandy", zips: ["84070", "84090", "84091", "84092", "84093", "84094"] },
+  { name: "Sandy", zips: ["84070", "84090", "84091", "84092", "84093", "84094"], lat: 40.5649, lng: -111.8389 },
   { name: "West Jordan", zips: ["84084", "84088"] },
   { name: "South Jordan", zips: ["84009", "84095"] },
   { name: "Riverton", zips: ["84065"] },
   { name: "Herriman", zips: ["84096"] },
   { name: "Bluffdale", zips: ["84065"] },
-  { name: "Draper", zips: ["84020"] },
+  { name: "Draper", zips: ["84020"], lat: 40.5246, lng: -111.8638 },
   { name: "Lehi", zips: ["84043"] },
   { name: "Saratoga Springs", zips: ["84045"] },
   { name: "Eagle Mountain", zips: ["84005"] },
@@ -51,13 +53,13 @@ export const utahCitiesFromNorthOgdenToNephi: UtahCity[] = [
   { name: "Pleasant Grove", zips: ["84062"] },
   { name: "Lindon", zips: ["84042"] },
   { name: "Vineyard", zips: ["84059"] },
-  { name: "Orem", zips: ["84057", "84058", "84097"] },
-  { name: "Provo", zips: ["84601", "84604", "84606"] },
+  { name: "Orem", zips: ["84057", "84058", "84097"], lat: 40.2969, lng: -111.6946 },
+  { name: "Provo", zips: ["84601", "84604", "84606"], lat: 40.2338, lng: -111.6585 },
   { name: "Springville", zips: ["84663"] },
   { name: "Mapleton", zips: ["84664"] },
   { name: "Spanish Fork", zips: ["84660"] },
   { name: "Salem", zips: ["84653"] },
-  { name: "Payson", zips: ["84651"] },
+  { name: "Payson", zips: ["84651"], lat: 40.0444, lng: -111.7324 },
   { name: "Santaquin", zips: ["84655"] },
   { name: "Nephi", zips: ["84648"] },
 ]

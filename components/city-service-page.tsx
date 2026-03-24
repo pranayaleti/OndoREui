@@ -56,6 +56,15 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
       addressCountry: "US",
     },
     sameAs: SITE_SOCIALS,
+    ...(city.lat && city.lng
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: city.lat,
+            longitude: city.lng,
+          },
+        }
+      : {}),
     makesOffer: [
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Property Management" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Home Buying" } },

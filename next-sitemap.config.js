@@ -13,7 +13,7 @@ const SECTION_LASTMOD = {
   '/resources': '2026-03-07',
   '/about': '2026-03-07',
   '/contact': '2026-03-07',
-  '/property-management': '2026-03-20',
+  '/property-management': '2026-03-23',
 }
 
 const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString().split('T')[0]

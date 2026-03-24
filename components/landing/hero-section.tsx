@@ -9,7 +9,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
         <LazyImage
           src="/modern-office-building.webp"
-          alt="Modern professional office building representing Ondo Real Estate's headquarters and property management services in Utah"
+          alt="Ondo RE headquarters in Lehi, Utah — property management, mortgage, and real estate services along the Wasatch Front"
           fill
           className="object-cover"
           priority
@@ -20,11 +20,12 @@ export function HeroSection() {
       <div className="container relative z-10 mx-auto px-4 text-center">
         <header>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Ondo RE — real estate, simplified for Utah and beyond
+            Ondo RE — Utah property management, loans &amp; real estate
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/70">
-            Ondo Real Estate unites property management, home loans, and investing in one modern platform—so owners keep
-            clarity, tenants stay supported, and investors see how assets are run.
+            Ondo Real Estate is a full-service property management, mortgage, and brokerage team serving the Wasatch
+            Front. Owners get real-time visibility, tenants get responsive support, and investors see exactly how assets
+            perform.
           </p>
         </header>
         <section aria-label="Property search" className="flex justify-center">

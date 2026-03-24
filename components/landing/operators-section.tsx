@@ -15,14 +15,15 @@ export function OperatorsSection() {
               id="operators-heading"
               className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl"
             >
-              Why operators switch to Ondo RE
+              Why Utah property managers switch to Ondo RE
             </h2>
             <p className="mt-4 text-lg text-slate-300 sm:text-xl">
-              Purpose-built for lean teams running 1–20 units (and scaling).
+              Purpose-built for Utah landlords and managers running 1–20 rental units and scaling.
             </p>
             <p className="mt-4 text-slate-400">
-              Get autopay, screening, and maintenance in one place. Owners see real-time rent and
-              maintenance; tenants get a single place to pay and request repairs.
+              Autopay rent collection, tenant screening, and maintenance coordination in one platform.
+              Owners see real-time financials and maintenance status; tenants get a single portal to pay
+              rent and request repairs.
             </p>
             <Button
               asChild

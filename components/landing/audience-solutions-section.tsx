@@ -16,7 +16,7 @@ export function AudienceSolutionsSection() {
           id="audience-solutions-heading"
           className="mb-4 text-center text-3xl font-bold tracking-tight dark:text-foreground"
         >
-          {SITE_BRAND_SHORT} for tenants, investors, and buyers
+          {SITE_BRAND_SHORT} solutions for tenants, investors &amp; home buyers
         </h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-foreground/70">
           One tech-forward real estate platform—rooted in Utah, built to scale with you across markets.

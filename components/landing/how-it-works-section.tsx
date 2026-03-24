@@ -1,10 +1,11 @@
+import Link from "next/link"
 import { Home, Building, DollarSign } from "lucide-react"
 
 export function HowItWorksSection() {
   return (
     <section className="py-16 bg-background dark:bg-[var(--gradient-overlay)]">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 dark:text-foreground">How Ondo RE works for renters</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 dark:text-foreground">How Ondo RE works — find Utah rentals in 3 steps</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center text-center">
             <div className="bg-muted dark:bg-muted p-4 rounded-full mb-4">
@@ -34,6 +35,11 @@ export function HowItWorksSection() {
             </p>
           </div>
         </div>
+        <p className="mt-10 text-center">
+          <Link href="/properties" className="font-medium text-primary underline-offset-4 hover:underline">
+            Browse all properties
+          </Link>
+        </p>
       </div>
     </section>
   )
