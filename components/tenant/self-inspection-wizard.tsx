@@ -78,7 +78,7 @@ export function SelfInspectionWizard() {
     try {
       if (inspectionId) {
         for (const room of rooms) {
-          await addInspectionRoom(inspectionId, room)
+          await addInspectionRoom(inspectionId, room as unknown as Record<string, unknown>)
         }
         await submitSelfInspection(inspectionId)
       }

@@ -21,7 +21,10 @@
     "react/no-unescaped-entities": "off",
     "react/display-name": "off",
     "@next/next/no-img-element": "warn",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn"
   },
   "overrides": [
     {
