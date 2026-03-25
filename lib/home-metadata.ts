@@ -5,7 +5,7 @@ export const HOME_PAGE_TITLE = "Ondo RE | Utah Property Management, Loans & Real
 
 /** Homepage meta description (≤155 chars). */
 export const HOME_PAGE_DESCRIPTION =
-  "Ondo RE manages Utah rental properties, originates home loans, and helps you buy or sell along the Wasatch Front. Owners, tenants & investors — one team."
+  "AI-powered property management for Utah landlords. Real-time dashboards, automated rent collection, tenant screening & maintenance — plus loans and brokerage."
 
 export const homeOpenGraphImages = [
   {

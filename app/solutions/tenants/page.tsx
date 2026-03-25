@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { CreditCard, ClipboardList, FolderOpen, MessageSquare } from "lucide-react"
+import { CreditCard, ClipboardList, FolderOpen, MessageSquare, Bell, Shield, Camera, Users } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
@@ -12,10 +12,14 @@ export const metadata: Metadata = {
 }
 
 const features = [
-  { icon: CreditCard, title: "Online rent payment", body: "Pay securely online, get receipts instantly, never miss a due date." },
-  { icon: ClipboardList, title: "Maintenance request tracking", body: "Submit a request in seconds, track its status in real time." },
-  { icon: FolderOpen, title: "Document access", body: "View your lease, inspections, and notices anytime." },
-  { icon: MessageSquare, title: "Direct messaging", body: "Message your property manager without phone tag." },
+  { icon: CreditCard, title: "Online rent payment", body: "Pay securely online via Stripe, get receipts instantly, and set up autopay so you never miss a due date." },
+  { icon: ClipboardList, title: "Maintenance request tracking", body: "Submit a request in seconds with photos. Track status in real time and get notified when it's resolved." },
+  { icon: FolderOpen, title: "Document access", body: "View your lease, move-in checklist, inspections, and notices anytime from your portal." },
+  { icon: MessageSquare, title: "Direct messaging", body: "Message your property manager without phone tag — all conversations saved in one place." },
+  { icon: Bell, title: "Push notifications", body: "Get instant alerts for rent reminders, maintenance updates, and important notices." },
+  { icon: Camera, title: "Photo maintenance reports", body: "Snap a photo of the issue and attach it to your request — no need to describe it twice." },
+  { icon: Shield, title: "Secure & encrypted", body: "Bank-level encryption protects your data. Your portal is available 24/7 from any device." },
+  { icon: Users, title: "Rent splitting", body: "Split rent with roommates directly in the portal — each person pays their share independently." },
 ]
 
 export default function TenantsPage() {

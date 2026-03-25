@@ -7,7 +7,7 @@ const DEFAULT_TIMEOUT_MS = 30_000
 function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = DEFAULT_TIMEOUT_MS): Promise<Response> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
-  return fetch(url, { ...init, signal: controller.signal }).finally(() => clearTimeout(timer))
+  return fetch(url, { ...init, signal: controller.signal, credentials: "include" }).finally(() => clearTimeout(timer))
 }
 
 interface RequestOptions {

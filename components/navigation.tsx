@@ -37,9 +37,10 @@ export const allNavigationItems: NavigationItem[] = [
   { href: "/notary", label: "Notary" },
 
   // Discovery & tools
+  { href: "/pricing", label: "Pricing" },
+  { href: "/compare", label: "Compare" },
   { href: "/investments", label: "Investments" },
   { href: "/calculators", label: "Calculators" },
-  { href: "/resources", label: "Resources" },
   { href: "/news", label: "News" },
   { href: "/blog", label: "Blog" },
 
@@ -58,16 +59,16 @@ export const allNavigationItems: NavigationItem[] = [
       { href: "/solutions/tenants", label: "For Tenants" },
     ],
   },
-  // Learn
+  // Resources
   {
     href: "/tour",
-    label: "Learn",
+    label: "Resources",
     children: [
       { href: "/tour", label: "Platform Tour" },
-      { href: "/video-library", label: "Video Library" },
-      { href: "/academy", label: "Academy" },
-      { href: "/insights", label: "Insights" },
-      { href: "/partners", label: "Partners" },
+      { href: "/blog", label: "Blog & Guides" },
+      { href: "/calculators", label: "Calculators" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/why-utah", label: "Why Utah" },
     ],
   },
 

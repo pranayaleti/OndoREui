@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { BarChart3, AlertTriangle, Calculator, Building2 } from "lucide-react"
+import { BarChart3, AlertTriangle, Calculator, Building2, Bot, TrendingUp, Bell, Wrench } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
@@ -12,10 +12,14 @@ export const metadata: Metadata = {
 }
 
 const features = [
-  { icon: BarChart3, title: "Portfolio analytics & risk scoring", body: "Track performance across every property with real-time risk scores." },
-  { icon: AlertTriangle, title: "At-risk tenant detection", body: "AI identifies payment risk before it becomes a problem." },
-  { icon: Calculator, title: "Cashflow modeling", body: "Model returns, NOI, and cap rates across your portfolio." },
+  { icon: BarChart3, title: "Portfolio analytics & risk scoring", body: "Track performance across every property with real-time risk scores and occupancy trends." },
+  { icon: AlertTriangle, title: "At-risk tenant detection", body: "AI identifies payment risk before it becomes a problem — so you can intervene early." },
+  { icon: Calculator, title: "Cashflow modeling", body: "Model returns, NOI, and cap rates across your portfolio with live financial data." },
   { icon: Building2, title: "Deal access", body: "Browse fractional and commercial investment opportunities in Utah." },
+  { icon: Bot, title: "AI portfolio assistant", body: "Ask questions in plain English — get summaries, risk analysis, and vendor suggestions powered by Claude AI." },
+  { icon: TrendingUp, title: "Predictive maintenance", body: "AI analyzes maintenance history to forecast upcoming costs and prevent expensive surprises." },
+  { icon: Bell, title: "Real-time alerts", body: "Push notifications for late payments, maintenance emergencies, and lease expirations." },
+  { icon: Wrench, title: "Vendor management", body: "Track preferred vendors, assign work orders, and compare costs across your portfolio." },
 ]
 
 const steps = [

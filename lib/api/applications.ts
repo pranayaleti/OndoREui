@@ -90,13 +90,11 @@ export interface ApplicationDetail extends TenantApplication {
 }
 
 async function authFetch(path: string, init?: RequestInit): Promise<Response> {
-  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(init?.headers as Record<string, string> | undefined),
   }
-  return fetch(backendUrl(path), { ...init, headers })
+  return fetch(backendUrl(path), { ...init, headers, credentials: "include" })
 }
 
 // ── Public endpoints ──────────────────────────────────────────────────────────

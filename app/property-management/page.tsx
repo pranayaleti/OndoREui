@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { Building2, ClipboardCheck, Shield, Wallet, Wrench } from "lucide-react"
+import { Building2, ClipboardCheck, Shield, Wallet, Wrench, Bot, BarChart3, Bell, Users, Zap } from "lucide-react"
 import SEO from "@/components/seo"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -115,6 +115,32 @@ export default function PropertyManagementPage() {
             </Card>
           ))}
         </div>
+
+        {/* Platform features — AI & automation */}
+        <section className="max-w-5xl mx-auto mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Built-in technology other PMs don&apos;t have</h2>
+          <p className="text-center text-foreground/70 mb-10 max-w-2xl mx-auto">
+            Our platform goes beyond basic PM software with AI-powered tools that protect your investment.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: <Bot className="h-6 w-6 text-primary" />, title: "AI assistant", desc: "Ask questions about your portfolio in plain English and get instant answers." },
+              { icon: <BarChart3 className="h-6 w-6 text-primary" />, title: "At-risk tenant scoring", desc: "AI flags tenants likely to miss payments before it happens." },
+              { icon: <Bell className="h-6 w-6 text-primary" />, title: "Push notifications", desc: "Real-time alerts for payments, maintenance, and lease events." },
+              { icon: <Zap className="h-6 w-6 text-primary" />, title: "Automation rules", desc: "Auto-send reminders, escalate overdue maintenance, and trigger workflows." },
+              { icon: <Users className="h-6 w-6 text-primary" />, title: "Vendor management", desc: "Track preferred vendors, assign work orders, and compare bids." },
+              { icon: <Shield className="h-6 w-6 text-primary" />, title: "24/7 emergency response", desc: "Tenants report emergencies anytime. We coordinate the fix." },
+            ].map((f) => (
+              <div key={f.title} className="flex items-start gap-3 p-4 rounded-lg border border-border bg-card">
+                {f.icon}
+                <div>
+                  <h3 className="font-semibold text-foreground">{f.title}</h3>
+                  <p className="text-sm text-foreground/70 mt-1">{f.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="max-w-5xl mx-auto mb-16 grid md:grid-cols-2 gap-10 items-center">
           <div>

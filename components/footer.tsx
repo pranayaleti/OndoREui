@@ -12,8 +12,6 @@ import {
   SITE_ADDRESS_CITY,
   SITE_ADDRESS_REGION,
   SITE_ADDRESS_POSTAL_CODE,
-  SITE_CLAUDE_ASK_ONDO_URL,
-  SITE_CHATGPT_REFERRAL_URL,
 } from "@/lib/site"
 import { usePwaInstall } from "@/lib/pwa/install-context"
 import { usePathname } from "next/navigation"
@@ -36,7 +34,6 @@ import {
   Calendar,
 } from "lucide-react"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
-import { ChatGptBrandIcon, ClaudeBrandIcon } from "@/components/ai-assistant-brand-icons"
 
 function EqualHousingIcon({ className }: { className?: string }) {
   return (
@@ -457,30 +454,6 @@ const Footer = memo(() => {
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
-              <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-foreground/80">
-                <span className="hidden sm:inline">Ask about us:</span>
-                <a
-                  href={SITE_CLAUDE_ASK_ONDO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 hover:text-foreground underline-offset-2 hover:underline"
-                  aria-label="Ask about Ondo Real Estate in Claude"
-                >
-                  <ClaudeBrandIcon className="h-4 w-4 shrink-0 text-foreground/90" />
-                  Claude
-                </a>
-                <span aria-hidden className="text-foreground/40">·</span>
-                <a
-                  href={SITE_CHATGPT_REFERRAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 hover:text-foreground underline-offset-2 hover:underline"
-                  aria-label="Ask about Ondo Real Estate in ChatGPT"
-                >
-                  <ChatGptBrandIcon className="h-4 w-4 shrink-0 text-foreground/90" />
-                  ChatGPT
-                </a>
-              </span>
               <span className="hidden sm:inline h-4 w-px bg-foreground/20" aria-hidden />
               {pwaInstall?.isInstallable && (
                 <button
