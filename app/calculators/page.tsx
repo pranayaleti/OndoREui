@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Use our free mortgage payment, affordability, refinance, and investment calculators to plan your Utah home purchase, refinance, or real estate investment.",
   alternates: {
-    canonical: `${SITE_URL}/calculators`,
+    canonical: `${SITE_URL}/calculators/`,
   },
   openGraph: {
     title: `Mortgage & Affordability Calculators | ${SITE_NAME}`,

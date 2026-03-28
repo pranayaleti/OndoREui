@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Home, Landmark, PiggyBank } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface RetirementData {
   // Personal Information
@@ -73,6 +74,7 @@ const RetirementCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<RetirementResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   useEffect(() => {
     calculateRetirement();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -202,6 +204,7 @@ const RetirementCalculator: React.FC = () => {
       recommendations,
       yearByYearProjection
     });
+    setHasCalculated(true);
   };
 
   const handleInputChange = (field: keyof RetirementData, value: number) => {
@@ -578,6 +581,11 @@ const RetirementCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="retirement"
+        calculatorName="Retirement"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

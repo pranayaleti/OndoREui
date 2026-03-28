@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface CashOnCashData {
   purchasePrice: number;
@@ -56,6 +57,7 @@ const CashOnCashCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<CashOnCashResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateCashOnCash = React.useCallback(() => {
     const {
@@ -126,6 +128,7 @@ const CashOnCashCalculator: React.FC = () => {
       capRate,
       grossRentMultiplier
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -616,6 +619,11 @@ const CashOnCashCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="cash-on-cash"
+        calculatorName="Cash on Cash"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

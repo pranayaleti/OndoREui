@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface DSCRData {
   monthlyRent: number;
@@ -47,6 +48,7 @@ const DSCRCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<DSCRResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateDSCR = React.useCallback(() => {
     const {
@@ -119,6 +121,7 @@ const DSCRCalculator: React.FC = () => {
       maxLoanAmount,
       maxPurchasePrice
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -513,6 +516,11 @@ const DSCRCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="dscr"
+        calculatorName="DSCR"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

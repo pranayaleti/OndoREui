@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface ROIData {
   purchasePrice: number;
@@ -62,6 +63,7 @@ const ROICalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<ROIResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   const calculateROI = useCallback(() => {
     const {
       purchasePrice,
@@ -157,6 +159,7 @@ const ROICalculator: React.FC = () => {
       totalROI,
       cashOnCashReturn
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -596,6 +599,11 @@ const ROICalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="roi"
+        calculatorName="ROI"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

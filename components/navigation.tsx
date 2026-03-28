@@ -82,7 +82,7 @@ export const allNavigationItems: NavigationItem[] = [
   { href: "/refinance/process", label: "Refinance Process" },
 
   // Marketing / campaigns
-  { href: "/sweepstakes", label: "🎁 Win Prizes", special: true },
+  { href: "/sweepstakes", label: "Win Prizes", special: true },
 ]
 
 // These are the items that stay visible in the main

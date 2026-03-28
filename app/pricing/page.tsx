@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: `Pricing | ${SITE_BRAND_SHORT}`,
   description:
     "Transparent property management pricing for Utah property owners. No hidden fees — just percentage-based plans that scale with your portfolio.",
-  alternates: { canonical: `${SITE_URL}/pricing` },
+  alternates: { canonical: `${SITE_URL}/pricing/` },
   openGraph: {
     title: `Pricing | ${SITE_BRAND_SHORT}`,
     description:

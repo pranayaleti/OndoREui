@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface BuydownData {
   loanAmount: number;
@@ -32,6 +33,7 @@ const TemporaryBuydownCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<BuydownResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   useEffect(() => {
     calculateBuydown();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,6 +76,7 @@ const TemporaryBuydownCalculator: React.FC = () => {
       effectiveRate,
       buydownCost
     });
+    setHasCalculated(true);
   };
 
   const handleInputChange = (field: keyof BuydownData, value: number) => {
@@ -376,6 +379,11 @@ const TemporaryBuydownCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="temporary-buydown"
+        calculatorName="Temporary Buydown"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

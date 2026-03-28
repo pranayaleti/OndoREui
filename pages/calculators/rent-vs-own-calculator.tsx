@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Home, Building2, Eye, EyeOff } from 'lucide-react';
 import { LoanProgram, getProgramMI, clampCreditScore } from '@/lib/mortgage-utils';
 import { useFinancialVisibility } from '@/lib/financial-visibility';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface RentVsOwnData {
   // Rent scenario
@@ -76,6 +77,7 @@ const RentVsOwnCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<RentVsOwnResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   const { showValues, toggle } = useFinancialVisibility();
 
   useEffect(() => {
@@ -211,6 +213,7 @@ const RentVsOwnCalculator: React.FC = () => {
       recommendation,
       explanation
     });
+    setHasCalculated(true);
   };
 
   const handleInputChange = (field: keyof RentVsOwnData, value: number | string) => {
@@ -595,6 +598,11 @@ const RentVsOwnCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="rent-vs-own"
+        calculatorName="Rent vs Own"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

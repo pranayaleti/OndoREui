@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LoanProgram, getProgramMI } from '@/lib/mortgage-utils';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface ClosingCostData {
   homePrice: number;
@@ -54,6 +55,7 @@ const ClosingCostCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<ClosingCostResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   useEffect(() => {
     calculateClosingCosts();
@@ -114,6 +116,7 @@ const ClosingCostCalculator: React.FC = () => {
       breakEvenMonths,
       monthlyPI: monthlyPI || undefined
     });
+    setHasCalculated(true);
   };
 
   const handleInputChange = (field: keyof ClosingCostData, value: number | string) => {
@@ -523,6 +526,11 @@ const ClosingCostCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="closing-cost"
+        calculatorName="Closing Cost"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

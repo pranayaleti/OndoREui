@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useFinancialVisibility } from '@/lib/financial-visibility';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface RefinanceData {
   currentBalance: number;
@@ -40,6 +41,7 @@ const RefinanceCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<RefinanceResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   const { showValues, toggle } = useFinancialVisibility();
 
   useEffect(() => {
@@ -117,6 +119,7 @@ const RefinanceCalculator: React.FC = () => {
       newEscrows: escrows,
       currentPI
     });
+    setHasCalculated(true);
   };
 
   const handleInputChange = (field: keyof RefinanceData, value: number) => {
@@ -442,6 +445,11 @@ const RefinanceCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="refinance"
+        calculatorName="Refinance"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

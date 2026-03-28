@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface HomeSaleData {
   homeValue: number;
@@ -38,6 +39,7 @@ const HomeSaleCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<HomeSaleResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   const calculateHomeSale = useCallback(() => {
     const { homeValue, mortgageBalance, realtorCommission, closingCosts, repairs, movingCosts, capitalGainsTax } = formData;
     
@@ -64,6 +66,7 @@ const HomeSaleCalculator: React.FC = () => {
       profit,
       basisUsed: costBasis
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -389,6 +392,11 @@ const HomeSaleCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="home-sale"
+        calculatorName="Home Sale"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

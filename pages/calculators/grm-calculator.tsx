@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface GRMData {
   purchasePrice: number;
@@ -26,6 +27,7 @@ const GRMCalculator: React.FC = () => {
 
   const [results, setResults] = useState<GRMResults | null>(null);
   const [targetGRM, setTargetGRM] = useState(12);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateGRM = useCallback(() => {
     const { purchasePrice, monthlyRent, annualRent } = formData;
@@ -48,6 +50,7 @@ const GRMCalculator: React.FC = () => {
       recommendedPrice,
       recommendedRent
     });
+    setHasCalculated(true);
   }, [formData, targetGRM]);
 
   useEffect(() => {
@@ -282,6 +285,11 @@ const GRMCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="grm"
+        calculatorName="GRM"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

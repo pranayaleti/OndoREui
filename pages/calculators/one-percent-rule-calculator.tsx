@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface OnePercentRuleData {
   purchasePrice: number;
@@ -27,6 +28,7 @@ const OnePercentRuleCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<OnePercentRuleResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
   const calculateOnePercentRule = useCallback(() => {
     const { purchasePrice, monthlyRent, afterRepairValue } = formData;
 
@@ -48,6 +50,7 @@ const OnePercentRuleCalculator: React.FC = () => {
       meetsRuleARV,
       requiredRentARV
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -257,6 +260,11 @@ const OnePercentRuleCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="one-percent-rule"
+        calculatorName="1% Rule"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

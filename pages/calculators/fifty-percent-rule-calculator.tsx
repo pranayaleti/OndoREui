@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface FiftyPercentRuleData {
   monthlyRent: number;
@@ -38,6 +39,7 @@ const FiftyPercentRuleCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<FiftyPercentRuleResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateFiftyPercentRule = useCallback(() => {
     const {
@@ -80,6 +82,7 @@ const FiftyPercentRuleCalculator: React.FC = () => {
       meetsRule,
       expenseRatio
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -390,6 +393,11 @@ const FiftyPercentRuleCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="fifty-percent-rule"
+        calculatorName="50% Rule"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

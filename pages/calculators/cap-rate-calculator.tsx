@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface CapRateData {
   purchasePrice: number;
@@ -39,6 +40,7 @@ const CapRateCalculator: React.FC = () => {
 
   const [results, setResults] = useState<CapRateResults | null>(null);
   const [targetCapRate, setTargetCapRate] = useState(8);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateCapRate = React.useCallback(() => {
     const {
@@ -84,6 +86,7 @@ const CapRateCalculator: React.FC = () => {
       capRate,
       propertyValue
     });
+    setHasCalculated(true);
   }, [formData, targetCapRate]);
 
   useEffect(() => {
@@ -431,6 +434,11 @@ const CapRateCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeadCaptureModal
+        calculatorSlug="cap-rate"
+        calculatorName="Cap Rate"
+        hasCalculated={hasCalculated}
+      />
     </div>
   );
 };

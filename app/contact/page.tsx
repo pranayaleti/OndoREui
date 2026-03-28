@@ -11,7 +11,7 @@ export const metadata = {
   title: "Contact Us",
   description:
     "Get in touch with Ondo Real Estate. We're your first point of contact — qualified leads and strategic outreach for property management, investments, and leasing across Utah.",
-  alternates: { canonical: `${SITE_URL}/contact` },
+  alternates: { canonical: `${SITE_URL}/contact/` },
   openGraph: {
     title: "Contact Us | Ondo Real Estate",
     description: "Ondo Real Estate — your first point of contact for property management and real estate services in Utah. Qualified leads, strategic outreach.",

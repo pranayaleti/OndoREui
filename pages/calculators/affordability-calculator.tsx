@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface AffordabilityData {
   annualIncome: number;
@@ -42,6 +43,7 @@ const AffordabilityCalculator: React.FC = () => {
   });
 
   const [results, setResults] = useState<AffordabilityResults | null>(null);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateAffordability = React.useCallback(() => {
     const { annualIncome, monthlyDebts, downPayment, interestRate, loanTerm, propertyTaxRate, insuranceRate } = formData;
@@ -125,6 +127,7 @@ const AffordabilityCalculator: React.FC = () => {
       backEndRatio,
       recommendedHomePrice
     });
+    setHasCalculated(true);
   }, [formData]);
 
   useEffect(() => {
@@ -471,6 +474,11 @@ const AffordabilityCalculator: React.FC = () => {
         </div>
       </div>
     </div>
+    <LeadCaptureModal
+      calculatorSlug="affordability"
+      calculatorName="Affordability"
+      hasCalculated={hasCalculated}
+    />
     </>
   );
 };
