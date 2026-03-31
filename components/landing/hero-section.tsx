@@ -20,7 +20,7 @@ export function HeroSection() {
       <div className="container relative z-10 mx-auto px-4 text-center">
         <header>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Ondo RE — Utah property management, loans &amp; real estate
+            Ondo RE: Utah property management, loans &amp; Real Estate
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/70">
             Ondo Real Estate is a full-service property management, mortgage, and brokerage team serving the Wasatch

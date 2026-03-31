@@ -7,12 +7,14 @@ import { PageBanner } from "@/components/page-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, XCircle, Loader2 } from "lucide-react"
+import { backendUrl } from "@/lib/backend"
 
 type Status = "verifying" | "success" | "error" | "missing"
 
 export default function VerifyPage() {
   const params = useSearchParams()
   const token = params?.get("token") ?? null
+  const type = params?.get("type") ?? "email" // Supabase sends type=signup for email confirmation
   const [status, setStatus] = useState<Status>(token ? "verifying" : "missing")
 
   useEffect(() => {
@@ -21,9 +23,13 @@ export default function VerifyPage() {
 
     async function verify() {
       try {
-        // TODO: replace with your actual verification API call
-        // e.g. await fetch(`/api/verify?token=${token}`)
-        await new Promise((r) => setTimeout(r, 1200))
+        const url = backendUrl("/api/auth/verify-email")
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, type }),
+        })
+        if (!res.ok) throw new Error("Verification failed")
         if (!cancelled) setStatus("success")
       } catch {
         if (!cancelled) setStatus("error")
@@ -32,7 +38,7 @@ export default function VerifyPage() {
 
     verify()
     return () => { cancelled = true }
-  }, [token])
+  }, [token, type])
 
   return (
     <main className="min-h-screen">

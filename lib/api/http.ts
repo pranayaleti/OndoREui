@@ -4,10 +4,25 @@ import { cacheGet, cacheSet, TTL } from "@/lib/cache/idb-cache"
 const API_CACHE_PREFIX = "ondo:api-cache:"
 const DEFAULT_TIMEOUT_MS = 30_000
 
+const CSRF_METHODS = new Set(["POST", "PUT", "DELETE", "PATCH"])
+
+export function getCsrfToken(): string | undefined {
+  if (typeof document === "undefined") return undefined
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("ondo_csrf="))
+    ?.split("=")[1]
+}
+
 function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = DEFAULT_TIMEOUT_MS): Promise<Response> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
-  return fetch(url, { ...init, signal: controller.signal, credentials: "include" }).finally(() => clearTimeout(timer))
+  const method = (init.method ?? "GET").toUpperCase()
+  const csrf = CSRF_METHODS.has(method) ? getCsrfToken() : undefined
+  const headers = csrf
+    ? { ...(init.headers as Record<string, string> | undefined), "x-csrf-token": csrf }
+    : init.headers
+  return fetch(url, { ...init, headers, signal: controller.signal, credentials: "include" }).finally(() => clearTimeout(timer))
 }
 
 interface RequestOptions {

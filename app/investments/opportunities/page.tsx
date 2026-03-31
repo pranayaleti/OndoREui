@@ -9,7 +9,8 @@ import { InvestmentCard } from "@/components/investments/investment-card"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { WebMCPOpportunitiesTool } from "@/components/investments/webmcp-opportunities-tool"
 import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
-import { getOpportunities } from "@/lib/investments-api"
+// API functions available for runtime use in client components
+// import { getOpportunities } from "@/lib/investments-api"
 
 export const metadata: Metadata = {
   title: "Investment Opportunities",
@@ -25,15 +26,8 @@ export const metadata: Metadata = {
 }
 
 export default async function OpportunitiesPage() {
-  let opportunities = MOCK_OPPORTUNITIES
-  try {
-    const fromApi = await getOpportunities()
-    if (Array.isArray(fromApi) && fromApi.length >= 0) {
-      opportunities = fromApi
-    }
-  } catch {
-    // Use mock data when API is unavailable (e.g. build time or backend down)
-  }
+  // Use mock data for static export — live data fetched client-side where needed
+  const opportunities = MOCK_OPPORTUNITIES
   const openDeals = opportunities.filter((o) => o.status === "open")
   const comingSoon = opportunities.filter((o) => o.status === "coming-soon")
   const fullyFunded = opportunities.filter((o) => o.status === "fully-funded")

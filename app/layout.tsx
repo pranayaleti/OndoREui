@@ -182,10 +182,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="prefetch" href="/properties" />
         <link rel="prefetch" href="/contact" />
         <link rel="prefetch" href="/investments" />
-        {/* CSP: 'unsafe-inline' is retained for speculation rules, analytics bootstraps, and Next.js hydration chunks. */}
+        {/* CSP: no upgrade-insecure-requests — it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts (wildcards can break script-src parsing in some browsers). */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://api.stripe.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self';"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -237,7 +237,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Script
             id="hubspot-tracking"
             strategy="lazyOnload"
-            src={`//js.hs-scripts.com/${process.env['NEXT_PUBLIC_HUBSPOT_PORTAL_ID']}.js`}
+            src={`https://js.hs-scripts.com/${process.env['NEXT_PUBLIC_HUBSPOT_PORTAL_ID']}.js`}
           />
         ) : null}
         {/* Vercel Analytics disabled for static exports - only works on Vercel platform */}

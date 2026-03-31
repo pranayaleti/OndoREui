@@ -1,4 +1,5 @@
 import { backendUrl } from "@/lib/backend"
+import { getCsrfToken } from "@/lib/api/http"
 
 export type VendorSpecialty =
   | "plumbing"
@@ -84,10 +85,15 @@ export interface AssignVendorPayload {
   notes?: string
 }
 
+const CSRF_METHODS = new Set(["POST", "PUT", "DELETE", "PATCH"])
+
 async function authFetch(path: string, init?: RequestInit): Promise<Response> {
+  const method = (init?.method ?? "GET").toUpperCase()
+  const csrf = CSRF_METHODS.has(method) ? getCsrfToken() : undefined
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     ...(init?.headers as Record<string, string> | undefined),
+    ...(csrf ? { "x-csrf-token": csrf } : {}),
   }
   return fetch(backendUrl(path), { ...init, headers, credentials: "include" })
 }

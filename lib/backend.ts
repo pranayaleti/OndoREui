@@ -11,12 +11,33 @@
 export const BACKEND_BASE_URL: string =
   process.env['NEXT_PUBLIC_BACKEND_BASE_URL'] || ''
 
+if (typeof window !== 'undefined' && !BACKEND_BASE_URL) {
+  console.warn('[OndoRE] NEXT_PUBLIC_BACKEND_BASE_URL is not set — API calls will use relative paths')
+}
+
+/** True when base URL's path already ends with `/api` (Supabase …/functions/v1/api or http://localhost:3000/api). */
+function baseAlreadyIncludesApiSegment(base: string): boolean {
+  try {
+    const pathname = new URL(base).pathname.replace(/\/+$/, "") || "/"
+    return pathname.endsWith("/api")
+  } catch {
+    return false
+  }
+}
+
 export function backendUrl(pathname: string) {
   const base = BACKEND_BASE_URL.replace(/\/$/, "")
-  // Strip legacy /api prefix — the Edge Function is named "api" so that segment is already
-  // consumed by Supabase routing. Routes inside Hono are at / (not /api/).
-  const stripped = pathname.replace(/^\/api(?=\/|$)/, "")
-  const path = stripped.startsWith("/") ? stripped : `/${stripped}`
-  return `${base}${path}`
+  const path = pathname.startsWith("/") ? pathname : `/${pathname}`
+  // Same-origin Next.js API routes: keep /api prefix when no external base is set.
+  if (!base) {
+    return path
+  }
+  // Only strip `/api` from the pathname when the base URL already ends with `/api`
+  // (Supabase Edge function URL). For `http://localhost:3000` without `/api`, keep `/api/...`.
+  const pathToJoin = baseAlreadyIncludesApiSegment(base)
+    ? pathname.replace(/^\/api(?=\/|$)/, "")
+    : pathname
+  const normalized = pathToJoin.startsWith("/") ? pathToJoin : `/${pathToJoin}`
+  return `${base}${normalized}`
 }
 

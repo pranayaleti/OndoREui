@@ -309,7 +309,7 @@ export default function PropertiesClient() {
         title="Browse Rental Properties in Utah"
         description="Explore available rental homes, apartments, condos, and townhomes managed by Ondo Real Estate."
         pathname="/properties"
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/modern-apartment-balcony.webp`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: 'Home', url: SITE_URL },
@@ -324,12 +324,12 @@ export default function PropertiesClient() {
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-black/90 z-10" />
         <div className="relative h-[400px] overflow-hidden">
           <Image
-            src="/modern-apartment-balcony.png"
+            src="/modern-apartment-balcony.webp"
             alt="Modern apartment building representing rental properties"
             fill
             className="object-cover"
             priority
-            quality={90}
+            quality={75}
             sizes="100vw"
             title="Rental Properties"
           />

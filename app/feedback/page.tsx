@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import SEO from "@/components/seo"
 import { SITE_URL } from "@/lib/site"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -13,6 +13,11 @@ export default function FeedbackPage() {
   const [phone, setPhone] = useState("")
   const [submittedCount, setSubmittedCount] = useState(0)
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const successTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => { if (successTimerRef.current) clearTimeout(successTimerRef.current) }
+  }, [])
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -49,7 +54,7 @@ export default function FeedbackPage() {
       setEmail("")
       setPhone("")
       setStatus("success")
-      setTimeout(() => setStatus("idle"), 3000)
+      successTimerRef.current = setTimeout(() => setStatus("idle"), 3000)
     } catch {
       setErrorMessage("Failed to submit. Please check your connection and try again.")
       setStatus("error")

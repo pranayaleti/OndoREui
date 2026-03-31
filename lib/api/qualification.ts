@@ -1,5 +1,6 @@
 // lib/api/qualification.ts
-const EDGE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL + "/functions/v1";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
+const EDGE_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1` : "";
 
 export interface QualifyResponse {
   reply: string;

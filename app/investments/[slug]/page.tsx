@@ -13,7 +13,8 @@ import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { InvestmentInquiryForm } from "@/components/investments/investment-inquiry-form"
 import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
 import type { InvestmentOpportunity } from "@/lib/investments-data"
-import { getOpportunities, getOpportunityBySlug } from "@/lib/investments-api"
+// API functions available for runtime use in client components
+// import { getOpportunities, getOpportunityBySlug } from "@/lib/investments-api"
 import {
   MapPin,
   DollarSign,
@@ -36,14 +37,7 @@ const statusConfig: Record<
 }
 
 export async function generateStaticParams() {
-  try {
-    const fromApi = await getOpportunities()
-    if (Array.isArray(fromApi) && fromApi.length > 0) {
-      return fromApi.map((o) => ({ slug: o.slug }))
-    }
-  } catch {
-    // Fallback to mock slugs when API unavailable at build time
-  }
+  // Always use mock data at build time — the backend API is not available during SSG
   return MOCK_OPPORTUNITIES.map((o) => ({ slug: o.slug }))
 }
 
@@ -53,12 +47,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  let opportunity: InvestmentOpportunity | null = null
-  try {
-    opportunity = await getOpportunityBySlug(slug)
-  } catch {
-    opportunity = MOCK_OPPORTUNITIES.find((o) => o.slug === slug) ?? null
-  }
+  const opportunity = MOCK_OPPORTUNITIES.find((o) => o.slug === slug) ?? null
   if (!opportunity) return {}
 
   const title = `${opportunity.title} | Investment Opportunity`
@@ -79,12 +68,7 @@ export default async function InvestmentDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  let opportunity: InvestmentOpportunity | null = null
-  try {
-    opportunity = await getOpportunityBySlug(slug)
-  } catch {
-    opportunity = MOCK_OPPORTUNITIES.find((o) => o.slug === slug) ?? null
-  }
+  const opportunity = MOCK_OPPORTUNITIES.find((o) => o.slug === slug) ?? null
   if (!opportunity) return notFound()
 
   const status = statusConfig[opportunity.status]

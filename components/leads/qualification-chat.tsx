@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { sendQualificationMessage } from "@/lib/api/qualification";
+import { backendUrl } from "@/lib/backend";
 
 interface Message { role: "user" | "assistant"; text: string }
 
@@ -37,8 +38,27 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
     setError(null);
     try {
       const result = await sendQualificationMessage(sessionToken, leadType, userMessage);
-      setMessages((prev) => [...prev, { role: "assistant", text: result.reply }]);
-      if (result.completed) setCompleted(true);
+      if (result.completed) {
+        setCompleted(true);
+      }
+      setMessages((prev) => {
+        const updated = [...prev, { role: "assistant" as const, text: result.reply }];
+        if (result.completed) {
+          // Fire-and-forget: extract lead data from full conversation and sync to HubSpot
+          // Use `updated` (committed prev + final assistant reply) to avoid stale-closure bug
+          fetch(backendUrl("/api/leads/capture-from-chat"), {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              messages: updated.map((m) => ({ role: m.role, text: m.text })),
+              leadType,
+            }),
+          }).catch(() => {
+            // Intentionally silent — lead capture failure must not affect the user experience
+          });
+        }
+        return updated;
+      });
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Unknown error";
       if (msg.includes("404") || msg.includes("expired")) {

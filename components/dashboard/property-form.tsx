@@ -36,9 +36,7 @@ export function PropertyForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // eslint-disable-next-line no-console
-    console.log("Form submitted:", formData)
-    // Here you would typically send the data to your API
+    // TODO: wire to property creation API
     alert("Property added successfully!")
   }
 
