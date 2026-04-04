@@ -16,6 +16,8 @@ import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigat
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useTranslation } from "react-i18next"
 
 const Header = memo(() => {
   const pathname = usePathname()
@@ -24,6 +26,7 @@ const Header = memo(() => {
   const [isMounted, setIsMounted] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const { t } = useTranslation()
   const handleMenuClose = useCallback(() => {
     setIsMenuOpen(false)
   }, [])
@@ -119,6 +122,7 @@ const Header = memo(() => {
 
         {/* Right-side controls */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
+          <LanguageSwitcher />
           <Button
             variant="ghost"
             size="icon"
@@ -140,12 +144,12 @@ const Header = memo(() => {
                 >
                   <ChevronDown className="h-4 w-4 shrink-0" aria-hidden />
                   <Menu className="h-4 w-4 shrink-0" aria-hidden />
-                  <span className="hidden lg:inline">More</span>
+                  <span className="hidden lg:inline">{t("nav.more")}</span>
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" sideOffset={6} className="w-64 py-2 z-[100]">
                 <div className="px-3 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Explore
+                  {t("nav.explore")}
                 </div>
                 {overflowNavigationItems.map((item) => (
                   <DropdownMenuItem key={item.href} asChild>
@@ -153,7 +157,7 @@ const Header = memo(() => {
                       href={item.href}
                       className="flex items-center px-3 py-2 cursor-pointer"
                     >
-                      <span className="truncate">{item.label}</span>
+                      <span className="truncate">{t(item.labelKey)}</span>
                     </Link>
                   </DropdownMenuItem>
                 ))}
@@ -164,8 +168,8 @@ const Header = memo(() => {
           <ModeToggle />
           <Button variant="ghost" size="sm" className="shrink-0 hidden sm:inline-flex" asChild>
             <Link href={APP_PORTAL_LOGIN_URL}>
-              <span className="hidden md:inline">Property Management Portal</span>
-              <span className="md:hidden">Portal</span>
+              <span className="hidden md:inline">{t("nav.portal")}</span>
+              <span className="md:hidden">{t("nav.portalShort")}</span>
             </Link>
           </Button>
           {/* Mobile hamburger */}
@@ -192,7 +196,7 @@ const Header = memo(() => {
               }}
             >
               <Search className="mr-2 h-4 w-4" />
-              Search
+              {t("nav.search")}
             </Button>
             <Navigation
               className="flex flex-col gap-2"
@@ -205,15 +209,15 @@ const Header = memo(() => {
               .filter(i => i.href === "/solutions" || i.href === "/tour")
               .map(item => (
                 <div key={item.href} className="pt-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 px-3 mb-1">{item.label}</p>
-                  {item.children?.map(({ href, label }) => (
+                  <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 px-3 mb-1">{t(item.labelKey)}</p>
+                  {item.children?.map(({ href, labelKey }) => (
                     <Link
                       key={href}
                       href={href}
                       className="block pl-6 pr-3 py-2 text-sm text-foreground hover:bg-muted rounded-md"
                       onClick={handleMenuClose}
                     >
-                      {label}
+                      {t(labelKey)}
                     </Link>
                   ))}
                 </div>
@@ -225,7 +229,7 @@ const Header = memo(() => {
                 onClick={handleMenuClose}
               >
                 <Button variant="outline" size="sm" className="w-full">
-                  Property Management Portal
+                  {t("nav.portal")}
                 </Button>
               </a>
             </div>

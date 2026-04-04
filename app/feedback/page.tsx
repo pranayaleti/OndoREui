@@ -1,13 +1,19 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from "react"
+import Link from "next/link"
+import { useTranslation } from "react-i18next"
 import SEO from "@/components/seo"
 import { SITE_URL } from "@/lib/site"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { Gift, MessageCircle, Sparkles } from "lucide-react"
 import { backendUrl } from "@/lib/backend"
 
+const DASHBOARD_URL =
+  process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.ondorealestate.com"
+
 export default function FeedbackPage() {
+  const { t } = useTranslation()
   const [suggestion, setSuggestion] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -232,6 +238,39 @@ export default function FeedbackPage() {
           </aside>
         </section>
       </div>
+
+      {/* Referral cross-promotion */}
+      <section
+        aria-labelledby="referral-promo-heading"
+        className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 border-t border-orange-200 dark:border-orange-800"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-12 text-center">
+          <Gift className="mx-auto mb-4 h-8 w-8 text-primary" aria-hidden="true" />
+          <h2
+            id="referral-promo-heading"
+            className="text-2xl font-bold text-foreground"
+          >
+            {t("referral.feedbackSectionTitle")}
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-foreground/70">
+            {t("referral.feedbackSectionDesc")}
+          </p>
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href={`${DASHBOARD_URL}/referrals`}
+              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              {t("referral.getYourLink")}
+            </Link>
+            <Link
+              href="/sweepstakes"
+              className="inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground shadow-sm transition hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              {t("referral.enterSweepstakes")}
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

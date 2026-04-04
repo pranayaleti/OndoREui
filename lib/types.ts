@@ -112,7 +112,7 @@ export type Theme = 'light' | 'dark' | 'system'
 // Navigation types
 export interface NavigationItem {
   href: string
-  label: string
+  labelKey: string
   special?: boolean
   external?: boolean
 }

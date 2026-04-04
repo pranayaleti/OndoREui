@@ -180,6 +180,9 @@ export async function submitMoveOut(data: Record<string, unknown>) {
 export async function cancelMoveOut(id: string) {
   return postJson(`/move-outs/${id}/cancel`, {})
 }
+export async function getMoveOutResources() {
+  return networkFirstGet("/move-out-resources", "move-out-resources")
+}
 
 // ── SMS Preferences ───────────────────────────────────────────────────────────
 export async function getSmsPreferences() {
@@ -245,4 +248,30 @@ export async function addInspectionRoom(inspectionId: string, data: Record<strin
 }
 export async function submitSelfInspection(inspectionId: string) {
   return postJson(`/tenant/inspections/${inspectionId}/submit`, {})
+}
+
+// ── Tenant Add-ons ─────────────────────────────────────────────────────────────
+export async function getAvailableAddons() {
+  return networkFirstGet("/tenant-addons/available", "available-addons")
+}
+
+export async function getMyAddons() {
+  return networkFirstGet("/tenant-addons", "my-addons")
+}
+
+export async function subscribeAddon(data: Record<string, unknown>) {
+  return postJson("/tenant-addons", data)
+}
+
+export async function cancelAddon(addonId: string) {
+  return deleteJson(`/tenant-addons/${addonId}`)
+}
+
+// ── Calendar Events ─────────────────────────────────────────────────────────────
+export async function getCalendarEvents(startDate: string, endDate: string) {
+  return networkFirstGet(`/calendar?startDate=${startDate}&endDate=${endDate}`, `calendar-${startDate}`)
+}
+
+export async function getUpcomingEvents(days?: number) {
+  return networkFirstGet(`/calendar/upcoming${days ? `?days=${days}` : ''}`, 'upcoming-events')
 }

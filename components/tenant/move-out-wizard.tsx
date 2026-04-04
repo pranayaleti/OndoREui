@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { getTenantMoveOut, submitMoveOut, cancelMoveOut } from "../../lib/api/tenant-services"
+import { MoveOutResources } from "./move-out-resources"
 
 interface MoveOut {
   id: string
@@ -241,6 +242,8 @@ export function MoveOutWizard() {
               {cancelling ? "Cancelling..." : "Cancel Move-Out Request"}
             </button>
           )}
+
+          <MoveOutResources />
         </div>
       )}
     </div>

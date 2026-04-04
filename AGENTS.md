@@ -77,6 +77,36 @@ The site is aligned with [WebMCP](https://developer.chrome.com/blog/webmcp-epp):
 8. **Accessibility**: Follow patterns in `lib/accessibility.ts`. Use semantic HTML and ARIA attributes consistent with existing components.
 9. **Calculators**: New calculators go in `pages/calculators/`. Keep math in pure functions in `lib/mortgage-utils.ts`; keep components focused on rendering and interaction.
 10. **AI/chat input**: When adding assistant chat or any user→LLM input, use `lib/aiGuardrails.ts` (`validateChatInput`, `sanitizeReply`) so limits and prompt-injection checks match the backend.
+11. **i18n — ALL USER-FACING STRINGS MUST BE TRANSLATED**: See full rules below.
+
+## Internationalization (i18n) — MANDATORY FOR ALL CHANGES
+
+This site uses `react-i18next` with a static-export-compatible client-side setup. **Every change that introduces user-facing text must ship translations for all 8 languages in the same commit.**
+
+### Supported locales
+
+| Code | Language | Native label | BCP 47 |
+|------|----------|--------------|--------|
+| `en` | English | English (United States) | `en-US` |
+| `es` | Spanish | Español | `es-ES` |
+| `fr` | French | Français | `fr-FR` |
+| `it` | Italian | Italiano | `it-IT` |
+| `te` | Telugu | తెలుగు | `te-IN` |
+| `hi` | Hindi | हिन्दी | `hi-IN` |
+| `ta` | Tamil | தமிழ் | `ta-IN` |
+| `kn` | Kannada | ಕನ್ನಡ | `kn-IN` |
+
+### Rules — enforce on every change
+
+1. **Client components**: Use `const { t } = useTranslation()` and `t('namespace.key')`. Never write English strings in JSX.
+2. **Server components**: Cannot use `useTranslation`. Acceptable to keep purely static SEO metadata (page `<title>`, JSON-LD) in English for now. Leave a `// TODO(i18n): server component — translate when dynamic` comment.
+3. **Translation files**: `public/locales/{locale}/common.json`. Each new key in `en/common.json` must have equivalents in all 7 other locale files.
+4. **New namespaces**: Create for all 8 locales simultaneously and register in `lib/i18n.ts`.
+5. **Navigation**: `components/navigation.tsx` uses `labelKey` on `NavigationItem`. Always add `labelKey` — never a raw `label` string.
+6. **Language switcher**: `components/language-switcher.tsx` — already in the header. Do not add locale arrays elsewhere.
+7. **i18n config**: `lib/i18n.ts` — `useSuspense: false` is mandatory for static export. Do not change this.
+8. **I18nProvider**: `components/i18n-provider.tsx` — initializes i18n and syncs `<html lang>`. Already in `components/root-providers.tsx`. Do not bypass it.
+9. **Adding a new language**: Update `lib/i18n.ts` `supportedLngs`, add locale files across all three repos, update the backend `SUPPORTED_LOCALES` in `src/types/locale.ts` and the DB migration CHECK constraint.
 
 ## Supabase integration
 

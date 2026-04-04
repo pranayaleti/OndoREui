@@ -1,19 +1,25 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle2, Gift, Loader2, Copy, Check } from "lucide-react"
+import { CheckCircle2, Gift, Loader2, Copy, Check, Sparkles } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { backendUrl } from "@/lib/backend"
+
+const DASHBOARD_URL =
+  process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.ondorealestate.com"
 
 interface SweepstakesFormProps {
   initialReferralCode?: string
 }
 
 export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -183,6 +189,25 @@ export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
           Fill out the form below to enter and get your unique referral code
         </CardDescription>
       </CardHeader>
+
+      {/* Cross-promotion banner */}
+      <div className="mx-6 mb-2 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 dark:border-amber-700 dark:bg-amber-950/40">
+        <div className="flex items-start gap-2">
+          <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+          <div className="flex-1 min-w-0">
+            <p className="text-xs text-amber-800 dark:text-amber-300">
+              {t("referral.sweepstakesBannerText")}
+            </p>
+            <Link
+              href={`${DASHBOARD_URL}/referrals`}
+              className="mt-1 inline-block text-xs font-semibold text-amber-700 underline underline-offset-2 hover:text-amber-900 dark:text-amber-400 dark:hover:text-amber-200"
+            >
+              {t("referral.sweepstakesGoToDashboard")}
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">

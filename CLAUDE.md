@@ -37,6 +37,33 @@ Env: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
 - **Supabase**: Never call Supabase directly from client components when a server action can handle it.
 - **Dev 404s**: If layout.css/main-app.js 404s appear, stop server and run `npm run dev:clean`.
 
+## Internationalization (i18n) — MANDATORY FOR ALL CHANGES
+
+This site uses `react-i18next` (client-side, static-export compatible). **Every new user-facing string must include all 8 locale translations.**
+
+### Supported locales
+
+| Code | Language | Native label |
+|------|----------|--------------|
+| `en` | English | English (United States) |
+| `es` | Spanish | Español |
+| `fr` | French | Français |
+| `it` | Italian | Italiano |
+| `te` | Telugu | తెలుగు |
+| `hi` | Hindi | हिन्दी |
+| `ta` | Tamil | தமிழ் |
+| `kn` | Kannada | ಕನ್ನಡ |
+
+### i18n rules
+
+- **No hardcoded English strings** in interactive (`"use client"`) components. Use `const { t } = useTranslation()` and `t('namespace.key')`.
+- **Server components** (no `"use client"`) cannot use `useTranslation`. Either convert to client component or accept English-only for purely static/SEO text (e.g. `<title>`, JSON-LD). Add a comment noting this limitation.
+- **Translation files**: `public/locales/{locale}/common.json`. Adding a key to `en/common.json` requires adding the equivalent to all 7 other locale files in the same change.
+- **i18n config**: `lib/i18n.ts` — HTTP backend (`/locales/`), `ondo_locale` localStorage key, `useSuspense: false` (required for static export).
+- **I18nProvider**: `components/i18n-provider.tsx` — client wrapper that initializes i18n and keeps `<html lang>` in sync. Already wired into `components/root-providers.tsx`.
+- **Language switcher**: `components/language-switcher.tsx` — already wired into the header. Do not duplicate locale lists.
+- **Navigation labels**: Use `labelKey` on `NavigationItem` and resolve with `t(item.labelKey)` in `components/navigation.tsx`. Never put English label strings directly in the `allNavigationItems` array.
+
 ## Project Structure
 
 ```

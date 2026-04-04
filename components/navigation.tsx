@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useCallback, memo } from "react"
+import { useTranslation } from "react-i18next"
 import { ChevronDown } from "lucide-react"
 import {
   DropdownMenu,
@@ -12,13 +13,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 export interface NavigationItemChild {
   href: string
-  label: string
+  labelKey: string
   external?: boolean
 }
 
 export interface NavigationItem {
   href: string
-  label: string
+  labelKey: string
   special?: boolean
   /** When set, this item is rendered as a dropdown with these links (e.g. Property Management → Login to Portal). */
   children?: NavigationItemChild[]
@@ -30,59 +31,60 @@ export interface NavigationItem {
 // automatically roll into the "More" section for easier visibility.
 export const allNavigationItems: NavigationItem[] = [
   // Core journeys (pinned in primary nav)
-  { href: "/buy", label: "Buy" },
-  { href: "/sell", label: "Sell" },
-  { href: "/properties", label: "Properties" },
-  { href: "/loans", label: "Loans" },
-  { href: "/notary", label: "Notary" },
+  { href: "/buy", labelKey: "nav.buy" },
+  { href: "/sell", labelKey: "nav.sell" },
+  { href: "/properties", labelKey: "nav.properties" },
+  { href: "/loans", labelKey: "nav.loans" },
+  { href: "/notary", labelKey: "nav.notary" },
 
   // Discovery & tools
-  { href: "/pricing", label: "Pricing" },
-  { href: "/compare", label: "Compare" },
-  { href: "/investments", label: "Investments" },
-  { href: "/calculators", label: "Calculators" },
-  { href: "/news", label: "News" },
-  { href: "/blog", label: "Blog" },
+  { href: "/pricing", labelKey: "nav.pricing" },
+  { href: "/compare", labelKey: "nav.compare" },
+  { href: "/investments", labelKey: "nav.investments" },
+  { href: "/calculators", labelKey: "nav.calculators" },
+  { href: "/news", labelKey: "nav.news" },
+  { href: "/blog", labelKey: "nav.blog" },
 
   // Utah positioning
-  { href: "/why-utah", label: "Why Utah" },
-  { href: "/founders-letter", label: "Founder's Letter" },
+  { href: "/why-utah", labelKey: "nav.whyUtah" },
+  { href: "/founders-letter", labelKey: "nav.foundersLetter" },
 
   // Solutions
   {
     href: "/solutions",
-    label: "Solutions",
+    labelKey: "nav.solutions",
     children: [
-      { href: "/solutions/investors", label: "For Investors" },
-      { href: "/solutions/landlords", label: "For Landlords" },
-      { href: "/solutions/property-managers", label: "For Property Managers" },
-      { href: "/solutions/tenants", label: "For Tenants" },
+      { href: "/solutions/investors", labelKey: "nav.forInvestors" },
+      { href: "/solutions/landlords", labelKey: "nav.forLandlords" },
+      { href: "/solutions/property-managers", labelKey: "nav.forPropertyManagers" },
+      { href: "/solutions/tenants", labelKey: "nav.forTenants" },
     ],
   },
   // Resources
   {
     href: "/tour",
-    label: "Resources",
+    labelKey: "nav.resources",
     children: [
-      { href: "/tour", label: "Platform Tour" },
-      { href: "/blog", label: "Blog & Guides" },
-      { href: "/calculators", label: "Calculators" },
-      { href: "/faq", label: "FAQ" },
-      { href: "/why-utah", label: "Why Utah" },
+      { href: "/tour", labelKey: "nav.platformTour" },
+      { href: "/blog", labelKey: "nav.blogAndGuides" },
+      { href: "/calculators", labelKey: "nav.calculators" },
+      { href: "/faq", labelKey: "nav.faq" },
+      { href: "/why-utah", labelKey: "nav.whyUtah" },
     ],
   },
 
   // Company & about
-  { href: "/about", label: "About" },
+  { href: "/about", labelKey: "nav.about" },
 
   // Help & education
-  { href: "/faq", label: "FAQ" },
+  { href: "/faq", labelKey: "nav.faq" },
 
   // Loan / refinance journeys
-  { href: "/refinance/process", label: "Refinance Process" },
+  { href: "/refinance/process", labelKey: "nav.refinanceProcess" },
 
   // Marketing / campaigns
-  { href: "/sweepstakes", label: "Win Prizes", special: true },
+  { href: "/sweepstakes", labelKey: "nav.winPrizes", special: true },
+  { href: "/affiliate", labelKey: "nav.becomeAffiliate" },
 ]
 
 // These are the items that stay visible in the main
@@ -107,6 +109,7 @@ export const Navigation = memo(function Navigation({
   onLinkClick,
   items = allNavigationItems,
 }: NavigationProps) {
+  const { t } = useTranslation()
   const pathname = usePathname()
 
   const isActive = useCallback((href: string) => {
@@ -136,7 +139,7 @@ export const Navigation = memo(function Navigation({
               aria-haspopup="menu"
               aria-expanded={undefined}
             >
-              {item.label}
+              {t(item.labelKey)}
               <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="min-w-[220px]">
@@ -149,11 +152,11 @@ export const Navigation = memo(function Navigation({
                       rel="noopener noreferrer"
                       onClick={onLinkClick}
                     >
-                      {child.label}
+                      {t(child.labelKey)}
                     </a>
                   ) : (
                     <Link href={child.href} prefetch onClick={onLinkClick}>
-                      {child.label}
+                      {t(child.labelKey)}
                     </Link>
                   )}
                 </DropdownMenuItem>
@@ -169,7 +172,7 @@ export const Navigation = memo(function Navigation({
             onClick={onLinkClick}
             aria-current={isActive(item.href) ? "page" : undefined}
           >
-            {item.label}
+            {t(item.labelKey)}
           </Link>
         )
       )}
