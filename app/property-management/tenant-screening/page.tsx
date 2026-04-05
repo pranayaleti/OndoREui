@@ -6,6 +6,7 @@ import { UserCheck, Shield, FileText, Clock } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
+import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -90,6 +91,8 @@ export default function TenantScreeningPage() {
           </div>
         </div>
       </section>
+
+      <CityLinksGrid title="Tenant Screening by City" servicePrefix="property-management" subServiceSlug="tenant-screening" />
     </main>
   )
 }

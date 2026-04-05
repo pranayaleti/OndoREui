@@ -6,6 +6,7 @@ import { Wrench, Bell, ClipboardList, Users } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
+import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -89,6 +90,8 @@ export default function MaintenanceCoordinationPage() {
           </div>
         </div>
       </section>
+
+      <CityLinksGrid title="Maintenance Coordination by City" servicePrefix="property-management" subServiceSlug="maintenance-coordination" />
     </main>
   )
 }

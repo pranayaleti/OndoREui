@@ -6,6 +6,7 @@ import { DollarSign, Shield, Users, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
+import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -133,6 +134,8 @@ export default function FHALoanPage() {
           </div>
         </div>
       </section>
+
+      <CityLinksGrid title="FHA Loans by City" servicePrefix="loans" subServiceSlug="fha" />
     </main>
   )
 }

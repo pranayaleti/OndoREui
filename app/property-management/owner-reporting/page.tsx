@@ -6,6 +6,7 @@ import { BarChart3, FileText, DollarSign, FolderOpen } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
+import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -80,6 +81,8 @@ export default function OwnerReportingPage() {
           </div>
         </div>
       </section>
+
+      <CityLinksGrid title="Owner Reporting by City" servicePrefix="property-management" subServiceSlug="owner-reporting" />
     </main>
   )
 }

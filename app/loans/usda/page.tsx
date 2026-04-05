@@ -6,6 +6,7 @@ import { DollarSign, MapPin, Home, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
+import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -135,6 +136,8 @@ export default function USDALoanPage() {
           </div>
         </div>
       </section>
+
+      <CityLinksGrid title="USDA Loans by City" servicePrefix="loans" subServiceSlug="usda" />
     </main>
   )
 }

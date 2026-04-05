@@ -13,7 +13,9 @@ const SECTION_LASTMOD = {
   '/resources': '2026-03-07',
   '/about': '2026-03-07',
   '/contact': '2026-03-07',
-  '/property-management': '2026-03-23',
+  '/property-management': '2026-04-05',
+  '/buy-sell': '2026-04-05',
+  '/locations': '2026-04-05',
 }
 
 const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString().split('T')[0]
@@ -44,10 +46,13 @@ function getPriority(path) {
   if (p === '/') return 1.0
   const tier9 = ['/buy', '/sell', '/loans', '/contact', '/properties']
   if (tier9.includes(p)) return 0.9
-  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management']
+  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = ['/resources', '/notary', '/news', '/privacy-policy', '/terms-of-service', '/accessibility', '/sitemap']
   if (tier5.some((x) => p === x || p.startsWith(`${x}/`))) return 0.5
+  // City x sub-service pages (e.g. /loans/sandy/fha, /property-management/draper/tenant-screening)
+  const citySubServicePattern = /^\/(property-management|loans|buy-sell)\/[a-z-]+\/[a-z-]+$/
+  if (citySubServicePattern.test(p)) return 0.6
   return 0.7
 }
 
