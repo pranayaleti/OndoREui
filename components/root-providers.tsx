@@ -16,7 +16,7 @@ const ClientConsultationWidget = dynamic(() => import("@/components/ClientConsul
 
 export function RootProviders({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <I18nProvider>
         <PwaProvider>
           <BfcacheProvider>

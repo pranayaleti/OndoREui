@@ -58,6 +58,10 @@ const MortgagePaymentCalculator: React.FC = () => {
   const [results, setResults] = useState<PaymentBreakdown | null>(null);
   const [showAmortization, setShowAmortization] = useState(true);
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Prevent hydration mismatch: only run calculations after mount
+  useEffect(() => { setIsMounted(true) }, []);
 
   const calculateMortgage = useCallback(() => {
     const { homePrice, downPayment, loanAmount, interestRate, loanTerm, propertyTax, insurance, program } = formData;
@@ -121,8 +125,8 @@ const MortgagePaymentCalculator: React.FC = () => {
   }, [formData]);
 
   useEffect(() => {
-    calculateMortgage();
-  }, [calculateMortgage]);
+    if (isMounted) calculateMortgage();
+  }, [isMounted, calculateMortgage]);
 
   const handleInputChange = (field: keyof MortgageData, value: number | string) => {
     const newData = { ...formData, [field]: value };
@@ -430,51 +434,86 @@ const MortgagePaymentCalculator: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Amortization Schedule */}
+                {/* Payment Breakdown Visual */}
+                <div className="bg-card rounded-lg shadow-lg p-6">
+                  <h2 className="text-xl font-semibold text-foreground mb-4">Payment Breakdown</h2>
+                  <div className="space-y-3">
+                    {[
+                      { label: 'Principal & Interest', value: results.monthlyPI, color: 'bg-blue-500' },
+                      { label: 'Property Tax', value: results.tax, color: 'bg-emerald-500' },
+                      { label: 'Insurance', value: results.insurance, color: 'bg-amber-500' },
+                      ...(results.pmi > 0 ? [{ label: 'PMI', value: results.pmi, color: 'bg-red-400' }] : []),
+                    ].map(({ label, value, color }) => (
+                      <div key={label}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="text-foreground/70">{label}</span>
+                          <span className="font-medium">{formatCurrency(value)} ({((value / results.totalMonthly) * 100).toFixed(0)}%)</span>
+                        </div>
+                        <div className="h-3 bg-muted rounded-full overflow-hidden">
+                          <div className={`h-full ${color} rounded-full transition-all duration-500`} style={{ width: `${(value / results.totalMonthly) * 100}%` }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Amortization Schedule - Yearly Summary + Expandable Monthly */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-xl font-semibold text-foreground">Amortization Schedule</h2>
-                    <button
-                      onClick={() => setShowAmortization(!showAmortization)}
-                      className="text-primary hover:text-primary text-sm font-medium"
-                    >
-                      {showAmortization ? 'Hide Details' : 'Show Details'}
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setShowAmortization(!showAmortization)}
+                        className="text-primary hover:text-primary text-sm font-medium"
+                      >
+                        {showAmortization ? 'Hide Details' : 'Show Details'}
+                      </button>
+                    </div>
                   </div>
 
-                  {showAmortization && (
-                    <div className="max-h-96 overflow-y-auto">
-                      <table className="w-full text-sm">
-                        <thead className="bg-muted">
-                          <tr>
-                            <th className="px-2 py-2 text-left text-foreground">Month</th>
-                            <th className="px-2 py-2 text-right text-foreground">Payment</th>
-                            <th className="px-2 py-2 text-right text-foreground">Principal</th>
-                            <th className="px-2 py-2 text-right text-foreground">Interest</th>
-                            <th className="px-2 py-2 text-right text-foreground">Balance</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {results.amortizationSchedule.slice(0, 60).map((row) => (
-                            <tr key={row.month} className="border-b border-gray-100">
-                              <td className="px-2 py-2 text-foreground/70">{row.month}</td>
-                              <td className="px-2 py-2 text-right font-medium">{formatCurrency(row.payment)}</td>
-                              <td className="px-2 py-2 text-right text-primary">{formatCurrency(row.principal)}</td>
-                              <td className="px-2 py-2 text-right text-destructive">{formatCurrency(row.interest)}</td>
-                              <td className="px-2 py-2 text-right text-foreground/70">{formatCurrency(row.remainingBalance)}</td>
+                  {showAmortization && (() => {
+                    // Group into yearly summaries for cleaner display
+                    const years: Array<{
+                      year: number;
+                      totalPrincipal: number;
+                      totalInterest: number;
+                      totalPayment: number;
+                      endBalance: number;
+                      months: typeof results.amortizationSchedule;
+                    }> = [];
+                    for (let i = 0; i < results.amortizationSchedule.length; i += 12) {
+                      const yearMonths = results.amortizationSchedule.slice(i, i + 12);
+                      years.push({
+                        year: Math.floor(i / 12) + 1,
+                        totalPrincipal: yearMonths.reduce((s, m) => s + m.principal, 0),
+                        totalInterest: yearMonths.reduce((s, m) => s + m.interest, 0),
+                        totalPayment: yearMonths.reduce((s, m) => s + m.payment, 0),
+                        endBalance: yearMonths[yearMonths.length - 1]?.remainingBalance ?? 0,
+                        months: yearMonths,
+                      });
+                    }
+
+                    return (
+                      <div className="max-h-[500px] overflow-y-auto overflow-x-auto -mx-2 px-2">
+                        <table className="w-full text-sm min-w-[480px]">
+                          <thead className="bg-muted sticky top-0 z-10">
+                            <tr>
+                              <th className="px-2 py-2 text-left text-foreground">Year</th>
+                              <th className="px-2 py-2 text-right text-foreground">Principal</th>
+                              <th className="px-2 py-2 text-right text-foreground">Interest</th>
+                              <th className="px-2 py-2 text-right text-foreground">Total Paid</th>
+                              <th className="px-2 py-2 text-right text-foreground">Balance</th>
                             </tr>
-                          ))}
-                          {results.amortizationSchedule.length > 60 && (
-                            <tr className="bg-muted">
-                              <td colSpan={5} className="px-2 py-2 text-center text-foreground/70 text-sm">
-                                ... and {results.amortizationSchedule.length - 60} more months
-                              </td>
-                            </tr>
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
+                          </thead>
+                          <tbody>
+                            {years.map((yr) => (
+                              <YearRow key={yr.year} yr={yr} formatCurrency={formatCurrency} />
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    );
+                  })()}
                 </div>
               </>
             )}
@@ -516,5 +555,42 @@ const MortgagePaymentCalculator: React.FC = () => {
     </div>
   );
 };
+
+/** Expandable yearly row — click to see individual months */
+function YearRow({ yr, formatCurrency }: {
+  yr: { year: number; totalPrincipal: number; totalInterest: number; totalPayment: number; endBalance: number; months: Array<{ month: number; payment: number; principal: number; interest: number; remainingBalance: number }> };
+  formatCurrency: (n: number) => string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <>
+      <tr
+        className="border-b border-gray-100 cursor-pointer hover:bg-muted/50 transition-colors"
+        onClick={() => setExpanded(!expanded)}
+        role="button"
+        aria-expanded={expanded}
+        aria-label={`Year ${yr.year} details`}
+      >
+        <td className="px-2 py-2 font-medium text-foreground">
+          <span className="inline-block w-4 mr-1 text-xs text-foreground/50">{expanded ? '▼' : '▶'}</span>
+          Year {yr.year}
+        </td>
+        <td className="px-2 py-2 text-right text-primary">{formatCurrency(yr.totalPrincipal)}</td>
+        <td className="px-2 py-2 text-right text-destructive">{formatCurrency(yr.totalInterest)}</td>
+        <td className="px-2 py-2 text-right font-medium">{formatCurrency(yr.totalPayment)}</td>
+        <td className="px-2 py-2 text-right text-foreground/70">{formatCurrency(yr.endBalance)}</td>
+      </tr>
+      {expanded && yr.months.map((row) => (
+        <tr key={row.month} className="border-b border-gray-50 bg-muted/20 text-xs">
+          <td className="px-2 py-1.5 pl-8 text-foreground/60">Mo {row.month}</td>
+          <td className="px-2 py-1.5 text-right text-primary/80">{formatCurrency(row.principal)}</td>
+          <td className="px-2 py-1.5 text-right text-destructive/80">{formatCurrency(row.interest)}</td>
+          <td className="px-2 py-1.5 text-right">{formatCurrency(row.payment)}</td>
+          <td className="px-2 py-1.5 text-right text-foreground/60">{formatCurrency(row.remainingBalance)}</td>
+        </tr>
+      ))}
+    </>
+  );
+}
 
 export default MortgagePaymentCalculator;

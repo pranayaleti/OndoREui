@@ -14,48 +14,19 @@
 export const PRERENDER_URLS: string[] = [
   "/",
   "/buy",
-  "/sell",
-  "/properties",
   "/contact",
 ]
 
 /** Primary nav – prefetch eagerly as soon as the rule is seen. */
 export const EAGER_PREFETCH_URLS: string[] = [
-  "/property-management",
   "/loans",
-  "/notary",
-  "/calculators",
   "/about",
-  "/faq",
-  "/investments",
-  "/investments/commercial-real-estate",
-  "/investments/fractional",
-  "/investments/opportunities",
 ]
 
 /** Secondary nav and high-traffic pages – prefetch when link is visible (moderate). */
 export const MODERATE_PREFETCH_URLS: string[] = [
   "/resources",
-  "/news",
   "/blog",
-  "/why-utah",
-  "/founders-letter",
-  "/refinance/process",
-  "/sweepstakes",
-  "/accessibility",
-  "/privacy-policy",
-  "/terms-of-service",
-  "/sitemap",
-  "/buy/first-time",
-  "/buy/second-home",
-  "/buy/fixed-rate",
-  "/buy/rates",
-  "/loans/conventional",
-  "/about/history",
-  "/about/team",
-  "/about/careers",
-  "/faq/general-faqs",
-  "/faq/payments-faqs",
 ]
 
 /**
@@ -63,35 +34,7 @@ export const MODERATE_PREFETCH_URLS: string[] = [
  * Keeps bandwidth usage low while still speeding up likely next navigations.
  */
 export const CONSERVATIVE_PREFETCH_URLS: string[] = [
-  "/buy/30-year",
-  "/buy/15-year",
-  "/buy/adjustable-rate",
-  "/loans/fha",
-  "/loans/va",
-  "/loans/usda",
-  "/loans/heloc",
-  "/loans/reverse",
-  "/loans/jumbo",
   "/calculators/mortgage-payment",
-  "/calculators/affordability",
-  "/calculators/income",
-  "/calculators/closing-cost",
-  "/calculators/refinance",
-  "/calculators/home-sale",
-  "/calculators/buying-power",
-  "/about/giving-back",
-  "/about/news",
-  "/about/investor-relations",
-  "/about/testimonials",
-  "/faq/tenant-faqs",
-  "/faq/owner-faqs",
-  "/faq/notary-faqs",
-  "/faq/loans-faqs",
-  "/faq/loan-payoffs-faqs",
-  "/faq/hardship-faqs",
-  "/faq/escrow-faqs",
-  "/faq/disaster-faqs",
-  "/faq/buying-selling-faqs",
 ]
 
 /** Paths that must never be prefetched or prerendered (user-specific, auth, side effects). */

@@ -1,6 +1,3 @@
-"use client"
-
-import { memo } from "react"
 import { HeroSection } from "@/components/landing/hero-section"
 import { SocialProofBar } from "@/components/landing/social-proof-bar"
 import { HowItWorksSection } from "@/components/landing/how-it-works-section"
@@ -14,7 +11,7 @@ import { CTASection } from "@/components/landing/cta-section"
 import { EmailCaptureSection } from "@/components/landing/email-capture-section"
 import { CalendlyBookSection } from "@/components/contact/calendly-inline-embed"
 
-function LandingPage() {
+export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection />
@@ -33,6 +30,3 @@ function LandingPage() {
     </div>
   )
 }
-
-// Memoize component to prevent unnecessary re-renders
-export default memo(LandingPage)

@@ -420,47 +420,49 @@ export default function PropertiesClient() {
             </div>
 
             {loading ? (
-              <div className="flex flex-col items-center justify-center py-12">
-                <div className="relative">
-                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary/20 border-t-primary"></div>
-                  <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary/30 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
-                </div>
-                <p className="text-lg text-foreground/70 mt-4">Finding the perfect properties for you...</p>
-                <p className="text-sm text-foreground/70/70 mt-2">This may take a moment</p>
-              </div>
-            ) : error ? (
-              <div className="flex flex-col items-center justify-center py-12">
-                <div className="max-w-md w-full">
-                  <div className="bg-card p-6 rounded-lg shadow-sm border mb-6 border-destructive">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center mr-3">
-                        <svg className="w-5 h-5 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                        </svg>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Loading properties">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="bg-card rounded-lg shadow-sm border overflow-hidden animate-pulse">
+                    <div className="aspect-video bg-muted" />
+                    <div className="p-4 space-y-3">
+                      <div className="h-5 bg-muted rounded w-3/4" />
+                      <div className="h-4 bg-muted rounded w-1/2" />
+                      <div className="flex gap-4">
+                        <div className="h-4 bg-muted rounded w-16" />
+                        <div className="h-4 bg-muted rounded w-16" />
+                        <div className="h-4 bg-muted rounded w-16" />
                       </div>
-                      <h3 className="text-lg font-semibold text-destructive">Unable to Load Properties</h3>
-                    </div>
-                    <p className="text-foreground/70 mb-6">{error}</p>
-                    <div className="flex gap-3">
-                      <Button
-                        onClick={handleRetry}
-                        className="flex-1"
-                        variant="default"
-                      >
-                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                        Try Again
-                      </Button>
-                      <Button
-                        onClick={() => window.location.reload()}
-                        variant="outline"
-                        className="px-4"
-                      >
-                        Refresh Page
-                      </Button>
+                      <div className="h-10 bg-muted rounded w-full mt-2" />
                     </div>
                   </div>
+                ))}
+              </div>
+            ) : error ? (
+              <div className="flex flex-col items-center justify-center py-16">
+                <div className="max-w-lg w-full text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+                    <Building className="w-10 h-10 text-foreground/40" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">Properties are temporarily unavailable</h3>
+                  <p className="text-foreground/60 mb-8 max-w-sm mx-auto">
+                    We&apos;re having trouble loading our listings right now. This is usually resolved quickly.
+                  </p>
+                  <div className="flex gap-3 justify-center">
+                    <Button onClick={handleRetry} variant="default" className="min-h-[44px]">
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                      Try Again
+                    </Button>
+                    <Button asChild variant="outline" className="min-h-[44px]">
+                      <a href="/contact">Contact Us</a>
+                    </Button>
+                  </div>
+                  {retryCount > 0 && (
+                    <p className="text-xs text-foreground/40 mt-4">
+                      Still not working? Call us at <a href="tel:+14085380420" className="text-primary hover:underline">+1 (408) 538-0420</a>
+                    </p>
+                  )}
                 </div>
               </div>
             ) : properties.length > 0 ? (

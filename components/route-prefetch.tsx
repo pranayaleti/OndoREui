@@ -40,15 +40,16 @@ export function RoutePrefetch() {
   const pathname = usePathname()
 
   useEffect(() => {
-    if (!pathname) return
+    if (!pathname || pathname === "/") return
 
     const targets = ROUTE_GRAPH[pathname]
     if (!targets) return
 
-    // Delay slightly so we don't compete with critical resource loading
-    const id = setTimeout(() => {
-      targets.forEach(prefetchUrl)
-    }, 1500)
+    // Give LCP-critical work plenty of room before warming likely next pages.
+    const id = window.setTimeout(() => {
+      if (document.visibilityState !== "visible") return
+      targets.slice(0, 2).forEach(prefetchUrl)
+    }, 4000)
 
     return () => clearTimeout(id)
   }, [pathname])

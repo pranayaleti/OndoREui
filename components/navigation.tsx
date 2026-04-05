@@ -155,7 +155,7 @@ export const Navigation = memo(function Navigation({
                       {t(child.labelKey)}
                     </a>
                   ) : (
-                    <Link href={child.href} prefetch onClick={onLinkClick}>
+                    <Link href={child.href} prefetch={false} onClick={onLinkClick}>
                       {t(child.labelKey)}
                     </Link>
                   )}
@@ -167,7 +167,7 @@ export const Navigation = memo(function Navigation({
           <Link
             key={item.href}
             href={item.href}
-            prefetch={true}
+            prefetch={false}
             className={linkClass(item)}
             onClick={onLinkClick}
             aria-current={isActive(item.href) ? "page" : undefined}

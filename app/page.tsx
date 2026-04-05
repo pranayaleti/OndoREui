@@ -1,7 +1,5 @@
-import { Suspense } from "react"
-import dynamic from "next/dynamic"
 import type { Metadata } from "next"
-import Loading from "@/components/loading"
+import LandingPage from "@/components/landing-page"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { HOME_PAGE_DESCRIPTION, HOME_PAGE_TITLE, homeOpenGraphImages } from "@/lib/home-metadata"
@@ -28,12 +26,6 @@ export const metadata: Metadata = {
     images: homeOpenGraphImages.map((i) => i.url),
   },
 }
-
-// Lazy load the landing page component
-const LandingPage = dynamic(() => import("@/components/landing-page"), {
-  loading: () => <Loading />,
-  ssr: true, // Enable SSR for better SEO
-})
 
 export default function Home() {
   return (
@@ -94,9 +86,7 @@ export default function Home() {
           }),
         ]}
       />
-      <Suspense fallback={<Loading />}>
-        <LandingPage />
-      </Suspense>
+      <LandingPage />
     </main>
   )
 }

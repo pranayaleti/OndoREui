@@ -34,22 +34,42 @@ export default function ClientConsultationWidget() {
   const [form, setForm] = useState<ConsultationForm>(initialForm)
   const { toast } = useToast()
 
-  // Auto-show widget after 30 seconds
+  // Show widget on exit-intent (mouse leaves viewport) or deep scroll (70%+)
+  // instead of aggressive auto-popup after 30s
   useEffect(() => {
-    // Only auto-open in production; never auto-open in local/dev
+    // Only trigger in production; never auto-open in local/dev
     if (process.env['NEXT_PUBLIC_APP_ENV'] !== "production" && process.env['NODE_ENV'] !== "production") {
       return
     }
 
-    const timer = setTimeout(() => {
-      // Only show if user hasn't dismissed it recently
-      const dismissed = localStorage.getItem('consultation-widget-dismissed')
-      if (!dismissed) {
-        setIsOpen(true)
-      }
-    }, 30000)
+    const dismissed = localStorage.getItem('consultation-widget-dismissed')
+    if (dismissed) return
 
-    return () => clearTimeout(timer)
+    let triggered = false
+    const trigger = () => {
+      if (triggered) return
+      triggered = true
+      setIsOpen(true)
+    }
+
+    // Exit-intent: user moves mouse above viewport (desktop only)
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) trigger()
+    }
+
+    // Deep scroll: user has scrolled past 70% of the page
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight
+      if (scrollPercent > 0.7) trigger()
+    }
+
+    document.addEventListener("mouseleave", handleMouseLeave)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      document.removeEventListener("mouseleave", handleMouseLeave)
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
@@ -195,6 +215,7 @@ export default function ClientConsultationWidget() {
                 <Label htmlFor="consultation-name">Name *</Label>
                 <Input
                   id="consultation-name"
+                  autoComplete="name"
                   value={form.name}
                   onChange={(e) => updateForm('name', e.target.value)}
                   placeholder="Your full name"
@@ -208,6 +229,7 @@ export default function ClientConsultationWidget() {
                 <Input
                   id="consultation-phone"
                   type="tel"
+                  autoComplete="tel"
                   value={form.phone}
                   onChange={(e) => updateForm('phone', e.target.value)}
                   placeholder="(801) 555-0123"
@@ -222,6 +244,7 @@ export default function ClientConsultationWidget() {
               <Input
                 id="consultation-email"
                 type="email"
+                autoComplete="email"
                 value={form.email}
                 onChange={(e) => updateForm('email', e.target.value)}
                 placeholder="your@email.com"

@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { memo } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import {
   SITE_SOCIALS,
   SITE_ADDRESS,
@@ -98,6 +98,65 @@ function PinterestIcon({ className }: { className?: string }) {
   )
 }
 
+/** Lazy-mount wrapper: children only render once the sentinel scrolls into view. */
+function LazySection({ children, fallbackHeight = "200px" }: { children: React.ReactNode; fallbackHeight?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setVisible(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: "200px" }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref}>
+      {visible ? children : <div style={{ minHeight: fallbackHeight }} />}
+    </div>
+  )
+}
+
+/** Collapsible footer nav section for mobile — expands on tap, always open on md+. */
+function FooterNavSection({ label, icon, href, children }: { label: string; icon: React.ReactNode; href: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <nav aria-label={label} className="space-y-4">
+      {/* Desktop: always-visible heading link */}
+      <h3 className="text-lg font-semibold mb-4 hidden md:block">
+        <Link href={href} className="flex items-center gap-2 hover:text-primary transition-colors">
+          {icon}
+          <span>{label}</span>
+        </Link>
+      </h3>
+      {/* Mobile: tappable toggle */}
+      <button
+        type="button"
+        className="flex w-full items-center justify-between text-lg font-semibold mb-2 md:hidden"
+        onClick={() => setOpen(prev => !prev)}
+        aria-expanded={open}
+      >
+        <span className="flex items-center gap-2">{icon}<span>{label}</span></span>
+        <svg className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+      </button>
+      {/* Content: visible on md+, toggled on mobile */}
+      <ul className={`space-y-2 text-sm ${open ? "block" : "hidden"} md:block`}>
+        {children}
+      </ul>
+    </nav>
+  )
+}
+
 const Footer = memo(() => {
   const pwaInstall = usePwaInstall()
   const pathname = usePathname()
@@ -177,20 +236,22 @@ const Footer = memo(() => {
       )}
 
       {showFooterCalendly && (
-        <div className="border-b border-border bg-muted/20">
-          <div className="container mx-auto max-w-3xl px-4 py-10">
-            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-center sm:gap-3">
-              <Calendar className="h-5 w-5 shrink-0 text-primary" aria-hidden />
-              <h2 className="text-lg font-semibold text-foreground">Book a 30-minute call</h2>
+        <LazySection fallbackHeight="520px">
+          <div className="border-b border-border bg-muted/20">
+            <div className="container mx-auto max-w-3xl px-4 py-10">
+              <div className="mb-4 flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-center sm:gap-3">
+                <Calendar className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+                <h2 className="text-lg font-semibold text-foreground">Book a 30-minute call</h2>
+              </div>
+              <CalendlyInlineEmbed
+                variant="compact"
+                heading={null}
+                showFallbackLink
+                className="mt-0"
+              />
             </div>
-            <CalendlyInlineEmbed
-              variant="compact"
-              heading={null}
-              showFallbackLink
-              className="mt-0"
-            />
           </div>
-        </div>
+        </LazySection>
       )}
 
       {/* Main Footer Content */}
@@ -198,131 +259,65 @@ const Footer = memo(() => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           
           {/* Buying a Home */}
-          <nav aria-label="Buying a Home" className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">
-              <Link
-                href="/buy"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <Home className="h-5 w-5" />
-                <span>Buying a Home</span>
-              </Link>
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/buy/first-time" className="text-foreground/70 hover:text-foreground">First-time homebuyer</Link></li>
-              <li><Link href="/buy/second-home" className="text-foreground/70 hover:text-foreground">Buying a second home</Link></li>
-              <li><Link href="/buy/fixed-rate" className="text-foreground/70 hover:text-foreground">Fixed-rate mortgage</Link></li>
-              <li><Link href="/buy/adjustable-rate" className="text-foreground/70 hover:text-foreground">Adjustable-rate mortgage</Link></li>
-              <li><Link href="/buy/30-year" className="text-foreground/70 hover:text-foreground">30 year mortgage</Link></li>
-              <li><Link href="/buy/15-year" className="text-foreground/70 hover:text-foreground">15 year mortgage</Link></li>
-              <li><Link href="/buy/rates" className="text-foreground/70 hover:text-foreground">Mortgage rates explained</Link></li>
-            </ul>
-          </nav>
+          <FooterNavSection label="Buying a Home" icon={<Home className="h-5 w-5" />} href="/buy">
+            <li><Link href="/buy/first-time" className="text-foreground/70 hover:text-foreground">First-time homebuyer</Link></li>
+            <li><Link href="/buy/second-home" className="text-foreground/70 hover:text-foreground">Buying a second home</Link></li>
+            <li><Link href="/buy/fixed-rate" className="text-foreground/70 hover:text-foreground">Fixed-rate mortgage</Link></li>
+            <li><Link href="/buy/adjustable-rate" className="text-foreground/70 hover:text-foreground">Adjustable-rate mortgage</Link></li>
+            <li><Link href="/buy/30-year" className="text-foreground/70 hover:text-foreground">30 year mortgage</Link></li>
+            <li><Link href="/buy/15-year" className="text-foreground/70 hover:text-foreground">15 year mortgage</Link></li>
+            <li><Link href="/buy/rates" className="text-foreground/70 hover:text-foreground">Mortgage rates explained</Link></li>
+          </FooterNavSection>
 
           {/* Refinance */}
-          <nav aria-label="Refinance" className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">
-              <Link
-                href="/refinance/process"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <TrendingUp className="h-5 w-5" />
-                <span>Refinance</span>
-              </Link>
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/refinance/process" className="text-foreground/70 hover:text-foreground">Mortgage refinance process</Link></li>
-              <li><Link href="/refinance/rate-term" className="text-foreground/70 hover:text-foreground">Rate-and-term refinance</Link></li>
-              <li><Link href="/refinance/cash-out" className="text-foreground/70 hover:text-foreground">Cash-out refinance</Link></li>
-              <li><Link href="/refinance/blog" className="text-foreground/70 hover:text-foreground">Mortgage blog – Refinance</Link></li>
-            </ul>
-          </nav>
+          <FooterNavSection label="Refinance" icon={<TrendingUp className="h-5 w-5" />} href="/refinance/process">
+            <li><Link href="/refinance/process" className="text-foreground/70 hover:text-foreground">Mortgage refinance process</Link></li>
+            <li><Link href="/refinance/rate-term" className="text-foreground/70 hover:text-foreground">Rate-and-term refinance</Link></li>
+            <li><Link href="/refinance/cash-out" className="text-foreground/70 hover:text-foreground">Cash-out refinance</Link></li>
+            <li><Link href="/refinance/blog" className="text-foreground/70 hover:text-foreground">Mortgage blog – Refinance</Link></li>
+          </FooterNavSection>
 
           {/* Mortgage Loans */}
-          <nav aria-label="Mortgage Loans" className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">
-              <Link
-                href="/loans"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <Building className="h-5 w-5" />
-                <span>Mortgage Loans</span>
-              </Link>
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/loans/conventional" className="text-foreground/70 hover:text-foreground">Conventional</Link></li>
-              <li><Link href="/loans/fha" className="text-foreground/70 hover:text-foreground">FHA</Link></li>
-              <li><Link href="/loans/usda" className="text-foreground/70 hover:text-foreground">USDA</Link></li>
-              <li><Link href="/loans/va" className="text-foreground/70 hover:text-foreground">VA</Link></li>
-              <li><Link href="/loans/heloc" className="text-foreground/70 hover:text-foreground">HELOC / HELOAN</Link></li>
-              <li><Link href="/loans/reverse" className="text-foreground/70 hover:text-foreground">Reverse Mortgage</Link></li>
-              <li><Link href="/loans/jumbo" className="text-foreground/70 hover:text-foreground">Jumbo Loans</Link></li>
-            </ul>
-          </nav>
+          <FooterNavSection label="Mortgage Loans" icon={<Building className="h-5 w-5" />} href="/loans">
+            <li><Link href="/loans/conventional" className="text-foreground/70 hover:text-foreground">Conventional</Link></li>
+            <li><Link href="/loans/fha" className="text-foreground/70 hover:text-foreground">FHA</Link></li>
+            <li><Link href="/loans/usda" className="text-foreground/70 hover:text-foreground">USDA</Link></li>
+            <li><Link href="/loans/va" className="text-foreground/70 hover:text-foreground">VA</Link></li>
+            <li><Link href="/loans/heloc" className="text-foreground/70 hover:text-foreground">HELOC / HELOAN</Link></li>
+            <li><Link href="/loans/reverse" className="text-foreground/70 hover:text-foreground">Reverse Mortgage</Link></li>
+            <li><Link href="/loans/jumbo" className="text-foreground/70 hover:text-foreground">Jumbo Loans</Link></li>
+          </FooterNavSection>
 
           {/* Mortgage Calculators */}
-          <nav aria-label="Calculators" className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">
-              <Link
-                href="/calculators"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <Calculator className="h-5 w-5" />
-                <span>Calculators</span>
-              </Link>
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/calculators/mortgage-payment" className="text-foreground/70 hover:text-foreground">Mortgage payment calculator</Link></li>
-              <li><Link href="/calculators/affordability" className="text-foreground/70 hover:text-foreground">Affordability calculator</Link></li>
-              <li><Link href="/calculators/income" className="text-foreground/70 hover:text-foreground">Income calculator</Link></li>
-              <li><Link href="/calculators/closing-cost" className="text-foreground/70 hover:text-foreground">Closing cost calculator</Link></li>
-              <li><Link href="/calculators/refinance" className="text-foreground/70 hover:text-foreground">Refinance calculator</Link></li>
-              <li><Link href="/calculators/home-sale" className="text-foreground/70 hover:text-foreground">Home sale calculator</Link></li>
-              <li><Link href="/calculators/buying-power" className="text-foreground/70 hover:text-foreground">Buying power calculator</Link></li>
-            </ul>
-          </nav>
+          <FooterNavSection label="Calculators" icon={<Calculator className="h-5 w-5" />} href="/calculators">
+            <li><Link href="/calculators/mortgage-payment" className="text-foreground/70 hover:text-foreground">Mortgage payment calculator</Link></li>
+            <li><Link href="/calculators/affordability" className="text-foreground/70 hover:text-foreground">Affordability calculator</Link></li>
+            <li><Link href="/calculators/income" className="text-foreground/70 hover:text-foreground">Income calculator</Link></li>
+            <li><Link href="/calculators/closing-cost" className="text-foreground/70 hover:text-foreground">Closing cost calculator</Link></li>
+            <li><Link href="/calculators/refinance" className="text-foreground/70 hover:text-foreground">Refinance calculator</Link></li>
+            <li><Link href="/calculators/home-sale" className="text-foreground/70 hover:text-foreground">Home sale calculator</Link></li>
+            <li><Link href="/calculators/buying-power" className="text-foreground/70 hover:text-foreground">Buying power calculator</Link></li>
+          </FooterNavSection>
 
           {/* About Us */}
-          <nav aria-label="About Us" className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">
-              <Link
-                href="/about"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <Users className="h-5 w-5" />
-                <span>About Us</span>
-              </Link>
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about/history" className="text-foreground/70 hover:text-foreground">History</Link></li>
-              <li><Link href="/about/giving-back" className="text-foreground/70 hover:text-foreground">Giving back</Link></li>
-              <li><Link href="/about/careers" className="text-foreground/70 hover:text-foreground">Careers</Link></li>
-              <li><Link href="/about/news" className="text-foreground/70 hover:text-foreground">News</Link></li>
-              <li><Link href="/about/investor-relations" className="text-foreground/70 hover:text-foreground">Investor relations</Link></li>
-              <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
-            </ul>
-          </nav>
+          <FooterNavSection label="About Us" icon={<Users className="h-5 w-5" />} href="/about">
+            <li><Link href="/about/history" className="text-foreground/70 hover:text-foreground">History</Link></li>
+            <li><Link href="/about/giving-back" className="text-foreground/70 hover:text-foreground">Giving back</Link></li>
+            <li><Link href="/about/careers" className="text-foreground/70 hover:text-foreground">Careers</Link></li>
+            <li><Link href="/about/news" className="text-foreground/70 hover:text-foreground">News</Link></li>
+            <li><Link href="/about/investor-relations" className="text-foreground/70 hover:text-foreground">Investor relations</Link></li>
+            <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
+          </FooterNavSection>
 
           {/* Help Center */}
-          <nav aria-label="Help Center" className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">
-              <Link
-                href="/faq"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <HelpCircle className="h-5 w-5" />
-                <span>Help Center</span>
-              </Link>
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/faq/payments-faqs" className="text-foreground/70 hover:text-foreground">Payment questions</Link></li>
-              <li><Link href="/faq/hardship-faqs" className="text-foreground/70 hover:text-foreground">Hardship assistance</Link></li>
-              <li><Link href="/faq/loan-payoffs-faqs" className="text-foreground/70 hover:text-foreground">Loan payoffs</Link></li>
-              <li><Link href="/faq/general-faqs" className="text-foreground/70 hover:text-foreground">Mortgage FAQs</Link></li>
-              <li><Link href="/faq/escrow-faqs" className="text-foreground/70 hover:text-foreground">Escrow</Link></li>
-              <li><Link href="/faq/disaster-faqs" className="text-foreground/70 hover:text-foreground">Natural Disaster Resources</Link></li>
-            </ul>
-          </nav>
+          <FooterNavSection label="Help Center" icon={<HelpCircle className="h-5 w-5" />} href="/faq">
+            <li><Link href="/faq/payments-faqs" className="text-foreground/70 hover:text-foreground">Payment questions</Link></li>
+            <li><Link href="/faq/hardship-faqs" className="text-foreground/70 hover:text-foreground">Hardship assistance</Link></li>
+            <li><Link href="/faq/loan-payoffs-faqs" className="text-foreground/70 hover:text-foreground">Loan payoffs</Link></li>
+            <li><Link href="/faq/general-faqs" className="text-foreground/70 hover:text-foreground">Mortgage FAQs</Link></li>
+            <li><Link href="/faq/escrow-faqs" className="text-foreground/70 hover:text-foreground">Escrow</Link></li>
+            <li><Link href="/faq/disaster-faqs" className="text-foreground/70 hover:text-foreground">Natural Disaster Resources</Link></li>
+          </FooterNavSection>
         </div>
 
         {/* Contact Information */}

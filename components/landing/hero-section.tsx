@@ -1,13 +1,11 @@
-"use client"
-
-import { SearchForm } from "@/components/search-form"
-import { LazyImage } from "@/components/lazy-image"
+import Image from "next/image"
+import { DeferredSearchForm } from "@/components/landing/deferred-search-form"
 
 export function HeroSection() {
   return (
     <section className="relative w-full bg-gradient-to-r from-background to-card dark:bg-gradient-to-b dark:from-black dark:to-gray-900 py-20 md:py-32 overflow-hidden" role="banner" aria-label="Hero section">
       <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
-        <LazyImage
+        <Image
           src="/modern-office-building.webp"
           alt="Ondo RE headquarters in Lehi, Utah — property management, mortgage, and real estate services along the Wasatch Front"
           fill
@@ -29,7 +27,7 @@ export function HeroSection() {
           </p>
         </header>
         <section aria-label="Property search" className="flex justify-center">
-          <SearchForm />
+          <DeferredSearchForm />
         </section>
       </div>
     </section>
