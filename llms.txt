@@ -7,6 +7,9 @@
 - HTML sitemap (all public pages): https://ondorealestate.com/sitemap/
 - XML sitemap: https://ondorealestate.com/sitemap.xml
 - This file: https://ondorealestate.com/llms.txt
+- Full agent brief (extended): https://ondorealestate.com/llms-full.txt
+- humans.txt: https://ondorealestate.com/humans.txt
+- security.txt: https://ondorealestate.com/.well-known/security.txt
 
 ## Product areas
 - **Buy / mortgage**: Purchase guides, loan pre-approval, conventional and specialty products, refinance process, Utah city/ZIP loan pages.
@@ -203,3 +206,5 @@ Access is invitation-only; there is no self-serve signup on the marketing site.
 - Accessibility: https://ondorealestate.com/accessibility/ — Commitment and contact for accessibility support.
 - XML sitemap: https://ondorealestate.com/sitemap.xml — Canonical URL list for crawlers (generated at build).
 - LLM & agent brief: https://ondorealestate.com/llms.txt — Concise site summary for AI assistants and automated agents.
+- LLM full brief: https://ondorealestate.com/llms-full.txt — Extended site context with FAQs, service details, and contact channels for AI agents.
+- humans.txt: https://ondorealestate.com/humans.txt — Team credits, tech stack, and tools behind the site.

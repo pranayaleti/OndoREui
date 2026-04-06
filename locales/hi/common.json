@@ -134,5 +134,278 @@
     "faq2A": "कोई नकद भुगतान नहीं है। आप Ondo RE प्लेटफ़ॉर्म एक्सेस के मुफ़्त महीने (24 तक) और बोनस ड्रॉ एंट्री कमाते हैं।",
     "faq3Q": "मेरा रेफ़रल लिंक कब मिलेगा?",
     "faq3A": "आपका आवेदन स्वीकृत होने के बाद, हम आपका अनोखा कोड ईमेल करेंगे।"
+  },
+  "leadPopup": {
+    "title": "क्या आप अगला कदम और आसान बनाना चाहते हैं?",
+    "body": "अपना नाम और ईमेल साझा करें और हम प्रक्रिया को ज्यादा आसान और कम तनावपूर्ण बनाने में मदद करेंगे। हम यह केवल एक बार पूछते हैं और आपकी जानकारी कभी बेचते या साझा नहीं करते।",
+    "nameLabel": "नाम",
+    "namePlaceholder": "आपका नाम",
+    "emailLabel": "ईमेल",
+    "emailPlaceholder": "you@example.com",
+    "submitCta": "व्यक्तिगत सहायता पाएं",
+    "dismissCta": "अभी नहीं",
+    "submitting": "भेजा जा रहा है...",
+    "privacyNotice": "हमारी <privacyLink>गोपनीयता नीति</privacyLink> पढ़ें।",
+    "successTitle": "अपनी जानकारी साझा करने के लिए धन्यवाद।",
+    "successBody": "हम जल्द ही आपसे अधिक व्यक्तिगत अगले कदम के साथ संपर्क करेंगे।",
+    "submitError": "हम अभी आपकी जानकारी सहेज नहीं सके। कृपया फिर से प्रयास करें।",
+    "validation": {
+      "nameRequired": "कृपया अपना नाम दर्ज करें।",
+      "emailRequired": "कृपया अपना ईमेल पता दर्ज करें।",
+      "emailInvalid": "कृपया वैध ईमेल पता दर्ज करें।"
+    }
+  },
+  "demo": {
+    "bannerTitle": "Ondo demo hub खोलें",
+    "bannerSubtitle": "Walkthrough देखें, seeded credentials इस्तेमाल करें, और तैयार होने पर live sandbox में जाएँ।",
+    "heroKicker": "Self-serve demo",
+    "heroTitle": "कॉल बुक करने से पहले Manager, Owner और Tenant अनुभव देखें।",
+    "heroBody": "यह पेज Ondo demo environment का public entry point है। रिकॉर्ड किया गया walkthrough देखें, seeded login credentials की समीक्षा करें, और demo app link उपलब्ध होने पर live sandbox लॉन्च करें।",
+    "openLiveDemo": "Live demo खोलें",
+    "bookGuidedDemo": "Guided demo बुक करें",
+    "heroAvailability": "यह sandbox seeded sample data का उपयोग करता है और सुरक्षित रूप से explore करने के लिए समय-समय पर reset होता है।",
+    "videoTitle": "Walkthrough वीडियो",
+    "videoBody": "Manager, Owner और Tenant workflows का सबसे तेज़ overview पाने के लिए यहीं से शुरू करें।",
+    "videoEmbedTitle": "Ondo demo walkthrough वीडियो",
+    "videoFallbackTitle": "Walkthrough वीडियो जल्द आएगा",
+    "videoFallbackBody": "इस पेज पर रिकॉर्डेड demo walkthrough दिखाने के लिए NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL जोड़ें।",
+    "credentialsTitle": "Seed किए गए demo roles में से एक का उपयोग करें",
+    "credentialsBody": "हर account उसी demo environment के अंदर अलग workspace में खुलता है।",
+    "openRoleLogin": "Demo login खोलें",
+    "galleryTitle": "उन workflows का preview देखें जिन्हें आप दिखाएँगे",
+    "galleryBody": "ये preview cards रिकॉर्डेड demo और screenshot gallery में दिखाए जाने वाले screens को map करती हैं।",
+    "previewEyebrow": "Screenshot focus",
+    "previewLiveSlot": "Demo view",
+    "sandboxTitle": "Sandbox उपयोग निर्देश",
+    "sandboxBody": "इस workspace का उपयोग केवल exploration के लिए करें। इसमें sample data है, यह बिना सूचना reset हो सकता है, और यहाँ कभी भी निजी दस्तावेज़ या वास्तविक payment जानकारी नहीं डालनी चाहिए।",
+    "guidedKicker": "Guided walkthrough",
+    "guidedTitle": "क्या आप चाहते हैं कि हम demo को आपके workflow के अनुसार तैयार करें?",
+    "guidedBody": "नीचे कुछ विवरण साझा करें और हम live walkthrough को आपके portfolio, operations या tenant experience सवालों के अनुसार तैयार करेंगे।",
+    "labels": {
+      "email": "ईमेल",
+      "password": "पासवर्ड"
+    },
+    "form": {
+      "firstNameLabel": "पहला नाम *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "अंतिम नाम *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "ईमेल *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "फ़ोन",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "मैं हूँ...",
+      "unitsLabel": "यूनिटों की संख्या",
+      "unitsPlaceholder": "जैसे 5",
+      "timeLabel": "पसंदीदा समय",
+      "timePlaceholder": "जैसे कार्यदिवस की सुबह",
+      "success": "धन्यवाद! आपकी demo की पुष्टि के लिए हम 1 कार्यदिवस के भीतर संपर्क करेंगे।",
+      "error": "कुछ गलत हो गया। हमें ईमेल करें",
+      "errorSuffix": "या फिर से कोशिश करें।",
+      "submitting": "भेजा जा रहा है...",
+      "submit": "मेरी guided demo बुक करें",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investor",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "उन operators के लिए सबसे अच्छा जो एक ही जगह portfolio visibility, leasing, maintenance और reporting चाहते हैं।",
+        "feature1": "एक ही dashboard से properties, leads और rent collection मॉनिटर करें।",
+        "feature2": "Tool बदले बिना maintenance queues, messages और owner updates देखें।",
+        "feature3": "Portfolio issues और next actions को assistant से summarize करें।",
+        "previewTitle": "Manager workspace",
+        "previewHeadline": "Portfolio control center",
+        "previewBody": "Daily operations, conversations और financial follow-up view को highlight करें।",
+        "stat1Label": "Access",
+        "stat1Value": "Multi-property",
+        "stat2Label": "Focus",
+        "stat2Value": "Ops visibility",
+        "previewItem1": "Property health और occupancy",
+        "previewItem2": "Maintenance triage और follow-up",
+        "previewItem3": "AI assistant और reports"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "उन owners के लिए सबसे अच्छा जो portfolio visibility, documents, maintenance updates और financial reporting चाहते हैं।",
+        "feature1": "अपनी properties, documents और occupancy को एक नज़र में देखें।",
+        "feature2": "Maintenance progress, payment history और owner-facing reports ट्रैक करें।",
+        "feature3": "Manual report का इंतज़ार किए बिना portfolio सवालों के जवाब assistant से लें।",
+        "previewTitle": "Owner workspace",
+        "previewHeadline": "Owner reporting view",
+        "previewBody": "दिखाएँ कि owners spreadsheets या inbox threads के बिना कैसे informed रहते हैं।",
+        "stat1Label": "Access",
+        "stat1Value": "Owner portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Portfolio summary और documents",
+        "previewItem2": "Maintenance visibility",
+        "previewItem3": "Payments और reports"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "उन residents के लिए सबसे अच्छा जिन्हें payments, documents, maintenance, messages और self-service support चाहिए।",
+        "feature1": "एक ही portal में rent pay करें, balances देखें और receipts रखें।",
+        "feature2": "Maintenance requests भेजें और कम back-and-forth के साथ status updates फॉलो करें।",
+        "feature3": "एक ही login से documents, messages और personal settings खोलें।",
+        "previewTitle": "Tenant workspace",
+        "previewHeadline": "Resident self-service",
+        "previewBody": "इस view से दिखाएँ कि tenants office को कॉल किए बिना सामान्य काम कैसे संभालते हैं।",
+        "stat1Label": "Access",
+        "stat1Value": "Tenant portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Self-service",
+        "previewItem1": "Payments और receipts",
+        "previewItem2": "Maintenance requests",
+        "previewItem3": "Messages और documents"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "यूटा में निवेश करने में हम आपकी मदद करें",
+      "title": "क्यों <highlight>यूटा</highlight> निवेश के लिए देश की सबसे बेहतर जगहों में से एक है",
+      "body": "यूटा की स्थिर अर्थव्यवस्था, मजबूत स्थानीय जनसंख्या वृद्धि और 2034 शीतकालीन ओलंपिक की गति मिलकर रियल एस्टेट निवेशकों के लिए लंबी अवधि की मजबूत संभावनाएं बना रही हैं।"
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "आपका आवेदन लोड हो रहा है",
+      "body": "हम आवेदन लिंक और संपत्ति के विवरण की पुष्टि कर रहे हैं।"
+    },
+    "error": {
+      "title": "आवेदन लिंक उपलब्ध नहीं है"
+    },
+    "submitted": {
+      "title": "आवेदन जमा हो गया",
+      "body": "{{property}} के लिए आपका आवेदन सफलतापूर्वक जमा हो गया है।",
+      "followUp": "जब संपत्ति टीम आपकी स्थिति अपडेट करेगी, तब हम आपको ईमेल भेजेंगे।"
+    },
+    "progressLabel": "आवेदन प्रगति",
+    "progress": {
+      "property": "संपत्ति",
+      "disclosure": "मानदंड और खुलासे",
+      "personal": "व्यक्तिगत जानकारी",
+      "questions": "प्रश्न",
+      "review": "समीक्षा"
+    },
+    "property": {
+      "description": "खुलासा और आवेदन चरणों पर जाने से पहले किराये का विवरण देख लें।",
+      "start": "मानदंड देखें और आगे बढ़ें",
+      "bedrooms": "शयनकक्ष",
+      "bathrooms": "बाथरूम",
+      "sqft": "वर्ग फुट",
+      "monthlyRent": "मासिक किराया",
+      "availability": "उपलब्धता"
+    },
+    "messages": {
+      "invalidLink": "यह आवेदन लिंक अमान्य है या समाप्त हो चुका है।",
+      "validationFailed": "हम अभी इस आवेदन लिंक की पुष्टि नहीं कर सके।",
+      "createFailed": "हम आपकी व्यक्तिगत जानकारी अभी सेव नहीं कर सके।",
+      "answerRequiredQuestions": "कृपया आगे बढ़ने से पहले सभी आवश्यक प्रश्नों का उत्तर दें।",
+      "missingApplicationContext": "आपके खुलासे का विवरण उपलब्ध नहीं है। कृपया आवेदन को शुरुआत से फिर शुरू करें।",
+      "consentRequired": "कृपया आगे बढ़ने से पहले मानदंड स्वीकार करें और स्क्रीनिंग की अनुमति दें।",
+      "submitFailed": "हम अभी आपका आवेदन जमा नहीं कर सके।"
+    },
+    "disclosure": {
+      "title": "मानदंड और खुलासों की समीक्षा",
+      "body": "आगे बढ़ने से पहले मालिक के स्वीकृति मानदंड, स्क्रीनिंग जांचें और किराया खुलासे देखें।",
+      "criteriaAcknowledgementLabel": "मैंने इस पेज पर दिखाए गए मालिक के स्वीकृति मानदंड और किराया खुलासे पढ़ लिए हैं।",
+      "screeningConsentLabel": "मैं Ondo Real Estate और मालिक को इस आवेदन के लिए बताई गई स्क्रीनिंग जांचें चलाने की अनुमति देता/देती हूं।",
+      "futureFeeNotice": "यदि इस प्रक्रिया में बाद में आवेदन शुल्क जोड़ा जाता है, तो कोई भी भुगतान मांगे जाने से पहले शुल्क खुलासा और भुगतान चरण यहीं दिखेगा।",
+      "emptyCharges": "इस सूची के लिए किराये के अलावा कोई निश्चित शुल्क घोषित नहीं किया गया है।",
+      "emptyUseBasedCharges": "इस सूची के लिए उपयोग-आधारित शुल्क श्रेणियां घोषित नहीं की गई हैं।",
+      "emptyCriteria": "इस संपत्ति के लिए कोई अतिरिक्त मालिक मानदंड सूचीबद्ध नहीं किए गए हैं।",
+      "rent": "किराया",
+      "availability": "उपलब्धता",
+      "fixedCharges": "ज्ञात गैर-किराया निश्चित शुल्क",
+      "useBasedCharges": "उपयोग-आधारित शुल्क श्रेणियां",
+      "criteria": "मालिक के स्वीकृति मानदंड",
+      "requiredChecks": "आवश्यक स्क्रीनिंग जांचें",
+      "feeCollectionStatus": "आवेदन शुल्क की स्थिति",
+      "refundRecoveryInstructions": "रिफंड और रिपोर्ट प्राप्त करने की जानकारी",
+      "ownerNotes": "मालिक के नोट्स",
+      "continue": "व्यक्तिगत जानकारी पर जाएं"
+    },
+    "personal": {
+      "title": "व्यक्तिगत जानकारी",
+      "subtitle": "स्क्रीनिंग शुरू होने से पहले अपना आवेदन रिकॉर्ड बनाने के लिए आवश्यक जानकारी साझा करें।",
+      "continue": "आगे बढ़ें",
+      "saving": "सेव हो रहा है...",
+      "fields": {
+        "firstName": "पहला नाम",
+        "lastName": "अंतिम नाम",
+        "email": "ईमेल",
+        "phone": "फोन",
+        "dateOfBirth": "जन्म तिथि",
+        "currentAddress": "वर्तमान पता",
+        "employer": "नियोक्ता",
+        "annualIncome": "वार्षिक आय",
+        "desiredMoveIn": "वांछित प्रवेश तिथि"
+      },
+      "placeholders": {
+        "phone": "उदा. +1 (801) 555-0100",
+        "currentAddress": "सड़क, शहर, राज्य, ज़िप",
+        "employer": "कंपनी या संगठन",
+        "annualIncome": "उदा. 75000"
+      }
+    },
+    "questions": {
+      "title": "स्क्रीनिंग प्रश्न",
+      "subtitle": "इस सूची के लिए मालिक द्वारा जोड़े गए कस्टम प्रश्नों का उत्तर दें।",
+      "yes": "हाँ",
+      "no": "नहीं",
+      "required": "आवश्यक",
+      "continue": "आवेदन की समीक्षा करें"
+    },
+    "review": {
+      "title": "अपने आवेदन की समीक्षा करें",
+      "submit": "आवेदन जमा करें",
+      "submitting": "जमा किया जा रहा है...",
+      "personalInfo": "व्यक्तिगत जानकारी",
+      "answers": "स्क्रीनिंग उत्तर",
+      "screeningChecks": "स्क्रीनिंग जांचें",
+      "consentSummary": "खुलासा पुष्टि",
+      "disclosureConfirmed": "आपने मालिक के मानदंडों की पुष्टि की और बताई गई स्क्रीनिंग जांचों को अनुमति दी।",
+      "emptyAnswer": "उत्तर नहीं दिया गया",
+      "fields": {
+        "name": "नाम",
+        "email": "ईमेल",
+        "phone": "फोन",
+        "employer": "नियोक्ता",
+        "income": "आय",
+        "moveIn": "प्रवेश तिथि"
+      }
+    },
+    "sidebar": {
+      "title": "आवेदन सारांश",
+      "rent": "किराया",
+      "availability": "उपलब्धता",
+      "screeningChecks": "स्क्रीनिंग जांचें",
+      "criteria": "मानदंड सारांश"
+    },
+    "requiredChecks": {
+      "credit": "क्रेडिट समीक्षा",
+      "criminal": "आपराधिक पृष्ठभूमि समीक्षा",
+      "eviction": "बेदखली इतिहास समीक्षा",
+      "income": "आय सत्यापन",
+      "identity": "पहचान सत्यापन",
+      "references": "संदर्भ जांच"
+    },
+    "affordability": {
+      "title": "वहन क्षमता जांच",
+      "requirement": "यह संपत्ति न्यूनतम आय-से-किराया अनुपात {{ratio}}x का उपयोग करती है, जो सालाना लगभग {{amount}} है।",
+      "inputLabel": "आपकी वार्षिक आय (USD)",
+      "placeholder": "उदा. 75000",
+      "meets": "आप इस समय आवश्यकता पूरी कर रहे हैं ({{ratio}}x अनुपात)।",
+      "below": "आप आवश्यकता से नीचे हैं ({{ratio}}x अनुपात; {{requiredRatio}}x चाहिए)।"
+    }
   }
 }

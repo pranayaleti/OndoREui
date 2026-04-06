@@ -134,5 +134,278 @@
     "faq2A": "There are no cash payments. Instead, you earn free months of Ondo RE platform access (up to 24 months) and bonus sweepstakes entries for every successful referral.",
     "faq3Q": "When do I get my referral link?",
     "faq3A": "Once your application is approved, we'll email your unique referral code. You can then share it with your audience and track your referrals from the dashboard."
+  },
+  "leadPopup": {
+    "title": "Want a simpler next step?",
+    "body": "Share your name and email and we'll help make the process simpler and less stressful. We only ask once, and we never sell or share your information.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "submitCta": "Get personalized help",
+    "dismissCta": "Not now",
+    "submitting": "Sending...",
+    "privacyNotice": "Read our <privacyLink>Privacy Policy</privacyLink>.",
+    "successTitle": "Thanks for sharing your details.",
+    "successBody": "We'll follow up soon with a more personalized next step.",
+    "submitError": "We couldn't save your information just now. Please try again.",
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address."
+    }
+  },
+  "demo": {
+    "bannerTitle": "Open the Ondo demo hub",
+    "bannerSubtitle": "Watch the walkthrough, use seeded credentials, and step into the live sandbox when you are ready.",
+    "heroKicker": "Self-serve demo",
+    "heroTitle": "See the Manager, Owner, and Tenant experience before you book a call.",
+    "heroBody": "This page is the public path into the Ondo demo environment. Watch the recorded walkthrough, review the seeded login credentials, and launch the live sandbox when the demo app link is enabled.",
+    "openLiveDemo": "Open live demo",
+    "bookGuidedDemo": "Book a guided demo",
+    "heroAvailability": "This sandbox uses seeded sample data and resets periodically so you can explore safely.",
+    "videoTitle": "Walkthrough video",
+    "videoBody": "Start here for the quickest overview of the Manager, Owner, and Tenant workflows.",
+    "videoEmbedTitle": "Ondo demo walkthrough video",
+    "videoFallbackTitle": "Walkthrough video coming soon",
+    "videoFallbackBody": "Add NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL to show the recorded demo walkthrough on this page.",
+    "credentialsTitle": "Use one of the seeded demo roles",
+    "credentialsBody": "Each account lands in a different workspace inside the same demo environment.",
+    "openRoleLogin": "Open demo login",
+    "galleryTitle": "Preview the workflows you will show",
+    "galleryBody": "These preview cards map the screens to feature in the recorded demo and screenshot gallery.",
+    "previewEyebrow": "Screenshot focus",
+    "previewLiveSlot": "Demo view",
+    "sandboxTitle": "Safe sandbox expectations",
+    "sandboxBody": "Use this workspace for exploration only. It contains sample data, may reset without notice, and should never receive private documents or real payment information.",
+    "guidedKicker": "Guided walkthrough",
+    "guidedTitle": "Want us to tailor the demo to your workflow?",
+    "guidedBody": "Share a few details below and we will shape the live walkthrough around your portfolio, operations, or tenant experience questions.",
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "form": {
+      "firstNameLabel": "First name *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "Last name *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "Email *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "I am a...",
+      "unitsLabel": "Number of units",
+      "unitsPlaceholder": "e.g. 5",
+      "timeLabel": "Preferred time",
+      "timePlaceholder": "e.g. Weekday mornings",
+      "success": "Thanks! We will follow up within 1 business day to confirm your demo.",
+      "error": "Something went wrong. Please email us at",
+      "errorSuffix": "or try again.",
+      "submitting": "Sending...",
+      "submit": "Book my guided demo",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investor",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "Best for operators who need portfolio-wide visibility, leasing, maintenance, and reporting in one place.",
+        "feature1": "Monitor properties, leads, and rent collection from one dashboard.",
+        "feature2": "Review maintenance queues, messages, and owner updates without switching tools.",
+        "feature3": "Use the assistant to summarize portfolio issues and next actions.",
+        "previewTitle": "Manager workspace",
+        "previewHeadline": "Portfolio control center",
+        "previewBody": "Highlight the daily command view for operations, conversations, and financial follow-up.",
+        "stat1Label": "Access",
+        "stat1Value": "Multi-property",
+        "stat2Label": "Focus",
+        "stat2Value": "Ops visibility",
+        "previewItem1": "Property health and occupancy",
+        "previewItem2": "Maintenance triage and follow-up",
+        "previewItem3": "AI assistant and reports"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "Best for owners who want portfolio visibility, documents, maintenance updates, and financial reporting.",
+        "feature1": "Review your properties, documents, and occupancy at a glance.",
+        "feature2": "Track maintenance progress, payment history, and owner-facing reports.",
+        "feature3": "Use the assistant to answer portfolio questions without waiting on a manual report.",
+        "previewTitle": "Owner workspace",
+        "previewHeadline": "Owner reporting view",
+        "previewBody": "Show how owners stay informed without digging through spreadsheets or inbox threads.",
+        "stat1Label": "Access",
+        "stat1Value": "Owner portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Portfolio summary and documents",
+        "previewItem2": "Maintenance visibility",
+        "previewItem3": "Payments and reports"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "Best for residents who need payments, documents, maintenance, messages, and self-service support.",
+        "feature1": "Pay rent, review balances, and keep receipts in one portal.",
+        "feature2": "Submit maintenance requests and follow status updates with less back-and-forth.",
+        "feature3": "Open documents, messages, and personal settings from the same login.",
+        "previewTitle": "Tenant workspace",
+        "previewHeadline": "Resident self-service",
+        "previewBody": "Use this view to show how tenants handle common tasks without calling the office.",
+        "stat1Label": "Access",
+        "stat1Value": "Tenant portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Self-service",
+        "previewItem1": "Payments and receipts",
+        "previewItem2": "Maintenance requests",
+        "previewItem3": "Messages and documents"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "Let us help you invest in Utah",
+      "title": "Why <highlight>Utah</highlight> is one of the nation's best places to invest",
+      "body": "Utah pairs a steady economy with strong local population growth and 2034 Winter Olympics tailwinds, creating long-term momentum for real estate investors."
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "Loading your application",
+      "body": "We're verifying the application link and property details."
+    },
+    "error": {
+      "title": "Application link unavailable"
+    },
+    "submitted": {
+      "title": "Application submitted",
+      "body": "Your application for {{property}} has been submitted successfully.",
+      "followUp": "We'll email you when the property team updates your status."
+    },
+    "progressLabel": "Application progress",
+    "progress": {
+      "property": "Property",
+      "disclosure": "Criteria & Disclosure",
+      "personal": "Personal Info",
+      "questions": "Questions",
+      "review": "Review"
+    },
+    "property": {
+      "description": "Review the rental details before you move into the disclosure and application steps.",
+      "start": "Review criteria and continue",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "sqft": "Sq Ft",
+      "monthlyRent": "Monthly rent",
+      "availability": "Availability"
+    },
+    "messages": {
+      "invalidLink": "This application link is invalid or has expired.",
+      "validationFailed": "We couldn't verify this application link right now.",
+      "createFailed": "We couldn't save your personal information yet.",
+      "answerRequiredQuestions": "Please answer every required question before continuing.",
+      "missingApplicationContext": "Your disclosure details are missing. Please restart the application from the beginning.",
+      "consentRequired": "Please acknowledge the criteria and authorize screening before continuing.",
+      "submitFailed": "We couldn't submit your application right now."
+    },
+    "disclosure": {
+      "title": "Criteria & disclosure review",
+      "body": "Please review the owner's acceptance criteria, screening checks, and rental disclosures before moving forward.",
+      "criteriaAcknowledgementLabel": "I reviewed the owner's acceptance criteria and the rental disclosures shown on this page.",
+      "screeningConsentLabel": "I authorize Ondo Real Estate and the property owner to run the disclosed screening checks for this application.",
+      "futureFeeNotice": "If this flow adds an application fee later, the fee disclosure and payment handoff will appear at this checkpoint before any payment is requested.",
+      "emptyCharges": "No fixed non-rent charges were disclosed for this listing.",
+      "emptyUseBasedCharges": "No use-based charge categories were disclosed for this listing.",
+      "emptyCriteria": "No additional owner criteria were listed for this property.",
+      "rent": "Rent",
+      "availability": "Availability",
+      "fixedCharges": "Known fixed non-rent charges",
+      "useBasedCharges": "Use-based charge categories",
+      "criteria": "Owner acceptance criteria",
+      "requiredChecks": "Required screening checks",
+      "feeCollectionStatus": "Application fee status",
+      "refundRecoveryInstructions": "Refund and report recovery information",
+      "ownerNotes": "Owner notes",
+      "continue": "Continue to personal information"
+    },
+    "personal": {
+      "title": "Personal information",
+      "subtitle": "Share the details needed to create your application record before screening begins.",
+      "continue": "Continue",
+      "saving": "Saving...",
+      "fields": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone",
+        "dateOfBirth": "Date of birth",
+        "currentAddress": "Current address",
+        "employer": "Employer",
+        "annualIncome": "Annual income",
+        "desiredMoveIn": "Desired move-in date"
+      },
+      "placeholders": {
+        "phone": "e.g. +1 (801) 555-0100",
+        "currentAddress": "Street, city, state, ZIP",
+        "employer": "Company or organization",
+        "annualIncome": "e.g. 75000"
+      }
+    },
+    "questions": {
+      "title": "Screening questions",
+      "subtitle": "Answer any custom questions the property owner added for this listing.",
+      "yes": "Yes",
+      "no": "No",
+      "required": "Required",
+      "continue": "Review application"
+    },
+    "review": {
+      "title": "Review your application",
+      "submit": "Submit application",
+      "submitting": "Submitting...",
+      "personalInfo": "Personal information",
+      "answers": "Screening answers",
+      "screeningChecks": "Screening checks",
+      "consentSummary": "Disclosure acknowledgement",
+      "disclosureConfirmed": "You confirmed the owner's criteria and authorized the disclosed screening checks.",
+      "emptyAnswer": "Not answered",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "employer": "Employer",
+        "income": "Income",
+        "moveIn": "Move-in date"
+      }
+    },
+    "sidebar": {
+      "title": "Application summary",
+      "rent": "Rent",
+      "availability": "Availability",
+      "screeningChecks": "Screening checks",
+      "criteria": "Criteria summary"
+    },
+    "requiredChecks": {
+      "credit": "Credit review",
+      "criminal": "Criminal history review",
+      "eviction": "Eviction history review",
+      "income": "Income verification",
+      "identity": "Identity verification",
+      "references": "Reference checks"
+    },
+    "affordability": {
+      "title": "Affordability check",
+      "requirement": "This property uses a minimum income-to-rent ratio of {{ratio}}x, which is about {{amount}} per year.",
+      "inputLabel": "Your annual income (USD)",
+      "placeholder": "e.g. 75000",
+      "meets": "You currently meet the requirement ({{ratio}}x ratio).",
+      "below": "You are below the requirement ({{ratio}}x ratio; need {{requiredRatio}}x)."
+    }
   }
 }

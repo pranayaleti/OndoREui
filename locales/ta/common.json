@@ -134,5 +134,278 @@
     "faq2A": "பணப் பரிவர்த்தனை இல்லை. Ondo RE தள அணுகலின் இலவச மாதங்கள் (24 வரை) மற்றும் போனஸ் சீட்டுப்போட்டி நுழைவுகள் சம்பாதிக்கிறீர்கள்.",
     "faq3Q": "எனது பரிந்துரை இணைப்பு எப்போது கிடைக்கும்?",
     "faq3A": "உங்கள் விண்ணப்பம் ஒப்புதல் பெற்ற பிறகு, உங்கள் தனித்துவமான குறியீட்டை மின்னஞ்சல் செய்வோம்."
+  },
+  "leadPopup": {
+    "title": "அடுத்த படியை இன்னும் எளிதாக்க விரும்புகிறீர்களா?",
+    "body": "உங்கள் பெயர் மற்றும் மின்னஞ்சலை பகிருங்கள். செயல்முறையை இன்னும் எளிமையாகவும் குறைந்த அழுத்தமாகவும் மாற்ற நாங்கள் உதவுவோம். இதை ஒரே முறை மட்டும் கேட்கிறோம், உங்கள் தகவலை எங்களால் ஒருபோதும் விற்கவோ பகிரவோ மாட்டோம்.",
+    "nameLabel": "பெயர்",
+    "namePlaceholder": "உங்கள் பெயர்",
+    "emailLabel": "மின்னஞ்சல்",
+    "emailPlaceholder": "you@example.com",
+    "submitCta": "தனிப்பயன் உதவி பெறுங்கள்",
+    "dismissCta": "இப்போது வேண்டாம்",
+    "submitting": "அனுப்பப்படுகிறது...",
+    "privacyNotice": "எங்கள் <privacyLink>தனியுரிமைக் கொள்கையை</privacyLink> படிக்கவும்.",
+    "successTitle": "உங்கள் விவரங்களை பகிர்ந்ததற்கு நன்றி.",
+    "successBody": "மேலும் தனிப்பயனாக்கப்பட்ட அடுத்த படியுடன் நாங்கள் விரைவில் தொடர்புகொள்வோம்.",
+    "submitError": "இந்த நேரத்தில் உங்கள் தகவலை சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+    "validation": {
+      "nameRequired": "தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்.",
+      "emailRequired": "தயவுசெய்து உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும்.",
+      "emailInvalid": "தயவுசெய்து சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்."
+    }
+  },
+  "demo": {
+    "bannerTitle": "Ondo demo hub ஐ திறக்கவும்",
+    "bannerSubtitle": "Walkthrough ஐ பாருங்கள், seeded credentials ஐ பயன்படுத்துங்கள், தயாரானபோது live sandbox க்கு செல்லுங்கள்.",
+    "heroKicker": "Self-serve demo",
+    "heroTitle": "ஒரு அழைப்பை பதிவு செய்வதற்கு முன் Manager, Owner, Tenant அனுபவத்தைப் பாருங்கள்.",
+    "heroBody": "இந்த பக்கம் Ondo demo environment க்கு public நுழைவாயில். பதிவு செய்யப்பட்ட walkthrough ஐ பார்க்கவும், seeded login credentials ஐ சரிபார்க்கவும், demo app link கிடைக்கும் போது live sandbox ஐ தொடங்கவும்.",
+    "openLiveDemo": "Live demo திறக்கவும்",
+    "bookGuidedDemo": "Guided demo பதிவு செய்யவும்",
+    "heroAvailability": "இந்த sandbox seeded sample data ஐ பயன்படுத்துகிறது மற்றும் நீங்கள் பாதுகாப்பாக ஆராய்வதற்காக காலம்தோறும் reset ஆகும்.",
+    "videoTitle": "Walkthrough வீடியோ",
+    "videoBody": "Manager, Owner, Tenant workflows பற்றிய வேகமான overview க்காக இங்கே தொடங்குங்கள்.",
+    "videoEmbedTitle": "Ondo demo walkthrough வீடியோ",
+    "videoFallbackTitle": "Walkthrough வீடியோ விரைவில் வரும்",
+    "videoFallbackBody": "இந்தப் பக்கத்தில் பதிவு செய்யப்பட்ட demo walkthrough ஐ காட்ட NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL ஐ சேர்க்கவும்.",
+    "credentialsTitle": "Seed செய்யப்பட்ட demo roles ல் ஒன்றைப் பயன்படுத்துங்கள்",
+    "credentialsBody": "ஒவ்வொரு account கும் அதே demo environment இல் வேறு workspace திறக்கப்படும்.",
+    "openRoleLogin": "Demo login திறக்கவும்",
+    "galleryTitle": "நீங்கள் காட்டப்போகும் workflows preview",
+    "galleryBody": "இந்த preview cards பதிவு செய்யப்பட்ட demo மற்றும் screenshot gallery இல் காட்ட வேண்டிய screens ஐ குறிக்கின்றன.",
+    "previewEyebrow": "Screenshot focus",
+    "previewLiveSlot": "Demo view",
+    "sandboxTitle": "Sandbox பயன்பாட்டு குறிப்புகள்",
+    "sandboxBody": "இந்த workspace ஐ exploration க்காக மட்டும் பயன்படுத்துங்கள். இதில் sample data உள்ளது, இது முன்னறிவிப்பு இல்லாமல் reset ஆகலாம், மேலும் தனிப்பட்ட documents அல்லது உண்மையான payment தகவலை இங்கே ஒருபோதும் வைக்கக் கூடாது.",
+    "guidedKicker": "Guided walkthrough",
+    "guidedTitle": "உங்கள் workflow க்கு ஏற்ப demo ஐ நாங்கள் அமைக்க வேண்டுமா?",
+    "guidedBody": "கீழே சில விவரங்களை பகிருங்கள். உங்கள் portfolio, operations அல்லது tenant experience கேள்விகளின் அடிப்படையில் live walkthrough ஐ அமைப்போம்.",
+    "labels": {
+      "email": "மின்னஞ்சல்",
+      "password": "கடவுச்சொல்"
+    },
+    "form": {
+      "firstNameLabel": "முதல் பெயர் *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "கடைசி பெயர் *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "மின்னஞ்சல் *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "தொலைபேசி",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "நான்...",
+      "unitsLabel": "அலகுகளின் எண்ணிக்கை",
+      "unitsPlaceholder": "எ.கா. 5",
+      "timeLabel": "விருப்பமான நேரம்",
+      "timePlaceholder": "எ.கா. வேலைநாட்களின் காலை",
+      "success": "நன்றி! உங்கள் demo ஐ உறுதிப்படுத்த 1 வேலை நாளுக்குள் தொடர்புகொள்வோம்.",
+      "error": "ஏதோ தவறாகிவிட்டது. எங்களுக்கு மின்னஞ்சல் அனுப்பவும்",
+      "errorSuffix": "அல்லது மீண்டும் முயற்சிக்கவும்.",
+      "submitting": "அனுப்பப்படுகிறது...",
+      "submit": "என் guided demo ஐ பதிவு செய்க",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investor",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "ஒரே இடத்தில் portfolio visibility, leasing, maintenance, reporting தேவைப்படும் operators க்கான சிறந்த தேர்வு.",
+        "feature1": "ஒரே dashboard இலிருந்து properties, leads, rent collection ஐ கண்காணிக்கவும்.",
+        "feature2": "tool மாற்றாமல் maintenance queues, messages, owner updates ஐ பார்க்கவும்.",
+        "feature3": "Portfolio issues மற்றும் next actions ஐ assistant மூலம் சுருக்கவும்.",
+        "previewTitle": "Manager workspace",
+        "previewHeadline": "Portfolio control center",
+        "previewBody": "தினசரி operations, conversations, financial follow-up view ஐ highlight செய்யவும்.",
+        "stat1Label": "Access",
+        "stat1Value": "Multi-property",
+        "stat2Label": "Focus",
+        "stat2Value": "Ops visibility",
+        "previewItem1": "Property health மற்றும் occupancy",
+        "previewItem2": "Maintenance triage மற்றும் follow-up",
+        "previewItem3": "AI assistant மற்றும் reports"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "Portfolio visibility, documents, maintenance updates, financial reporting விரும்பும் owners க்கு இது பொருத்தமானது.",
+        "feature1": "உங்கள் properties, documents, occupancy ஐ ஒரே பார்வையில் காணுங்கள்.",
+        "feature2": "Maintenance progress, payment history, owner-facing reports ஐ கண்காணிக்கவும்.",
+        "feature3": "Manual report க்காக காத்திருக்காமல் portfolio கேள்விகளுக்கு assistant மூலம் பதில் பெறுங்கள்.",
+        "previewTitle": "Owner workspace",
+        "previewHeadline": "Owner reporting view",
+        "previewBody": "Spreadsheet அல்லது inbox threads இன்றி owners எப்படி தகவலறிந்து இருப்பார்கள் என்பதை காட்டுங்கள்.",
+        "stat1Label": "Access",
+        "stat1Value": "Owner portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Portfolio summary மற்றும் documents",
+        "previewItem2": "Maintenance visibility",
+        "previewItem3": "Payments மற்றும் reports"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "Payments, documents, maintenance, messages, self-service support தேவைப்படும் residents க்கு இது சரியானது.",
+        "feature1": "ஒரே portal இல் rent செலுத்துங்கள், balances பாருங்கள், receipts சேமியுங்கள்.",
+        "feature2": "Maintenance requests அனுப்பி, குறைந்த back-and-forth உடன் status updates ஐ பின்பற்றுங்கள்.",
+        "feature3": "அதே login இலிருந்து documents, messages, personal settings ஐத் திறக்கவும்.",
+        "previewTitle": "Tenant workspace",
+        "previewHeadline": "Resident self-service",
+        "previewBody": "Office க்கு அழைக்காமல் tenants சாதாரண பணிகளை எப்படிச் செய்கிறார்கள் என்பதை இந்த view மூலம் காட்டுங்கள்.",
+        "stat1Label": "Access",
+        "stat1Value": "Tenant portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Self-service",
+        "previewItem1": "Payments மற்றும் receipts",
+        "previewItem2": "Maintenance requests",
+        "previewItem3": "Messages மற்றும் documents"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "யூட்டாவில் முதலீடு செய்ய நாங்கள் உங்களுக்கு உதவுகிறோம்",
+      "title": "முதலீடு செய்ய நாட்டின் சிறந்த இடங்களில் <highlight>யூட்டா</highlight> ஏன் ஒன்றாக இருக்கிறது",
+      "body": "யூட்டாவின் நிலையான பொருளாதாரம், வலுவான உள்ளூர் மக்கள்தொகை வளர்ச்சி மற்றும் 2034 குளிர்கால ஒலிம்பிக் ஊக்கவிளைவு ஆகியவை ரியல் எஸ்டேட் முதலீட்டாளர்களுக்கு நீண்டகால முன்னேற்றத்தை உருவாக்குகின்றன."
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "உங்கள் விண்ணப்பம் ஏற்றப்படுகிறது",
+      "body": "விண்ணப்ப இணைப்பையும் சொத்து விவரங்களையும் நாம் சரிபார்த்துக் கொண்டிருக்கிறோம்."
+    },
+    "error": {
+      "title": "விண்ணப்ப இணைப்பு கிடைக்கவில்லை"
+    },
+    "submitted": {
+      "title": "விண்ணப்பம் சமர்ப்பிக்கப்பட்டது",
+      "body": "{{property}} க்கான உங்கள் விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.",
+      "followUp": "சொத்து குழு உங்கள் நிலையைப் புதுப்பிக்கும் போது நாங்கள் உங்களுக்கு மின்னஞ்சல் அனுப்புவோம்."
+    },
+    "progressLabel": "விண்ணப்ப முன்னேற்றம்",
+    "progress": {
+      "property": "சொத்து",
+      "disclosure": "அளவுகோல்கள் மற்றும் வெளிப்படுத்தல்கள்",
+      "personal": "தனிப்பட்ட தகவல்",
+      "questions": "கேள்விகள்",
+      "review": "சரிபார்ப்பு"
+    },
+    "property": {
+      "description": "வெளிப்படுத்தல் மற்றும் விண்ணப்ப படிகளுக்கு செல்லும் முன் வாடகை விவரங்களைப் பாருங்கள்.",
+      "start": "அளவுகோல்களைப் பார்த்து தொடரவும்",
+      "bedrooms": "படுக்கையறைகள்",
+      "bathrooms": "குளியலறைகள்",
+      "sqft": "சதுர அடி",
+      "monthlyRent": "மாத வாடகை",
+      "availability": "கிடைக்கும் நிலை"
+    },
+    "messages": {
+      "invalidLink": "இந்த விண்ணப்ப இணைப்பு செல்லுபடியாகாது அல்லது காலாவதியானது.",
+      "validationFailed": "இந்த விண்ணப்ப இணைப்பை இப்போது சரிபார்க்க முடியவில்லை.",
+      "createFailed": "உங்கள் தனிப்பட்ட தகவலை இன்னும் சேமிக்க முடியவில்லை.",
+      "answerRequiredQuestions": "தொடர்வதற்கு முன் தேவையான எல்லா கேள்விகளுக்கும் பதிலளிக்கவும்.",
+      "missingApplicationContext": "உங்கள் வெளிப்படுத்தல் விவரங்கள் இல்லை. விண்ணப்பத்தை தொடக்கம் முதல் மீண்டும் தொடங்கவும்.",
+      "consentRequired": "தொடர்வதற்கு முன் அளவுகோல்களை ஒப்புக்கொண்டு ஸ்கிரீனிங்கிற்கு அனுமதி வழங்கவும்.",
+      "submitFailed": "உங்கள் விண்ணப்பத்தை இப்போது சமர்ப்பிக்க முடியவில்லை."
+    },
+    "disclosure": {
+      "title": "அளவுகோல்கள் மற்றும் வெளிப்படுத்தல்களின் சரிபார்ப்பு",
+      "body": "முன்னேறுவதற்கு முன் உரிமையாளரின் ஏற்றுக்கொள்ளும் அளவுகோல்கள், ஸ்கிரீனிங் சோதனைகள், மற்றும் வாடகை வெளிப்படுத்தல்களைப் பாருங்கள்.",
+      "criteriaAcknowledgementLabel": "இந்தப் பக்கத்தில் காட்டப்பட்ட உரிமையாளரின் ஏற்றுக்கொள்ளும் அளவுகோல்கள் மற்றும் வாடகை வெளிப்படுத்தல்களை நான் பார்த்துள்ளேன்.",
+      "screeningConsentLabel": "இந்த விண்ணப்பத்திற்காக வெளிப்படுத்தப்பட்ட ஸ்கிரீனிங் சோதனைகளை நடத்த Ondo Real Estate மற்றும் உரிமையாளருக்கு நான் அனுமதி அளிக்கிறேன்.",
+      "futureFeeNotice": "இந்த ஓட்டத்தில் பின்னர் விண்ணப்பக் கட்டணம் சேர்க்கப்பட்டால், எந்தக் கட்டணமும் கேட்கப்படும் முன் அதன் வெளிப்படுத்தலும் கட்டணப் படியும் இங்கே தோன்றும்.",
+      "emptyCharges": "இந்த அறிவிப்பிற்கு வாடகை அல்லாத நிரந்தர கட்டணங்கள் எதுவும் வெளிப்படுத்தப்படவில்லை.",
+      "emptyUseBasedCharges": "இந்த அறிவிப்பிற்கு பயன்பாடு அடிப்படையிலான கட்டண வகைகள் வெளிப்படுத்தப்படவில்லை.",
+      "emptyCriteria": "இந்த சொத்திற்காக கூடுதல் உரிமையாளர் அளவுகோல்கள் பட்டியலிடப்படவில்லை.",
+      "rent": "வாடகை",
+      "availability": "கிடைக்கும் நிலை",
+      "fixedCharges": "தெரிந்த நிரந்தர வாடகை அல்லாத கட்டணங்கள்",
+      "useBasedCharges": "பயன்பாடு அடிப்படையிலான கட்டண வகைகள்",
+      "criteria": "உரிமையாளரின் ஏற்றுக்கொள்ளும் அளவுகோல்கள்",
+      "requiredChecks": "தேவையான ஸ்கிரீனிங் சோதனைகள்",
+      "feeCollectionStatus": "விண்ணப்பக் கட்டண நிலை",
+      "refundRecoveryInstructions": "பணத்தைத் திருப்பிப் பெறுதல் மற்றும் அறிக்கைகளைப் பெறுதல் பற்றிய தகவல்",
+      "ownerNotes": "உரிமையாளர் குறிப்புகள்",
+      "continue": "தனிப்பட்ட தகவலுக்கு தொடரவும்"
+    },
+    "personal": {
+      "title": "தனிப்பட்ட தகவல்",
+      "subtitle": "ஸ்கிரீனிங் தொடங்குவதற்கு முன் உங்கள் விண்ணப்பப் பதிவை உருவாக்க தேவையான விவரங்களை பகிரவும்.",
+      "continue": "தொடரவும்",
+      "saving": "சேமிக்கப்படுகிறது...",
+      "fields": {
+        "firstName": "முதல் பெயர்",
+        "lastName": "கடைசி பெயர்",
+        "email": "மின்னஞ்சல்",
+        "phone": "தொலைபேசி",
+        "dateOfBirth": "பிறந்த தேதி",
+        "currentAddress": "தற்போதைய முகவரி",
+        "employer": "நியமிப்பாளர்",
+        "annualIncome": "ஆண்டு வருமானம்",
+        "desiredMoveIn": "விரும்பிய குடியேறும் தேதி"
+      },
+      "placeholders": {
+        "phone": "எ.கா. +1 (801) 555-0100",
+        "currentAddress": "தெரு, நகரம், மாநிலம், ZIP",
+        "employer": "நிறுவனம் அல்லது அமைப்பு",
+        "annualIncome": "எ.கா. 75000"
+      }
+    },
+    "questions": {
+      "title": "ஸ்கிரீனிங் கேள்விகள்",
+      "subtitle": "இந்த அறிவிப்பிற்காக உரிமையாளர் சேர்த்த தனிப்பயன் கேள்விகளுக்கு பதிலளிக்கவும்.",
+      "yes": "ஆம்",
+      "no": "இல்லை",
+      "required": "கட்டாயம்",
+      "continue": "விண்ணப்பத்தைச் சரிபார்க்கவும்"
+    },
+    "review": {
+      "title": "உங்கள் விண்ணப்பத்தைச் சரிபார்க்கவும்",
+      "submit": "விண்ணப்பத்தை சமர்ப்பிக்கவும்",
+      "submitting": "சமர்ப்பிக்கப்படுகிறது...",
+      "personalInfo": "தனிப்பட்ட தகவல்",
+      "answers": "ஸ்கிரீனிங் பதில்கள்",
+      "screeningChecks": "ஸ்கிரீனிங் சோதனைகள்",
+      "consentSummary": "வெளிப்படுத்தல் உறுதிப்படுத்தல்",
+      "disclosureConfirmed": "உரிமையாளரின் அளவுகோல்களை நீங்கள் உறுதிப்படுத்தி வெளிப்படுத்தப்பட்ட ஸ்கிரீனிங் சோதனைகளுக்கு அனுமதி அளித்துள்ளீர்கள்.",
+      "emptyAnswer": "பதில் இல்லை",
+      "fields": {
+        "name": "பெயர்",
+        "email": "மின்னஞ்சல்",
+        "phone": "தொலைபேசி",
+        "employer": "நியமிப்பாளர்",
+        "income": "வருமானம்",
+        "moveIn": "குடியேறும் தேதி"
+      }
+    },
+    "sidebar": {
+      "title": "விண்ணப்ப சுருக்கம்",
+      "rent": "வாடகை",
+      "availability": "கிடைக்கும் நிலை",
+      "screeningChecks": "ஸ்கிரீனிங் சோதனைகள்",
+      "criteria": "அளவுகோல் சுருக்கம்"
+    },
+    "requiredChecks": {
+      "credit": "கடன் மதிப்பீட்டு ஆய்வு",
+      "criminal": "குற்றப் பின்னணி ஆய்வு",
+      "eviction": "வெளியேற்ற வரலாறு ஆய்வு",
+      "income": "வருமான சரிபார்ப்பு",
+      "identity": "அடையாளச் சரிபார்ப்பு",
+      "references": "பரிந்துரைச் சோதனைகள்"
+    },
+    "affordability": {
+      "title": "வசதித் திறன் சரிபார்ப்பு",
+      "requirement": "இந்த சொத்து குறைந்தபட்ச வருமானம்-வாடகை விகிதமான {{ratio}}x ஐ பயன்படுத்துகிறது, இது ஆண்டுக்கு சுமார் {{amount}} ஆகும்.",
+      "inputLabel": "உங்கள் ஆண்டு வருமானம் (USD)",
+      "placeholder": "எ.கா. 75000",
+      "meets": "நீங்கள் தற்போது தேவையை பூர்த்தி செய்கிறீர்கள் ({{ratio}}x விகிதம்).",
+      "below": "நீங்கள் தேவைக்கு கீழே உள்ளீர்கள் ({{ratio}}x விகிதம்; {{requiredRatio}}x தேவை)."
+    }
   }
 }

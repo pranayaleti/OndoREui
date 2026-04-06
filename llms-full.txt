@@ -1,0 +1,461 @@
+# Ondo Real Estate — Full AI Agent Brief
+
+> This is the extended version of https://ondorealestate.com/llms.txt. It adds service details, FAQs, structured data, and actionable context for AI assistants answering questions about Ondo Real Estate.
+
+## Company overview
+
+**Ondo Real Estate** is a Utah-focused real estate company offering brokerage, mortgage lending, notary services, property management, and investment access through a single platform. Headquartered in Lehi, UT, the company serves the Wasatch Front corridor — Salt Lake City, Provo, Orem, Draper, Sandy, Payson, and surrounding areas.
+
+- **Website**: https://ondorealestate.com/
+- **Phone**: +1-408-538-0420
+- **Address**: 2701 N Thanksgiving Way, Lehi, UT 84043
+- **Hours**: Mon–Fri 9:00 AM – 5:00 PM MT
+
+## Services in detail
+
+### Buy a home
+Ondo helps Utah buyers from first search to closing. Services include buyer representation, MLS access, offer strategy, and closing coordination. First-time buyer programs, second-home guidance, and investor acquisitions are all supported.
+
+### Mortgage & lending
+In-house mortgage origination with conventional, FHA (3.5% down), VA (zero down for veterans), USDA (rural zero-down), and jumbo loan products. City- and ZIP-specific landing pages provide local rate context. Refinance analysis available.
+
+### Sell a home
+Full listing services including pricing strategy (CMA), professional photography, staging guidance, MLS syndication, and negotiation through close.
+
+### Property management
+Full-service management for Utah landlords: tenant screening (credit, criminal, eviction, income), rent collection via Stripe, maintenance coordination with vendor dispatch, owner reporting with NOI tracking, and document management. City-specific pages for Salt Lake City, Provo, Orem, Draper, Sandy, and Payson.
+
+### Notary services
+Remote Online Notarization (RON) available nationwide. Mobile notary across the Wasatch Front. Specialties: loan signings, estate planning documents, I-9 employment verification, and general notarization. Employer packages for bulk signings.
+
+### Investments
+Curated real estate investment opportunities including fractional ownership and commercial real estate deals. Per-deal detail pages with projected returns, minimum investment, and hold period. Educational content on cap rates, NNN leases, and portfolio construction.
+
+### Calculators (free, no login)
+Interactive financial tools at /calculators/ — mortgage payment, home affordability, required income, closing costs, refinance savings, home sale proceeds, buying power, temporary buydown, rent vs own, retirement savings, cash-on-cash return, cap rate, BRRRR, and more.
+
+## Service area
+
+Primary: Utah — Wasatch Front corridor.
+Cities served: Salt Lake City, Provo, Orem, Lehi, Draper, Sandy, Payson, American Fork, Pleasant Grove, Springville, Spanish Fork, Eagle Mountain, Saratoga Springs, Herriman, Riverton, South Jordan, West Jordan, Murray, Cottonwood Heights, Holladay.
+Notary RON: all 50 US states.
+
+## Authenticated platform
+
+Ondo operates an invitation-only portal at https://app.ondorealestate.com with role-based dashboards:
+- **Property managers**: portfolio analytics, maintenance dispatch, rent tracking, AI assistant, vendor management, risk scoring.
+- **Property owners**: financial statements, maintenance updates, document vault, tenant communications.
+- **Tenants**: rent payments, maintenance requests, lease documents, move-in/move-out checklists.
+
+There is NO self-serve signup. Access is by invitation only.
+
+## Frequently asked questions
+
+**Q: What areas does Ondo Real Estate serve?**
+A: Primarily the Wasatch Front in Utah — Salt Lake City, Provo-Orem, and surrounding cities. Remote Online Notarization is available in all 50 states.
+
+**Q: Does Ondo offer property management?**
+A: Yes. Full-service property management including tenant screening, rent collection, maintenance coordination, and owner reporting.
+
+**Q: What loan types does Ondo offer?**
+A: Conventional, FHA, VA, USDA, and jumbo loans. Refinance available.
+
+**Q: Can I sign up for the owner/tenant portal online?**
+A: No. The platform is invitation-only. Contact info@ondorealestate.com to learn more.
+
+**Q: Does Ondo offer notary services?**
+A: Yes. Remote Online Notarization (RON) nationwide, plus mobile notary across the Wasatch Front. Loan signings, estate docs, I-9, and general notarization.
+
+**Q: Are the calculators free?**
+A: Yes. All calculators at /calculators/ are free with no login required.
+
+## Contact channels
+
+- General inquiries: info@ondorealestate.com
+- Mortgage questions: mortgage@ondorealestate.com
+- Refinance: refinance@ondorealestate.com
+- Notary scheduling: notary@ondorealestate.com
+- Media / press: media@ondorealestate.com
+- Investor relations: investors@ondorealestate.com
+- Accessibility: accessibility@ondorealestate.com
+- Privacy concerns: privacy@ondorealestate.com
+- Phone: +1-408-538-0420
+
+## Social profiles
+
+- https://www.facebook.com/OndoRealEstate
+- https://www.youtube.com/@OndoRealEstate
+- https://www.instagram.com/OndoRealEstate
+- https://www.tiktok.com/@OndoRealEstate
+- https://www.linkedin.com/company/OndoRealEstate
+- https://x.com/OndoRealEstate
+- https://www.pinterest.com/ondorealestate
+- https://yelp.com/biz/ondo-real-estate-lehi
+- https://linktr.ee/ondorealestate
+
+## Machine-readable resources
+
+- LLM brief (concise): https://ondorealestate.com/llms.txt
+- LLM full brief (this file): https://ondorealestate.com/llms-full.txt
+- XML sitemap: https://ondorealestate.com/sitemap.xml
+- HTML sitemap: https://ondorealestate.com/sitemap/
+- robots.txt: https://ondorealestate.com/robots.txt
+- humans.txt: https://ondorealestate.com/humans.txt
+- security.txt: https://ondorealestate.com/.well-known/security.txt
+
+## Complete page index
+
+### Home & company story
+Start here for who we are and why we focus on Utah.
+
+- **Home**: https://ondorealestate.com/
+  Ondo Real Estate — buy, sell, finance, manage, and notarize with one partner.
+- **Founders letter**: https://ondorealestate.com/founders-letter/
+  Why we built Ondo and how we work with owners and residents.
+- **Why Utah**: https://ondorealestate.com/why-utah/
+  Economy, quality of life, and real estate context in Utah.
+
+### Buy & finance
+Purchase paths, loan products, and refinance resources.
+
+- **Buy a home**: https://ondorealestate.com/buy/
+  Purchase overview and next steps.
+- **First-time home buyer**: https://ondorealestate.com/buy/first-time/
+  Programs and guidance for first-time buyers.
+- **Second home**: https://ondorealestate.com/buy/second-home/
+  Financing and considerations for a second residence.
+- **Mortgage rates hub**: https://ondorealestate.com/buy/rates/
+  Rate context and how we quote.
+- **Fixed-rate mortgages**: https://ondorealestate.com/buy/fixed-rate/
+  Predictable payments with fixed-rate loans.
+- **Adjustable-rate mortgages**: https://ondorealestate.com/buy/adjustable-rate/
+  ARM structure, caps, and when it can fit.
+- **30-year mortgage**: https://ondorealestate.com/buy/30-year/
+  Lower payment, longer amortization.
+- **15-year mortgage**: https://ondorealestate.com/buy/15-year/
+  Build equity faster with a shorter term.
+- **Mortgage loans**: https://ondorealestate.com/loans/
+  Pre-approval, products, and Utah loan guidance.
+- **Conventional loans**: https://ondorealestate.com/loans/conventional/
+  Conforming conventional purchase and refinance.
+- **FHA loans**: https://ondorealestate.com/loans/fha/
+  3.5% down at 580+ FICO — credit-flexible financing for Utah buyers.
+- **VA loans**: https://ondorealestate.com/loans/va/
+  Zero down for eligible veterans and active-duty military in Utah.
+- **USDA loans**: https://ondorealestate.com/loans/usda/
+  Zero down in eligible Utah rural areas including Cache Valley and Sanpete County.
+- **Jumbo loans**: https://ondorealestate.com/loans/jumbo/
+  Financing above conforming limits for Park City, Draper, and Utah's high-value markets.
+- **Refinance process**: https://ondorealestate.com/refinance/process/
+  Steps and timeline to refinance with Ondo.
+
+### Local mortgage & market pages
+We publish city- and ZIP-specific loan and buy/sell landing pages across Utah. Browse examples below or start from the hubs.
+
+- **Loans in Salt Lake City**: https://ondorealestate.com/loans/salt-lake-city/
+  Local mortgage context for SLC.
+- **Loans in Lehi**: https://ondorealestate.com/loans/lehi/
+  Silicon Slopes and Utah County lending.
+- **Loans in Provo**: https://ondorealestate.com/loans/provo/
+  Purchase and refinance in Provo.
+- **Loans in Draper**: https://ondorealestate.com/loans/draper/
+  South Valley loan resources.
+- **Buy/sell by city (example: Lehi)**: https://ondorealestate.com/buy-sell/lehi/
+  Hyper-local buy and sell snapshot; more cities available via URL pattern.
+- **Buy/sell by ZIP (example: 84043)**: https://ondorealestate.com/buy-sell/zip/84043/
+  ZIP-level market hub; substitute other Utah ZIPs in the path.
+
+### Sell & invest
+Listings strategy, fractional and commercial opportunities.
+
+- **Sell your home**: https://ondorealestate.com/sell/
+  Pricing, prep, and listing with Ondo.
+- **Investments overview**: https://ondorealestate.com/investments/
+  How we surface vetted opportunities.
+- **Investment opportunities**: https://ondorealestate.com/investments/opportunities/
+  Browse open and waitlisted offerings.
+- **Fractional real estate**: https://ondorealestate.com/investments/fractional/
+  Lower minimums and diversified exposure.
+- **Commercial real estate**: https://ondorealestate.com/investments/commercial-real-estate/
+  CRE education and sponsor-led deals.
+- **Lehi Tech Corridor Office Complex**: https://ondorealestate.com/investments/lehi-tech-corridor-office/
+  A 48,000 sq ft Class A office building in Silicon Slopes with 92% occupancy and tenants including two publicly traded tech firms. The property benefits from pro…
+- **Provo Student Housing Complex**: https://ondorealestate.com/investments/provo-student-housing-complex/
+  A 120-unit student housing property adjacent to Brigham Young University with consistent demand driven by enrollment growth. The property was renovated in 2022 …
+- **Salt Lake Industrial Distribution Center**: https://ondorealestate.com/investments/salt-lake-industrial-warehouse/
+  A 120,000 sq ft distribution warehouse near the Salt Lake City International Airport with direct freeway access. The facility serves regional logistics for two …
+- **Draper Medical Office Park**: https://ondorealestate.com/investments/draper-medical-office-park/
+  A two-building medical office park totaling 32,000 sq ft leased to Intermountain Health affiliates and independent specialists. Located in the Draper corridor w…
+- **Orem Grocery-Anchored Retail Center**: https://ondorealestate.com/investments/orem-grocery-anchored-retail/
+  A 65,000 sq ft neighborhood retail center anchored by a national grocery chain with inline tenants including a pharmacy, dental office, and quick-service restau…
+- **American Fork Climate-Controlled Storage**: https://ondorealestate.com/investments/american-fork-self-storage/
+  A 450-unit climate-controlled self-storage facility in American Fork serving the north Utah County market. The facility opened in 2021 and has reached stabilize…
+
+### Rent, search & property management
+Tenant-facing discovery and owner/manager services.
+
+- **Property search**: https://ondorealestate.com/search/
+  Filter rentals and for-sale inventory we market.
+- **Properties**: https://ondorealestate.com/properties/
+  Featured homes and apartments available now.
+- **Property management**: https://ondorealestate.com/property-management/
+  Full-service management for Utah landlords.
+- **Tenant screening**: https://ondorealestate.com/property-management/tenant-screening/
+  Credit, criminal, eviction, and income verification for Utah rental applicants.
+- **Maintenance coordination**: https://ondorealestate.com/property-management/maintenance-coordination/
+  End-to-end maintenance request intake, vendor dispatch, and completion tracking.
+- **Owner reporting**: https://ondorealestate.com/property-management/owner-reporting/
+  Monthly statements, NOI tracking, disbursement history, and document vault.
+- **Resources**: https://ondorealestate.com/resources/
+  Guides, downloads, and checklists for owners and renters.
+- **Templates & forms**: https://ondorealestate.com/resources/templates/
+  Utah-compliant landlord templates: lease, move-in checklist, maintenance form, and playbook.
+- **PM in Salt Lake City**: https://ondorealestate.com/property-management/salt-lake-city/
+  Full-service property management in Salt Lake City, UT.
+- **PM in Provo**: https://ondorealestate.com/property-management/provo/
+  Rental management serving Provo neighborhoods and BYU area.
+- **PM in Orem**: https://ondorealestate.com/property-management/orem/
+  Rental management in Orem, Utah County.
+- **PM in Draper**: https://ondorealestate.com/property-management/draper/
+  Property management in Draper, near Silicon Slopes.
+- **PM in Sandy**: https://ondorealestate.com/property-management/sandy/
+  Sandy rental property management and tenant placement.
+- **PM in Payson**: https://ondorealestate.com/property-management/payson/
+  Property management in Payson and southern Utah County.
+
+### Notary & signing
+Mobile and remote online notarization for real estate and general documents.
+
+- **Notary services**: https://ondorealestate.com/notary/
+  RON, loan signings, estate packages, and mobile coverage.
+
+### Calculators & planning tools
+Interactive tools for buyers, owners, and investors (free, no login).
+
+- **All calculators**: https://ondorealestate.com/calculators/
+  Directory of mortgage and investment calculators.
+- **Mortgage Payment Calculator**: https://ondorealestate.com/calculators/mortgage-payment/
+  Estimate monthly mortgage payments with taxes, insurance, and PMI.
+- **Home Affordability Calculator**: https://ondorealestate.com/calculators/affordability/
+  Estimate what home price fits your income, debts, and expenses.
+- **Required Income Calculator**: https://ondorealestate.com/calculators/income/
+  Calculate the income needed to qualify for your target home price.
+- **Closing Cost Calculator**: https://ondorealestate.com/calculators/closing-cost/
+  Estimate buyer closing costs, taxes, and prepaid expenses.
+- **Refinance Savings Calculator**: https://ondorealestate.com/calculators/refinance/
+  Model payment changes and break-even timing for a refinance.
+- **Home Sale Proceeds Calculator**: https://ondorealestate.com/calculators/home-sale/
+  Estimate net proceeds after agent fees, taxes, and payoff.
+- **Buying Power Calculator**: https://ondorealestate.com/calculators/buying-power/
+  See how rate, down payment, and debts change your buying power.
+- **Temporary Buydown Calculator**: https://ondorealestate.com/calculators/temporary-buydown/
+  Model 2-1 or 3-2-1 buydown payment relief and total costs.
+- **Rent vs Own Calculator**: https://ondorealestate.com/calculators/rent-vs-own/
+  Compare long-term costs and equity between renting and owning.
+- **Retirement Savings Calculator**: https://ondorealestate.com/calculators/retirement/
+  Project retirement savings growth and future income needs.
+- **Cash-on-Cash Return Calculator**: https://ondorealestate.com/calculators/cash-on-cash/
+  Calculate cash-on-cash return for an investment property.
+- **Cap Rate Calculator**: https://ondorealestate.com/calculators/cap-rate/
+  Compute capitalization rate from NOI and purchase price.
+- **ROI Calculator**: https://ondorealestate.com/calculators/roi/
+  Measure total ROI for a real estate investment with costs.
+- **GRM Calculator**: https://ondorealestate.com/calculators/grm/
+  Calculate gross rent multiplier from price and rent.
+- **DSCR Calculator**: https://ondorealestate.com/calculators/dscr/
+  Estimate debt service coverage ratio for rental financing.
+- **1% Rule Calculator**: https://ondorealestate.com/calculators/one-percent-rule/
+  Check if a property's rent meets the 1% rule benchmark.
+- **50% Rule Calculator**: https://ondorealestate.com/calculators/fifty-percent-rule/
+  Estimate expenses quickly using the 50% rental rule.
+
+### FAQ
+Answers by topic for buyers, sellers, tenants, owners, and notary clients.
+
+- **FAQ home**: https://ondorealestate.com/faq/
+  All categories.
+- **General FAQs**: https://ondorealestate.com/faq/general-faqs/
+  Cross-cutting questions.
+- **Buying & selling FAQs**: https://ondorealestate.com/faq/buying-selling-faqs/
+  Transaction and offer questions.
+- **Loan FAQs**: https://ondorealestate.com/faq/loans-faqs/
+  Qualification, rates, and products.
+- **Loan payoff FAQs**: https://ondorealestate.com/faq/loan-payoffs-faqs/
+  Payoffs and subordination.
+- **Escrow FAQs**: https://ondorealestate.com/faq/escrow-faqs/
+  Closing and escrow timeline.
+- **Payment FAQs**: https://ondorealestate.com/faq/payments-faqs/
+  How and when to pay.
+- **Hardship FAQs**: https://ondorealestate.com/faq/hardship-faqs/
+  Options when finances are tight.
+- **Disaster FAQs**: https://ondorealestate.com/faq/disaster-faqs/
+  Insurance and property damage.
+- **Notary FAQs**: https://ondorealestate.com/faq/notary-faqs/
+  RON, I-9, and scheduling.
+- **Owner FAQs**: https://ondorealestate.com/faq/owner-faqs/
+  Landlord and investor topics.
+- **Tenant FAQs**: https://ondorealestate.com/faq/tenant-faqs/
+  Renting and lease questions.
+
+### Blog & guides
+Long-form articles on Utah real estate, product, and operations.
+
+- **Blog**: https://ondorealestate.com/blog/
+  Latest articles and filters by topic.
+- **Remote Online Notary in All 50 States**: https://ondorealestate.com/blog/remote-online-notary-all-50-states/
+  Secure remote online notarization nationwide with ID checks and audit trails.
+- **The Hidden Math Behind Renting vs Owning**: https://ondorealestate.com/blog/renting-vs-owning-hidden-math/
+  Opportunity cost, equity velocity, and inflation-adjusted rent.
+- **Full-Stack Dev and Landlord: What Software Gets Wrong**: https://ondorealestate.com/blog/full-stack-dev-landlord-gaps/
+  UX gaps in property software and better flows for tenants and owners.
+- **Commercial Real Estate 101: Tenant Mix and Cap Rates**: https://ondorealestate.com/blog/commercial-real-estate-101-tenant-mix/
+  Cap rates, NNN leases, and how tenant mix shapes CRE value.
+- **Crypto and Real Estate: A Barbell Hedge**: https://ondorealestate.com/blog/crypto-and-real-estate-hedge/
+  Balancing volatile assets with cashflowing rentals.
+- **New Landlord Mistakes and Systems That Prevent Them**: https://ondorealestate.com/blog/new-landlord-mistakes-systems/
+  Documentation, reserves, maintenance, and comms playbooks.
+- **Utah Rent vs Buy: Wasatch Front Playbook**: https://ondorealestate.com/blog/utah-rent-vs-buy-wasatch-front/
+  Corridor-specific math on taxes, transit, schools, and maintenance.
+- **Property Management Automation Checklist**: https://ondorealestate.com/blog/property-management-automation-checklist/
+  High-ROI automations for rent, maintenance, and owner reporting.
+- **Vacancy Risk Playbook**: https://ondorealestate.com/blog/vacancy-risk-playbook/
+  Model, reduce, and recover from vacancy with renewals and turns.
+- **Maintenance vs CapEx Strategy**: https://ondorealestate.com/blog/maintenance-capex-strategy/
+  Plan operating maintenance versus capital improvements.
+- **Dashboards for Landlords**: https://ondorealestate.com/blog/dashboards-for-landlords/
+  What owners and managers should track in one view.
+- **Building High-Performance Real Estate on Next.js and Supabase**: https://ondorealestate.com/blog/building-high-performance-real-estate-nextjs-supabase/
+  Technical architecture notes for a modern property platform.
+- **Engineering Real Estate Investment Calculators**: https://ondorealestate.com/blog/engineering-real-estate-investment-calculators/
+  How we model mortgage and investment math in the product.
+- **Modernizing Notary Workflows With Software**: https://ondorealestate.com/blog/modernizing-notary-workflows-integration/
+  Integrating RON and loan signing into real estate closings.
+- **Technical SEO for Real Estate Sites**: https://ondorealestate.com/blog/technical-seo-for-real-estate/
+  Structured data, sitemaps, and performance as ranking signals.
+- **Designing a Property Owner Portal**: https://ondorealestate.com/blog/designing-property-owner-portal/
+  Owner UX for finances, maintenance, and documents.
+- **Mobile Notary in Utah County**: https://ondorealestate.com/blog/mobile-notary-utah-county-guide/
+  Local guide to mobile notarization along the Wasatch Front.
+- **Remote Online Notary for Real Estate Closings**: https://ondorealestate.com/blog/remote-online-notary-real-estate-closings/
+  How RON fits lender and title workflows.
+- **Prepare for a Remote Online Notary Session**: https://ondorealestate.com/blog/prepare-for-remote-online-notary-session/
+  ID verification, tech checks, and witness tips.
+- **First-Time Home Buyer Guide**: https://ondorealestate.com/blog/first-time-home-buyer-guide/
+  Pre-approval through closing for Utah buyers.
+- **Property Management Tips for Utah Landlords**: https://ondorealestate.com/blog/property-management-tips-utah-landlords/
+  Vacancy, compliance, and tenant experience in Utah.
+- **Mortgage Rate Trends**: https://ondorealestate.com/blog/mortgage-rate-trends-2025/
+  Rate environment and what buyers and refinancers should watch.
+- **Why Utah Is a Strong Real Estate Investment Market**: https://ondorealestate.com/blog/why-utah-best-real-estate-investment/
+  Demographics, jobs, and housing demand in Utah.
+- **Home Staging Tips That Work**: https://ondorealestate.com/blog/home-staging-tips-that-work/
+  Prepare a listing to sell faster and for stronger offers.
+- **Understanding Property Taxes in Utah**: https://ondorealestate.com/blog/understanding-property-taxes-utah/
+  Assessments, Truth in Taxation, and investor implications.
+- **How to Choose a Property Management Company in Utah**: https://ondorealestate.com/blog/how-to-choose-property-management-company-utah/
+  Step-by-step guide to evaluating Utah property management companies — fees, services, and red flags.
+- **Utah Landlord-Tenant Law Guide**: https://ondorealestate.com/blog/utah-landlord-tenant-law-guide/
+  Security deposits, eviction timelines, habitability, and Fair Housing requirements in Utah.
+- **Salt Lake City Rental Market Report**: https://ondorealestate.com/blog/salt-lake-city-rental-market-report/
+  Vacancy rates, rents by submarket, and demand drivers for SLC landlords and investors.
+- **Property Management Fees in Utah**: https://ondorealestate.com/blog/property-management-fees-utah/
+  Transparent breakdown of Utah property management pricing — management fee, leasing fee, and markup structures.
+- **Best Neighborhoods to Invest in Utah Real Estate**: https://ondorealestate.com/blog/best-neighborhoods-invest-utah-real-estate/
+  Wasatch Front submarket breakdown: cash flow, appreciation, and vacancy by neighborhood.
+- **First-Time Landlord Checklist for Utah**: https://ondorealestate.com/blog/first-time-landlord-checklist-utah/
+  Everything to do before, during, and after your first tenant moves in to a Utah rental.
+- **FHA vs Conventional Loans in Utah**: https://ondorealestate.com/blog/fha-vs-conventional-loans-utah/
+  Side-by-side comparison of FHA and conventional mortgages for Utah home buyers.
+- **How Ondo RE Uses Technology to Manage Utah Rentals**: https://ondorealestate.com/blog/how-ondo-re-uses-technology-property-management/
+  Behind-the-scenes look at AI, owner portal, and automated workflows at Ondo RE.
+- **Provo and Orem Rental Market Guide**: https://ondorealestate.com/blog/provo-orem-rental-market-guide/
+  BYU, UVU, and Silicon Slopes demand — what landlords need to know in Utah County.
+- **Wasatch Front Real Estate Forecast 2026**: https://ondorealestate.com/blog/wasatch-front-real-estate-forecast-2026/
+  Interest rates, inventory, rent trends, and strategic positioning for Utah property owners.
+
+### About Ondo
+Team, history, careers, and investor relations.
+
+- **About us**: https://ondorealestate.com/about/
+  Mission, services, and service area.
+- **Team**: https://ondorealestate.com/about/team/
+  Leadership and licensed professionals.
+- **Careers**: https://ondorealestate.com/about/careers/
+  Open roles and culture.
+- **Testimonials**: https://ondorealestate.com/about/testimonials/
+  Client and partner stories.
+- **Case studies**: https://ondorealestate.com/about/case-studies/
+  Documented outcomes from Utah owners, buyers, and investors.
+- **History**: https://ondorealestate.com/about/history/
+  Milestones and growth.
+- **Giving back**: https://ondorealestate.com/about/giving-back/
+  Community and nonprofit support.
+- **Investor relations**: https://ondorealestate.com/about/investor-relations/
+  Institutional and accredited investor inquiries.
+- **Company news**: https://ondorealestate.com/about/news/
+  Press and announcements.
+
+### Contact, news & programs
+Reach the team and follow public updates.
+
+- **Contact**: https://ondorealestate.com/contact/
+  Phone, email, and appointment booking.
+- **Feedback**: https://ondorealestate.com/feedback/
+  Product and website feedback.
+- **News**: https://ondorealestate.com/news/
+  Updates and industry notes.
+- **Sweepstakes**: https://ondorealestate.com/sweepstakes/
+  Official rules for active promotions.
+
+### Solutions
+Platform capabilities by role.
+
+- **Solutions overview**: https://ondorealestate.com/solutions/
+  One platform for every stakeholder in real estate.
+- **For Investors**: https://ondorealestate.com/solutions/investors/
+  Portfolio analytics, risk scoring, and deal access.
+- **For Landlords**: https://ondorealestate.com/solutions/landlords/
+  Full-service management for property owners.
+- **For Property Managers**: https://ondorealestate.com/solutions/property-managers/
+  Scale operations with automation.
+- **For Tenants**: https://ondorealestate.com/solutions/tenants/
+  Rent, requests, and documents in one portal.
+- **Book a Demo**: https://ondorealestate.com/demo/
+  Free 15-minute platform walkthrough.
+- **Platform Tour**: https://ondorealestate.com/tour/
+  Self-serve guided tour of all platform features.
+- **Partners**: https://ondorealestate.com/partners/
+  Integrations: Stripe, Supabase, HubSpot, and more.
+
+### Learn
+Research, education, and market data.
+
+- **Market Data**: https://ondorealestate.com/data/
+  Utah real estate stats updated quarterly.
+- **Insights**: https://ondorealestate.com/insights/
+  Research, reports, and thought leadership.
+- **Video Library**: https://ondorealestate.com/video-library/
+  Step-by-step platform walkthroughs.
+- **Academy**: https://ondorealestate.com/academy/
+  Free real estate education and guides.
+
+### Legal, accessibility & discovery
+Policies and machine-readable indexes for search engines and AI systems.
+
+- **Privacy policy**: https://ondorealestate.com/privacy-policy/
+  How we collect and use data.
+- **Terms of service**: https://ondorealestate.com/terms-of-service/
+  Site and service terms.
+- **Accessibility**: https://ondorealestate.com/accessibility/
+  Commitment and contact for accessibility support.
+- **XML sitemap**: https://ondorealestate.com/sitemap.xml
+  Canonical URL list for crawlers (generated at build).
+- **LLM & agent brief**: https://ondorealestate.com/llms.txt
+  Concise site summary for AI assistants and automated agents.
+- **LLM full brief**: https://ondorealestate.com/llms-full.txt
+  Extended site context with FAQs, service details, and contact channels for AI agents.
+- **humans.txt**: https://ondorealestate.com/humans.txt
+  Team credits, tech stack, and tools behind the site.
+
+---
+Generated for Ondo Real Estate. For human support, contact info@ondorealestate.com or call +1-408-538-0420.
