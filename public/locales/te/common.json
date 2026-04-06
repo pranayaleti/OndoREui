@@ -134,5 +134,278 @@
     "faq2A": "నగదు చెల్లింపులు లేవు. మీరు Ondo RE వేదిక యాక్సెస్ యొక్క ఉచిత నెలలు (24 వరకు) మరియు బోనస్ స్వీప్‌స్టేక్స్ ఎంట్రీలు సంపాదిస్తారు.",
     "faq3Q": "నా రెఫరల్ లింక్ ఎప్పుడు వస్తుంది?",
     "faq3A": "మీ దరఖాస్తు ఆమోదించబడిన తర్వాత, మేము మీ ప్రత్యేక కోడ్‌ను ఇమెయిల్ చేస్తాము."
+  },
+  "leadPopup": {
+    "title": "మరింత సులభమైన తదుపరి అడుగు కావాలా?",
+    "body": "మీ పేరు మరియు ఇమెయిల్‌ను పంచుకోండి. మేము ప్రక్రియను మరింత సులభంగా, తక్కువ ఒత్తిడిగా చేయడంలో సహాయపడతాము. మేము దీన్ని ఒకసారి మాత్రమే అడుగుతాము మరియు మీ సమాచారాన్ని ఎప్పుడూ అమ్మము లేదా పంచుకోము.",
+    "nameLabel": "పేరు",
+    "namePlaceholder": "మీ పేరు",
+    "emailLabel": "ఇమెయిల్",
+    "emailPlaceholder": "you@example.com",
+    "submitCta": "వ్యక్తిగత సహాయం పొందండి",
+    "dismissCta": "ఇప్పుడు కాదు",
+    "submitting": "పంపిస్తోంది...",
+    "privacyNotice": "మా <privacyLink>గోప్యతా విధానం</privacyLink> చదవండి.",
+    "successTitle": "మీ వివరాలను పంచుకున్నందుకు ధన్యవాదాలు.",
+    "successBody": "మరింత వ్యక్తిగతమైన తదుపరి అడుగుతో మేము త్వరలో సంప్రదిస్తాము.",
+    "submitError": "ఈ క్షణంలో మీ సమాచారాన్ని సేవ్ చేయలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
+    "validation": {
+      "nameRequired": "దయచేసి మీ పేరును నమోదు చేయండి.",
+      "emailRequired": "దయచేసి మీ ఇమెయిల్ చిరునామాను నమోదు చేయండి.",
+      "emailInvalid": "దయచేసి చెల్లుబాటు అయ్యే ఇమెయిల్ చిరునామాను నమోదు చేయండి."
+    }
+  },
+  "demo": {
+    "bannerTitle": "Ondo డెమో హబ్‌ను తెరవండి",
+    "bannerSubtitle": "వాక్‌థ్రూ చూడండి, seeded credentials ఉపయోగించండి, సిద్ధమైనప్పుడు live sandbox‌లోకి వెళ్లండి.",
+    "heroKicker": "Self-serve demo",
+    "heroTitle": "కాల్ బుక్ చేసే ముందు Manager, Owner, Tenant అనుభవాన్ని చూడండి.",
+    "heroBody": "ఈ పేజీ Ondo డెమో వాతావరణానికి పబ్లిక్ ప్రవేశద్వారం. రికార్డ్ చేసిన walkthrough చూడండి, seeded login credentials పరిశీలించండి, demo app link అందుబాటులో ఉన్నప్పుడు live sandbox‌ను ప్రారంభించండి.",
+    "openLiveDemo": "Live demo తెరవండి",
+    "bookGuidedDemo": "Guided demo బుక్ చేయండి",
+    "heroAvailability": "ఈ sandbox seeded sample data ఉపయోగిస్తుంది మరియు మీరు సురక్షితంగా అన్వేషించేందుకు కాలానుగుణంగా reset అవుతుంది.",
+    "videoTitle": "Walkthrough వీడియో",
+    "videoBody": "Manager, Owner, Tenant workflows‌కు వేగవంతమైన అవలోకనం కోసం ఇక్కడ ప్రారంభించండి.",
+    "videoEmbedTitle": "Ondo demo walkthrough వీడియో",
+    "videoFallbackTitle": "Walkthrough వీడియో త్వరలో వస్తుంది",
+    "videoFallbackBody": "ఈ పేజీలో రికార్డ్ చేసిన demo walkthrough చూపించడానికి NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL జోడించండి.",
+    "credentialsTitle": "Seed చేసిన demo roles‌లో ఒకదాన్ని ఉపయోగించండి",
+    "credentialsBody": "ప్రతి ఖాతా అదే demo environment‌లో వేరు workspace‌కు తీసుకెళ్తుంది.",
+    "openRoleLogin": "Demo login తెరవండి",
+    "galleryTitle": "మీరు చూపించే workflows preview",
+    "galleryBody": "ఈ preview cards రికార్డ్ చేసిన demo మరియు screenshot galleryలో చూపాల్సిన screens‌ను సూచిస్తాయి.",
+    "previewEyebrow": "Screenshot focus",
+    "previewLiveSlot": "Demo view",
+    "sandboxTitle": "Sandbox ఉపయోగించే విధానం",
+    "sandboxBody": "ఈ workspace‌ను అన్వేషణ కోసం మాత్రమే ఉపయోగించండి. ఇందులో sample data ఉంటుంది, ఎప్పుడైనా reset కావచ్చు, మరియు వ్యక్తిగత పత్రాలు లేదా నిజమైన payment సమాచారాన్ని ఎప్పుడూ ఇక్కడ ఉంచకండి.",
+    "guidedKicker": "Guided walkthrough",
+    "guidedTitle": "మీ workflow‌కు తగ్గట్టు demo కావాలా?",
+    "guidedBody": "కింద కొన్ని వివరాలు పంచుకోండి. మీ portfolio, operations లేదా tenant experience ప్రశ్నల ఆధారంగా live walkthrough‌ను మేము రూపొందిస్తాము.",
+    "labels": {
+      "email": "ఇమెయిల్",
+      "password": "పాస్‌వర్డ్"
+    },
+    "form": {
+      "firstNameLabel": "మొదటి పేరు *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "చివరి పేరు *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "ఇమెయిల్ *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "ఫోన్",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "నేను...",
+      "unitsLabel": "యూనిట్ల సంఖ్య",
+      "unitsPlaceholder": "ఉదా. 5",
+      "timeLabel": "ఇష్టమైన సమయం",
+      "timePlaceholder": "ఉదా. వారంలో ఉదయాలు",
+      "success": "ధన్యవాదాలు! మీ demo‌ను నిర్ధారించడానికి 1 పని దినంలో మేము సంప్రదిస్తాము.",
+      "error": "ఏదో తప్పు జరిగింది. మాకు ఇమెయిల్ పంపండి",
+      "errorSuffix": "లేదా మళ్లీ ప్రయత్నించండి.",
+      "submitting": "పంపుతోంది...",
+      "submit": "నా guided demo బుక్ చేయండి",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investor",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "ఒకే చోట portfolio visibility, leasing, maintenance, reporting అవసరమయ్యే operators కోసం ఇది సరైనది.",
+        "feature1": "ఒకే dashboard నుంచి properties, leads, rent collection‌ను పర్యవేక్షించండి.",
+        "feature2": "tools మార్చకుండా maintenance queues, messages, owner updates చూడండి.",
+        "feature3": "Portfolio issues మరియు next actions‌ను assistant‌తో సారాంశం చేయండి.",
+        "previewTitle": "Manager workspace",
+        "previewHeadline": "Portfolio control center",
+        "previewBody": "రోజువారీ operations, conversations, financial follow-up view‌ను ఇక్కడ హైలైట్ చేయండి.",
+        "stat1Label": "Access",
+        "stat1Value": "Multi-property",
+        "stat2Label": "Focus",
+        "stat2Value": "Ops visibility",
+        "previewItem1": "Property health మరియు occupancy",
+        "previewItem2": "Maintenance triage మరియు follow-up",
+        "previewItem3": "AI assistant మరియు reports"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "Portfolio visibility, documents, maintenance updates, financial reporting కావాలనుకునే owners కోసం ఇది సరైనది.",
+        "feature1": "మీ properties, documents, occupancy‌ను ఒకే చూపులో చూడండి.",
+        "feature2": "Maintenance progress, payment history, owner-facing reports‌ను ట్రాక్ చేయండి.",
+        "feature3": "Manual report కోసం వేచి లేకుండా portfolio ప్రశ్నలకు assistant ద్వారా సమాధానాలు పొందండి.",
+        "previewTitle": "Owner workspace",
+        "previewHeadline": "Owner reporting view",
+        "previewBody": "Spreadsheetలు లేదా inbox threads లేకుండానే owners ఎలా సమాచారం పొందుతారో చూపండి.",
+        "stat1Label": "Access",
+        "stat1Value": "Owner portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Portfolio summary మరియు documents",
+        "previewItem2": "Maintenance visibility",
+        "previewItem3": "Payments మరియు reports"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "Payments, documents, maintenance, messages, self-service support అవసరమయ్యే residents కోసం ఇది సరైనది.",
+        "feature1": "ఒకే portal‌లో rent చెల్లించండి, balances చూడండి, receipts ఉంచుకోండి.",
+        "feature2": "Maintenance requests సమర్పించి, తక్కువ back-and-forth‌తో status updates‌ను అనుసరించండి.",
+        "feature3": "అదే login నుంచే documents, messages, personal settings తెరవండి.",
+        "previewTitle": "Tenant workspace",
+        "previewHeadline": "Resident self-service",
+        "previewBody": "Office‌కు కాల్ చేయకుండా tenants సాధారణ పనులను ఎలా పూర్తి చేస్తారో ఈ view‌తో చూపండి.",
+        "stat1Label": "Access",
+        "stat1Value": "Tenant portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Self-service",
+        "previewItem1": "Payments మరియు receipts",
+        "previewItem2": "Maintenance requests",
+        "previewItem3": "Messages మరియు documents"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "యూటాలో పెట్టుబడి పెట్టేందుకు మేము మీకు సహాయం చేస్తాము",
+      "title": "పెట్టుబడి పెట్టడానికి దేశంలోని ఉత్తమ ప్రదేశాల్లో <highlight>యూటా</highlight> ఎందుకు ఒకటి",
+      "body": "యూటా యొక్క స్థిరమైన ఆర్థిక వ్యవస్థ, బలమైన స్థానిక జనాభా వృద్ధి మరియు 2034 శీతాకాల ఒలింపిక్స్ ప్రభావం కలిసి రియల్ ఎస్టేట్ పెట్టుబడిదారులకు దీర్ఘకాలిక వేగాన్ని సృష్టిస్తున్నాయి."
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "మీ దరఖాస్తు లోడ్ అవుతోంది",
+      "body": "మేము దరఖాస్తు లింక్ మరియు ఆస్తి వివరాలను ధృవీకరిస్తున్నాము."
+    },
+    "error": {
+      "title": "దరఖాస్తు లింక్ అందుబాటులో లేదు"
+    },
+    "submitted": {
+      "title": "దరఖాస్తు సమర్పించబడింది",
+      "body": "{{property}} కోసం మీ దరఖాస్తు విజయవంతంగా సమర్పించబడింది.",
+      "followUp": "ఆస్తి బృందం మీ స్థితిని నవీకరించినప్పుడు మేము మీకు ఇమెయిల్ పంపిస్తాము."
+    },
+    "progressLabel": "దరఖాస్తు పురోగతి",
+    "progress": {
+      "property": "ఆస్తి",
+      "disclosure": "ప్రమాణాలు మరియు వెల్లడింపులు",
+      "personal": "వ్యక్తిగత సమాచారం",
+      "questions": "ప్రశ్నలు",
+      "review": "సమీక్ష"
+    },
+    "property": {
+      "description": "వెల్లడింపు మరియు దరఖాస్తు దశలకు వెళ్లే ముందు అద్దె వివరాలను సమీక్షించండి.",
+      "start": "ప్రమాణాలను సమీక్షించి కొనసాగండి",
+      "bedrooms": "పడక గదులు",
+      "bathrooms": "స్నాన గదులు",
+      "sqft": "చ.అ.",
+      "monthlyRent": "నెలసరి అద్దె",
+      "availability": "అందుబాటు"
+    },
+    "messages": {
+      "invalidLink": "ఈ దరఖాస్తు లింక్ చెల్లదు లేదా గడువు ముగిసింది.",
+      "validationFailed": "ప్రస్తుతం ఈ దరఖాస్తు లింక్‌ను ధృవీకరించలేకపోయాము.",
+      "createFailed": "మీ వ్యక్తిగత సమాచారాన్ని ఇంకా సేవ్ చేయలేకపోయాము.",
+      "answerRequiredQuestions": "కొనసాగించే ముందు అవసరమైన ప్రతి ప్రశ్నకు సమాధానం ఇవ్వండి.",
+      "missingApplicationContext": "వెల్లడింపు వివరాలు లేవు. దయచేసి దరఖాస్తును మొదటి నుండి మళ్లీ ప్రారంభించండి.",
+      "consentRequired": "కొనసాగించే ముందు మీరు ప్రమాణాలను అంగీకరించి స్క్రీనింగ్‌కు అనుమతి ఇవ్వాలి.",
+      "submitFailed": "ప్రస్తుతం మీ దరఖాస్తును సమర్పించలేకపోయాము."
+    },
+    "disclosure": {
+      "title": "ప్రమాణాలు మరియు వెల్లడింపుల సమీక్ష",
+      "body": "ముందుకు వెళ్లే ముందు యజమాని అంగీకార ప్రమాణాలు, స్క్రీనింగ్ తనిఖీలు మరియు అద్దె వెల్లడింపులను సమీక్షించండి.",
+      "criteriaAcknowledgementLabel": "ఈ పేజీలో చూపిన యజమాని అంగీకార ప్రమాణాలు మరియు అద్దె వెల్లడింపులను నేను సమీక్షించాను.",
+      "screeningConsentLabel": "ఈ దరఖాస్తు కోసం వెల్లడించిన స్క్రీనింగ్ తనిఖీలను నిర్వహించేందుకు నేను Ondo Real Estate మరియు యజమానికి అనుమతి ఇస్తున్నాను.",
+      "futureFeeNotice": "ఈ ప్రవాహంలో తర్వాత దరఖాస్తు రుసుము జోడిస్తే, ఎటువంటి చెల్లింపు కోరే ముందు రుసుము వెల్లడింపు మరియు చెల్లింపు దశ ఈ స్థలంలో కనిపిస్తాయి.",
+      "emptyCharges": "ఈ జాబితాకు అద్దె కాని స్థిర ఖర్చులు వెల్లడించబడలేదు.",
+      "emptyUseBasedCharges": "ఈ జాబితాకు వినియోగ ఆధారిత ఛార్జీల వర్గాలు వెల్లడించబడలేదు.",
+      "emptyCriteria": "ఈ ఆస్తికి అదనపు యజమాని ప్రమాణాలు జాబితా చేయబడలేదు.",
+      "rent": "అద్దె",
+      "availability": "అందుబాటు",
+      "fixedCharges": "తెలిసిన అద్దె కాని స్థిర ఖర్చులు",
+      "useBasedCharges": "వినియోగ ఆధారిత ఛార్జీల వర్గాలు",
+      "criteria": "యజమాని అంగీకార ప్రమాణాలు",
+      "requiredChecks": "అవసరమైన స్క్రీనింగ్ తనిఖీలు",
+      "feeCollectionStatus": "దరఖాస్తు రుసుము స్థితి",
+      "refundRecoveryInstructions": "రిఫండ్ మరియు రిపోర్ట్ పొందే సమాచారం",
+      "ownerNotes": "యజమాని గమనికలు",
+      "continue": "వ్యక్తిగత సమాచారానికి కొనసాగండి"
+    },
+    "personal": {
+      "title": "వ్యక్తిగత సమాచారం",
+      "subtitle": "స్క్రీనింగ్ ప్రారంభమయ్యే ముందు మీ దరఖాస్తు రికార్డును సృష్టించడానికి అవసరమైన వివరాలను పంచుకోండి.",
+      "continue": "కొనసాగండి",
+      "saving": "సేవ్ అవుతోంది...",
+      "fields": {
+        "firstName": "మొదటి పేరు",
+        "lastName": "చివరి పేరు",
+        "email": "ఇమెయిల్",
+        "phone": "ఫోన్",
+        "dateOfBirth": "పుట్టిన తేదీ",
+        "currentAddress": "ప్రస్తుత చిరునామా",
+        "employer": "ఉద్యోగదాత",
+        "annualIncome": "వార్షిక ఆదాయం",
+        "desiredMoveIn": "కావలసిన ప్రవేశ తేదీ"
+      },
+      "placeholders": {
+        "phone": "ఉదా. +1 (801) 555-0100",
+        "currentAddress": "వీధి, నగరం, రాష్ట్రం, జిప్",
+        "employer": "కంపెనీ లేదా సంస్థ",
+        "annualIncome": "ఉదా. 75000"
+      }
+    },
+    "questions": {
+      "title": "స్క్రీనింగ్ ప్రశ్నలు",
+      "subtitle": "ఈ జాబితాకు యజమాని జోడించిన ఏవైనా అనుకూల ప్రశ్నలకు సమాధానం ఇవ్వండి.",
+      "yes": "అవును",
+      "no": "కాదు",
+      "required": "తప్పనిసరి",
+      "continue": "దరఖాస్తును సమీక్షించండి"
+    },
+    "review": {
+      "title": "మీ దరఖాస్తును సమీక్షించండి",
+      "submit": "దరఖాస్తు సమర్పించండి",
+      "submitting": "సమర్పిస్తోంది...",
+      "personalInfo": "వ్యక్తిగత సమాచారం",
+      "answers": "స్క్రీనింగ్ సమాధానాలు",
+      "screeningChecks": "స్క్రీనింగ్ తనిఖీలు",
+      "consentSummary": "వెల్లడింపు ధృవీకరణ",
+      "disclosureConfirmed": "మీరు యజమాని ప్రమాణాలను ధృవీకరించి వెల్లడించిన స్క్రీనింగ్ తనిఖీలకు అనుమతి ఇచ్చారు.",
+      "emptyAnswer": "సమాధానం లేదు",
+      "fields": {
+        "name": "పేరు",
+        "email": "ఇమెయిల్",
+        "phone": "ఫోన్",
+        "employer": "ఉద్యోగదాత",
+        "income": "ఆదాయం",
+        "moveIn": "ప్రవేశ తేదీ"
+      }
+    },
+    "sidebar": {
+      "title": "దరఖాస్తు సారాంశం",
+      "rent": "అద్దె",
+      "availability": "అందుబాటు",
+      "screeningChecks": "స్క్రీనింగ్ తనిఖీలు",
+      "criteria": "ప్రమాణాల సారాంశం"
+    },
+    "requiredChecks": {
+      "credit": "క్రెడిట్ సమీక్ష",
+      "criminal": "నేర చరిత్ర సమీక్ష",
+      "eviction": "బహిష్కరణ చరిత్ర సమీక్ష",
+      "income": "ఆదాయం ధృవీకరణ",
+      "identity": "గుర్తింపు ధృవీకరణ",
+      "references": "రిఫరెన్స్ తనిఖీలు"
+    },
+    "affordability": {
+      "title": "భరించగల సామర్థ్య తనిఖీ",
+      "requirement": "ఈ ఆస్తి కనీస ఆదాయం-అద్దె నిష్పత్తి {{ratio}}x ను ఉపయోగిస్తుంది, ఇది సంవత్సరానికి సుమారు {{amount}}.",
+      "inputLabel": "మీ వార్షిక ఆదాయం (USD)",
+      "placeholder": "ఉదా. 75000",
+      "meets": "మీరు ప్రస్తుతం అవసరాన్ని చేరుకుంటున్నారు ({{ratio}}x నిష్పత్తి).",
+      "below": "మీరు అవసరానికి దిగువన ఉన్నారు ({{ratio}}x నిష్పత్తి; {{requiredRatio}}x అవసరం)."
+    }
   }
 }

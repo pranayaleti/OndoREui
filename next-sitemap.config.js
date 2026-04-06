@@ -88,7 +88,54 @@ module.exports = {
         allow: '/',
         disallow: ROBOTS_DISALLOW,
       },
+      // ── AI crawlers: explicitly welcome on public content ──
+      {
+        userAgent: 'GPTBot',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'ChatGPT-User',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'Google-Extended',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'Claude-Web',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'Anthropic-AI',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'Bytespider',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'CCBot',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
+      {
+        userAgent: 'cohere-ai',
+        allow: '/',
+        disallow: ROBOTS_DISALLOW,
+      },
     ],
+    additionalSitemaps: [],
   },
   exclude: [
     '/auth',
@@ -134,7 +181,8 @@ module.exports = {
     return base
   },
   additionalPaths: async (config) => {
-    const entry = await config.transform(config, '/llms.txt')
-    return entry ? [entry] : []
+    const paths = ['/llms.txt', '/llms-full.txt']
+    const entries = await Promise.all(paths.map((p) => config.transform(config, p)))
+    return entries.filter(Boolean)
   },
 }

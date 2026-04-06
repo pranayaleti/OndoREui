@@ -28,6 +28,12 @@ export const APP_PORTAL_IS_EXTERNAL = /^https?:\/\//.test(APP_PORTAL_URL)
 export const APP_PORTAL_LOGIN_URL = APP_PORTAL_IS_EXTERNAL
   ? `${APP_PORTAL_URL.replace(/\/$/, "")}/login`
   : APP_PORTAL_URL
+const configuredDemoDashboardUrl = process.env["NEXT_PUBLIC_DEMO_DASHBOARD_URL"]?.trim()
+export const DEMO_DASHBOARD_URL =
+  configuredDemoDashboardUrl && /^https?:\/\//.test(configuredDemoDashboardUrl)
+    ? configuredDemoDashboardUrl.replace(/\/$/, "")
+    : ""
+export const DEMO_VIDEO_EMBED_URL = process.env["NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL"]?.trim() || ""
 export const SITE_PHONE = process.env['NEXT_PUBLIC_SITE_PHONE'] || "+1-408-538-0420"
 export const SITE_HOURS = "Mo-Fr 09:00-17:00"
 export const SITE_ADDRESS = "2701 N Thanksgiving Way, Lehi, UT 84043"

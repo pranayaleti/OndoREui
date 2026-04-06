@@ -1,29 +1,101 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import type { ReactNode } from "react"
+import { useParams } from "next/navigation"
+import { useTranslation } from "react-i18next"
 import {
-  validateApplyToken,
   createApplication,
   submitApplication,
+  validateApplyToken,
+  type AcceptanceCriteria,
+  type ApplicationDisclosure,
+  type ApplicationDisclosureSnapshot,
   type ApplicationLinkValidation,
   type ScreeningQuestion,
+  type VerificationCheckType,
 } from "@/lib/api/applications"
 import { AffordabilityCalculator } from "@/components/apply/affordability-calculator"
+import { PropertyImage } from "@/components/ui/optimized-image"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 
-type Step = "loading" | "property" | "personal" | "questions" | "review" | "submitted" | "error"
+type Step =
+  | "loading"
+  | "property"
+  | "disclosure"
+  | "personal"
+  | "questions"
+  | "review"
+  | "submitted"
+  | "error"
+
+const CHECK_TRANSLATION_KEYS: Record<VerificationCheckType, string> = {
+  credit: "applyFlow.requiredChecks.credit",
+  criminal: "applyFlow.requiredChecks.criminal",
+  eviction: "applyFlow.requiredChecks.eviction",
+  income: "applyFlow.requiredChecks.income",
+  identity: "applyFlow.requiredChecks.identity",
+  references: "applyFlow.requiredChecks.references",
+}
+
+function isAnswerProvided(value: unknown): boolean {
+  if (typeof value === "string") {
+    return value.trim().length > 0
+  }
+  if (typeof value === "number") {
+    return !Number.isNaN(value)
+  }
+  return value !== null && value !== undefined
+}
+
+function formatCurrency(value: number | null | undefined, locale: string) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return null
+  }
+
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value)
+}
+
+function formatNumber(value: number | null | undefined, locale: string) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return null
+  }
+
+  return new Intl.NumberFormat(locale).format(value)
+}
+
+function formatAnswerValue(value: unknown, emptyLabel: string) {
+  if (value === null || value === undefined || value === "") {
+    return emptyLabel
+  }
+  return String(value)
+}
 
 export function ApplyPageClient() {
   const params = useParams()
-  const router = useRouter()
+  const { t, i18n } = useTranslation()
   const token = (params?.token ?? "") as string
+  const locale = i18n.resolvedLanguage || i18n.language || "en"
 
   const [step, setStep] = useState<Step>("loading")
   const [validation, setValidation] = useState<ApplicationLinkValidation | null>(null)
-  const [error, setError] = useState<string>("")
-  const [applicationId, setApplicationId] = useState<string>("")
+  const [error, setError] = useState("")
+  const [applicationId, setApplicationId] = useState("")
+  const [submitting, setSubmitting] = useState(false)
 
-  // Personal info form state
+  const [criteriaAcknowledged, setCriteriaAcknowledged] = useState(false)
+  const [screeningConsent, setScreeningConsent] = useState(false)
+
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
@@ -33,33 +105,50 @@ export function ApplyPageClient() {
   const [employer, setEmployer] = useState("")
   const [annualIncome, setAnnualIncome] = useState("")
   const [desiredMoveIn, setDesiredMoveIn] = useState("")
-
-  // Screening question answers
   const [answers, setAnswers] = useState<Record<string, unknown>>({})
 
-  const [submitting, setSubmitting] = useState(false)
-
-  void router
-
   useEffect(() => {
-    validateApplyToken(token).then((result) => {
-      if (result.valid) {
-        setValidation(result)
-        setStep("property")
-      } else {
-        setError(result.error || "Invalid or expired application link")
+    let cancelled = false
+
+    async function loadValidation() {
+      try {
+        const result = await validateApplyToken(token, locale)
+        if (cancelled) {
+          return
+        }
+
+        if (result.valid) {
+          setValidation(result)
+          setError("")
+          setStep((currentStep) =>
+            currentStep === "loading" || currentStep === "error" ? "property" : currentStep
+          )
+          return
+        }
+
+        setError(result.error || t("applyFlow.messages.invalidLink"))
         setStep("error")
+      } catch {
+        if (!cancelled) {
+          setError(t("applyFlow.messages.validationFailed"))
+          setStep("error")
+        }
       }
-    }).catch(() => {
-      setError("Failed to validate application link")
-      setStep("error")
-    })
-  }, [token])
+    }
+
+    void loadValidation()
+
+    return () => {
+      cancelled = true
+    }
+  }, [locale, t, token])
 
   async function handleCreateApplication() {
     setSubmitting(true)
+    setError("")
+
     try {
-      const app = await createApplication({
+      const application = await createApplication({
         token,
         firstName,
         lastName,
@@ -68,49 +157,96 @@ export function ApplyPageClient() {
         dateOfBirth: dateOfBirth || undefined,
         currentAddress: currentAddress || undefined,
         employer: employer || undefined,
-        annualIncome: annualIncome ? parseFloat(annualIncome) : undefined,
+        annualIncome: annualIncome ? Number.parseFloat(annualIncome) : undefined,
         desiredMoveIn: desiredMoveIn || undefined,
       })
-      setApplicationId(app.id)
 
-      if (validation?.questions && validation.questions.length > 0) {
-        setStep("questions")
-      } else {
-        setStep("review")
-      }
-    } catch (err: unknown) {
-      setError((err as Error).message || "Failed to create application")
+      setApplicationId(application.id)
+      setStep((validation?.questions?.length ?? 0) > 0 ? "questions" : "review")
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message || t("applyFlow.messages.createFailed") : t("applyFlow.messages.createFailed")
+      )
     } finally {
       setSubmitting(false)
     }
   }
 
+  function getMissingRequiredQuestions(questions: ScreeningQuestion[]) {
+    return questions.filter((question) => question.isRequired && !isAnswerProvided(answers[question.id]))
+  }
+
+  function handleContinueFromQuestions() {
+    const questions = validation?.questions ?? []
+    const missingQuestions = getMissingRequiredQuestions(questions)
+
+    if (missingQuestions.length > 0) {
+      setError(t("applyFlow.messages.answerRequiredQuestions"))
+      return
+    }
+
+    setError("")
+    setStep("review")
+  }
+
   async function handleSubmit() {
+    const disclosureSnapshot = validation?.disclosureSnapshot
+    const consentVersion = validation?.consentCopy?.version
+
+    if (!applicationId || !disclosureSnapshot || !consentVersion) {
+      setError(t("applyFlow.messages.missingApplicationContext"))
+      return
+    }
+
+    if (!criteriaAcknowledged || !screeningConsent) {
+      setError(t("applyFlow.messages.consentRequired"))
+      return
+    }
+
     setSubmitting(true)
+    setError("")
+
     try {
       const answerArray = Object.entries(answers).map(([questionId, answer]) => ({
         questionId,
         answer,
       }))
-      await submitApplication(applicationId, answerArray)
+
+      await submitApplication(applicationId, {
+        token,
+        answers: answerArray,
+        criteriaAcknowledged: true,
+        screeningConsent: true,
+        consentVersion,
+        disclosureSnapshot: disclosureSnapshot as ApplicationDisclosureSnapshot,
+      })
+
       setStep("submitted")
-    } catch (err: unknown) {
-      setError((err as Error).message || "Failed to submit application")
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message || t("applyFlow.messages.submitFailed") : t("applyFlow.messages.submitFailed")
+      )
     } finally {
       setSubmitting(false)
     }
   }
 
   function handleAnswerChange(questionId: string, value: unknown) {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }))
+    setAnswers((currentAnswers) => ({ ...currentAnswers, [questionId]: value }))
+    if (error) {
+      setError("")
+    }
   }
 
   if (step === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
-          <p className="mt-4 text-gray-600">Loading application...</p>
+      <div className="min-h-screen bg-muted/30 px-4 py-12">
+        <div className="mx-auto flex max-w-md flex-col items-center justify-center gap-4 rounded-2xl border bg-background p-10 text-center shadow-sm">
+          <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+          <div className="space-y-1">
+            <p className="text-lg font-semibold text-foreground">{t("applyFlow.loading.title")}</p>
+            <p className="text-sm text-foreground/70">{t("applyFlow.loading.body")}</p>
+          </div>
         </div>
       </div>
     )
@@ -118,11 +254,13 @@ export function ApplyPageClient() {
 
   if (step === "error") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 text-center">
-          <div className="text-red-500 text-5xl mb-4">!</div>
-          <h1 className="text-xl font-semibold text-gray-900 mb-2">Application Link Invalid</h1>
-          <p className="text-gray-600">{error}</p>
+      <div className="min-h-screen bg-muted/30 px-4 py-12">
+        <div className="mx-auto max-w-md rounded-2xl border bg-background p-10 text-center shadow-sm">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-destructive/10 text-2xl font-semibold text-destructive">
+            !
+          </div>
+          <h1 className="mb-2 text-2xl font-semibold text-foreground">{t("applyFlow.error.title")}</h1>
+          <p className="text-sm leading-6 text-foreground/70">{error}</p>
         </div>
       </div>
     )
@@ -130,374 +268,1164 @@ export function ApplyPageClient() {
 
   if (step === "submitted") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 text-center">
-          <div className="text-green-500 text-5xl mb-4">&#10003;</div>
-          <h1 className="text-xl font-semibold text-gray-900 mb-2">Application Submitted!</h1>
-          <p className="text-gray-600 mb-4">
-            Your application for <strong>{validation?.property?.title}</strong> has been submitted
-            successfully. The property owner will review your application and get back to you.
+      <div className="min-h-screen bg-muted/30 px-4 py-12">
+        <div className="mx-auto max-w-xl rounded-2xl border bg-background p-10 text-center shadow-sm">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl font-semibold text-primary">
+            ✓
+          </div>
+          <h1 className="mb-2 text-2xl font-semibold text-foreground">{t("applyFlow.submitted.title")}</h1>
+          <p className="mb-3 text-sm leading-6 text-foreground/70">
+            {t("applyFlow.submitted.body", { property: validation?.property?.title ?? "" })}
           </p>
-          <p className="text-sm text-gray-500">
-            You&apos;ll receive an email notification when your application status is updated.
-          </p>
+          <p className="text-sm text-foreground/60">{t("applyFlow.submitted.followUp")}</p>
         </div>
       </div>
     )
   }
 
   const property = validation?.property
+  const disclosure = validation?.applicationDisclosure
+  const questions = validation?.questions ?? []
+  const hasQuestions = questions.length > 0
+  const progressSteps = [
+    { id: "property", label: t("applyFlow.progress.property") },
+    { id: "disclosure", label: t("applyFlow.progress.disclosure") },
+    { id: "personal", label: t("applyFlow.progress.personal") },
+    ...(hasQuestions ? [{ id: "questions", label: t("applyFlow.progress.questions") }] : []),
+    { id: "review", label: t("applyFlow.progress.review") },
+  ] as Array<{ id: Exclude<Step, "loading" | "submitted" | "error">; label: string }>
+
+  const currentStepIndex = progressSteps.findIndex((progressStep) => progressStep.id === step)
+  const currentStepLabel =
+    progressSteps[currentStepIndex]?.label ?? t("applyFlow.progress.property")
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        {/* Progress steps */}
-        <div className="flex items-center justify-center mb-8 gap-2 text-sm">
-          {["Property", "Personal Info", ...(validation?.questions?.length ? ["Questions"] : []), "Review"].map(
-            (label, i) => {
-              const stepIndex = step === "property" ? 0 : step === "personal" ? 1 : step === "questions" ? 2 : 3
-              const isActive = i <= stepIndex
+    <div className="min-h-screen bg-muted/30 py-8">
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-foreground/55">
+            <span>{t("applyFlow.progressLabel")}</span>
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-primary">
+              {currentStepLabel}
+            </span>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-5">
+            {progressSteps.map((progressStep, index) => {
+              const isComplete = currentStepIndex >= index
               return (
-                <div key={label} className="flex items-center gap-2">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                      isActive ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-500"
-                    }`}
-                  >
-                    {i + 1}
-                  </div>
-                  <span className={isActive ? "text-gray-900" : "text-gray-400"}>{label}</span>
-                  {i < 3 && <div className="w-8 h-px bg-gray-300" />}
+                <div
+                  key={progressStep.id}
+                  className={`rounded-2xl border px-4 py-3 transition-colors ${
+                    isComplete
+                      ? "border-primary/30 bg-primary/10 text-primary"
+                      : "border-border bg-background text-foreground/55"
+                  }`}
+                >
+                  <div className="text-xs font-semibold">{index + 1}</div>
+                  <div className="mt-1 text-sm font-medium">{progressStep.label}</div>
                 </div>
               )
-            }
-          )}
+            })}
+          </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          {/* Step 1: Property Overview */}
-          {step === "property" && property && (
-            <>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">{property.title}</h1>
-              <p className="text-gray-600 mb-4">{property.address}</p>
-
-              {property.photos.length > 0 && (
-                <div className="mb-4 rounded-lg overflow-hidden">
-                  <img
-                    src={property.photos[0].url}
-                    alt={property.title}
-                    className="w-full h-64 object-cover"
-                  />
-                </div>
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr]">
+          <Card className="overflow-hidden">
+            <CardHeader className="border-b bg-background/80">
+              <CardTitle className="text-2xl">{property?.title}</CardTitle>
+              <CardDescription>{property?.address}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6 pt-6">
+              {step === "property" && property && (
+                <PropertyStep
+                  property={property}
+                  locale={locale}
+                  description={t("applyFlow.property.description")}
+                  startLabel={t("applyFlow.property.start")}
+                  bedsLabel={t("applyFlow.property.bedrooms")}
+                  bathsLabel={t("applyFlow.property.bathrooms")}
+                  sqftLabel={t("applyFlow.property.sqft")}
+                  monthlyLabel={t("applyFlow.property.monthlyRent")}
+                  availabilityLabel={t("applyFlow.property.availability")}
+                  onContinue={() => {
+                    setError("")
+                    setStep("disclosure")
+                  }}
+                />
               )}
 
-              <div className="grid grid-cols-3 gap-4 mb-4 text-center">
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <div className="text-lg font-semibold text-gray-900">{property.bedrooms}</div>
-                  <div className="text-xs text-gray-500">Bedrooms</div>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <div className="text-lg font-semibold text-gray-900">{property.bathrooms}</div>
-                  <div className="text-xs text-gray-500">Bathrooms</div>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <div className="text-lg font-semibold text-gray-900">{property.sqft?.toLocaleString()}</div>
-                  <div className="text-xs text-gray-500">Sq Ft</div>
-                </div>
-              </div>
+              {step === "disclosure" && disclosure && (
+                <DisclosureStep
+                  disclosure={disclosure}
+                  locale={locale}
+                  criteria={validation?.screeningCriteriaSummary ?? []}
+                  requiredChecks={validation?.requiredChecks ?? []}
+                  acceptanceCriteria={validation?.acceptanceCriteria}
+                  criteriaAcknowledged={criteriaAcknowledged}
+                  screeningConsent={screeningConsent}
+                  onCriteriaAcknowledgedChange={setCriteriaAcknowledged}
+                  onScreeningConsentChange={setScreeningConsent}
+                  disclosureTitle={validation?.consentCopy?.disclosureTitle ?? t("applyFlow.disclosure.title")}
+                  disclosureBody={validation?.consentCopy?.disclosureBody ?? t("applyFlow.disclosure.body")}
+                  criteriaAcknowledgementLabel={
+                    validation?.consentCopy?.criteriaAcknowledgementLabel ??
+                    t("applyFlow.disclosure.criteriaAcknowledgementLabel")
+                  }
+                  screeningConsentLabel={
+                    validation?.consentCopy?.screeningConsentLabel ??
+                    t("applyFlow.disclosure.screeningConsentLabel")
+                  }
+                  futureFeeNotice={
+                    validation?.consentCopy?.futureFeeNotice ??
+                    t("applyFlow.disclosure.futureFeeNotice")
+                  }
+                  emptyChargesLabel={t("applyFlow.disclosure.emptyCharges")}
+                  emptyUseBasedChargesLabel={t("applyFlow.disclosure.emptyUseBasedCharges")}
+                  emptyCriteriaLabel={t("applyFlow.disclosure.emptyCriteria")}
+                  rentLabel={t("applyFlow.disclosure.rent")}
+                  availabilityLabel={t("applyFlow.disclosure.availability")}
+                  fixedChargesLabel={t("applyFlow.disclosure.fixedCharges")}
+                  useBasedChargesLabel={t("applyFlow.disclosure.useBasedCharges")}
+                  criteriaLabel={t("applyFlow.disclosure.criteria")}
+                  requiredChecksLabel={t("applyFlow.disclosure.requiredChecks")}
+                  feeCollectionLabel={t("applyFlow.disclosure.feeCollectionStatus")}
+                  refundInstructionsLabel={t("applyFlow.disclosure.refundRecoveryInstructions")}
+                  ownerNotesLabel={t("applyFlow.disclosure.ownerNotes")}
+                  backLabel={t("actions.back")}
+                  continueLabel={t("applyFlow.disclosure.continue")}
+                  error={error}
+                  onBack={() => {
+                    setError("")
+                    setStep("property")
+                  }}
+                  onContinue={() => {
+                    if (!criteriaAcknowledged || !screeningConsent) {
+                      setError(t("applyFlow.messages.consentRequired"))
+                      return
+                    }
 
-              <div className="text-2xl font-bold text-blue-600 mb-4">
-                ${property.price?.toLocaleString()}/mo
-              </div>
-
-              {property.description && (
-                <p className="text-gray-600 mb-6">{property.description}</p>
+                    setError("")
+                    setStep("personal")
+                  }}
+                  getCheckLabel={(checkType) => t(CHECK_TRANSLATION_KEYS[checkType])}
+                />
               )}
 
-              <button
-                onClick={() => setStep("personal")}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
-              >
-                Start Application
-              </button>
-            </>
-          )}
+              {step === "personal" && (
+                <PersonalStep
+                  firstName={firstName}
+                  lastName={lastName}
+                  email={email}
+                  phone={phone}
+                  dateOfBirth={dateOfBirth}
+                  currentAddress={currentAddress}
+                  employer={employer}
+                  annualIncome={annualIncome}
+                  desiredMoveIn={desiredMoveIn}
+                  onFirstNameChange={setFirstName}
+                  onLastNameChange={setLastName}
+                  onEmailChange={setEmail}
+                  onPhoneChange={setPhone}
+                  onDateOfBirthChange={setDateOfBirth}
+                  onCurrentAddressChange={setCurrentAddress}
+                  onEmployerChange={setEmployer}
+                  onAnnualIncomeChange={setAnnualIncome}
+                  onDesiredMoveInChange={setDesiredMoveIn}
+                  onBack={() => {
+                    setError("")
+                    setStep("disclosure")
+                  }}
+                  onContinue={handleCreateApplication}
+                  submitting={submitting}
+                  error={error}
+                  backLabel={t("actions.back")}
+                  continueLabel={t("applyFlow.personal.continue")}
+                  savingLabel={t("applyFlow.personal.saving")}
+                  title={t("applyFlow.personal.title")}
+                  subtitle={t("applyFlow.personal.subtitle")}
+                  labels={{
+                    firstName: t("applyFlow.personal.fields.firstName"),
+                    lastName: t("applyFlow.personal.fields.lastName"),
+                    email: t("applyFlow.personal.fields.email"),
+                    phone: t("applyFlow.personal.fields.phone"),
+                    dateOfBirth: t("applyFlow.personal.fields.dateOfBirth"),
+                    currentAddress: t("applyFlow.personal.fields.currentAddress"),
+                    employer: t("applyFlow.personal.fields.employer"),
+                    annualIncome: t("applyFlow.personal.fields.annualIncome"),
+                    desiredMoveIn: t("applyFlow.personal.fields.desiredMoveIn"),
+                  }}
+                  placeholders={{
+                    phone: t("applyFlow.personal.placeholders.phone"),
+                    currentAddress: t("applyFlow.personal.placeholders.currentAddress"),
+                    employer: t("applyFlow.personal.placeholders.employer"),
+                    annualIncome: t("applyFlow.personal.placeholders.annualIncome"),
+                  }}
+                  affordabilityCalculator={
+                    property?.price ? <AffordabilityCalculator monthlyRent={property.price} requiredRatio={3} /> : null
+                  }
+                />
+              )}
 
-          {/* Step 2: Personal Info */}
-          {step === "personal" && (
-            <>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Personal Information</h2>
-              {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+              {step === "questions" && (
+                <QuestionsStep
+                  questions={questions}
+                  answers={answers}
+                  error={error}
+                  title={t("applyFlow.questions.title")}
+                  subtitle={t("applyFlow.questions.subtitle")}
+                  yesLabel={t("applyFlow.questions.yes")}
+                  noLabel={t("applyFlow.questions.no")}
+                  requiredLabel={t("applyFlow.questions.required")}
+                  backLabel={t("actions.back")}
+                  continueLabel={t("applyFlow.questions.continue")}
+                  onAnswerChange={handleAnswerChange}
+                  onBack={() => {
+                    setError("")
+                    setStep("personal")
+                  }}
+                  onContinue={handleContinueFromQuestions}
+                />
+              )}
 
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
-                    <input
-                      type="text"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full border rounded-lg px-3 py-2"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
-                    <input
-                      type="text"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      className="w-full border rounded-lg px-3 py-2"
-                      required
-                    />
-                  </div>
-                </div>
+              {step === "review" && (
+                <ReviewStep
+                  firstName={firstName}
+                  lastName={lastName}
+                  email={email}
+                  phone={phone}
+                  employer={employer}
+                  annualIncome={annualIncome}
+                  desiredMoveIn={desiredMoveIn}
+                  questions={questions}
+                  answers={answers}
+                  requiredChecks={validation?.requiredChecks ?? []}
+                  onBack={() => {
+                    setError("")
+                    setStep(hasQuestions ? "questions" : "personal")
+                  }}
+                  onSubmit={handleSubmit}
+                  submitting={submitting}
+                  error={error}
+                  backLabel={t("actions.back")}
+                  title={t("applyFlow.review.title")}
+                  submitLabel={t("applyFlow.review.submit")}
+                  submittingLabel={t("applyFlow.review.submitting")}
+                  personalInfoLabel={t("applyFlow.review.personalInfo")}
+                  answersLabel={t("applyFlow.review.answers")}
+                  screeningLabel={t("applyFlow.review.screeningChecks")}
+                  consentSummaryLabel={t("applyFlow.review.consentSummary")}
+                  disclosureConfirmedLabel={t("applyFlow.review.disclosureConfirmed")}
+                  emptyAnswerLabel={t("applyFlow.review.emptyAnswer")}
+                  fields={{
+                    name: t("applyFlow.review.fields.name"),
+                    email: t("applyFlow.review.fields.email"),
+                    phone: t("applyFlow.review.fields.phone"),
+                    employer: t("applyFlow.review.fields.employer"),
+                    income: t("applyFlow.review.fields.income"),
+                    moveIn: t("applyFlow.review.fields.moveIn"),
+                  }}
+                  getCheckLabel={(checkType) => t(CHECK_TRANSLATION_KEYS[checkType])}
+                  locale={locale}
+                />
+              )}
+            </CardContent>
+          </Card>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-                  <input
-                    type="date"
-                    value={dateOfBirth}
-                    onChange={(e) => setDateOfBirth(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Current Address</label>
-                  <textarea
-                    value={currentAddress}
-                    onChange={(e) => setCurrentAddress(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                    rows={2}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Employer</label>
-                  <input
-                    type="text"
-                    value={employer}
-                    onChange={(e) => setEmployer(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Annual Income</label>
-                  <input
-                    type="number"
-                    value={annualIncome}
-                    onChange={(e) => setAnnualIncome(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                    placeholder="e.g. 75000"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Desired Move-in Date</label>
-                  <input
-                    type="date"
-                    value={desiredMoveIn}
-                    onChange={(e) => setDesiredMoveIn(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2"
-                  />
-                </div>
-
-                {property?.price && (
-                  <AffordabilityCalculator
-                    monthlyRent={property.price}
-                    requiredRatio={3}
-                  />
-                )}
-              </div>
-
-              <div className="flex gap-3 mt-6">
-                <button
-                  onClick={() => setStep("property")}
-                  className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={handleCreateApplication}
-                  disabled={!firstName || !lastName || !email || submitting}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50"
-                >
-                  {submitting ? "Saving..." : "Continue"}
-                </button>
-              </div>
-            </>
-          )}
-
-          {/* Step 3: Screening Questions */}
-          {step === "questions" && validation?.questions && (
-            <>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Screening Questions</h2>
-              <p className="text-gray-600 text-sm mb-6">
-                Please answer the following questions from the property owner.
-              </p>
-
-              <div className="space-y-6">
-                {validation.questions.map((q: ScreeningQuestion) => (
-                  <div key={q.id}>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {q.questionText}
-                      {q.isRequired && <span className="text-red-500 ml-1">*</span>}
-                    </label>
-
-                    {q.questionType === "text" && (
-                      <textarea
-                        value={(answers[q.id] as string) || ""}
-                        onChange={(e) => handleAnswerChange(q.id, e.target.value)}
-                        className="w-full border rounded-lg px-3 py-2"
-                        rows={3}
-                      />
-                    )}
-
-                    {q.questionType === "yes_no" && (
-                      <div className="flex gap-4">
-                        {["Yes", "No"].map((opt) => (
-                          <label key={opt} className="flex items-center gap-2 cursor-pointer">
-                            <input
-                              type="radio"
-                              name={q.id}
-                              checked={answers[q.id] === opt.toLowerCase()}
-                              onChange={() => handleAnswerChange(q.id, opt.toLowerCase())}
-                              className="h-4 w-4 text-blue-600"
-                            />
-                            {opt}
-                          </label>
-                        ))}
-                      </div>
-                    )}
-
-                    {q.questionType === "number" && (
-                      <input
-                        type="number"
-                        value={(answers[q.id] as string) || ""}
-                        onChange={(e) => handleAnswerChange(q.id, parseFloat(e.target.value) || 0)}
-                        className="w-full border rounded-lg px-3 py-2"
-                      />
-                    )}
-
-                    {q.questionType === "multiple_choice" && q.options && (
-                      <div className="space-y-2">
-                        {(q.options as string[]).map((opt) => (
-                          <label key={opt} className="flex items-center gap-2 cursor-pointer">
-                            <input
-                              type="radio"
-                              name={q.id}
-                              checked={answers[q.id] === opt}
-                              onChange={() => handleAnswerChange(q.id, opt)}
-                              className="h-4 w-4 text-blue-600"
-                            />
-                            {opt}
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex gap-3 mt-6">
-                <button
-                  onClick={() => setStep("personal")}
-                  className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={() => setStep("review")}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
-                >
-                  Review Application
-                </button>
-              </div>
-            </>
-          )}
-
-          {/* Step 4: Review & Submit */}
-          {step === "review" && (
-            <>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Review Your Application</h2>
-
-              <div className="space-y-4 mb-6">
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <h3 className="font-medium text-gray-900 mb-2">Personal Information</h3>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div><span className="text-gray-500">Name:</span> {firstName} {lastName}</div>
-                    <div><span className="text-gray-500">Email:</span> {email}</div>
-                    {phone && <div><span className="text-gray-500">Phone:</span> {phone}</div>}
-                    {employer && <div><span className="text-gray-500">Employer:</span> {employer}</div>}
-                    {annualIncome && <div><span className="text-gray-500">Income:</span> ${parseFloat(annualIncome).toLocaleString()}</div>}
-                    {desiredMoveIn && <div><span className="text-gray-500">Move-in:</span> {desiredMoveIn}</div>}
-                  </div>
-                </div>
-
-                {validation?.questions && validation.questions.length > 0 && (
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h3 className="font-medium text-gray-900 mb-2">Screening Answers</h3>
-                    <div className="space-y-2 text-sm">
-                      {validation.questions.map((q: ScreeningQuestion) => (
-                        <div key={q.id}>
-                          <span className="text-gray-500">{q.questionText}:</span>{" "}
-                          <span className="text-gray-900">{String(answers[q.id] ?? "—")}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
-                  By submitting this application, you consent to the property owner conducting
-                  background checks and verification as part of the screening process.
-                </div>
-              </div>
-
-              {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setStep(validation?.questions?.length ? "questions" : "personal")}
-                  className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  disabled={submitting}
-                  className="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50"
-                >
-                  {submitting ? "Submitting..." : "Submit Application"}
-                </button>
-              </div>
-            </>
-          )}
+          <ApplicationSummarySidebar
+            property={property}
+            disclosure={disclosure}
+            locale={locale}
+            title={t("applyFlow.sidebar.title")}
+            rentLabel={t("applyFlow.sidebar.rent")}
+            availabilityLabel={t("applyFlow.sidebar.availability")}
+            checksLabel={t("applyFlow.sidebar.screeningChecks")}
+            criteriaLabel={t("applyFlow.sidebar.criteria")}
+            emptyCriteriaLabel={t("applyFlow.disclosure.emptyCriteria")}
+            getCheckLabel={(checkType) => t(CHECK_TRANSLATION_KEYS[checkType])}
+            requiredChecks={validation?.requiredChecks ?? []}
+            criteria={validation?.screeningCriteriaSummary ?? []}
+          />
         </div>
       </div>
+    </div>
+  )
+}
+
+function PropertyStep({
+  property,
+  locale,
+  description,
+  startLabel,
+  bedsLabel,
+  bathsLabel,
+  sqftLabel,
+  monthlyLabel,
+  availabilityLabel,
+  onContinue,
+}: {
+  property: NonNullable<ApplicationLinkValidation["property"]>
+  locale: string
+  description: string
+  startLabel: string
+  bedsLabel: string
+  bathsLabel: string
+  sqftLabel: string
+  monthlyLabel: string
+  availabilityLabel: string
+  onContinue: () => void
+}) {
+  return (
+    <div className="space-y-6">
+      <p className="max-w-2xl text-sm leading-6 text-foreground/70">{description}</p>
+
+      {property.photos.length > 0 && (
+        <div className="relative h-72 overflow-hidden rounded-2xl border">
+          <PropertyImage
+            src={property.photos[0]?.url || ""}
+            alt={property.title}
+            className="h-full w-full object-cover"
+            priority
+          />
+        </div>
+      )}
+
+      <div className="grid gap-4 md:grid-cols-4">
+        <StatCard label={bedsLabel} value={String(property.bedrooms)} />
+        <StatCard label={bathsLabel} value={String(property.bathrooms)} />
+        <StatCard label={sqftLabel} value={formatNumber(property.sqft, locale) || "0"} />
+        <StatCard
+          label={monthlyLabel}
+          value={formatCurrency(property.price, locale) || ""}
+          caption={availabilityLabel}
+        />
+      </div>
+
+      {property.availability && (
+        <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-foreground/80">
+          <span className="font-medium text-foreground">{availabilityLabel}:</span>{" "}
+          {property.availability}
+        </div>
+      )}
+
+      {property.description && (
+        <div className="rounded-2xl border bg-muted/30 p-5 text-sm leading-6 text-foreground/75">
+          {property.description}
+        </div>
+      )}
+
+      <Button onClick={onContinue} size="lg" className="w-full sm:w-auto">
+        {startLabel}
+      </Button>
+    </div>
+  )
+}
+
+function DisclosureStep({
+  disclosure,
+  locale,
+  criteria,
+  requiredChecks,
+  acceptanceCriteria,
+  criteriaAcknowledged,
+  screeningConsent,
+  onCriteriaAcknowledgedChange,
+  onScreeningConsentChange,
+  disclosureTitle,
+  disclosureBody,
+  criteriaAcknowledgementLabel,
+  screeningConsentLabel,
+  futureFeeNotice,
+  emptyChargesLabel,
+  emptyUseBasedChargesLabel,
+  emptyCriteriaLabel,
+  rentLabel,
+  availabilityLabel,
+  fixedChargesLabel,
+  useBasedChargesLabel,
+  criteriaLabel,
+  requiredChecksLabel,
+  feeCollectionLabel,
+  refundInstructionsLabel,
+  ownerNotesLabel,
+  backLabel,
+  continueLabel,
+  error,
+  onBack,
+  onContinue,
+  getCheckLabel,
+}: {
+  disclosure: ApplicationDisclosure
+  locale: string
+  criteria: string[]
+  requiredChecks: VerificationCheckType[]
+  acceptanceCriteria?: AcceptanceCriteria
+  criteriaAcknowledged: boolean
+  screeningConsent: boolean
+  onCriteriaAcknowledgedChange: (value: boolean) => void
+  onScreeningConsentChange: (value: boolean) => void
+  disclosureTitle: string
+  disclosureBody: string
+  criteriaAcknowledgementLabel: string
+  screeningConsentLabel: string
+  futureFeeNotice: string
+  emptyChargesLabel: string
+  emptyUseBasedChargesLabel: string
+  emptyCriteriaLabel: string
+  rentLabel: string
+  availabilityLabel: string
+  fixedChargesLabel: string
+  useBasedChargesLabel: string
+  criteriaLabel: string
+  requiredChecksLabel: string
+  feeCollectionLabel: string
+  refundInstructionsLabel: string
+  ownerNotesLabel: string
+  backLabel: string
+  continueLabel: string
+  error: string
+  onBack: () => void
+  onContinue: () => void
+  getCheckLabel: (checkType: VerificationCheckType) => string
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-semibold text-foreground">{disclosureTitle}</h2>
+        <p className="max-w-2xl text-sm leading-6 text-foreground/70">{disclosureBody}</p>
+      </div>
+
+      {acceptanceCriteria && (
+        <div className="rounded-2xl border-2 border-amber-500/30 bg-amber-50/50 dark:bg-amber-950/20 p-5 space-y-4">
+          <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-200">
+            Acceptance Criteria — Please Review Before Proceeding
+          </h3>
+          <p className="text-sm text-amber-800 dark:text-amber-300">
+            Your application will be evaluated against the following criteria. Please ensure you meet these requirements before continuing.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {acceptanceCriteria.minimumCreditScore !== null && (
+              <div className="rounded-xl border bg-background px-4 py-3">
+                <div className="text-xs font-medium text-foreground/50">Minimum Credit Score</div>
+                <div className="text-lg font-semibold">{acceptanceCriteria.minimumCreditScore}</div>
+              </div>
+            )}
+            {acceptanceCriteria.minimumIncomeRatio !== null && (
+              <div className="rounded-xl border bg-background px-4 py-3">
+                <div className="text-xs font-medium text-foreground/50">Income Requirement</div>
+                <div className="text-lg font-semibold">{acceptanceCriteria.minimumIncomeRatio}x monthly rent</div>
+              </div>
+            )}
+            {acceptanceCriteria.noEvictionHistory && (
+              <div className="rounded-xl border bg-background px-4 py-3">
+                <div className="text-xs font-medium text-foreground/50">Eviction History</div>
+                <div className="text-sm font-medium">No prior evictions</div>
+              </div>
+            )}
+            {acceptanceCriteria.noCriminalHistory && (
+              <div className="rounded-xl border bg-background px-4 py-3">
+                <div className="text-xs font-medium text-foreground/50">Criminal History</div>
+                <div className="text-sm font-medium">No disqualifying criminal history</div>
+              </div>
+            )}
+          </div>
+          {acceptanceCriteria.requiredDocuments.length > 0 && (
+            <div>
+              <div className="text-sm font-medium text-amber-900 dark:text-amber-200 mb-2">Required Documents</div>
+              <div className="flex flex-wrap gap-2">
+                {acceptanceCriteria.requiredDocuments.map((doc) => (
+                  <Badge key={doc} variant="outline" className="rounded-full border-amber-500/40 text-amber-800 dark:text-amber-300">
+                    {doc}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+          <div className="grid gap-3 sm:grid-cols-2 text-sm">
+            <div>
+              <span className="text-foreground/50">Application Fee: </span>
+              <span className="font-medium">
+                {acceptanceCriteria.applicationFee !== null
+                  ? `${formatCurrency(acceptanceCriteria.applicationFee, locale)}${acceptanceCriteria.feeRefundable ? " (refundable)" : " (non-refundable)"}`
+                  : "No fee at this time"}
+              </span>
+            </div>
+            <div>
+              <span className="text-foreground/50">Processing Time: </span>
+              <span className="font-medium">{acceptanceCriteria.processingTime}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        <InfoPanel label={rentLabel} value={formatCurrency(disclosure.rentAmount, locale) || "—"} />
+        <InfoPanel label={availabilityLabel} value={disclosure.availability || "—"} />
+      </div>
+
+      <SectionCard title={fixedChargesLabel}>
+        {disclosure.fixedNonRentCharges.length === 0 ? (
+          <p className="text-sm text-foreground/60">{emptyChargesLabel}</p>
+        ) : (
+          <div className="space-y-3">
+            {disclosure.fixedNonRentCharges.map((charge, index) => (
+              <div
+                key={`${charge.label}-${index}`}
+                className="flex flex-wrap items-center justify-between gap-2 rounded-xl border bg-background px-4 py-3 text-sm"
+              >
+                <div className="font-medium text-foreground">{charge.label}</div>
+                <div className="text-foreground/70">
+                  {charge.amount !== null ? formatCurrency(charge.amount, locale) : "—"}
+                  {charge.frequency ? ` • ${charge.frequency}` : ""}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </SectionCard>
+
+      <SectionCard title={useBasedChargesLabel}>
+        {disclosure.useBasedChargeCategories.length === 0 ? (
+          <p className="text-sm text-foreground/60">{emptyUseBasedChargesLabel}</p>
+        ) : (
+          <div className="flex flex-wrap gap-2">
+            {disclosure.useBasedChargeCategories.map((category) => (
+              <Badge key={category} variant="secondary" className="rounded-full px-3 py-1">
+                {category}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </SectionCard>
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        <SectionCard title={criteriaLabel}>
+          {criteria.length === 0 ? (
+            <p className="text-sm text-foreground/60">{emptyCriteriaLabel}</p>
+          ) : (
+            <ul className="space-y-2 text-sm leading-6 text-foreground/80">
+              {criteria.map((criterion) => (
+                <li key={criterion} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span>{criterion}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </SectionCard>
+
+        <SectionCard title={requiredChecksLabel}>
+          <div className="flex flex-wrap gap-2">
+            {requiredChecks.map((checkType) => (
+              <Badge key={checkType} className="rounded-full px-3 py-1">
+                {getCheckLabel(checkType)}
+              </Badge>
+            ))}
+          </div>
+        </SectionCard>
+      </div>
+
+      {disclosure.applicantDisclosureNotes && (
+        <SectionCard title={ownerNotesLabel}>
+          <p className="text-sm leading-6 text-foreground/80">{disclosure.applicantDisclosureNotes}</p>
+        </SectionCard>
+      )}
+
+      <SectionCard title={feeCollectionLabel}>
+        <p className="text-sm leading-6 text-foreground/80">{disclosure.feeCollectionStatus}</p>
+      </SectionCard>
+
+      <SectionCard title={refundInstructionsLabel}>
+        <p className="text-sm leading-6 text-foreground/80">{disclosure.refundRecoveryInstructions}</p>
+      </SectionCard>
+
+      <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 text-sm leading-6 text-foreground/80">
+        {futureFeeNotice}
+      </div>
+
+      <div className="space-y-4 rounded-2xl border bg-muted/30 p-5">
+        <label className="flex items-start gap-3 text-sm leading-6 text-foreground/80">
+          <Checkbox
+            checked={criteriaAcknowledged}
+            onCheckedChange={(checked) => onCriteriaAcknowledgedChange(checked === true)}
+            className="mt-1"
+          />
+          <span>{criteriaAcknowledgementLabel}</span>
+        </label>
+
+        <label className="flex items-start gap-3 text-sm leading-6 text-foreground/80">
+          <Checkbox
+            checked={screeningConsent}
+            onCheckedChange={(checked) => onScreeningConsentChange(checked === true)}
+            className="mt-1"
+          />
+          <span>{screeningConsentLabel}</span>
+        </label>
+      </div>
+
+      {error && <p className="text-sm text-destructive">{error}</p>}
+
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Button variant="outline" onClick={onBack} className="sm:min-w-36">
+          {backLabel}
+        </Button>
+        <Button onClick={onContinue} className="sm:min-w-44">
+          {continueLabel}
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+function PersonalStep({
+  firstName,
+  lastName,
+  email,
+  phone,
+  dateOfBirth,
+  currentAddress,
+  employer,
+  annualIncome,
+  desiredMoveIn,
+  onFirstNameChange,
+  onLastNameChange,
+  onEmailChange,
+  onPhoneChange,
+  onDateOfBirthChange,
+  onCurrentAddressChange,
+  onEmployerChange,
+  onAnnualIncomeChange,
+  onDesiredMoveInChange,
+  onBack,
+  onContinue,
+  submitting,
+  error,
+  backLabel,
+  continueLabel,
+  savingLabel,
+  title,
+  subtitle,
+  labels,
+  placeholders,
+  affordabilityCalculator,
+}: {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  dateOfBirth: string
+  currentAddress: string
+  employer: string
+  annualIncome: string
+  desiredMoveIn: string
+  onFirstNameChange: (value: string) => void
+  onLastNameChange: (value: string) => void
+  onEmailChange: (value: string) => void
+  onPhoneChange: (value: string) => void
+  onDateOfBirthChange: (value: string) => void
+  onCurrentAddressChange: (value: string) => void
+  onEmployerChange: (value: string) => void
+  onAnnualIncomeChange: (value: string) => void
+  onDesiredMoveInChange: (value: string) => void
+  onBack: () => void
+  onContinue: () => void
+  submitting: boolean
+  error: string
+  backLabel: string
+  continueLabel: string
+  savingLabel: string
+  title: string
+  subtitle: string
+  labels: Record<string, string>
+  placeholders: Record<string, string>
+  affordabilityCalculator: ReactNode
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
+        <p className="text-sm leading-6 text-foreground/70">{subtitle}</p>
+      </div>
+
+      {error && <p className="text-sm text-destructive">{error}</p>}
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Field label={labels.firstName} required>
+          <Input value={firstName} onChange={(event) => onFirstNameChange(event.target.value)} />
+        </Field>
+        <Field label={labels.lastName} required>
+          <Input value={lastName} onChange={(event) => onLastNameChange(event.target.value)} />
+        </Field>
+      </div>
+
+      <Field label={labels.email} required>
+        <Input type="email" value={email} onChange={(event) => onEmailChange(event.target.value)} />
+      </Field>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Field label={labels.phone}>
+          <Input
+            type="tel"
+            value={phone}
+            onChange={(event) => onPhoneChange(event.target.value)}
+            placeholder={placeholders.phone}
+          />
+        </Field>
+        <Field label={labels.dateOfBirth}>
+          <Input
+            type="date"
+            value={dateOfBirth}
+            onChange={(event) => onDateOfBirthChange(event.target.value)}
+          />
+        </Field>
+      </div>
+
+      <Field label={labels.currentAddress}>
+        <Textarea
+          value={currentAddress}
+          onChange={(event) => onCurrentAddressChange(event.target.value)}
+          placeholder={placeholders.currentAddress}
+          rows={3}
+        />
+      </Field>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Field label={labels.employer}>
+          <Input
+            value={employer}
+            onChange={(event) => onEmployerChange(event.target.value)}
+            placeholder={placeholders.employer}
+          />
+        </Field>
+        <Field label={labels.annualIncome}>
+          <Input
+            type="number"
+            value={annualIncome}
+            onChange={(event) => onAnnualIncomeChange(event.target.value)}
+            placeholder={placeholders.annualIncome}
+          />
+        </Field>
+      </div>
+
+      <Field label={labels.desiredMoveIn}>
+        <Input
+          type="date"
+          value={desiredMoveIn}
+          onChange={(event) => onDesiredMoveInChange(event.target.value)}
+        />
+      </Field>
+
+      {affordabilityCalculator}
+
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Button variant="outline" onClick={onBack} className="sm:min-w-36">
+          {backLabel}
+        </Button>
+        <Button
+          onClick={onContinue}
+          disabled={!firstName || !lastName || !email || submitting}
+          className="sm:min-w-44"
+        >
+          {submitting ? savingLabel : continueLabel}
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+function QuestionsStep({
+  questions,
+  answers,
+  error,
+  title,
+  subtitle,
+  yesLabel,
+  noLabel,
+  requiredLabel,
+  backLabel,
+  continueLabel,
+  onAnswerChange,
+  onBack,
+  onContinue,
+}: {
+  questions: ScreeningQuestion[]
+  answers: Record<string, unknown>
+  error: string
+  title: string
+  subtitle: string
+  yesLabel: string
+  noLabel: string
+  requiredLabel: string
+  backLabel: string
+  continueLabel: string
+  onAnswerChange: (questionId: string, value: unknown) => void
+  onBack: () => void
+  onContinue: () => void
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
+        <p className="text-sm leading-6 text-foreground/70">{subtitle}</p>
+      </div>
+
+      {error && <p className="text-sm text-destructive">{error}</p>}
+
+      <div className="space-y-6">
+        {questions.map((question) => (
+          <div key={question.id} className="rounded-2xl border bg-muted/20 p-5">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <Label className="text-base font-medium leading-6 text-foreground">
+                {question.questionText}
+              </Label>
+              {question.isRequired && <Badge variant="secondary">{requiredLabel}</Badge>}
+            </div>
+
+            {question.questionType === "text" && (
+              <Textarea
+                value={typeof answers[question.id] === "string" ? String(answers[question.id]) : ""}
+                onChange={(event) => onAnswerChange(question.id, event.target.value)}
+                rows={4}
+              />
+            )}
+
+            {question.questionType === "yes_no" && (
+              <div className="flex flex-wrap gap-4">
+                {[
+                  { label: yesLabel, value: "yes" },
+                  { label: noLabel, value: "no" },
+                ].map((option) => (
+                  <label key={option.value} className="flex items-center gap-2 text-sm text-foreground/80">
+                    <input
+                      type="radio"
+                      name={question.id}
+                      checked={answers[question.id] === option.value}
+                      onChange={() => onAnswerChange(question.id, option.value)}
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+
+            {question.questionType === "number" && (
+              <Input
+                type="number"
+                value={typeof answers[question.id] === "number" ? String(answers[question.id]) : ""}
+                onChange={(event) =>
+                  onAnswerChange(
+                    question.id,
+                    event.target.value === "" ? null : Number.parseFloat(event.target.value)
+                  )
+                }
+              />
+            )}
+
+            {question.questionType === "multiple_choice" && question.options && (
+              <div className="space-y-2">
+                {(question.options as string[]).map((option) => (
+                  <label key={option} className="flex items-center gap-2 text-sm text-foreground/80">
+                    <input
+                      type="radio"
+                      name={question.id}
+                      checked={answers[question.id] === option}
+                      onChange={() => onAnswerChange(question.id, option)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Button variant="outline" onClick={onBack} className="sm:min-w-36">
+          {backLabel}
+        </Button>
+        <Button onClick={onContinue} className="sm:min-w-44">
+          {continueLabel}
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+function ReviewStep({
+  firstName,
+  lastName,
+  email,
+  phone,
+  employer,
+  annualIncome,
+  desiredMoveIn,
+  questions,
+  answers,
+  requiredChecks,
+  onBack,
+  onSubmit,
+  submitting,
+  error,
+  backLabel,
+  title,
+  submitLabel,
+  submittingLabel,
+  personalInfoLabel,
+  answersLabel,
+  screeningLabel,
+  consentSummaryLabel,
+  disclosureConfirmedLabel,
+  emptyAnswerLabel,
+  fields,
+  getCheckLabel,
+  locale,
+}: {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  employer: string
+  annualIncome: string
+  desiredMoveIn: string
+  questions: ScreeningQuestion[]
+  answers: Record<string, unknown>
+  requiredChecks: VerificationCheckType[]
+  onBack: () => void
+  onSubmit: () => void
+  submitting: boolean
+  error: string
+  backLabel: string
+  title: string
+  submitLabel: string
+  submittingLabel: string
+  personalInfoLabel: string
+  answersLabel: string
+  screeningLabel: string
+  consentSummaryLabel: string
+  disclosureConfirmedLabel: string
+  emptyAnswerLabel: string
+  fields: Record<string, string>
+  getCheckLabel: (checkType: VerificationCheckType) => string
+  locale: string
+}) {
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
+
+      <SectionCard title={personalInfoLabel}>
+        <div className="grid gap-3 text-sm text-foreground/80 md:grid-cols-2">
+          <ReviewField label={fields.name} value={`${firstName} ${lastName}`.trim()} />
+          <ReviewField label={fields.email} value={email} />
+          {phone && <ReviewField label={fields.phone} value={phone} />}
+          {employer && <ReviewField label={fields.employer} value={employer} />}
+          {annualIncome && (
+            <ReviewField
+              label={fields.income}
+              value={formatCurrency(Number.parseFloat(annualIncome), locale) || annualIncome}
+            />
+          )}
+          {desiredMoveIn && <ReviewField label={fields.moveIn} value={desiredMoveIn} />}
+        </div>
+      </SectionCard>
+
+      {questions.length > 0 && (
+        <SectionCard title={answersLabel}>
+          <div className="space-y-3 text-sm text-foreground/80">
+            {questions.map((question) => (
+              <ReviewField
+                key={question.id}
+                label={question.questionText}
+                value={formatAnswerValue(answers[question.id], emptyAnswerLabel)}
+              />
+            ))}
+          </div>
+        </SectionCard>
+      )}
+
+      <SectionCard title={screeningLabel}>
+        <div className="flex flex-wrap gap-2">
+          {requiredChecks.map((checkType) => (
+            <Badge key={checkType} className="rounded-full px-3 py-1">
+              {getCheckLabel(checkType)}
+            </Badge>
+          ))}
+        </div>
+      </SectionCard>
+
+      <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 text-sm leading-6 text-foreground/80">
+        <span className="font-medium text-foreground">{consentSummaryLabel}:</span>{" "}
+        {disclosureConfirmedLabel}
+      </div>
+
+      {error && <p className="text-sm text-destructive">{error}</p>}
+
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Button variant="outline" onClick={onBack} className="sm:min-w-36">
+          {backLabel}
+        </Button>
+        <Button onClick={onSubmit} disabled={submitting} className="sm:min-w-52">
+          {submitting ? submittingLabel : submitLabel}
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+function ApplicationSummarySidebar({
+  property,
+  disclosure,
+  locale,
+  title,
+  rentLabel,
+  availabilityLabel,
+  checksLabel,
+  criteriaLabel,
+  emptyCriteriaLabel,
+  getCheckLabel,
+  requiredChecks,
+  criteria,
+}: {
+  property: ApplicationLinkValidation["property"]
+  disclosure: ApplicationDisclosure | undefined
+  locale: string
+  title: string
+  rentLabel: string
+  availabilityLabel: string
+  checksLabel: string
+  criteriaLabel: string
+  emptyCriteriaLabel: string
+  getCheckLabel: (checkType: VerificationCheckType) => string
+  requiredChecks: VerificationCheckType[]
+  criteria: string[]
+}) {
+  return (
+    <Card className="h-fit">
+      <CardHeader>
+        <CardTitle className="text-lg">{title}</CardTitle>
+        <CardDescription>{property?.title}</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-5">
+        <InfoPanel
+          label={rentLabel}
+          value={formatCurrency(disclosure?.rentAmount ?? property?.price, locale) || "—"}
+        />
+        <InfoPanel
+          label={availabilityLabel}
+          value={disclosure?.availability || property?.availability || "—"}
+        />
+
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold text-foreground">{checksLabel}</h3>
+          <div className="flex flex-wrap gap-2">
+            {requiredChecks.map((checkType) => (
+              <Badge key={checkType} variant="outline" className="rounded-full px-3 py-1">
+                {getCheckLabel(checkType)}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold text-foreground">{criteriaLabel}</h3>
+          {criteria.length === 0 ? (
+            <p className="text-sm text-foreground/60">{emptyCriteriaLabel}</p>
+          ) : (
+            <ul className="space-y-2 text-sm leading-6 text-foreground/75">
+              {criteria.map((criterion) => (
+                <li key={criterion}>{criterion}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+function Field({
+  label,
+  required = false,
+  children,
+}: {
+  label: string
+  required?: boolean
+  children: ReactNode
+}) {
+  return (
+    <div className="space-y-2">
+      <Label className="text-sm font-medium text-foreground">
+        {label}
+        {required && <span className="ml-1 text-destructive">*</span>}
+      </Label>
+      {children}
+    </div>
+  )
+}
+
+function SectionCard({
+  title,
+  children,
+}: {
+  title: string
+  children: ReactNode
+}) {
+  return (
+    <div className="rounded-2xl border bg-muted/20 p-5">
+      <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-foreground/55">
+        {title}
+      </h3>
+      {children}
+    </div>
+  )
+}
+
+function StatCard({
+  label,
+  value,
+  caption,
+}: {
+  label: string
+  value: string
+  caption?: string
+}) {
+  return (
+    <div className="rounded-2xl border bg-muted/20 p-4">
+      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/50">{label}</div>
+      <div className="mt-2 text-2xl font-semibold text-foreground">{value}</div>
+      {caption && <div className="mt-1 text-xs text-foreground/55">{caption}</div>}
+    </div>
+  )
+}
+
+function InfoPanel({
+  label,
+  value,
+}: {
+  label: string
+  value: string
+}) {
+  return (
+    <div className="rounded-2xl border bg-background px-4 py-3">
+      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/50">{label}</div>
+      <div className="mt-2 text-sm font-medium text-foreground">{value}</div>
+    </div>
+  )
+}
+
+function ReviewField({
+  label,
+  value,
+}: {
+  label: string
+  value: string
+}) {
+  return (
+    <div className="rounded-xl border bg-background px-4 py-3">
+      <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/50">
+        {label}
+      </span>
+      <span className="mt-1 block text-sm text-foreground">{value}</span>
     </div>
   )
 }

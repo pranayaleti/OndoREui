@@ -134,5 +134,278 @@
     "faq2A": "Il n'y a pas de paiements en espèces. Vous gagnez des mois gratuits d'accès Ondo RE (jusqu'à 24 mois) et des entrées supplémentaires au tirage.",
     "faq3Q": "Quand est-ce que je reçois mon lien de parrainage ?",
     "faq3A": "Une fois votre candidature approuvée, nous vous enverrons votre code unique par e-mail."
+  },
+  "leadPopup": {
+    "title": "Vous voulez une prochaine étape plus simple ?",
+    "body": "Partagez votre nom et votre e-mail, et nous vous aiderons à rendre la suite plus simple et moins stressante. Nous ne le demandons qu'une seule fois et nous ne vendons ni ne partageons jamais vos informations.",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Votre nom",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "submitCta": "Obtenir une aide personnalisée",
+    "dismissCta": "Pas maintenant",
+    "submitting": "Envoi en cours...",
+    "privacyNotice": "Consultez notre <privacyLink>Politique de confidentialité</privacyLink>.",
+    "successTitle": "Merci d'avoir partagé vos informations.",
+    "successBody": "Nous vous recontacterons bientôt avec une prochaine étape plus personnalisée.",
+    "submitError": "Nous n'avons pas pu enregistrer vos informations pour le moment. Veuillez réessayer.",
+    "validation": {
+      "nameRequired": "Veuillez saisir votre nom.",
+      "emailRequired": "Veuillez saisir votre adresse e-mail.",
+      "emailInvalid": "Veuillez saisir une adresse e-mail valide."
+    }
+  },
+  "demo": {
+    "bannerTitle": "Ouvrez le hub de démo Ondo",
+    "bannerSubtitle": "Regardez la visite, utilisez les identifiants préremplis et entrez dans le bac à sable en direct quand vous êtes prêt.",
+    "heroKicker": "Démo en libre-service",
+    "heroTitle": "Découvrez l’expérience Manager, Owner et Tenant avant de réserver un appel.",
+    "heroBody": "Cette page est le point d’entrée public vers l’environnement de démonstration Ondo. Regardez la visite enregistrée, consultez les identifiants de connexion préchargés et lancez le bac à sable en direct lorsque le lien de démo est activé.",
+    "openLiveDemo": "Ouvrir la démo en direct",
+    "bookGuidedDemo": "Réserver une démo guidée",
+    "heroAvailability": "Ce bac à sable utilise des données d’exemple préchargées et se réinitialise régulièrement pour vous permettre d’explorer en toute sécurité.",
+    "videoTitle": "Vidéo de visite",
+    "videoBody": "Commencez ici pour obtenir l’aperçu le plus rapide des parcours Manager, Owner et Tenant.",
+    "videoEmbedTitle": "Vidéo de démonstration Ondo",
+    "videoFallbackTitle": "Vidéo de visite bientôt disponible",
+    "videoFallbackBody": "Ajoutez NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL pour afficher ici la visite enregistrée de la démo.",
+    "credentialsTitle": "Utilisez l’un des rôles de démo préchargés",
+    "credentialsBody": "Chaque compte ouvre un espace de travail différent dans le même environnement de démonstration.",
+    "openRoleLogin": "Ouvrir la connexion démo",
+    "galleryTitle": "Aperçu des parcours à montrer",
+    "galleryBody": "Ces cartes d’aperçu indiquent les écrans à mettre en avant dans la vidéo enregistrée et la galerie.",
+    "previewEyebrow": "Focus capture",
+    "previewLiveSlot": "Vue démo",
+    "sandboxTitle": "Règles du bac à sable",
+    "sandboxBody": "Utilisez cet espace uniquement pour explorer. Il contient des données d’exemple, peut être réinitialisé sans préavis et ne doit jamais recevoir de documents privés ni d’informations de paiement réelles.",
+    "guidedKicker": "Visite guidée",
+    "guidedTitle": "Vous voulez une démo adaptée à votre flux ?",
+    "guidedBody": "Partagez quelques détails ci-dessous et nous construirons la visite en direct autour de vos questions de portefeuille, d’opérations ou d’expérience locataire.",
+    "labels": {
+      "email": "E-mail",
+      "password": "Mot de passe"
+    },
+    "form": {
+      "firstNameLabel": "Prénom *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "Nom *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "E-mail *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "Téléphone",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "Je suis...",
+      "unitsLabel": "Nombre d’unités",
+      "unitsPlaceholder": "ex. 5",
+      "timeLabel": "Créneau préféré",
+      "timePlaceholder": "ex. matins en semaine",
+      "success": "Merci. Nous vous recontacterons sous 1 jour ouvré pour confirmer votre démo.",
+      "error": "Un problème est survenu. Écrivez-nous à",
+      "errorSuffix": "ou réessayez.",
+      "submitting": "Envoi en cours...",
+      "submit": "Réserver ma démo guidée",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investisseur",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "Idéal pour les opérateurs qui ont besoin d’une vue portefeuille, location, maintenance et reporting au même endroit.",
+        "feature1": "Surveillez biens, leads et encaissement des loyers depuis un seul tableau de bord.",
+        "feature2": "Consultez les files de maintenance, messages et mises à jour owners sans changer d’outil.",
+        "feature3": "Utilisez l’assistant pour résumer les sujets du portefeuille et les prochaines actions.",
+        "previewTitle": "Espace Manager",
+        "previewHeadline": "Centre de pilotage du portefeuille",
+        "previewBody": "Mettez en avant la vue quotidienne pour les opérations, les conversations et le suivi financier.",
+        "stat1Label": "Accès",
+        "stat1Value": "Multi-biens",
+        "stat2Label": "Focus",
+        "stat2Value": "Visibilité ops",
+        "previewItem1": "Santé du parc et occupation",
+        "previewItem2": "Triage et suivi maintenance",
+        "previewItem3": "Assistant IA et rapports"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "Idéal pour les owners qui veulent visibilité portefeuille, documents, suivi maintenance et reporting financier.",
+        "feature1": "Consultez vos biens, documents et niveaux d’occupation en un coup d’œil.",
+        "feature2": "Suivez l’avancement maintenance, l’historique des paiements et les rapports owner.",
+        "feature3": "Utilisez l’assistant pour répondre aux questions du portefeuille sans attendre un rapport manuel.",
+        "previewTitle": "Espace Owner",
+        "previewHeadline": "Vue de reporting owner",
+        "previewBody": "Montrez comment les owners restent informés sans fouiller dans des tableurs ou des fils de messages.",
+        "stat1Label": "Accès",
+        "stat1Value": "Portail owner",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Résumé portefeuille et documents",
+        "previewItem2": "Visibilité maintenance",
+        "previewItem3": "Paiements et rapports"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "Idéal pour les résidents qui ont besoin de paiements, documents, maintenance, messages et assistance en libre-service.",
+        "feature1": "Payez le loyer, consultez les soldes et conservez les reçus dans un seul portail.",
+        "feature2": "Soumettez des demandes de maintenance et suivez leur statut avec moins d’allers-retours.",
+        "feature3": "Accédez aux documents, messages et paramètres personnels depuis la même connexion.",
+        "previewTitle": "Espace Tenant",
+        "previewHeadline": "Libre-service résident",
+        "previewBody": "Utilisez cette vue pour montrer comment les tenants gèrent les tâches courantes sans appeler le bureau.",
+        "stat1Label": "Accès",
+        "stat1Value": "Portail tenant",
+        "stat2Label": "Focus",
+        "stat2Value": "Libre-service",
+        "previewItem1": "Paiements et reçus",
+        "previewItem2": "Demandes de maintenance",
+        "previewItem3": "Messages et documents"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "Laissez-nous vous aider à investir dans l'Utah",
+      "title": "Pourquoi l'<highlight>Utah</highlight> est l'un des meilleurs endroits du pays pour investir",
+      "body": "L'Utah combine une économie stable, une forte croissance démographique locale et l'élan des Jeux olympiques d'hiver de 2034, créant une dynamique durable pour les investisseurs immobiliers."
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "Chargement de votre demande",
+      "body": "Nous vérifions le lien de demande et les détails du bien."
+    },
+    "error": {
+      "title": "Lien de demande indisponible"
+    },
+    "submitted": {
+      "title": "Demande envoyée",
+      "body": "Votre demande pour {{property}} a bien été envoyée.",
+      "followUp": "Nous vous enverrons un e-mail lorsque l'équipe du bien mettra à jour votre statut."
+    },
+    "progressLabel": "Progression de la demande",
+    "progress": {
+      "property": "Bien",
+      "disclosure": "Critères et divulgations",
+      "personal": "Infos personnelles",
+      "questions": "Questions",
+      "review": "Révision"
+    },
+    "property": {
+      "description": "Consultez les détails de la location avant de passer aux étapes de divulgation et de demande.",
+      "start": "Examiner les critères et continuer",
+      "bedrooms": "Chambres",
+      "bathrooms": "Salles de bain",
+      "sqft": "Pieds carrés",
+      "monthlyRent": "Loyer mensuel",
+      "availability": "Disponibilité"
+    },
+    "messages": {
+      "invalidLink": "Ce lien de demande est invalide ou a expiré.",
+      "validationFailed": "Nous n'avons pas pu vérifier ce lien de demande pour le moment.",
+      "createFailed": "Nous n'avons pas encore pu enregistrer vos informations personnelles.",
+      "answerRequiredQuestions": "Veuillez répondre à toutes les questions obligatoires avant de continuer.",
+      "missingApplicationContext": "Les informations de divulgation sont manquantes. Veuillez recommencer la demande depuis le début.",
+      "consentRequired": "Veuillez accepter les critères et autoriser le contrôle avant de continuer.",
+      "submitFailed": "Nous n'avons pas pu envoyer votre demande pour le moment."
+    },
+    "disclosure": {
+      "title": "Révision des critères et divulgations",
+      "body": "Veuillez examiner les critères d'acceptation du propriétaire, les contrôles de sélection et les divulgations locatives avant de poursuivre.",
+      "criteriaAcknowledgementLabel": "J'ai examiné les critères d'acceptation du propriétaire et les divulgations locatives affichées sur cette page.",
+      "screeningConsentLabel": "J'autorise Ondo Real Estate et le propriétaire à effectuer les contrôles de sélection divulgués pour cette demande.",
+      "futureFeeNotice": "Si ce parcours ajoute plus tard des frais de dossier, la divulgation des frais et le passage au paiement apparaîtront à cette étape avant toute demande de paiement.",
+      "emptyCharges": "Aucun frais fixe hors loyer n'a été divulgué pour cette annonce.",
+      "emptyUseBasedCharges": "Aucune catégorie de frais liés à l'usage n'a été divulguée pour cette annonce.",
+      "emptyCriteria": "Aucun critère supplémentaire du propriétaire n'a été indiqué pour ce bien.",
+      "rent": "Loyer",
+      "availability": "Disponibilité",
+      "fixedCharges": "Frais fixes hors loyer connus",
+      "useBasedCharges": "Catégories de frais liés à l'usage",
+      "criteria": "Critères d'acceptation du propriétaire",
+      "requiredChecks": "Contrôles de sélection requis",
+      "feeCollectionStatus": "Statut des frais de dossier",
+      "refundRecoveryInstructions": "Informations sur les remboursements et l'accès aux rapports",
+      "ownerNotes": "Notes du propriétaire",
+      "continue": "Continuer vers les informations personnelles"
+    },
+    "personal": {
+      "title": "Informations personnelles",
+      "subtitle": "Partagez les informations nécessaires pour créer votre dossier de demande avant le début du contrôle.",
+      "continue": "Continuer",
+      "saving": "Enregistrement...",
+      "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "dateOfBirth": "Date de naissance",
+        "currentAddress": "Adresse actuelle",
+        "employer": "Employeur",
+        "annualIncome": "Revenu annuel",
+        "desiredMoveIn": "Date d'emménagement souhaitée"
+      },
+      "placeholders": {
+        "phone": "ex. +1 (801) 555-0100",
+        "currentAddress": "Rue, ville, État, code postal",
+        "employer": "Entreprise ou organisation",
+        "annualIncome": "ex. 75000"
+      }
+    },
+    "questions": {
+      "title": "Questions de sélection",
+      "subtitle": "Répondez aux questions personnalisées ajoutées par le propriétaire pour cette annonce.",
+      "yes": "Oui",
+      "no": "Non",
+      "required": "Obligatoire",
+      "continue": "Vérifier la demande"
+    },
+    "review": {
+      "title": "Vérifiez votre demande",
+      "submit": "Envoyer la demande",
+      "submitting": "Envoi...",
+      "personalInfo": "Informations personnelles",
+      "answers": "Réponses de sélection",
+      "screeningChecks": "Contrôles de sélection",
+      "consentSummary": "Confirmation des divulgations",
+      "disclosureConfirmed": "Vous avez confirmé les critères du propriétaire et autorisé les contrôles de sélection divulgués.",
+      "emptyAnswer": "Sans réponse",
+      "fields": {
+        "name": "Nom",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "employer": "Employeur",
+        "income": "Revenu",
+        "moveIn": "Date d'emménagement"
+      }
+    },
+    "sidebar": {
+      "title": "Résumé de la demande",
+      "rent": "Loyer",
+      "availability": "Disponibilité",
+      "screeningChecks": "Contrôles de sélection",
+      "criteria": "Résumé des critères"
+    },
+    "requiredChecks": {
+      "credit": "Vérification de crédit",
+      "criminal": "Vérification des antécédents judiciaires",
+      "eviction": "Vérification des expulsions",
+      "income": "Vérification des revenus",
+      "identity": "Vérification d'identité",
+      "references": "Vérification des références"
+    },
+    "affordability": {
+      "title": "Vérification d'accessibilité financière",
+      "requirement": "Ce bien utilise un ratio minimum revenus/loyer de {{ratio}}x, soit environ {{amount}} par an.",
+      "inputLabel": "Votre revenu annuel (USD)",
+      "placeholder": "ex. 75000",
+      "meets": "Vous respectez actuellement l'exigence (ratio de {{ratio}}x).",
+      "below": "Vous êtes en dessous de l'exigence (ratio de {{ratio}}x ; {{requiredRatio}}x requis)."
+    }
   }
 }

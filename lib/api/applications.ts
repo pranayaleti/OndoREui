@@ -29,6 +29,7 @@ export interface PropertySummary {
   title: string
   description: string | null
   address: string
+  availability: string | null
   price: number
   bedrooms: number
   bathrooms: number
@@ -45,12 +46,68 @@ export interface ScreeningQuestion {
   isRequired: boolean
 }
 
+export type VerificationCheckType =
+  | "credit"
+  | "criminal"
+  | "eviction"
+  | "income"
+  | "identity"
+  | "references"
+
+export interface AcceptanceCriteria {
+  minimumCreditScore: number | null
+  minimumIncomeRatio: number | null
+  noEvictionHistory: boolean
+  noCriminalHistory: boolean
+  requiredDocuments: string[]
+  applicationFee: number | null
+  feeRefundable: boolean
+  processingTime: string
+  ownerCriteria: string[]
+}
+
 export interface ApplicationLinkValidation {
   valid: boolean
   link?: { token: string; propertyId: string; linkType: string }
   property?: PropertySummary
   questions?: ScreeningQuestion[]
+  applicationDisclosure?: ApplicationDisclosure
+  screeningCriteriaSummary?: string[]
+  requiredChecks?: VerificationCheckType[]
+  consentCopy?: ConsentCopy
+  disclosureSnapshot?: ApplicationDisclosureSnapshot
+  acceptanceCriteria?: AcceptanceCriteria
   error?: string
+}
+
+export interface ApplicationDisclosure {
+  rentAmount: number | null
+  availability: string | null
+  fixedNonRentCharges: Array<{ label: string; amount: number | null; frequency: string | null }>
+  useBasedChargeCategories: string[]
+  ownerCriteria: string[]
+  applicantDisclosureNotes: string | null
+  feeCollectionStatus: string
+  refundRecoveryInstructions: string
+}
+
+export interface ConsentCopy {
+  version: string
+  disclosureTitle: string
+  disclosureBody: string
+  criteriaAcknowledgementLabel: string
+  screeningConsentLabel: string
+  futureFeeNotice: string
+}
+
+export interface ApplicationDisclosureSnapshot {
+  version: string
+  locale: string
+  generatedAt: string
+  applicationDisclosure: ApplicationDisclosure
+  screeningCriteriaSummary: string[]
+  requiredChecks: VerificationCheckType[]
+  consentCopy: ConsentCopy
 }
 
 export interface TenantApplication {
@@ -78,7 +135,7 @@ export interface ApplicationAnswer {
 
 export interface VerificationCheck {
   id: string
-  checkType: string
+  checkType: VerificationCheckType
   status: string
   passes: boolean | null
   completedAt: string | null
@@ -99,10 +156,14 @@ async function authFetch(path: string, init?: RequestInit): Promise<Response> {
 
 // ── Public endpoints ──────────────────────────────────────────────────────────
 
-export async function validateApplyToken(token: string): Promise<ApplicationLinkValidation> {
-  const res = await fetch(backendUrl(`/api/apply/${token}`))
+export async function validateApplyToken(
+  token: string,
+  locale?: string
+): Promise<ApplicationLinkValidation> {
+  const headers = locale ? { "Accept-Language": locale } : undefined
+  const res = await fetch(backendUrl(`/api/apply/${token}`), { headers })
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ message: "Invalid link" }))
+    const err = await res.json().catch(() => ({ message: "" }))
     return { valid: false, error: err.message }
   }
   const data = await res.json()
@@ -127,7 +188,7 @@ export async function createApplication(payload: {
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
-    throw new Error(err.message ?? "Failed to create application")
+    throw new Error(err.message ?? "")
   }
   const data = await res.json()
   return data.data
@@ -135,15 +196,22 @@ export async function createApplication(payload: {
 
 export async function submitApplication(
   applicationId: string,
-  answers: { questionId: string; answer: unknown }[]
+  payload: {
+    token: string
+    answers: { questionId: string; answer: unknown }[]
+    criteriaAcknowledged: true
+    screeningConsent: true
+    consentVersion: string
+    disclosureSnapshot: ApplicationDisclosureSnapshot
+  }
 ): Promise<TenantApplication> {
   const res = await authFetch(`/api/applications/${applicationId}/submit`, {
     method: "POST",
-    body: JSON.stringify({ answers }),
+    body: JSON.stringify(payload),
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
-    throw new Error(err.message ?? "Failed to submit application")
+    throw new Error(err.message ?? "")
   }
   const data = await res.json()
   return data.data

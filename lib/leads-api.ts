@@ -1,7 +1,7 @@
 import { backendUrl } from "@/lib/backend"
 import type { MarketingAttribution } from "@/lib/attribution"
 
-export type ContactLeadSource = "website" | "referral" | "direct" | "social" | "ad"
+export type ContactLeadSource = "website" | "referral" | "direct" | "social" | "ad" | "popup"
 
 export interface SubmitContactLeadPayload {
   name: string

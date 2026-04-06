@@ -134,5 +134,278 @@
     "faq2A": "Non ci sono pagamenti in denaro. Guadagni mesi gratis di accesso a Ondo RE (fino a 24 mesi) e voci extra per l'estrazione.",
     "faq3Q": "Quando ricevo il mio link referral?",
     "faq3A": "Una volta approvata la tua candidatura, ti invieremo il codice univoco via email."
+  },
+  "leadPopup": {
+    "title": "Vuoi un prossimo passo piu semplice?",
+    "body": "Condividi il tuo nome e la tua email e ti aiuteremo a rendere il percorso piu semplice e meno stressante. Te lo chiediamo solo una volta e non vendiamo ne condividiamo mai le tue informazioni.",
+    "nameLabel": "Nome",
+    "namePlaceholder": "Il tuo nome",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@esempio.com",
+    "submitCta": "Ottieni aiuto personalizzato",
+    "dismissCta": "Non ora",
+    "submitting": "Invio in corso...",
+    "privacyNotice": "Leggi la nostra <privacyLink>Informativa sulla privacy</privacyLink>.",
+    "successTitle": "Grazie per aver condiviso i tuoi dati.",
+    "successBody": "Ti ricontatteremo presto con un prossimo passo piu personalizzato.",
+    "submitError": "Non siamo riusciti a salvare le tue informazioni in questo momento. Riprova.",
+    "validation": {
+      "nameRequired": "Inserisci il tuo nome.",
+      "emailRequired": "Inserisci il tuo indirizzo email.",
+      "emailInvalid": "Inserisci un indirizzo email valido."
+    }
+  },
+  "demo": {
+    "bannerTitle": "Apri l’hub demo di Ondo",
+    "bannerSubtitle": "Guarda il walkthrough, usa le credenziali demo e accedi al sandbox live quando sei pronto.",
+    "heroKicker": "Demo self-service",
+    "heroTitle": "Scopri l’esperienza Manager, Owner e Tenant prima di prenotare una call.",
+    "heroBody": "Questa pagina è il percorso pubblico verso l’ambiente demo di Ondo. Guarda il walkthrough registrato, controlla le credenziali seed e avvia il sandbox live quando il link della demo app è attivo.",
+    "openLiveDemo": "Apri demo live",
+    "bookGuidedDemo": "Prenota demo guidata",
+    "heroAvailability": "Questo sandbox usa dati di esempio seedati e viene ripristinato periodicamente così puoi esplorare in sicurezza.",
+    "videoTitle": "Video walkthrough",
+    "videoBody": "Inizia da qui per avere la panoramica più rapida dei flussi Manager, Owner e Tenant.",
+    "videoEmbedTitle": "Video walkthrough demo Ondo",
+    "videoFallbackTitle": "Video walkthrough in arrivo",
+    "videoFallbackBody": "Aggiungi NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL per mostrare qui il walkthrough registrato della demo.",
+    "credentialsTitle": "Usa uno dei ruoli demo seedati",
+    "credentialsBody": "Ogni account apre uno spazio di lavoro diverso nello stesso ambiente demo.",
+    "openRoleLogin": "Apri login demo",
+    "galleryTitle": "Anteprima dei flussi da mostrare",
+    "galleryBody": "Queste card anticipano le schermate da evidenziare nel video registrato e nella galleria screenshot.",
+    "previewEyebrow": "Focus screenshot",
+    "previewLiveSlot": "Vista demo",
+    "sandboxTitle": "Regole del sandbox",
+    "sandboxBody": "Usa questo spazio solo per esplorare. Contiene dati di esempio, può essere ripristinato senza preavviso e non deve mai ricevere documenti privati o informazioni di pagamento reali.",
+    "guidedKicker": "Walkthrough guidato",
+    "guidedTitle": "Vuoi che adattiamo la demo al tuo flusso?",
+    "guidedBody": "Condividi qualche dettaglio qui sotto e modelleremo il walkthrough live attorno alle tue domande su portafoglio, operations o tenant experience.",
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "form": {
+      "firstNameLabel": "Nome *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "Cognome *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "Email *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "Telefono",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "Sono un...",
+      "unitsLabel": "Numero di unità",
+      "unitsPlaceholder": "es. 5",
+      "timeLabel": "Orario preferito",
+      "timePlaceholder": "es. mattine nei feriali",
+      "success": "Grazie! Ti ricontatteremo entro 1 giorno lavorativo per confermare la demo.",
+      "error": "Qualcosa è andato storto. Scrivici a",
+      "errorSuffix": "oppure riprova.",
+      "submitting": "Invio in corso...",
+      "submit": "Prenota la mia demo guidata",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investitore",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "Ideale per gli operatori che hanno bisogno di visibilità sul portafoglio, leasing, manutenzione e report in un unico posto.",
+        "feature1": "Monitora proprietà, lead e riscossione degli affitti da un’unica dashboard.",
+        "feature2": "Controlla code di manutenzione, messaggi e aggiornamenti owner senza cambiare strumento.",
+        "feature3": "Usa l’assistente per riassumere problemi del portafoglio e prossime azioni.",
+        "previewTitle": "Workspace Manager",
+        "previewHeadline": "Centro di controllo del portafoglio",
+        "previewBody": "Metti in evidenza la vista quotidiana per operations, conversazioni e follow-up finanziari.",
+        "stat1Label": "Accesso",
+        "stat1Value": "Multi-property",
+        "stat2Label": "Focus",
+        "stat2Value": "Visibilità ops",
+        "previewItem1": "Salute immobili e occupazione",
+        "previewItem2": "Triage e follow-up manutenzione",
+        "previewItem3": "Assistente AI e report"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "Ideale per owner che vogliono visibilità sul portafoglio, documenti, aggiornamenti manutentivi e report finanziari.",
+        "feature1": "Rivedi proprietà, documenti e occupazione a colpo d’occhio.",
+        "feature2": "Segui avanzamento manutenzione, storico pagamenti e report per owner.",
+        "feature3": "Usa l’assistente per rispondere a domande sul portafoglio senza aspettare un report manuale.",
+        "previewTitle": "Workspace Owner",
+        "previewHeadline": "Vista report owner",
+        "previewBody": "Mostra come gli owner restano aggiornati senza scavare tra fogli di calcolo o thread email.",
+        "stat1Label": "Accesso",
+        "stat1Value": "Portale owner",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Riepilogo portafoglio e documenti",
+        "previewItem2": "Visibilità manutenzione",
+        "previewItem3": "Pagamenti e report"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "Ideale per residenti che hanno bisogno di pagamenti, documenti, manutenzione, messaggi e supporto self-service.",
+        "feature1": "Paga l’affitto, controlla i saldi e conserva le ricevute in un solo portale.",
+        "feature2": "Invia richieste di manutenzione e segui lo stato con meno scambi.",
+        "feature3": "Apri documenti, messaggi e impostazioni personali dallo stesso accesso.",
+        "previewTitle": "Workspace Tenant",
+        "previewHeadline": "Self-service residente",
+        "previewBody": "Usa questa vista per mostrare come i tenant gestiscono i compiti comuni senza chiamare l’ufficio.",
+        "stat1Label": "Accesso",
+        "stat1Value": "Portale tenant",
+        "stat2Label": "Focus",
+        "stat2Value": "Self-service",
+        "previewItem1": "Pagamenti e ricevute",
+        "previewItem2": "Richieste di manutenzione",
+        "previewItem3": "Messaggi e documenti"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "Lasciaci aiutarti a investire nello Utah",
+      "title": "Perché lo <highlight>Utah</highlight> è uno dei migliori posti del Paese in cui investire",
+      "body": "Lo Utah unisce un'economia stabile, una forte crescita della popolazione locale e la spinta delle Olimpiadi invernali del 2034, creando slancio di lungo periodo per gli investitori immobiliari."
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "Caricamento della domanda",
+      "body": "Stiamo verificando il link della domanda e i dettagli della proprietà."
+    },
+    "error": {
+      "title": "Link della domanda non disponibile"
+    },
+    "submitted": {
+      "title": "Domanda inviata",
+      "body": "La tua domanda per {{property}} è stata inviata con successo.",
+      "followUp": "Ti invieremo un'email quando il team della proprietà aggiornerà il tuo stato."
+    },
+    "progressLabel": "Avanzamento della domanda",
+    "progress": {
+      "property": "Proprietà",
+      "disclosure": "Criteri e informative",
+      "personal": "Dati personali",
+      "questions": "Domande",
+      "review": "Revisione"
+    },
+    "property": {
+      "description": "Rivedi i dettagli dell'affitto prima di passare alle fasi di informativa e domanda.",
+      "start": "Rivedi i criteri e continua",
+      "bedrooms": "Camere",
+      "bathrooms": "Bagni",
+      "sqft": "Piedi quadrati",
+      "monthlyRent": "Affitto mensile",
+      "availability": "Disponibilità"
+    },
+    "messages": {
+      "invalidLink": "Questo link della domanda non è valido o è scaduto.",
+      "validationFailed": "Non siamo riusciti a verificare questo link della domanda in questo momento.",
+      "createFailed": "Non siamo ancora riusciti a salvare le tue informazioni personali.",
+      "answerRequiredQuestions": "Rispondi a tutte le domande obbligatorie prima di continuare.",
+      "missingApplicationContext": "Mancano i dettagli dell'informativa. Riavvia la domanda dall'inizio.",
+      "consentRequired": "Devi confermare i criteri e autorizzare lo screening prima di continuare.",
+      "submitFailed": "Non siamo riusciti a inviare la tua domanda in questo momento."
+    },
+    "disclosure": {
+      "title": "Revisione di criteri e informative",
+      "body": "Esamina i criteri di accettazione del proprietario, i controlli di screening e le informative sull'affitto prima di procedere.",
+      "criteriaAcknowledgementLabel": "Ho esaminato i criteri di accettazione del proprietario e le informative sull'affitto mostrate in questa pagina.",
+      "screeningConsentLabel": "Autorizzo Ondo Real Estate e il proprietario a eseguire i controlli di screening divulgati per questa domanda.",
+      "futureFeeNotice": "Se questo flusso aggiungerà in futuro una tariffa di domanda, l'informativa sulla tariffa e il passaggio al pagamento appariranno qui prima che venga richiesto qualsiasi pagamento.",
+      "emptyCharges": "Non sono stati divulgati costi fissi diversi dall'affitto per questo annuncio.",
+      "emptyUseBasedCharges": "Non sono state divulgate categorie di costi basati sull'uso per questo annuncio.",
+      "emptyCriteria": "Non sono stati indicati criteri aggiuntivi del proprietario per questa proprietà.",
+      "rent": "Affitto",
+      "availability": "Disponibilità",
+      "fixedCharges": "Costi fissi noti diversi dall'affitto",
+      "useBasedCharges": "Categorie di costi basati sull'uso",
+      "criteria": "Criteri di accettazione del proprietario",
+      "requiredChecks": "Controlli di screening richiesti",
+      "feeCollectionStatus": "Stato della tariffa di domanda",
+      "refundRecoveryInstructions": "Informazioni su rimborsi e accesso ai report",
+      "ownerNotes": "Note del proprietario",
+      "continue": "Continua alle informazioni personali"
+    },
+    "personal": {
+      "title": "Informazioni personali",
+      "subtitle": "Condividi i dettagli necessari per creare il record della tua domanda prima che inizi lo screening.",
+      "continue": "Continua",
+      "saving": "Salvataggio...",
+      "fields": {
+        "firstName": "Nome",
+        "lastName": "Cognome",
+        "email": "Email",
+        "phone": "Telefono",
+        "dateOfBirth": "Data di nascita",
+        "currentAddress": "Indirizzo attuale",
+        "employer": "Datore di lavoro",
+        "annualIncome": "Reddito annuale",
+        "desiredMoveIn": "Data desiderata di trasferimento"
+      },
+      "placeholders": {
+        "phone": "es. +1 (801) 555-0100",
+        "currentAddress": "Via, città, stato, CAP",
+        "employer": "Azienda o organizzazione",
+        "annualIncome": "es. 75000"
+      }
+    },
+    "questions": {
+      "title": "Domande di screening",
+      "subtitle": "Rispondi a tutte le domande personalizzate aggiunte dal proprietario per questo annuncio.",
+      "yes": "Sì",
+      "no": "No",
+      "required": "Obbligatoria",
+      "continue": "Rivedi la domanda"
+    },
+    "review": {
+      "title": "Rivedi la tua domanda",
+      "submit": "Invia domanda",
+      "submitting": "Invio in corso...",
+      "personalInfo": "Informazioni personali",
+      "answers": "Risposte di screening",
+      "screeningChecks": "Controlli di screening",
+      "consentSummary": "Conferma delle informative",
+      "disclosureConfirmed": "Hai confermato i criteri del proprietario e autorizzato i controlli di screening divulgati.",
+      "emptyAnswer": "Nessuna risposta",
+      "fields": {
+        "name": "Nome",
+        "email": "Email",
+        "phone": "Telefono",
+        "employer": "Datore di lavoro",
+        "income": "Reddito",
+        "moveIn": "Data di trasferimento"
+      }
+    },
+    "sidebar": {
+      "title": "Riepilogo domanda",
+      "rent": "Affitto",
+      "availability": "Disponibilità",
+      "screeningChecks": "Controlli di screening",
+      "criteria": "Riepilogo criteri"
+    },
+    "requiredChecks": {
+      "credit": "Controllo del credito",
+      "criminal": "Controllo dei precedenti penali",
+      "eviction": "Controllo degli sfratti",
+      "income": "Verifica del reddito",
+      "identity": "Verifica dell'identità",
+      "references": "Verifica delle referenze"
+    },
+    "affordability": {
+      "title": "Verifica di sostenibilità",
+      "requirement": "Questa proprietà utilizza un rapporto minimo reddito/affitto di {{ratio}}x, pari a circa {{amount}} all'anno.",
+      "inputLabel": "Il tuo reddito annuale (USD)",
+      "placeholder": "es. 75000",
+      "meets": "Al momento soddisfi il requisito (rapporto {{ratio}}x).",
+      "below": "Sei sotto il requisito (rapporto {{ratio}}x; servono {{requiredRatio}}x)."
+    }
   }
 }

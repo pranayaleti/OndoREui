@@ -1,12 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { SITE_EMAILS } from "@/lib/site"
 
 type FormState = "idle" | "loading" | "success" | "error"
 
 export function DemoForm() {
+  const { t } = useTranslation()
   const [state, setState] = useState<FormState>("idle")
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -31,8 +33,8 @@ export function DemoForm() {
             name: `${firstName} ${lastName}`,
             email,
             phone,
-            source: "website",
-            message: `Demo request — Role: ${role}, Units: ${units || "not specified"}, Preferred time: ${time || "not specified"}`,
+            source: "website-demo",
+            message: `Demo request - Role: ${role}, Units: ${units || "not specified"}, Preferred time: ${time || "not specified"}`,
           }),
         }
       )
@@ -45,7 +47,7 @@ export function DemoForm() {
   if (state === "success") {
     return (
       <div className="rounded-lg bg-muted border border-border p-6 text-center">
-        <p className="text-foreground font-medium">Thanks! We&apos;ll be in touch within 1 business day to confirm your demo time.</p>
+        <p className="text-foreground font-medium">{t("demo.form.success")}</p>
       </div>
     )
   }
@@ -56,50 +58,50 @@ export function DemoForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1">
-          <label htmlFor="firstName" className="text-sm font-medium text-foreground">First name *</label>
-          <input id="firstName" name="firstName" required className={inputClass} placeholder="Jane" />
+          <label htmlFor="firstName" className="text-sm font-medium text-foreground">{t("demo.form.firstNameLabel")}</label>
+          <input id="firstName" name="firstName" required className={inputClass} placeholder={t("demo.form.firstNamePlaceholder")} />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="lastName" className="text-sm font-medium text-foreground">Last name *</label>
-          <input id="lastName" name="lastName" required className={inputClass} placeholder="Smith" />
+          <label htmlFor="lastName" className="text-sm font-medium text-foreground">{t("demo.form.lastNameLabel")}</label>
+          <input id="lastName" name="lastName" required className={inputClass} placeholder={t("demo.form.lastNamePlaceholder")} />
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="email" className="text-sm font-medium text-foreground">Email *</label>
-        <input id="email" name="email" type="email" required className={inputClass} placeholder="jane@example.com" />
+        <label htmlFor="email" className="text-sm font-medium text-foreground">{t("demo.form.emailLabel")}</label>
+        <input id="email" name="email" type="email" required className={inputClass} placeholder={t("demo.form.emailPlaceholder")} />
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="phone" className="text-sm font-medium text-foreground">Phone</label>
-        <input id="phone" name="phone" type="tel" className={inputClass} placeholder="+1 (801) 555-0100" />
+        <label htmlFor="phone" className="text-sm font-medium text-foreground">{t("demo.form.phoneLabel")}</label>
+        <input id="phone" name="phone" type="tel" className={inputClass} placeholder={t("demo.form.phonePlaceholder")} />
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="role" className="text-sm font-medium text-foreground">I am a...</label>
+        <label htmlFor="role" className="text-sm font-medium text-foreground">{t("demo.form.roleLabel")}</label>
         <select id="role" name="role" className={inputClass}>
-          <option value="Owner">Owner</option>
-          <option value="Investor">Investor</option>
-          <option value="Property Manager">Property Manager</option>
-          <option value="Tenant">Tenant</option>
+          <option value="Owner">{t("demo.form.roleOptions.owner")}</option>
+          <option value="Investor">{t("demo.form.roleOptions.investor")}</option>
+          <option value="Property Manager">{t("demo.form.roleOptions.propertyManager")}</option>
+          <option value="Tenant">{t("demo.form.roleOptions.tenant")}</option>
         </select>
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="units" className="text-sm font-medium text-foreground">Number of units</label>
-        <input id="units" name="units" className={inputClass} placeholder="e.g. 5" />
+        <label htmlFor="units" className="text-sm font-medium text-foreground">{t("demo.form.unitsLabel")}</label>
+        <input id="units" name="units" className={inputClass} placeholder={t("demo.form.unitsPlaceholder")} />
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="time" className="text-sm font-medium text-foreground">Preferred time</label>
-        <input id="time" name="time" className={inputClass} placeholder="e.g. Weekday mornings" />
+        <label htmlFor="time" className="text-sm font-medium text-foreground">{t("demo.form.timeLabel")}</label>
+        <input id="time" name="time" className={inputClass} placeholder={t("demo.form.timePlaceholder")} />
       </div>
 
       {state === "error" && (
         <p className="text-sm text-destructive">
-          Something went wrong. Please email us at{" "}
+          {t("demo.form.error")}{" "}
           <a href={`mailto:${SITE_EMAILS.primary}`} className="underline">{SITE_EMAILS.primary}</a>{" "}
-          or try again.
+          {t("demo.form.errorSuffix")}
         </p>
       )}
 
       <Button type="submit" size="lg" disabled={state === "loading"}>
-        {state === "loading" ? "Sending..." : "Book my demo"}
+        {state === "loading" ? t("demo.form.submitting") : t("demo.form.submit")}
       </Button>
     </form>
   )

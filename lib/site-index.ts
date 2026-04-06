@@ -3,8 +3,12 @@ import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
 import {
   APP_PORTAL_LOGIN_URL,
   APP_PORTAL_URL,
+  SITE_ADDRESS,
   SITE_EMAILS,
+  SITE_HOURS_LABEL,
+  SITE_NAME,
   SITE_PHONE,
+  SITE_SOCIALS,
   SITE_URL,
 } from "@/lib/site"
 
@@ -577,6 +581,16 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           href: "/llms.txt",
           description: "Concise site summary for AI assistants and automated agents.",
         },
+        {
+          name: "LLM full brief",
+          href: "/llms-full.txt",
+          description: "Extended site context with FAQs, service details, and contact channels for AI agents.",
+        },
+        {
+          name: "humans.txt",
+          href: "/humans.txt",
+          description: "Team credits, tech stack, and tools behind the site.",
+        },
       ],
     },
   ]
@@ -608,6 +622,9 @@ export function buildLlmsTxtBody(): string {
     `- HTML sitemap (all public pages): ${toAbsoluteSiteUrl("/sitemap")}`,
     `- XML sitemap: ${toAbsoluteSiteUrl("/sitemap.xml")}`,
     `- This file: ${toAbsoluteSiteUrl("/llms.txt")}`,
+    `- Full agent brief (extended): ${toAbsoluteSiteUrl("/llms-full.txt")}`,
+    `- humans.txt: ${toAbsoluteSiteUrl("/humans.txt")}`,
+    `- security.txt: ${toAbsoluteSiteUrl("/.well-known/security.txt")}`,
     "",
     "## Product areas",
     "- **Buy / mortgage**: Purchase guides, loan pre-approval, conventional and specialty products, refinance process, Utah city/ZIP loan pages.",
@@ -640,6 +657,131 @@ export function buildLlmsTxtBody(): string {
       lines.push(`- ${link.name}: ${u} — ${blurb}`)
     }
   }
+  lines.push("")
+  return lines.join("\n")
+}
+
+/** Extended plain-text brief for /llms-full.txt — deeper context for AI agents. */
+export function buildLlmsFullTxtBody(): string {
+  const lines: string[] = [
+    "# Ondo Real Estate — Full AI Agent Brief",
+    "",
+    `> This is the extended version of ${toAbsoluteSiteUrl("/llms.txt")}. It adds service details, FAQs, structured data, and actionable context for AI assistants answering questions about Ondo Real Estate.`,
+    "",
+    "## Company overview",
+    "",
+    `**${SITE_NAME}** is a Utah-focused real estate company offering brokerage, mortgage lending, notary services, property management, and investment access through a single platform. Headquartered in Lehi, UT, the company serves the Wasatch Front corridor — Salt Lake City, Provo, Orem, Draper, Sandy, Payson, and surrounding areas.`,
+    "",
+    `- **Website**: ${baseSiteUrl}/`,
+    `- **Phone**: ${SITE_PHONE}`,
+    `- **Address**: ${SITE_ADDRESS}`,
+    `- **Hours**: ${SITE_HOURS_LABEL}`,
+    "",
+    "## Services in detail",
+    "",
+    "### Buy a home",
+    "Ondo helps Utah buyers from first search to closing. Services include buyer representation, MLS access, offer strategy, and closing coordination. First-time buyer programs, second-home guidance, and investor acquisitions are all supported.",
+    "",
+    "### Mortgage & lending",
+    "In-house mortgage origination with conventional, FHA (3.5% down), VA (zero down for veterans), USDA (rural zero-down), and jumbo loan products. City- and ZIP-specific landing pages provide local rate context. Refinance analysis available.",
+    "",
+    "### Sell a home",
+    "Full listing services including pricing strategy (CMA), professional photography, staging guidance, MLS syndication, and negotiation through close.",
+    "",
+    "### Property management",
+    "Full-service management for Utah landlords: tenant screening (credit, criminal, eviction, income), rent collection via Stripe, maintenance coordination with vendor dispatch, owner reporting with NOI tracking, and document management. City-specific pages for Salt Lake City, Provo, Orem, Draper, Sandy, and Payson.",
+    "",
+    "### Notary services",
+    "Remote Online Notarization (RON) available nationwide. Mobile notary across the Wasatch Front. Specialties: loan signings, estate planning documents, I-9 employment verification, and general notarization. Employer packages for bulk signings.",
+    "",
+    "### Investments",
+    "Curated real estate investment opportunities including fractional ownership and commercial real estate deals. Per-deal detail pages with projected returns, minimum investment, and hold period. Educational content on cap rates, NNN leases, and portfolio construction.",
+    "",
+    "### Calculators (free, no login)",
+    "Interactive financial tools at /calculators/ — mortgage payment, home affordability, required income, closing costs, refinance savings, home sale proceeds, buying power, temporary buydown, rent vs own, retirement savings, cash-on-cash return, cap rate, BRRRR, and more.",
+    "",
+    "## Service area",
+    "",
+    "Primary: Utah — Wasatch Front corridor.",
+    "Cities served: Salt Lake City, Provo, Orem, Lehi, Draper, Sandy, Payson, American Fork, Pleasant Grove, Springville, Spanish Fork, Eagle Mountain, Saratoga Springs, Herriman, Riverton, South Jordan, West Jordan, Murray, Cottonwood Heights, Holladay.",
+    "Notary RON: all 50 US states.",
+    "",
+    "## Authenticated platform",
+    "",
+    `Ondo operates an invitation-only portal at ${APP_PORTAL_URL} with role-based dashboards:`,
+    "- **Property managers**: portfolio analytics, maintenance dispatch, rent tracking, AI assistant, vendor management, risk scoring.",
+    "- **Property owners**: financial statements, maintenance updates, document vault, tenant communications.",
+    "- **Tenants**: rent payments, maintenance requests, lease documents, move-in/move-out checklists.",
+    "",
+    "There is NO self-serve signup. Access is by invitation only.",
+    "",
+    "## Frequently asked questions",
+    "",
+    "**Q: What areas does Ondo Real Estate serve?**",
+    "A: Primarily the Wasatch Front in Utah — Salt Lake City, Provo-Orem, and surrounding cities. Remote Online Notarization is available in all 50 states.",
+    "",
+    "**Q: Does Ondo offer property management?**",
+    "A: Yes. Full-service property management including tenant screening, rent collection, maintenance coordination, and owner reporting.",
+    "",
+    "**Q: What loan types does Ondo offer?**",
+    "A: Conventional, FHA, VA, USDA, and jumbo loans. Refinance available.",
+    "",
+    "**Q: Can I sign up for the owner/tenant portal online?**",
+    "A: No. The platform is invitation-only. Contact info@ondorealestate.com to learn more.",
+    "",
+    "**Q: Does Ondo offer notary services?**",
+    "A: Yes. Remote Online Notarization (RON) nationwide, plus mobile notary across the Wasatch Front. Loan signings, estate docs, I-9, and general notarization.",
+    "",
+    "**Q: Are the calculators free?**",
+    "A: Yes. All calculators at /calculators/ are free with no login required.",
+    "",
+    "## Contact channels",
+    "",
+    `- General inquiries: ${SITE_EMAILS.info}`,
+    `- Mortgage questions: ${SITE_EMAILS.mortgage}`,
+    `- Refinance: ${SITE_EMAILS.refinance}`,
+    `- Notary scheduling: ${SITE_EMAILS.notary}`,
+    `- Media / press: ${SITE_EMAILS.media}`,
+    `- Investor relations: ${SITE_EMAILS.investors}`,
+    `- Accessibility: ${SITE_EMAILS.accessibility}`,
+    `- Privacy concerns: ${SITE_EMAILS.privacy}`,
+    `- Phone: ${SITE_PHONE}`,
+    "",
+    "## Social profiles",
+    "",
+    ...SITE_SOCIALS.map((url) => `- ${url}`),
+    "",
+    "## Machine-readable resources",
+    "",
+    `- LLM brief (concise): ${toAbsoluteSiteUrl("/llms.txt")}`,
+    `- LLM full brief (this file): ${toAbsoluteSiteUrl("/llms-full.txt")}`,
+    `- XML sitemap: ${toAbsoluteSiteUrl("/sitemap.xml")}`,
+    `- HTML sitemap: ${toAbsoluteSiteUrl("/sitemap")}`,
+    `- robots.txt: ${toAbsoluteSiteUrl("/robots.txt")}`,
+    `- humans.txt: ${toAbsoluteSiteUrl("/humans.txt")}`,
+    `- security.txt: ${toAbsoluteSiteUrl("/.well-known/security.txt")}`,
+    "",
+    "## Complete page index",
+    "",
+  ]
+
+  for (const section of getSiteIndexSections()) {
+    lines.push(`### ${section.title}`)
+    if (section.description) {
+      lines.push(section.description)
+    }
+    lines.push("")
+    for (const link of section.links) {
+      const u = toAbsoluteSiteUrl(link.href)
+      const blurb = link.description.replace(/\s+/g, " ").trim()
+      lines.push(`- **${link.name}**: ${u}`)
+      lines.push(`  ${blurb}`)
+    }
+    lines.push("")
+  }
+
+  lines.push("---")
+  lines.push(`Generated for ${SITE_NAME}. For human support, contact ${SITE_EMAILS.info} or call ${SITE_PHONE}.`)
   lines.push("")
   return lines.join("\n")
 }

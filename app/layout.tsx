@@ -16,6 +16,7 @@ import { ScrollProgress } from "@/components/scroll-progress"
 import ErrorBoundary from "@/components/error-boundary"
 import { CachePurge } from "@/components/cache-purge"
 import { AttributionCapture } from "@/components/attribution-capture"
+import { FirstVisitLeadPopup } from "@/components/first-visit-lead-popup"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
@@ -193,6 +194,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>
+          <FirstVisitLeadPopup />
           <CachePurge />
           <ScrollProgress />
           <div className="min-h-screen flex flex-col">

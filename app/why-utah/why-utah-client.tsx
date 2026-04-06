@@ -3,12 +3,15 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { Trans, useTranslation } from "react-i18next"
 import { TrendingUp, Building2, Briefcase, Users, Trees, Trophy, DollarSign, ShieldCheck, LineChart, MapPin } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 
 export default function WhyUtahPage() {
+  const { t } = useTranslation()
+
   return (
     <div className="min-h-screen bg-background dark:bg-transparent">
       <SEO
@@ -27,13 +30,17 @@ export default function WhyUtahPage() {
         <div className="relative max-w-7xl mx-auto px-4 py-24">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h1 className="text-5xl md:text-6xl font-extrabold text-foreground leading-tight">
-                Why Invest in <span className="text-primary">Utah</span>
+              <p className="inline-flex rounded-full bg-background/80 px-4 py-2 text-sm font-semibold text-primary shadow-sm">
+                {t("whyUtahPage.hero.kicker")}
+              </p>
+              <h1 className="mt-5 text-5xl md:text-6xl font-extrabold text-foreground leading-tight">
+                <Trans
+                  i18nKey="whyUtahPage.hero.title"
+                  components={{ highlight: <span className="text-primary" /> }}
+                />
               </h1>
               <p className="text-xl text-foreground/70 mt-6 max-w-2xl">
-                Utah combines a resilient economy, nation‑leading job growth, a booming tech corridor, and
-                quality‑of‑life advantages that continue to attract people and capital. Here is a clear,
-                investor‑focused view of the opportunity—and how to act on it.
+                {t("whyUtahPage.hero.body")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link href="/properties" className="bg-primary hover:bg-primary text-foreground px-6 py-3 rounded-lg font-semibold">
@@ -215,5 +222,4 @@ function MarketCard({ title, note }: { title: string; note: string }) {
     </div>
   )
 }
-
 

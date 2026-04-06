@@ -50,7 +50,7 @@ export default function TourPage() {
           {/* CTA */}
           <div className="mt-16 flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg">
-              <Link href="/auth">Try it yourself</Link>
+              <Link href="/demo">Try it yourself</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/demo">Book a demo</Link>

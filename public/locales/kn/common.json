@@ -134,5 +134,278 @@
     "faq2A": "ನಗದು ಪಾವತಿಗಳಿಲ್ಲ. ನೀವು Ondo RE ವೇದಿಕೆ ಆ್ಯಕ್ಸೆಸ್‌ನ ಉಚಿತ ತಿಂಗಳು (24 ವರೆಗೆ) ಮತ್ತು ಬೋನಸ್ ಸ್ವೀಪ್‌ಸ್ಟೇಕ್ಸ್ ಎಂಟ್ರಿಗಳನ್ನು ಗಳಿಸುತ್ತೀರಿ.",
     "faq3Q": "ನನ್ನ ರೆಫರಲ್ ಲಿಂಕ್ ಯಾವಾಗ ಸಿಗುತ್ತದೆ?",
     "faq3A": "ನಿಮ್ಮ ಅರ್ಜಿ ಅನುಮೋದನೆಯಾದ ನಂತರ, ನಾವು ನಿಮ್ಮ ಅನನ್ಯ ಕೋಡ್ ಅನ್ನು ಇಮೇಲ್ ಮಾಡುತ್ತೇವೆ."
+  },
+  "leadPopup": {
+    "title": "ಮುಂದಿನ ಹೆಜ್ಜೆಯನ್ನು ಇನ್ನಷ್ಟು ಸರಳವಾಗಿಸಬೇಕೇ?",
+    "body": "ನಿಮ್ಮ ಹೆಸರು ಮತ್ತು ಇಮೇಲ್ ಹಂಚಿಕೊಳ್ಳಿ. ಪ್ರಕ್ರಿಯೆಯನ್ನು ಇನ್ನಷ್ಟು ಸರಳವಾಗಿಯೂ ಕಡಿಮೆ ಒತ್ತಡವಾಗಿಯೂ ಮಾಡಲು ನಾವು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ. ನಾವು ಇದನ್ನು ಒಮ್ಮೆ ಮಾತ್ರ ಕೇಳುತ್ತೇವೆ ಮತ್ತು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಎಂದಿಗೂ ಮಾರುವುದಿಲ್ಲ ಅಥವಾ ಹಂಚುವುದಿಲ್ಲ.",
+    "nameLabel": "ಹೆಸರು",
+    "namePlaceholder": "ನಿಮ್ಮ ಹೆಸರು",
+    "emailLabel": "ಇಮೇಲ್",
+    "emailPlaceholder": "you@example.com",
+    "submitCta": "ವೈಯಕ್ತಿಕ ಸಹಾಯ ಪಡೆಯಿರಿ",
+    "dismissCta": "ಈಗ ಬೇಡ",
+    "submitting": "ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ...",
+    "privacyNotice": "ನಮ್ಮ <privacyLink>ಗೌಪ್ಯತಾ ನೀತಿಯನ್ನು</privacyLink> ಓದಿ.",
+    "successTitle": "ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಹಂಚಿಕೊಂಡಿದ್ದಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
+    "successBody": "ಹೆಚ್ಚು ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಮುಂದಿನ ಹೆಜ್ಜೆಯೊಂದಿಗೆ ನಾವು ಶೀಘ್ರದಲ್ಲೇ ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.",
+    "submitError": "ಈ ಕ್ಷಣದಲ್ಲಿ ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಉಳಿಸಲಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    "validation": {
+      "nameRequired": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.",
+      "emailRequired": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.",
+      "emailInvalid": "ದಯವಿಟ್ಟು ಮಾನ್ಯ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ."
+    }
+  },
+  "demo": {
+    "bannerTitle": "Ondo demo hub ಅನ್ನು ತೆರೆಯಿರಿ",
+    "bannerSubtitle": "Walkthrough ನೋಡಿ, seeded credentials ಬಳಸಿ, ಸಿದ್ಧವಾದಾಗ live sandbox ಗೆ ಹೋಗಿ.",
+    "heroKicker": "Self-serve demo",
+    "heroTitle": "ಕಾಲ್ ಬುಕ್ ಮಾಡುವ ಮೊದಲು Manager, Owner, Tenant ಅನುಭವವನ್ನು ನೋಡಿ.",
+    "heroBody": "ಈ ಪುಟವು Ondo demo environment ಗೆ public ಪ್ರವೇಶ ದ್ವಾರವಾಗಿದೆ. Record ಮಾಡಿರುವ walkthrough ನೋಡಿ, seeded login credentials ಪರಿಶೀಲಿಸಿ, demo app link ಲಭ್ಯವಿರುವಾಗ live sandbox ತೆರೆಯಿರಿ.",
+    "openLiveDemo": "Live demo ತೆರೆಯಿರಿ",
+    "bookGuidedDemo": "Guided demo ಬುಕ್ ಮಾಡಿ",
+    "heroAvailability": "ಈ sandbox seeded sample data ಬಳಸಿ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಮತ್ತು ನೀವು ಸುರಕ್ಷಿತವಾಗಿ ಅನ್ವೇಷಿಸಲು ನಿಯಮಿತವಾಗಿ reset ಆಗುತ್ತದೆ.",
+    "videoTitle": "Walkthrough ವಿಡಿಯೋ",
+    "videoBody": "Manager, Owner, Tenant workflows ನ ವೇಗವಾದ overview ಗೆ ಇಲ್ಲಿ ಆರಂಭಿಸಿ.",
+    "videoEmbedTitle": "Ondo demo walkthrough ವಿಡಿಯೋ",
+    "videoFallbackTitle": "Walkthrough ವಿಡಿಯೋ ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ",
+    "videoFallbackBody": "ಈ ಪುಟದಲ್ಲಿ record ಮಾಡಿದ demo walkthrough ತೋರಿಸಲು NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL ಸೇರಿಸಿ.",
+    "credentialsTitle": "Seed ಮಾಡಿದ demo roles ಗಳಲ್ಲಿ ಒಂದನ್ನು ಬಳಸಿ",
+    "credentialsBody": "ಪ್ರತಿ account ಕೂಡ ಅದೇ demo environment ನಲ್ಲಿ ಬೇರೆ workspace ಗೆ ತೆರೆಯುತ್ತದೆ.",
+    "openRoleLogin": "Demo login ತೆರೆಯಿರಿ",
+    "galleryTitle": "ನೀವು ತೋರಿಸುವ workflows preview",
+    "galleryBody": "ಈ preview cards ರೆಕಾರ್ಡ್ ಮಾಡಿದ demo ಮತ್ತು screenshot gallery ಯಲ್ಲಿ ತೋರಿಸಬೇಕಾದ screens ಅನ್ನು ಸೂಚಿಸುತ್ತವೆ.",
+    "previewEyebrow": "Screenshot focus",
+    "previewLiveSlot": "Demo view",
+    "sandboxTitle": "Sandbox ಬಳಕೆ ಸೂಚನೆಗಳು",
+    "sandboxBody": "ಈ workspace ಅನ್ನು ಅನ್ವೇಷಣೆಗೆ ಮಾತ್ರ ಬಳಸಿ. ಇದರಲ್ಲಿ sample data ಇದೆ, ಇದು ಯಾವುದೇ ಸಮಯದಲ್ಲಿ reset ಆಗಬಹುದು, ಮತ್ತು ಖಾಸಗಿ documents ಅಥವಾ ನಿಜವಾದ payment ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಎಂದಿಗೂ ಹಾಕಬಾರದು.",
+    "guidedKicker": "Guided walkthrough",
+    "guidedTitle": "ನಿಮ್ಮ workflow ಗೆ ತಕ್ಕಂತೆ demo ರೂಪಿಸಬೇಕೇ?",
+    "guidedBody": "ಕೆಳಗೆ ಕೆಲವು ವಿವರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ. ನಿಮ್ಮ portfolio, operations ಅಥವಾ tenant experience ಪ್ರಶ್ನೆಗಳ ಸುತ್ತ live walkthrough ಅನ್ನು ನಾವು ರೂಪಿಸುತ್ತೇವೆ.",
+    "labels": {
+      "email": "ಇಮೇಲ್",
+      "password": "ಪಾಸ್‌ವರ್ಡ್"
+    },
+    "form": {
+      "firstNameLabel": "ಮೊದಲ ಹೆಸರು *",
+      "firstNamePlaceholder": "Jane",
+      "lastNameLabel": "ಕೊನೆಯ ಹೆಸರು *",
+      "lastNamePlaceholder": "Smith",
+      "emailLabel": "ಇಮೇಲ್ *",
+      "emailPlaceholder": "jane@example.com",
+      "phoneLabel": "ಫೋನ್",
+      "phonePlaceholder": "+1 (801) 555-0100",
+      "roleLabel": "ನಾನು...",
+      "unitsLabel": "ಯುನಿಟ್‌ಗಳ ಸಂಖ್ಯೆ",
+      "unitsPlaceholder": "ಉದಾ. 5",
+      "timeLabel": "ಆಯ್ಕೆಯ ಸಮಯ",
+      "timePlaceholder": "ಉದಾ. ವಾರದ ದಿನ ಬೆಳಿಗ್ಗೆ",
+      "success": "ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ demo ಅನ್ನು ದೃಢೀಕರಿಸಲು 1 ಕೆಲಸದ ದಿನದೊಳಗೆ ನಾವು ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.",
+      "error": "ಏನೋ ತಪ್ಪಾಗಿದೆ. ನಮಗೆ ಇಮೇಲ್ ಮಾಡಿ",
+      "errorSuffix": "ಅಥವಾ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      "submitting": "ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ...",
+      "submit": "ನನ್ನ guided demo ಬುಕ್ ಮಾಡಿ",
+      "roleOptions": {
+        "owner": "Owner",
+        "investor": "Investor",
+        "propertyManager": "Property Manager",
+        "tenant": "Tenant"
+      }
+    },
+    "roles": {
+      "manager": {
+        "badge": "Manager",
+        "title": "Manager / Admin",
+        "description": "ಒಂದು ಸ್ಥಳದಲ್ಲಿ portfolio visibility, leasing, maintenance, reporting ಬೇಕಿರುವ operators ಗಾಗಿ ಇದು ಉತ್ತಮ ಆಯ್ಕೆ.",
+        "feature1": "ಒಂದು dashboard ನಿಂದ properties, leads ಮತ್ತು rent collection ಅನ್ನು ನೋಡಿರಿ.",
+        "feature2": "Tool ಬದಲಾಯಿಸದೆ maintenance queues, messages, owner updates ನೋಡಿರಿ.",
+        "feature3": "Portfolio issues ಮತ್ತು next actions ಅನ್ನು assistant ಮೂಲಕ summarize ಮಾಡಿ.",
+        "previewTitle": "Manager workspace",
+        "previewHeadline": "Portfolio control center",
+        "previewBody": "ದೈನಂದಿನ operations, conversations ಮತ್ತು financial follow-up view ಅನ್ನು highlight ಮಾಡಿ.",
+        "stat1Label": "Access",
+        "stat1Value": "Multi-property",
+        "stat2Label": "Focus",
+        "stat2Value": "Ops visibility",
+        "previewItem1": "Property health ಮತ್ತು occupancy",
+        "previewItem2": "Maintenance triage ಮತ್ತು follow-up",
+        "previewItem3": "AI assistant ಮತ್ತು reports"
+      },
+      "owner": {
+        "badge": "Owner",
+        "title": "Owner",
+        "description": "Portfolio visibility, documents, maintenance updates ಮತ್ತು financial reporting ಬಯಸುವ owners ಗಾಗಿ ಇದು ಸೂಕ್ತವಾಗಿದೆ.",
+        "feature1": "ನಿಮ್ಮ properties, documents ಮತ್ತು occupancy ಅನ್ನು ಒಂದೇ ನೋಟದಲ್ಲಿ ನೋಡಿ.",
+        "feature2": "Maintenance progress, payment history ಮತ್ತು owner-facing reports ಅನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ.",
+        "feature3": "Manual report ಕಾಯದೇ portfolio ಪ್ರಶ್ನೆಗಳಿಗೆ assistant ಮೂಲಕ ಉತ್ತರ ಪಡೆಯಿರಿ.",
+        "previewTitle": "Owner workspace",
+        "previewHeadline": "Owner reporting view",
+        "previewBody": "Spreadsheet ಅಥವಾ inbox threads ಇಲ್ಲದೆ owners ಹೇಗೆ ಮಾಹಿತಿ ಪಡೆಯುತ್ತಾರೆ ಎಂಬುದನ್ನು ತೋರಿಸಿ.",
+        "stat1Label": "Access",
+        "stat1Value": "Owner portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Reporting",
+        "previewItem1": "Portfolio summary ಮತ್ತು documents",
+        "previewItem2": "Maintenance visibility",
+        "previewItem3": "Payments ಮತ್ತು reports"
+      },
+      "tenant": {
+        "badge": "Tenant",
+        "title": "Tenant",
+        "description": "Payments, documents, maintenance, messages ಮತ್ತು self-service support ಬೇಕಿರುವ residents ಗಾಗಿ ಇದು ಸೂಕ್ತವಾಗಿದೆ.",
+        "feature1": "ಒಂದು portal ನಲ್ಲಿ rent ಪಾವತಿಸಿ, balances ನೋಡಿ, receipts ಉಳಿಸಿ.",
+        "feature2": "Maintenance requests ಕಳುಹಿಸಿ, ಕಡಿಮೆ back-and-forth ನಲ್ಲಿ status updates ಅನುಸರಿಸಿ.",
+        "feature3": "ಅದೇ login ನಿಂದ documents, messages ಮತ್ತು personal settings ತೆರೆಯಿರಿ.",
+        "previewTitle": "Tenant workspace",
+        "previewHeadline": "Resident self-service",
+        "previewBody": "Office ಗೆ ಕರೆ ಮಾಡದೇ tenants ಸಾಮಾನ್ಯ ಕಾರ್ಯಗಳನ್ನು ಹೇಗೆ ನಿರ್ವಹಿಸುತ್ತಾರೆ ಎಂಬುದನ್ನು ಈ view ಮೂಲಕ ತೋರಿಸಿ.",
+        "stat1Label": "Access",
+        "stat1Value": "Tenant portal",
+        "stat2Label": "Focus",
+        "stat2Value": "Self-service",
+        "previewItem1": "Payments ಮತ್ತು receipts",
+        "previewItem2": "Maintenance requests",
+        "previewItem3": "Messages ಮತ್ತು documents"
+      }
+    }
+  },
+  "whyUtahPage": {
+    "hero": {
+      "kicker": "ಯುಟಾಹ್‌ನಲ್ಲಿ ಹೂಡಿಕೆ ಮಾಡಲು ನಾವು ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತೇವೆ",
+      "title": "ಹೂಡಿಕೆ ಮಾಡಲು ದೇಶದ ಅತ್ಯುತ್ತಮ ಸ್ಥಳಗಳಲ್ಲಿ <highlight>ಯುಟಾಹ್</highlight> ಏಕೆ ಒಂದಾಗಿದೆ",
+      "body": "ಯುಟಾಹ್‌ನ ಸ್ಥಿರ ಆರ್ಥಿಕತೆ, ಬಲವಾದ ಸ್ಥಳೀಯ ಜನಸಂಖ್ಯಾ ವೃದ್ಧಿ ಮತ್ತು 2034ರ ಶೀತಕಾಲದ ಒಲಿಂಪಿಕ್ಸ್‌ನ ಉತ್ತೇಜನವು ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಹೂಡಿಕೆದಾರರಿಗೆ ದೀರ್ಘಕಾಲಿಕ ವೇಗವನ್ನು ಸೃಷ್ಟಿಸುತ್ತಿದೆ."
+    }
+  },
+  "applyFlow": {
+    "loading": {
+      "title": "ನಿಮ್ಮ ಅರ್ಜಿ ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+      "body": "ನಾವು ಅರ್ಜಿ ಲಿಂಕ್ ಮತ್ತು ಆಸ್ತಿ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸುತ್ತಿದ್ದೇವೆ."
+    },
+    "error": {
+      "title": "ಅರ್ಜಿ ಲಿಂಕ್ ಲಭ್ಯವಿಲ್ಲ"
+    },
+    "submitted": {
+      "title": "ಅರ್ಜಿ ಸಲ್ಲಿಸಲಾಗಿದೆ",
+      "body": "{{property}} ಗಾಗಿ ನಿಮ್ಮ ಅರ್ಜಿ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ.",
+      "followUp": "ಆಸ್ತಿ ತಂಡವು ನಿಮ್ಮ ಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಿದಾಗ ನಾವು ನಿಮಗೆ ಇಮೇಲ್ ಕಳುಹಿಸುತ್ತೇವೆ."
+    },
+    "progressLabel": "ಅರ್ಜಿ ಪ್ರಗತಿ",
+    "progress": {
+      "property": "ಆಸ್ತಿ",
+      "disclosure": "ಮಾಪದಂಡಗಳು ಮತ್ತು ಬಹಿರಂಗಪಡಿಸುವಿಕೆಗಳು",
+      "personal": "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ",
+      "questions": "ಪ್ರಶ್ನೆಗಳು",
+      "review": "ಪರಿಶೀಲನೆ"
+    },
+    "property": {
+      "description": "ಬಹಿರಂಗಪಡಿಸುವಿಕೆ ಮತ್ತು ಅರ್ಜಿ ಹಂತಗಳಿಗೆ ಹೋಗುವ ಮೊದಲು ಬಾಡಿಗೆ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.",
+      "start": "ಮಾಪದಂಡಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಮುಂದುವರಿಯಿರಿ",
+      "bedrooms": "ಮಲಗುವ ಕೋಣೆಗಳು",
+      "bathrooms": "ಬಾತ್‌ರೂಮ್‌ಗಳು",
+      "sqft": "ಚ.ಅಡಿ",
+      "monthlyRent": "ತಿಂಗಳ ಬಾಡಿಗೆ",
+      "availability": "ಲಭ್ಯತೆ"
+    },
+    "messages": {
+      "invalidLink": "ಈ ಅರ್ಜಿ ಲಿಂಕ್ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಅವಧಿ ಮುಗಿದಿದೆ.",
+      "validationFailed": "ಈ ಅರ್ಜಿ ಲಿಂಕ್ ಅನ್ನು ಈಗ ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.",
+      "createFailed": "ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಇನ್ನೂ ಉಳಿಸಲಾಗಲಿಲ್ಲ.",
+      "answerRequiredQuestions": "ಮುಂದುವರಿಯುವ ಮೊದಲು ಅಗತ್ಯವಿರುವ ಎಲ್ಲಾ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
+      "missingApplicationContext": "ಬಹಿರಂಗಪಡಿಸುವಿಕೆ ವಿವರಗಳು ಕಾಣೆಯಾಗಿವೆ. ದಯವಿಟ್ಟು ಅರ್ಜಿಯನ್ನು ಆರಂಭದಿಂದ ಮರುಪ್ರಾರಂಭಿಸಿ.",
+      "consentRequired": "ಮುಂದುವರಿಯುವ ಮೊದಲು ಮಾಪದಂಡಗಳನ್ನು ಒಪ್ಪಿಕೊಂಡು ಸ್ಕ್ರೀನಿಂಗ್‌ಗೆ ಅನುಮತಿ ನೀಡಿ.",
+      "submitFailed": "ಈಗ ನಿಮ್ಮ ಅರ್ಜಿಯನ್ನು ಸಲ್ಲಿಸಲಾಗಲಿಲ್ಲ."
+    },
+    "disclosure": {
+      "title": "ಮಾಪದಂಡಗಳು ಮತ್ತು ಬಹಿರಂಗಪಡಿಸುವಿಕೆಗಳ ಪರಿಶೀಲನೆ",
+      "body": "ಮುಂದುವರಿಯುವ ಮೊದಲು ಮಾಲೀಕರ ಸ್ವೀಕೃತಿ ಮಾಪದಂಡಗಳು, ಸ್ಕ್ರೀನಿಂಗ್ ಪರಿಶೀಲನೆಗಳು ಮತ್ತು ಬಾಡಿಗೆ ಬಹಿರಂಗಪಡಿಸುವಿಕೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.",
+      "criteriaAcknowledgementLabel": "ಈ ಪುಟದಲ್ಲಿ ತೋರಿಸಿರುವ ಮಾಲೀಕರ ಸ್ವೀಕೃತಿ ಮಾಪದಂಡಗಳು ಮತ್ತು ಬಾಡಿಗೆ ಬಹಿರಂಗಪಡಿಸುವಿಕೆಗಳನ್ನು ನಾನು ಪರಿಶೀಲಿಸಿದ್ದೇನೆ.",
+      "screeningConsentLabel": "ಈ ಅರ್ಜಿಗಾಗಿ ಬಹಿರಂಗಪಡಿಸಿದ ಸ್ಕ್ರೀನಿಂಗ್ ಪರಿಶೀಲನೆಗಳನ್ನು ನಡೆಸಲು ನಾನು Ondo Real Estate ಮತ್ತು ಮಾಲೀಕರಿಗೆ ಅನುಮತಿ ನೀಡುತ್ತೇನೆ.",
+      "futureFeeNotice": "ಈ ಪ್ರಕ್ರಿಯೆಗೆ ನಂತರ ಅರ್ಜಿ ಶುಲ್ಕವನ್ನು ಸೇರಿಸಿದರೆ, ಯಾವುದೇ ಪಾವತಿ ಕೇಳುವ ಮೊದಲು ಶುಲ್ಕ ಬಹಿರಂಗಪಡಿಸುವಿಕೆ ಮತ್ತು ಪಾವತಿ ಹಂತ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ.",
+      "emptyCharges": "ಈ ಪಟ್ಟಿಗಾಗಿ ಬಾಡಿಗೆಗೆ ಸಂಬಂಧಿಸದ ಸ್ಥಿರ ಶುಲ್ಕಗಳನ್ನು ಬಹಿರಂಗಪಡಿಸಲಾಗಿಲ್ಲ.",
+      "emptyUseBasedCharges": "ಈ ಪಟ್ಟಿಗಾಗಿ ಬಳಕೆ ಆಧಾರಿತ ಶುಲ್ಕ ವರ್ಗಗಳನ್ನು ಬಹಿರಂಗಪಡಿಸಲಾಗಿಲ್ಲ.",
+      "emptyCriteria": "ಈ ಆಸ್ತಿಗೆ ಹೆಚ್ಚುವರಿ ಮಾಲೀಕರ ಮಾಪದಂಡಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಲಾಗಿಲ್ಲ.",
+      "rent": "ಬಾಡಿಗೆ",
+      "availability": "ಲಭ್ಯತೆ",
+      "fixedCharges": "ಗೊತ್ತಿರುವ ಸ್ಥಿರ ಬಾಡಿಗೆಯಲ್ಲದ ಶುಲ್ಕಗಳು",
+      "useBasedCharges": "ಬಳಕೆ ಆಧಾರಿತ ಶುಲ್ಕ ವರ್ಗಗಳು",
+      "criteria": "ಮಾಲೀಕರ ಸ್ವೀಕೃತಿ ಮಾಪದಂಡಗಳು",
+      "requiredChecks": "ಅಗತ್ಯವಿರುವ ಸ್ಕ್ರೀನಿಂಗ್ ಪರಿಶೀಲನೆಗಳು",
+      "feeCollectionStatus": "ಅರ್ಜಿ ಶುಲ್ಕದ ಸ್ಥಿತಿ",
+      "refundRecoveryInstructions": "ರಿಫಂಡ್ ಮತ್ತು ವರದಿ ಪಡೆಯುವ ಮಾಹಿತಿ",
+      "ownerNotes": "ಮಾಲೀಕರ ಟಿಪ್ಪಣಿಗಳು",
+      "continue": "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಗೆ ಮುಂದುವರಿಯಿರಿ"
+    },
+    "personal": {
+      "title": "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ",
+      "subtitle": "ಸ್ಕ್ರೀನಿಂಗ್ ಪ್ರಾರಂಭವಾಗುವ ಮೊದಲು ನಿಮ್ಮ ಅರ್ಜಿ ದಾಖಲೆಯನ್ನು ರಚಿಸಲು ಅಗತ್ಯವಿರುವ ವಿವರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
+      "continue": "ಮುಂದುವರಿಯಿರಿ",
+      "saving": "ಉಳಿಸಲಾಗುತ್ತಿದೆ...",
+      "fields": {
+        "firstName": "ಮೊದಲ ಹೆಸರು",
+        "lastName": "ಕೊನೆಯ ಹೆಸರು",
+        "email": "ಇಮೇಲ್",
+        "phone": "ಫೋನ್",
+        "dateOfBirth": "ಜನ್ಮ ದಿನಾಂಕ",
+        "currentAddress": "ಪ್ರಸ್ತುತ ವಿಳಾಸ",
+        "employer": "ನಿಯೋಜಕ",
+        "annualIncome": "ವಾರ್ಷಿಕ ಆದಾಯ",
+        "desiredMoveIn": "ಬಯಸಿದ ವಾಸದಿನಾಂಕ"
+      },
+      "placeholders": {
+        "phone": "ಉದಾ. +1 (801) 555-0100",
+        "currentAddress": "ರಸ್ತೆ, ನಗರ, ರಾಜ್ಯ, ZIP",
+        "employer": "ಕಂಪನಿ ಅಥವಾ ಸಂಸ್ಥೆ",
+        "annualIncome": "ಉದಾ. 75000"
+      }
+    },
+    "questions": {
+      "title": "ಸ್ಕ್ರೀನಿಂಗ್ ಪ್ರಶ್ನೆಗಳು",
+      "subtitle": "ಈ ಪಟ್ಟಿಗಾಗಿ ಮಾಲೀಕರು ಸೇರಿಸಿದ ಯಾವುದೇ ಕಸ್ಟಮ್ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
+      "yes": "ಹೌದು",
+      "no": "ಇಲ್ಲ",
+      "required": "ಕಡ್ಡಾಯ",
+      "continue": "ಅರ್ಜಿ ಪರಿಶೀಲಿಸಿ"
+    },
+    "review": {
+      "title": "ನಿಮ್ಮ ಅರ್ಜಿಯನ್ನು ಪರಿಶೀಲಿಸಿ",
+      "submit": "ಅರ್ಜಿ ಸಲ್ಲಿಸಿ",
+      "submitting": "ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...",
+      "personalInfo": "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ",
+      "answers": "ಸ್ಕ್ರೀನಿಂಗ್ ಉತ್ತರಗಳು",
+      "screeningChecks": "ಸ್ಕ್ರೀನಿಂಗ್ ಪರಿಶೀಲನೆಗಳು",
+      "consentSummary": "ಬಹಿರಂಗಪಡಿಸುವಿಕೆ ದೃಢೀಕರಣ",
+      "disclosureConfirmed": "ನೀವು ಮಾಲೀಕರ ಮಾಪದಂಡಗಳನ್ನು ದೃಢೀಕರಿಸಿ ಬಹಿರಂಗಪಡಿಸಿದ ಸ್ಕ್ರೀನಿಂಗ್ ಪರಿಶೀಲನೆಗಳಿಗೆ ಅನುಮತಿ ನೀಡಿದ್ದಾರೆ.",
+      "emptyAnswer": "ಉತ್ತರಿಸಲಾಗಿಲ್ಲ",
+      "fields": {
+        "name": "ಹೆಸರು",
+        "email": "ಇಮೇಲ್",
+        "phone": "ಫೋನ್",
+        "employer": "ನಿಯೋಜಕ",
+        "income": "ಆದಾಯ",
+        "moveIn": "ವಾಸದಿನಾಂಕ"
+      }
+    },
+    "sidebar": {
+      "title": "ಅರ್ಜಿ ಸಾರಾಂಶ",
+      "rent": "ಬಾಡಿಗೆ",
+      "availability": "ಲಭ್ಯತೆ",
+      "screeningChecks": "ಸ್ಕ್ರೀನಿಂಗ್ ಪರಿಶೀಲನೆಗಳು",
+      "criteria": "ಮಾಪದಂಡ ಸಾರಾಂಶ"
+    },
+    "requiredChecks": {
+      "credit": "ಕ್ರೆಡಿಟ್ ಪರಿಶೀಲನೆ",
+      "criminal": "ಅಪರಾಧ ಹಿನ್ನೆಲೆ ಪರಿಶೀಲನೆ",
+      "eviction": "ಹೊರಹಾಕುವಿಕೆ ಇತಿಹಾಸ ಪರಿಶೀಲನೆ",
+      "income": "ಆದಾಯ ದೃಢೀಕರಣ",
+      "identity": "ಗುರುತು ದೃಢೀಕರಣ",
+      "references": "ರೆಫರೆನ್ಸ್ ಪರಿಶೀಲನೆಗಳು"
+    },
+    "affordability": {
+      "title": "ಹೊರೆತಾಳುವ ಸಾಮರ್ಥ್ಯ ಪರಿಶೀಲನೆ",
+      "requirement": "ಈ ಆಸ್ತಿ ಕನಿಷ್ಠ ಆದಾಯ-ಬಾಡಿಗೆ ಅನುಪಾತ {{ratio}}x ಅನ್ನು ಬಳಸುತ್ತದೆ, ಇದು ವರ್ಷಕ್ಕೆ ಸುಮಾರು {{amount}} ಆಗಿದೆ.",
+      "inputLabel": "ನಿಮ್ಮ ವಾರ್ಷಿಕ ಆದಾಯ (USD)",
+      "placeholder": "ಉದಾ. 75000",
+      "meets": "ನೀವು ಈಗ ಅಗತ್ಯವನ್ನು ಪೂರೈಸುತ್ತಿದ್ದೀರಿ ({{ratio}}x ಅನುಪಾತ).",
+      "below": "ನೀವು ಅಗತ್ಯಕ್ಕಿಂತ ಕಡಿಮೆಯಿದ್ದೀರಿ ({{ratio}}x ಅನುಪಾತ; {{requiredRatio}}x ಅಗತ್ಯವಿದೆ)."
+    }
   }
 }
