@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
 import { useMemo, useState } from "react"
-import { Calendar, User, ArrowRight } from "lucide-react"
+import { Calendar, User, ArrowRight, MapPin } from "lucide-react"
 
 export default function BlogPage() {
   const featuredPost = {
@@ -83,7 +83,8 @@ export default function BlogPage() {
       readTime: "7 min read",
       category: "Utah",
       image: "/city-map-with-pin.png",
-      slug: "utah-rent-vs-buy-wasatch-front"
+      slug: "utah-rent-vs-buy-wasatch-front",
+      cities: ["Salt Lake City", "Draper", "Lehi", "Provo", "Ogden"],
     },
     {
       title: "Property Management Automation Checklist",
@@ -223,7 +224,8 @@ export default function BlogPage() {
       readTime: "6 min read",
       category: "Property Management",
       image: "/property-manager-meeting.png",
-      slug: "property-management-tips-utah-landlords"
+      slug: "property-management-tips-utah-landlords",
+      cities: ["Salt Lake City", "Lehi", "Provo", "Ogden"],
     },
     {
       title: "Mortgage Rate Trends: What to Expect in 2025",
@@ -243,7 +245,8 @@ export default function BlogPage() {
       readTime: "7 min read",
       category: "Investment",
       image: "/city-map-with-pin.png",
-      slug: "why-utah-best-real-estate-investment"
+      slug: "why-utah-best-real-estate-investment",
+      cities: ["Salt Lake City", "Draper", "Lehi", "Sandy", "Orem", "Ogden"],
     },
     {
       title: "Home Staging Tips That Actually Work",
@@ -280,11 +283,30 @@ export default function BlogPage() {
   }, [blogPosts.length, categoryCounts])
 
   const [activeCategory, setActiveCategory] = useState<string>("All")
+  const [activeCity, setActiveCity] = useState<string>("All")
 
-  const filteredPosts = useMemo(
-    () => (activeCategory === "All" ? blogPosts : blogPosts.filter(post => post.category === activeCategory)),
-    [activeCategory, blogPosts]
-  )
+  // Collect unique cities across all tagged posts
+  const citiesWithPosts = useMemo(() => {
+    const all = new Set<string>()
+    blogPosts.forEach((p) => {
+      if ("cities" in p && Array.isArray((p as { cities?: string[] }).cities)) {
+        (p as { cities: string[] }).cities.forEach((c) => all.add(c))
+      }
+    })
+    return ["All", ...Array.from(all).sort()]
+  }, [blogPosts])
+
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter((post) => {
+      const catMatch = activeCategory === "All" || post.category === activeCategory
+      const cityMatch =
+        activeCity === "All" ||
+        ("cities" in post &&
+          Array.isArray((post as { cities?: string[] }).cities) &&
+          (post as { cities: string[] }).cities.includes(activeCity))
+      return catMatch && cityMatch
+    })
+  }, [activeCategory, activeCity, blogPosts])
 
   return (
     <main className="min-h-screen">
@@ -419,6 +441,36 @@ export default function BlogPage() {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* City filter */}
+                {citiesWithPosts.length > 1 && (
+                  <Card className="mb-8">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <MapPin className="h-4 w-4 text-primary" />
+                        Filter by City
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {citiesWithPosts.map((city) => {
+                          const isActive = city === activeCity
+                          return (
+                            <Button
+                              key={city}
+                              variant={isActive ? "secondary" : "outline"}
+                              size="sm"
+                              onClick={() => setActiveCity(city)}
+                              aria-pressed={isActive}
+                            >
+                              {city}
+                            </Button>
+                          )
+                        })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 <Card>
                   <CardHeader>

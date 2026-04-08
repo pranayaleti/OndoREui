@@ -130,6 +130,11 @@ export default function LocationsPage() {
                           </p>
                         )}
                         <div className="flex flex-wrap gap-1.5">
+                          <Link href={`/locations/${slug}/`}>
+                            <Button variant="default" size="sm" className="text-xs h-7">
+                              City Guide
+                            </Button>
+                          </Link>
                           <Link href={`/property-management/${slug}/`}>
                             <Button variant="outline" size="sm" className="text-xs h-7">
                               Property Mgmt

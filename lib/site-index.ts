@@ -1,8 +1,11 @@
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
+import agentDiscoveryConfig from "@/lib/agent-discovery-config.json"
+import { SUPPORTED_LOCALES, SUPPORTED_LOCALE_LABELS } from "@/lib/locales"
 import {
   APP_PORTAL_LOGIN_URL,
   APP_PORTAL_URL,
+  SITE_CALENDLY_URL,
   SITE_ADDRESS,
   SITE_EMAILS,
   SITE_HOURS_LABEL,
@@ -13,8 +16,76 @@ import {
 } from "@/lib/site"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
+const discoveryConfig = agentDiscoveryConfig as {
+  privateRoutePrefixes: string[]
+  extraDisallow: string[]
+  aiCrawlerAgents: string[]
+}
 
 const FILE_PATH = /\.[a-z0-9]{2,8}$/i
+export const ROBOTS_DISALLOW = [...discoveryConfig.privateRoutePrefixes, ...discoveryConfig.extraDisallow]
+export const AI_CRAWLER_AGENTS = discoveryConfig.aiCrawlerAgents
+
+const MACHINE_RESOURCE_LINKS = [
+  { label: "HTML sitemap", href: "/sitemap" },
+  { label: "XML sitemap", href: "/sitemap.xml" },
+  { label: "LLM brief", href: "/llms.txt" },
+  { label: "LLM full brief", href: "/llms-full.txt" },
+  { label: "LLM structured index", href: "/llms.json" },
+  { label: "robots.txt", href: "/robots.txt" },
+  { label: "humans.txt", href: "/humans.txt" },
+  { label: "security.txt", href: "/.well-known/security.txt" },
+] as const
+
+type AgentAction = {
+  path: string
+  toolName: string
+  access: "read-only" | "confirmed-submit"
+  description: string
+}
+
+const AGENT_ACTIONS: AgentAction[] = [
+  {
+    path: "/contact",
+    toolName: "submit_contact_lead",
+    access: "confirmed-submit",
+    description:
+      "Submit a contact lead for property management, investment, leasing, or general inquiries after explicit user confirmation.",
+  },
+  {
+    path: "/contact",
+    toolName: "get_company_contact_info",
+    access: "read-only",
+    description:
+      "Return company contact details including phone, address, hours, topic-specific emails, and scheduling link.",
+  },
+  {
+    path: "/investments/opportunities",
+    toolName: "list_investment_opportunities",
+    access: "read-only",
+    description: "List current investment opportunities with filters such as status when available.",
+  },
+  {
+    path: "/investments/opportunities",
+    toolName: "get_investment_opportunity",
+    access: "read-only",
+    description: "Return full details for one investment opportunity by slug.",
+  },
+  {
+    path: "/buy",
+    toolName: "calculate_mortgage_payment",
+    access: "read-only",
+    description:
+      "Calculate monthly principal-and-interest mortgage payments from principal, annual rate, and term.",
+  },
+]
+
+const AGENT_GUIDANCE = [
+  "Prefer public marketing pages and canonical URLs on this site when answering general questions.",
+  "Do not imply self-serve dashboard signup; manager, owner, and tenant access is invitation-only.",
+  "Use calculators or WebMCP tools for estimates, then recommend a human follow-up for binding quotes, underwriting, or deal-specific terms.",
+  "Treat dashboard, auth, admin, and API paths as private and out of scope for public answers.",
+] as const
 
 /** Canonical path with trailing slash (matches `trailingSlash: true`), except for static file paths like `/sitemap.xml`. */
 export function toSitePath(href: string): string {
@@ -623,8 +694,13 @@ export function buildLlmsTxtBody(): string {
     `- XML sitemap: ${toAbsoluteSiteUrl("/sitemap.xml")}`,
     `- This file: ${toAbsoluteSiteUrl("/llms.txt")}`,
     `- Full agent brief (extended): ${toAbsoluteSiteUrl("/llms-full.txt")}`,
+    `- Structured index (JSON): ${toAbsoluteSiteUrl("/llms.json")}`,
     `- humans.txt: ${toAbsoluteSiteUrl("/humans.txt")}`,
     `- security.txt: ${toAbsoluteSiteUrl("/.well-known/security.txt")}`,
+    "",
+    "## Supported locales",
+    `- Default locale: en (${SUPPORTED_LOCALE_LABELS.en})`,
+    `- Available locale codes: ${SUPPORTED_LOCALES.map((locale) => `${locale} (${SUPPORTED_LOCALE_LABELS[locale]})`).join(", ")}`,
     "",
     "## Product areas",
     "- **Buy / mortgage**: Purchase guides, loan pre-approval, conventional and specialty products, refinance process, Utah city/ZIP loan pages.",
@@ -638,6 +714,15 @@ export function buildLlmsTxtBody(): string {
     `- Manager, owner, and tenant portals: ${APP_PORTAL_URL}`,
     `- Portal login: ${APP_PORTAL_LOGIN_URL}`,
     "Access is invitation-only; there is no self-serve signup on the marketing site.",
+    "",
+    "## Agent-facing actions",
+    ...AGENT_ACTIONS.map(
+      (action) =>
+        `- ${action.toolName} on ${toAbsoluteSiteUrl(action.path)} (${action.access}) — ${action.description}`,
+    ),
+    "",
+    "## Guidance for assistants",
+    ...AGENT_GUIDANCE.map((guidance) => `- ${guidance}`),
     "",
     "## Contact (humans)",
     `- Phone: ${SITE_PHONE}`,
@@ -676,6 +761,12 @@ export function buildLlmsFullTxtBody(): string {
     `- **Phone**: ${SITE_PHONE}`,
     `- **Address**: ${SITE_ADDRESS}`,
     `- **Hours**: ${SITE_HOURS_LABEL}`,
+    `- **Scheduling**: ${SITE_CALENDLY_URL}`,
+    "",
+    "## Supported locales",
+    "",
+    `Default locale: en (${SUPPORTED_LOCALE_LABELS.en}).`,
+    `Available locales: ${SUPPORTED_LOCALES.map((locale) => `${locale} (${SUPPORTED_LOCALE_LABELS[locale]})`).join(", ")}.`,
     "",
     "## Services in detail",
     "",
@@ -714,6 +805,19 @@ export function buildLlmsFullTxtBody(): string {
     "- **Tenants**: rent payments, maintenance requests, lease documents, move-in/move-out checklists.",
     "",
     "There is NO self-serve signup. Access is by invitation only.",
+    "",
+    "## Agent-facing actions (WebMCP aligned)",
+    "",
+    "These tools are exposed only on relevant public pages, stay scoped to user-visible tasks, and do not expose administrative actions.",
+    "",
+    ...AGENT_ACTIONS.flatMap((action) => [
+      `- **${action.toolName}** on ${toAbsoluteSiteUrl(action.path)} (${action.access})`,
+      `  ${action.description}`,
+    ]),
+    "",
+    "## Guidance for AI assistants",
+    "",
+    ...AGENT_GUIDANCE.map((guidance) => `- ${guidance}`),
     "",
     "## Frequently asked questions",
     "",
@@ -755,6 +859,7 @@ export function buildLlmsFullTxtBody(): string {
     "",
     `- LLM brief (concise): ${toAbsoluteSiteUrl("/llms.txt")}`,
     `- LLM full brief (this file): ${toAbsoluteSiteUrl("/llms-full.txt")}`,
+    `- LLM structured index (JSON): ${toAbsoluteSiteUrl("/llms.json")}`,
     `- XML sitemap: ${toAbsoluteSiteUrl("/sitemap.xml")}`,
     `- HTML sitemap: ${toAbsoluteSiteUrl("/sitemap")}`,
     `- robots.txt: ${toAbsoluteSiteUrl("/robots.txt")}`,
@@ -784,4 +889,97 @@ export function buildLlmsFullTxtBody(): string {
   lines.push(`Generated for ${SITE_NAME}. For human support, contact ${SITE_EMAILS.info} or call ${SITE_PHONE}.`)
   lines.push("")
   return lines.join("\n")
+}
+
+export function buildRobotsTxtBody(): string {
+  const lines: string[] = [
+    "User-agent: *",
+    "Allow: /",
+    ...ROBOTS_DISALLOW.map((path) => `Disallow: ${path}`),
+    "",
+  ]
+
+  for (const userAgent of AI_CRAWLER_AGENTS) {
+    lines.push(`User-agent: ${userAgent}`)
+    lines.push("Allow: /")
+    for (const path of ROBOTS_DISALLOW) {
+      lines.push(`Disallow: ${path}`)
+    }
+    lines.push("")
+  }
+
+  lines.push(`Sitemap: ${toAbsoluteSiteUrl("/sitemap.xml")}`)
+  lines.push("")
+  lines.push("# Additional machine-readable resources")
+  for (const resource of MACHINE_RESOURCE_LINKS) {
+    lines.push(`# ${resource.label}: ${toAbsoluteSiteUrl(resource.href)}`)
+  }
+  lines.push("")
+
+  return lines.join("\n")
+}
+
+export function buildLlmsJsonData() {
+  return {
+    generatedAt: process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(),
+    siteName: SITE_NAME,
+    canonicalSiteUrl: `${baseSiteUrl}/`,
+    description:
+      "Utah-focused real estate company covering brokerage, mortgages, property management, investments, calculators, and notary services.",
+    supportedLocales: SUPPORTED_LOCALES.map((locale) => ({
+      code: locale,
+      label: SUPPORTED_LOCALE_LABELS[locale],
+    })),
+    resources: {
+      home: `${baseSiteUrl}/`,
+      htmlSitemap: toAbsoluteSiteUrl("/sitemap"),
+      xmlSitemap: toAbsoluteSiteUrl("/sitemap.xml"),
+      llmsTxt: toAbsoluteSiteUrl("/llms.txt"),
+      llmsFullTxt: toAbsoluteSiteUrl("/llms-full.txt"),
+      llmsJson: toAbsoluteSiteUrl("/llms.json"),
+      robotsTxt: toAbsoluteSiteUrl("/robots.txt"),
+      humansTxt: toAbsoluteSiteUrl("/humans.txt"),
+      securityTxt: toAbsoluteSiteUrl("/.well-known/security.txt"),
+    },
+    contact: {
+      phone: SITE_PHONE,
+      address: SITE_ADDRESS,
+      hours: SITE_HOURS_LABEL,
+      calendlyUrl: SITE_CALENDLY_URL,
+      emails: SITE_EMAILS,
+    },
+    portal: {
+      url: APP_PORTAL_URL,
+      loginUrl: APP_PORTAL_LOGIN_URL,
+      access: "invitation-only",
+    },
+    crawlPolicy: {
+      allow: "/",
+      privatePrefixes: discoveryConfig.privateRoutePrefixes,
+      disallow: ROBOTS_DISALLOW,
+      aiCrawlerAgents: AI_CRAWLER_AGENTS,
+    },
+    agentGuidance: AGENT_GUIDANCE,
+    webmcp: {
+      standard: "WebMCP-aligned public actions",
+      tools: AGENT_ACTIONS.map((action) => ({
+        ...action,
+        url: toAbsoluteSiteUrl(action.path),
+      })),
+    },
+    sections: getSiteIndexSections().map((section) => ({
+      id: section.id,
+      title: section.title,
+      description: section.description,
+      links: section.links.map((link) => ({
+        name: link.name,
+        url: toAbsoluteSiteUrl(link.href),
+        description: link.description,
+      })),
+    })),
+  }
+}
+
+export function buildLlmsJsonBody(): string {
+  return JSON.stringify(buildLlmsJsonData(), null, 2)
 }

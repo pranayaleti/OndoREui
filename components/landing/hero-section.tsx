@@ -1,5 +1,18 @@
 import Image from "next/image"
-import { DeferredSearchForm } from "@/components/landing/deferred-search-form"
+import dynamic from "next/dynamic"
+
+const ZipServiceSelector = dynamic(
+  () => import("@/components/landing/zip-service-selector").then((m) => m.ZipServiceSelector),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex w-full max-w-sm items-center gap-2" aria-hidden="true">
+        <div className="h-11 flex-1 rounded-md bg-white/20" />
+        <div className="h-11 w-28 rounded-md bg-white/20" />
+      </div>
+    ),
+  }
+)
 
 export function HeroSection() {
   return (
@@ -18,17 +31,19 @@ export function HeroSection() {
       <div className="container relative z-10 mx-auto px-4 text-center">
         <header>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Ondo RE: Utah property management, loans &amp; Real Estate
+            Utah&apos;s Full-Service Real Estate Partner
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/70">
-            Ondo Real Estate is a full-service property management, mortgage, and brokerage team serving the Wasatch
-            Front. Owners get real-time visibility, tenants get responsive support, and investors see exactly how assets
-            perform.
+            Property management, home loans, and brokerage across 55+ Wasatch Front cities.
+            Owners get real-time visibility. Tenants get responsive support. Investors see exactly how assets perform.
           </p>
         </header>
-        <section aria-label="Property search" className="flex justify-center">
-          <DeferredSearchForm />
+        <section aria-label="Property search" className="relative flex justify-center">
+          <ZipServiceSelector />
         </section>
+        <p className="mt-6 text-sm text-foreground/50">
+          Trusted by property owners from North Ogden to Nephi &bull; 4.9★ average rating
+        </p>
       </div>
     </section>
   )

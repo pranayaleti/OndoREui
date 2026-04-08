@@ -1,0 +1,15 @@
+{
+  "privateRoutePrefixes": ["/dashboard", "/owner", "/tenant", "/platform", "/auth", "/admin", "/api"],
+  "extraDisallow": ["/login", "/feedback", "/health"],
+  "aiCrawlerAgents": [
+    "GPTBot",
+    "ChatGPT-User",
+    "Google-Extended",
+    "Claude-Web",
+    "Anthropic-AI",
+    "PerplexityBot",
+    "Bytespider",
+    "CCBot",
+    "cohere-ai"
+  ]
+}

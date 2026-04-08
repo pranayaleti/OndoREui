@@ -3,8 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpBackend from 'i18next-http-backend';
 import enCommon from '@/public/locales/en/common.json';
-
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'it', 'te', 'hi', 'ta', 'kn'] as const;
+import { SUPPORTED_LOCALES } from '@/lib/locales';
 
 i18n
   .use(HttpBackend)

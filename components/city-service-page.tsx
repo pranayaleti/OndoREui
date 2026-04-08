@@ -16,6 +16,10 @@ import { CommuteBadges } from "@/components/commute-badges"
 import { MarketDataCard } from "@/components/market-data-card"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { LocalProofCTA } from "@/components/local-proof-cta"
+import { CityTestimonials } from "@/components/city-testimonials"
+import { CityTeamSection } from "@/components/city-team-section"
+import { SeasonalCallout } from "@/components/seasonal-callout"
+import { BreadcrumbNav } from "@/components/breadcrumb-nav"
 import { getSubServicesForParent } from "@/lib/sub-service-content"
 import { School, TreePine } from "lucide-react"
 
@@ -121,12 +125,20 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
     })),
   }
 
+  const serviceLabel = service === "property-management" ? "Property Management" : service === "buy-sell" ? "Buy & Sell" : "Home Loans"
+  const serviceBasePath = service === "property-management" ? "property-management" : service === "buy-sell" ? "buy-sell" : "loans"
+
   return (
     <div className="container mx-auto px-4 py-10 space-y-10">
       <Script id="city-business-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }} />
       <Script id="city-service-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <Script id="city-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
+      <BreadcrumbNav items={[
+        { label: serviceLabel, href: `/${serviceBasePath}/` },
+        { label: city.name },
+      ]} />
+      <SeasonalCallout cityName={city.name} audience={service === "property-management" ? "owner" : "investor"} />
       <LocalProofCTA city={city} service={service} marketData={marketData} />
 
       <Card>
@@ -306,6 +318,22 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
       />
 
       <Separator />
+
+      {/* Team section */}
+      <CityTeamSection cityName={city.name} />
+
+      {/* City testimonials */}
+      <CityTestimonials cityName={city.name} />
+
+      {/* Cross-links to city guide & pricing */}
+      <CrossLinkSection
+        title={`More ${city.name} Resources`}
+        variant="pills"
+        links={[
+          { label: `${city.name} City Guide`, href: `/locations/${citySlug}/` },
+          { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
+        ]}
+      />
 
       <Card>
         <CardHeader>

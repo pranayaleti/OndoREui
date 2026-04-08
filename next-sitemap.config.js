@@ -1,4 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
+const agentDiscoveryConfig = require('./lib/agent-discovery-config.json')
 
 // Static lastmod dates by path prefix (no trailing slash; paths normalized in getLastmod).
 const SECTION_LASTMOD = {
@@ -19,8 +20,11 @@ const SECTION_LASTMOD = {
 }
 
 const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString().split('T')[0]
-const PRIVATE_ROUTE_PREFIXES = ['/dashboard', '/owner', '/tenant', '/platform', '/auth', '/admin', '/api']
-const ROBOTS_DISALLOW = [...PRIVATE_ROUTE_PREFIXES, '/login', '/feedback', '/health']
+const PRIVATE_ROUTE_PREFIXES = agentDiscoveryConfig.privateRoutePrefixes
+const ROBOTS_DISALLOW = [...PRIVATE_ROUTE_PREFIXES, ...agentDiscoveryConfig.extraDisallow]
+const AI_CRAWLER_AGENTS = agentDiscoveryConfig.aiCrawlerAgents
+const AGENT_DISCOVERY_PATHS = ['/llms.txt', '/llms-full.txt', '/llms.json']
+const ROBOTS_COMMENT_RESOURCES = [...AGENT_DISCOVERY_PATHS, '/humans.txt', '/.well-known/security.txt']
 
 function normalizeSitemapPath(path) {
   if (!path || path === '/') return '/'
@@ -71,6 +75,14 @@ function isFileLikeSitemapPath(path) {
   return /\.[a-z0-9]{2,8}$/i.test(p)
 }
 
+function buildRobotsCommentBlock(siteUrl) {
+  const normalizedSiteUrl = siteUrl.replace(/\/$/, '')
+  return [
+    '# Additional machine-readable resources',
+    ...ROBOTS_COMMENT_RESOURCES.map((path) => `# ${path.replace(/^\//, '')}: ${normalizedSiteUrl}${path}`),
+  ].join('\n')
+}
+
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://ondorealestate.com',
   /** Must match `trailingSlash` in next.config.mjs for static export + GitHub Pages. */
@@ -88,54 +100,15 @@ module.exports = {
         allow: '/',
         disallow: ROBOTS_DISALLOW,
       },
-      // ── AI crawlers: explicitly welcome on public content ──
-      {
-        userAgent: 'GPTBot',
+      ...AI_CRAWLER_AGENTS.map((userAgent) => ({
+        userAgent,
         allow: '/',
         disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'ChatGPT-User',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'Google-Extended',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'Claude-Web',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'Anthropic-AI',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'PerplexityBot',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'Bytespider',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'CCBot',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
-      {
-        userAgent: 'cohere-ai',
-        allow: '/',
-        disallow: ROBOTS_DISALLOW,
-      },
+      })),
     ],
     additionalSitemaps: [],
+    transformRobotsTxt: async (config, robotsTxt) =>
+      `${robotsTxt.trimEnd()}\n${buildRobotsCommentBlock(config.siteUrl)}\n`,
   },
   exclude: [
     '/auth',
@@ -181,7 +154,7 @@ module.exports = {
     return base
   },
   additionalPaths: async (config) => {
-    const paths = ['/llms.txt', '/llms-full.txt']
+    const paths = AGENT_DISCOVERY_PATHS
     const entries = await Promise.all(paths.map((p) => config.transform(config, p)))
     return entries.filter(Boolean)
   },

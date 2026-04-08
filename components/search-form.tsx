@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast"
 import { saveUserInfo } from "@/lib/session-utils"
 import { sanitizeInput, isValidZipCode, RateLimiter } from "@/lib/security"
 import { SearchFormData } from "@/lib/types"
+import { findCityByZip, toCitySlug } from "@/lib/utah-cities"
 
 const searchRateLimiter = new RateLimiter(3, 30000) // 3 attempts per 30 seconds
 
@@ -19,34 +20,6 @@ export function SearchForm() {
   const [error, setError] = useState("")
   const router = useRouter()
   const { toast } = useToast()
-
-  // Function to get city from zip code (mock implementation)
-  const getCityFromZipCode = async (zip: string): Promise<string> => {
-    try {
-      // Mock city lookup - in production, use a real geocoding API
-      const cityMap: Record<string, string> = {
-        "84101": "Salt-Lake-City",
-        "84108": "Salt-Lake-City",
-        "84044": "Magna",
-        "84047": "Midvale",
-        "84117": "Holladay",
-        "98101": "Seattle",
-        "98004": "Bellevue",
-        "98052": "Redmond",
-        // Add more zip codes as needed
-      }
-
-      const city = cityMap[zip]
-      if (!city) {
-        // Return a default city for unknown ZIP codes
-        return "nearby"
-      }
-      return city
-    } catch (error) {
-      console.error("Error getting city from zip code:", error)
-      throw new Error("Unable to find city for this ZIP code")
-    }
-  }
 
   const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Sanitize input: only allow digits and limit to 5 characters
@@ -88,41 +61,33 @@ export function SearchForm() {
 
     setIsLoading(true)
 
-    // Get city from zip code
-    const city = await getCityFromZipCode(sanitizedZipCode)
+    // Look up city from full utah-cities database
+    const city = findCityByZip(sanitizedZipCode)
 
     // Save the ZIP code to session storage
     saveUserInfo(sanitizedZipCode)
+    sessionStorage.setItem("property-match-zipcode", sanitizedZipCode)
 
-    try {
-      // Store the zip code in sessionStorage (clears when browser is closed)
-      sessionStorage.setItem("property-match-zipcode", sanitizedZipCode)
-
-      // Get city from zip code
-      //const city = await getCityFromZipCode(zipCode)
-
-      // Redirect to the search form page
-      //router.push(`/search/${city}?zip=${zipCode}`)
-      // Redirect to the search results page
-      setTimeout(() => {
-        router.push(`/search/${city}`)
-        setIsLoading(false)
-      }, 1000) // Simulate network delay
-    } catch {
-      setIsLoading(false)
+    if (city) {
+      const slug = toCitySlug(city.name)
+      router.push(`/property-management/${slug}/`)
+    } else {
+      // ZIP not in our service area — route to general properties page
+      router.push("/properties/")
       toast({
-        title: "Location Error",
-        description: "We couldn't find that ZIP code. Please try another one.",
-        variant: "destructive",
+        title: "ZIP code not in service area",
+        description: "We serve Utah's Wasatch Front from North Ogden to Nephi. Showing all properties.",
       })
     }
+
+    setIsLoading(false)
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-sm items-center gap-2">
       <Input
         type="text"
-        placeholder="Enter ZIP code (e.g., 84101)"
+        placeholder="Enter ZIP code (e.g., 84043)"
         value={formData.zipCode}
         onChange={handleZipCodeChange}
         className="flex-1"

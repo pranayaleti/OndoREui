@@ -11,11 +11,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Menu, X, Search, ChevronDown } from "lucide-react"
+import { Menu, X, Search, ChevronDown, Phone } from "lucide-react"
 import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
-import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
+import { APP_PORTAL_LOGIN_URL, SITE_PHONE } from "@/lib/site"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { useTranslation } from "react-i18next"
 
@@ -122,6 +122,15 @@ const Header = memo(() => {
 
         {/* Right-side controls */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
+          {/* Phone CTA — icon-only on mobile, full number on desktop */}
+          <a
+            href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
+            className="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent transition-colors shrink-0"
+            aria-label={`Call ${SITE_PHONE}`}
+          >
+            <Phone className="h-4 w-4 text-primary" />
+            <span className="hidden lg:inline text-foreground/80">{SITE_PHONE}</span>
+          </a>
           <LanguageSwitcher />
           <Button
             variant="ghost"
@@ -223,7 +232,15 @@ const Header = memo(() => {
                 </div>
               ))}
 
-            <div className="mt-4">
+            <div className="mt-4 flex flex-col gap-2">
+              <a
+                href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-primary bg-primary/5 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
+                onClick={handleMenuClose}
+              >
+                <Phone className="h-4 w-4" />
+                {SITE_PHONE} — Free Consultation
+              </a>
               <a
                 href={APP_PORTAL_LOGIN_URL}
                 onClick={handleMenuClose}

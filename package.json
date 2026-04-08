@@ -27,6 +27,8 @@
     "optimize:images": "node scripts/optimize-images.mjs",
     "optimize:all-images": "node scripts/optimize-all-images.mjs",
     "copy:headers": "cp public/_headers out/_headers 2>/dev/null || true",
+    "generate:blogs": "npx tsx scripts/generate-city-blogs.ts",
+    "generate:blogs:dry": "npx tsx scripts/generate-city-blogs.ts --dry-run",
     "analyze:bundle": "node scripts/analyze-bundle.mjs",
     "check:unused": "node scripts/check-unused-deps.mjs",
     "a11y:axe": "playwright test tests/a11y.spec.ts",

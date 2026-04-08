@@ -10,6 +10,7 @@ import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { CTASection } from "@/components/landing/cta-section"
 import { EmailCaptureSection } from "@/components/landing/email-capture-section"
 import { CalendlyBookSection } from "@/components/contact/calendly-inline-embed"
+import { ServiceAreaSection } from "@/components/landing/service-area-section"
 
 export default function LandingPage() {
   return (
@@ -22,6 +23,7 @@ export default function LandingPage() {
       <PropertyOwnerSection />
       <FeaturedPropertiesSection />
       <TestimonialsSection />
+      <ServiceAreaSection />
       <FoundersNoteSection />
       <EmailCaptureSection />
       <CalendlyBookSection />
