@@ -4,12 +4,19 @@
   "aiCrawlerAgents": [
     "GPTBot",
     "ChatGPT-User",
+    "OAI-SearchBot",
     "Google-Extended",
     "Claude-Web",
     "Anthropic-AI",
     "PerplexityBot",
     "Bytespider",
     "CCBot",
-    "cohere-ai"
+    "cohere-ai",
+    "Meta-ExternalAgent",
+    "Applebot-Extended",
+    "Amazonbot",
+    "Diffbot",
+    "omgili",
+    "YouBot"
   ]
 }

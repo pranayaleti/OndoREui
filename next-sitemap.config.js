@@ -23,7 +23,16 @@ const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(
 const PRIVATE_ROUTE_PREFIXES = agentDiscoveryConfig.privateRoutePrefixes
 const ROBOTS_DISALLOW = [...PRIVATE_ROUTE_PREFIXES, ...agentDiscoveryConfig.extraDisallow]
 const AI_CRAWLER_AGENTS = agentDiscoveryConfig.aiCrawlerAgents
-const AGENT_DISCOVERY_PATHS = ['/llms.txt', '/llms-full.txt', '/llms.json']
+const AGENT_DISCOVERY_PATHS = [
+  '/llms',
+  '/llms.txt',
+  '/llm.txt',
+  '/.well-known/llms.txt',
+  '/llms-full.txt',
+  '/llms.json',
+  '/index.md',
+  '/.well-known/agents.json',
+]
 const ROBOTS_COMMENT_RESOURCES = [...AGENT_DISCOVERY_PATHS, '/humans.txt', '/.well-known/security.txt']
 
 function normalizeSitemapPath(path) {
@@ -52,7 +61,16 @@ function getPriority(path) {
   if (tier9.includes(p)) return 0.9
   const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations']
   if (tier8.some((x) => p === x)) return 0.8
-  const tier5 = ['/resources', '/notary', '/news', '/privacy-policy', '/terms-of-service', '/accessibility', '/sitemap']
+  const tier5 = [
+    '/resources',
+    '/notary',
+    '/news',
+    '/privacy-policy',
+    '/terms-of-service',
+    '/accessibility',
+    '/sitemap',
+    '/llms',
+  ]
   if (tier5.some((x) => p === x || p.startsWith(`${x}/`))) return 0.5
   // City x sub-service pages (e.g. /loans/sandy/fha, /property-management/draper/tenant-screening)
   const citySubServicePattern = /^\/(property-management|loans|buy-sell)\/[a-z-]+\/[a-z-]+$/

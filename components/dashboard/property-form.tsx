@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,8 +11,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
 import { Building, Home, Hotel, Store, Users } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 export function PropertyForm() {
+  const router = useRouter()
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -34,10 +39,26 @@ export function PropertyForm() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: wire to property creation API
-    alert("Property added successfully!")
+    setIsSubmitting(true)
+    try {
+      // Demo-only: owner property CRUD against the live API is in OndoREDashboard; this UI matches that flow.
+      await new Promise((resolve) => setTimeout(resolve, 800))
+      toast({
+        title: "Property added",
+        description: "The property has been added to your portfolio (demo).",
+      })
+      router.push("/owner/properties")
+    } catch {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -165,7 +186,9 @@ export function PropertyForm() {
             <Button type="button" variant="outline">
               Cancel
             </Button>
-            <Button type="submit">Add Property</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Saving…" : "Add Property"}
+            </Button>
           </div>
         </CardContent>
       </Card>

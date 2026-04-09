@@ -1,4 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
+/**
+ * Client blacklist helpers are stubs (see blacklist.ts). Moderation is enforced server-side.
+ * These tests lock in stub behavior so refactors do not accidentally reintroduce broken fetch logic.
+ */
+import { describe, it, expect } from "vitest"
 import {
   checkUserBlacklist,
   checkPropertyBlacklist,
@@ -8,170 +12,36 @@ import {
   validateContent,
 } from "./blacklist"
 
-describe("blacklist", () => {
-  beforeEach(() => {
-    clearBlacklistCache()
-    vi.restoreAllMocks()
+describe("blacklist (client stubs)", () => {
+  it("checkUserBlacklist always returns not blacklisted", async () => {
+    const result = await checkUserBlacklist("uid", "user@example.com")
+    expect(result).toEqual({ isBlacklisted: false, type: "user" })
   })
 
-  describe("checkUserBlacklist", () => {
-    it("returns not blacklisted on API error (fail open)", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({ ok: false })
-      )
-      const result = await checkUserBlacklist("", "user@example.com")
-      expect(result.isBlacklisted).toBe(false)
-      expect(result.type).toBe("user")
-    })
-    it("returns not blacklisted on network error", async () => {
-      vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("network")))
-      const result = await checkUserBlacklist("uid1", "u@x.com")
-      expect(result.isBlacklisted).toBe(false)
-    })
-    it("returns data when API returns success", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({
-          ok: true,
-          json: () =>
-            Promise.resolve({
-              success: true,
-              data: { isBlacklisted: true, type: "user", reason: "spam" },
-            }),
-        })
-      )
-      const result = await checkUserBlacklist("uid", "e@x.com")
-      expect(result.isBlacklisted).toBe(true)
-      expect(result.type).toBe("user")
-    })
-    it("uses cache when useCache true and cached", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({
-          ok: true,
-          json: () =>
-            Promise.resolve({
-              success: true,
-              data: { isBlacklisted: false, type: "user" },
-            }),
-        })
-      )
-      await checkUserBlacklist("u1", "a@b.com")
-      await checkUserBlacklist("u1", "a@b.com")
-      expect(fetch).toHaveBeenCalledTimes(1)
-    })
+  it("checkPropertyBlacklist always returns not blacklisted", async () => {
+    const result = await checkPropertyBlacklist(123)
+    expect(result).toEqual({ isBlacklisted: false, type: "property" })
   })
 
-  describe("checkPropertyBlacklist", () => {
-    it("returns not blacklisted on API error", async () => {
-      vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }))
-      const result = await checkPropertyBlacklist(123)
-      expect(result.isBlacklisted).toBe(false)
-      expect(result.type).toBe("property")
-    })
+  it("checkIPBlacklist always returns not blacklisted", async () => {
+    const result = await checkIPBlacklist("1.2.3.4")
+    expect(result).toEqual({ isBlacklisted: false, type: "ip" })
   })
 
-  describe("checkIPBlacklist", () => {
-    it("returns not blacklisted on API error", async () => {
-      vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }))
-      const result = await checkIPBlacklist("1.2.3.4")
-      expect(result.isBlacklisted).toBe(false)
-      expect(result.type).toBe("ip")
-    })
+  it("clearBlacklistCache is safe to call (no-op)", () => {
+    expect(() => clearBlacklistCache()).not.toThrow()
   })
 
-  describe("clearBlacklistCache", () => {
-    it("clears cache so next check refetches", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({
-          ok: true,
-          json: () =>
-            Promise.resolve({
-              success: true,
-              data: { isBlacklisted: false, type: "user" },
-            }),
-        })
-      )
-      await checkUserBlacklist("u", "e@x.com")
-      clearBlacklistCache()
-      await checkUserBlacklist("u", "e@x.com")
-      expect(fetch).toHaveBeenCalledTimes(2)
+  it("getClientIP returns null (IP resolved on server)", () => {
+    const req = new Request("https://example.com", {
+      headers: { "x-forwarded-for": "1.2.3.4" },
     })
+    expect(getClientIP(req)).toBe(null)
   })
 
-  describe("getClientIP", () => {
-    it("returns first x-forwarded-for IP", () => {
-      const req = new Request("https://example.com", {
-        headers: { "x-forwarded-for": " 1.2.3.4 , 5.6.7.8 " },
-      })
-      expect(getClientIP(req)).toBe("1.2.3.4")
-    })
-    it("returns null when no IP headers", () => {
-      const req = new Request("https://example.com")
-      expect(getClientIP(req)).toBe(null)
-    })
-    it("ignores unknown", () => {
-      const req = new Request("https://example.com", {
-        headers: { "x-forwarded-for": "unknown" },
-      })
-      expect(getClientIP(req)).toBe(null)
-    })
-  })
-
-  describe("validateContent", () => {
-    it("returns valid on API error (fail open)", async () => {
-      vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }))
-      const result = await validateContent("anything")
-      expect(result.isValid).toBe(true)
-    })
-    it("returns valid when response success is false or data missing", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({
-          ok: true,
-          json: () => Promise.resolve({ success: false }),
-        })
-      )
-      const result = await validateContent("anything")
-      expect(result.isValid).toBe(true)
-    })
-    it("returns valid when no filters match", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({
-          ok: true,
-          json: () =>
-            Promise.resolve({
-              success: true,
-              data: [{ pattern: "spam" }],
-            }),
-        })
-      )
-      const result = await validateContent("hello world")
-      expect(result.isValid).toBe(true)
-    })
-    it("returns invalid when pattern matches", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn().mockResolvedValue({
-          ok: true,
-          json: () =>
-            Promise.resolve({
-              success: true,
-              data: [{ pattern: "spam" }],
-            }),
-        })
-      )
-      const result = await validateContent("this is spam content")
-      expect(result.isValid).toBe(false)
-      expect(result.blockedPattern).toBe("spam")
-    })
-    it("returns valid on fetch throw (fail open)", async () => {
-      vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("network")))
-      const result = await validateContent("anything")
-      expect(result.isValid).toBe(true)
-    })
+  it("validateContent always allows content in the stub", async () => {
+    const result = await validateContent("any string including spam")
+    expect(result.isValid).toBe(true)
+    expect(result.blockedPattern).toBeUndefined()
   })
 })

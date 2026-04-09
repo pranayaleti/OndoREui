@@ -99,7 +99,7 @@ This site uses `react-i18next` with a static-export-compatible client-side setup
 ### Rules — enforce on every change
 
 1. **Client components**: Use `const { t } = useTranslation()` and `t('namespace.key')`. Never write English strings in JSX.
-2. **Server components**: Cannot use `useTranslation`. Acceptable to keep purely static SEO metadata (page `<title>`, JSON-LD) in English for now. Leave a `// TODO(i18n): server component — translate when dynamic` comment.
+2. **Server components**: Cannot use `useTranslation`. Acceptable to keep purely static SEO metadata (page `<title>`, JSON-LD) in English for now. Optionally add `// NOTE(i18n): server component — translate when content becomes dynamic`.
 3. **Translation files**: `public/locales/{locale}/common.json`. Each new key in `en/common.json` must have equivalents in all 7 other locale files.
 4. **New namespaces**: Create for all 8 locales simultaneously and register in `lib/i18n.ts`.
 5. **Navigation**: `components/navigation.tsx` uses `labelKey` on `NavigationItem`. Always add `labelKey` — never a raw `label` string.

@@ -1,18 +1,5 @@
 import Image from "next/image"
-import dynamic from "next/dynamic"
-
-const ZipServiceSelector = dynamic(
-  () => import("@/components/landing/zip-service-selector").then((m) => m.ZipServiceSelector),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex w-full max-w-sm items-center gap-2" aria-hidden="true">
-        <div className="h-11 flex-1 rounded-md bg-white/20" />
-        <div className="h-11 w-28 rounded-md bg-white/20" />
-      </div>
-    ),
-  }
-)
+import { HeroZipServiceSelectorLazy } from "@/components/landing/hero-zip-service-selector-lazy"
 
 export function HeroSection() {
   return (
@@ -39,7 +26,7 @@ export function HeroSection() {
           </p>
         </header>
         <section aria-label="Property search" className="relative flex justify-center">
-          <ZipServiceSelector />
+          <HeroZipServiceSelectorLazy />
         </section>
         <p className="mt-6 text-sm text-foreground/50">
           Trusted by property owners from North Ogden to Nephi &bull; 4.9★ average rating
