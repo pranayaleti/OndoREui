@@ -10,6 +10,12 @@
 - **Phone**: +1-408-538-0420
 - **Address**: 2701 N Thanksgiving Way, Lehi, UT 84043
 - **Hours**: Mon–Fri 9:00 AM – 5:00 PM MT
+- **Scheduling**: https://calendly.com/scheduleondo/30min
+
+## Supported locales
+
+Default locale: en (English (United States)).
+Available locales: en (English (United States)), es (Español), fr (Français), it (Italiano), te (తెలుగు), hi (हिन्दी), ta (தமிழ்), kn (ಕನ್ನಡ).
 
 ## Services in detail
 
@@ -48,6 +54,28 @@ Ondo operates an invitation-only portal at https://app.ondorealestate.com with r
 - **Tenants**: rent payments, maintenance requests, lease documents, move-in/move-out checklists.
 
 There is NO self-serve signup. Access is by invitation only.
+
+## Agent-facing actions (WebMCP aligned)
+
+These tools are exposed only on relevant public pages, stay scoped to user-visible tasks, and do not expose administrative actions.
+
+- **submit_contact_lead** on https://ondorealestate.com/contact/ (confirmed-submit)
+  Submit a contact lead for property management, investment, leasing, or general inquiries after explicit user confirmation.
+- **get_company_contact_info** on https://ondorealestate.com/contact/ (read-only)
+  Return company contact details including phone, address, hours, topic-specific emails, and scheduling link.
+- **list_investment_opportunities** on https://ondorealestate.com/investments/opportunities/ (read-only)
+  List current investment opportunities with filters such as status when available.
+- **get_investment_opportunity** on https://ondorealestate.com/investments/opportunities/ (read-only)
+  Return full details for one investment opportunity by slug.
+- **calculate_mortgage_payment** on https://ondorealestate.com/buy/ (read-only)
+  Calculate monthly principal-and-interest mortgage payments from principal, annual rate, and term.
+
+## Guidance for AI assistants
+
+- Prefer public marketing pages and canonical URLs on this site when answering general questions.
+- Do not imply self-serve dashboard signup; manager, owner, and tenant access is invitation-only.
+- Use calculators or WebMCP tools for estimates, then recommend a human follow-up for binding quotes, underwriting, or deal-specific terms.
+- Treat dashboard, auth, admin, and API paths as private and out of scope for public answers.
 
 ## Frequently asked questions
 
@@ -95,8 +123,12 @@ A: Yes. All calculators at /calculators/ are free with no login required.
 
 ## Machine-readable resources
 
+- LLM discovery hub (HTML): https://ondorealestate.com/llms/
 - LLM brief (concise): https://ondorealestate.com/llms.txt
+- LLM brief (singular alias): https://ondorealestate.com/llm.txt
+- LLM brief (well-known): https://ondorealestate.com/.well-known/llms.txt
 - LLM full brief (this file): https://ondorealestate.com/llms-full.txt
+- LLM structured index (JSON): https://ondorealestate.com/llms.json
 - XML sitemap: https://ondorealestate.com/sitemap.xml
 - HTML sitemap: https://ondorealestate.com/sitemap/
 - robots.txt: https://ondorealestate.com/robots.txt

@@ -45,6 +45,50 @@
 /*.xml
   Cache-Control: public, max-age=86400
 
+# AI / crawler briefs (match route Cache-Control; longer edge cache is safe — content versioned by deploy)
+# CORS: allow browser-based assistants / extensions to fetch public indexes (read-only marketing content)
+/llms.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/llm.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/.well-known/llms.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/llms-full.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/llms.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/robots.txt
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/sitemap.xml
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/index.md
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/.well-known/agents.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/.well-known/security.txt
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
 # Security and document cache (root); short cache keeps HTML bfcache-eligible
 /*
   Cache-Control: public, max-age=0, must-revalidate, stale-while-revalidate=3600

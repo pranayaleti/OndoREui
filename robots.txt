@@ -40,6 +40,20 @@ Disallow: /login
 Disallow: /feedback
 Disallow: /health
 
+# OAI-SearchBot
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
 # Google-Extended
 User-agent: Google-Extended
 Allow: /
@@ -138,8 +152,103 @@ Disallow: /login
 Disallow: /feedback
 Disallow: /health
 
+# Meta-ExternalAgent
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
+# Applebot-Extended
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
+# Amazonbot
+User-agent: Amazonbot
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
+# omgili
+User-agent: omgili
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
+# YouBot
+User-agent: YouBot
+Allow: /
+Disallow: /dashboard
+Disallow: /owner
+Disallow: /tenant
+Disallow: /platform
+Disallow: /auth
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+Disallow: /feedback
+Disallow: /health
+
 # Host
 Host: https://ondorealestate.com
 
 # Sitemaps
 Sitemap: https://ondorealestate.com/sitemap.xml
+# Additional machine-readable resources
+# llms: https://ondorealestate.com/llms
+# llms.txt: https://ondorealestate.com/llms.txt
+# llm.txt: https://ondorealestate.com/llm.txt
+# .well-known/llms.txt: https://ondorealestate.com/.well-known/llms.txt
+# llms-full.txt: https://ondorealestate.com/llms-full.txt
+# llms.json: https://ondorealestate.com/llms.json
+# index.md: https://ondorealestate.com/index.md
+# .well-known/agents.json: https://ondorealestate.com/.well-known/agents.json
+# humans.txt: https://ondorealestate.com/humans.txt
+# .well-known/security.txt: https://ondorealestate.com/.well-known/security.txt

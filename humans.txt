@@ -12,6 +12,17 @@ AI features powered by Anthropic Claude.
 Email delivery by Resend.
 CRM by HubSpot.
 
+/* DISCOVERY */
+
+LLM brief: https://ondorealestate.com/llms.txt
+LLM brief (alias): https://ondorealestate.com/llm.txt
+LLM brief (well-known): https://ondorealestate.com/.well-known/llms.txt
+Full AI brief: https://ondorealestate.com/llms-full.txt
+Structured AI index: https://ondorealestate.com/llms.json
+Site overview (Markdown): https://ondorealestate.com/index.md
+AI agent manifest: https://ondorealestate.com/.well-known/agents.json
+Security contact: https://ondorealestate.com/.well-known/security.txt
+
 /* SITE */
 
 Standards: HTML5, CSS3, ECMAScript 2024

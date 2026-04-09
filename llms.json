@@ -1,0 +1,1013 @@
+{
+  "generatedAt": "2026-04-09T19:04:16.352Z",
+  "siteName": "Ondo Real Estate",
+  "canonicalSiteUrl": "https://ondorealestate.com/",
+  "description": "Utah-focused real estate company covering brokerage, mortgages, property management, investments, calculators, and notary services.",
+  "supportedLocales": [
+    {
+      "code": "en",
+      "label": "English (United States)"
+    },
+    {
+      "code": "es",
+      "label": "Español"
+    },
+    {
+      "code": "fr",
+      "label": "Français"
+    },
+    {
+      "code": "it",
+      "label": "Italiano"
+    },
+    {
+      "code": "te",
+      "label": "తెలుగు"
+    },
+    {
+      "code": "hi",
+      "label": "हिन्दी"
+    },
+    {
+      "code": "ta",
+      "label": "தமிழ்"
+    },
+    {
+      "code": "kn",
+      "label": "ಕನ್ನಡ"
+    }
+  ],
+  "resources": {
+    "home": "https://ondorealestate.com/",
+    "htmlSitemap": "https://ondorealestate.com/sitemap/",
+    "xmlSitemap": "https://ondorealestate.com/sitemap.xml",
+    "llmsHub": "https://ondorealestate.com/llms/",
+    "llmsTxt": "https://ondorealestate.com/llms.txt",
+    "llmTxtAlias": "https://ondorealestate.com/llm.txt",
+    "llmsTxtWellKnown": "https://ondorealestate.com/.well-known/llms.txt",
+    "llmsFullTxt": "https://ondorealestate.com/llms-full.txt",
+    "llmsJson": "https://ondorealestate.com/llms.json",
+    "robotsTxt": "https://ondorealestate.com/robots.txt",
+    "humansTxt": "https://ondorealestate.com/humans.txt",
+    "securityTxt": "https://ondorealestate.com/.well-known/security.txt"
+  },
+  "contact": {
+    "phone": "+1-408-538-0420",
+    "address": "2701 N Thanksgiving Way, Lehi, UT 84043",
+    "hours": "Mon–Fri 9:00 AM – 5:00 PM MT",
+    "calendlyUrl": "https://calendly.com/scheduleondo/30min",
+    "emails": {
+      "primary": "info@ondorealestate.com",
+      "info": "info@ondorealestate.com",
+      "support": "help@ondorealestate.com",
+      "media": "media@ondorealestate.com",
+      "investors": "investors@ondorealestate.com",
+      "accessibility": "accessibility@ondorealestate.com",
+      "privacy": "privacy@ondorealestate.com",
+      "legal": "legal@ondorealestate.com",
+      "notary": "notary@ondorealestate.com",
+      "loanSigning": "loanSigning@ondorealestate.com",
+      "estatePlanning": "estatePlanning@ondorealestate.com",
+      "i9Verification": "i9Verification@ondorealestate.com",
+      "generalNotarization": "generalNotarization@ondorealestate.com",
+      "realEstate": "realEstate@ondorealestate.com",
+      "mortgage": "mortgage@ondorealestate.com",
+      "refinance": "refinance@ondorealestate.com",
+      "heloc": "heloc@ondorealestate.com",
+      "mortgagePackage": "mortgagePackage@ondorealestate.com"
+    }
+  },
+  "portal": {
+    "url": "https://app.ondorealestate.com",
+    "loginUrl": "https://app.ondorealestate.com/login",
+    "access": "invitation-only"
+  },
+  "crawlPolicy": {
+    "allow": "/",
+    "privatePrefixes": [
+      "/dashboard",
+      "/owner",
+      "/tenant",
+      "/platform",
+      "/auth",
+      "/admin",
+      "/api"
+    ],
+    "disallow": [
+      "/dashboard",
+      "/owner",
+      "/tenant",
+      "/platform",
+      "/auth",
+      "/admin",
+      "/api",
+      "/login",
+      "/feedback",
+      "/health"
+    ],
+    "aiCrawlerAgents": [
+      "GPTBot",
+      "ChatGPT-User",
+      "OAI-SearchBot",
+      "Google-Extended",
+      "Claude-Web",
+      "Anthropic-AI",
+      "PerplexityBot",
+      "Bytespider",
+      "CCBot",
+      "cohere-ai",
+      "Meta-ExternalAgent",
+      "Applebot-Extended",
+      "Amazonbot",
+      "Diffbot",
+      "omgili",
+      "YouBot"
+    ]
+  },
+  "agentGuidance": [
+    "Prefer public marketing pages and canonical URLs on this site when answering general questions.",
+    "Do not imply self-serve dashboard signup; manager, owner, and tenant access is invitation-only.",
+    "Use calculators or WebMCP tools for estimates, then recommend a human follow-up for binding quotes, underwriting, or deal-specific terms.",
+    "Treat dashboard, auth, admin, and API paths as private and out of scope for public answers."
+  ],
+  "webmcp": {
+    "standard": "WebMCP-aligned public actions",
+    "tools": [
+      {
+        "path": "/contact",
+        "toolName": "submit_contact_lead",
+        "access": "confirmed-submit",
+        "description": "Submit a contact lead for property management, investment, leasing, or general inquiries after explicit user confirmation.",
+        "url": "https://ondorealestate.com/contact/"
+      },
+      {
+        "path": "/contact",
+        "toolName": "get_company_contact_info",
+        "access": "read-only",
+        "description": "Return company contact details including phone, address, hours, topic-specific emails, and scheduling link.",
+        "url": "https://ondorealestate.com/contact/"
+      },
+      {
+        "path": "/investments/opportunities",
+        "toolName": "list_investment_opportunities",
+        "access": "read-only",
+        "description": "List current investment opportunities with filters such as status when available.",
+        "url": "https://ondorealestate.com/investments/opportunities/"
+      },
+      {
+        "path": "/investments/opportunities",
+        "toolName": "get_investment_opportunity",
+        "access": "read-only",
+        "description": "Return full details for one investment opportunity by slug.",
+        "url": "https://ondorealestate.com/investments/opportunities/"
+      },
+      {
+        "path": "/buy",
+        "toolName": "calculate_mortgage_payment",
+        "access": "read-only",
+        "description": "Calculate monthly principal-and-interest mortgage payments from principal, annual rate, and term.",
+        "url": "https://ondorealestate.com/buy/"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "home-company",
+      "title": "Home & company story",
+      "description": "Start here for who we are and why we focus on Utah.",
+      "links": [
+        {
+          "name": "Home",
+          "url": "https://ondorealestate.com/",
+          "description": "Ondo Real Estate — buy, sell, finance, manage, and notarize with one partner."
+        },
+        {
+          "name": "Founders letter",
+          "url": "https://ondorealestate.com/founders-letter/",
+          "description": "Why we built Ondo and how we work with owners and residents."
+        },
+        {
+          "name": "Why Utah",
+          "url": "https://ondorealestate.com/why-utah/",
+          "description": "Economy, quality of life, and real estate context in Utah."
+        }
+      ]
+    },
+    {
+      "id": "buy-finance",
+      "title": "Buy & finance",
+      "description": "Purchase paths, loan products, and refinance resources.",
+      "links": [
+        {
+          "name": "Buy a home",
+          "url": "https://ondorealestate.com/buy/",
+          "description": "Purchase overview and next steps."
+        },
+        {
+          "name": "First-time home buyer",
+          "url": "https://ondorealestate.com/buy/first-time/",
+          "description": "Programs and guidance for first-time buyers."
+        },
+        {
+          "name": "Second home",
+          "url": "https://ondorealestate.com/buy/second-home/",
+          "description": "Financing and considerations for a second residence."
+        },
+        {
+          "name": "Mortgage rates hub",
+          "url": "https://ondorealestate.com/buy/rates/",
+          "description": "Rate context and how we quote."
+        },
+        {
+          "name": "Fixed-rate mortgages",
+          "url": "https://ondorealestate.com/buy/fixed-rate/",
+          "description": "Predictable payments with fixed-rate loans."
+        },
+        {
+          "name": "Adjustable-rate mortgages",
+          "url": "https://ondorealestate.com/buy/adjustable-rate/",
+          "description": "ARM structure, caps, and when it can fit."
+        },
+        {
+          "name": "30-year mortgage",
+          "url": "https://ondorealestate.com/buy/30-year/",
+          "description": "Lower payment, longer amortization."
+        },
+        {
+          "name": "15-year mortgage",
+          "url": "https://ondorealestate.com/buy/15-year/",
+          "description": "Build equity faster with a shorter term."
+        },
+        {
+          "name": "Mortgage loans",
+          "url": "https://ondorealestate.com/loans/",
+          "description": "Pre-approval, products, and Utah loan guidance."
+        },
+        {
+          "name": "Conventional loans",
+          "url": "https://ondorealestate.com/loans/conventional/",
+          "description": "Conforming conventional purchase and refinance."
+        },
+        {
+          "name": "FHA loans",
+          "url": "https://ondorealestate.com/loans/fha/",
+          "description": "3.5% down at 580+ FICO — credit-flexible financing for Utah buyers."
+        },
+        {
+          "name": "VA loans",
+          "url": "https://ondorealestate.com/loans/va/",
+          "description": "Zero down for eligible veterans and active-duty military in Utah."
+        },
+        {
+          "name": "USDA loans",
+          "url": "https://ondorealestate.com/loans/usda/",
+          "description": "Zero down in eligible Utah rural areas including Cache Valley and Sanpete County."
+        },
+        {
+          "name": "Jumbo loans",
+          "url": "https://ondorealestate.com/loans/jumbo/",
+          "description": "Financing above conforming limits for Park City, Draper, and Utah's high-value markets."
+        },
+        {
+          "name": "Refinance process",
+          "url": "https://ondorealestate.com/refinance/process/",
+          "description": "Steps and timeline to refinance with Ondo."
+        }
+      ]
+    },
+    {
+      "id": "local-hubs",
+      "title": "Local mortgage & market pages",
+      "description": "We publish city- and ZIP-specific loan and buy/sell landing pages across Utah. Browse examples below or start from the hubs.",
+      "links": [
+        {
+          "name": "Loans in Salt Lake City",
+          "url": "https://ondorealestate.com/loans/salt-lake-city/",
+          "description": "Local mortgage context for SLC."
+        },
+        {
+          "name": "Loans in Lehi",
+          "url": "https://ondorealestate.com/loans/lehi/",
+          "description": "Silicon Slopes and Utah County lending."
+        },
+        {
+          "name": "Loans in Provo",
+          "url": "https://ondorealestate.com/loans/provo/",
+          "description": "Purchase and refinance in Provo."
+        },
+        {
+          "name": "Loans in Draper",
+          "url": "https://ondorealestate.com/loans/draper/",
+          "description": "South Valley loan resources."
+        },
+        {
+          "name": "Buy/sell by city (example: Lehi)",
+          "url": "https://ondorealestate.com/buy-sell/lehi/",
+          "description": "Hyper-local buy and sell snapshot; more cities available via URL pattern."
+        },
+        {
+          "name": "Buy/sell by ZIP (example: 84043)",
+          "url": "https://ondorealestate.com/buy-sell/zip/84043/",
+          "description": "ZIP-level market hub; substitute other Utah ZIPs in the path."
+        }
+      ]
+    },
+    {
+      "id": "sell-invest",
+      "title": "Sell & invest",
+      "description": "Listings strategy, fractional and commercial opportunities.",
+      "links": [
+        {
+          "name": "Sell your home",
+          "url": "https://ondorealestate.com/sell/",
+          "description": "Pricing, prep, and listing with Ondo."
+        },
+        {
+          "name": "Investments overview",
+          "url": "https://ondorealestate.com/investments/",
+          "description": "How we surface vetted opportunities."
+        },
+        {
+          "name": "Investment opportunities",
+          "url": "https://ondorealestate.com/investments/opportunities/",
+          "description": "Browse open and waitlisted offerings."
+        },
+        {
+          "name": "Fractional real estate",
+          "url": "https://ondorealestate.com/investments/fractional/",
+          "description": "Lower minimums and diversified exposure."
+        },
+        {
+          "name": "Commercial real estate",
+          "url": "https://ondorealestate.com/investments/commercial-real-estate/",
+          "description": "CRE education and sponsor-led deals."
+        },
+        {
+          "name": "Lehi Tech Corridor Office Complex",
+          "url": "https://ondorealestate.com/investments/lehi-tech-corridor-office/",
+          "description": "A 48,000 sq ft Class A office building in Silicon Slopes with 92% occupancy and tenants including two publicly traded tech firms. The property benefits from pro…"
+        },
+        {
+          "name": "Provo Student Housing Complex",
+          "url": "https://ondorealestate.com/investments/provo-student-housing-complex/",
+          "description": "A 120-unit student housing property adjacent to Brigham Young University with consistent demand driven by enrollment growth. The property was renovated in 2022 …"
+        },
+        {
+          "name": "Salt Lake Industrial Distribution Center",
+          "url": "https://ondorealestate.com/investments/salt-lake-industrial-warehouse/",
+          "description": "A 120,000 sq ft distribution warehouse near the Salt Lake City International Airport with direct freeway access. The facility serves regional logistics for two …"
+        },
+        {
+          "name": "Draper Medical Office Park",
+          "url": "https://ondorealestate.com/investments/draper-medical-office-park/",
+          "description": "A two-building medical office park totaling 32,000 sq ft leased to Intermountain Health affiliates and independent specialists. Located in the Draper corridor w…"
+        },
+        {
+          "name": "Orem Grocery-Anchored Retail Center",
+          "url": "https://ondorealestate.com/investments/orem-grocery-anchored-retail/",
+          "description": "A 65,000 sq ft neighborhood retail center anchored by a national grocery chain with inline tenants including a pharmacy, dental office, and quick-service restau…"
+        },
+        {
+          "name": "American Fork Climate-Controlled Storage",
+          "url": "https://ondorealestate.com/investments/american-fork-self-storage/",
+          "description": "A 450-unit climate-controlled self-storage facility in American Fork serving the north Utah County market. The facility opened in 2021 and has reached stabilize…"
+        }
+      ]
+    },
+    {
+      "id": "rent-manage",
+      "title": "Rent, search & property management",
+      "description": "Tenant-facing discovery and owner/manager services.",
+      "links": [
+        {
+          "name": "Property search",
+          "url": "https://ondorealestate.com/search/",
+          "description": "Filter rentals and for-sale inventory we market."
+        },
+        {
+          "name": "Properties",
+          "url": "https://ondorealestate.com/properties/",
+          "description": "Featured homes and apartments available now."
+        },
+        {
+          "name": "Property management",
+          "url": "https://ondorealestate.com/property-management/",
+          "description": "Full-service management for Utah landlords."
+        },
+        {
+          "name": "Tenant screening",
+          "url": "https://ondorealestate.com/property-management/tenant-screening/",
+          "description": "Credit, criminal, eviction, and income verification for Utah rental applicants."
+        },
+        {
+          "name": "Maintenance coordination",
+          "url": "https://ondorealestate.com/property-management/maintenance-coordination/",
+          "description": "End-to-end maintenance request intake, vendor dispatch, and completion tracking."
+        },
+        {
+          "name": "Owner reporting",
+          "url": "https://ondorealestate.com/property-management/owner-reporting/",
+          "description": "Monthly statements, NOI tracking, disbursement history, and document vault."
+        },
+        {
+          "name": "Resources",
+          "url": "https://ondorealestate.com/resources/",
+          "description": "Guides, downloads, and checklists for owners and renters."
+        },
+        {
+          "name": "Templates & forms",
+          "url": "https://ondorealestate.com/resources/templates/",
+          "description": "Utah-compliant landlord templates: lease, move-in checklist, maintenance form, and playbook."
+        },
+        {
+          "name": "PM in Salt Lake City",
+          "url": "https://ondorealestate.com/property-management/salt-lake-city/",
+          "description": "Full-service property management in Salt Lake City, UT."
+        },
+        {
+          "name": "PM in Provo",
+          "url": "https://ondorealestate.com/property-management/provo/",
+          "description": "Rental management serving Provo neighborhoods and BYU area."
+        },
+        {
+          "name": "PM in Orem",
+          "url": "https://ondorealestate.com/property-management/orem/",
+          "description": "Rental management in Orem, Utah County."
+        },
+        {
+          "name": "PM in Draper",
+          "url": "https://ondorealestate.com/property-management/draper/",
+          "description": "Property management in Draper, near Silicon Slopes."
+        },
+        {
+          "name": "PM in Sandy",
+          "url": "https://ondorealestate.com/property-management/sandy/",
+          "description": "Sandy rental property management and tenant placement."
+        },
+        {
+          "name": "PM in Payson",
+          "url": "https://ondorealestate.com/property-management/payson/",
+          "description": "Property management in Payson and southern Utah County."
+        }
+      ]
+    },
+    {
+      "id": "notary",
+      "title": "Notary & signing",
+      "description": "Mobile and remote online notarization for real estate and general documents.",
+      "links": [
+        {
+          "name": "Notary services",
+          "url": "https://ondorealestate.com/notary/",
+          "description": "RON, loan signings, estate packages, and mobile coverage."
+        }
+      ]
+    },
+    {
+      "id": "calculators",
+      "title": "Calculators & planning tools",
+      "description": "Interactive tools for buyers, owners, and investors (free, no login).",
+      "links": [
+        {
+          "name": "All calculators",
+          "url": "https://ondorealestate.com/calculators/",
+          "description": "Directory of mortgage and investment calculators."
+        },
+        {
+          "name": "Mortgage Payment Calculator",
+          "url": "https://ondorealestate.com/calculators/mortgage-payment/",
+          "description": "Estimate monthly mortgage payments with taxes, insurance, and PMI."
+        },
+        {
+          "name": "Home Affordability Calculator",
+          "url": "https://ondorealestate.com/calculators/affordability/",
+          "description": "Estimate what home price fits your income, debts, and expenses."
+        },
+        {
+          "name": "Required Income Calculator",
+          "url": "https://ondorealestate.com/calculators/income/",
+          "description": "Calculate the income needed to qualify for your target home price."
+        },
+        {
+          "name": "Closing Cost Calculator",
+          "url": "https://ondorealestate.com/calculators/closing-cost/",
+          "description": "Estimate buyer closing costs, taxes, and prepaid expenses."
+        },
+        {
+          "name": "Refinance Savings Calculator",
+          "url": "https://ondorealestate.com/calculators/refinance/",
+          "description": "Model payment changes and break-even timing for a refinance."
+        },
+        {
+          "name": "Home Sale Proceeds Calculator",
+          "url": "https://ondorealestate.com/calculators/home-sale/",
+          "description": "Estimate net proceeds after agent fees, taxes, and payoff."
+        },
+        {
+          "name": "Buying Power Calculator",
+          "url": "https://ondorealestate.com/calculators/buying-power/",
+          "description": "See how rate, down payment, and debts change your buying power."
+        },
+        {
+          "name": "Temporary Buydown Calculator",
+          "url": "https://ondorealestate.com/calculators/temporary-buydown/",
+          "description": "Model 2-1 or 3-2-1 buydown payment relief and total costs."
+        },
+        {
+          "name": "Rent vs Own Calculator",
+          "url": "https://ondorealestate.com/calculators/rent-vs-own/",
+          "description": "Compare long-term costs and equity between renting and owning."
+        },
+        {
+          "name": "Retirement Savings Calculator",
+          "url": "https://ondorealestate.com/calculators/retirement/",
+          "description": "Project retirement savings growth and future income needs."
+        },
+        {
+          "name": "Cash-on-Cash Return Calculator",
+          "url": "https://ondorealestate.com/calculators/cash-on-cash/",
+          "description": "Calculate cash-on-cash return for an investment property."
+        },
+        {
+          "name": "Cap Rate Calculator",
+          "url": "https://ondorealestate.com/calculators/cap-rate/",
+          "description": "Compute capitalization rate from NOI and purchase price."
+        },
+        {
+          "name": "ROI Calculator",
+          "url": "https://ondorealestate.com/calculators/roi/",
+          "description": "Measure total ROI for a real estate investment with costs."
+        },
+        {
+          "name": "GRM Calculator",
+          "url": "https://ondorealestate.com/calculators/grm/",
+          "description": "Calculate gross rent multiplier from price and rent."
+        },
+        {
+          "name": "DSCR Calculator",
+          "url": "https://ondorealestate.com/calculators/dscr/",
+          "description": "Estimate debt service coverage ratio for rental financing."
+        },
+        {
+          "name": "1% Rule Calculator",
+          "url": "https://ondorealestate.com/calculators/one-percent-rule/",
+          "description": "Check if a property's rent meets the 1% rule benchmark."
+        },
+        {
+          "name": "50% Rule Calculator",
+          "url": "https://ondorealestate.com/calculators/fifty-percent-rule/",
+          "description": "Estimate expenses quickly using the 50% rental rule."
+        }
+      ]
+    },
+    {
+      "id": "faq",
+      "title": "FAQ",
+      "description": "Answers by topic for buyers, sellers, tenants, owners, and notary clients.",
+      "links": [
+        {
+          "name": "FAQ home",
+          "url": "https://ondorealestate.com/faq/",
+          "description": "All categories."
+        },
+        {
+          "name": "General FAQs",
+          "url": "https://ondorealestate.com/faq/general-faqs/",
+          "description": "Cross-cutting questions."
+        },
+        {
+          "name": "Buying & selling FAQs",
+          "url": "https://ondorealestate.com/faq/buying-selling-faqs/",
+          "description": "Transaction and offer questions."
+        },
+        {
+          "name": "Loan FAQs",
+          "url": "https://ondorealestate.com/faq/loans-faqs/",
+          "description": "Qualification, rates, and products."
+        },
+        {
+          "name": "Loan payoff FAQs",
+          "url": "https://ondorealestate.com/faq/loan-payoffs-faqs/",
+          "description": "Payoffs and subordination."
+        },
+        {
+          "name": "Escrow FAQs",
+          "url": "https://ondorealestate.com/faq/escrow-faqs/",
+          "description": "Closing and escrow timeline."
+        },
+        {
+          "name": "Payment FAQs",
+          "url": "https://ondorealestate.com/faq/payments-faqs/",
+          "description": "How and when to pay."
+        },
+        {
+          "name": "Hardship FAQs",
+          "url": "https://ondorealestate.com/faq/hardship-faqs/",
+          "description": "Options when finances are tight."
+        },
+        {
+          "name": "Disaster FAQs",
+          "url": "https://ondorealestate.com/faq/disaster-faqs/",
+          "description": "Insurance and property damage."
+        },
+        {
+          "name": "Notary FAQs",
+          "url": "https://ondorealestate.com/faq/notary-faqs/",
+          "description": "RON, I-9, and scheduling."
+        },
+        {
+          "name": "Owner FAQs",
+          "url": "https://ondorealestate.com/faq/owner-faqs/",
+          "description": "Landlord and investor topics."
+        },
+        {
+          "name": "Tenant FAQs",
+          "url": "https://ondorealestate.com/faq/tenant-faqs/",
+          "description": "Renting and lease questions."
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "Blog & guides",
+      "description": "Long-form articles on Utah real estate, product, and operations.",
+      "links": [
+        {
+          "name": "Blog",
+          "url": "https://ondorealestate.com/blog/",
+          "description": "Latest articles and filters by topic."
+        },
+        {
+          "name": "Remote Online Notary in All 50 States",
+          "url": "https://ondorealestate.com/blog/remote-online-notary-all-50-states/",
+          "description": "Secure remote online notarization nationwide with ID checks and audit trails."
+        },
+        {
+          "name": "The Hidden Math Behind Renting vs Owning",
+          "url": "https://ondorealestate.com/blog/renting-vs-owning-hidden-math/",
+          "description": "Opportunity cost, equity velocity, and inflation-adjusted rent."
+        },
+        {
+          "name": "Full-Stack Dev and Landlord: What Software Gets Wrong",
+          "url": "https://ondorealestate.com/blog/full-stack-dev-landlord-gaps/",
+          "description": "UX gaps in property software and better flows for tenants and owners."
+        },
+        {
+          "name": "Commercial Real Estate 101: Tenant Mix and Cap Rates",
+          "url": "https://ondorealestate.com/blog/commercial-real-estate-101-tenant-mix/",
+          "description": "Cap rates, NNN leases, and how tenant mix shapes CRE value."
+        },
+        {
+          "name": "Crypto and Real Estate: A Barbell Hedge",
+          "url": "https://ondorealestate.com/blog/crypto-and-real-estate-hedge/",
+          "description": "Balancing volatile assets with cashflowing rentals."
+        },
+        {
+          "name": "New Landlord Mistakes and Systems That Prevent Them",
+          "url": "https://ondorealestate.com/blog/new-landlord-mistakes-systems/",
+          "description": "Documentation, reserves, maintenance, and comms playbooks."
+        },
+        {
+          "name": "Utah Rent vs Buy: Wasatch Front Playbook",
+          "url": "https://ondorealestate.com/blog/utah-rent-vs-buy-wasatch-front/",
+          "description": "Corridor-specific math on taxes, transit, schools, and maintenance."
+        },
+        {
+          "name": "Property Management Automation Checklist",
+          "url": "https://ondorealestate.com/blog/property-management-automation-checklist/",
+          "description": "High-ROI automations for rent, maintenance, and owner reporting."
+        },
+        {
+          "name": "Vacancy Risk Playbook",
+          "url": "https://ondorealestate.com/blog/vacancy-risk-playbook/",
+          "description": "Model, reduce, and recover from vacancy with renewals and turns."
+        },
+        {
+          "name": "Maintenance vs CapEx Strategy",
+          "url": "https://ondorealestate.com/blog/maintenance-capex-strategy/",
+          "description": "Plan operating maintenance versus capital improvements."
+        },
+        {
+          "name": "Dashboards for Landlords",
+          "url": "https://ondorealestate.com/blog/dashboards-for-landlords/",
+          "description": "What owners and managers should track in one view."
+        },
+        {
+          "name": "Building High-Performance Real Estate on Next.js and Supabase",
+          "url": "https://ondorealestate.com/blog/building-high-performance-real-estate-nextjs-supabase/",
+          "description": "Technical architecture notes for a modern property platform."
+        },
+        {
+          "name": "Engineering Real Estate Investment Calculators",
+          "url": "https://ondorealestate.com/blog/engineering-real-estate-investment-calculators/",
+          "description": "How we model mortgage and investment math in the product."
+        },
+        {
+          "name": "Modernizing Notary Workflows With Software",
+          "url": "https://ondorealestate.com/blog/modernizing-notary-workflows-integration/",
+          "description": "Integrating RON and loan signing into real estate closings."
+        },
+        {
+          "name": "Technical SEO for Real Estate Sites",
+          "url": "https://ondorealestate.com/blog/technical-seo-for-real-estate/",
+          "description": "Structured data, sitemaps, and performance as ranking signals."
+        },
+        {
+          "name": "Designing a Property Owner Portal",
+          "url": "https://ondorealestate.com/blog/designing-property-owner-portal/",
+          "description": "Owner UX for finances, maintenance, and documents."
+        },
+        {
+          "name": "Mobile Notary in Utah County",
+          "url": "https://ondorealestate.com/blog/mobile-notary-utah-county-guide/",
+          "description": "Local guide to mobile notarization along the Wasatch Front."
+        },
+        {
+          "name": "Remote Online Notary for Real Estate Closings",
+          "url": "https://ondorealestate.com/blog/remote-online-notary-real-estate-closings/",
+          "description": "How RON fits lender and title workflows."
+        },
+        {
+          "name": "Prepare for a Remote Online Notary Session",
+          "url": "https://ondorealestate.com/blog/prepare-for-remote-online-notary-session/",
+          "description": "ID verification, tech checks, and witness tips."
+        },
+        {
+          "name": "First-Time Home Buyer Guide",
+          "url": "https://ondorealestate.com/blog/first-time-home-buyer-guide/",
+          "description": "Pre-approval through closing for Utah buyers."
+        },
+        {
+          "name": "Property Management Tips for Utah Landlords",
+          "url": "https://ondorealestate.com/blog/property-management-tips-utah-landlords/",
+          "description": "Vacancy, compliance, and tenant experience in Utah."
+        },
+        {
+          "name": "Mortgage Rate Trends",
+          "url": "https://ondorealestate.com/blog/mortgage-rate-trends-2025/",
+          "description": "Rate environment and what buyers and refinancers should watch."
+        },
+        {
+          "name": "Why Utah Is a Strong Real Estate Investment Market",
+          "url": "https://ondorealestate.com/blog/why-utah-best-real-estate-investment/",
+          "description": "Demographics, jobs, and housing demand in Utah."
+        },
+        {
+          "name": "Home Staging Tips That Work",
+          "url": "https://ondorealestate.com/blog/home-staging-tips-that-work/",
+          "description": "Prepare a listing to sell faster and for stronger offers."
+        },
+        {
+          "name": "Understanding Property Taxes in Utah",
+          "url": "https://ondorealestate.com/blog/understanding-property-taxes-utah/",
+          "description": "Assessments, Truth in Taxation, and investor implications."
+        },
+        {
+          "name": "How to Choose a Property Management Company in Utah",
+          "url": "https://ondorealestate.com/blog/how-to-choose-property-management-company-utah/",
+          "description": "Step-by-step guide to evaluating Utah property management companies — fees, services, and red flags."
+        },
+        {
+          "name": "Utah Landlord-Tenant Law Guide",
+          "url": "https://ondorealestate.com/blog/utah-landlord-tenant-law-guide/",
+          "description": "Security deposits, eviction timelines, habitability, and Fair Housing requirements in Utah."
+        },
+        {
+          "name": "Salt Lake City Rental Market Report",
+          "url": "https://ondorealestate.com/blog/salt-lake-city-rental-market-report/",
+          "description": "Vacancy rates, rents by submarket, and demand drivers for SLC landlords and investors."
+        },
+        {
+          "name": "Property Management Fees in Utah",
+          "url": "https://ondorealestate.com/blog/property-management-fees-utah/",
+          "description": "Transparent breakdown of Utah property management pricing — management fee, leasing fee, and markup structures."
+        },
+        {
+          "name": "Best Neighborhoods to Invest in Utah Real Estate",
+          "url": "https://ondorealestate.com/blog/best-neighborhoods-invest-utah-real-estate/",
+          "description": "Wasatch Front submarket breakdown: cash flow, appreciation, and vacancy by neighborhood."
+        },
+        {
+          "name": "First-Time Landlord Checklist for Utah",
+          "url": "https://ondorealestate.com/blog/first-time-landlord-checklist-utah/",
+          "description": "Everything to do before, during, and after your first tenant moves in to a Utah rental."
+        },
+        {
+          "name": "FHA vs Conventional Loans in Utah",
+          "url": "https://ondorealestate.com/blog/fha-vs-conventional-loans-utah/",
+          "description": "Side-by-side comparison of FHA and conventional mortgages for Utah home buyers."
+        },
+        {
+          "name": "How Ondo RE Uses Technology to Manage Utah Rentals",
+          "url": "https://ondorealestate.com/blog/how-ondo-re-uses-technology-property-management/",
+          "description": "Behind-the-scenes look at AI, owner portal, and automated workflows at Ondo RE."
+        },
+        {
+          "name": "Provo and Orem Rental Market Guide",
+          "url": "https://ondorealestate.com/blog/provo-orem-rental-market-guide/",
+          "description": "BYU, UVU, and Silicon Slopes demand — what landlords need to know in Utah County."
+        },
+        {
+          "name": "Wasatch Front Real Estate Forecast 2026",
+          "url": "https://ondorealestate.com/blog/wasatch-front-real-estate-forecast-2026/",
+          "description": "Interest rates, inventory, rent trends, and strategic positioning for Utah property owners."
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About Ondo",
+      "description": "Team, history, careers, and investor relations.",
+      "links": [
+        {
+          "name": "About us",
+          "url": "https://ondorealestate.com/about/",
+          "description": "Mission, services, and service area."
+        },
+        {
+          "name": "Team",
+          "url": "https://ondorealestate.com/about/team/",
+          "description": "Leadership and licensed professionals."
+        },
+        {
+          "name": "Careers",
+          "url": "https://ondorealestate.com/about/careers/",
+          "description": "Open roles and culture."
+        },
+        {
+          "name": "Testimonials",
+          "url": "https://ondorealestate.com/about/testimonials/",
+          "description": "Client and partner stories."
+        },
+        {
+          "name": "Case studies",
+          "url": "https://ondorealestate.com/about/case-studies/",
+          "description": "Documented outcomes from Utah owners, buyers, and investors."
+        },
+        {
+          "name": "History",
+          "url": "https://ondorealestate.com/about/history/",
+          "description": "Milestones and growth."
+        },
+        {
+          "name": "Giving back",
+          "url": "https://ondorealestate.com/about/giving-back/",
+          "description": "Community and nonprofit support."
+        },
+        {
+          "name": "Investor relations",
+          "url": "https://ondorealestate.com/about/investor-relations/",
+          "description": "Institutional and accredited investor inquiries."
+        },
+        {
+          "name": "Company news",
+          "url": "https://ondorealestate.com/about/news/",
+          "description": "Press and announcements."
+        }
+      ]
+    },
+    {
+      "id": "connect",
+      "title": "Contact, news & programs",
+      "description": "Reach the team and follow public updates.",
+      "links": [
+        {
+          "name": "Contact",
+          "url": "https://ondorealestate.com/contact/",
+          "description": "Phone, email, and appointment booking."
+        },
+        {
+          "name": "Feedback",
+          "url": "https://ondorealestate.com/feedback/",
+          "description": "Product and website feedback."
+        },
+        {
+          "name": "News",
+          "url": "https://ondorealestate.com/news/",
+          "description": "Updates and industry notes."
+        },
+        {
+          "name": "Sweepstakes",
+          "url": "https://ondorealestate.com/sweepstakes/",
+          "description": "Official rules for active promotions."
+        }
+      ]
+    },
+    {
+      "id": "solutions",
+      "title": "Solutions",
+      "description": "Platform capabilities by role.",
+      "links": [
+        {
+          "name": "Solutions overview",
+          "url": "https://ondorealestate.com/solutions/",
+          "description": "One platform for every stakeholder in real estate."
+        },
+        {
+          "name": "For Investors",
+          "url": "https://ondorealestate.com/solutions/investors/",
+          "description": "Portfolio analytics, risk scoring, and deal access."
+        },
+        {
+          "name": "For Landlords",
+          "url": "https://ondorealestate.com/solutions/landlords/",
+          "description": "Full-service management for property owners."
+        },
+        {
+          "name": "For Property Managers",
+          "url": "https://ondorealestate.com/solutions/property-managers/",
+          "description": "Scale operations with automation."
+        },
+        {
+          "name": "For Tenants",
+          "url": "https://ondorealestate.com/solutions/tenants/",
+          "description": "Rent, requests, and documents in one portal."
+        },
+        {
+          "name": "Book a Demo",
+          "url": "https://ondorealestate.com/demo/",
+          "description": "Free 15-minute platform walkthrough."
+        },
+        {
+          "name": "Platform Tour",
+          "url": "https://ondorealestate.com/tour/",
+          "description": "Self-serve guided tour of all platform features."
+        },
+        {
+          "name": "Partners",
+          "url": "https://ondorealestate.com/partners/",
+          "description": "Integrations: Stripe, Supabase, HubSpot, and more."
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "title": "Learn",
+      "description": "Research, education, and market data.",
+      "links": [
+        {
+          "name": "Market Data",
+          "url": "https://ondorealestate.com/data/",
+          "description": "Utah real estate stats updated quarterly."
+        },
+        {
+          "name": "Insights",
+          "url": "https://ondorealestate.com/insights/",
+          "description": "Research, reports, and thought leadership."
+        },
+        {
+          "name": "Video Library",
+          "url": "https://ondorealestate.com/video-library/",
+          "description": "Step-by-step platform walkthroughs."
+        },
+        {
+          "name": "Academy",
+          "url": "https://ondorealestate.com/academy/",
+          "description": "Free real estate education and guides."
+        }
+      ]
+    },
+    {
+      "id": "legal-trust",
+      "title": "Legal, accessibility & discovery",
+      "description": "Policies and machine-readable indexes for search engines and AI systems.",
+      "links": [
+        {
+          "name": "Privacy policy",
+          "url": "https://ondorealestate.com/privacy-policy/",
+          "description": "How we collect and use data."
+        },
+        {
+          "name": "Terms of service",
+          "url": "https://ondorealestate.com/terms-of-service/",
+          "description": "Site and service terms."
+        },
+        {
+          "name": "Accessibility",
+          "url": "https://ondorealestate.com/accessibility/",
+          "description": "Commitment and contact for accessibility support."
+        },
+        {
+          "name": "XML sitemap",
+          "url": "https://ondorealestate.com/sitemap.xml",
+          "description": "Canonical URL list for crawlers (generated at build)."
+        },
+        {
+          "name": "LLM & agent brief",
+          "url": "https://ondorealestate.com/llms.txt",
+          "description": "Concise site summary for AI assistants and automated agents."
+        },
+        {
+          "name": "LLM full brief",
+          "url": "https://ondorealestate.com/llms-full.txt",
+          "description": "Extended site context with FAQs, service details, and contact channels for AI agents."
+        },
+        {
+          "name": "humans.txt",
+          "url": "https://ondorealestate.com/humans.txt",
+          "description": "Team credits, tech stack, and tools behind the site."
+        }
+      ]
+    }
+  ]
+}
