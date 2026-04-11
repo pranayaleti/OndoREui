@@ -193,7 +193,7 @@ export default function FAQPage() {
         subtitle="Everything you need to know about our property management and rental services"
       />
 
-      <main className="flex-1 py-12 bg-gradient-to-b from-black to-gray-900">
+      <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
         <div className="container px-4 md:px-6">
           {/* FAQ tiles modeled after calculators page */}
           <section className="mb-16">
@@ -219,7 +219,7 @@ export default function FAQPage() {
                   style={{ animationDelay: `${Math.min(index * 0.07, 0.7)}s` }}
                 >
                   <Link href={tile.path} className="block group h-full">
-                    <div className="relative h-full rounded-2xl backdrop-blur-lg border border-white/10 bg-white/5 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-white/[0.07] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(249,115,22,0.15)]">
+                    <div className="relative h-full rounded-2xl backdrop-blur-lg border border-white/10 bg-card/60 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-card/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(249,115,22,0.15)]">
                       {/* Glow border like calculators page */}
                       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-1 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

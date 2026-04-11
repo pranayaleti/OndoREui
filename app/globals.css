@@ -1,8 +1,8 @@
+@import "../src/styles/_design-tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "../src/styles/_design-tokens.css";
 
 @layer base {
   :root {
@@ -35,21 +35,7 @@
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
-  
-  html.dark {
-    background: var(--gradient-overlay) !important;
-    background-attachment: fixed;
-    min-height: 100%;
-  }
-  
-  html.dark body {
-    background: transparent !important;
-  }
-  
-  html.dark > body {
-    background: transparent !important;
-  }
-  
+
   /* Fix for Next.js portal elements - ensure they don't interfere with layout */
   nextjs-portal {
     position: fixed;
@@ -144,6 +130,21 @@
 }
 
 @layer components {
+  .custom-map-marker-pin {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-radius: 9999px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    border: 3px solid hsl(var(--card));
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  }
+
   .btn {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }

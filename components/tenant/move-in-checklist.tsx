@@ -61,7 +61,7 @@ export function MoveInChecklist({ checklist, onUpdate }: MoveInChecklistProps) {
   }
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">{typeLabel}</h2>
@@ -71,7 +71,7 @@ export function MoveInChecklist({ checklist, onUpdate }: MoveInChecklistProps) {
       </div>
 
       {/* Progress bar */}
-      <div className="w-full bg-gray-200 rounded-full h-2">
+      <div className="w-full bg-muted rounded-full h-2">
         <div
           className="bg-blue-600 h-2 rounded-full transition-all"
           style={{ width: `${progressPct}%` }}
@@ -80,7 +80,7 @@ export function MoveInChecklist({ checklist, onUpdate }: MoveInChecklistProps) {
 
       {/* All Done banner */}
       {allDone && (
-        <div className="bg-green-50 border border-green-200 rounded-lg px-4 py-3 text-green-700 font-medium text-sm">
+        <div className="bg-green-500/10 dark:bg-green-500/15 border border-green-200 dark:border-green-500/30 rounded-lg px-4 py-3 text-green-700 dark:text-green-400 font-medium text-sm">
           All Done!
         </div>
       )}
@@ -97,7 +97,7 @@ export function MoveInChecklist({ checklist, onUpdate }: MoveInChecklistProps) {
               .map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-start gap-3 bg-gray-50 rounded-lg px-3 py-2"
+                  className="flex items-start gap-3 bg-muted rounded-lg px-3 py-2"
                 >
                   <button
                     onClick={() => handleToggle(item)}
@@ -105,7 +105,7 @@ export function MoveInChecklist({ checklist, onUpdate }: MoveInChecklistProps) {
                     className={`mt-0.5 w-5 h-5 rounded border-2 flex-shrink-0 flex items-center justify-center transition ${
                       item.isCompleted
                         ? "bg-blue-600 border-blue-600 text-white"
-                        : "border-gray-300 bg-white"
+                        : "border-gray-300 bg-card"
                     } disabled:opacity-50`}
                     aria-label={item.isCompleted ? "Mark incomplete" : "Mark complete"}
                   >

@@ -400,7 +400,7 @@ const Footer = memo(() => {
                     alt="Linktree QR Code - Scan to access all social media"
                     width={52}
                     height={52}
-                    className="h-8 w-8 rounded border bg-white p-0.5"
+                    className="h-8 w-8 rounded border bg-card p-0.5"
                     quality={85}
                     sizes="32px"
                   />
@@ -417,12 +417,12 @@ const Footer = memo(() => {
                 <EqualHousingIcon className="text-foreground/70" />
                 <span>Equal Housing Opportunity</span>
               </div>
-              <span className="h-4 w-px bg-gray-600" />
+              <span className="h-4 w-px bg-muted" />
               <div className="flex items-center gap-2">
                 <div className="h-4 w-4 rounded-sm border border-gray-500 flex items-center justify-center text-[8px] font-semibold">R</div>
                 <span>REALTOR</span>
               </div>
-              <span className="h-4 w-px bg-gray-600" />
+              <span className="h-4 w-px bg-muted" />
               <div className="flex items-center gap-2">
                 <div className="rounded border border-gray-500 px-1 py-0.5 text-[8px] font-semibold tracking-wide">MLS</div>
                 <span>Multiple Listing Service</span>
@@ -433,7 +433,7 @@ const Footer = memo(() => {
       </div>
 
       {/* Bottom Footer */}
-      <div className="bg-gray-950 py-4">
+      <div className="bg-background py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/70">
             <div className="flex flex-col items-center gap-1 text-center md:items-start md:text-left">

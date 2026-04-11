@@ -79,7 +79,7 @@ export default function PushNotificationPrompt() {
       aria-label="Enable push notifications"
       className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-2rem)] max-w-sm"
     >
-      <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-lg dark:border-gray-700 dark:bg-gray-900">
+      <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-card px-4 py-3 shadow-lg dark:border-gray-700 dark:bg-card">
         {/* Bell icon */}
         <span className="mt-0.5 flex-shrink-0 text-blue-600 dark:text-blue-400" aria-hidden>
           <svg
@@ -119,7 +119,7 @@ export default function PushNotificationPrompt() {
           <button
             onClick={dismiss}
             aria-label="Dismiss notification prompt"
-            className="rounded-lg px-3 py-1.5 text-xs font-medium text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="rounded-lg px-3 py-1.5 text-xs font-medium text-gray-500 hover:bg-muted dark:text-gray-400 dark:hover:bg-card focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
             Not now
           </button>

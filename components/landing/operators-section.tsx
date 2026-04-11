@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 export function OperatorsSection() {
   return (
     <section
-      className="relative w-full bg-slate-950 text-white px-4 py-16"
+      className="relative w-full bg-muted text-white px-4 py-16"
       aria-labelledby="operators-heading"
     >
       <div className="container mx-auto max-w-6xl">
@@ -27,7 +27,7 @@ export function OperatorsSection() {
             </p>
             <Button
               asChild
-              className="mt-6 bg-white text-slate-900 hover:bg-slate-100"
+              className="mt-6 bg-card text-card-foreground hover:bg-muted"
             >
               <Link href="/contact#book-a-call">Get started</Link>
             </Button>
@@ -35,7 +35,7 @@ export function OperatorsSection() {
 
           {/* Right: social proof / quote */}
           <div className="min-w-0">
-            <blockquote className="rounded-xl bg-slate-900/80 border border-slate-800 p-6 sm:p-8">
+            <blockquote className="rounded-xl bg-card/80 border border-border p-6 sm:p-8">
               <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
                 &ldquo;We launched autopay + screening in a weekend. Owners finally see real-time rent
                 + maintenance, and we stopped chasing spreadsheets.&rdquo;

@@ -82,7 +82,7 @@ export default function HistoryPage() {
         subtitle="Building trust and excellence in property management since 2020"
       />
 
-      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-background dark:to-card">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -93,7 +93,7 @@ export default function HistoryPage() {
             </div>
 
             <div className="relative">
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-muted dark:bg-gray-700"></div>
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-muted dark:bg-secondary"></div>
               <div className="space-y-12">
                 {milestones.map((milestone, index) => (
                   <div key={index} className="relative flex items-start gap-6">

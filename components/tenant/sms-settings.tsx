@@ -32,11 +32,11 @@ function Toggle({ checked, onChange, disabled }: ToggleProps) {
       disabled={disabled}
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors disabled:opacity-50 ${
-        checked ? "bg-blue-600" : "bg-gray-300"
+        checked ? "bg-blue-600" : "bg-muted"
       }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+        className={`inline-block h-4 w-4 transform rounded-full bg-card shadow transition-transform ${
           checked ? "translate-x-6" : "translate-x-1"
         }`}
       />
@@ -133,7 +133,7 @@ export function SmsSettings() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading SMS settings...
       </div>
     )
@@ -147,7 +147,7 @@ export function SmsSettings() {
   ]
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-5">
+    <div className="bg-card border rounded-lg p-4 space-y-5">
       <h2 className="text-lg font-semibold text-gray-900">SMS Settings</h2>
 
       {error && <p className="text-sm text-red-500">{error}</p>}

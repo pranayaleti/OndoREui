@@ -190,7 +190,7 @@ export default function LoansPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900 text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Pre-Approved?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -244,13 +244,13 @@ export default function LoansPage() {
       </Script>
 
       {/* Centralized FAQs live on /faq */}
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900 text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Questions about loans or refinancing?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
             Visit our Help Center for detailed FAQs on loans, payments, escrow, and assistance options.
           </p>
-          <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+          <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-card hover:text-black">
             <Link href="/faq/loans-faqs">View Loans FAQs</Link>
           </Button>
         </div>

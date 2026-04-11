@@ -28,7 +28,7 @@ export function AffordabilityCalculator({
   })
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 space-y-3">
+    <div className="bg-muted dark:bg-card rounded-lg p-4 space-y-3">
       <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
         {t("applyFlow.affordability.title")}
       </h4>
@@ -47,7 +47,7 @@ export function AffordabilityCalculator({
           value={income}
           onChange={(e) => setIncome(e.target.value)}
           placeholder={t("applyFlow.affordability.placeholder")}
-          className="w-full px-3 py-2 border rounded-md text-sm bg-white dark:bg-slate-900 dark:border-slate-600"
+          className="w-full px-3 py-2 border rounded-md text-sm bg-card dark:bg-card dark:border-slate-600"
         />
       </div>
       {income && (

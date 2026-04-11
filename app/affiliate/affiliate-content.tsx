@@ -107,7 +107,7 @@ export function AffiliateContent() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-orange-500 to-red-800 py-20">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-medium text-white">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-card/70 px-4 py-1.5 text-sm font-medium text-white">
             <Gift className="h-4 w-4" aria-hidden="true" />
             <span>{t("affiliate.heroBadge")}</span>
           </div>

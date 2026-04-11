@@ -64,7 +64,7 @@ export default function PropertySearchMap({
   return (
     <div className="flex flex-col gap-4">
       {/* Search & Filters Bar */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-card rounded-lg border border-gray-200 p-4">
         <div className="flex flex-wrap gap-3 items-end">
           {/* Search input */}
           <div className="flex-1 min-w-[200px]">
@@ -164,7 +164,7 @@ export default function PropertySearchMap({
           {/* Reset */}
           <button
             onClick={handleReset}
-            className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 border border-gray-300 rounded-md hover:bg-gray-50"
+            className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 border border-gray-300 rounded-md hover:bg-muted"
           >
             Reset
           </button>
@@ -201,7 +201,7 @@ export default function PropertySearchMap({
             key={property.id}
             role="button"
             tabIndex={0}
-            className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-card rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => onPropertyClick?.(property.id)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {

@@ -89,7 +89,7 @@ export default function NotaryPage() {
     />
 
     {/* HERO */}
-    <section className="py-16 md:py-24 bg-gradient-to-b from-black to-gray-900 text-center">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card text-center">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
           Remote Online Notary – Available Nationwide
@@ -113,7 +113,7 @@ export default function NotaryPage() {
             asChild
             size="lg"
             variant="outline"
-            className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-white/10"
+            className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-card/75"
           >
             <Link href="#services" className="flex gap-2">
               <FileText className="w-5 h-5" /> View Services
@@ -128,7 +128,7 @@ export default function NotaryPage() {
     </section>
 
     {/* ABOUT */}
-    <section className="py-16 md:py-24 bg-black">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
           Professional Remote Notary Services by ONDO Notary
@@ -169,7 +169,7 @@ export default function NotaryPage() {
             </div>
           </div>
 
-          <div className="p-8 bg-gradient-to-b from-black to-gray-900 border border-border rounded-lg">
+          <div className="p-8 bg-gradient-to-b from-background to-card border border-border rounded-lg">
             <h3 className="text-xl font-semibold text-white mb-4">Why Choose ONDO Notary?</h3>
             <ul className="space-y-3 text-gray-300">
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Nationwide remote notarization</li>
@@ -183,7 +183,7 @@ export default function NotaryPage() {
     </section>
 
     {/* SERVICES */}
-    <section id="services" className="py-16 md:py-24 bg-card dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+    <section id="services" className="py-16 md:py-24 bg-card dark:bg-gradient-to-b dark:from-background dark:to-card">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
           ONDO Notary Services Offered
@@ -194,7 +194,7 @@ export default function NotaryPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* RON */}
-          <div className="p-6 bg-black border border-primary rounded-lg">
+          <div className="p-6 bg-background border border-primary rounded-lg">
             <h3 className="text-xl text-primary font-semibold mb-3">
               Remote Online Notarization (RON) by ONDO Notary
             </h3>
@@ -238,7 +238,7 @@ export default function NotaryPage() {
           </div>
 
           {/* Loan Signing */}
-          <div className="p-6 bg-black border border-primary rounded-lg">
+          <div className="p-6 bg-background border border-primary rounded-lg">
             <h3 className="text-xl text-primary font-semibold mb-3">Loan Signing Agent by ONDO Notary</h3>
             <p className="text-gray-300 text-sm mb-4">
               Full mortgage packages, refinances, and investment property closings.
@@ -251,7 +251,7 @@ export default function NotaryPage() {
           </div>
 
           {/* Additional */}
-          <div className="p-6 bg-black border border-primary rounded-lg md:col-span-2">
+          <div className="p-6 bg-background border border-primary rounded-lg md:col-span-2">
             <h3 className="text-xl text-primary font-semibold mb-3">Additional Services</h3>
             <ul className="text-gray-300 text-sm space-y-2">
               <li>• I‑9 Employment Verification</li>
@@ -264,7 +264,7 @@ export default function NotaryPage() {
     </section>
 
       {/* PRICING */}
-      <section className="py-16 md:py-24 bg-black">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
             ONDO Notary Fees & Availability
@@ -325,7 +325,7 @@ export default function NotaryPage() {
       </section>
 
       {/* WHAT TO BRING */}
-      <section className="py-16 md:py-24 bg-card dark:bg-black">
+      <section className="py-16 md:py-24 bg-card dark:bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
             What to Bring for ONDO Notary
@@ -345,7 +345,7 @@ export default function NotaryPage() {
               </ul>
             </div>
 
-            <div className="p-6 bg-black border border-primary rounded-lg">
+            <div className="p-6 bg-background border border-primary rounded-lg">
               <h3 className="text-xl text-primary font-semibold mb-4">RON Appointments</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Laptop or smartphone</li>
@@ -359,7 +359,7 @@ export default function NotaryPage() {
       </section>
 
       {/* LOAN SIGNING */}
-      <section className="py-16 md:py-24 bg-card dark:bg-black">
+      <section className="py-16 md:py-24 bg-card dark:bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             ONDO Notary Loan Signing Expertise
@@ -368,7 +368,7 @@ export default function NotaryPage() {
             Professional, accurate mortgage signing services.
           </p>
 
-          <div className="bg-black p-8 border border-primary rounded-lg mb-12">
+          <div className="bg-background p-8 border border-primary rounded-lg mb-12">
               <h3 className="text-2xl font-semibold text-primary flex gap-2 mb-4">
                 <TrendingUp className="w-6 h-6" /> Why ONDO Notary Loan Signing Agents Matter
             </h3>
@@ -406,7 +406,7 @@ export default function NotaryPage() {
       </section>
 
     {/* NATIONWIDE COVERAGE */}
-    <section className="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-black">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-card to-background">
       <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-6">
           Nationwide Coverage – ONDO Notary in All 50 States
@@ -422,7 +422,7 @@ export default function NotaryPage() {
               <Link
                 key={state.slug}
                 href={state.url}
-                className="block rounded-md border border-white/10 bg-white/5 px-3 py-2 transition hover:border-primary hover:bg-primary/10"
+                className="block rounded-md border border-white/10 bg-card/60 px-3 py-2 transition hover:border-primary hover:bg-primary/10"
               >
                 <span className="font-semibold text-white">{state.name}</span>
                 <p className="text-xs text-gray-400">{state.linkText}</p>
@@ -440,7 +440,7 @@ export default function NotaryPage() {
               <Link
                 key={city.slug}
                 href={city.url}
-                className="block rounded-md border border-white/10 bg-white/5 px-3 py-2 transition hover:border-primary hover:bg-primary/10"
+                className="block rounded-md border border-white/10 bg-card/60 px-3 py-2 transition hover:border-primary hover:bg-primary/10"
               >
                 <span className="font-semibold text-white">{city.name}</span>
                 <p className="text-xs text-gray-400">{city.linkText}</p>
@@ -452,7 +452,7 @@ export default function NotaryPage() {
     </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-16 md:py-24 bg-card dark:bg-black">
+      <section className="py-16 md:py-24 bg-card dark:bg-background">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             What Clients Say About ONDO Notary
@@ -460,7 +460,7 @@ export default function NotaryPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* 1 */}
-            <div className="p-6 bg-black border border-primary rounded-lg">
+            <div className="p-6 bg-background border border-primary rounded-lg">
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-primary text-primary" />
@@ -505,7 +505,7 @@ export default function NotaryPage() {
             </div>
 
             {/* 4 */}
-            <div className="p-6 bg-black border border-primary rounded-lg">
+            <div className="p-6 bg-background border border-primary rounded-lg">
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-primary text-primary" />
@@ -524,7 +524,7 @@ export default function NotaryPage() {
       </section>
 
       {/* Centralized FAQs live on /faq */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-black to-gray-900">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Questions about ONDO Notary services?
@@ -536,7 +536,7 @@ export default function NotaryPage() {
             asChild
             size="lg"
             variant="outline"
-            className="border-white text-white hover:bg-white hover:text-black"
+            className="border-white text-white hover:bg-card hover:text-black"
           >
             <Link href="/faq/notary-faqs">View Notary FAQs</Link>
           </Button>
@@ -544,7 +544,7 @@ export default function NotaryPage() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="py-16 md:py-24 bg-black">
+      <section id="contact" className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
             Contact ONDO Notary & Booking
@@ -602,7 +602,7 @@ export default function NotaryPage() {
             <p className="text-center text-gray-400 text-sm mb-6 max-w-md mx-auto">
               Same calendar for notary questions, loan signings, and general scheduling.
             </p>
-            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-2">
+            <div className="rounded-lg border border-white/10 bg-card/50 p-2">
               <CalendlyInlineEmbed
                 variant="compact"
                 heading={null}
@@ -619,7 +619,7 @@ export default function NotaryPage() {
         <span className="font-medium text-lg">Need ONDO Notary?</span>
         <Button
           size="sm"
-          className="bg-white text-primary font-semibold"
+          className="bg-card text-primary font-semibold"
           onClick={() => setIsModalOpen(true)}
         >
           Book ONDO

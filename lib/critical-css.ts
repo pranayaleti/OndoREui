@@ -38,8 +38,8 @@ export const criticalCSS = {
     'bg-gradient-to-r',
     'bg-gradient-to-b',
     'dark:bg-gradient-to-b',
-    'dark:from-black',
-    'dark:to-gray-900',
+    'dark:from-background',
+    'dark:to-card',
     
     // Spacing
     'mb-4',

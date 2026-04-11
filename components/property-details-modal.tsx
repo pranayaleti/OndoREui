@@ -90,14 +90,14 @@ export function PropertyDetailsModal({ company, open, onOpenChange }: PropertyDe
                   <>
                     <button
                       onClick={prevImage}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/50 text-white p-2 rounded-full hover:bg-background/70 transition-colors"
                       aria-label="Previous image"
                     >
                       ‹
                     </button>
                     <button
                       onClick={nextImage}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/50 text-white p-2 rounded-full hover:bg-background/70 transition-colors"
                       aria-label="Next image"
                     >
                       ›

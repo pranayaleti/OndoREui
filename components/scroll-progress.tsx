@@ -42,7 +42,7 @@ export function ScrollProgress() {
   return (
     <div
       aria-hidden="true"
-      className="fixed top-16 left-0 right-0 z-40 h-[3px] bg-gray-200 dark:bg-gray-800"
+      className="fixed top-16 left-0 right-0 z-40 h-[3px] bg-muted dark:bg-card"
     >
       <div
         className={`h-full bg-accent-1 ${prefersReducedMotion ? "" : "transition-all duration-150 ease-out"}`}

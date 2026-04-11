@@ -151,7 +151,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const rb2bKey = process.env['NEXT_PUBLIC_RB2B_KEY']
   return (
-    <html lang="en" suppressHydrationWarning className="dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         {/* Preconnect to external domains for faster resource loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

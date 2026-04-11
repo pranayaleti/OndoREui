@@ -70,14 +70,14 @@ export function NotificationPreferences() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading preferences…
       </div>
     )
   }
 
   return (
-    <div className="bg-white border rounded-lg divide-y">
+    <div className="bg-card border rounded-lg divide-y">
       <div className="p-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">Notification Preferences</h2>
         {saving && <span className="text-xs text-gray-400">Saving…</span>}
@@ -128,11 +128,11 @@ function Toggle({
         aria-checked={enabled}
         onClick={onChange}
         className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition ${
-          enabled ? "bg-orange-600" : "bg-gray-300"
+          enabled ? "bg-orange-600" : "bg-muted"
         }`}
       >
         <span
-          className={`inline-block h-3.5 w-3.5 rounded-full bg-white shadow transition ${
+          className={`inline-block h-3.5 w-3.5 rounded-full bg-card shadow transition ${
             enabled ? "translate-x-4" : "translate-x-0.5"
           }`}
         />

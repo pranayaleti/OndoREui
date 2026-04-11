@@ -157,7 +157,7 @@ const CalculatorsPage: React.FC = () => {
       path: '/calculators/grm',
       icon: <Building2 className="h-8 w-8" />,
       category: 'Investment',
-      color: 'from-slate-500 to-slate-600',
+      color: 'from-secondary to-secondary',
     },
     {
       id: 'dscr',
@@ -197,9 +197,9 @@ const CalculatorsPage: React.FC = () => {
     : calculators.filter(calc => calc.category === selectedCategory)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white antialiased" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+    <div className="min-h-screen bg-gradient-to-b from-background to-card text-white antialiased" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
       {/* Hero Header */}
-      <div className="relative border-b border-white/10 bg-gradient-to-b from-black to-gray-900">
+      <div className="relative border-b border-white/10 bg-gradient-to-b from-background to-card">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative">
           <div className="space-y-4 text-center">
@@ -225,7 +225,7 @@ const CalculatorsPage: React.FC = () => {
                 className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer border backdrop-blur-sm active:scale-95 ${
                   selectedCategory === category
                     ? 'bg-gradient-to-r from-accent-1 to-accent-2 text-white border-accent-1 shadow-lg shadow-orange-500/30'
-                    : 'bg-white/5 text-white border-white/10 hover:border-accent-1/50 hover:bg-white/[0.08]'
+                    : 'bg-card/60 text-white border-white/10 hover:border-accent-1/50 hover:bg-card/80'
                 }`}
               >
                 {category}
@@ -253,7 +253,7 @@ const CalculatorsPage: React.FC = () => {
                 href={calculator.path}
                 className="block group h-full"
               >
-                <div className="relative h-full rounded-2xl backdrop-blur-lg border border-white/10 bg-white/5 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-white/[0.07] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(255,107,0,0.15)]">
+                <div className="relative h-full rounded-2xl backdrop-blur-lg border border-white/10 bg-card/60 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-card/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(255,107,0,0.15)]">
                   {/* Animated Glow Border on Hover */}
                   <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-1 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -293,7 +293,7 @@ const CalculatorsPage: React.FC = () => {
 
         {/* Why Use Our Calculators Section */}
         <div className="mt-24 mb-12 animate-fade-in-up">
-          <div className="relative backdrop-blur-lg border border-white/10 bg-white/5 rounded-3xl p-8 md:p-12 overflow-hidden">
+          <div className="relative backdrop-blur-lg border border-white/10 bg-card/60 rounded-3xl p-8 md:p-12 overflow-hidden">
             {/* Background Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none"></div>
             

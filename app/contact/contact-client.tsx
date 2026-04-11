@@ -208,7 +208,7 @@ export default function ContactPage() {
                             alt="Linktree QR Code"
                             width={64}
                             height={64}
-                            className="h-16 w-16 rounded border bg-white p-1"
+                            className="h-16 w-16 rounded border bg-card p-1"
                             quality={85}
                             sizes="64px"
                           />

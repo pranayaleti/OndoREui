@@ -100,14 +100,14 @@ export function MoveOutWizard() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading...
       </div>
     )
   }
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-900">Move-Out</h2>
 
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -198,7 +198,7 @@ export function MoveOutWizard() {
                           ? "bg-green-500 text-white"
                           : active
                           ? "bg-blue-600 text-white"
-                          : "bg-gray-200 text-gray-400"
+                          : "bg-muted text-gray-400"
                       }`}
                     >
                       {done ? (
@@ -212,7 +212,7 @@ export function MoveOutWizard() {
                     {idx < STEPS.length - 1 && (
                       <div
                         className={`w-0.5 h-5 mt-1 ${
-                          done ? "bg-green-400" : "bg-gray-200"
+                          done ? "bg-green-400" : "bg-muted"
                         }`}
                       />
                     )}

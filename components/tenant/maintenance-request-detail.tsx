@@ -111,9 +111,9 @@ export function MaintenanceRequestDetail({ requestId: _requestId = "req-001" }: 
       case "medium":
         return <Badge className="bg-primary">Medium</Badge>
       case "low":
-        return <Badge className="bg-gray-500">Low</Badge>
+        return <Badge className="bg-muted">Low</Badge>
       default:
-        return <Badge className="bg-gray-500">Unknown</Badge>
+        return <Badge className="bg-muted">Unknown</Badge>
     }
   }
 

@@ -13,10 +13,10 @@ export function PropertyListingCard({ property, applyUrl }: PropertyListingCardP
   const photos = property.photos ?? []
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border shadow-sm overflow-hidden">
+    <div className="bg-card dark:bg-card rounded-xl border shadow-sm overflow-hidden">
       {/* Photos */}
       {photos.length > 0 ? (
-        <div className="relative h-64 bg-slate-100">
+        <div className="relative h-64 bg-muted">
           <img
             src={photos[imgIdx]?.url}
             alt={photos[imgIdx]?.caption || property.title}
@@ -26,24 +26,24 @@ export function PropertyListingCard({ property, applyUrl }: PropertyListingCardP
             <>
               <button
                 onClick={() => setImgIdx((i) => (i - 1 + photos.length) % photos.length)}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
               >
                 &lt;
               </button>
               <button
                 onClick={() => setImgIdx((i) => (i + 1) % photos.length)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
               >
                 &gt;
               </button>
-              <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute bottom-2 right-2 bg-background/60 text-white text-xs px-2 py-1 rounded-full">
                 {imgIdx + 1}/{photos.length}
               </div>
             </>
           )}
         </div>
       ) : (
-        <div className="h-48 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+        <div className="h-48 bg-muted dark:bg-card flex items-center justify-center text-slate-400">
           No photos
         </div>
       )}
@@ -60,7 +60,7 @@ export function PropertyListingCard({ property, applyUrl }: PropertyListingCardP
             <p className="text-lg font-bold text-green-600">${property.price.toLocaleString()}</p>
             <p className="text-xs text-slate-500">per month</p>
           </div>
-          <div className="h-8 w-px bg-slate-200 dark:bg-slate-700" />
+          <div className="h-8 w-px bg-muted dark:bg-secondary" />
           <div className="flex gap-4">
             <div className="text-center">
               <p className="font-semibold">{property.bedrooms}</p>
@@ -86,7 +86,7 @@ export function PropertyListingCard({ property, applyUrl }: PropertyListingCardP
         {property.amenities && (
           <div className="flex flex-wrap gap-1.5">
             {property.amenities.split(",").map((a) => (
-              <span key={a} className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-xs rounded-full text-slate-600 dark:text-slate-400">
+              <span key={a} className="px-2 py-0.5 bg-muted dark:bg-card text-xs rounded-full text-slate-600 dark:text-slate-400">
                 {a.trim()}
               </span>
             ))}

@@ -491,7 +491,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900 text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Make Your Real Estate Move?</h2>
@@ -506,7 +506,7 @@ export default function BlogPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-white/10"
+                className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-card/75"
               >
                 <Link href="/properties">Browse Properties</Link>
               </Button>

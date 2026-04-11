@@ -64,14 +64,14 @@ export function CommunityEventsBoard() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading events...
       </div>
     )
   }
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-900">Community Events</h2>
 
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -110,7 +110,7 @@ export function CommunityEventsBoard() {
                       : status === "maybe"
                       ? "bg-yellow-500 text-white"
                       : "bg-red-500 text-white"
-                  const inactive = "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  const inactive = "bg-muted text-gray-600 hover:bg-muted"
                   const isActive = event.myRsvp === status
                   return (
                     <button

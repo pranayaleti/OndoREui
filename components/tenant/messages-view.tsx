@@ -61,9 +61,9 @@ export default function TenantMessagesView() {
       urgent: 'bg-red-100 text-red-800',
       high: 'bg-orange-100 text-orange-800',
       normal: 'bg-blue-100 text-blue-800',
-      low: 'bg-gray-100 text-gray-800',
+      low: 'bg-muted text-gray-800',
     };
-    return map[priority] || 'bg-gray-100 text-gray-800';
+    return map[priority] || 'bg-muted text-gray-800';
   };
 
   if (loading) {

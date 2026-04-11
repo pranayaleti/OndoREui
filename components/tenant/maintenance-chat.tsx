@@ -70,7 +70,7 @@ export function MaintenanceChat({ requestId, requestTitle }: MaintenanceChatProp
   const shortId = (id: string) => id.slice(0, 8)
 
   return (
-    <div className="bg-white border rounded-lg flex flex-col h-96">
+    <div className="bg-card border rounded-lg flex flex-col h-96">
       {/* Header */}
       <div className="px-4 py-3 border-b">
         <h3 className="text-sm font-semibold text-gray-900">{requestTitle}</h3>
@@ -93,7 +93,7 @@ export function MaintenanceChat({ requestId, requestTitle }: MaintenanceChatProp
                 {new Date(msg.createdAt).toLocaleString()}
               </span>
             </div>
-            <div className="bg-gray-50 rounded-lg px-3 py-2 text-sm text-gray-800">
+            <div className="bg-muted rounded-lg px-3 py-2 text-sm text-gray-800">
               {msg.message}
             </div>
             {msg.attachmentUrl && (

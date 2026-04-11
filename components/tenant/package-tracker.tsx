@@ -17,7 +17,7 @@ const statusBadge: Record<string, string> = {
   delivered: "bg-blue-100 text-blue-700",
   notified: "bg-yellow-100 text-yellow-700",
   picked_up: "bg-green-100 text-green-700",
-  returned: "bg-gray-100 text-gray-500",
+  returned: "bg-muted text-gray-500",
 }
 
 const statusLabel: Record<string, string> = {
@@ -66,14 +66,14 @@ export function PackageTracker() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading packages...
       </div>
     )
   }
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-900">Package Tracker</h2>
 
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -104,7 +104,7 @@ export function PackageTracker() {
                 </div>
                 <span
                   className={`text-xs px-2 py-1 rounded-full font-medium flex-shrink-0 ${
-                    statusBadge[pkg.status] ?? "bg-gray-100 text-gray-500"
+                    statusBadge[pkg.status] ?? "bg-muted text-gray-500"
                   }`}
                 >
                   {statusLabel[pkg.status] ?? pkg.status}

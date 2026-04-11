@@ -82,7 +82,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {open && (
-        <div className="w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: 460 }}>
+        <div className="w-80 bg-card rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: 460 }}>
           {/* Header */}
           <div className="bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
             <span className="text-sm font-semibold">Quick Questions</span>
@@ -96,7 +96,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
                 <div className={`max-w-[80%] text-sm px-3 py-2 rounded-2xl ${
                   m.role === "user"
                     ? "bg-indigo-600 text-white rounded-br-sm"
-                    : "bg-gray-100 text-gray-800 rounded-bl-sm"
+                    : "bg-muted text-gray-800 rounded-bl-sm"
                 }`}>
                   {m.text}
                 </div>
@@ -104,7 +104,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
             ))}
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 text-gray-400 text-sm px-3 py-2 rounded-2xl rounded-bl-sm">
+                <div className="bg-muted text-gray-400 text-sm px-3 py-2 rounded-2xl rounded-bl-sm">
                   <span className="animate-pulse">•••</span>
                 </div>
               </div>

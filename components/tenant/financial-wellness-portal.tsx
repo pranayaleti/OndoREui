@@ -89,8 +89,8 @@ export function FinancialWellnessPortal() {
   const rtiColor = (ratio: number) =>
     ratio <= 30 ? "bg-green-500" : ratio <= 40 ? "bg-yellow-400" : "bg-red-500"
 
-  if (loading) return <div className="bg-white border rounded-lg p-6 text-center text-sm text-gray-500">Loading financial data...</div>
-  if (error) return <div className="bg-white border rounded-lg p-6 text-center text-sm text-red-500">{error}</div>
+  if (loading) return <div className="bg-card border rounded-lg p-6 text-center text-sm text-gray-500">Loading financial data...</div>
+  if (error) return <div className="bg-card border rounded-lg p-6 text-center text-sm text-red-500">{error}</div>
 
   const score = scoreData?.score ?? 0
   const goals = financial?.savingsGoals ?? []
@@ -100,7 +100,7 @@ export function FinancialWellnessPortal() {
   return (
     <div className="space-y-4">
       {/* Payment Score */}
-      <div className="bg-white border rounded-lg p-4">
+      <div className="bg-card border rounded-lg p-4">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Payment Score</h2>
         <div className="flex items-center gap-6">
           <div className={`w-24 h-24 rounded-full border-8 ${scoreRingColor(score)} flex flex-col items-center justify-center flex-shrink-0`}>
@@ -120,12 +120,12 @@ export function FinancialWellnessPortal() {
       </div>
 
       {/* Rent-to-Income Gauge */}
-      <div className="bg-white border rounded-lg p-4">
+      <div className="bg-card border rounded-lg p-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-semibold text-gray-900">Rent-to-Income Ratio</h3>
           <span className={`text-sm font-bold ${rti > 30 ? "text-red-500" : "text-green-600"}`}>{rti.toFixed(1)}%</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+        <div className="w-full bg-muted rounded-full h-3 mb-2">
           <div
             className={`h-3 rounded-full transition-all ${rtiColor(rti)}`}
             style={{ width: `${Math.min(rti, 100)}%` }}
@@ -137,14 +137,14 @@ export function FinancialWellnessPortal() {
           <span>100%</span>
         </div>
         {rti > 30 && (
-          <p className="text-xs text-red-600 mt-2 bg-red-50 border border-red-100 rounded px-3 py-2">
+          <p className="text-xs text-red-600 dark:text-red-400 mt-2 bg-red-500/10 dark:bg-red-500/15 border border-red-200 dark:border-red-500/30 rounded px-3 py-2">
             Your rent exceeds 30% of income. Consider budgeting strategies to reduce financial strain.
           </p>
         )}
       </div>
 
       {/* Savings Goals */}
-      <div className="bg-white border rounded-lg p-4 space-y-3">
+      <div className="bg-card border rounded-lg p-4 space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-gray-900">Savings Goals</h3>
           <button onClick={() => setAddingGoal(true)} className="text-sm text-blue-600 hover:underline">+ Add Goal</button>
@@ -162,7 +162,7 @@ export function FinancialWellnessPortal() {
                 <span className="font-medium text-gray-800">{goal.label}</span>
                 <span className="text-gray-500">${goal.currentAmount.toLocaleString()} / ${goal.targetAmount.toLocaleString()}</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-muted rounded-full h-2">
                 <div className="bg-blue-500 h-2 rounded-full transition-all" style={{ width: `${pct}%` }} />
               </div>
               <p className="text-xs text-gray-400 text-right">{pct.toFixed(0)}% reached</p>
@@ -171,7 +171,7 @@ export function FinancialWellnessPortal() {
         })}
 
         {addingGoal && (
-          <div className="border border-gray-200 rounded-lg p-3 space-y-2 bg-gray-50">
+          <div className="border border-gray-200 rounded-lg p-3 space-y-2 bg-muted">
             <input className="w-full border rounded-lg px-3 py-2 text-sm" placeholder="Goal label (e.g. Emergency Fund)" value={goalForm.label} onChange={(e) => setGoalForm((f) => ({ ...f, label: e.target.value }))} />
             <div className="grid grid-cols-2 gap-2">
               <input type="number" className="border rounded-lg px-3 py-2 text-sm" placeholder="Current ($)" value={goalForm.currentAmount} onChange={(e) => setGoalForm((f) => ({ ...f, currentAmount: e.target.value }))} />
@@ -181,14 +181,14 @@ export function FinancialWellnessPortal() {
               <button onClick={handleAddGoal} disabled={savingGoal} className="bg-blue-600 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition">
                 {savingGoal ? "Saving..." : "Save"}
               </button>
-              <button onClick={() => setAddingGoal(false)} className="text-sm px-3 py-1.5 rounded-lg border hover:bg-gray-100 transition">Cancel</button>
+              <button onClick={() => setAddingGoal(false)} className="text-sm px-3 py-1.5 rounded-lg border hover:bg-muted transition">Cancel</button>
             </div>
           </div>
         )}
       </div>
 
       {/* Budget Tips */}
-      <div className="bg-white border rounded-lg p-4">
+      <div className="bg-card border rounded-lg p-4">
         <h3 className="font-semibold text-gray-900 mb-3">Budget Tips</h3>
         <ul className="space-y-2">
           {tips.slice(0, 4).map((tip, i) => (
@@ -205,7 +205,7 @@ export function FinancialWellnessPortal() {
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-4 text-white">
           <h3 className="font-semibold mb-1">Build Credit With Every Payment</h3>
           <p className="text-sm text-blue-100 mb-3">Enroll in credit reporting to have your on-time rent payments reported to major bureaus — free of charge.</p>
-          <a href="/tenant/credit-reporting" className="inline-block bg-white text-blue-700 text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-50 transition">
+          <a href="/tenant/credit-reporting" className="inline-block bg-card text-blue-700 dark:text-blue-400 text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-500/10 transition">
             Enroll Now
           </a>
         </div>

@@ -114,7 +114,7 @@ export default function GivingBackPage() {
         subtitle="Making a positive impact in Utah communities through housing and support programs"
       />
 
-      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-background dark:to-card">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">

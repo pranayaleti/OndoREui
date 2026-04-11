@@ -92,7 +92,7 @@ export function SelfInspectionWizard() {
 
   if (submitted) {
     return (
-      <div className="bg-white border rounded-lg p-8 text-center space-y-3">
+      <div className="bg-card border rounded-lg p-8 text-center space-y-3">
         <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto">
           <svg className="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -105,7 +105,7 @@ export function SelfInspectionWizard() {
   }
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-5">
+    <div className="bg-card border rounded-lg p-4 space-y-5">
       {/* Progress indicator */}
       <div>
         <div className="flex justify-between mb-2">
@@ -150,7 +150,7 @@ export function SelfInspectionWizard() {
           <h2 className="text-base font-semibold text-gray-900">Add Rooms</h2>
           <div className="space-y-2">
             {rooms.map((room, i) => (
-              <div key={i} className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+              <div key={i} className="flex items-center justify-between bg-muted rounded-lg px-3 py-2">
                 <div>
                   <p className="text-sm font-medium text-gray-800">{room.name}</p>
                   <p className="text-xs text-gray-500 capitalize">{room.condition}{room.notes ? ` · ${room.notes}` : ""}</p>
@@ -164,13 +164,13 @@ export function SelfInspectionWizard() {
             <div className="flex gap-2">
               {CONDITIONS.map((c) => (
                 <button key={c} onClick={() => setNewRoom((r) => ({ ...r, condition: c }))}
-                  className={`flex-1 text-xs px-2 py-1.5 rounded-lg border capitalize font-medium transition ${newRoom.condition === c ? conditionColor[c] : "border-gray-200 text-gray-500 hover:bg-gray-50"}`}>
+                  className={`flex-1 text-xs px-2 py-1.5 rounded-lg border capitalize font-medium transition ${newRoom.condition === c ? conditionColor[c] : "border-gray-200 text-gray-500 hover:bg-muted"}`}>
                   {c}
                 </button>
               ))}
             </div>
             <input className="w-full border rounded-lg px-3 py-2 text-sm" placeholder="Notes (optional)" value={newRoom.notes} onChange={(e) => setNewRoom((r) => ({ ...r, notes: e.target.value }))} />
-            <button onClick={addRoom} className="w-full bg-gray-800 text-white text-sm py-2 rounded-lg hover:bg-gray-900 transition">+ Add Room</button>
+            <button onClick={addRoom} className="w-full bg-muted text-white text-sm py-2 rounded-lg hover:bg-card transition">+ Add Room</button>
           </div>
         </div>
       )}
@@ -181,7 +181,7 @@ export function SelfInspectionWizard() {
           <h2 className="text-base font-semibold text-gray-900">Add Photos</h2>
           {rooms.length === 0 && <p className="text-sm text-gray-500 text-center py-4">No rooms added yet.</p>}
           {rooms.map((room, i) => (
-            <div key={i} className="bg-gray-50 rounded-lg p-3 space-y-2">
+            <div key={i} className="bg-muted rounded-lg p-3 space-y-2">
               <p className="text-sm font-medium text-gray-800">{room.name}</p>
               {room.photoUrl ? (
                 <div className="flex items-center gap-2">
@@ -207,7 +207,7 @@ export function SelfInspectionWizard() {
       {step === 3 && (
         <div className="space-y-3">
           <h2 className="text-base font-semibold text-gray-900">Review & Submit</h2>
-          <div className="bg-gray-50 rounded-lg p-3 space-y-1">
+          <div className="bg-muted rounded-lg p-3 space-y-1">
             <p className="text-sm text-gray-600 capitalize"><span className="font-medium">Type:</span> {inspectionType.replace("_", "-")}</p>
             <p className="text-sm text-gray-600"><span className="font-medium">Date:</span> {inspectionDate}</p>
             <p className="text-sm text-gray-600"><span className="font-medium">Rooms:</span> {rooms.length}</p>
@@ -230,7 +230,7 @@ export function SelfInspectionWizard() {
       {/* Navigation */}
       <div className="flex gap-2 pt-2">
         {step > 0 && (
-          <button onClick={prev} className="flex-1 border text-sm py-2.5 rounded-lg hover:bg-gray-50 transition">Previous</button>
+          <button onClick={prev} className="flex-1 border text-sm py-2.5 rounded-lg hover:bg-muted transition">Previous</button>
         )}
         {step < 3 ? (
           <button onClick={next} className="flex-1 bg-blue-600 text-white text-sm py-2.5 rounded-lg hover:bg-blue-700 transition">

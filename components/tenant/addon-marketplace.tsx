@@ -73,7 +73,7 @@ export function AddonMarketplace() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading add-ons…
       </div>
     )
@@ -84,16 +84,16 @@ export function AddonMarketplace() {
       {/* Active subscriptions */}
       {active.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Your Add-ons</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-3">Your Add-ons</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {active.map((sub) => (
               <div
                 key={sub.id}
-                className="border rounded-lg p-4 bg-orange-50 flex flex-col justify-between"
+                className="border rounded-lg p-4 bg-orange-500/10 dark:bg-orange-500/15 flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-medium text-gray-900">{sub.addon.name}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{sub.addon.description}</p>
+                  <h3 className="font-medium text-foreground">{sub.addon.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{sub.addon.description}</p>
                   <p className="text-sm font-semibold text-orange-700 mt-2">
                     ${(sub.addon.price_cents / 100).toFixed(2)}/mo
                   </p>
@@ -101,7 +101,7 @@ export function AddonMarketplace() {
                 <button
                   onClick={() => handleCancel(sub.id)}
                   disabled={cancelling === sub.id}
-                  className="mt-4 w-full rounded-md border border-red-300 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50 transition"
+                  className="mt-4 w-full rounded-md border border-red-300 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-500/10 disabled:opacity-50 transition"
                 >
                   {cancelling === sub.id ? "Cancelling…" : "Cancel"}
                 </button>
@@ -113,7 +113,7 @@ export function AddonMarketplace() {
 
       {/* Available add-ons */}
       <section>
-        <h2 className="text-lg font-semibold text-gray-900 mb-3">Available Add-ons</h2>
+        <h2 className="text-lg font-semibold text-foreground mb-3">Available Add-ons</h2>
         {available.length === 0 ? (
           <p className="text-sm text-gray-500">No add-ons available right now.</p>
         ) : (
@@ -123,7 +123,7 @@ export function AddonMarketplace() {
               return (
                 <div
                   key={addon.id}
-                  className="border rounded-lg p-4 bg-white flex flex-col justify-between hover:shadow-sm transition"
+                  className="border rounded-lg p-4 bg-card flex flex-col justify-between hover:shadow-sm transition"
                 >
                   <div>
                     {addon.category && (
@@ -131,8 +131,8 @@ export function AddonMarketplace() {
                         {addon.category}
                       </span>
                     )}
-                    <h3 className="font-medium text-gray-900">{addon.name}</h3>
-                    <p className="text-sm text-gray-600 mt-1">{addon.description}</p>
+                    <h3 className="font-medium text-foreground">{addon.name}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{addon.description}</p>
                     <p className="text-sm font-semibold text-gray-800 mt-2">
                       ${(addon.price_cents / 100).toFixed(2)}/mo
                     </p>

@@ -17,7 +17,7 @@ const STEPS: Step[] = [
 
 const terminalStatuses: Record<string, { label: string; color: string }> = {
   rejected: { label: "Not Approved", color: "bg-red-500" },
-  withdrawn: { label: "Withdrawn", color: "bg-slate-400" },
+  withdrawn: { label: "Withdrawn", color: "bg-muted" },
   failed: { label: "Did Not Pass", color: "bg-red-500" },
 }
 
@@ -74,7 +74,7 @@ export function ApplicationStatusTracker({
                         ? "bg-blue-500 border-blue-500 text-white animate-pulse"
                         : terminal && idx === activeStep
                           ? `${terminal.color} border-transparent text-white`
-                          : "bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-400"
+                          : "bg-card dark:bg-card border-slate-300 dark:border-slate-600 text-slate-400"
                   }`}
                 >
                   {done ? (
@@ -99,7 +99,7 @@ export function ApplicationStatusTracker({
             <div
               key={idx}
               className={`flex-1 h-0.5 ${
-                idx < activeStep || isComplete ? "bg-green-500" : "bg-slate-200 dark:bg-slate-700"
+                idx < activeStep || isComplete ? "bg-green-500" : "bg-muted dark:bg-secondary"
               }`}
             />
           ))}
@@ -122,7 +122,7 @@ export function ApplicationStatusTracker({
 
       {/* Score + breakdown */}
       {recommendationScore !== null && recommendationScore !== undefined && (
-        <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+        <div className="bg-muted dark:bg-card rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Screening Score</span>
             <span className={`text-2xl font-bold ${
@@ -137,7 +137,7 @@ export function ApplicationStatusTracker({
                 <div key={key} className="flex items-center justify-between text-xs">
                   <span className="text-slate-500 capitalize">{key.replace("_", " ")}</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-24 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div className="w-24 h-1.5 bg-muted dark:bg-secondary rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full ${val.earned === val.max ? "bg-green-500" : val.earned > 0 ? "bg-amber-500" : "bg-red-400"}`}
                         style={{ width: `${val.max > 0 ? (val.earned / val.max) * 100 : 0}%` }}

@@ -7,31 +7,43 @@
     "generatedAt": "${NOW}"
   },
   "color": {
-    "bg-base-light": { "value": "#F8FAFC" },
+    "bg-base-light": { "value": "#FAFAFA" },
     "bg-elevated-light": { "value": "#FFFFFF" },
-    "text-primary-light": { "value": "#0F172A" },
-    "text-muted-light": { "value": "#475569" },
-    "link-light": { "value": "#0F172A" },
-    "border-light": { "value": "#E2E8F0" },
-    "border-strong-light": { "value": "#CBD5E1" },
+    "text-primary-light": { "value": "#0D0D0D" },
+    "text-muted-light": { "value": "#737373" },
+    "link-light": { "value": "#0D0D0D" },
+    "border-light": { "value": "#E0E0E0" },
+    "border-strong-light": { "value": "#D4D4D4" },
 
-    "bg-base-dark": { "value": "#0D0D0D" },
-    "bg-elevated-dark": { "value": "#111827" },
+    "bg-base-dark": { "value": "#0D1117" },
+    "bg-elevated-dark": { "value": "#131A25" },
     "text-primary-dark": { "value": "#F2F2F2" },
-    "text-muted-dark": { "value": "#D1D5DB" },
+    "text-muted-dark": { "value": "#8C8C8C" },
     "link-dark": { "value": "#F2F2F2" },
-    "border-dark": { "value": "#1F2937" },
-    "border-strong-dark": { "value": "#333333" },
+    "border-dark": { "value": "#242E3F" },
+    "border-strong-dark": { "value": "#2D3A50" },
 
     "accent-1": { "value": "#F97316" },
     "accent-2": { "value": "#FB923C" },
     "accent-3": { "value": "#FDBA74" },
+    "category-1": { "value": "#1378C3" },
+    "category-1-surface-light": { "value": "#EDF7FE" },
+    "category-1-surface-dark": { "value": "#123047" },
+    "category-2": { "value": "#7621CA" },
+    "category-2-surface-light": { "value": "#F5EEFE" },
+    "category-2-surface-dark": { "value": "#2D1840" },
+    "category-3": { "value": "#F97316" },
+    "category-3-surface-light": { "value": "#FFF3EB" },
+    "category-3-surface-dark": { "value": "#3F2612" },
+    "category-4": { "value": "#1E8A45" },
+    "category-4-surface-light": { "value": "#ECFDF3" },
+    "category-4-surface-dark": { "value": "#183624" },
 
     "gradient-light-from": { "value": "#FFFFFF" },
-    "gradient-light-to": { "value": "#F8FAFC" },
-    "gradient-dark-from": { "value": "#000000" },
-    "gradient-dark-to": { "value": "#111827" },
-    "gradient-dark-accent": { "value": "linear-gradient(180deg, rgba(249,115,22,0.08) 0%, rgba(17,24,39,0) 70%)" }
+    "gradient-light-to": { "value": "#FAFAFA" },
+    "gradient-dark-from": { "value": "#0D1117" },
+    "gradient-dark-to": { "value": "#131A25" },
+    "gradient-dark-accent": { "value": "linear-gradient(180deg, rgba(249,115,22,0.18) 0%, rgba(13,17,23,0) 65%)" }
   },
   "font": {
     "family-base": { "value": "Inter, \"Inter Fallback\"" },
@@ -71,5 +83,3 @@
     "md": { "value": "0 4px 8px rgba(0,0,0,0.2)" }
   }
 }
-
-

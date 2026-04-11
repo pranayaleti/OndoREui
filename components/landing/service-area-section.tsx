@@ -8,19 +8,19 @@ import { MapPin, TrendingUp, Home, DollarSign } from "lucide-react"
 
 // Counties in north-to-south order with color coding
 const COUNTY_COLORS: Record<string, string> = {
-  Weber: "bg-blue-500",
-  Davis: "bg-purple-500",
+  Weber: "bg-[hsl(var(--color-category-1))]",
+  Davis: "bg-[hsl(var(--color-category-2))]",
   "Salt Lake": "bg-primary",
-  Utah: "bg-orange-500",
-  Juab: "bg-green-600",
+  Utah: "bg-[hsl(var(--color-category-3))]",
+  Juab: "bg-[hsl(var(--color-category-4))]",
 }
 
 const COUNTY_BG: Record<string, string> = {
-  Weber: "bg-blue-50 dark:bg-blue-950/20",
-  Davis: "bg-purple-50 dark:bg-purple-950/20",
+  Weber: "bg-[hsl(var(--color-category-1-surface))]",
+  Davis: "bg-[hsl(var(--color-category-2-surface))]",
   "Salt Lake": "bg-primary/5",
-  Utah: "bg-orange-50 dark:bg-orange-950/20",
-  Juab: "bg-green-50 dark:bg-green-950/20",
+  Utah: "bg-[hsl(var(--color-category-3-surface))]",
+  Juab: "bg-[hsl(var(--color-category-4-surface))]",
 }
 
 function fmtUsd(n: number) {

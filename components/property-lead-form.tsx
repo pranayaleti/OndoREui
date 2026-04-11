@@ -260,7 +260,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                       "flex items-center justify-center w-10 h-10 rounded-full",
                       step === i
                         ? "bg-background text-foreground dark:bg-muted dark:text-foreground"
-                        : "bg-muted text-foreground/70 dark:bg-gray-700 dark:text-foreground/70"
+                        : "bg-muted text-foreground/70 dark:bg-secondary dark:text-foreground/70"
                     )}
                   >
                     {i}

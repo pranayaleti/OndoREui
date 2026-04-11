@@ -61,7 +61,7 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
           <h3 className="text-lg font-semibold text-gray-900 mb-3">My Bookings</h3>
           <div className="space-y-2">
             {bookings.map((b) => (
-              <div key={b.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+              <div key={b.id} className="flex items-center justify-between bg-muted rounded-lg p-3">
                 <div>
                   <p className="font-medium text-sm">{b.propertyAmenities?.name || "Amenity"}</p>
                   <p className="text-xs text-gray-500">
@@ -69,7 +69,7 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={`text-xs px-2 py-1 rounded-full ${b.status === "confirmed" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"}`}>
+                  <span className={`text-xs px-2 py-1 rounded-full ${b.status === "confirmed" ? "bg-green-100 text-green-700" : "bg-muted text-gray-500"}`}>
                     {b.status}
                   </span>
                   {b.status === "confirmed" && (
@@ -88,7 +88,7 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
       {amenities.length > 0 && (
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Book an Amenity</h3>
-          <div className="bg-white border rounded-lg p-4 space-y-4">
+          <div className="bg-card border rounded-lg p-4 space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Amenity</label>
               <select className={inputClass} value={selectedAmenity} onChange={(e) => setSelectedAmenity(e.target.value)}>

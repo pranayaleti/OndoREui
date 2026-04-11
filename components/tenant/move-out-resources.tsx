@@ -27,7 +27,7 @@ export function MoveOutResources() {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading resources...
       </div>
     )
@@ -42,7 +42,7 @@ export function MoveOutResources() {
   }, {})
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-900">Move-Out Resources</h2>
       <p className="text-sm text-gray-600">
         Helpful links to update your address and transfer services.
@@ -57,7 +57,7 @@ export function MoveOutResources() {
             {items.map((resource) => (
               <div
                 key={resource.id}
-                className="flex items-start gap-3 p-3 border rounded-lg hover:bg-gray-50 transition"
+                className="flex items-start gap-3 p-3 border rounded-lg hover:bg-muted transition"
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900">{resource.title}</p>

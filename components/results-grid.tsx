@@ -42,7 +42,7 @@ export default function ResultsGrid({ properties }: ResultsGridProps) {
             <Button
               variant="ghost"
               size="sm"
-              className="absolute top-2 right-2 h-8 w-8 p-0 bg-white/80 hover:bg-white text-gray-600 hover:text-red-500 rounded-full"
+              className="absolute top-2 right-2 h-8 w-8 p-0 bg-card/80 hover:bg-card text-gray-600 hover:text-red-500 rounded-full"
               aria-label="Add to favorites"
             >
               <Heart className="h-4 w-4" />

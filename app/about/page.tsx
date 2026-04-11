@@ -42,7 +42,7 @@ export default function AboutPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-background/40" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
@@ -55,7 +55,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-background dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+      <section className="py-16 md:py-24 bg-background dark:bg-gradient-to-b dark:from-background dark:to-card">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Intro */}

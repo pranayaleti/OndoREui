@@ -23,7 +23,7 @@ interface RewardsCardProps {
 
 const TIERS = [
   { name: "Bronze", min: 0, color: "bg-orange-100 text-orange-700", next: 1000 },
-  { name: "Silver", min: 1000, color: "bg-gray-100 text-gray-700", next: 5000 },
+  { name: "Silver", min: 1000, color: "bg-muted text-gray-700", next: 5000 },
   { name: "Gold", min: 5000, color: "bg-yellow-100 text-yellow-700", next: 10000 },
   { name: "Platinum", min: 10000, color: "bg-purple-100 text-purple-700", next: null },
 ]
@@ -85,7 +85,7 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
 
   if (loading) {
     return (
-      <div className="bg-white border rounded-lg p-6 text-center text-gray-400 text-sm">
+      <div className="bg-card border rounded-lg p-6 text-center text-gray-400 text-sm">
         Loading rewards...
       </div>
     )
@@ -93,7 +93,7 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
 
   if (error) {
     return (
-      <div className="bg-white border rounded-lg p-4">
+      <div className="bg-card border rounded-lg p-4">
         <p className="text-sm text-red-500">{error}</p>
       </div>
     )
@@ -104,7 +104,7 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
   const nextTierPts = tier.next !== null ? tier.next - balance : null
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       {/* Balance & Tier */}
       <div className="flex items-center justify-between">
         <div>
@@ -123,7 +123,7 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
             <span>{tier.name}</span>
             <span>{nextTierPts.toLocaleString()} pts to next tier</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-muted rounded-full h-2">
             <div
               className="bg-blue-600 h-2 rounded-full transition-all"
               style={{
@@ -150,7 +150,7 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
 
       {/* Redeem form */}
       {showRedeem && (
-        <div className="border rounded-lg p-3 space-y-2 bg-gray-50">
+        <div className="border rounded-lg p-3 space-y-2 bg-muted">
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Points to Redeem</label>
             <input

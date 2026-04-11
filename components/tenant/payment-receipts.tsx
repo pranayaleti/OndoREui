@@ -40,7 +40,7 @@ export function PaymentReceipts({ receipts, onDownload }: PaymentReceiptsProps) 
       <h3 className="text-lg font-semibold text-gray-900">Payment Receipts</h3>
       <div className="space-y-2">
         {receipts.map((r) => (
-          <div key={r.id} className="flex items-center justify-between bg-white border rounded-lg p-4">
+          <div key={r.id} className="flex items-center justify-between bg-card border rounded-lg p-4">
             <div>
               <p className="font-medium text-sm">{r.receiptNumber}</p>
               <p className="text-xs text-gray-500">

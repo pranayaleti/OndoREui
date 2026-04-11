@@ -76,10 +76,10 @@ const SPECIALTY_COLORS: Record<VendorSpecialty, string> = {
   appliances: "bg-purple-100 text-purple-800",
   flooring: "bg-orange-100 text-orange-800",
   windows: "bg-sky-100 text-sky-800",
-  structural: "bg-stone-100 text-stone-800",
+  structural: "bg-muted text-stone-800",
   pest_control: "bg-red-100 text-red-800",
   cleaning: "bg-green-100 text-green-800",
-  general: "bg-gray-100 text-gray-800",
+  general: "bg-muted text-gray-800",
   landscaping: "bg-lime-100 text-lime-800",
   roofing: "bg-amber-100 text-amber-800",
   painting: "bg-pink-100 text-pink-800",
@@ -87,7 +87,7 @@ const SPECIALTY_COLORS: Record<VendorSpecialty, string> = {
 
 const STATUS_COLORS = {
   active: "bg-green-100 text-green-800",
-  inactive: "bg-gray-100 text-gray-800",
+  inactive: "bg-muted text-gray-800",
   suspended: "bg-red-100 text-red-800",
 }
 

@@ -74,7 +74,7 @@ export function PropertyComparison({ properties, onRemove }: PropertyComparisonP
                 {values.map((v, i) => (
                   <td
                     key={properties[i].id}
-                    className={`p-3 text-center text-sm ${isBestFn(v, values) ? "font-bold text-green-600 bg-green-50" : ""}`}
+                    className={`p-3 text-center text-sm ${isBestFn(v, values) ? "font-bold text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-500/15" : ""}`}
                   >
                     {v}
                   </td>

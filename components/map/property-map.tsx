@@ -112,20 +112,7 @@ export default function PropertyMap({
     if (!L) return undefined;
     return L.divIcon({
       className: "custom-map-marker",
-      html: `<div style="
-        background: #2563eb;
-        color: white;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 14px;
-        border: 3px solid white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      ">&#127968;</div>`,
+      html: '<div class="custom-map-marker-pin">&#127968;</div>',
       iconSize: [32, 32],
       iconAnchor: [16, 32],
       popupAnchor: [0, -32],
@@ -149,7 +136,7 @@ export default function PropertyMap({
     return (
       <div
         id="property-map-container"
-        className={`bg-gray-100 rounded-lg flex items-center justify-center ${className}`}
+        className={`bg-muted rounded-lg flex items-center justify-center ${className}`}
         style={{ width: "100%", aspectRatio: "16 / 9", minHeight: 220 }}
       >
         <p className="text-gray-500">Loading map...</p>
@@ -210,19 +197,9 @@ export default function PropertyMap({
                 </p>
                 {onPropertyClick && (
                   <button
+                    type="button"
                     onClick={() => onPropertyClick(property.id)}
-                    style={{
-                      marginTop: 8,
-                      width: "100%",
-                      padding: "6px 12px",
-                      background: "#2563eb",
-                      color: "white",
-                      border: "none",
-                      borderRadius: 6,
-                      cursor: "pointer",
-                      fontSize: 13,
-                      fontWeight: 500,
-                    }}
+                    className="mt-2 w-full cursor-pointer rounded-md border-0 bg-primary px-3 py-1.5 text-[13px] font-medium text-primary-foreground"
                   >
                     View Details
                   </button>

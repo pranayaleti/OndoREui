@@ -69,11 +69,11 @@ export function UtilityChargesView() {
 
   const outstanding = charges.filter((c) => !c.paid).reduce((sum, c) => sum + c.amount, 0)
 
-  if (loading) return <div className="bg-white border rounded-lg p-6 text-center text-sm text-gray-500">Loading utility charges...</div>
-  if (error) return <div className="bg-white border rounded-lg p-6 text-center text-sm text-red-500">{error}</div>
+  if (loading) return <div className="bg-card border rounded-lg p-6 text-center text-sm text-gray-500">Loading utility charges...</div>
+  if (error) return <div className="bg-card border rounded-lg p-6 text-center text-sm text-red-500">{error}</div>
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">Utility Charges</h2>
         {outstanding > 0 && (
@@ -101,7 +101,7 @@ export function UtilityChargesView() {
             <div key={charge.id} className="border border-gray-200 rounded-lg overflow-hidden">
               {/* Main row */}
               <div
-                className="flex items-center gap-3 px-3 py-3 cursor-pointer hover:bg-gray-50 transition"
+                className="flex items-center gap-3 px-3 py-3 cursor-pointer hover:bg-muted transition"
                 onClick={() => setExpandedId(isExpanded ? null : charge.id)}
               >
                 <span className="text-xl flex-shrink-0">{icon}</span>
@@ -127,16 +127,16 @@ export function UtilityChargesView() {
 
               {/* Expandable breakdown */}
               {isExpanded && (
-                <div className="border-t border-gray-100 bg-gray-50 px-4 py-3">
+                <div className="border-t border-gray-100 bg-muted px-4 py-3">
                   {charge.breakdown ? (
                     <div className="space-y-2">
                       <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Allocation Breakdown</p>
                       <div className="grid grid-cols-2 gap-2 text-sm">
-                        <div className="bg-white rounded px-3 py-2 border border-gray-100">
+                        <div className="bg-card rounded px-3 py-2 border border-gray-100">
                           <p className="text-xs text-gray-500">Total Bill</p>
                           <p className="font-semibold text-gray-800">{formatCurrency(charge.breakdown.totalBill)}</p>
                         </div>
-                        <div className="bg-white rounded px-3 py-2 border border-gray-100">
+                        <div className="bg-card rounded px-3 py-2 border border-gray-100">
                           <p className="text-xs text-gray-500">Your Share</p>
                           <p className="font-semibold text-blue-700">{formatCurrency(charge.breakdown.tenantShare)}</p>
                         </div>
@@ -151,7 +151,7 @@ export function UtilityChargesView() {
                             <span>Your portion</span>
                             <span>{((charge.breakdown.tenantShare / charge.breakdown.totalBill) * 100).toFixed(1)}%</span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-1.5">
+                          <div className="w-full bg-muted rounded-full h-1.5">
                             <div
                               className="bg-blue-500 h-1.5 rounded-full"
                               style={{ width: `${Math.min((charge.breakdown.tenantShare / charge.breakdown.totalBill) * 100, 100)}%` }}

@@ -125,7 +125,7 @@ const ConsultationWidget: React.FC = memo(() => {
         </Button>
         
         {/* Enhanced Tooltip */}
-        <div className="absolute bottom-full right-0 mb-3 bg-gray-900 text-white text-sm px-4 py-3 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg pointer-events-none">
+        <div className="absolute bottom-full right-0 mb-3 bg-card text-white text-sm px-4 py-3 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg pointer-events-none">
           <div className="flex items-center space-x-2">
             <Home className="h-4 w-4" />
             <span>View Available Times & Book Now</span>
@@ -136,7 +136,7 @@ const ConsultationWidget: React.FC = memo(() => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-background/50 flex items-center justify-center p-4 z-50">
           <div className="bg-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b">

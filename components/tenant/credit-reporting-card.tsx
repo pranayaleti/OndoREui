@@ -46,18 +46,18 @@ export function CreditReportingCard() {
     }
   }
 
-  if (loading) return <div className="bg-white border rounded-lg p-6 text-center text-sm text-gray-500">Loading credit reporting status...</div>
+  if (loading) return <div className="bg-card border rounded-lg p-6 text-center text-sm text-gray-500">Loading credit reporting status...</div>
 
   const enrolled = status?.enrolled ?? false
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">Credit Reporting</h2>
         {enrolled ? (
-          <span className="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-medium">Enrolled</span>
+          <span className="text-xs bg-green-500/10 dark:bg-green-500/15 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-full font-medium">Enrolled</span>
         ) : (
-          <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full font-medium">Not Enrolled</span>
+          <span className="text-xs bg-muted text-gray-600 px-2.5 py-1 rounded-full font-medium">Not Enrolled</span>
         )}
       </div>
 
@@ -70,11 +70,11 @@ export function CreditReportingCard() {
               { icon: "🆓", title: "Free of Charge", desc: "No fees for enrollment or ongoing reporting" },
               { icon: "⚡", title: "Automated Monthly Reporting", desc: "Happens automatically — no action needed" },
             ].map((benefit) => (
-              <div key={benefit.title} className="flex gap-3 items-start bg-blue-50 rounded-lg px-3 py-2.5">
+              <div key={benefit.title} className="flex gap-3 items-start bg-blue-500/10 dark:bg-blue-500/15 rounded-lg px-3 py-2.5">
                 <span className="text-lg leading-none mt-0.5">{benefit.icon}</span>
                 <div>
-                  <p className="text-sm font-medium text-gray-800">{benefit.title}</p>
-                  <p className="text-xs text-gray-500">{benefit.desc}</p>
+                  <p className="text-sm font-medium text-foreground">{benefit.title}</p>
+                  <p className="text-xs text-muted-foreground">{benefit.desc}</p>
                 </div>
               </div>
             ))}
@@ -125,7 +125,7 @@ export function CreditReportingCard() {
             >
               {enrolling ? "Enrolling..." : "Confirm Enrollment"}
             </button>
-            <button onClick={() => setShowForm(false)} className="flex-1 border text-sm py-2.5 rounded-lg hover:bg-gray-50 transition">Cancel</button>
+            <button onClick={() => setShowForm(false)} className="flex-1 border text-sm py-2.5 rounded-lg hover:bg-muted transition">Cancel</button>
           </div>
         </div>
       )}
@@ -139,14 +139,14 @@ export function CreditReportingCard() {
               { label: "Enrolled On", value: status?.enrolledAt ? new Date(status.enrolledAt).toLocaleDateString() : "—" },
               { label: "Next Report", value: status?.nextReportDate ? new Date(status.nextReportDate).toLocaleDateString() : "—" },
             ].map(({ label, value }) => (
-              <div key={label} className="bg-gray-50 rounded-lg px-3 py-2">
+              <div key={label} className="bg-muted rounded-lg px-3 py-2">
                 <p className="text-xs text-gray-500">{label}</p>
                 <p className="text-sm font-medium text-gray-800 capitalize">{value}</p>
               </div>
             ))}
           </div>
 
-          <div className="bg-green-50 border border-green-100 rounded-lg px-3 py-2.5 text-sm text-green-700">
+          <div className="bg-green-500/10 dark:bg-green-500/15 border border-green-200 dark:border-green-500/30 rounded-lg px-3 py-2.5 text-sm text-green-700 dark:text-green-400">
             Your rent payments are being reported monthly. On-time payments positively impact your credit score.
           </div>
 

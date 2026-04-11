@@ -17,8 +17,8 @@ interface AnnouncementFeedProps {
 const priorityStyles: Record<string, { bg: string; border: string; icon: string }> = {
   urgent: { bg: "bg-red-50", border: "border-red-200", icon: "text-red-500" },
   high: { bg: "bg-amber-50", border: "border-amber-200", icon: "text-amber-500" },
-  normal: { bg: "bg-white", border: "border-gray-200", icon: "text-blue-500" },
-  low: { bg: "bg-gray-50", border: "border-gray-200", icon: "text-gray-400" },
+  normal: { bg: "bg-card", border: "border-gray-200", icon: "text-blue-500" },
+  low: { bg: "bg-muted", border: "border-gray-200", icon: "text-gray-400" },
 }
 
 export function AnnouncementFeed({ announcements, onMarkRead }: AnnouncementFeedProps) {

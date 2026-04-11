@@ -420,7 +420,7 @@ export default function PropertiesClient() {
 
       {/* Banner with search field */}
       <section className="relative" aria-labelledby="properties-hero-heading">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-black/90 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-card/90 to-background/90 z-10" />
         <div className="relative h-[400px] overflow-hidden">
           <Image
             src="/modern-apartment-balcony.webp"
@@ -441,7 +441,7 @@ export default function PropertiesClient() {
                 Browse our curated selection of quality rental properties
               </p>
               <div className="flex justify-center px-4">
-                <Suspense fallback={<div className="h-12 w-full max-w-md bg-white/10 animate-pulse rounded"></div>}>
+                <Suspense fallback={<div className="h-12 w-full max-w-md bg-card/75 animate-pulse rounded"></div>}>
                   <PropertySearch onSearch={handleSearch} />
                 </Suspense>
               </div>
@@ -570,7 +570,7 @@ export default function PropertiesClient() {
                         <div className="absolute top-2 right-2 bg-primary text-foreground px-3 py-1 rounded-md font-medium">
                           ${property.price.toLocaleString()}/mo
                         </div>
-                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-xs">Example listing</div>
+                        <div className="absolute top-2 left-2 bg-background/70 text-white px-2 py-1 rounded text-xs">Example listing</div>
                       </div>
                       <CardContent className="p-4">
                         <div className="flex justify-between items-center mb-2">
@@ -702,8 +702,8 @@ export default function PropertiesClient() {
       {/* Details modal */}
       {selectedPropertyData && (
         <Suspense fallback={
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 flex items-center gap-3">
+          <div className="fixed inset-0 bg-background/50 flex items-center justify-center z-50">
+            <div className="bg-card rounded-lg p-6 flex items-center gap-3">
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
               <span>Loading property details...</span>
             </div>

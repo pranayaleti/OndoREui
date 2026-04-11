@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 export function NotaryFAQ() {
   const itemClass =
-    "rounded-lg border border-border/70 dark:border-white/10 bg-card/80 dark:bg-white/5 px-6";
+    "rounded-lg border border-border/70 dark:border-white/10 bg-card/80 dark:bg-card/60 px-6";
 
   return (
     <Accordion type="single" collapsible className="w-full space-y-4">

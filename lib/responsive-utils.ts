@@ -176,7 +176,7 @@ export const patterns = {
   hero: "min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8",
   
   // Card responsive layout
-  card: "bg-white rounded-lg shadow-md p-4 sm:p-6",
+  card: "bg-card rounded-lg shadow-md p-4 sm:p-6",
   
   // Form responsive layout
   form: "max-w-md mx-auto space-y-4 sm:space-y-6",

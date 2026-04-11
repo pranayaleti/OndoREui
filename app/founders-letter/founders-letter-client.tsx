@@ -429,7 +429,7 @@ export default function FoundersLetterPage() {
   </div>
   
   {/* Bottom CTA */}
-  <div className="bg-gradient-to-b from-black to-gray-900 py-20">
+  <div className="bg-gradient-to-b from-background to-card py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Ready to Experience Ondo?</h2>
           <p className="text-xl text-foreground mb-8 opacity-90">
@@ -439,13 +439,13 @@ export default function FoundersLetterPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-black hover:bg-black/90 text-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors text-center"
+              className="bg-background hover:bg-background/90 text-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors text-center"
             >
               Start Your Journey
             </Link>
             <Link
               href="/about"
-              className="bg-black hover:bg-black/90 text-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors text-center"
+              className="bg-background hover:bg-background/90 text-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors text-center"
             >
               Learn More About Ondo
             </Link>

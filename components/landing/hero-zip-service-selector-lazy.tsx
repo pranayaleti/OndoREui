@@ -9,8 +9,8 @@ export const HeroZipServiceSelectorLazy = dynamic(
     ssr: false,
     loading: () => (
       <div className="flex w-full max-w-sm items-center gap-2" aria-hidden="true">
-        <div className="h-11 flex-1 rounded-md bg-white/20" />
-        <div className="h-11 w-28 rounded-md bg-white/20" />
+        <div className="h-11 flex-1 rounded-md bg-card/70" />
+        <div className="h-11 w-28 rounded-md bg-card/70" />
       </div>
     ),
   },

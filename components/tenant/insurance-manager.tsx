@@ -79,7 +79,7 @@ export function InsuranceManager({ policies, onAdd, propertyId }: InsuranceManag
       </div>
 
       {showForm && (
-        <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+        <div className="bg-muted rounded-lg p-4 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Provider</label>
@@ -115,7 +115,7 @@ export function InsuranceManager({ policies, onAdd, propertyId }: InsuranceManag
       ) : (
         <div className="space-y-2">
           {policies.map((p) => (
-            <div key={p.id} className="bg-white border rounded-lg p-4">
+            <div key={p.id} className="bg-card border rounded-lg p-4">
               <div className="flex items-center justify-between mb-1">
                 <p className="font-medium text-sm">{p.provider}</p>
                 <div className="flex items-center gap-2">

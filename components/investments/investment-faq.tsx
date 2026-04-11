@@ -5,7 +5,7 @@ import { FRACTIONAL_FAQ_ITEMS } from "@/lib/investments-faq-data"
 
 export function InvestmentFAQ() {
   const itemClass =
-    "rounded-lg border border-border/70 dark:border-white/10 bg-card/80 dark:bg-white/5 px-6"
+    "rounded-lg border border-border/70 dark:border-white/10 bg-card/80 dark:bg-card/60 px-6"
   const items = Array.isArray(FRACTIONAL_FAQ_ITEMS) ? FRACTIONAL_FAQ_ITEMS : []
 
   return (

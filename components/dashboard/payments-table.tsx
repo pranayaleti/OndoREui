@@ -173,7 +173,7 @@ const getStatusColor = (status: string) => {
     case "refunded":
       return "bg-primary"
     default:
-      return "bg-gray-500"
+      return "bg-muted"
   }
 }
 

@@ -74,7 +74,7 @@ export default function NotaryFAQPage() {
         subtitle="Common questions about notarization services and what to expect"
       />
 
-      <main className="flex-1 py-12 bg-gradient-to-b from-black to-gray-900">
+      <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
         <div className="container px-4 md:px-6">
           <Link
             href="/faq"
@@ -100,7 +100,7 @@ export default function NotaryFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-white/5 px-6 py-2 backdrop-blur-sm"
+                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
                   <AccordionTrigger className="text-white hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>

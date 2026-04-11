@@ -21,7 +21,7 @@ export default function SweepstakesPage() {
       />
 
       {/* Hero Banner */}
-      <div className="relative bg-gradient-to-b from-black to-gray-900 text-white py-16 md:py-24">
+      <div className="relative bg-gradient-to-b from-background to-card text-white py-16 md:py-24">
         <div className="container px-4 md:px-6">
           <div className="grid gap-8 lg:grid-cols-2 items-center max-w-6xl mx-auto">
             <div>
@@ -38,15 +38,15 @@ export default function SweepstakesPage() {
             </div>
             <div className="relative">
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                <div className="bg-card/75 backdrop-blur-sm rounded-lg p-4 text-center">
                   <div className="text-4xl mb-2">💻</div>
                   <h3 className="font-bold text-sm">MacBook</h3>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                <div className="bg-card/75 backdrop-blur-sm rounded-lg p-4 text-center">
                   <div className="text-4xl mb-2">📱</div>
                   <h3 className="font-bold text-sm">iPhone</h3>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                <div className="bg-card/75 backdrop-blur-sm rounded-lg p-4 text-center">
                   <div className="text-4xl mb-2">🎧</div>
                   <h3 className="font-bold text-sm">AirPods</h3>
                 </div>
@@ -102,19 +102,19 @@ export default function SweepstakesPage() {
             <div className="max-w-6xl mx-auto mb-12">
               <Card className="border-2 border-primary overflow-hidden">
                 <div className="grid md:grid-cols-3 gap-6 p-6">
-                  <div className="text-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8">
+                  <div className="text-center bg-gradient-to-br from-background to-muted rounded-lg p-8">
                     <div className="text-6xl mb-4">💻</div>
                     <h3 className="text-xl font-bold mb-2">MacBook Pro</h3>
                     <p className="text-sm text-foreground/70">Latest model with M3 chip</p>
                     <p className="text-lg font-semibold text-primary mt-2">1st Prize</p>
                   </div>
-                  <div className="text-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8">
+                  <div className="text-center bg-gradient-to-br from-background to-muted rounded-lg p-8">
                     <div className="text-6xl mb-4">📱</div>
                     <h3 className="text-xl font-bold mb-2">iPhone 17</h3>
                     <p className="text-sm text-foreground/70">Latest iPhone with Pro features</p>
                     <p className="text-lg font-semibold text-primary mt-2">2nd Prize</p>
                   </div>
-                  <div className="text-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8">
+                  <div className="text-center bg-gradient-to-br from-background to-muted rounded-lg p-8">
                     <div className="text-6xl mb-4">🎧</div>
                     <h3 className="text-xl font-bold mb-2">AirPods Pro</h3>
                     <p className="text-sm text-foreground/70">Active noise cancellation</p>
@@ -303,7 +303,7 @@ export default function SweepstakesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-b from-black to-gray-900 py-20">
+        <section className="bg-gradient-to-b from-background to-card py-20">
           <div className="container px-4 md:px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">

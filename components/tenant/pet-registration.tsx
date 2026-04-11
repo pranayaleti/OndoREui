@@ -95,15 +95,15 @@ export function PetRegistration() {
   }
 
   const vacBadge = (status: Pet["vaccinationStatus"]) => {
-    if (status === "current") return <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Vaccinations Current</span>
-    if (status === "expired") return <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Vaccinations Expired</span>
-    return <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Status Unknown</span>
+    if (status === "current") return <span className="text-xs bg-green-500/10 dark:bg-green-500/15 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full">Vaccinations Current</span>
+    if (status === "expired") return <span className="text-xs bg-red-500/10 dark:bg-red-500/15 text-red-700 dark:text-red-400 px-2 py-0.5 rounded-full">Vaccinations Expired</span>
+    return <span className="text-xs bg-muted text-gray-600 px-2 py-0.5 rounded-full">Status Unknown</span>
   }
 
-  if (loading) return <div className="bg-white border rounded-lg p-6 text-center text-sm text-gray-500">Loading pets...</div>
+  if (loading) return <div className="bg-card border rounded-lg p-6 text-center text-sm text-gray-500">Loading pets...</div>
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-4">
+    <div className="bg-card border rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">Pet Registration</h2>
         <button onClick={openAdd} className="text-sm bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition">
@@ -112,7 +112,7 @@ export function PetRegistration() {
       </div>
 
       {policy && (
-        <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 text-sm text-blue-800 flex gap-6">
+        <div className="bg-blue-500/10 dark:bg-blue-500/15 border border-blue-200 dark:border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-800 dark:text-blue-300 flex gap-6">
           <span><span className="font-medium">Pet Deposit:</span> ${policy.petDeposit}</span>
           <span><span className="font-medium">Monthly Pet Rent:</span> ${policy.monthlyPetRent}/mo</span>
           <span><span className="font-medium">Max Pets:</span> {policy.maxPets}</span>
@@ -127,8 +127,8 @@ export function PetRegistration() {
 
       <div className="space-y-3">
         {pets.map((pet) => (
-          <div key={pet.id} className="flex items-start gap-4 bg-gray-50 rounded-lg p-3">
-            <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl flex-shrink-0">
+          <div key={pet.id} className="flex items-start gap-4 bg-muted rounded-lg p-3">
+            <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-2xl flex-shrink-0">
               {pet.species === "cat" ? "🐱" : pet.species === "dog" ? "🐶" : "🐾"}
             </div>
             <div className="flex-1 min-w-0">
@@ -145,7 +145,7 @@ export function PetRegistration() {
       </div>
 
       {showForm && (
-        <div className="border border-gray-200 rounded-lg p-4 space-y-3 bg-gray-50">
+        <div className="border border-gray-200 rounded-lg p-4 space-y-3 bg-muted">
           <h3 className="text-sm font-semibold text-gray-800">{editingId ? "Edit Pet" : "Add Pet"}</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -185,7 +185,7 @@ export function PetRegistration() {
             <button onClick={handleSave} disabled={saving} className="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition">
               {saving ? "Saving..." : "Save Pet"}
             </button>
-            <button onClick={() => setShowForm(false)} className="text-sm px-4 py-2 rounded-lg border hover:bg-gray-100 transition">Cancel</button>
+            <button onClick={() => setShowForm(false)} className="text-sm px-4 py-2 rounded-lg border hover:bg-muted transition">Cancel</button>
           </div>
         </div>
       )}

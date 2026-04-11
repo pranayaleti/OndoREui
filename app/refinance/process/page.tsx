@@ -77,7 +77,7 @@ export default function RefinanceProcessPage() {
         subtitle="A step-by-step guide to refinancing your home loan"
       />
 
-      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-background dark:to-card">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

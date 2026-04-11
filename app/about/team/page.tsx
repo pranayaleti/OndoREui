@@ -87,7 +87,7 @@ export default function TeamPage() {
         backgroundImage="/modern-office-building.png"
       />
 
-      <section className="py-16 bg-muted dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+      <section className="py-16 bg-muted dark:bg-gradient-to-b dark:from-background dark:to-card">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Our Team</h2>
@@ -128,7 +128,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-black dark:to-gray-900">
+      <section className="py-16 bg-background dark:bg-gradient-to-b dark:from-background dark:to-card">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-12">By the Numbers</h2>
@@ -144,7 +144,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900 text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Join Our Team</h2>
@@ -159,7 +159,7 @@ export default function TeamPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-white/10"
+                className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-card/75"
               >
                 <Link href="/contact">Contact Us</Link>
               </Button>

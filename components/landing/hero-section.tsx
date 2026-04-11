@@ -3,7 +3,7 @@ import { HeroZipServiceSelectorLazy } from "@/components/landing/hero-zip-servic
 
 export function HeroSection() {
   return (
-    <section className="relative w-full bg-gradient-to-r from-background to-card dark:bg-gradient-to-b dark:from-black dark:to-gray-900 py-20 md:py-32 overflow-hidden" role="banner" aria-label="Hero section">
+    <section className="relative w-full bg-gradient-to-r from-background to-card dark:bg-gradient-to-b dark:from-background dark:to-card py-20 md:py-32 overflow-hidden" role="banner" aria-label="Hero section">
       <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
         <Image
           src="/modern-office-building.webp"
