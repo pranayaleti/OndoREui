@@ -28,10 +28,27 @@ export function EmailCaptureSection() {
           <h2 className="text-2xl font-bold mb-2 text-foreground">
             Free guide: The Utah Landlord&apos;s Property Management Checklist
           </h2>
-          <p className="text-foreground/70 mb-6">
-            Tenant screening, lease compliance, rent collection, maintenance — everything Utah owners
-            need in one actionable PDF. Join our mailing list and get it instantly.
+          <p className="text-foreground/70 mb-3">
+            Join our mailing list and get this actionable PDF instantly.
           </p>
+          <ul className="text-left text-sm text-foreground/70 mb-6 space-y-1.5 max-w-xs mx-auto">
+            <li className="flex items-start gap-2">
+              <svg className="h-4 w-4 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              <span>Utah tenant screening checklist &amp; red flags</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <svg className="h-4 w-4 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              <span>Lease compliance requirements specific to Utah law</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <svg className="h-4 w-4 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              <span>Rent collection &amp; late fee procedures</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <svg className="h-4 w-4 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              <span>Maintenance request response time standards</span>
+            </li>
+          </ul>
 
           {submitted ? (
             <p className="text-primary font-semibold py-4">

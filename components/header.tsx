@@ -210,12 +210,12 @@ const Header = memo(() => {
             <Navigation
               className="flex flex-col gap-2"
               onLinkClick={handleMenuClose}
-              items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/tour")}
+              items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/resources")}
             />
 
-            {/* Solutions + Learn — mobile inline (children sourced from allNavigationItems to stay DRY) */}
+            {/* Solutions + Resources — mobile inline (children sourced from allNavigationItems to stay DRY) */}
             {allNavigationItems
-              .filter(i => i.href === "/solutions" || i.href === "/tour")
+              .filter(i => i.href === "/solutions" || i.href === "/resources")
               .map(item => (
                 <div key={item.href} className="pt-2">
                   <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 px-3 mb-1">{t(item.labelKey)}</p>

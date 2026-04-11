@@ -37,19 +37,7 @@ export const allNavigationItems: NavigationItem[] = [
   { href: "/loans", labelKey: "nav.loans" },
   { href: "/notary", labelKey: "nav.notary" },
 
-  // Discovery & tools
-  { href: "/pricing", labelKey: "nav.pricing" },
-  { href: "/compare", labelKey: "nav.compare" },
-  { href: "/investments", labelKey: "nav.investments" },
-  { href: "/calculators", labelKey: "nav.calculators" },
-  { href: "/news", labelKey: "nav.news" },
-  { href: "/blog", labelKey: "nav.blog" },
-
-  // Utah positioning
-  { href: "/why-utah", labelKey: "nav.whyUtah" },
-  { href: "/founders-letter", labelKey: "nav.foundersLetter" },
-
-  // Solutions
+  // Solutions — who are you + how to choose
   {
     href: "/solutions",
     labelKey: "nav.solutions",
@@ -58,39 +46,38 @@ export const allNavigationItems: NavigationItem[] = [
       { href: "/solutions/landlords", labelKey: "nav.forLandlords" },
       { href: "/solutions/property-managers", labelKey: "nav.forPropertyManagers" },
       { href: "/solutions/tenants", labelKey: "nav.forTenants" },
+      { href: "/pricing", labelKey: "nav.pricing" },
     ],
   },
-  // Resources
+
+  // Resources — learn, research & tools
   {
-    href: "/tour",
+    href: "/resources",
     labelKey: "nav.resources",
     children: [
       { href: "/tour", labelKey: "nav.platformTour" },
       { href: "/blog", labelKey: "nav.blogAndGuides" },
+      { href: "/news", labelKey: "nav.news" },
       { href: "/calculators", labelKey: "nav.calculators" },
+      { href: "/compare", labelKey: "nav.compare" },
       { href: "/faq", labelKey: "nav.faq" },
       { href: "/why-utah", labelKey: "nav.whyUtah" },
     ],
   },
 
-  // Company & about
+  // Company & misc (More overflow)
   { href: "/about", labelKey: "nav.about" },
-
-  // Help & education
-  { href: "/faq", labelKey: "nav.faq" },
-
-  // Loan / refinance journeys
+  { href: "/investments", labelKey: "nav.investments" },
+  { href: "/founders-letter", labelKey: "nav.foundersLetter" },
   { href: "/refinance/process", labelKey: "nav.refinanceProcess" },
-
-  // Marketing / campaigns
-  { href: "/sweepstakes", labelKey: "nav.winPrizes", special: true },
   { href: "/affiliate", labelKey: "nav.becomeAffiliate" },
+  { href: "/sweepstakes", labelKey: "nav.winPrizes", special: true },
 ]
 
 // These are the items that stay visible in the main
 // desktop navbar. The rest will live in the hamburger menu.
 export const primaryNavigationItems: NavigationItem[] = allNavigationItems.filter(item =>
-  ["/buy", "/sell", "/properties", "/loans", "/notary", "/solutions", "/tour"].includes(item.href)
+  ["/buy", "/sell", "/properties", "/loans", "/notary", "/solutions", "/resources"].includes(item.href)
 )
 
 // Everything that is not part of the primary desktop nav.

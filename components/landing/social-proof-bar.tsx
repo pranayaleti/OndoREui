@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react"
 
 const stats = [
   { icon: MapPin, value: 55, suffix: "+", label: "Utah cities served" },
-  { icon: Building, value: 200, suffix: "+", label: "Properties managed" },
+  { icon: Building, value: 200, suffix: "+", label: "Properties managed & growing" },
   { icon: Star, value: 4.9, suffix: "★", label: "Average client rating", decimals: 1 },
   { icon: Clock, value: 24, suffix: "/7", label: "Emergency maintenance response" },
 ]

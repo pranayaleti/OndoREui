@@ -47,6 +47,105 @@ type LocalSortOption =
   | 'bathrooms'
   | 'sqft';
 
+const SAMPLE_PROPERTIES: Property[] = [
+  {
+    id: 'sample-1',
+    title: 'Modern Downtown Apartment',
+    type: 'apartment',
+    address: 'Salt Lake City, UT',
+    price: 1850,
+    bedrooms: 2,
+    bathrooms: 2,
+    sqft: 900,
+    phone: '',
+    website: null,
+    leaseTerms: null,
+    fees: null,
+    availability: null,
+    rating: 0,
+    reviewCount: 0,
+    amenities: [],
+    specialties: [],
+    services: [],
+    valueRanges: [],
+    images: ['/modern-apartment-balcony.webp'],
+    image: '/modern-apartment-balcony.webp',
+    dateAdded: new Date(),
+    logo: '',
+    description: 'A modern apartment in the heart of downtown Salt Lake City.',
+    contact: {
+      name: 'Ondo Real Estate',
+      phone: '',
+      email: '',
+      role: 'property',
+    },
+  },
+  {
+    id: 'sample-2',
+    title: 'Family Home with Garden',
+    type: 'house',
+    address: 'Holladay, UT 84117',
+    price: 2400,
+    bedrooms: 3,
+    bathrooms: 2.5,
+    sqft: 1800,
+    phone: '',
+    website: null,
+    leaseTerms: null,
+    fees: null,
+    availability: null,
+    rating: 0,
+    reviewCount: 0,
+    amenities: [],
+    specialties: [],
+    services: [],
+    valueRanges: [],
+    images: ['/suburban-house-garden.webp'],
+    image: '/suburban-house-garden.webp',
+    dateAdded: new Date(),
+    logo: '',
+    description: 'Spacious family home with a beautiful garden in Holladay.',
+    contact: {
+      name: 'Ondo Real Estate',
+      phone: '',
+      email: '',
+      role: 'property',
+    },
+  },
+  {
+    id: 'sample-3',
+    title: 'Modern Townhouse',
+    type: 'townhouse',
+    address: 'Midvale, UT 84047',
+    price: 1650,
+    bedrooms: 2,
+    bathrooms: 1.5,
+    sqft: 1100,
+    phone: '',
+    website: null,
+    leaseTerms: null,
+    fees: null,
+    availability: null,
+    rating: 0,
+    reviewCount: 0,
+    amenities: [],
+    specialties: [],
+    services: [],
+    valueRanges: [],
+    images: ['/modern-townhouse-garage.webp'],
+    image: '/modern-townhouse-garage.webp',
+    dateAdded: new Date(),
+    logo: '',
+    description: 'A modern townhouse with garage in Midvale.',
+    contact: {
+      name: 'Ondo Real Estate',
+      phone: '',
+      email: '',
+      role: 'property',
+    },
+  },
+];
+
 export default function PropertiesClient() {
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
   const [allApiProperties, setAllApiProperties] = useState<Property[]>([]);
@@ -438,31 +537,74 @@ export default function PropertiesClient() {
                 ))}
               </div>
             ) : error ? (
-              <div className="flex flex-col items-center justify-center py-16">
-                <div className="max-w-lg w-full text-center">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-                    <Building className="w-10 h-10 text-foreground/40" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Properties are temporarily unavailable</h3>
-                  <p className="text-foreground/60 mb-8 max-w-sm mx-auto">
-                    We&apos;re having trouble loading our listings right now. This is usually resolved quickly.
-                  </p>
-                  <div className="flex gap-3 justify-center">
-                    <Button onClick={handleRetry} variant="default" className="min-h-[44px]">
-                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                      Try Again
-                    </Button>
-                    <Button asChild variant="outline" className="min-h-[44px]">
-                      <a href="/contact">Contact Us</a>
-                    </Button>
-                  </div>
-                  {retryCount > 0 && (
-                    <p className="text-xs text-foreground/40 mt-4">
-                      Still not working? Call us at <a href="tel:+14085380420" className="text-primary hover:underline">+1 (408) 538-0420</a>
+              <div>
+                <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/20 px-5 py-4 text-sm text-amber-800 dark:text-amber-300 flex items-start gap-3">
+                  <svg className="h-5 w-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                  </svg>
+                  <div>
+                    <p className="font-semibold">Live listings temporarily unavailable</p>
+                    <p className="mt-0.5 text-amber-700 dark:text-amber-400">
+                      We&apos;re having trouble connecting to our listing database. The properties below are representative examples.{' '}
+                      <a href="/contact" className="underline hover:no-underline">Contact us</a> to ask about current availability.
                     </p>
-                  )}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="grid" aria-label="Sample rental properties">
+                  {SAMPLE_PROPERTIES.map((property) => (
+                    <Card
+                      key={property.id}
+                      className="overflow-hidden card-hover hover-lift focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 btn-interactive"
+                      role="gridcell"
+                    >
+                      <div className="relative aspect-video">
+                        <Image
+                          src={property.image || '/placeholder.svg'}
+                          alt={property.title}
+                          fill
+                          className="object-cover"
+                          loading="lazy"
+                          quality={85}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                        <div className="absolute top-2 right-2 bg-primary text-foreground px-3 py-1 rounded-md font-medium">
+                          ${property.price.toLocaleString()}/mo
+                        </div>
+                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-xs">Example listing</div>
+                      </div>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <h3 className="font-semibold text-lg">
+                            {property.title}
+                          </h3>
+                        </div>
+                        <p className="text-foreground/70 text-sm mb-2">
+                          {property.address}
+                        </p>
+                        <div className="flex items-center gap-4 text-sm" role="list" aria-label="Property specifications">
+                          <span className="flex items-center gap-1" role="listitem">
+                            <Home className="h-4 w-4" aria-hidden="true" />{' '}
+                            {property.bedrooms === 0
+                              ? 'Studio'
+                              : `${property.bedrooms} Beds`}
+                          </span>
+                          <span className="flex items-center gap-1" role="listitem">
+                            <Building className="h-4 w-4" aria-hidden="true" /> {property.bathrooms}{' '}
+                            Baths
+                          </span>
+                          <span className="flex items-center gap-1" role="listitem">
+                            <Search className="h-4 w-4" aria-hidden="true" /> {property.sqft} sqft
+                          </span>
+                        </div>
+                        <Button
+                          asChild
+                          className="w-full mt-4 min-h-[44px] text-base btn-interactive hover-lift"
+                        >
+                          <a href="/contact">Inquire About Availability</a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </div>
             ) : properties.length > 0 ? (
@@ -525,13 +667,10 @@ export default function PropertiesClient() {
             ) : (
               <div className="py-12 flex flex-col items-center">
                 <div className="max-w-md w-full">
-                  <div className="bg-card p-6 rounded-lg shadow-sm border mb-6 dark:bg-muted dark:border-border">
-                    <h3 className="text-lg font-semibold mb-4 dark:text-foreground">
-                      No properties found
-                    </h3>
-                    <p className="text-foreground/70 mb-4 dark:text-foreground/70">
-                      We couldn't find any properties matching your search
-                      criteria.
+                  <div className="bg-card p-6 rounded-lg shadow-sm border mb-6">
+                    <h3 className="text-lg font-semibold mb-2">No properties match your filters</h3>
+                    <p className="text-foreground/70 mb-4 text-sm">
+                      Try widening your search, or get notified when new listings hit your area.
                     </p>
                     <Button
                       onClick={() => {
@@ -544,9 +683,13 @@ export default function PropertiesClient() {
                         });
                         setSearchQuery('');
                       }}
-                      className="w-full"
+                      variant="outline"
+                      className="w-full mb-3"
                     >
                       Reset Filters
+                    </Button>
+                    <Button asChild className="w-full">
+                      <a href="/contact">Contact Us About Availability</a>
                     </Button>
                   </div>
                 </div>

@@ -11,7 +11,7 @@
 export const BACKEND_BASE_URL: string =
   process.env['NEXT_PUBLIC_BACKEND_BASE_URL'] || ''
 
-if (typeof window !== 'undefined' && !BACKEND_BASE_URL) {
+if (typeof window !== 'undefined' && !BACKEND_BASE_URL && process.env.NODE_ENV === 'development') {
   console.warn('[OndoRE] NEXT_PUBLIC_BACKEND_BASE_URL is not set — API calls will use relative paths')
 }
 

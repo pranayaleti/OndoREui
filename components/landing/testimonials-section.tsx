@@ -6,8 +6,8 @@ import { testimonials } from "@/lib/testimonials"
 
 // Show a curated mix of roles for the landing page
 const landingTestimonials = [
-  testimonials.find((t) => t.role === "Tenant" && t.city === "Salt Lake City"),
-  testimonials.find((t) => t.role === "Owner" && t.city === "Salt Lake City"),
+  testimonials.find((t) => t.role === "Tenant" && t.city === "Lehi"),
+  testimonials.find((t) => t.role === "Owner" && t.city === "Draper"),
   testimonials.find((t) => t.role === "Investor" && t.city === "Salt Lake City"),
 ].filter(Boolean)
 

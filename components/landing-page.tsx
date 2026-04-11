@@ -26,7 +26,7 @@ export default function LandingPage() {
       <ServiceAreaSection />
       <FoundersNoteSection />
       <EmailCaptureSection />
-      <CalendlyBookSection />
+      <CalendlyBookSection variant="compact" />
       <CTASection />
       {/* Footer rendered globally in RootLayout */}
     </div>
