@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
+import { getStatements, type OwnerStatement } from "@/lib/api/owner-financials"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -54,132 +55,7 @@ const PropertyPerformanceChart = dynamic(
 import { AddTransactionDialog } from "@/components/owner/add-transaction-dialog"
 import { useToast } from "@/hooks/use-toast"
 
-// Mock financial data
-const FINANCIAL_SUMMARY = {
-  currentMonth: {
-    income: 8750,
-    expenses: 3450,
-    netIncome: 5300,
-    occupancyRate: 85,
-  },
-  previousMonth: {
-    income: 8400,
-    expenses: 3200,
-    netIncome: 5200,
-    occupancyRate: 80,
-  },
-  ytd: {
-    income: 52500,
-    expenses: 20700,
-    netIncome: 31800,
-  },
-}
-
-// Mock transactions
-const TRANSACTIONS = [
-  {
-    id: "txn1",
-    date: "2023-05-01",
-    property: "2701 N Thanksgiving Way",
-    category: "Rent",
-    description: "May 2023 Rent - Unit 1",
-    amount: 1700,
-    type: "income",
-    status: "completed",
-  },
-  {
-    id: "txn2",
-    date: "2023-05-01",
-    property: "2701 N Thanksgiving Way",
-    category: "Rent",
-    description: "May 2023 Rent - Unit 2",
-    amount: 1700,
-    type: "income",
-    status: "completed",
-  },
-  {
-    id: "txn3",
-    date: "2023-05-01",
-    property: "456 Oak Avenue",
-    category: "Rent",
-    description: "May 2023 Rent",
-    amount: 1850,
-    type: "income",
-    status: "completed",
-  },
-  {
-    id: "txn4",
-    date: "2023-05-05",
-    property: "2701 N Thanksgiving Way",
-    category: "Mortgage",
-    description: "Monthly Mortgage Payment",
-    amount: 1800,
-    type: "expense",
-    status: "completed",
-  },
-  {
-    id: "txn5",
-    date: "2023-05-10",
-    property: "456 Oak Avenue",
-    category: "Utilities",
-    description: "Water Bill",
-    amount: 120,
-    type: "expense",
-    status: "completed",
-  },
-  {
-    id: "txn6",
-    date: "2023-05-15",
-    property: "2701 N Thanksgiving Way",
-    category: "Maintenance",
-    description: "Plumbing Repair",
-    amount: 350,
-    type: "expense",
-    status: "completed",
-  },
-  {
-    id: "txn7",
-    date: "2023-05-15",
-    property: "All Properties",
-    category: "Insurance",
-    description: "Property Insurance Premium",
-    amount: 450,
-    type: "expense",
-    status: "completed",
-  },
-  {
-    id: "txn8",
-    date: "2023-05-20",
-    property: "456 Oak Avenue",
-    category: "Maintenance",
-    description: "Lawn Care Service",
-    amount: 150,
-    type: "expense",
-    status: "completed",
-  },
-  {
-    id: "txn9",
-    date: "2023-05-25",
-    property: "All Properties",
-    category: "Property Management",
-    description: "Property Management Fee",
-    amount: 580,
-    type: "expense",
-    status: "completed",
-  },
-  {
-    id: "txn10",
-    date: "2023-06-01",
-    property: "2701 N Thanksgiving Way",
-    category: "Rent",
-    description: "June 2023 Rent - Unit 1",
-    amount: 1700,
-    type: "income",
-    status: "pending",
-  },
-]
-
-// Mock properties
+// Mock properties — kept for Reports tab ROI display (ROI % not available from statements API)
 const PROPERTIES = [
   {
     id: "prop1",
@@ -214,11 +90,86 @@ export function FinancesView() {
   const [transactionType, setTransactionType] = useState("all")
   const [propertyFilter, setPropertyFilter] = useState("all")
   const [categoryFilter, setCategoryFilter] = useState("all")
-  const [transactions, setTransactions] = useState(TRANSACTIONS)
+  const [transactions, setTransactions] = useState<
+    Array<{
+      id: string
+      date: string
+      property: string
+      category: string
+      description: string
+      amount: number
+      type: string
+      status: string
+    }>
+  >([])
   const [date, setDate] = useState<DateRange | undefined>({
     from: subMonths(new Date(), 1),
     to: new Date(),
   })
+  const [statements, setStatements] = useState<OwnerStatement[]>([])
+  const [statementsLoading, setStatementsLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchStatements() {
+      try {
+        const data = await getStatements()
+        setStatements(data)
+      } catch (err) {
+        console.error("Failed to fetch statements:", err)
+      } finally {
+        setStatementsLoading(false)
+      }
+    }
+    fetchStatements()
+  }, [])
+
+  const financialSummary = useMemo(() => {
+    if (statements.length === 0) return null
+    const current = statements[0]
+    const previous = statements[1]
+    return {
+      currentMonth: {
+        income: current.totalIncomeCents / 100,
+        expenses: current.totalExpenseCents / 100,
+        netIncome: current.netCents / 100,
+      },
+      previousMonth: previous
+        ? {
+            income: previous.totalIncomeCents / 100,
+            expenses: previous.totalExpenseCents / 100,
+            netIncome: previous.netCents / 100,
+          }
+        : null,
+      ytd: {
+        income: statements.reduce((sum, s) => sum + s.totalIncomeCents, 0) / 100,
+        expenses: statements.reduce((sum, s) => sum + s.totalExpenseCents, 0) / 100,
+        netIncome: statements.reduce((sum, s) => sum + s.netCents, 0) / 100,
+      },
+    }
+  }, [statements])
+
+  const derivedTransactions = useMemo(() => {
+    return statements
+      .flatMap((s) =>
+        (s.lineItems || []).map((li, idx) => ({
+          id: `${s.id}-${idx}`,
+          date: li.date,
+          property: li.description.split(" — ")[1] || "Property",
+          category: li.type === "income" ? "Rent" : li.description.split(":")[0] || "Expense",
+          description: li.description,
+          amount: li.amountCents / 100,
+          type: li.type,
+          status: "completed" as const,
+        }))
+      )
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  }, [statements])
+
+  useEffect(() => {
+    if (derivedTransactions.length > 0) {
+      setTransactions(derivedTransactions)
+    }
+  }, [derivedTransactions])
 
   // Filter transactions based on search term, type, property, and category
   const filteredTransactions = transactions.filter((transaction) => {
@@ -279,21 +230,25 @@ export function FinancesView() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${statementsLoading ? "opacity-60" : ""}`}>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium">Monthly Income</CardTitle>
                 <DollarSign className="h-4 w-4 text-foreground/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">${FINANCIAL_SUMMARY.currentMonth.income.toLocaleString()}</div>
+                <div className="text-2xl font-bold">
+                  ${(financialSummary?.currentMonth.income ?? 0).toLocaleString()}
+                </div>
                 <p className="text-xs text-foreground/70">
                   <TrendingUp className="inline h-3 w-3 text-green-500 mr-1" />
-                  {(
-                    ((FINANCIAL_SUMMARY.currentMonth.income - FINANCIAL_SUMMARY.previousMonth.income) /
-                      FINANCIAL_SUMMARY.previousMonth.income) *
-                    100
-                  ).toFixed(1)}
+                  {financialSummary?.previousMonth
+                    ? (
+                        ((financialSummary.currentMonth.income - financialSummary.previousMonth.income) /
+                          financialSummary.previousMonth.income) *
+                        100
+                      ).toFixed(1)
+                    : "0.0"}
                   % from last month
                 </p>
               </CardContent>
@@ -305,14 +260,18 @@ export function FinancesView() {
                 <DollarSign className="h-4 w-4 text-foreground/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">${FINANCIAL_SUMMARY.currentMonth.expenses.toLocaleString()}</div>
+                <div className="text-2xl font-bold">
+                  ${(financialSummary?.currentMonth.expenses ?? 0).toLocaleString()}
+                </div>
                 <p className="text-xs text-foreground/70">
                   <TrendingDown className="inline h-3 w-3 text-red-500 mr-1" />
-                  {(
-                    ((FINANCIAL_SUMMARY.currentMonth.expenses - FINANCIAL_SUMMARY.previousMonth.expenses) /
-                      FINANCIAL_SUMMARY.previousMonth.expenses) *
-                    100
-                  ).toFixed(1)}
+                  {financialSummary?.previousMonth
+                    ? (
+                        ((financialSummary.currentMonth.expenses - financialSummary.previousMonth.expenses) /
+                          financialSummary.previousMonth.expenses) *
+                        100
+                      ).toFixed(1)
+                    : "0.0"}
                   % from last month
                 </p>
               </CardContent>
@@ -324,14 +283,18 @@ export function FinancesView() {
                 <DollarSign className="h-4 w-4 text-foreground/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">${FINANCIAL_SUMMARY.currentMonth.netIncome.toLocaleString()}</div>
+                <div className="text-2xl font-bold">
+                  ${(financialSummary?.currentMonth.netIncome ?? 0).toLocaleString()}
+                </div>
                 <p className="text-xs text-foreground/70">
                   <TrendingUp className="inline h-3 w-3 text-green-500 mr-1" />
-                  {(
-                    ((FINANCIAL_SUMMARY.currentMonth.netIncome - FINANCIAL_SUMMARY.previousMonth.netIncome) /
-                      FINANCIAL_SUMMARY.previousMonth.netIncome) *
-                    100
-                  ).toFixed(1)}
+                  {financialSummary?.previousMonth
+                    ? (
+                        ((financialSummary.currentMonth.netIncome - financialSummary.previousMonth.netIncome) /
+                          financialSummary.previousMonth.netIncome) *
+                        100
+                      ).toFixed(1)
+                    : "0.0"}
                   % from last month
                 </p>
               </CardContent>
@@ -650,19 +613,19 @@ export function FinancesView() {
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span>Rental Income</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.income * 0.95).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.income ?? 0) * 0.95).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Late Fees</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.income * 0.03).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.income ?? 0) * 0.03).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Other Income</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.income * 0.02).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.income ?? 0) * 0.02).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between font-medium pt-2 border-t">
                         <span>Total Income</span>
-                        <span>${FINANCIAL_SUMMARY.currentMonth.income.toLocaleString()}</span>
+                        <span>${(financialSummary?.currentMonth.income ?? 0).toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
@@ -672,27 +635,27 @@ export function FinancesView() {
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span>Mortgage</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.expenses * 0.52).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.expenses ?? 0) * 0.52).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Property Management</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.expenses * 0.17).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.expenses ?? 0) * 0.17).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Insurance</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.expenses * 0.13).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.expenses ?? 0) * 0.13).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Maintenance</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.expenses * 0.1).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.expenses ?? 0) * 0.1).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Utilities</span>
-                        <span>${(FINANCIAL_SUMMARY.currentMonth.expenses * 0.08).toLocaleString()}</span>
+                        <span>${((financialSummary?.currentMonth.expenses ?? 0) * 0.08).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between font-medium pt-2 border-t">
                         <span>Total Expenses</span>
-                        <span>${FINANCIAL_SUMMARY.currentMonth.expenses.toLocaleString()}</span>
+                        <span>${(financialSummary?.currentMonth.expenses ?? 0).toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
@@ -701,7 +664,7 @@ export function FinancesView() {
                     <div className="flex justify-between font-medium text-lg">
                       <span>Net Income</span>
                       <span className="text-primary">
-                        ${FINANCIAL_SUMMARY.currentMonth.netIncome.toLocaleString()}
+                        ${(financialSummary?.currentMonth.netIncome ?? 0).toLocaleString()}
                       </span>
                     </div>
                   </div>

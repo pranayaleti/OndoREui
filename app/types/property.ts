@@ -46,6 +46,8 @@ export interface ApiProperty {
   createdAt: string;
   updatedAt: string;
   photos: ApiPhoto[];
+  lat?: number | null;
+  lng?: number | null;
   owner?: ApiContact | null;
   manager?: ApiContact | null;
 }
@@ -75,6 +77,8 @@ export interface Property {
   dateAdded: Date;               // from createdAt
   logo: string;                  // keep placeholder for now
   description: string;
+  lat?: number | null;
+  lng?: number | null;
   addressParts?: {
     line1?: string | null;
     line2?: string | null;

@@ -51,3 +51,66 @@ export async function signLease(leaseId: string): Promise<Lease> {
   const data = await res.json()
   return data.data
 }
+
+export async function getPropertyLeases(propertyId: string): Promise<Lease[]> {
+  const res = await authFetch(`/api/properties/${propertyId}/leases`)
+  if (!res.ok) throw new Error("Failed to fetch property leases")
+  const data = await res.json()
+  return data.data ?? []
+}
+
+export async function createLease(input: {
+  propertyId: string
+  tenantId: string
+  leaseStart: string
+  leaseEnd: string
+  monthlyRent: number
+  securityDeposit?: number
+  applicationId?: string
+  terms?: Record<string, unknown>
+}): Promise<Lease> {
+  const res = await authFetch("/api/leases", {
+    method: "POST",
+    body: JSON.stringify(input),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.message ?? "Failed to create lease")
+  }
+  const data = await res.json()
+  return data.data
+}
+
+export async function updateLease(
+  leaseId: string,
+  updates: {
+    leaseStart?: string
+    leaseEnd?: string
+    monthlyRent?: number
+    securityDeposit?: number
+    terms?: Record<string, unknown>
+  }
+): Promise<Lease> {
+  const res = await authFetch(`/api/leases/${leaseId}`, {
+    method: "PUT",
+    body: JSON.stringify(updates),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.message ?? "Failed to update lease")
+  }
+  const data = await res.json()
+  return data.data
+}
+
+export async function sendForSignature(leaseId: string): Promise<Lease> {
+  const res = await authFetch(`/api/leases/${leaseId}/send-for-signature`, {
+    method: "POST",
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.message ?? "Failed to send for signature")
+  }
+  const data = await res.json()
+  return data.data
+}

@@ -71,6 +71,8 @@ export function mapApiProperty(p: ApiProperty): Property {
       country: p.country,
       zipcode: p.zipcode,
     },
+    lat: p.lat ?? null,
+    lng: p.lng ?? null,
     contact: {
       name: contactName,
       phone: contactPhone,

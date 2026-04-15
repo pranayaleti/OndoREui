@@ -10,6 +10,17 @@ import Link from "next/link"
 import { PropertyCard } from "@/components/owner/property-card"
 import { PropertyListItem } from "@/components/owner/property-list-item"
 import { PropertyFilters } from "@/components/owner/property-filters"
+import { PricingInsightsCard } from "@/components/owner/pricing-insights-card"
+import { LeaseRenewalCard } from "@/components/owner/lease-renewal-card"
+import { ScreeningPanel } from "@/components/owner/screening-panel"
+import { AutomationPanel } from "@/components/owner/automation-panel"
+import { MaintenancePredictionsCard } from "@/components/owner/maintenance-predictions-card"
+import { DocumentQAWidget } from "@/components/owner/document-qa-widget"
+import { TourBookingsCard } from "@/components/owner/tour-bookings-card"
+import { SyndicationPanel } from "@/components/owner/syndication-panel"
+import { ReferralCard } from "@/components/owner/referral-card"
+import { SatisfactionCard } from "@/components/owner/satisfaction-card"
+import { IntegrationStatusPanel } from "@/components/owner/integration-status-panel"
 import { useToast } from "@/hooks/use-toast"
 
 // Mock property data
@@ -228,6 +239,100 @@ export function OwnerPropertiesView() {
           )}
         </TabsContent>
       </Tabs>
+
+      {/* Pricing Insights */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Pricing Insights</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROPERTIES.map((property) => (
+            <PricingInsightsCard
+              key={property.id}
+              propertyId={property.id}
+              propertyTitle={property.name}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Lease Renewals */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Lease Renewals</h2>
+        <LeaseRenewalCard />
+      </div>
+
+      {/* Tour Bookings */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Tour Bookings</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROPERTIES.map((property) => (
+            <TourBookingsCard key={property.id} propertyId={property.id} />
+          ))}
+        </div>
+      </div>
+
+      {/* Tenant Screening */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Tenant Screening</h2>
+        <ScreeningPanel />
+      </div>
+
+      {/* Workflow Automations */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Automations</h2>
+        <AutomationPanel />
+      </div>
+
+      {/* Predictive Maintenance */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Maintenance Predictions</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROPERTIES.map((property) => (
+            <MaintenancePredictionsCard key={property.id} propertyId={property.id} />
+          ))}
+        </div>
+      </div>
+
+      {/* Document Intelligence */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Document Intelligence</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROPERTIES.map((property) => (
+            <DocumentQAWidget key={property.id} propertyId={property.id} />
+          ))}
+        </div>
+      </div>
+
+      {/* Listing Syndication */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Listing Syndication</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROPERTIES.map((property) => (
+            <SyndicationPanel key={property.id} propertyId={property.id} />
+          ))}
+        </div>
+      </div>
+
+      {/* Referral Program */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Referral Program</h2>
+        <ReferralCard />
+      </div>
+
+      {/* Tenant Satisfaction */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Tenant Satisfaction</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROPERTIES.map((property) => (
+            <SatisfactionCard key={property.id} propertyId={property.id} />
+          ))}
+        </div>
+      </div>
+
+      {/* Integrations */}
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Integrations</h2>
+        <IntegrationStatusPanel />
+      </div>
     </div>
   )
 }

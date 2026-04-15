@@ -23,6 +23,10 @@ const PropertySearch = dynamic(
   () => import('@/components/property-search').then((mod) => mod.PropertySearch),
   { ssr: false, loading: () => <div className="h-12 w-full max-w-md bg-muted animate-pulse rounded" /> }
 );
+const PropertyMap = dynamic(
+  () => import('@/components/map/property-map'),
+  { ssr: false, loading: () => <div className="h-[400px] w-full bg-muted animate-pulse rounded-lg" /> }
+);
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -340,6 +344,24 @@ export default function PropertiesClient() {
     setProperties(filtered);
   }, [allApiProperties, filters, sortBy, searchQuery]);
 
+  const mapProperties = useMemo(
+    () =>
+      properties
+        .filter((p) => p.lat != null && p.lng != null)
+        .map((p) => ({
+          id: p.id,
+          title: p.title,
+          price: p.price,
+          bedrooms: p.bedrooms,
+          bathrooms: p.bathrooms,
+          lat: p.lat!,
+          lng: p.lng!,
+          image: p.image,
+          type: p.type,
+        })),
+    [properties]
+  );
+
   const selectedPropertyData = useMemo(() => {
     return selectedProperty
       ? properties.find((p) => p.id === selectedProperty) ?? null
@@ -517,6 +539,14 @@ export default function PropertiesClient() {
                 </DropdownMenu>
               </div>
             </div>
+
+            {mapProperties.length > 0 && (
+              <PropertyMap
+                properties={mapProperties}
+                onPropertyClick={(id) => setSelectedProperty(id)}
+                className="h-[400px] mb-6"
+              />
+            )}
 
             {loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Loading properties">
