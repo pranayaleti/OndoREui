@@ -4,13 +4,18 @@ import { notFound } from "next/navigation"
 import { backendUrl } from "@/lib/backend"
 import { generatePropertyJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
+import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import type { ApiProperty } from "@/app/types/property"
 
+/**
+ * The site is statically exported (output: "export" in next.config.mjs).
+ * `revalidate` is a no-op there, so we drop it to avoid implying a behavior
+ * we don't actually deliver. fetchProperty is invoked at build time from
+ * generateStaticParams + generateMetadata + the page render.
+ */
 async function fetchProperty(publicId: string): Promise<ApiProperty | null> {
   try {
-    const res = await fetch(backendUrl(`/api/properties/public/${encodeURIComponent(publicId)}`), {
-      next: { revalidate: 300 },
-    })
+    const res = await fetch(backendUrl(`/api/properties/public/${encodeURIComponent(publicId)}`))
     if (!res.ok) return null
     return (await res.json()) as ApiProperty
   } catch {
@@ -20,6 +25,44 @@ async function fetchProperty(publicId: string): Promise<ApiProperty | null> {
 
 interface PageProps {
   params: Promise<{ publicId: string }>
+}
+
+/**
+ * Required under `output: "export"` for any dynamic segment. We fetch the
+ * public listings at build time and emit one static page per publicId.
+ *
+ * Graceful fallback: when the backend is unreachable during the build (CI
+ * without a configured BACKEND_URL, offline dev, etc.) we return an empty
+ * list. That keeps `next build` green; the route just won't have prebuilt
+ * pages until the next build sees the backend.
+ */
+export async function generateStaticParams(): Promise<Array<{ publicId: string }>> {
+  try {
+    const res = await fetch(backendUrl("/api/properties/public"))
+    if (!res.ok) {
+      console.warn(
+        `[properties/[publicId]] generateStaticParams: backend returned ${res.status}; emitting 0 pages`
+      )
+      return []
+    }
+    const body = await res.json()
+    // Backend may return an array or { data: [...] }; tolerate both.
+    const list: Array<{ publicId?: string; public_id?: string; id?: string }> = Array.isArray(body)
+      ? body
+      : Array.isArray(body?.data)
+        ? body.data
+        : []
+    return list
+      .map((p) => p.publicId ?? p.public_id ?? p.id)
+      .filter((id): id is string => typeof id === "string" && id.length > 0)
+      .map((publicId) => ({ publicId }))
+  } catch (err) {
+    console.warn(
+      "[properties/[publicId]] generateStaticParams: fetch failed; emitting 0 pages",
+      err
+    )
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -32,13 +75,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description =
     property.description?.slice(0, 160) ??
     `${property.bedrooms} BR / ${property.bathrooms} BA in ${cityState}. $${property.price}/mo.`
-  const canonical = `${SITE_URL}/properties/${publicId}`
+  // trailingSlash: true in next.config.mjs — the canonical needs to match.
+  const canonicalPath = `/properties/${publicId}`
+  const canonical = `${SITE_URL}${canonicalPath}/`
   const image = property.photos?.[0]?.url
 
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      languages: buildMetadataLanguages(canonicalPath),
+    },
     openGraph: {
       title,
       description,
