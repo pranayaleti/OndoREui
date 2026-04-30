@@ -35,18 +35,25 @@ interface PageProps {
  * public listings at build time and emit one static page per publicId.
  *
  * Graceful fallback: when the backend is unreachable during the build (CI
- * without a configured BACKEND_URL, offline dev, etc.) we return an empty
- * list. That keeps `next build` green; the route just won't have prebuilt
- * pages until the next build sees the backend.
+ * without a configured BACKEND_URL, offline dev, etc.) we emit a single
+ * stub entry so Next.js has something concrete to prerender. The page
+ * handler calls notFound() if the publicId doesn't resolve, so the stub
+ * path becomes a 404 at runtime instead of a 200 with empty content.
+ *
+ * Pair this with `dynamicParams = false` — under output: "export" we cannot
+ * server-render unknown ids on demand, so any request outside the prebuilt
+ * set must 404 statically.
  */
+export const dynamicParams = false
+
 export async function generateStaticParams(): Promise<Array<{ publicId: string }>> {
   try {
     const res = await fetch(backendUrl("/api/properties/public"))
     if (!res.ok) {
       console.warn(
-        `[properties/[publicId]] generateStaticParams: backend returned ${res.status}; emitting 0 pages`
+        `[properties/[publicId]] generateStaticParams: backend returned ${res.status}; emitting placeholder`
       )
-      return []
+      return [{ publicId: "_placeholder" }]
     }
     const body = await res.json()
     // Backend may return an array or { data: [...] }; tolerate both.
@@ -55,16 +62,17 @@ export async function generateStaticParams(): Promise<Array<{ publicId: string }
       : Array.isArray(body?.data)
         ? body.data
         : []
-    return list
+    const params = list
       .map((p) => p.publicId ?? p.public_id ?? p.id)
       .filter((id): id is string => typeof id === "string" && id.length > 0)
       .map((publicId) => ({ publicId }))
+    return params.length > 0 ? params : [{ publicId: "_placeholder" }]
   } catch (err) {
     console.warn(
-      "[properties/[publicId]] generateStaticParams: fetch failed; emitting 0 pages",
+      "[properties/[publicId]] generateStaticParams: fetch failed; emitting placeholder",
       err
     )
-    return []
+    return [{ publicId: "_placeholder" }]
   }
 }
 
