@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { SITE_PHONE } from "@/lib/site"
 import { submitContactLead, type ContactLeadSource } from "@/lib/leads-api"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { useAntiSpam } from "@/lib/anti-spam"
 import { CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -27,6 +28,7 @@ export function ContactLeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const { honeypotProps, gate } = useAntiSpam()
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,6 +42,16 @@ export function ContactLeadForm() {
     setIsSubmitting(true)
     setSubmitStatus(null)
     setErrorMessage(null)
+
+    // Bot signal: honeypot filled OR submit < minDwell after mount. Render
+    // the success state so bots can't probe for "did the gate fire?".
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt()
+      setSubmitStatus("success")
+      setFormData({ name: "", email: "", phone: "", message: "" })
+      setIsSubmitting(false)
+      return
+    }
 
     const attribution = getAttributionPayloadForApi()
     const result = await submitContactLead({
@@ -176,6 +188,8 @@ export function ContactLeadForm() {
               "Submit a contact or lead inquiry to Ondo Real Estate. Use to send a message for property management, investments, or leasing in Utah. Requires name and email; optional phone and message. Do not use for automated bulk submissions.",
           } as Record<string, string>)}
         >
+          {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
+          <input {...honeypotProps} />
           <div className="space-y-2">
             <Label htmlFor="contact-name">{t('contactForm.nameLabel')}</Label>
             <Input

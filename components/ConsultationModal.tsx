@@ -16,6 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SITE_PHONE, SITE_CALENDLY_URL } from '@/lib/site';
 import { backendUrl } from '@/lib/backend';
+import { useAntiSpam } from '@/lib/anti-spam';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -54,6 +55,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const { honeypotProps, gate } = useAntiSpam();
 
   // NOTE(i18n): enum option labels are kept in English for now and tracked as a
   // Phase 1 follow-up. They are sent verbatim to the backend as form values, so
@@ -149,9 +151,24 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Bot signal: silently render success so the bot can't probe whether
+    // the gate fired. Real users can't trip these — honeypot is hidden +
+    // non-focusable, and the dwell threshold is well under the time a
+    // human takes to fill 4-5 fields.
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt();
+      setSubmitStatus('success');
+      setFormData({
+        name: '', email: '', phone: '', propertyType: '', serviceType: '',
+        timeline: '', budget: '', message: '', preferredTime: '', timezone: 'MST',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
-    
+
     try {
       const nowIso = new Date().toISOString();
       const fallbackPublicId = '5b3aba39-51f2-48b5-b3a0-db948cfde010';
@@ -206,7 +223,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, variant]);
+  }, [formData, variant, gate]);
 
   if (!isOpen) return null;
 
@@ -259,6 +276,8 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6">
+          {/* Honeypot: visually hidden, non-focusable. Bots fill it; humans don't. */}
+          <input {...honeypotProps} />
           {/* Success/Error Messages */}
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center">

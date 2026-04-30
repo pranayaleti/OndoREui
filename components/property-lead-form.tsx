@@ -14,6 +14,7 @@ import { CheckCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { emailValidation, phoneValidation } from "@/lib/validations";
 import { backendUrl } from "@/lib/backend";
+import { useAntiSpam } from "@/lib/anti-spam";
 import { QualificationChat } from "@/components/leads/qualification-chat";
 
 interface PropertyLeadFormProps {
@@ -47,6 +48,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
   const [errors, setErrors] = useState<Errors>({});
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [, setLeadId] = useState<string | null>(null);
+  const { honeypotProps, gate } = useAntiSpam();
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -151,6 +153,16 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep2()) return;
+
+    // Bot signal: silently render success so the bot can't probe whether the
+    // gate fired or what the gate is. Real users can't trip these (honeypot
+    // is hidden + non-focusable; minDwell is < the time it takes to read the
+    // first step's labels).
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt();
+      setIsSubmitted(true);
+      return;
+    }
 
     setIsSubmitting(true);
     setErrors({});
@@ -284,6 +296,8 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                {/* Honeypot: bots fill it; real users never see it. */}
+                <input {...honeypotProps} />
                 {errors.form ? (
                   <p className="mb-3 text-sm text-red-500" role="alert">{errors.form}</p>
                 ) : null}
