@@ -1,3 +1,6 @@
+// NOTE(i18n): server component — body copy (CTAs, breadcrumb, headers) is
+// English for SEO under output: "export". Tracked as a Phase 1 follow-up:
+// move client-only sections into a "use client" subtree wired to useTranslation.
 import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState, useCallback, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   X,
   Calendar,
@@ -36,6 +37,7 @@ interface FormData {
 }
 
 const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onClose, variant = 'default' }) => {
+  const { t } = useTranslation();
   const isNotary = variant === 'notary';
 
   const [formData, setFormData] = useState<FormData>({
@@ -53,6 +55,10 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
 
+  // NOTE(i18n): enum option labels are kept in English for now and tracked as a
+  // Phase 1 follow-up. They are sent verbatim to the backend as form values, so
+  // translating them here would also need a label-vs-value split. See the
+  // production-readiness roadmap.
   const propertyTypes = useMemo(
     () => [
       'Single Family Home',
@@ -219,19 +225,19 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             </div>
             <div>
               <h2 className="text-2xl font-bold text-card-foreground">
-                {isNotary ? 'Book ONDO Notary' : 'View Available Times & Book Now'}
+                {isNotary ? t('consultationModal.titleNotary') : t('consultationModal.titleDefault')}
               </h2>
               <p className="text-foreground/70">
                 {isNotary
-                  ? 'Remote online or Utah County mobile/in-office notarization'
-                  : '30-minute expert consultation'}
+                  ? t('consultationModal.subtitleNotary')
+                  : t('consultationModal.subtitleDefault')}
               </p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Close"
+            aria-label={t('consultationModal.closeAria')}
             onClick={onClose}
             className="text-foreground/70 hover:text-foreground"
           >
@@ -241,12 +247,12 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
         <div className="px-6 py-4 border-b bg-muted/40">
           <p className="text-sm text-foreground/80 mb-3">
-            Prefer to pick a time yourself? Same calendar for general consultations, notary, loans, and other services.
+            {t('consultationModal.calendlyHint')}
           </p>
           <Button asChild variant="outline" size="sm" className="gap-2">
             <a href={SITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer">
               <Calendar className="h-4 w-4 shrink-0" />
-              Book on Calendly (30 min)
+              {t('consultationModal.bookOnCalendly')}
             </a>
           </Button>
         </div>
@@ -258,16 +264,16 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center">
               <CheckCircle className="text-green-500 dark:text-green-400 mr-3 flex-shrink-0" />
               <div>
-                <p className="text-green-700 dark:text-green-300 font-semibold">Consultation Booked Successfully!</p>
-                <p className="text-green-600 dark:text-green-400 text-sm">We'll send you a calendar invite and confirmation email shortly.</p>
+                <p className="text-green-700 dark:text-green-300 font-semibold">{t('consultationModal.successTitle')}</p>
+                <p className="text-green-600 dark:text-green-400 text-sm">{t('consultationModal.successBody')}</p>
               </div>
             </div>
           )}
           
           {submitStatus === 'error' && (
-            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center">
+            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center" role="alert">
               <AlertCircle className="text-red-500 dark:text-red-400 mr-3 flex-shrink-0" />
-              <p className="text-red-700 dark:text-red-300">Something went wrong. Please try again or contact us directly.</p>
+              <p className="text-red-700 dark:text-red-300">{t('consultationModal.errorMessage')}</p>
             </div>
           )}
 
@@ -275,7 +281,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {/* Name */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-2">
-                Full Name *
+                {t('consultationModal.fields.name')}
               </label>
               <Input
                 type="text"
@@ -284,14 +290,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                placeholder="Your full name"
+                placeholder={t('consultationModal.placeholders.name')}
               />
             </div>
 
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-card-foreground mb-2">
-                Email Address *
+                {t('consultationModal.fields.email')}
               </label>
               <Input
                 type="email"
@@ -300,14 +306,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                placeholder="your@email.com"
+                placeholder={t('consultationModal.placeholders.email')}
               />
             </div>
 
             {/* Phone */}
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-card-foreground mb-2">
-                Phone Number
+                {t('consultationModal.fields.phone')}
               </label>
               <Input
                 type="tel"
@@ -315,20 +321,21 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                placeholder="(555) 123-4567"
+                placeholder={t('consultationModal.placeholders.phone')}
               />
             </div>
 
             {/* Service Type */}
             <div>
               <label htmlFor="serviceType" className="block text-sm font-medium text-card-foreground mb-2">
-                {isNotary ? 'Notary Service Needed *' : 'Service Needed *'}
+                {isNotary ? t('consultationModal.fields.serviceTypeNotary') : t('consultationModal.fields.serviceTypeDefault')}
               </label>
               <Select value={formData.serviceType} onValueChange={(value) => handleSelectChange('serviceType', value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder={isNotary ? 'Select notary service' : 'Select service type'} />
+                  <SelectValue placeholder={isNotary ? t('consultationModal.placeholders.serviceTypeNotary') : t('consultationModal.placeholders.serviceTypeDefault')} />
                 </SelectTrigger>
                 <SelectContent>
+                  {/* NOTE(i18n): option labels are English; see Phase 1 follow-up. */}
                   {serviceTypes.map(type => (
                     <SelectItem key={type} value={type}>{type}</SelectItem>
                   ))}
@@ -340,13 +347,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {!isNotary && (
               <div>
                 <label htmlFor="propertyType" className="block text-sm font-medium text-card-foreground mb-2">
-                  Property Type
+                  {t('consultationModal.fields.propertyType')}
                 </label>
                 <Select value={formData.propertyType} onValueChange={(value) => handleSelectChange('propertyType', value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select property type" />
+                    <SelectValue placeholder={t('consultationModal.placeholders.propertyType')} />
                   </SelectTrigger>
                   <SelectContent>
+                    {/* NOTE(i18n): option labels are English; see Phase 1 follow-up. */}
                     {propertyTypes.map(type => (
                       <SelectItem key={type} value={type}>{type}</SelectItem>
                     ))}
@@ -358,13 +366,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {/* Timeline */}
             <div>
               <label htmlFor="timeline" className="block text-sm font-medium text-card-foreground mb-2">
-                {isNotary ? 'Appointment Timing' : 'Timeline'}
+                {isNotary ? t('consultationModal.fields.timelineNotary') : t('consultationModal.fields.timelineDefault')}
               </label>
               <Select value={formData.timeline} onValueChange={(value) => handleSelectChange('timeline', value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder={isNotary ? 'When do you need this?' : 'Select timeline'} />
+                  <SelectValue placeholder={isNotary ? t('consultationModal.placeholders.timelineNotary') : t('consultationModal.placeholders.timelineDefault')} />
                 </SelectTrigger>
                 <SelectContent>
+                  {/* NOTE(i18n): option labels are English; see Phase 1 follow-up. */}
                   {timelineOptions.map(timeline => (
                     <SelectItem key={timeline} value={timeline}>{timeline}</SelectItem>
                   ))}
@@ -376,13 +385,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {!isNotary && (
               <div>
                 <label htmlFor="budget" className="block text-sm font-medium text-card-foreground mb-2">
-                  Budget Range
+                  {t('consultationModal.fields.budget')}
                 </label>
                 <Select value={formData.budget} onValueChange={(value) => handleSelectChange('budget', value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select budget range" />
+                    <SelectValue placeholder={t('consultationModal.placeholders.budget')} />
                   </SelectTrigger>
                   <SelectContent>
+                    {/* NOTE(i18n): option labels are English; see Phase 1 follow-up. */}
                     {budgetRanges.map(budget => (
                       <SelectItem key={budget} value={budget}>{budget}</SelectItem>
                     ))}
@@ -394,13 +404,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {/* Preferred Time */}
             <div>
               <label htmlFor="preferredTime" className="block text-sm font-medium text-card-foreground mb-2">
-                Preferred Time Slot
+                {t('consultationModal.fields.preferredTime')}
               </label>
               <Select value={formData.preferredTime} onValueChange={(value) => handleSelectChange('preferredTime', value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select preferred time" />
+                  <SelectValue placeholder={t('consultationModal.placeholders.preferredTime')} />
                 </SelectTrigger>
                 <SelectContent>
+                  {/* NOTE(i18n): time slot labels are English; see Phase 1 follow-up. */}
                   {timeSlots.map(time => (
                     <SelectItem key={time} value={time}>{time} MST</SelectItem>
                   ))}
@@ -412,7 +423,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
           {/* Message */}
           <div className="mt-6">
             <label htmlFor="message" className="block text-sm font-medium text-card-foreground mb-2">
-              {isNotary ? 'Tell us about your notarization *' : 'Tell us about your real estate needs *'}
+              {isNotary ? t('consultationModal.fields.messageNotary') : t('consultationModal.fields.messageDefault')}
             </label>
             <Textarea
               id="message"
@@ -423,13 +434,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
               rows={4}
               placeholder={
                 isNotary
-                  ? 'Documents, state, online vs. mobile, number of signers, preferred time...'
-                  : 'Tell us about your real estate goals, property preferences, timeline, and any specific questions you have...'
+                  ? t('consultationModal.placeholders.messageNotary')
+                  : t('consultationModal.placeholders.messageDefault')
               }
             />
           </div>
 
           {/* Benefits */}
+          {/* NOTE(i18n): benefit bullets are kept in English for Phase 1. */}
           <div className="mt-6 p-4 bg-primary/10 rounded-lg">
             <h3 className="font-semibold text-card-foreground mb-3">
               {isNotary ? 'What you get with ONDO Notary:' : "What you'll get from this consultation:"}
@@ -488,12 +500,12 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
               {isSubmitting ? (
                 <>
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Booking...
+                  {t('consultationModal.booking')}
                 </>
               ) : (
                 <>
                   <Calendar className="h-5 w-5 mr-2" />
-                  {isNotary ? 'Book ONDO Notary' : 'View Available Times & Book Now'}
+                  {isNotary ? t('consultationModal.bookingNotary') : t('consultationModal.bookingDefault')}
                 </>
               )}
             </Button>
@@ -504,14 +516,14 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
               onClick={onClose}
               size="lg"
             >
-              Cancel
+              {t('consultationModal.cancel')}
             </Button>
           </div>
 
           {/* Contact Info */}
           <div className="mt-6 text-center text-sm text-foreground/70">
             <p>
-              {isNotary ? 'For urgent notarization, call or text: ' : 'Or call us directly: '}
+              {isNotary ? t('consultationModal.contactInfoNotary') + ' ' : t('consultationModal.contactInfoDefault') + ' '}
               <a href={`tel:${SITE_PHONE}`} className="text-primary font-semibold">{SITE_PHONE}</a>
             </p>
           </div>

@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,6 +40,7 @@ type FormData = {
 type Errors = Partial<Record<keyof FormData, string>> & { form?: string };
 
 export function PropertyLeadForm({ open, onClose, propertyName, publicId }: PropertyLeadFormProps) {
+  const { t } = useTranslation();
   const [step, setStep] = useState<1 | 2>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -89,53 +91,49 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
 
   const validateStep1 = (): boolean => {
     const next: Errors = {};
-    
-    // First name validation
+
     if (!formData.firstName.trim()) {
-      next.firstName = "First name is required";
+      next.firstName = t("propertyLeadForm.errors.firstNameRequired");
     }
-    
-    // Last name validation
+
     if (!formData.lastName.trim()) {
-      next.lastName = "Last name is required";
+      next.lastName = t("propertyLeadForm.errors.lastNameRequired");
     }
-    
-    // Email validation using Zod
+
     if (!formData.email.trim()) {
-      next.email = "Email is required";
+      next.email = t("propertyLeadForm.errors.emailRequired");
     } else {
       const emailResult = emailValidation.safeParse(formData.email);
       if (!emailResult.success) {
-        next.email = emailResult.error.errors[0]?.message || "Enter a valid email";
+        next.email = emailResult.error.errors[0]?.message || t("propertyLeadForm.errors.emailInvalid");
       }
     }
-    
-    // Phone validation using Zod
+
     if (!formData.phone.trim()) {
-      next.phone = "Phone number is required";
+      next.phone = t("propertyLeadForm.errors.phoneRequired");
     } else {
       const phoneResult = phoneValidation.safeParse(formData.phone);
       if (!phoneResult.success) {
-        next.phone = phoneResult.error.errors[0]?.message || "Enter a valid phone number";
+        next.phone = phoneResult.error.errors[0]?.message || t("propertyLeadForm.errors.phoneInvalid");
       }
     }
-    
+
     setErrors(next);
     return Object.keys(next).length === 0;
   };
 
   const validateStep2 = (): boolean => {
     const next: Errors = {};
-    if (!formData.moveInDate) next.moveInDate = "Move-in date is required";
-    else if (!isFutureOrToday(formData.moveInDate)) next.moveInDate = "Move-in date cannot be in the past";
+    if (!formData.moveInDate) next.moveInDate = t("propertyLeadForm.errors.moveInRequired");
+    else if (!isFutureOrToday(formData.moveInDate)) next.moveInDate = t("propertyLeadForm.errors.moveInPast");
 
     const budgetNum = parseBudget(formData.budget);
-    if (!formData.budget.trim()) next.budget = "Monthly budget is required";
-    else if (!Number.isFinite(budgetNum) || budgetNum <= 0) next.budget = "Enter a valid positive amount";
+    if (!formData.budget.trim()) next.budget = t("propertyLeadForm.errors.budgetRequired");
+    else if (!Number.isFinite(budgetNum) || budgetNum <= 0) next.budget = t("propertyLeadForm.errors.budgetInvalid");
 
-    if (!formData.occupants) next.occupants = "Select occupants";
+    if (!formData.occupants) next.occupants = t("propertyLeadForm.errors.occupantsRequired");
 
-    if (!formData.termsAccepted) next.termsAccepted = "You must accept the terms to submit";
+    if (!formData.termsAccepted) next.termsAccepted = t("propertyLeadForm.errors.termsRequired");
 
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -195,7 +193,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
       }
       setIsSubmitted(true);
     } catch (err: unknown) {
-      setErrors({ form: (err instanceof Error ? err.message : null) ?? "Something went wrong. Please try again." });
+      setErrors({ form: (err instanceof Error ? err.message : null) ?? t("propertyLeadForm.errors.submit") });
     } finally {
       setIsSubmitting(false);
     }
@@ -233,22 +231,23 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
           <button
             onClick={handleClose}
             className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            aria-label={t("propertyLeadForm.close")}
           >
             <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{t("propertyLeadForm.close")}</span>
           </button>
 
           <div className="p-6">
             <DialogTitle className="sr-only">
-              {isSubmitted ? "Thank You!" : `Apply for ${propertyName}`}
+              {isSubmitted ? t("propertyLeadForm.thankYou") : t("propertyLeadForm.applyTitle", { propertyName })}
             </DialogTitle>
             <DialogDescription className="sr-only">
-              {isSubmitted 
-                ? "Your application has been submitted successfully. We'll contact you soon." 
-                : `Submit your application to apply for ${propertyName}.`}
+              {isSubmitted
+                ? t("propertyLeadForm.descriptionThanks")
+                : t("propertyLeadForm.descriptionApply", { propertyName })}
             </DialogDescription>
             <h2 className="text-xl font-semibold mb-6">
-              {isSubmitted ? "Thank You!" : `Apply for ${propertyName}`}
+              {isSubmitted ? t("propertyLeadForm.thankYou") : t("propertyLeadForm.applyTitle", { propertyName })}
             </h2>
 
             {!isSubmitted && (
@@ -274,11 +273,11 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                 <div className="mb-4 rounded-full bg-muted p-3 text-primary dark:bg-card/20 dark:text-primary">
                   <CheckCircle className="h-8 w-8" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold">Application Submitted</h3>
+                <h3 className="mb-2 text-xl font-semibold">{t("propertyLeadForm.submittedTitle")}</h3>
                 <p className="mb-6 text-foreground/70">
-                  Thank you for your interest! A property manager will contact you shortly.
+                  {t("propertyLeadForm.submittedBody")}
                 </p>
-                <Button onClick={handleClose}>Close</Button>
+                <Button onClick={handleClose}>{t("propertyLeadForm.close")}</Button>
                 {sessionToken && (
                   <QualificationChat sessionToken={sessionToken} leadType="property" />
                 )}
@@ -286,24 +285,24 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
             ) : (
               <form onSubmit={handleSubmit}>
                 {errors.form ? (
-                  <p className="mb-3 text-sm text-red-500">{errors.form}</p>
+                  <p className="mb-3 text-sm text-red-500" role="alert">{errors.form}</p>
                 ) : null}
 
                 {step === 1 && (
                   <div className="space-y-4">
-                    <h3 className="font-medium text-lg mb-4">Personal Information</h3>
+                    <h3 className="font-medium text-lg mb-4">{t("propertyLeadForm.step1Title")}</h3>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="firstName">
-                          First Name <span className="text-red-500">*</span>
+                          {t("propertyLeadForm.firstName")} <span className="text-red-500">*</span>
                         </Label>
                         <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} />
                         {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="lastName">
-                          Last Name <span className="text-red-500">*</span>
+                          {t("propertyLeadForm.lastName")} <span className="text-red-500">*</span>
                         </Label>
                         <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} />
                         {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
@@ -312,7 +311,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
 
                     <div className="space-y-2">
                       <Label htmlFor="email">
-                        Email <span className="text-red-500">*</span>
+                        {t("propertyLeadForm.email")} <span className="text-red-500">*</span>
                       </Label>
                       <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} />
                       {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
@@ -320,14 +319,14 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
 
                     <div className="space-y-2">
                       <Label htmlFor="phone">
-                        Phone Number <span className="text-red-500">*</span>
+                        {t("propertyLeadForm.phone")} <span className="text-red-500">*</span>
                       </Label>
                       <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} />
                       {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Preferred Contact Method</Label>
+                      <Label>{t("propertyLeadForm.preferredContactMethod")}</Label>
                       <RadioGroup
                         defaultValue={formData.preferredContact}
                         onValueChange={(val) => handleSelectChange("preferredContact", val)}
@@ -335,15 +334,15 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                       >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="email" id="contact-email" />
-                          <Label htmlFor="contact-email">Email</Label>
+                          <Label htmlFor="contact-email">{t("propertyLeadForm.contactEmail")}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="phone" id="contact-phone" />
-                          <Label htmlFor="contact-phone">Phone</Label>
+                          <Label htmlFor="contact-phone">{t("propertyLeadForm.contactPhone")}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="text" id="contact-text" />
-                          <Label htmlFor="contact-text">Text</Label>
+                          <Label htmlFor="contact-text">{t("propertyLeadForm.contactText")}</Label>
                         </div>
                       </RadioGroup>
                     </div>
@@ -354,7 +353,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                         onClick={handleNext}
                         className="bg-background hover:bg-muted dark:bg-muted dark:text-foreground dark:hover:bg-muted"
                       >
-                        Next
+                        {t("propertyLeadForm.next")}
                       </Button>
                     </div>
                   </div>
@@ -362,11 +361,11 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
 
                 {step === 2 && (
                   <div className="space-y-4">
-                    <h3 className="font-medium text-lg mb-4">Rental Details</h3>
+                    <h3 className="font-medium text-lg mb-4">{t("propertyLeadForm.step2Title")}</h3>
 
                     <div className="space-y-2">
                       <Label htmlFor="moveInDate">
-                        Desired Move-in Date <span className="text-red-500">*</span>
+                        {t("propertyLeadForm.moveInDate")} <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="moveInDate"
@@ -380,12 +379,12 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
 
                     <div className="space-y-2">
                       <Label htmlFor="budget">
-                        Monthly Budget <span className="text-red-500">*</span>
+                        {t("propertyLeadForm.monthlyBudget")} <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="budget"
                         name="budget"
-                        placeholder="₹"
+                        placeholder="$"
                         value={formData.budget}
                         onChange={handleChange}
                       />
@@ -393,7 +392,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="occupants">Number of Occupants</Label>
+                      <Label htmlFor="occupants">{t("propertyLeadForm.occupants")}</Label>
                       <select
                         id="occupants"
                         name="occupants"
@@ -411,7 +410,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="pets">Do you have pets?</Label>
+                      <Label htmlFor="pets">{t("propertyLeadForm.pets")}</Label>
                       <select
                         id="pets"
                         name="pets"
@@ -419,17 +418,17 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                         onChange={(e) => handleSelectChange("pets", e.target.value)}
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                       >
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
+                        <option value="No">{t("propertyLeadForm.petsNo")}</option>
+                        <option value="Yes">{t("propertyLeadForm.petsYes")}</option>
                       </select>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="comments">Questions or Comments</Label>
+                      <Label htmlFor="comments">{t("propertyLeadForm.comments")}</Label>
                       <Textarea
                         id="comments"
                         name="comments"
-                        placeholder="Any specific questions about the property?"
+                        placeholder={t("propertyLeadForm.commentsPlaceholder")}
                         value={formData.comments}
                         onChange={handleChange}
                       />
@@ -442,17 +441,17 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
                         onCheckedChange={(checked) => handleCheckboxChange(!!checked)}
                       />
                       <Label htmlFor="termsAccepted" className="text-sm">
-                        I agree to the terms and conditions and consent to having my information stored for rental application purposes.
+                        {t("propertyLeadForm.terms")}
                       </Label>
                     </div>
                     {errors.termsAccepted && <p className="text-xs text-red-500">{errors.termsAccepted}</p>}
 
                     <div className="pt-4 flex justify-between">
                       <Button type="button" variant="outline" onClick={handleBack}>
-                        Back
+                        {t("propertyLeadForm.back")}
                       </Button>
                       <Button type="submit" disabled={isSubmitting} className="bg-background hover:bg-muted dark:bg-muted dark:text-foreground dark:hover:bg-muted">
-                        {isSubmitting ? "Submitting..." : "Submit Application"}
+                        {isSubmitting ? t("propertyLeadForm.submitting") : t("propertyLeadForm.submit")}
                       </Button>
                     </div>
                   </div>
