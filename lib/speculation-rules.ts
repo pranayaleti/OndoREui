@@ -39,11 +39,23 @@ export const CONSERVATIVE_PREFETCH_URLS: string[] = [
 
 /** Paths that must never be prefetched or prerendered (user-specific, auth, side effects). */
 const EXCLUDED_PATH_PREFIXES = [
-  "/platform/owner",
-  "/platform/tenant",
-  "/platform/admin",
+  // /platform is the entire post-login app shell. Per the prefetch/bfcache
+  // rules, anything that may set cookies, reflect auth state, or trigger
+  // side effects on first paint must not be prefetched/prerendered.
+  "/platform",
   "/api/",
   "/auth/callback",
+  "/auth/login",
+  "/auth/signup",
+  "/login",
+  "/signup",
+  "/logout",
+  // Token-bearing paths must not be prefetched — every visit consumes the token
+  // exactly once (apply, invite, onboarding, visit confirmation).
+  "/apply/",
+  "/invite/",
+  "/tenantOnboarding/",
+  "/visit/confirm/",
 ]
 
 interface SpeculationRule {

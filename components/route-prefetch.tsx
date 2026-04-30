@@ -9,7 +9,12 @@ import { useEffect } from "react"
  * injecting <link rel="prefetch"> for routes the user is statistically
  * most likely to visit next given where they already are.
  *
- * Only targets same-origin, public pages. Avoids user-specific routes.
+ * Only targets same-origin, public, unauthenticated pages.
+ *
+ * /platform/* is the post-login app shell; per the prefetch/bfcache rules
+ * we MUST NOT prefetch routes that reflect authenticated state, may set
+ * cookies, or have side effects on first paint. /platform entries were
+ * previously included here and are now removed.
  */
 
 const ROUTE_GRAPH: Record<string, string[]> = {
@@ -22,8 +27,6 @@ const ROUTE_GRAPH: Record<string, string[]> = {
   "/calculators": ["/calculators/mortgage-payment", "/calculators/affordability", "/calculators/refinance", "/calculators/closing-cost"],
   "/about": ["/about/team", "/about/history", "/contact", "/about/careers"],
   "/faq": ["/faq/general-faqs", "/faq/payments-faqs", "/contact"],
-  "/platform": ["/platform/properties", "/platform/contact"],
-  "/platform/properties": ["/platform/contact", "/platform"],
 }
 
 function prefetchUrl(href: string) {
