@@ -6,19 +6,32 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { FileSearch, Send, FileText } from "lucide-react"
 import { askDocuments, type DocumentChunk } from "@/lib/api/document-qa"
+import { validateChatInput } from "@/lib/aiGuardrails"
 
 export function DocumentQAWidget({ propertyId }: { propertyId: string }) {
   const [question, setQuestion] = useState("")
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<DocumentChunk[]>([])
   const [lastQuestion, setLastQuestion] = useState("")
+  const [guardrailError, setGuardrailError] = useState<string | null>(null)
 
   const handleAsk = async () => {
     if (!question.trim() || !propertyId) return
+    // Run the same guardrails the assistant chat uses so length/prompt-injection
+    // checks happen client-side before hitting the network. Backend enforces the
+    // same limits, but rejecting locally avoids wasted round trips and surfaces
+    // a clearer error to the user.
+    const validation = validateChatInput([{ role: "user", content: question }])
+    if (!validation.ok) {
+      setGuardrailError(validation.error)
+      setResults([])
+      return
+    }
     try {
+      setGuardrailError(null)
       setLoading(true)
-      setLastQuestion(question)
-      const res = await askDocuments(propertyId, question)
+      setLastQuestion(validation.messages[0].content)
+      const res = await askDocuments(propertyId, validation.messages[0].content)
       setResults(res.chunks)
       setQuestion("")
     } catch {
@@ -53,6 +66,15 @@ export function DocumentQAWidget({ propertyId }: { propertyId: string }) {
             <Send className="h-4 w-4" />
           </Button>
         </div>
+
+        {guardrailError && (
+          <p
+            role="alert"
+            className="text-sm text-destructive text-center py-2"
+          >
+            {guardrailError}
+          </p>
+        )}
 
         {loading && (
           <p className="text-sm text-foreground/70 text-center py-4">Searching documents...</p>
