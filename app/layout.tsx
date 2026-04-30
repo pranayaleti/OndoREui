@@ -9,6 +9,7 @@ import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
+import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -17,6 +18,7 @@ import ErrorBoundary from "@/components/error-boundary"
 import { CachePurge } from "@/components/cache-purge"
 import { AttributionCapture } from "@/components/attribution-capture"
 import { FirstVisitLeadPopup } from "@/components/first-visit-lead-popup"
+import ServiceWorkerRegistrar from "@/components/sw-register"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
@@ -102,6 +104,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: SITE_URL,
+    languages: buildMetadataLanguages("/"),
   },
   openGraph: {
     type: "website",
@@ -186,6 +189,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.className} ${outfit.variable} min-h-screen bg-background text-foreground`}>
+        {/* NOTE(i18n): server component — translate when Next.js i18n routing is added */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
@@ -193,6 +197,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <RootProvidersClient>
+          <ServiceWorkerRegistrar />
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>

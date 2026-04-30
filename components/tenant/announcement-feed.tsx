@@ -34,8 +34,16 @@ export function AnnouncementFeed({ announcements, onMarkRead }: AnnouncementFeed
         return (
           <div
             key={a.id}
-            className={`${style.bg} border ${style.border} rounded-lg p-4`}
+            className={`${style.bg} border ${style.border} rounded-lg p-4 cursor-pointer`}
+            role="button"
+            tabIndex={0}
             onClick={() => onMarkRead?.(a.id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault()
+                onMarkRead?.(a.id)
+              }
+            }}
           >
             <div className="flex items-start gap-3">
               <div className={`mt-0.5 text-lg ${style.icon}`}>

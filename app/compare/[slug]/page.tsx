@@ -9,7 +9,7 @@ import { notFound } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CrossLinkSection } from "@/components/cross-link-section"
-import { CheckCircle2, XCircle, Minus, ArrowRight } from "lucide-react"
+import { Minus, ArrowRight } from "lucide-react"
 
 // Generate pairs for adjacent cities (neighbor pairs)
 const CITY_PAIRS: [string, string][] = [
@@ -50,12 +50,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const description = `Compare ${a.name} and ${b.name} side-by-side: home prices, rent, schools, commute, growth rate, and lifestyle.`
   const canonical = `${SITE_URL}/compare/${slug}/`
   return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
-}
-
-function Winner({ value }: { value: "a" | "b" | "tie" }) {
-  if (value === "tie") return <Minus className="h-4 w-4 text-foreground/40" />
-  if (value === "a") return <CheckCircle2 className="h-4 w-4 text-green-500" />
-  return <XCircle className="h-4 w-4 text-foreground/30" />
 }
 
 function fmtUsd(n: number) {

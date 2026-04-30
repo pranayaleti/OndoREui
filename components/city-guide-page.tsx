@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useMemo } from "react"
 import Script from "next/script"
-import { SITE_NAME, SITE_URL, SITE_PHONE } from "@/lib/site"
+import { SITE_PHONE } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"

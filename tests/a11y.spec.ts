@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test"
-import { analyze } from "@axe-core/playwright"
+import AxeBuilder from "@axe-core/playwright"
+import type { Result } from "axe-core"
 
 const routes = [
   "/",
@@ -26,16 +27,13 @@ test.describe("Accessibility smoke tests", () => {
     test(`page ${route} has no serious accessibility violations`, async ({ page }) => {
       await page.goto(route, { waitUntil: "networkidle" })
 
-      const results = await analyze(page, {
-        runOnly: {
-          type: "tag",
-          values: ["wcag2a", "wcag2aa"],
-        },
-        resultTypes: ["violations"],
-      })
+      const results = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa"])
+        .options({ resultTypes: ["violations"] })
+        .analyze()
 
       const seriousViolations = results.violations.filter(
-        (v) => v.impact === "serious" || v.impact === "critical",
+        (v: Result) => v.impact === "serious" || v.impact === "critical",
       )
 
       if (seriousViolations.length > 0) {
@@ -45,7 +43,7 @@ test.describe("Accessibility smoke tests", () => {
           `\nAccessibility violations on ${route}:\n` +
             seriousViolations
               .map(
-                (v) =>
+                (v: Result) =>
                   `- [${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node${v.nodes.length === 1 ? "" : "s"})`,
               )
               .join("\n"),

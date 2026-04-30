@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { sendQualificationMessage } from "@/lib/api/qualification";
 import { backendUrl } from "@/lib/backend";
+import { validateChatInput, sanitizeReply } from "@/lib/aiGuardrails";
 
 interface Message { role: "user" | "assistant"; text: string }
 
@@ -27,6 +28,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
       setGreeted(true);
       fetchReply("Hello");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Intentional single-fire on open; greeted/fetchReply are guards/stable refs.
   }, [open]);
 
   useEffect(() => {
@@ -36,13 +38,23 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
   async function fetchReply(userMessage: string) {
     setLoading(true);
     setError(null);
+
+    // Validate user input before sending to the LLM
+    const guardrail = validateChatInput([{ role: "user", content: userMessage }]);
+    if (!guardrail.ok) {
+      setError(guardrail.error);
+      setLoading(false);
+      return;
+    }
+
     try {
       const result = await sendQualificationMessage(sessionToken, leadType, userMessage);
       if (result.completed) {
         setCompleted(true);
       }
+      const safeReply = sanitizeReply(result.reply);
       setMessages((prev) => {
-        const updated = [...prev, { role: "assistant" as const, text: result.reply }];
+        const updated = [...prev, { role: "assistant" as const, text: safeReply }];
         if (result.completed) {
           // Fire-and-forget: extract lead data from full conversation and sync to HubSpot
           // Use `updated` (committed prev + final assistant reply) to avoid stale-closure bug

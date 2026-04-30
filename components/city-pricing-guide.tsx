@@ -17,7 +17,6 @@ import {
   TrendingUp,
   ArrowRight,
   CheckCircle2,
-  MapPin,
 } from "lucide-react"
 
 type CityPricingGuideProps = {

@@ -380,10 +380,6 @@ export default function PropertiesClient() {
     setSearchQuery(q);
   }, []);
 
-  const handleRetry = useCallback(() => {
-    setRetryCount(prev => prev + 1);
-  }, []);
-
   const propertySchemas = useMemo(() => {
     return properties.slice(0, 5).map((p) => {
     const addressParts = p.addressParts ?? {};

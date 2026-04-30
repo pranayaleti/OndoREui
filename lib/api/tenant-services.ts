@@ -1,5 +1,13 @@
 import { networkFirstGet, postJson, putJson, deleteJson } from "./http"
 
+// Unwraps a backend response that may be either { data: T } or T directly.
+export function unwrapData<T>(res: unknown): T | undefined {
+  if (res && typeof res === "object" && "data" in res) {
+    return (res as { data: T }).data
+  }
+  return res as T | undefined
+}
+
 // ── Tenant Profile ────────────────────────────────────────────────────────────
 
 export async function getTenantProfile() {
@@ -53,8 +61,11 @@ export async function generateReceipt(paymentId: string) {
 }
 
 export async function getReceiptPdfUrl(receiptId: string) {
-  const res = await networkFirstGet(`/receipts/${receiptId}/pdf`, `receipt-pdf-${receiptId}`)
-  return (res as any)?.data?.url || (res as any)?.url
+  const res = await networkFirstGet<{ url?: string } | { data: { url?: string } }>(
+    `/receipts/${receiptId}/pdf`,
+    `receipt-pdf-${receiptId}`,
+  )
+  return unwrapData<{ url?: string }>(res)?.url ?? (res as { url?: string }).url
 }
 
 // ── Insurance ────────────────────────────────────────────────────────────────

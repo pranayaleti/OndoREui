@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getTenantPets, addPet, updatePet } from "../../lib/api/tenant-services"
+import { getTenantPets, addPet, updatePet, unwrapData } from "../../lib/api/tenant-services"
 
 interface Pet {
   id: string
@@ -43,9 +43,10 @@ export function PetRegistration() {
 
   useEffect(() => {
     getTenantPets()
-      .then((res: any) => {
-        setPets(res?.data?.pets ?? res?.pets ?? [])
-        setPolicy(res?.data?.policy ?? res?.policy ?? null)
+      .then((res) => {
+        const data = unwrapData<{ pets?: Pet[]; policy?: PetPolicy }>(res) ?? (res as { pets?: Pet[]; policy?: PetPolicy } | null)
+        setPets(data?.pets ?? [])
+        setPolicy(data?.policy ?? null)
       })
       .catch(() => setError("Failed to load pets."))
       .finally(() => setLoading(false))
@@ -78,12 +79,12 @@ export function PetRegistration() {
     const payload = { ...form, weight: parseFloat(form.weight) || 0 }
     try {
       if (editingId) {
-        const res: any = await updatePet(editingId, payload)
-        const updated = res?.data?.pet ?? res?.pet
+        const res = await updatePet(editingId, payload)
+        const updated = (unwrapData<{ pet?: Pet }>(res) ?? (res as { pet?: Pet }))?.pet
         if (updated) setPets((p) => p.map((x) => (x.id === editingId ? updated : x)))
       } else {
-        const res: any = await addPet(payload)
-        const created = res?.data?.pet ?? res?.pet
+        const res = await addPet(payload)
+        const created = (unwrapData<{ pet?: Pet }>(res) ?? (res as { pet?: Pet }))?.pet
         if (created) setPets((p) => [...p, created])
       }
       setShowForm(false)
@@ -149,37 +150,37 @@ export function PetRegistration() {
           <h3 className="text-sm font-semibold text-gray-800">{editingId ? "Edit Pet" : "Add Pet"}</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-gray-600 block mb-1">Pet Name *</label>
-              <input className="w-full border rounded-lg px-3 py-2 text-sm" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+              <label htmlFor="pet-name" className="text-xs text-gray-600 block mb-1">Pet Name *</label>
+              <input id="pet-name" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
             </div>
             <div>
-              <label className="text-xs text-gray-600 block mb-1">Species *</label>
-              <select className="w-full border rounded-lg px-3 py-2 text-sm" value={form.species} onChange={(e) => setForm((f) => ({ ...f, species: e.target.value as Pet["species"] }))}>
+              <label htmlFor="pet-species" className="text-xs text-gray-600 block mb-1">Species *</label>
+              <select id="pet-species" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.species} onChange={(e) => setForm((f) => ({ ...f, species: e.target.value as Pet["species"] }))}>
                 <option value="dog">Dog</option>
                 <option value="cat">Cat</option>
                 <option value="other">Other</option>
               </select>
             </div>
             <div>
-              <label className="text-xs text-gray-600 block mb-1">Breed *</label>
-              <input className="w-full border rounded-lg px-3 py-2 text-sm" value={form.breed} onChange={(e) => setForm((f) => ({ ...f, breed: e.target.value }))} />
+              <label htmlFor="pet-breed" className="text-xs text-gray-600 block mb-1">Breed *</label>
+              <input id="pet-breed" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.breed} onChange={(e) => setForm((f) => ({ ...f, breed: e.target.value }))} />
             </div>
             <div>
-              <label className="text-xs text-gray-600 block mb-1">Weight (lbs)</label>
-              <input type="number" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.weight} onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))} />
+              <label htmlFor="pet-weight" className="text-xs text-gray-600 block mb-1">Weight (lbs)</label>
+              <input id="pet-weight" type="number" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.weight} onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))} />
             </div>
             <div>
-              <label className="text-xs text-gray-600 block mb-1">Color</label>
-              <input className="w-full border rounded-lg px-3 py-2 text-sm" value={form.color} onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))} />
+              <label htmlFor="pet-color" className="text-xs text-gray-600 block mb-1">Color</label>
+              <input id="pet-color" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.color} onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))} />
             </div>
             <div>
-              <label className="text-xs text-gray-600 block mb-1">Vaccination Date</label>
-              <input type="date" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.vaccinationDate} onChange={(e) => setForm((f) => ({ ...f, vaccinationDate: e.target.value }))} />
+              <label htmlFor="pet-vaccination-date" className="text-xs text-gray-600 block mb-1">Vaccination Date</label>
+              <input id="pet-vaccination-date" type="date" className="w-full border rounded-lg px-3 py-2 text-sm" value={form.vaccinationDate} onChange={(e) => setForm((f) => ({ ...f, vaccinationDate: e.target.value }))} />
             </div>
           </div>
           <div>
-            <label className="text-xs text-gray-600 block mb-1">Vaccination Certificate URL</label>
-            <input className="w-full border rounded-lg px-3 py-2 text-sm" placeholder="https://..." value={form.vaccinationCertUrl} onChange={(e) => setForm((f) => ({ ...f, vaccinationCertUrl: e.target.value }))} />
+            <label htmlFor="pet-vaccination-cert-url" className="text-xs text-gray-600 block mb-1">Vaccination Certificate URL</label>
+            <input id="pet-vaccination-cert-url" className="w-full border rounded-lg px-3 py-2 text-sm" placeholder="https://..." value={form.vaccinationCertUrl} onChange={(e) => setForm((f) => ({ ...f, vaccinationCertUrl: e.target.value }))} />
           </div>
           <div className="flex gap-2 pt-1">
             <button onClick={handleSave} disabled={saving} className="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition">

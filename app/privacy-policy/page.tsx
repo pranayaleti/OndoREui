@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 
 export default function PrivacyPolicyPage() {
-  const lastUpdated = "December 15, 2024"
+  const lastUpdated = "April 27, 2026"
 
   const sections = [
     {
@@ -49,10 +49,10 @@ export default function PrivacyPolicyPage() {
       title: "Information Sharing",
       icon: <Shield className="h-6 w-6" />,
       content: [
-        "We do not sell your personal information to third parties",
-        "We may share information with trusted service providers",
-        "Information may be shared for legal compliance or protection of rights",
-        "Aggregated, non-personal data may be used for business purposes"
+        "We do not sell your personal information to third parties, and we do not share it for cross-context behavioral advertising",
+        "We may share information with trusted service providers (such as payment processors, hosting, email, and analytics vendors) who are contractually required to protect it and use it only to deliver services on our behalf",
+        "Information may be shared when required for legal compliance, to enforce our terms, or to protect the rights, property, or safety of Ondo Real Estate, our users, or others",
+        "Aggregated or de-identified data that cannot reasonably be linked back to you may be used for business purposes"
       ]
     },
     {
@@ -157,11 +157,24 @@ export default function PrivacyPolicyPage() {
                 <CardTitle>Changes to This Policy</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground/70">
-                  We may update this Privacy Policy from time to time. We will notify you of any changes by posting 
-                  the new Privacy Policy on this page and updating the "Last updated" date. We encourage you to review 
-                  this Privacy Policy periodically for any changes.
-                </p>
+                <div className="space-y-4 text-foreground/70">
+                  <p>
+                    We may update this Privacy Policy from time to time to reflect changes in our services, technology,
+                    or legal obligations. When we make changes, we will post the revised policy on this page and update
+                    the &ldquo;Last updated&rdquo; date above.
+                  </p>
+                  <p>
+                    For <strong>material changes</strong> &mdash; meaning changes that significantly affect your rights or
+                    how your information is used &mdash; we will provide advance notice (for example, by email or a
+                    prominent notice on the site) before the change takes effect, and we will obtain your consent or
+                    provide an opt-out where required by applicable law.
+                  </p>
+                  <p>
+                    Continuing to use our services after the effective date of an updated policy means you accept the
+                    revised terms, except where additional consent is required by law. We encourage you to review this
+                    Privacy Policy periodically.
+                  </p>
+                </div>
               </CardContent>
             </Card>
 

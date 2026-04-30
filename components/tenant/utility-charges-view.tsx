@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getTenantCamCharges } from "../../lib/api/tenant-services"
+import { getTenantCamCharges, unwrapData } from "../../lib/api/tenant-services"
 
 type UtilityType = "electricity" | "gas" | "water" | "trash" | "internet" | string
 
@@ -62,7 +62,13 @@ export function UtilityChargesView() {
 
   useEffect(() => {
     getTenantCamCharges()
-      .then((res: any) => setCharges(res?.data?.charges ?? res?.charges ?? res?.data ?? []))
+      .then((res) => {
+        const wrapped = unwrapData<{ charges?: UtilityCharge[] } | UtilityCharge[]>(res)
+          ?? (res as { charges?: UtilityCharge[] } | UtilityCharge[] | null)
+        if (Array.isArray(wrapped)) setCharges(wrapped)
+        else if (wrapped && Array.isArray(wrapped.charges)) setCharges(wrapped.charges)
+        else setCharges([])
+      })
       .catch(() => setError("Failed to load utility charges."))
       .finally(() => setLoading(false))
   }, [])
@@ -102,7 +108,16 @@ export function UtilityChargesView() {
               {/* Main row */}
               <div
                 className="flex items-center gap-3 px-3 py-3 cursor-pointer hover:bg-muted transition"
+                role="button"
+                tabIndex={0}
+                aria-expanded={isExpanded}
                 onClick={() => setExpandedId(isExpanded ? null : charge.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    setExpandedId(isExpanded ? null : charge.id)
+                  }
+                }}
               >
                 <span className="text-xl flex-shrink-0">{icon}</span>
                 <div className="flex-1 min-w-0">

@@ -16,6 +16,8 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { backendUrl } from "@/lib/backend"
+import SEO from "@/components/seo"
+import { generateFAQJsonLd } from "@/lib/seo"
 
 const affiliateSchema = z.object({
   name: z.string().min(1),
@@ -102,8 +104,18 @@ export function AffiliateContent() {
     { q: t("affiliate.faq3Q"), a: t("affiliate.faq3A") },
   ]
 
+  const faqJsonLd = generateFAQJsonLd(
+    faqs.map((f) => ({ question: f.q, answer: f.a })),
+  )
+
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title={t("affiliate.heroTitle")}
+        description={t("affiliate.heroSubtitle")}
+        pathname="/affiliate/"
+        jsonLd={faqJsonLd}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-orange-500 to-red-800 py-20">
         <div className="mx-auto max-w-4xl px-4 text-center">

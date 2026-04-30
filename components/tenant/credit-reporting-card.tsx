@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getCreditReportingStatus, enrollCreditReporting } from "../../lib/api/tenant-services"
+import { getCreditReportingStatus, enrollCreditReporting, unwrapData } from "../../lib/api/tenant-services"
 
 interface CreditStatus {
   enrolled: boolean
@@ -25,7 +25,7 @@ export function CreditReportingCard() {
 
   useEffect(() => {
     getCreditReportingStatus()
-      .then((res: any) => setStatus(res?.data ?? res ?? null))
+      .then((res) => setStatus(unwrapData<CreditStatus>(res) ?? (res as CreditStatus | null) ?? null))
       .catch(() => setStatus({ enrolled: false }))
       .finally(() => setLoading(false))
   }, [])
@@ -35,8 +35,8 @@ export function CreditReportingCard() {
     setEnrolling(true)
     setError(null)
     try {
-      const res: any = await enrollCreditReporting({ ssnLast4, bureau, consentGiven: true })
-      const updated = res?.data ?? res
+      const res = await enrollCreditReporting({ ssnLast4, bureau, consentGiven: true })
+      const updated = unwrapData<{ status?: CreditStatus }>(res) ?? (res as { status?: CreditStatus })
       setStatus(updated?.status ?? { enrolled: true, bureau, enrolledAt: new Date().toISOString().slice(0, 10), reportingStatus: "active" })
       setShowForm(false)
     } catch {
@@ -90,15 +90,16 @@ export function CreditReportingCard() {
           <h3 className="text-sm font-semibold text-gray-800">Enrollment Details</h3>
 
           <div>
-            <label className="text-xs text-gray-600 block mb-1">Reporting Bureau</label>
-            <select className="w-full border rounded-lg px-3 py-2 text-sm" value={bureau} onChange={(e) => setBureau(e.target.value)}>
+            <label htmlFor="credit-bureau" className="text-xs text-gray-600 block mb-1">Reporting Bureau</label>
+            <select id="credit-bureau" className="w-full border rounded-lg px-3 py-2 text-sm" value={bureau} onChange={(e) => setBureau(e.target.value)}>
               {BUREAU_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
             </select>
           </div>
 
           <div>
-            <label className="text-xs text-gray-600 block mb-1">Last 4 digits of SSN</label>
+            <label htmlFor="credit-ssn-last4" className="text-xs text-gray-600 block mb-1">Last 4 digits of SSN</label>
             <input
+              id="credit-ssn-last4"
               type="password"
               maxLength={4}
               className="w-full border rounded-lg px-3 py-2 text-sm tracking-widest"

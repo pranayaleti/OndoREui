@@ -14,8 +14,8 @@ export const config = {
       enabled: process.env['NODE_ENV'] === "production",
     },
     google: {
-      id: process.env['NEXT_PUBLIC_GOOGLE_ANALYTICS_ID'],
-      enabled: !!process.env['NEXT_PUBLIC_GOOGLE_ANALYTICS_ID'],
+      id: process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'],
+      enabled: !!process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'],
     },
   },
 

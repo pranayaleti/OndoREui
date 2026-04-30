@@ -1,5 +1,5 @@
 import { CitySubServicePage } from "@/components/city-sub-service-page"
-import { findCityBySlug, allCitySlugs, toCitySlug } from "@/lib/utah-cities"
+import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
 import { subServiceDefinitions, getSubServiceSlugsForParent } from "@/lib/sub-service-content"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"

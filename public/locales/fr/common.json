@@ -407,5 +407,22 @@
       "meets": "Vous respectez actuellement l'exigence (ratio de {{ratio}}x).",
       "below": "Vous êtes en dessous de l'exigence (ratio de {{ratio}}x ; {{requiredRatio}}x requis)."
     }
+  },
+  "contactForm": {
+    "title": "Contactez-nous",
+    "subtitle": "Envoyez-nous un message et nous vous répondrons dans un jour ouvrable.",
+    "successTitle": "Message envoyé !",
+    "successBody": "Nous vous recontacterons dans un jour ouvrable.",
+    "errorFallback": "Une erreur est survenue. Veuillez réessayer ou nous appeler au {{phone}}.",
+    "nameLabel": "Nom *",
+    "namePlaceholder": "Votre nom",
+    "emailLabel": "E-mail *",
+    "emailPlaceholder": "vous@exemple.com",
+    "phoneLabel": "Téléphone",
+    "phonePlaceholder": "(555) 123-4567",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Comment pouvons-nous vous aider ?",
+    "sending": "Envoi en cours...",
+    "sendMessage": "Envoyer le message"
   }
 }

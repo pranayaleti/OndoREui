@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -20,15 +20,15 @@ export function MaintenancePredictionsCard({ propertyId }: { propertyId: string 
   const [equipment, setEquipment] = useState<Equipment[]>([])
   const [loading, setLoading] = useState(true)
 
-  const load = () => {
+  const load = useCallback(() => {
     setLoading(true)
     getAtRiskEquipment(propertyId)
       .then(setEquipment)
       .catch(() => setEquipment([]))
       .finally(() => setLoading(false))
-  }
+  }, [propertyId])
 
-  useEffect(() => { load() }, [propertyId])
+  useEffect(() => { load() }, [load])
 
   return (
     <Card>
@@ -37,8 +37,8 @@ export function MaintenancePredictionsCard({ propertyId }: { propertyId: string 
           <AlertTriangle className="h-4 w-4 text-amber-500" />
           At-Risk Equipment
         </CardTitle>
-        <Button variant="ghost" size="icon" onClick={load} className="h-8 w-8">
-          <RefreshCw className="h-4 w-4" />
+        <Button variant="ghost" size="icon" aria-label="Refresh" onClick={load} className="h-8 w-8">
+          <RefreshCw className="h-4 w-4" aria-hidden="true" />
         </Button>
       </CardHeader>
       <CardContent>

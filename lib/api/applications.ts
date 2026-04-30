@@ -248,3 +248,116 @@ export async function getVerificationChecks(applicationId: string): Promise<Veri
   const data = await res.json()
   return data.data ?? []
 }
+
+// ─── Apply-flow drafts (anonymous, keyed on token + email) ───────────────────
+
+export interface ApplyDraft {
+  id: string
+  applyToken: string
+  applicantEmail: string
+  payload: Record<string, unknown>
+  currentStep: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export async function saveApplyDraft(args: {
+  applyToken: string
+  applicantEmail: string
+  payload: Record<string, unknown>
+  currentStep?: string
+}): Promise<ApplyDraft> {
+  const res = await fetch(backendUrl(`/api/apply/${encodeURIComponent(args.applyToken)}/draft`), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      applicantEmail: args.applicantEmail,
+      payload: args.payload,
+      currentStep: args.currentStep,
+    }),
+  })
+  if (!res.ok) throw new Error("Failed to save apply draft")
+  const data = await res.json()
+  return data.data
+}
+
+export async function loadApplyDraft(args: {
+  applyToken: string
+  applicantEmail: string
+}): Promise<ApplyDraft | null> {
+  const url = backendUrl(
+    `/api/apply/${encodeURIComponent(args.applyToken)}/draft?email=${encodeURIComponent(args.applicantEmail)}`
+  )
+  const res = await fetch(url)
+  if (!res.ok) throw new Error("Failed to load apply draft")
+  const data = await res.json()
+  return data.data ?? null
+}
+
+export async function discardApplyDraft(args: {
+  applyToken: string
+  applicantEmail: string
+}): Promise<void> {
+  const url = backendUrl(
+    `/api/apply/${encodeURIComponent(args.applyToken)}/draft?email=${encodeURIComponent(args.applicantEmail)}`
+  )
+  await fetch(url, { method: "DELETE" })
+}
+
+// ─── Co-applicants ───────────────────────────────────────────────────────────
+
+export interface CoApplicant {
+  id: string
+  applicationId: string
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string | null
+  dateOfBirth?: string | null
+  currentAddress?: string | null
+  employer?: string | null
+  monthlyIncomeCents?: number | null
+  relationship?: string | null
+  screeningConsentAt?: string | null
+  disclosureAcknowledgedAt?: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export async function listCoApplicants(applicationId: string): Promise<CoApplicant[]> {
+  const res = await authFetch(`/api/applications/${applicationId}/co-applicants`)
+  if (!res.ok) throw new Error("Failed to list co-applicants")
+  const data = await res.json()
+  return data.data ?? []
+}
+
+export async function addCoApplicant(
+  applicationId: string,
+  input: Omit<Partial<CoApplicant>, "id" | "applicationId" | "createdAt" | "updatedAt">
+): Promise<CoApplicant> {
+  const res = await authFetch(`/api/applications/${applicationId}/co-applicants`, {
+    method: "POST",
+    body: JSON.stringify(input),
+  })
+  if (!res.ok) throw new Error("Failed to add co-applicant")
+  const data = await res.json()
+  return data.data
+}
+
+export async function updateCoApplicant(
+  id: string,
+  input: Partial<CoApplicant>
+): Promise<CoApplicant> {
+  const res = await authFetch(`/api/co-applicants/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(input),
+  })
+  if (!res.ok) throw new Error("Failed to update co-applicant")
+  const data = await res.json()
+  return data.data
+}
+
+export async function removeCoApplicant(id: string): Promise<void> {
+  const res = await authFetch(`/api/co-applicants/${id}`, { method: "DELETE" })
+  if (!res.ok) throw new Error("Failed to remove co-applicant")
+}

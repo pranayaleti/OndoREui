@@ -24,6 +24,9 @@ export function useCalculatorAI(params: AnalyzeRequest): UseCalculatorAIResult {
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
+  const inputsKey = JSON.stringify(params.inputs);
+  const resultsKey = JSON.stringify(params.results);
+
   const analyze = useCallback(() => {
     if (!hasNonZeroInputs(params.inputs)) {
       setError('Enter values before requesting AI analysis.');
@@ -48,8 +51,8 @@ export function useCalculatorAI(params: AnalyzeRequest): UseCalculatorAIResult {
         setError(err.message ?? 'AI analysis failed.');
         setLoading(false);
       });
-  }, [params.calculatorType, params.location, params.propertyType,
-      JSON.stringify(params.inputs), JSON.stringify(params.results)]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- inputs/results are compared by serialized value via inputsKey/resultsKey instead of identity.
+  }, [params.calculatorType, params.location, params.propertyType, inputsKey, resultsKey]);
 
   return { data, loading, error, analyze };
 }

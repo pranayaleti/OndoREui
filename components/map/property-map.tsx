@@ -179,6 +179,7 @@ export default function PropertyMap({
             <Popup>
               <div style={{ minWidth: 200, padding: 4 }}>
                 {property.image && (
+                  // eslint-disable-next-line @next/next/no-img-element -- Leaflet Popup renders outside the React tree; next/image's optimizer can't bind here.
                   <img
                     src={property.image}
                     alt={property.title}

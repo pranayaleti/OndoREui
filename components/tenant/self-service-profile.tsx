@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 interface TenantProfile {
   emergencyContactName?: string
@@ -69,16 +69,16 @@ export function SelfServiceProfile({ profile, onSave }: SelfServiceProfileProps)
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Emergency Contact</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input className={inputClass} value={emergencyName} onChange={(e) => setEmergencyName(e.target.value)} placeholder="Contact name" />
+            <label htmlFor="emergency-name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input id="emergency-name" className={inputClass} value={emergencyName} onChange={(e) => setEmergencyName(e.target.value)} placeholder="Contact name" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-            <input className={inputClass} type="tel" value={emergencyPhone} onChange={(e) => setEmergencyPhone(e.target.value)} placeholder="Phone number" />
+            <label htmlFor="emergency-phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <input id="emergency-phone" className={inputClass} type="tel" value={emergencyPhone} onChange={(e) => setEmergencyPhone(e.target.value)} placeholder="Phone number" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Relationship</label>
-            <input className={inputClass} value={emergencyRelation} onChange={(e) => setEmergencyRelation(e.target.value)} placeholder="e.g. Spouse, Parent" />
+            <label htmlFor="emergency-relation" className="block text-sm font-medium text-gray-700 mb-1">Relationship</label>
+            <input id="emergency-relation" className={inputClass} value={emergencyRelation} onChange={(e) => setEmergencyRelation(e.target.value)} placeholder="e.g. Spouse, Parent" />
           </div>
         </div>
       </section>

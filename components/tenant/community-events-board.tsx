@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getTenantEvents, rsvpEvent } from "../../lib/api/tenant-services"
+import { getTenantEvents, rsvpEvent, unwrapData } from "../../lib/api/tenant-services"
 
 interface Event {
   id: string
@@ -25,10 +25,10 @@ export function CommunityEventsBoard() {
     const load = async () => {
       try {
         const res = await getTenantEvents()
-        const list = (res as any)?.data ?? (res as any) ?? []
+        const list = unwrapData<Event[]>(res) ?? (res as Event[] | null) ?? []
         setEvents(Array.isArray(list) ? list : [])
-      } catch (err: any) {
-        setError(err.message || "Failed to load events")
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load events")
       } finally {
         setLoading(false)
       }
@@ -55,8 +55,8 @@ export function CommunityEventsBoard() {
           return updated
         })
       )
-    } catch (err: any) {
-      setError(err.message || "RSVP failed")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "RSVP failed")
     } finally {
       setRsvping(null)
     }

@@ -1,10 +1,12 @@
 // Analytics and tracking utilities
 
+const GA_ID = process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'] ?? '';
+
 export const analytics = {
   // Track page views
   trackPageView: (url: string, title?: string) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'G-SSND5XGJ87', {
+    if (typeof window !== 'undefined' && window.gtag && GA_ID) {
+      window.gtag('config', GA_ID, {
         page_title: title,
         page_location: url,
       })

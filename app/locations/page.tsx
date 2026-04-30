@@ -9,7 +9,7 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
 import { utahCitiesFromNorthOgdenToNephi, toCitySlug } from "@/lib/utah-cities"
 import { cityMarketData } from "@/lib/city-market-data"
-import { Home, DollarSign, Users, MapPin } from "lucide-react"
+import { Home, Users, MapPin } from "lucide-react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {

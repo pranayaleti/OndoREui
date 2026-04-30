@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getTenantPackages, markPackagePickedUp } from "../../lib/api/tenant-services"
+import { getTenantPackages, markPackagePickedUp, unwrapData } from "../../lib/api/tenant-services"
 
 interface Package {
   id: string
@@ -37,10 +37,10 @@ export function PackageTracker() {
     setLoading(true)
     try {
       const res = await getTenantPackages()
-      const list = (res as any)?.data ?? (res as any) ?? []
+      const list = unwrapData<Package[]>(res) ?? (res as Package[] | null) ?? []
       setPackages(Array.isArray(list) ? list : [])
-    } catch (err: any) {
-      setError(err.message || "Failed to load packages")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load packages")
     } finally {
       setLoading(false)
     }
@@ -57,8 +57,8 @@ export function PackageTracker() {
       setPackages((prev) =>
         prev.map((p) => (p.id === id ? { ...p, status: "picked_up" } : p))
       )
-    } catch (err: any) {
-      setError(err.message || "Failed to mark picked up")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to mark picked up")
     } finally {
       setPickingUp(null)
     }

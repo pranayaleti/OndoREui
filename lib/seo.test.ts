@@ -42,8 +42,9 @@ describe("seo", () => {
         { question: "Q1?", answer: "A1" },
         { question: "Q2?", answer: "A2" },
       ])
-      expect(out["@type"]).toBe("FAQPage")
-      expect(out.mainEntity).toHaveLength(2)
+      expect(out).not.toBeNull()
+      expect(out!["@type"]).toBe("FAQPage")
+      expect(out!.mainEntity).toHaveLength(2)
     })
   })
 

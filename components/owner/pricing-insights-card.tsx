@@ -42,7 +42,7 @@ export function PricingInsightsCard({
       try {
         const result = await getSuggestedRent(propertyId);
         setData(result);
-      } catch (err) {
+      } catch {
         setError("Unable to load pricing data");
       } finally {
         setLoading(false);

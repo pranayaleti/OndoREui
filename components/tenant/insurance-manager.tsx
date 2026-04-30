@@ -82,26 +82,26 @@ export function InsuranceManager({ policies, onAdd, propertyId }: InsuranceManag
         <div className="bg-muted rounded-lg p-4 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Provider</label>
-              <input className={inputClass} value={provider} onChange={(e) => setProvider(e.target.value)} placeholder="Insurance company" />
+              <label htmlFor="insurance-provider" className="block text-sm font-medium text-gray-700 mb-1">Provider</label>
+              <input id="insurance-provider" className={inputClass} value={provider} onChange={(e) => setProvider(e.target.value)} placeholder="Insurance company" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Policy Number</label>
-              <input className={inputClass} value={policyNumber} onChange={(e) => setPolicyNumber(e.target.value)} />
+              <label htmlFor="insurance-policy-number" className="block text-sm font-medium text-gray-700 mb-1">Policy Number</label>
+              <input id="insurance-policy-number" className={inputClass} value={policyNumber} onChange={(e) => setPolicyNumber(e.target.value)} />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Coverage ($)</label>
-              <input className={inputClass} type="number" value={coverage} onChange={(e) => setCoverage(e.target.value)} />
+              <label htmlFor="insurance-coverage" className="block text-sm font-medium text-gray-700 mb-1">Coverage ($)</label>
+              <input id="insurance-coverage" className={inputClass} type="number" value={coverage} onChange={(e) => setCoverage(e.target.value)} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-              <input className={inputClass} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <label htmlFor="insurance-start-date" className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+              <input id="insurance-start-date" className={inputClass} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-              <input className={inputClass} type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <label htmlFor="insurance-end-date" className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+              <input id="insurance-end-date" className={inputClass} type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
             </div>
           </div>
           <button onClick={handleAdd} disabled={saving || !provider || !startDate || !endDate} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50">

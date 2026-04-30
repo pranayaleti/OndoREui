@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { getTeamForCity, type TeamMember } from "@/lib/team-data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"

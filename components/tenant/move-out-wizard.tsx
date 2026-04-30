@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getTenantMoveOut, submitMoveOut, cancelMoveOut } from "../../lib/api/tenant-services"
+import { getTenantMoveOut, submitMoveOut, cancelMoveOut, unwrapData } from "../../lib/api/tenant-services"
 import { MoveOutResources } from "./move-out-resources"
 
 interface MoveOut {
@@ -54,7 +54,7 @@ export function MoveOutWizard() {
     setLoading(true)
     try {
       const res = await getTenantMoveOut()
-      const data = (res as any)?.data ?? (res as any) ?? null
+      const data = unwrapData<MoveOut>(res) ?? (res as MoveOut | null)
       setMoveOut(data && data.id ? data : null)
     } catch {
       setMoveOut(null)
@@ -74,8 +74,8 @@ export function MoveOutWizard() {
     try {
       await submitMoveOut({ requestedMoveOutDate: date, forwardingAddress: address, reason })
       await load()
-    } catch (err: any) {
-      setError(err.message || "Failed to submit move-out request")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to submit move-out request")
     } finally {
       setSubmitting(false)
     }
@@ -88,8 +88,8 @@ export function MoveOutWizard() {
     try {
       await cancelMoveOut(moveOut.id)
       setMoveOut(null)
-    } catch (err: any) {
-      setError(err.message || "Failed to cancel move-out")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to cancel move-out")
     } finally {
       setCancelling(false)
     }
@@ -120,10 +120,11 @@ export function MoveOutWizard() {
           </p>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="move-out-date" className="block text-sm font-medium text-gray-700 mb-1">
               Requested Move-Out Date
             </label>
             <input
+              id="move-out-date"
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -132,10 +133,11 @@ export function MoveOutWizard() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="move-out-address" className="block text-sm font-medium text-gray-700 mb-1">
               Forwarding Address
             </label>
             <textarea
+              id="move-out-address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               rows={3}
@@ -145,8 +147,9 @@ export function MoveOutWizard() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Reason</label>
+            <label htmlFor="move-out-reason" className="block text-sm font-medium text-gray-700 mb-1">Reason</label>
             <select
+              id="move-out-reason"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               className={inputClass}

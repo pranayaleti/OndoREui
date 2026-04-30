@@ -6,6 +6,7 @@ import {
   updateSmsPreferences,
   requestSmsVerification,
   verifySmsCode,
+  unwrapData,
 } from "../../lib/api/tenant-services"
 
 interface SmsPrefs {
@@ -63,11 +64,11 @@ export function SmsSettings() {
     const load = async () => {
       try {
         const res = await getSmsPreferences()
-        const data: SmsPrefs = (res as any)?.data ?? (res as any) ?? {}
+        const data: SmsPrefs = unwrapData<SmsPrefs>(res) ?? (res as SmsPrefs | null) ?? {}
         setPrefs(data)
         setPhone(data.phoneNumber ?? "")
-      } catch (err: any) {
-        setError(err.message || "Failed to load SMS preferences")
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load SMS preferences")
       } finally {
         setLoading(false)
       }
@@ -91,8 +92,8 @@ export function SmsSettings() {
         emergencyAlerts: prefs.emergencyAlerts ?? false,
       })
       setSuccess("Preferences saved.")
-    } catch (err: any) {
-      setError(err.message || "Failed to save preferences")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to save preferences")
     } finally {
       setSaving(false)
     }
@@ -105,8 +106,8 @@ export function SmsSettings() {
     try {
       await requestSmsVerification(phone)
       setCodeSent(true)
-    } catch (err: any) {
-      setVerifyError(err.message || "Failed to send code")
+    } catch (err) {
+      setVerifyError(err instanceof Error ? err.message : "Failed to send code")
     } finally {
       setSendingCode(false)
     }
@@ -121,8 +122,8 @@ export function SmsSettings() {
       setPrefs((prev) => ({ ...prev, phoneNumber: phone, phoneVerified: true }))
       setCodeSent(false)
       setCode("")
-    } catch (err: any) {
-      setVerifyError(err.message || "Invalid code")
+    } catch (err) {
+      setVerifyError(err instanceof Error ? err.message : "Invalid code")
     } finally {
       setVerifying(false)
     }
@@ -154,9 +155,10 @@ export function SmsSettings() {
 
       {/* Phone number */}
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+        <label htmlFor="sms-phone-number" className="block text-sm font-medium text-gray-700">Phone Number</label>
         <div className="flex gap-2 items-center">
           <input
+            id="sms-phone-number"
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}

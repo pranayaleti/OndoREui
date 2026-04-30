@@ -61,7 +61,7 @@ export function TwoFactorAuthDialog({
           if (data.totp?.qr_code) {
              setQrCode(data.totp.qr_code)
           }
-        } catch (error: any) {
+        } catch (error) {
           console.error("MFA Initialization failed:", error)
           // Fallback UI or silent error if just mocking for now
         } finally {
@@ -86,10 +86,11 @@ export function TwoFactorAuthDialog({
     try {
       if (!supabase) throw new Error("Supabase client is not configured")
       
-      const { data: enrollData, error: enrollError } = await (supabase as any).auth.mfa.enroll({
+      // Phone factor isn't in the supabase-js v2 type defs yet, so cast just the enroll arg.
+      const { data: enrollData, error: enrollError } = await supabase.auth.mfa.enroll({
         factorType: "phone",
         phone: phoneNumber,
-      })
+      } as Parameters<typeof supabase.auth.mfa.enroll>[0])
       
       if (enrollError) {
         console.error("Supabase MFA Phone Enroll Error:", enrollError.message)
@@ -110,10 +111,10 @@ export function TwoFactorAuthDialog({
         title: "Code Sent",
         description: "We've sent a verification code to your phone.",
       })
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
-        description: error?.message || "Failed to send code. (Check Supabase config)",
+        description: error instanceof Error ? error.message : "Failed to send code. (Check Supabase config)",
         variant: "destructive",
       })
     } finally {
@@ -145,10 +146,10 @@ export function TwoFactorAuthDialog({
           description: "Your account is no longer protected by two-factor authentication.",
         })
         onOpenChange(false)
-      } catch (error: any) {
+      } catch (error) {
         toast({
           title: "Error",
-          description: error.message || "Failed to disable two-factor authentication.",
+          description: error instanceof Error ? error.message : "Failed to disable two-factor authentication.",
           variant: "destructive",
         })
       } finally {
@@ -208,10 +209,10 @@ export function TwoFactorAuthDialog({
         setVerificationCode("")
         setIsCodeSent(false)
         onOpenChange(false)
-      } catch (error: any) {
+      } catch (error) {
         toast({
           title: "Error",
-          description: error.message || "Failed to verify access code.",
+          description: error instanceof Error ? error.message : "Failed to verify access code.",
           variant: "destructive",
         })
       } finally {

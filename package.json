@@ -31,6 +31,7 @@
     "generate:blogs:dry": "npx tsx scripts/generate-city-blogs.ts --dry-run",
     "analyze:bundle": "node scripts/analyze-bundle.mjs",
     "check:unused": "node scripts/check-unused-deps.mjs",
+    "check:locales": "npx tsx scripts/check-locale-parity.ts",
     "a11y:axe": "playwright test tests/a11y.spec.ts",
     "test:a11y": "playwright test tests/a11y.spec.ts"
   },

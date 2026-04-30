@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useMemo, useCallback } from "react";
 import PropertyMap from "./property-map";
 
@@ -211,11 +212,15 @@ export default function PropertySearchMap({
             }}
           >
             {property.image && (
-              <img
-                src={property.image}
-                alt={property.title}
-                className="w-full h-40 object-cover"
-              />
+              <div className="relative w-full h-40">
+                <Image
+                  src={property.image}
+                  alt={property.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
             )}
             <div className="p-3">
               <h3 className="font-semibold text-sm truncate">{property.title}</h3>

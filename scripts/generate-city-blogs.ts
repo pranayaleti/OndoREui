@@ -52,6 +52,7 @@ type CityContent = {
 
 // Read the data files at runtime using dynamic require trick
 // (tsx handles TypeScript imports natively)
+/* eslint-disable @typescript-eslint/no-explicit-any -- dynamic imports with fallback paths have no static shape */
 const { utahCitiesFromNorthOgdenToNephi, toCitySlug } = await import("../lib/utah-cities.js").catch(
   () => import("../lib/utah-cities.ts" as string)
 ) as any
@@ -61,6 +62,7 @@ const { cityMarketData } = await import("../lib/city-market-data.js").catch(
 const { cityContentByName } = await import("../lib/city-content.js").catch(
   () => import("../lib/city-content.ts" as string)
 ) as any
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 

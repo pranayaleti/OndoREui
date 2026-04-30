@@ -354,8 +354,9 @@ export function OnboardingClient() {
                 </p>
               </div>
 
-              <label className="flex items-start gap-3 text-sm leading-6 text-foreground/80 cursor-pointer">
+              <label htmlFor="bg-check-consent" className="flex items-start gap-3 text-sm leading-6 text-foreground/80 cursor-pointer">
                 <Checkbox
+                  id="bg-check-consent"
                   checked={bgCheckConsent}
                   onCheckedChange={(checked) => setBgCheckConsent(checked === true)}
                   className="mt-1"

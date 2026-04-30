@@ -407,5 +407,22 @@
       "meets": "Al momento soddisfi il requisito (rapporto {{ratio}}x).",
       "below": "Sei sotto il requisito (rapporto {{ratio}}x; servono {{requiredRatio}}x)."
     }
+  },
+  "contactForm": {
+    "title": "Contattaci",
+    "subtitle": "Inviaci un messaggio e ti risponderemo entro un giorno lavorativo.",
+    "successTitle": "Messaggio inviato!",
+    "successBody": "Ti ricontatteremo entro un giorno lavorativo.",
+    "errorFallback": "Qualcosa è andato storto. Riprova o chiamaci al {{phone}}.",
+    "nameLabel": "Nome *",
+    "namePlaceholder": "Il tuo nome",
+    "emailLabel": "E-mail *",
+    "emailPlaceholder": "tu@esempio.com",
+    "phoneLabel": "Telefono",
+    "phonePlaceholder": "(555) 123-4567",
+    "messageLabel": "Messaggio",
+    "messagePlaceholder": "Come possiamo aiutarti?",
+    "sending": "Invio in corso...",
+    "sendMessage": "Invia messaggio"
   }
 }

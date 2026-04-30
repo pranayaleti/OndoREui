@@ -5,10 +5,9 @@ import { useMemo } from "react"
 import { SITE_PHONE } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { cityContentByName } from "@/lib/city-content"
-import { cityMarketData, type CityMarketData } from "@/lib/city-market-data"
+import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
@@ -19,9 +18,7 @@ import {
   Users,
   Briefcase,
   School,
-  MapPin,
   Phone,
-  ArrowRight,
   BarChart3,
   Clock,
   Building2,
@@ -50,7 +47,6 @@ function StatCard({ icon: Icon, label, value }: { icon: React.ComponentType<{ cl
 export function MarketReportPage({ city }: MarketReportPageProps) {
   const citySlug = toCitySlug(city.name)
   const market = cityMarketData[city.name]
-  const content = cityContentByName[city.name]
   const nearbyCities = useMemo(() => getNearbyCities(city.name, 6), [city.name])
 
   if (!market) {

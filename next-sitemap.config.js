@@ -1,6 +1,14 @@
 /** @type {import('next-sitemap').IConfig} */
 const agentDiscoveryConfig = require('./lib/agent-discovery-config.json')
 
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'it', 'te', 'hi', 'ta', 'kn']
+const BCP47_BY_LOCALE = {
+  en: 'en-US', es: 'es-ES', fr: 'fr-FR', it: 'it-IT',
+  te: 'te-IN', hi: 'hi-IN', ta: 'ta-IN', kn: 'kn-IN',
+}
+// Flip NEXT_PUBLIC_I18N_ROUTED=1 once per-locale URL paths ship (e.g. /es/about).
+const LOCALE_ROUTING_ENABLED = process.env.NEXT_PUBLIC_I18N_ROUTED === '1'
+
 // Static lastmod dates by path prefix (no trailing slash; paths normalized in getLastmod).
 const SECTION_LASTMOD = {
   '/blog': '2026-03-07',
@@ -76,6 +84,25 @@ function getPriority(path) {
   const citySubServicePattern = /^\/(property-management|loans|buy-sell)\/[a-z-]+\/[a-z-]+$/
   if (citySubServicePattern.test(p)) return 0.6
   return 0.7
+}
+
+function buildAlternateRefs(path, siteUrl) {
+  const base = siteUrl.replace(/\/+$/, '')
+  const p = normalizeSitemapPath(path)
+  const canonical = p === '/' ? `${base}/` : `${base}${p}/`
+  if (!LOCALE_ROUTING_ENABLED) {
+    return [
+      { href: canonical, hreflang: 'x-default' },
+      { href: canonical, hreflang: BCP47_BY_LOCALE.en },
+    ]
+  }
+  return [
+    { href: canonical, hreflang: 'x-default' },
+    ...SUPPORTED_LOCALES.map((loc) => ({
+      href: loc === 'en' ? canonical : `${base}/${loc}${p === '/' ? '' : p}/`,
+      hreflang: BCP47_BY_LOCALE[loc],
+    })),
+  ]
 }
 
 function isExcludedPath(path) {
@@ -164,7 +191,7 @@ module.exports = {
       changefreq: 'weekly',
       priority: getPriority(path),
       lastmod: getLastmod(path),
-      alternateRefs: [],
+      alternateRefs: buildAlternateRefs(path, config.siteUrl),
     }
     if (isFileLikeSitemapPath(path)) {
       return { ...base, trailingSlash: false }

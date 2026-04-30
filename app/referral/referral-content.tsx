@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import { Building2, Users, Home, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import SEO from "@/components/seo"
 
 const DASHBOARD_URL =
   process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.ondorealestate.com"
@@ -39,6 +40,11 @@ export function ReferralContent() {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title={t("referral.heroTitle")}
+        description={t("referral.heroSubtitle")}
+        pathname="/referral/"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-orange-500 to-red-800 py-20">
         <div className="mx-auto max-w-4xl px-4 text-center">

@@ -1,9 +1,22 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
-import {
-  analytics,
-  performanceTracking,
-  ecommerceTracking,
-} from "./analytics"
+import { describe, it, expect, vi, beforeEach, afterEach, beforeAll } from "vitest"
+
+// Set the env var BEFORE importing the module so the top-level const picks it up
+const TEST_GA_ID = "G-TEST123"
+beforeAll(() => {
+  process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'] = TEST_GA_ID
+})
+
+// Use dynamic import so the env var is set before the module evaluates
+let analytics: typeof import("./analytics")["analytics"]
+let performanceTracking: typeof import("./analytics")["performanceTracking"]
+let ecommerceTracking: typeof import("./analytics")["ecommerceTracking"]
+
+beforeAll(async () => {
+  const mod = await import("./analytics")
+  analytics = mod.analytics
+  performanceTracking = mod.performanceTracking
+  ecommerceTracking = mod.ecommerceTracking
+})
 
 describe("analytics", () => {
   beforeEach(() => {
@@ -20,7 +33,7 @@ describe("analytics", () => {
       analytics.trackPageView("/page", "Title")
       expect((window as { gtag?: (a: string, b: string, c?: object) => void }).gtag).toHaveBeenCalledWith(
         "config",
-        "G-SSND5XGJ87",
+        TEST_GA_ID,
         { page_title: "Title", page_location: "/page" }
       )
     })

@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { CheckCircle, Mail, TrendingUp, Home, Wrench } from "lucide-react"
 import { SITE_EMAILS } from "@/lib/site"
+import SEO from "@/components/seo"
 
 const topics = [
   {
@@ -63,6 +64,11 @@ export default function SubscribePage() {
 
   return (
     <main className="min-h-screen">
+      <SEO
+        title="Subscribe to Ondo RE | Utah Real Estate Newsletter"
+        description="Get Utah real estate insights, new listings, and property tips delivered to your inbox."
+        pathname="/subscribe/"
+      />
       <PageBanner
         title="Stay in the Loop"
         subtitle="Get Utah real estate insights, new listings, and property tips delivered to your inbox"

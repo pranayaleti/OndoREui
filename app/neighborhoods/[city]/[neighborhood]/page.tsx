@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { findCityBySlug, toCitySlug } from "@/lib/utah-cities"
+import { findCityBySlug } from "@/lib/utah-cities"
 import { findNeighborhood, allNeighborhoodParams } from "@/lib/neighborhood-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import type { Metadata } from "next"

@@ -407,5 +407,22 @@
       "meets": "You currently meet the requirement ({{ratio}}x ratio).",
       "below": "You are below the requirement ({{ratio}}x ratio; need {{requiredRatio}}x)."
     }
+  },
+  "contactForm": {
+    "title": "Get in touch",
+    "subtitle": "Send us a message and we'll get back to you within one business day.",
+    "successTitle": "Message sent!",
+    "successBody": "We'll be in touch within one business day.",
+    "errorFallback": "Something went wrong. Please try again or call us at {{phone}}.",
+    "nameLabel": "Name *",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email *",
+    "emailPlaceholder": "you@example.com",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "(555) 123-4567",
+    "messageLabel": "Message",
+    "messagePlaceholder": "How can we help?",
+    "sending": "Sending...",
+    "sendMessage": "Send message"
   }
 }

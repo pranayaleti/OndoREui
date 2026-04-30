@@ -407,5 +407,22 @@
       "meets": "మీరు ప్రస్తుతం అవసరాన్ని చేరుకుంటున్నారు ({{ratio}}x నిష్పత్తి).",
       "below": "మీరు అవసరానికి దిగువన ఉన్నారు ({{ratio}}x నిష్పత్తి; {{requiredRatio}}x అవసరం)."
     }
+  },
+  "contactForm": {
+    "title": "సంప్రదించండి",
+    "subtitle": "మాకు సందేశం పంపండి, మేము ఒక పని దినంలో మీకు తిరిగి సమాధానం ఇస్తాము.",
+    "successTitle": "సందేశం పంపబడింది!",
+    "successBody": "మేము ఒక పని దినంలో సంప్రదిస్తాము.",
+    "errorFallback": "ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించండి లేదా {{phone}} కు కాల్ చేయండి.",
+    "nameLabel": "పేరు *",
+    "namePlaceholder": "మీ పేరు",
+    "emailLabel": "ఇమెయిల్ *",
+    "emailPlaceholder": "you@example.com",
+    "phoneLabel": "ఫోన్",
+    "phonePlaceholder": "(555) 123-4567",
+    "messageLabel": "సందేశం",
+    "messagePlaceholder": "మేము ఎలా సహాయపడగలము?",
+    "sending": "పంపుతోంది...",
+    "sendMessage": "సందేశం పంపండి"
   }
 }

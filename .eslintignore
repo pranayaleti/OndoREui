@@ -1,0 +1,15 @@
+# Next.js build output
+.next/
+out/
+node_modules/
+
+# Auto-generated route type helpers
+types/app/
+next-env.d.ts
+
+# Sitemap output
+public/sitemap*.xml
+public/robots.txt
+
+# Coverage reports
+coverage/

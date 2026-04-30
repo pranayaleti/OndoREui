@@ -231,10 +231,11 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
           <Button
             variant="ghost"
             size="icon"
+            aria-label="Close"
             onClick={onClose}
             className="text-foreground/70 hover:text-foreground"
           >
-            <X className="h-6 w-6" />
+            <X className="h-6 w-6" aria-hidden="true" />
           </Button>
         </div>
 

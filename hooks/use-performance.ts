@@ -39,14 +39,15 @@ export function usePerformance() {
         const fidEntries = performance.getEntriesByType('first-input')
         const firstInputEntry = fidEntries[0]
         const firstInputDelay =
-          firstInputEntry && 'processingStart' in firstInputEntry && typeof (firstInputEntry as any).processingStart === 'number'
+          firstInputEntry && 'processingStart' in firstInputEntry && typeof (firstInputEntry as PerformanceEventTiming).processingStart === 'number'
             ? (firstInputEntry as PerformanceEventTiming).processingStart - firstInputEntry.startTime
             : 0
 
         // Get CLS (if available)
         const clsEntries = performance.getEntriesByType('layout-shift')
         const cumulativeLayoutShift = clsEntries.reduce((cls, entry) => {
-          return cls + (entry as any).value
+          // LayoutShift entries expose `value` but the DOM type isn't always available.
+          return cls + (entry as PerformanceEntry & { value: number }).value
         }, 0)
 
         const performanceMetrics: PerformanceMetrics = {
@@ -125,6 +126,7 @@ export function useRenderPerformance(componentName: string) {
       const renderTime = endTime - startTime
       
       if (process.env['NODE_ENV'] === 'development') {
+        // eslint-disable-next-line no-console -- intentional dev-only render-time logging
         console.log(`${componentName} render time: ${renderTime.toFixed(2)}ms`)
       }
       

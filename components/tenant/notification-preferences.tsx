@@ -33,9 +33,9 @@ export function NotificationPreferences() {
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    networkFirstGet<{ data?: Preferences }>("/notifications/preferences", "notif-prefs")
-      .then((res: any) => {
-        const data = res?.data ?? res
+    networkFirstGet<Preferences | { data?: Preferences }>("/notifications/preferences", "notif-prefs")
+      .then((res) => {
+        const data = res && typeof res === "object" && "data" in res ? res.data : (res as Preferences | undefined)
         if (data?.categories) setPrefs(data)
       })
       .catch(() => {})

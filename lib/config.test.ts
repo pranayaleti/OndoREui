@@ -43,11 +43,12 @@ describe("config", () => {
       expect(result).toBe(true)
     })
     it("throws in development when NEXT_PUBLIC_SITE_URL is missing", () => {
-      const nodeEnv = process.env['NODE_ENV']
-      process.env['NODE_ENV'] = "development"
+      const env = process.env as Record<string, string | undefined>
+      const nodeEnv = env['NODE_ENV']
+      env['NODE_ENV'] = "development"
       delete process.env['NEXT_PUBLIC_SITE_URL']
       expect(() => validateConfig()).toThrow(/Missing required environment variables/)
-      process.env['NODE_ENV'] = nodeEnv
+      env['NODE_ENV'] = nodeEnv
     })
   })
 })

@@ -407,5 +407,22 @@
       "meets": "ನೀವು ಈಗ ಅಗತ್ಯವನ್ನು ಪೂರೈಸುತ್ತಿದ್ದೀರಿ ({{ratio}}x ಅನುಪಾತ).",
       "below": "ನೀವು ಅಗತ್ಯಕ್ಕಿಂತ ಕಡಿಮೆಯಿದ್ದೀರಿ ({{ratio}}x ಅನುಪಾತ; {{requiredRatio}}x ಅಗತ್ಯವಿದೆ)."
     }
+  },
+  "contactForm": {
+    "title": "ಸಂಪರ್ಕಿಸಿ",
+    "subtitle": "ನಮಗೆ ಸಂದೇಶ ಕಳುಹಿಸಿ, ಒಂದು ಕೆಲಸದ ದಿನದೊಳಗೆ ಉತ್ತರಿಸುತ್ತೇವೆ.",
+    "successTitle": "ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ!",
+    "successBody": "ಒಂದು ಕೆಲಸದ ದಿನದೊಳಗೆ ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.",
+    "errorFallback": "ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ {{phone}} ಗೆ ಕರೆ ಮಾಡಿ.",
+    "nameLabel": "ಹೆಸರು *",
+    "namePlaceholder": "ನಿಮ್ಮ ಹೆಸರು",
+    "emailLabel": "ಇಮೇಲ್ *",
+    "emailPlaceholder": "you@example.com",
+    "phoneLabel": "ಫೋನ್",
+    "phonePlaceholder": "(555) 123-4567",
+    "messageLabel": "ಸಂದೇಶ",
+    "messagePlaceholder": "ನಾವು ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
+    "sending": "ಕಳುಹಿಸುತ್ತಿದೆ...",
+    "sendMessage": "ಸಂದೇಶ ಕಳುಹಿಸಿ"
   }
 }

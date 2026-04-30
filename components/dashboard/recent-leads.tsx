@@ -145,11 +145,11 @@ export function RecentLeads() {
             </TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-2">
-                <Button size="icon" variant="ghost">
-                  <Phone className="h-4 w-4" />
+                <Button size="icon" variant="ghost" aria-label="Call lead">
+                  <Phone className="h-4 w-4" aria-hidden="true" />
                 </Button>
-                <Button size="icon" variant="ghost">
-                  <Mail className="h-4 w-4" />
+                <Button size="icon" variant="ghost" aria-label="Email lead">
+                  <Mail className="h-4 w-4" aria-hidden="true" />
                 </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

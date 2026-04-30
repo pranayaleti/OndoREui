@@ -44,7 +44,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [sessionToken, setSessionToken] = useState<string | null>(null);
-  const [leadId, setLeadId] = useState<string | null>(null);
+  const [, setLeadId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",

@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { getMaintenanceMessages, sendMaintenanceMessage } from "../../lib/api/tenant-services"
+import { useState, useEffect, useRef, useCallback } from "react"
+import { getMaintenanceMessages, sendMaintenanceMessage, unwrapData } from "../../lib/api/tenant-services"
 
 interface Message {
   id: string
@@ -24,21 +24,21 @@ export function MaintenanceChat({ requestId, requestTitle }: MaintenanceChatProp
   const [error, setError] = useState("")
   const bottomRef = useRef<HTMLDivElement>(null)
 
-  const loadMessages = async () => {
+  const loadMessages = useCallback(async () => {
     try {
       const res = await getMaintenanceMessages(requestId)
-      const list = (res as any)?.data ?? (res as any) ?? []
+      const list = unwrapData<Message[]>(res) ?? (res as Message[] | null) ?? []
       setMessages(Array.isArray(list) ? list : [])
     } catch {
       // silently ignore load errors
     } finally {
       setLoading(false)
     }
-  }
+  }, [requestId])
 
   useEffect(() => {
     loadMessages()
-  }, [requestId])
+  }, [loadMessages])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -53,8 +53,8 @@ export function MaintenanceChat({ requestId, requestTitle }: MaintenanceChatProp
       await sendMaintenanceMessage(requestId, { message: trimmed })
       setText("")
       await loadMessages()
-    } catch (err: any) {
-      setError(err.message || "Failed to send message")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send message")
     } finally {
       setSending(false)
     }

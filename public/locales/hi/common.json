@@ -407,5 +407,22 @@
       "meets": "आप इस समय आवश्यकता पूरी कर रहे हैं ({{ratio}}x अनुपात)।",
       "below": "आप आवश्यकता से नीचे हैं ({{ratio}}x अनुपात; {{requiredRatio}}x चाहिए)।"
     }
+  },
+  "contactForm": {
+    "title": "संपर्क करें",
+    "subtitle": "हमें एक संदेश भेजें और हम एक कार्य दिवस के भीतर आपसे संपर्क करेंगे।",
+    "successTitle": "संदेश भेज दिया गया!",
+    "successBody": "हम एक कार्य दिवस के भीतर संपर्क करेंगे।",
+    "errorFallback": "कुछ गलत हो गया। कृपया पुनः प्रयास करें या हमें {{phone}} पर कॉल करें।",
+    "nameLabel": "नाम *",
+    "namePlaceholder": "आपका नाम",
+    "emailLabel": "ईमेल *",
+    "emailPlaceholder": "you@example.com",
+    "phoneLabel": "फ़ोन",
+    "phonePlaceholder": "(555) 123-4567",
+    "messageLabel": "संदेश",
+    "messagePlaceholder": "हम आपकी कैसे मदद कर सकते हैं?",
+    "sending": "भेज रहे हैं...",
+    "sendMessage": "संदेश भेजें"
   }
 }

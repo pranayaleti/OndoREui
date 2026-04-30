@@ -21,7 +21,7 @@ interface SyndicationPanelProps {
   listingId?: string
 }
 
-export function SyndicationPanel({ propertyId, listingId }: SyndicationPanelProps) {
+export function SyndicationPanel({ propertyId: _propertyId, listingId }: SyndicationPanelProps) {
   const [syndications, setSyndications] = useState<ListingSyndication[]>([])
   const [loading, setLoading] = useState(false)
   const [syndicating, setSyndicating] = useState(false)

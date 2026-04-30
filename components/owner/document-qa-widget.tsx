@@ -67,7 +67,7 @@ export function DocumentQAWidget({ propertyId }: { propertyId: string }) {
         {!loading && results.length > 0 && (
           <div className="space-y-3">
             <p className="text-xs text-foreground/70">Results for &ldquo;{lastQuestion}&rdquo;</p>
-            {results.map((chunk, i) => (
+            {results.map((chunk) => (
               <div key={`${chunk.documentId}-${chunk.chunkIndex}`} className="border rounded-md p-3 text-sm">
                 <div className="flex items-center gap-2 mb-1">
                   <FileText className="h-3.5 w-3.5 text-foreground/70" />

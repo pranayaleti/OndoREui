@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getTenantRewards, getRewardHistory, redeemRewardPoints } from "../../lib/api/tenant-services"
+import { getTenantRewards, getRewardHistory, redeemRewardPoints, unwrapData } from "../../lib/api/tenant-services"
 
 interface RewardData {
   balance: number
@@ -53,11 +53,11 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
           getTenantRewards(propertyId),
           getRewardHistory(propertyId),
         ])
-        setRewards((rwRes as any)?.data ?? (rwRes as any) ?? null)
-        const h = (histRes as any)?.data ?? (histRes as any) ?? []
+        setRewards(unwrapData<RewardData>(rwRes) ?? (rwRes as RewardData | null) ?? null)
+        const h = unwrapData<HistoryItem[]>(histRes) ?? (histRes as HistoryItem[] | null) ?? []
         setHistory(Array.isArray(h) ? h : [])
-      } catch (err: any) {
-        setError(err.message || "Failed to load rewards")
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load rewards")
       } finally {
         setLoading(false)
       }
@@ -76,8 +76,8 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
       setShowRedeem(false)
       setRedeemPoints("")
       setRedeemDesc("")
-    } catch (err: any) {
-      setRedeemError(err.message || "Redemption failed")
+    } catch (err) {
+      setRedeemError(err instanceof Error ? err.message : "Redemption failed")
     } finally {
       setRedeeming(false)
     }
@@ -152,8 +152,9 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
       {showRedeem && (
         <div className="border rounded-lg p-3 space-y-2 bg-muted">
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">Points to Redeem</label>
+            <label htmlFor="rewards-redeem-points" className="block text-xs font-medium text-gray-700 mb-1">Points to Redeem</label>
             <input
+              id="rewards-redeem-points"
               type="number"
               min={1}
               max={balance}
@@ -164,8 +165,9 @@ export function RewardsCard({ propertyId }: RewardsCardProps) {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">Description</label>
+            <label htmlFor="rewards-redeem-description" className="block text-xs font-medium text-gray-700 mb-1">Description</label>
             <input
+              id="rewards-redeem-description"
               type="text"
               value={redeemDesc}
               onChange={(e) => setRedeemDesc(e.target.value)}

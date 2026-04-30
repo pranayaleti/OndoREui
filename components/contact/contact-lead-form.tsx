@@ -10,12 +10,14 @@ import { SITE_PHONE } from "@/lib/site"
 import { submitContactLead, type ContactLeadSource } from "@/lib/leads-api"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { CheckCircle, AlertCircle } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 const DEFAULT_SOURCE: ContactLeadSource = "website"
 
 const WEBMCP_TOOL_NAME = "submit_contact_lead"
 
 export function ContactLeadForm() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -136,9 +138,9 @@ export function ContactLeadForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="dark:text-foreground">Get in touch</CardTitle>
+        <CardTitle className="dark:text-foreground">{t('contactForm.title')}</CardTitle>
         <CardDescription>
-          Send us a message and we&apos;ll get back to you within one business day.
+          {t('contactForm.subtitle')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -147,10 +149,10 @@ export function ContactLeadForm() {
             <CheckCircle className="text-green-500 dark:text-green-400 mr-3 flex-shrink-0" />
             <div>
               <p className="text-green-700 dark:text-green-300 font-semibold">
-                Message sent!
+                {t('contactForm.successTitle')}
               </p>
               <p className="text-green-600 dark:text-green-400 text-sm">
-                We&apos;ll be in touch within one business day.
+                {t('contactForm.successBody')}
               </p>
             </div>
           </div>
@@ -160,7 +162,7 @@ export function ContactLeadForm() {
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center">
             <AlertCircle className="text-red-500 dark:text-red-400 mr-3 flex-shrink-0" />
             <p className="text-red-700 dark:text-red-300">
-              {errorMessage ?? `Something went wrong. Please try again or call us at ${SITE_PHONE}.`}
+              {errorMessage ?? t('contactForm.errorFallback', { phone: SITE_PHONE })}
             </p>
           </div>
         )}
@@ -175,51 +177,51 @@ export function ContactLeadForm() {
           } as Record<string, string>)}
         >
           <div className="space-y-2">
-            <Label htmlFor="contact-name">Name *</Label>
+            <Label htmlFor="contact-name">{t('contactForm.nameLabel')}</Label>
             <Input
               id="contact-name"
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              placeholder="Your name"
+              placeholder={t('contactForm.namePlaceholder')}
               required
               {...({ toolparamdescription: "Full name of the person submitting the inquiry" } as Record<string, string>)}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="contact-email">Email *</Label>
+            <Label htmlFor="contact-email">{t('contactForm.emailLabel')}</Label>
             <Input
               id="contact-email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="you@example.com"
+              placeholder={t('contactForm.emailPlaceholder')}
               type="email"
               required
               {...({ toolparamdescription: "Email address for reply (required)" } as Record<string, string>)}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="contact-phone">Phone</Label>
+            <Label htmlFor="contact-phone">{t('contactForm.phoneLabel')}</Label>
             <Input
               id="contact-phone"
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              placeholder="(555) 123-4567"
+              placeholder={t('contactForm.phonePlaceholder')}
               type="tel"
               {...({ toolparamdescription: "Phone number (optional)" } as Record<string, string>)}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="contact-message">Message</Label>
+            <Label htmlFor="contact-message">{t('contactForm.messageLabel')}</Label>
             <Textarea
               className="min-h-[120px]"
               id="contact-message"
               name="message"
               value={formData.message}
               onChange={handleInputChange}
-              placeholder="How can we help?"
+              placeholder={t('contactForm.messagePlaceholder')}
               {...({ toolparamdescription: "Message or question for the team (optional)" } as Record<string, string>)}
             />
           </div>
@@ -227,10 +229,10 @@ export function ContactLeadForm() {
             {isSubmitting ? (
               <>
                 <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-current mr-2 inline-block" />
-                Sending...
+                {t('contactForm.sending')}
               </>
             ) : (
-              "Send message"
+              t('contactForm.sendMessage')
             )}
           </Button>
         </form>

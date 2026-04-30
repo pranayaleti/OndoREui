@@ -29,11 +29,11 @@ export function AddonMarketplace() {
   async function fetchData() {
     try {
       const [avail, mine] = await Promise.all([
-        networkFirstGet<{ data?: Addon[] }>("/tenant-addons/available", "available-addons"),
-        networkFirstGet<{ data?: ActiveAddon[] }>("/tenant-addons", "my-addons"),
+        networkFirstGet<Addon[] | { data?: Addon[] }>("/tenant-addons/available", "available-addons"),
+        networkFirstGet<ActiveAddon[] | { data?: ActiveAddon[] }>("/tenant-addons", "my-addons"),
       ])
-      setAvailable(Array.isArray(avail) ? avail : (avail as any)?.data ?? [])
-      setActive(Array.isArray(mine) ? mine : (mine as any)?.data ?? [])
+      setAvailable(Array.isArray(avail) ? avail : avail?.data ?? [])
+      setActive(Array.isArray(mine) ? mine : mine?.data ?? [])
     } catch {
       /* keep existing state */
     } finally {

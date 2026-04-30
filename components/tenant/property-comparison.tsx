@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 interface Property {
   id: string
   title: string
@@ -40,7 +42,15 @@ export function PropertyComparison({ properties, onRemove }: PropertyComparisonP
             {properties.map((p) => (
               <th key={p.id} className="p-3 text-center min-w-[200px]">
                 {p.photos.length > 0 && (
-                  <img src={p.photos[0].url} alt={p.title} className="w-full h-32 object-cover rounded-lg mb-2" />
+                  <div className="relative w-full h-32 mb-2">
+                    <Image
+                      src={p.photos[0].url}
+                      alt={p.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 200px"
+                      className="object-cover rounded-lg"
+                    />
+                  </div>
                 )}
                 <p className="font-medium text-sm">{p.title}</p>
                 <button onClick={() => onRemove(p.id)} className="text-xs text-red-500 hover:text-red-700 mt-1">

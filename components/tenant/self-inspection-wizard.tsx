@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { createSelfInspection, addInspectionRoom, submitSelfInspection } from "../../lib/api/tenant-services"
+import { createSelfInspection, addInspectionRoom, submitSelfInspection, unwrapData } from "../../lib/api/tenant-services"
 
 type InspectionType = "move_in" | "move_out" | "periodic"
 type Condition = "excellent" | "good" | "fair" | "poor"
@@ -41,8 +41,9 @@ export function SelfInspectionWizard() {
     setError(null)
     if (step === 0) {
       try {
-        const res: any = await createSelfInspection({ type: inspectionType, scheduledDate: inspectionDate })
-        const id = res?.data?.inspection?.id ?? res?.inspection?.id ?? res?.id
+        const res = await createSelfInspection({ type: inspectionType, scheduledDate: inspectionDate })
+        const wrapped = unwrapData<{ inspection?: { id?: string }; id?: string }>(res) ?? (res as { inspection?: { id?: string }; id?: string })
+        const id = wrapped?.inspection?.id ?? wrapped?.id
         if (id) setInspectionId(id)
       } catch {
         // Allow continuing even if API fails — id will be null
@@ -130,16 +131,16 @@ export function SelfInspectionWizard() {
         <div className="space-y-4">
           <h2 className="text-base font-semibold text-gray-900">Start Inspection</h2>
           <div>
-            <label className="text-sm text-gray-600 block mb-1">Inspection Type</label>
-            <select className="w-full border rounded-lg px-3 py-2 text-sm" value={inspectionType} onChange={(e) => setInspectionType(e.target.value as InspectionType)}>
+            <label htmlFor="inspection-type" className="text-sm text-gray-600 block mb-1">Inspection Type</label>
+            <select id="inspection-type" className="w-full border rounded-lg px-3 py-2 text-sm" value={inspectionType} onChange={(e) => setInspectionType(e.target.value as InspectionType)}>
               <option value="move_in">Move-In</option>
               <option value="move_out">Move-Out</option>
               <option value="periodic">Periodic</option>
             </select>
           </div>
           <div>
-            <label className="text-sm text-gray-600 block mb-1">Inspection Date</label>
-            <input type="date" className="w-full border rounded-lg px-3 py-2 text-sm" value={inspectionDate} onChange={(e) => setInspectionDate(e.target.value)} />
+            <label htmlFor="inspection-date" className="text-sm text-gray-600 block mb-1">Inspection Date</label>
+            <input id="inspection-date" type="date" className="w-full border rounded-lg px-3 py-2 text-sm" value={inspectionDate} onChange={(e) => setInspectionDate(e.target.value)} />
           </div>
         </div>
       )}

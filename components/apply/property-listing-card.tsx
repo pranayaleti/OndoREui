@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import type { PropertySummary } from "@/lib/api/applications"
 
@@ -17,20 +18,26 @@ export function PropertyListingCard({ property, applyUrl }: PropertyListingCardP
       {/* Photos */}
       {photos.length > 0 ? (
         <div className="relative h-64 bg-muted">
-          <img
-            src={photos[imgIdx]?.url}
+          <Image
+            src={photos[imgIdx]?.url ?? ""}
             alt={photos[imgIdx]?.caption || property.title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 600px"
+            className="object-cover"
           />
           {photos.length > 1 && (
             <>
               <button
+                type="button"
+                aria-label="Previous photo"
                 onClick={() => setImgIdx((i) => (i - 1 + photos.length) % photos.length)}
                 className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
               >
                 &lt;
               </button>
               <button
+                type="button"
+                aria-label="Next photo"
                 onClick={() => setImgIdx((i) => (i + 1) % photos.length)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
               >

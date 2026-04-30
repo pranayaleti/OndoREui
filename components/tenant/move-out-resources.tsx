@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getMoveOutResources } from "../../lib/api/tenant-services"
+import { getMoveOutResources, unwrapData } from "../../lib/api/tenant-services"
 
 interface MoveOutResource {
   id: string
@@ -17,8 +17,8 @@ export function MoveOutResources() {
 
   useEffect(() => {
     getMoveOutResources()
-      .then((res: any) => {
-        const data = res?.data ?? res ?? []
+      .then((res) => {
+        const data = unwrapData<MoveOutResource[]>(res) ?? (res as MoveOutResource[] | null) ?? []
         setResources(Array.isArray(data) ? data : [])
       })
       .catch(() => setResources([]))

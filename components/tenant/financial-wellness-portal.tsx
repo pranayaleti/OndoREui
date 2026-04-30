@@ -5,7 +5,7 @@ import {
   getFinancialWellness,
   getPaymentScore,
   updateSavingsGoal,
-  getCreditReportingStatus,
+  unwrapData,
 } from "../../lib/api/tenant-services"
 
 interface PaymentScore {
@@ -49,9 +49,9 @@ export function FinancialWellnessPortal() {
 
   useEffect(() => {
     Promise.all([getFinancialWellness(), getPaymentScore()])
-      .then(([fw, ps]: any) => {
-        setFinancial(fw?.data ?? fw ?? null)
-        setScoreData(ps?.data ?? ps ?? null)
+      .then(([fw, ps]) => {
+        setFinancial(unwrapData<FinancialData>(fw) ?? (fw as FinancialData | null) ?? null)
+        setScoreData(unwrapData<PaymentScore>(ps) ?? (ps as PaymentScore | null) ?? null)
       })
       .catch(() => setError("Failed to load financial data."))
       .finally(() => setLoading(false))
@@ -61,12 +61,13 @@ export function FinancialWellnessPortal() {
     if (!goalForm.label.trim()) return
     setSavingGoal(true)
     try {
-      const res: any = await updateSavingsGoal({
+      const res = await updateSavingsGoal({
         label: goalForm.label,
         currentAmount: parseFloat(goalForm.currentAmount) || 0,
         targetAmount: parseFloat(goalForm.targetAmount) || 0,
       })
-      const updated = res?.data?.savingsGoals ?? res?.savingsGoals
+      const wrapped = unwrapData<{ savingsGoals?: SavingsGoal[] }>(res) ?? (res as { savingsGoals?: SavingsGoal[] })
+      const updated = wrapped?.savingsGoals
       if (updated && financial) setFinancial({ ...financial, savingsGoals: updated })
       setAddingGoal(false)
       setGoalForm({ label: "", currentAmount: "", targetAmount: "" })

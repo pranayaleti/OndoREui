@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 interface Amenity {
   id: string
@@ -44,8 +44,8 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
       await onBook(selectedAmenity, bookingDate, startTime, endTime)
       setSelectedAmenity("")
       setBookingDate("")
-    } catch (err: any) {
-      setError(err.message || "Failed to book")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to book")
     } finally {
       setBooking(false)
     }
@@ -90,8 +90,8 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Book an Amenity</h3>
           <div className="bg-card border rounded-lg p-4 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Amenity</label>
-              <select className={inputClass} value={selectedAmenity} onChange={(e) => setSelectedAmenity(e.target.value)}>
+              <label htmlFor="amenity-select" className="block text-sm font-medium text-gray-700 mb-1">Amenity</label>
+              <select id="amenity-select" className={inputClass} value={selectedAmenity} onChange={(e) => setSelectedAmenity(e.target.value)}>
                 <option value="">Select amenity...</option>
                 {amenities.map((a) => (
                   <option key={a.id} value={a.id}>{a.name}</option>
@@ -112,16 +112,16 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
 
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                <input className={inputClass} type="date" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} />
+                <label htmlFor="amenity-date" className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                <input id="amenity-date" className={inputClass} type="date" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Start</label>
-                <input className={inputClass} type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+                <label htmlFor="amenity-start" className="block text-sm font-medium text-gray-700 mb-1">Start</label>
+                <input id="amenity-start" className={inputClass} type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">End</label>
-                <input className={inputClass} type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+                <label htmlFor="amenity-end" className="block text-sm font-medium text-gray-700 mb-1">End</label>
+                <input id="amenity-end" className={inputClass} type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
               </div>
             </div>
 
