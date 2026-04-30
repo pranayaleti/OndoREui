@@ -58,8 +58,9 @@ function getLastmod(path) {
 
 // Priority tiers:
 //  1.0 — homepage
-//  0.9 — primary service pages (buy, sell, loans, contact, properties)
-//  0.8 — secondary landing pages (investments, calculators index, blog index, about, faq index)
+//  0.9 — primary service pages (buy, sell, loans, contact, properties index)
+//  0.8 — secondary landing pages (investments, calculators index, blog index,
+//        about, faq index, individual property listing pages)
 //  0.7 — content pages (blog posts, calculator sub-pages, faq sub-pages)
 //  0.5 — utility pages (resources, notary, news, privacy, terms)
 function getPriority(path) {
@@ -67,6 +68,10 @@ function getPriority(path) {
   if (p === '/') return 1.0
   const tier9 = ['/buy', '/sell', '/loans', '/contact', '/properties']
   if (tier9.includes(p)) return 0.9
+  // Individual listing detail pages get tier 8 — they're crawl-worthy but
+  // less important than the index. Each listing also benefits from a fresh
+  // BUILD_DATE lastmod (the listing data is regenerated each build).
+  if (/^\/properties\/[^/]+$/.test(p)) return 0.8
   const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = [
@@ -108,6 +113,13 @@ function buildAlternateRefs(path, siteUrl) {
 function isExcludedPath(path) {
   const p = normalizeSitemapPath(path)
   if (p === '/login' || p === '/feedback' || p === '/health') {
+    return true
+  }
+  // /properties/_placeholder is the build-time stub emitted by
+  // generateStaticParams in app/properties/[publicId]/page.tsx when the
+  // backend is unreachable during the build (CI without BACKEND_BASE_URL).
+  // It must never appear in the public sitemap or robots.txt.
+  if (p === '/properties/_placeholder') {
     return true
   }
 
