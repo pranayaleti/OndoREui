@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import i18n from '@/lib/i18n'
 import { I18nextProvider } from 'react-i18next'
+import { initSentry } from '@/lib/sentry'
 
 /** True only when i18n is initialized AND the default namespace is in memory. */
 function translationsReady(): boolean {
@@ -11,6 +12,13 @@ function translationsReady(): boolean {
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [isReady, setIsReady] = useState(translationsReady)
+
+  // Sentry boots once on the first client render so any error in the
+  // subtree (including the i18n loading path) is captured. No-op when
+  // NEXT_PUBLIC_SENTRY_DSN is unset.
+  useEffect(() => {
+    initSentry()
+  }, [])
 
   useEffect(() => {
     if (translationsReady()) {

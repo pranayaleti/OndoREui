@@ -4,6 +4,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertTriangle, RefreshCw } from 'lucide-react'
+import { captureException } from '@/lib/sentry'
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -37,6 +38,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
         fatal: false,
       })
     }
+
+    // Forward to Sentry with the React component stack as extra context.
+    // No-op when NEXT_PUBLIC_SENTRY_DSN is unset.
+    captureException(error, {
+      componentStack: errorInfo.componentStack,
+      digest:
+        (errorInfo as { digest?: string }).digest ?? null,
+    })
 
     this.setState({
       error,
