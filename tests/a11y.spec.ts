@@ -2,24 +2,32 @@ import { test, expect } from "@playwright/test"
 import AxeBuilder from "@axe-core/playwright"
 import type { Result } from "axe-core"
 
+/**
+ * Public routes that should never produce serious/critical axe violations.
+ *
+ * Authenticated portal routes (/dashboard, /tenant, /owner, /platform) are
+ * not included here because they redirect to login when unauthenticated, so
+ * an unconfigured Playwright run only ever sees the login form. Add an
+ * authenticated suite when E2E credentials are wired into CI.
+ */
 const routes = [
   "/",
   "/feedback",
   "/founders-letter",
   "/accessibility",
   "/contact",
-  "/dashboard",
+  "/login",
   // Primary marketing flows
   "/buy",
   "/sell",
   "/properties",
   "/loans",
   "/investments",
-  // Auth and portals
-  "/login",
-  "/tenant",
-  "/owner",
-  "/platform",
+  // New public/marketing routes added in Phase 0
+  "/locations",
+  "/privacy-policy",
+  // Dynamic-but-public routes (placeholder slugs covered by generateStaticParams)
+  "/properties/_placeholder",
 ]
 
 test.describe("Accessibility smoke tests", () => {
