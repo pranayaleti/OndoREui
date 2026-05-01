@@ -74,7 +74,7 @@ export function ServiceAreaSection() {
               </div>
             </div>
           ) : (
-            <p className="text-sm text-foreground/40 italic">Hover over a city to see market data</p>
+            <p className="text-sm text-foreground/70 italic">Hover over a city to see market data</p>
           )}
         </div>
 
@@ -82,7 +82,7 @@ export function ServiceAreaSection() {
         <div className="space-y-6">
           {groups.map(({ county, cities }) => (
             <div key={county} className={`rounded-xl p-4 ${COUNTY_BG[county]}`}>
-              <p className="text-xs font-semibold uppercase tracking-wide text-foreground/50 mb-3 flex items-center gap-1.5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-foreground/70 mb-3 flex items-center gap-1.5">
                 <span className={`inline-block h-2 w-2 rounded-full ${COUNTY_COLORS[county]}`} />
                 {county} County
               </p>

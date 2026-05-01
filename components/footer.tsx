@@ -448,7 +448,16 @@ const Footer = memo(() => {
                 >
                   OndoSoft
                 </Link>
-                <span>The digital engine behind <Link href="/" className="text-primary hover:text-primary/80 hover:underline">Ondo Real Estate</Link>.</span>
+                <span>
+                  The digital engine behind{" "}
+                  <Link
+                    href="/"
+                    className="font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-4 hover:text-primary"
+                  >
+                    Ondo Real Estate
+                  </Link>
+                  .
+                </span>
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">

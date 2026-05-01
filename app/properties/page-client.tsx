@@ -545,7 +545,12 @@ export default function PropertiesClient() {
             )}
 
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Loading properties">
+              <div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                role="status"
+                aria-live="polite"
+                aria-label="Loading properties"
+              >
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="bg-card rounded-lg shadow-sm border overflow-hidden animate-pulse">
                     <div className="aspect-video bg-muted" />

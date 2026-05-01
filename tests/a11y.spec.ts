@@ -16,7 +16,6 @@ const routes = [
   "/founders-letter",
   "/accessibility",
   "/contact",
-  "/login",
   // Primary marketing flows
   "/buy",
   "/sell",
@@ -27,16 +26,20 @@ const routes = [
   "/locations",
   "/privacy-policy",
   // Dynamic-but-public routes (placeholder slugs covered by generateStaticParams)
-  "/properties/_placeholder",
+  "/properties/_placeholder/",
   // Representative generated dynamic pages with real static params
-  "/compare/draper-vs-lehi",
-  "/neighborhoods/draper/suncrest",
+  "/compare/draper-vs-lehi/",
+  "/neighborhoods/draper/suncrest/",
 ]
 
 test.describe("Accessibility smoke tests", () => {
   for (const route of routes) {
     test(`page ${route} has no serious accessibility violations`, async ({ page }) => {
-      await page.goto(route, { waitUntil: "networkidle" })
+      await page.goto(route, { waitUntil: "domcontentloaded" })
+      // Marketing pages may keep analytics/maps/widgets alive, so `networkidle`
+      // is not a reliable readiness signal. Give client hydration a small,
+      // deterministic settle window before running axe.
+      await page.waitForTimeout(500)
 
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa"])

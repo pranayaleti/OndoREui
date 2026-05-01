@@ -27,7 +27,7 @@ export function FoundersNoteSection() {
               modern property management and real estate platform rooted in trust, transparency, and technology so Utah
               owners rest easy and tenants feel right at home."
             </p>
-            <Button asChild className="bg-primary hover:bg-primary text-foreground">
+            <Button asChild className="bg-primary hover:bg-primary text-primary-foreground">
               <Link href="/founders-letter">Read the full letter</Link>
             </Button>
           </div>

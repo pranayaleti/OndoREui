@@ -285,7 +285,7 @@ export default function FoundersLetterPage() {
               <p className="text-foreground/70 text-sm mb-4">Ready to experience the future of property management?</p>
               <Link
                 href="/contact"
-                className="inline-flex w-full items-center justify-center bg-primary hover:bg-primary text-foreground px-6 py-3 rounded-lg font-semibold transition-colors"
+                className="inline-flex w-full items-center justify-center bg-primary hover:bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors"
               >
                 Schedule a Consultation
               </Link>
