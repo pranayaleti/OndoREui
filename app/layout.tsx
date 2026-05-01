@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
+import { DEFAULT_LOCALE } from "@/lib/locales"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -153,8 +154,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const rb2bKey = process.env['NEXT_PUBLIC_RB2B_KEY']
+  // Static export has no request-time locale segment/cookie, so SSR must emit
+  // the default locale. I18nProvider updates document.documentElement.lang on
+  // the client after reading the user's saved locale.
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang={DEFAULT_LOCALE} suppressHydrationWarning className="dark">
       <head>
         {/* Preconnect to external domains for faster resource loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

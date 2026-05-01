@@ -35,6 +35,9 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
+    // Static export ships <html lang="en"> from app/layout.tsx. Once the
+    // browser loads the saved i18n preference, keep the DOM lang in sync for
+    // screen readers and browser translation heuristics.
     const updateHtmlLang = (lng: string) => { document.documentElement.lang = lng }
     i18n.on('languageChanged', updateHtmlLang)
     if (i18n.language) updateHtmlLang(i18n.language)
