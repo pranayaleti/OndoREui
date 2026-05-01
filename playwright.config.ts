@@ -21,7 +21,10 @@ export default defineConfig({
   webServer: {
     command: "npm run dev -- --hostname 127.0.0.1 --port 3000",
     url: "http://127.0.0.1:3000",
-    reuseExistingServer: !process.env.CI,
+    // Reuse if a local dev/preview server is already running. If none is
+    // reachable, Playwright starts the command above. This avoids EADDRINUSE in
+    // local agent sessions while still booting cleanly in CI.
+    reuseExistingServer: true,
     timeout: 120_000,
     env: {
       NEXT_PUBLIC_BACKEND_BASE_URL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL ?? "http://localhost:3030",
