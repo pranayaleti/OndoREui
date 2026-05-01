@@ -28,6 +28,9 @@ const routes = [
   "/privacy-policy",
   // Dynamic-but-public routes (placeholder slugs covered by generateStaticParams)
   "/properties/_placeholder",
+  // Representative generated dynamic pages with real static params
+  "/compare/draper-vs-lehi",
+  "/neighborhoods/draper/suncrest",
 ]
 
 test.describe("Accessibility smoke tests", () => {
