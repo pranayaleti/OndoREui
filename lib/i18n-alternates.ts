@@ -21,7 +21,9 @@ export const BCP47_BY_LOCALE: Record<SupportedLocale, string> = {
  * resolves to the same English URL; claiming per-locale hreflang on identical
  * URLs would confuse search engines.
  */
-const LOCALE_ROUTING_ENABLED = process.env["NEXT_PUBLIC_I18N_ROUTED"] === "1"
+export function isLocaleRoutingEnabled(): boolean {
+  return process.env["NEXT_PUBLIC_I18N_ROUTED"] === "1"
+}
 
 function normalizePath(path: string): string {
   if (!path || path === "/") return "/"
@@ -41,7 +43,7 @@ export function buildSitemapAlternateRefs(
   path: string,
 ): Array<{ href: string; hreflang: string }> {
   const canonical = joinUrl(SITE_URL, path)
-  if (!LOCALE_ROUTING_ENABLED) {
+  if (!isLocaleRoutingEnabled()) {
     return [
       { href: canonical, hreflang: "x-default" },
       { href: canonical, hreflang: BCP47_BY_LOCALE.en },
@@ -61,7 +63,7 @@ export function buildSitemapAlternateRefs(
  */
 export function buildMetadataLanguages(path: string): Record<string, string> {
   const canonical = joinUrl(SITE_URL, path)
-  if (!LOCALE_ROUTING_ENABLED) {
+  if (!isLocaleRoutingEnabled()) {
     return {
       "x-default": canonical,
       [BCP47_BY_LOCALE.en]: canonical,
