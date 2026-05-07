@@ -1,6 +1,7 @@
 {
   "nav": {
     "buy": "Comprar",
+    "explore": "Explorar",
     "sell": "Vender",
     "properties": "Propiedades",
     "loans": "Préstamos",
@@ -28,7 +29,6 @@
     "about": "Acerca de",
     "contact": "Contacto",
     "more": "Más",
-    "explore": "Explorar",
     "search": "Buscar",
     "portal": "Portal de gestión de propiedades",
     "portalShort": "Portal"

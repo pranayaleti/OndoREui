@@ -32,6 +32,7 @@ export interface NavigationItem {
 export const allNavigationItems: NavigationItem[] = [
   // Core journeys (pinned in primary nav)
   { href: "/buy", labelKey: "nav.buy" },
+  { href: "/explore", labelKey: "nav.explore" },
   { href: "/sell", labelKey: "nav.sell" },
   { href: "/properties", labelKey: "nav.properties" },
   { href: "/loans", labelKey: "nav.loans" },
