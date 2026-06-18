@@ -8,6 +8,9 @@ import Loading from "@/components/loading"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 
 const slugToComponent: Record<string, ComponentType> = {
+  "owner-vs-self": dynamic(() => import("@/pages/calculators/owner-vs-self-calculator"), {
+    loading: () => <Loading />
+  }),
   "mortgage-payment": dynamic(() => import("@/pages/calculators/mortgage-payment-calculator"), {
     loading: () => <Loading />
   }),

@@ -1,6 +1,6 @@
 {
   "privateRoutePrefixes": ["/dashboard", "/owner", "/tenant", "/platform", "/auth", "/admin", "/api"],
-  "extraDisallow": ["/login", "/feedback", "/health"],
+  "extraDisallow": ["/login", "/feedback", "/health", "/verify", "/invite", "/unsubscribe"],
   "aiCrawlerAgents": [
     "GPTBot",
     "ChatGPT-User",

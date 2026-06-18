@@ -3,6 +3,12 @@ export const CALCULATOR_CATALOG: Record<
   string,
   { name: string; description: string; applicationCategory?: string }
 > = {
+  "owner-vs-self": {
+    name: "Self-Manage vs Ondo RE Calculator",
+    description:
+      "Compare annual net income from self-managing your Utah rental vs handing it to Ondo — including the hidden cost of your own time.",
+    applicationCategory: "FinancialApplication",
+  },
   "mortgage-payment": {
     name: "Mortgage Payment Calculator",
     description: "Estimate monthly mortgage payments with taxes, insurance, and PMI.",

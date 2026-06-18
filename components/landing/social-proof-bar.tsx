@@ -11,13 +11,27 @@ const stats = [
 ]
 
 function useCountUp(target: number, decimals = 0, duration = 1200) {
-  const [value, setValue] = useState(0)
+  // Initialize at the TARGET value so SSR + first paint render the real number
+  // ("55+" not "0+"). This matters for SEO crawlers and avoids the placeholder-y
+  // "0+" flash users saw before JS hydrated.
+  const [value, setValue] = useState(target)
   const ref = useRef<HTMLSpanElement>(null)
   const started = useRef(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    // Respect reduced-motion preference: skip animation entirely.
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) return
+
+    // Drop to 0 only AFTER mount (post-hydration) so SEO + above-the-fold paint
+    // still see the real target value. Then animate from 0 -> target when the
+    // element scrolls into view.
+    setValue(0)
 
     const observer = new IntersectionObserver(
       ([entry]) => {

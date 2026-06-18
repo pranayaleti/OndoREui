@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Shield } from "lucide-react"
+import { Shield, Calculator } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LazyImage } from "@/components/lazy-image"
 
@@ -34,7 +34,7 @@ export function PropertyOwnerSection() {
                 <span className="dark:text-foreground/70">Regular property inspections and detailed owner reports</span>
               </li>
             </ul>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <Button asChild className="bg-background hover:bg-muted dark:hover:bg-muted text-foreground">
                 <Link href="/property-management">Property management services</Link>
               </Button>
@@ -42,6 +42,14 @@ export function PropertyOwnerSection() {
                 <Link href="/contact">Talk to our team</Link>
               </Button>
             </div>
+            <Link
+              href="/calculators/owner-vs-self"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
+            >
+              <Calculator className="h-4 w-4" aria-hidden="true" />
+              Run the numbers: self-manage vs Ondo
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+            </Link>
           </div>
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <LazyImage

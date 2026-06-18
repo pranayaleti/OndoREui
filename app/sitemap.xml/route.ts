@@ -1,9 +1,12 @@
 import { backendUrl } from "@/lib/backend"
 import { SITE_URL } from "@/lib/site"
+import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 
 /**
  * Dynamic sitemap. Includes:
  *   - Static marketing routes
+ *   - Every calculator slug from CALCULATOR_CATALOG (auto-updates when a new
+ *     calculator is registered — no sitemap edit needed)
  *   - One entry per active public property listing (sourced from /api/properties/public)
  *
  * Cached for 1 hour to keep the response cheap; Google won't re-crawl faster than
@@ -41,7 +44,22 @@ const STATIC_PATHS: string[] = [
   "/privacy-policy",
   "/terms-of-service",
   "/accessibility",
+  "/affiliate",
+  "/calculators",
+  "/qualify",
+  "/feedback",
+  "/notary",
+  "/get-matched",
+  "/compare-utah-property-managers",
+  "/whats-my-home-worth",
+  "/blog/ultimate-guide-becoming-utah-landlord-2026",
 ]
+
+// Auto-include every calculator slug. Adding a new calculator (see
+// lib/calculator-catalog.ts) requires no sitemap edit.
+const CALCULATOR_PATHS: string[] = Object.keys(CALCULATOR_CATALOG).map(
+  (slug) => `/calculators/${slug}`
+)
 
 async function fetchListings(): Promise<ApiPropertyLite[]> {
   try {
@@ -75,6 +93,13 @@ export async function GET() {
     return `  <url><loc>${escapeXml(loc)}</loc><changefreq>${p === "" ? "daily" : "weekly"}</changefreq><priority>${p === "" ? "1.0" : "0.7"}</priority></url>`
   })
 
+  // Calculators: stable utility pages, low-priority but worth indexing for
+  // long-tail SEO ("Utah cap rate calculator", etc.).
+  const calculatorUrls = CALCULATOR_PATHS.map((p) => {
+    const loc = `${SITE_URL}${p}`
+    return `  <url><loc>${escapeXml(loc)}</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>`
+  })
+
   const listingUrls = listings.map((l) => {
     const id = encodeURIComponent(l.publicId ?? l.id ?? "")
     if (!id) return ""
@@ -86,7 +111,7 @@ export async function GET() {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...staticUrls, ...listingUrls].join("\n")}
+${[...staticUrls, ...calculatorUrls, ...listingUrls].join("\n")}
 </urlset>`
 
   return new Response(xml, {

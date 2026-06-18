@@ -1,4 +1,6 @@
 import Image from "next/image"
+import Link from "next/link"
+import { Calculator } from "lucide-react"
 import { HeroZipServiceSelectorLazy } from "@/components/landing/hero-zip-service-selector-lazy"
 
 export function HeroSection() {
@@ -30,6 +32,21 @@ export function HeroSection() {
         </section>
         <p className="mt-6 text-sm text-foreground/50">
           Trusted by property owners from North Ogden to Nephi &bull; 4.9★ average rating
+        </p>
+        {/*
+          Secondary CTA: owners shopping a property manager need a number to
+          chew on before they'll book a call. The ROI calculator is that
+          number. Kept low-key so it doesn't compete with the primary ZIP search.
+        */}
+        <p className="mt-5 text-sm text-foreground/80">
+          <Link
+            href="/calculators/owner-vs-self"
+            className="inline-flex items-center gap-1.5 font-medium text-primary hover:text-primary/80 transition-colors group"
+          >
+            <Calculator className="h-4 w-4" aria-hidden="true" />
+            Are you a Utah landlord? Run the numbers: self-manage vs Ondo
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
         </p>
       </div>
     </section>

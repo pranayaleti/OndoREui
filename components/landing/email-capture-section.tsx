@@ -1,22 +1,60 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { FileText, ArrowRight } from "lucide-react"
+import { FileText, ArrowRight, Loader2, AlertCircle } from "lucide-react"
+import { submitContactLead } from "@/lib/leads-api"
+import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { isValidEmail } from "@/lib/security"
+import { analytics } from "@/lib/analytics"
+
+type Status = "idle" | "submitting" | "success" | "error"
 
 export function EmailCaptureSection() {
   const [email, setEmail] = useState("")
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<Status>("idle")
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault()
-      if (!email) return
-      // Fire-and-forget to backend (or HubSpot form endpoint)
-      // For now just show success — wire to /api/leads or HubSpot later
-      setSubmitted(true)
+      const trimmed = email.trim()
+      if (!trimmed || !isValidEmail(trimmed)) {
+        setErrorMsg("Please enter a valid email address.")
+        setStatus("error")
+        return
+      }
+      setStatus("submitting")
+      setErrorMsg(null)
+
+      // Derive a friendly name from the email local-part — backend requires `name`.
+      const localPart = trimmed.split("@")[0] ?? "Subscriber"
+      const friendlyName = localPart
+        .replace(/[._-]+/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase())
+        .slice(0, 80) || "Lead Magnet Subscriber"
+
+      const result = await submitContactLead({
+        name: friendlyName,
+        email: trimmed,
+        source: "website",
+        message: "Requested: Utah Landlord's Property Management Checklist (PDF lead magnet).",
+        attribution: getAttributionPayloadForApi(),
+      })
+
+      if ("error" in result) {
+        setErrorMsg(result.error || "Something went wrong. Please try again.")
+        setStatus("error")
+        analytics.trackFormSubmission("lead_magnet_landlord_checklist", false)
+        return
+      }
+      setStatus("success")
+      analytics.trackLeadGeneration("lead_magnet_landlord_checklist")
+      analytics.trackFormSubmission("lead_magnet_landlord_checklist", true)
     },
     [email]
   )
+
+  const submitted = status === "success"
 
   return (
     <section className="py-16 bg-primary/5 dark:bg-primary/10">
@@ -51,27 +89,52 @@ export function EmailCaptureSection() {
           </ul>
 
           {submitted ? (
-            <p className="text-primary font-semibold py-4">
+            <p className="text-primary font-semibold py-4" role="status" aria-live="polite">
               Check your inbox — the guide is on its way.
             </p>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>
               <input
                 type="email"
                 required
+                aria-label="Email address"
+                aria-invalid={status === "error"}
                 placeholder="you@example.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary"
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  if (status === "error") {
+                    setStatus("idle")
+                    setErrorMsg(null)
+                  }
+                }}
+                disabled={status === "submitting"}
+                className="flex-1 rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60"
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                disabled={status === "submitting"}
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Get the guide
-                <ArrowRight className="h-4 w-4" />
+                {status === "submitting" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    Get the guide
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
               </button>
             </form>
+          )}
+          {status === "error" && errorMsg && (
+            <p className="mt-3 inline-flex items-center justify-center gap-1.5 text-sm text-destructive" role="alert">
+              <AlertCircle className="h-4 w-4" aria-hidden="true" />
+              {errorMsg}
+            </p>
           )}
           <p className="text-xs text-foreground/50 mt-3">No spam. Unsubscribe anytime.</p>
         </div>

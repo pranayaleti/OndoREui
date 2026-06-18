@@ -20,6 +20,8 @@ import { CachePurge } from "@/components/cache-purge"
 import { AttributionCapture } from "@/components/attribution-capture"
 import { FirstVisitLeadPopup } from "@/components/first-visit-lead-popup"
 import ServiceWorkerRegistrar from "@/components/sw-register"
+import { TrackingTags, GoogleTagManagerNoscript } from "@/components/analytics/tracking-tags"
+import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
@@ -153,7 +155,6 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const rb2bKey = process.env['NEXT_PUBLIC_RB2B_KEY']
   // Static export has no request-time locale segment/cookie, so SSR must emit
   // the default locale. I18nProvider updates document.documentElement.lang on
   // the client after reading the user's saved locale.
@@ -188,11 +189,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* CSP: no upgrade-insecure-requests — it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts. Note: unsafe-inline kept for style-src (required by Next.js inline styles). unsafe-eval added only in dev (React Refresh requires it). */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self';`}
+          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.className} ${outfit.variable} min-h-screen bg-background text-foreground`}>
+        {/* GTM <noscript> iframe — must live at the top of <body>. No-op when NEXT_PUBLIC_GTM_ID is unset. */}
+        <GoogleTagManagerNoscript />
         {/* NOTE(i18n): server component — translate when Next.js i18n routing is added */}
         <a
           href="#main-content"
@@ -216,28 +219,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <Footer />
           </div>
+          {/* Floating WhatsApp CTA — env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
+          <WhatsAppFloatButton />
         </RootProvidersClient>
         <JsonLd
           id="global-jsonld"
           data={[generateRealEstateBusinessJsonLd(), generateWebsiteJsonLd()].filter(Boolean)}
         />
-        {/* Google Analytics - Deferred to reduce render blocking and unused JS */}
-        {process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'] ? (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID']}`}
-              strategy="lazyOnload"
-            />
-            <Script id="google-analytics" strategy="lazyOnload">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID']}');
-              `}
-            </Script>
-          </>
-        ) : null}
+        {/* Google Analytics moved into the geo-gated <TrackingTags /> bundle
+            (below) — GA sets cookies and needs consent in EU/EEA too. */}
         {/* HubSpot Tracking Code — enables page view attribution for leads */}
         {process.env['NEXT_PUBLIC_HUBSPOT_PORTAL_ID'] ? (
           <Script
@@ -246,27 +236,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src={`https://js.hs-scripts.com/${process.env['NEXT_PUBLIC_HUBSPOT_PORTAL_ID']}.js`}
           />
         ) : null}
+        {/*
+          Marketing / retargeting tracking pixels.
+          Each pixel is a no-op until its env var is set, so the same build
+          is safe in dev (no env) and prod (with env vars in deploy config).
+          Configure NEXT_PUBLIC_GTM_ID and add Meta/TikTok/LinkedIn inside GTM,
+          OR set the individual pixel IDs to load them as standalone scripts.
+        */}
+        <TrackingTags />
         {/* Vercel Analytics disabled for static exports - only works on Vercel platform */}
         {/* {process.env['NEXT_PUBLIC_VERCEL'] && <Analytics />} */}
-        {/* rb2b Script (optional) - keep off by default for static export */}
-        {rb2bKey ? (
-          <Script
-            id="rb2b-script"
-            strategy="lazyOnload"
-            dangerouslySetInnerHTML={{
-              __html: `
-                !function(key) {
-                  if (window.reb2b) return;
-                  window.reb2b = {loaded: true};
-                  var s = document.createElement("script");
-                  s.async = true;
-                  s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";
-                  document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
-                }("${rb2bKey}");
-              `,
-            }}
-          />
-        ) : null}
+        {/* rb2b moved into the geo-gated <TrackingTags /> bundle (above) for
+            privacy compliance — see components/analytics/tracking-tags.tsx. */}
       </body>
     </html>
   )

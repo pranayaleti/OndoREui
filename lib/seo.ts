@@ -8,6 +8,7 @@ import {
   SITE_EMAILS,
   SITE_BRAND_SHORT,
 } from "./site"
+import { testimonials } from "./testimonials"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 
@@ -165,7 +166,7 @@ export function generateOrganizationJsonLd() {
       { "@type": "AdministrativeArea", name: "Utah County" },
     ],
     openingHours: SITE_HOURS,
-    sameAs: SITE_SOCIALS,
+    sameAs: [...SITE_SOCIALS],
     address: {
       ...SITE_ADDRESS_OBJ,
     },
@@ -192,7 +193,63 @@ export function generateOrganizationJsonLd() {
  * Generate RealEstateBusiness JSON-LD (richer than Organization — includes
  * foundingDate, founder, openingHoursSpecification, and hasOfferCatalog).
  */
+/**
+ * Build AggregateRating + Review nodes from the testimonials library.
+ *
+ * Only "Owner" and "Investor" testimonials are surfaced as Reviews here so the
+ * schema is unambiguously about the *business* (B2C tenant reviews are fine
+ * for the LocalBusiness but Google tends to prefer service-provider reviews
+ * for the local pack). All testimonials still feed the AggregateRating count
+ * since rating averages are about the entity as a whole.
+ *
+ * Returns `undefined` when no rated testimonials exist so callers can spread
+ * the result without leaving stub fields in the JSON-LD output.
+ */
+function buildBusinessRatingAndReviews() {
+  const rated = testimonials.filter((t) => typeof t.rating === "number" && t.rating > 0)
+  if (rated.length === 0) return undefined
+
+  const ratingValue = (rated.reduce((sum, t) => sum + t.rating, 0) / rated.length).toFixed(2)
+
+  // Limit the embedded Review list — Google prefers a small curated set; the
+  // AggregateRating count carries the full social proof.
+  const REVIEW_LIMIT = 6
+  const featuredReviews = rated
+    .filter((t) => t.role === "Owner" || t.role === "Investor")
+    .slice(0, REVIEW_LIMIT)
+    .map((t) => ({
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: t.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      author: {
+        '@type': 'Person',
+        name: t.name,
+      },
+      reviewBody: t.quote,
+      itemReviewed: {
+        '@type': 'LocalBusiness',
+        name: SITE_NAME,
+      },
+    }))
+
+  return {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      reviewCount: rated.length,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    ...(featuredReviews.length > 0 ? { review: featuredReviews } : {}),
+  }
+}
+
 export function generateRealEstateBusinessJsonLd() {
+  const ratingAndReviews = buildBusinessRatingAndReviews()
   return {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'RealEstateBusiness', 'RealEstateAgent'],
@@ -232,7 +289,7 @@ export function generateRealEstateBusinessJsonLd() {
       '@type': 'PostalAddress',
       ...SITE_ADDRESS_OBJ,
     },
-    sameAs: SITE_SOCIALS,
+    sameAs: [...SITE_SOCIALS],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Real Estate Services',
@@ -261,6 +318,11 @@ export function generateRealEstateBusinessJsonLd() {
         areaServed: 'Utah',
       },
     ],
+    // AggregateRating + Review nodes unlock the gold-star rich snippet in
+    // Google SERPs for branded + local-pack queries. Sourced from the
+    // testimonials library so adding/removing testimonials updates schema
+    // automatically.
+    ...(ratingAndReviews ?? {}),
   }
 }
 

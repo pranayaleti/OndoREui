@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { memo, useEffect, useRef, useState } from "react"
 import {
-  SITE_SOCIALS,
+  SITE_SOCIAL_LINKS,
   SITE_ADDRESS,
   SITE_PHONE,
   SITE_EMAILS,
@@ -194,15 +194,19 @@ const Footer = memo(() => {
     { pattern: "g.page", name: "Google Business", Component: GoogleBusinessIcon, hover: "hover:text-green-500" },
   ]
 
-  const socials = SITE_SOCIALS
-    .map((href) => {
+  // Only render socials marked `live` in lib/site.ts. Dead accounts in the
+  // footer hurt trust and confuse Google's sameAs crawl. Flip `live: true`
+  // per platform in SITE_SOCIAL_LINKS once each account is real.
+  const socials = SITE_SOCIAL_LINKS
+    .filter((s) => s.live)
+    .map(({ url: href }) => {
       const lower = href.toLowerCase()
       const match = socialMediaMap.find(item => lower.includes(item.pattern))
       if (match) {
-        return { 
-          name: match.name, 
-          Component: match.Component, 
-          href, 
+        return {
+          name: match.name,
+          Component: match.Component,
+          href,
           hover: match.hover,
           key: `${match.name}-${href}` // Add stable key for consistent rendering
         }
@@ -290,6 +294,7 @@ const Footer = memo(() => {
 
           {/* Mortgage Calculators */}
           <FooterNavSection label="Calculators" icon={<Calculator className="h-5 w-5" />} href="/calculators">
+            <li><Link href="/calculators/owner-vs-self" className="text-primary hover:text-primary/80 font-semibold">Self-manage vs Ondo ROI</Link></li>
             <li><Link href="/calculators/mortgage-payment" className="text-foreground/70 hover:text-foreground">Mortgage payment calculator</Link></li>
             <li><Link href="/calculators/affordability" className="text-foreground/70 hover:text-foreground">Affordability calculator</Link></li>
             <li><Link href="/calculators/income" className="text-foreground/70 hover:text-foreground">Income calculator</Link></li>

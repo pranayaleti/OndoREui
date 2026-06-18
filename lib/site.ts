@@ -85,18 +85,49 @@ export const SITE_EMAILS = {
 }
 
 
-// Centralized social profile URLs used across footer, metadata, and JSON-LD
-export const SITE_SOCIALS = [
-  "https://www.facebook.com/OndoRealEstate",
-  "https://www.youtube.com/@OndoRealEstate",
-  "https://www.instagram.com/OndoRealEstate",
-  "https://www.tiktok.com/@OndoRealEstate",
-  "https://www.linkedin.com/company/OndoRealEstate",
-  "https://x.com/OndoRealEstate",
-  "https://www.pinterest.com/ondorealestate",
-  "https://yelp.com/biz/ondo-real-estate-lehi",
-  "https://linktr.ee/ondorealestate",
-  // TODO: Implement WhatsApp group integration - temporarily commented out
-  // "https://chat.whatsapp.com/GFnQbVD7kriKlz3kHpTx2c",
-  // "https://www.reddit.com/user/ondorealestate/",
+/**
+ * Centralized social profile config used across footer, metadata, and JSON-LD.
+ *
+ * NOTE: Set `live: true` ONLY once the account is claimed, branded, and has at
+ * least 1 post. Listing a non-existent account in JSON-LD `sameAs` or rendering
+ * a dead icon in the footer is a soft negative trust signal — Google crawls
+ * sameAs URLs, and visitors who click on a dead account bounce harder.
+ *
+ * Flip flags to `true` per platform as you launch each account.
+ */
+export type SocialLink = {
+  url: string
+  /** When true, renders in the footer AND included in JSON-LD `sameAs`. */
+  live: boolean
+  /** Optional override label for analytics; defaults to platform name from URL. */
+  label?: string
+}
+
+export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
+  { url: "https://www.facebook.com/OndoRealEstate",      live: false },
+  { url: "https://www.youtube.com/@OndoRealEstate",      live: false },
+  { url: "https://www.instagram.com/OndoRealEstate",     live: false },
+  { url: "https://www.tiktok.com/@OndoRealEstate",       live: false },
+  { url: "https://www.linkedin.com/company/OndoRealEstate", live: false },
+  { url: "https://x.com/OndoRealEstate",                 live: false },
+  { url: "https://www.pinterest.com/ondorealestate",     live: false },
+  { url: "https://yelp.com/biz/ondo-real-estate-lehi",   live: false },
+  // Linktree is treated as the canonical "all our links" hub — keep live.
+  { url: "https://linktr.ee/ondorealestate",             live: true  },
+  // TODO: Implement WhatsApp group integration once the group is stable.
+  // { url: "https://chat.whatsapp.com/GFnQbVD7kriKlz3kHpTx2c", live: false },
+  // { url: "https://www.reddit.com/user/ondorealestate/",      live: false },
 ]
+
+/**
+ * Live-only social URLs (string array) — used by JSON-LD `sameAs`,
+ * metadata, and any code that historically read SITE_SOCIALS as URLs.
+ *
+ * Backwards-compatible with the previous string[] export.
+ */
+export const SITE_SOCIALS: readonly string[] = SITE_SOCIAL_LINKS
+  .filter((s) => s.live)
+  .map((s) => s.url)
+
+/** Every social URL regardless of live status — for marketing dashboards / audits. */
+export const SITE_SOCIALS_ALL: readonly string[] = SITE_SOCIAL_LINKS.map((s) => s.url)
