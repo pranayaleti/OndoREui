@@ -1,33 +1,22 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpBackend from 'i18next-http-backend';
 import enCommon from '@/public/locales/en/common.json';
-import { SUPPORTED_LOCALES } from '@/lib/locales';
 
 i18n
   .use(HttpBackend)
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    supportedLngs: [...SUPPORTED_LOCALES],
+    supportedLngs: ['en'],
     ns: ['common'],
     defaultNS: 'common',
-    /** Ship English in the bundle so nav labels resolve before HTTP; other locales still load from `/locales/`. */
     partialBundledLanguages: true,
     resources: {
-      en: {
-        common: enCommon,
-      },
+      en: { common: enCommon },
     },
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
-    },
-    detection: {
-      order: ['localStorage', 'navigator'],
-      caches: ['localStorage'],
-      lookupLocalStorage: 'ondo_locale',
     },
     interpolation: {
       escapeValue: false,

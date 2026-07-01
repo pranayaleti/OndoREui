@@ -16,7 +16,6 @@ import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigat
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL, SITE_PHONE } from "@/lib/site"
-import { LanguageSwitcher } from "@/components/language-switcher"
 import { useTranslation } from "react-i18next"
 
 const Header = memo(() => {
@@ -131,7 +130,6 @@ const Header = memo(() => {
             <Phone className="h-4 w-4 text-primary" />
             <span className="hidden lg:inline text-foreground/80">{SITE_PHONE}</span>
           </a>
-          <LanguageSwitcher />
           <Button
             variant="ghost"
             size="icon"
