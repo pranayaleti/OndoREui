@@ -1,0 +1,101 @@
+# Cache headers for GitHub Pages
+# Note: GitHub Pages supports _headers file for custom headers
+
+# Cache static assets for 1 year
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache images for 1 year
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache fonts for 1 year
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+/*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+/*.otf
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS and JS for 1 year (with versioning)
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML files - short cache with revalidation; keeps pages bfcache-eligible
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate, stale-while-revalidate=3600
+
+# JSON and XML files
+/*.json
+  Cache-Control: public, max-age=86400
+/*.xml
+  Cache-Control: public, max-age=86400
+
+# AI / crawler briefs (match route Cache-Control; longer edge cache is safe — content versioned by deploy)
+# CORS: allow browser-based assistants / extensions to fetch public indexes (read-only marketing content)
+/llms.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/llm.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/.well-known/llms.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/llms-full.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/llms.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/robots.txt
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/sitemap.xml
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/index.md
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/.well-known/agents.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Max-Age: 86400
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/.well-known/security.txt
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Security and document cache (root); short cache keeps HTML bfcache-eligible
+/*
+  Cache-Control: public, max-age=0, must-revalidate, stale-while-revalidate=3600
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), display-capture=()
+

@@ -1,0 +1,95 @@
+{
+  "name": "Ondo Real Estate",
+  "description": "Full-service real estate company — property management, home buying/selling, mortgage lending, and notary services across Utah's Wasatch Front.",
+  "url": "https://ondorealestate.com",
+  "contact": {
+    "email": "info@ondorealestate.com",
+    "phone": "+1-408-538-0420",
+    "address": {
+      "streetAddress": "2701 N Thanksgiving Way",
+      "addressLocality": "Lehi",
+      "addressRegion": "UT",
+      "postalCode": "84043",
+      "addressCountry": "US"
+    },
+    "hours": "Mo-Fr 09:00-17:00",
+    "schedule": "https://calendly.com/scheduleondo/30min"
+  },
+  "services": [
+    {
+      "name": "Property Management",
+      "url": "https://ondorealestate.com/property-management/",
+      "description": "Full-service residential property management including tenant screening, rent collection, maintenance coordination, and owner reporting."
+    },
+    {
+      "name": "Home Buying",
+      "url": "https://ondorealestate.com/buy/",
+      "description": "Buyer representation, MLS access, offer strategy, and closing coordination throughout Utah."
+    },
+    {
+      "name": "Home Selling",
+      "url": "https://ondorealestate.com/sell/",
+      "description": "Strategic listing, professional marketing, offer negotiation, and transaction coordination."
+    },
+    {
+      "name": "Mortgage & Home Loans",
+      "url": "https://ondorealestate.com/loans/",
+      "description": "In-house mortgage origination: conventional, FHA, VA, USDA, DSCR investor loans, and refinance."
+    },
+    {
+      "name": "Real Estate Investment",
+      "url": "https://ondorealestate.com/investments/",
+      "description": "Curated investment opportunities with due-diligence data; portfolio analysis; investor financing."
+    },
+    {
+      "name": "Remote Online Notary",
+      "url": "https://ondorealestate.com/notary/",
+      "description": "Utah-licensed RON (all 50 states) and mobile notary for real estate closings and general documents."
+    }
+  ],
+  "tools": [
+    {
+      "name": "mortgage_calculator",
+      "description": "Calculate monthly mortgage payment from principal, annual interest rate, and loan term.",
+      "url": "https://ondorealestate.com/calculators/",
+      "access": "read-only"
+    },
+    {
+      "name": "property_search",
+      "description": "Browse and filter available properties for sale or rent.",
+      "url": "https://ondorealestate.com/properties/",
+      "access": "read-only"
+    },
+    {
+      "name": "investment_opportunities",
+      "description": "List current real estate investment opportunities with filters.",
+      "url": "https://ondorealestate.com/investments/opportunities/",
+      "access": "read-only"
+    },
+    {
+      "name": "contact_form",
+      "description": "Submit a lead or inquiry (property management, buying, selling, loans, notary).",
+      "url": "https://ondorealestate.com/contact/",
+      "access": "confirmed-submit"
+    }
+  ],
+  "aiResources": {
+    "brief": "https://ondorealestate.com/llms.txt",
+    "briefSingularAlias": "https://ondorealestate.com/llm.txt",
+    "briefWellKnown": "https://ondorealestate.com/.well-known/llms.txt",
+    "full": "https://ondorealestate.com/llms-full.txt",
+    "structured": "https://ondorealestate.com/llms.json",
+    "overview": "https://ondorealestate.com/index.md",
+    "sitemap": "https://ondorealestate.com/sitemap.xml"
+  },
+  "guidance": [
+    "Platform access (owner/tenant/manager portals) is invitation-only. Direct interested parties to contact@ondorealestate.com.",
+    "Use /calculators/ for mortgage and investment estimates; recommend human follow-up for binding quotes.",
+    "All canonical public URLs use a trailing slash: https://ondorealestate.com/[path]/.",
+    "Paths under /dashboard, /owner, /tenant, /platform, /auth, /api are private and should not be surfaced in public answers."
+  ],
+  "privacyPolicy": "https://ondorealestate.com/privacy-policy/",
+  "termsOfService": "https://ondorealestate.com/terms-of-service/",
+  "schema": "https://schema.org/RealEstateAgent",
+  "updated": "2026-04-09"
+}
