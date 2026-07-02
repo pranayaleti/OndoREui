@@ -3,7 +3,6 @@
 // move client-only sections into a "use client" subtree wired to useTranslation.
 import { Metadata } from "next"
 import Link from "next/link"
-import { notFound } from "next/navigation"
 import { backendUrl } from "@/lib/backend"
 import { generatePropertyJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
@@ -16,7 +15,16 @@ import type { ApiProperty } from "@/app/types/property"
  * we don't actually deliver. fetchProperty is invoked at build time from
  * generateStaticParams + generateMetadata + the page render.
  */
+/**
+ * Sentinel emitted by generateStaticParams when the backend is unreachable at
+ * build time (e.g. deploy job without NEXT_PUBLIC_BACKEND_BASE_URL). It must
+ * never hit the network and must never call notFound() — see PLACEHOLDER_ID
+ * handling in the page/metadata below.
+ */
+const PLACEHOLDER_ID = "_placeholder"
+
 async function fetchProperty(publicId: string): Promise<ApiProperty | null> {
+  if (publicId === PLACEHOLDER_ID) return null
   try {
     const res = await fetch(backendUrl(`/api/properties/public/${encodeURIComponent(publicId)}`))
     if (!res.ok) return null
@@ -53,7 +61,7 @@ export async function generateStaticParams(): Promise<Array<{ publicId: string }
       console.warn(
         `[properties/[publicId]] generateStaticParams: backend returned ${res.status}; emitting placeholder`
       )
-      return [{ publicId: "_placeholder" }]
+      return [{ publicId: PLACEHOLDER_ID }]
     }
     const body = await res.json()
     // Backend may return an array or { data: [...] }; tolerate both.
@@ -66,20 +74,20 @@ export async function generateStaticParams(): Promise<Array<{ publicId: string }
       .map((p) => p.publicId ?? p.public_id ?? p.id)
       .filter((id): id is string => typeof id === "string" && id.length > 0)
       .map((publicId) => ({ publicId }))
-    return params.length > 0 ? params : [{ publicId: "_placeholder" }]
+    return params.length > 0 ? params : [{ publicId: PLACEHOLDER_ID }]
   } catch (err) {
     console.warn(
       "[properties/[publicId]] generateStaticParams: fetch failed; emitting placeholder",
       err
     )
-    return [{ publicId: "_placeholder" }]
+    return [{ publicId: PLACEHOLDER_ID }]
   }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { publicId } = await params
   const property = await fetchProperty(publicId)
-  if (!property) return { title: "Property not found" }
+  if (!property) return { title: "Property not found", robots: { index: false, follow: false } }
 
   const cityState = [property.city, property.state].filter(Boolean).join(", ")
   const title = `${property.title} – ${cityState} | ${SITE_NAME}`
@@ -118,10 +126,44 @@ function formatPrice(p: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(p)
 }
 
+/**
+ * Rendered for the build-time placeholder and for listings that no longer
+ * resolve. A lightweight, no-index 200 page — deliberately NOT notFound(),
+ * which hangs the static export worker (see fetchProperty note above).
+ */
+function PropertyUnavailable() {
+  return (
+    <main className="container mx-auto max-w-2xl px-4 py-16 text-center">
+      <h1 className="mb-3 text-2xl font-bold">This listing isn&apos;t available</h1>
+      <p className="mb-8 text-muted-foreground">
+        The property you&apos;re looking for may have been rented or removed. Browse our current listings instead.
+      </p>
+      <div className="flex flex-wrap justify-center gap-3">
+        <Link
+          href="/properties"
+          className="rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground hover:opacity-90"
+        >
+          Browse properties
+        </Link>
+        <Link href="/contact" className="rounded-md border px-5 py-2.5 font-medium hover:bg-muted">
+          Contact us
+        </Link>
+      </div>
+    </main>
+  )
+}
+
 export default async function PropertyDetailPage({ params }: PageProps) {
   const { publicId } = await params
   const property = await fetchProperty(publicId)
-  if (!property) notFound()
+  // Under `output: export` we cannot call notFound() here: for a param that was
+  // emitted by generateStaticParams (the _placeholder sentinel, or a listing
+  // that has since been removed), notFound() hangs the export worker until the
+  // per-page timeout and fails the whole build. `dynamicParams = false` already
+  // makes Next serve a real 404 for any publicId NOT in generateStaticParams, so
+  // unknown URLs still 404 correctly — we only need a graceful, no-index stub for
+  // the build-time placeholder / stale-listing case.
+  if (!property) return <PropertyUnavailable />
 
   const cityState = [property.city, property.state].filter(Boolean).join(", ")
   const fullAddress = [property.addressLine1, cityState, property.zipcode].filter(Boolean).join(", ")

@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description: "Map view of available properties.",
 };
 
-// Re-fetch on each request so newly-listed properties appear without a
-// rebuild. Map view is a live "what's available right now" experience.
-export const dynamic = "force-dynamic";
-
+// The site is statically exported (output: "export" in next.config.mjs), so
+// there is no request-time server — `force-dynamic` is invalid here and breaks
+// the export. Properties are fetched at build time for the initial pin set;
+// ExploreMapClient refreshes from the API on the client for live availability.
 export default async function ExplorePage() {
   const properties = await fetchProperties();
 

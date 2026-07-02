@@ -341,7 +341,6 @@ export function LeadQualifierWizard() {
             }}
             placeholder={current.placeholder}
             className="w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            autoFocus
             onKeyDown={(e) => {
               if (e.key === "Enter" && canAdvance) goNext()
             }}
@@ -362,7 +361,6 @@ export function LeadQualifierWizard() {
               value={answers.name}
               onChange={(e) => setAnswers((a) => ({ ...a, name: e.target.value }))}
               className="mt-1.5 w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              autoFocus
             />
           </label>
           <label className="block">
