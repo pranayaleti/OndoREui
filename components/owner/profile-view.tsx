@@ -353,10 +353,10 @@ export function ProfileView() {
                 <div className="space-y-0.5">
                   <p className="text-sm font-medium leading-none">Two-Factor Authentication</p>
                   <p className="text-sm text-foreground/70">
-                    Add an extra layer of security to your account by enabling two-factor authentication.
+                    Add an extra layer of security to your account by enabling two-factor authentication (coming soon).
                   </p>
                 </div>
-                <Switch id="twoFactor" checked={userData.twoFactorEnabled} onCheckedChange={() => handleTwoFactorChange()} />
+                <Switch id="twoFactor" checked={userData.twoFactorEnabled} onCheckedChange={() => handleTwoFactorChange()} disabled />
               </div>
             </CardContent>
           </Card>

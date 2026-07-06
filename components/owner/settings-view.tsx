@@ -375,13 +375,14 @@ export function SettingsView() {
               <div className="space-y-0.5">
                 <Label htmlFor="two-factor">Two-factor authentication</Label>
                 <p className="text-sm text-foreground/70">
-                  Add an extra layer of security to your account with two-factor authentication
+                  Add an extra layer of security to your account with two-factor authentication (coming soon)
                 </p>
               </div>
               <Switch
                 id="two-factor"
                 checked={settings.security.twoFactor}
                 onCheckedChange={() => setIs2FADialogOpen(true)}
+                disabled
               />
             </div>
 
