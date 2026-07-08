@@ -16,13 +16,28 @@ import { isMarketingRestrictedRegion } from "@/lib/region"
  *
  * Env vars:
  *  - NEXT_PUBLIC_GTM_ID            — e.g. "GTM-XXXXXXX"
+ *  - NEXT_PUBLIC_GA_MEASUREMENT_ID   — e.g. "G-XXXXXXXX"
  *  - NEXT_PUBLIC_META_PIXEL_ID     — Facebook/Meta Pixel numeric ID
  *  - NEXT_PUBLIC_TIKTOK_PIXEL_ID   — TikTok Pixel ID
  *  - NEXT_PUBLIC_LINKEDIN_PARTNER_ID — LinkedIn Insight Partner ID
+ *  - NEXT_PUBLIC_HUBSPOT_PORTAL_ID   — HubSpot portal ID
+ *  - NEXT_PUBLIC_REB2B_KEY           — rb2b visitor ID key
  */
 
+/** Reject env values that could break out of inline script strings. */
+function sanitizeTrackingId(raw: string | undefined, pattern: RegExp): string | null {
+  const id = raw?.trim()
+  if (!id || !pattern.test(id)) return null
+  return id
+}
+
+const GTM_ID_PATTERN = /^GTM-[A-Z0-9]+$/i
+const GA_ID_PATTERN = /^G-[A-Z0-9]+$/i
+const NUMERIC_ID_PATTERN = /^\d+$/
+const ALPHANUM_ID_PATTERN = /^[A-Za-z0-9_-]+$/
+
 export function GoogleTagManager() {
-  const id = process.env["NEXT_PUBLIC_GTM_ID"]
+  const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_GTM_ID"], GTM_ID_PATTERN)
   if (!id) return null
   return (
     <Script
@@ -43,9 +58,9 @@ export function GoogleTagManager() {
   )
 }
 
-/** Inline <noscript> GTM iframe — must live at top of <body>. */
+/** Inline <noscript> GTM iframe — must live at top of <body>. Geo-gated client wrapper below. */
 export function GoogleTagManagerNoscript() {
-  const id = process.env["NEXT_PUBLIC_GTM_ID"]
+  const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_GTM_ID"], GTM_ID_PATTERN)
   if (!id) return null
   return (
     <noscript>
@@ -66,7 +81,7 @@ export function GoogleTagManagerNoscript() {
  * (Moved out of app/layout.tsx so it shares the same geo-gate.)
  */
 export function GoogleAnalyticsTag() {
-  const id = process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"]
+  const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"], GA_ID_PATTERN)
   if (!id) return null
   return (
     <>
@@ -87,7 +102,7 @@ export function GoogleAnalyticsTag() {
 }
 
 export function MetaPixel() {
-  const id = process.env["NEXT_PUBLIC_META_PIXEL_ID"]
+  const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_META_PIXEL_ID"], NUMERIC_ID_PATTERN)
   if (!id) return null
   return (
     <>
@@ -124,7 +139,7 @@ export function MetaPixel() {
 }
 
 export function TikTokPixel() {
-  const id = process.env["NEXT_PUBLIC_TIKTOK_PIXEL_ID"]
+  const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_TIKTOK_PIXEL_ID"], ALPHANUM_ID_PATTERN)
   if (!id) return null
   return (
     <Script
@@ -159,7 +174,7 @@ export function TikTokPixel() {
 }
 
 export function LinkedInInsightTag() {
-  const id = process.env["NEXT_PUBLIC_LINKEDIN_PARTNER_ID"]
+  const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_LINKEDIN_PARTNER_ID"], NUMERIC_ID_PATTERN)
   if (!id) return null
   return (
     <>
@@ -203,7 +218,7 @@ export function LinkedInInsightTag() {
  * Reads NEXT_PUBLIC_REB2B_KEY (matches .env.example and the `reb2b` global).
  */
 export function Rb2bPixel() {
-  const key = process.env["NEXT_PUBLIC_REB2B_KEY"]
+  const key = sanitizeTrackingId(process.env["NEXT_PUBLIC_REB2B_KEY"], ALPHANUM_ID_PATTERN)
   if (!key) return null
   return (
     <Script
@@ -223,6 +238,36 @@ export function Rb2bPixel() {
       }}
     />
   )
+}
+
+/**
+ * HubSpot tracking — page views and form attribution. Gated with other marketing tags.
+ */
+export function HubSpotTrackingTag() {
+  const portalId = sanitizeTrackingId(process.env["NEXT_PUBLIC_HUBSPOT_PORTAL_ID"], NUMERIC_ID_PATTERN)
+  if (!portalId) return null
+  return (
+    <Script
+      id="hubspot-tracking"
+      strategy="lazyOnload"
+      src={`https://js.hs-scripts.com/${portalId}.js`}
+    />
+  )
+}
+
+/**
+ * Client-side geo gate for GTM <noscript>. Visitors without JavaScript still
+ * receive the prerendered noscript iframe (accepted trade-off documented below).
+ */
+export function GeoGatedGoogleTagManagerNoscript() {
+  const [allowed, setAllowed] = useState(false)
+
+  useEffect(() => {
+    setAllowed(!isMarketingRestrictedRegion())
+  }, [])
+
+  if (!allowed) return null
+  return <GoogleTagManagerNoscript />
 }
 
 /**
@@ -253,6 +298,7 @@ export function TrackingTags() {
     <>
       <GoogleAnalyticsTag />
       <GoogleTagManager />
+      <HubSpotTrackingTag />
       <MetaPixel />
       <TikTokPixel />
       <LinkedInInsightTag />

@@ -36,10 +36,10 @@ test.describe("Accessibility smoke tests", () => {
   for (const route of routes) {
     test(`page ${route} has no serious accessibility violations`, async ({ page }) => {
       await page.goto(route, { waitUntil: "domcontentloaded" })
-      // Marketing pages may keep analytics/maps/widgets alive, so `networkidle`
-      // is not a reliable readiness signal. Give client hydration a small,
-      // deterministic settle window before running axe.
-      await page.waitForTimeout(500)
+      // Wait for a stable landmark before axe — avoids flakes when dev Fast Refresh
+      // or client hydration triggers a secondary navigation.
+      await page.locator("main, #main-content, [role='main']").first().waitFor({ state: "visible", timeout: 15_000 })
+      await page.waitForTimeout(300)
 
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa"])

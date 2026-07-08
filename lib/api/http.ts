@@ -8,10 +8,15 @@ const CSRF_METHODS = new Set(["POST", "PUT", "DELETE", "PATCH"])
 
 export function getCsrfToken(): string | undefined {
   if (typeof document === "undefined") return undefined
-  return document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("ondo_csrf="))
-    ?.split("=")[1]
+  const prefix = "ondo_csrf="
+  const row = document.cookie.split("; ").find((entry) => entry.startsWith(prefix))
+  if (!row) return undefined
+  const value = row.slice(prefix.length)
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
 }
 
 function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = DEFAULT_TIMEOUT_MS): Promise<Response> {

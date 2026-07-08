@@ -6,9 +6,7 @@ import { useTranslation } from "react-i18next"
 import { Building2, Users, Home, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
-
-const DASHBOARD_URL =
-  process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.ondorealestate.com"
+import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
 
 export function ReferralContent() {
   const { t } = useTranslation()
@@ -17,8 +15,8 @@ export function ReferralContent() {
 
   /** Invite signup is `/signup/:inviteToken`; we pass program ref via query so it survives until signup API call. */
   const signupUrl = refCode
-    ? `${DASHBOARD_URL}/login?ref=${encodeURIComponent(refCode)}`
-    : `${DASHBOARD_URL}/login`
+    ? `${APP_PORTAL_LOGIN_URL}?ref=${encodeURIComponent(refCode)}`
+    : APP_PORTAL_LOGIN_URL
 
   const benefits = [
     {

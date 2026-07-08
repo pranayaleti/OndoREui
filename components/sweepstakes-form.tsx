@@ -10,9 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CheckCircle2, Gift, Loader2, Copy, Check, Sparkles } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { backendUrl } from "@/lib/backend"
-
-const DASHBOARD_URL =
-  process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.ondorealestate.com"
+import { APP_PORTAL_URL } from "@/lib/site"
 
 interface SweepstakesFormProps {
   initialReferralCode?: string
@@ -199,7 +197,7 @@ export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
               {t("referral.sweepstakesBannerText")}
             </p>
             <Link
-              href={`${DASHBOARD_URL}/referrals`}
+              href={`${APP_PORTAL_URL}/referrals`}
               className="mt-1 inline-block text-xs font-semibold text-amber-700 underline underline-offset-2 hover:text-amber-900 dark:text-amber-400 dark:hover:text-amber-200"
             >
               {t("referral.sweepstakesGoToDashboard")}

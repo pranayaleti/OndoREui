@@ -4,7 +4,7 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
-import { Check, X, ArrowRight } from "lucide-react"
+import { Check, ArrowRight } from "lucide-react"
 
 const title = "Utah Property Management Companies Compared (2026) | Ondo RE"
 const description =

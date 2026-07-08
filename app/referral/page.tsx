@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import type { Metadata } from "next"
 import { ReferralContent } from "./referral-content"
 import { SITE_URL } from "@/lib/site"
-import { SUPPORTED_LOCALES } from "@/lib/locales"
+import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 
 const title = "You've Been Invited to Ondo RE | Ondo Real Estate"
 const description =
@@ -15,9 +15,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   alternates: {
     canonical,
-    languages: Object.fromEntries(
-      SUPPORTED_LOCALES.map((locale) => [locale, `${SITE_URL}/${locale}/referral/`])
-    ),
+    languages: buildMetadataLanguages("/referral"),
   },
   openGraph: { title, description, url: canonical },
 }

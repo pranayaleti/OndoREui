@@ -41,6 +41,7 @@ import { mapApiProperty } from '@/lib/mapProperty';
 import { backendUrl } from '@/lib/backend';
 import { caches, cacheKeys } from '@/lib/cache';
 import { registerBfcacheRestoreCallback } from '@/lib/bfcache-optimization';
+import { WebMCPPropertySearchTool } from '@/components/properties/webmcp-property-search-tool';
 
 // keep your SortOption union if not importing
 type LocalSortOption =
@@ -169,7 +170,14 @@ export default function PropertiesClient() {
   const [sortBy, setSortBy] = useState<LocalSortOption>('newest');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // 3a) Fetch from backend API (Supabase Edge Functions); use in-memory cache for repeat visits and bfcache-friendly behavior
+  // Deep-link support: /properties?query=... from PropertySearch fallback navigation
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const q = new URLSearchParams(window.location.search).get('query')?.trim()
+    if (q) setSearchQuery(q)
+  }, [])
+
+  // 3a) Fetch from backend API
   const PROPERTIES_CACHE_TTL = 2 * 60 * 1000; // 2 minutes
   const propertiesCacheKey = cacheKeys.api.properties();
 
@@ -178,7 +186,7 @@ export default function PropertiesClient() {
     (async () => {
       try {
         const cached = caches.properties.get(propertiesCacheKey) as Property[] | null;
-        if (Array.isArray(cached) && cached.length >= 0 && retryCount === 0) {
+        if (Array.isArray(cached) && cached.length > 0 && retryCount === 0) {
           setAllApiProperties(cached);
           setLoading(false);
           setError(null);
@@ -422,6 +430,7 @@ export default function PropertiesClient() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <WebMCPPropertySearchTool />
       <SEO
         title="Browse Rental Properties in Utah"
         description="Explore available rental homes, apartments, condos, and townhomes managed by Ondo Real Estate."

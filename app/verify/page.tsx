@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
@@ -11,7 +11,7 @@ import { backendUrl } from "@/lib/backend"
 
 type Status = "verifying" | "success" | "error" | "missing"
 
-export default function VerifyPage() {
+function VerifyPageContent() {
   const params = useSearchParams()
   const token = params?.get("token") ?? null
   const type = params?.get("type") ?? "email" // Supabase sends type=signup for email confirmation
@@ -117,5 +117,13 @@ export default function VerifyPage() {
         </div>
       </section>
     </main>
+  )
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={null}>
+      <VerifyPageContent />
+    </Suspense>
   )
 }

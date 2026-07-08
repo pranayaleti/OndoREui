@@ -10,6 +10,7 @@ This app is aligned with [WebMCP](https://developer.chrome.com/blog/webmcp-epp) 
   - **Contact** (`/contact`): `submit_contact_lead` (with user confirmation) and `get_company_contact_info` (read-only).
   - **Opportunities** (`/investments/opportunities`): `list_investment_opportunities` (read-only, optional status filter) and `get_investment_opportunity` (read-only, by slug).
   - **Buy** (`/buy`): `calculate_mortgage_payment` (read-only; principal, rate, term → monthly P&I).
+  - **Properties** (`/properties`): `search_available_properties` (read-only; filter Utah rentals by city, min bedrooms, max price, or free text).
 
 ## Tool descriptions
 
@@ -20,6 +21,7 @@ Descriptions are written so agents know when to use each tool and what to expect
 - **list_investment_opportunities**: Read-only; returns open/coming-soon/fully-funded deals with slug, title, location, asset class, min investment, target return, hold period, status, and a short description. Optional `status` filter.
 - **get_investment_opportunity**: Read-only; returns full details for one deal by slug (title, location, description, highlights, risk factors, etc.).
 - **calculate_mortgage_payment**: Read-only; given principal (USD), annual rate (%), and term (years), returns monthly principal-and-interest payment. Does not include taxes, insurance, or PMI.
+- **search_available_properties**: Read-only; fetches the current Ondo public listings feed and filters client-side by city (partial, case-insensitive), min bedrooms, max monthly rent, and/or free text (matched against title, description, address). Returns id, title, city, address, price, bedrooms, bathrooms, sqft, and a 200-char description; capped at 100 results per call.
 
 ## Testing
 

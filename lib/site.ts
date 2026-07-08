@@ -131,3 +131,21 @@ export const SITE_SOCIALS: readonly string[] = SITE_SOCIAL_LINKS
 
 /** Every social URL regardless of live status — for marketing dashboards / audits. */
 export const SITE_SOCIALS_ALL: readonly string[] = SITE_SOCIAL_LINKS.map((s) => s.url)
+
+/** Supabase project origin from NEXT_PUBLIC_SUPABASE_URL (for CSP / preconnect). */
+export function getSupabaseOrigin(): string | null {
+  const raw = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+  if (!raw) return null
+  try {
+    return new URL(raw).origin
+  } catch {
+    return null
+  }
+}
+
+/** Space-delimited connect-src entries for Supabase REST + Edge Functions. */
+export function getSupabaseConnectSrc(): string {
+  const origin = getSupabaseOrigin()
+  if (!origin) return ""
+  return `${origin} ${origin}/functions/v1`
+}

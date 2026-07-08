@@ -4,13 +4,10 @@ import React, { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import { useTranslation } from "react-i18next"
 import SEO from "@/components/seo"
-import { SITE_URL } from "@/lib/site"
+import { APP_PORTAL_URL, SITE_URL } from "@/lib/site"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { Gift, MessageCircle, Sparkles } from "lucide-react"
 import { backendUrl } from "@/lib/backend"
-
-const DASHBOARD_URL =
-  process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.ondorealestate.com"
 
 export default function FeedbackPage() {
   const { t } = useTranslation()
@@ -257,7 +254,7 @@ export default function FeedbackPage() {
           </p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
-              href={`${DASHBOARD_URL}/referrals`}
+              href={`${APP_PORTAL_URL}/referrals`}
               className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               {t("referral.getYourLink")}

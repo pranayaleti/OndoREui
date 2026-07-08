@@ -30,10 +30,8 @@ export function PropertySearch({ onSearch }: PropertySearchProps) {
       setIsLoading(false)
     } else {
       // Otherwise, navigate to search results page
-      setTimeout(() => {
-        router.push(`/search/nearby?query=${encodeURIComponent(searchQuery)}`)
-        setIsLoading(false)
-      }, 500) // Simulate network delay
+      router.push(`/properties?query=${encodeURIComponent(searchQuery.trim())}`)
+      setIsLoading(false)
     }
   }
 

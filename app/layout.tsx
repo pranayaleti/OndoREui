@@ -1,14 +1,13 @@
 import type React from "react"
 import { Suspense } from "react"
 import type { Metadata } from "next"
-import Script from "next/script"
 import { Inter, Outfit } from "next/font/google"
 import "./globals.css"
 import "leaflet/dist/leaflet.css"
 import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
-import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getSupabaseConnectSrc, getSupabaseOrigin } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { DEFAULT_LOCALE } from "@/lib/locales"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
@@ -20,7 +19,7 @@ import { CachePurge } from "@/components/cache-purge"
 import { AttributionCapture } from "@/components/attribution-capture"
 import { FirstVisitLeadPopup } from "@/components/first-visit-lead-popup"
 import ServiceWorkerRegistrar from "@/components/sw-register"
-import { TrackingTags, GoogleTagManagerNoscript } from "@/components/analytics/tracking-tags"
+import { TrackingTags, GeoGatedGoogleTagManagerNoscript } from "@/components/analytics/tracking-tags"
 import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
@@ -154,6 +153,9 @@ export const metadata: Metadata = {
   },
 }
 
+const supabaseOrigin = getSupabaseOrigin()
+const supabaseConnectSrc = getSupabaseConnectSrc()
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Static export has no request-time locale segment/cookie, so SSR must emit
   // the default locale. I18nProvider updates document.documentElement.lang on
@@ -165,7 +167,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://lpklmquhxgbpavjngbby.supabase.co" crossOrigin="anonymous" />
+        {supabaseOrigin ? (
+          <link rel="preconnect" href={supabaseOrigin} crossOrigin="anonymous" />
+        ) : null}
         <link rel="dns-prefetch" href="https://ddwl4m2hdecbv.cloudfront.net" />
         <link rel="dns-prefetch" href="https://js.hs-scripts.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
@@ -189,13 +193,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* CSP: no upgrade-insecure-requests — it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts. Note: unsafe-inline kept for style-src (required by Next.js inline styles). unsafe-eval added only in dev (React Refresh requires it). */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com https://lpklmquhxgbpavjngbby.supabase.co https://lpklmquhxgbpavjngbby.supabase.co/functions/v1 https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';`}
+          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com${supabaseConnectSrc ? ` ${supabaseConnectSrc}` : ""} https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.className} ${outfit.variable} min-h-screen bg-background text-foreground`}>
-        {/* GTM <noscript> iframe — must live at the top of <body>. No-op when NEXT_PUBLIC_GTM_ID is unset. */}
-        <GoogleTagManagerNoscript />
+        {/* GTM <noscript> iframe — geo-gated when JS is available. No-JS visitors cannot be geo-detected. */}
+        <GeoGatedGoogleTagManagerNoscript />
         {/* NOTE(i18n): server component — translate when Next.js i18n routing is added */}
         <a
           href="#main-content"
@@ -228,14 +232,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {/* Google Analytics moved into the geo-gated <TrackingTags /> bundle
             (below) — GA sets cookies and needs consent in EU/EEA too. */}
-        {/* HubSpot Tracking Code — enables page view attribution for leads */}
-        {process.env['NEXT_PUBLIC_HUBSPOT_PORTAL_ID'] ? (
-          <Script
-            id="hubspot-tracking"
-            strategy="lazyOnload"
-            src={`https://js.hs-scripts.com/${process.env['NEXT_PUBLIC_HUBSPOT_PORTAL_ID']}.js`}
-          />
-        ) : null}
+        {/* HubSpot tracking moved into geo-gated <TrackingTags /> for privacy parity. */}
         {/*
           Marketing / retargeting tracking pixels.
           Each pixel is a no-op until its env var is set, so the same build

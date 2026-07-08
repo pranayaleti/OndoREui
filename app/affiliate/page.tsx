@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { AffiliateContent } from "./affiliate-content"
 import { SITE_URL } from "@/lib/site"
-import { SUPPORTED_LOCALES } from "@/lib/locales"
+import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 
 const title = "Become an Ondo RE Affiliate | Ondo Real Estate"
 const description =
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   alternates: {
     canonical,
-    languages: Object.fromEntries(
-      SUPPORTED_LOCALES.map((locale) => [locale, `${SITE_URL}/${locale}/affiliate/`])
-    ),
+    languages: buildMetadataLanguages("/affiliate"),
   },
   openGraph: { title, description, url: canonical },
 }
