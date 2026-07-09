@@ -75,10 +75,9 @@ export async function generateStaticParams(): Promise<Array<{ publicId: string }
       .filter((id): id is string => typeof id === "string" && id.length > 0)
       .map((publicId) => ({ publicId }))
     return params.length > 0 ? params : [{ publicId: PLACEHOLDER_ID }]
-  } catch (err) {
+  } catch {
     console.warn(
-      "[properties/[publicId]] generateStaticParams: fetch failed; emitting placeholder",
-      err
+      "[properties/[publicId]] generateStaticParams: backend unreachable; emitting placeholder"
     )
     return [{ publicId: PLACEHOLDER_ID }]
   }

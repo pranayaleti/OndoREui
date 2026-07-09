@@ -32,7 +32,8 @@
     "analyze:bundle": "node scripts/analyze-bundle.mjs",
     "check:unused": "node scripts/check-unused-deps.mjs",
     "a11y:axe": "playwright test tests/a11y.spec.ts",
-    "test:a11y": "playwright test tests/a11y.spec.ts"
+    "test:a11y": "playwright test tests/a11y.spec.ts",
+    "a11y:serve": "next build && npx --yes serve@14 out -l 3000 --no-clipboard"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",

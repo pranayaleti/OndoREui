@@ -485,7 +485,11 @@ export default function PropertiesClient() {
                 <h2 id="properties-section-heading" className="text-3xl font-bold tracking-tight">
                   Available Properties
                 </h2>
-                <p className="text-foreground/70 mt-2" aria-live="polite" aria-atomic="true">
+                <p
+                  className={loading ? 'text-foreground mt-2' : 'text-foreground/80 mt-2'}
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
                   {loading
                     ? 'Loading...'
                     : `${properties.length} properties available for rent`}
@@ -590,12 +594,11 @@ export default function PropertiesClient() {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="grid" aria-label="Sample rental properties">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Sample rental properties">
                   {SAMPLE_PROPERTIES.map((property) => (
+                    <li key={property.id}>
                     <Card
-                      key={property.id}
-                      className="overflow-hidden card-hover hover-lift focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 btn-interactive"
-                      role="gridcell"
+                      className="overflow-hidden card-hover hover-lift focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 btn-interactive h-full"
                     >
                       <div className="relative aspect-video">
                         <Image
@@ -607,7 +610,7 @@ export default function PropertiesClient() {
                           quality={85}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
-                        <div className="absolute top-2 right-2 bg-primary text-foreground px-3 py-1 rounded-md font-medium">
+                        <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 rounded-md font-medium">
                           ${property.price.toLocaleString()}/mo
                         </div>
                         <div className="absolute top-2 left-2 bg-background/70 text-white px-2 py-1 rounded text-xs">Example listing</div>
@@ -618,7 +621,7 @@ export default function PropertiesClient() {
                             {property.title}
                           </h3>
                         </div>
-                        <p className="text-foreground/70 text-sm mb-2">
+                        <p className="text-foreground/80 text-sm mb-2">
                           {property.address}
                         </p>
                         <div className="flex items-center gap-4 text-sm" role="list" aria-label="Property specifications">
@@ -644,16 +647,16 @@ export default function PropertiesClient() {
                         </Button>
                       </CardContent>
                     </Card>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             ) : properties.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-fade-in" role="grid" aria-label="Available rental properties">
+              <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-fade-in" aria-label="Available rental properties">
                 {properties.map((property) => (
+                  <li key={property.id}>
                   <Card
-                    key={property.id}
-                    className="overflow-hidden card-hover hover-lift focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 btn-interactive"
-                    role="gridcell"
+                    className="overflow-hidden card-hover hover-lift focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 btn-interactive h-full"
                   >
                     <div className="relative aspect-video">
                       <Image
@@ -665,7 +668,7 @@ export default function PropertiesClient() {
                         quality={85}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      <div className="absolute top-2 right-2 bg-primary text-foreground px-3 py-1 rounded-md font-medium">
+                      <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 rounded-md font-medium">
                         ${property.price.toLocaleString()}/mo
                       </div>
                     </div>
@@ -675,7 +678,7 @@ export default function PropertiesClient() {
                           {property.title}
                         </h3>
                       </div>
-                      <p className="text-foreground/70 text-sm mb-2">
+                      <p className="text-foreground/80 text-sm mb-2">
                         {property.address}
                       </p>
                       <div className="flex items-center gap-4 text-sm" role="list" aria-label="Property specifications">
@@ -702,14 +705,15 @@ export default function PropertiesClient() {
                       </Button>
                     </CardContent>
                   </Card>
+                  </li>
                 ))}
-              </div>
+              </ul>
             ) : (
               <div className="py-12 flex flex-col items-center">
                 <div className="max-w-md w-full">
                   <div className="bg-card p-6 rounded-lg shadow-sm border mb-6">
                     <h3 className="text-lg font-semibold mb-2">No properties match your filters</h3>
-                    <p className="text-foreground/70 mb-4 text-sm">
+                    <p className="text-foreground/80 mb-4 text-sm">
                       Try widening your search, or get notified when new listings hit your area.
                     </p>
                     <Button

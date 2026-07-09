@@ -39,6 +39,17 @@ test.describe("Accessibility smoke tests", () => {
       // Wait for a stable landmark before axe — avoids flakes when dev Fast Refresh
       // or client hydration triggers a secondary navigation.
       await page.locator("main, #main-content, [role='main']").first().waitFor({ state: "visible", timeout: 15_000 })
+      if (route === "/properties") {
+        await page
+          .waitForResponse((response) => response.url().includes("/api/properties/public"), {
+            timeout: 15_000,
+          })
+          .catch(() => undefined)
+        await page
+          .locator('[aria-label="Loading properties"]')
+          .waitFor({ state: "detached", timeout: 15_000 })
+          .catch(() => undefined)
+      }
       await page.waitForTimeout(300)
 
       const results = await new AxeBuilder({ page })

@@ -1,8 +1,8 @@
 import { SITE_SOCIALS } from "@/lib/site"
 import type { Metadata } from "next"
-import Script from "next/script"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
+import { JsonLd } from "@/components/json-ld"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -208,8 +208,9 @@ export default function LoansPage() {
       </section>
 
       {/* Service JSON-LD + Business JSON-LD */}
-      <Script id="loans-service-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
+      <JsonLd
+        id="loans-service-jsonld"
+        data={{
           '@context': 'https://schema.org',
           '@type': ['Service'],
           name: 'Home Loan Services',
@@ -224,10 +225,11 @@ export default function LoansPage() {
           areaServed: ['Lehi UT','Salt Lake City UT','Draper UT','Utah County'],
           serviceType: 'Financial Services',
           offers: { '@type': 'Offer', description: 'Professional mortgage and home loan services' },
-        })}
-      </Script>
-      <Script id="loans-business-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
+        }}
+      />
+      <JsonLd
+        id="loans-business-jsonld"
+        data={{
           '@context': 'https://schema.org',
           '@type': ['Organization','LocalBusiness','RealEstateAgent'],
           name: SITE_NAME,
@@ -240,8 +242,8 @@ export default function LoansPage() {
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Home Selling' } },
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Home Loans' } }
           ]
-        })}
-      </Script>
+        }}
+      />
 
       {/* Centralized FAQs live on /faq */}
       <section className="py-16 bg-gradient-to-b from-background to-card text-white">

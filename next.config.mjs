@@ -5,19 +5,28 @@ function patchServerRuntimePlugin() {
   return {
     name: 'patch-server-runtime-chunk-path',
     apply: (compiler) => {
-      compiler.hooks.emit.tap('patch-server-runtime-chunk-path', (compilation) => {
-        for (const name of Object.keys(compilation.assets)) {
-          const asset = compilation.assets[name];
-          let source = asset.source().toString();
-          if (!source.includes('require("./" + __webpack_require__.u(chunkId))')) continue;
-          // Only add "chunks/" for numeric chunk ids (e.g. 5611); named ids like "vendor-chunks/next" stay as ./
-          source = source.replace(
-            /require\("\.\/" \+ __webpack_require__\.u\(chunkId\)\)/g,
-            'require((/^\\d+$/.test(chunkId) ? "./chunks/" : "./") + __webpack_require__.u(chunkId))'
-          );
-          compilation.assets[name] = { source: () => source, size: () => source.length };
-          break;
-        }
+      const { Compilation, sources } = compiler.webpack
+      compiler.hooks.thisCompilation.tap('patch-server-runtime-chunk-path', (compilation) => {
+        compilation.hooks.processAssets.tap(
+          {
+            name: 'patch-server-runtime-chunk-path',
+            stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE,
+          },
+          () => {
+            for (const name of Object.keys(compilation.assets)) {
+              const asset = compilation.assets[name];
+              let source = asset.source().toString();
+              if (!source.includes('require("./" + __webpack_require__.u(chunkId))')) continue;
+              // Only add "chunks/" for numeric chunk ids (e.g. 5611); named ids like "vendor-chunks/next" stay as ./
+              source = source.replace(
+                /require\("\.\/" \+ __webpack_require__\.u\(chunkId\)\)/g,
+                'require((/^\\d+$/.test(chunkId) ? "./chunks/" : "./") + __webpack_require__.u(chunkId))'
+              );
+              compilation.updateAsset(name, new sources.RawSource(source));
+              break;
+            }
+          }
+        );
       });
     },
   };
@@ -78,8 +87,9 @@ const nextConfig = {
       // Avoid overriding Next's dev strategy — can break Fast Refresh / chunk graphs.
       config.optimization.moduleIds = 'deterministic'
     }
-    // Fix server chunk resolution: runtime does require("./chunkId.js") but chunks live in ./chunks/
-    if (isServer) {
+    // Fix server chunk resolution during production builds only — applying this in dev
+    // corrupts RSC clientReferenceManifest generation (InvariantError on server pages).
+    if (isServer && !dev) {
       config.plugins = config.plugins || []
       config.plugins.push(patchServerRuntimePlugin())
     }
