@@ -11,6 +11,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { CheckCircle, Mail, TrendingUp, Home, Wrench } from "lucide-react"
 import { SITE_EMAILS } from "@/lib/site"
 import SEO from "@/components/seo"
+import { submitContactLead } from "@/lib/leads-api"
+import { getAttributionPayloadForApi } from "@/lib/attribution"
 
 const topics = [
   {
@@ -53,7 +55,17 @@ export default function SubscribePage() {
     setLoading(true)
     setError("")
     try {
-      await new Promise((r) => setTimeout(r, 800))
+      const result = await submitContactLead({
+        name: name.trim() || "Newsletter subscriber",
+        email: email.trim(),
+        source: "website",
+        message: `Newsletter subscribe. Topics: ${selected.join(", ") || "none selected"}.`,
+        attribution: getAttributionPayloadForApi(),
+      })
+      if ("error" in result) {
+        setError(result.error || "Something went wrong. Please try again.")
+        return
+      }
       setSubmitted(true)
     } catch {
       setError("Something went wrong. Please try again.")
@@ -81,10 +93,10 @@ export default function SubscribePage() {
               <Card>
                 <CardContent className="pt-10 pb-10 text-center space-y-4">
                   <CheckCircle className="mx-auto h-14 w-14 text-green-500" />
-                  <h2 className="text-2xl font-bold">You&apos;re subscribed!</h2>
+                  <h2 className="text-2xl font-bold">You&apos;re on the list</h2>
                   <p className="text-foreground/70">
-                    Thanks, <strong>{name || email}</strong>. You&apos;re now subscribed to Ondo
-                    Real Estate updates. Check your inbox for a confirmation email.
+                    Thanks, <strong>{name || email}</strong>. We&apos;ve received your subscription
+                    request and will send updates to your inbox.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
                     <Button asChild>

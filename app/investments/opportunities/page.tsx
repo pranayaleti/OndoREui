@@ -52,6 +52,18 @@ export default async function OpportunitiesPage() {
         subtitle="Browse current and upcoming commercial real estate deals across Utah"
       />
 
+      <section className="border-b bg-muted/40">
+        <div className="container mx-auto px-4 py-3">
+          <p className="text-sm text-foreground/70 text-center max-w-3xl mx-auto">
+            Sample deal cards below are illustrative for product demos.{" "}
+            <Link href="/contact" className="text-primary hover:underline">
+              Contact us
+            </Link>{" "}
+            for current offerings — figures are not a live fundraising inventory.
+          </p>
+        </div>
+      </section>
+
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">

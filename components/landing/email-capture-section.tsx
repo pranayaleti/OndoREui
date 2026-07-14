@@ -64,10 +64,11 @@ export function EmailCaptureSection() {
             <FileText className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-2xl font-bold mb-2 text-foreground">
-            Free guide: The Utah Landlord&apos;s Property Management Checklist
+            Utah landlord checklist — stay in the loop
           </h2>
           <p className="text-foreground/70 mb-3">
-            Join our mailing list and get this actionable PDF instantly.
+            Leave your email and we&apos;ll share practical landlord tips and follow up with the
+            checklist materials.
           </p>
           <ul className="text-left text-sm text-foreground/70 mb-6 space-y-1.5 max-w-xs mx-auto">
             <li className="flex items-start gap-2">
@@ -90,7 +91,7 @@ export function EmailCaptureSection() {
 
           {submitted ? (
             <p className="text-primary font-semibold py-4" role="status" aria-live="polite">
-              Check your inbox — the guide is on its way.
+              Thanks — we&apos;ll follow up at your email with landlord tips and checklist materials.
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>
@@ -123,7 +124,7 @@ export function EmailCaptureSection() {
                   </>
                 ) : (
                   <>
-                    Get the guide
+                    Get updates
                     <ArrowRight className="h-4 w-4" />
                   </>
                 )}
