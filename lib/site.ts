@@ -62,6 +62,16 @@ export const SITE_ADDRESS_OBJ = {
   addressCountry: SITE_ADDRESS_COUNTRY,
 }
 
+/**
+ * HQ coordinates for geo meta tags and Organization JSON-LD.
+ * PLACEHOLDER — update with real HQ lat/lng when the office address is finalized.
+ * Approx for current placeholder: 2701 N Thanksgiving Way, Lehi, UT 84043.
+ */
+export const SITE_GEO = {
+  latitude: 40.4319,
+  longitude: -111.8952,
+} as const
+
 // Centralized emails used across the app
 export const SITE_EMAILS = {
   primary: "info@ondorealestate.com",

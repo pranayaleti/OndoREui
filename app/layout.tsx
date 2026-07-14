@@ -8,6 +8,7 @@ import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getSupabaseConnectSrc, getSupabaseOrigin } from "@/lib/site"
+import { getSiteGeoMetaOther } from "@/lib/seo"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { DEFAULT_LOCALE } from "@/lib/locales"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
@@ -151,6 +152,7 @@ export const metadata: Metadata = {
       'p:domain_verify': process.env['NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY'] ?? '',
     },
   },
+  other: getSiteGeoMetaOther(),
 }
 
 const supabaseOrigin = getSupabaseOrigin()

@@ -11,7 +11,11 @@ import {
   generateWebPageJsonLd,
   generateBlogPostingJsonLd,
   generateWebApplicationJsonLd,
+  generateRealEstateBusinessJsonLd,
+  getSiteGeoMetaOther,
+  buildPageMetadata,
 } from "./seo"
+import { SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_GEO } from "./site"
 
 describe("seo", () => {
   describe("generateServiceJsonLd", () => {
@@ -74,6 +78,49 @@ describe("seo", () => {
       const out = generateOrganizationJsonLd()
       expect(out).toBeDefined()
       expect(out?.["@type"]).toContain("Organization")
+    })
+    it("includes GeoCoordinates from SITE_GEO", () => {
+      const out = generateOrganizationJsonLd()
+      expect(out?.geo).toEqual({
+        "@type": "GeoCoordinates",
+        latitude: SITE_GEO.latitude,
+        longitude: SITE_GEO.longitude,
+      })
+    })
+  })
+
+  describe("generateRealEstateBusinessJsonLd", () => {
+    it("includes GeoCoordinates from SITE_GEO", () => {
+      const out = generateRealEstateBusinessJsonLd()
+      expect(out.geo).toEqual({
+        "@type": "GeoCoordinates",
+        latitude: SITE_GEO.latitude,
+        longitude: SITE_GEO.longitude,
+      })
+    })
+  })
+
+  describe("getSiteGeoMetaOther", () => {
+    it("returns classic geo meta from site constants", () => {
+      const other = getSiteGeoMetaOther()
+      expect(other["geo.region"]).toBe(`US-${SITE_ADDRESS_REGION}`)
+      expect(other["geo.placename"]).toBe(SITE_ADDRESS_CITY)
+      expect(other["geo.position"]).toBe(`${SITE_GEO.latitude};${SITE_GEO.longitude}`)
+      expect(other.ICBM).toBe(`${SITE_GEO.latitude}, ${SITE_GEO.longitude}`)
+    })
+  })
+
+  describe("buildPageMetadata", () => {
+    it("sets canonical, OG, and HQ geo meta", () => {
+      const meta = buildPageMetadata({
+        title: "Buy a Home",
+        description: "Utah home buying",
+        pathname: "/buy",
+      })
+      expect(meta.title).toBe("Buy a Home")
+      expect(meta.alternates?.canonical).toMatch(/\/buy$/)
+      expect(meta.openGraph?.title).toBe("Buy a Home")
+      expect(meta.other).toMatchObject(getSiteGeoMetaOther())
     })
   })
 

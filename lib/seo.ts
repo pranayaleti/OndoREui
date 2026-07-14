@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import {
   SITE_NAME,
   SITE_URL,
@@ -5,8 +6,11 @@ import {
   SITE_HOURS,
   SITE_SOCIALS,
   SITE_ADDRESS_OBJ,
+  SITE_ADDRESS_CITY,
+  SITE_ADDRESS_REGION,
   SITE_EMAILS,
   SITE_BRAND_SHORT,
+  SITE_GEO,
 } from "./site"
 import { testimonials } from "./testimonials"
 
@@ -70,6 +74,10 @@ export interface LocalBusinessData {
     areaServed?: string
     availableLanguage?: string[]
   }>
+  geo?: {
+    latitude: number
+    longitude: number
+  }
 }
 
 /**
@@ -149,6 +157,15 @@ export function generateLocalBusinessJsonLd(business: LocalBusinessData) {
     sameAs: business.sameAs,
     makesOffer: business.makesOffer,
     contactPoint: business.contactPoint,
+    ...(business.geo
+      ? {
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: business.geo.latitude,
+            longitude: business.geo.longitude,
+          },
+        }
+      : {}),
   }
 }
 
@@ -170,6 +187,7 @@ export function generateOrganizationJsonLd() {
     address: {
       ...SITE_ADDRESS_OBJ,
     },
+    geo: { ...SITE_GEO },
     contactPoint: [
       {
         contactType: "customer support",
@@ -288,6 +306,11 @@ export function generateRealEstateBusinessJsonLd() {
     address: {
       '@type': 'PostalAddress',
       ...SITE_ADDRESS_OBJ,
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: SITE_GEO.latitude,
+      longitude: SITE_GEO.longitude,
     },
     sameAs: [...SITE_SOCIALS],
     hasOfferCatalog: {
@@ -590,5 +613,78 @@ export function generateWebApplicationJsonLd(params: {
           },
         }
       : {}),
+  }
+}
+
+/** Classic HTML geo meta tags (HQ placeholder — from SITE_GEO / address constants). */
+export function getSiteGeoMetaOther(): Record<string, string> {
+  const { latitude, longitude } = SITE_GEO
+  return {
+    "geo.region": `US-${SITE_ADDRESS_REGION}`,
+    "geo.placename": SITE_ADDRESS_CITY,
+    "geo.position": `${latitude};${longitude}`,
+    ICBM: `${latitude}, ${longitude}`,
+  }
+}
+
+export type BuildPageMetadataInput = {
+  title: string
+  description: string
+  /** Pathname like `/buy` or absolute URL; used for canonical + OG url. */
+  pathname: string
+  image?: string
+  type?: "website" | "article"
+  keywords?: string[]
+  robots?: Metadata["robots"]
+  other?: Record<string, string | number | (string | number)[]>
+}
+
+/**
+ * Thin shared Metadata builder for public pages.
+ * Always includes HQ geo meta from SITE_GEO (placeholder until real address).
+ */
+export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
+  const {
+    title,
+    description,
+    pathname,
+    image,
+    type = "website",
+    keywords,
+    robots,
+    other,
+  } = input
+
+  const canonical =
+    pathname.startsWith("http://") || pathname.startsWith("https://")
+      ? pathname
+      : `${baseSiteUrl}${pathname.startsWith("/") ? pathname : `/${pathname}`}`
+
+  const ogImage = toAbsoluteUrl(image) ?? `${baseSiteUrl}/modern-office-building.webp`
+
+  return {
+    title,
+    description,
+    ...(keywords?.length ? { keywords } : {}),
+    alternates: { canonical },
+    openGraph: {
+      type,
+      url: canonical,
+      siteName: SITE_NAME,
+      title,
+      description,
+      images: [{ url: ogImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+    ...(robots !== undefined ? { robots } : {}),
+    other: {
+      ...getSiteGeoMetaOther(),
+      ...(other ?? {}),
+    },
   }
 }
