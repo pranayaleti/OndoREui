@@ -96,6 +96,15 @@ export default function RemoteOnlineNotaryAllStatesPage() {
             </Button>
           </div>
 
+          <div className="not-prose mb-6">
+            <Link
+              href="/notary/locations/"
+              className="text-primary underline-offset-4 hover:underline font-semibold"
+            >
+              Browse all notary locations
+            </Link>
+          </div>
+
           {/* Gestalt: quick anchors */}
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
             <CardSpot title="Who it's for" body="Borrowers, sellers, businesses, and estates needing notarization anywhere in the US." />

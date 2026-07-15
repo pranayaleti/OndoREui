@@ -1,6 +1,7 @@
 import { backendUrl } from "@/lib/backend"
-import { SITE_URL } from "@/lib/site"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
+import { SITE_URL } from "@/lib/site"
+import { getAllNotaryCityParams, getAllNotaryStateParams } from "@/lib/notary-cities"
 
 /**
  * Dynamic sitemap. Includes:
@@ -49,6 +50,8 @@ const STATIC_PATHS: string[] = [
   "/qualify",
   "/feedback",
   "/notary",
+  "/notary/on-demand",
+  "/notary/locations",
   "/get-matched",
   "/compare-utah-property-managers",
   "/whats-my-home-worth",
@@ -100,6 +103,17 @@ export async function GET() {
     return `  <url><loc>${escapeXml(loc)}</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>`
   })
 
+  // Trailing slash matches next.config trailingSlash + page canonicals.
+  const notaryStateUrls = getAllNotaryStateParams().map(({ state }) => {
+    const loc = `${SITE_URL}/notary/${state}/`
+    return `  <url><loc>${escapeXml(loc)}</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>`
+  })
+
+  const notaryCityUrls = getAllNotaryCityParams().map(({ state, city }) => {
+    const loc = `${SITE_URL}/notary/${state}/${city}/`
+    return `  <url><loc>${escapeXml(loc)}</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>`
+  })
+
   const listingUrls = listings.map((l) => {
     const id = encodeURIComponent(l.publicId ?? l.id ?? "")
     if (!id) return ""
@@ -111,7 +125,7 @@ export async function GET() {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...staticUrls, ...calculatorUrls, ...listingUrls].join("\n")}
+${[...staticUrls, ...calculatorUrls, ...notaryStateUrls, ...notaryCityUrls, ...listingUrls].join("\n")}
 </urlset>`
 
   return new Response(xml, {

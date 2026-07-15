@@ -42,6 +42,7 @@ export const allNavigationItems: NavigationItem[] = [
     children: [
       { href: "/notary", labelKey: "nav.notaryServices" },
       { href: "/notary/on-demand", labelKey: "nav.onDemandNotary" },
+      { href: "/notary/locations/", labelKey: "nav.notaryLocations" },
     ],
   },
 

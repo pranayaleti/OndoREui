@@ -674,26 +674,11 @@ export const NOTARY_SERVICE_AREAS = {
       (city) => `${city.citySlug}-${city.stateSlug}` === slug
     ),
 
-  // Get all service area URLs for sitemap
-  getServiceAreaUrls: () => {
-    const { states, cities } = getNormalizedLocations();
-    const lastmod = new Date().toISOString().split("T")[0];
-
-    return [
-      ...states.map((state) => ({
-        url: `/notary/${state.slug}`,
-        priority: "0.6",
-        changefreq: "monthly",
-        lastmod,
-      })),
-      ...cities.map((city) => ({
-        url: `/notary/${city.citySlug}-${city.stateSlug}`,
-        priority: "0.7",
-        changefreq: "monthly",
-        lastmod,
-      })),
-    ];
-  },
+  /**
+   * @deprecated Use helpers in lib/notary-cities.ts for sitemap/static params.
+   * Returning an empty list to avoid circular imports with notary-cities.
+   */
+  getServiceAreaUrls: () => [],
 
   // Generate schema markup for service areas
   getServiceAreaSchema: () => {
@@ -735,19 +720,21 @@ export const NOTARY_SERVICE_AREAS = {
     return `remote online notary, nationwide notary, online notarization, loan signing agent, apostille assistance, mobile notary, real estate notary, estate planning notary, power of attorney notarization, I-9 verification, witness services, ${stateNames}, ${cityNames}, ${stateKeywords}, ${cityKeywords}`;
   },
 
-  // Generate hidden SEO content for pages
+  /**
+   * @deprecated Legacy hidden SEO blocks; do not use for discovery.
+   */
   getHiddenSEOContent: () => ({
     states: getNormalizedLocations().states.map((state) => ({
       name: state.name,
       slug: state.slug,
       linkText: `Remote online notary and mobile notarization in ${state.name} – loan signings, real estate, and estate documents.`,
-      url: `/notary?state=${state.slug}`,
+      url: `/notary/${state.slug}/`,
     })),
     cities: getNormalizedLocations().cities.map((city) => ({
       name: `${city.city}, ${city.state}`,
       slug: `${city.citySlug}-${city.stateSlug}`,
       linkText: `Remote notary and loan signing services in ${city.city}, ${city.state} with nationwide coverage.`,
-      url: `/notary?city=${city.citySlug}-${city.stateSlug}`,
+      url: `/notary/${city.stateSlug}/${city.citySlug}/`,
     })),
   }),
 
@@ -785,6 +772,10 @@ export function generateStateSlug(stateCode: string) {
 }
 
 // Generate all possible city-service combinations for sitemap
+/**
+ * @deprecated v1 Notary SEO does not ship city × service subtype routes.
+ * Do not use in sitemap or generateStaticParams.
+ */
 export const generateAllCityServiceCombinations = () => {
   const combinations: {
     city: string;

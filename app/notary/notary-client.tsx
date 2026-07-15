@@ -1,12 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SEO from "@/components/seo";
 import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site";
 import { generateBreadcrumbJsonLd, generateLocalBusinessJsonLd } from "@/lib/seo";
-import NOTARY_SERVICE_AREAS from "@/lib/notary-service-areas";
 import {
   CheckCircle,
   Clock,
@@ -26,21 +25,47 @@ import {
 import { NotaryBooking } from "@/components/notary-booking";
 import ConsultationModal from "@/components/ConsultationModal";
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed";
+import { notaryStatePath } from "@/lib/notary-cities";
+
+const FEATURED_STATES = [
+  { name: "Utah", slug: "utah" },
+  { name: "California", slug: "california" },
+  { name: "Texas", slug: "texas" },
+  { name: "Florida", slug: "florida" },
+  { name: "New York", slug: "new-york" },
+];
+
+const META_KEYWORDS = [
+  "remote online notary",
+  "RON nationwide",
+  "online notary USA",
+  "mobile notary Utah",
+  "loan signing agent",
+  "real estate notary",
+  "digital notarization",
+  "notary Texas",
+  "notary California",
+  "notary New York",
+  "notary Florida",
+];
+
+const KEYWORDS = Array.from(
+  new Set([
+    "remote online notary",
+    "RON nationwide",
+    "online notary US",
+    "mobile notary Utah",
+    "loan signing agent",
+    "real estate notary",
+    "notary near me",
+    "Utah notary public",
+    "apostille assistance",
+    ...META_KEYWORDS,
+  ])
+);
 
 export default function NotaryPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const hiddenContent = useMemo(
-    () => NOTARY_SERVICE_AREAS.getHiddenSEOContent(),
-    []
-  );
-  const notaryKeywords = useMemo(
-    () =>
-      NOTARY_SERVICE_AREAS.getKeywordsString()
-        .split(",")
-        .map((keyword) => keyword.trim())
-        .filter(Boolean),
-    []
-  );
 
   return (
   <main className="min-h-screen">
@@ -50,18 +75,7 @@ export default function NotaryPage() {
       description="Secure Remote Online Notarization (RON) for clients across all 50 U.S. states. Mobile and in-office notarization in Utah County. Specializing in real estate, loan signings, affidavits, and estate documents."
       pathname="/notary"
       image={`${SITE_URL}/notary-cover.jpg`}
-      keywords={[
-        "remote online notary",
-        "RON nationwide",
-        "online notary US",
-        "mobile notary Utah",
-        "loan signing agent",
-        "real estate notary",
-        "notary near me",
-        "Utah notary public",
-        "apostille assistance",
-        ...notaryKeywords,
-      ]}
+      keywords={KEYWORDS}
       jsonLd={[
         generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
@@ -450,42 +464,37 @@ export default function NotaryPage() {
           Nationwide Coverage – ONDO Notary in All 50 States
         </h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto mb-10">
-          We support Remote Online Notarization everywhere in the United States,
-          plus mobile and in-office appointments in Utah County. Choose your
-          state to confirm your documents can be notarized online.
+          We support Remote Online Notarization for clients across the United States,
+          plus mobile and in-office appointments in Utah County. Browse a state hub
+          for local pages — and confirm receiving-party acceptance before you book.
         </p>
-        <div className="sr-only" aria-hidden="true">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-sm text-gray-200">
-            {hiddenContent.states.map((state) => (
+        <section className="mt-10" aria-labelledby="browse-states">
+          <h3 id="browse-states" className="text-2xl font-semibold text-white mb-3 text-center">
+            Browse notary by state
+          </h3>
+          <p className="text-center text-gray-300 mb-6">
+            Explore state hubs and curated city pages for remote online notarization.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {FEATURED_STATES.map((state) => (
               <Link
                 key={state.slug}
-                href={state.url}
-                className="block rounded-md border border-white/10 bg-card/60 px-3 py-2 transition hover:border-primary hover:bg-primary/10"
+                href={notaryStatePath(state.slug)}
+                className="block rounded-md border border-white/10 bg-card/60 px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-primary/10"
               >
-                <span className="font-semibold text-white">{state.name}</span>
-                <p className="text-xs text-gray-400">{state.linkText}</p>
+                {state.name}
               </Link>
             ))}
           </div>
-        </div>
-
-        <div className="mt-12 sr-only" aria-hidden="true">
-          <h3 className="text-xl font-semibold text-primary mb-3 text-center">
-            High-Demand Metro Areas (Online Notary)
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-sm text-gray-200">
-            {hiddenContent.cities.map((city) => (
-              <Link
-                key={city.slug}
-                href={city.url}
-                className="block rounded-md border border-white/10 bg-card/60 px-3 py-2 transition hover:border-primary hover:bg-primary/10"
-              >
-                <span className="font-semibold text-white">{city.name}</span>
-                <p className="text-xs text-gray-400">{city.linkText}</p>
-              </Link>
-            ))}
+          <div className="mt-6 text-center">
+            <Link
+              href="/notary/locations/"
+              className="text-primary underline-offset-4 hover:underline font-medium"
+            >
+              All notary locations
+            </Link>
           </div>
-        </div>
+        </section>
       </div>
     </section>
 
