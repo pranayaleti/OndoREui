@@ -83,6 +83,7 @@ export default function NotaryPage() {
             { itemOffered: { name: "Remote Online Notarization (RON)" } },
             { itemOffered: { name: "Mobile Notary" } },
             { itemOffered: { name: "Loan Signing Agent" } },
+            { itemOffered: { name: "On-demand Notary" } },
           ],
         }),
       ]}
@@ -122,8 +123,45 @@ export default function NotaryPage() {
         </div>
 
         <p className="text-gray-400 mt-6 text-sm">
-          Same‑day availability • Remote notarization nationwide • Mobile service in Utah County
+          On-demand available • We try to accommodate same-day • RON nationwide • Mobile in Utah County
         </p>
+      </div>
+    </section>
+
+    {/* ON-DEMAND */}
+    <section id="on-demand" className="py-16 md:py-20 bg-card border-y border-border">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="flex flex-col md:flex-row md:items-center gap-8">
+          <div className="flex-1">
+            <div className="inline-flex items-center gap-2 text-primary text-sm font-medium mb-3">
+              <Clock className="w-4 h-4" />
+              On-demand notary
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Need a notarization today?
+            </h2>
+            <p className="text-foreground/80 text-lg leading-relaxed mb-4">
+              ONDO Notary offers on-demand scheduling for remote and mobile appointments.
+              We&apos;ll try to accommodate same-day when capacity allows — earlier requests
+              improve your odds.
+            </p>
+            <p className="text-foreground/60 text-sm mb-6">
+              Same-day is best-effort, not a guaranteed SLA. RON nationwide; mobile across our Utah service area.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button asChild size="lg" className="bg-primary text-primary-foreground">
+                <Link href="/notary/on-demand">Learn about on-demand</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Request same-day slot
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -173,7 +211,7 @@ export default function NotaryPage() {
             <h3 className="text-xl font-semibold text-white mb-4">Why Choose ONDO Notary?</h3>
             <ul className="space-y-3 text-gray-300">
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Nationwide remote notarization</li>
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Same‑day appointments</li>
+              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Same-day when capacity allows</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Real estate & loan document experts</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Transparent pricing & clear process</li>
             </ul>

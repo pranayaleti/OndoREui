@@ -36,7 +36,14 @@ export const allNavigationItems: NavigationItem[] = [
   { href: "/sell", labelKey: "nav.sell" },
   { href: "/properties", labelKey: "nav.properties" },
   { href: "/loans", labelKey: "nav.loans" },
-  { href: "/notary", labelKey: "nav.notary" },
+  {
+    href: "/notary",
+    labelKey: "nav.notary",
+    children: [
+      { href: "/notary", labelKey: "nav.notaryServices" },
+      { href: "/notary/on-demand", labelKey: "nav.onDemandNotary" },
+    ],
+  },
 
   // Solutions — who are you + how to choose
   {
@@ -59,6 +66,7 @@ export const allNavigationItems: NavigationItem[] = [
       { href: "/tour", labelKey: "nav.platformTour" },
       { href: "/blog", labelKey: "nav.blogAndGuides" },
       { href: "/news", labelKey: "nav.news" },
+      { href: "/socials", labelKey: "nav.socials" },
       { href: "/calculators", labelKey: "nav.calculators" },
       { href: "/compare", labelKey: "nav.compare" },
       { href: "/faq", labelKey: "nav.faq" },

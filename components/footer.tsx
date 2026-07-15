@@ -310,6 +310,8 @@ const Footer = memo(() => {
             <li><Link href="/about/giving-back" className="text-foreground/70 hover:text-foreground">Giving back</Link></li>
             <li><Link href="/about/careers" className="text-foreground/70 hover:text-foreground">Careers</Link></li>
             <li><Link href="/about/news" className="text-foreground/70 hover:text-foreground">News</Link></li>
+            <li><Link href="/socials" className="text-foreground/70 hover:text-foreground">Socials</Link></li>
+            <li><Link href="/news" className="text-foreground/70 hover:text-foreground">Industry news</Link></li>
             <li><Link href="/about/investor-relations" className="text-foreground/70 hover:text-foreground">Investor relations</Link></li>
             <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
           </FooterNavSection>

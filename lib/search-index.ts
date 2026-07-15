@@ -50,6 +50,22 @@ const pages: SearchResult[] = [
     keywords: ['notary', 'notarization', 'remote notary', 'mobile notary', 'signing']
   },
   {
+    id: 'notary-on-demand',
+    title: 'On-Demand Notary',
+    description: 'Urgent notarization — we try to accommodate same-day when capacity allows',
+    href: '/notary/on-demand',
+    category: 'Service',
+    keywords: ['on demand notary', 'same day notary', 'urgent notary', 'same-day notarization']
+  },
+  {
+    id: 'socials',
+    title: 'Socials & Updates',
+    description: 'Curated social posts, profile links, and latest real estate news',
+    href: '/socials',
+    category: 'Page',
+    keywords: ['socials', 'social media', 'updates', 'news', 'linktree']
+  },
+  {
     id: 'calculators',
     title: 'Calculators',
     description: 'Real estate calculators and tools',

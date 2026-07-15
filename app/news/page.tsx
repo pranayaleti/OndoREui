@@ -1,87 +1,15 @@
- "use client"
+"use client"
 
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
+import { NEWS_ITEMS } from "@/lib/news-items"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Calendar, Globe2, ExternalLink } from "lucide-react"
-
-type NewsItem = {
-  title: string
-  excerpt: string
-  source: string
-  sourceUrl: string
-  category: string
-  region?: string
-  date: string
-}
-
-const newsItems: NewsItem[] = [
-  {
-    title: "National Housing Market Update: Inventory and Rates",
-    excerpt:
-      "Latest data on home prices, inventory, and mortgage rates across major U.S. metros and what it means for buyers and sellers.",
-    source: "Redfin News",
-    sourceUrl: "https://www.redfin.com/news/",
-    category: "Market Trends",
-    region: "US",
-    date: "Updated Weekly",
-  },
-  {
-    title: "Real Estate News and Analysis",
-    excerpt:
-      "In-depth reporting on residential and commercial real estate including financing, policy changes, and investor activity.",
-    source: "The Wall Street Journal – Real Estate",
-    sourceUrl: "https://www.wsj.com/news/realestate",
-    category: "National",
-    region: "US",
-    date: "Updated Daily",
-  },
-  {
-    title: "Housing Wire: Mortgage & Housing Industry",
-    excerpt:
-      "Breaking news on mortgage rates, lending guidelines, and housing policy for agents, lenders, and investors.",
-    source: "HousingWire",
-    sourceUrl: "https://www.housingwire.com/",
-    category: "Mortgage",
-    region: "US",
-    date: "Updated Daily",
-  },
-  {
-    title: "Local Utah Real Estate Headlines",
-    excerpt:
-      "Coverage of Utah housing affordability, new developments, and population growth across the Wasatch Front.",
-    source: "KSL Real Estate",
-    sourceUrl: "https://www.ksl.com/real-estate",
-    category: "Utah",
-    region: "Utah",
-    date: "Updated Regularly",
-  },
-  {
-    title: "Salt Lake City Housing Market Data",
-    excerpt:
-      "Trends in prices, days on market, and inventory for Salt Lake City and surrounding counties, plus neighborhood-level insights.",
-    source: "Zillow Research",
-    sourceUrl: "https://www.zillow.com/research/",
-    category: "Market Data",
-    region: "Utah",
-    date: "Updated Monthly",
-  },
-  {
-    title: "Real Estate Policy and Regulation Updates",
-    excerpt:
-      "News on zoning changes, landlord–tenant regulations, and housing policy that can impact Utah investors and homeowners.",
-    source: "National Association of Realtors",
-    sourceUrl: "https://www.nar.realtor/newsroom",
-    category: "Policy",
-    region: "US",
-    date: "Updated Regularly",
-  },
-]
 
 export default function NewsPage() {
   return (
@@ -121,7 +49,7 @@ export default function NewsPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {newsItems.map((item) => (
+              {NEWS_ITEMS.map((item) => (
                 <Card key={item.title} className="h-full flex flex-col justify-between">
                   <CardHeader className="pb-3">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -159,6 +87,12 @@ export default function NewsPage() {
               ))}
             </div>
 
+            <div className="mt-10 text-center">
+              <Button asChild variant="outline">
+                <Link href="/socials">Also see Socials & updates</Link>
+              </Button>
+            </div>
+
             <div className="mt-12 text-center text-sm text-foreground/70">
               <p>
                 Ondo Real Estate does not own or control the external news sites linked above. Always verify details
@@ -171,4 +105,3 @@ export default function NewsPage() {
     </main>
   )
 }
-

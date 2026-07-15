@@ -1,7 +1,7 @@
 # On-Demand Notary + `/socials` Hub — Design Spec
 
 **Date:** 2026-07-14  
-**Status:** Approved (pending user review of this file)  
+**Status:** Implemented  
 **Repo:** OndoREui (Next.js 15 App Router)
 
 ---

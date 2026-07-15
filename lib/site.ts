@@ -116,7 +116,7 @@ export type SocialLink = {
 export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
   { url: "https://www.facebook.com/OndoRealEstate",      live: false },
   { url: "https://www.youtube.com/@OndoRealEstate",      live: false },
-  { url: "https://www.instagram.com/OndoRealEstate",     live: false },
+  { url: "https://www.instagram.com/OndoRealEstate",     live: true },
   { url: "https://www.tiktok.com/@OndoRealEstate",       live: false },
   { url: "https://www.linkedin.com/company/OndoRealEstate", live: false },
   { url: "https://x.com/OndoRealEstate",                 live: false },

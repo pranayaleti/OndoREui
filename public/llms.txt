@@ -10,7 +10,9 @@ Ondo Real Estate (also known as Ondo RE) is headquartered at 2701 N Thanksgiving
 - [Home Loans & Mortgages](https://ondorealestate.com/loans/): Conventional, FHA, VA, USDA, Jumbo, HELOC, Reverse Mortgage
 - [Buying a Home](https://ondorealestate.com/buy/): First-time buyer, second home, refinance, education-first guidance
 - [Selling a Home](https://ondorealestate.com/sell/): Listing services, home staging, market analysis
-- [Mobile Notary](https://ondorealestate.com/notary/): Remote online notarization, loan signing, estate planning, I-9 verification
+- [Mobile Notary](https://ondorealestate.com/notary/): Remote online notarization, on-demand / same-day when capacity allows, loan signing, estate planning, I-9 verification
+- [On-demand Notary](https://ondorealestate.com/notary/on-demand/): Urgent scheduling — we try to accommodate same-day when capacity allows
+- [Socials](https://ondorealestate.com/socials/): Curated posts, profile links, and latest industry news
 - [Investment Services](https://ondorealestate.com/investments/): Cap rate analysis, ROI tools, portfolio reporting
 
 ## Free tools

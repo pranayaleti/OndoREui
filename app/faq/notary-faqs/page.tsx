@@ -39,7 +39,12 @@ export default function NotaryFAQPage() {
     {
       question: "How quickly can I get a document notarized?",
       answer:
-        "For Remote Online Notary (RON), we can often schedule same-day appointments. In-office appointments are typically available within 24-48 hours. Mobile notary services in Utah County can be arranged with advance notice. Emergency or rush services may be available for an additional fee.",
+        "We'll try to accommodate same-day when capacity allows — especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. In-office is often available within 24–48 hours; mobile in Utah depends on location and travel. Same-day is best-effort, not a guaranteed SLA. See /notary/on-demand for how on-demand scheduling works.",
+    },
+    {
+      question: "Do you offer on-demand or same-day notary?",
+      answer:
+        "Yes. ONDO Notary offers on-demand scheduling for urgent needs. We try to accommodate same-day when our calendar allows — RON nationwide and mobile/in-office in our Utah service area. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent. Learn more at /notary/on-demand or book from /notary.",
     },
     {
       question: "What types of documents can you notarize?",
@@ -119,7 +124,13 @@ export default function NotaryFAQPage() {
                   href="/notary"
                   className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[accent-1] to-[accent-2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                 >
-                  Book Notary Service
+                  Book notary
+                </Link>
+                <Link
+                  href="/notary/on-demand"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/5 transition-colors"
+                >
+                  On-demand / same-day
                 </Link>
                 <Link
                   href="/contact"
