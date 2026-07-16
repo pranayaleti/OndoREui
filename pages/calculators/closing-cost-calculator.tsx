@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, getProgramMI } from '@/lib/mortgage-utils';
+import { LoanProgram, getProgramMI, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface ClosingCostData {
@@ -31,7 +31,8 @@ interface ClosingCostResults {
   thirdPartyCosts: number;
   prepaidCosts: number;
   monthlyPayment: number;
-  breakEvenMonths: number;
+  /** Months of first-month principal needed to equal total closing costs (rough equity payback, not true break-even). */
+  equityPaybackMonths: number;
   monthlyPI?: number;
 }
 
@@ -40,7 +41,7 @@ const ClosingCostCalculator: React.FC = () => {
     homePrice: 300000,
     loanAmount: 240000,
     downPayment: 60000,
-    interestRate: 6.5,
+    interestRate: DEFAULT_MORTGAGE_RATE,
     loanTerm: 30,
     propertyTax: 3000,
     insurance: 1200,
@@ -92,10 +93,8 @@ const ClosingCostCalculator: React.FC = () => {
     const outOfPocket = downPayment + totalClosingCosts;
 
     let monthlyPI = 0;
-    if (formData.interestRate && formData.loanTerm) {
-      const r = (formData.interestRate / 100) / 12;
-      const n = formData.loanTerm * 12;
-      monthlyPI = loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    if (formData.interestRate != null && formData.loanTerm) {
+      monthlyPI = calculateMonthlyPI(loanAmount, formData.interestRate, formData.loanTerm);
     }
     const monthlyPayment = monthlyTax + monthlyInsurance + (monthlyPI || (loanAmount * 0.005));
 
@@ -104,7 +103,7 @@ const ClosingCostCalculator: React.FC = () => {
       ? loanAmount * ((formData.interestRate / 100) / 12)
       : 0;
     const firstMonthPrincipal = monthlyPI > 0 ? monthlyPI - firstMonthInterest : 0;
-    const breakEvenMonths = firstMonthPrincipal > 0 ? (totalClosingCosts / firstMonthPrincipal) : 0;
+    const equityPaybackMonths = firstMonthPrincipal > 0 ? (totalClosingCosts / firstMonthPrincipal) : 0;
 
     setResults({
       totalClosingCosts,
@@ -113,7 +112,7 @@ const ClosingCostCalculator: React.FC = () => {
       thirdPartyCosts,
       prepaidCosts,
       monthlyPayment,
-      breakEvenMonths,
+      equityPaybackMonths,
       monthlyPI: monthlyPI || undefined
     });
     setHasCalculated(true);
@@ -468,18 +467,18 @@ const ClosingCostCalculator: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Break-Even Analysis */}
+                {/* Equity payback (not true cash-flow break-even) */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
-                  <h2 className="text-xl font-semibold text-foreground mb-4">Break-Even Analysis</h2>
+                  <h2 className="text-xl font-semibold text-foreground mb-4">Principal Payback Context</h2>
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
-                        <p className="text-sm text-primary mb-1">Break-Even Time</p>
+                        <p className="text-sm text-primary mb-1">Closing Costs ÷ First-Month Principal</p>
                         <p className="text-2xl font-bold text-green-700">
-                          {results.breakEvenMonths.toFixed(1)} months
+                          {results.equityPaybackMonths.toFixed(1)} months
                         </p>
                         <p className="text-sm text-primary mt-1">
-                          Time to recoup closing costs through principal paydown
+                          Rough months of early principal needed to match closing costs (not a cash-flow break-even)
                         </p>
                       </div>
                     </div>

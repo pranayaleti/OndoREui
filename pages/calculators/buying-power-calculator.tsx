@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI, calculateMaxLoanFromPayment, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface BuyingPowerData {
@@ -31,7 +31,7 @@ const BuyingPowerCalculator: React.FC = () => {
     annualIncome: 80000,
     monthlyDebts: 500,
     downPayment: 20000,
-    interestRate: 4.5,
+    interestRate: DEFAULT_MORTGAGE_RATE,
     loanTerm: 30,
     propertyTaxRate: 1.2,
     insuranceRate: 0.5,
@@ -46,27 +46,23 @@ const BuyingPowerCalculator: React.FC = () => {
     const { annualIncome, monthlyDebts, downPayment, interestRate, loanTerm, propertyTaxRate, insuranceRate } = formData;
 
     const monthlyIncome = annualIncome / 12;
-    const monthlyRate = interestRate / 100 / 12;
-    const totalPayments = loanTerm * 12;
-    
+
     // Calculate maximum monthly payment using program DTI
     const dti = getProgramDTI(formData.program);
     const frontRatio = dti.frontPercent > 0 ? (dti.frontPercent / 100) : 0;
     const backRatio = dti.backPercent / 100;
     const maxFrontEndPayment = frontRatio > 0 ? monthlyIncome * frontRatio : Number.POSITIVE_INFINITY;
     const maxBackEndPayment = (monthlyIncome * backRatio) - monthlyDebts;
-    
+
     // Use the lower of the two ratios
     const maxMonthlyPayment = Math.min(maxFrontEndPayment, maxBackEndPayment);
-    
-    // Calculate maximum loan amount using the mortgage payment formula
-    const maxLoanAmount = maxMonthlyPayment * 
-      (1 - Math.pow(1 + monthlyRate, -totalPayments)) / monthlyRate;
-    
+
+    const maxLoanAmount = calculateMaxLoanFromPayment(maxMonthlyPayment, interestRate, loanTerm);
+
     // Calculate property tax and insurance based on home price
     const maxHomePrice = maxLoanAmount + downPayment;
     let adjustedMaxHomePrice = maxHomePrice;
-    
+
     // Iterate to find the correct home price that fits within the payment constraints
     for (let i = 0; i < 10; i++) {
       const monthlyTax = (adjustedMaxHomePrice * propertyTaxRate / 100) / 12;
@@ -75,12 +71,11 @@ const BuyingPowerCalculator: React.FC = () => {
       const credit = clampCreditScore(formData.creditScore);
       const mi = getProgramMI(formData.program, estLoan, adjustedMaxHomePrice, credit, loanTerm, downPayment).monthlyMI;
       const availableForPandI = maxMonthlyPayment - monthlyTax - monthlyInsurance - mi;
-      
+
       if (availableForPandI > 0) {
-        const newMaxLoanAmount = availableForPandI * 
-          (1 - Math.pow(1 + monthlyRate, -totalPayments)) / monthlyRate;
+        const newMaxLoanAmount = calculateMaxLoanFromPayment(availableForPandI, interestRate, loanTerm);
         const newMaxHomePrice = newMaxLoanAmount + downPayment;
-        
+
         if (Math.abs(newMaxHomePrice - adjustedMaxHomePrice) < 100) {
           break;
         }
@@ -274,7 +269,7 @@ const BuyingPowerCalculator: React.FC = () => {
                   value={formData.interestRate || ''}
                   onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="4.5"
+                  placeholder={String(DEFAULT_MORTGAGE_RATE)}
                 />
               </div>
 

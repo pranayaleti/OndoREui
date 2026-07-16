@@ -39,7 +39,8 @@ export const CALCULATOR_CATALOG: Record<
   },
   "temporary-buydown": {
     name: "Temporary Buydown Calculator",
-    description: "Model 2-1 or 3-2-1 buydown payment relief and total costs.",
+    description:
+      "Model 2-1, 3-2-1, or flat temporary payment subsidies (note rate stays fixed; cost ≈ subsidy sum).",
   },
   "rent-vs-own": {
     name: "Rent vs Own Calculator",

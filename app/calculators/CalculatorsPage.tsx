@@ -34,6 +34,15 @@ interface CalculatorTile {
 const CalculatorsPage: React.FC = () => {
   const calculators: CalculatorTile[] = [
     {
+      id: 'owner-vs-self',
+      name: 'Self-Manage vs Ondo RE',
+      description: 'Compare self-managing a rental vs Ondo — including the hidden cost of your time.',
+      path: '/calculators/owner-vs-self',
+      icon: <Building2 className="h-8 w-8" />,
+      category: 'Investment',
+      color: 'from-orange-500 to-red-700',
+    },
+    {
       id: 'mortgage-payment',
       name: 'Mortgage Payment Calculator',
       description: 'Calculate your monthly mortgage payment including principal, interest, taxes, and insurance.',
@@ -99,7 +108,7 @@ const CalculatorsPage: React.FC = () => {
     {
       id: 'temporary-buydown',
       name: 'Temporary Buydown Calculator',
-      description: 'Calculate temporary interest rate buydown benefits and costs.',
+      description: 'Model 2-1, 3-2-1, or flat temporary payment subsidies and estimated buydown cost.',
       path: '/calculators/temporary-buydown',
       icon: <PiggyBank className="h-8 w-8" />,
       category: 'Mortgage',
@@ -207,7 +216,7 @@ const CalculatorsPage: React.FC = () => {
               Real Estate Calculators
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Professional-grade tools to help you make informed real estate decisions
+              Free tools to model mortgage, purchase, and investment scenarios with clear example rates
             </p>
           </div>
         </div>
@@ -302,7 +311,7 @@ const CalculatorsPage: React.FC = () => {
                 Why Use Our Calculators?
               </h2>
               <p className="text-gray-300 mb-12 max-w-2xl">
-                Professional tools designed for accuracy and speed
+                Transparent formulas with example defaults you can adjust
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -313,8 +322,8 @@ const CalculatorsPage: React.FC = () => {
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-br from-accent-1 to-accent-2 rounded-2xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-white">Accurate Calculations</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">Professional-grade calculations using current market rates and formulas</p>
+                  <h3 className="text-xl font-bold mb-3 text-white">Clear Calculations</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">Standard amortization formulas with example rates you can edit — not live market quotes</p>
                 </div>
 
                 <div className="text-center group">

@@ -1,12 +1,19 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useFinancialVisibility } from '@/lib/financial-visibility';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import {
+  DEFAULT_MORTGAGE_RATE,
+  calculateMonthlyPI,
+  calculateRefinance,
+  hasCompleteRefinanceInputs,
+  type RefinanceInput,
+} from '@/lib/mortgage-utils'
 
-interface RefinanceData {
+interface RefinanceFormData {
   currentBalance: number;
   currentRate: number;
   currentPayment: number;
@@ -17,112 +24,51 @@ interface RefinanceData {
   insurance: number;
 }
 
-interface RefinanceResults {
-  newMonthlyPayment: number;
-  monthlySavings: number;
-  breakEvenMonths: number;
-  totalSavings: number;
-  interestSavings: number;
-  newPI: number;
-  newEscrows: number;
-  currentPI: number;
-}
-
 const RefinanceCalculator: React.FC = () => {
-  const [formData, setFormData] = useState<RefinanceData>({
-    currentBalance: 0,
-    currentRate: 0,
-    currentPayment: 0,
-    newRate: 0,
-    newTerm: 0,
-    closingCosts: 0,
-    propertyTax: 0,
-    insurance: 0
+  // Defaults are internally consistent: ~25 years remaining at 7% on $200k + escrow.
+  const defaultBalance = 200000
+  const defaultRate = 7.0
+  const defaultRemainingYears = 25
+  const defaultTax = 3000
+  const defaultIns = 1200
+  const defaultEscrow = defaultTax / 12 + defaultIns / 12
+  const defaultPI = calculateMonthlyPI(defaultBalance, defaultRate, defaultRemainingYears)
+
+  const [formData, setFormData] = useState<RefinanceFormData>({
+    currentBalance: defaultBalance,
+    currentRate: defaultRate,
+    currentPayment: Math.round(defaultPI + defaultEscrow),
+    newRate: DEFAULT_MORTGAGE_RATE,
+    newTerm: 30,
+    closingCosts: 3000,
+    propertyTax: defaultTax,
+    insurance: defaultIns,
   });
 
-  const [results, setResults] = useState<RefinanceResults | null>(null);
-  const [hasCalculated, setHasCalculated] = useState(false);
   const { showValues, toggle } = useFinancialVisibility();
 
-  useEffect(() => {
-    calculateRefinance();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData]);
+  const input: RefinanceInput = useMemo(
+    () => ({
+      currentBalance: formData.currentBalance,
+      currentRate: formData.currentRate,
+      currentPayment: formData.currentPayment,
+      newRate: formData.newRate,
+      newTermYears: formData.newTerm,
+      closingCosts: formData.closingCosts,
+      annualPropertyTax: formData.propertyTax,
+      annualInsurance: formData.insurance,
+    }),
+    [formData]
+  );
 
-  const calculateRefinance = () => {
-    const hasAnyInput = [
-      formData.currentBalance,
-      formData.currentRate,
-      formData.currentPayment,
-      formData.newRate,
-      formData.newTerm,
-      formData.closingCosts,
-      formData.propertyTax,
-      formData.insurance
-    ].some((v) => v != null && v !== 0);
+  const isComplete = hasCompleteRefinanceInputs(input);
+  const results = useMemo(
+    () => (isComplete ? calculateRefinance(input) : null),
+    [input, isComplete]
+  );
+  const hasCalculated = results != null;
 
-    if (!hasAnyInput) {
-      setResults({
-        newMonthlyPayment: 0,
-        monthlySavings: 0,
-        breakEvenMonths: 0,
-        totalSavings: 0,
-        interestSavings: 0,
-        newPI: 0,
-        newEscrows: 0,
-        currentPI: 0
-      });
-      return;
-    }
-
-    const currentBalance = formData.currentBalance || 200000;
-    const currentPayment = formData.currentPayment || 1200;
-    const newRate = formData.newRate || 4.0;
-    const newTerm = formData.newTerm || 30;
-    const closingCosts = formData.closingCosts || 3000;
-    const propertyTax = formData.propertyTax || 3000;
-    const insurance = formData.insurance || 1200;
-
-    // Calculate monthly interest rate
-    const monthlyRate = newRate / 100 / 12;
-    const totalPayments = newTerm * 12;
-    
-    // Calculate new monthly payment (P&I only)
-    const newMonthlyPayment = currentBalance * 
-      (monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) / 
-      (Math.pow(1 + monthlyRate, totalPayments) - 1);
-    
-    // Add property tax and insurance
-    const monthlyTax = propertyTax / 12;
-    const monthlyInsurance = insurance / 12;
-    const escrows = monthlyTax + monthlyInsurance;
-    const totalNewPayment = newMonthlyPayment + escrows;
-    
-    const monthlySavings = currentPayment - totalNewPayment;
-    
-    const breakEvenMonths = monthlySavings > 0 ? closingCosts / monthlySavings : 0;
-    
-    // P&I savings over the new loan term
-    const currentPI = currentPayment - escrows;
-    const piSavingsPerMonth = currentPI - newMonthlyPayment;
-    const totalSavings = piSavingsPerMonth > 0 ? piSavingsPerMonth * totalPayments - closingCosts : -closingCosts;
-    
-    const interestSavings = piSavingsPerMonth * totalPayments;
-    
-    setResults({
-      newMonthlyPayment: totalNewPayment,
-      monthlySavings,
-      breakEvenMonths,
-      totalSavings,
-      interestSavings,
-      newPI: newMonthlyPayment,
-      newEscrows: escrows,
-      currentPI
-    });
-    setHasCalculated(true);
-  };
-
-  const handleInputChange = (field: keyof RefinanceData, value: number) => {
+  const handleInputChange = (field: keyof RefinanceFormData, value: number) => {
     setFormData({ ...formData, [field]: value });
   };
 
@@ -137,7 +83,6 @@ const RefinanceCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <div className="bg-background shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between gap-4">
@@ -164,12 +109,13 @@ const RefinanceCalculator: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Input Form */}
           <div className="bg-card rounded-lg shadow-lg p-6">
             <h2 className="text-xl font-semibold text-foreground mb-6">Current Mortgage</h2>
-            
+            <p className="text-sm text-foreground/70 mb-6">
+              All required fields must be filled to see results. Rates shown are example defaults, not live quotes.
+            </p>
+
             <div className="space-y-6">
-              {/* Current Balance */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Current Loan Balance
@@ -188,26 +134,27 @@ const RefinanceCalculator: React.FC = () => {
                 </div>
               </div>
 
-              {/* Current Rate */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Current Interest Rate (%)
                 </label>
                 <input
                   type="number"
-                    onFocus={(e) => e.target.select()}
+                  onFocus={(e) => e.target.select()}
                   step="0.01"
-                  value={formData.currentRate || ''}
+                  value={formData.currentRate === 0 ? 0 : formData.currentRate || ''}
                   onChange={(e) => handleInputChange('currentRate', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="5.5"
+                  placeholder="7.0"
                 />
+                <p className="text-sm text-foreground/70 mt-1">
+                  Used to estimate remaining term and interest savings
+                </p>
               </div>
 
-              {/* Current Payment */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  Current Monthly Payment
+                  Current Monthly Payment (PITI)
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-3 text-foreground/70">$</span>
@@ -215,38 +162,36 @@ const RefinanceCalculator: React.FC = () => {
                     type="number"
                     onFocus={(e) => e.target.select()}
                     value={formData.currentPayment || ''}
-                    onChange={(e) => handleInputChange('currentPayment', Number(e.target.value))}
+                    onChange={(e) => handleInputChange('currentPayment', Number(e.target.value) || 0)}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,200"
+                    placeholder="1,600"
                   />
                 </div>
               </div>
 
               <h2 className="text-xl font-semibold text-foreground mb-6 mt-8">New Mortgage</h2>
 
-              {/* New Rate */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   New Interest Rate (%)
                 </label>
                 <input
                   type="number"
-                    onFocus={(e) => e.target.select()}
+                  onFocus={(e) => e.target.select()}
                   step="0.01"
-                  value={formData.newRate || ''}
+                  value={formData.newRate === 0 ? 0 : formData.newRate || ''}
                   onChange={(e) => handleInputChange('newRate', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="4.0"
+                  placeholder={String(DEFAULT_MORTGAGE_RATE)}
                 />
               </div>
 
-              {/* New Term */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   New Loan Term (years)
                 </label>
                 <select
-                  value={formData.newTerm || 30}
+                  value={formData.newTerm}
                   onChange={(e) => handleInputChange('newTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                 >
@@ -256,7 +201,6 @@ const RefinanceCalculator: React.FC = () => {
                 </select>
               </div>
 
-              {/* Closing Costs */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Refinancing Closing Costs
@@ -266,15 +210,14 @@ const RefinanceCalculator: React.FC = () => {
                   <input
                     type="number"
                     onFocus={(e) => e.target.select()}
-                    value={formData.closingCosts || ''}
-                    onChange={(e) => handleInputChange('closingCosts', Number(e.target.value))}
+                    value={formData.closingCosts === 0 ? 0 : formData.closingCosts || ''}
+                    onChange={(e) => handleInputChange('closingCosts', Number(e.target.value) || 0)}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
                     placeholder="3,000"
                   />
                 </div>
               </div>
 
-              {/* Property Tax */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Annual Property Tax
@@ -284,15 +227,14 @@ const RefinanceCalculator: React.FC = () => {
                   <input
                     type="number"
                     onFocus={(e) => e.target.select()}
-                    value={formData.propertyTax || ''}
-                    onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
+                    value={formData.propertyTax === 0 ? 0 : formData.propertyTax || ''}
+                    onChange={(e) => handleInputChange('propertyTax', Number(e.target.value) || 0)}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
                     placeholder="3,000"
                   />
                 </div>
               </div>
 
-              {/* Insurance */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Annual Homeowners Insurance
@@ -302,8 +244,8 @@ const RefinanceCalculator: React.FC = () => {
                   <input
                     type="number"
                     onFocus={(e) => e.target.select()}
-                    value={formData.insurance || ''}
-                    onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
+                    value={formData.insurance === 0 ? 0 : formData.insurance || ''}
+                    onChange={(e) => handleInputChange('insurance', Number(e.target.value) || 0)}
                     className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
                     placeholder="1,200"
                   />
@@ -312,11 +254,18 @@ const RefinanceCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Results */}
           <div className="space-y-6">
+            {!isComplete && (
+              <div className="bg-card rounded-lg shadow-lg p-6">
+                <p className="text-sm text-foreground/70">
+                  Enter current balance, current rate, current payment, new rate, and new term to see refinance results.
+                  Empty or incomplete fields are not replaced with hidden defaults.
+                </p>
+              </div>
+            )}
+
             {results && (
               <>
-                {/* Monthly Savings */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold text-foreground mb-4">Monthly Payment Comparison</h2>
                   <div className="space-y-4">
@@ -330,27 +279,26 @@ const RefinanceCalculator: React.FC = () => {
                       <div className="text-center p-3 bg-muted rounded-lg">
                         <p className="text-sm text-primary mb-1">New Payment</p>
                         <p className="text-lg font-semibold text-green-700">
-                          {showValues ? formatCurrency(results.newMonthlyPayment) : '••••'}
+                          {showValues ? formatCurrency(results.newTotalPayment) : '••••'}
                         </p>
                         <p className="text-xs text-foreground/70 mt-1">
-                          P&I: {showValues ? formatCurrency(results.newPI) : '••••'} • Escrows:{" "}
+                          P&amp;I: {showValues ? formatCurrency(results.newPI) : '••••'} • Escrows:{' '}
                           {showValues ? formatCurrency(results.newEscrows) : '••••'}
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
-                        <p className="text-sm text-primary mb-1">Monthly Savings</p>
+                        <p className="text-sm text-primary mb-1">Monthly Payment Savings</p>
                         <p className="text-2xl font-bold text-foreground">
-                          {showValues ? formatCurrency(results.monthlySavings) : '••••'}
+                          {showValues ? formatCurrency(results.monthlyPaymentSavings) : '••••'}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Break-Even Analysis */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold text-foreground mb-4">Break-Even Analysis</h2>
                   <div className="space-y-4">
@@ -358,54 +306,93 @@ const RefinanceCalculator: React.FC = () => {
                       <div className="text-center">
                         <p className="text-sm text-yellow-600 mb-1">Break-Even Time</p>
                         <p className="text-2xl font-bold text-yellow-700">
-                          {results.breakEvenMonths.toFixed(1)} months
+                          {results.breakEvenMonths == null
+                            ? 'N/A'
+                            : `${results.breakEvenMonths.toFixed(1)} months`}
                         </p>
                         <p className="text-sm text-yellow-600 mt-1">
-                          Time to recoup closing costs
+                          Time to recoup closing costs from payment savings
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-2 text-sm text-foreground/70">
                       <p>• Closing costs: {showValues ? formatCurrency(formData.closingCosts) : '••••'}</p>
-                      <p>• Monthly savings: {showValues ? formatCurrency(results.monthlySavings) : '••••'}</p>
-                      <p>• Break-even: {results.breakEvenMonths.toFixed(1)} months</p>
+                      <p>• Monthly payment savings: {showValues ? formatCurrency(results.monthlyPaymentSavings) : '••••'}</p>
+                      {results.estimatedRemainingMonths != null && (
+                        <p>
+                          • Est. remaining term on current loan:{' '}
+                          {(results.estimatedRemainingMonths / 12).toFixed(1)} years
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
 
-                {/* Total Savings */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
-                  <h2 className="text-xl font-semibold text-foreground mb-4">Total Savings</h2>
+                  <h2 className="text-xl font-semibold text-foreground mb-4">Savings Summary</h2>
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
-                        <p className="text-sm text-primary mb-1">Total Savings</p>
+                        <p className="text-sm text-primary mb-1">Net P&amp;I Payment Savings</p>
                         <p className="text-2xl font-bold text-green-700">
-                          {showValues ? formatCurrency(results.totalSavings) : '••••'}
+                          {showValues ? formatCurrency(results.netPaymentSavingsOverNewTerm) : '••••'}
                         </p>
                         <p className="text-sm text-primary mt-1">
-                          Over {formData.newTerm} years (minus closing costs)
+                          P&amp;I difference over {(results.comparisonMonths / 12).toFixed(1)} years
+                          (aligned horizon) minus closing costs
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-2 text-sm text-foreground/70">
-                      <p>• Interest savings (PI-only est.): {showValues ? formatCurrency(results.interestSavings) : '••••'}</p>
+                      {results.interestSavings != null ? (
+                        <p>
+                          • Estimated interest savings over the same horizon:{' '}
+                          {showValues ? formatCurrency(results.interestSavings) : '••••'}
+                        </p>
+                      ) : (
+                        <p>
+                          • Interest savings: unavailable — check that current payment covers interest
+                          at the current rate
+                          {results.monthlyPaymentSavings < 0 && results.extendsTerm
+                            ? ', or note that a higher payment with a longer term is not framed as interest savings'
+                            : ''}
+                        </p>
+                      )}
                       <p>• Closing costs: {showValues ? formatCurrency(formData.closingCosts) : '••••'}</p>
-                      <p>• Net savings: {showValues ? formatCurrency(results.totalSavings) : '••••'}</p>
+                      <p>
+                        • Net P&amp;I payment savings: {showValues ? formatCurrency(results.netPaymentSavingsOverNewTerm) : '••••'}
+                      </p>
+                      {results.extendsTerm && (
+                        <p className="text-yellow-700">
+                          • This refinance extends your remaining term (
+                          {results.estimatedRemainingMonths != null
+                            ? `${(results.estimatedRemainingMonths / 12).toFixed(1)} years left`
+                            : 'current remaining'}{' '}
+                          → {formData.newTerm} years).
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
 
-                {/* Recommendations */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold text-foreground mb-4">Recommendations</h2>
                   <div className="space-y-3 text-sm text-foreground/70">
-                    {results.breakEvenMonths < 24 ? (
-                      <p className="text-primary font-medium">✓ Refinancing looks beneficial with a quick break-even period</p>
+                    {results.isBeneficial ? (
+                      <p className="text-primary font-medium">
+                        ✓ Refinancing looks beneficial: lower payment, positive interest savings, and
+                        break-even within the remaining loan term
+                      </p>
+                    ) : results.monthlyPaymentSavings <= 0 ? (
+                      <p className="text-yellow-600 font-medium">
+                        ⚠ Monthly payment does not decrease — weigh interest and term tradeoffs carefully
+                      </p>
                     ) : (
-                      <p className="text-yellow-600 font-medium">⚠ Consider if you plan to stay in the home long enough to benefit</p>
+                      <p className="text-yellow-600 font-medium">
+                        ⚠ Consider if you plan to stay long enough for break-even and interest savings to matter
+                      </p>
                     )}
                     <p>• Factor in your plans to stay in the home</p>
                     <p>• Consider the opportunity cost of closing costs</p>
@@ -418,7 +405,6 @@ const RefinanceCalculator: React.FC = () => {
           </div>
         </div>
 
-        {/* Additional Information */}
         <div className="mt-12 bg-card rounded-lg shadow-lg p-6">
           <h2 className="text-xl font-semibold text-foreground mb-4">About Refinancing</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-foreground/70">
@@ -438,7 +424,7 @@ const RefinanceCalculator: React.FC = () => {
                 <li>Break-even time vs. how long you'll stay</li>
                 <li>Total closing costs and fees</li>
                 <li>Impact on loan term and total interest</li>
-                <li>Current market conditions</li>
+                <li>Example rates in this tool are not live market quotes</li>
                 <li>Your financial situation</li>
               </ul>
             </div>

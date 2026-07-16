@@ -1,5 +1,8 @@
-import { loadStripe } from "@stripe/stripe-js"
+import { loadStripe, type Stripe } from "@stripe/stripe-js"
 
-export const stripePromise = loadStripe(
-  process.env['NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY'] || "pk_test_xxx"
-)
+const publishableKey = process.env["NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"]
+
+/** null when unset — Elements must not load a fake pk_test_xxx key. */
+export const stripePromise: Promise<Stripe | null> = publishableKey
+  ? loadStripe(publishableKey)
+  : Promise.resolve(null)

@@ -768,7 +768,12 @@ export function generateCitySlug(cityName: string) {
 }
 
 export function generateStateSlug(stateCode: string) {
-  return stateCode.toLowerCase();
+  const code = stateCode.trim().toUpperCase();
+  const fromUsStates = (US_STATES as Record<string, { slug: string }>)[code]?.slug;
+  if (fromUsStates) return fromUsStates;
+  // DC is served by RON hubs but is not in US_STATES (50 states only).
+  if (code === "DC") return "district-of-columbia";
+  return code.toLowerCase();
 }
 
 // Generate all possible city-service combinations for sitemap
