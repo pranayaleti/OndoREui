@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
 interface IncomeData {
@@ -33,7 +33,7 @@ const IncomeCalculator: React.FC = () => {
     homePrice: 300000,
     downPayment: 60000,
     loanAmount: 240000,
-    interestRate: 4.5,
+    interestRate: DEFAULT_MORTGAGE_RATE,
     loanTerm: 30,
     propertyTax: 3000,
     insurance: 1200,
@@ -183,7 +183,7 @@ const IncomeCalculator: React.FC = () => {
                   value={formData.interestRate || ''}
                   onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-border bg-background rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="4.5"
+                  placeholder={String(DEFAULT_MORTGAGE_RATE)}
                 />
               </div>
 

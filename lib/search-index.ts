@@ -1,3 +1,6 @@
+import { getNotaryCitiesByStateSlug, notaryCityPath, notaryStatePath } from './notary-cities'
+import { getServedRonStates } from './notary-ron-states'
+
 export interface SearchResult {
   id: string
   title: string
@@ -121,6 +124,33 @@ const pages: SearchResult[] = [
     category: 'Page',
     keywords: ['sweepstakes', 'prizes', 'win', 'contest']
   }
+]
+
+const notaryLocationPages: SearchResult[] = [
+  {
+    id: 'notary-locations',
+    title: 'Notary locations',
+    description: 'State hubs for remote online notary nationwide',
+    href: '/notary/locations',
+    category: 'Service',
+    keywords: ['notary locations', 'RON states', 'online notary near me']
+  },
+  ...getServedRonStates().map((state) => ({
+    id: `notary-${state.slug}`,
+    title: `Remote online notary in ${state.name}`,
+    description: `${state.name} RON hub page`,
+    href: notaryStatePath(state.slug),
+    category: 'Service' as const,
+    keywords: ['remote online notary', state.name.toLowerCase(), `${state.code} notary`],
+  })),
+  ...getNotaryCitiesByStateSlug('utah').map((city) => ({
+    id: `notary-${city.stateSlug}-${city.slug}`,
+    title: `Remote online notary in ${city.name}, Utah`,
+    description: `Utah RON and mobile notary for ${city.name}`,
+    href: notaryCityPath(city.stateSlug, city.slug),
+    category: 'Service' as const,
+    keywords: ['online notary', 'utah', city.name.toLowerCase()],
+  })),
 ]
 
 // Calculators
@@ -430,6 +460,7 @@ const blogPosts: SearchResult[] = [
 // Combine all searchable items
 export const searchIndex: SearchResult[] = [
   ...pages,
+  ...notaryLocationPages,
   ...calculators,
   ...blogPosts
 ]

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Home, Building2, Eye, EyeOff } from 'lucide-react';
-import { LoanProgram, getProgramMI, clampCreditScore } from '@/lib/mortgage-utils';
+import { LoanProgram, getProgramMI, clampCreditScore, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { useFinancialVisibility } from '@/lib/financial-visibility';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 
@@ -62,7 +62,7 @@ const RentVsOwnCalculator: React.FC = () => {
     rentersInsurance: 200,
     homePrice: 400000,
     downPayment: 80000,
-    interestRate: 4.5,
+    interestRate: DEFAULT_MORTGAGE_RATE,
     loanTerm: 30,
     propertyTax: 4000,
     homeownersInsurance: 1200,
@@ -107,10 +107,7 @@ const RentVsOwnCalculator: React.FC = () => {
     // Calculate loan details
     const loanAmount = homePrice - downPayment;
     const monthlyRate = interestRate / 100 / 12;
-    const totalPayments = loanTerm * 12;
-    const monthlyPayment = loanAmount * 
-      (monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) / 
-      (Math.pow(1 + monthlyRate, totalPayments) - 1);
+    const monthlyPayment = calculateMonthlyPI(loanAmount, interestRate, loanTerm);
 
     // Calculate monthly costs for buying
     const monthlyTax = propertyTax / 12;
