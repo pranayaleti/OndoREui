@@ -79,7 +79,7 @@ export default async function Page({ params }: { params: Params }) {
                 href={district.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm hover:bg-primary/5 transition-colors"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm hover:bg-primary/5 transition-colors"
               >
                 <ExternalLink className="h-4 w-4 text-primary" />
                 Official Website
@@ -154,7 +154,7 @@ export default async function Page({ params }: { params: Params }) {
                 <Link
                   key={city}
                   href={`/locations/${toCitySlug(city)}/`}
-                  className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm hover:bg-primary/5 hover:border-primary/30 transition-colors"
+                  className="inline-flex min-h-11 items-center rounded-full border px-4 py-1.5 text-sm hover:bg-primary/5 hover:border-primary/30 transition-colors"
                 >
                   <MapPin className="mr-1.5 h-3.5 w-3.5 text-primary" />
                   {city}

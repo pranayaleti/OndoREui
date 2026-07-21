@@ -91,7 +91,7 @@ export function ServiceAreaSection() {
                   <Link
                     key={city.name}
                     href={`/locations/${toCitySlug(city.name)}/`}
-                    className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-card/80 backdrop-blur-sm px-3 py-1.5 text-sm hover:border-primary/50 hover:bg-primary/5 transition-all"
+                    className="inline-flex min-h-11 items-center gap-1 rounded-full border border-border/60 bg-card/80 backdrop-blur-sm px-3 py-1.5 text-sm hover:border-primary/50 hover:bg-primary/5 transition-all"
                     onMouseEnter={() => setHoveredCity(city.name)}
                     onMouseLeave={() => setHoveredCity(null)}
                   >
