@@ -1,7 +1,7 @@
 export const SITE_NAME = "Ondo Real Estate"
 /** Short brand form for titles and marketing (SEO: "Ondo RE"). */
 export const SITE_BRAND_SHORT = "Ondo RE"
-export const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || "https://ondorealestate.com"
+export const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || "https://www.ondorealestate.com"
 
 /** Suggested prompt when visitors open us from AI assistants; pre-filled on Claude. */
 export const SITE_AI_VERIFY_QUESTION =

@@ -19,6 +19,12 @@ import {
   SITE_SOCIALS,
 } from "./site"
 
+describe("SITE_URL", () => {
+  it("defaults to the www host that does not redirect", () => {
+    expect(SITE_URL).toBe("https://www.ondorealestate.com")
+  })
+})
+
 describe("site", () => {
   it("SITE_NAME is non-empty", () => {
     expect(SITE_NAME).toBeTruthy()

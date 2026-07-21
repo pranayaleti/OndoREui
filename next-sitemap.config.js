@@ -141,7 +141,7 @@ function buildRobotsCommentBlock(siteUrl) {
 }
 
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://ondorealestate.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ondorealestate.com',
   /** Must match `trailingSlash` in next.config.mjs for static export + GitHub Pages. */
   trailingSlash: true,
   generateRobotsTxt: true,
