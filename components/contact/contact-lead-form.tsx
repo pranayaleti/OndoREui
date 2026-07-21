@@ -17,13 +17,18 @@ const DEFAULT_SOURCE: ContactLeadSource = "website"
 
 const WEBMCP_TOOL_NAME = "submit_contact_lead"
 
-export function ContactLeadForm() {
+type ContactLeadFormProps = {
+  source?: ContactLeadSource
+  prefillMessage?: string
+}
+
+export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }: ContactLeadFormProps = {}) {
   const { t } = useTranslation()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    message: "",
+    message: prefillMessage,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null)
@@ -59,7 +64,7 @@ export function ContactLeadForm() {
       email: formData.email.trim(),
       ...(formData.phone.trim() && { phone: formData.phone.trim() }),
       ...(formData.message.trim() && { message: formData.message.trim() }),
-      source: DEFAULT_SOURCE,
+      source,
       ...(attribution && { attribution }),
     })
 

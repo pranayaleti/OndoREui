@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { findCityBySlug } from "@/lib/utah-cities"
-import { findNeighborhood, allNeighborhoodParams } from "@/lib/neighborhood-content"
+import { findNeighborhood, allNeighborhoodParams, type NeighborhoodInfo } from "@/lib/neighborhood-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import type { Metadata } from "next"
 import { SITE_BRAND_SHORT, SITE_URL, SITE_PHONE } from "@/lib/site"
@@ -10,12 +10,32 @@ import { notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CrossLinkSection } from "@/components/cross-link-section"
+import { CityTeamSection } from "@/components/city-team-section"
+import { CityTestimonials } from "@/components/city-testimonials"
+import { ContactLeadForm } from "@/components/contact/contact-lead-form"
 import { MapPin, Home, School, TreePine, Users, Phone, ArrowRight, CheckCircle2 } from "lucide-react"
 
 type Params = Promise<{ city: string; neighborhood: string }>
 
 export function generateStaticParams() {
   return allNeighborhoodParams()
+}
+
+// Google truncates meta descriptions around ~155 characters. The "character"
+// clause is the variable-length part, so it's the one we trim (word-boundary
+// + ellipsis) to guarantee the full description fits regardless of which
+// neighborhood's copy is longest.
+const MAX_DESCRIPTION_LENGTH = 155
+
+function buildNeighborhoodDescription(hood: NeighborhoodInfo, cityName: string): string {
+  const prefix = `${hood.name} in ${cityName}, UT — `
+  const suffix = ` Homes: ${hood.typicalHomes.split(",")[0]}. ${hood.priceRange}.`
+  const budget = MAX_DESCRIPTION_LENGTH - prefix.length - suffix.length
+  const character =
+    hood.character.length > budget
+      ? `${hood.character.slice(0, Math.max(0, budget - 1)).replace(/\s+\S*$/, "")}…`
+      : hood.character
+  return `${prefix}${character}${suffix}`
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -25,11 +45,14 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = hood
     ? `Living in ${hood.name}, ${city!.name} | Neighborhood Guide | ${SITE_BRAND_SHORT}`
     : `Neighborhood Guide | ${SITE_BRAND_SHORT}`
-  const description = hood
-    ? `${hood.name} in ${city!.name}, UT — ${hood.character} Typical homes: ${hood.typicalHomes}. Price range: ${hood.priceRange}.`
-    : ""
+  const description = hood ? buildNeighborhoodDescription(hood, city!.name) : ""
   const canonical = `${SITE_URL}/neighborhoods/${citySlug}/${neighborhoodSlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return {
+    title: { absolute: title },
+    description,
+    alternates: { canonical },
+    openGraph: { title, description, url: canonical },
+  }
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -167,26 +190,38 @@ export default async function Page({ params }: { params: Params }) {
           )}
 
           {/* CTA */}
-          <section className="text-center py-8 rounded-xl bg-muted/50 px-6">
-            <h2 className="text-xl font-bold mb-3">Interested in {hood.name}?</h2>
-            <p className="text-foreground/70 mb-6">
-              Whether you&apos;re buying, renting, or investing in {hood.name} — we can help.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button asChild size="lg">
-                <Link href={`/property-management/${citySlug}/`}>
-                  Property Management
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}>
-                  <Phone className="mr-2 h-4 w-4" />
-                  {SITE_PHONE}
-                </a>
-              </Button>
+          <section className="py-8 rounded-xl bg-muted/50 px-6">
+            <div className="text-center mb-8">
+              <h2 className="text-xl font-bold mb-3">Interested in {hood.name}?</h2>
+              <p className="text-foreground/70 mb-6">
+                Whether you&apos;re buying, renting, or investing in {hood.name} — we can help.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Button asChild variant="outline" size="lg">
+                  <a href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}>
+                    <Phone className="mr-2 h-4 w-4" />
+                    {SITE_PHONE}
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href={`/calculators/home-sale`}>
+                    {hood.name} home cost calculator
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="max-w-lg mx-auto">
+              <ContactLeadForm
+                source="website"
+                prefillMessage={`I'm interested in ${hood.name}, ${city.name}.`}
+              />
             </div>
           </section>
+
+          <CityTeamSection cityName={city.name} />
+
+          <CityTestimonials cityName={city.name} limit={2} />
 
           <CrossLinkSection
             title={`Explore ${city.name}`}
