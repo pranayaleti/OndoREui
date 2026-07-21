@@ -34,16 +34,20 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (isReservedNotarySegment(stateSlug)) return {}
   const state = getRonStateBySlug(stateSlug)
   if (!state || state.ronServingStatus !== "serves") return {}
-  return buildPageMetadata({
-    title: `Remote Online Notary in ${state.name} | ONDO Notary`,
-    description: `Secure remote online notarization (RON) for clients in ${state.name}. Identity-verified sessions for real estate, loan signings, and estate documents.`,
-    pathname: `/notary/${state.slug}/`,
-    keywords: [
-      `remote online notary ${state.name}`,
-      `online notary ${state.name}`,
-      `RON ${state.name}`,
-    ],
-  })
+  const title = `Remote Online Notary in ${state.name} | ONDO Notary`
+  return {
+    ...buildPageMetadata({
+      title,
+      description: `Secure remote online notarization (RON) for clients in ${state.name}. Identity-verified sessions for real estate, loan signings, and estate documents.`,
+      pathname: `/notary/${state.slug}/`,
+      keywords: [
+        `remote online notary ${state.name}`,
+        `online notary ${state.name}`,
+        `RON ${state.name}`,
+      ],
+    }),
+    title: { absolute: title },
+  }
 }
 
 export default async function NotaryStateRoute({ params }: { params: Params }) {

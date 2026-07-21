@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Mortgage Lenders ${zip} (${cityName}) | ${SITE_NAME}`
   const description = `Loan options and pre-qualification for borrowers in ${zip} ${cityName}.`
   const canonical = `${SITE_URL}/loans/zip/${zip}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

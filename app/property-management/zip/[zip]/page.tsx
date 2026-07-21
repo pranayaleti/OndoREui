@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Property Management ${zip} (${cityName}) | ${SITE_BRAND_SHORT}`
   const description = `Rental property management in ${zip} ${cityName} — tenant screening, rent collection, and maintenance. Get a free rental analysis.`
   const canonical = `${SITE_URL}/property-management/zip/${zip}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

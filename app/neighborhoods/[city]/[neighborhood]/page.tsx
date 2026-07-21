@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     ? `${hood.name} in ${city!.name}, UT — ${hood.character} Typical homes: ${hood.typicalHomes}. Price range: ${hood.priceRange}.`
     : ""
   const canonical = `${SITE_URL}/neighborhoods/${citySlug}/${neighborhoodSlug}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

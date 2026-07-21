@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Why ${cityName}, Utah Is a Great Place to Live & Invest | ${SITE_BRAND_SHORT}`
   const description = `Discover ${cityName}, UT — neighborhoods, schools, commute times, market stats, outdoor recreation, and why it's a top choice for homeowners and investors.`
   const canonical = `${SITE_URL}/locations/${citySlug}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

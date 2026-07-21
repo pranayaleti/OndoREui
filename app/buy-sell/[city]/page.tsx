@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Buy & Sell Homes in ${cityName}, Utah | ${SITE_NAME}`
   const description = `Top local agents in ${cityName}. Expert pricing, marketing, and smooth closings for buyers and sellers.`
   const canonical = `${SITE_URL}/buy-sell/${citySlug}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

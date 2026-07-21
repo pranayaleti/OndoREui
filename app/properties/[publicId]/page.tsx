@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const image = property.photos?.[0]?.url
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical,

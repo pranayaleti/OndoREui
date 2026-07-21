@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     ? `${district.name} serves ${district.citiesServed.slice(0, 3).join(", ")} and more — ${district.enrollment.toLocaleString()} students, top programs, and school listings.`
     : ""
   const canonical = `${SITE_URL}/schools/${districtSlug}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

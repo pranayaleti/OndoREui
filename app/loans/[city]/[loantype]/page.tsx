@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const description = def.metaDescription(city.name)
   const canonical = `${SITE_URL}/loans/${citySlug}/${loantype}/`
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical },
     openGraph: { title, description, url: canonical },

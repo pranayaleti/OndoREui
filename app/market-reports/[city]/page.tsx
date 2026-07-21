@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `${cityName}, Utah Real Estate Market Report | ${SITE_BRAND_SHORT}`
   const description = `${cityName} market data: median home prices, rent, population growth, employment, schools, and investment metrics. Compare with nearby Utah cities.`
   const canonical = `${SITE_URL}/market-reports/${citySlug}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {

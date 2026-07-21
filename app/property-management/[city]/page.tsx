@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Property Management in ${cityName}, Utah | ${SITE_BRAND_SHORT}`
   const description = `${SITE_BRAND_SHORT} manages rentals in ${cityName}, UT — tenant screening, rent collection, maintenance, and owner reporting. Get a free rental analysis.`
   const canonical = `${SITE_URL}/property-management/${citySlug}/`
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
 
 export default async function Page({ params }: { params: Params }) {
