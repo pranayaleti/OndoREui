@@ -10,6 +10,13 @@ export type NeighborhoodInfo = {
   nearbySchools?: string[]
   nearbyParks?: string[]
   walkability: "High" | "Moderate" | "Low"
+  /**
+   * Approximate neighborhood-center coordinates, for map display only —
+   * not surveyed boundaries. Good-faith estimates from each neighborhood's
+   * description; refine if precision ever matters for a future feature.
+   */
+  centerLat: number
+  centerLng: number
 }
 
 /**
@@ -30,6 +37,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Ensign Elementary", "West High School"],
       nearbyParks: ["City Creek Canyon", "Memory Grove Park", "Lindsey Gardens"],
       walkability: "High",
+      centerLat: 40.7794,
+      centerLng: -111.8788,
     },
     {
       name: "Sugar House",
@@ -43,6 +52,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Hawthorne Elementary", "Highland High School"],
       nearbyParks: ["Sugar House Park", "Hidden Hollow Nature Preserve", "Fairmont Park"],
       walkability: "High",
+      centerLat: 40.7217,
+      centerLng: -111.8496,
     },
     {
       name: "Liberty Wells",
@@ -56,6 +67,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Emerson Elementary", "Nibley Park Elementary"],
       nearbyParks: ["Liberty Park", "Gilgal Sculpture Garden"],
       walkability: "Moderate",
+      centerLat: 40.7280,
+      centerLng: -111.8730,
     },
     {
       name: "Downtown",
@@ -69,6 +82,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Open Classroom", "West High School"],
       nearbyParks: ["Pioneer Park", "Gateway Discovery Park"],
       walkability: "High",
+      centerLat: 40.7670,
+      centerLng: -111.8910,
     },
   ],
   Draper: [
@@ -84,6 +99,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Corner Canyon High School", "Draper Elementary"],
       nearbyParks: ["Corner Canyon Regional Park", "Potato Hill Trail"],
       walkability: "Low",
+      centerLat: 40.4850,
+      centerLng: -111.8600,
     },
     {
       name: "Suncrest",
@@ -97,6 +114,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Summit Academy", "Corner Canyon High School"],
       nearbyParks: ["Suncrest Park", "BST Trail Access"],
       walkability: "Low",
+      centerLat: 40.4950,
+      centerLng: -111.8300,
     },
     {
       name: "Draper Peaks",
@@ -110,6 +129,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Draper Park Middle School", "Draper Elementary"],
       nearbyParks: ["Draper City Park", "Galena Park"],
       walkability: "Moderate",
+      centerLat: 40.5230,
+      centerLng: -111.8630,
     },
   ],
   Lehi: [
@@ -125,6 +146,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Traverse Mountain Elementary", "Vista Heights Middle"],
       nearbyParks: ["Traverse Mountain Park", "Murdock Canal Trail"],
       walkability: "Moderate",
+      centerLat: 40.4630,
+      centerLng: -111.8850,
     },
     {
       name: "Thanksgiving Point",
@@ -138,6 +161,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Dry Creek Elementary", "Willowcreek Middle"],
       nearbyParks: ["Ashton Gardens", "Museum of Natural Curiosity", "Thanksgiving Point Golf Club"],
       walkability: "Moderate",
+      centerLat: 40.4180,
+      centerLng: -111.8460,
     },
     {
       name: "Lehi Old Town",
@@ -151,6 +176,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Lehi Elementary", "Lehi Junior High"],
       nearbyParks: ["Wines Park", "Lehi Legacy Center"],
       walkability: "High",
+      centerLat: 40.3916,
+      centerLng: -111.8508,
     },
   ],
   Provo: [
@@ -166,6 +193,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Provo High School", "Dixon Middle School"],
       nearbyParks: ["Pioneer Park", "North Park"],
       walkability: "High",
+      centerLat: 40.2338,
+      centerLng: -111.6585,
     },
     {
       name: "Edgemont / Oak Hills",
@@ -179,6 +208,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Edgemont Elementary", "Rock Canyon Elementary", "Timpview High School"],
       nearbyParks: ["Rock Canyon Park", "Edgemont Park"],
       walkability: "Low",
+      centerLat: 40.2650,
+      centerLng: -111.6280,
     },
   ],
   Ogden: [
@@ -194,6 +225,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Bonneville Elementary", "Ogden High School"],
       nearbyParks: ["Ogden Nature Center", "MTC Park", "22nd Street trailhead"],
       walkability: "Moderate",
+      centerLat: 41.2200,
+      centerLng: -111.9450,
     },
     {
       name: "Downtown / 25th Street",
@@ -207,6 +240,8 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       nearbySchools: ["Ogden Preparatory Academy"],
       nearbyParks: ["Marshall White Center Park", "Municipal Gardens"],
       walkability: "High",
+      centerLat: 41.2230,
+      centerLng: -111.9738,
     },
   ],
 }
