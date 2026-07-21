@@ -108,7 +108,7 @@ export function MetaPixel() {
     <>
       <Script
         id="meta-pixel"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             !function(f,b,e,v,n,t,s){
@@ -144,7 +144,7 @@ export function TikTokPixel() {
   return (
     <Script
       id="tiktok-pixel"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       dangerouslySetInnerHTML={{
         __html: `
           !function (w, d, t) {
@@ -180,7 +180,7 @@ export function LinkedInInsightTag() {
     <>
       <Script
         id="linkedin-insight"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             _linkedin_partner_id = "${id}";
