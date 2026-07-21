@@ -49,4 +49,21 @@ describe("PropertyMap with a listing-less marker", () => {
     expect(screen.getByText(/\$2,200\/mo/)).toBeInTheDocument()
     expect(screen.getByText(/3 bed/)).toBeInTheDocument()
   })
+
+  it("shows only bedrooms, with no dangling 'undefined bath', when bathrooms is absent", async () => {
+    render(
+      <PropertyMap
+        properties={[{ id: "2", title: "456 Oak Ave", bedrooms: 3, lat: 40.7217, lng: -111.8496 }]}
+      />
+    )
+    const marker = await waitFor(() => {
+      const el = document.querySelector(".custom-map-marker-pin")
+      expect(el).toBeTruthy()
+      return el!
+    })
+    fireEvent.click(marker)
+    await waitFor(() => expect(screen.getByText("456 Oak Ave")).toBeInTheDocument())
+    expect(screen.getByText("3 bed")).toBeInTheDocument()
+    expect(screen.queryByText(/undefined/)).not.toBeInTheDocument()
+  })
 })

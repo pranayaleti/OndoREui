@@ -195,10 +195,15 @@ export default function PropertyMap({
                     {formatPrice(property.price)}/mo
                   </p>
                 )}
-                {(property.bedrooms !== undefined || property.bathrooms !== undefined) && (
+                {(property.bedrooms !== undefined || property.bathrooms !== undefined || property.type) && (
                   <p style={{ margin: 0, fontSize: 12, color: "#6b7280" }}>
-                    {property.bedrooms} bed &middot; {property.bathrooms} bath
-                    {property.type && ` \u00B7 ${property.type}`}
+                    {[
+                      property.bedrooms !== undefined ? `${property.bedrooms} bed` : null,
+                      property.bathrooms !== undefined ? `${property.bathrooms} bath` : null,
+                      property.type,
+                    ]
+                      .filter(Boolean)
+                      .join(" \u00B7 ")}
                   </p>
                 )}
                 {onPropertyClick && (
