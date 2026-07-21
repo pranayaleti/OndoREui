@@ -7,9 +7,10 @@ import dynamic from "next/dynamic";
 interface MapProperty {
   id: string;
   title: string;
-  price: number;
-  bedrooms: number;
-  bathrooms: number;
+  /** Omit for a plain location marker with no listing behind it (e.g. a neighborhood center pin). */
+  price?: number;
+  bedrooms?: number;
+  bathrooms?: number;
   lat: number;
   lng: number;
   image?: string;
@@ -189,13 +190,17 @@ export default function PropertyMap({
                 <h3 style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 600 }}>
                   {property.title}
                 </h3>
-                <p style={{ margin: "0 0 4px", fontSize: 16, fontWeight: 700, color: "#2563eb" }}>
-                  {formatPrice(property.price)}/mo
-                </p>
-                <p style={{ margin: 0, fontSize: 12, color: "#6b7280" }}>
-                  {property.bedrooms} bed &middot; {property.bathrooms} bath
-                  {property.type && ` \u00B7 ${property.type}`}
-                </p>
+                {property.price !== undefined && (
+                  <p style={{ margin: "0 0 4px", fontSize: 16, fontWeight: 700, color: "#2563eb" }}>
+                    {formatPrice(property.price)}/mo
+                  </p>
+                )}
+                {(property.bedrooms !== undefined || property.bathrooms !== undefined) && (
+                  <p style={{ margin: 0, fontSize: 12, color: "#6b7280" }}>
+                    {property.bedrooms} bed &middot; {property.bathrooms} bath
+                    {property.type && ` \u00B7 ${property.type}`}
+                  </p>
+                )}
                 {onPropertyClick && (
                   <button
                     type="button"
