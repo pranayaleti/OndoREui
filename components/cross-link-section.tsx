@@ -38,7 +38,7 @@ export function CrossLinkSection({ title, links, variant }: CrossLinkSectionProp
       ) : (
         <div className="flex flex-wrap gap-2">
           {links.map((link) => (
-            <Link key={link.href} href={link.href}>
+            <Link key={link.href} href={link.href} className="inline-flex min-h-11 items-center">
               <Badge
                 variant="outline"
                 className="text-sm py-1.5 px-3 hover:bg-muted/50 transition-colors cursor-pointer"

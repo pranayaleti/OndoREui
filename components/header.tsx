@@ -124,7 +124,7 @@ const Header = memo(() => {
           {/* Phone CTA — icon-only on mobile, full number on desktop */}
           <a
             href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
-            className="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent transition-colors shrink-0"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent transition-colors shrink-0"
             aria-label={`Call ${SITE_PHONE}`}
           >
             <Phone className="h-4 w-4 text-primary" />
@@ -145,7 +145,7 @@ const Header = memo(() => {
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-0 bg-transparent cursor-pointer shrink-0"
+                  className="inline-flex min-h-11 items-center gap-1 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-0 bg-transparent cursor-pointer shrink-0"
                   aria-label="More navigation"
                   aria-haspopup="menu"
                 >
@@ -221,7 +221,7 @@ const Header = memo(() => {
                     <Link
                       key={href}
                       href={href}
-                      className="block pl-6 pr-3 py-2 text-sm text-foreground hover:bg-muted rounded-md"
+                      className="flex min-h-11 items-center pl-6 pr-3 py-2 text-sm text-foreground hover:bg-muted rounded-md"
                       onClick={handleMenuClose}
                     >
                       {t(labelKey)}
@@ -233,7 +233,7 @@ const Header = memo(() => {
             <div className="mt-4 flex flex-col gap-2">
               <a
                 href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-primary bg-primary/5 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-primary/5 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
                 onClick={handleMenuClose}
               >
                 <Phone className="h-4 w-4" />
