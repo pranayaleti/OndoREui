@@ -11,6 +11,8 @@ import { Separator } from "@/components/ui/separator"
 import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
+import { generateFAQJsonLd } from "@/lib/seo"
+import { neighborhoodsByCity } from "@/lib/neighborhood-content"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { CityTeamSection } from "@/components/city-team-section"
@@ -40,6 +42,17 @@ function fmtUsd(n: number): string {
   return "$" + n.toLocaleString("en-US")
 }
 
+function findNeighborhoodSlugForCard(cityName: string, cardLabel: string): string | null {
+  const candidates = neighborhoodsByCity[cityName]
+  if (!candidates) return null
+  const normalized = cardLabel.trim().toLowerCase()
+  const match = candidates.find((n) => {
+    const name = n.name.toLowerCase()
+    return name === normalized || name === `the ${normalized}` || `the ${name}` === normalized
+  })
+  return match?.slug ?? null
+}
+
 export function CityGuidePage({ city }: CityGuidePageProps) {
   const citySlug = toCitySlug(city.name)
   const content = cityContentByName[city.name]
@@ -55,6 +68,10 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
     containedInPlace: { "@type": "AdministrativeArea", name: `${city.county} County, Utah` },
   }
 
+  const faqJsonLd = content?.faq?.length
+    ? generateFAQJsonLd(content.faq.map((f) => ({ question: f.q, answer: f.a })))
+    : null
+
   return (
     <>
       <Script
@@ -62,6 +79,13 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <Script
+          id="city-guide-faq-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-primary/5 to-background py-16 md:py-24">
@@ -172,8 +196,9 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {content.neighborhoods.map((hood) => {
                 const [name, desc] = hood.includes(" — ") ? hood.split(" — ") : [hood, null]
-                return (
-                  <Card key={hood}>
+                const neighborhoodSlug = findNeighborhoodSlugForCard(city.name, name)
+                const cardBody = (
+                  <Card className={neighborhoodSlug ? "hover:bg-muted/50 transition-colors cursor-pointer h-full" : undefined}>
                     <CardHeader className="pb-2">
                       <CardTitle className="text-base">{name}</CardTitle>
                     </CardHeader>
@@ -183,6 +208,13 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
                       </CardContent>
                     )}
                   </Card>
+                )
+                return neighborhoodSlug ? (
+                  <Link key={hood} href={`/neighborhoods/${citySlug}/${neighborhoodSlug}/`}>
+                    {cardBody}
+                  </Link>
+                ) : (
+                  <div key={hood}>{cardBody}</div>
                 )
               })}
             </div>
