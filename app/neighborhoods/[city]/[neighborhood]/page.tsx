@@ -29,7 +29,7 @@ const MAX_DESCRIPTION_LENGTH = 155
 
 function buildNeighborhoodDescription(hood: NeighborhoodInfo, cityName: string): string {
   const prefix = `${hood.name} in ${cityName}, UT — `
-  const suffix = ` Homes: ${hood.typicalHomes.split(",")[0]}. ${hood.priceRange}.`
+  const suffix = ` Homes: ${hood.typicalHomes.split(/,(?!\d)/)[0]}. ${hood.priceRange}.`
   const budget = MAX_DESCRIPTION_LENGTH - prefix.length - suffix.length
   const character =
     hood.character.length > budget
@@ -204,7 +204,7 @@ export default async function Page({ params }: { params: Params }) {
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href={`/calculators/home-sale`}>
+                  <Link href={`/calculators/home-sale/`}>
                     {hood.name} home cost calculator
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
