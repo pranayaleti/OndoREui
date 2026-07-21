@@ -410,6 +410,7 @@ const Footer = memo(() => {
                     className="h-8 w-8 rounded border bg-card p-0.5"
                     quality={85}
                     sizes="32px"
+                    loading="lazy"
                   />
                 </a>
                 <span className="text-xs text-foreground/70 hidden sm:block">
