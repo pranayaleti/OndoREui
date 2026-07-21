@@ -1,11 +1,12 @@
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import { findCityBySlug } from "@/lib/utah-cities"
 import { findNeighborhood, allNeighborhoodParams, type NeighborhoodInfo } from "@/lib/neighborhood-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import type { Metadata } from "next"
 import { SITE_BRAND_SHORT, SITE_URL, SITE_PHONE } from "@/lib/site"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -14,6 +15,15 @@ import { CityTeamSection } from "@/components/city-team-section"
 import { CityTestimonials } from "@/components/city-testimonials"
 import { ContactLeadForm } from "@/components/contact/contact-lead-form"
 import { MapPin, Home, School, TreePine, Users, Phone, ArrowRight, CheckCircle2 } from "lucide-react"
+
+// NOTE: unlike app/properties/page-client.tsx (a Client Component, where
+// `{ ssr: false }` is allowed), this file is an async Server Component —
+// Next.js's App Router forbids `ssr: false` on a `next/dynamic` call made
+// directly inside a Server Component. PropertyMap is itself a "use client"
+// component that gates all browser-only work (leaflet, react-leaflet)
+// behind a useEffect, so omitting `ssr: false` is safe: its first render,
+// server or client, is the same "Loading map..." placeholder either way.
+const PropertyMap = dynamic(() => import("@/components/map/property-map"))
 
 type Params = Promise<{ city: string; neighborhood: string }>
 
@@ -36,6 +46,43 @@ function buildNeighborhoodDescription(hood: NeighborhoodInfo, cityName: string):
       ? `${hood.character.slice(0, Math.max(0, budget - 1)).replace(/\s+\S*$/, "")}…`
       : hood.character
   return `${prefix}${character}${suffix}`
+}
+
+function buildNeighborhoodFaqs(
+  hood: NeighborhoodInfo,
+  cityName: string,
+  schoolDistrict: string | undefined
+): { question: string; answer: string }[] {
+  const faqs: { question: string; answer: string }[] = [
+    {
+      question: `What is ${hood.name} known for?`,
+      answer: hood.character,
+    },
+    {
+      question: `What's the price range in ${hood.name}?`,
+      answer: `Homes in ${hood.name} typically range ${hood.priceRange}. Common home types: ${hood.typicalHomes}.`,
+    },
+    {
+      question: `Who is ${hood.name} best for?`,
+      answer: `${hood.name} tends to suit ${hood.bestFor.join(", ")}.`,
+    },
+    {
+      question: `Is ${hood.name} walkable?`,
+      answer:
+        hood.walkability === "High"
+          ? `Yes — ${hood.name} has high walkability, with most daily needs reachable on foot.`
+          : hood.walkability === "Moderate"
+            ? `${hood.name} has moderate walkability — some errands are walkable, but a car helps for most trips.`
+            : `${hood.name} has low walkability and is best navigated by car.`,
+    },
+  ]
+  if (hood.nearbySchools && hood.nearbySchools.length > 0) {
+    faqs.push({
+      question: `What schools serve ${hood.name}?`,
+      answer: `${hood.name} is served by ${hood.nearbySchools.join(", ")}${schoolDistrict ? ` in the ${schoolDistrict}` : ""}.`,
+    })
+  }
+  return faqs
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -62,6 +109,8 @@ export default async function Page({ params }: { params: Params }) {
   const hood = findNeighborhood(city.name, neighborhoodSlug)
   if (!hood) notFound()
   const market = cityMarketData[city.name]
+  const faqs = buildNeighborhoodFaqs(hood, city.name, market?.schoolDistrict)
+  const faqJsonLd = generateFAQJsonLd(faqs)
 
   return (
     <>
@@ -69,12 +118,15 @@ export default async function Page({ params }: { params: Params }) {
         title={`Living in ${hood.name}, ${city.name} | Neighborhood Guide | ${SITE_BRAND_SHORT}`}
         description={`${hood.name} in ${city.name}, UT — ${hood.character}`}
         pathname={`/neighborhoods/${citySlug}/${neighborhoodSlug}/`}
-        jsonLd={generateBreadcrumbJsonLd([
-          { name: "Home", url: SITE_URL },
-          { name: "Neighborhoods", url: `${SITE_URL}/neighborhoods/` },
-          { name: city.name, url: `${SITE_URL}/locations/${citySlug}/` },
-          { name: hood.name, url: `${SITE_URL}/neighborhoods/${citySlug}/${neighborhoodSlug}/` },
-        ])}
+        jsonLd={[
+          generateBreadcrumbJsonLd([
+            { name: "Home", url: SITE_URL },
+            { name: "Neighborhoods", url: `${SITE_URL}/neighborhoods/` },
+            { name: city.name, url: `${SITE_URL}/locations/${citySlug}/` },
+            { name: hood.name, url: `${SITE_URL}/neighborhoods/${citySlug}/${neighborhoodSlug}/` },
+          ]),
+          faqJsonLd,
+        ]}
       />
 
       <main>
@@ -140,6 +192,30 @@ export default async function Page({ params }: { params: Params }) {
             </Card>
           </div>
 
+          {/* Market Context */}
+          {market && (
+            <section>
+              <h2 className="text-xl font-bold mb-1">{city.name} Market Context</h2>
+              <p className="text-sm text-foreground/60 mb-4">
+                Citywide figures — neighborhood-level market data isn&apos;t available yet.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="rounded-lg border p-4">
+                  <p className="text-sm text-foreground/60">Median Rent</p>
+                  <p className="text-lg font-semibold">${market.medianRent.toLocaleString()}/mo</p>
+                </div>
+                <div className="rounded-lg border p-4">
+                  <p className="text-sm text-foreground/60">Growth Rate</p>
+                  <p className="text-lg font-semibold">{market.growthRate}</p>
+                </div>
+                <div className="rounded-lg border p-4">
+                  <p className="text-sm text-foreground/60">Avg Days on Market</p>
+                  <p className="text-lg font-semibold">{market.avgDaysOnMarket} days</p>
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Best For */}
           <section>
             <h2 className="text-xl font-bold mb-4">{hood.name} Is Best For</h2>
@@ -186,6 +262,35 @@ export default async function Page({ params }: { params: Params }) {
                   </li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {/* Map */}
+          <section>
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-primary" />
+              Where {hood.name} Is
+            </h2>
+            <PropertyMap
+              properties={[{ id: hood.slug, title: `${hood.name}, ${city.name}`, lat: hood.centerLat, lng: hood.centerLng }]}
+              center={[hood.centerLat, hood.centerLng]}
+              zoom={13}
+              className="h-[50vw] max-h-[360px]"
+            />
+          </section>
+
+          {/* FAQ */}
+          {faqs.length > 0 && (
+            <section>
+              <h2 className="text-xl font-bold mb-4">{hood.name} FAQ</h2>
+              <div className="space-y-4">
+                {faqs.map((item) => (
+                  <details key={item.question} className="group rounded-lg border p-4 cursor-pointer">
+                    <summary className="font-medium text-foreground group-open:mb-2">{item.question}</summary>
+                    <p className="text-sm text-foreground/70">{item.answer}</p>
+                  </details>
+                ))}
+              </div>
             </section>
           )}
 
