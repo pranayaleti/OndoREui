@@ -140,7 +140,7 @@ export default function PropertyMap({
         className={`bg-muted rounded-lg flex items-center justify-center ${className}`}
         style={{ width: "100%", aspectRatio: "16 / 9", minHeight: 220 }}
       >
-        <p className="text-gray-500">Loading map...</p>
+        <p className="text-foreground/60">Loading map...</p>
       </div>
     );
   }
