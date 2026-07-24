@@ -350,6 +350,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           description: "Programs and guidance for first-time buyers.",
         },
         {
+          name: "Utah housing grants",
+          href: "/buy/first-time/grants",
+          description: "Down payment assistance and homebuyer grant programs.",
+        },
+        {
           name: "Second home",
           href: "/buy/second-home",
           description: "Financing and considerations for a second residence.",
