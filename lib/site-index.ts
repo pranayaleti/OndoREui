@@ -633,6 +633,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         { name: "Feedback", href: "/feedback", description: "Product and website feedback." },
         { name: "News", href: "/news", description: "Updates and industry notes." },
         {
+          name: "Events",
+          href: "/events",
+          description: "Upcoming ONDO workshops, mixers, and community events.",
+        },
+        {
           name: "Socials",
           href: "/socials",
           description: "Curated posts, profile links, and latest news.",
