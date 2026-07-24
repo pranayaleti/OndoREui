@@ -160,6 +160,15 @@ const CalculatorsPage: React.FC = () => {
       color: 'from-violet-500 to-violet-600',
     },
     {
+      id: 'cagr',
+      name: 'CAGR Calculator',
+      description: 'Compute the compound annual growth rate between two values over time.',
+      path: '/calculators/cagr',
+      icon: <TrendingUpIcon className="h-8 w-8" />,
+      category: 'Investment',
+      color: 'from-indigo-500 to-indigo-600',
+    },
+    {
       id: 'grm',
       name: 'Gross Rent Multiplier Calculator',
       description: 'Quick screening tool to evaluate property price relative to rental income.',

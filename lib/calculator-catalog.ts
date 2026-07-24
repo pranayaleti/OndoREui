@@ -62,6 +62,10 @@ export const CALCULATOR_CATALOG: Record<
     name: "ROI Calculator",
     description: "Measure total ROI for a real estate investment with costs.",
   },
+  cagr: {
+    name: "CAGR Calculator",
+    description: "Compute the compound annual growth rate between two values over time.",
+  },
   grm: {
     name: "GRM Calculator",
     description: "Calculate gross rent multiplier from price and rent.",
