@@ -444,6 +444,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           href: "/investments/commercial-real-estate",
           description: "CRE education and sponsor-led deals.",
         },
+        {
+          name: "Opportunity zones",
+          href: "/investments/opportunity-zones",
+          description: "Capital-gains deferral via Utah Opportunity Zone tracts.",
+        },
         ...investmentDetailLinks(),
       ],
     },
