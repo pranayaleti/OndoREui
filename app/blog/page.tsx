@@ -127,6 +127,46 @@ export default function BlogPage() {
       slug: "home-maintenance-schedule-utah"
     },
     {
+      title: "Finishing a Basement in Utah: Costs, Permits & ROI",
+      excerpt: "What a finished basement really costs, the permits and egress rules that matter, and how the ROI compares to other projects.",
+      author: "ONDO Team",
+      date: "July 24, 2026",
+      readTime: "6 min read",
+      category: "Home Improvement",
+      image: "/modern-townhouse-garage.png",
+      slug: "finishing-basement-roi-utah"
+    },
+    {
+      title: "Backyard Upgrades & Lawn Care: A Seasonal Fertilizer Guide",
+      excerpt: "Value-adding backyard projects plus a simple Utah fertilizer schedule and the common DIY fixes that keep a yard healthy.",
+      author: "ONDO Team",
+      date: "July 24, 2026",
+      readTime: "6 min read",
+      category: "Home Improvement",
+      image: "/modern-apartment-balcony.png",
+      slug: "backyard-upgrades-and-fertilizer-guide"
+    },
+    {
+      title: "Cash-on-Cash Return, Explained (with the Math)",
+      excerpt: "What cash-on-cash measures, the exact formula, a worked example, and how it differs from cap rate and CAGR.",
+      author: "ONDO Team",
+      date: "July 24, 2026",
+      readTime: "6 min read",
+      category: "Finance",
+      image: "/modern-office-building.png",
+      slug: "cash-on-cash-return-explained"
+    },
+    {
+      title: "Mortgage Pay-Down Hacks That Actually Save Interest",
+      excerpt: "Biweekly payments, extra principal, recasting, and refinancing — which tactics really move the needle, and when not to.",
+      author: "ONDO Team",
+      date: "July 24, 2026",
+      readTime: "6 min read",
+      category: "Finance",
+      image: "/modern-office-building.png",
+      slug: "mortgage-paydown-hacks"
+    },
+    {
       title: "Dashboards for Landlords: See Patterns, Act Faster",
       excerpt: "KPIs, design principles, and build notes for turning rentals into a managed system.",
       author: "ONDO Team",
