@@ -65,6 +65,20 @@ const programs: GrantProgram[] = [
       "Fannie Mae HomeReady and Freddie Mac Home Possible allow as little as 3% down with reduced mortgage insurance for income-qualified buyers. Mortgage Credit Certificates (MCCs) can add a federal tax credit on mortgage interest.",
     href: "https://www.consumerfinance.gov/owning-a-home/",
   },
+  {
+    name: "Good Neighbor Next Door",
+    eligibility: "Law enforcement, teachers (pre-K–12), firefighters, and EMTs",
+    description:
+      "A HUD program offering eligible public servants 50% off the list price of homes in designated revitalization areas, in exchange for a 3-year owner-occupancy commitment.",
+    href: "https://www.hud.gov/program_offices/housing/sfh/reo/goodn/gnndabot",
+  },
+  {
+    name: "Nonprofit & employer assistance",
+    eligibility: "Varies — income-qualified buyers, or employees of participating employers",
+    description:
+      "Nonprofits like NeighborWorks and Habitat for Humanity, plus a growing number of employer-assisted housing (EAH) programs, offer grants, forgivable loans, or matched savings toward a down payment.",
+    href: "https://www.neighborworks.org/",
+  },
 ]
 
 export default function HousingGrantsPage() {
