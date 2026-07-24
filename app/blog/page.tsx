@@ -117,24 +117,24 @@ export default function BlogPage() {
       slug: "maintenance-capex-strategy"
     },
     {
-      title: "Home Maintenance Schedule for Utah Homeowners",
-      excerpt: "A monthly and annual home-care checklist — filters, HVAC, gutters, winterizing — and how ONDO auto-reminds you.",
+      title: "Home Maintenance Schedule: A Monthly & Annual Checklist",
+      excerpt: "A complete home-care checklist — filters, HVAC, gutters, winterizing — and how ONDO auto-reminds you.",
       author: "ONDO Team",
       date: "July 24, 2026",
       readTime: "6 min read",
       category: "Home Care",
       image: "/modern-townhouse-garage.png",
-      slug: "home-maintenance-schedule-utah"
+      slug: "home-maintenance-schedule"
     },
     {
-      title: "Finishing a Basement in Utah: Costs, Permits & ROI",
+      title: "Finishing a Basement: Costs, Permits & ROI",
       excerpt: "What a finished basement really costs, the permits and egress rules that matter, and how the ROI compares to other projects.",
       author: "ONDO Team",
       date: "July 24, 2026",
       readTime: "6 min read",
       category: "Home Improvement",
       image: "/modern-townhouse-garage.png",
-      slug: "finishing-basement-roi-utah"
+      slug: "finishing-basement-roi"
     },
     {
       title: "Backyard Upgrades & Lawn Care: A Seasonal Fertilizer Guide",

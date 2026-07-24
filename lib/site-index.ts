@@ -350,7 +350,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           description: "Programs and guidance for first-time buyers.",
         },
         {
-          name: "Utah housing grants",
+          name: "Housing grants",
           href: "/buy/first-time/grants",
           description: "Down payment assistance and homebuyer grant programs.",
         },
@@ -452,7 +452,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "Opportunity zones",
           href: "/investments/opportunity-zones",
-          description: "Capital-gains deferral via Utah Opportunity Zone tracts.",
+          description: "Capital-gains deferral via Qualified Opportunity Zone tracts.",
         },
         ...investmentDetailLinks(),
       ],

@@ -7,14 +7,14 @@ import { SITE_URL } from "@/lib/site"
 
 const slug = "/blog/backyard-upgrades-and-fertilizer-guide"
 const title = "Backyard Upgrades & Lawn Care: A Seasonal Fertilizer Guide"
-const description = "Value-adding backyard projects plus a simple Utah fertilizer schedule and the common DIY fixes that keep a yard healthy."
+const description = "Value-adding backyard projects plus a simple seasonal fertilizer schedule and the common DIY fixes that keep a yard healthy."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"
 
 const keywords = [
   "backyard upgrades",
-  "lawn fertilizer schedule Utah",
+  "lawn fertilizer schedule",
   "when to fertilize lawn",
   "NPK fertilizer",
   "curb appeal projects",
@@ -93,21 +93,22 @@ export default function BackyardUpgradesAndFertilizerGuide() {
             <h2>Upgrades that pay off</h2>
             <ul>
               <li><strong>Patio or deck:</strong> defined outdoor living space is the highest-impact addition for both use and resale.</li>
-              <li><strong>Low-water landscaping:</strong> xeriscape beds and drip irrigation cut water bills and thrive in Utah’s climate.</li>
+              <li><strong>Low-water landscaping:</strong> native and drought-tolerant beds with drip irrigation cut water bills, especially in dry climates.</li>
               <li><strong>Lighting &amp; fencing:</strong> path lighting and clean fence lines make a yard feel finished and private.</li>
               <li><strong>Shade trees:</strong> the long game — they lower cooling costs and add mature-landscape value.</li>
             </ul>
 
-            <h2>The fertilizer schedule (Utah)</h2>
+            <h2>The fertilizer schedule</h2>
             <p>
               Fertilizer bags list three numbers — <strong>N-P-K</strong> (nitrogen for green growth,
-              phosphorus for roots, potassium for stress tolerance). A simple cool-season-grass cadence:
+              phosphorus for roots, potassium for stress tolerance). Timing depends on your grass type,
+              so first find out whether you have cool-season or warm-season grass:
             </p>
             <ul>
-              <li><strong>Early spring (Apr):</strong> light feed to green up; don’t overdo nitrogen too early.</li>
-              <li><strong>Late spring (late May–Jun):</strong> balanced feed as growth peaks.</li>
-              <li><strong>Fall (Sep–Oct):</strong> the most important feeding — builds roots for winter and a fast spring green-up.</li>
-              <li><strong>Skip mid-summer heat:</strong> feeding a stressed lawn in July burns it; water deeply instead.</li>
+              <li><strong>Cool-season grasses (fescue, ryegrass, bluegrass — northern U.S.):</strong> light spring feed, then the most important feeding in fall to build roots. Skip feeding during mid-summer heat.</li>
+              <li><strong>Warm-season grasses (Bermuda, zoysia, St. Augustine — southern U.S.):</strong> feed through late spring and summer when they actively grow; taper off before dormancy.</li>
+              <li><strong>Don’t over-apply nitrogen:</strong> too much causes weak, disease-prone growth — follow the bag rate for your lawn size.</li>
+              <li><strong>Water it in:</strong> irrigate after granular feeds and never fertilize a heat-stressed lawn — water deeply instead.</li>
             </ul>
 
             <h2>Common DIY fixes</h2>
@@ -123,8 +124,8 @@ export default function BackyardUpgradesAndFertilizerGuide() {
               Pick one or two upgrades that fit how you use the yard, then keep the lawn on a simple
               seasonal cadence — feed in fall, water deeply, fix small issues early. Planning an indoor
               project too? See our{" "}
-              <Link href="/blog/finishing-basement-roi-utah">basement finishing guide</Link> and the{" "}
-              <Link href="/blog/home-maintenance-schedule-utah">home maintenance schedule</Link>.
+              <Link href="/blog/finishing-basement-roi">basement finishing guide</Link> and the{" "}
+              <Link href="/blog/home-maintenance-schedule">home maintenance schedule</Link>.
             </p>
           </div>
         </div>

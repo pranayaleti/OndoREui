@@ -33,7 +33,7 @@ const sections = [
     icon: MapPin,
     title: "Opportunity Zones",
     description:
-      "Learn how Qualified Opportunity Zones defer and reduce capital-gains tax when you reinvest gains into designated Utah tracts for the long term.",
+      "Learn how Qualified Opportunity Zones defer and reduce capital-gains tax when you reinvest gains into designated tracts for the long term.",
   },
   {
     href: "/investments/fractional",

@@ -10,14 +10,14 @@ import { ExternalLink } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
 
 export const metadata: Metadata = {
-  title: "Utah Housing Grants & Down Payment Assistance",
+  title: "Housing Grants & Down Payment Assistance Programs",
   description:
-    "A guide to Utah down payment assistance and homebuyer grant programs — Utah Housing Corporation loans, county and city assistance, and who qualifies.",
+    "A guide to down payment assistance and homebuyer grant programs in the U.S. — state housing finance agencies, FHA/VA/USDA loans, and who qualifies.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
-    title: "Utah Housing Grants & Down Payment Assistance | Ondo Real Estate",
+    title: "Housing Grants & Down Payment Assistance Programs | Ondo Real Estate",
     description:
-      "Down payment assistance and grant programs for Utah homebuyers, with eligibility summaries and official links.",
+      "Down payment assistance and grant programs for U.S. homebuyers, with eligibility summaries and official links.",
     url: `${SITE_URL}/buy/first-time/grants/`,
   },
 }
@@ -31,48 +31,48 @@ interface GrantProgram {
 
 const programs: GrantProgram[] = [
   {
-    name: "Utah Housing Corporation — FirstHome & HomeAgain",
-    eligibility: "First-time and repeat buyers meeting income and purchase-price limits",
+    name: "State Housing Finance Agencies (HFAs)",
+    eligibility: "First-time and repeat buyers meeting state income and purchase-price limits",
     description:
-      "The state housing agency offers competitive first-mortgage programs (FirstHome, HomeAgain, Score) that pair with down payment assistance second loans.",
-    href: "https://utahhousingcorp.org/",
+      "Every state has a Housing Finance Agency offering below-market first mortgages paired with down payment and closing-cost assistance (grants or second loans). This is the first place most buyers should look.",
+    href: "https://www.ncsha.org/housing-help/",
   },
   {
-    name: "Utah Housing Down Payment Assistance (2nd loan)",
-    eligibility: "Buyers using a Utah Housing first mortgage",
+    name: "Down payment assistance (grants & second loans)",
+    eligibility: "Income-qualified buyers in participating states, counties, and cities",
     description:
-      "A subordinate loan that can cover down payment and closing costs, letting qualified buyers finance up to the full purchase with little cash out of pocket.",
-    href: "https://utahhousingcorp.org/homebuyer/",
+      "Thousands of local programs — administered by states, counties, cities, and nonprofits — offer forgivable grants or low-interest second loans to cover down payment and closing costs. Availability and amounts vary by location.",
+    href: "https://downpaymentresource.com/",
   },
   {
-    name: "Utah First-Time Homebuyer Assistance Program",
-    eligibility: "First-time buyers purchasing a newly built home (program terms vary)",
+    name: "FHA loans",
+    eligibility: "Buyers with lower down payments or credit that doesn't fit conventional loans",
     description:
-      "State-funded assistance created to help first-time buyers with down payment and closing costs on qualifying new construction — availability and funding change over time.",
-    href: "https://utahhousingcorp.org/",
-  },
-  {
-    name: "County & city down payment assistance",
-    eligibility: "Income-qualified buyers in participating jurisdictions",
-    description:
-      "Many Utah counties and cities (e.g., Salt Lake County, Provo, West Valley City) run HOME/CDBG-funded assistance programs. Availability and amounts vary locally.",
-    href: "https://utahhousingcorp.org/homebuyer/",
-  },
-  {
-    name: "Federal loan programs (FHA / VA / USDA)",
-    eligibility: "Varies — low down payment, veteran, or rural-area buyers",
-    description:
-      "Not grants, but low- or no-down-payment loans that pair well with the assistance above. See our FHA vs conventional guide for the trade-offs.",
+      "Government-backed loans allowing as little as 3.5% down with flexible credit requirements — a common pairing with down payment assistance. See our FHA vs conventional guide for the trade-offs.",
     href: "https://www.hud.gov/buying/loans",
+  },
+  {
+    name: "VA & USDA loans",
+    eligibility: "Eligible veterans/service members (VA) or rural-area buyers (USDA)",
+    description:
+      "Both can offer 0% down. VA loans serve veterans, active-duty, and eligible spouses; USDA loans serve qualifying buyers in designated rural and suburban areas with income limits.",
+    href: "https://www.va.gov/housing-assistance/home-loans/",
+  },
+  {
+    name: "Conventional 3%-down & first-time programs",
+    eligibility: "Buyers meeting income limits (varies by program)",
+    description:
+      "Fannie Mae HomeReady and Freddie Mac Home Possible allow as little as 3% down with reduced mortgage insurance for income-qualified buyers. Mortgage Credit Certificates (MCCs) can add a federal tax credit on mortgage interest.",
+    href: "https://www.consumerfinance.gov/owning-a-home/",
   },
 ]
 
-export default function UtahHousingGrantsPage() {
+export default function HousingGrantsPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Utah Housing Grants & Down Payment Assistance"
-        description="A guide to Utah down payment assistance and homebuyer grant programs — Utah Housing Corporation loans, county and city assistance, and who qualifies."
+        title="Housing Grants & Down Payment Assistance Programs"
+        description="A guide to down payment assistance and homebuyer grant programs in the U.S. — state housing finance agencies, FHA/VA/USDA loans, and who qualifies."
         pathname="/buy/first-time/grants"
         image={`${SITE_URL}/suburban-house-garden.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -83,20 +83,20 @@ export default function UtahHousingGrantsPage() {
         ])}
       />
       <PageBanner
-        title="Utah Housing Grants & Down Payment Assistance"
-        subtitle="Programs that help Utah buyers bridge the down payment gap"
+        title="Housing Grants & Down Payment Assistance"
+        subtitle="Programs that help buyers bridge the down payment gap"
       />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Assistance for Utah Homebuyers</h2>
+              <h2 className="text-3xl font-bold mb-4">Assistance for Homebuyers</h2>
               <p className="text-lg text-foreground/70">
-                The down payment is the biggest hurdle for most first-time buyers. Utah offers several
-                programs — from state housing loans to local grants — that can cover part or all of it.
-                Below is a starting map; program terms, funding, and eligibility change often, so confirm
-                current details with each provider.
+                The down payment is the biggest hurdle for most first-time buyers. Across the U.S.,
+                many programs — from state housing agencies to federal loans and local grants — can cover
+                part or all of it. Below is a starting map; program terms, funding, and eligibility change
+                often and vary by state and locality, so confirm current details with each provider.
               </p>
             </div>
 
@@ -126,8 +126,8 @@ export default function UtahHousingGrantsPage() {
               <p className="text-sm text-foreground/70">
                 <strong className="text-foreground">Note:</strong> This page is educational and not
                 financial, tax, or legal advice. Grant availability, income limits, and purchase-price
-                caps change frequently and vary by location. Always verify current terms directly with
-                the program administrator or a licensed loan officer before relying on them.
+                caps change frequently and vary by state and locality. Always verify current terms
+                directly with the program administrator or a licensed loan officer before relying on them.
               </p>
             </div>
 

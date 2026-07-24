@@ -5,19 +5,19 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { SITE_URL } from "@/lib/site"
 
-const slug = "/blog/home-maintenance-schedule-utah"
-const title = "Home Maintenance Schedule for Utah Homeowners"
-const description = "A monthly and annual home-care checklist — filters, HVAC, gutters, winterizing — and how ONDO auto-reminds you."
+const slug = "/blog/home-maintenance-schedule"
+const title = "Home Maintenance Schedule: A Monthly & Annual Checklist"
+const description = "A complete home-care checklist for homeowners — filters, HVAC, gutters, winterizing — and how ONDO can auto-remind you."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"
 
 const keywords = [
   "home maintenance schedule",
+  "home maintenance checklist",
   "air filter replacement",
-  "HVAC service",
-  "winterize sprinklers Utah",
-  "Utah home care",
+  "HVAC service schedule",
+  "winterize sprinklers",
   "maintenance reminders",
 ]
 
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomeMaintenanceScheduleUtah() {
+export default function HomeMaintenanceSchedule() {
   return (
     <main className="min-h-screen">
       <SEO
@@ -102,16 +102,17 @@ export default function HomeMaintenanceScheduleUtah() {
             <ul>
               <li><strong>HVAC service:</strong> professional inspection and duct/unit cleanup before the heating and cooling seasons.</li>
               <li><strong>Water heater flush:</strong> drain sediment to extend life and hold efficiency.</li>
-              <li><strong>Gutters &amp; downspouts:</strong> clear debris so meltwater drains away from the foundation.</li>
+              <li><strong>Gutters &amp; downspouts:</strong> clear debris so rain and meltwater drain away from the foundation.</li>
               <li><strong>Dryer vent:</strong> clean the exhaust run — efficiency plus a real fire-risk reduction.</li>
               <li><strong>Refrigerator coils:</strong> vacuum condenser coils so the compressor isn’t overworked.</li>
             </ul>
 
-            <h2>Seasonal — the Utah lens</h2>
+            <h2>Seasonal — adapt to your climate</h2>
             <ul>
-              <li><strong>Before first freeze:</strong> blow out sprinkler lines and winterize the lawn to avoid burst pipes.</li>
-              <li><strong>Freeze-thaw:</strong> inspect roof, flashing, and concrete each spring — Utah’s cycles are hard on them.</li>
-              <li><strong>Inversion season:</strong> fresh filters and a serviced HVAC help indoor air quality when the valley traps smog.</li>
+              <li><strong>Cold-winter regions:</strong> before the first freeze, blow out sprinkler lines and winterize outdoor faucets to avoid burst pipes.</li>
+              <li><strong>Freeze-thaw climates:</strong> inspect roof, flashing, and concrete each spring — repeated cycles are hard on them.</li>
+              <li><strong>Hot or humid regions:</strong> service the A/C before summer, check attic ventilation, and watch for moisture and pests.</li>
+              <li><strong>Wildfire or poor-air areas:</strong> fresh filters and a serviced HVAC keep indoor air healthier during smoke events.</li>
             </ul>
 
             <h2>Let ONDO remind you</h2>

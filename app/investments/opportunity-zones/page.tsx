@@ -11,14 +11,14 @@ import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { Clock, TrendingUp, ShieldCheck, MapPin, Landmark, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Opportunity Zone Investing in Utah",
+  title: "Opportunity Zone Investing: How It Works",
   description:
-    "How Qualified Opportunity Zones work in Utah — capital-gains deferral, the long-term hold exclusion, eligible tracts, and who the strategy fits.",
+    "How Qualified Opportunity Zones work — capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits.",
   alternates: { canonical: `${SITE_URL}/investments/opportunity-zones/` },
   openGraph: {
-    title: "Opportunity Zone Investing in Utah | Ondo Real Estate",
+    title: "Opportunity Zone Investing: How It Works | Ondo Real Estate",
     description:
-      "Understand Qualified Opportunity Zone tax benefits and how Utah's designated tracts fit a long-term real estate strategy.",
+      "Understand Qualified Opportunity Zone tax benefits and how designated tracts across the U.S. fit a long-term real estate strategy.",
     url: `${SITE_URL}/investments/opportunity-zones/`,
   },
 }
@@ -44,18 +44,18 @@ const taxBenefits = [
   },
 ]
 
-const utahPoints = [
+const zonePoints = [
   {
     icon: "MapPin",
-    title: "Designated tracts statewide",
+    title: "Thousands of tracts nationwide",
     description:
-      "Utah has Qualified Opportunity Zone tracts across the Wasatch Front and rural counties, including parts of Salt Lake, Utah, Weber, and Washington counties.",
+      "There are roughly 8,700 designated Qualified Opportunity Zone tracts across all 50 states, D.C., and U.S. territories — spanning both urban and rural communities.",
   },
   {
     icon: "Landmark",
     title: "Growth-corridor overlap",
     description:
-      "Several zones sit near Silicon Slopes and transit corridors where population and employment growth support long-hold development strategies.",
+      "Many zones sit near job centers and transit corridors where population and employment growth support long-hold development strategies.",
   },
   {
     icon: "Users",
@@ -78,8 +78,8 @@ export default function OpportunityZonesPage() {
   return (
     <main id="main-content" className="min-h-screen">
       <SEO
-        title="Opportunity Zone Investing in Utah"
-        description="How Qualified Opportunity Zones work in Utah — capital-gains deferral, the long-term hold exclusion, eligible tracts, and who the strategy fits."
+        title="Opportunity Zone Investing: How It Works"
+        description="How Qualified Opportunity Zones work — capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits."
         pathname="/investments/opportunity-zones"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -93,7 +93,7 @@ export default function OpportunityZonesPage() {
       />
 
       <PageBanner
-        title="Opportunity Zone Investing in Utah"
+        title="Opportunity Zone Investing"
         subtitle="A long-term, tax-advantaged strategy for reinvesting capital gains"
       />
 
@@ -156,13 +156,13 @@ export default function OpportunityZonesPage() {
               </p>
             </div>
 
-            {/* Utah landscape */}
+            {/* National landscape */}
             <div className="mb-16">
               <h3 className="text-2xl font-bold mb-8 text-center dark:text-foreground">
-                Opportunity Zones in Utah
+                Opportunity Zones Across the U.S.
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {utahPoints.map((point) => {
+                {zonePoints.map((point) => {
                   const Icon = iconMap[point.icon]
                   return (
                     <Card key={point.title}>
