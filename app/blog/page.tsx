@@ -117,6 +117,16 @@ export default function BlogPage() {
       slug: "maintenance-capex-strategy"
     },
     {
+      title: "Home Maintenance Schedule for Utah Homeowners",
+      excerpt: "A monthly and annual home-care checklist — filters, HVAC, gutters, winterizing — and how ONDO auto-reminds you.",
+      author: "ONDO Team",
+      date: "July 24, 2026",
+      readTime: "6 min read",
+      category: "Home Care",
+      image: "/modern-townhouse-garage.png",
+      slug: "home-maintenance-schedule-utah"
+    },
+    {
       title: "Dashboards for Landlords: See Patterns, Act Faster",
       excerpt: "KPIs, design principles, and build notes for turning rentals into a managed system.",
       author: "ONDO Team",
