@@ -41,6 +41,7 @@ const STATIC_PATHS: string[] = [
   "/mortgages",
   "/refinance",
   "/insights",
+  "/events",
   "/founders-letter",
   "/privacy-policy",
   "/terms-of-service",

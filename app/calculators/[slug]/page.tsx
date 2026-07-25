@@ -50,6 +50,9 @@ const slugToComponent: Record<string, ComponentType> = {
   "roi": dynamic(() => import("@/pages/calculators/roi-calculator"), {
     loading: () => <Loading />
   }),
+  "cagr": dynamic(() => import("@/pages/calculators/cagr-calculator"), {
+    loading: () => <Loading />
+  }),
   "grm": dynamic(() => import("@/pages/calculators/grm-calculator"), {
     loading: () => <Loading />
   }),

@@ -6,17 +6,22 @@
 
 /** Slugs with their own app/blog/<slug>/page.tsx static directory. */
 const STATIC_ROUTE_SLUGS = [
+  "backyard-upgrades-and-fertilizer-guide",
   "building-high-performance-real-estate-nextjs-supabase",
+  "cash-on-cash-return-explained",
   "commercial-real-estate-101-tenant-mix",
   "crypto-and-real-estate-hedge",
   "dashboards-for-landlords",
   "designing-property-owner-portal",
   "engineering-real-estate-investment-calculators",
+  "finishing-basement-roi",
   "first-time-home-buyer-guide",
   "full-stack-dev-landlord-gaps",
+  "home-maintenance-schedule",
   "home-staging-tips-that-work",
   "maintenance-capex-strategy",
   "mobile-notary-utah-county-guide",
+  "mortgage-paydown-hacks",
   "modernizing-notary-workflows-integration",
   "mortgage-rate-trends-2025",
   "new-landlord-mistakes-systems",
@@ -51,6 +56,7 @@ export const BLOG_INDEX_SLUGS = [
   "property-management-automation-checklist",
   "vacancy-risk-playbook",
   "maintenance-capex-strategy",
+  "home-maintenance-schedule",
   "dashboards-for-landlords",
   "building-high-performance-real-estate-nextjs-supabase",
   "engineering-real-estate-investment-calculators",
@@ -61,6 +67,10 @@ export const BLOG_INDEX_SLUGS = [
   "remote-online-notary-real-estate-closings",
   "prepare-for-remote-online-notary-session",
   "first-time-home-buyer-guide",
+  "finishing-basement-roi",
+  "backyard-upgrades-and-fertilizer-guide",
+  "cash-on-cash-return-explained",
+  "mortgage-paydown-hacks",
 ] as const;
 
 export function isValidBlogSlug(slug: string): boolean {

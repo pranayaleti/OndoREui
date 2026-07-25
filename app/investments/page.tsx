@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
-import { Building2, Users, LayoutGrid, ArrowRight } from "lucide-react"
+import { Building2, Users, LayoutGrid, MapPin, ArrowRight } from "lucide-react"
 
 const sections = [
   {
@@ -27,6 +27,13 @@ const sections = [
     title: "Commercial Real Estate",
     description:
       "Explore asset classes — office, retail, industrial, multifamily — and learn how institutional-quality CRE deals are structured.",
+  },
+  {
+    href: "/investments/opportunity-zones",
+    icon: MapPin,
+    title: "Opportunity Zones",
+    description:
+      "Learn how Qualified Opportunity Zones defer and reduce capital-gains tax when you reinvest gains into designated tracts for the long term.",
   },
   {
     href: "/investments/fractional",

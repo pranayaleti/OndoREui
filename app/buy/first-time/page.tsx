@@ -91,6 +91,11 @@ export default function FirstTimeBuyerPage() {
                   </ul>
                 </div>
               </div>
+              <div className="mt-6">
+                <Button asChild variant="outline">
+                  <Link href="/buy/first-time/grants">See housing grants &amp; down payment assistance →</Link>
+                </Button>
+              </div>
             </div>
 
             <div className="text-center mb-12">

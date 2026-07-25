@@ -350,6 +350,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           description: "Programs and guidance for first-time buyers.",
         },
         {
+          name: "Housing grants",
+          href: "/buy/first-time/grants",
+          description: "Down payment assistance and homebuyer grant programs.",
+        },
+        {
           name: "Second home",
           href: "/buy/second-home",
           description: "Financing and considerations for a second residence.",
@@ -443,6 +448,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           name: "Commercial real estate",
           href: "/investments/commercial-real-estate",
           description: "CRE education and sponsor-led deals.",
+        },
+        {
+          name: "Opportunity zones",
+          href: "/investments/opportunity-zones",
+          description: "Capital-gains deferral via Qualified Opportunity Zone tracts.",
         },
         ...investmentDetailLinks(),
       ],
@@ -622,6 +632,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         { name: "Contact", href: "/contact", description: "Phone, email, and appointment booking." },
         { name: "Feedback", href: "/feedback", description: "Product and website feedback." },
         { name: "News", href: "/news", description: "Updates and industry notes." },
+        {
+          name: "Events",
+          href: "/events",
+          description: "Upcoming ONDO workshops, mixers, and community events.",
+        },
         {
           name: "Socials",
           href: "/socials",
