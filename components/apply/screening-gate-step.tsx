@@ -265,9 +265,16 @@ export function ScreeningGateStep({
           Screening fee due: {formatScreeningFeeCents(feeCents)}. You cannot continue until the fee
           is paid, waived, or you send a portable package.
         </p>
-        <Button onClick={() => void handleRetryBlocked()} disabled={busy} className="sm:min-w-44">
-          {busy ? labels.startingPay : labels.retryLabel}
-        </Button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button onClick={() => void handleRetryBlocked()} disabled={busy} className="sm:min-w-44">
+            {busy ? labels.startingPay : labels.retryLabel}
+          </Button>
+          {portable.length > 0 ? (
+            <Button variant="outline" onClick={() => setMode("portable")} disabled={busy}>
+              Back to portable screening
+            </Button>
+          ) : null}
+        </div>
       </div>
     )
   }
