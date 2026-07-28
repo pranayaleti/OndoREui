@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import type { PropertySummary } from "@/lib/api/applications"
+import { GetScreenedCta } from "@/components/properties/get-screened-cta"
 
 interface PropertyListingCardProps {
   property: PropertySummary
@@ -103,11 +104,17 @@ export function PropertyListingCard({ property, applyUrl }: PropertyListingCardP
         {applyUrl && (
           <a
             href={applyUrl}
-            className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors"
+            className="block w-full text-center bg-primary hover:opacity-90 text-primary-foreground font-medium py-3 rounded-lg transition-colors"
           >
             Apply Now
           </a>
         )}
+
+        {property.id ? (
+          <div className="pt-1">
+            <GetScreenedCta propertyId={property.id} />
+          </div>
+        ) : null}
       </div>
     </div>
   )

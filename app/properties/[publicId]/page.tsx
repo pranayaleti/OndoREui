@@ -8,6 +8,7 @@ import { generatePropertyJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import type { ApiProperty } from "@/app/types/property"
+import { GetScreenedCta } from "@/components/properties/get-screened-cta"
 
 /**
  * The site is statically exported (output: "export" in next.config.mjs).
@@ -261,7 +262,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="mb-8 flex flex-wrap gap-3">
+      <section className="mb-8 flex flex-wrap items-start gap-3">
         <Link
           href={`/visit/confirm?propertyId=${publicId}`}
           className="rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground hover:opacity-90"
@@ -274,6 +275,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
         >
           Apply now
         </Link>
+        {property.id ? <GetScreenedCta propertyId={property.id} /> : null}
         <Link
           href="/contact"
           className="rounded-md border px-5 py-2.5 font-medium hover:bg-muted"

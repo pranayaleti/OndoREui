@@ -298,7 +298,8 @@
       "disclosure": "Criteria & Disclosure",
       "personal": "Personal Info",
       "questions": "Questions",
-      "review": "Review"
+      "review": "Review",
+      "screening": "Screening"
     },
     "property": {
       "description": "Review the rental details before you move into the disclosure and application steps.",
@@ -323,7 +324,7 @@
       "body": "Please review the owner's acceptance criteria, screening checks, and rental disclosures before moving forward.",
       "criteriaAcknowledgementLabel": "I reviewed the owner's acceptance criteria and the rental disclosures shown on this page.",
       "screeningConsentLabel": "I authorize Ondo Real Estate and the property owner to run the disclosed screening checks for this application.",
-      "futureFeeNotice": "If this flow adds an application fee later, the fee disclosure and payment handoff will appear at this checkpoint before any payment is requested.",
+      "futureFeeNotice": "An applicant screening fee may be collected via Stripe before bureau checks begin, unless a manager waives the fee or you reuse a valid portable screening package. The amount is shown under Application fee status when screening is enabled for this listing.",
       "emptyCharges": "No fixed non-rent charges were disclosed for this listing.",
       "emptyUseBasedCharges": "No use-based charge categories were disclosed for this listing.",
       "emptyCriteria": "No additional owner criteria were listed for this property.",
@@ -333,10 +334,21 @@
       "useBasedCharges": "Use-based charge categories",
       "criteria": "Owner acceptance criteria",
       "requiredChecks": "Required screening checks",
-      "feeCollectionStatus": "Application fee status",
+      "feeCollectionStatus": "Screening fee status",
       "refundRecoveryInstructions": "Refund and report recovery information",
       "ownerNotes": "Owner notes",
       "continue": "Continue to personal information"
+    },
+    "screeningGate": {
+      "portableTitle": "Use your existing screening",
+      "portableBody": "You have a valid portable screening package. Send it to this property with no additional fee.",
+      "useExisting": "Send Screening",
+      "sending": "Sending…",
+      "payTitle": "Pay screening fee",
+      "payBody": "Pay {{fee}} to run credit, criminal, and eviction checks for this application. Managers may waive this fee. Reusing a portable package later skips a second charge.",
+      "skipPay": "Skip for now",
+      "continueLabel": "Continue",
+      "expiresLabel": "Valid through"
     },
     "personal": {
       "title": "Personal information",

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import type { ReactNode } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import {
   createApplication,
@@ -15,7 +15,12 @@ import {
   type ScreeningQuestion,
   type VerificationCheckType,
 } from "@/lib/api/applications"
+import { getScreeningCta, type ScreeningCta } from "@/lib/api/screening"
 import { AffordabilityCalculator } from "@/components/apply/affordability-calculator"
+import {
+  ScreeningGateStep,
+  buildScreeningFeeDisclosure,
+} from "@/components/apply/screening-gate-step"
 import { PropertyImage } from "@/components/ui/optimized-image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -32,6 +37,7 @@ type Step =
   | "personal"
   | "questions"
   | "review"
+  | "screening"
   | "submitted"
   | "error"
 
@@ -83,15 +89,18 @@ function formatAnswerValue(value: unknown, emptyLabel: string) {
 
 export function ApplyPageClient() {
   const params = useParams()
+  const searchParams = useSearchParams()
   const { t, i18n } = useTranslation()
   const token = (params?.token ?? "") as string
   const locale = i18n.resolvedLanguage || i18n.language || "en"
+  const screeningIdHint = searchParams?.get("screeningId")
 
   const [step, setStep] = useState<Step>("loading")
   const [validation, setValidation] = useState<ApplicationLinkValidation | null>(null)
   const [error, setError] = useState("")
   const [applicationId, setApplicationId] = useState("")
   const [submitting, setSubmitting] = useState(false)
+  const [screeningCta, setScreeningCta] = useState<ScreeningCta | null>(null)
 
   const [criteriaAcknowledged, setCriteriaAcknowledged] = useState(false)
   const [screeningConsent, setScreeningConsent] = useState(false)
@@ -123,6 +132,12 @@ export function ApplyPageClient() {
           setStep((currentStep) =>
             currentStep === "loading" || currentStep === "error" ? "property" : currentStep
           )
+          const propertyId = result.property?.id ?? result.link?.propertyId
+          if (propertyId) {
+            void getScreeningCta(propertyId).then((cta) => {
+              if (!cancelled) setScreeningCta(cta)
+            })
+          }
           return
         }
 
@@ -221,7 +236,8 @@ export function ApplyPageClient() {
         disclosureSnapshot: disclosureSnapshot as ApplicationDisclosureSnapshot,
       })
 
-      setStep("submitted")
+      // Portable reuse / fee pay gate before confirmation.
+      setStep("screening")
     } catch (err) {
       setError(
         err instanceof Error ? err.message || t("applyFlow.messages.submitFailed") : t("applyFlow.messages.submitFailed")
@@ -284,7 +300,15 @@ export function ApplyPageClient() {
   }
 
   const property = validation?.property
+  const feeDisclosure = buildScreeningFeeDisclosure(screeningCta)
   const disclosure = validation?.applicationDisclosure
+    ? {
+        ...validation.applicationDisclosure,
+        feeCollectionStatus: feeDisclosure.feeCollectionStatus,
+        refundRecoveryInstructions: feeDisclosure.refundRecoveryInstructions,
+      }
+    : undefined
+  const futureFeeNotice = feeDisclosure.futureFeeNotice
   const questions = validation?.questions ?? []
   const hasQuestions = questions.length > 0
   const progressSteps = [
@@ -293,6 +317,7 @@ export function ApplyPageClient() {
     { id: "personal", label: t("applyFlow.progress.personal") },
     ...(hasQuestions ? [{ id: "questions", label: t("applyFlow.progress.questions") }] : []),
     { id: "review", label: t("applyFlow.progress.review") },
+    { id: "screening", label: t("applyFlow.progress.screening") },
   ] as Array<{ id: Exclude<Step, "loading" | "submitted" | "error">; label: string }>
 
   const currentStepIndex = progressSteps.findIndex((progressStep) => progressStep.id === step)
@@ -376,10 +401,8 @@ export function ApplyPageClient() {
                     validation?.consentCopy?.screeningConsentLabel ??
                     t("applyFlow.disclosure.screeningConsentLabel")
                   }
-                  futureFeeNotice={
-                    validation?.consentCopy?.futureFeeNotice ??
-                    t("applyFlow.disclosure.futureFeeNotice")
-                  }
+                  futureFeeNotice={futureFeeNotice}
+                  screeningFeeCents={screeningCta?.enabled ? screeningCta.feeCents : null}
                   emptyChargesLabel={t("applyFlow.disclosure.emptyCharges")}
                   emptyUseBasedChargesLabel={t("applyFlow.disclosure.emptyUseBasedCharges")}
                   emptyCriteriaLabel={t("applyFlow.disclosure.emptyCriteria")}
@@ -529,6 +552,27 @@ export function ApplyPageClient() {
                   locale={locale}
                 />
               )}
+
+              {step === "screening" && property && applicationId && (
+                <ScreeningGateStep
+                  propertyId={property.id}
+                  applicationId={applicationId}
+                  screeningIdHint={screeningIdHint}
+                  feeCents={screeningCta?.feeCents ?? 5000}
+                  onComplete={() => setStep("submitted")}
+                  labels={{
+                    portableTitle: t("applyFlow.screeningGate.portableTitle"),
+                    portableBody: t("applyFlow.screeningGate.portableBody"),
+                    useExisting: t("applyFlow.screeningGate.useExisting"),
+                    sending: t("applyFlow.screeningGate.sending"),
+                    payTitle: t("applyFlow.screeningGate.payTitle"),
+                    payBody: t("applyFlow.screeningGate.payBody"),
+                    skipPay: t("applyFlow.screeningGate.skipPay"),
+                    continueLabel: t("applyFlow.screeningGate.continueLabel"),
+                    expiresLabel: t("applyFlow.screeningGate.expiresLabel"),
+                  }}
+                />
+              )}
             </CardContent>
           </Card>
 
@@ -636,6 +680,7 @@ function DisclosureStep({
   criteriaAcknowledgementLabel,
   screeningConsentLabel,
   futureFeeNotice,
+  screeningFeeCents,
   emptyChargesLabel,
   emptyUseBasedChargesLabel,
   emptyCriteriaLabel,
@@ -669,6 +714,7 @@ function DisclosureStep({
   criteriaAcknowledgementLabel: string
   screeningConsentLabel: string
   futureFeeNotice: string
+  screeningFeeCents: number | null
   emptyChargesLabel: string
   emptyUseBasedChargesLabel: string
   emptyCriteriaLabel: string
@@ -743,11 +789,13 @@ function DisclosureStep({
           )}
           <div className="grid gap-3 sm:grid-cols-2 text-sm">
             <div>
-              <span className="text-foreground/50">Application Fee: </span>
+              <span className="text-foreground/50">Screening fee: </span>
               <span className="font-medium">
-                {acceptanceCriteria.applicationFee !== null
-                  ? `${formatCurrency(acceptanceCriteria.applicationFee, locale)}${acceptanceCriteria.feeRefundable ? " (refundable)" : " (non-refundable)"}`
-                  : "No fee at this time"}
+                {screeningFeeCents != null && screeningFeeCents > 0
+                  ? `${formatCurrency(screeningFeeCents / 100, locale)} (due before bureau checks; waived or portable reuse skips payment)`
+                  : acceptanceCriteria.applicationFee !== null
+                    ? `${formatCurrency(acceptanceCriteria.applicationFee, locale)}${acceptanceCriteria.feeRefundable ? " (refundable)" : " (non-refundable)"}`
+                    : "No screening fee required for this listing"}
               </span>
             </div>
             <div>
