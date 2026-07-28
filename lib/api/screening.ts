@@ -58,6 +58,8 @@ export interface PortableScreeningStatus {
   completedAt: string | null
   expiresAt: string | null
   isPortable: boolean
+  propertyId?: string
+  feeStatus?: string
 }
 
 export interface CreateFeeIntentResult {
@@ -113,6 +115,59 @@ export async function initiateScreening(
     input
   )
   return res
+}
+
+export interface InitiateForApplyResult {
+  screeningId: string
+  needsPayment?: boolean
+  feeStatus?: string
+  feeCents?: number
+  status?: string
+}
+
+/**
+ * Applicant finds/creates a property-scoped screening fee row for this application.
+ * POST /applications/:id/ensure-screening (auth required; email must match applicant).
+ */
+export async function ensureApplicantScreening(
+  applicationId: string
+): Promise<InitiateForApplyResult> {
+  const res = await screeningFetch(`/api/applications/${applicationId}/ensure-screening`, {
+    method: "POST",
+    body: JSON.stringify({}),
+  })
+  if (!res.ok) {
+    throw new Error(
+      await readErrorMessage(
+        res,
+        "Could not start screening for this application. Sign in with the applicant email used on the form."
+      )
+    )
+  }
+  return (await res.json()) as InitiateForApplyResult
+}
+
+/**
+ * Return screeningId only when it belongs to this property (tenant status includes propertyId).
+ */
+export async function findTenantScreeningIdForProperty(
+  screeningId: string,
+  propertyId: string
+): Promise<string | null> {
+  try {
+    const res = await screeningFetch(`/api/screening?page=1&limit=50`)
+    if (!res.ok) return null
+    const body = (await res.json()) as { screenings?: PortableScreeningStatus[] }
+    const match = (body.screenings ?? []).find(
+      (s) =>
+        s.view === "status" &&
+        s.id === screeningId &&
+        s.propertyId === propertyId
+    )
+    return match?.id ?? null
+  } catch {
+    return null
+  }
 }
 
 export async function getScreening(
@@ -216,21 +271,3 @@ export async function createScreeningFeeIntent(
   }
 }
 
-/**
- * Tenant list — used to find an invited screening that may need fee payment.
- * Returns status-shaped rows for tenants.
- */
-export async function listTenantScreeningStatuses(
-  page = 1,
-  limit = 20
-): Promise<PortableScreeningStatus[]> {
-  try {
-    const res = await screeningFetch(`/api/screening?page=${page}&limit=${limit}`)
-    if (res.status === 401 || res.status === 403) return []
-    if (!res.ok) return []
-    const body = (await res.json()) as { screenings?: PortableScreeningStatus[] }
-    return (body.screenings ?? []).filter((s) => s.view === "status")
-  } catch {
-    return []
-  }
-}

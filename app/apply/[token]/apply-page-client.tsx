@@ -101,6 +101,7 @@ export function ApplyPageClient() {
   const [applicationId, setApplicationId] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [screeningCta, setScreeningCta] = useState<ScreeningCta | null>(null)
+  const [ctaStatus, setCtaStatus] = useState<"loading" | "ready" | "error">("loading")
 
   const [criteriaAcknowledged, setCriteriaAcknowledged] = useState(false)
   const [screeningConsent, setScreeningConsent] = useState(false)
@@ -134,9 +135,19 @@ export function ApplyPageClient() {
           )
           const propertyId = result.property?.id ?? result.link?.propertyId
           if (propertyId) {
+            setCtaStatus("loading")
             void getScreeningCta(propertyId).then((cta) => {
-              if (!cancelled) setScreeningCta(cta)
+              if (cancelled) return
+              if (!cta) {
+                setScreeningCta(null)
+                setCtaStatus("error")
+                return
+              }
+              setScreeningCta(cta)
+              setCtaStatus("ready")
             })
+          } else {
+            setCtaStatus("error")
           }
           return
         }
@@ -213,6 +224,11 @@ export function ApplyPageClient() {
       return
     }
 
+    if (ctaStatus !== "ready" || !screeningCta) {
+      setError(t("applyFlow.messages.ctaRequired"))
+      return
+    }
+
     if (!criteriaAcknowledged || !screeningConsent) {
       setError(t("applyFlow.messages.consentRequired"))
       return
@@ -227,13 +243,27 @@ export function ApplyPageClient() {
         answer,
       }))
 
+      const feeDisclosure = buildScreeningFeeDisclosure(screeningCta)
+      const accurateSnapshot: ApplicationDisclosureSnapshot = {
+        ...disclosureSnapshot,
+        applicationDisclosure: {
+          ...disclosureSnapshot.applicationDisclosure,
+          feeCollectionStatus: feeDisclosure.feeCollectionStatus,
+          refundRecoveryInstructions: feeDisclosure.refundRecoveryInstructions,
+        },
+        consentCopy: {
+          ...disclosureSnapshot.consentCopy,
+          futureFeeNotice: feeDisclosure.futureFeeNotice,
+        },
+      }
+
       await submitApplication(applicationId, {
         token,
         answers: answerArray,
         criteriaAcknowledged: true,
         screeningConsent: true,
         consentVersion,
-        disclosureSnapshot: disclosureSnapshot as ApplicationDisclosureSnapshot,
+        disclosureSnapshot: accurateSnapshot,
       })
 
       // Portable reuse / fee pay gate before confirmation.
@@ -300,15 +330,17 @@ export function ApplyPageClient() {
   }
 
   const property = validation?.property
-  const feeDisclosure = buildScreeningFeeDisclosure(screeningCta)
-  const disclosure = validation?.applicationDisclosure
-    ? {
-        ...validation.applicationDisclosure,
-        feeCollectionStatus: feeDisclosure.feeCollectionStatus,
-        refundRecoveryInstructions: feeDisclosure.refundRecoveryInstructions,
-      }
-    : undefined
-  const futureFeeNotice = feeDisclosure.futureFeeNotice
+  const feeDisclosure =
+    ctaStatus === "ready" && screeningCta ? buildScreeningFeeDisclosure(screeningCta) : null
+  const disclosure =
+    validation?.applicationDisclosure && feeDisclosure
+      ? {
+          ...validation.applicationDisclosure,
+          feeCollectionStatus: feeDisclosure.feeCollectionStatus,
+          refundRecoveryInstructions: feeDisclosure.refundRecoveryInstructions,
+        }
+      : undefined
+  const futureFeeNotice = feeDisclosure?.futureFeeNotice ?? ""
   const questions = validation?.questions ?? []
   const hasQuestions = questions.length > 0
   const progressSteps = [
@@ -380,7 +412,49 @@ export function ApplyPageClient() {
                 />
               )}
 
-              {step === "disclosure" && disclosure && (
+              {step === "disclosure" && ctaStatus === "loading" && (
+                <div className="flex flex-col items-center gap-3 py-10 text-center">
+                  <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+                  <p className="text-sm text-foreground/70">{t("applyFlow.disclosure.loadingFee")}</p>
+                </div>
+              )}
+
+              {step === "disclosure" && ctaStatus === "error" && (
+                <div className="space-y-4">
+                  <p className="text-sm text-destructive">{t("applyFlow.disclosure.ctaLoadFailed")}</p>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setError("")
+                        setStep("property")
+                      }}
+                    >
+                      {t("actions.back")}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        const propertyId = property?.id ?? validation?.link?.propertyId
+                        if (!propertyId) return
+                        setCtaStatus("loading")
+                        void getScreeningCta(propertyId).then((cta) => {
+                          if (!cta) {
+                            setScreeningCta(null)
+                            setCtaStatus("error")
+                            return
+                          }
+                          setScreeningCta(cta)
+                          setCtaStatus("ready")
+                        })
+                      }}
+                    >
+                      {t("applyFlow.disclosure.retryFee")}
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {step === "disclosure" && ctaStatus === "ready" && disclosure && (
                 <DisclosureStep
                   disclosure={disclosure}
                   locale={locale}
@@ -558,18 +632,23 @@ export function ApplyPageClient() {
                   propertyId={property.id}
                   applicationId={applicationId}
                   screeningIdHint={screeningIdHint}
-                  feeCents={screeningCta?.feeCents ?? 5000}
+                  screeningEnabled={screeningCta?.enabled ?? false}
+                  feeCents={screeningCta?.feeCents ?? 0}
                   onComplete={() => setStep("submitted")}
                   labels={{
                     portableTitle: t("applyFlow.screeningGate.portableTitle"),
                     portableBody: t("applyFlow.screeningGate.portableBody"),
                     useExisting: t("applyFlow.screeningGate.useExisting"),
+                    runNew: t("applyFlow.screeningGate.runNew"),
                     sending: t("applyFlow.screeningGate.sending"),
+                    startingPay: t("applyFlow.screeningGate.startingPay"),
                     payTitle: t("applyFlow.screeningGate.payTitle"),
                     payBody: t("applyFlow.screeningGate.payBody"),
-                    skipPay: t("applyFlow.screeningGate.skipPay"),
                     continueLabel: t("applyFlow.screeningGate.continueLabel"),
                     expiresLabel: t("applyFlow.screeningGate.expiresLabel"),
+                    blockedTitle: t("applyFlow.screeningGate.blockedTitle"),
+                    blockedBody: t("applyFlow.screeningGate.blockedBody"),
+                    retryLabel: t("applyFlow.screeningGate.retryLabel"),
                   }}
                 />
               )}

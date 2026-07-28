@@ -317,6 +317,7 @@
       "answerRequiredQuestions": "Please answer every required question before continuing.",
       "missingApplicationContext": "Your disclosure details are missing. Please restart the application from the beginning.",
       "consentRequired": "Please acknowledge the criteria and authorize screening before continuing.",
+      "ctaRequired": "We need the screening fee details for this listing before you can submit. Go back to Criteria & Disclosure and retry loading the fee.",
       "submitFailed": "We couldn't submit your application right now."
     },
     "disclosure": {
@@ -324,7 +325,10 @@
       "body": "Please review the owner's acceptance criteria, screening checks, and rental disclosures before moving forward.",
       "criteriaAcknowledgementLabel": "I reviewed the owner's acceptance criteria and the rental disclosures shown on this page.",
       "screeningConsentLabel": "I authorize Ondo Real Estate and the property owner to run the disclosed screening checks for this application.",
-      "futureFeeNotice": "An applicant screening fee may be collected via Stripe before bureau checks begin, unless a manager waives the fee or you reuse a valid portable screening package. The amount is shown under Application fee status when screening is enabled for this listing.",
+      "futureFeeNotice": "An applicant screening fee may be collected via Stripe before bureau checks begin, unless a manager waives the fee or you reuse a valid portable screening package. The amount is shown under Screening fee status when screening is enabled for this listing.",
+      "loadingFee": "Loading screening fee disclosure for this listing…",
+      "ctaLoadFailed": "We couldn't load the screening fee for this listing. Fee details are required before you continue — retry or go back.",
+      "retryFee": "Retry loading fee",
       "emptyCharges": "No fixed non-rent charges were disclosed for this listing.",
       "emptyUseBasedCharges": "No use-based charge categories were disclosed for this listing.",
       "emptyCriteria": "No additional owner criteria were listed for this property.",
@@ -341,14 +345,18 @@
     },
     "screeningGate": {
       "portableTitle": "Use your existing screening",
-      "portableBody": "You have a valid portable screening package. Send it to this property with no additional fee.",
+      "portableBody": "You have a valid portable screening package. Send it to this property with no additional fee, or run a new screening and pay the fee for this listing.",
       "useExisting": "Send Screening",
+      "runNew": "Run new screening",
       "sending": "Sending…",
+      "startingPay": "Starting payment…",
       "payTitle": "Pay screening fee",
       "payBody": "Pay {{fee}} to run credit, criminal, and eviction checks for this application. Managers may waive this fee. Reusing a portable package later skips a second charge.",
-      "skipPay": "Skip for now",
       "continueLabel": "Continue",
-      "expiresLabel": "Valid through"
+      "expiresLabel": "Valid through",
+      "blockedTitle": "Screening fee required",
+      "blockedBody": "Sign in with the same email you used on this application so we can create the screening fee payment for this property. You cannot continue until the fee is paid, waived, or you send a portable package.",
+      "retryLabel": "Retry payment setup"
     },
     "personal": {
       "title": "Personal information",

@@ -1,37 +1,49 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { StripePaymentForm } from "@/components/stripe-payment-form"
 import {
   createScreeningFeeIntent,
+  ensureApplicantScreening,
+  findTenantScreeningIdForProperty,
   formatScreeningFeeCents,
   listPortableScreenings,
-  listTenantScreeningStatuses,
   sendPortableScreening,
   type PortableScreeningStatus,
   type ScreeningCta,
 } from "@/lib/api/screening"
 
-export type ScreeningGateMode = "portable" | "pay" | "done" | "loading" | "skip"
+export type ScreeningGateMode =
+  | "loading"
+  | "portable"
+  | "pay"
+  | "done"
+  | "blocked"
+  | "not_required"
 
 interface ScreeningGateStepProps {
   propertyId: string
   applicationId: string
-  /** Optional screening id from invite deep link (?screeningId=). */
+  /** Deep-link screening id — used only after property match is confirmed. */
   screeningIdHint?: string | null
+  screeningEnabled: boolean
   feeCents: number
   onComplete: () => void
   labels: {
     portableTitle: string
     portableBody: string
     useExisting: string
+    runNew: string
     sending: string
+    startingPay: string
     payTitle: string
     payBody: string
-    skipPay: string
     continueLabel: string
     expiresLabel: string
+    blockedTitle: string
+    blockedBody: string
+    retryLabel: string
   }
 }
 
@@ -46,29 +58,93 @@ function formatExpiry(expiresAt: string | null): string | null {
   }
 }
 
+function isFeeDue(screeningEnabled: boolean, feeCents: number): boolean {
+  return screeningEnabled && feeCents > 0
+}
+
 /**
- * Post-submit gate: portable reuse (no pay) → fee pay (Stripe) → continue.
- * Skips silently when the applicant is not authenticated or no fee screening exists.
+ * Post-submit gate: portable reuse and/or pay for a property-scoped screening.
+ * When fee is due, continue is blocked until portable send, paid, waived, or not_required.
  */
 export function ScreeningGateStep({
   propertyId,
   applicationId,
   screeningIdHint,
+  screeningEnabled,
   feeCents,
   onComplete,
   labels,
 }: ScreeningGateStepProps) {
+  const feeDue = isFeeDue(screeningEnabled, feeCents)
   const [mode, setMode] = useState<ScreeningGateMode>("loading")
   const [portable, setPortable] = useState<PortableScreeningStatus[]>([])
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [payScreeningId, setPayScreeningId] = useState<string | null>(null)
   const [error, setError] = useState("")
   const [busy, setBusy] = useState(false)
+  const [blockedDetail, setBlockedDetail] = useState("")
+
+  const tryOpenPayForScreeningId = useCallback(
+    async (screeningId: string): Promise<"pay" | "done" | "fail"> => {
+      try {
+        const intent = await createScreeningFeeIntent(screeningId)
+        if (intent.alreadySettled) return "done"
+        if (intent.clientSecret) {
+          setPayScreeningId(screeningId)
+          setClientSecret(intent.clientSecret)
+          return "pay"
+        }
+        return "fail"
+      } catch {
+        return "fail"
+      }
+    },
+    []
+  )
+
+  /**
+   * Resolve a payable screening for THIS property only.
+   * Never uses invited screenings from other properties.
+   */
+  const resolvePayScreening = useCallback(async (): Promise<"pay" | "done" | "fail"> => {
+    if (screeningIdHint) {
+      const scopedId = await findTenantScreeningIdForProperty(screeningIdHint, propertyId)
+      if (scopedId) {
+        const fromHint = await tryOpenPayForScreeningId(scopedId)
+        if (fromHint !== "fail") return fromHint
+      }
+    }
+
+    try {
+      const created = await ensureApplicantScreening(applicationId)
+      if (
+        created.feeStatus === "paid" ||
+        created.feeStatus === "waived" ||
+        created.feeStatus === "not_required" ||
+        created.needsPayment === false
+      ) {
+        return "done"
+      }
+      return tryOpenPayForScreeningId(created.screeningId)
+    } catch (err) {
+      setBlockedDetail(
+        err instanceof Error
+          ? err.message
+          : "Could not start a screening fee payment for this property."
+      )
+      return "fail"
+    }
+  }, [applicationId, propertyId, screeningIdHint, tryOpenPayForScreeningId])
 
   useEffect(() => {
     let cancelled = false
 
     async function resolveGate() {
+      if (!screeningEnabled || !feeDue) {
+        setMode("not_required")
+        return
+      }
+
       const packages = await listPortableScreenings()
       if (cancelled) return
 
@@ -78,45 +154,24 @@ export function ScreeningGateStep({
         return
       }
 
-      const candidates = new Set<string>()
-      if (screeningIdHint) candidates.add(screeningIdHint)
-
-      const statuses = await listTenantScreeningStatuses(1, 50)
+      const payResult = await resolvePayScreening()
       if (cancelled) return
-      for (const row of statuses) {
-        if (row.status === "invited" || row.status === "pending" || row.status === "in_progress") {
-          candidates.add(row.id)
-        }
+      if (payResult === "done") {
+        setMode("done")
+        return
       }
-
-      for (const screeningId of candidates) {
-        try {
-          const intent = await createScreeningFeeIntent(screeningId)
-          if (cancelled) return
-          if (intent.alreadySettled) {
-            setMode("done")
-            return
-          }
-          if (intent.clientSecret) {
-            setPayScreeningId(screeningId)
-            setClientSecret(intent.clientSecret)
-            setMode("pay")
-            return
-          }
-        } catch {
-          // Try next candidate (auth mismatch, wrong status, etc.)
-        }
+      if (payResult === "pay") {
+        setMode("pay")
+        return
       }
-
-      // No portable package and no payable screening yet (manager may invite later).
-      setMode("skip")
+      setMode("blocked")
     }
 
     void resolveGate()
     return () => {
       cancelled = true
     }
-  }, [screeningIdHint])
+  }, [feeDue, resolvePayScreening, screeningEnabled])
 
   async function handleSend(screeningId: string) {
     setBusy(true)
@@ -131,25 +186,87 @@ export function ScreeningGateStep({
     }
   }
 
+  async function handleRunNewScreening() {
+    setBusy(true)
+    setError("")
+    setBlockedDetail("")
+    try {
+      const payResult = await resolvePayScreening()
+      if (payResult === "done") {
+        onComplete()
+        return
+      }
+      if (payResult === "pay") {
+        setMode("pay")
+        return
+      }
+      setMode("blocked")
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function handleRetryBlocked() {
+    setBusy(true)
+    setError("")
+    setBlockedDetail("")
+    setMode("loading")
+    try {
+      const payResult = await resolvePayScreening()
+      if (payResult === "done") {
+        setMode("done")
+        return
+      }
+      if (payResult === "pay") {
+        setMode("pay")
+        return
+      }
+      setMode("blocked")
+    } finally {
+      setBusy(false)
+    }
+  }
+
   if (mode === "loading") {
     return (
       <div className="flex flex-col items-center gap-3 py-8 text-center">
         <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
-        <p className="text-sm text-foreground/70">Checking for an existing screening…</p>
+        <p className="text-sm text-foreground/70">Checking screening options…</p>
       </div>
     )
   }
 
-  if (mode === "done" || mode === "skip") {
+  if (mode === "not_required" || mode === "done") {
     return (
       <div className="space-y-4">
         <p className="text-sm leading-6 text-foreground/70">
           {mode === "done"
             ? "Your screening fee is already settled. You can continue."
-            : "Your application is in. If a screening invitation is sent, you can pay the fee from that invite or reuse a portable package when available."}
+            : "No screening fee is due for this listing. You can continue."}
         </p>
         <Button onClick={onComplete} className="sm:min-w-44">
           {labels.continueLabel}
+        </Button>
+      </div>
+    )
+  }
+
+  if (mode === "blocked") {
+    return (
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold text-foreground">{labels.blockedTitle}</h2>
+          <p className="text-sm leading-6 text-foreground/70">{labels.blockedBody}</p>
+          {blockedDetail ? (
+            <p className="text-sm text-destructive">{blockedDetail}</p>
+          ) : null}
+        </div>
+        <p className="text-sm text-foreground/60">
+          Screening fee due: {formatScreeningFeeCents(feeCents)}. You cannot continue until the fee
+          is paid, waived, or you send a portable package.
+        </p>
+        <Button onClick={() => void handleRetryBlocked()} disabled={busy} className="sm:min-w-44">
+          {busy ? labels.startingPay : labels.retryLabel}
         </Button>
       </div>
     )
@@ -193,14 +310,18 @@ export function ScreeningGateStep({
 
         {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-        <Button variant="outline" onClick={onComplete} disabled={busy}>
-          Continue without sending
+        <Button
+          variant="outline"
+          onClick={() => void handleRunNewScreening()}
+          disabled={busy}
+          className="w-full sm:w-auto"
+        >
+          {busy ? labels.startingPay : labels.runNew}
         </Button>
       </div>
     )
   }
 
-  // pay
   return (
     <div className="space-y-6">
       <div className="space-y-2">
@@ -218,19 +339,25 @@ export function ScreeningGateStep({
           onSuccess={onComplete}
           onError={(message) => setError(message)}
         />
-      ) : null}
+      ) : (
+        <p className="text-sm text-destructive">
+          Payment form is unavailable. Retry or contact the property team.
+        </p>
+      )}
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-      <Button variant="outline" onClick={onComplete}>
-        {labels.skipPay}
-      </Button>
+      {portable.length > 0 ? (
+        <Button variant="outline" onClick={() => setMode("portable")} disabled={busy}>
+          Back to portable screening
+        </Button>
+      ) : null}
     </div>
   )
 }
 
-/** Build English fee / reuse disclosure lines from public CTA. */
-export function buildScreeningFeeDisclosure(cta: ScreeningCta | null): {
+/** Build English fee / reuse disclosure lines from a loaded public CTA. */
+export function buildScreeningFeeDisclosure(cta: ScreeningCta): {
   feeCollectionStatus: string
   futureFeeNotice: string
   refundRecoveryInstructions: string
@@ -238,7 +365,7 @@ export function buildScreeningFeeDisclosure(cta: ScreeningCta | null): {
   const refundRecoveryInstructions =
     "Screening fees cover the cost of obtaining consumer reports. To request a copy of your report or dispute inaccurate information, use the contact details on any adverse-action notice you receive. Fee refunds are handled case-by-case by the property team."
 
-  if (!cta?.enabled) {
+  if (!cta.enabled) {
     return {
       feeCollectionStatus:
         "No applicant screening fee is required for this listing at this time. A property manager may still invite you to screening later.",
