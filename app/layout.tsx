@@ -22,6 +22,7 @@ import { FirstVisitLeadPopup } from "@/components/first-visit-lead-popup"
 import ServiceWorkerRegistrar from "@/components/sw-register"
 import { TrackingTags, GeoGatedGoogleTagManagerNoscript } from "@/components/analytics/tracking-tags"
 import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
+import PublicAssistantWidget from "@/components/PublicAssistantWidget"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
@@ -227,6 +228,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           {/* Floating WhatsApp CTA — env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
           <WhatsAppFloatButton />
+          {/* Site-wide public assistant. Bottom-left so it never overlaps the WhatsApp CTA or the
+              property-scoped LeasingChatWidget, both of which sit bottom-right. Hides itself on
+              /chat, where the leasing agent already owns the conversation. */}
+          <PublicAssistantWidget />
         </RootProvidersClient>
         <JsonLd
           id="global-jsonld"

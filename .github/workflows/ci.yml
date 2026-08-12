@@ -36,6 +36,15 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Accessibility (axe) suite
+        # tests/a11y.spec.ts and @axe-core/playwright were configured but never executed
+        # by CI, so WCAG regressions shipped silently. This is a licensed housing site;
+        # inaccessible real-estate web content is an active litigation area.
+        run: npm run test:a11y
         env:
           NEXT_PUBLIC_APP_PORTAL_URL: https://app.ondorealestate.com
           NEXT_PUBLIC_BACKEND_BASE_URL: https://api.ondorealestate.com
