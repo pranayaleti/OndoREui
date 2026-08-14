@@ -74,11 +74,12 @@ describe("notary-location-copy", () => {
     expect(intro).toContain(receivingPartyCaveat())
   })
 
-  it("Utah intro mentions mobile availability", () => {
+  it("Utah intro covers Wasatch Front RON without travel appointments", () => {
     const city = getNotaryCity("utah", "lehi")!
     const state = getRonStateBySlug("utah")!
     const intro = buildCityRonIntro(city, state)
-    expect(intro.toLowerCase()).toMatch(/mobile|wasatch|in-office|utah/)
+    expect(intro.toLowerCase()).toMatch(/wasatch|utah/)
+    expect(intro.toLowerCase()).toMatch(/do not offer in-office or mobile travel/)
 
     const signals = getLocalIntroSignalCategories(city, state, intro)
     expect(signals.has("utahMobile")).toBe(true)

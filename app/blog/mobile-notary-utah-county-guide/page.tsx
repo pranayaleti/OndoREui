@@ -3,40 +3,50 @@ import SEO from "@/components/seo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  NOTARY_AFTER_HOURS_USD,
+  NOTARY_HOURS_LABEL,
+  NOTARY_LOAN_RANGE,
+  NOTARY_RON_ACT_USD,
+  NOTARY_SAME_DAY_USD,
+} from "@/lib/notary-fees";
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
 
+const TITLE = "Notary in Utah County: Remote Online Notarization, Fees, and How to Book"
+const DESCRIPTION =
+  "ONDO Notary serves Utah County by Remote Online Notarization (RON) — $25 per remote act, same-day when capacity allows. No mobile travel or in-office appointments."
+
 export const metadata: Metadata = {
-  title: "Mobile Notary in Utah County: Fees, Timing, and How to Book | Ondo Real Estate",
-  description: "ONDO Notary offers mobile notarization across Utah County with transparent pricing, same-day scheduling, and real estate-ready loan signing expertise.",
+  title: `${TITLE} | Ondo Real Estate`,
+  description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/blog/mobile-notary-utah-county-guide/` },
   openGraph: {
-    title: "Mobile Notary in Utah County: Fees, Timing, and How to Book | Ondo Real Estate",
-    description: "ONDO Notary offers mobile notarization across Utah County with transparent pricing, same-day scheduling, and real estate-ready loan signing expertise.",
+    title: `${TITLE} | Ondo Real Estate`,
+    description: DESCRIPTION,
     type: "article",
     publishedTime: "2025-01-10",
-    modifiedTime: "2025-01-10",
+    modifiedTime: "2026-08-13",
     authors: ["ONDO Notary Team"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mobile Notary in Utah County: Fees, Timing, and How to Book | Ondo Real Estate",
-    description: "ONDO Notary offers mobile notarization across Utah County with transparent pricing, same-day scheduling, and real estate-ready loan signing expertise.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
 }
 
-
 const published = "2025-01-10";
-const modified = "2025-01-10";
+const modified = "2026-08-13";
 const slug = "/blog/mobile-notary-utah-county-guide";
 
 const keywords = [
-  "mobile notary Utah County",
-  "notary Lehi Utah",
-  "mobile notary Provo",
-  "traveling notary American Fork",
-  "after hours notary Utah",
+  "remote online notary Utah County",
+  "RON Lehi Utah",
+  "online notary Provo",
+  "notary American Fork",
+  "same day notary Utah",
   "loan signing agent Utah County",
   "real estate notary Utah",
 ];
@@ -56,22 +66,21 @@ export default function MobileNotaryUtahCountyGuide() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Mobile Notary in Utah County: Fees, Timing, and How to Book"
-        description="ONDO Notary offers mobile notarization across Utah County with transparent pricing, same-day scheduling, and real estate-ready loan signing expertise."
+        title={TITLE}
+        description={DESCRIPTION}
         pathname={slug}
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         publishedTime={published}
         modifiedTime={modified}
         author="ONDO Notary Team"
         section="Notary"
-        tags={["Mobile Notary", "Utah County", "Loan Signing", "Real Estate"]}
+        tags={["Remote Online Notary", "Utah County", "Loan Signing", "Real Estate"]}
         keywords={keywords}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Article",
-          headline: "Mobile Notary in Utah County: Fees, Timing, and How to Book",
-          description:
-            "Book a mobile notary anywhere in Utah County with transparent pricing and same-day appointments.",
+          headline: TITLE,
+          description: DESCRIPTION,
           author: { "@type": "Organization", name: "ONDO Notary" },
           datePublished: published,
           dateModified: modified,
@@ -80,15 +89,15 @@ export default function MobileNotaryUtahCountyGuide() {
       />
 
       <PageBanner
-        title="Mobile Notary in Utah County"
-        subtitle="On-site notarization across Utah County with transparent fees and fast booking."
+        title="Notary in Utah County"
+        subtitle="Remote Online Notarization (RON) from Lehi, Provo, Orem, and beyond — no travel appointment required."
         backgroundImage="/modern-apartment-balcony.png"
       />
 
       <article className="bg-background py-12">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">
           <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Mobile Notary</Badge>
+            <Badge variant="secondary">Remote Online Notary</Badge>
             <Badge variant="outline">Utah County</Badge>
             <Badge variant="outline">Real Estate & Loan Signings</Badge>
           </div>
@@ -104,22 +113,22 @@ export default function MobileNotaryUtahCountyGuide() {
             </Button>
           </div>
 
-          {/* Gestalt: quick anchors */}
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
-            <CardSpot title="Who it's for" body="Borrowers, title, and residents needing on-site notarization." />
-            <CardSpot title="What you get" body="Same-day or scheduled visits across Utah County with transparent pricing." />
-            <CardSpot title="How it flows" body="Choose city → confirm fee → ID check → stamp → receipt/scan-back if needed." />
+            <CardSpot title="Who it's for" body="Borrowers, title, and residents in Utah County who can complete a video session." />
+            <CardSpot title="What you get" body="Secure RON nationwide with posted fees and same-day when capacity allows." />
+            <CardSpot title="How it flows" body="Book → ID check on video → e-sign and seal → documents back immediately." />
           </div>
 
           <div className="prose prose-lg prose-invert max-w-none">
             <p>
-              Need a notary to come to you in Utah County? ONDO Notary sends a commissioned, bonded
-              professional to your home, office, title company, hospital, or designated meeting
-              point. We specialize in real estate, loan signings, POA, estate documents, and sworn
-              statements—without the drive time.
+              Searching for a mobile notary in Utah County? ONDO Notary now completes sessions by
+              <strong> Remote Online Notarization (RON)</strong> — a secure video appointment you can
+              join from Lehi, Provo, Orem, or anywhere in the U.S. We do not offer mobile travel or
+              in-office appointments. Confirm your title company, lender, or receiving party accepts
+              electronic notarization before you book.
             </p>
 
-            <h2>Where We Travel in Utah County</h2>
+            <h2>Utah County clients we serve online</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
               {serviceAreas.map((city) => (
                 <Card key={city} className="bg-muted border-border">
@@ -130,55 +139,79 @@ export default function MobileNotaryUtahCountyGuide() {
               ))}
             </div>
             <p className="text-foreground/70">
-              Additional nearby stops available. Travel fees are quoted upfront based on distance
-              and urgency.
+              If you are in Utah County (or out of state), the session is the same: laptop or phone,
+              camera, microphone, and a stable connection. See{" "}
+              <Link href="/notary" className="text-primary underline">/notary</Link> to book.
             </p>
 
-            <h2>Pricing Snapshot</h2>
+            <h2>Pricing snapshot</h2>
             <ul>
-              <li><strong>Notarial act:</strong> $10 per stamp (Utah maximum)</li>
-              <li><strong>Mobile trip fee:</strong> Starting at $25 (quoted by location)</li>
-              <li><strong>Loan signing packages:</strong> $75–$200 depending on pages and parties</li>
-              <li><strong>After-hours/urgent:</strong> Available; surcharge disclosed before booking</li>
+              <li>
+                <strong>Remote notarial act (RON):</strong> ${NOTARY_RON_ACT_USD} per act (Utah remote
+                maximum; platform included)
+              </li>
+              <li>
+                <strong>Same-day / on-demand:</strong> +${NOTARY_SAME_DAY_USD} when we can take the
+                request (best-effort, not a guarantee)
+              </li>
+              <li>
+                <strong>Loan signing packages:</strong> {NOTARY_LOAN_RANGE} when the file can close by RON
+              </li>
+              <li>
+                <strong>After-hours:</strong> +${NOTARY_AFTER_HOURS_USD} after 7 PM MT; hours are{" "}
+                {NOTARY_HOURS_LABEL}
+              </li>
             </ul>
+            <p>
+              Full schedule and policies:{" "}
+              <Link href="/notary#fees" className="text-primary underline">
+                /notary#fees
+              </Link>
+              .
+            </p>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">
-              <KeyLine title="Clarity" detail="Trip fee quoted upfront; stamp costs fixed by Utah statute." />
-              <KeyLine title="Expectation" detail="Loan packages scale with page count and party count." />
+              <KeyLine title="Clarity" detail="RON fee is posted. Same-day and after-hours add-ons are quoted before we book." />
+              <KeyLine title="No travel table" detail="We do not publish mile bands or dispatch a notary to your door." />
             </div>
 
-            <h2>What to Expect at the Appointment</h2>
+            <h2>What to expect on the call</h2>
             <ul>
-              <li>ID check for every signer (government-issued ID)</li>
-              <li>Document review for completeness and witness needs</li>
-              <li>Proper journaling, seals, and notarizations for each signature</li>
-              <li>Clear next steps for title/escrow or your records</li>
+              <li>Government-issued photo ID for every signer</li>
+              <li>Camera, microphone, and a quiet space with stable internet</li>
+              <li>Unsigned documents ready (no blank spaces to fill in later)</li>
+              <li>Electronic seal, audit trail, and documents returned after the session</li>
             </ul>
 
-            <h2>Real Estate & Loan Signing Focus</h2>
+            <h2>Real estate &amp; loan signing</h2>
             <ul>
-              <li>Purchase, refinance, HELOC, and investment property packages</li>
-              <li>Borrower walkthroughs with clear summaries for each document</li>
-              <li>Courier or scan-back coordination upon request</li>
-              <li>Flexible scheduling to align with lender and title deadlines</li>
+              <li>Purchase, refinance, HELOC, and investment packages that accept RON</li>
+              <li>Borrower walkthrough on video with identity verification</li>
+              <li>Coordination with title and escrow when they accept electronic notarization</li>
+              <li>Same-day slots when the calendar allows — request by noon MT</li>
             </ul>
 
-            <h2>Same-Day and After-Hours Options</h2>
+            <h2>Same-day and after-hours</h2>
             <p>
-              We reserve calendar blocks for urgent requests. If you need a notary today—or after 7 PM—
-              call or text to confirm availability and pricing before dispatch.
+              We try to fit urgent RON sessions when capacity allows. If you need a notary today — or
+              after 7 PM — book online or call and tell us it is urgent. Same-day is best-effort, not
+              a guaranteed SLA. Details:{" "}
+              <Link href="/notary/on-demand" className="text-primary underline">
+                /notary/on-demand
+              </Link>
+              .
             </p>
 
-            <h3>Process at a Glance</h3>
+            <h3>Process at a glance</h3>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`Caller → City/urgency check → Fee quote → Confirm time/place
-→ ID verified on-site → Journal entry + seal → Scan-back/courier (optional)`}
+{`Request → Confirm RON acceptance → Quote → Video session
+→ ID verified → Electronic seal → Documents returned`}
             </pre>
 
-            <h2>Book Your Mobile Notary</h2>
+            <h2>Book a remote session</h2>
             <ul>
               <li>Call or text: {SITE_PHONE}</li>
-              <li>Email: {SITE_EMAILS.primary}</li>
+              <li>Email: {SITE_EMAILS.notary}</li>
               <li>
                 Request online: <Link href="/notary" className="text-primary underline">/notary</Link>
               </li>

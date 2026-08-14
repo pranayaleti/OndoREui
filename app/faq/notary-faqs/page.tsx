@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
+import { NOTARY_PRICING_SUMMARY } from "@/lib/notary-fees"
 import Link from "next/link"
 import { ArrowLeft, FileText } from "lucide-react"
 import Script from "next/script"
@@ -10,11 +11,11 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Notary & Closings FAQs | Ondo Real Estate",
-  description: "Get answers to common questions about notary services, Remote Online Notarization (RON), mobile notary, and what to expect during document signing.",
+  description: "Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing.",
   alternates: { canonical: `${SITE_URL}/faq/notary-faqs/` },
   openGraph: {
     title: "Notary & Closings FAQs | Ondo Real Estate",
-    description: "Get answers to common questions about notary services, Remote Online Notarization (RON), mobile notary, and what to expect during document signing.",
+    description: "Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing.",
   },
 }
 
@@ -32,19 +33,19 @@ export default function NotaryFAQPage() {
         "Yes. Remote Online Notarization lets us notarize for clients located anywhere in the U.S., as long as the receiving party accepts RON documents (most modern lenders and employers do). We regularly support out‑of‑state real estate closings, employment forms, and business agreements.",
     },
     {
-      question: "What's the difference between mobile, in‑office, and online notarization?",
+      question: "What's the difference between mobile and online notarization?",
       answer:
-        "In‑office means you come to our Lehi office. Mobile means we travel to you in Utah County. Remote Online Notarization (RON) happens completely online via secure video. All three are performed by the same commissioned notary; we'll recommend the best option based on urgency, location, and document type.",
+        "ONDO Notary offers Remote Online Notarization (RON) only — a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
     },
     {
       question: "How quickly can I get a document notarized?",
       answer:
-        "We'll try to accommodate same-day when capacity allows — especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. In-office is often available within 24–48 hours; mobile in Utah depends on location and travel. Same-day is best-effort, not a guaranteed SLA. See /notary/on-demand for how on-demand scheduling works.",
+        "We'll try to accommodate same-day when capacity allows — especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. Same-day is best-effort, not a guaranteed SLA. See /notary/on-demand for how on-demand scheduling works.",
     },
     {
       question: "Do you offer on-demand or same-day notary?",
       answer:
-        "Yes. ONDO Notary offers on-demand scheduling for urgent needs. We try to accommodate same-day when our calendar allows — RON nationwide and mobile/in-office in our Utah service area. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent. Learn more at /notary/on-demand or book from /notary.",
+        "Yes. ONDO Notary offers on-demand scheduling for urgent remote online notarization. We try to accommodate same-day when our calendar allows — RON nationwide. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent. Learn more at /notary/on-demand or book from /notary.",
     },
     {
       question: "What types of documents can you notarize?",
@@ -53,8 +54,7 @@ export default function NotaryFAQPage() {
     },
     {
       question: "How much does notarization cost?",
-      answer:
-        "Standard notarization fees vary by service type. Remote Online Notary (RON) typically costs less than mobile services. Contact us for current pricing based on your specific needs. We offer competitive rates and transparent pricing with no hidden fees.",
+      answer: NOTARY_PRICING_SUMMARY,
     },
   ]
 
@@ -62,7 +62,7 @@ export default function NotaryFAQPage() {
     <div className="flex flex-col min-h-screen">
       <SEO
         title="Notary & Closings FAQs | Ondo Real Estate"
-        description="Get answers to common questions about notary services, Remote Online Notarization (RON), mobile notary, and what to expect during document signing."
+        description="Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing."
         pathname="/faq/notary-faqs"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={[

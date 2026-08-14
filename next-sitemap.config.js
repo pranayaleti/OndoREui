@@ -39,6 +39,9 @@ const AGENT_DISCOVERY_PATHS = [
   '/llms-full.txt',
   '/llms.json',
   '/index.md',
+  '/sitemap.md',
+  '/properties.md',
+  '/contact.md',
   '/.well-known/agents.json',
   '/loans/heloc/index.txt',
 ]
@@ -155,18 +158,35 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        allow: ['/llms.txt', '/llms-full.txt', '/.well-known/llms.txt', '/'],
+        allow: ['/llms.txt', '/llms-full.txt', '/.well-known/llms.txt', '/sitemap.md', '/index.md', '/'],
         disallow: ROBOTS_DISALLOW,
       },
       ...AI_CRAWLER_AGENTS.map((userAgent) => ({
         userAgent,
-        allow: ['/llms.txt', '/llms-full.txt', '/.well-known/llms.txt', '/'],
+        allow: ['/llms.txt', '/llms-full.txt', '/.well-known/llms.txt', '/sitemap.md', '/index.md', '/'],
         disallow: ROBOTS_DISALLOW,
       })),
     ],
     additionalSitemaps: [],
-    transformRobotsTxt: async (config, robotsTxt) =>
-      `${robotsTxt.trimEnd()}\n${buildRobotsCommentBlock(config.siteUrl)}\n`,
+    /**
+     * next-sitemap emits a UA=* policy but does not know about
+     * [Cloudflare Content-Signal](https://contentsignals.org/). We inject the
+     * directive inline so it lands inside the UA=* group per the spec, then
+     * append the machine-readable resource comment block.
+     */
+    transformRobotsTxt: async (config, robotsTxt) => {
+      const withContentSignal = robotsTxt.replace(
+        /^# \*\nUser-agent: \*\n/m,
+        '# *\nUser-agent: *\nContent-Signal: search=yes, ai-input=yes, ai-train=yes\n',
+      )
+      const output = withContentSignal === robotsTxt
+        ? robotsTxt.replace(
+            /^User-agent: \*\n/m,
+            'User-agent: *\nContent-Signal: search=yes, ai-input=yes, ai-train=yes\n',
+          )
+        : withContentSignal
+      return `${output.trimEnd()}\n${buildRobotsCommentBlock(config.siteUrl)}\n`
+    },
   },
   exclude: [
     '/auth',

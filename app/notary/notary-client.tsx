@@ -23,6 +23,7 @@ import {
   Building2,
 } from "lucide-react";
 import { NotaryBooking } from "@/components/notary-booking";
+import { NotaryFees } from "@/components/notary-fees";
 import ConsultationModal from "@/components/ConsultationModal";
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed";
 import { notaryStatePath } from "@/lib/notary-cities";
@@ -39,7 +40,6 @@ const META_KEYWORDS = [
   "remote online notary",
   "RON nationwide",
   "online notary USA",
-  "mobile notary Utah",
   "loan signing agent",
   "real estate notary",
   "digital notarization",
@@ -54,7 +54,6 @@ const KEYWORDS = Array.from(
     "remote online notary",
     "RON nationwide",
     "online notary US",
-    "mobile notary Utah",
     "loan signing agent",
     "real estate notary",
     "notary near me",
@@ -72,7 +71,7 @@ export default function NotaryPage() {
     {/* SEO */}
     <SEO
       title="Remote Online Notary – Available Nationwide | ONDO Notary"
-      description="Secure Remote Online Notarization (RON) for clients across all 50 U.S. states. Mobile and in-office notarization in Utah County. Specializing in real estate, loan signings, affidavits, and estate documents."
+      description="Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents — no office visit and no mobile travel appointments."
       pathname="/notary"
       image={`${SITE_URL}/notary-cover.jpg`}
       keywords={KEYWORDS}
@@ -95,7 +94,6 @@ export default function NotaryPage() {
           },
           makesOffer: [
             { itemOffered: { name: "Remote Online Notarization (RON)" } },
-            { itemOffered: { name: "Mobile Notary" } },
             { itemOffered: { name: "Loan Signing Agent" } },
             { itemOffered: { name: "On-demand Notary" } },
           ],
@@ -110,9 +108,9 @@ export default function NotaryPage() {
           Remote Online Notary – Available Nationwide
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
-          ONDO Notary provides secure Remote Online Notarization (RON) from anywhere in the U.S.,
-          plus mobile and in-office notarization in Utah County. Ideal for real estate, loan
-          packages, affidavits, POA, estate documents, and business agreements.
+          ONDO Notary provides secure Remote Online Notarization (RON) from anywhere in the U.S.
+          Ideal for real estate, loan packages, affidavits, POA, estate documents, and business
+          agreements. No office visit and no mobile travel appointments.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -134,10 +132,20 @@ export default function NotaryPage() {
               <FileText className="w-5 h-5" /> View Services
             </Link>
           </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-card/75"
+          >
+            <Link href="#fees" className="flex gap-2">
+              Fees & policies
+            </Link>
+          </Button>
         </div>
 
         <p className="text-gray-400 mt-6 text-sm">
-          On-demand available • We try to accommodate same-day • RON nationwide • Mobile in Utah County
+          On-demand available • We try to accommodate same-day • RON nationwide
         </p>
       </div>
     </section>
@@ -155,12 +163,12 @@ export default function NotaryPage() {
               Need a notarization today?
             </h2>
             <p className="text-foreground/80 text-lg leading-relaxed mb-4">
-              ONDO Notary offers on-demand scheduling for remote and mobile appointments.
+              ONDO Notary offers on-demand scheduling for remote online appointments.
               We&apos;ll try to accommodate same-day when capacity allows — earlier requests
               improve your odds.
             </p>
             <p className="text-foreground/60 text-sm mb-6">
-              Same-day is best-effort, not a guaranteed SLA. RON nationwide; mobile across our Utah service area.
+              Same-day is best-effort, not a guaranteed SLA. RON nationwide via secure video.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg" className="bg-primary text-primary-foreground">
@@ -227,7 +235,7 @@ export default function NotaryPage() {
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Nationwide remote notarization</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Same-day when capacity allows</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Real estate & loan document experts</li>
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Transparent pricing & clear process</li>
+              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Posted fee schedule — quoted before we book</li>
             </ul>
           </div>
         </div>
@@ -235,13 +243,13 @@ export default function NotaryPage() {
     </section>
 
     {/* SERVICES */}
-    <section id="services" className="py-16 md:py-24 bg-card dark:bg-gradient-to-b dark:from-background dark:to-card">
+    <section id="services" className="scroll-mt-24 py-16 md:py-24 bg-card dark:bg-gradient-to-b dark:from-background dark:to-card">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
           ONDO Notary Services Offered
         </h2>
         <p className="text-center text-foreground/70 mb-8 max-w-2xl mx-auto">
-          Remote‑first ONDO Notary services with Utah-specific mobile and in-office options.
+          Remote online notarization nationwide. No in-office visits and no mobile travel schedule.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -258,34 +266,6 @@ export default function NotaryPage() {
               <li>• Digital signatures & electronic seal</li>
               <li>• Fastest notarization method available</li>
               <li>• Ideal for real estate, POA, affidavits, and business documents</li>
-            </ul>
-          </div>
-
-          {/* In‑Office */}
-          <div className="p-6 bg-muted border border-border rounded-lg">
-            <h3 className="text-xl font-semibold mb-3">In‑Office Notarization (Utah)</h3>
-            <p className="text-foreground/70 mb-4">
-              Quick appointments at the Lehi office.
-            </p>
-            <ul className="text-foreground text-sm space-y-2">
-              <li>• Loan documents</li>
-              <li>• Affidavits & acknowledgements</li>
-              <li>• Power of attorney</li>
-              <li>• Estate documents</li>
-              <li>• I‑9 verification</li>
-            </ul>
-          </div>
-
-          {/* Mobile */}
-          <div className="p-6 bg-muted border border-border rounded-lg">
-            <h3 className="text-xl font-semibold mb-3">Mobile Notary (Utah County)</h3>
-            <p className="text-foreground/70 mb-4">
-              We travel to your home, office, or preferred location in Utah County.
-            </p>
-            <ul className="text-foreground text-sm space-y-2">
-              <li>• Flexible scheduling</li>
-              <li>• Evening availability</li>
-              <li>• Travel fee applies</li>
             </ul>
           </div>
 
@@ -315,66 +295,7 @@ export default function NotaryPage() {
       </div>
     </section>
 
-      {/* PRICING */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-            ONDO Notary Fees & Availability
-          </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
-            Transparent, upfront pricing.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <div>
-              <h3 className="text-2xl text-primary font-semibold mb-6">Pricing</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between border-b border-gray-700 pb-3">
-                  <span className="text-white font-medium">Notarial Act</span>
-                  <span className="text-primary font-semibold">$10 per stamp</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-700 pb-3">
-                  <span className="text-white font-medium">Mobile Trip Fee</span>
-                  <span className="text-primary font-semibold">Starting at $25</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-700 pb-3">
-                  <span className="text-white font-medium">Loan Signing Packages</span>
-                  <span className="text-primary font-semibold">$75–$200</span>
-                </div>
-                <div className="flex justify-between pb-3">
-                  <span className="text-white font-medium">Remote Online Notary (RON)</span>
-                  <span className="text-primary font-semibold">$25 platform fee + state fee</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl text-primary font-semibold mb-6">Availability</h3>
-              <div className="space-y-6">
-                <div className="flex gap-3">
-                  <Clock className="w-6 h-6 text-primary" />
-                  <div>
-                    <h4 className="text-white font-semibold">Hours</h4>
-                    <p className="text-gray-300">Mon–Fri 9 AM – 7 PM<br />Weekends by appointment</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <Users className="w-6 h-6 text-primary" />
-                  <div>
-                    <h4 className="text-white font-semibold">Client Volume</h4>
-                    <p className="text-gray-300">Serving 5–10 clients monthly</p>
-                  </div>
-                </div>
-
-                <p className="text-sm text-gray-400">
-                  Text or call for urgent, same‑day notarization.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <NotaryFees />
 
       {/* WHAT TO BRING */}
       <section className="py-16 md:py-24 bg-card dark:bg-background">
@@ -390,10 +311,10 @@ export default function NotaryPage() {
             <div className="p-6 bg-muted border border-border rounded-lg">
               <h3 className="text-xl font-semibold mb-4">Required Items</h3>
               <ul className="space-y-3 text-foreground">
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Valid government ID</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Unsigned documents</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Witnesses (if required)</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Payment method</li>
+                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Valid government photo ID (driver’s license, passport, or state ID)</li>
+                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Unsigned documents (no blank spaces to fill in later)</li>
+                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Witnesses (if the document requires them)</li>
+                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Payment due at or before the appointment</li>
               </ul>
             </div>
 
@@ -464,9 +385,8 @@ export default function NotaryPage() {
           Nationwide Coverage – ONDO Notary in All 50 States
         </h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto mb-10">
-          We support Remote Online Notarization for clients across the United States,
-          plus mobile and in-office appointments in Utah County. Browse a state hub
-          for local pages — and confirm receiving-party acceptance before you book.
+          We support Remote Online Notarization for clients across the United States.
+          Browse a state hub for local pages — and confirm receiving-party acceptance before you book.
         </p>
         <section className="mt-10" aria-labelledby="browse-states">
           <h3 id="browse-states" className="text-2xl font-semibold text-white mb-3 text-center">
@@ -577,7 +497,7 @@ export default function NotaryPage() {
             Questions about ONDO Notary services?
           </h2>
           <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Visit our Help Center to browse detailed FAQs on notary services, RON, mobile notary, and document signing.
+            Visit our Help Center to browse detailed FAQs on remote online notarization and document signing.
           </p>
           <Button
             asChild
@@ -597,7 +517,7 @@ export default function NotaryPage() {
             Contact ONDO Notary & Booking
           </h2>
           <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
-            Book online, call, or text for urgent same-day notarization in Utah County.
+            Book online, call, or text for urgent same-day remote notarization.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -614,15 +534,19 @@ export default function NotaryPage() {
                 <Mail className="w-6 h-6 text-primary" />
                 <div>
                   <h4 className="text-white font-semibold">Email</h4>
-                  <p className="text-gray-300">{SITE_EMAILS.primary}</p>
+                  <p className="text-gray-300">{SITE_EMAILS.notary}</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
                 <MapPin className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="text-white font-semibold">Office Location</h4>
-                  <p className="text-gray-300">2701 N Thanksgiving Way, Lehi, UT 84043</p>
+                  <h4 className="text-white font-semibold">Based in Lehi</h4>
+                  <p className="text-gray-300">
+                    2701 N Thanksgiving Way, Lehi, UT 84043
+                    <br />
+                    Remote sessions only — we do not take walk-in or mobile travel appointments.
+                  </p>
                 </div>
               </div>
 
@@ -631,9 +555,8 @@ export default function NotaryPage() {
                 <div>
                   <h4 className="text-white font-semibold">Service Area</h4>
                   <p className="text-gray-300">
-                    Remote online notarization across all 50 U.S. states, with mobile and in-office
-                    appointments available in Utah County (Lehi, American Fork, Saratoga Springs,
-                    Orem, Provo).
+                    Remote online notarization across all 50 U.S. states. No in-office visits and no
+                    mobile travel appointments.
                   </p>
                 </div>
               </div>

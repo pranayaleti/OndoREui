@@ -47,10 +47,10 @@ const pages: SearchResult[] = [
   {
     id: 'notary',
     title: 'Notary Services',
-    description: 'Mobile and remote online notary services',
+    description: 'Remote online notary (RON) nationwide',
     href: '/notary',
     category: 'Service',
-    keywords: ['notary', 'notarization', 'remote notary', 'mobile notary', 'signing']
+    keywords: ['notary', 'notarization', 'remote notary', 'ron', 'signing']
   },
   {
     id: 'notary-on-demand',
@@ -146,7 +146,7 @@ const notaryLocationPages: SearchResult[] = [
   ...getNotaryCitiesByStateSlug('utah').map((city) => ({
     id: `notary-${city.stateSlug}-${city.slug}`,
     title: `Remote online notary in ${city.name}, Utah`,
-    description: `Utah RON and mobile notary for ${city.name}`,
+    description: `Utah remote online notary (RON) for ${city.name}`,
     href: notaryCityPath(city.stateSlug, city.slug),
     category: 'Service' as const,
     keywords: ['online notary', 'utah', city.name.toLowerCase()],
@@ -417,11 +417,11 @@ const blogPosts: SearchResult[] = [
   },
   {
     id: 'mobile-notary-utah-county-guide',
-    title: 'Mobile Notary Utah County Guide',
-    description: 'Complete guide to mobile notary services in Utah County',
+    title: 'Notary in Utah County: Remote Online Notarization',
+    description: 'RON for Utah County clients — posted fees, same-day when capacity allows, no mobile travel appointments',
     href: '/blog/mobile-notary-utah-county-guide',
     category: 'Blog',
-    keywords: ['mobile notary', 'utah county', 'notary services']
+    keywords: ['remote online notary', 'utah county', 'ron', 'notary services']
   },
   {
     id: 'modernizing-notary-workflows-integration',

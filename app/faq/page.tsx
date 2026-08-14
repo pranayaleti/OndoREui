@@ -132,7 +132,7 @@ const faqTiles: FAQTile[] = [
   {
     id: "notary",
     name: "Notary & Closings",
-    description: "Remote Online Notarization (RON), mobile notary, document signing, and what to expect.",
+    description: "Remote Online Notarization (RON), document signing, and what to expect.",
     path: "/faq/notary-faqs",
     icon: <FileText className="h-7 w-7" />,
     audience: "All clients",

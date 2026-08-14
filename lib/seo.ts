@@ -202,7 +202,7 @@ export function generateOrganizationJsonLd() {
       { itemOffered: { name: "Home Buying" } },
       { itemOffered: { name: "Home Selling" } },
       { itemOffered: { name: "Home Loans" } },
-      { itemOffered: { name: "Mobile Notary" } },
+      { itemOffered: { name: "Remote Online Notary" } },
     ],
   })
 }
@@ -320,7 +320,7 @@ export function generateRealEstateBusinessJsonLd() {
         { '@type': 'OfferCatalog', name: 'Property Management' },
         { '@type': 'OfferCatalog', name: 'Mortgage Lending' },
         { '@type': 'OfferCatalog', name: 'Home Buying & Selling' },
-        { '@type': 'OfferCatalog', name: 'Mobile Notary' },
+        { '@type': 'OfferCatalog', name: 'Remote Online Notary' },
         { '@type': 'OfferCatalog', name: 'Investment Services' },
       ],
     },
@@ -637,6 +637,13 @@ export type BuildPageMetadataInput = {
   keywords?: string[]
   robots?: Metadata["robots"]
   other?: Record<string, string | number | (string | number)[]>
+  /**
+   * Optional sibling Markdown URL for AI agents. When set, emits
+   * `<link rel="alternate" type="text/markdown">` via Next `alternates.types`.
+   * Use for pages that have a first-party `.md` twin (calculators, properties,
+   * contact) — see `lib/agent-markdown.ts`. Absolute or root-relative.
+   */
+  markdownAlternate?: string
 }
 
 /**
@@ -653,6 +660,7 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
     keywords,
     robots,
     other,
+    markdownAlternate,
   } = input
 
   const canonical =
@@ -662,11 +670,20 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
 
   const ogImage = toAbsoluteUrl(image) ?? `${baseSiteUrl}/modern-office-building.webp`
 
+  const markdownUrl = markdownAlternate
+    ? markdownAlternate.startsWith("http://") || markdownAlternate.startsWith("https://")
+      ? markdownAlternate
+      : `${baseSiteUrl}${markdownAlternate.startsWith("/") ? markdownAlternate : `/${markdownAlternate}`}`
+    : undefined
+
   return {
     title,
     description,
     ...(keywords?.length ? { keywords } : {}),
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      ...(markdownUrl ? { types: { "text/markdown": markdownUrl } } : {}),
+    },
     openGraph: {
       type,
       url: canonical,

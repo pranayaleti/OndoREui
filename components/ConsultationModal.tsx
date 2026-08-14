@@ -79,8 +79,6 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
       isNotary
         ? [
             'Remote Online Notarization (RON)',
-            'Mobile Notary (Utah County)',
-            'In-Office Notary (Lehi)',
             'Loan Signing (Real Estate)',
             'Apostille Assistance (Utah docs)',
             'Witness Services',
@@ -470,7 +468,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
                 <>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                    <span>Remote online or Utah County mobile/in-office options</span>
+                    <span>Remote online notarization nationwide</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-primary mr-2" />

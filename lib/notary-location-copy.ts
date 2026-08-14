@@ -67,7 +67,7 @@ export function buildCityRonIntro(city: NotaryCityRecord, state: RonStateRecord)
 
   if (state.code === "UT") {
     parts.push(
-      `In Utah's Wasatch Front we also offer mobile and in-office notary when you prefer an in-person appointment; RON remains available nationwide.`
+      `RON is available throughout Utah's Wasatch Front and nationwide. We do not offer in-office or mobile travel appointments.`
     )
   }
 
@@ -87,7 +87,7 @@ export function buildStateRonFaqs(state: RonStateRecord): NotaryFaq[] {
     },
     {
       question: `Do I need a local notary office in ${state.name}?`,
-      answer: `No for RON — you can complete the session from anywhere with a supported device and internet. ${state.code === "UT" ? "Utah clients can also book mobile or in-office notary along the Wasatch Front." : "Mobile and in-office notary from ONDO is focused on Utah; elsewhere we specialize in RON."}`,
+      answer: `No. You can complete the session from anywhere with a supported device and internet. ONDO Notary offers remote online notarization only — we do not offer in-office or mobile travel appointments.`,
     },
     {
       question: `What documents can be notarized for ${state.name} clients?`,

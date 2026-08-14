@@ -227,8 +227,8 @@ export default function BlogPage() {
       slug: "designing-property-owner-portal"
     },
     {
-      title: "Mobile Notary in Utah County: Fees, Timing, and How to Book",
-      excerpt: "Transparent pricing, same-day scheduling, and where we travel for on-site notarization in Utah County.",
+      title: "Notary in Utah County: Remote Online Notarization, Fees, and How to Book",
+      excerpt: "RON for Lehi, Provo, Orem, and the rest of Utah County — posted fees, same-day when we can, no mobile travel appointments.",
       author: "ONDO Notary Team",
       date: "January 10, 2025",
       readTime: "6 min read",

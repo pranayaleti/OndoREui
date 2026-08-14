@@ -72,13 +72,13 @@ export function NotaryStatePage({ state, cities }: Props) {
         </section>
 
         {state.code === "UT" ? (
-          <section className="mb-12" aria-labelledby="utah-mobile">
-            <h2 id="utah-mobile" className="text-2xl font-semibold mb-4">
-              Mobile and in-office in Utah
+          <section className="mb-12" aria-labelledby="utah-ron">
+            <h2 id="utah-ron" className="text-2xl font-semibold mb-4">
+              Remote online notary in Utah
             </h2>
             <p className="text-muted-foreground">
-              Along the Wasatch Front we also offer mobile and in-office notary. RON remains available
-              for clients anywhere in Utah and nationwide.
+              RON is available throughout the Wasatch Front and nationwide. We do not offer in-office
+              or mobile travel appointments.
             </p>
           </section>
         ) : null}

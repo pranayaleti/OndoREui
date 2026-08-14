@@ -58,8 +58,6 @@ export const US_STATES = {
 // Notary service types for dynamic content generation
 export const NOTARY_SERVICE_TYPES = [
   "remote-online-notary",
-  "mobile-notary",
-  "in-office-notary",
   "loan-signing-agent",
   "apostille-assistance",
   "real-estate-notary",
@@ -708,16 +706,16 @@ export const NOTARY_SERVICE_AREAS = {
     const stateKeywords = states
       .map(
         (state) =>
-          `remote online notary in ${state.name}, mobile notary ${state.name}, online notary ${state.name}, loan signing agent ${state.name}`
+          `remote online notary in ${state.name}, online notary ${state.name}, loan signing agent ${state.name}`
       )
       .join(", ");
     const cityKeywords = cities
       .map(
         (city) =>
-          `remote online notary in ${city.city}, mobile notary ${city.city}, online notary ${city.city}, loan signing agent ${city.city}, notary ${city.city} ${city.state}`
+          `remote online notary in ${city.city}, online notary ${city.city}, loan signing agent ${city.city}, notary ${city.city} ${city.state}`
       )
       .join(", ");
-    return `remote online notary, nationwide notary, online notarization, loan signing agent, apostille assistance, mobile notary, real estate notary, estate planning notary, power of attorney notarization, I-9 verification, witness services, ${stateNames}, ${cityNames}, ${stateKeywords}, ${cityKeywords}`;
+    return `remote online notary, nationwide notary, online notarization, loan signing agent, apostille assistance, real estate notary, estate planning notary, power of attorney notarization, I-9 verification, witness services, ${stateNames}, ${cityNames}, ${stateKeywords}, ${cityKeywords}`;
   },
 
   /**
@@ -727,7 +725,7 @@ export const NOTARY_SERVICE_AREAS = {
     states: getNormalizedLocations().states.map((state) => ({
       name: state.name,
       slug: state.slug,
-      linkText: `Remote online notary and mobile notarization in ${state.name} – loan signings, real estate, and estate documents.`,
+      linkText: `Remote online notary in ${state.name} – loan signings, real estate, and estate documents.`,
       url: `/notary/${state.slug}/`,
     })),
     cities: getNormalizedLocations().cities.map((city) => ({

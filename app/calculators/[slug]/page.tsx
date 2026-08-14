@@ -1,4 +1,5 @@
 import type { ComponentType } from "react"
+import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 import SEO from "@/components/seo"
@@ -6,6 +7,7 @@ import { generateBreadcrumbJsonLd, generateWebApplicationJsonLd } from "@/lib/se
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import Loading from "@/components/loading"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
+import { CalculatorAgentIntro } from "@/components/calculators/calculator-agent-intro"
 
 const slugToComponent: Record<string, ComponentType> = {
   "owner-vs-self": dynamic(() => import("@/pages/calculators/owner-vs-self-calculator"), {
@@ -72,6 +74,37 @@ export async function generateStaticParams() {
   return Object.keys(slugToComponent).map((slug) => ({ slug }))
 }
 
+/**
+ * Per-slug metadata so each calculator page advertises its Markdown twin via
+ * `<link rel="alternate" type="text/markdown">`. Cloudflare Markdown for Agents
+ * will also convert the HTML shell, but the first-party `.md` at
+ * `/calculators/{slug}.md` carries the formula + worked example that the
+ * client-only widget would otherwise hide.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const detail = CALCULATOR_CATALOG[slug]
+  if (!detail) return {}
+  const canonical = `${SITE_URL}/calculators/${slug}/`
+  return {
+    title: `${detail.name}`,
+    description: detail.description,
+    alternates: {
+      canonical,
+      types: { "text/markdown": `${SITE_URL}/calculators/${slug}.md` },
+    },
+    openGraph: {
+      title: `${detail.name} | ${SITE_NAME}`,
+      description: detail.description,
+      url: canonical,
+    },
+  }
+}
+
 export default async function CalculatorBySlugPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const Component = slugToComponent[slug]
@@ -108,6 +141,10 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={structuredData}
       />
+      {/* Server-rendered so AI agents and no-JS clients see the formula and worked
+          example before the interactive widget hydrates. Progressive enhancement:
+          the client `<Component />` below re-computes with user input. */}
+      <CalculatorAgentIntro slug={slug} />
       <Component />
     </>
   )

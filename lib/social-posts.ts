@@ -40,7 +40,7 @@ export const SOCIAL_POSTS: readonly SocialPost[] = [
     platform: "Notary",
     title: "On-demand notary — same-day when we can",
     excerpt:
-      "Need a notarization today? We try to accommodate same-day when capacity allows. RON nationwide; mobile in Utah.",
+      "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide.",
     url: `${base}/notary/on-demand/`,
     date: "2026-07-14",
   },

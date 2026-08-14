@@ -28,7 +28,7 @@ OndoREui is the public-facing Next.js site for Ondo Real Estate. It serves:
 | `/property-management` | Full-service property management for investors |
 | `/investments` | Real estate investment opportunities |
 | `/calculators` | Free mortgage and investment calculators |
-| `/notary` | Remote Online Notary (RON) and mobile notary |
+| `/notary` | Remote Online Notary (RON) nationwide |
 | `/buy-sell` | Combined buy-sell transaction services |
 | `/locations` | Service area — Utah cities |
 | `/neighborhoods` | Neighborhood guides by city |

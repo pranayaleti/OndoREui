@@ -182,6 +182,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/manifest.json" />
         <link rel="alternate" type="text/plain" title="LLM brief (llms.txt)" href={`${SITE_URL.replace(/\/$/, "")}/llms.txt`} />
         <link rel="alternate" type="application/json" title="Structured LLM index" href={`${SITE_URL.replace(/\/$/, "")}/llms.json`} />
+        {/* Homepage Markdown twin (mirrors `/`) and the section-grouped sitemap. */}
+        <link rel="alternate" type="text/markdown" title="Homepage (Markdown)" href={`${SITE_URL.replace(/\/$/, "")}/index.md`} />
+        <link rel="alternate" type="text/markdown" title="Markdown sitemap" href={`${SITE_URL.replace(/\/$/, "")}/sitemap.md`} />
+        {/* RFC 8288 discovery link so agents can find /llms.txt from the HTML shell. */}
+        <link rel="describedby" type="text/plain" href={`${SITE_URL.replace(/\/$/, "")}/llms.txt`} />
         <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="mobile-web-app-capable" content="yes" />

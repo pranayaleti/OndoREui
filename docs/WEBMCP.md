@@ -40,3 +40,7 @@ Descriptions are written so agents know when to use each tool and what to expect
 - [WebMCP EPP (Chrome blog)](https://developer.chrome.com/blog/webmcp-epp)
 - [W3C WebMCP draft](https://webmachinelearning.github.io/webmcp/)
 - [Declarative explainer (GitHub)](https://github.com/webmachinelearning/webmcp/pull/76)
+
+## Related
+
+- [Agent readability runbook](./AGENT_READABILITY.md) — content negotiation, Markdown twins, Cloudflare Markdown for Agents, and how to measure crawler traffic in server logs.

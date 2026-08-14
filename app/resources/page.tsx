@@ -149,9 +149,9 @@ const notaryFAQs = [
       "Yes. Remote Online Notarization lets us notarize for clients located anywhere in the U.S., as long as the receiving party accepts RON documents (most modern lenders and employers do). We regularly support out‑of‑state real estate closings, employment forms, and business agreements.",
   },
   {
-    question: "What’s the difference between mobile, in‑office, and online notarization?",
+    question: "What’s the difference between mobile and online notarization?",
     answer:
-      "In‑office means you come to our Lehi office. Mobile means we travel to you in Utah County. Remote Online Notarization (RON) happens completely online via secure video. All three are performed by the same commissioned notary; we’ll recommend the best option based on urgency, location, and document type.",
+      "ONDO Notary offers Remote Online Notarization (RON) only — a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
   },
 ]
 
@@ -357,7 +357,7 @@ export default function ResourcesPage() {
                 <CardHeader>
                   <CardTitle>Notary & Closings</CardTitle>
                   <CardDescription>
-                    Remote online notarization (RON), mobile notary in Utah County, and loan signing support.
+                    Remote online notarization (RON) nationwide and loan signing support. No mobile travel appointments.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2 text-sm text-foreground/80">

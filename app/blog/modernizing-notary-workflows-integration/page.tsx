@@ -9,13 +9,13 @@ const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/modernizing-notary-workflows-integration";
 const title = "Modernizing Legal Workflows: Integrating Remote Online Notary Services";
-const description = "How we integrated seamless booking for mobile and remote online notary services directly into the Ondo platform.";
+const description = "How we integrated seamless booking for remote online notary (RON) services directly into the Ondo platform.";
 const author = "Product Team";
 
 const keywords = [
   "Remote Online Notary (RON)",
   "Notary Booking System",
-  "Utah Mobile Notary",
+  "Utah Remote Notary",
   "Digital Legal Services",
   "React Scheduling Components"
 ];
@@ -96,13 +96,13 @@ export default function ModernizingNotaryWorkflows() {
           {/* Gestalt: quick anchors for the story */}
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
             <CardSpot title="Pain" body="Signatures were the offline bottleneck in an otherwise digital journey." />
-            <CardSpot title="Solution" body="One booking surface for RON, mobile, and office visits, routed by need." />
+            <CardSpot title="Solution" body="One booking surface for remote online notarization, routed by document type." />
             <CardSpot title="Outcome" body="Faster closings, fewer reschedules, clearer audit trails for lenders." />
           </div>
 
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
-              Real estate transactions are 90% digital—until you need a signature. At <strong>Ondo</strong>, we bridged this gap by integrating <strong>Remote Online Notary (RON)</strong> and mobile notary booking directly into our platform.
+              Real estate transactions are 90% digital—until you need a signature. At <strong>Ondo</strong>, we bridged this gap by integrating <strong>Remote Online Notary (RON)</strong> booking directly into our platform.
             </p>
 
             <h2>The Problem: The "Last Mile" of Real Estate</h2>
@@ -112,7 +112,7 @@ export default function ModernizingNotaryWorkflows() {
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">
               <KeyLine title="Friction point" detail="Signatures pull clients out of flow, causing delays and drop-off." />
-              <KeyLine title="Design principle" detail="Keep user in one surface; adapt the fulfillment (RON vs mobile) under the hood." />
+              <KeyLine title="Design principle" detail="Keep the user in one surface; fulfill by secure video (RON)." />
             </div>
 
             <h2>The Solution: <code>NotaryBooking</code> Component</h2>
@@ -120,13 +120,13 @@ export default function ModernizingNotaryWorkflows() {
               We built a dedicated booking interface located at <code>components/notary-booking.tsx</code>. It abstracts the complexity of coordination into a simple 3-step flow:
             </p>
             <ol>
-              <li><strong>Service Selection</strong>: Users choose between &quot;Remote Online,&quot; &quot;Mobile In-Person,&quot; or &quot;Office Visit.&quot;</li>
+              <li><strong>Service Selection</strong>: Users request a remote online (RON) session.</li>
               <li><strong>Scheduling</strong>: Integrated calendar logic allows users to pick available slots.</li>
               <li><strong>Confirmation</strong>: Automated email triggers to both the client and our notary team (via <code>SITE_EMAILS</code>).</li>
             </ol>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-3">
-              <KeyLine title="Single surface" detail="One dialog, three fulfillment modes—chosen by user intent." />
+              <KeyLine title="Single surface" detail="One dialog for RON — chosen by user intent." />
               <KeyLine title="State clarity" detail="Calendar first, then confirmation; no hidden extra steps." />
               <KeyLine title="Ops handoff" detail="Email routing makes the right specialist respond instantly." />
             </div>
@@ -147,16 +147,16 @@ export default function ModernizingNotaryWorkflows() {
 
             <h2>Service Areas & Local SEO</h2>
             <p>
-              We mapped our service areas specifically to Utah County logic. Our <code>notary-service-areas.ts</code> file acts as a source of truth for:
+              We mapped notary coverage to state and city hubs for local SEO. Our <code>notary-service-areas.ts</code> file acts as a source of truth for:
             </p>
             <ul>
-              <li><strong>Mobile Service Range</strong>: Lehi, Provo, Orem, American Fork.</li>
-              <li><strong>Pricing Zones</strong>: Calculating travel fees based on distance from our Lehi headquarters.</li>
+              <li><strong>RON coverage</strong>: Nationwide video sessions, including Utah County cities such as Lehi, Provo, Orem, and American Fork.</li>
+              <li><strong>Posted fees</strong>: Remote notarial acts at the Utah RON maximum, with same-day and after-hours add-ons disclosed before booking.</li>
             </ul>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">
-              <CardSpot title="Local SEO" body="City targeting keeps the calendar filled with nearby appointments." />
-              <CardSpot title="Operational clarity" body="Pricing zones set travel fees upfront to avoid surprises." />
+              <CardSpot title="Local SEO" body="City hubs explain RON for nearby clients without promising a travel appointment." />
+              <CardSpot title="Operational clarity" body="Posted RON fees avoid surprise trip charges." />
             </div>
 
             <h2>Beyond Closings: Estate Planning & Loan Signing</h2>
@@ -191,7 +191,7 @@ export default function ModernizingNotaryWorkflows() {
             <div className="mt-12 p-6 bg-muted rounded-lg">
               <h3 className="text-xl font-bold mb-4">Summary</h3>
               <p className="mb-0">
-                Ondo Real Estate integrates Remote Online Notary (RON) and mobile notary scheduling directly into its React-based platform. The <code>NotaryBooking</code> component simplifies the &quot;last mile&quot; of real estate transactions by allowing users to schedule certified notaries for loan signings, estate planning, and I-9 verification. The system uses a specialized routing logic to direct requests to the appropriate department and leverages <code>ConsultationModal</code> for a consistent UX across the application.
+                Ondo Real Estate integrates Remote Online Notary (RON) scheduling directly into its React-based platform. The <code>NotaryBooking</code> component simplifies the &quot;last mile&quot; of real estate transactions by allowing users to schedule certified remote sessions for loan signings, estate planning, and I-9 verification. The system uses a specialized routing logic to direct requests to the appropriate department and leverages <code>ConsultationModal</code> for a consistent UX across the application.
               </p>
             </div>
           </div>

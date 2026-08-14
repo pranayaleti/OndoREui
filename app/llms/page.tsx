@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     "Machine-readable briefs and structured data for AI assistants and crawlers covering Ondo Real Estate — Utah brokerage, mortgages, property management, and notary.",
   alternates: {
     canonical: `${SITE_URL}/llms/`,
+    // Point discovery clients at every machine-readable format from one place.
+    types: {
+      "text/plain": `${SITE_URL}/llms.txt`,
+      "text/markdown": `${SITE_URL}/sitemap.md`,
+      "application/json": `${SITE_URL}/llms.json`,
+    },
   },
 }
 
@@ -50,6 +56,27 @@ const RESOURCE_LINKS: Array<{
     title: "Site overview (Markdown)",
     description: "Human- and machine-friendly Markdown outline of the marketing site.",
     href: "/index.md",
+    format: "text/markdown",
+  },
+  {
+    title: "Markdown sitemap",
+    description:
+      "Section-grouped index of every public page in Markdown. Links to first-party `.md` twins for JS-heavy calculators, properties, and contact.",
+    href: "/sitemap.md",
+    format: "text/markdown",
+  },
+  {
+    title: "Properties brief (Markdown)",
+    description:
+      "How to search Utah rentals, what each listing returns, and the WebMCP search_available_properties tool.",
+    href: "/properties.md",
+    format: "text/markdown",
+  },
+  {
+    title: "Contact brief (Markdown)",
+    description:
+      "Phone, address, hours, topic-specific email channels, and the WebMCP contact tools (`get_company_contact_info`, `submit_contact_lead`).",
+    href: "/contact.md",
     format: "text/markdown",
   },
 ]

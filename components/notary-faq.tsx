@@ -1,6 +1,7 @@
 "use client"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { NOTARY_PRICING_SUMMARY } from "@/lib/notary-fees"
 
 export function NotaryFAQ() {
   const itemClass =
@@ -25,8 +26,8 @@ export function NotaryFAQ() {
           Do you serve all 50 states?
         </AccordionTrigger>
         <AccordionContent className="text-foreground/70 leading-relaxed">
-          Yes—remote online notarization is available in every U.S. state. For clients in Utah
-          County, we also offer mobile and in-office appointments.
+          Yes—remote online notarization is available in every U.S. state. We do not offer in-office
+          or mobile travel appointments.
         </AccordionContent>
       </AccordionItem>
       
@@ -98,9 +99,7 @@ export function NotaryFAQ() {
           What do you charge?
         </AccordionTrigger>
         <AccordionContent className="text-foreground/70 leading-relaxed">
-          State-regulated notarial acts are $10 per stamp. RON sessions include a platform fee
-          (from $25) plus state fees. Mobile visits include a travel fee, and loan signings typically
-          range from $75–$200. You’ll get a clear quote before we book.
+          {NOTARY_PRICING_SUMMARY}
         </AccordionContent>
       </AccordionItem>
     </Accordion>

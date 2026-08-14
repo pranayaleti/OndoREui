@@ -59,6 +59,7 @@ const STATIC_PATHS: string[] = [
   "/blog/ultimate-guide-becoming-utah-landlord-2026",
   "/llms.txt",
   "/llms-full.txt",
+  "/sitemap.md",
 ]
 
 // Auto-include every calculator slug. Adding a new calculator (see

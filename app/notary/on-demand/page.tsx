@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Clock, CheckCircle, Video, MapPin, Mail, Phone } from "lucide-react"
+import { Clock, CheckCircle, Video, Mail, Phone } from "lucide-react"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Button } from "@/components/ui/button"
@@ -12,12 +12,12 @@ import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
 export const metadata: Metadata = {
   title: "On-Demand Notary — Same-Day When We Can | ONDO Notary",
   description:
-    "On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows — RON nationwide and mobile notary in Utah.",
+    "On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows — remote online (RON) nationwide.",
   alternates: { canonical: `${SITE_URL}/notary/on-demand/` },
   openGraph: {
     title: "On-Demand Notary — Same-Day When We Can | ONDO Notary",
     description:
-      "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide; mobile in Utah.",
+      "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide.",
     url: `${SITE_URL}/notary/on-demand/`,
     images: [
       {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "On-Demand Notary — Same-Day When We Can",
-    description: "Best-effort same-day notarization. RON nationwide; mobile in Utah.",
+    description: "Best-effort same-day notarization. Remote online (RON) nationwide.",
     images: [`${SITE_URL}/modern-office-building.webp`],
   },
 }
@@ -41,7 +41,7 @@ export default function OnDemandNotaryPage() {
     <main className="min-h-screen">
       <SEO
         title="On-Demand Notary — Same-Day When We Can | ONDO Notary"
-        description="On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows — RON nationwide and mobile notary in Utah."
+        description="On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows — remote online (RON) nationwide."
         pathname="/notary/on-demand"
         image={`${SITE_URL}/modern-office-building.webp`}
         keywords={[
@@ -50,7 +50,6 @@ export default function OnDemandNotaryPage() {
           "same day notary Utah",
           "urgent notary",
           "remote online notary",
-          "mobile notary Utah",
         ]}
         jsonLd={[
           generateBreadcrumbJsonLd([
@@ -61,7 +60,7 @@ export default function OnDemandNotaryPage() {
           generateServiceJsonLd({
             name: "On-Demand Notary",
             description:
-              "On-demand notarization with best-effort same-day scheduling when capacity allows. Remote Online Notarization nationwide; mobile notary in Utah.",
+              "On-demand notarization with best-effort same-day scheduling when capacity allows. Remote Online Notarization nationwide.",
             serviceType: "NotaryPublic",
             areaServed: "United States",
             offers: {
@@ -114,8 +113,8 @@ export default function OnDemandNotaryPage() {
               },
               {
                 step: "3",
-                title: "RON or mobile",
-                body: "Complete via remote online notarization nationwide, or mobile/in-office in our Utah area.",
+                title: "Complete RON",
+                body: "Join a secure video session from anywhere in the U.S. — no travel required.",
               },
             ].map((item) => (
               <li key={item.step} className="text-center">
@@ -156,10 +155,6 @@ export default function OnDemandNotaryPage() {
             </li>
             <li className="flex gap-2">
               <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-              Mobile travel depends on location within our Utah service area
-            </li>
-            <li className="flex gap-2">
-              <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
               Evenings and weekends are limited and not guaranteed
             </li>
             <li className="flex gap-2">
@@ -170,35 +165,21 @@ export default function OnDemandNotaryPage() {
         </div>
       </section>
 
-      {/* RON vs mobile */}
       <section className="py-16 bg-card border-y border-border">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-10">RON vs mobile</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-lg border border-primary bg-background">
-              <Video className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Remote Online (RON)</h3>
-              <p className="text-sm text-foreground/70 mb-4">
-                Best for most urgent needs — available nationwide via secure video. No travel required.
-              </p>
-              <ul className="text-sm text-foreground/80 space-y-1">
-                <li>• All 50 U.S. states</li>
-                <li>• Government ID verification</li>
-                <li>• Ideal for many real estate & general docs</li>
-              </ul>
-            </div>
-            <div className="p-6 rounded-lg border border-border bg-muted/40">
-              <MapPin className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Mobile / in-office (Utah)</h3>
-              <p className="text-sm text-foreground/70 mb-4">
-                We come to you or meet at our Lehi-area office when in-person is required or preferred.
-              </p>
-              <ul className="text-sm text-foreground/80 space-y-1">
-                <li>• Utah County & nearby Wasatch Front</li>
-                <li>• Loan packages & wet-ink needs</li>
-                <li>• Travel fee may apply for mobile</li>
-              </ul>
-            </div>
+          <h2 className="text-3xl font-bold text-center mb-10">Remote online only</h2>
+          <div className="max-w-xl mx-auto p-6 rounded-lg border border-primary bg-background">
+            <Video className="h-8 w-8 text-primary mb-3" />
+            <h3 className="text-xl font-semibold mb-2">Remote Online (RON)</h3>
+            <p className="text-sm text-foreground/70 mb-4">
+              Available nationwide via secure video. No office visit and no mobile travel appointments.
+            </p>
+            <ul className="text-sm text-foreground/80 space-y-1">
+              <li>• All 50 U.S. states</li>
+              <li>• Government ID verification</li>
+              <li>• Ideal for many real estate & general docs</li>
+              <li>• Confirm the receiving party accepts RON before you book</li>
+            </ul>
           </div>
         </div>
       </section>
