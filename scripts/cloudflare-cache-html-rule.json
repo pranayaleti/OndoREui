@@ -1,0 +1,26 @@
+{
+  "expected_zone_name": "ondorealestate.com",
+  "rule": {
+    "ref": "cache-html-www-apex",
+    "description": "Cache static HTML on www and apex (504 mitigation)",
+    "expression": "(http.host in {\"www.ondorealestate.com\" \"ondorealestate.com\"}) and not http.host in {\"api.ondorealestate.com\" \"app.ondorealestate.com\"} and http.request.method in {\"GET\" \"HEAD\"} and not starts_with(http.request.uri.path, \"/api/\")",
+    "action": "set_cache_settings",
+    "enabled": true,
+    "action_parameters": {
+      "cache": true,
+      "edge_ttl": {
+        "mode": "override_origin",
+        "default": 7200,
+        "status_code_ttl": [
+          { "status_code_range": { "from": 200, "to": 299 }, "value": 7200 },
+          { "status_code_range": { "from": 300, "to": 399 }, "value": 3600 },
+          { "status_code_range": { "from": 400, "to": 499 }, "value": 0 },
+          { "status_code_range": { "from": 500 }, "value": -1 }
+        ]
+      },
+      "browser_ttl": { "mode": "respect_origin" },
+      "serve_stale": { "disable_stale_while_updating": false },
+      "origin_error_page_passthru": false
+    }
+  }
+}

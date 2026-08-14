@@ -57,6 +57,8 @@ const STATIC_PATHS: string[] = [
   "/compare-utah-property-managers",
   "/whats-my-home-worth",
   "/blog/ultimate-guide-becoming-utah-landlord-2026",
+  "/llms.txt",
+  "/llms-full.txt",
 ]
 
 // Auto-include every calculator slug. Adding a new calculator (see

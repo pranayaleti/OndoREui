@@ -1,0 +1,8 @@
+# Pointer only — not a product or legal page
+
+Crawlers that request /loans/heloc/index.txt should use these URLs instead.
+Ondo Real Estate does not publish a per-city index.txt tree.
+
+- HELOC / HELOAN HTML: https://www.ondorealestate.com/loans/
+- Site-wide AI brief (includes required disclosures): https://www.ondorealestate.com/llms.txt
+- Extended AI brief: https://www.ondorealestate.com/llms-full.txt

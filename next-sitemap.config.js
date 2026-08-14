@@ -40,6 +40,7 @@ const AGENT_DISCOVERY_PATHS = [
   '/llms.json',
   '/index.md',
   '/.well-known/agents.json',
+  '/loans/heloc/index.txt',
 ]
 const ROBOTS_COMMENT_RESOURCES = [...AGENT_DISCOVERY_PATHS, '/humans.txt', '/.well-known/security.txt']
 
@@ -154,12 +155,12 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/llms.txt', '/llms-full.txt', '/.well-known/llms.txt', '/'],
         disallow: ROBOTS_DISALLOW,
       },
       ...AI_CRAWLER_AGENTS.map((userAgent) => ({
         userAgent,
-        allow: '/',
+        allow: ['/llms.txt', '/llms-full.txt', '/.well-known/llms.txt', '/'],
         disallow: ROBOTS_DISALLOW,
       })),
     ],
