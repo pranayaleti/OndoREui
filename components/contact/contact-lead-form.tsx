@@ -10,8 +10,18 @@ import { SITE_PHONE } from "@/lib/site"
 import { submitContactLead, type ContactLeadSource } from "@/lib/leads-api"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { useAntiSpam } from "@/lib/anti-spam"
+import {
+  isAgentInvokedSubmit,
+  respondToAgent,
+  toolEventMatches,
+  webmcpFormAttrs,
+  webmcpParamAttrs,
+} from "@/lib/webmcp-attrs"
 import { CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
+
+const CONTACT_TOOL_DESCRIPTION =
+  "Submit a contact or lead inquiry to Ondo Real Estate for property management, investments, or leasing in Utah. Requires name and email; optional phone and message."
 
 const DEFAULT_SOURCE: ContactLeadSource = "website"
 
@@ -33,7 +43,23 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [agentFormActive, setAgentFormActive] = useState(false)
   const { honeypotProps, gate } = useAntiSpam()
+
+  useEffect(() => {
+    const onActivated = (event: Event) => {
+      if (toolEventMatches(event, WEBMCP_TOOL_NAME)) setAgentFormActive(true)
+    }
+    const onCancel = (event: Event) => {
+      if (toolEventMatches(event, WEBMCP_TOOL_NAME)) setAgentFormActive(false)
+    }
+    window.addEventListener("toolactivated", onActivated)
+    window.addEventListener("toolcancel", onCancel)
+    return () => {
+      window.removeEventListener("toolactivated", onActivated)
+      window.removeEventListener("toolcancel", onCancel)
+    }
+  }, [])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,39 +68,56 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const nativeEvent = e.nativeEvent
+    const agentInvoked = isAgentInvokedSubmit(nativeEvent)
+    const data = new FormData(e.currentTarget)
+    const name = String(data.get("name") ?? formData.name).trim()
+    const email = String(data.get("email") ?? formData.email).trim()
+    const phone = String(data.get("phone") ?? formData.phone).trim()
+    const message = String(data.get("message") ?? formData.message).trim()
+    const honeypotFilled = String(data.get(honeypotProps.name) ?? "").trim() !== ""
+
     setIsSubmitting(true)
     setSubmitStatus(null)
     setErrorMessage(null)
 
-    // Bot signal: honeypot filled OR submit < minDwell after mount. Render
-    // the success state so bots can't probe for "did the gate fire?".
-    if (gate.isLikelyBot()) {
-      gate.recordAttempt()
+    const work = (async () => {
+      // Bot signal: honeypot filled, or a non-agent submit that arrives
+      // faster than minDwell. Render success so bots can't probe the gate.
+      // Agent fills can be instant, so skip the dwell check when Chrome
+      // marks the submit as agentInvoked.
+      if (honeypotFilled || (!agentInvoked && gate.isLikelyBot())) {
+        gate.recordAttempt()
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", phone: "", message: "" })
+        return { status: "accepted" as const }
+      }
+
+      const attribution = getAttributionPayloadForApi()
+      const result = await submitContactLead({
+        name,
+        email,
+        ...(phone && { phone }),
+        ...(message && { message }),
+        source,
+        ...(attribution && { attribution }),
+      })
+
+      if ("error" in result) {
+        setSubmitStatus("error")
+        setErrorMessage(result.error)
+        return result
+      }
       setSubmitStatus("success")
       setFormData({ name: "", email: "", phone: "", message: "" })
-      setIsSubmitting(false)
-      return
-    }
+      setAgentFormActive(false)
+      return result
+    })()
 
-    const attribution = getAttributionPayloadForApi()
-    const result = await submitContactLead({
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      ...(formData.phone.trim() && { phone: formData.phone.trim() }),
-      ...(formData.message.trim() && { message: formData.message.trim() }),
-      source,
-      ...(attribution && { attribution }),
-    })
-
-    if ("error" in result) {
-      setSubmitStatus("error")
-      setErrorMessage(result.error)
-    } else {
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", phone: "", message: "" })
-    }
+    respondToAgent(nativeEvent, work)
+    await work
     setIsSubmitting(false)
   }
 
@@ -87,8 +130,8 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
     try {
       modelContext.registerTool({
         name: WEBMCP_TOOL_NAME,
-        description:
-          "Submit a contact or lead inquiry to Ondo Real Estate for property management, investments, or leasing in Utah. Requires name and email; optional phone and message. Use when the user wants to get in touch with Ondo. Always request user confirmation before submitting.",
+        title: "Contact Ondo",
+        description: CONTACT_TOOL_DESCRIPTION,
         inputSchema: {
           type: "object",
           properties: {
@@ -99,6 +142,7 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
           },
           required: ["name", "email"],
         },
+        annotations: { readOnlyHint: false, untrustedContentHint: false },
         async execute(
           input: { name?: string; email?: string; phone?: string; message?: string },
           client: { requestUserInteraction?: (cb: () => Promise<boolean>) => Promise<boolean> }
@@ -186,12 +230,8 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
 
         <form
           onSubmit={handleSubmit}
-          className="grid gap-4"
-          {...({
-            toolname: "submit_contact_lead",
-            tooldescription:
-              "Submit a contact or lead inquiry to Ondo Real Estate. Use to send a message for property management, investments, or leasing in Utah. Requires name and email; optional phone and message. Do not use for automated bulk submissions.",
-          } as Record<string, string>)}
+          className={`grid gap-4${agentFormActive ? " tool-form-active" : ""}`}
+          {...webmcpFormAttrs(WEBMCP_TOOL_NAME, CONTACT_TOOL_DESCRIPTION)}
         >
           {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
           <input {...honeypotProps} />
@@ -204,7 +244,7 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
               onChange={handleInputChange}
               placeholder={t('contactForm.namePlaceholder')}
               required
-              {...({ toolparamdescription: "Full name of the person submitting the inquiry" } as Record<string, string>)}
+              {...webmcpParamAttrs("Full name of the person submitting the inquiry")}
             />
           </div>
           <div className="space-y-2">
@@ -217,7 +257,7 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
               placeholder={t('contactForm.emailPlaceholder')}
               type="email"
               required
-              {...({ toolparamdescription: "Email address for reply (required)" } as Record<string, string>)}
+              {...webmcpParamAttrs("Email address for reply (required)")}
             />
           </div>
           <div className="space-y-2">
@@ -229,7 +269,7 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
               onChange={handleInputChange}
               placeholder={t('contactForm.phonePlaceholder')}
               type="tel"
-              {...({ toolparamdescription: "Phone number (optional)" } as Record<string, string>)}
+              {...webmcpParamAttrs("Phone number (optional)")}
             />
           </div>
           <div className="space-y-2">
@@ -241,7 +281,7 @@ export function ContactLeadForm({ source = DEFAULT_SOURCE, prefillMessage = "" }
               value={formData.message}
               onChange={handleInputChange}
               placeholder={t('contactForm.messagePlaceholder')}
-              {...({ toolparamdescription: "Message or question for the team (optional)" } as Record<string, string>)}
+              {...webmcpParamAttrs("Message or question for the team (optional)")}
             />
           </div>
           <Button type="submit" disabled={isSubmitting} className="w-full">

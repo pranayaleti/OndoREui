@@ -19,6 +19,7 @@ export const PRERENDER_URLS: string[] = [
 
 /** Primary nav – prefetch eagerly as soon as the rule is seen. */
 export const EAGER_PREFETCH_URLS: string[] = [
+  "/properties",
   "/loans",
   "/about",
 ]

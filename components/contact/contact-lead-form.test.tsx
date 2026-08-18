@@ -10,6 +10,16 @@ vi.mock("@/lib/leads-api", async () => {
 import { submitContactLead } from "@/lib/leads-api"
 
 describe("ContactLeadForm", () => {
+  it("exposes declarative WebMCP attributes on the form", () => {
+    const { container } = render(<ContactLeadForm />)
+    const form = container.querySelector("form")
+    expect(form).toHaveAttribute("toolname", "submit_contact_lead")
+    expect(form).toHaveAttribute("tooldescription")
+    expect(form).not.toHaveAttribute("toolautosubmit")
+    expect(screen.getByLabelText(/name/i)).toHaveAttribute("toolparamdescription")
+    expect(screen.getByLabelText(/email/i)).toHaveAttribute("toolparamdescription")
+  })
+
   it("renders with an empty message field when used without props (backward-compatible default)", () => {
     render(<ContactLeadForm />)
     expect(screen.getByLabelText(/message/i)).toHaveValue("")

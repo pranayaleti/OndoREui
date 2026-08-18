@@ -11,6 +11,7 @@ import { saveUserInfo } from "@/lib/session-utils"
 import { sanitizeInput, isValidZipCode, RateLimiter } from "@/lib/security"
 import { SearchFormData } from "@/lib/types"
 import { findCityByZip, toCitySlug } from "@/lib/utah-cities"
+import { webmcpFormAttrs, webmcpParamAttrs } from "@/lib/webmcp-attrs"
 
 const searchRateLimiter = new RateLimiter(3, 30000) // 3 attempts per 30 seconds
 
@@ -32,7 +33,7 @@ export function SearchForm() {
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError("")
 
@@ -47,9 +48,9 @@ export function SearchForm() {
       return
     }
 
-    // Sanitize and validate ZIP code
-    const sanitizedZipCode = sanitizeInput(formData.zipCode)
-    if (!sanitizedZipCode || !isValidZipCode(sanitizedZipCode)) {
+    const data = new FormData(e.currentTarget)
+    const submittedZip = sanitizeInput(String(data.get("zip") ?? formData.zipCode))
+    if (!submittedZip || !isValidZipCode(submittedZip)) {
       setError("Please enter a valid ZIP code")
       toast({
         title: "Invalid ZIP Code",
@@ -62,11 +63,11 @@ export function SearchForm() {
     setIsLoading(true)
 
     // Look up city from full utah-cities database
-    const city = findCityByZip(sanitizedZipCode)
+    const city = findCityByZip(submittedZip)
 
     // Save the ZIP code to session storage
-    saveUserInfo(sanitizedZipCode)
-    sessionStorage.setItem("property-match-zipcode", sanitizedZipCode)
+    saveUserInfo(submittedZip)
+    sessionStorage.setItem("property-match-zipcode", submittedZip)
 
     if (city) {
       const slug = toCitySlug(city.name)
@@ -84,16 +85,29 @@ export function SearchForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-sm items-center gap-2">
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full max-w-sm items-center gap-2"
+      {...webmcpFormAttrs(
+        "search_city_by_zip",
+        "Look up Ondo property-management coverage for a Utah ZIP code and open that city page.",
+        { autoSubmit: true },
+      )}
+    >
       <Input
         type="text"
+        name="zip"
         placeholder="Enter ZIP code (e.g., 84043)"
         value={formData.zipCode}
         onChange={handleZipCodeChange}
         className="flex-1"
         maxLength={5}
+        inputMode="numeric"
+        autoComplete="postal-code"
+        required
         disabled={isLoading}
         aria-describedby={error ? "zip-error" : undefined}
+        {...webmcpParamAttrs("5-digit Utah ZIP code (e.g. 84043)", "zip_code")}
       />
       <Button type="submit" disabled={isLoading}>
         {isLoading ? "Searching..." : "Search"}

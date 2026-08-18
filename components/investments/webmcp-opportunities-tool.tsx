@@ -31,6 +31,7 @@ export function WebMCPOpportunitiesTool() {
     try {
       modelContext.registerTool({
         name: TOOL_LIST,
+        title: "List investments",
         description:
           "List current commercial real estate and fractional investment opportunities from Ondo Real Estate in Utah. Returns open, coming-soon, and recently funded deals with slug, title, location, asset class, min investment, target return, hold period, status, and description. Use when the user asks about available investments or deals.",
         inputSchema: {
@@ -44,7 +45,7 @@ export function WebMCPOpportunitiesTool() {
           },
           required: [],
         },
-        annotations: { readOnlyHint: true },
+        annotations: { readOnlyHint: true, untrustedContentHint: true },
         async execute(input: { status?: string }) {
           const opportunities = await fetchOpportunitiesClient()
           const status = input?.status as "open" | "coming-soon" | "fully-funded" | undefined
@@ -75,6 +76,7 @@ export function WebMCPOpportunitiesTool() {
     try {
       modelContext.registerTool({
         name: TOOL_GET,
+        title: "Investment details",
         description:
           "Get full details of a single investment opportunity by its slug. Use after list_investment_opportunities when the user wants details on a specific deal (e.g. Lehi Tech Corridor, Provo Student Housing). Returns title, location, asset class, min investment, target return, hold period, description, highlights, risk factors, and status.",
         inputSchema: {
@@ -87,7 +89,7 @@ export function WebMCPOpportunitiesTool() {
           },
           required: ["slug"],
         },
-        annotations: { readOnlyHint: true },
+        annotations: { readOnlyHint: true, untrustedContentHint: true },
         async execute(input: { slug?: string }) {
           const slug = input?.slug?.trim()
           if (!slug) {

@@ -24,6 +24,8 @@ Results are capped at 100 rows per call. Each row returns id, title, city, addre
 - **Page**: https://www.ondorealestate.com/properties/
 - **Data feed**: https://www.ondorealestate.com/api/properties/public/ (routed to the Ondo backend at deploy time)
 
+The HTML search box on the same page is the declarative tool `search_listings_by_text` (toolautosubmit). Prefer `search_available_properties` when the agent has city, bedroom, or price filters.
+
 See the [WebMCP alignment notes](https://www.ondorealestate.com/docs/WEBMCP.md) for the full tool schema.
 
 ## For binding decisions

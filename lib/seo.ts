@@ -11,6 +11,7 @@ import {
   SITE_EMAILS,
   SITE_BRAND_SHORT,
   SITE_GEO,
+  SITE_CALENDLY_URL,
 } from "./site"
 import { testimonials } from "./testimonials"
 
@@ -324,6 +325,32 @@ export function generateRealEstateBusinessJsonLd() {
         { '@type': 'OfferCatalog', name: 'Investment Services' },
       ],
     },
+    potentialAction: [
+      {
+        '@type': 'CommunicateAction',
+        name: 'Contact Ondo Real Estate',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${SITE_URL.replace(/\/$/, "")}/contact`,
+          actionPlatform: [
+            'https://schema.org/DesktopWebPlatform',
+            'https://schema.org/MobileWebPlatform',
+          ],
+        },
+      },
+      {
+        '@type': 'ReserveAction',
+        name: 'Schedule a call',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: SITE_CALENDLY_URL,
+          actionPlatform: [
+            'https://schema.org/DesktopWebPlatform',
+            'https://schema.org/MobileWebPlatform',
+          ],
+        },
+      },
+    ],
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -690,7 +717,7 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
       siteName: SITE_NAME,
       title,
       description,
-      images: [{ url: ogImage }],
+      images: [{ url: ogImage, alt: `${SITE_NAME}: ${title}` }],
     },
     twitter: {
       card: "summary_large_image",

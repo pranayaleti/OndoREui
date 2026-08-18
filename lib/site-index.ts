@@ -99,6 +99,25 @@ const AGENT_ACTIONS: AgentAction[] = [
     description:
       "Calculate monthly principal-and-interest mortgage payments from principal, annual rate, and term.",
   },
+  {
+    path: "/properties",
+    toolName: "search_available_properties",
+    access: "read-only",
+    description:
+      "Search current Utah rental listings by city, bedrooms, max rent, or free text.",
+  },
+  {
+    path: "/properties",
+    toolName: "search_listings_by_text",
+    access: "read-only",
+    description: "Filter or open listings from the on-page search box by city, address, or name.",
+  },
+  {
+    path: "/",
+    toolName: "lookup_utah_zip_services",
+    access: "read-only",
+    description: "Look up Ondo services available for a Utah ZIP code along the Wasatch Front.",
+  },
 ]
 
 const AGENT_GUIDANCE = [

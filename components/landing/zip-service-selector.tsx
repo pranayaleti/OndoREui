@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { findCityByZip, toCitySlug } from "@/lib/utah-cities"
 import { sanitizeInput, isValidZipCode, RateLimiter } from "@/lib/security"
 import { saveUserInfo } from "@/lib/session-utils"
+import { webmcpFormAttrs, webmcpParamAttrs } from "@/lib/webmcp-attrs"
 import { Building2, Home, Landmark, TrendingUp, ArrowLeft } from "lucide-react"
 
 const searchRateLimiter = new RateLimiter(5, 30000)
@@ -40,7 +41,7 @@ export function ZipServiceSelector() {
     if (error) setError("")
   }, [error])
 
-  const handleZipSubmit = useCallback((e: React.FormEvent) => {
+  const handleZipSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!searchRateLimiter.isAllowed("hero-search")) {
@@ -48,18 +49,22 @@ export function ZipServiceSelector() {
       return
     }
 
-    if (!zip || !isValidZipCode(zip)) {
+    const data = new FormData(e.currentTarget)
+    const submittedZip = sanitizeInput(String(data.get("zip") ?? zip)).replace(/\D/g, "").slice(0, 5)
+
+    if (!submittedZip || !isValidZipCode(submittedZip)) {
       setError("Please enter a valid 5-digit ZIP code")
       return
     }
 
-    const city = findCityByZip(zip)
+    const city = findCityByZip(submittedZip)
     if (city) {
+      setZip(submittedZip)
       setCityName(city.name)
       setCitySlug(toCitySlug(city.name))
       setStep("service")
-      saveUserInfo(zip)
-      sessionStorage.setItem("property-match-zipcode", zip)
+      saveUserInfo(submittedZip)
+      sessionStorage.setItem("property-match-zipcode", submittedZip)
     } else {
       setError("This ZIP isn't in our service area (North Ogden to Nephi)")
     }
@@ -113,16 +118,28 @@ export function ZipServiceSelector() {
   }
 
   return (
-    <form onSubmit={handleZipSubmit} className="flex w-full max-w-sm items-center gap-2">
+    <form
+      onSubmit={handleZipSubmit}
+      className="flex w-full max-w-sm items-center gap-2"
+      {...webmcpFormAttrs(
+        "lookup_utah_zip_services",
+        "Find Ondo Real Estate services available for a Utah ZIP code along the Wasatch Front.",
+        { autoSubmit: true },
+      )}
+    >
       <Input
         type="text"
+        name="zip"
         placeholder="Enter your ZIP code"
         value={zip}
         onChange={handleZipChange}
         className="flex-1 h-11"
         maxLength={5}
-        aria-describedby={error ? "hero-zip-error" : undefined}
+        inputMode="numeric"
         autoComplete="postal-code"
+        required
+        aria-describedby={error ? "hero-zip-error" : undefined}
+        {...webmcpParamAttrs("5-digit Utah ZIP code (e.g. 84043)", "zip_code")}
       />
       <Button type="submit" size="lg">
         Get Started

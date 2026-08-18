@@ -15,6 +15,7 @@ describe("speculation-rules", () => {
       expect(PRERENDER_URLS).toContain("/contact")
     })
     it("eager includes main nav pages", () => {
+      expect(EAGER_PREFETCH_URLS).toContain("/properties")
       expect(EAGER_PREFETCH_URLS).toContain("/loans")
       expect(EAGER_PREFETCH_URLS).toContain("/about")
     })

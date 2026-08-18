@@ -153,6 +153,8 @@ export function buildPropertiesMarkdown(): string {
     `- **Page**: ${toAbsoluteSiteUrl("/properties")}`,
     `- **Data feed**: ${toAbsoluteSiteUrl("/api/properties/public")} (routed to the Ondo backend at deploy time)`,
     "",
+    "The HTML search box on the same page is the declarative tool `search_listings_by_text` (toolautosubmit). Prefer `search_available_properties` when the agent has city, bedroom, or price filters.",
+    "",
     "See the [WebMCP alignment notes](" + toAbsoluteSiteUrl("/docs/WEBMCP.md") + ") for the full tool schema.",
     "",
     "## For binding decisions",

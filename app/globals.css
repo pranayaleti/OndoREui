@@ -244,3 +244,18 @@
     @apply outline-none ring-2 ring-ring ring-offset-2;
   }
 }
+
+/* WebMCP declarative tools: Chrome sets :tool-form-active / :tool-submit-active
+   when an agent fills a form. `.tool-form-active` is the JS fallback. */
+form:tool-form-active,
+form.tool-form-active {
+  outline: 2px dashed var(--color-gradient-from, #f97316);
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+:tool-submit-active,
+form.tool-form-active button[type="submit"] {
+  outline: 2px dashed var(--color-gradient-to, #991b1b);
+  outline-offset: 2px;
+}

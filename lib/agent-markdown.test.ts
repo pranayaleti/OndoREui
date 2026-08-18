@@ -22,6 +22,7 @@ describe("first-party Markdown twins", () => {
   it("properties brief lists WebMCP tool and how-to-filter fields", () => {
     const md = buildPropertiesMarkdown()
     expect(md).toContain("search_available_properties")
+    expect(md).toContain("search_listings_by_text")
     expect(md).toContain("Minimum bedrooms")
     expect(md).toContain("Maximum monthly rent")
     expect(md).toContain(LLMS_DISCLOSURES_BLOCK)

@@ -22,6 +22,7 @@ export function WebMCPMortgageTool() {
     try {
       modelContext.registerTool({
         name: WEBMCP_TOOL_NAME,
+        title: "Mortgage P&I payment",
         description:
           "Calculate monthly principal-and-interest (P&I) payment for a fixed-rate mortgage. Inputs: loan principal in USD, annual interest rate as a percent (e.g. 6.5), and term in years (e.g. 30). Does not include taxes, insurance, or PMI. Use when the user asks what their monthly payment would be, or to compare loan scenarios.",
         inputSchema: {
@@ -42,7 +43,7 @@ export function WebMCPMortgageTool() {
           },
           required: ["principal", "annualRatePercent", "termYears"],
         },
-        annotations: { readOnlyHint: true },
+        annotations: { readOnlyHint: true, untrustedContentHint: false },
         async execute(input: { principal?: number; annualRatePercent?: number; termYears?: number }) {
           const principal = Number(input?.principal)
           const annualRatePercent = Number(input?.annualRatePercent)

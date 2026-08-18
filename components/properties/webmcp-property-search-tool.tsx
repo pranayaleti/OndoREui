@@ -41,6 +41,7 @@ export function WebMCPPropertySearchTool() {
     try {
       modelContext.registerTool({
         name: TOOL_LIST,
+        title: "Search Utah rentals",
         description:
           "Search current rental properties available on Ondo Real Estate (Utah). Returns matching listings with id, title, city, address, price per month, bedrooms, bathrooms, sqft, and up to a 200-char description. Use when the user asks about rentals in a specific city, price range, or bedroom count.",
         inputSchema: {
@@ -69,7 +70,7 @@ export function WebMCPPropertySearchTool() {
           },
           required: [],
         },
-        annotations: { readOnlyHint: true },
+        annotations: { readOnlyHint: true, untrustedContentHint: true },
         async execute(input: SearchInput) {
           const limit = Math.max(1, Math.min(input.limit ?? 20, 100))
           const res = await fetch(backendUrl("/api/properties/public"), {

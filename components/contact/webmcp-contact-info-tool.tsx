@@ -31,6 +31,7 @@ export function WebMCPContactInfoTool() {
     try {
       modelContext.registerTool({
         name: WEBMCP_TOOL_NAME,
+        title: "Ondo contact info",
         description:
           "Get Ondo Real Estate company contact information: phone, primary and topic-specific email addresses, physical address, business hours, website URL, and Calendly scheduling URL for booking a call. Use when the user asks how to reach Ondo, contact details, where they are located, or how to schedule a meeting.",
         inputSchema: {
@@ -38,7 +39,7 @@ export function WebMCPContactInfoTool() {
           properties: {},
           required: [],
         },
-        annotations: { readOnlyHint: true },
+        annotations: { readOnlyHint: true, untrustedContentHint: false },
         async execute() {
           const info = {
             name: SITE_NAME,

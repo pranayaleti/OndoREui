@@ -98,6 +98,13 @@ describe("seo", () => {
         longitude: SITE_GEO.longitude,
       })
     })
+    it("exposes contact and schedule potentialAction entry points", () => {
+      const out = generateRealEstateBusinessJsonLd()
+      const actions = out.potentialAction as Array<{ "@type": string; target: { urlTemplate: string } }>
+      expect(actions.map((a) => a["@type"])).toEqual(["CommunicateAction", "ReserveAction"])
+      expect(actions[0].target.urlTemplate).toMatch(/\/contact$/)
+      expect(actions[1].target.urlTemplate).toMatch(/calendly\.com/)
+    })
   })
 
   describe("getSiteGeoMetaOther", () => {
@@ -120,6 +127,9 @@ describe("seo", () => {
       expect(meta.title).toBe("Buy a Home")
       expect(meta.alternates?.canonical).toMatch(/\/buy$/)
       expect(meta.openGraph?.title).toBe("Buy a Home")
+      const ogImages = meta.openGraph?.images
+      const ogImage = Array.isArray(ogImages) ? ogImages[0] : ogImages
+      expect(ogImage).toMatchObject({ alt: "Ondo Real Estate: Buy a Home" })
       expect(meta.other).toMatchObject(getSiteGeoMetaOther())
     })
   })
