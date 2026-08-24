@@ -22,9 +22,9 @@ const seasonConfig: Record<Season, {
     icon: Snowflake,
     bg: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800",
     label: "Winter",
-    ownerTip: "Schedule furnace inspections and pipe insulation checks before freezing temperatures. Utah winters can drop to single digits — protect your asset.",
-    tenantTip: "Report drafty windows or thermostat issues early. Your landlord is responsible for maintaining heat — submit a maintenance request in the portal.",
-    investorTip: "Winter is historically the slowest listing season in Utah — use this time to complete renovations and be ready to list in February/March for spring demand.",
+    ownerTip: "Schedule furnace inspections and pipe insulation checks before freezing temperatures. Utah winters can drop to single digits, protect your asset.",
+    tenantTip: "Report drafty windows or thermostat issues early. Your landlord is responsible for maintaining heat, submit a maintenance request in the portal.",
+    investorTip: "Winter is historically the slowest listing season in Utah, use this time to complete renovations and be ready to list in February/March for spring demand.",
   },
   spring: {
     icon: Flower2,
@@ -46,9 +46,9 @@ const seasonConfig: Record<Season, {
     icon: Leaf,
     bg: "bg-orange-50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-800",
     label: "Fall",
-    ownerTip: "Reach out to tenants whose leases expire in November–January now. Renewing early prevents winter vacancies — the hardest time of year to fill units.",
+    ownerTip: "Reach out to tenants whose leases expire in November–January now. Renewing early prevents winter vacancies, the hardest time of year to fill units.",
     tenantTip: "Fall is a great time to negotiate lease terms. Landlords are motivated to avoid winter vacancies and may offer concessions to quality tenants who commit early.",
-    investorTip: "Fall brings motivated sellers on the Wasatch Front. Properties that didn't sell in spring/summer often see price reductions — opportunity for patient buyers.",
+    investorTip: "Fall brings motivated sellers on the Wasatch Front. Properties that didn't sell in spring/summer often see price reductions, opportunity for patient buyers.",
   },
 }
 

@@ -27,7 +27,7 @@ export interface SubmitContactLeadError {
 
 /**
  * Submit a website/contact lead to the backend.
- * Use from client components (e.g. contact form). Works with static export —
+ * Use from client components (e.g. contact form). Works with static export , 
  * no Next.js API route required; the UI calls the backend directly.
  */
 export async function submitContactLead(

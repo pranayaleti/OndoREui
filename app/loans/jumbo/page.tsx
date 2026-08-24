@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 }
 
 const benefits = [
-  { title: "Above Conforming Limits", description: "Finance properties exceeding the $766,550 2024 Utah conforming limit — up to $3M+", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "Competitive Rates", description: "Jumbo rates are now often at parity with or below conventional — the spread has narrowed significantly", icon: <TrendingUp className="h-6 w-6" /> },
+  { title: "Above Conforming Limits", description: "Finance properties exceeding the $766,550 2024 Utah conforming limit: up to $3M+", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Competitive Rates", description: "Jumbo rates are now often at parity with or below conventional: the spread has narrowed significantly", icon: <TrendingUp className="h-6 w-6" /> },
   { title: "Utah High-Value Markets", description: "Specialists in Park City, Draper, Holladay, Cottonwood Heights, and other premium corridors", icon: <Building2 className="h-6 w-6" /> },
   { title: "Flexible Structures", description: "Fixed and ARM options; interest-only available for qualified buyers; portfolio lending options", icon: <CheckCircle className="h-6 w-6" /> },
 ]
@@ -69,7 +69,7 @@ export default function JumboLoanPage() {
                   <h4 className="text-lg font-semibold mb-3">Credit Score</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Typically 700+ required; 720+ for best terms</li>
-                    <li>• No government guarantee — lenders set their own overlays</li>
+                    <li>• No government guarantee, lenders set their own overlays</li>
                   </ul>
                 </div>
                 <div>
@@ -108,7 +108,7 @@ export default function JumboLoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Stricter credit and reserve requirements</li>
                     <li>• Larger down payment typically expected</li>
-                    <li>• Not sold to Fannie/Freddie — held in portfolio</li>
+                    <li>• Not sold to Fannie/Freddie, held in portfolio</li>
                     <li>• Full income documentation required</li>
                   </ul>
                 </div>

@@ -5,14 +5,14 @@
  *
  * High-intent lead-gen tool. Visitors enter their rent + cost assumptions and
  * see a side-by-side annual net comparison: doing it themselves vs handing it
- * to Ondo. The "hidden cost of your time" is the conversion lever — most
+ * to Ondo. The "hidden cost of your time" is the conversion lever, most
  * landlords undervalue their own hours by 5–10x.
  *
  * Output: annual net income under each path, hours saved per year, and a
  * recommendation. Followed by a soft CTA to book a call.
  *
  * NOTE(i18n): user-facing copy is English-only. This client component can be
- * wired to react-i18next later — kept simple here to keep the conversion path
+ * wired to react-i18next later, kept simple here to keep the conversion path
  * fast.
  */
 
@@ -206,7 +206,7 @@ const OwnerVsSelfCalculator: React.FC = () => {
             Self-Manage vs Ondo RE: What's actually more profitable?
           </h1>
           <p className="mt-3 text-foreground/70 max-w-2xl">
-            Enter your rental's real numbers. We'll show side-by-side annual net income — and the
+            Enter your rental's real numbers. We'll show side-by-side annual net income, and the
             hidden cost most landlords forget: the value of their own time.
           </p>
         </header>
@@ -269,7 +269,7 @@ const OwnerVsSelfCalculator: React.FC = () => {
                   value={inputs.managementFeePct}
                   onChange={(v) => set("managementFeePct", v)}
                   suffix="%"
-                  hint="% of collected rent. Editable — contact us for your exact quote."
+                  hint="% of collected rent. Editable, contact us for your exact quote."
                 />
                 <NumberField
                   label="Leasing fee"
@@ -349,7 +349,7 @@ const OwnerVsSelfCalculator: React.FC = () => {
               </p>
               <p className="mt-2 text-sm text-foreground/70">
                 You'd get back <strong>{results.annualHoursSaved} hours/year</strong>{" "}
-                ({results.annualHoursSaved >= 40 ? "≈ a full work-week" : "of weekends and evenings"}) —
+                ({results.annualHoursSaved >= 40 ? "≈ a full work-week" : "of weekends and evenings"}) , 
                 worth about {fmtUSD(results.timeValueSaved)} at your hourly rate.
               </p>
               <div className="mt-4 flex flex-col sm:flex-row gap-3">
@@ -372,7 +372,7 @@ const OwnerVsSelfCalculator: React.FC = () => {
             <p className="text-xs text-foreground/50 leading-relaxed">
               Estimates only. Actual results depend on tenant quality, property condition, market rent at lease-up,
               and applicable Utah landlord-tenant law. Repair % uses the industry rule of thumb; your property may vary.
-              Ondo fees shown are illustrative — request a quote for your exact pricing.
+              Ondo fees shown are illustrative, request a quote for your exact pricing.
             </p>
           </section>
         </div>

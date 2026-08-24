@@ -118,7 +118,7 @@ export function SyndicationPanel({ propertyId: _propertyId, listingId }: Syndica
           <div className="flex flex-wrap gap-2">
             {syndications.map((s) => (
               <Badge key={s.id} variant={statusColor(s.status)}>
-                {s.platform} — {s.status}
+                {s.platform}, {s.status}
                 {s.leadsCount > 0 && ` (${s.leadsCount} leads)`}
               </Badge>
             ))}

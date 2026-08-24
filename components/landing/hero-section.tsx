@@ -9,7 +9,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
         <Image
           src="/modern-office-building.webp"
-          alt="Ondo RE headquarters in Lehi, Utah — property management, mortgage, and real estate services along the Wasatch Front"
+          alt="Ondo RE headquarters in Lehi, Utah: property management, mortgage, and real estate services along the Wasatch Front"
           fill
           className="object-cover"
           priority

@@ -1,19 +1,19 @@
-// NOTE(i18n): server component — English-only per OndoREui/CLAUDE.md i18n rules.
+// NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { HomeValueEstimator } from "@/components/home-value-estimator"
 
-const title = "What's My Utah Home Worth? — Free Rent + Sale Estimate | Ondo RE"
+const title = "What's My Utah Home Worth?: Free Rent + Sale Estimate | Ondo RE"
 const description =
-  "Free instant estimate of what your Utah home would rent for AND sell for. Covers 55+ Wasatch Front cities — from Salt Lake City to Provo, Lehi to Ogden. No signup to see your number."
+  "Free instant estimate of what your Utah home would rent for AND sell for. Covers 55+ Wasatch Front cities, from Salt Lake City to Provo, Lehi to Ogden. No signup to see your number."
 
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: `${SITE_URL}/whats-my-home-worth` },
-  openGraph: { title, description, url: `${SITE_URL}/whats-my-home-worth` },
+  alternates: { canonical: `${SITE_URL}/whats-my-home-worth/` },
+  openGraph: { title, description, url: `${SITE_URL}/whats-my-home-worth/` },
   twitter: { card: "summary_large_image", title, description },
   robots: { index: true, follow: true },
 }
@@ -32,7 +32,7 @@ export default function WhatsMyHomeWorthPage() {
             { name: "What's My Home Worth?", url: `${SITE_URL}/whats-my-home-worth` },
           ]),
           generateServiceJsonLd({
-            name: `${SITE_NAME} — Utah Home Value Estimator`,
+            name: `${SITE_NAME}, Utah Home Value Estimator`,
             description:
               "Free instant estimate of what your Utah home would rent for and sell for, based on 55+ Wasatch Front city market data.",
             serviceType: "Property Valuation Tool",
@@ -46,7 +46,7 @@ export default function WhatsMyHomeWorthPage() {
             What&apos;s my Utah home worth?
           </h1>
           <p className="text-lg text-foreground/70">
-            Free instant estimate — rent <em>and</em> sale price — for any of 55+ Wasatch Front cities.
+            Free instant estimate, rent <em>and</em> sale price, for any of 55+ Wasatch Front cities.
             No signup to see your number.
           </p>
         </header>
@@ -55,7 +55,7 @@ export default function WhatsMyHomeWorthPage() {
         <div className="mt-12 max-w-3xl mx-auto text-center">
           <p className="text-sm text-foreground/60 mb-3">
             Estimates use median market data for each Utah city plus standard adjustments for bedrooms and square feet.
-            Real-world value depends on condition, finishes, and current market timing — we can do a walk-through valuation for free.
+            Real-world value depends on condition, finishes, and current market timing, we can do a walk-through valuation for free.
           </p>
         </div>
       </div>

@@ -426,7 +426,7 @@ export default function VendorManagement() {
             <p className="text-2xl font-bold">
               {vendors.length > 0
                 ? (vendors.reduce((sum, v) => sum + v.rating, 0) / vendors.length).toFixed(1)
-                : "—"}
+                : "Not available"}
             </p>
             <p className="text-sm text-muted-foreground">Avg Rating</p>
           </CardContent>
@@ -565,7 +565,7 @@ export default function VendorManagement() {
                         {vendor.hourly_rate ? (
                           <span className="text-sm">${vendor.hourly_rate}/hr</span>
                         ) : (
-                          <span className="text-xs text-muted-foreground">—</span>
+                          <span className="text-xs text-muted-foreground">Not available</span>
                         )}
                       </TableCell>
                       <TableCell>

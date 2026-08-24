@@ -28,7 +28,7 @@ import { Progress } from "@/components/ui/progress"
 import dynamic from "next/dynamic"
 import { Skeleton } from "@/components/ui/skeleton"
 
-// recharts does not support SSR — lazy-load both chart components so the
+// recharts does not support SSR, lazy-load both chart components so the
 // recharts bundle is excluded from the initial page payload entirely.
 const ChartSkeleton = () => (
   <div className="h-full w-full space-y-2 p-1">
@@ -55,7 +55,7 @@ const PropertyPerformanceChart = dynamic(
 import { AddTransactionDialog } from "@/components/owner/add-transaction-dialog"
 import { useToast } from "@/hooks/use-toast"
 
-// Mock properties — kept for Reports tab ROI display (ROI % not available from statements API)
+// Mock properties, kept for Reports tab ROI display (ROI % not available from statements API)
 const PROPERTIES = [
   {
     id: "prop1",
@@ -154,7 +154,7 @@ export function FinancesView() {
         (s.lineItems || []).map((li, idx) => ({
           id: `${s.id}-${idx}`,
           date: li.date,
-          property: li.description.split(" — ")[1] || "Property",
+          property: li.description.split(", ")[1] || "Property",
           category: li.type === "income" ? "Rent" : li.description.split(":")[0] || "Expense",
           description: li.description,
           amount: li.amountCents / 100,

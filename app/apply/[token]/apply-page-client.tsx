@@ -823,7 +823,7 @@ function DisclosureStep({
       {acceptanceCriteria && (
         <div className="rounded-2xl border-2 border-amber-500/30 bg-amber-50/50 dark:bg-amber-950/20 p-5 space-y-4">
           <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-200">
-            Acceptance Criteria — Please Review Before Proceeding
+            Acceptance Criteria, Please Review Before Proceeding
           </h3>
           <p className="text-sm text-amber-800 dark:text-amber-300">
             Your application will be evaluated against the following criteria. Please ensure you meet these requirements before continuing.
@@ -886,8 +886,8 @@ function DisclosureStep({
       )}
 
       <div className="grid gap-4 xl:grid-cols-2">
-        <InfoPanel label={rentLabel} value={formatCurrency(disclosure.rentAmount, locale) || "—"} />
-        <InfoPanel label={availabilityLabel} value={disclosure.availability || "—"} />
+        <InfoPanel label={rentLabel} value={formatCurrency(disclosure.rentAmount, locale) || "Not available"} />
+        <InfoPanel label={availabilityLabel} value={disclosure.availability || "Not available"} />
       </div>
 
       <SectionCard title={fixedChargesLabel}>
@@ -902,7 +902,7 @@ function DisclosureStep({
               >
                 <div className="font-medium text-foreground">{charge.label}</div>
                 <div className="text-foreground/70">
-                  {charge.amount !== null ? formatCurrency(charge.amount, locale) : "—"}
+                  {charge.amount !== null ? formatCurrency(charge.amount, locale) : "Not available"}
                   {charge.frequency ? ` • ${charge.frequency}` : ""}
                 </div>
               </div>
@@ -1435,11 +1435,11 @@ function ApplicationSummarySidebar({
       <CardContent className="space-y-5">
         <InfoPanel
           label={rentLabel}
-          value={formatCurrency(disclosure?.rentAmount ?? property?.price, locale) || "—"}
+          value={formatCurrency(disclosure?.rentAmount ?? property?.price, locale) || "Not available"}
         />
         <InfoPanel
           label={availabilityLabel}
-          value={disclosure?.availability || property?.availability || "—"}
+          value={disclosure?.availability || property?.availability || "Not available"}
         />
 
         <div className="space-y-2">

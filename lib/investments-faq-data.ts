@@ -25,7 +25,7 @@ export const FRACTIONAL_FAQ_ITEMS: FractionalFAQItem[] = [
     value: "legal-structure",
     question: "What is the legal structure of each investment?",
     answer:
-      "Each property is held in a dedicated LLC or SPV. Investors receive membership interests in the entity. This structure provides liability protection — your risk is limited to the amount you invest. The operating agreement governs distributions, voting rights, and exit terms.",
+      "Each property is held in a dedicated LLC or SPV. Investors receive membership interests in the entity. This structure provides liability protection, your risk is limited to the amount you invest. The operating agreement governs distributions, voting rights, and exit terms.",
   },
   {
     value: "liquidity",
@@ -37,7 +37,7 @@ export const FRACTIONAL_FAQ_ITEMS: FractionalFAQItem[] = [
     value: "tax-implications",
     question: "What are the tax implications?",
     answer:
-      "Investors typically receive a Schedule K-1 for their share of the entity's income, deductions, and credits. Depreciation pass-through can provide tax-advantaged income. Tax treatment varies based on individual circumstances — consult a qualified tax professional.",
+      "Investors typically receive a Schedule K-1 for their share of the entity's income, deductions, and credits. Depreciation pass-through can provide tax-advantaged income. Tax treatment varies based on individual circumstances, consult a qualified tax professional.",
   },
   {
     value: "accreditation",

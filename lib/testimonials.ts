@@ -15,7 +15,7 @@ export const testimonials: Testimonial[] = [
     role: "Tenant",
     city: "Salt Lake City",
     service: "property-management",
-    quote: "Ondo RE made finding my new apartment in Sugar House so easy. Their team was responsive and helped me find exactly what I was looking for — walkable to TRAX and within my budget.",
+    quote: "Ondo RE made finding my new apartment in Sugar House so easy. Their team was responsive and helped me find exactly what I was looking for, walkable to TRAX and within my budget.",
     rating: 5,
     image: "/professional-woman-smiling.webp",
   },
@@ -44,7 +44,7 @@ export const testimonials: Testimonial[] = [
     role: "Owner",
     city: "Draper",
     service: "property-management",
-    quote: "Managing my Suncrest rental from out of state was a nightmare until I found Ondo. Their owner dashboard shows me everything — rent status, maintenance, financials — in real time.",
+    quote: "Managing my Suncrest rental from out of state was a nightmare until I found Ondo. Their owner dashboard shows me everything, rent status, maintenance, financials, in real time.",
     rating: 5,
   },
   {
@@ -62,7 +62,7 @@ export const testimonials: Testimonial[] = [
     role: "Investor",
     city: "Lehi",
     service: "investments",
-    quote: "The Traverse Mountain townhome Ondo helped me acquire has been fully occupied since day one. Their tenant screening is thorough — quality tenants, zero turnover in 18 months.",
+    quote: "The Traverse Mountain townhome Ondo helped me acquire has been fully occupied since day one. Their tenant screening is thorough, quality tenants, zero turnover in 18 months.",
     rating: 5,
   },
   {
@@ -80,7 +80,7 @@ export const testimonials: Testimonial[] = [
     role: "Owner",
     city: "Provo",
     service: "property-management",
-    quote: "I own three rentals near BYU campus. Ondo handles the student turnover seamlessly — properties are cleaned, repaired, and re-listed within days of lease end. Vacancy stays under two weeks.",
+    quote: "I own three rentals near BYU campus. Ondo handles the student turnover seamlessly, properties are cleaned, repaired, and re-listed within days of lease end. Vacancy stays under two weeks.",
     rating: 5,
   },
 
@@ -120,7 +120,7 @@ export const testimonials: Testimonial[] = [
     role: "Tenant",
     city: "Bountiful",
     service: "property-management",
-    quote: "The online portal makes everything simple — rent payments, maintenance requests, document storage. I've rented from three different companies and Ondo's tech is leagues ahead.",
+    quote: "The online portal makes everything simple, rent payments, maintenance requests, document storage. I've rented from three different companies and Ondo's tech is leagues ahead.",
     rating: 5,
   },
 

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const city = findCityBySlug(citySlug)
   const cityName = city?.name ?? citySlug
   const title = `Why ${cityName}, Utah Is a Great Place to Live & Invest | ${SITE_BRAND_SHORT}`
-  const description = `Discover ${cityName}, UT — neighborhoods, schools, commute times, market stats, outdoor recreation, and why it's a top choice for homeowners and investors.`
+  const description = `Discover ${cityName}, UT, neighborhoods, schools, commute times, market stats, outdoor recreation, and why it's a top choice for homeowners and investors.`
   const canonical = `${SITE_URL}/locations/${citySlug}/`
   return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Params }) {
     <>
       <SEO
         title={`Why ${city.name}, Utah Is a Great Place to Live & Invest | ${SITE_BRAND_SHORT}`}
-        description={`Discover ${city.name}, UT — neighborhoods, schools, commute times, market stats, outdoor recreation, and real estate opportunities.`}
+        description={`Discover ${city.name}, UT, neighborhoods, schools, commute times, market stats, outdoor recreation, and real estate opportunities.`}
         pathname={`/locations/${citySlug}/`}
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([

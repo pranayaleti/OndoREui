@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const a = findCityBySlug(pair.aSlug)
   const b = findCityBySlug(pair.bSlug)
   if (!a || !b) return {}
-  const title = `${a.name} vs ${b.name}, Utah — Real Estate Comparison | ${SITE_BRAND_SHORT}`
+  const title = `${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`
   const description = `Compare ${a.name} and ${b.name} side-by-side: home prices, rent, schools, commute, growth rate, and lifestyle.`
   const canonical = `${SITE_URL}/compare/${slug}/`
   return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
@@ -140,7 +140,7 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <>
       <SEO
-        title={`${a.name} vs ${b.name}, Utah — Real Estate Comparison | ${SITE_BRAND_SHORT}`}
+        title={`${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`}
         description={`${a.name} vs ${b.name}: compare home prices, rent, schools, commute, and growth.`}
         pathname={`/compare/${slug}/`}
         jsonLd={generateBreadcrumbJsonLd([

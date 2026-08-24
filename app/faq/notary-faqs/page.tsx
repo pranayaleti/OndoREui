@@ -35,17 +35,17 @@ export default function NotaryFAQPage() {
     {
       question: "What's the difference between mobile and online notarization?",
       answer:
-        "ONDO Notary offers Remote Online Notarization (RON) only — a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
+        "ONDO Notary offers Remote Online Notarization (RON) only, a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
     },
     {
       question: "How quickly can I get a document notarized?",
       answer:
-        "We'll try to accommodate same-day when capacity allows — especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. Same-day is best-effort, not a guaranteed SLA. See /notary/on-demand for how on-demand scheduling works.",
+        "We'll try to accommodate same-day when capacity allows, especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. Same-day is best-effort, not a guaranteed SLA. See /notary/on-demand for how on-demand scheduling works.",
     },
     {
       question: "Do you offer on-demand or same-day notary?",
       answer:
-        "Yes. ONDO Notary offers on-demand scheduling for urgent remote online notarization. We try to accommodate same-day when our calendar allows — RON nationwide. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent. Learn more at /notary/on-demand or book from /notary.",
+        "Yes. ONDO Notary offers on-demand scheduling for urgent remote online notarization. We try to accommodate same-day when our calendar allows, RON nationwide. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent. Learn more at /notary/on-demand or book from /notary.",
     },
     {
       question: "What types of documents can you notarize?",

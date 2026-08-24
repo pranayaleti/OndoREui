@@ -1,5 +1,5 @@
 ---
-title: "Retirement Savings Calculator — Ondo Real Estate"
+title: "Retirement Savings Calculator: Ondo Real Estate"
 description: "Project retirement savings growth and future income needs."
 canonical: https://www.ondorealestate.com/calculators/retirement/
 ---

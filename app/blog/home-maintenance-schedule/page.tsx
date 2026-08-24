@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site"
 
 const slug = "/blog/home-maintenance-schedule"
 const title = "Home Maintenance Schedule: A Monthly & Annual Checklist"
-const description = "A complete home-care checklist for homeowners — filters, HVAC, gutters, winterizing — and how ONDO can auto-remind you."
+const description = "A complete home-care checklist for homeowners, filters, HVAC, gutters, winterizing, and how ONDO can auto-remind you."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"
@@ -86,14 +86,14 @@ export default function HomeMaintenanceSchedule() {
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
               Deferred maintenance is the most expensive kind. A simple, repeating checklist keeps
-              systems efficient, prevents emergency repairs, and preserves your home’s value — and if
+              systems efficient, prevents emergency repairs, and preserves your home’s value, and if
               you’re an ONDO owner, we track most of it for you automatically.
             </p>
 
             <h2>Monthly &amp; Quarterly</h2>
             <ul>
-              <li><strong>Air filters (every ~90 days):</strong> replace HVAC filters — the single cheapest way to protect the system and cut energy bills.</li>
-              <li><strong>Garage door (every ~6 months):</strong> lubricate rollers, hinges, and springs so the door runs quiet and lasts. (Yes — the “garage oil” job.)</li>
+              <li><strong>Air filters (every ~90 days):</strong> replace HVAC filters, the single cheapest way to protect the system and cut energy bills.</li>
+              <li><strong>Garage door (every ~6 months):</strong> lubricate rollers, hinges, and springs so the door runs quiet and lasts. (Yes, the “garage oil” job.)</li>
               <li><strong>Smoke &amp; CO detectors:</strong> test monthly; swap batteries on a schedule.</li>
               <li><strong>Quick walk:</strong> check for minor leaks under sinks, running toilets, and GFCI outlets.</li>
             </ul>
@@ -103,14 +103,14 @@ export default function HomeMaintenanceSchedule() {
               <li><strong>HVAC service:</strong> professional inspection and duct/unit cleanup before the heating and cooling seasons.</li>
               <li><strong>Water heater flush:</strong> drain sediment to extend life and hold efficiency.</li>
               <li><strong>Gutters &amp; downspouts:</strong> clear debris so rain and meltwater drain away from the foundation.</li>
-              <li><strong>Dryer vent:</strong> clean the exhaust run — efficiency plus a real fire-risk reduction.</li>
+              <li><strong>Dryer vent:</strong> clean the exhaust run, efficiency plus a real fire-risk reduction.</li>
               <li><strong>Refrigerator coils:</strong> vacuum condenser coils so the compressor isn’t overworked.</li>
             </ul>
 
-            <h2>Seasonal — adapt to your climate</h2>
+            <h2>Seasonal: adapt to your climate</h2>
             <ul>
               <li><strong>Cold-winter regions:</strong> before the first freeze, blow out sprinkler lines and winterize outdoor faucets to avoid burst pipes.</li>
-              <li><strong>Freeze-thaw climates:</strong> inspect roof, flashing, and concrete each spring — repeated cycles are hard on them.</li>
+              <li><strong>Freeze-thaw climates:</strong> inspect roof, flashing, and concrete each spring, repeated cycles are hard on them.</li>
               <li><strong>Hot or humid regions:</strong> service the A/C before summer, check attic ventilation, and watch for moisture and pests.</li>
               <li><strong>Wildfire or poor-air areas:</strong> fresh filters and a serviced HVAC keep indoor air healthier during smoke events.</li>
             </ul>
@@ -118,8 +118,8 @@ export default function HomeMaintenanceSchedule() {
             <h2>Let ONDO remind you</h2>
             <p>
               You don’t have to keep this calendar in your head. ONDO’s home-care reminders track the
-              recurring tasks above — air filters (90 days), HVAC service (annual), garage-door lube,
-              gutters, water-heater flush, dryer vent, smoke/CO batteries, and sprinkler winterizing —
+              recurring tasks above, air filters (90 days), HVAC service (annual), garage-door lube,
+              gutters, water-heater flush, dryer vent, smoke/CO batteries, and sprinkler winterizing , 
               and surface each one when it’s due, tuned to your property type.
             </p>
 

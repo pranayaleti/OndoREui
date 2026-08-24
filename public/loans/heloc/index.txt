@@ -1,4 +1,4 @@
-# Pointer only — not a product or legal page
+# Pointer only, not a product or legal page
 
 Crawlers that request /loans/heloc/index.txt should use these URLs instead.
 Ondo Real Estate does not publish a per-city index.txt tree.

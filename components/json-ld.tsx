@@ -9,7 +9,7 @@ const flattenData = (data?: object | object[] | null) => {
 }
 
 /**
- * Server-safe JSON-LD. Uses a plain <script> tag — next/script pulls in client
+ * Server-safe JSON-LD. Uses a plain <script> tag, next/script pulls in client
  * boundaries and can trigger clientReferenceManifest errors in dev/static export.
  */
 export function JsonLd({ data, id = "seo-jsonld" }: JsonLdProps) {

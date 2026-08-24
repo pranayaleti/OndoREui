@@ -71,7 +71,7 @@ export default function NotaryPage() {
     {/* SEO */}
     <SEO
       title="Remote Online Notary – Available Nationwide | ONDO Notary"
-      description="Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents — no office visit and no mobile travel appointments."
+      description="Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments."
       pathname="/notary"
       image={`${SITE_URL}/notary-cover.jpg`}
       keywords={KEYWORDS}
@@ -164,7 +164,7 @@ export default function NotaryPage() {
             </h2>
             <p className="text-foreground/80 text-lg leading-relaxed mb-4">
               ONDO Notary offers on-demand scheduling for remote online appointments.
-              We&apos;ll try to accommodate same-day when capacity allows — earlier requests
+              We&apos;ll try to accommodate same-day when capacity allows, earlier requests
               improve your odds.
             </p>
             <p className="text-foreground/60 text-sm mb-6">
@@ -235,7 +235,7 @@ export default function NotaryPage() {
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Nationwide remote notarization</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Same-day when capacity allows</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Real estate & loan document experts</li>
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Posted fee schedule — quoted before we book</li>
+              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Posted fee schedule, quoted before we book</li>
             </ul>
           </div>
         </div>
@@ -347,7 +347,7 @@ export default function NotaryPage() {
             </h3>
             <p className="text-gray-300 leading-relaxed">
           A trained ONDO Notary signing agent ensures mortgage documents are executed correctly,
-          properly notarized, and returned promptly — preventing delays and funding issues.
+          properly notarized, and returned promptly, preventing delays and funding issues.
             </p>
           </div>
 
@@ -386,7 +386,7 @@ export default function NotaryPage() {
         </h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto mb-10">
           We support Remote Online Notarization for clients across the United States.
-          Browse a state hub for local pages — and confirm receiving-party acceptance before you book.
+          Browse a state hub for local pages, and confirm receiving-party acceptance before you book.
         </p>
         <section className="mt-10" aria-labelledby="browse-states">
           <h3 id="browse-states" className="text-2xl font-semibold text-white mb-3 text-center">
@@ -438,7 +438,7 @@ export default function NotaryPage() {
                 “We closed on our Colorado property from home. The remote online notarization was
                 accepted by our title company without a hitch and took under 20 minutes.”
               </p>
-              <p className="text-primary font-semibold">— Sarah M., Denver, CO</p>
+              <p className="text-primary font-semibold">,  Sarah M., Denver, CO</p>
             </div>
 
             {/* 2 */}
@@ -453,7 +453,7 @@ export default function NotaryPage() {
                 “I’m in Texas and needed an out-of-state investment package notarized. The RON
                 session met my lender’s requirements, and every document was verified on the call.”
               </p>
-              <p className="text-primary font-semibold">— Jason T., Dallas, TX</p>
+              <p className="text-primary font-semibold">,  Jason T., Dallas, TX</p>
             </div>
 
             {/* 3 */}
@@ -468,7 +468,7 @@ export default function NotaryPage() {
                 “Clear instructions, identity checks, and a smooth video session. I received the
                 signed, sealed documents instantly after the call.”
               </p>
-              <p className="text-primary font-semibold">— Michelle R., Salt Lake City, UT</p>
+              <p className="text-primary font-semibold">,  Michelle R., Salt Lake City, UT</p>
             </div>
 
             {/* 4 */}
@@ -484,7 +484,7 @@ export default function NotaryPage() {
                 They provided the electronic seal, audit trail, and confirmation the receiving state
                 needed.”
               </p>
-              <p className="text-primary font-semibold">— Daniel K., New York, NY</p>
+              <p className="text-primary font-semibold">,  Daniel K., New York, NY</p>
             </div>
           </div>
         </div>
@@ -545,7 +545,7 @@ export default function NotaryPage() {
                   <p className="text-gray-300">
                     2701 N Thanksgiving Way, Lehi, UT 84043
                     <br />
-                    Remote sessions only — we do not take walk-in or mobile travel appointments.
+                    Remote sessions only, we do not take walk-in or mobile travel appointments.
                   </p>
                 </div>
               </div>

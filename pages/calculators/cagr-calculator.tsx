@@ -184,7 +184,7 @@ const CAGRCalculator: React.FC = () => {
                     <p>• CAGR smooths out year-to-year volatility into one annualized rate.</p>
                     <p>• It answers &ldquo;what steady annual rate produces this growth?&rdquo;</p>
                     <p>• Use it to compare investments over different time horizons.</p>
-                    <p>• It ignores interim cash flow — pair it with cash-on-cash for income.</p>
+                    <p>• It ignores interim cash flow, pair it with cash-on-cash for income.</p>
                   </div>
                 </div>
               </>

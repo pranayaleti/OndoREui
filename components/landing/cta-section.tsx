@@ -10,7 +10,7 @@ export function CTASection() {
           Ready to work with {SITE_BRAND_SHORT}?
         </h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto text-foreground/80">
-          Search Utah rental properties by ZIP — or talk to our team about{" "}
+          Search Utah rental properties by ZIP, or talk to our team about{" "}
           <Link href="/property-management" className="font-medium text-primary underline-offset-4 hover:underline">
             property management
           </Link>

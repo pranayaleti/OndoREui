@@ -92,7 +92,7 @@ export function CalendlyInlineEmbed({
         await requestContainerFullscreen(shell);
       }
     } catch {
-      // Unsupported, denied, or transient failure — inline size remains usable
+      // Unsupported, denied, or transient failure, inline size remains usable
     }
   }, []);
 
@@ -182,7 +182,7 @@ export function CalendlyInlineEmbed({
               title={
                 isFullscreen
                   ? "Exit fullscreen (Escape, Ctrl+F over calendar, or Ctrl+Shift+F)"
-                  : "Fullscreen — Ctrl+F (⌘F) while cursor is over the calendar, or Ctrl+Shift+F anywhere"
+                  : "Fullscreen, Ctrl+F (⌘F) while cursor is over the calendar, or Ctrl+Shift+F anywhere"
               }
               aria-label={
                 isFullscreen
@@ -232,7 +232,7 @@ type CalendlyBookSectionProps = {
   id?: string;
 };
 
-/** Prominent section with heading — use on landing and key service pages */
+/** Prominent section with heading, use on landing and key service pages */
 export function CalendlyBookSection({
   variant = "default",
   className,
@@ -255,7 +255,7 @@ export function CalendlyBookSection({
           Schedule a call
         </h2>
         <p className="text-center text-muted-foreground text-sm md:text-base mb-8 max-w-xl mx-auto">
-          Pick a time that works for you — property management, buying, selling, loans, notary, and
+          Pick a time that works for you, property management, buying, selling, loans, notary, and
           general questions.
         </p>
         <CalendlyInlineEmbed

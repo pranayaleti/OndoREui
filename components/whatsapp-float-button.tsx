@@ -10,7 +10,7 @@
  *   pathname checks, mirroring footer behavior). The button itself does NOT
  *   inspect pathname so it can be reused anywhere.
  * - Persistently dismissible per browser via localStorage.
- * - Opens wa.me link in a new tab with a prefilled message — works on mobile
+ * - Opens wa.me link in a new tab with a prefilled message, works on mobile
  *   (deep-links to WhatsApp app) and desktop (web.whatsapp.com).
  *
  * NOTE(i18n): user-facing copy uses react-i18next when available; falls back
@@ -27,7 +27,7 @@ const DISMISS_KEY = "ondo:whatsapp-float:dismissed:v1"
 
 function WhatsAppGlyph({ className }: { className?: string }) {
   // Official WhatsApp brand glyph (phone-in-speech-bubble). Path data is the
-  // brand mark — render at currentColor on a green circle.
+  // brand mark, render at currentColor on a green circle.
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@ export function WhatsAppFloatButton({ prefilledMessage }: Props = {}) {
         setDismissed(true)
       }
     } catch {
-      // localStorage blocked (private mode / quota) — keep button visible.
+      // localStorage blocked (private mode / quota), keep button visible.
     }
   }, [])
 
@@ -73,7 +73,7 @@ export function WhatsAppFloatButton({ prefilledMessage }: Props = {}) {
   const label = t("whatsapp.cta", { defaultValue: "Chat on WhatsApp" })
   const dismissLabel = t("whatsapp.dismiss", { defaultValue: "Hide chat button" })
   const message =
-    prefilledMessage ?? t("whatsapp.prefilled", { defaultValue: "Hi Ondo RE — I'd like to chat about " })
+    prefilledMessage ?? t("whatsapp.prefilled", { defaultValue: "Hi Ondo RE, I'd like to chat about " })
   const href = `https://wa.me/${number}${message ? `?text=${encodeURIComponent(message)}` : ""}`
 
   const handleClick = () => {

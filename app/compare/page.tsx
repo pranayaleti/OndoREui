@@ -119,7 +119,7 @@ function CellValue({ value }: { value: boolean | string }) {
 
 const differentiators = [
   {
-    title: "Local Utah expertise — not just software",
+    title: "Local Utah expertise: not just software",
     description:
       "We are a Utah-based team that knows the local market, regulations, and tenant landscape. You get hands-on property management, not a generic SaaS login.",
   },

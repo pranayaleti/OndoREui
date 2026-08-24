@@ -30,19 +30,19 @@ export const NOTARY_EXAMPLE_SAME_DAY_RON_TOTAL = NOTARY_RON_ACT_USD + NOTARY_SAM
 export const NOTARY_EXAMPLE_AFTER_HOURS_RON_TOTAL = NOTARY_RON_ACT_USD + NOTARY_AFTER_HOURS_USD
 
 export const NOTARY_PRICING_SUMMARY =
-  `Remote online notarization is $${NOTARY_RON_ACT_USD} per act (Utah remote maximum; platform included). Loan signing packages typically range from ${NOTARY_LOAN_RANGE}. We do not offer in-office or mobile travel appointments. See the posted schedule on /notary#fees — we quote the total before we book.`
+  `Remote online notarization is $${NOTARY_RON_ACT_USD} per act (Utah remote maximum; platform included). Loan signing packages typically range from ${NOTARY_LOAN_RANGE}. We do not offer in-office or mobile travel appointments. See the posted schedule on /notary#fees, we quote the total before we book.`
 
 export const NOTARY_EXAMPLE_QUOTES = [
   {
-    title: "Remote online — 1 act",
+    title: "Remote online: 1 act",
     detail: `RON $${NOTARY_RON_ACT_USD}. Total $${NOTARY_RON_ACT_USD}.`,
   },
   {
-    title: "Same-day RON — 1 act",
+    title: "Same-day RON: 1 act",
     detail: `RON $${NOTARY_RON_ACT_USD} + same-day $${NOTARY_SAME_DAY_USD}. Total $${NOTARY_EXAMPLE_SAME_DAY_RON_TOTAL}.`,
   },
   {
-    title: "After-hours RON — 1 act",
+    title: "After-hours RON: 1 act",
     detail: `RON $${NOTARY_RON_ACT_USD} + after hours $${NOTARY_AFTER_HOURS_USD}. Total $${NOTARY_EXAMPLE_AFTER_HOURS_RON_TOTAL}.`,
   },
 ] as const

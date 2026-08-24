@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 }
 
 const sampleDeal = {
-  property: "Class A Office Building — Silicon Slopes",
+  property: "Class A Office Building, Silicon Slopes",
   purchasePrice: "$6,200,000",
   totalEquityRaise: "$2,480,000",
   loanAmount: "$3,720,000 (60% LTV)",

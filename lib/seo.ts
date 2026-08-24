@@ -14,6 +14,7 @@ import {
   SITE_CALENDLY_URL,
 } from "./site"
 import { testimonials } from "./testimonials"
+import { toAbsoluteSiteUrl } from "./site-index"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 
@@ -209,7 +210,7 @@ export function generateOrganizationJsonLd() {
 }
 
 /**
- * Generate RealEstateBusiness JSON-LD (richer than Organization — includes
+ * Generate RealEstateBusiness JSON-LD (richer than Organization, includes
  * foundingDate, founder, openingHoursSpecification, and hasOfferCatalog).
  */
 /**
@@ -230,7 +231,7 @@ function buildBusinessRatingAndReviews() {
 
   const ratingValue = (rated.reduce((sum, t) => sum + t.rating, 0) / rated.length).toFixed(2)
 
-  // Limit the embedded Review list — Google prefers a small curated set; the
+  // Limit the embedded Review list, Google prefers a small curated set; the
   // AggregateRating count carries the full social proof.
   const REVIEW_LIMIT = 6
   const featuredReviews = rated
@@ -643,7 +644,7 @@ export function generateWebApplicationJsonLd(params: {
   }
 }
 
-/** Classic HTML geo meta tags (HQ placeholder — from SITE_GEO / address constants). */
+/** Classic HTML geo meta tags (HQ placeholder, from SITE_GEO / address constants). */
 export function getSiteGeoMetaOther(): Record<string, string> {
   const { latitude, longitude } = SITE_GEO
   return {
@@ -668,7 +669,7 @@ export type BuildPageMetadataInput = {
    * Optional sibling Markdown URL for AI agents. When set, emits
    * `<link rel="alternate" type="text/markdown">` via Next `alternates.types`.
    * Use for pages that have a first-party `.md` twin (calculators, properties,
-   * contact) — see `lib/agent-markdown.ts`. Absolute or root-relative.
+   * contact), see `lib/agent-markdown.ts`. Absolute or root-relative.
    */
   markdownAlternate?: string
 }
@@ -693,7 +694,7 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
   const canonical =
     pathname.startsWith("http://") || pathname.startsWith("https://")
       ? pathname
-      : `${baseSiteUrl}${pathname.startsWith("/") ? pathname : `/${pathname}`}`
+      : toAbsoluteSiteUrl(pathname)
 
   const ogImage = toAbsoluteUrl(image) ?? `${baseSiteUrl}/modern-office-building.webp`
 

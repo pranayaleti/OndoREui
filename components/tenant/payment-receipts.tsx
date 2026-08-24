@@ -44,7 +44,7 @@ export function PaymentReceipts({ receipts, onDownload }: PaymentReceiptsProps) 
             <div>
               <p className="font-medium text-sm">{r.receiptNumber}</p>
               <p className="text-xs text-gray-500">
-                {new Date(r.paymentDate).toLocaleDateString()} — ${(r.amountCents / 100).toFixed(2)}
+                {new Date(r.paymentDate).toLocaleDateString()}, ${(r.amountCents / 100).toFixed(2)}
               </p>
             </div>
             <button

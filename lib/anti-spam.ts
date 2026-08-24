@@ -2,11 +2,11 @@
  * Lightweight client-side anti-spam helpers for public lead/contact forms.
  *
  * Two layered defenses, both gated entirely client-side:
- *   1. Honeypot field — a hidden input bots gleefully fill in. Human users
+ *   1. Honeypot field, a hidden input bots gleefully fill in. Human users
  *      can't see or focus it, so any non-empty value at submit time is a
  *      reliable bot signal. Drop the submission silently (don't tell the
  *      bot which field gave it away).
- *   2. Submit time-gate — bots POST in <100 ms; legitimate humans take at
+ *   2. Submit time-gate, bots POST in <100 ms; legitimate humans take at
  *      least a few seconds to read + fill a multi-field form. Reject any
  *      submission that arrives sooner than `minDwellMs`.
  *

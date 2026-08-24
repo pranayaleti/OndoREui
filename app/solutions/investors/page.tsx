@@ -5,18 +5,20 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/solutions/investors") },
   title: "For Investors | Ondo Real Estate",
   description: "AI-powered portfolio analytics, cashflow modeling, and deal access for Utah real estate investors.",
 }
 
 const features = [
   { icon: BarChart3, title: "Portfolio analytics & risk scoring", body: "Track performance across every property with real-time risk scores and occupancy trends." },
-  { icon: AlertTriangle, title: "At-risk tenant detection", body: "AI identifies payment risk before it becomes a problem — so you can intervene early." },
+  { icon: AlertTriangle, title: "At-risk tenant detection", body: "AI identifies payment risk before it becomes a problem: so you can intervene early." },
   { icon: Calculator, title: "Cashflow modeling", body: "Model returns, NOI, and cap rates across your portfolio with live financial data." },
   { icon: Building2, title: "Deal access", body: "Browse fractional and commercial investment opportunities in Utah." },
-  { icon: Bot, title: "AI portfolio assistant", body: "Ask questions in plain English — get summaries, risk analysis, and vendor suggestions powered by Claude AI." },
+  { icon: Bot, title: "AI portfolio assistant", body: "Ask questions in plain English: get summaries, risk analysis, and vendor suggestions powered by Claude AI." },
   { icon: TrendingUp, title: "Predictive maintenance", body: "AI analyzes maintenance history to forecast upcoming costs and prevent expensive surprises." },
   { icon: Bell, title: "Real-time alerts", body: "Push notifications for late payments, maintenance emergencies, and lease expirations." },
   { icon: Wrench, title: "Vendor management", body: "Track preferred vendors, assign work orders, and compare costs across your portfolio." },
@@ -38,7 +40,7 @@ export default function InvestorsPage() {
       />
       <PageBanner
         title="Grow your portfolio. Maximize returns."
-        subtitle="AI-powered insights, cashflow modeling, and deal access — all in one platform."
+        subtitle="AI-powered insights, cashflow modeling, and deal access: all in one platform."
       />
 
       {/* Features */}

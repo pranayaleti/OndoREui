@@ -124,7 +124,7 @@ export default function FoundersLetterPage() {
                 What started as a personal passion evolved into a full-time vision: to invest in real estate and eventually dedicate my career to it. In early <strong className="text-primary">2022</strong>, I launched both <a href="https://ondosoft.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 font-semibold decoration-2 underline-offset-2 transition-colors">OndoSoft</a> and <strong className="text-primary">Ondo Real Estate</strong>, blending technology and real estate innovation.
               </p>
               <p className="text-foreground/70 text-lg leading-relaxed">
-                Around the same time, I began building this very website — a continuous work in progress that evolves as I do. Every update reflects a step forward in our mission to make property management smarter, more transparent, and deeply human.
+                Around the same time, I began building this very website, a continuous work in progress that evolves as I do. Every update reflects a step forward in our mission to make property management smarter, more transparent, and deeply human.
               </p>
             </section>
 
@@ -330,7 +330,7 @@ export default function FoundersLetterPage() {
           <div className="bg-card rounded-xl p-6 border border-border shadow-sm group-hover:shadow-lg transition-all duration-300 group-hover:border-primary/50">
             <h3 className="text-xl font-bold text-foreground mb-3">The Foundation</h3>
             <p className="text-foreground/70 text-sm leading-relaxed">
-              Began journey in <strong className="text-primary">software engineering</strong> — mastering full stack development, 
+              Began journey in <strong className="text-primary">software engineering</strong>, mastering full stack development, 
               building scalable applications, and developing a deep understanding of technology's potential.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -414,7 +414,7 @@ export default function FoundersLetterPage() {
           <div className="bg-card rounded-xl p-6 border border-border shadow-sm group-hover:shadow-lg transition-all duration-300 group-hover:border-primary/50">
             <h3 className="text-xl font-bold text-foreground mb-3">The Future</h3>
             <p className="text-foreground/70 text-sm leading-relaxed">
-              Expanding Ondo into a <strong className="text-primary">fully integrated real estate ecosystem</strong> — 
+              Expanding Ondo into a <strong className="text-primary">fully integrated real estate ecosystem</strong>, 
               combining management, investment, and technology to serve owners and tenants with unprecedented innovation.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">

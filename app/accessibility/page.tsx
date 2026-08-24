@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Accessibility, Eye, Volume2, MousePointer, Keyboard, Smartphone, Monitor, CheckCircle } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/accessibility", {
+  title: "Accessibility | Ondo Real Estate",
+  description: "Accessibility features and commitment for the Ondo Real Estate website and services.",
+})
+
 
 export default function AccessibilityPage() {
   const accessibilityFeatures = [

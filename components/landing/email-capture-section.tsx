@@ -26,7 +26,7 @@ export function EmailCaptureSection() {
       setStatus("submitting")
       setErrorMsg(null)
 
-      // Derive a friendly name from the email local-part — backend requires `name`.
+      // Derive a friendly name from the email local-part, backend requires `name`.
       const localPart = trimmed.split("@")[0] ?? "Subscriber"
       const friendlyName = localPart
         .replace(/[._-]+/g, " ")
@@ -64,7 +64,7 @@ export function EmailCaptureSection() {
             <FileText className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-2xl font-bold mb-2 text-foreground">
-            Utah landlord checklist — stay in the loop
+            Utah landlord checklist, stay in the loop
           </h2>
           <p className="text-foreground/70 mb-3">
             Leave your email and we&apos;ll share practical landlord tips and follow up with the
@@ -91,7 +91,7 @@ export function EmailCaptureSection() {
 
           {submitted ? (
             <p className="text-primary font-semibold py-4" role="status" aria-live="polite">
-              Thanks — we&apos;ll follow up at your email with landlord tips and checklist materials.
+              Thanks, we&apos;ll follow up at your email with landlord tips and checklist materials.
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>

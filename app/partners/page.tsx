@@ -5,8 +5,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { SITE_EMAILS } from "@/lib/site"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/partners") },
   title: "Partners | Ondo Real Estate",
   description: "Ondo integrates with Stripe, Supabase, HubSpot, Resend, Anthropic Claude, and Leaflet Maps.",
 }

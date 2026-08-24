@@ -195,7 +195,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {content.neighborhoods.map((hood) => {
-                const [name, desc] = hood.includes(" — ") ? hood.split(" — ") : [hood, null]
+                const [name, desc] = hood.includes(", ") ? hood.split(", ") : [hood, null]
                 const neighborhoodSlug = findNeighborhoodSlugForCard(city.name, name)
                 const cardBody = (
                   <Card className={neighborhoodSlug ? "hover:bg-muted/50 transition-colors cursor-pointer h-full" : undefined}>
@@ -343,7 +343,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
         <section className="text-center py-8">
           <h2 className="text-2xl font-bold mb-3">Ready to Get Started in {city.name}?</h2>
           <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
-            Whether you&apos;re buying, selling, investing, or need property management — our local team is here to help.
+            Whether you&apos;re buying, selling, investing, or need property management, our local team is here to help.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">

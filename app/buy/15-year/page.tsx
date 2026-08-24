@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { TrendingDown, Calendar, DollarSign, Target } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/15-year", {
+  title: "15-Year Mortgage Guide | Utah Real Estate",
+  description: "Learn about 15-year fixed-rate mortgages in Utah. Build equity faster and pay less interest with shorter loan terms.",
+})
+
 
 export default function FifteenYearPage() {
   return (

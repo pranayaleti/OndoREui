@@ -60,7 +60,7 @@ export default function RentingVsOwningHiddenMath() {
 
       <PageBanner
         title={title}
-        subtitle="Use real math—not slogans—to decide."
+        subtitle="Use real math: not slogans: to decide."
         backgroundImage="/modern-office-building.png"
       />
 

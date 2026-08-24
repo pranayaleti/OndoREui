@@ -60,7 +60,7 @@ export default function BackyardUpgradesAndFertilizerGuide() {
 
       <PageBanner
         title={title}
-        subtitle="Curb appeal and a healthy lawn — on a schedule you can keep."
+        subtitle="Curb appeal and a healthy lawn: on a schedule you can keep."
         backgroundImage="/modern-apartment-balcony.png"
       />
 
@@ -86,7 +86,7 @@ export default function BackyardUpgradesAndFertilizerGuide() {
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
               The backyard is where lifestyle value and curb appeal meet. A few well-chosen upgrades
-              and a consistent lawn routine do more for enjoyment — and first impressions — than almost
+              and a consistent lawn routine do more for enjoyment, and first impressions, than almost
               any interior project of the same cost.
             </p>
 
@@ -95,20 +95,20 @@ export default function BackyardUpgradesAndFertilizerGuide() {
               <li><strong>Patio or deck:</strong> defined outdoor living space is the highest-impact addition for both use and resale.</li>
               <li><strong>Low-water landscaping:</strong> native and drought-tolerant beds with drip irrigation cut water bills, especially in dry climates.</li>
               <li><strong>Lighting &amp; fencing:</strong> path lighting and clean fence lines make a yard feel finished and private.</li>
-              <li><strong>Shade trees:</strong> the long game — they lower cooling costs and add mature-landscape value.</li>
+              <li><strong>Shade trees:</strong> the long game, they lower cooling costs and add mature-landscape value.</li>
             </ul>
 
             <h2>The fertilizer schedule</h2>
             <p>
-              Fertilizer bags list three numbers — <strong>N-P-K</strong> (nitrogen for green growth,
+              Fertilizer bags list three numbers, <strong>N-P-K</strong> (nitrogen for green growth,
               phosphorus for roots, potassium for stress tolerance). Timing depends on your grass type,
               so first find out whether you have cool-season or warm-season grass:
             </p>
             <ul>
-              <li><strong>Cool-season grasses (fescue, ryegrass, bluegrass — northern U.S.):</strong> light spring feed, then the most important feeding in fall to build roots. Skip feeding during mid-summer heat.</li>
-              <li><strong>Warm-season grasses (Bermuda, zoysia, St. Augustine — southern U.S.):</strong> feed through late spring and summer when they actively grow; taper off before dormancy.</li>
-              <li><strong>Don’t over-apply nitrogen:</strong> too much causes weak, disease-prone growth — follow the bag rate for your lawn size.</li>
-              <li><strong>Water it in:</strong> irrigate after granular feeds and never fertilize a heat-stressed lawn — water deeply instead.</li>
+              <li><strong>Cool-season grasses (fescue, ryegrass, bluegrass, northern U.S.):</strong> light spring feed, then the most important feeding in fall to build roots. Skip feeding during mid-summer heat.</li>
+              <li><strong>Warm-season grasses (Bermuda, zoysia, St. Augustine, southern U.S.):</strong> feed through late spring and summer when they actively grow; taper off before dormancy.</li>
+              <li><strong>Don’t over-apply nitrogen:</strong> too much causes weak, disease-prone growth, follow the bag rate for your lawn size.</li>
+              <li><strong>Water it in:</strong> irrigate after granular feeds and never fertilize a heat-stressed lawn, water deeply instead.</li>
             </ul>
 
             <h2>Common DIY fixes</h2>
@@ -122,7 +122,7 @@ export default function BackyardUpgradesAndFertilizerGuide() {
             <h2>Takeaway</h2>
             <p>
               Pick one or two upgrades that fit how you use the yard, then keep the lawn on a simple
-              seasonal cadence — feed in fall, water deeply, fix small issues early. Planning an indoor
+              seasonal cadence, feed in fall, water deeply, fix small issues early. Planning an indoor
               project too? See our{" "}
               <Link href="/blog/finishing-basement-roi">basement finishing guide</Link> and the{" "}
               <Link href="/blog/home-maintenance-schedule">home maintenance schedule</Link>.

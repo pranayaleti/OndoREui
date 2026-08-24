@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import ExploreMapClient from "./explore-map-client";
 import { fetchProperties } from "@/lib/api/properties";
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/explore") },
   title: "Explore properties | Ondo",
   description: "Map view of available properties.",
 };
 
 // The site is statically exported (output: "export" in next.config.mjs), so
-// there is no request-time server — `force-dynamic` is invalid here and breaks
+// there is no request-time server, `force-dynamic` is invalid here and breaks
 // the export. Properties are fetched at build time for the initial pin set;
 // ExploreMapClient refreshes from the API on the client for live availability.
 export default async function ExplorePage() {

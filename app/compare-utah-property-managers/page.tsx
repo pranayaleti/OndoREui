@@ -1,4 +1,4 @@
-// NOTE(i18n): server component — English-only per OndoREui/CLAUDE.md i18n rules.
+// NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import Link from "next/link"
 import SEO from "@/components/seo"
@@ -8,30 +8,30 @@ import { Check, ArrowRight } from "lucide-react"
 
 const title = "Utah Property Management Companies Compared (2026) | Ondo RE"
 const description =
-  "Honest side-by-side comparison of Utah's top property management companies — Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and which owners each one fits best."
+  "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and which owners each one fits best."
 
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: `${SITE_URL}/compare-utah-property-managers` },
-  openGraph: { title, description, url: `${SITE_URL}/compare-utah-property-managers` },
+  alternates: { canonical: `${SITE_URL}/compare-utah-property-managers/` },
+  openGraph: { title, description, url: `${SITE_URL}/compare-utah-property-managers/` },
   twitter: { card: "summary_large_image", title, description },
   robots: { index: true, follow: true },
 }
 
 // NOTE: Competitor fees and features below are based on publicly available
 // information at the time of writing. Verify before relying on this for
-// procurement decisions — providers update pricing without notice.
+// procurement decisions, providers update pricing without notice.
 const competitors = [
   {
     name: "Ondo RE",
     headline: "Tech-forward, owner + tenant portals, AI risk alerts",
-    mgmtFee: "8% (typical) — quote on volume",
+    mgmtFee: "8% (typical), quote on volume",
     leasingFee: "50% of one month's rent",
     setupFee: "Waived for first property",
     techStack: "Custom Next.js + Supabase platform, multi-language portal, AI dashboard",
     bestFor: "Owners who want real-time visibility + a tech-forward partner",
-    cons: "Newer (2024 founded) — smaller than incumbents",
+    cons: "Newer (2024 founded), smaller than incumbents",
     isUs: true,
   },
   {
@@ -78,12 +78,12 @@ const faqs = [
   {
     question: "Are flat-fee or percentage-based property management fees better?",
     answer:
-      "Flat fees are more predictable and often cheaper for higher-rent units (above ~$2,000/mo). Percentage fees align incentives — the manager earns more when your rent is higher, so they push for rent optimization. For most Utah owners under $2,000/mo, percentage fees are slightly more cost-effective.",
+      "Flat fees are more predictable and often cheaper for higher-rent units (above ~$2,000/mo). Percentage fees align incentives, the manager earns more when your rent is higher, so they push for rent optimization. For most Utah owners under $2,000/mo, percentage fees are slightly more cost-effective.",
   },
   {
     question: "What's the difference between a leasing fee and a setup fee?",
     answer:
-      "A leasing fee is charged when a new tenant is placed — covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost when you first hire the management company, covering account setup, property inspection, and document collection. Ondo waives the setup fee for first-time clients.",
+      "A leasing fee is charged when a new tenant is placed, covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost when you first hire the management company, covering account setup, property inspection, and document collection. Ondo waives the setup fee for first-time clients.",
   },
   {
     question: "What questions should I ask a Utah property management company?",
@@ -93,7 +93,7 @@ const faqs = [
   {
     question: "How long does it take to switch property managers in Utah?",
     answer:
-      "Most contracts have a 30–60 day termination notice clause. Once you give notice, the transition typically takes another 30 days — your existing manager has to hand off security deposits, leases, and maintenance records. Plan for ~60–90 days from decision to fully transitioned.",
+      "Most contracts have a 30–60 day termination notice clause. Once you give notice, the transition typically takes another 30 days, your existing manager has to hand off security deposits, leases, and maintenance records. Plan for ~60–90 days from decision to fully transitioned.",
   },
 ]
 
@@ -124,7 +124,7 @@ export default function CompareUtahPropertyManagersPage() {
             { name: "Compare Utah Property Managers", url: `${SITE_URL}/compare-utah-property-managers` },
           ]),
           generateServiceJsonLd({
-            name: `${SITE_NAME} — Property Management Comparison`,
+            name: `${SITE_NAME}, Property Management Comparison`,
             description:
               "Side-by-side comparison of Utah's leading property management companies, covering fees, technology, services, and ideal customer fit.",
             serviceType: "Comparison Guide",
@@ -145,7 +145,7 @@ export default function CompareUtahPropertyManagersPage() {
             Fees, tech, services, and which owners each one actually fits.
           </p>
           <p className="mt-4 text-xs text-foreground/50 max-w-xl mx-auto">
-            We're biased — this is our website — but the data points below are publicly available.
+            We're biased, this is our website, but the data points below are publicly available.
             Verify with each provider before you commit.
           </p>
         </div>
@@ -225,7 +225,7 @@ export default function CompareUtahPropertyManagersPage() {
             {[
               "Licensed under the new July 1, 2026 Utah property manager law (state license OR principal broker)",
               "Average maintenance response time documented, not just promised",
-              "Tenant screening criteria written and applied consistently — ask for the rubric",
+              "Tenant screening criteria written and applied consistently, ask for the rubric",
               "Sample owner statement BEFORE you sign, not after",
               "Average tenant tenure over the past 24 months",
             ].map((item) => (
@@ -256,7 +256,7 @@ export default function CompareUtahPropertyManagersPage() {
       {/* CTA */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Get a real quote — not a brochure</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Get a real quote: not a brochure</h2>
           <p className="text-foreground/70 mb-8">
             30 minutes, no pressure, full transparency on fees and what's included.
           </p>

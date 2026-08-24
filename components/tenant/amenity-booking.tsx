@@ -65,7 +65,7 @@ export function AmenityBooking({ amenities, bookings, onBook, onCancel }: Amenit
                 <div>
                   <p className="font-medium text-sm">{b.propertyAmenities?.name || "Amenity"}</p>
                   <p className="text-xs text-gray-500">
-                    {new Date(b.bookingDate).toLocaleDateString()} — {b.startTime.slice(0, 5)} to {b.endTime.slice(0, 5)}
+                    {new Date(b.bookingDate).toLocaleDateString()}, {b.startTime.slice(0, 5)} to {b.endTime.slice(0, 5)}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">

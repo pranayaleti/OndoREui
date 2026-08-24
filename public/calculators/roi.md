@@ -1,5 +1,5 @@
 ---
-title: "ROI Calculator — Ondo Real Estate"
+title: "ROI Calculator: Ondo Real Estate"
 description: "Measure total ROI for a real estate investment with costs."
 canonical: https://www.ondorealestate.com/calculators/roi/
 ---

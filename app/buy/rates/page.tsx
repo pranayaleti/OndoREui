@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { TrendingUp, BarChart, DollarSign, Info } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/rates", {
+  title: "Mortgage Rates Explained | Utah Real Estate",
+  description: "Understand how mortgage rates work in Utah and what affects the rate you are offered.",
+})
+
 
 export default function MortgageRatesPage() {
   return (

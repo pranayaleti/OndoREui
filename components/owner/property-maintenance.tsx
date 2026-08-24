@@ -136,7 +136,7 @@ export function PropertyMaintenance({ property }: PropertyMaintenanceProps) {
             Home care reminders
           </CardTitle>
           <CardDescription>
-            Routine tasks for your property — HVAC cleanup, air filters, winterize lawn (single-family), and more
+            Routine tasks for your property, HVAC cleanup, air filters, winterize lawn (single-family), and more
           </CardDescription>
         </CardHeader>
         <CardContent>

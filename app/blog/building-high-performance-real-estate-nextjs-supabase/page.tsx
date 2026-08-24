@@ -102,7 +102,7 @@ export default function BuildingHighPerformanceRealEstatePlatform() {
 
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
-              In the competitive proptech landscape, speed and reliability are not just &quot;nice-to-haves&quot;—they are conversion drivers. At <strong>Ondo Real Estate</strong>, we rebuilt our core infrastructure using <strong>Next.js 15</strong> and <strong>Supabase</strong> to deliver a seamless experience for buyers, sellers, and property owners.
+              In the competitive proptech landscape, speed and reliability are not just &quot;nice-to-haves&quot;, they are conversion drivers. At <strong>Ondo Real Estate</strong>, we rebuilt our core infrastructure using <strong>Next.js 15</strong> and <strong>Supabase</strong> to deliver a seamless experience for buyers, sellers, and property owners.
             </p>
 
             <p>
@@ -206,7 +206,7 @@ const LandingPage = dynamic(() => import("@/components/landing-page"), {
 
             <h2>Conclusion</h2>
             <p>
-              By combining the server-side power of Next.js 15 with the scalability of Supabase, Ondo Real Estate delivers a native-app-like feel on the web. This architecture not only boosts SEO rankings but ensures our users—whether booking a notary or managing a rental portfolio—experience zero friction.
+              By combining the server-side power of Next.js 15 with the scalability of Supabase, Ondo Real Estate delivers a native-app-like feel on the web. This architecture not only boosts SEO rankings but ensures our users, whether booking a notary or managing a rental portfolio, experience zero friction.
             </p>
 
             <hr className="my-12 border-border" />

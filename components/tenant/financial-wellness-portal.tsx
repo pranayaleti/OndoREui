@@ -205,7 +205,7 @@ export function FinancialWellnessPortal() {
       {!financial?.creditEnrolled && (
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-4 text-white">
           <h3 className="font-semibold mb-1">Build Credit With Every Payment</h3>
-          <p className="text-sm text-blue-100 mb-3">Enroll in credit reporting to have your on-time rent payments reported to major bureaus — free of charge.</p>
+          <p className="text-sm text-blue-100 mb-3">Enroll in credit reporting to have your on-time rent payments reported to major bureaus, free of charge.</p>
           <a href="/tenant/credit-reporting" className="inline-block bg-card text-blue-700 dark:text-blue-400 text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-500/10 transition">
             Enroll Now
           </a>

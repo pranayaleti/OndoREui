@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { MapPin, Clock, Users, Heart, Award, GraduationCap, DollarSign } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/careers", {
+  title: "Careers at Ondo Real Estate | High-Performance Real Estate, Loans & Notary",
+  description: "Join a high-performance team where Utah real estate, lending, and notary work together as one engine.",
+})
+
 
 export default function CareersPage() {
   const openPositions = [
@@ -72,17 +80,17 @@ export default function CareersPage() {
   ]
 
   const values = [
-    "Experience — we learn from every deal and every door",
-    "Expertise — deep Utah real estate, lending, and notary knowledge",
-    "Efficiency — we move fast without cutting corners",
-    "Ownership — we take responsibility for outcomes, not just tasks",
+    "Experience, we learn from every deal and every door",
+    "Expertise, deep Utah real estate, lending, and notary knowledge",
+    "Efficiency, we move fast without cutting corners",
+    "Ownership, we take responsibility for outcomes, not just tasks",
   ]
 
   return (
     <main className="min-h-screen">
       <SEO
         title="Careers at Ondo Real Estate | High-Performance Real Estate, Loans & Notary"
-        description="Join Ondo Real Estate — a tech-forward team focused on Utah real estate, property management, home loans, and notary services. Grow your career where grit, service, and execution matter."
+        description="Join Ondo Real Estate, a tech-forward team focused on Utah real estate, property management, home loans, and notary services. Grow your career where grit, service, and execution matter."
         pathname="/about/careers"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -102,7 +110,7 @@ export default function CareersPage() {
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Why Work at Ondo Real Estate?</h2>
             <p className="text-xl text-foreground/70">
-              Ondo isn’t a “clock in, clock out” shop — we’re building a lean, tech-forward real estate platform that
+              Ondo isn’t a “clock in, clock out” shop, we’re building a lean, tech-forward real estate platform that
               helps clients buy, sell, manage, finance, and close smarter. If you like ownership, clear standards, and
               seeing your work show up in real outcomes for Utah families and investors, you’ll fit in here.
             </p>

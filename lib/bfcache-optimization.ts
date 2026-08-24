@@ -5,7 +5,7 @@
  * Rules:
  * - Use pagehide (with event.persisted) for cleanup or analytics; avoid beforeunload/unload.
  * - Use pageshow with event.persisted === true to detect bfcache restore and re-initialize.
- * - For sending data on exit, use visibilitychange, pagehide, or sendBeacon in pagehide —
+ * - For sending data on exit, use visibilitychange, pagehide, or sendBeacon in pagehide , 
  *   never rely on beforeunload/unload (they break bfcache and are unreliable).
  * - Avoid: unload listeners, Cache API during unload, closing WebSockets in unload,
  *   or setting history.state right before navigation.

@@ -23,7 +23,7 @@ export function FoundersNoteSection() {
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-3">Founder&apos;s note</h2>
             <p className="text-foreground/70 mb-6 max-w-3xl">
-              "Real estate is more than property — it is about people, growth, and legacy. At Ondo RE, we are building a
+              "Real estate is more than property, it is about people, growth, and legacy. At Ondo RE, we are building a
               modern property management and real estate platform rooted in trust, transparency, and technology so Utah
               owners rest easy and tenants feel right at home."
             </p>

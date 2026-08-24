@@ -588,7 +588,7 @@ export function DocumentsView() {
                               {document.folder}
                             </span>
                           ) : (
-                            "—"
+                            "Not available"
                           )}
                         </TableCell>
                         <TableCell>

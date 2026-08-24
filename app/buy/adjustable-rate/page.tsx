@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { TrendingDown, Clock, Calculator, AlertCircle } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/adjustable-rate", {
+  title: "Adjustable-Rate Mortgage (ARM) Guide | Utah Real Estate",
+  description: "Learn about adjustable-rate mortgages in Utah. Understand ARM benefits, rate caps, and when an ARM might be right for you.",
+})
+
 
 export default function AdjustableRatePage() {
   return (

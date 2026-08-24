@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Home, DollarSign, Shield } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/first-time", {
+  title: "First-Time Homebuyer Guide | Utah Real Estate",
+  description: "Step-by-step guidance, programs, and calculators for first-time homebuyers in Utah.",
+})
+
 
 export default function FirstTimeBuyerPage() {
   return (

@@ -353,7 +353,7 @@ const RefinanceCalculator: React.FC = () => {
                         </p>
                       ) : (
                         <p>
-                          • Interest savings: unavailable — check that current payment covers interest
+                          • Interest savings: unavailable, check that current payment covers interest
                           at the current rate
                           {results.monthlyPaymentSavings < 0 && results.extendsTerm
                             ? ', or note that a higher payment with a longer term is not framed as interest savings'
@@ -387,7 +387,7 @@ const RefinanceCalculator: React.FC = () => {
                       </p>
                     ) : results.monthlyPaymentSavings <= 0 ? (
                       <p className="text-yellow-600 font-medium">
-                        ⚠ Monthly payment does not decrease — weigh interest and term tradeoffs carefully
+                        ⚠ Monthly payment does not decrease, weigh interest and term tradeoffs carefully
                       </p>
                     ) : (
                       <p className="text-yellow-600 font-medium">

@@ -25,7 +25,7 @@ export function friendlyTimezoneLabel(iana?: string): string | undefined {
 }
 
 export function receivingPartyCaveat(): string {
-  return "Receiving parties — lenders, title companies, courts, and agencies — set their own rules for accepting remote online notarizations. Confirm acceptance before your session."
+  return "Receiving parties, lenders, title companies, courts, and agencies, set their own rules for accepting remote online notarizations. Confirm acceptance before your session."
 }
 
 export function buildCityRonIntro(city: NotaryCityRecord, state: RonStateRecord): string {
@@ -87,11 +87,11 @@ export function buildStateRonFaqs(state: RonStateRecord): NotaryFaq[] {
     },
     {
       question: `Do I need a local notary office in ${state.name}?`,
-      answer: `No. You can complete the session from anywhere with a supported device and internet. ONDO Notary offers remote online notarization only — we do not offer in-office or mobile travel appointments.`,
+      answer: `No. You can complete the session from anywhere with a supported device and internet. ONDO Notary offers remote online notarization only, we do not offer in-office or mobile travel appointments.`,
     },
     {
       question: `What documents can be notarized for ${state.name} clients?`,
-      answer: `Common use cases include real estate packages, loan signings, estate planning documents, powers of attorney, and affidavits — subject to receiving-party acceptance.`,
+      answer: `Common use cases include real estate packages, loan signings, estate planning documents, powers of attorney, and affidavits, subject to receiving-party acceptance.`,
     },
   ]
 }

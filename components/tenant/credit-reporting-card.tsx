@@ -63,12 +63,12 @@ export function CreditReportingCard() {
 
       {!enrolled && !showForm && (
         <div className="space-y-4">
-          <p className="text-sm text-gray-600">Turn your on-time rent payments into positive credit history — automatically, every month.</p>
+          <p className="text-sm text-gray-600">Turn your on-time rent payments into positive credit history, automatically, every month.</p>
           <div className="grid grid-cols-1 gap-2">
             {[
               { icon: "📈", title: "Builds Credit History", desc: "Payments reported monthly to credit bureaus" },
               { icon: "🆓", title: "Free of Charge", desc: "No fees for enrollment or ongoing reporting" },
-              { icon: "⚡", title: "Automated Monthly Reporting", desc: "Happens automatically — no action needed" },
+              { icon: "⚡", title: "Automated Monthly Reporting", desc: "Happens automatically: no action needed" },
             ].map((benefit) => (
               <div key={benefit.title} className="flex gap-3 items-start bg-blue-500/10 dark:bg-blue-500/15 rounded-lg px-3 py-2.5">
                 <span className="text-lg leading-none mt-0.5">{benefit.icon}</span>
@@ -135,10 +135,10 @@ export function CreditReportingCard() {
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
             {[
-              { label: "Bureau", value: status?.bureau ?? "—" },
+              { label: "Bureau", value: status?.bureau ?? "Not available" },
               { label: "Status", value: status?.reportingStatus ?? "Active" },
-              { label: "Enrolled On", value: status?.enrolledAt ? new Date(status.enrolledAt).toLocaleDateString() : "—" },
-              { label: "Next Report", value: status?.nextReportDate ? new Date(status.nextReportDate).toLocaleDateString() : "—" },
+              { label: "Enrolled On", value: status?.enrolledAt ? new Date(status.enrolledAt).toLocaleDateString() : "Not available" },
+              { label: "Next Report", value: status?.nextReportDate ? new Date(status.nextReportDate).toLocaleDateString() : "Not available" },
             ].map(({ label, value }) => (
               <div key={label} className="bg-muted rounded-lg px-3 py-2">
                 <p className="text-xs text-gray-500">{label}</p>

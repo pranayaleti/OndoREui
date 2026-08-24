@@ -1,5 +1,5 @@
 ---
-title: "Temporary Buydown Calculator — Ondo Real Estate"
+title: "Temporary Buydown Calculator: Ondo Real Estate"
 description: "Model 2-1, 3-2-1, or flat temporary payment subsidies (note rate stays fixed; cost ≈ subsidy sum)."
 canonical: https://www.ondorealestate.com/calculators/temporary-buydown/
 ---

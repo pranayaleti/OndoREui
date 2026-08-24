@@ -6,7 +6,7 @@ import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 
 const title = "You've Been Invited to Ondo RE | Ondo Real Estate"
 const description =
-  "Your friend invited you to Ondo RE — the platform connecting property managers, owners, and tenants. Sign up now and your friend earns a free month."
+  "Your friend invited you to Ondo RE, the platform connecting property managers, owners, and tenants. Sign up now and your friend earns a free month."
 const canonical = `${SITE_URL}/referral/`
 
 export const metadata: Metadata = {

@@ -46,29 +46,29 @@ export default function MortgageRateTrends2025() {
             </p>
 
             <h2>How Mortgage Rates Are Set</h2>
-            <p>The 30-year fixed mortgage rate is not directly set by the Federal Reserve — it tracks the 10-year Treasury yield with a spread. That spread (typically 150–200 basis points in normal conditions) widens when secondary market risk appetite falls. The Fed's federal funds rate influences the short end of the yield curve; longer-term rates are driven more by inflation expectations and investor demand for bonds.</p>
+            <p>The 30-year fixed mortgage rate is not directly set by the Federal Reserve, it tracks the 10-year Treasury yield with a spread. That spread (typically 150–200 basis points in normal conditions) widens when secondary market risk appetite falls. The Fed's federal funds rate influences the short end of the yield curve; longer-term rates are driven more by inflation expectations and investor demand for bonds.</p>
             <p>Key inputs to watch:</p>
             <ul>
-              <li><strong>10-year Treasury yield</strong> — the single best leading indicator for 30-year fixed rates</li>
-              <li><strong>PCE inflation (Personal Consumption Expenditures)</strong> — the Fed's preferred inflation gauge</li>
-              <li><strong>Jobs data</strong> — strong employment keeps inflation sticky and rates elevated</li>
-              <li><strong>MBS spreads</strong> — mortgage-backed securities spreads over Treasuries reflect lender risk appetite</li>
+              <li><strong>10-year Treasury yield</strong>, the single best leading indicator for 30-year fixed rates</li>
+              <li><strong>PCE inflation (Personal Consumption Expenditures)</strong>, the Fed's preferred inflation gauge</li>
+              <li><strong>Jobs data</strong>, strong employment keeps inflation sticky and rates elevated</li>
+              <li><strong>MBS spreads</strong>, mortgage-backed securities spreads over Treasuries reflect lender risk appetite</li>
             </ul>
 
             <h2>What Happened in 2023–2024</h2>
-            <p>The fastest rate hiking cycle in four decades pushed the 30-year fixed from sub-3% (2021) to above 8% (late 2023). Utah buyers saw purchasing power compressed by over 40% from peak to trough. The Fed began cutting its benchmark rate in late 2024, but 30-year mortgage rates did not fall proportionally — the 10-year yield remained elevated due to persistent inflation and large Treasury supply.</p>
+            <p>The fastest rate hiking cycle in four decades pushed the 30-year fixed from sub-3% (2021) to above 8% (late 2023). Utah buyers saw purchasing power compressed by over 40% from peak to trough. The Fed began cutting its benchmark rate in late 2024, but 30-year mortgage rates did not fall proportionally, the 10-year yield remained elevated due to persistent inflation and large Treasury supply.</p>
 
             <h2>Reading a Rate Quote Correctly</h2>
             <p>When a lender quotes you a rate, understand the full cost picture:</p>
             <ul>
-              <li><strong>Rate vs. APR</strong>: APR includes origination fees, discount points, and other costs — always compare APRs</li>
+              <li><strong>Rate vs. APR</strong>: APR includes origination fees, discount points, and other costs, always compare APRs</li>
               <li><strong>Discount points</strong>: 1 point = 1% of loan amount paid upfront to buy down the rate. Break-even is typically 3–5 years; only worth it if you plan to stay</li>
               <li><strong>Rate lock period</strong>: Standard locks are 30–45 days; longer locks cost more. Know your close timeline before locking</li>
-              <li><strong>Float-down options</strong>: Some lenders offer a one-time float-down if rates drop after you lock — worth asking about</li>
+              <li><strong>Float-down options</strong>: Some lenders offer a one-time float-down if rates drop after you lock, worth asking about</li>
             </ul>
 
             <h2>When to Lock vs. Float</h2>
-            <p>Trying to time rates perfectly is futile — even professional bond traders cannot do it consistently. A practical framework:</p>
+            <p>Trying to time rates perfectly is futile, even professional bond traders cannot do it consistently. A practical framework:</p>
             <ul>
               <li>If current rates make the purchase pencil and you are within 30–45 days of closing, lock</li>
               <li>If rates drop significantly (0.25%+ below your lock) before closing, ask about float-down provisions</li>

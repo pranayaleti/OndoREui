@@ -46,7 +46,7 @@ export function SelfInspectionWizard() {
         const id = wrapped?.inspection?.id ?? wrapped?.id
         if (id) setInspectionId(id)
       } catch {
-        // Allow continuing even if API fails — id will be null
+        // Allow continuing even if API fails, id will be null
       }
       setStep(1)
     } else if (step === 1) {

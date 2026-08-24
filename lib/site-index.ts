@@ -133,7 +133,7 @@ const AGENT_GUIDANCE = [
  * Required lending / brokerage / Fair Housing / AI disclosures for machine-readable
  * briefs. Wording is copied from OndoREBackend `src/utils/disclosures.ts` (lending,
  * realEstate, valuation, aiGenerated, notLegalAdvice) plus the footer Equal Housing
- * line. Do not invent NMLS or brokerage license numbers — the backend uses
+ * line. Do not invent NMLS or brokerage license numbers, the backend uses
  * `NMLS ID on file` when ONDO_NMLS_ID is unset; this static site does the same.
  */
 export const LLMS_DISCLOSURES_BLOCK = [
@@ -262,7 +262,7 @@ const BLOG_POSTS: SiteIndexLink[] = [
   {
     name: "Notary in Utah County: Remote Online Notarization",
     href: "/blog/mobile-notary-utah-county-guide",
-    description: "RON for Utah County clients — posted fees, no mobile travel appointments.",
+    description: "RON for Utah County clients, posted fees, no mobile travel appointments.",
   },
   {
     name: "Remote Online Notary for Real Estate Closings",
@@ -307,7 +307,7 @@ const BLOG_POSTS: SiteIndexLink[] = [
   {
     name: "How to Choose a Property Management Company in Utah",
     href: "/blog/how-to-choose-property-management-company-utah",
-    description: "Step-by-step guide to evaluating Utah property management companies — fees, services, and red flags.",
+    description: "Step-by-step guide to evaluating Utah property management companies, fees, services, and red flags.",
   },
   {
     name: "Utah Landlord-Tenant Law Guide",
@@ -322,7 +322,7 @@ const BLOG_POSTS: SiteIndexLink[] = [
   {
     name: "Property Management Fees in Utah",
     href: "/blog/property-management-fees-utah",
-    description: "Transparent breakdown of Utah property management pricing — management fee, leasing fee, and markup structures.",
+    description: "Transparent breakdown of Utah property management pricing, management fee, leasing fee, and markup structures.",
   },
   {
     name: "Best Neighborhoods to Invest in Utah Real Estate",
@@ -347,7 +347,7 @@ const BLOG_POSTS: SiteIndexLink[] = [
   {
     name: "Provo and Orem Rental Market Guide",
     href: "/blog/provo-orem-rental-market-guide",
-    description: "BYU, UVU, and Silicon Slopes demand — what landlords need to know in Utah County.",
+    description: "BYU, UVU, and Silicon Slopes demand, what landlords need to know in Utah County.",
   },
   {
     name: "Wasatch Front Real Estate Forecast 2026",
@@ -382,7 +382,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "Home",
           href: "/",
-          description: "Ondo Real Estate — buy, sell, finance, manage, and notarize with one partner.",
+          description: "Ondo Real Estate, buy, sell, finance, manage, and notarize with one partner.",
         },
         {
           name: "Founders letter",
@@ -443,7 +443,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "FHA loans",
           href: "/loans/fha",
-          description: "3.5% down at 580+ FICO — credit-flexible financing for Utah buyers.",
+          description: "3.5% down at 580+ FICO, credit-flexible financing for Utah buyers.",
         },
         {
           name: "VA loans",
@@ -609,7 +609,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "On-demand notary",
           href: "/notary/on-demand",
-          description: "Urgent and same-day when capacity allows — RON or mobile.",
+          description: "Urgent and same-day when capacity allows, RON or mobile.",
         },
         {
           name: "Notary locations",
@@ -821,7 +821,7 @@ export function buildLlmsTxtBody(): string {
       ({ html, md, label }) =>
         `  - ${label}: ${toAbsoluteSiteUrl(html)} → ${toAbsoluteSiteUrl(md)}`,
     ),
-    `  - Calculators: each \`/calculators/{slug}/\` has a \`/calculators/{slug}.md\` twin — index at ${toAbsoluteSiteUrl("/sitemap.md")}.`,
+    `  - Calculators: each \`/calculators/{slug}/\` has a \`/calculators/{slug}.md\` twin, index at ${toAbsoluteSiteUrl("/sitemap.md")}.`,
     "",
     "## Supported locales",
     `- Default locale: en (${SUPPORTED_LOCALE_LABELS.en})`,
@@ -843,7 +843,7 @@ export function buildLlmsTxtBody(): string {
     "## Agent-facing actions",
     ...AGENT_ACTIONS.map(
       (action) =>
-        `- ${action.toolName} on ${toAbsoluteSiteUrl(action.path)} (${action.access}) — ${action.description}`,
+        `- ${action.toolName} on ${toAbsoluteSiteUrl(action.path)} (${action.access}), ${action.description}`,
     ),
     "",
     "## Guidance for assistants",
@@ -866,23 +866,23 @@ export function buildLlmsTxtBody(): string {
     for (const link of section.links) {
       const u = toAbsoluteSiteUrl(link.href)
       const blurb = link.description.replace(/\s+/g, " ").trim()
-      lines.push(`- ${link.name}: ${u} — ${blurb}`)
+      lines.push(`- ${link.name}: ${u}, ${blurb}`)
     }
   }
   lines.push("")
   return lines.join("\n")
 }
 
-/** Extended plain-text brief for /llms-full.txt — deeper context for AI agents. */
+/** Extended plain-text brief for /llms-full.txt, deeper context for AI agents. */
 export function buildLlmsFullTxtBody(): string {
   const lines: string[] = [
-    "# Ondo Real Estate — Full AI Agent Brief",
+    "# Ondo Real Estate, Full AI Agent Brief",
     "",
     `> This is the extended version of ${toAbsoluteSiteUrl("/llms.txt")}. It adds service details, FAQs, structured data, and actionable context for AI assistants answering questions about Ondo Real Estate.`,
     "",
     "## Company overview",
     "",
-    `**${SITE_NAME}** is a Utah-focused real estate company offering brokerage, mortgage lending, notary services, property management, and investment access through a single platform. Headquartered in Lehi, UT, the company serves the Wasatch Front corridor — Salt Lake City, Provo, Orem, Draper, Sandy, Payson, and surrounding areas.`,
+    `**${SITE_NAME}** is a Utah-focused real estate company offering brokerage, mortgage lending, notary services, property management, and investment access through a single platform. Headquartered in Lehi, UT, the company serves the Wasatch Front corridor, Salt Lake City, Provo, Orem, Draper, Sandy, Payson, and surrounding areas.`,
     "",
     `- **Website**: ${baseSiteUrl}/`,
     `- **Phone**: ${SITE_PHONE}`,
@@ -910,7 +910,7 @@ export function buildLlmsFullTxtBody(): string {
     "Full-service management for Utah landlords: tenant screening (credit, criminal, eviction, income), rent collection via Stripe, maintenance coordination with vendor dispatch, owner reporting with NOI tracking, and document management. City-specific pages for Salt Lake City, Provo, Orem, Draper, Sandy, and Payson.",
     "",
     "### Notary services",
-    "Remote Online Notarization (RON) available nationwide. On-demand scheduling — we try to accommodate same-day when capacity allows (best-effort, not a guaranteed SLA). Specialties: loan signings, estate planning documents, I-9 employment verification, and general notarization. Employer packages for bulk signings. Locations hub highlights state RON coverage and Utah city pages. We do not offer in-office or mobile travel appointments.",
+    "Remote Online Notarization (RON) available nationwide. On-demand scheduling, we try to accommodate same-day when capacity allows (best-effort, not a guaranteed SLA). Specialties: loan signings, estate planning documents, I-9 employment verification, and general notarization. Employer packages for bulk signings. Locations hub highlights state RON coverage and Utah city pages. We do not offer in-office or mobile travel appointments.",
     `- On-demand page: ${toAbsoluteSiteUrl("/notary/on-demand")}`,
     `- Main notary page: ${toAbsoluteSiteUrl("/notary")}`,
     `- Locations hub: ${toAbsoluteSiteUrl("/notary/locations")}`,
@@ -920,11 +920,11 @@ export function buildLlmsFullTxtBody(): string {
     "Curated real estate investment opportunities including fractional ownership and commercial real estate deals. Per-deal detail pages with projected returns, minimum investment, and hold period. Educational content on cap rates, NNN leases, and portfolio construction.",
     "",
     "### Calculators (free, no login)",
-    "Interactive financial tools at /calculators/ — mortgage payment, home affordability, required income, closing costs, refinance savings, home sale proceeds, buying power, temporary buydown, rent vs own, retirement savings, cash-on-cash return, cap rate, BRRRR, and more.",
+    "Interactive financial tools at /calculators/, mortgage payment, home affordability, required income, closing costs, refinance savings, home sale proceeds, buying power, temporary buydown, rent vs own, retirement savings, cash-on-cash return, cap rate, BRRRR, and more.",
     "",
     "## Service area",
     "",
-    "Primary: Utah — Wasatch Front corridor.",
+    "Primary: Utah, Wasatch Front corridor.",
     "Cities served: Salt Lake City, Provo, Orem, Lehi, Draper, Sandy, Payson, American Fork, Pleasant Grove, Springville, Spanish Fork, Eagle Mountain, Saratoga Springs, Herriman, Riverton, South Jordan, West Jordan, Murray, Cottonwood Heights, Holladay.",
     "Notary RON: all 50 US states.",
     "",
@@ -953,7 +953,7 @@ export function buildLlmsFullTxtBody(): string {
     "## Frequently asked questions",
     "",
     "**Q: What areas does Ondo Real Estate serve?**",
-    "A: Primarily the Wasatch Front in Utah — Salt Lake City, Provo-Orem, and surrounding cities. Remote Online Notarization is available in all 50 states.",
+    "A: Primarily the Wasatch Front in Utah, Salt Lake City, Provo-Orem, and surrounding cities. Remote Online Notarization is available in all 50 states.",
     "",
     "**Q: Does Ondo offer property management?**",
     "A: Yes. Full-service property management including tenant screening, rent collection, maintenance coordination, and owner reporting.",
@@ -965,7 +965,7 @@ export function buildLlmsFullTxtBody(): string {
     "A: No. The platform is invitation-only. Contact info@ondorealestate.com to learn more.",
     "",
     "**Q: Does Ondo offer notary services?**",
-    "A: Yes. Remote Online Notarization (RON) nationwide. On-demand scheduling — we try to accommodate same-day when capacity allows. Loan signings, estate docs, I-9, and general notarization. We do not offer in-office or mobile travel appointments. See /notary and /notary/on-demand.",
+    "A: Yes. Remote Online Notarization (RON) nationwide. On-demand scheduling, we try to accommodate same-day when capacity allows. Loan signings, estate docs, I-9, and general notarization. We do not offer in-office or mobile travel appointments. See /notary and /notary/on-demand.",
     "",
     "**Q: Are the calculators free?**",
     "A: Yes. All calculators at /calculators/ are free with no login required.",
@@ -1089,7 +1089,7 @@ export function buildRobotsTxtBody(): string {
  */
 export function buildSitemapMdBody(): string {
   const lines: string[] = [
-    "# Ondo Real Estate — Markdown sitemap",
+    "# Ondo Real Estate, Markdown sitemap",
     "",
     `> Curated index of every public page on ${baseSiteUrl}/. Send \`Accept: text/markdown\` to any HTML URL for a Markdown response, or fetch the sibling \`.md\` twin where listed.`,
     "",
@@ -1097,7 +1097,7 @@ export function buildSitemapMdBody(): string {
     "",
     ...AGENT_MARKDOWN_TWINS.map(
       ({ html, md, label }) =>
-        `- [${label}](${toAbsoluteSiteUrl(md)}) — mirror of ${toAbsoluteSiteUrl(html)}`,
+        `- [${label}](${toAbsoluteSiteUrl(md)}), mirror of ${toAbsoluteSiteUrl(html)}`,
     ),
     "- Calculators: each `/calculators/{slug}/` HTML page has a `/calculators/{slug}.md` twin (see section below).",
     "",
@@ -1123,9 +1123,9 @@ export function buildSitemapMdBody(): string {
       if (isCalculator) {
         const slug = link.href.replace(/^\/calculators\//, "").replace(/\/$/, "")
         const mdUrl = toAbsoluteSiteUrl(`/calculators/${slug}.md`)
-        lines.push(`- [${link.name}](${url}) — ${blurb} ([Markdown](${mdUrl}))`)
+        lines.push(`- [${link.name}](${url}), ${blurb} ([Markdown](${mdUrl}))`)
       } else {
-        lines.push(`- [${link.name}](${url}) — ${blurb}`)
+        lines.push(`- [${link.name}](${url}), ${blurb}`)
       }
     }
     lines.push("")

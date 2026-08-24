@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -8,6 +9,13 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
 import { Star, Quote, ThumbsUp, Award, Users, Home } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/testimonials", {
+  title: "Testimonials | Ondo Real Estate",
+  description: "Real stories from property owners and tenants across Utah.",
+})
+
 
 export default function TestimonialsPage() {
   const testimonials = [

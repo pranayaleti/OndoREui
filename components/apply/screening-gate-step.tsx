@@ -25,7 +25,7 @@ export type ScreeningGateMode =
 interface ScreeningGateStepProps {
   propertyId: string
   applicationId: string
-  /** Deep-link screening id — used only after property match is confirmed. */
+  /** Deep-link screening id, used only after property match is confirmed. */
   screeningIdHint?: string | null
   screeningEnabled: boolean
   feeCents: number

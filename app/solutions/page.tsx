@@ -5,8 +5,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/solutions") },
   title: "Solutions | Ondo Real Estate",
   description: "One platform built for investors, landlords, property managers, and tenants across Utah.",
 }
@@ -39,8 +41,8 @@ const audiences = [
 ]
 
 const differentiators = [
-  { icon: Bot, heading: "AI assistant", body: "Ask questions, get portfolio insights, and take action — all in plain English." },
-  { icon: LayoutGrid, heading: "One unified platform", body: "Owners, tenants, investors, and managers — one login, one source of truth." },
+  { icon: Bot, heading: "AI assistant", body: "Ask questions, get portfolio insights, and take action, all in plain English." },
+  { icon: LayoutGrid, heading: "One unified platform", body: "Owners, tenants, investors, and managers, one login, one source of truth." },
   { icon: MapPin, heading: "Utah expertise", body: "Deep local knowledge of Utah's fastest-growing real estate markets." },
 ]
 

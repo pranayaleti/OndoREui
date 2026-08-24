@@ -106,7 +106,7 @@ const Header = memo(() => {
           </Link>
         </div>
 
-        {/* Centered desktop navigation — flex-1 so it fills space between logo and controls without overlapping */}
+        {/* Centered desktop navigation, flex-1 so it fills space between logo and controls without overlapping */}
         <div className="hidden md:flex flex-1 min-w-0 justify-center items-center">
           <nav
             className="flex justify-center w-full min-w-0 overflow-x-auto scrollbar-hide"
@@ -121,7 +121,7 @@ const Header = memo(() => {
 
         {/* Right-side controls */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
-          {/* Phone CTA — icon-only on mobile, full number on desktop */}
+          {/* Phone CTA, icon-only on mobile, full number on desktop */}
           <a
             href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
             className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent transition-colors shrink-0"
@@ -211,7 +211,7 @@ const Header = memo(() => {
               items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/resources" && i.href !== "/notary")}
             />
 
-            {/* Solutions + Resources + Notary — mobile inline (children sourced from allNavigationItems to stay DRY) */}
+            {/* Solutions + Resources + Notary, mobile inline (children sourced from allNavigationItems to stay DRY) */}
             {allNavigationItems
               .filter(i => i.href === "/solutions" || i.href === "/resources" || i.href === "/notary")
               .map(item => (
@@ -237,7 +237,7 @@ const Header = memo(() => {
                 onClick={handleMenuClose}
               >
                 <Phone className="h-4 w-4" />
-                {SITE_PHONE} — Free Consultation
+                {SITE_PHONE}, Free Consultation
               </a>
               <a
                 href={APP_PORTAL_LOGIN_URL}

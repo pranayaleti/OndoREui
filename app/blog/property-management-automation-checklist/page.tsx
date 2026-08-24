@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site"
 
 const slug = "/blog/property-management-automation-checklist"
 const title = "Property Management Automation Checklist"
-const description = "High-ROI automations for rent, maintenance, and owner reporting—built by a dev who also manages units."
+const description = "High-ROI automations for rent, maintenance, and owner reporting, built by a dev who also manages units."
 const published = "2025-12-10"
 const modified = "2025-12-10"
 const author = "ONDO Team"

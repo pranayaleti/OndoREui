@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site"
 
 const slug = "/blog/vacancy-risk-playbook"
 const title = "Vacancy Risk Playbook"
-const description = "How to model, reduce, and recover from vacancy—including Utah seasonality and leasing tactics." 
+const description = "How to model, reduce, and recover from vacancy, including Utah seasonality and leasing tactics." 
 const published = "2025-12-10"
 const modified = "2025-12-10"
 const author = "ONDO Team"
@@ -60,7 +60,7 @@ export default function VacancyRiskPlaybook() {
 
       <PageBanner
         title={title}
-        subtitle="Vacancy is a controllable variable—if you plan for it."
+        subtitle="Vacancy is a controllable variable: if you plan for it."
         backgroundImage="/modern-apartment-balcony.png"
       />
 

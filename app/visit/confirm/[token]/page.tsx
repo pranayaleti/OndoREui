@@ -1,6 +1,10 @@
-// app/visit/confirm/[token]/page.tsx
-import { getVisitByToken } from "@/lib/api/site-visits";
-import { VisitConfirmClient } from "./visit-confirm-client";
+import type { Metadata } from "next"
+import { getVisitByToken } from "@/lib/api/site-visits"
+import { VisitConfirmClient } from "./visit-confirm-client"
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
 
 interface Props { params: Promise<{ token: string }> }
 

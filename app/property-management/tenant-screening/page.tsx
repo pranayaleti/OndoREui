@@ -46,7 +46,7 @@ export default function TenantScreeningPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Why Screening Matters</h2>
               <p className="text-lg text-foreground/70">
-                A single bad placement can cost $8,000–15,000 in lost rent, legal fees, and turnover costs. Our systematic screening process applies consistent, documented criteria to every applicant — protecting your asset and keeping you compliant with Utah Fair Housing law.
+                A single bad placement can cost $8,000–15,000 in lost rent, legal fees, and turnover costs. Our systematic screening process applies consistent, documented criteria to every applicant, protecting your asset and keeping you compliant with Utah Fair Housing law.
               </p>
             </div>
 

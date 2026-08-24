@@ -9,7 +9,7 @@ describe("school district page tap targets", () => {
 
     // The external "Official Website" link and the internal city-served
     // links both use rounded-full pills but are distinguishable by target
-    // vs. href — assert on each kind separately so a regression in either
+    // vs. href, assert on each kind separately so a regression in either
     // one (not just whichever Array.find() happens to return first) fails.
     const websiteLink = pillLinks.find((l) => l.getAttribute("target") === "_blank")
     const cityLinks = pillLinks.filter((l) => l.getAttribute("href")?.startsWith("/locations/"))

@@ -55,7 +55,7 @@ export default function PushNotificationPrompt() {
     try {
       const sub = await subscribeToPush()
       if (sub) {
-        // Successfully subscribed — hide the banner
+        // Successfully subscribed, hide the banner
         setVisible(false)
         try {
           localStorage.setItem(DISMISSED_KEY, "1")
@@ -63,7 +63,7 @@ export default function PushNotificationPrompt() {
           // ignore
         }
       } else {
-        // Permission denied or error — just dismiss so we don't prompt again
+        // Permission denied or error, just dismiss so we don't prompt again
         dismiss()
       }
     } finally {

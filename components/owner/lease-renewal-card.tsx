@@ -17,7 +17,7 @@ const statusColors: Record<string, string> = {
 }
 
 function daysUntil(dateStr: string | null): string {
-  if (!dateStr) return "—"
+  if (!dateStr) return "Not available"
   const diff = Math.ceil((new Date(dateStr).getTime() - Date.now()) / 86400000)
   if (diff < 0) return "Overdue"
   return `${diff}d left`

@@ -556,7 +556,7 @@ const MortgagePaymentCalculator: React.FC = () => {
   );
 };
 
-/** Expandable yearly row — click to see individual months */
+/** Expandable yearly row, click to see individual months */
 function YearRow({ yr, formatCurrency }: {
   yr: { year: number; totalPrincipal: number; totalInterest: number; totalPayment: number; endBalance: number; months: Array<{ month: number; payment: number; principal: number; interest: number; remainingBalance: number }> };
   formatCurrency: (n: number) => string;

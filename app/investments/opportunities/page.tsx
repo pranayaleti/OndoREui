@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 }
 
 export default async function OpportunitiesPage() {
-  // Use mock data for static export — live data fetched client-side where needed
+  // Use mock data for static export, live data fetched client-side where needed
   const opportunities = MOCK_OPPORTUNITIES
   const openDeals = opportunities.filter((o) => o.status === "open")
   const comingSoon = opportunities.filter((o) => o.status === "coming-soon")
@@ -59,7 +59,7 @@ export default async function OpportunitiesPage() {
             <Link href="/contact" className="text-primary hover:underline">
               Contact us
             </Link>{" "}
-            for current offerings — figures are not a live fundraising inventory.
+            for current offerings, figures are not a live fundraising inventory.
           </p>
         </div>
       </section>

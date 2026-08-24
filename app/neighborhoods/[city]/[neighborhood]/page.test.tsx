@@ -26,7 +26,7 @@ describe("neighborhood page content", () => {
   it("renders the city team section and testimonials", async () => {
     render(await Page({ params }))
     // CityTeamSection renders "Your {cityName} Real Estate Team" and
-    // CityTestimonials renders "What {cityName} Clients Say" — assert on
+    // CityTestimonials renders "What {cityName} Clients Say", assert on
     // both components' actual headings rather than guessed copy.
     expect(screen.getByText(/Real Estate Team/i)).toBeInTheDocument()
     expect(screen.getByText(/Clients Say/i)).toBeInTheDocument()
@@ -39,7 +39,7 @@ describe("neighborhood page content", () => {
   })
 })
 
-describe("neighborhood page — market context, map, and FAQ", () => {
+describe("neighborhood page, market context, map, and FAQ", () => {
   it("shows city-level market context, clearly labeled as citywide", async () => {
     render(await Page({ params }))
     expect(screen.getByText(/Salt Lake City market context/i)).toBeInTheDocument()
@@ -63,8 +63,8 @@ describe("neighborhood page — market context, map, and FAQ", () => {
     render(await Page({ params }))
     const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
     // SEO/JsonLd merges every JSON-LD object passed to a page into a single
-    // <script> tag — one object if there's only one, otherwise a JSON array
-    // — rather than one script per object. Flatten before searching so this
+    // <script> tag, one object if there's only one, otherwise a JSON array
+    //, rather than one script per object. Flatten before searching so this
     // works regardless of how many other JSON-LD entries the page emits.
     const allEntries = scripts.flatMap((s) => {
       try {

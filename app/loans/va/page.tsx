@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 }
 
 const benefits = [
-  { title: "Zero Down Payment", description: "No down payment required for eligible borrowers — the most powerful benefit in housing finance", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "No Private Mortgage Insurance", description: "VA loans never require PMI regardless of down payment amount — saving hundreds per month", icon: <Shield className="h-6 w-6" /> },
-  { title: "Competitive Rates", description: "VA loans historically carry rates 0.25–0.5% below conventional — backed by the government guarantee", icon: <Star className="h-6 w-6" /> },
+  { title: "Zero Down Payment", description: "No down payment required for eligible borrowers: the most powerful benefit in housing finance", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "No Private Mortgage Insurance", description: "VA loans never require PMI regardless of down payment amount: saving hundreds per month", icon: <Shield className="h-6 w-6" /> },
+  { title: "Competitive Rates", description: "VA loans historically carry rates 0.25–0.5% below conventional: backed by the government guarantee", icon: <Star className="h-6 w-6" /> },
   { title: "Limited Closing Costs", description: "VA caps what lenders can charge; sellers can pay all closing costs on a VA loan", icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
@@ -38,7 +38,7 @@ export default function VALoanPage() {
           { name: "VA Loans", url: `${SITE_URL}/loans/va` },
         ])}
       />
-      <PageBanner title="VA Home Loans" subtitle="Earned benefits for veterans and active-duty service members — zero down, no PMI" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="VA Home Loans" subtitle="Earned benefits for veterans and active-duty service members: zero down, no PMI" backgroundImage="/modern-office-building.png" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -46,7 +46,7 @@ export default function VALoanPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">The VA Home Loan Benefit</h2>
               <p className="text-lg text-foreground/70">
-                The VA home loan program is one of the most powerful financial benefits available to those who have served. Backed by the Department of Veterans Affairs, VA loans allow eligible borrowers to purchase a home with no down payment, no PMI, and competitive rates — in Utah and nationwide.
+                The VA home loan program is one of the most powerful financial benefits available to those who have served. Backed by the Department of Veterans Affairs, VA loans allow eligible borrowers to purchase a home with no down payment, no PMI, and competitive rates, in Utah and nationwide.
               </p>
             </div>
 
@@ -94,7 +94,7 @@ export default function VALoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Utah Military Context</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Hill Air Force Base (Davis County) — large VA loan market</li>
+                    <li>• Hill Air Force Base (Davis County), large VA loan market</li>
                     <li>• Dugway Proving Ground, Tooele County</li>
                     <li>• Utah National Guard installations across Wasatch Front</li>
                   </ul>

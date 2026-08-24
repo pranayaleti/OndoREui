@@ -359,7 +359,7 @@ const AffordabilityCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Results — aria-live announces updates to screen readers when results are calculated */}
+          {/* Results, aria-live announces updates to screen readers when results are calculated */}
           <div className="space-y-6" aria-live="polite" aria-atomic="true">
             {results && (
               <>

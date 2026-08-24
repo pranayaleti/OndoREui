@@ -99,7 +99,7 @@ export default function WhyUtahPage() {
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <Reason icon={<Briefcase className="h-5 w-5" />} title="Diverse, resilient economy">
-              Utah balances tech, healthcare, finance, logistics, tourism, and outdoor industries—reducing
+              Utah balances tech, healthcare, finance, logistics, tourism, and outdoor industries, reducing
               exposure to any single sector and supporting steady tenant demand across cycles.
             </Reason>
             <Reason icon={<Users className="h-5 w-5" />} title="Population & migration growth">
@@ -112,14 +112,14 @@ export default function WhyUtahPage() {
             </Reason>
             <Reason icon={<DollarSign className="h-5 w-5" />} title="Relative affordability vs. coastal markets">
               While prices have appreciated, Utah still offers a compelling cost‑of‑living and business‑cost edge
-              compared to West Coast hubs—expanding the renter and buyer pool.
+              compared to West Coast hubs, expanding the renter and buyer pool.
             </Reason>
             <Reason icon={<ShieldCheck className="h-5 w-5" />} title="Landlord‑friendly, predictable processes">
               Streamlined processes and practical timelines mean fewer surprises for operators compared with
               stricter jurisdictions.
             </Reason>
             <Reason icon={<Trophy className="h-5 w-5" />} title="2034 Winter Olympics tailwinds">
-              The upcoming Games catalyze infrastructure, hospitality, and global visibility—historic precedents
+              The upcoming Games catalyze infrastructure, hospitality, and global visibility, historic precedents
               point to durable demand lifts in the years around the event.
             </Reason>
             <Reason icon={<Trees className="h-5 w-5" />} title="Lifestyle moat: outdoors, safety, community">

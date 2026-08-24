@@ -96,7 +96,7 @@ export default function CashOnCashReturnExplained() {
             </p>
             <ul>
               <li><strong>Annual pre-tax cash flow</strong> = rental income − operating expenses − debt service (mortgage principal + interest).</li>
-              <li><strong>Total cash invested</strong> = down payment + closing costs + upfront repairs — i.e. the real money out of pocket, not the purchase price.</li>
+              <li><strong>Total cash invested</strong> = down payment + closing costs + upfront repairs, i.e. the real money out of pocket, not the purchase price.</li>
             </ul>
 
             <h2>A worked example</h2>
@@ -113,7 +113,7 @@ export default function CashOnCashReturnExplained() {
 
             <h2>How it differs from cap rate and CAGR</h2>
             <ul>
-              <li><strong>Cap rate</strong> = NOI ÷ property value — ignores financing, so it measures the asset, not your leveraged position.</li>
+              <li><strong>Cap rate</strong> = NOI ÷ property value, ignores financing, so it measures the asset, not your leveraged position.</li>
               <li><strong>Cash-on-cash</strong> includes your loan, so it reflects the effect of leverage on <em>your</em> cash.</li>
               <li><strong>CAGR</strong> measures the compounded annual growth of a value over time (e.g. equity or portfolio), while cash-on-cash is a single-year yield. Use the{" "}
                 <Link href="/calculators/cagr">CAGR calculator</Link> for the growth-over-time view.</li>
@@ -122,7 +122,7 @@ export default function CashOnCashReturnExplained() {
             <h2>What a “good” number is</h2>
             <p>
               It depends on strategy and market, but many buy-and-hold investors target roughly 8–12%
-              cash-on-cash. Pair it with cap rate and CAGR — no single metric tells the whole story.
+              cash-on-cash. Pair it with cap rate and CAGR, no single metric tells the whole story.
             </p>
 
             <h2>Takeaway</h2>

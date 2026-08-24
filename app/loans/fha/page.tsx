@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 }
 
 const benefits = [
-  { title: "3.5% Down Payment", description: "As low as 3.5% down with a 580+ credit score — one of the lowest available", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "3.5% Down Payment", description: "As low as 3.5% down with a 580+ credit score: one of the lowest available", icon: <DollarSign className="h-6 w-6" /> },
   { title: "Flexible Credit Standards", description: "Scores as low as 500 accepted (with 10% down); ideal for buyers rebuilding credit", icon: <Shield className="h-6 w-6" /> },
-  { title: "Gift Funds Allowed", description: "100% of the down payment can come from family gifts — no seasoning required", icon: <Users className="h-6 w-6" /> },
+  { title: "Gift Funds Allowed", description: "100% of the down payment can come from family gifts: no seasoning required", icon: <Users className="h-6 w-6" /> },
   { title: "Higher DTI Tolerance", description: "Debt-to-income up to 57% with compensating factors vs 43–45% for conventional", icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
@@ -46,7 +46,7 @@ export default function FHALoanPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Is an FHA Loan?</h2>
               <p className="text-lg text-foreground/70">
-                FHA loans are mortgages insured by the Federal Housing Administration. Because the government backs the lender against default, lenders can offer lower down payment requirements and more flexible qualification standards — making homeownership accessible to more Utah buyers.
+                FHA loans are mortgages insured by the Federal Housing Administration. Because the government backs the lender against default, lenders can offer lower down payment requirements and more flexible qualification standards, making homeownership accessible to more Utah buyers.
               </p>
             </div>
 

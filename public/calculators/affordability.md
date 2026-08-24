@@ -1,5 +1,5 @@
 ---
-title: "Home Affordability Calculator — Ondo Real Estate"
+title: "Home Affordability Calculator: Ondo Real Estate"
 description: "Estimate what home price fits your income, debts, and expenses."
 canonical: https://www.ondorealestate.com/calculators/affordability/
 ---

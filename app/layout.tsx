@@ -9,7 +9,6 @@ import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getSupabaseConnectSrc, getSupabaseOrigin } from "@/lib/site"
 import { getSiteGeoMetaOther } from "@/lib/seo"
-import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { DEFAULT_LOCALE } from "@/lib/locales"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
 import Header from "@/components/header"
@@ -46,11 +45,11 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_BRAND_SHORT} | ${SITE_NAME} — Utah real estate & property management`,
+    default: `${SITE_BRAND_SHORT} | ${SITE_NAME}: Utah real estate and property management`,
     template: `%s | ${SITE_BRAND_SHORT}`,
   },
   description:
-    "Ondo RE (Ondo Real Estate): Utah property management, mortgages, buying & selling, and investor tools—modern software with local expertise.",
+    "Ondo RE (Ondo Real Estate): Utah property management, mortgages, buying and selling, and investor tools with modern software and local expertise.",
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -106,15 +105,11 @@ export const metadata: Metadata = {
     "Utah housing market",
     "MLS listings Utah",
   ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: buildMetadataLanguages("/"),
-  },
   openGraph: {
     type: "website",
-    url: SITE_URL,
+    url: `${SITE_URL.replace(/\/$/, "")}/`,
     siteName: SITE_NAME,
-    title: `${SITE_BRAND_SHORT} | ${SITE_NAME} — Utah real estate & property management`,
+    title: `${SITE_BRAND_SHORT} | ${SITE_NAME}: Utah real estate & property management`,
     description:
       "Ondo RE: Utah property management, mortgages, and real estate services across the Wasatch Front.",
     images: [
@@ -122,13 +117,13 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/modern-office-building.webp`,
         width: 1200,
         height: 630,
-        alt: `${SITE_BRAND_SHORT} (${SITE_NAME}) — Utah headquarters and services`,
+        alt: `${SITE_BRAND_SHORT} (${SITE_NAME}): Utah headquarters and services`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_BRAND_SHORT} | ${SITE_NAME} — Utah real estate & property management`,
+    title: `${SITE_BRAND_SHORT} | ${SITE_NAME}: Utah real estate & property management`,
     description:
       "Ondo RE: Utah property management, mortgages, and real estate services across the Wasatch Front.",
     images: [`${SITE_URL}/modern-office-building.webp`],
@@ -198,7 +193,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="speculationrules"
           dangerouslySetInnerHTML={{ __html: getSpeculationRulesJson() }}
         />
-        {/* CSP: no upgrade-insecure-requests — it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts. Note: unsafe-inline kept for style-src (required by Next.js inline styles). unsafe-eval added only in dev (React Refresh requires it). */}
+        {/* CSP: no upgrade-insecure-requests, it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts. Note: unsafe-inline kept for style-src (required by Next.js inline styles). unsafe-eval added only in dev (React Refresh requires it). */}
         <meta
           httpEquiv="Content-Security-Policy"
           content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com${supabaseConnectSrc ? ` ${supabaseConnectSrc}` : ""} https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';`}
@@ -206,9 +201,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.className} ${outfit.variable} min-h-screen bg-background text-foreground`}>
-        {/* GTM <noscript> iframe — geo-gated when JS is available. No-JS visitors cannot be geo-detected. */}
+        {/* GTM <noscript> iframe, geo-gated when JS is available. No-JS visitors cannot be geo-detected. */}
         <GeoGatedGoogleTagManagerNoscript />
-        {/* NOTE(i18n): server component — translate when Next.js i18n routing is added */}
+        {/* NOTE(i18n): server component, translate when Next.js i18n routing is added */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
@@ -231,7 +226,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <Footer />
           </div>
-          {/* Floating WhatsApp CTA — env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
+          {/* Floating WhatsApp CTA, env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
           <WhatsAppFloatButton />
           {/* Site-wide public assistant. Bottom-left so it never overlaps the WhatsApp CTA or the
               property-scoped LeasingChatWidget, both of which sit bottom-right. Hides itself on
@@ -243,7 +238,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data={[generateRealEstateBusinessJsonLd(), generateWebsiteJsonLd()].filter(Boolean)}
         />
         {/* Google Analytics moved into the geo-gated <TrackingTags /> bundle
-            (below) — GA sets cookies and needs consent in EU/EEA too. */}
+            (below), GA sets cookies and needs consent in EU/EEA too. */}
         {/* HubSpot tracking moved into geo-gated <TrackingTags /> for privacy parity. */}
         {/*
           Marketing / retargeting tracking pixels.
@@ -256,7 +251,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Vercel Analytics disabled for static exports - only works on Vercel platform */}
         {/* {process.env['NEXT_PUBLIC_VERCEL'] && <Analytics />} */}
         {/* rb2b moved into the geo-gated <TrackingTags /> bundle (above) for
-            privacy compliance — see components/analytics/tracking-tags.tsx. */}
+            privacy compliance, see components/analytics/tracking-tags.tsx. */}
       </body>
     </html>
   )

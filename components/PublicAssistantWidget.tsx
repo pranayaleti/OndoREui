@@ -5,7 +5,7 @@
  *
  * The counterpart to LeasingChatWidget, and deliberately not the same component. That one is
  * scoped to a single listing and is the right surface on a property page. This one runs
- * everywhere else — pricing, locations, calculators, blog, academy — where the visitor is
+ * everywhere else, pricing, locations, calculators, blog, academy, where the visitor is
  * usually an owner deciding whether to hire a manager, or someone with a mortgage question.
  *
  * Notes that matter:
@@ -35,7 +35,7 @@ interface Turn {
 }
 
 const GREETING =
-  "Hi — I can help with property management, renting, buying, loans, or notary questions. What brings you here?";
+  "Hi, I can help with property management, renting, buying, loans, or notary questions. What brings you here?";
 
 const SUGGESTIONS = [
   'What do you charge to manage a rental?',
@@ -109,7 +109,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
       const next: Turn[] = [...turns, { id: `u-${Date.now()}`, role: 'user', content: message }];
       setTurns(next);
 
-      // Send only the tail. The agent is a front door, not a case file — older turns stop
+      // Send only the tail. The agent is a front door, not a case file, older turns stop
       // earning their token cost quickly.
       const payload: PublicAssistantMessage[] = next
         .slice(-MAX_TURNS_SENT)
@@ -182,7 +182,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
       <header className="flex items-center justify-between border-b border-neutral-200 bg-[#0B0B0B] px-4 py-3">
         <div className="min-w-0">
           <h2 className="truncate text-sm font-semibold text-white">Ask Ondo</h2>
-          <p className="text-xs text-neutral-400">Automated assistant — a person can take over anytime</p>
+          <p className="text-xs text-neutral-400">Automated assistant, a person can take over anytime</p>
         </div>
         {!inline && (
           <button
@@ -255,7 +255,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
 
         {leadCaptured && !escalated && (
           <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-            Thanks — your details are with the team and someone will be in touch.
+            Thanks, your details are with the team and someone will be in touch.
           </p>
         )}
 

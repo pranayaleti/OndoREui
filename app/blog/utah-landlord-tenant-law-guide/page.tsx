@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 
 const slug = "/blog/utah-landlord-tenant-law-guide"
 const title = "Utah Landlord-Tenant Law: What Every Property Owner Must Know"
-const description = "A practical guide to Utah rental laws in 2026 — security deposits, eviction timelines, habitability standards, and Fair Housing requirements."
+const description = "A practical guide to Utah rental laws in 2026, security deposits, eviction timelines, habitability standards, and Fair Housing requirements."
 const published = "2026-03-23"
 const modified = "2026-03-23"
 const author = "Ondo RE Team"
@@ -71,7 +71,7 @@ export default function UtahLandlordTenantLawGuide() {
           </div>
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Utah landlord-tenant law sits in the Utah Code under Title 57 (Real Property). Violations — even unintentional ones — can expose you to liability, voided lease clauses, or tenant remedies including rent withholding. Here is what every Utah property owner must know in 2026.
+              Utah landlord-tenant law sits in the Utah Code under Title 57 (Real Property). Violations, even unintentional ones, can expose you to liability, voided lease clauses, or tenant remedies including rent withholding. Here is what every Utah property owner must know in 2026.
             </p>
 
             <h2>The Utah Fit Premises Act (Utah Code § 57-22)</h2>
@@ -84,14 +84,14 @@ export default function UtahLandlordTenantLawGuide() {
               <li>Common areas kept clean and structurally safe</li>
               <li>No infestation of insects or rodents</li>
             </ul>
-            <p>If a landlord fails to address a habitability issue after written notice, a tenant may have the right to repair and deduct, withhold rent into an escrow account, or terminate the lease without penalty. Document every maintenance request and your response with timestamps — this is your best protection against disputes.</p>
+            <p>If a landlord fails to address a habitability issue after written notice, a tenant may have the right to repair and deduct, withhold rent into an escrow account, or terminate the lease without penalty. Document every maintenance request and your response with timestamps, this is your best protection against disputes.</p>
 
             <h2>Security Deposits</h2>
             <p>Utah does not cap the amount a landlord can charge as a security deposit. However, the rules for returning it are strict:</p>
             <ul>
               <li><strong>Return timeline:</strong> 30 days after the tenant vacates and returns the keys</li>
               <li><strong>Itemized deductions:</strong> Any deductions must be accompanied by a written, itemized list explaining what was deducted and why</li>
-              <li><strong>Normal wear and tear:</strong> Cannot be deducted — only damage beyond normal use qualifies</li>
+              <li><strong>Normal wear and tear:</strong> Cannot be deducted, only damage beyond normal use qualifies</li>
               <li><strong>Penalty for non-compliance:</strong> Tenants can sue for the deposit amount plus damages</li>
             </ul>
             <p>Take dated photos at move-in and move-out. Use a written move-in inspection form signed by the tenant. This documentation is your defense if a deposit deduction is contested.</p>
@@ -102,10 +102,10 @@ export default function UtahLandlordTenantLawGuide() {
               <li><strong>Non-payment of rent:</strong> 3-day notice to pay or vacate (Utah Code § 78B-6-802)</li>
               <li><strong>Lease violation:</strong> 3-day notice to cure or quit for material violations</li>
               <li><strong>Month-to-month tenancy termination:</strong> 15-day written notice to vacate</li>
-              <li><strong>Fixed-term lease expiration:</strong> No notice required — lease ends on the agreed date</li>
+              <li><strong>Fixed-term lease expiration:</strong> No notice required, lease ends on the agreed date</li>
             </ul>
-            <p>After the notice period, if the tenant has not complied, you may file an Unlawful Detainer action in the local circuit court. Utah's courts move relatively quickly — a hearing is typically set within 10–14 days. However, a single procedural error (improper service, incorrect notice language, wrong statutory cite) can reset the process.</p>
-            <p>Never attempt a "self-help" eviction — changing locks, removing belongings, or shutting off utilities to force a tenant out. This is illegal in Utah and exposes you to significant liability.</p>
+            <p>After the notice period, if the tenant has not complied, you may file an Unlawful Detainer action in the local circuit court. Utah's courts move relatively quickly, a hearing is typically set within 10–14 days. However, a single procedural error (improper service, incorrect notice language, wrong statutory cite) can reset the process.</p>
+            <p>Never attempt a "self-help" eviction, changing locks, removing belongings, or shutting off utilities to force a tenant out. This is illegal in Utah and exposes you to significant liability.</p>
 
             <h2>Required Lease Disclosures</h2>
             <p>Utah law requires certain disclosures in or alongside a rental agreement:</p>
@@ -122,10 +122,10 @@ export default function UtahLandlordTenantLawGuide() {
               <li>Race, color, national origin</li>
               <li>Sex, including gender identity and sexual orientation (per HUD guidance)</li>
               <li>Religion</li>
-              <li>Disability (physical or mental) — you must also allow reasonable accommodations</li>
+              <li>Disability (physical or mental), you must also allow reasonable accommodations</li>
               <li>Familial status (families with children under 18)</li>
             </ul>
-            <p>Apply the same screening criteria — income ratio, credit threshold, eviction history — to every applicant in the same property. Keep records of every application decision for at least 3 years. A complaint to the Utah Antidiscrimination and Labor Division (UALD) or HUD can trigger an investigation even if your intent was not discriminatory.</p>
+            <p>Apply the same screening criteria, income ratio, credit threshold, eviction history, to every applicant in the same property. Keep records of every application decision for at least 3 years. A complaint to the Utah Antidiscrimination and Labor Division (UALD) or HUD can trigger an investigation even if your intent was not discriminatory.</p>
 
             <h2>Rent Increases and Notice Requirements</h2>
             <p>Utah has no rent control. Landlords may raise rent to any amount, but must provide proper notice:</p>
@@ -135,7 +135,7 @@ export default function UtahLandlordTenantLawGuide() {
             </ul>
 
             <h2>Entry Rights</h2>
-            <p>Utah law requires landlords to give reasonable notice before entering a tenant's unit — generally interpreted as 24 hours. Exceptions include genuine emergencies. Include your entry notice policy in the lease agreement to prevent misunderstandings.</p>
+            <p>Utah law requires landlords to give reasonable notice before entering a tenant's unit, generally interpreted as 24 hours. Exceptions include genuine emergencies. Include your entry notice policy in the lease agreement to prevent misunderstandings.</p>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">

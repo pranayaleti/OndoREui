@@ -22,7 +22,7 @@ export function PropertiesAgentIntro() {
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Browse Ondo Real Estate&apos;s current Utah rentals along the Wasatch Front. The results below load a
-          client-side search, filter, and map — this summary keeps the essentials available for AI agents and no-JS
+          client-side search, filter, and map, this summary keeps the essentials available for AI agents and no-JS
           visitors.
         </p>
 
@@ -30,7 +30,7 @@ export function PropertiesAgentIntro() {
           <div>
             <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">Filter by</h2>
             <ul className="mt-2 space-y-1 text-sm text-foreground/90">
-              <li>City (partial, case-insensitive — e.g. Lehi, Salt Lake)</li>
+              <li>City (partial, case-insensitive, e.g. Lehi, Salt Lake)</li>
               <li>Minimum bedrooms</li>
               <li>Maximum monthly rent (USD)</li>
               <li>Free text against title, description, and address</li>
@@ -64,7 +64,7 @@ export function PropertiesAgentIntro() {
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
-          Ready to apply or tour? Applications are invitation-based — email{" "}
+          Ready to apply or tour? Applications are invitation-based, email{" "}
           <a href={`mailto:${SITE_EMAILS.info}`} className="underline hover:text-foreground">
             {SITE_EMAILS.info}
           </a>{" "}

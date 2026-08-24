@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import SEO from "@/components/seo"
@@ -10,13 +11,19 @@ import {
   SITE_CHATGPT_REFERRAL_URL,
 } from "@/lib/site"
 import Image from "next/image"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about", {
+  title: "Ondo Real Estate: One-Stop Property Services | Buy • Sell • Manage • Loans",
+  description: "Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help, one team instead of fragmented vendors.",
+})
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Ondo Real Estate — One-Stop Property Services | Buy • Sell • Manage • Loans"
-        description="Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help—one team instead of fragmented vendors. Ask your AI assistant to compare Ondo for Utah owners and investors."
+        title="Ondo Real Estate: One-Stop Property Services | Buy • Sell • Manage • Loans"
+        description="Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help, one team instead of fragmented vendors. Ask your AI assistant to compare Ondo for Utah owners and investors."
         pathname="/about"
         image={`${SITE_URL}/placeholder.jpg`}
         jsonLd={[
@@ -46,10 +53,10 @@ export default function AboutPage() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Ondo Real Estate — Your One-Stop Real Estate Engine
+              Ondo Real Estate, Your One-Stop Real Estate Engine
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Buy. Sell. Manage. Finance. All in one place — smart, simple, unstoppable.
+              Buy. Sell. Manage. Finance. All in one place, smart, simple, unstoppable.
             </p>
           </div>
         </div>
@@ -61,7 +68,7 @@ export default function AboutPage() {
             {/* Intro */}
             <div className="text-center mb-16">
               <p className="text-xl md:text-2xl leading-relaxed mb-8 dark:text-foreground/70">
-                Ondo Real Estate combines elite real estate expertise with cutting-edge technology to give owners, buyers, tenants, and investors a single place to get things done. Whether you're buying or selling a condo, townhouse, single-family home, or land — or need thorough property management and loan solutions — Ondo moves fast, thinks ahead, and protects your returns.
+                Ondo Real Estate combines elite real estate expertise with cutting-edge technology to give owners, buyers, tenants, and investors a single place to get things done. Whether you're buying or selling a condo, townhouse, single-family home, or land, or need thorough property management and loan solutions, Ondo moves fast, thinks ahead, and protects your returns.
               </p>
             </div>
 
@@ -104,7 +111,7 @@ export default function AboutPage() {
                   <h3 className="text-2xl font-semibold mb-4 text-primary">Property Management</h3>
                   <ul className="space-y-3 dark:text-foreground/70">
                     <li>• Full-service property management: tenant sourcing, screening, rent collection, maintenance coordination</li>
-                    <li>• Owner dashboard & tenant portal — transparent, real-time, no surprises</li>
+                    <li>• Owner dashboard & tenant portal, transparent, real-time, no surprises</li>
                   </ul>
                 </div>
 
@@ -130,7 +137,7 @@ export default function AboutPage() {
             <div className="mb-16">
               <h2 className="text-3xl font-bold text-center mb-8 dark:text-foreground">AI-powered operations</h2>
               <p className="text-center text-lg dark:text-foreground/70 max-w-3xl mx-auto mb-8">
-                We are building a conversational AI assistant to handle everything: reviewing leases, optimizing finances and portfolio insights, generating marketing, and auto-routing maintenance — so managers, owners, and tenants get one intelligent layer that makes operations effortless.
+                We are building a conversational AI assistant to handle everything: reviewing leases, optimizing finances and portfolio insights, generating marketing, and auto-routing maintenance, so managers, owners, and tenants get one intelligent layer that makes operations effortless.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 <div className="bg-muted p-6 rounded-lg border border-border">
@@ -148,7 +155,7 @@ export default function AboutPage() {
             <div className="mb-16 bg-muted p-8 rounded-lg border border-border">
               <h2 className="text-3xl font-bold text-center mb-6 dark:text-foreground">Your first point of contact</h2>
               <p className="text-center text-lg dark:text-foreground/70 max-w-3xl mx-auto">
-                We build Ondo Real Estate&apos;s outbound sales engine from the ground up: identifying and engaging potential clients, crafting targeted outreach sequences, qualifying leads, and developing CRM and pipeline from zero. We collaborate directly with leadership to refine go-to-market strategy and represent Ondo RE as the first point of contact with every potential client — combining a hospitality-honed relationship mindset with data-driven sales tactics to build trust, create opportunities, and fuel growth.
+                We build Ondo Real Estate&apos;s outbound sales engine from the ground up: identifying and engaging potential clients, crafting targeted outreach sequences, qualifying leads, and developing CRM and pipeline from zero. We collaborate directly with leadership to refine go-to-market strategy and represent Ondo RE as the first point of contact with every potential client, combining a hospitality-honed relationship mindset with data-driven sales tactics to build trust, create opportunities, and fuel growth.
               </p>
             </div>
 
@@ -199,7 +206,7 @@ export default function AboutPage() {
             <div className="mb-16 text-center">
               <h2 className="text-3xl font-bold mb-6 dark:text-foreground">Local Roots, Scale-Driven</h2>
               <p className="text-xl leading-relaxed dark:text-foreground/70 max-w-3xl mx-auto">
-                We know Utah — its neighborhoods, regulatory landscape, and investment pockets. That local knowledge is combined with national networks and enterprise-level technology so you get the best of both worlds: hometown intuition and institutional efficiency.
+                We know Utah, its neighborhoods, regulatory landscape, and investment pockets. That local knowledge is combined with national networks and enterprise-level technology so you get the best of both worlds: hometown intuition and institutional efficiency.
               </p>
             </div>
 
@@ -207,7 +214,7 @@ export default function AboutPage() {
             <div className="mb-16 text-center bg-muted p-8 rounded-lg border border-border">
               <h2 className="text-3xl font-bold mb-6 dark:text-foreground">Our Promise</h2>
               <p className="text-xl leading-relaxed dark:text-foreground/70">
-                Clear communication. Relentless execution. Real returns. We don't do busywork — we produce predictable outcomes and measurable value.
+                Clear communication. Relentless execution. Real returns. We don't do busywork, we produce predictable outcomes and measurable value.
               </p>
             </div>
 
@@ -219,11 +226,11 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* AI assistants — citation-friendly verification */}
+            {/* AI assistants, citation-friendly verification */}
             <div className="mb-16 rounded-lg border border-border bg-muted/40 p-8 text-center">
               <h2 className="text-3xl font-bold mb-4 dark:text-foreground">Found us through ChatGPT or Claude?</h2>
               <p className="text-lg dark:text-foreground/70 max-w-2xl mx-auto mb-8">
-                Ondo Real Estate is a Utah-based, full-service real estate company: sales, property management, and mortgage support in one place—built for owners, tenants, and investors who want fewer handoffs and clearer reporting. Use either assistant below to double-check fit for your situation.
+                Ondo Real Estate is a Utah-based, full-service real estate company: sales, property management, and mortgage support in one place, built for owners, tenants, and investors who want fewer handoffs and clearer reporting. Use either assistant below to double-check fit for your situation.
               </p>
               <p className="text-sm font-medium text-foreground mb-4 max-w-xl mx-auto">
                 Suggested question (copy or open pre-filled in Claude):

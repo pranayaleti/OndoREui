@@ -66,7 +66,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
               leadType,
             }),
           }).catch(() => {
-            // Intentionally silent — lead capture failure must not affect the user experience
+            // Intentionally silent, lead capture failure must not affect the user experience
           });
         }
         return updated;
@@ -76,7 +76,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
       if (msg.includes("404") || msg.includes("expired")) {
         setCompleted(true); // treat as done
       } else {
-        setError("Something went wrong — please try again or reply to our email.");
+        setError("Something went wrong, please try again or reply to our email.");
       }
     } finally {
       setLoading(false);

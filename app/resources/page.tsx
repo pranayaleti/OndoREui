@@ -151,7 +151,7 @@ const notaryFAQs = [
   {
     question: "What’s the difference between mobile and online notarization?",
     answer:
-      "ONDO Notary offers Remote Online Notarization (RON) only — a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
+      "ONDO Notary offers Remote Online Notarization (RON) only, a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
   },
 ]
 
@@ -196,12 +196,12 @@ export default function ResourcesPage() {
 
       <PageBanner
         title="Real Estate Resources"
-        subtitle="Everything you need to understand Utah real estate, financing, property management, and notary workflows—without the jargon."
+        subtitle="Everything you need to understand Utah real estate, financing, property management, and notary workflows: without the jargon."
       />
 
       <PageBanner
         title="Real Estate Resources"
-        subtitle="Everything you need to understand Utah real estate, financing, property management, and notary workflows—without the jargon."
+        subtitle="Everything you need to understand Utah real estate, financing, property management, and notary workflows: without the jargon."
       />
 
       <section className="py-16 bg-background">
@@ -461,7 +461,7 @@ export default function ResourcesPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="lg:col-span-1">
               <CardHeader>
-                <CardTitle>Loans & Financing — Plain English</CardTitle>
+                <CardTitle>Loans & Financing, Plain English</CardTitle>
                 <CardDescription>
                   Simple explanations for the questions people actually type into Google about mortgages and refinance.
                 </CardDescription>
@@ -488,7 +488,7 @@ export default function ResourcesPage() {
 
             <Card className="lg:col-span-1">
               <CardHeader>
-                <CardTitle>Notary & Closings — What to Expect</CardTitle>
+                <CardTitle>Notary & Closings, What to Expect</CardTitle>
                 <CardDescription>
                   Good‑to‑know details so your notarization or closing doesn’t get delayed at the last minute.
                 </CardDescription>
@@ -515,7 +515,7 @@ export default function ResourcesPage() {
 
             <Card className="lg:col-span-1">
               <CardHeader>
-                <CardTitle>Buy • Sell • Rent — Big Picture</CardTitle>
+                <CardTitle>Buy • Sell • Rent, Big Picture</CardTitle>
                 <CardDescription>
                   High‑level guidance for common “Should I buy, sell, or keep renting?” questions.
                 </CardDescription>

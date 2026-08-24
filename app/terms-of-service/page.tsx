@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -6,6 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { FileText, Scale, Shield, AlertTriangle, CheckCircle, Users } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/terms-of-service", {
+  title: "Terms of Service | Ondo Real Estate",
+  description: "Terms of service for using the Ondo Real Estate website and related services.",
+})
+
 
 export default function TermsOfServicePage() {
   const lastUpdated = "December 15, 2024"

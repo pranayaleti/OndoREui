@@ -32,7 +32,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
       { name: "North Ogden Elementary", level: "Elementary", grades: "K–6" },
       { name: "Green Acres Elementary", level: "Elementary", grades: "K–6" },
       { name: "North Ogden Junior High", level: "Middle", grades: "7–9" },
-      { name: "Weber High School", level: "High", grades: "10–12", enrollment: 2800, notes: "Weber Warriors — strong CTE and AP programs" },
+      { name: "Weber High School", level: "High", grades: "10–12", enrollment: 2800, notes: "Weber Warriors, strong CTE and AP programs" },
       { name: "Bonneville High School", level: "High", grades: "10–12", enrollment: 1900 },
       { name: "Roy High School", level: "High", grades: "10–12", enrollment: 2100 },
     ],
@@ -66,7 +66,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     highlights: [
       "Top 3 Utah district by graduation rate",
       "IB Diploma Programme at Farmington High School",
-      "Farmington HS opened 2020 — state-of-the-art facilities",
+      "Farmington HS opened 2020, state-of-the-art facilities",
       "Multiple STEM magnet programs across the district",
     ],
   },
@@ -89,9 +89,9 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     citiesServed: ["Salt Lake City"],
     notablePrograms: ["Dual Language Immersion (Spanish, French, Mandarin)", "IB Programme at East High", "Open Classroom alternative school", "Career & Technical Education"],
     highlights: [
-      "East High — National Blue Ribbon School recognition",
+      "East High, National Blue Ribbon School recognition",
       "Extensive dual-language immersion from K–12",
-      "Open Classroom — project-based alternative program",
+      "Open Classroom, project-based alternative program",
       "Strong arts and music programs across all levels",
     ],
   },
@@ -99,7 +99,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     name: "Canyons School District",
     slug: "canyons-school-district",
     overview:
-      "Canyons School District serves the southeastern Salt Lake Valley — Sandy, Draper, Holladay, Cottonwood Heights, and South Jordan. Known for high graduation rates, exceptional AP participation, and corner canyon area schools consistently ranked among Utah's best.",
+      "Canyons School District serves the southeastern Salt Lake Valley, Sandy, Draper, Holladay, Cottonwood Heights, and South Jordan. Known for high graduation rates, exceptional AP participation, and corner canyon area schools consistently ranked among Utah's best.",
     headquarters: "Sandy, UT",
     website: "https://www.canyonsdistrict.org",
     enrollment: 34000,
@@ -114,7 +114,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     citiesServed: ["Draper", "Sandy", "Holladay", "Cottonwood Heights", "Midvale", "South Jordan"],
     notablePrograms: ["AP Capstone Diploma Program", "STEM Academy at Corner Canyon", "CTE Health Sciences", "Gifted & Talented IEP programs"],
     highlights: [
-      "Corner Canyon HS — #1 in Utah for AP exam participation and scores",
+      "Corner Canyon HS, #1 in Utah for AP exam participation and scores",
       "STEM Academy program at multiple schools",
       "Above-average graduation and college-readiness rates",
       "Strong community support and PTA engagement",
@@ -155,7 +155,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     enrollment: 15000,
     schools: [
       { name: "Provo High School", level: "High", grades: "10–12", enrollment: 1900 },
-      { name: "Timpview High School", level: "High", grades: "10–12", enrollment: 1700, notes: "Serves northeast Provo — Edgemont area" },
+      { name: "Timpview High School", level: "High", grades: "10–12", enrollment: 1700, notes: "Serves northeast Provo, Edgemont area" },
       { name: "Dixon Middle School", level: "Middle", grades: "6–9" },
       { name: "Edgemont Elementary", level: "Elementary", grades: "K–6" },
       { name: "Rock Canyon Elementary", level: "Elementary", grades: "K–6" },

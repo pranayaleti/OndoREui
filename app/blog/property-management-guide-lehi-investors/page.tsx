@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 
 const slug = "/blog/property-management-guide-lehi-investors"
 const title = "Lehi, Utah Property Management Guide for Investors (2026)"
-const description = "Everything you need to know about managing rental property in Lehi, UT — tenant profiles, pricing, legal requirements, and what a professional PM company handles for you."
+const description = "Everything you need to know about managing rental property in Lehi, UT, tenant profiles, pricing, legal requirements, and what a professional PM company handles for you."
 const published = "2026-04-06"
 const author = "Ondo RE Team"
 const category = "Property Management"
@@ -26,7 +26,7 @@ export default function PropertyManagementGuideLehi() {
   return (
     <main className="min-h-screen">
       <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="The Lehi rental market is one of Utah's strongest — here's how to operate in it." backgroundImage={image} />
+      <PageBanner title={title} subtitle="The Lehi rental market is one of Utah's strongest: here's how to operate in it." backgroundImage={image} />
       <article className="bg-background py-12">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">
           <div className="flex flex-wrap gap-3 mb-6">
@@ -41,7 +41,7 @@ export default function PropertyManagementGuideLehi() {
           </div>
           <div className="prose prose-lg max-w-none dark:prose-invert">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Lehi is the epicenter of Utah&apos;s tech boom. Adobe, Vivint, Podium, and over 100 startups have made it one of the state&apos;s fastest-growing cities. That&apos;s created a rental market unlike anywhere else on the Wasatch Front — higher incomes, lower vacancy, and tenant profiles that demand a quality product. Here&apos;s what investors need to know.
+              Lehi is the epicenter of Utah&apos;s tech boom. Adobe, Vivint, Podium, and over 100 startups have made it one of the state&apos;s fastest-growing cities. That&apos;s created a rental market unlike anywhere else on the Wasatch Front, higher incomes, lower vacancy, and tenant profiles that demand a quality product. Here&apos;s what investors need to know.
             </p>
 
             <h2>Who Rents in Lehi?</h2>
@@ -64,7 +64,7 @@ export default function PropertyManagementGuideLehi() {
               <li>Attached garage adds: $100–$150/mo</li>
               <li>EV charger ready: $75–$100/mo</li>
             </ul>
-            <p>Lehi&apos;s vacancy rate sits under 4% — one of the lowest in the state. Properly priced properties attract 10–20 qualified applications in the first week.</p>
+            <p>Lehi&apos;s vacancy rate sits under 4%, one of the lowest in the state. Properly priced properties attract 10–20 qualified applications in the first week.</p>
 
             <h2>Utah Landlord-Tenant Law Essentials</h2>
             <p>Key requirements every Lehi landlord must know:</p>
@@ -105,7 +105,7 @@ export default function PropertyManagementGuideLehi() {
               <li>Net yield after management, taxes, insurance, and maintenance: 1.5–2.5%</li>
               <li>10-year appreciation assumption (4%/yr): $540K home → $799K</li>
             </ul>
-            <p>Lehi is a cash-flow-neutral to slightly negative market at today&apos;s prices — but appreciation-driven total return is strong. Best suited for investors with a 5–10 year hold horizon.</p>
+            <p>Lehi is a cash-flow-neutral to slightly negative market at today&apos;s prices, but appreciation-driven total return is strong. Best suited for investors with a 5–10 year hold horizon.</p>
 
             <div className="not-prose mt-8 flex flex-wrap gap-3">
               <Button asChild>

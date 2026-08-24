@@ -1,5 +1,5 @@
 ---
-title: "Cap Rate Calculator — Ondo Real Estate"
+title: "Cap Rate Calculator: Ondo Real Estate"
 description: "Compute capitalization rate from NOI and purchase price."
 canonical: https://www.ondorealestate.com/calculators/cap-rate/
 ---

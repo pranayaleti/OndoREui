@@ -17,7 +17,7 @@ export interface ApiContact {
 }
 
 export interface ApiProperty {
-  /** Internal UUID — used for screening-cta and other property-scoped APIs. */
+  /** Internal UUID, used for screening-cta and other property-scoped APIs. */
   id?: string;
   publicId: string;
   title: string;

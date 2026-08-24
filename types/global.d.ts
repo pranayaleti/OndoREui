@@ -1,5 +1,7 @@
 // Global type declarations for the application
 
+declare module "*.css"
+
 // Google Analytics gtag function
 declare global {
   interface Window {

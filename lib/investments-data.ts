@@ -290,7 +290,7 @@ export const MOCK_OPPORTUNITIES: InvestmentOpportunity[] = [
     riskFactors: [
       "Self-storage is sensitive to local supply additions",
       "Month-to-month lease structure creates revenue volatility",
-      "Fully funded — this opportunity is no longer accepting investors",
+      "Fully funded, this opportunity is no longer accepting investors",
       "Operational costs may increase with utility rate changes",
     ],
     creativeFinancing: {

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Investor Brochure | Ondo Real Estate",
     description:
-      "Request our investor overview — strategy overview, portfolio highlights, and how to get started with Ondo Real Estate.",
+      "Request our investor overview, strategy overview, portfolio highlights, and how to get started with Ondo Real Estate.",
     url: `${SITE_URL}/brochure`,
   },
 }
@@ -49,7 +49,7 @@ export default function BrochurePage() {
     <main className="min-h-screen">
       <SEO
         title="Investor Brochure | Ondo Real Estate"
-        description="Request the Ondo Real Estate investor overview — strategy, portfolio, and how to start earning passive income."
+        description="Request the Ondo Real Estate investor overview, strategy, portfolio, and how to start earning passive income."
         pathname="/brochure"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -60,7 +60,7 @@ export default function BrochurePage() {
 
       <PageBanner
         title="Investor Overview"
-        subtitle="Tell us where to reach you — our team will send the investor overview and follow up."
+        subtitle="Tell us where to reach you: our team will send the investor overview and follow up."
       />
 
       <section className="py-16 bg-background">

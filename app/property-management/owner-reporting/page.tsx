@@ -11,17 +11,17 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Owner Reporting | Property Management Utah | Ondo Real Estate",
-  description: "Real-time owner reporting for Utah rental properties: monthly statements, NOI tracking, maintenance history, and document vault — all in one dashboard.",
+  description: "Real-time owner reporting for Utah rental properties: monthly statements, NOI tracking, maintenance history, and document vault, all in one dashboard.",
   alternates: { canonical: `${SITE_URL}/property-management/owner-reporting/` },
   openGraph: { title: "Owner Reporting | Ondo Real Estate", description: "Monthly statements, NOI tracking, and document vault for Utah rental owners." },
   twitter: { card: "summary_large_image", title: "Owner Reporting | Ondo", description: "Real-time financial and maintenance reporting for Utah rental owners." },
 }
 
 const features = [
-  { title: "Monthly Statements", description: "Detailed income and expense statements delivered by the 10th — rent collected, vendor invoices, management fees, net disbursement", icon: <FileText className="h-6 w-6" /> },
+  { title: "Monthly Statements", description: "Detailed income and expense statements delivered by the 10th: rent collected, vendor invoices, management fees, net disbursement", icon: <FileText className="h-6 w-6" /> },
   { title: "NOI Tracking", description: "Gross rent, vacancy, operating expenses, and net operating income tracked monthly with year-over-year comparison", icon: <BarChart3 className="h-6 w-6" /> },
-  { title: "Disbursement History", description: "Every owner distribution logged with bank reference — downloadable for tax preparation or lender review", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "Document Vault", description: "Leases, inspection reports, invoices, and notices stored and searchable — access any document in seconds", icon: <FolderOpen className="h-6 w-6" /> },
+  { title: "Disbursement History", description: "Every owner distribution logged with bank reference: downloadable for tax preparation or lender review", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Document Vault", description: "Leases, inspection reports, invoices, and notices stored and searchable: access any document in seconds", icon: <FolderOpen className="h-6 w-6" /> },
 ]
 
 export default function OwnerReportingPage() {
@@ -38,7 +38,7 @@ export default function OwnerReportingPage() {
           { name: "Owner Reporting", url: `${SITE_URL}/property-management/owner-reporting` },
         ])}
       />
-      <PageBanner title="Owner Reporting" subtitle="Complete financial visibility for your Utah rental portfolio — real-time, no spreadsheets" backgroundImage="/property-manager-meeting.png" />
+      <PageBanner title="Owner Reporting" subtitle="Complete financial visibility for your Utah rental portfolio: real-time, no spreadsheets" backgroundImage="/property-manager-meeting.png" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -46,7 +46,7 @@ export default function OwnerReportingPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Know Your Numbers, Always</h2>
               <p className="text-lg text-foreground/70">
-                Most property management firms send a PDF statement once a month. We give you a live dashboard with every transaction, every document, and every maintenance event — accessible any time from any device.
+                Most property management firms send a PDF statement once a month. We give you a live dashboard with every transaction, every document, and every maintenance event, accessible any time from any device.
               </p>
             </div>
 
@@ -65,10 +65,10 @@ export default function OwnerReportingPage() {
             <div className="bg-muted rounded-lg p-8 mb-12">
               <h3 className="text-2xl font-bold mb-4">What You See in the Portal</h3>
               <ul className="space-y-3 text-foreground/70">
-                <li>• <strong>Portfolio summary</strong> — total units, occupied vs vacant, total monthly rent roll, and aggregate NOI</li>
-                <li>• <strong>Per-property drill-down</strong> — tenant info, lease dates, last payment, open maintenance items</li>
-                <li>• <strong>Maintenance log</strong> — every request from open to closed with vendor, cost, and completion date</li>
-                <li>• <strong>Year-end packet</strong> — 1099 preparation, full-year income/expense summary, and all invoices in one download</li>
+                <li>• <strong>Portfolio summary</strong>, total units, occupied vs vacant, total monthly rent roll, and aggregate NOI</li>
+                <li>• <strong>Per-property drill-down</strong>, tenant info, lease dates, last payment, open maintenance items</li>
+                <li>• <strong>Maintenance log</strong>, every request from open to closed with vendor, cost, and completion date</li>
+                <li>• <strong>Year-end packet</strong>, 1099 preparation, full-year income/expense summary, and all invoices in one download</li>
               </ul>
             </div>
 

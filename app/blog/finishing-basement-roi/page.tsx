@@ -60,7 +60,7 @@ export default function FinishingBasementRoi() {
 
       <PageBanner
         title={title}
-        subtitle="Add square footage without moving — if the numbers work."
+        subtitle="Add square footage without moving: if the numbers work."
         backgroundImage="/modern-townhouse-garage.png"
       />
 
@@ -85,29 +85,29 @@ export default function FinishingBasementRoi() {
 
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
-              A finished basement is one of the highest-leverage ways to add usable space in a home —
+              A finished basement is one of the highest-leverage ways to add usable space in a home , 
               often at a lower cost per square foot than an addition. But the return depends on doing it
               to code and matching the finish to the neighborhood.
             </p>
 
             <h2>What it costs</h2>
             <ul>
-              <li><strong>Budget finish:</strong> roughly $30–$50 / sq ft for a basic rec room — framing, drywall, flooring, lighting.</li>
+              <li><strong>Budget finish:</strong> roughly $30–$50 / sq ft for a basic rec room, framing, drywall, flooring, lighting.</li>
               <li><strong>Mid-range with a bath:</strong> $50–$85 / sq ft once you add a bathroom, egress, and better finishes.</li>
               <li><strong>Legal apartment / ADU:</strong> $85–$140+ / sq ft with a kitchen, separate entrance, and full code compliance.</li>
             </ul>
 
             <h2>Permits &amp; code (don’t skip these)</h2>
             <ul>
-              <li><strong>Egress window:</strong> any bedroom needs a compliant egress window and well — this is the most-missed requirement.</li>
+              <li><strong>Egress window:</strong> any bedroom needs a compliant egress window and well, this is the most-missed requirement.</li>
               <li><strong>Ceiling height:</strong> most jurisdictions require ~7 ft minimum finished height.</li>
-              <li><strong>Permits &amp; inspections:</strong> framing, electrical, plumbing, and final — unpermitted work can sink an appraisal or a sale.</li>
+              <li><strong>Permits &amp; inspections:</strong> framing, electrical, plumbing, and final, unpermitted work can sink an appraisal or a sale.</li>
               <li><strong>Smoke/CO &amp; exits:</strong> hard-wired detectors and proper emergency exits are required for bedrooms.</li>
             </ul>
 
             <h2>ROI vs other projects</h2>
             <p>
-              Finished basements typically recoup ~70–75% of cost at resale — solid, though usually
+              Finished basements typically recoup ~70–75% of cost at resale, solid, though usually
               behind minor kitchen and bath updates. The bigger win is often <em>use value</em>: a
               rentable room, a home office, or a legal apartment that produces income changes the math
               entirely. If you’re weighing income potential, run the numbers with our{" "}
@@ -116,7 +116,7 @@ export default function FinishingBasementRoi() {
 
             <h2>Know your local rules</h2>
             <p>
-              Building codes, permit fees, and — critically — accessory-dwelling-unit (ADU) and zoning
+              Building codes, permit fees, and, critically, accessory-dwelling-unit (ADU) and zoning
               rules vary widely by city and county. Where an internal ADU is allowed and rental supply
               is tight, a basement apartment can be especially valuable. Always verify local requirements
               before you frame.

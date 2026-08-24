@@ -80,7 +80,7 @@ export default async function NotaryCityRoute({ params }: { params: Params }) {
     areaServed: state.name,
   })
 
-  // HQ NAP + SITE_GEO only — never pair HQ address with city coordinates (fake NAP).
+  // HQ NAP + SITE_GEO only, never pair HQ address with city coordinates (fake NAP).
   const businessLd = generateLocalBusinessJsonLd({
     name: "ONDO Notary Services",
     url: pageUrl,

@@ -6,7 +6,7 @@ export const CALCULATOR_CATALOG: Record<
   "owner-vs-self": {
     name: "Self-Manage vs Ondo RE Calculator",
     description:
-      "Compare annual net income from self-managing your Utah rental vs handing it to Ondo — including the hidden cost of your own time.",
+      "Compare annual net income from self-managing your Utah rental vs handing it to Ondo, including the hidden cost of your own time.",
     applicationCategory: "FinancialApplication",
   },
   "mortgage-payment": {

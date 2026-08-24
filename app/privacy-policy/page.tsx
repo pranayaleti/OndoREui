@@ -1,4 +1,4 @@
-// NOTE(i18n): server component — privacy policy is intentionally English-only.
+// NOTE(i18n): server component, privacy policy is intentionally English-only.
 // Legal copy translation requires a lawyer review per jurisdiction; tracked as
 // a Phase 1 follow-up. Until then keep the en page authoritative.
 import { PageBanner } from "@/components/page-banner"

@@ -5,8 +5,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/solutions/property-managers") },
   title: "For Property Managers | Ondo Real Estate",
   description: "Scale your property management operation with automated maintenance routing, vendor management, and owner reporting.",
 }
@@ -51,7 +53,7 @@ export default function PropertyManagersPage() {
       {/* Scale callout */}
       <section className="py-12 bg-muted">
         <div className="container mx-auto px-4 max-w-2xl text-center">
-          <p className="text-xl text-foreground font-medium">Built for portfolios of any size — from 20 units to 500+.</p>
+          <p className="text-xl text-foreground font-medium">Built for portfolios of any size, from 20 units to 500+.</p>
         </div>
       </section>
 

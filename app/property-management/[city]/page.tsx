@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const city = findCityBySlug(citySlug)
   const cityName = city?.name ?? citySlug
   const title = `Property Management in ${cityName}, Utah | ${SITE_BRAND_SHORT}`
-  const description = `${SITE_BRAND_SHORT} manages rentals in ${cityName}, UT — tenant screening, rent collection, maintenance, and owner reporting. Get a free rental analysis.`
+  const description = `${SITE_BRAND_SHORT} manages rentals in ${cityName}, UT, tenant screening, rent collection, maintenance, and owner reporting. Get a free rental analysis.`
   const canonical = `${SITE_URL}/property-management/${citySlug}/`
   return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
 }
@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Params }) {
     <>
       <SEO
         title={`Property Management in ${city.name}, Utah | ${SITE_BRAND_SHORT}`}
-        description={`${SITE_BRAND_SHORT} manages rentals in ${city.name}, UT — tenant screening, rent collection, maintenance, and owner reporting.`}
+        description={`${SITE_BRAND_SHORT} manages rentals in ${city.name}, UT, tenant screening, rent collection, maintenance, and owner reporting.`}
         pathname={`/property-management/${citySlug}/`}
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([

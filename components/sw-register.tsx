@@ -17,7 +17,7 @@ export default function ServiceWorkerRegistrar() {
       navigator.serviceWorker
         .register("/sw.js", { scope: "/" })
         .catch((err) => {
-          // Don't surface to user — fall back gracefully.
+          // Don't surface to user, fall back gracefully.
           if (process.env.NODE_ENV !== "production") {
             console.warn("[sw] registration failed", err)
           }

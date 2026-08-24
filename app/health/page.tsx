@@ -60,7 +60,7 @@ export default function HealthPage() {
               </Badge>
             </div>
             <p className="text-xs text-muted-foreground">
-              BACKEND_BASE_URL (origin only): {typeof window !== "undefined" ? new URL(backendUrl("/")).origin : "—"}
+              BACKEND_BASE_URL (origin only): {typeof window !== "undefined" ? new URL(backendUrl("/")).origin : "Not available"}
             </p>
           </CardContent>
         </Card>

@@ -1,7 +1,7 @@
 /**
  * Base URL for the runtime backend used by the static export.
  * Keep this as a public env var so it works client-side.
- * Points to the Supabase Edge Function — Supabase strips the /functions/v1/api prefix
+ * Points to the Supabase Edge Function, Supabase strips the /functions/v1/api prefix
  * before passing the request to Hono, so routes inside the function start at /.
  *
  * IMPORTANT: NEXT_PUBLIC_BACKEND_BASE_URL must be set in the environment.
@@ -12,7 +12,7 @@ export const BACKEND_BASE_URL: string =
   process.env['NEXT_PUBLIC_BACKEND_BASE_URL'] || ''
 
 if (typeof window !== 'undefined' && !BACKEND_BASE_URL && process.env.NODE_ENV === 'development') {
-  console.warn('[OndoRE] NEXT_PUBLIC_BACKEND_BASE_URL is not set — API calls will use relative paths')
+  console.warn('[OndoRE] NEXT_PUBLIC_BACKEND_BASE_URL is not set, API calls will use relative paths')
 }
 
 /** True when base URL's path already ends with `/api` (Supabase …/functions/v1/api or http://localhost:3000/api). */

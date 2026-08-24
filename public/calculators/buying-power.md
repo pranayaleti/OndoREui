@@ -1,5 +1,5 @@
 ---
-title: "Buying Power Calculator — Ondo Real Estate"
+title: "Buying Power Calculator: Ondo Real Estate"
 description: "See how rate, down payment, and debts change your buying power."
 canonical: https://www.ondorealestate.com/calculators/buying-power/
 ---

@@ -2,7 +2,7 @@
  * Marketing attribution (UTMs + common click ids) for static marketing site.
  *
  * - **Google Analytics 4**: When `gtag` loads, campaign data from the landing URL is
- *   attributed automatically for that session — no extra code required for basic reports.
+ *   attributed automatically for that session, no extra code required for basic reports.
  * - **HubSpot** (if `NEXT_PUBLIC_HUBSPOT_PORTAL_ID` is set): tracks page views and forms
  *   with standard cookie-based attribution.
  * - **This module**: Persists first- and last-touch params in `sessionStorage` and sends them
@@ -80,7 +80,7 @@ export function readMarketingAttribution(): MarketingAttribution | null {
   }
 }
 
-/** Payload for `POST /api/leads/contact` — omit when nothing was captured. */
+/** Payload for `POST /api/leads/contact`, omit when nothing was captured. */
 export function getAttributionPayloadForApi(): MarketingAttribution | undefined {
   const a = readMarketingAttribution()
   if (!a) return undefined

@@ -41,7 +41,7 @@ export function OperatorsSection() {
                 + maintenance, and we stopped chasing spreadsheets.&rdquo;
               </p>
               <footer className="mt-4 text-sm text-slate-400">
-                — Property manager, Utah
+               , Property manager, Utah
               </footer>
             </blockquote>
           </div>

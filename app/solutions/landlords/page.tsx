@@ -5,10 +5,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/solutions/landlords") },
   title: "For Landlords | Ondo Real Estate",
-  description: "Full-service property management for Utah landlords — tenant screening, rent tracking, maintenance, and more.",
+  description: "Full-service property management for Utah landlords, tenant screening, rent tracking, maintenance, and more.",
 }
 
 const features = [
@@ -23,12 +25,12 @@ export default function LandlordsPage() {
     <main className="min-h-screen">
       <SEO
         title="For Landlords | Ondo Real Estate"
-        description="Full-service property management for Utah landlords — tenant screening, rent tracking, maintenance, and more."
+        description="Full-service property management for Utah landlords, tenant screening, rent tracking, maintenance, and more."
         pathname="/solutions/landlords"
       />
       <PageBanner
         title="Manage your properties. Stress-free."
-        subtitle="From tenant screening to rent collection — Ondo runs your rentals so you don't have to."
+        subtitle="From tenant screening to rent collection: Ondo runs your rentals so you don't have to."
       />
 
       {/* Features */}

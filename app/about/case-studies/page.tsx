@@ -35,7 +35,7 @@ const story2JsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "First-Time Buyer in Lehi Closes with FHA Loan and Zero Cash Over Asking",
-  "description": "A first-time buyer in Lehi, Utah County, used an FHA loan paired with a Utah Housing Corporation DPA second mortgage and Ondo buyer representation to close at asking price with DPA covering closing costs — keys in hand in 38 days.",
+  "description": "A first-time buyer in Lehi, Utah County, used an FHA loan paired with a Utah Housing Corporation DPA second mortgage and Ondo buyer representation to close at asking price with DPA covering closing costs, keys in hand in 38 days.",
   "datePublished": "2025-04-15",
   "author": { "@type": "Organization", "name": "Ondo Real Estate" },
 }
@@ -44,7 +44,7 @@ const story3JsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Draper Investor Achieves 7.2% Projected Yield on Fully Managed Rental",
-  "description": "A Draper investor sought real estate exposure without active management. Ondo sourced a multi-unit property, handled acquisition, and placed full property management on day one — resulting in a 7.2% projected cap rate and 100% occupancy within 19 days.",
+  "description": "A Draper investor sought real estate exposure without active management. Ondo sourced a multi-unit property, handled acquisition, and placed full property management on day one, resulting in a 7.2% projected cap rate and 100% occupancy within 19 days.",
   "datePublished": "2025-08-20",
   "author": { "@type": "Organization", "name": "Ondo Real Estate" },
 }
@@ -82,7 +82,7 @@ const stories = [
     solution:
       "FHA loan combined with a Utah Housing Corporation DPA second mortgage to cover the down payment, plus Ondo buyer representation to negotiate and manage the closing timeline.",
     outcomes: [
-      "Closed at asking price — no cash over asking",
+      "Closed at asking price, no cash over asking",
       "DPA second mortgage covered closing costs",
       "Keys in hand in 38 days from offer acceptance",
     ],
@@ -92,7 +92,7 @@ const stories = [
     propertyType: "Multi-unit investment",
     location: "Draper",
     challenge:
-      "The investor wanted meaningful real estate exposure but had no bandwidth for active management — sourcing, acquisition coordination, and day-to-day operations all needed to be handled externally.",
+      "The investor wanted meaningful real estate exposure but had no bandwidth for active management, sourcing, acquisition coordination, and day-to-day operations all needed to be handled externally.",
     solution:
       "Ondo sourced the multi-unit property, managed the acquisition process end to end, and placed property management services on day one with no gap between closing and operations.",
     outcomes: [
@@ -112,7 +112,7 @@ const stories = [
     outcomes: [
       "$380/month payment reduction",
       "Break-even on refinance costs in 18 months",
-      "Existing tenant retained — no leasing gap",
+      "Existing tenant retained, no leasing gap",
     ],
   },
 ]
@@ -161,7 +161,7 @@ export default function CaseStudiesPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Results Across Utah Markets</h2>
               <p className="text-lg text-foreground/70">
-                These stories reflect the types of situations we encounter every day — landlords losing money on extended vacancies, first-time buyers overwhelmed by financing options, investors wanting returns without operational headaches, and homeowners stuck with rate structures that no longer fit the market. Each case below is drawn from real client work in Utah. Names and identifying details are generalised for privacy, but the numbers and timelines are accurate.
+                These stories reflect the types of situations we encounter every day, landlords losing money on extended vacancies, first-time buyers overwhelmed by financing options, investors wanting returns without operational headaches, and homeowners stuck with rate structures that no longer fit the market. Each case below is drawn from real client work in Utah. Names and identifying details are generalised for privacy, but the numbers and timelines are accurate.
               </p>
             </div>
 
@@ -205,7 +205,7 @@ export default function CaseStudiesPage() {
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-4">See What Others Are Saying</h3>
               <p className="text-foreground/70 mb-6">
-                Case studies show the mechanics — testimonials give you the full picture from the client&apos;s perspective. Or if you are ready to talk through your own situation, reach out and we will walk through it with you.
+                Case studies show the mechanics, testimonials give you the full picture from the client&apos;s perspective. Or if you are ready to talk through your own situation, reach out and we will walk through it with you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg">

@@ -7,7 +7,7 @@ import { getAllNotaryCityParams, getAllNotaryStateParams } from "@/lib/notary-ci
  * Dynamic sitemap. Includes:
  *   - Static marketing routes
  *   - Every calculator slug from CALCULATOR_CATALOG (auto-updates when a new
- *     calculator is registered — no sitemap edit needed)
+ *     calculator is registered, no sitemap edit needed)
  *   - One entry per active public property listing (sourced from /api/properties/public)
  *
  * Cached for 1 hour to keep the response cheap; Google won't re-crawl faster than

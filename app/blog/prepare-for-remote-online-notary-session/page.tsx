@@ -51,7 +51,7 @@ const prepSteps = [
   },
   {
     title: "Final Documents",
-    detail: "Upload the final PDF—no drafts—so the notarized copy matches lender/title requirements.",
+    detail: "Upload the final PDF, no drafts, so the notarized copy matches lender/title requirements.",
   },
   {
     title: "Know Witness Rules",

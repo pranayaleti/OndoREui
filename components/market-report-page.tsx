@@ -69,7 +69,7 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm font-medium text-primary mb-2">
             <BarChart3 className="h-4 w-4 inline mr-1" />
-            Market Report — {city.county} County
+            Market Report, {city.county} County
           </p>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
             {city.name}, Utah Real Estate Market Report

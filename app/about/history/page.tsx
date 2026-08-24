@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -6,6 +7,13 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Users, TrendingUp, Award, Home, Building } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/history", {
+  title: "Our History | Ondo Real Estate",
+  description: "Building trust and excellence in Utah real estate and property management.",
+})
+
 
 export default function HistoryPage() {
   const milestones = [

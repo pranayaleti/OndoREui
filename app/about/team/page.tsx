@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -8,6 +9,13 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
 import { Award } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/team", {
+  title: "Our Team | Ondo Real Estate",
+  description: "Experienced professionals dedicated to your success across Utah real estate.",
+})
+
 
 export default function TeamPage() {
   const teamMembers = [

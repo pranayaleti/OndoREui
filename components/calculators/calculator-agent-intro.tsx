@@ -18,7 +18,7 @@ interface CalculatorAgentIntroProps {
  *   - Search engines and no-JS agents get the same information as the sibling
  *     `/calculators/{slug}.md` twin.
  *
- * Styling stays visible to human visitors too — the disclosures satisfy the
+ * Styling stays visible to human visitors too, the disclosures satisfy the
  * lending / Fair Housing requirements documented in `LLMS_DISCLOSURES_BLOCK`.
  */
 export function CalculatorAgentIntro({ slug }: CalculatorAgentIntroProps) {

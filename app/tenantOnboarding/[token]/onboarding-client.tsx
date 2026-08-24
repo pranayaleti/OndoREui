@@ -540,7 +540,7 @@ export function OnboardingClient() {
                             <div key={i} className="rounded-lg border p-3 text-sm">
                               <span className="font-medium">{key.label}</span>
                               {key.location && (
-                                <span className="text-foreground/60 ml-2">— {key.location}</span>
+                                <span className="text-foreground/60 ml-2">,  {key.location}</span>
                               )}
                             </div>
                           ),
@@ -561,7 +561,7 @@ export function OnboardingClient() {
                               <span className="font-medium">{code.type}:</span>
                               <span className="font-mono ml-2">{code.code}</span>
                               {code.location && (
-                                <span className="text-foreground/60 ml-2">— {code.location}</span>
+                                <span className="text-foreground/60 ml-2">,  {code.location}</span>
                               )}
                             </div>
                           ),
@@ -609,7 +609,7 @@ export function OnboardingClient() {
                   disabled={submitting}
                   onClick={() => handleCompleteStep("property_access", { acknowledged: true })}
                 >
-                  {submitting ? "Continuing..." : "I've Reviewed — Continue"}
+                  {submitting ? "Continuing..." : "I've Reviewed, Continue"}
                 </Button>
               </div>
             </CardContent>

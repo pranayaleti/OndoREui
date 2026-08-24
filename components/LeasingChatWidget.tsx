@@ -5,7 +5,7 @@
  *
  * Talks to the AI leasing agent on the Edge API. The agent can answer questions from real
  * property data and book a tour on the calendar, so this widget is a conversion surface,
- * not a support box — the goal of every session is a booked viewing.
+ * not a support box, the goal of every session is a booked viewing.
  *
  * Notes that matter:
  * - The session id lives in component state only. It is not a credential, and persisting
@@ -34,7 +34,7 @@ interface LeasingChatWidgetProps {
   /** Render inline instead of as a floating launcher. */
   inline?: boolean;
   /**
-   * Resume an existing conversation. Used by /chat?session=… — the link in the reply the
+   * Resume an existing conversation. Used by /chat?session=…, the link in the reply the
    * agent emails to an inbound lead, so the prospect picks up where they left off rather
    * than starting over.
    */
@@ -42,7 +42,7 @@ interface LeasingChatWidgetProps {
 }
 
 const GREETING =
-  "Hi — ask me anything about this home, or tell me when you'd like to see it and I can get a tour on the calendar.";
+  "Hi, ask me anything about this home, or tell me when you'd like to see it and I can get a tour on the calendar.";
 
 export default function LeasingChatWidget({
   propertyId,
@@ -159,7 +159,7 @@ export default function LeasingChatWidget({
       });
 
       if (res.status === 429) {
-        setError('That was a lot of messages at once — give it a moment and try again.');
+        setError('That was a lot of messages at once, give it a moment and try again.');
         return;
       }
       if (!res.ok) {
@@ -237,7 +237,7 @@ export default function LeasingChatWidget({
           <h2 className="truncate text-sm font-semibold text-white">
             {propertyTitle ? `About ${propertyTitle}` : 'Leasing assistant'}
           </h2>
-          <p className="text-xs text-neutral-400">Automated assistant — a person can take over anytime</p>
+          <p className="text-xs text-neutral-400">Automated assistant, a person can take over anytime</p>
         </div>
         {!inline && (
           <button

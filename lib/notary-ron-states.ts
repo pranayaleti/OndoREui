@@ -35,7 +35,7 @@ const fromUsStates: RonStateRecord[] = Object.entries(US_STATES).map(([code, dat
   slug: data.slug,
   ronServingStatus: "serves" as const,
   statusNote:
-    `Remote online notarization is available for clients in ${data.name}. Receiving parties (lenders, title companies, courts) set their own acceptance rules — confirm before your signing.`,
+    `Remote online notarization is available for clients in ${data.name}. Receiving parties (lenders, title companies, courts) set their own acceptance rules, confirm before your signing.`,
   lastReviewed: LAST_REVIEWED,
 }))
 

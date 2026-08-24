@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const benefits = [
   { title: "Zero Down Payment", description: "100% financing with no down payment required for eligible properties and borrowers", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "Rural Utah Coverage", description: "Many suburban Utah areas qualify — Cache Valley, Sanpete County, rural Utah County, and more", icon: <MapPin className="h-6 w-6" /> },
+  { title: "Rural Utah Coverage", description: "Many suburban Utah areas qualify: Cache Valley, Sanpete County, rural Utah County, and more", icon: <MapPin className="h-6 w-6" /> },
   { title: "Lower Mortgage Insurance", description: "USDA guarantee fee (1%) and annual fee (0.35%) are lower than FHA MIP over the life of the loan", icon: <Home className="h-6 w-6" /> },
   { title: "Competitive Fixed Rates", description: "Government-backed guarantee enables competitive 30-year fixed rates for qualified borrowers", icon: <CheckCircle className="h-6 w-6" /> },
 ]
@@ -46,7 +46,7 @@ export default function USDALoanPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Is a USDA Loan?</h2>
               <p className="text-lg text-foreground/70">
-                USDA Rural Development loans are backed by the U.S. Department of Agriculture to support homeownership in rural and suburban communities. They offer zero down payment and competitive rates — and more Utah areas qualify than most buyers realise.
+                USDA Rural Development loans are backed by the U.S. Department of Agriculture to support homeownership in rural and suburban communities. They offer zero down payment and competitive rates, and more Utah areas qualify than most buyers realise.
               </p>
             </div>
 
@@ -70,7 +70,7 @@ export default function USDALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Household income must be ≤115% of area median income (AMI)</li>
                     <li>• Salt Lake County: ~$110,000–130,000 for a family of 4 (verify at eligibility.sc.egov.usda.gov)</li>
-                    <li>• All household income counts — not just borrowers on the loan</li>
+                    <li>• All household income counts, not just borrowers on the loan</li>
                   </ul>
                 </div>
                 <div>
@@ -87,7 +87,7 @@ export default function USDALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Upfront guarantee fee: 1.0% of loan (financed)</li>
                     <li>• Annual fee: 0.35% of remaining balance</li>
-                    <li>• No monthly PMI — annual fee is significantly lower than FHA MIP</li>
+                    <li>• No monthly PMI, annual fee is significantly lower than FHA MIP</li>
                   </ul>
                 </div>
                 <div>
@@ -109,7 +109,7 @@ export default function USDALoanPage() {
                   <h4 className="text-lg font-semibold mb-3 text-primary">USDA Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Lower annual fee (0.35% vs FHA's 0.55%+)</li>
-                    <li>• No upfront MIP structure — just the 1% guarantee fee</li>
+                    <li>• No upfront MIP structure, just the 1% guarantee fee</li>
                     <li>• Annual fee can drop off (unlike FHA MIP for life)</li>
                     <li>• Often lower total cost over 30 years vs FHA</li>
                   </ul>
@@ -117,7 +117,7 @@ export default function USDALoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-primary">FHA Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• No geographic restriction — works anywhere in Utah</li>
+                    <li>• No geographic restriction, works anywhere in Utah</li>
                     <li>• Lower minimum credit score (580 vs 640 for USDA)</li>
                     <li>• No household income cap</li>
                     <li>• Higher loan limits for higher-priced markets</li>

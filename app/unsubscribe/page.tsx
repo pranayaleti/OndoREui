@@ -36,7 +36,7 @@ export default function UnsubscribePage() {
     <main className="min-h-screen">
       <PageBanner
         title="Unsubscribe"
-        subtitle="We respect your inbox — you can opt out of our emails at any time"
+        subtitle="We respect your inbox: you can opt out of our emails at any time"
       />
 
       <section className="py-16 bg-background">

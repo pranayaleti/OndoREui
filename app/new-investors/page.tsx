@@ -59,7 +59,7 @@ const steps = [
     step: "04",
     title: "Start earning",
     description:
-      "Once you invest, our team handles everything — tenant placement, maintenance, and monthly reporting.",
+      "Once you invest, our team handles everything, tenant placement, maintenance, and monthly reporting.",
     icon: <DollarSign className="h-6 w-6" />,
     cta: { label: "Owner portal", href: "/owner" },
   },

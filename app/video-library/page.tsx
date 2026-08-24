@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { VideoTabs } from "./video-tabs"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/video-library") },
   title: "Video Library | Ondo Real Estate",
   description: "Step-by-step video walkthroughs for owners, tenants, investors, and platform administrators.",
 }

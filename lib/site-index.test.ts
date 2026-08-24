@@ -89,7 +89,7 @@ describe("robots.txt", () => {
 describe("robots.txt drift between App Router route and next-sitemap", () => {
   // In production, `postbuild → next-sitemap` overwrites `out/robots.txt`.
   // In dev and any environment where next-sitemap doesn't run, the App Router
-  // route wins. Both must serve the same policy — otherwise crawlers see
+  // route wins. Both must serve the same policy, otherwise crawlers see
   // different rules depending on which build ran last.
   it("uses the same AI crawler user-agent list in both producers", () => {
     const uaFromConfig = new Set(
@@ -136,7 +136,7 @@ describe("robots.txt drift between App Router route and next-sitemap", () => {
 describe("sitemap.md", () => {
   it("renders an H1, blockquote description, and Markdown links", () => {
     const body = buildSitemapMdBody()
-    expect(body).toMatch(/^# Ondo Real Estate — Markdown sitemap/m)
+    expect(body).toMatch(/^# Ondo Real Estate, Markdown sitemap/m)
     expect(body).toMatch(/^> Curated index of every public page/m)
     expect(body).toMatch(/\[.+\]\(https?:\/\/.+\)/)
   })

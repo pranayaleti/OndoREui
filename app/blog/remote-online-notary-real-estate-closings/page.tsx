@@ -111,7 +111,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
             <p>
               Title companies and lenders increasingly accept Remote Online Notarization (RON) for
               closings. ONDO Notary runs secure video sessions with ID proofing, KBA, electronic seals,
-              and full audit trails so your package is accepted the first time—without last-minute
+              and full audit trails so your package is accepted the first time, without last-minute
               scheduling conflicts.
             </p>
 
@@ -163,7 +163,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
             <h2>Tips to Avoid Delays</h2>
             <ul>
               <li>Share lender or title requirements (e.g., witness rules, ink vs. digital) upfront.</li>
-              <li>Use final documents—avoid draft PDFs that require re-signing.</li>
+              <li>Use final documents, avoid draft PDFs that require re-signing.</li>
               <li>Check device, camera, and connectivity 10 minutes before the session.</li>
               <li>Have all signers present with valid IDs to pass KBA on the first attempt.</li>
             </ul>

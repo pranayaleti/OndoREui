@@ -26,7 +26,7 @@ export default function OwnerError({
           </div>
           <CardTitle className="text-xl">Owner Portal Error</CardTitle>
           <CardDescription>
-            Something went wrong in the Owner Portal. Your data is safe — please
+            Something went wrong in the Owner Portal. Your data is safe, please
             try again or navigate to a different section.
           </CardDescription>
         </CardHeader>

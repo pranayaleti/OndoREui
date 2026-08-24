@@ -116,7 +116,7 @@ export default function RemoteOnlineNotaryAllStatesPage() {
             <p>
               ONDO Notary delivers Remote Online Notarization (RON) to clients in all 50 U.S. states.
               We use identity verification, secure video, electronic seal, and full audit trails to
-              keep your documents lender- and title-ready—without travel or scheduling delays.
+              keep your documents lender- and title-ready, without travel or scheduling delays.
             </p>
 
             <h2>How Nationwide RON Works</h2>

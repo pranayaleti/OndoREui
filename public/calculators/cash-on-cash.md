@@ -1,5 +1,5 @@
 ---
-title: "Cash-on-Cash Return Calculator — Ondo Real Estate"
+title: "Cash-on-Cash Return Calculator: Ondo Real Estate"
 description: "Calculate cash-on-cash return for an investment property."
 canonical: https://www.ondorealestate.com/calculators/cash-on-cash/
 ---

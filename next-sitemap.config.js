@@ -119,6 +119,10 @@ function isExcludedPath(path) {
   if (p === '/login' || p === '/feedback' || p === '/health') {
     return true
   }
+  // Pages Router leftovers — same calculators live at /calculators/{slug}/.
+  if (/^\/calculators\/[^/]+-calculator$/.test(p)) {
+    return true
+  }
   // /properties/_placeholder is the build-time stub emitted by
   // generateStaticParams in app/properties/[publicId]/page.tsx when the
   // backend is unreachable during the build (CI without BACKEND_BASE_URL).
@@ -189,6 +193,8 @@ module.exports = {
     },
   },
   exclude: [
+    '/calculators/*-calculator',
+    '/calculators/*-calculator/',
     '/auth',
     '/dashboard',
     '/owner',

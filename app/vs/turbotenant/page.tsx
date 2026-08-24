@@ -7,13 +7,13 @@ import SEO from "@/components/seo"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: `${SITE_BRAND_SHORT} vs TurboTenant — The Best TurboTenant Alternative`,
+  title: `${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`,
   description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. See why property owners choose Ondo RE for AI risk scoring, 10 financial calculators, 6 auth roles, full PWA, and a complete owner-to-tenant platform.`,
   alternates: {
     canonical: `${SITE_URL}/vs/turbotenant/`,
   },
   openGraph: {
-    title: `${SITE_BRAND_SHORT} vs TurboTenant — The Best TurboTenant Alternative`,
+    title: `${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`,
     description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. AI-powered risk scoring, 10 calculators, full PWA offline support, and 6 auth roles vs TurboTenant's basic free tier.`,
     url: `${SITE_URL}/vs/turbotenant/`,
     type: "website",
@@ -66,7 +66,7 @@ const ondoStrengths = [
   {
     title: "10 built-in financial calculators",
     description:
-      "Mortgage, amortization, ROI, cap rate, cash-on-cash, and more — all built in. TurboTenant offers none. Ondo RE gives owners and agents the numbers they need to make smart investment decisions.",
+      "Mortgage, amortization, ROI, cap rate, cash-on-cash, and more, all built in. TurboTenant offers none. Ondo RE gives owners and agents the numbers they need to make smart investment decisions.",
   },
   {
     title: "AI-powered tenant risk scoring",
@@ -76,12 +76,12 @@ const ondoStrengths = [
   {
     title: "Full PWA with offline support",
     description:
-      "Ondo RE is a full Progressive Web App. Property managers and tenants can access key features without a network connection — a critical advantage for on-site inspections and maintenance.",
+      "Ondo RE is a full Progressive Web App. Property managers and tenants can access key features without a network connection, a critical advantage for on-site inspections and maintenance.",
   },
   {
     title: "One platform for every role",
     description:
-      "Manager, owner, tenant, maintenance, agent, loan officer — all six roles have tailored dashboards and permissions. TurboTenant treats landlords and tenants as two roles, nothing more.",
+      "Manager, owner, tenant, maintenance, agent, loan officer, all six roles have tailored dashboards and permissions. TurboTenant treats landlords and tenants as two roles, nothing more.",
   },
 ]
 
@@ -107,7 +107,7 @@ export default function VsTurboTenantPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <SEO
-        title={`${SITE_BRAND_SHORT} vs TurboTenant — The Best TurboTenant Alternative`}
+        title={`${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`}
         description={`Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. AI risk scoring, 10 calculators, full PWA, and 6 auth roles.`}
         pathname="/vs/turbotenant/"
       />
@@ -119,7 +119,7 @@ export default function VsTurboTenantPage() {
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/70">
           TurboTenant is a solid free option for small landlords. But if you need AI risk scoring,
-          financial calculators, multi-role auth, or full PWA offline support — {SITE_BRAND_SHORT} is
+          financial calculators, multi-role auth, or full PWA offline support, {SITE_BRAND_SHORT} is
           the upgrade.
         </p>
       </section>
@@ -243,7 +243,7 @@ export default function VsTurboTenantPage() {
               ))}
             </ul>
             <p className="mt-4 text-sm text-foreground/60">
-              If any of the above describes you today but you expect to grow — {SITE_BRAND_SHORT} is
+              If any of the above describes you today but you expect to grow, {SITE_BRAND_SHORT} is
               built to scale with you.
             </p>
           </CardContent>

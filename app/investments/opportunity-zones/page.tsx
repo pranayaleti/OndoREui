@@ -13,7 +13,7 @@ import { Clock, TrendingUp, ShieldCheck, MapPin, Landmark, Users } from "lucide-
 export const metadata: Metadata = {
   title: "Opportunity Zone Investing: How It Works",
   description:
-    "How Qualified Opportunity Zones work — capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits.",
+    "How Qualified Opportunity Zones work, capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits.",
   alternates: { canonical: `${SITE_URL}/investments/opportunity-zones/` },
   openGraph: {
     title: "Opportunity Zone Investing: How It Works | Ondo Real Estate",
@@ -34,13 +34,13 @@ const taxBenefits = [
     icon: "TrendingUp",
     title: "Tax-free appreciation on the new investment",
     description:
-      "Hold the Opportunity Fund investment for at least 10 years and the appreciation on that investment can be excluded from capital-gains tax — the headline long-term benefit.",
+      "Hold the Opportunity Fund investment for at least 10 years and the appreciation on that investment can be excluded from capital-gains tax, the headline long-term benefit.",
   },
   {
     icon: "ShieldCheck",
     title: "Community reinvestment",
     description:
-      "Opportunity Zones were created to channel long-term capital into designated lower-income and high-growth census tracts — pairing a tax incentive with local development.",
+      "Opportunity Zones were created to channel long-term capital into designated lower-income and high-growth census tracts, pairing a tax incentive with local development.",
   },
 ]
 
@@ -49,7 +49,7 @@ const zonePoints = [
     icon: "MapPin",
     title: "Thousands of tracts nationwide",
     description:
-      "There are roughly 8,700 designated Qualified Opportunity Zone tracts across all 50 states, D.C., and U.S. territories — spanning both urban and rural communities.",
+      "There are roughly 8,700 designated Qualified Opportunity Zone tracts across all 50 states, D.C., and U.S. territories, spanning both urban and rural communities.",
   },
   {
     icon: "Landmark",
@@ -61,7 +61,7 @@ const zonePoints = [
     icon: "Users",
     title: "Best for patient, gain-holding investors",
     description:
-      "The strategy rewards investors with an existing capital gain who can commit to a 10-year horizon — not short-term flippers.",
+      "The strategy rewards investors with an existing capital gain who can commit to a 10-year horizon, not short-term flippers.",
   },
 ]
 
@@ -79,7 +79,7 @@ export default function OpportunityZonesPage() {
     <main id="main-content" className="min-h-screen">
       <SEO
         title="Opportunity Zone Investing: How It Works"
-        description="How Qualified Opportunity Zones work — capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits."
+        description="How Qualified Opportunity Zones work, capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits."
         pathname="/investments/opportunity-zones"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -108,15 +108,15 @@ export default function OpportunityZonesPage() {
               <p className="text-lg text-foreground/70 dark:text-foreground/70 max-w-3xl mx-auto">
                 Opportunity Zones are census tracts designated under the 2017 Tax Cuts and Jobs Act to
                 encourage long-term investment in designated communities. Investors reinvest eligible
-                capital gains into a Qualified Opportunity Fund (QOF) — which in turn invests in real
-                estate or businesses within the zone — in exchange for meaningful tax benefits.
+                capital gains into a Qualified Opportunity Fund (QOF), which in turn invests in real
+                estate or businesses within the zone, in exchange for meaningful tax benefits.
               </p>
               <p className="mt-4 text-sm text-foreground/70 dark:text-foreground/70 max-w-3xl mx-auto">
                 Looking for available properties to buy instead? See{" "}
                 <Link href="/investments/opportunities" className="text-primary hover:underline">
                   investment opportunities
                 </Link>{" "}
-                — this page explains the Opportunity Zone tax program, not a property listing.
+               , this page explains the Opportunity Zone tax program, not a property listing.
               </p>
             </div>
 
@@ -152,7 +152,7 @@ export default function OpportunityZonesPage() {
               <p className="text-center text-xs text-foreground/60 mt-6 max-w-3xl mx-auto">
                 Opportunity Zone rules and deadlines have changed over time and continue to evolve.
                 Benefits depend on your specific situation. This is educational information, not tax or
-                legal advice — consult a qualified professional.
+                legal advice, consult a qualified professional.
               </p>
             </div>
 

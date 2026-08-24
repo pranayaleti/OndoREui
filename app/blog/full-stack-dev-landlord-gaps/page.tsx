@@ -126,7 +126,7 @@ export default function FullStackDevLandlordGaps() {
             <ul>
               <li>Model states explicitly (requested → scheduled → in-progress → done → billed).</li>
               <li>Use webhooks for payment/maintenance events; fan out to email/SMS/push.</li>
-              <li>Add audit trails by default—users rarely complain about too much clarity.</li>
+              <li>Add audit trails by default, users rarely complain about too much clarity.</li>
             </ul>
 
             <h2>Utah/Regional Nuance</h2>

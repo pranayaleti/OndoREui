@@ -126,7 +126,7 @@ function LazySection({ children, fallbackHeight = "200px" }: { children: React.R
   )
 }
 
-/** Collapsible footer nav section for mobile — expands on tap, always open on md+. */
+/** Collapsible footer nav section for mobile, expands on tap, always open on md+. */
 function FooterNavSection({ label, icon, href, children }: { label: string; icon: React.ReactNode; href: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
 

@@ -22,7 +22,7 @@ describe("useAntiSpam", () => {
   it("flags as bot when submit happens before minDwell elapses", () => {
     vi.setSystemTime(new Date("2026-01-01T00:00:00Z"))
     const { result } = renderHook(() => useAntiSpam({ minDwellMs: 2_500 }))
-    // Immediate submit — too fast for a real user.
+    // Immediate submit, too fast for a real user.
     expect(result.current.gate.isLikelyBot()).toBe(true)
   })
 

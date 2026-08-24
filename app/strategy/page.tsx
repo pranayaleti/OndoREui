@@ -35,7 +35,7 @@ const pillars = [
     icon: <MapPin className="h-7 w-7" />,
     title: "Market Selection",
     description:
-      "We focus exclusively on Utah's Wasatch Front — one of the fastest-growing and most supply-constrained rental markets in the country. Strong job growth, in-migration, and limited new supply create durable rent appreciation.",
+      "We focus exclusively on Utah's Wasatch Front, one of the fastest-growing and most supply-constrained rental markets in the country. Strong job growth, in-migration, and limited new supply create durable rent appreciation.",
   },
   {
     icon: <Target className="h-7 w-7" />,
@@ -53,7 +53,7 @@ const pillars = [
     icon: <Users className="h-7 w-7" />,
     title: "Institutional Property Management",
     description:
-      "Professionally managed properties perform better. Our team handles leasing, maintenance, tenant relations, and compliance — protecting asset value and investor returns at every stage.",
+      "Professionally managed properties perform better. Our team handles leasing, maintenance, tenant relations, and compliance, protecting asset value and investor returns at every stage.",
   },
   {
     icon: <BarChart3 className="h-7 w-7" />,
@@ -156,11 +156,11 @@ export default function StrategyPage() {
           <div className="space-y-3">
             {[
               "B and B+ class multifamily or single-family rentals",
-              "Utah Wasatch Front — Salt Lake, Utah, Davis, and Weber Counties",
+              "Utah Wasatch Front, Salt Lake, Utah, Davis, and Weber Counties",
               "Properties priced at or below replacement cost",
               "Identifiable value-add upside through renovation or operational improvements",
               "Stable in-place cash flow with rent growth potential",
-              "Conservative LTV — typically 60–70% at acquisition",
+              "Conservative LTV, typically 60–70% at acquisition",
               "Strong local school districts, employment anchors, and transit access",
             ].map((item) => (
               <div key={item} className="flex items-start gap-3 p-4 rounded-lg border bg-card">

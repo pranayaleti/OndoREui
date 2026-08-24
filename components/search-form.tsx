@@ -73,7 +73,7 @@ export function SearchForm() {
       const slug = toCitySlug(city.name)
       router.push(`/property-management/${slug}/`)
     } else {
-      // ZIP not in our service area — route to general properties page
+      // ZIP not in our service area, route to general properties page
       router.push("/properties/")
       toast({
         title: "ZIP code not in service area",

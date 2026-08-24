@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Home, MapPin, DollarSign, TrendingUp } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/second-home", {
+  title: "Buying a Second Home | Utah Real Estate",
+  description: "Guidance on buying a second home in Utah, including financing considerations for vacation and rental properties.",
+})
+
 
 export default function SecondHomePage() {
   return (

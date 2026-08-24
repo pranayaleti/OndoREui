@@ -8,20 +8,20 @@ import { isMarketingRestrictedRegion } from "@/lib/region"
  * Marketing / retargeting tracking tags.
  *
  * Each tag loads ONLY if its env var is set, so flipping a pixel on/off
- * is just a redeploy with a new env value — no code changes.
+ * is just a redeploy with a new env value, no code changes.
  *
  * Recommended setup: configure GTM once (NEXT_PUBLIC_GTM_ID) and add the
  * Meta / TikTok / LinkedIn pixels INSIDE GTM. The standalone components
  * below are kept as fallbacks for cases where GTM is not desired.
  *
  * Env vars:
- *  - NEXT_PUBLIC_GTM_ID            — e.g. "GTM-XXXXXXX"
- *  - NEXT_PUBLIC_GA_MEASUREMENT_ID   — e.g. "G-XXXXXXXX"
- *  - NEXT_PUBLIC_META_PIXEL_ID     — Facebook/Meta Pixel numeric ID
- *  - NEXT_PUBLIC_TIKTOK_PIXEL_ID   — TikTok Pixel ID
- *  - NEXT_PUBLIC_LINKEDIN_PARTNER_ID — LinkedIn Insight Partner ID
- *  - NEXT_PUBLIC_HUBSPOT_PORTAL_ID   — HubSpot portal ID
- *  - NEXT_PUBLIC_REB2B_KEY           — rb2b visitor ID key
+ *  - NEXT_PUBLIC_GTM_ID           , e.g. "GTM-XXXXXXX"
+ *  - NEXT_PUBLIC_GA_MEASUREMENT_ID  , e.g. "G-XXXXXXXX"
+ *  - NEXT_PUBLIC_META_PIXEL_ID    , Facebook/Meta Pixel numeric ID
+ *  - NEXT_PUBLIC_TIKTOK_PIXEL_ID  , TikTok Pixel ID
+ *  - NEXT_PUBLIC_LINKEDIN_PARTNER_ID, LinkedIn Insight Partner ID
+ *  - NEXT_PUBLIC_HUBSPOT_PORTAL_ID  , HubSpot portal ID
+ *  - NEXT_PUBLIC_REB2B_KEY          , rb2b visitor ID key
  */
 
 /** Reject env values that could break out of inline script strings. */
@@ -43,7 +43,7 @@ export function GoogleTagManager() {
     <Script
       id="gtm-base"
       strategy="afterInteractive"
-      // GTM's official snippet — verbatim recommended install
+      // GTM's official snippet, verbatim recommended install
       dangerouslySetInnerHTML={{
         __html: `
           (function(w,d,s,l,i){
@@ -58,7 +58,7 @@ export function GoogleTagManager() {
   )
 }
 
-/** Inline <noscript> GTM iframe — must live at top of <body>. Geo-gated client wrapper below. */
+/** Inline <noscript> GTM iframe, must live at top of <body>. Geo-gated client wrapper below. */
 export function GoogleTagManagerNoscript() {
   const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_GTM_ID"], GTM_ID_PATTERN)
   if (!id) return null
@@ -213,7 +213,7 @@ export function LinkedInInsightTag() {
 }
 
 /**
- * rb2b — anonymous visitor de-anonymization. The most consent-sensitive tag
+ * rb2b, anonymous visitor de-anonymization. The most consent-sensitive tag
  * here (it identifies individuals/companies), so it is gated like the rest.
  * Reads NEXT_PUBLIC_REB2B_KEY (matches .env.example and the `reb2b` global).
  */
@@ -241,7 +241,7 @@ export function Rb2bPixel() {
 }
 
 /**
- * HubSpot tracking — page views and form attribution. Gated with other marketing tags.
+ * HubSpot tracking, page views and form attribution. Gated with other marketing tags.
  */
 export function HubSpotTrackingTag() {
   const portalId = sanitizeTrackingId(process.env["NEXT_PUBLIC_HUBSPOT_PORTAL_ID"], NUMERIC_ID_PATTERN)
@@ -277,7 +277,7 @@ export function GeoGatedGoogleTagManagerNoscript() {
  * bundle is withheld from privacy-strict (European) regions, detected
  * client-side via {@link isMarketingRestrictedRegion}. We start in the
  * suppressed state and only opt in after mount once a non-EEA region is
- * confirmed — this both errs toward privacy and avoids a hydration mismatch
+ * confirmed, this both errs toward privacy and avoids a hydration mismatch
  * (the prerendered HTML contains no pixels, matching the first client render).
  *
  * Note: the no-JS <noscript> fallbacks (e.g. GoogleTagManagerNoscript) cannot

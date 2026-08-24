@@ -1,5 +1,5 @@
 ---
-title: "1% Rule Calculator — Ondo Real Estate"
+title: "1% Rule Calculator: Ondo Real Estate"
 description: "Check if a property's rent meets the 1% rule benchmark."
 canonical: https://www.ondorealestate.com/calculators/one-percent-rule/
 ---
@@ -10,7 +10,7 @@ canonical: https://www.ondorealestate.com/calculators/one-percent-rule/
 
 ## Formula
 
-1% Rule check: does monthly rent ≥ 1% of purchase price? A screening heuristic — not underwriting.
+1% Rule check: does monthly rent ≥ 1% of purchase price? A screening heuristic, not underwriting.
 
 ## Inputs
 

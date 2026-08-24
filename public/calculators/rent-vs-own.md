@@ -1,5 +1,5 @@
 ---
-title: "Rent vs Own Calculator — Ondo Real Estate"
+title: "Rent vs Own Calculator: Ondo Real Estate"
 description: "Compare long-term costs and equity between renting and owning."
 canonical: https://www.ondorealestate.com/calculators/rent-vs-own/
 ---

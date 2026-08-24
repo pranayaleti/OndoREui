@@ -187,7 +187,7 @@ export const generateBreadcrumbJsonLd = (items) => ({
             <div className="space-y-6">
               <div>
                 <h4 className="font-bold text-lg">Q: Why is JSON-LD important for real estate?</h4>
-                <p>A: It helps Google display &quot;Rich Snippets&quot;—like price, address, and star ratings—directly in the search results, increasing click-through rates.</p>
+                <p>A: It helps Google display &quot;Rich Snippets&quot;, like price, address, and star ratings, directly in the search results, increasing click-through rates.</p>
               </div>
               <div>
                 <h4 className="font-bold text-lg">Q: What is Programmatic SEO?</h4>

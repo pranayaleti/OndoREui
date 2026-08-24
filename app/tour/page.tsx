@@ -3,16 +3,18 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/tour") },
   title: "Platform Tour | Ondo Real Estate",
-  description: "Take a guided tour of the Ondo platform — owner dashboard, tenant portal, AI assistant, and vendor tools.",
+  description: "Take a guided tour of the Ondo platform, owner dashboard, tenant portal, AI assistant, and vendor tools.",
 }
 
 const tourSteps = [
   { title: "Owner Dashboard", description: "See every property, tenant, and payment at a glance." },
   { title: "Tenant Portal", description: "Tenants pay rent, submit requests, and message you in one place." },
-  { title: "AI Assistant", description: "Ask questions, get insights, and take action — all in natural language." },
+  { title: "AI Assistant", description: "Ask questions, get insights, and take action: all in natural language." },
   { title: "Vendor Tools", description: "Coordinate maintenance and manage your vendor network." },
 ]
 
@@ -21,12 +23,12 @@ export default function TourPage() {
     <main className="min-h-screen">
       <SEO
         title="Platform Tour | Ondo Real Estate"
-        description="Take a guided tour of the Ondo platform — owner dashboard, tenant portal, AI assistant, and vendor tools."
+        description="Take a guided tour of the Ondo platform, owner dashboard, tenant portal, AI assistant, and vendor tools."
         pathname="/tour"
       />
       <PageBanner
         title="Take a guided tour of the Ondo platform"
-        subtitle="Explore every feature — owner dashboard, tenant portal, AI assistant, and more."
+        subtitle="Explore every feature: owner dashboard, tenant portal, AI assistant, and more."
       />
 
       <section className="py-16 bg-background">

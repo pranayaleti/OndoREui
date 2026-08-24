@@ -1,5 +1,5 @@
 ---
-title: "Utah rental property search — Ondo Real Estate"
+title: "Utah rental property search: Ondo Real Estate"
 description: "How to search Ondo Real Estate's Utah rental listings by city, bedrooms, price, or free text. Includes the WebMCP tool exposed on the page for AI agents."
 canonical: https://www.ondorealestate.com/properties/
 ---
@@ -10,10 +10,10 @@ canonical: https://www.ondorealestate.com/properties/
 
 ## How to filter
 
-- **City** — partial, case-insensitive match against the listing city (e.g. `Lehi`, `Salt Lake`).
-- **Minimum bedrooms** — integer.
-- **Maximum monthly rent** — USD.
-- **Free text** — matched against title, description, and address.
+- **City**, partial, case-insensitive match against the listing city (e.g. `Lehi`, `Salt Lake`).
+- **Minimum bedrooms**, integer.
+- **Maximum monthly rent**, USD.
+- **Free text**, matched against title, description, and address.
 
 Results are capped at 100 rows per call. Each row returns id, title, city, address, price, bedrooms, bathrooms, sqft, and a 200-char description.
 

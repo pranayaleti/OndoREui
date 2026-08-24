@@ -1,12 +1,12 @@
 ---
-title: "Self-Manage vs Ondo RE Calculator — Ondo Real Estate"
-description: "Compare annual net income from self-managing your Utah rental vs handing it to Ondo — including the hidden cost of your own time."
+title: "Self-Manage vs Ondo RE Calculator: Ondo Real Estate"
+description: "Compare annual net income from self-managing your Utah rental vs handing it to Ondo, including the hidden cost of your own time."
 canonical: https://www.ondorealestate.com/calculators/owner-vs-self/
 ---
 
 # Self-Manage vs Ondo RE Calculator
 
-> Compare annual net income from self-managing your Utah rental vs handing it to Ondo — including the hidden cost of your own time.
+> Compare annual net income from self-managing your Utah rental vs handing it to Ondo, including the hidden cost of your own time.
 
 ## Formula
 

@@ -125,7 +125,7 @@ describe("seo", () => {
         pathname: "/buy",
       })
       expect(meta.title).toBe("Buy a Home")
-      expect(meta.alternates?.canonical).toMatch(/\/buy$/)
+      expect(meta.alternates?.canonical).toMatch(/\/buy\/$/)
       expect(meta.openGraph?.title).toBe("Buy a Home")
       const ogImages = meta.openGraph?.images
       const ogImage = Array.isArray(ogImages) ? ogImages[0] : ogImages

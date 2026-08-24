@@ -43,11 +43,11 @@ export default function UnderstandingPropertyTaxesUtah() {
           </div>
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Utah property taxes are calculated differently than most states. Understanding assessment ratios, Truth in Taxation notices, and exemptions is essential for accurate underwriting — especially after a sale.
+              Utah property taxes are calculated differently than most states. Understanding assessment ratios, Truth in Taxation notices, and exemptions is essential for accurate underwriting, especially after a sale.
             </p>
 
             <h2>How Utah Assesses Property Value</h2>
-            <p>The Utah County Assessor determines the fair market value (FMV) of every property annually. The taxable value for most residential properties is 55% of FMV (the "assessment ratio"). This means a home with a $500,000 FMV has an assessed value of $275,000 for tax calculation purposes. The total tax owed is: assessed value × the combined tax rate (all overlapping taxing entities — county, city, school district, water district, etc.).</p>
+            <p>The Utah County Assessor determines the fair market value (FMV) of every property annually. The taxable value for most residential properties is 55% of FMV (the "assessment ratio"). This means a home with a $500,000 FMV has an assessed value of $275,000 for tax calculation purposes. The total tax owed is: assessed value × the combined tax rate (all overlapping taxing entities, county, city, school district, water district, etc.).</p>
             <ul>
               <li>Utah County effective rate: approximately 0.52–0.65% of FMV (varies by city)</li>
               <li>Salt Lake County: approximately 0.58–0.72% of FMV</li>
@@ -55,19 +55,19 @@ export default function UnderstandingPropertyTaxesUtah() {
             </ul>
 
             <h2>What Is Truth in Taxation?</h2>
-            <p>Utah's Truth in Taxation law (Utah Code § 59-2-919) requires any taxing entity that plans to collect more revenue than the prior year to hold a public hearing and explicitly notify property owners. You may receive a "Truth in Taxation" notice in August/September. This is not your tax bill — it is a notice that your taxing entities are considering a rate increase and that you have the right to attend a public hearing and comment.</p>
+            <p>Utah's Truth in Taxation law (Utah Code § 59-2-919) requires any taxing entity that plans to collect more revenue than the prior year to hold a public hearing and explicitly notify property owners. You may receive a "Truth in Taxation" notice in August/September. This is not your tax bill, it is a notice that your taxing entities are considering a rate increase and that you have the right to attend a public hearing and comment.</p>
             <p>Why this matters for investors: even if your property value holds flat, your tax bill can increase if the school district or city votes to raise their levy. Underwrite with a 3–5% annual property tax escalator in your cash flow models.</p>
 
             <h2>The Primary Residential Exemption</h2>
-            <p>Utah offers a primary residential exemption that reduces the assessed value to 55% of FMV (versus 100% for non-primary). If you purchase a rental property, you lose this exemption — the property is taxed at 100% of the county's assessed FMV. This is a significant underwriting factor: a rental property will carry a higher effective tax rate than the same home used as a primary residence. Always verify the current year's tax bill in the county assessor's database before closing on any investment property.</p>
+            <p>Utah offers a primary residential exemption that reduces the assessed value to 55% of FMV (versus 100% for non-primary). If you purchase a rental property, you lose this exemption, the property is taxed at 100% of the county's assessed FMV. This is a significant underwriting factor: a rental property will carry a higher effective tax rate than the same home used as a primary residence. Always verify the current year's tax bill in the county assessor's database before closing on any investment property.</p>
 
             <h2>Appealing Your Assessment</h2>
-            <p>If you believe your property is over-assessed, you can file a petition with the County Board of Equalization (BOE) typically by September 15 of the tax year. Bring comparable sales (not listing prices), and present evidence that the assessor's FMV exceeds actual market value. In rapidly appreciating markets, assessments can lag — but in correcting markets, they can overshoot. Most counties have informal review processes before a formal BOE appeal.</p>
+            <p>If you believe your property is over-assessed, you can file a petition with the County Board of Equalization (BOE) typically by September 15 of the tax year. Bring comparable sales (not listing prices), and present evidence that the assessor's FMV exceeds actual market value. In rapidly appreciating markets, assessments can lag, but in correcting markets, they can overshoot. Most counties have informal review processes before a formal BOE appeal.</p>
 
             <h2>Investor Underwriting Checklist</h2>
             <ul>
               <li>Pull the current year tax bill from the county assessor's site before making an offer</li>
-              <li>Confirm whether the property has the primary residential exemption — it will be removed in the year of sale if you are buying as an investment</li>
+              <li>Confirm whether the property has the primary residential exemption, it will be removed in the year of sale if you are buying as an investment</li>
               <li>Model a 3–5% annual tax escalator in your NOI projections</li>
               <li>Check if the property is in a special assessment district (Mello-Roos equivalent) for infrastructure improvements</li>
             </ul>

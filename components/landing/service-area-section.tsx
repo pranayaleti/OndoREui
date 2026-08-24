@@ -48,7 +48,7 @@ export function ServiceAreaSection() {
             55+ Cities Along Utah&apos;s Wasatch Front
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">
-            From North Ogden to Nephi — local real estate expertise in every city. Hover a city to see market data.
+            From North Ogden to Nephi, local real estate expertise in every city. Hover a city to see market data.
           </p>
         </div>
 

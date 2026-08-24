@@ -4,10 +4,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/data") },
   title: "Utah Real Estate Market Data | Ondo Real Estate",
-  description: "Quarterly insights on Utah's residential and rental markets — median rent, vacancy rates, home prices, and trends.",
+  description: "Quarterly insights on Utah's residential and rental markets, median rent, vacancy rates, home prices, and trends.",
 }
 
 const stats = [
@@ -28,7 +30,7 @@ export default function DataPage() {
     <main className="min-h-screen">
       <SEO
         title="Utah Real Estate Market Data | Ondo Real Estate"
-        description="Quarterly insights on Utah's residential and rental markets — median rent, vacancy rates, home prices, and trends."
+        description="Quarterly insights on Utah's residential and rental markets, median rent, vacancy rates, home prices, and trends."
         pathname="/data"
       />
       <PageBanner

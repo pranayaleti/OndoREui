@@ -2,7 +2,7 @@
  * Sentry initialization for the static-export Next.js site.
  *
  * Uses @sentry/react (not @sentry/nextjs) because the site runs as a fully
- * static export (next.config.mjs `output: "export"`) — there's no Next.js
+ * static export (next.config.mjs `output: "export"`), there's no Next.js
  * server runtime to wire server-side instrumentation into. The browser SDK
  * is lighter and avoids the Next.js webpack plugin that can complicate
  * static-export builds.
@@ -31,7 +31,7 @@ function readSampleRate(): number {
 
 export function initSentry(): void {
   if (initialized) return
-  if (typeof window === "undefined") return // SSR/build-time — skip silently
+  if (typeof window === "undefined") return // SSR/build-time, skip silently
   const dsn = process.env["NEXT_PUBLIC_SENTRY_DSN"]
   if (!dsn) return // No-op when not configured
 

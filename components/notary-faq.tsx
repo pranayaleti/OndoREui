@@ -16,7 +16,7 @@ export function NotaryFAQ() {
         <AccordionContent className="text-foreground/70 leading-relaxed">
           Yes. Remote online notarizations completed by a commissioned Utah notary are valid
           nationwide because the notarial act is tied to the notary’s location. Always confirm the
-          receiving party accepts electronic/remote notarization—we provide the digital certificate,
+          receiving party accepts electronic/remote notarization, we provide the digital certificate,
           audio/video record, and compliance details if they need them.
         </AccordionContent>
       </AccordionItem>
@@ -26,7 +26,7 @@ export function NotaryFAQ() {
           Do you serve all 50 states?
         </AccordionTrigger>
         <AccordionContent className="text-foreground/70 leading-relaxed">
-          Yes—remote online notarization is available in every U.S. state. We do not offer in-office
+          Yes, remote online notarization is available in every U.S. state. We do not offer in-office
           or mobile travel appointments.
         </AccordionContent>
       </AccordionItem>

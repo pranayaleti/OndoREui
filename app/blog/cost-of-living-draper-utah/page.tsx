@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 
 const slug = "/blog/cost-of-living-draper-utah"
 const title = "Cost of Living in Draper, Utah (2026)"
-const description = "Real numbers on housing, utilities, groceries, taxes, and commute costs in Draper, UT — compared to SLC and the national average."
+const description = "Real numbers on housing, utilities, groceries, taxes, and commute costs in Draper, UT, compared to SLC and the national average."
 const published = "2026-04-06"
 const author = "Ondo RE Team"
 const category = "Cost of Living"
@@ -40,16 +40,16 @@ export default function CostOfLivingDraper() {
           </div>
           <div className="prose prose-lg max-w-none dark:prose-invert">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Draper is one of Utah&apos;s most desirable addresses — but what does it actually cost to live there? This guide breaks down every major expense category with real 2026 numbers, so you can decide if Draper fits your budget.
+              Draper is one of Utah&apos;s most desirable addresses, but what does it actually cost to live there? This guide breaks down every major expense category with real 2026 numbers, so you can decide if Draper fits your budget.
             </p>
 
             <h2>Housing: The Biggest Line Item</h2>
-            <p>Draper&apos;s median home price sits around $620,000 in 2026 — significantly above the Salt Lake County median of $510,000. Suncrest and South Mountain push well past $800K. Draper Peaks and townhome communities offer an entry point around $420K–$550K.</p>
+            <p>Draper&apos;s median home price sits around $620,000 in 2026, significantly above the Salt Lake County median of $510,000. Suncrest and South Mountain push well past $800K. Draper Peaks and townhome communities offer an entry point around $420K–$550K.</p>
             <p><strong>Renting:</strong> Expect to pay $1,900–$2,400/mo for a 3-bedroom single-family home. 2-bedroom townhomes run $1,600–$2,000/mo. Demand is high; quality listings under $2,000 move in days.</p>
             <p><strong>Monthly mortgage (median price, 20% down, 30yr @ 6.75%):</strong> ~$3,210/mo, plus property taxes and insurance (~$500–$700/mo combined).</p>
 
             <h2>Property Taxes</h2>
-            <p>Utah&apos;s property tax rate is relatively low nationally — approximately 0.5–0.6% of assessed value for residential properties. On a $620,000 Draper home: roughly $3,100–$3,720/year, or $260–$310/month. This is well below California, Oregon, and many Midwest states.</p>
+            <p>Utah&apos;s property tax rate is relatively low nationally, approximately 0.5–0.6% of assessed value for residential properties. On a $620,000 Draper home: roughly $3,100–$3,720/year, or $260–$310/month. This is well below California, Oregon, and many Midwest states.</p>
 
             <h2>Utilities</h2>
             <p>Average monthly utility costs in Draper (electric, gas, water, trash):</p>
@@ -70,10 +70,10 @@ export default function CostOfLivingDraper() {
               <li><strong>Downtown SLC:</strong> 25–35 min (40–50 min in rush hour)</li>
               <li><strong>South Jordan/Riverton:</strong> 10–15 min</li>
             </ul>
-            <p>Gas in Utah typically runs $0.20–$0.30/gallon below the national average. Monthly fuel costs for a 25-mile daily commute: $120–$180. TRAX Blue Line has a Draper station — about 40 minutes to downtown SLC with one transfer.</p>
+            <p>Gas in Utah typically runs $0.20–$0.30/gallon below the national average. Monthly fuel costs for a 25-mile daily commute: $120–$180. TRAX Blue Line has a Draper station, about 40 minutes to downtown SLC with one transfer.</p>
 
             <h2>Childcare & Education</h2>
-            <p>Public schools (Canyons School District) are free and highly rated — Corner Canyon High School is regularly ranked in Utah&apos;s top 3 by AP participation. Private preschool and daycare run $1,200–$2,000/mo for full-time care.</p>
+            <p>Public schools (Canyons School District) are free and highly rated, Corner Canyon High School is regularly ranked in Utah&apos;s top 3 by AP participation. Private preschool and daycare run $1,200–$2,000/mo for full-time care.</p>
 
             <h2>Draper vs. Salt Lake City: Quick Comparison</h2>
             <p>Draper costs approximately 15–25% more than SLC proper for equivalent housing, offset by lower crime rates, higher-rated schools, and newer infrastructure. For tech workers earning $120K+, the premium is often worth it for the lifestyle and school quality.</p>

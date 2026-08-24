@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -6,6 +7,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { FileText, Download, Phone, Mail, Calendar } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/investor-relations", {
+  title: "Investor Relations | Ondo Real Estate",
+  description: "Financial information and resources for investors and stakeholders.",
+})
+
 
 export default function InvestorRelationsPage() {
   const financialHighlights = [

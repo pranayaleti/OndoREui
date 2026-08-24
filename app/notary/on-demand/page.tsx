@@ -10,12 +10,12 @@ import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "On-Demand Notary — Same-Day When We Can | ONDO Notary",
+  title: "On-Demand Notary: Same-Day When We Can | ONDO Notary",
   description:
-    "On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows — remote online (RON) nationwide.",
+    "On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows, remote online (RON) nationwide.",
   alternates: { canonical: `${SITE_URL}/notary/on-demand/` },
   openGraph: {
-    title: "On-Demand Notary — Same-Day When We Can | ONDO Notary",
+    title: "On-Demand Notary: Same-Day When We Can | ONDO Notary",
     description:
       "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide.",
     url: `${SITE_URL}/notary/on-demand/`,
@@ -24,13 +24,13 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/modern-office-building.webp`,
         width: 1200,
         height: 630,
-        alt: "ONDO Notary — on-demand and same-day when we can",
+        alt: "ONDO Notary: on-demand and same-day when we can",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "On-Demand Notary — Same-Day When We Can",
+    title: "On-Demand Notary: Same-Day When We Can",
     description: "Best-effort same-day notarization. Remote online (RON) nationwide.",
     images: [`${SITE_URL}/modern-office-building.webp`],
   },
@@ -40,8 +40,8 @@ export default function OnDemandNotaryPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="On-Demand Notary — Same-Day When We Can | ONDO Notary"
-        description="On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows — remote online (RON) nationwide."
+        title="On-Demand Notary: Same-Day When We Can | ONDO Notary"
+        description="On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows, remote online (RON) nationwide."
         pathname="/notary/on-demand"
         image={`${SITE_URL}/modern-office-building.webp`}
         keywords={[
@@ -64,7 +64,7 @@ export default function OnDemandNotaryPage() {
             serviceType: "NotaryPublic",
             areaServed: "United States",
             offers: {
-              description: "Same-day when capacity allows — not a guaranteed SLA.",
+              description: "Same-day when capacity allows, not a guaranteed SLA.",
             },
           }),
         ]}
@@ -80,7 +80,7 @@ export default function OnDemandNotaryPage() {
       <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <p className="text-lg text-foreground/80 leading-relaxed">
-            When you need a notarization quickly — loan packages, POA, affidavits, or closing docs —
+            When you need a notarization quickly, loan packages, POA, affidavits, or closing docs , 
             ONDO Notary offers on-demand scheduling. We work to fit same-day requests whenever our
             calendar allows.
           </p>
@@ -104,7 +104,7 @@ export default function OnDemandNotaryPage() {
               {
                 step: "1",
                 title: "Request",
-                body: "Tell us what you need notarized and when you need it — online booking, email, or phone.",
+                body: "Tell us what you need notarized and when you need it, online booking, email, or phone.",
               },
               {
                 step: "2",
@@ -114,7 +114,7 @@ export default function OnDemandNotaryPage() {
               {
                 step: "3",
                 title: "Complete RON",
-                body: "Join a secure video session from anywhere in the U.S. — no travel required.",
+                body: "Join a secure video session from anywhere in the U.S., no travel required.",
               },
             ].map((item) => (
               <li key={item.step} className="text-center">
@@ -137,7 +137,7 @@ export default function OnDemandNotaryPage() {
             <h2 className="text-3xl font-bold text-foreground">Same-day expectations</h2>
           </div>
           <p className="text-center text-foreground/80 mb-8">
-            We&apos;ll try to accommodate same-day when capacity allows. This is best-effort —
+            We&apos;ll try to accommodate same-day when capacity allows. This is best-effort , 
             not a guaranteed same-day SLA.
           </p>
           <ul className="space-y-3 text-foreground/80 max-w-xl mx-auto">
@@ -189,7 +189,7 @@ export default function OnDemandNotaryPage() {
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-bold text-center mb-4">Request on-demand</h2>
           <p className="text-center text-foreground/70 mb-10">
-            Book online or reach us directly — mention that you need same-day if timing is urgent.
+            Book online or reach us directly, mention that you need same-day if timing is urgent.
           </p>
 
           <NotaryBooking />

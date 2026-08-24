@@ -1,5 +1,11 @@
+import type { Metadata } from "next"
 import { Suspense } from "react"
 import { ApplyPageClient } from "./apply-page-client"
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 // Dynamic token URLs are handled client-side via the 404 fallback.
 // We generate one placeholder so Next.js static export is satisfied.

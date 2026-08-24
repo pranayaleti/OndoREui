@@ -1,5 +1,5 @@
 ---
-title: "50% Rule Calculator — Ondo Real Estate"
+title: "50% Rule Calculator: Ondo Real Estate"
 description: "Estimate expenses quickly using the 50% rental rule."
 canonical: https://www.ondorealestate.com/calculators/fifty-percent-rule/
 ---
@@ -10,7 +10,7 @@ canonical: https://www.ondorealestate.com/calculators/fifty-percent-rule/
 
 ## Formula
 
-50% Rule: assume operating expenses (excluding debt service) ≈ 50% of gross rent. Quick screen only — verify with real expenses.
+50% Rule: assume operating expenses (excluding debt service) ≈ 50% of gross rent. Quick screen only, verify with real expenses.
 
 ## Inputs
 

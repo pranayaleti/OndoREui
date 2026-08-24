@@ -110,7 +110,7 @@ export default function TemplatesPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Why We Publish These Templates</h2>
               <p className="text-lg text-foreground/70">
-                Most landlord mistakes happen before a tenant ever moves in — an informal lease, a skipped move-in checklist, or no documented process for maintenance. These templates reflect the same forms and workflows we use inside Ondo&apos;s property management platform. They are written for Utah law, tested across hundreds of rentals, and free to use as a starting point. If you need a version customised to your specific portfolio or want us to manage the whole process, reach out and we will walk through it with you.
+                Most landlord mistakes happen before a tenant ever moves in, an informal lease, a skipped move-in checklist, or no documented process for maintenance. These templates reflect the same forms and workflows we use inside Ondo&apos;s property management platform. They are written for Utah law, tested across hundreds of rentals, and free to use as a starting point. If you need a version customised to your specific portfolio or want us to manage the whole process, reach out and we will walk through it with you.
               </p>
             </div>
 

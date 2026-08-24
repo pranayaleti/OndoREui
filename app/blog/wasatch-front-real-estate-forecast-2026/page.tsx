@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 
 const slug = "/blog/wasatch-front-real-estate-forecast-2026"
 const title = "Wasatch Front Real Estate Forecast: What Owners and Investors Should Watch"
-const description = "An outlook for the Wasatch Front real estate market in 2026 — interest rates, inventory, rent trends, and strategic positioning for Utah property owners and investors."
+const description = "An outlook for the Wasatch Front real estate market in 2026, interest rates, inventory, rent trends, and strategic positioning for Utah property owners and investors."
 const published = "2026-03-23"
 const modified = "2026-03-23"
 const author = "Ondo RE Team"
@@ -76,17 +76,17 @@ export default function WasatchFrontRealEstateForecast2026() {
             <h2>Interest Rate Environment</h2>
             <p>The Federal Reserve's rate trajectory remains the most consequential variable for Utah real estate. The 30-year fixed mortgage rate, which peaked above 7.5% in late 2023, has moderated but remains elevated relative to the 2019–2021 era. The current rate environment has two major effects on the Wasatch Front:</p>
             <ul>
-              <li><strong>Demand suppression on the purchase side:</strong> Affordability remains stretched for first-time buyers in Salt Lake and Utah counties. The monthly payment on a $500,000 home at 6.75% with 10% down is approximately $3,200/month — well above what a median Utah household qualifies for. This keeps demand in the rental market elevated.</li>
+              <li><strong>Demand suppression on the purchase side:</strong> Affordability remains stretched for first-time buyers in Salt Lake and Utah counties. The monthly payment on a $500,000 home at 6.75% with 10% down is approximately $3,200/month, well above what a median Utah household qualifies for. This keeps demand in the rental market elevated.</li>
               <li><strong>Lock-in effect on the supply side:</strong> Homeowners who refinanced at 2.5–3.5% between 2020–2022 are reluctant to sell and take on a new mortgage at 6.5%+. This suppresses resale inventory, keeping competition high for buyers who are in the market.</li>
             </ul>
-            <p>The net effect is that both sides of the affordability equation favor continued strong rental demand in 2026. Households that cannot buy — or choose to wait — are renting. And they are renting in Utah at historically low vacancy rates.</p>
+            <p>The net effect is that both sides of the affordability equation favor continued strong rental demand in 2026. Households that cannot buy, or choose to wait, are renting. And they are renting in Utah at historically low vacancy rates.</p>
 
             <h2>Home Price Outlook</h2>
             <p>Wasatch Front home prices are expected to see modest appreciation of 2–4% in 2026 after the 2023 correction and 2024 stabilization. The key dynamics:</p>
             <ul>
               <li><strong>Constrained resale inventory:</strong> The lock-in effect limits supply, supporting prices in established neighborhoods even as demand slows</li>
               <li><strong>New construction activity:</strong> Builders remain active in southern Utah County (Payson, Springville, Spanish Fork) and the far-west Salt Lake County markets, adding supply that moderates price growth in those areas</li>
-              <li><strong>Income growth:</strong> Utah continues to attract high-income relocations from California and the Pacific Northwest — raising the top of the demand curve even as affordability tightens the middle</li>
+              <li><strong>Income growth:</strong> Utah continues to attract high-income relocations from California and the Pacific Northwest, raising the top of the demand curve even as affordability tightens the middle</li>
             </ul>
 
             <h2>Rental Market Outlook</h2>
@@ -104,20 +104,20 @@ export default function WasatchFrontRealEstateForecast2026() {
               <li>Major employers (Adobe, Workday, Domo, Qualtrics, and dozens of venture-backed startups) maintain significant Wasatch Front footprints</li>
               <li>The University of Utah and BYU supply a consistent pipeline of STEM graduates who stay in-state</li>
             </ul>
-            <p>A significant Silicon Slopes downturn would be the most material risk to Wasatch Front real estate — particularly in the Lehi-Draper-South Jordan corridor. Watch tech employment data as a leading indicator for this submarket.</p>
+            <p>A significant Silicon Slopes downturn would be the most material risk to Wasatch Front real estate, particularly in the Lehi-Draper-South Jordan corridor. Watch tech employment data as a leading indicator for this submarket.</p>
 
             <h2>Migration and Population Growth</h2>
-            <p>Utah continues to rank among the top states for domestic in-migration. The primary sources of new residents — California, Washington, Oregon, and Texas — bring household incomes and wealth levels that are accretive to the Utah market. Utah's population growth rate of approximately 1.5–2% per year is roughly twice the national average, sustaining long-term housing demand across the cycle.</p>
+            <p>Utah continues to rank among the top states for domestic in-migration. The primary sources of new residents, California, Washington, Oregon, and Texas, bring household incomes and wealth levels that are accretive to the Utah market. Utah's population growth rate of approximately 1.5–2% per year is roughly twice the national average, sustaining long-term housing demand across the cycle.</p>
 
             <h2>What Owners Should Do Now</h2>
             <ul>
               <li><strong>Owners with sub-3.5% mortgages:</strong> Hold. The equity you have is growing modestly and your carrying cost is below replacement cost. Refinancing to access equity makes sense only if the use of funds generates a return above your effective cost of capital.</li>
-              <li><strong>Owners with near-market-rate debt:</strong> Focus on NOI optimization — tenant retention, proactive maintenance to preserve condition, and dynamic rent pricing aligned with the micro-market.</li>
+              <li><strong>Owners with near-market-rate debt:</strong> Focus on NOI optimization, tenant retention, proactive maintenance to preserve condition, and dynamic rent pricing aligned with the micro-market.</li>
               <li><strong>Investors considering acquisition in 2026:</strong> The math is tighter than 2019–2020 at current rates. Focus on cap rate compression opportunities in value-add Class B/C assets in stable submarkets (West Valley, Midvale, Payson). Avoid paying full price for Class A in new supply submarkets until concessions stabilize.</li>
             </ul>
 
             <h2>What Tenants Should Know</h2>
-            <p>Renters who would like to buy but are priced out should use this period to save aggressively and work on credit. If rates decline to the 5.5–6% range in 2026–2027, the demand surge from sideline buyers will be significant — first-time buyers who are financially prepared will have an advantage.</p>
+            <p>Renters who would like to buy but are priced out should use this period to save aggressively and work on credit. If rates decline to the 5.5–6% range in 2026–2027, the demand surge from sideline buyers will be significant, first-time buyers who are financially prepared will have an advantage.</p>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">

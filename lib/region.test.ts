@@ -10,7 +10,7 @@ describe("isMarketingRestrictedRegion", () => {
 
   it("returns true during SSR (no window)", () => {
     const windowBackup = globalThis.window
-    // @ts-expect-error — simulate SSR
+    // @ts-expect-error, simulate SSR
     delete globalThis.window
     expect(isMarketingRestrictedRegion()).toBe(true)
     globalThis.window = windowBackup

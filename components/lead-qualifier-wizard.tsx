@@ -10,7 +10,7 @@
  *     token (invite flow only).
  *   - Multi-step wizards convert better than single forms for high-intent
  *     CTAs (commitment escalation + visible progress).
- *   - Honest framing — we're guiding, not pretending the bot is AI.
+ *   - Honest framing, we're guiding, not pretending the bot is AI.
  *
  * Behavior:
  *   - Q1–Q5 collect role, intent, location, units, urgency, contact info.
@@ -104,7 +104,7 @@ const STEPS: Step[] = [
     id: "units",
     title: "How many rental units (if any)?",
     type: "text",
-    placeholder: "e.g. 1, 3, 12 — or leave blank",
+    placeholder: "e.g. 1, 3, 12, or leave blank",
     optional: true,
   },
   {
@@ -112,7 +112,7 @@ const STEPS: Step[] = [
     title: "When do you want to move on this?",
     type: "single",
     options: [
-      { value: "now", label: "ASAP — this week", emoji: "🔥" },
+      { value: "now", label: "ASAP, this week", emoji: "🔥" },
       { value: "30_days", label: "Within 30 days", emoji: "⏱️" },
       { value: "90_days", label: "Within 90 days", emoji: "📅" },
       { value: "exploring", label: "Just exploring", emoji: "💭" },
@@ -125,7 +125,7 @@ const STEPS: Step[] = [
   },
 ]
 
-/** Routing logic — determines whether this is a HOT lead worth pushing to Calendly. */
+/** Routing logic, determines whether this is a HOT lead worth pushing to Calendly. */
 function classifyLead(a: Answers): "hot" | "warm" | "cold" {
   const isOwnerOrInvestor = a.role === "owner" || a.role === "investor"
   const isManageRental = a.intent === "manage_rental"
@@ -184,7 +184,7 @@ export function LeadQualifierWizard() {
 
     const classification = classifyLead(answers)
     const messageParts: string[] = [
-      `Lead qualifier wizard — classification: ${classification.toUpperCase()}`,
+      `Lead qualifier wizard, classification: ${classification.toUpperCase()}`,
       `Role: ${answers.role}`,
       `Intent: ${answers.intent}`,
       `Location: ${answers.location}`,
@@ -226,11 +226,11 @@ export function LeadQualifierWizard() {
           <CheckCircle2 className="h-9 w-9 text-primary" aria-hidden="true" />
         </div>
         <h2 className="text-3xl font-bold text-foreground mb-3">
-          {isHot ? "We're a great fit. Pick a time below." : "Got it — we'll be in touch."}
+          {isHot ? "We're a great fit. Pick a time below." : "Got it, we'll be in touch."}
         </h2>
         <p className="text-foreground/70 mb-8 max-w-md mx-auto">
           {isHot
-            ? `Based on your answers, the fastest path is a 30-minute call. Pick whatever works — we'll have your file open before we dial in.`
+            ? `Based on your answers, the fastest path is a 30-minute call. Pick whatever works, we'll have your file open before we dial in.`
             : `We'll send a personalized recommendation to ${answers.email} within one business day, along with the next steps tailored to your situation.`}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -346,7 +346,7 @@ export function LeadQualifierWizard() {
             }}
           />
           {current.id === "units" && (
-            <p className="text-xs text-foreground/50 mt-2">Optional — skip if not applicable.</p>
+            <p className="text-xs text-foreground/50 mt-2">Optional, skip if not applicable.</p>
           )}
         </div>
       )}

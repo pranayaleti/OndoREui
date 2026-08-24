@@ -11,7 +11,7 @@ export function PropertyOwnerSection() {
           <div>
             <h2 className="text-3xl font-bold mb-6 dark:text-foreground">Property management for Utah owners &amp; landlords</h2>
             <p className="text-lg mb-6 dark:text-foreground/70">
-              Ondo RE delivers full-service property management across the Wasatch Front — leasing, tenant screening,
+              Ondo RE delivers full-service property management across the Wasatch Front, leasing, tenant screening,
               rent collection, maintenance, and real-time owner reporting. From Salt Lake City to Payson, we handle the
               operations so you focus on growing your portfolio.
             </p>
@@ -54,7 +54,7 @@ export function PropertyOwnerSection() {
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <LazyImage
               src="/city-map-with-pin.webp"
-              alt="Ondo RE property management service area — Salt Lake City, Provo, Draper, Sandy, and Wasatch Front communities in Utah"
+              alt="Ondo RE property management service area: Salt Lake City, Provo, Draper, Sandy, and Wasatch Front communities in Utah"
               fill
               className="object-cover"
               quality={80}

@@ -89,7 +89,7 @@ export function PackageTracker() {
                   <p className="text-sm font-medium text-gray-900">
                     {pkg.carrier}
                     {pkg.description && (
-                      <span className="text-gray-500 font-normal"> — {pkg.description}</span>
+                      <span className="text-gray-500 font-normal">, {pkg.description}</span>
                     )}
                   </p>
                   <p className="text-xs text-gray-500 font-mono">{pkg.trackingNumber}</p>

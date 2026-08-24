@@ -14,7 +14,7 @@ import { SITE_SOCIAL_LINKS, SITE_URL } from "@/lib/site"
 export const metadata: Metadata = {
   title: "Socials & Updates | Ondo Real Estate",
   description:
-    "Latest Ondo social posts, profile links, and curated real estate news — follow along on Linktree and our public channels.",
+    "Latest Ondo social posts, profile links, and curated real estate news, follow along on Linktree and our public channels.",
   alternates: { canonical: `${SITE_URL}/socials/` },
   openGraph: {
     title: "Socials & Updates | Ondo Real Estate",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/modern-office-building.webp`,
         width: 1200,
         height: 630,
-        alt: "Ondo Real Estate — socials and updates",
+        alt: "Ondo Real Estate: socials and updates",
       },
     ],
   },
@@ -121,7 +121,7 @@ export default function SocialsPage() {
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-2xl font-bold mb-2">Follow us</h2>
           <p className="text-sm text-foreground/70 mb-8 max-w-2xl">
-            Live profiles only — we list channels once they&apos;re claimed and active. Linktree is the
+            Live profiles only, we list channels once they&apos;re claimed and active. Linktree is the
             always-on hub for every public link.
           </p>
           <div className="flex flex-wrap gap-3 mb-8">
@@ -142,7 +142,7 @@ export default function SocialsPage() {
             <h3 className="text-xl font-semibold mb-2">Linktree hub</h3>
             <p className="text-sm text-foreground/70 mb-6">
               Open our Linktree for every public booking link, tool, and profile in one place.
-              (Embeds are often blocked by browsers — a direct link is more reliable.)
+              (Embeds are often blocked by browsers, a direct link is more reliable.)
             </p>
             <Button asChild size="lg" className="gap-2">
               <Link

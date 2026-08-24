@@ -16,7 +16,7 @@ import type { Metadata } from "next"
 
 const TITLE = "Notary in Utah County: Remote Online Notarization, Fees, and How to Book"
 const DESCRIPTION =
-  "ONDO Notary serves Utah County by Remote Online Notarization (RON) — $25 per remote act, same-day when capacity allows. No mobile travel or in-office appointments."
+  "ONDO Notary serves Utah County by Remote Online Notarization (RON), $25 per remote act, same-day when capacity allows. No mobile travel or in-office appointments."
 
 export const metadata: Metadata = {
   title: `${TITLE} | Ondo Real Estate`,
@@ -90,7 +90,7 @@ export default function MobileNotaryUtahCountyGuide() {
 
       <PageBanner
         title="Notary in Utah County"
-        subtitle="Remote Online Notarization (RON) from Lehi, Provo, Orem, and beyond — no travel appointment required."
+        subtitle="Remote Online Notarization (RON) from Lehi, Provo, Orem, and beyond: no travel appointment required."
         backgroundImage="/modern-apartment-balcony.png"
       />
 
@@ -122,7 +122,7 @@ export default function MobileNotaryUtahCountyGuide() {
           <div className="prose prose-lg prose-invert max-w-none">
             <p>
               Searching for a mobile notary in Utah County? ONDO Notary now completes sessions by
-              <strong> Remote Online Notarization (RON)</strong> — a secure video appointment you can
+              <strong> Remote Online Notarization (RON)</strong>, a secure video appointment you can
               join from Lehi, Provo, Orem, or anywhere in the U.S. We do not offer mobile travel or
               in-office appointments. Confirm your title company, lender, or receiving party accepts
               electronic notarization before you book.
@@ -188,13 +188,13 @@ export default function MobileNotaryUtahCountyGuide() {
               <li>Purchase, refinance, HELOC, and investment packages that accept RON</li>
               <li>Borrower walkthrough on video with identity verification</li>
               <li>Coordination with title and escrow when they accept electronic notarization</li>
-              <li>Same-day slots when the calendar allows — request by noon MT</li>
+              <li>Same-day slots when the calendar allows, request by noon MT</li>
             </ul>
 
             <h2>Same-day and after-hours</h2>
             <p>
-              We try to fit urgent RON sessions when capacity allows. If you need a notary today — or
-              after 7 PM — book online or call and tell us it is urgent. Same-day is best-effort, not
+              We try to fit urgent RON sessions when capacity allows. If you need a notary today, or
+              after 7 PM, book online or call and tell us it is urgent. Same-day is best-effort, not
               a guaranteed SLA. Details:{" "}
               <Link href="/notary/on-demand" className="text-primary underline">
                 /notary/on-demand

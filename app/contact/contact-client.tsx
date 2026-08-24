@@ -273,7 +273,7 @@ export default function ContactPage() {
                       Notary &amp; other services
                     </Button>
                     <p className="text-xs text-muted-foreground">
-                      Send a detailed request for notary, loan signing, or anything that needs follow-up from our team — or use Calendly to grab a time.
+                      Send a detailed request for notary, loan signing, or anything that needs follow-up from our team, or use Calendly to grab a time.
                     </p>
                   </div>
                 </div>

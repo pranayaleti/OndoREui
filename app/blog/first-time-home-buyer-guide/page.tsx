@@ -42,7 +42,7 @@ export default function FirstTimeHomeBuyerGuide() {
           </div>
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Buying your first home is one of the biggest financial decisions you will make. This guide walks you through every stage of the process — from getting pre-approved to handing over the keys — so you can move forward with confidence.
+              Buying your first home is one of the biggest financial decisions you will make. This guide walks you through every stage of the process, from getting pre-approved to handing over the keys, so you can move forward with confidence.
             </p>
 
             <h2>Step 1: Know Your Numbers Before You Shop</h2>
@@ -53,37 +53,37 @@ export default function FirstTimeHomeBuyerGuide() {
               <li>Have 2–3 months of reserves after closing for peace of mind</li>
             </ul>
 
-            <h2>Step 2: Get Pre-Approved — Not Just Pre-Qualified</h2>
-            <p>A pre-qualification is a quick estimate. A pre-approval is a lender reviewing your actual tax returns, W-2s, pay stubs, and bank statements and issuing a conditional commitment. In Utah's competitive market, sellers often reject offers without a solid pre-approval letter. Use a local lender who understands Utah title, HOA, and county-specific quirks — national online lenders can cause delays at closing.</p>
+            <h2>Step 2: Get Pre-Approved: Not Just Pre-Qualified</h2>
+            <p>A pre-qualification is a quick estimate. A pre-approval is a lender reviewing your actual tax returns, W-2s, pay stubs, and bank statements and issuing a conditional commitment. In Utah's competitive market, sellers often reject offers without a solid pre-approval letter. Use a local lender who understands Utah title, HOA, and county-specific quirks, national online lenders can cause delays at closing.</p>
             <p>Utah first-time buyer programs to ask about:</p>
             <ul>
-              <li><strong>Utah Housing Corporation (UHC) FirstHome Loan</strong> — below-market rate + optional DPA second mortgage</li>
-              <li><strong>UHC Score Loan</strong> — for buyers with lower credit scores who need more flexibility</li>
-              <li><strong>FHA loans</strong> — 3.5% down at 580+ FICO; works well with UHC DPA</li>
-              <li><strong>USDA Rural Development</strong> — zero down in eligible rural areas (Cache Valley, parts of Utah County)</li>
+              <li><strong>Utah Housing Corporation (UHC) FirstHome Loan</strong>, below-market rate + optional DPA second mortgage</li>
+              <li><strong>UHC Score Loan</strong>, for buyers with lower credit scores who need more flexibility</li>
+              <li><strong>FHA loans</strong>, 3.5% down at 580+ FICO; works well with UHC DPA</li>
+              <li><strong>USDA Rural Development</strong>, zero down in eligible rural areas (Cache Valley, parts of Utah County)</li>
             </ul>
 
             <h2>Step 3: Find the Right Agent and Search Smart</h2>
-            <p>A buyer's agent costs you nothing (seller pays both commissions in most transactions) and gives you negotiation expertise, contract knowledge, and access to off-market listings. Look for someone who specialises in your target corridor — Wasatch Front dynamics differ dramatically from Park City or St. George.</p>
+            <p>A buyer's agent costs you nothing (seller pays both commissions in most transactions) and gives you negotiation expertise, contract knowledge, and access to off-market listings. Look for someone who specialises in your target corridor, Wasatch Front dynamics differ dramatically from Park City or St. George.</p>
             <p>Search tips for Utah:</p>
             <ul>
               <li>Watch days-on-market. Anything under 7 days in the Salt Lake metro usually means multiple offers.</li>
-              <li>Check flood zone maps — FEMA-designated zones affect insurance cost significantly.</li>
+              <li>Check flood zone maps, FEMA-designated zones affect insurance cost significantly.</li>
               <li>Verify HOA documents: budget, reserve study, and meeting minutes before going under contract.</li>
             </ul>
 
             <h2>Step 4: Make a Strong Offer</h2>
-            <p>Price is not the only lever. In a competitive market, escalation clauses, waived minor contingencies, and a flexible close date can win over a marginally higher offer. That said, never waive an inspection entirely on your first home — the inspection contingency protects you from discovering major structural or mechanical defects after you own the property.</p>
+            <p>Price is not the only lever. In a competitive market, escalation clauses, waived minor contingencies, and a flexible close date can win over a marginally higher offer. That said, never waive an inspection entirely on your first home, the inspection contingency protects you from discovering major structural or mechanical defects after you own the property.</p>
             <p>Utah-specific contract items to understand:</p>
             <ul>
-              <li>REPC (Real Estate Purchase Contract) — Utah's standard contract is thorough; know the deadlines</li>
+              <li>REPC (Real Estate Purchase Contract), Utah's standard contract is thorough; know the deadlines</li>
               <li>Earnest money is typically 1–2% of purchase price and goes hard (non-refundable) after the due-diligence period</li>
               <li>Seller disclosures are required by Utah law; review them carefully</li>
             </ul>
 
             <h2>Step 5: Navigate Inspection, Appraisal, and Closing</h2>
             <p>After an accepted offer, the clock starts. You typically have 10–14 days for inspections. Hire a licensed Utah home inspector and, for older homes, add a sewer scope and radon test (Utah has elevated radon in many areas). If issues arise, you can negotiate repairs, a price reduction, or a seller credit.</p>
-            <p>The lender orders an appraisal to confirm the home is worth the purchase price. If it appraises low, you can renegotiate, pay the gap in cash, or walk away. Final underwriting then clears any remaining conditions. Closing day involves signing a stack of documents at title — in Utah, closings are typically handled by a title company, not an attorney.</p>
+            <p>The lender orders an appraisal to confirm the home is worth the purchase price. If it appraises low, you can renegotiate, pay the gap in cash, or walk away. Final underwriting then clears any remaining conditions. Closing day involves signing a stack of documents at title, in Utah, closings are typically handled by a title company, not an attorney.</p>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">

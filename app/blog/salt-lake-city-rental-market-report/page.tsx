@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 
 const slug = "/blog/salt-lake-city-rental-market-report"
 const title = "Salt Lake City Rental Market Report: Vacancy Rates, Rents & Trends"
-const description = "A data-driven look at the Salt Lake City rental market in 2026 — vacancy rates, average rents by neighborhood, and what landlords should expect."
+const description = "A data-driven look at the Salt Lake City rental market in 2026, vacancy rates, average rents by neighborhood, and what landlords should expect."
 const published = "2026-03-23"
 const modified = "2026-03-23"
 const author = "Ondo RE Team"
@@ -74,11 +74,11 @@ export default function SaltLakeCityRentalMarketReport() {
             </p>
 
             <h2>Vacancy Rates</h2>
-            <p>Salt Lake County's apartment vacancy rate has hovered between 5% and 7% over the past 18 months — higher than the historic lows seen in 2021–2022, but still well below the national average of approximately 7.8%. The softening reflects a wave of new multifamily deliveries in the Downtown, Sugar House, and South Jordan submarkets. However, single-family rentals continue to experience tighter vacancy, particularly in the 3–4 bedroom segment sought by families priced out of homeownership.</p>
+            <p>Salt Lake County's apartment vacancy rate has hovered between 5% and 7% over the past 18 months, higher than the historic lows seen in 2021–2022, but still well below the national average of approximately 7.8%. The softening reflects a wave of new multifamily deliveries in the Downtown, Sugar House, and South Jordan submarkets. However, single-family rentals continue to experience tighter vacancy, particularly in the 3–4 bedroom segment sought by families priced out of homeownership.</p>
             <ul>
-              <li><strong>Studio / 1BR:</strong> 6.5–8% vacancy — most affected by new supply</li>
-              <li><strong>2BR:</strong> 5–6% vacancy — stable demand from young professionals and couples</li>
-              <li><strong>3–4BR SFR:</strong> 3–4% vacancy — tightest segment in the market</li>
+              <li><strong>Studio / 1BR:</strong> 6.5–8% vacancy, most affected by new supply</li>
+              <li><strong>2BR:</strong> 5–6% vacancy, stable demand from young professionals and couples</li>
+              <li><strong>3–4BR SFR:</strong> 3–4% vacancy, tightest segment in the market</li>
             </ul>
 
             <h2>Average Rent by Submarket</h2>
@@ -87,8 +87,8 @@ export default function SaltLakeCityRentalMarketReport() {
               <li><strong>Downtown SLC / Marmalade:</strong> $1,600–$2,200/mo for 1BR; $2,100–$2,900/mo for 2BR</li>
               <li><strong>Sugar House:</strong> $1,500–$1,900/mo for 1BR; $1,900–$2,500/mo for 2BR</li>
               <li><strong>East Bench / Millcreek:</strong> $1,700–$2,400/mo for 2BR; $2,400–$3,200/mo for 3BR SFR</li>
-              <li><strong>West Valley City / Kearns:</strong> $1,200–$1,600/mo for 2BR — most affordable in the county</li>
-              <li><strong>Holladay / Cottonwood Heights:</strong> $2,200–$3,500/mo for 3–4BR SFR — premium family submarket</li>
+              <li><strong>West Valley City / Kearns:</strong> $1,200–$1,600/mo for 2BR, most affordable in the county</li>
+              <li><strong>Holladay / Cottonwood Heights:</strong> $2,200–$3,500/mo for 3–4BR SFR, premium family submarket</li>
             </ul>
             <p>Year-over-year rent growth has moderated to approximately 1–3% in most SLC submarkets, down from double-digit growth in 2021–2022. Owners who purchased at lower basis pre-2021 remain in an excellent cash flow position; those who acquired at peak 2022 prices may be experiencing tighter margins.</p>
 
@@ -107,7 +107,7 @@ export default function SaltLakeCityRentalMarketReport() {
             <h2>What This Means for Landlords</h2>
             <ul>
               <li><strong>Pricing strategy:</strong> Micro-market awareness matters more than ever. A Holladay SFR and a West Valley apartment require different pricing approaches. Use recent comps within a mile, not county-wide averages.</li>
-              <li><strong>Lease timing:</strong> Utah vacancy peaks in October–February. Avoid lease expirations in this window — structure renewals to expire in April–July.</li>
+              <li><strong>Lease timing:</strong> Utah vacancy peaks in October–February. Avoid lease expirations in this window, structure renewals to expire in April–July.</li>
               <li><strong>Tenant retention:</strong> With concessions appearing at new Class A buildings, retaining a good existing tenant with a modest below-market renewal offer is almost always more profitable than re-leasing.</li>
               <li><strong>Condition matters:</strong> Tenants in the 2026 SLC market have options. Updated kitchens, in-unit laundry, and fast maintenance response are the top differentiators in online reviews and renter decisions.</li>
             </ul>
@@ -121,7 +121,7 @@ export default function SaltLakeCityRentalMarketReport() {
               </Button>
             </div>
 
-            <p>Ondo RE manages rental properties across <Link href="/property-management/salt-lake-city">Salt Lake City</Link>, <Link href="/property-management/draper">Draper</Link>, <Link href="/property-management/sandy">Sandy</Link>, and surrounding communities. Our owner portal gives you real-time visibility into rent collection, vacancy, and maintenance — so you can make data-driven decisions. <Link href="/contact">Request a free rental analysis</Link> for your property.</p>
+            <p>Ondo RE manages rental properties across <Link href="/property-management/salt-lake-city">Salt Lake City</Link>, <Link href="/property-management/draper">Draper</Link>, <Link href="/property-management/sandy">Sandy</Link>, and surrounding communities. Our owner portal gives you real-time visibility into rent collection, vacancy, and maintenance, so you can make data-driven decisions. <Link href="/contact">Request a free rental analysis</Link> for your property.</p>
           </div>
         </div>
       </article>

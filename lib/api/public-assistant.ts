@@ -2,7 +2,7 @@
  * Client for the site-wide public assistant.
  *
  * The public site is a static export on GitHub Pages, so there is no server here to proxy
- * through — the browser talks to the Supabase Edge Function directly. That is why the
+ * through, the browser talks to the Supabase Edge Function directly. That is why the
  * request carries no credentials and why the endpoint is rate limited per IP on the server:
  * this call is reachable by anyone who views source.
  *
@@ -44,7 +44,7 @@ export function publicAssistantUrl(): string {
   return base.endsWith('/api') ? `${base.slice(0, -4)}/public-assistant` : `${base}/public-assistant`
 }
 
-/** Stable id for one visitor conversation. Not a credential — it authorizes nothing. */
+/** Stable id for one visitor conversation. Not a credential, it authorizes nothing. */
 export function newConversationId(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID()
@@ -81,7 +81,7 @@ export async function sendPublicAssistantMessage(params: {
       return {
         ok: false,
         rateLimited: true,
-        error: 'That was a lot of messages at once — give it a moment and try again.',
+        error: 'That was a lot of messages at once, give it a moment and try again.',
       }
     }
 

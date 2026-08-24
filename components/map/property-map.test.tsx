@@ -4,7 +4,7 @@ import PropertyMap from "./property-map"
 
 // PropertyMap gates its real render behind an async `import("leaflet")` in a
 // useEffect, showing a "Loading map..." placeholder until it resolves. A bare
-// synchronous render() only ever sees that placeholder — it never mounts the
+// synchronous render() only ever sees that placeholder, it never mounts the
 // Marker/Popup this task's conditional JSX lives in. waitFor lets the effect
 // resolve so the assertions below exercise the actual changed code.
 describe("PropertyMap with a listing-less marker", () => {
@@ -18,7 +18,7 @@ describe("PropertyMap with a listing-less marker", () => {
     )
     // react-leaflet doesn't mount a Marker's Popup content into the DOM until
     // the marker opens (click), so wait for the marker icon itself (not just
-    // the loading placeholder disappearing — there's a gap between the two)
+    // the loading placeholder disappearing, there's a gap between the two)
     // before opening it and asserting on popup text.
     const marker = await waitFor(() => {
       const el = document.querySelector(".custom-map-marker-pin")

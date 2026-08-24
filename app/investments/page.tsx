@@ -4,8 +4,10 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/investments") },
   title: "Utah Investment Properties | Ondo Real Estate",
   description:
     "Discover high-yield investment properties in Utah. Turnkey rentals, multi-family, and commercial opportunities with expert management.",
@@ -26,7 +28,7 @@ const sections = [
     icon: Building2,
     title: "Commercial Real Estate",
     description:
-      "Explore asset classes — office, retail, industrial, multifamily — and learn how institutional-quality CRE deals are structured.",
+      "Explore asset classes, office, retail, industrial, multifamily, and learn how institutional-quality CRE deals are structured.",
   },
   {
     href: "/investments/opportunity-zones",
@@ -105,7 +107,7 @@ export default function InvestmentsPage() {
               </p>
             </div>
 
-            {/* Section Cards — each links to its sub-route */}
+            {/* Section Cards, each links to its sub-route */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
               {sections.map((section) => (
                 <Link

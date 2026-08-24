@@ -10,12 +10,12 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 export const metadata: Metadata = {
   title: `Pricing | ${SITE_BRAND_SHORT}`,
   description:
-    "Transparent property management pricing for Utah property owners. No hidden fees — just percentage-based plans that scale with your portfolio.",
+    "Transparent property management pricing for Utah property owners. No hidden fees, just percentage-based plans that scale with your portfolio.",
   alternates: { canonical: `${SITE_URL}/pricing/` },
   openGraph: {
     title: `Pricing | ${SITE_BRAND_SHORT}`,
     description:
-      "Property management pricing Utah — percentage-based plans for portfolios of every size. Tenant screening, rent collection, maintenance, and more.",
+      "Property management pricing Utah, percentage-based plans for portfolios of every size. Tenant screening, rent collection, maintenance, and more.",
     url: `${SITE_URL}/pricing`,
   },
 }

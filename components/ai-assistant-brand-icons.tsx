@@ -8,7 +8,7 @@ type BrandIconProps = {
 
 /**
  * OpenAI mark used for ChatGPT entry points (ChatGPT is an OpenAI product).
- * Path from Simple Icons v9.21.0 — CC0-1.0.
+ * Path from Simple Icons v9.21.0, CC0-1.0.
  */
 export function ChatGptBrandIcon({
   className,
@@ -27,7 +27,7 @@ export function ChatGptBrandIcon({
   )
 }
 
-/** Claude product mark. Path from Simple Icons v16 — CC0-1.0. */
+/** Claude product mark. Path from Simple Icons v16, CC0-1.0. */
 export function ClaudeBrandIcon({
   className,
   "aria-hidden": ariaHidden = true,

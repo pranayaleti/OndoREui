@@ -4,7 +4,7 @@
  * Reads the session id from the query string and mounts the leasing chat in resume mode.
  *
  * Split from page.tsx because useSearchParams forces a client boundary, and this site is a
- * static export — keeping the boundary narrow means the page shell still prerenders.
+ * static export, keeping the boundary narrow means the page shell still prerenders.
  */
 
 import { useSearchParams } from 'next/navigation';

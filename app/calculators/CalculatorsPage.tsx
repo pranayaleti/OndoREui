@@ -36,7 +36,7 @@ const CalculatorsPage: React.FC = () => {
     {
       id: 'owner-vs-self',
       name: 'Self-Manage vs Ondo RE',
-      description: 'Compare self-managing a rental vs Ondo — including the hidden cost of your time.',
+      description: 'Compare self-managing a rental vs Ondo, including the hidden cost of your time.',
       path: '/calculators/owner-vs-self',
       icon: <Building2 className="h-8 w-8" />,
       category: 'Investment',
@@ -332,7 +332,7 @@ const CalculatorsPage: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-accent-1 to-accent-2 rounded-2xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-white">Clear Calculations</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">Standard amortization formulas with example rates you can edit — not live market quotes</p>
+                  <p className="text-gray-300 text-sm leading-relaxed">Standard amortization formulas with example rates you can edit, not live market quotes</p>
                 </div>
 
                 <div className="text-center group">

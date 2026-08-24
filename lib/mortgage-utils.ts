@@ -226,7 +226,7 @@ export function interestPaidWithFixedPayment(
   const monthlyRate = (annualRatePercent / 100) / 12
   if (monthlyRate === 0) return 0
   if (monthlyPI <= principal * monthlyRate) {
-    // Interest-only or underwater payment — interest ≈ rate × principal × months
+    // Interest-only or underwater payment, interest ≈ rate × principal × months
     return principal * monthlyRate * k
   }
   const growth = Math.pow(1 + monthlyRate, k)

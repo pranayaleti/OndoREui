@@ -11,7 +11,7 @@ async function readJsonList<T>(key: string): Promise<T[]> {
 }
 
 async function writeJsonList<T>(key: string, value: T[]): Promise<void> {
-  // User preference lists use LONG TTL (30 min) — they are small and mutation-driven,
+  // User preference lists use LONG TTL (30 min), they are small and mutation-driven,
   // not network responses, so we keep them alive between page loads.
   await cacheSet(key, value, TTL.LONG)
 }

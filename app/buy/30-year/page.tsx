@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Calendar, DollarSign, TrendingUp, Home } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/30-year", {
+  title: "30-Year Mortgage Guide | Utah Real Estate",
+  description: "Learn about 30-year fixed-rate mortgages in Utah. Understand benefits, rates, and why it is a common home loan option.",
+})
+
 
 export default function ThirtyYearPage() {
   return (

@@ -4,16 +4,13 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { HOME_PAGE_DESCRIPTION, HOME_PAGE_TITLE, homeOpenGraphImages } from "@/lib/home-metadata"
 import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageCanonicalMetadata("/", {
   title: HOME_PAGE_TITLE,
   description: HOME_PAGE_DESCRIPTION,
-  alternates: {
-    canonical: SITE_URL,
-  },
   openGraph: {
     type: "website",
-    url: SITE_URL,
     siteName: SITE_NAME,
     title: HOME_PAGE_TITLE,
     description: HOME_PAGE_DESCRIPTION,
@@ -25,7 +22,7 @@ export const metadata: Metadata = {
     description: HOME_PAGE_DESCRIPTION,
     images: homeOpenGraphImages.map((i) => i.url),
   },
-}
+})
 
 export default function Home() {
   return (
@@ -74,7 +71,7 @@ export default function Home() {
         jsonLd={[
           generateBreadcrumbJsonLd([{ name: "Home", url: SITE_URL }]),
           generateServiceJsonLd({
-            name: `${SITE_BRAND_SHORT} — Utah property management, mortgages & real estate`,
+            name: `${SITE_BRAND_SHORT}, Utah property management, mortgages & real estate`,
             description:
               "Full-service Utah real estate for owners, tenants, and investors: property management, buying and selling, home loans, and portfolio-minded tools across the Wasatch Front and expansion markets.",
             serviceType: "Real estate services",

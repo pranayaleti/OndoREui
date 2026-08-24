@@ -1,5 +1,5 @@
 ---
-title: "Required Income Calculator — Ondo Real Estate"
+title: "Required Income Calculator: Ondo Real Estate"
 description: "Calculate the income needed to qualify for your target home price."
 canonical: https://www.ondorealestate.com/calculators/income/
 ---

@@ -39,7 +39,7 @@ export const teamMembers: TeamMember[] = [
     name: "Marcus Thompson",
     slug: "marcus-thompson",
     title: "Lead Mortgage Advisor",
-    bio: "Marcus is Ondo's go-to expert for home financing. He specializes in helping first-time buyers and investors navigate conventional, FHA, VA, and jumbo loan products. Marcus has helped over 500 Utah families achieve homeownership and is known for his clear explanations and fast pre-approval turnaround — often within 48 hours.",
+    bio: "Marcus is Ondo's go-to expert for home financing. He specializes in helping first-time buyers and investors navigate conventional, FHA, VA, and jumbo loan products. Marcus has helped over 500 Utah families achieve homeownership and is known for his clear explanations and fast pre-approval turnaround, often within 48 hours.",
     specialties: ["Conventional Loans", "FHA & VA Loans", "Jumbo Mortgages", "Investment Property Financing"],
     cities: ["Lehi", "American Fork", "Pleasant Grove", "Orem", "Provo", "Spanish Fork"],
     email: "marcus@ondorealestate.com",

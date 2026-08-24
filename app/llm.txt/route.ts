@@ -1,7 +1,7 @@
 import { buildLlmsTxtBody } from "@/lib/site-index"
 
 /**
- * Singular alias for `/llms.txt` (common typo). Same body — one canonical brief for agents.
+ * Singular alias for `/llms.txt` (common typo). Same body, one canonical brief for agents.
  * @see https://llmstxt.org/
  */
 export const dynamic = "force-static"

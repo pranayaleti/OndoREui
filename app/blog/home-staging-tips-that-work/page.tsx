@@ -28,7 +28,7 @@ export default function HomeStagingTipsThatWork() {
   return (
     <main className="min-h-screen">
       <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} modifiedTime={modified} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="The moves that actually move buyers — from curb to close." backgroundImage={image} />
+      <PageBanner title={title} subtitle="The moves that actually move buyers: from curb to close." backgroundImage={image} />
       <article className="bg-background py-12">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">
           <div className="flex flex-wrap gap-3 mb-8">
@@ -42,20 +42,20 @@ export default function HomeStagingTipsThatWork() {
           </div>
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Staged homes sell faster and typically for more money. These are the moves that actually matter — from decluttering and lighting to the small details buyers notice on first walk-through.
+              Staged homes sell faster and typically for more money. These are the moves that actually matter, from decluttering and lighting to the small details buyers notice on first walk-through.
             </p>
 
             <h2>Start Outside: Curb Appeal Sets First Impressions</h2>
             <p>Buyers form an opinion within 8 seconds of pulling up. In Utah, the exterior work that pays most reliably is:</p>
             <ul>
-              <li><strong>Fresh paint on the front door and shutters</strong> — $100–300, consistently cited as top ROI improvement</li>
-              <li><strong>Clean, edged lawn and trimmed shrubs</strong> — dried-out or overgrown landscaping is the #1 visual negative</li>
-              <li><strong>Power-wash the driveway and walkway</strong> — Utah's red rock dust and inversion grime builds up fast</li>
-              <li><strong>Replace or clean outdoor light fixtures</strong> — buyers tour in evenings; light fixtures signal maintenance habits</li>
+              <li><strong>Fresh paint on the front door and shutters</strong>, $100–300, consistently cited as top ROI improvement</li>
+              <li><strong>Clean, edged lawn and trimmed shrubs</strong>, dried-out or overgrown landscaping is the #1 visual negative</li>
+              <li><strong>Power-wash the driveway and walkway</strong>, Utah's red rock dust and inversion grime builds up fast</li>
+              <li><strong>Replace or clean outdoor light fixtures</strong>, buyers tour in evenings; light fixtures signal maintenance habits</li>
             </ul>
 
             <h2>Declutter Ruthlessly Before Photos</h2>
-            <p>Listing photos are your first showing — most buyers filter before ever scheduling a visit. The goal is to make every room look larger and allow buyers to mentally place their own furniture. Remove 30–40% of belongings: pack personal photos, excess furniture, countertop appliances, and anything that signals the home is lived-in rather than move-in ready. Rent a storage unit for 4–6 weeks if needed.</p>
+            <p>Listing photos are your first showing, most buyers filter before ever scheduling a visit. The goal is to make every room look larger and allow buyers to mentally place their own furniture. Remove 30–40% of belongings: pack personal photos, excess furniture, countertop appliances, and anything that signals the home is lived-in rather than move-in ready. Rent a storage unit for 4–6 weeks if needed.</p>
             <p>Room-specific priorities:</p>
             <ul>
               <li><strong>Kitchen:</strong> Clear all countertops except one decorative item. Deep clean appliances inside and out.</li>
@@ -68,10 +68,10 @@ export default function HomeStagingTipsThatWork() {
             <p>Dark rooms feel smaller and less inviting. Before every showing: open all blinds, turn on every light in the house including closets and range hoods. Replace any burned-out bulbs with matching colour temperature (2700–3000K for warm, inviting light). Add a floor lamp or table lamp to any room that feels dark even with overhead lighting. Professional photos should be taken with all lights on and on an overcast or early morning shoot for even natural light.</p>
 
             <h2>Neutral, Clean, and Smell-Neutral</h2>
-            <p>Buyers who are sensitive to odours (pets, cooking, must) will walk out and not come back. A professional carpet cleaning, fresh air for 24–48 hours, and a light neutral scent (clean linen, not heavy fragrance) resets the olfactory experience. Repaint any rooms with bold colours in a soft neutral — Benjamin Moore Accessible Beige, Sherwin-Williams Agreeable Gray, or similar. Buyers pay a premium to not repaint.</p>
+            <p>Buyers who are sensitive to odours (pets, cooking, must) will walk out and not come back. A professional carpet cleaning, fresh air for 24–48 hours, and a light neutral scent (clean linen, not heavy fragrance) resets the olfactory experience. Repaint any rooms with bold colours in a soft neutral, Benjamin Moore Accessible Beige, Sherwin-Williams Agreeable Gray, or similar. Buyers pay a premium to not repaint.</p>
 
             <h2>The Walk-Through Test</h2>
-            <p>Walk every room as a buyer would: stand in the doorway and evaluate the first 3 seconds. Check: does it feel open? Is the focal point (fireplace, view, built-in) highlighted? Is the furniture arrangement making the room feel smaller? A common staging move is to pull furniture 6–12 inches away from walls — counterintuitively, this makes rooms feel larger. Remove extra chairs and side tables that create traffic flow obstacles.</p>
+            <p>Walk every room as a buyer would: stand in the doorway and evaluate the first 3 seconds. Check: does it feel open? Is the focal point (fireplace, view, built-in) highlighted? Is the furniture arrangement making the room feel smaller? A common staging move is to pull furniture 6–12 inches away from walls, counterintuitively, this makes rooms feel larger. Remove extra chairs and side tables that create traffic flow obstacles.</p>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">

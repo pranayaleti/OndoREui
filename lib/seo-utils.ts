@@ -159,7 +159,7 @@ export const generateStructuredData = {
 export const generateMetadata = {
   // Homepage metadata
   homepage: (): Metadata => ({
-    title: `${SITE_NAME} — Utah Property Management, Buying, Selling, Loans`,
+    title: `${SITE_NAME}: Utah Property Management, Buying, Selling, Loans`,
     description: "Utah real estate experts for property management, home buying, and selling services across Utah. Explore listings, loans, and expert guidance.",
     keywords: [
       // Core market/service
@@ -198,7 +198,7 @@ export const generateMetadata = {
     ],
     openGraph: {
       type: "website",
-      title: `${SITE_NAME} — Utah Property Management, Buying, Selling, Loans`,
+      title: `${SITE_NAME}: Utah Property Management, Buying, Selling, Loans`,
       description: "Utah real estate services: property management, buying, selling, refinancing, and mortgages.",
       images: [
         {
@@ -211,7 +211,7 @@ export const generateMetadata = {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${SITE_NAME} — Utah Property Management, Buying, Selling, Loans`,
+      title: `${SITE_NAME}: Utah Property Management, Buying, Selling, Loans`,
       description: "Utah real estate services: property management, buying, selling, refinancing, and mortgages.",
       images: [`${SITE_URL}/modern-office-building.png`],
     },

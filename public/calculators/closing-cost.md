@@ -1,5 +1,5 @@
 ---
-title: "Closing Cost Calculator — Ondo Real Estate"
+title: "Closing Cost Calculator: Ondo Real Estate"
 description: "Estimate buyer closing costs, taxes, and prepaid expenses."
 canonical: https://www.ondorealestate.com/calculators/closing-cost/
 ---

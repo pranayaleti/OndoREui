@@ -176,7 +176,7 @@ export default function PropertySearchMap({
         </p>
       </div>
 
-      {/* Map — responsive height: clamps between 220px (mobile) and 500px (desktop).
+      {/* Map, responsive height: clamps between 220px (mobile) and 500px (desktop).
            The outer wrapper drives the height via aspect-ratio on small screens and
            a max-height cap on larger ones so the map always fills its container. */}
       <div

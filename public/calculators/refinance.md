@@ -1,5 +1,5 @@
 ---
-title: "Refinance Savings Calculator — Ondo Real Estate"
+title: "Refinance Savings Calculator: Ondo Real Estate"
 description: "Model payment changes and break-even timing for a refinance."
 canonical: https://www.ondorealestate.com/calculators/refinance/
 ---

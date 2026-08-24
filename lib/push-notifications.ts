@@ -82,7 +82,7 @@ export async function subscribeToPush(): Promise<PushSubscriptionPayload | null>
   const vapidKey = process.env["NEXT_PUBLIC_VAPID_PUBLIC_KEY"]
   if (!vapidKey) {
     if (process.env.NODE_ENV === 'development') {
-      console.warn("[push-notifications] NEXT_PUBLIC_VAPID_PUBLIC_KEY is not set — push notifications disabled.")
+      console.warn("[push-notifications] NEXT_PUBLIC_VAPID_PUBLIC_KEY is not set, push notifications disabled.")
     }
     return null
   }

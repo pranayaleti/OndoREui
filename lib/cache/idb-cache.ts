@@ -70,7 +70,7 @@ export async function cacheGet<T>(key: string): Promise<T | null> {
       const entry = req.result as CacheEntry<T> | undefined;
       if (!entry) return resolve(null);
       if (Date.now() > entry.expiresAt) {
-        // Stale — delete async and return null
+        // Stale, delete async and return null
         cacheDelete(key).catch(() => {});
         return resolve(null);
       }
@@ -125,8 +125,8 @@ export async function cachePurgeExpired(): Promise<void> {
 
 /** TTL constants for common use cases */
 export const TTL = {
-  SHORT: 2 * 60 * 1000,     // 2 min — live prices, urgent data
-  MEDIUM: 5 * 60 * 1000,    // 5 min — property lists, stats
-  LONG: 30 * 60 * 1000,     // 30 min — calculator inputs, preferences
-  DAY: 24 * 60 * 60 * 1000, // 24 hr — static reference data
+  SHORT: 2 * 60 * 1000,     // 2 min, live prices, urgent data
+  MEDIUM: 5 * 60 * 1000,    // 5 min, property lists, stats
+  LONG: 30 * 60 * 1000,     // 30 min, calculator inputs, preferences
+  DAY: 24 * 60 * 60 * 1000, // 24 hr, static reference data
 } as const;

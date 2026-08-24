@@ -54,7 +54,7 @@ export function BrochureRequestForm() {
             <CheckCircle className="mx-auto h-12 w-12 text-green-500" />
             <h3 className="text-xl font-bold">Request received</h3>
             <p className="text-sm text-foreground/70">
-              Thanks — we&apos;ll email the investor overview to <strong>{email}</strong> and follow
+              Thanks, we&apos;ll email the investor overview to <strong>{email}</strong> and follow
               up if you have questions.
             </p>
             <Button asChild variant="outline">

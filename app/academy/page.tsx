@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { SITE_CLAUDE_ASK_ONDO_URL } from "@/lib/site"
+import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
+  alternates: { canonical: toCanonicalPageUrl("/academy") },
   title: "Ondo Academy | Real Estate Education",
   description: "Free guides, tools, and resources to help you make smarter real estate decisions in Utah.",
 }
@@ -96,7 +98,7 @@ export default function AcademyPage() {
         <div className="container mx-auto px-4 max-w-xl text-center">
           <div className="bg-background border border-border rounded-lg p-8">
             <h2 className="text-xl font-bold text-foreground mb-3">Have a specific question?</h2>
-            <p className="text-foreground/70 mb-6">Ask the Ondo AI assistant — it knows Utah real estate inside out.</p>
+            <p className="text-foreground/70 mb-6">Ask the Ondo AI assistant, it knows Utah real estate inside out.</p>
             <Button asChild>
               <a href={SITE_CLAUDE_ASK_ONDO_URL} target="_blank" rel="noopener noreferrer">Ask AI</a>
             </Button>

@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Params }) {
     <>
       <SEO
         title={`${city.name}, Utah Real Estate Market Report | ${SITE_BRAND_SHORT}`}
-        description={`Comprehensive market data for ${city.name}, UT — prices, rent, growth, employment, and schools.`}
+        description={`Comprehensive market data for ${city.name}, UT, prices, rent, growth, employment, and schools.`}
         pathname={`/market-reports/${citySlug}/`}
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([

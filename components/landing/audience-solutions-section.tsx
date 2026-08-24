@@ -19,7 +19,7 @@ export function AudienceSolutionsSection() {
           {SITE_BRAND_SHORT} solutions for tenants, investors &amp; home buyers
         </h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-foreground/70">
-          One tech-forward real estate platform—rooted in Utah, built to scale with you across markets.
+          One tech-forward real estate platform, rooted in Utah, built to scale with you across markets.
         </p>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <article className="rounded-xl border border-border bg-background p-6 dark:bg-card">
@@ -28,7 +28,7 @@ export function AudienceSolutionsSection() {
               <h3 className="text-xl font-semibold dark:text-foreground">Tenants</h3>
             </div>
             <p className="text-foreground/70">
-              Pay rent, request maintenance, and stay organized in one place—backed by responsive property management.
+              Pay rent, request maintenance, and stay organized in one place, backed by responsive property management.
             </p>
             <p className="mt-4">
               <Link href="/solutions/tenants" className="font-medium text-primary underline-offset-4 hover:underline">
@@ -60,7 +60,7 @@ export function AudienceSolutionsSection() {
               <h3 className="text-xl font-semibold dark:text-foreground">Buying &amp; loans</h3>
             </div>
             <p className="text-foreground/70">
-              Education-first guidance for purchases and refinances—loan programs and calculators to match your goals.
+              Education-first guidance for purchases and refinances, loan programs and calculators to match your goals.
             </p>
             <p className="mt-4">
               <Link href="/loans" className="mr-4 font-medium text-primary underline-offset-4 hover:underline">

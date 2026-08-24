@@ -37,7 +37,7 @@ const statusConfig: Record<
 }
 
 export async function generateStaticParams() {
-  // Always use mock data at build time — the backend API is not available during SSG
+  // Always use mock data at build time, the backend API is not available during SSG
   return MOCK_OPPORTUNITIES.map((o) => ({ slug: o.slug }))
 }
 

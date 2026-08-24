@@ -121,7 +121,7 @@ Provo/Orem: student/education anchor; seasonality + parking constraints.`}
             </ul>
 
             <h2>Takeaway</h2>
-            <p>Utah rent vs buy is corridor-specific. Model taxes, transit, school-driven rent spreads, and maintenance. Let the numbers—plus your time horizon—decide.</p>
+            <p>Utah rent vs buy is corridor-specific. Model taxes, transit, school-driven rent spreads, and maintenance. Let the numbers, plus your time horizon, decide.</p>
           </div>
         </div>
       </article>

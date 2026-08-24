@@ -14,7 +14,7 @@ export const propertyManagementFaqBank: CityFaq[] = [
   { q: "How do you handle late rent and evictions?", a: "We follow Utah statutes for notices and timelines, apply late fees per lease, and coordinate with legal partners when necessary to protect your interests." },
   { q: "Can I approve repairs over a certain amount?", a: "Yes. We obtain owner approval for non-emergency repairs above your chosen dollar threshold. Emergencies are handled to prevent further damage." },
   { q: "Do you allow pets?", a: "Pet policies are owner-led. If allowed, we use pet screening, deposits, and pet rent to mitigate risk while expanding the renter pool." },
-  { q: "What does onboarding look like?", a: "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings—typically within 48–72 hours." },
+  { q: "What does onboarding look like?", a: "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings, typically within 48–72 hours." },
 ]
 
 export const buySellFaqBank: CityFaq[] = [
@@ -23,8 +23,8 @@ export const buySellFaqBank: CityFaq[] = [
   { q: "How competitive is the market right now?", a: "Competitiveness varies by city and price band. We share current absorption rates, days on market, and strategy for winning in multiple-offer scenarios." },
   { q: "Should I waive inspections or appraisal?", a: "We protect your interests. We rarely recommend waiving protections; instead we tailor timelines, escalation terms, and credits to strengthen offers." },
   { q: "What closing costs should I expect?", a: "Plan for 2–3% of purchase price for lender, title, and prepaid items. We can pursue seller credits to offset costs where appropriate." },
-  { q: "Do you represent new construction buyers?", a: "Yes. We help evaluate builders, negotiate upgrades, review timelines, and coordinate inspections—representation costs are typically covered by the builder." },
-  { q: "Can you help me sell my current home and buy another?", a: "Yes. We coordinate pricing, timing, and financing—often with leasebacks or extended closings—to minimize overlap and stress." },
+  { q: "Do you represent new construction buyers?", a: "Yes. We help evaluate builders, negotiate upgrades, review timelines, and coordinate inspections, representation costs are typically covered by the builder." },
+  { q: "Can you help me sell my current home and buy another?", a: "Yes. We coordinate pricing, timing, and financing, often with leasebacks or extended closings, to minimize overlap and stress." },
   { q: "What is earnest money?", a: "A good-faith deposit credited at closing. It signals commitment and is protected by your contract’s contingencies and timelines." },
   { q: "How long does a typical purchase take?", a: "Most close in 30–45 days from acceptance. Cash can be faster. Pre-approval and document readiness help keep timelines tight." },
   { q: "How do you market homes for sale?", a: "For sellers, we use professional photography, video, 3D tours, targeted digital ads, and agent networks to maximize exposure and results." },
@@ -40,7 +40,7 @@ export const loansFaqBank: CityFaq[] = [
   { q: "What credit score do I need?", a: "Minimums vary by program. Stronger credit typically improves pricing. We’ll suggest steps to optimize credit before locking." },
   { q: "Can I use gift funds for my down payment?", a: "Often yes, especially with FHA and conventional loans. Your lender will outline documentation needed for compliant gift sourcing." },
   { q: "How is DTI calculated?", a: "Debt-to-income compares monthly debts vs. gross income. Most programs prefer DTI under 45%, though exceptions exist." },
-  { q: "I’m self-employed—what documents are required?", a: "Expect two years of returns, YTD P&L, and bank statements. Some programs allow alternative documentation with conditions." },
+  { q: "I’m self-employed, what documents are required?", a: "Expect two years of returns, YTD P&L, and bank statements. Some programs allow alternative documentation with conditions." },
   { q: "Should I buy points or do a buydown?", a: "Discount points can lower rate for the life of the loan; temporary buydowns reduce payments for 1–3 years. We model both scenarios." },
   { q: "How long is a rate lock?", a: "Common lock periods are 30–60 days. We select a lock that covers your closing timeline with flexibility for extensions if needed." },
   { q: "When does PMI apply and how can I remove it?", a: "PMI generally applies with <20% down on conventional loans and can be removed as equity grows, per investor guidelines." },

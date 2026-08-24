@@ -46,7 +46,7 @@ export const allNavigationItems: NavigationItem[] = [
     ],
   },
 
-  // Solutions — who are you + how to choose
+  // Solutions, who are you + how to choose
   {
     href: "/solutions",
     labelKey: "nav.solutions",
@@ -59,7 +59,7 @@ export const allNavigationItems: NavigationItem[] = [
     ],
   },
 
-  // Resources — learn, research & tools
+  // Resources, learn, research & tools
   {
     href: "/resources",
     labelKey: "nav.resources",

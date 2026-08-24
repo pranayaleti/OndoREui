@@ -64,7 +64,7 @@ export const SITE_ADDRESS_OBJ = {
 
 /**
  * HQ coordinates for geo meta tags and Organization JSON-LD.
- * PLACEHOLDER — update with real HQ lat/lng when the office address is finalized.
+ * PLACEHOLDER, update with real HQ lat/lng when the office address is finalized.
  * Approx for current placeholder: 2701 N Thanksgiving Way, Lehi, UT 84043.
  */
 export const SITE_GEO = {
@@ -100,7 +100,7 @@ export const SITE_EMAILS = {
  *
  * NOTE: Set `live: true` ONLY once the account is claimed, branded, and has at
  * least 1 post. Listing a non-existent account in JSON-LD `sameAs` or rendering
- * a dead icon in the footer is a soft negative trust signal — Google crawls
+ * a dead icon in the footer is a soft negative trust signal, Google crawls
  * sameAs URLs, and visitors who click on a dead account bounce harder.
  *
  * Flip flags to `true` per platform as you launch each account.
@@ -122,7 +122,7 @@ export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
   { url: "https://x.com/OndoRealEstate",                 live: false },
   { url: "https://www.pinterest.com/ondorealestate",     live: false },
   { url: "https://yelp.com/biz/ondo-real-estate-lehi",   live: false },
-  // Linktree is treated as the canonical "all our links" hub — keep live.
+  // Linktree is treated as the canonical "all our links" hub, keep live.
   { url: "https://linktr.ee/ondorealestate",             live: true  },
   // TODO: Implement WhatsApp group integration once the group is stable.
   // { url: "https://chat.whatsapp.com/GFnQbVD7kriKlz3kHpTx2c", live: false },
@@ -130,7 +130,7 @@ export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
 ]
 
 /**
- * Live-only social URLs (string array) — used by JSON-LD `sameAs`,
+ * Live-only social URLs (string array), used by JSON-LD `sameAs`,
  * metadata, and any code that historically read SITE_SOCIALS as URLs.
  *
  * Backwards-compatible with the previous string[] export.
@@ -139,7 +139,7 @@ export const SITE_SOCIALS: readonly string[] = SITE_SOCIAL_LINKS
   .filter((s) => s.live)
   .map((s) => s.url)
 
-/** Every social URL regardless of live status — for marketing dashboards / audits. */
+/** Every social URL regardless of live status, for marketing dashboards / audits. */
 export const SITE_SOCIALS_ALL: readonly string[] = SITE_SOCIAL_LINKS.map((s) => s.url)
 
 /** Supabase project origin from NEXT_PUBLIC_SUPABASE_URL (for CSP / preconnect). */

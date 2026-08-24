@@ -7,13 +7,13 @@ import SEO from "@/components/seo"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: `Ondo RE vs Buildium — The Better Buildium Alternative | ${SITE_BRAND_SHORT}`,
+  title: `Ondo RE vs Buildium: The Better Buildium Alternative | ${SITE_BRAND_SHORT}`,
   description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience. No $62/mo entry fee.`,
   alternates: {
     canonical: `${SITE_URL}/vs/buildium/`,
   },
   openGraph: {
-    title: `Ondo RE vs Buildium — The Better Buildium Alternative`,
+    title: `Ondo RE vs Buildium: The Better Buildium Alternative`,
     description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience.`,
     url: `${SITE_URL}/vs/buildium/`,
     type: "website",
@@ -99,7 +99,7 @@ const ondoBetterCards = [
   {
     title: "You care about your tenants' experience",
     description:
-      "Ondo builds for both sides of the lease — tenants get credit building across 4 bureaus, a full portal, and offline PWA access.",
+      "Ondo builds for both sides of the lease, tenants get credit building across 4 bureaus, a full portal, and offline PWA access.",
   },
   {
     title: "You need AI that's ready today",
@@ -133,7 +133,7 @@ export default function VsBuildiumPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <SEO
-        title="Ondo RE vs Buildium — The Better Buildium Alternative"
+        title="Ondo RE vs Buildium: The Better Buildium Alternative"
         description="Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience."
         pathname="/vs/buildium/"
         keywords={["Buildium alternative", "Buildium vs Ondo", "property management software alternative", "Buildium competitor"]}
@@ -145,7 +145,7 @@ export default function VsBuildiumPage() {
           {SITE_BRAND_SHORT} vs Buildium
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/70">
-          A head-to-head comparison for property owners who want more than legacy PM software —
+          A head-to-head comparison for property owners who want more than legacy PM software , 
           better AI, integrated services, and no surprise entry fees.
         </p>
       </section>

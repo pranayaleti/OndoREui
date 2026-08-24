@@ -10,7 +10,7 @@ async function registerServiceWorker(): Promise<void> {
   /**
    * `public/sw.js` uses cache-first for `/_next/static/*`. In `next dev`, chunk
    * URLs and valid webpack runtime + module maps change on every rebuild/HMR,
-   * but the SW can keep serving *stale* JS — producing obscure runtime errors
+   * but the SW can keep serving *stale* JS, producing obscure runtime errors
    * like `Cannot read properties of undefined (reading 'call')`.
    */
   if (process.env.NODE_ENV === "development") {

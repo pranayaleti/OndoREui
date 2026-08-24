@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 }
 
 const features = [
-  { title: "24/7 Request Intake", description: "Tenants submit requests via the portal any time — categorised by urgency, with photo attachments", icon: <Bell className="h-6 w-6" /> },
-  { title: "Vetted Vendor Network", description: "We dispatch from our pre-screened Utah vendor network — licensed, insured, and rated by past performance", icon: <Users className="h-6 w-6" /> },
+  { title: "24/7 Request Intake", description: "Tenants submit requests via the portal any time: categorised by urgency, with photo attachments", icon: <Bell className="h-6 w-6" /> },
+  { title: "Vetted Vendor Network", description: "We dispatch from our pre-screened Utah vendor network: licensed, insured, and rated by past performance", icon: <Users className="h-6 w-6" /> },
   { title: "Owner Approval Thresholds", description: "You set a dollar threshold. Work under it proceeds automatically; above it requires your sign-off", icon: <ClipboardList className="h-6 w-6" /> },
   { title: "Completion Tracking", description: "Every request logged from open to close with photos, invoices, and tenant sign-off in your dashboard", icon: <Wrench className="h-6 w-6" /> },
 ]
@@ -38,7 +38,7 @@ export default function MaintenanceCoordinationPage() {
           { name: "Maintenance Coordination", url: `${SITE_URL}/property-management/maintenance-coordination` },
         ])}
       />
-      <PageBanner title="Maintenance Coordination" subtitle="Fast, transparent maintenance handling — tenants stay happy, your asset stays protected" backgroundImage="/property-manager-meeting.png" />
+      <PageBanner title="Maintenance Coordination" subtitle="Fast, transparent maintenance handling: tenants stay happy, your asset stays protected" backgroundImage="/property-manager-meeting.png" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -46,7 +46,7 @@ export default function MaintenanceCoordinationPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Maintenance Done Right</h2>
               <p className="text-lg text-foreground/70">
-                Slow maintenance response is the top reason Utah tenants don't renew. Our coordination system ensures every request is acknowledged, triaged, and resolved quickly — with full visibility for owners and tenants throughout.
+                Slow maintenance response is the top reason Utah tenants don't renew. Our coordination system ensures every request is acknowledged, triaged, and resolved quickly, with full visibility for owners and tenants throughout.
               </p>
             </div>
 

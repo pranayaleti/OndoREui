@@ -36,7 +36,7 @@ test.describe("Accessibility smoke tests", () => {
   for (const route of routes) {
     test(`page ${route} has no serious accessibility violations`, async ({ page }) => {
       await page.goto(route, { waitUntil: "domcontentloaded" })
-      // Wait for a stable landmark before axe — avoids flakes when dev Fast Refresh
+      // Wait for a stable landmark before axe so Fast Refresh flakes less
       // or client hydration triggers a secondary navigation.
       await page.locator("main, #main-content, [role='main']").first().waitFor({ state: "visible", timeout: 15_000 })
       if (route === "/properties") {

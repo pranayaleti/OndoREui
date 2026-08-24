@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const name = district?.name ?? districtSlug
   const title = `${name} | Schools & Education Guide | ${SITE_BRAND_SHORT}`
   const description = district
-    ? `${district.name} serves ${district.citiesServed.slice(0, 3).join(", ")} and more — ${district.enrollment.toLocaleString()} students, top programs, and school listings.`
+    ? `${district.name} serves ${district.citiesServed.slice(0, 3).join(", ")} and more, ${district.enrollment.toLocaleString()} students, top programs, and school listings.`
     : ""
   const canonical = `${SITE_URL}/schools/${districtSlug}/`
   return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }

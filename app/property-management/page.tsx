@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/modern-office-building.webp`,
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — Utah property management`,
+        alt: `${SITE_NAME}: Utah property management`,
       },
     ],
   },
@@ -55,7 +55,7 @@ const pillars = [
   {
     icon: <Wrench className="h-8 w-8 text-primary" aria-hidden />,
     title: "Maintenance & compliance",
-    description: "Coordinated repairs, vendor relationships, and documented work—plus support for Utah rental compliance expectations.",
+    description: "Coordinated repairs, vendor relationships, and documented work, plus support for Utah rental compliance expectations.",
   },
   {
     icon: <Shield className="h-8 w-8 text-primary" aria-hidden />,
@@ -69,7 +69,7 @@ export default function PropertyManagementPage() {
     <>
       <SEO
         title="Utah Property Management | Owners & Investors"
-        description="Full-service Utah property management with leasing, screening, rent collection, maintenance, and owner visibility—alongside brokerage, mortgage, and notary under one roof."
+        description="Full-service Utah property management with leasing, screening, rent collection, maintenance, and owner visibility, alongside brokerage, mortgage, and notary under one roof."
         pathname="/property-management/"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={[
@@ -89,7 +89,7 @@ export default function PropertyManagementPage() {
 
       <PageBanner
         title="Property management built for Utah owners"
-        subtitle="Leasing, screening, rent, maintenance, and reporting—with brokerage, loans, and notary when you need them in the same relationship."
+        subtitle="Leasing, screening, rent, maintenance, and reporting: with brokerage, loans, and notary when you need them in the same relationship."
         backgroundImage="/modern-office-building.png"
       />
 
@@ -98,7 +98,7 @@ export default function PropertyManagementPage() {
           <p className="text-lg text-foreground/80 leading-relaxed">
             Whether you own one door or a growing portfolio, Ondo Real Estate runs day-to-day operations so you are not juggling
             spreadsheets, vendors, and tenant messages alone. We combine property management with the rest of our real estate
-            stack—so sales, refinancing, and notarized documents do not require a separate cast of vendors.
+            stack, so sales, refinancing, and notarized documents do not require a separate cast of vendors.
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function PropertyManagementPage() {
           ))}
         </div>
 
-        {/* Platform features — AI & automation */}
+        {/* Platform features, AI & automation */}
         <section className="max-w-5xl mx-auto mb-16">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Built-in technology other PMs don&apos;t have</h2>
           <p className="text-center text-foreground/70 mb-10 max-w-2xl mx-auto">
@@ -151,7 +151,7 @@ export default function PropertyManagementPage() {
             <ul className="space-y-3 text-foreground/80">
               <li>• Same team context when you buy, refinance, or sell the asset you already manage with us.</li>
               <li>• Notary and loan signing workflows available when closings and paperwork need to move fast.</li>
-              <li>• Operators-focused tooling for lean teams—autopay, screening, and maintenance in one rhythm.</li>
+              <li>• Operators-focused tooling for lean teams, autopay, screening, and maintenance in one rhythm.</li>
             </ul>
             <div className="flex flex-wrap gap-3 mt-8">
               <Button asChild>
@@ -189,7 +189,7 @@ export default function PropertyManagementPage() {
 
         <ConsultationCTA
           title="Get a management plan for your Utah rentals"
-          description="Tell us about your units and goals—we will follow up with next steps."
+          description="Tell us about your units and goals, we will follow up with next steps."
         />
       </div>
     </>

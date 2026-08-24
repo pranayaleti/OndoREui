@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, User, ArrowRight, Phone, Mail } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/news", {
+  title: "News & Updates | Ondo Real Estate",
+  description: "Stay informed with the latest news and insights from Ondo Real Estate.",
+})
+
 
 export default function NewsPage() {
   const newsArticles = [

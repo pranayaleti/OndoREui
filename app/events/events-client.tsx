@@ -136,7 +136,7 @@ export default function EventsClient() {
     <main id="main-content" className="min-h-screen">
       <SEO
         title="ONDO Events"
-        description="Upcoming ONDO events — homebuyer workshops, investor mixers, and community gatherings. RSVP and join us."
+        description="Upcoming ONDO events, homebuyer workshops, investor mixers, and community gatherings. RSVP and join us."
         pathname="/events"
         image={`${SITE_URL}/modern-office-building.png`}
       />
@@ -149,7 +149,7 @@ export default function EventsClient() {
 
       <PageBanner
         title="ONDO Events"
-        subtitle="Workshops, mixers, and community events — come say hi."
+        subtitle="Workshops, mixers, and community events: come say hi."
       />
 
       <section className="py-16 bg-background">
@@ -189,7 +189,7 @@ export default function EventsClient() {
                     </div>
                   ) : (
                     <p className="text-foreground/70">
-                      No upcoming events scheduled — check back soon.
+                      No upcoming events scheduled, check back soon.
                     </p>
                   )}
                 </div>

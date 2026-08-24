@@ -1,5 +1,5 @@
 ---
-title: "CAGR Calculator — Ondo Real Estate"
+title: "CAGR Calculator: Ondo Real Estate"
 description: "Compute the compound annual growth rate between two values over time."
 canonical: https://www.ondorealestate.com/calculators/cagr/
 ---

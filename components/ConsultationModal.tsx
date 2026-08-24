@@ -151,7 +151,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
     e.preventDefault();
 
     // Bot signal: silently render success so the bot can't probe whether
-    // the gate fired. Real users can't trip these — honeypot is hidden +
+    // the gate fired. Real users can't trip these, honeypot is hidden +
     // non-focusable, and the dwell threshold is well under the time a
     // human takes to fill 4-5 fields.
     if (gate.isLikelyBot()) {

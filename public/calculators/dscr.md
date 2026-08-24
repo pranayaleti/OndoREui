@@ -1,5 +1,5 @@
 ---
-title: "DSCR Calculator — Ondo Real Estate"
+title: "DSCR Calculator: Ondo Real Estate"
 description: "Estimate debt service coverage ratio for rental financing."
 canonical: https://www.ondorealestate.com/calculators/dscr/
 ---

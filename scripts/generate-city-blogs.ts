@@ -91,7 +91,7 @@ function bestNeighborhoodsPost(
   const neighborhoods = content?.neighborhoods ?? ["Downtown", "North Side", "East Bench"]
   const schools = market.notableSchools.slice(0, 3).join(", ") || market.schoolDistrict
   const title = `Best Neighborhoods in ${city}, Utah (${YEAR} Guide)`
-  const description = `A local breakdown of the top neighborhoods in ${city}, UT — home prices, schools, lifestyle, and investment notes for renters, buyers, and investors.`
+  const description = `A local breakdown of the top neighborhoods in ${city}, UT: home prices, schools, lifestyle, and investment notes for renters, buyers, and investors.`
   const postSlug = `/blog/best-neighborhoods-${slug}-utah`
   const keywords = [`best neighborhoods ${city} Utah`, `${city} neighborhoods`, `living in ${city} Utah`, `${city} UT real estate`]
 
@@ -269,7 +269,7 @@ export default function CostOfLiving${city.replace(/[^a-zA-Z]/g, "")}() {
             <h2>Commute Costs</h2>
             <p>
               Major employers near ${city} include ${market.topEmployers.slice(0, 3).join(", ")}.
-              ${market.outdoorRec.length > 0 ? `Outdoor recreation — ${market.outdoorRec[0]} — is a free lifestyle benefit residents consistently value.` : ""}
+              ${market.outdoorRec.length > 0 ? `Outdoor recreation, including ${market.outdoorRec[0]}, is a free lifestyle benefit residents consistently value.` : ""}
             </p>
 
             <h2>Is ${city} Affordable in ${YEAR}?</h2>
@@ -305,7 +305,7 @@ function rentVsBuyPost(
   const monthlyMortgage = Math.round(market.medianHomePrice * 0.8 * 0.00668)
   const breakEvenYears = Math.round((market.medianHomePrice * 0.03) / ((monthlyMortgage - market.medianRent) * 12 || 1))
   const title = `Renting vs. Buying in ${city}, Utah: A ${YEAR} Analysis`
-  const description = `Should you rent or buy in ${city}, UT? We break down the numbers — monthly payments, break-even timelines, equity building, and lifestyle factors.`
+  const description = `Should you rent or buy in ${city}, UT? We break down the numbers: monthly payments, break-even timelines, equity building, and lifestyle factors.`
   const postSlug = `/blog/renting-vs-buying-${slug}`
   const keywords = [`renting vs buying ${city}`, `should I buy a home in ${city} Utah`, `${city} UT rent or buy`, `${city} real estate ${YEAR}`]
 
@@ -358,7 +358,7 @@ export default function RentVsBuy${city.replace(/[^a-zA-Z]/g, "")}() {
             </p>
             <p>
               With a 20% down payment (${fmtUsd(Math.round(market.medianHomePrice * 0.2))}), your estimated monthly
-              mortgage payment is approximately <strong>$${monthlyMortgage.toLocaleString()}/month</strong> — about
+              mortgage payment is approximately <strong>$${monthlyMortgage.toLocaleString()}/month</strong>, about
               <strong> $${Math.abs(monthlyMortgage - market.medianRent).toLocaleString()} ${monthlyMortgage > market.medianRent ? "more" : "less"}</strong> than
               the median rent of ${fmtUsd(market.medianRent)}.
             </p>
@@ -384,14 +384,14 @@ export default function RentVsBuy${city.replace(/[^a-zA-Z]/g, "")}() {
               <li>You plan to stay 5+ years in ${city}</li>
               <li>You have a stable income and a down payment saved</li>
               <li>You want to lock in a fixed payment against ${city}&apos;s ${market.growthRate} annual appreciation</li>
-              <li>You want to eventually rent the property out — ${city} generates a ~${((market.medianRent * 12) / market.medianHomePrice * 100).toFixed(1)}% gross yield</li>
+              <li>You want to eventually rent the property out. ${city} generates a ~${((market.medianRent * 12) / market.medianHomePrice * 100).toFixed(1)}% gross yield</li>
             </ul>
 
             <h2>Market Trend</h2>
             <p>
               ${city} homes have averaged <strong>${market.avgDaysOnMarket} days on market</strong> recently.
               ${market.avgDaysOnMarket < 20
-                ? "That's a fast-moving market — buyers need pre-approval ready before touring."
+                ? "That's a fast-moving market. Buyers need pre-approval ready before touring."
                 : "The pace gives buyers reasonable time to evaluate options without panic offers."}
             </p>
           </div>
@@ -421,7 +421,7 @@ function pmGuidePost(
 ): string {
   const grossYield = ((market.medianRent * 12) / market.medianHomePrice * 100).toFixed(1)
   const title = `${city} Property Management Guide for Investors (${YEAR})`
-  const description = `A complete guide to managing rental properties in ${city}, UT — tenant profiles, pricing strategy, legal requirements, and working with a local PM firm.`
+  const description = `A complete guide to managing rental properties in ${city}, UT: tenant profiles, pricing strategy, legal requirements, and working with a local PM firm.`
   const postSlug = `/blog/property-management-guide-${slug}-investors`
   const keywords = [`${city} property management`, `rental property ${city} Utah`, `${city} UT landlord guide`, `property management ${city} ${YEAR}`]
 
@@ -488,7 +488,7 @@ export default function PMGuide${city.replace(/[^a-zA-Z]/g, "")}() {
             <p>
               Price within 3–5% of the ${fmtUsd(market.medianRent)} median and you should lease
               in under ${market.avgDaysOnMarket} days. Properties priced above market in ${city}
-              sit 2–3× longer on average — vacancies erode returns faster than a modest rent reduction.
+              sit 2–3× longer on average. Vacancies erode returns faster than a modest rent reduction.
             </p>
 
             <h2>Utah Landlord Law Essentials</h2>
@@ -532,7 +532,7 @@ function marketReportPost(
   market: CityMarketData,
 ): string {
   const title = `${city} Real Estate Market Report ${YEAR}`
-  const description = `${YEAR} real estate market data for ${city}, UT — median home prices, rent trends, days on market, top employers, and investment outlook.`
+  const description = `${YEAR} real estate market data for ${city}, UT: median home prices, rent trends, days on market, top employers, and investment outlook.`
   const postSlug = `/blog/${slug}-real-estate-market-${YEAR}`
   const keywords = [`${city} real estate market ${YEAR}`, `${city} UT home prices`, `${city} housing market`, `${city} Utah investment`]
 
@@ -577,7 +577,7 @@ export default function MarketReport${city.replace(/[^a-zA-Z]/g, "")}${YEAR}() {
             </Button>
           </div>
           <div className="prose prose-lg max-w-none dark:prose-invert">
-            <h2>Key Statistics — ${YEAR}</h2>
+            <h2>Key Statistics: ${YEAR}</h2>
             <ul>
               <li><strong>Median Home Price:</strong> ${fmtUsd(market.medianHomePrice)}</li>
               <li><strong>Median Monthly Rent:</strong> ${fmtUsd(market.medianRent)}</li>
@@ -612,7 +612,7 @@ export default function MarketReport${city.replace(/[^a-zA-Z]/g, "")}${YEAR}() {
               With ${market.growthRate} annual appreciation and ${market.avgDaysOnMarket} average days on market,
               ${city} ${market.avgDaysOnMarket < 25 ? "remains a competitive seller&apos;s market with strong rental demand" : "offers balanced conditions for buyers willing to move decisively"}.
               The ${((market.medianRent * 12) / market.medianHomePrice * 100).toFixed(1)}% gross yield is
-              ${(market.medianRent * 12) / market.medianHomePrice > 0.07 ? "above average for the Wasatch Front — positive cash flow is achievable with appropriate leverage" : "typical for the Wasatch Front — appreciation rather than cash flow is the primary driver"}.
+              ${(market.medianRent * 12) / market.medianHomePrice > 0.07 ? "above average for the Wasatch Front. Positive cash flow is achievable with appropriate leverage" : "typical for the Wasatch Front. Appreciation rather than cash flow is the primary driver"}.
             </p>
           </div>
           <div className="not-prose mt-10 flex flex-wrap gap-4">

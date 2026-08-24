@@ -129,7 +129,7 @@ describe("PublicAssistantWidget", () => {
     mockSend.mockResolvedValue({
       ok: false,
       rateLimited: true,
-      error: "That was a lot of messages at once — give it a moment and try again.",
+      error: "That was a lot of messages at once, give it a moment and try again.",
     })
     openWidget()
     type("hello")

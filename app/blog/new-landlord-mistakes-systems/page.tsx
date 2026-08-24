@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site"
 
 const slug = "/blog/new-landlord-mistakes-systems"
 const title = "New Landlord Mistakes and the Systems That Prevent Them"
-const description = "Evergreen pitfalls—maintenance, documentation, vacancy—and the operational playbooks that stop them."
+const description = "Evergreen pitfalls, maintenance, documentation, vacancy, and the operational playbooks that stop them."
 const published = "2025-12-10"
 const modified = "2025-12-10"
 const author = "ONDO Team"
@@ -133,7 +133,7 @@ export default function NewLandlordMistakesSystems() {
             <p>Winter-proofing (pipes/roof) and summer HVAC strain are predictable cycles. Pre-schedule inspections; tenants appreciate proactive care.</p>
 
             <h2>Takeaway</h2>
-            <p>Landlording is a process business. If you build simple systems—docs, reserves, maintenance states—you avoid the expensive mistakes most new landlords make.</p>
+            <p>Landlording is a process business. If you build simple systems, docs, reserves, maintenance states, you avoid the expensive mistakes most new landlords make.</p>
           </div>
         </div>
       </article>

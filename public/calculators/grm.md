@@ -1,5 +1,5 @@
 ---
-title: "GRM Calculator — Ondo Real Estate"
+title: "GRM Calculator: Ondo Real Estate"
 description: "Calculate gross rent multiplier from price and rent."
 canonical: https://www.ondorealestate.com/calculators/grm/
 ---

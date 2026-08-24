@@ -1,5 +1,5 @@
 ---
-title: "Mortgage Payment Calculator — Ondo Real Estate"
+title: "Mortgage Payment Calculator: Ondo Real Estate"
 description: "Estimate monthly mortgage payments with taxes, insurance, and PMI."
 canonical: https://www.ondorealestate.com/calculators/mortgage-payment/
 ---

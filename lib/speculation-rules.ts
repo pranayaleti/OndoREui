@@ -51,7 +51,7 @@ const EXCLUDED_PATH_PREFIXES = [
   "/login",
   "/signup",
   "/logout",
-  // Token-bearing paths must not be prefetched — every visit consumes the token
+  // Token-bearing paths must not be prefetched, every visit consumes the token
   // exactly once (apply, invite, onboarding, visit confirmation).
   "/apply/",
   "/invite/",

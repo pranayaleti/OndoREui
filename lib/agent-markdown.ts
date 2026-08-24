@@ -56,12 +56,12 @@ function sitemapFooter(): string[] {
   ]
 }
 
-/** Homepage marketing brief — replaces the developer-oriented `public/index.md`. */
+/** Homepage marketing brief, replaces the developer-oriented `public/index.md`. */
 export function buildHomepageMarkdown(): string {
   const canonical = `${baseSiteUrl}/`
   const lines = [
     renderFrontmatter({
-      title: `${SITE_NAME} — Utah brokerage, mortgage, notary, and property management`,
+      title: `${SITE_NAME}: Utah brokerage, mortgage, notary, and property management`,
       description:
         "Ondo Real Estate is a Utah-focused, invite-only real estate platform covering brokerage, mortgage lending, notary, property management, and investment opportunities.",
       canonical,
@@ -73,12 +73,12 @@ export function buildHomepageMarkdown(): string {
     "",
     "## What Ondo does",
     "",
-    "- **Buy a home** — buyer representation across the Wasatch Front, first-time buyer programs, and mortgage origination in-house.",
-    "- **Sell a home** — pricing strategy (CMA), listing marketing, and negotiation through close.",
-    "- **Rent and manage** — full-service property management for Utah landlords: screening, rent collection, maintenance, owner reporting.",
-    "- **Invest** — curated fractional and commercial real estate opportunities with per-deal detail pages.",
-    "- **Notary** — Remote Online Notarization (RON) nationwide. No in-office or mobile travel appointments.",
-    "- **Calculators** — free mortgage, affordability, refinance, and investor tools at " +
+    "- **Buy a home**, buyer representation across the Wasatch Front, first-time buyer programs, and mortgage origination in-house.",
+    "- **Sell a home**, pricing strategy (CMA), listing marketing, and negotiation through close.",
+    "- **Rent and manage**, full-service property management for Utah landlords: screening, rent collection, maintenance, owner reporting.",
+    "- **Invest**, curated fractional and commercial real estate opportunities with per-deal detail pages.",
+    "- **Notary**, Remote Online Notarization (RON) nationwide. No in-office or mobile travel appointments.",
+    "- **Calculators**, free mortgage, affordability, refinance, and investor tools at " +
       `${toAbsoluteSiteUrl("/calculators")}.`,
     "",
     "## Where to start",
@@ -122,12 +122,12 @@ export function buildHomepageMarkdown(): string {
   return `${lines.join("\n").trimEnd()}\n`
 }
 
-/** Properties page brief — the HTML page is a client-only search + map widget. */
+/** Properties page brief, the HTML page is a client-only search + map widget. */
 export function buildPropertiesMarkdown(): string {
   const canonical = `${baseSiteUrl}/properties/`
   const lines = [
     renderFrontmatter({
-      title: `Utah rental property search — ${SITE_NAME}`,
+      title: `Utah rental property search: ${SITE_NAME}`,
       description:
         "How to search Ondo Real Estate's Utah rental listings by city, bedrooms, price, or free text. Includes the WebMCP tool exposed on the page for AI agents.",
       canonical,
@@ -139,10 +139,10 @@ export function buildPropertiesMarkdown(): string {
     "",
     "## How to filter",
     "",
-    "- **City** — partial, case-insensitive match against the listing city (e.g. `Lehi`, `Salt Lake`).",
-    "- **Minimum bedrooms** — integer.",
-    "- **Maximum monthly rent** — USD.",
-    "- **Free text** — matched against title, description, and address.",
+    "- **City**, partial, case-insensitive match against the listing city (e.g. `Lehi`, `Salt Lake`).",
+    "- **Minimum bedrooms**, integer.",
+    "- **Maximum monthly rent**, USD.",
+    "- **Free text**, matched against title, description, and address.",
     "",
     "Results are capped at 100 rows per call. Each row returns id, title, city, address, price, bedrooms, bathrooms, sqft, and a 200-char description.",
     "",
@@ -170,7 +170,7 @@ export function buildPropertiesMarkdown(): string {
   return `${lines.join("\n").trimEnd()}\n`
 }
 
-/** Contact page brief — the HTML page ships a client form; this is the machine-friendly mirror. */
+/** Contact page brief, the HTML page ships a client form; this is the machine-friendly mirror. */
 export function buildContactMarkdown(): string {
   const canonical = `${baseSiteUrl}/contact/`
   const lines = [
@@ -211,8 +211,8 @@ export function buildContactMarkdown(): string {
     "",
     "## WebMCP tools on this page",
     "",
-    "- **`get_company_contact_info`** — read-only. Returns the fields listed above.",
-    "- **`submit_contact_lead`** — requires explicit user confirmation. Submits a lead for property management, investment, leasing, or general inquiries; captured UTM/click attribution is attached automatically.",
+    "- **`get_company_contact_info`**, read-only. Returns the fields listed above.",
+    "- **`submit_contact_lead`**, requires explicit user confirmation. Submits a lead for property management, investment, leasing, or general inquiries; captured UTM/click attribution is attached automatically.",
     "",
     "AI agents must not auto-submit `submit_contact_lead`. The declarative WebMCP form on the HTML page enforces user confirmation.",
     "",
@@ -361,11 +361,11 @@ const CALCULATOR_DETAILS: Record<string, CalculatorMarkdownDetail> = {
     inputs: ["NOI", "Annual debt service"],
   },
   "one-percent-rule": {
-    formula: "1% Rule check: does monthly rent ≥ 1% of purchase price? A screening heuristic — not underwriting.",
+    formula: "1% Rule check: does monthly rent ≥ 1% of purchase price? A screening heuristic, not underwriting.",
     inputs: ["Purchase price", "Monthly rent"],
   },
   "fifty-percent-rule": {
-    formula: "50% Rule: assume operating expenses (excluding debt service) ≈ 50% of gross rent. Quick screen only — verify with real expenses.",
+    formula: "50% Rule: assume operating expenses (excluding debt service) ≈ 50% of gross rent. Quick screen only, verify with real expenses.",
     inputs: ["Gross monthly rent"],
   },
   "owner-vs-self": {
@@ -389,7 +389,7 @@ export function buildCalculatorMarkdown(slug: string): string {
   const canonical = `${baseSiteUrl}/calculators/${slug}/`
   const lines = [
     renderFrontmatter({
-      title: `${catalog.name} — ${SITE_NAME}`,
+      title: `${catalog.name}: ${SITE_NAME}`,
       description: catalog.description,
       canonical,
     }),

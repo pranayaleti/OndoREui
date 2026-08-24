@@ -22,7 +22,7 @@ import {
 export const metadata: Metadata = {
   title: "Fractional Real Estate Ownership",
   description:
-    "Learn how fractional ownership works — invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management.",
+    "Learn how fractional ownership works, invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management.",
   alternates: { canonical: `${SITE_URL}/investments/fractional/` },
   openGraph: {
     title: "Fractional Real Estate Ownership | Ondo Real Estate",
@@ -75,7 +75,7 @@ export default function FractionalPage() {
     <main id="main-content" className="min-h-screen">
       <SEO
         title="Fractional Real Estate Ownership"
-        description="Learn how fractional ownership works — invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management."
+        description="Learn how fractional ownership works, invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management."
         pathname="/investments/fractional"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={[
@@ -106,7 +106,7 @@ export default function FractionalPage() {
               <p className="text-lg text-foreground/70 dark:text-foreground/70 max-w-3xl mx-auto">
                 Fractional ownership allows multiple investors to collectively purchase a commercial
                 property through a legal entity. Each investor owns a proportional share and
-                receives distributions based on their ownership percentage — making commercial
+                receives distributions based on their ownership percentage, making commercial
                 real estate accessible without the capital requirements of full ownership.
               </p>
             </div>
@@ -190,8 +190,8 @@ export default function FractionalPage() {
                 <CardContent>
                   <p className="text-2xl font-bold text-primary mb-2">3–10 Year Hold</p>
                   <p className="text-sm text-foreground/70 dark:text-foreground/70">
-                    Properties are held for a defined period, then sold. Net proceeds — including
-                    any appreciation — are distributed proportionally to investors.
+                    Properties are held for a defined period, then sold. Net proceeds, including
+                    any appreciation, are distributed proportionally to investors.
                   </p>
                 </CardContent>
               </Card>

@@ -32,13 +32,13 @@ export const SOCIAL_POSTS: readonly SocialPost[] = [
     platform: "Linktree",
     title: "All Ondo links in one place",
     excerpt:
-      "Booking, tools, and public profiles — Linktree is our always-on hub while we launch each social channel.",
+      "Booking, tools, and public profiles, Linktree is our always-on hub while we launch each social channel.",
     url: "https://linktr.ee/ondorealestate",
     date: "2026-07-01",
   },
   {
     platform: "Notary",
-    title: "On-demand notary — same-day when we can",
+    title: "On-demand notary: same-day when we can",
     excerpt:
       "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide.",
     url: `${base}/notary/on-demand/`,
@@ -56,7 +56,7 @@ export const SOCIAL_POSTS: readonly SocialPost[] = [
     platform: "News",
     title: "Real estate news we track",
     excerpt:
-      "Curated national and Utah market sources — inventory, rates, and policy — in one place.",
+      "Curated national and Utah market sources, inventory, rates, and policy, in one place.",
     url: `${base}/news/`,
     date: "2026-07-01",
   },

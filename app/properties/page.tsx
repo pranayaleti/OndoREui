@@ -1,5 +1,13 @@
+import type { Metadata } from "next"
 import PropertiesClient from "./page-client"
 import { PropertiesAgentIntro } from "@/components/properties/properties-agent-intro"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/properties", {
+  title: "Utah Properties for Sale & Rent | Ondo Real Estate",
+  description: "Browse homes, condos, and investment properties across Utah.",
+})
+
 
 export default function PropertiesPage() {
   return (

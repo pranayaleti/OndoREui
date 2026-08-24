@@ -1,5 +1,5 @@
 ---
-title: "Home Sale Proceeds Calculator — Ondo Real Estate"
+title: "Home Sale Proceeds Calculator: Ondo Real Estate"
 description: "Estimate net proceeds after agent fees, taxes, and payoff."
 canonical: https://www.ondorealestate.com/calculators/home-sale/
 ---

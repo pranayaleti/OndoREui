@@ -26,7 +26,7 @@ export default function TenantError({
           </div>
           <CardTitle className="text-xl">Tenant Portal Error</CardTitle>
           <CardDescription>
-            Something went wrong in the Tenant Portal. Your data is safe — please
+            Something went wrong in the Tenant Portal. Your data is safe, please
             try again or navigate to a different section.
           </CardDescription>
         </CardHeader>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Shield, TrendingUp, Calculator, Lock } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/buy/fixed-rate", {
+  title: "Fixed-Rate Mortgage Guide | Utah Real Estate",
+  description: "Learn about fixed-rate mortgages in Utah and how predictable payments work.",
+})
+
 
 export default function FixedRatePage() {
   return (

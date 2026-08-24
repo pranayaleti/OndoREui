@@ -102,7 +102,7 @@ export default function ModernizingNotaryWorkflows() {
 
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
-              Real estate transactions are 90% digital—until you need a signature. At <strong>Ondo</strong>, we bridged this gap by integrating <strong>Remote Online Notary (RON)</strong> booking directly into our platform.
+              Real estate transactions are 90% digital, until you need a signature. At <strong>Ondo</strong>, we bridged this gap by integrating <strong>Remote Online Notary (RON)</strong> booking directly into our platform.
             </p>
 
             <h2>The Problem: The "Last Mile" of Real Estate</h2>
@@ -126,14 +126,14 @@ export default function ModernizingNotaryWorkflows() {
             </ol>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-3">
-              <KeyLine title="Single surface" detail="One dialog for RON — chosen by user intent." />
+              <KeyLine title="Single surface" detail="One dialog for RON: chosen by user intent." />
               <KeyLine title="State clarity" detail="Calendar first, then confirmation; no hidden extra steps." />
               <KeyLine title="Ops handoff" detail="Email routing makes the right specialist respond instantly." />
             </div>
 
             <h3>Technical Implementation</h3>
             <p>
-              The booking system is wrapped in a <code>ConsultationModal</code> component. This modal is designed to be reusable across the site—whether a user is on a &quot;Buy&quot; page or the dedicated &quot;Notary&quot; page.
+              The booking system is wrapped in a <code>ConsultationModal</code> component. This modal is designed to be reusable across the site, whether a user is on a &quot;Buy&quot; page or the dedicated &quot;Notary&quot; page.
             </p>
 
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
@@ -171,7 +171,7 @@ export default function ModernizingNotaryWorkflows() {
 
             <h2>Conclusion</h2>
             <p>
-              By treating notary services as a first-class citizen in our code—not an afterthought—we reduce the &quot;time-to-close&quot; for real estate deals and provide a vital utility to our local community.
+              By treating notary services as a first-class citizen in our code, not an afterthought, we reduce the &quot;time-to-close&quot; for real estate deals and provide a vital utility to our local community.
             </p>
 
             <hr className="my-12 border-border" />

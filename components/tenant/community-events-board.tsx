@@ -86,7 +86,7 @@ export function CommunityEventsBoard() {
                 <h3 className="font-semibold text-gray-900">{event.title}</h3>
                 <p className="text-xs text-gray-500 mt-0.5">
                   {new Date(event.startAt).toLocaleString()}
-                  {event.endAt && ` — ${new Date(event.endAt).toLocaleTimeString()}`}
+                  {event.endAt && `, ${new Date(event.endAt).toLocaleTimeString()}`}
                 </p>
                 {event.location && (
                   <p className="text-xs text-gray-500">{event.location}</p>

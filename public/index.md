@@ -1,5 +1,5 @@
 ---
-title: "Ondo Real Estate — Utah brokerage, mortgage, notary, and property management"
+title: "Ondo Real Estate: Utah brokerage, mortgage, notary, and property management"
 description: "Ondo Real Estate is a Utah-focused, invite-only real estate platform covering brokerage, mortgage lending, notary, property management, and investment opportunities."
 canonical: https://www.ondorealestate.com/
 ---
@@ -10,12 +10,12 @@ canonical: https://www.ondorealestate.com/
 
 ## What Ondo does
 
-- **Buy a home** — buyer representation across the Wasatch Front, first-time buyer programs, and mortgage origination in-house.
-- **Sell a home** — pricing strategy (CMA), listing marketing, and negotiation through close.
-- **Rent and manage** — full-service property management for Utah landlords: screening, rent collection, maintenance, owner reporting.
-- **Invest** — curated fractional and commercial real estate opportunities with per-deal detail pages.
-- **Notary** — Remote Online Notarization (RON) nationwide. No in-office or mobile travel appointments.
-- **Calculators** — free mortgage, affordability, refinance, and investor tools at https://www.ondorealestate.com/calculators/.
+- **Buy a home**, buyer representation across the Wasatch Front, first-time buyer programs, and mortgage origination in-house.
+- **Sell a home**, pricing strategy (CMA), listing marketing, and negotiation through close.
+- **Rent and manage**, full-service property management for Utah landlords: screening, rent collection, maintenance, owner reporting.
+- **Invest**, curated fractional and commercial real estate opportunities with per-deal detail pages.
+- **Notary**, Remote Online Notarization (RON) nationwide. No in-office or mobile travel appointments.
+- **Calculators**, free mortgage, affordability, refinance, and investor tools at https://www.ondorealestate.com/calculators/.
 
 ## Where to start
 

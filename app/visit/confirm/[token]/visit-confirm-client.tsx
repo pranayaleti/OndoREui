@@ -57,7 +57,7 @@ export function VisitConfirmClient({ visit, token }: Props) {
           {(propertyTitle || visit.properties) && (
             <p className="text-gray-400 text-sm mb-6">
               {propertyTitle || visit.properties?.title}
-              {visit.properties && ` — ${visit.properties.addressLine1}, ${visit.properties.city}`}
+              {visit.properties && `, ${visit.properties.addressLine1}, ${visit.properties.city}`}
             </p>
           )}
           <a
@@ -78,7 +78,7 @@ export function VisitConfirmClient({ visit, token }: Props) {
       <div className="max-w-md w-full">
         <h1 className="text-2xl font-bold mb-2">Choose a time</h1>
         {visit.properties && (
-          <p className="text-gray-500 mb-6">{visit.properties.title} — {visit.properties.addressLine1}</p>
+          <p className="text-gray-500 mb-6">{visit.properties.title}, {visit.properties.addressLine1}</p>
         )}
         <div className="space-y-3 mb-6">
           {visit.proposedSlots.map((slot, i) => (

@@ -62,7 +62,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
             Cost of Real Estate Services in {city.name}, Utah
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-foreground/70">
-            What property management, home buying, and mortgages cost in {city.name} — with local market context.
+            What property management, home buying, and mortgages cost in {city.name}, with local market context.
           </p>
         </div>
       </section>
@@ -181,7 +181,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
               </div>
             </div>
             <p className="text-xs text-foreground/40 mt-2">
-              * Estimates exclude property taxes, insurance, and HOA. Rates are illustrative — get a personalized quote.
+              * Estimates exclude property taxes, insurance, and HOA. Rates are illustrative, get a personalized quote.
             </p>
           </section>
         )}

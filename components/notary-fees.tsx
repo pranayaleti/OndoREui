@@ -39,7 +39,7 @@ export function NotaryFees() {
           </h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
             Utah-compliant remote online notarization, quoted before we book. No in-office visits
-            and no published travel schedule — sessions are completed by secure video.
+            and no published travel schedule, sessions are completed by secure video.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
@@ -64,7 +64,7 @@ export function NotaryFees() {
                 Weekends by appointment
               </p>
               <p className="text-sm text-gray-400">
-                Same-day is best-effort when capacity allows — not a guaranteed SLA.{" "}
+                Same-day is best-effort when capacity allows, not a guaranteed SLA.{" "}
                 <Link href="/notary/on-demand" className="text-primary underline-offset-4 hover:underline">
                   On-demand details
                 </Link>
@@ -156,7 +156,7 @@ export function NotaryFees() {
               <ul className="text-sm text-foreground space-y-2">
                 <li>• Payment is due at or before the session</li>
                 <li>• We confirm accepted methods when you book (card, app pay, or title invoice)</li>
-                <li>• Remote online only — no walk-in office and no mobile travel appointments</li>
+                <li>• Remote online only, no walk-in office and no mobile travel appointments</li>
               </ul>
             </div>
 

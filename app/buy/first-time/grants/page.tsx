@@ -12,7 +12,7 @@ import ConsultationCTA from "@/components/ConsultationCTA"
 export const metadata: Metadata = {
   title: "Housing Grants & Down Payment Assistance Programs",
   description:
-    "A guide to down payment assistance and homebuyer grant programs in the U.S. — state housing finance agencies, FHA/VA/USDA loans, and who qualifies.",
+    "A guide to down payment assistance and homebuyer grant programs in the U.S., state housing finance agencies, FHA/VA/USDA loans, and who qualifies.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
     title: "Housing Grants & Down Payment Assistance Programs | Ondo Real Estate",
@@ -41,14 +41,14 @@ const programs: GrantProgram[] = [
     name: "Down payment assistance (grants & second loans)",
     eligibility: "Income-qualified buyers in participating states, counties, and cities",
     description:
-      "Thousands of local programs — administered by states, counties, cities, and nonprofits — offer forgivable grants or low-interest second loans to cover down payment and closing costs. Availability and amounts vary by location.",
+      "Thousands of local programs, administered by states, counties, cities, and nonprofits, offer forgivable grants or low-interest second loans to cover down payment and closing costs. Availability and amounts vary by location.",
     href: "https://downpaymentresource.com/",
   },
   {
     name: "FHA loans",
     eligibility: "Buyers with lower down payments or credit that doesn't fit conventional loans",
     description:
-      "Government-backed loans allowing as little as 3.5% down with flexible credit requirements — a common pairing with down payment assistance. See our FHA vs conventional guide for the trade-offs.",
+      "Government-backed loans allowing as little as 3.5% down with flexible credit requirements, a common pairing with down payment assistance. See our FHA vs conventional guide for the trade-offs.",
     href: "https://www.hud.gov/buying/loans",
   },
   {
@@ -74,7 +74,7 @@ const programs: GrantProgram[] = [
   },
   {
     name: "Nonprofit & employer assistance",
-    eligibility: "Varies — income-qualified buyers, or employees of participating employers",
+    eligibility: "Varies, income-qualified buyers, or employees of participating employers",
     description:
       "Nonprofits like NeighborWorks and Habitat for Humanity, plus a growing number of employer-assisted housing (EAH) programs, offer grants, forgivable loans, or matched savings toward a down payment.",
     href: "https://www.neighborworks.org/",
@@ -86,7 +86,7 @@ export default function HousingGrantsPage() {
     <main className="min-h-screen">
       <SEO
         title="Housing Grants & Down Payment Assistance Programs"
-        description="A guide to down payment assistance and homebuyer grant programs in the U.S. — state housing finance agencies, FHA/VA/USDA loans, and who qualifies."
+        description="A guide to down payment assistance and homebuyer grant programs in the U.S., state housing finance agencies, FHA/VA/USDA loans, and who qualifies."
         pathname="/buy/first-time/grants"
         image={`${SITE_URL}/suburban-house-garden.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -108,7 +108,7 @@ export default function HousingGrantsPage() {
               <h2 className="text-3xl font-bold mb-4">Assistance for Homebuyers</h2>
               <p className="text-lg text-foreground/70">
                 The down payment is the biggest hurdle for most first-time buyers. Across the U.S.,
-                many programs — from state housing agencies to federal loans and local grants — can cover
+                many programs, from state housing agencies to federal loans and local grants, can cover
                 part or all of it. Below is a starting map; program terms, funding, and eligibility change
                 often and vary by state and locality, so confirm current details with each provider.
               </p>

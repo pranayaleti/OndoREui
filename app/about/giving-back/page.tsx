@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -6,6 +7,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Heart, Users, Home, Clock, Award, Phone, Mail } from "lucide-react"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+
+export const metadata: Metadata = pageCanonicalMetadata("/about/giving-back", {
+  title: "Giving Back to Our Community | Ondo Real Estate",
+  description: "Making a positive impact in Utah communities through housing and support programs.",
+})
+
 
 export default function GivingBackPage() {
   const initiatives = [

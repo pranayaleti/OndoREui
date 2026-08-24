@@ -53,7 +53,7 @@ export default function RentingVsBuyingSLC() {
               <li><strong>Maintenance reserve (1% of value/yr):</strong> ~$425/mo</li>
               <li><strong>Total monthly cost of ownership:</strong> ~$3,410–$3,810/mo</li>
             </ul>
-            <p>Median rent for a comparable 3-bedroom SLC home: $1,850–$2,200/mo. The gap is real. You&apos;re paying $1,200–$1,600 more per month to own — on pure cash flow.</p>
+            <p>Median rent for a comparable 3-bedroom SLC home: $1,850–$2,200/mo. The gap is real. You&apos;re paying $1,200–$1,600 more per month to own, on pure cash flow.</p>
 
             <h2>When Buying Makes Sense</h2>
             <p>The buy argument improves dramatically over time due to three forces:</p>
@@ -74,13 +74,13 @@ export default function RentingVsBuyingSLC() {
             </ul>
 
             <h2>Neighborhood-Level Analysis</h2>
-            <p><strong>Sugar House:</strong> Renting remains competitive here — heavy supply of new apartments keeps rents relatively flat. Buying makes more sense if you plan to stay 5+ years.</p>
+            <p><strong>Sugar House:</strong> Renting remains competitive here, heavy supply of new apartments keeps rents relatively flat. Buying makes more sense if you plan to stay 5+ years.</p>
             <p><strong>The Avenues:</strong> Tight supply and strong appreciation make buying compelling. Avenues properties hold value well even in softer markets.</p>
             <p><strong>Liberty Wells:</strong> The value-buy neighborhood of SLC. Below-median prices with solid appreciation potential as the corridor continues to gentrify from the east.</p>
             <p><strong>Downtown:</strong> New construction condos are competitive with renting if you can negotiate the purchase price. Appreciate more slowly than single-family.</p>
 
             <h2>The Bottom Line</h2>
-            <p>If you plan to stay in Salt Lake City for 5+ years and can cover the down payment without depleting emergency reserves, buying in 2026 makes long-term financial sense — especially with rents unlikely to fall. If your timeline is shorter or you&apos;re still building savings, renting is the financially sound choice.</p>
+            <p>If you plan to stay in Salt Lake City for 5+ years and can cover the down payment without depleting emergency reserves, buying in 2026 makes long-term financial sense, especially with rents unlikely to fall. If your timeline is shorter or you&apos;re still building savings, renting is the financially sound choice.</p>
             <p>Uncertainty? Talk to Ondo RE. We can run a personalized buy/rent analysis with your specific numbers, neighborhood preferences, and timeline.</p>
 
             <div className="not-prose mt-8 flex flex-wrap gap-3">

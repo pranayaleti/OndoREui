@@ -17,7 +17,7 @@ import { ContactLeadForm } from "@/components/contact/contact-lead-form"
 import { MapPin, Home, School, TreePine, Users, Phone, ArrowRight, CheckCircle2 } from "lucide-react"
 
 // NOTE: unlike app/properties/page-client.tsx (a Client Component, where
-// `{ ssr: false }` is allowed), this file is an async Server Component —
+// `{ ssr: false }` is allowed), this file is an async Server Component , 
 // Next.js's App Router forbids `ssr: false` on a `next/dynamic` call made
 // directly inside a Server Component. PropertyMap is itself a "use client"
 // component that gates all browser-only work (leaflet, react-leaflet)
@@ -38,7 +38,7 @@ export function generateStaticParams() {
 const MAX_DESCRIPTION_LENGTH = 155
 
 function buildNeighborhoodDescription(hood: NeighborhoodInfo, cityName: string): string {
-  const prefix = `${hood.name} in ${cityName}, UT — `
+  const prefix = `${hood.name} in ${cityName}, UT, `
   const suffix = ` Homes: ${hood.typicalHomes.split(/,(?!\d)/)[0]}. ${hood.priceRange}.`
   const budget = MAX_DESCRIPTION_LENGTH - prefix.length - suffix.length
   const character =
@@ -70,9 +70,9 @@ function buildNeighborhoodFaqs(
       question: `Is ${hood.name} walkable?`,
       answer:
         hood.walkability === "High"
-          ? `Yes — ${hood.name} has high walkability, with most daily needs reachable on foot.`
+          ? `Yes, ${hood.name} has high walkability, with most daily needs reachable on foot.`
           : hood.walkability === "Moderate"
-            ? `${hood.name} has moderate walkability — some errands are walkable, but a car helps for most trips.`
+            ? `${hood.name} has moderate walkability, some errands are walkable, but a car helps for most trips.`
             : `${hood.name} has low walkability and is best navigated by car.`,
     },
   ]
@@ -116,7 +116,7 @@ export default async function Page({ params }: { params: Params }) {
     <>
       <SEO
         title={`Living in ${hood.name}, ${city.name} | Neighborhood Guide | ${SITE_BRAND_SHORT}`}
-        description={`${hood.name} in ${city.name}, UT — ${hood.character}`}
+        description={`${hood.name} in ${city.name}, UT, ${hood.character}`}
         pathname={`/neighborhoods/${citySlug}/${neighborhoodSlug}/`}
         jsonLd={[
           generateBreadcrumbJsonLd([
@@ -197,7 +197,7 @@ export default async function Page({ params }: { params: Params }) {
             <section>
               <h2 className="text-xl font-bold mb-1">{city.name} Market Context</h2>
               <p className="text-sm text-foreground/60 mb-4">
-                Citywide figures — neighborhood-level market data isn&apos;t available yet.
+                Citywide figures, neighborhood-level market data isn&apos;t available yet.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="rounded-lg border p-4">
@@ -299,7 +299,7 @@ export default async function Page({ params }: { params: Params }) {
             <div className="text-center mb-8">
               <h2 className="text-xl font-bold mb-3">Interested in {hood.name}?</h2>
               <p className="text-foreground/70 mb-6">
-                Whether you&apos;re buying, renting, or investing in {hood.name} — we can help.
+                Whether you&apos;re buying, renting, or investing in {hood.name}, we can help.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild variant="outline" size="lg">

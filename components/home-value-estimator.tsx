@@ -1,7 +1,7 @@
 "use client"
 
 /**
- * "What's My Utah Home Worth?" — free lead-magnet estimator.
+ * "What's My Utah Home Worth?", free lead-magnet estimator.
  *
  * Maps to playbook idea #1 (called out in 2026 RE research as the
  * single most effective lead-gen tool in real estate).
@@ -10,7 +10,7 @@
  *   - Static estimator driven by lib/city-market-data.ts. No API dependency,
  *     no rate limits, no cost. Acknowledges accuracy limits in copy.
  *   - Email captured AFTER showing the estimate (commitment + curiosity gap)
- *     for "send the detailed report" — converts ~3-4x better than upfront
+ *     for "send the detailed report", converts ~3-4x better than upfront
  *     email gates.
  *   - Email submission flows to existing /api/leads/contact via lib/leads-api,
  *     so HubSpot + attribution + drip flows are already wired.
@@ -31,7 +31,7 @@ import { analytics } from "@/lib/analytics"
 const fmtUSD = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })
 
-// Bedroom multipliers — based on Utah multi-family / SFR market spreads.
+// Bedroom multipliers, based on Utah multi-family / SFR market spreads.
 const BEDROOM_MULTIPLIERS: Record<number, number> = {
   1: 0.70,
   2: 0.90,
@@ -198,7 +198,7 @@ export function HomeValueEstimator() {
               onChange={(e) => setSqft(parseInt(e.target.value, 10) || 0)}
               className="mt-1.5 w-full rounded-md border border-border bg-background py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            <span className="block text-xs text-foreground/50 mt-1">Roughly — exact number not required.</span>
+            <span className="block text-xs text-foreground/50 mt-1">Roughly, exact number not required.</span>
           </label>
 
           <button
@@ -221,7 +221,7 @@ export function HomeValueEstimator() {
 
           {!hasCalculated || !estimate ? (
             <div className="text-center py-10 text-foreground/50 text-sm">
-              <p>Pick a city, bedrooms, and square feet — then hit <em>Get my estimate</em>.</p>
+              <p>Pick a city, bedrooms, and square feet, then hit <em>Get my estimate</em>.</p>
             </div>
           ) : (
             <div className="space-y-4" aria-live="polite">
@@ -241,7 +241,7 @@ export function HomeValueEstimator() {
 
               <p className="text-xs text-foreground/50 leading-relaxed">
                 Range based on median {city} market data plus bedroom and square-foot adjustments.
-                Actual value depends on condition, amenities, finishes, and current market timing —
+                Actual value depends on condition, amenities, finishes, and current market timing , 
                 we'll send a free walk-through valuation below.
               </p>
 

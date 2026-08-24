@@ -1,4 +1,4 @@
-// NOTE(i18n): server component — body copy (CTAs, breadcrumb, headers) is
+// NOTE(i18n): server component, body copy (CTAs, breadcrumb, headers) is
 // English for SEO under output: "export". Tracked as a Phase 1 follow-up:
 // move client-only sections into a "use client" subtree wired to useTranslation.
 import { Metadata } from "next"
@@ -19,7 +19,7 @@ import { GetScreenedCta } from "@/components/properties/get-screened-cta"
 /**
  * Sentinel emitted by generateStaticParams when the backend is unreachable at
  * build time (e.g. deploy job without NEXT_PUBLIC_BACKEND_BASE_URL). It must
- * never hit the network and must never call notFound() — see PLACEHOLDER_ID
+ * never hit the network and must never call notFound(), see PLACEHOLDER_ID
  * handling in the page/metadata below.
  */
 const PLACEHOLDER_ID = "_placeholder"
@@ -49,7 +49,7 @@ interface PageProps {
  * handler calls notFound() if the publicId doesn't resolve, so the stub
  * path becomes a 404 at runtime instead of a 200 with empty content.
  *
- * Pair this with `dynamicParams = false` — under output: "export" we cannot
+ * Pair this with `dynamicParams = false`, under output: "export" we cannot
  * server-render unknown ids on demand, so any request outside the prebuilt
  * set must 404 statically.
  */
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description =
     property.description?.slice(0, 160) ??
     `${property.bedrooms} BR / ${property.bathrooms} BA in ${cityState}. $${property.price}/mo.`
-  // trailingSlash: true in next.config.mjs — the canonical needs to match.
+  // trailingSlash: true in next.config.mjs, the canonical needs to match.
   const canonicalPath = `/properties/${publicId}`
   const canonical = `${SITE_URL}${canonicalPath}/`
   const image = property.photos?.[0]?.url
@@ -128,7 +128,7 @@ function formatPrice(p: number) {
 
 /**
  * Rendered for the build-time placeholder and for listings that no longer
- * resolve. A lightweight, no-index 200 page — deliberately NOT notFound(),
+ * resolve. A lightweight, no-index 200 page, deliberately NOT notFound(),
  * which hangs the static export worker (see fetchProperty note above).
  */
 function PropertyUnavailable() {
@@ -161,7 +161,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
   // that has since been removed), notFound() hangs the export worker until the
   // per-page timeout and fails the whole build. `dynamicParams = false` already
   // makes Next serve a real 404 for any publicId NOT in generateStaticParams, so
-  // unknown URLs still 404 correctly — we only need a graceful, no-index stub for
+  // unknown URLs still 404 correctly, we only need a graceful, no-index stub for
   // the build-time placeholder / stale-listing case.
   if (!property) return <PropertyUnavailable />
 
@@ -257,7 +257,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
           <div className="text-xs text-muted-foreground">Bathrooms</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold">{property.sqft || "—"}</div>
+          <div className="text-2xl font-semibold">{property.sqft || "Not available"}</div>
           <div className="text-xs text-muted-foreground">Sq Ft</div>
         </div>
       </section>

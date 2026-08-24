@@ -98,7 +98,7 @@ export function CalculatorPDFDocument({
           )}
         </View>
 
-        {/* Metrics grid — first 4 results */}
+        {/* Metrics grid, first 4 results */}
         {resultEntries.length > 0 && (
           <View>
             <Text style={styles.sectionLabel}>Results</Text>
@@ -116,7 +116,7 @@ export function CalculatorPDFDocument({
         {/* AI Analysis */}
         {analysis && (
           <View style={styles.aiSection}>
-            <Text style={styles.aiLabel}>AI Analysis — Powered by Claude</Text>
+            <Text style={styles.aiLabel}>AI Analysis, Powered by Claude</Text>
             {analysis.marketContext ? <Text style={styles.aiText}>{analysis.marketContext}</Text> : null}
             {analysis.recommendations.map((rec, i) => (
               <Text key={i} style={styles.aiBullet}>· {rec}</Text>

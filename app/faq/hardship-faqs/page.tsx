@@ -31,7 +31,7 @@ export default function HardshipFAQPage() {
     },
     {
       question: "How do I apply for hardship assistance?",
-      answer: `Contact us immediately at ${SITE_PHONE} to discuss your situation. Don't wait until you're behind on payments—the sooner you reach out, the more options we have to help. We'll guide you through the application process and help you gather the necessary documentation.`
+      answer: `Contact us immediately at ${SITE_PHONE} to discuss your situation. Don't wait until you're behind on payments, the sooner you reach out, the more options we have to help. We'll guide you through the application process and help you gather the necessary documentation.`
     },
     {
       question: "What is mortgage forbearance?",

@@ -12,7 +12,7 @@ interface ExploreMapClientProps {
 /**
  * Maps the public PropertySummary shape (used across listings) onto the
  * SearchProperty shape that PropertySearchMap expects. Properties without
- * lat/lng are filtered out — backend geocodes on create/update, but legacy
+ * lat/lng are filtered out, backend geocodes on create/update, but legacy
  * rows pre-geocoding may still be missing coords.
  */
 export default function ExploreMapClient({ properties }: ExploreMapClientProps) {

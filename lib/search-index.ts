@@ -55,7 +55,7 @@ const pages: SearchResult[] = [
   {
     id: 'notary-on-demand',
     title: 'On-Demand Notary',
-    description: 'Urgent notarization — we try to accommodate same-day when capacity allows',
+    description: 'Urgent notarization, we try to accommodate same-day when capacity allows',
     href: '/notary/on-demand',
     category: 'Service',
     keywords: ['on demand notary', 'same day notary', 'urgent notary', 'same-day notarization']
@@ -330,7 +330,7 @@ const blogPosts: SearchResult[] = [
   {
     id: 'crypto-and-real-estate-hedge',
     title: 'Crypto and Real Estate: Building a Barbell Hedge',
-    description: 'Balancing fast, volatile assets with slow, cashflowing rentals—without co-mingling risk',
+    description: 'Balancing fast, volatile assets with slow, cashflowing rentals, without co-mingling risk',
     href: '/blog/crypto-and-real-estate-hedge',
     category: 'Blog',
     keywords: ['crypto', 'real estate', 'hedge', 'investment', 'strategy']
@@ -354,7 +354,7 @@ const blogPosts: SearchResult[] = [
   {
     id: 'property-management-automation-checklist',
     title: 'Property Management Automation Checklist',
-    description: 'High-ROI automations for rent, maintenance, and owner reporting—built by a dev-operator',
+    description: 'High-ROI automations for rent, maintenance, and owner reporting, built by a dev-operator',
     href: '/blog/property-management-automation-checklist',
     category: 'Blog',
     keywords: ['property management', 'automation', 'checklist', 'ROI']
@@ -418,7 +418,7 @@ const blogPosts: SearchResult[] = [
   {
     id: 'mobile-notary-utah-county-guide',
     title: 'Notary in Utah County: Remote Online Notarization',
-    description: 'RON for Utah County clients — posted fees, same-day when capacity allows, no mobile travel appointments',
+    description: 'RON for Utah County clients, posted fees, same-day when capacity allows, no mobile travel appointments',
     href: '/blog/mobile-notary-utah-county-guide',
     category: 'Blog',
     keywords: ['remote online notary', 'utah county', 'ron', 'notary services']

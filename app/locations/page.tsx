@@ -1,4 +1,4 @@
-// NOTE(i18n): server component — copy is English-only for SEO/static-export
+// NOTE(i18n): server component, copy is English-only for SEO/static-export
 // reasons. Tracked as a Phase 1 follow-up: convert dynamic body content to a
 // client component or thread per-locale data through generateStaticParams.
 import Link from "next/link"

@@ -108,7 +108,7 @@ export default function FeedbackPage() {
               </h2>
             </div>
             <p className="text-base text-foreground/70">
-              Share anything—from product ideas and UX improvements to new services you&apos;d love to see. Short,
+              Share anything, from product ideas and UX improvements to new services you&apos;d love to see. Short,
               direct, and honest feedback is perfect.
             </p>
 
@@ -189,7 +189,7 @@ export default function FeedbackPage() {
               >
                 {status === "success" && (
                   <span className="font-medium text-emerald-500">
-                    Thank you for sharing your idea — it&apos;s been added to our suggestion tracker.
+                    Thank you for sharing your idea, it&apos;s been added to our suggestion tracker.
                   </span>
                 )}
                 {status === "submitting" && (
