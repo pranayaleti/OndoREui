@@ -3,6 +3,13 @@
 import Script from "next/script"
 import { useEffect, useState } from "react"
 import { isMarketingRestrictedRegion } from "@/lib/region"
+import {
+  ALPHANUM_ID_PATTERN,
+  GA_ID_PATTERN,
+  GTM_ID_PATTERN,
+  NUMERIC_ID_PATTERN,
+  sanitizeTrackingId,
+} from "@/lib/tracking-ids"
 
 /**
  * Marketing / retargeting tracking tags.
@@ -15,26 +22,14 @@ import { isMarketingRestrictedRegion } from "@/lib/region"
  * below are kept as fallbacks for cases where GTM is not desired.
  *
  * Env vars:
- *  - NEXT_PUBLIC_GTM_ID           , e.g. "GTM-XXXXXXX"
- *  - NEXT_PUBLIC_GA_MEASUREMENT_ID  , e.g. "G-XXXXXXXX"
+ *  - NEXT_PUBLIC_GTM_ID           , e.g. "GTM-N6ZJ2P8"
+ *  - NEXT_PUBLIC_GA_MEASUREMENT_ID  , e.g. "G-ABC123XYZ"
  *  - NEXT_PUBLIC_META_PIXEL_ID    , Facebook/Meta Pixel numeric ID
  *  - NEXT_PUBLIC_TIKTOK_PIXEL_ID  , TikTok Pixel ID
  *  - NEXT_PUBLIC_LINKEDIN_PARTNER_ID, LinkedIn Insight Partner ID
  *  - NEXT_PUBLIC_HUBSPOT_PORTAL_ID  , HubSpot portal ID
  *  - NEXT_PUBLIC_REB2B_KEY          , rb2b visitor ID key
  */
-
-/** Reject env values that could break out of inline script strings. */
-function sanitizeTrackingId(raw: string | undefined, pattern: RegExp): string | null {
-  const id = raw?.trim()
-  if (!id || !pattern.test(id)) return null
-  return id
-}
-
-const GTM_ID_PATTERN = /^GTM-[A-Z0-9]+$/i
-const GA_ID_PATTERN = /^G-[A-Z0-9]+$/i
-const NUMERIC_ID_PATTERN = /^\d+$/
-const ALPHANUM_ID_PATTERN = /^[A-Za-z0-9_-]+$/
 
 export function GoogleTagManager() {
   const id = sanitizeTrackingId(process.env["NEXT_PUBLIC_GTM_ID"], GTM_ID_PATTERN)

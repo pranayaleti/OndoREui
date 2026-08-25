@@ -67,6 +67,22 @@ const competitors = [
     cons: "Smaller geographic coverage outside core metro",
     isUs: false,
   },
+  {
+    name: "Keyrenter Salt Lake",
+    // Publicly listed franchise operating out of Midvale; conversion-heavy
+    // marketing (owner-first nav, three-CTA hero, named performance
+    // guarantees on lease-in-30, evictions, and maintenance rework). Fees
+    // below are from their public site + Utah PM industry norms — verify
+    // before signing since franchisees can adjust locally.
+    headline: "Franchise PM, guarantee-forward marketing, Midvale HQ",
+    mgmtFee: "~9% typical (franchise range; verify locally)",
+    leasingFee: "35% of one month's rent (Keyrenter Salt Lake site, as of Aug 2026)",
+    setupFee: "Standard onboarding",
+    techStack: "AppFolio-class franchise stack",
+    bestFor: "Owners who want the reassurance of a national franchise brand + named guarantees",
+    cons: "Franchisee-run, guarantee terms vary by market; less bespoke than local operators",
+    isUs: false,
+  },
 ]
 
 const faqs = [
@@ -88,7 +104,7 @@ const faqs = [
   {
     question: "What questions should I ask a Utah property management company?",
     answer:
-      "Five must-asks: (1) Are you licensed under the new Utah property-management law that takes effect July 1, 2026? (2) What's your average response time for maintenance requests? (3) How do you handle tenant screening, and what's your eviction rate? (4) Can I see a sample owner statement before I sign? (5) What's your average tenant tenure?",
+      "Five must-asks: (1) Are you licensed under Utah's Real Estate Licensing and Practices Act, and will you hold the separate property manager license required beginning January 1, 2027? (2) What's your average response time for maintenance requests? (3) How do you handle tenant screening, and what's your eviction rate? (4) Can I see a sample owner statement before I sign? (5) What's your average tenant tenure?",
   },
   {
     question: "How long does it take to switch property managers in Utah?",
@@ -209,6 +225,12 @@ export default function CompareUtahPropertyManagersPage() {
               alignment, and you prefer a single-line P&L cost.
             </p>
             <p>
+              You should look at Keyrenter Salt Lake if the reassurance of a national franchise
+              brand and their advertised performance guarantees are more valuable to you than a
+              bespoke local operator. Read the guarantee fine print with each franchisee, terms
+              vary by market and Utah franchisees set their own leasing/eviction policies.
+            </p>
+            <p>
               The right move before any of these conversations: run your own numbers in our{" "}
               <Link href="/calculators/owner-vs-self">Self-Manage vs Ondo ROI calculator</Link>.
               Whatever the answer, you'll walk into every PM conversation with leverage.
@@ -223,7 +245,7 @@ export default function CompareUtahPropertyManagersPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Five things to verify with any Utah property manager</h2>
           <ul className="space-y-3">
             {[
-              "Licensed under the new July 1, 2026 Utah property manager law (state license OR principal broker)",
+              "Licensed under Utah's Real Estate Licensing and Practices Act (separate property manager license required beginning January 1, 2027)",
               "Average maintenance response time documented, not just promised",
               "Tenant screening criteria written and applied consistently, ask for the rubric",
               "Sample owner statement BEFORE you sign, not after",

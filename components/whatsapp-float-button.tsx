@@ -94,10 +94,9 @@ export function WhatsAppFloatButton({ prefilledMessage }: Props = {}) {
 
   return (
     <div
-      className="fixed bottom-5 right-5 z-40 flex items-center gap-2 group print:hidden"
+      className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] right-5 z-40 flex items-center gap-2 group print:hidden md:bottom-5"
       style={{
-        // Stay clear of mobile browser bottom UI; safe-area-aware.
-        paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        // Lifted above the mobile sticky CTA bar; desktop uses the original bottom-5.
       }}
     >
       <button

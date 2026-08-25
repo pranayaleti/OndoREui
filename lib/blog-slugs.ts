@@ -36,6 +36,16 @@ const STATIC_ROUTE_SLUGS = [
   "utah-rent-vs-buy-wasatch-front",
   "vacancy-risk-playbook",
   "why-utah-best-real-estate-investment",
+  "real-estate-agents-manage-own-rentals",
+  "turbotenant-vs-buildium-vs-ondo",
+  "collect-rent-with-crypto-guide",
+  "online-notary-for-lease-agreements",
+  "rent-vs-own-calculator-guide",
+  "tenant-rights-checklist",
+  "build-rental-portfolio-investor-2026",
+  "property-management-pwa-offline",
+  "switch-from-turbotenant-migration-guide",
+  "property-management-calculators-which-one",
 ] as const;
 
 /** Every slug that must resolve to a built blog page. */
@@ -71,6 +81,16 @@ export const BLOG_INDEX_SLUGS = [
   "backyard-upgrades-and-fertilizer-guide",
   "cash-on-cash-return-explained",
   "mortgage-paydown-hacks",
+  "real-estate-agents-manage-own-rentals",
+  "turbotenant-vs-buildium-vs-ondo",
+  "collect-rent-with-crypto-guide",
+  "online-notary-for-lease-agreements",
+  "rent-vs-own-calculator-guide",
+  "tenant-rights-checklist",
+  "build-rental-portfolio-investor-2026",
+  "property-management-pwa-offline",
+  "switch-from-turbotenant-migration-guide",
+  "property-management-calculators-which-one",
 ] as const;
 
 export function isValidBlogSlug(slug: string): boolean {

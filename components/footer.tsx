@@ -481,8 +481,8 @@ const Footer = memo(() => {
                 </button>
               )}
               <Link href="/licensing" className="hover:text-foreground">Licensing</Link>
-              <Link href="/privacy" className="hover:text-foreground">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-foreground">Terms of Use</Link>
+              <Link href="/privacy-policy" className="hover:text-foreground">Privacy Policy</Link>
+              <Link href="/terms-of-service" className="hover:text-foreground">Terms of Use</Link>
               <Link href="/accessibility" className="hover:text-foreground">Accessibility</Link>
               <Link href="/sitemap" className="hover:text-foreground">Site Map</Link>
             </div>

@@ -46,6 +46,21 @@ export const allNavigationItems: NavigationItem[] = [
     ],
   },
 
+  // Owners hub — the highest-intent segment for us (self-managing landlords,
+  // investors shopping a manager). Keep this above the generic Solutions menu
+  // so PM shoppers can find services / pricing / analysis in one click.
+  {
+    href: "/property-management",
+    labelKey: "nav.owners",
+    children: [
+      { href: "/property-management", labelKey: "nav.propertyManagement" },
+      { href: "/pricing", labelKey: "nav.pricing" },
+      { href: "/whats-my-home-worth", labelKey: "nav.freeRentalAnalysis" },
+      { href: "/faq/owner-faqs", labelKey: "nav.ownerFaqs" },
+      { href: "/compare-utah-property-managers", labelKey: "nav.compareUtahPms" },
+    ],
+  },
+
   // Solutions, who are you + how to choose
   {
     href: "/solutions",
@@ -85,9 +100,12 @@ export const allNavigationItems: NavigationItem[] = [
 ]
 
 // These are the items that stay visible in the main
-// desktop navbar. The rest will live in the hamburger menu.
+// desktop navbar. The rest live in the "More" overflow menu.
+// Owners is pinned first because it's Ondo's highest-intent PM shopper path;
+// /solutions moves to overflow since the Owners menu already covers
+// landlord/investor/PM/pricing links that would otherwise duplicate it.
 export const primaryNavigationItems: NavigationItem[] = allNavigationItems.filter(item =>
-  ["/buy", "/sell", "/properties", "/loans", "/notary", "/solutions", "/resources"].includes(item.href)
+  ["/property-management", "/buy", "/sell", "/properties", "/loans", "/notary", "/resources"].includes(item.href)
 )
 
 // Everything that is not part of the primary desktop nav.

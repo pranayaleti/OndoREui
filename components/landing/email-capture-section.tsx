@@ -33,23 +33,29 @@ export function EmailCaptureSection() {
         .replace(/\b\w/g, (c) => c.toUpperCase())
         .slice(0, 80) || "Lead Magnet Subscriber"
 
-      const result = await submitContactLead({
-        name: friendlyName,
-        email: trimmed,
-        source: "website",
-        message: "Requested: Utah Landlord's Property Management Checklist (PDF lead magnet).",
-        attribution: getAttributionPayloadForApi(),
-      })
+      try {
+        const result = await submitContactLead({
+          name: friendlyName,
+          email: trimmed,
+          source: "website",
+          message: "Requested: Utah Landlord's Property Management Checklist (PDF lead magnet).",
+          attribution: getAttributionPayloadForApi(),
+        })
 
-      if ("error" in result) {
-        setErrorMsg(result.error || "Something went wrong. Please try again.")
+        if ("error" in result) {
+          setErrorMsg(result.error || "Something went wrong. Please try again.")
+          setStatus("error")
+          analytics.trackFormSubmission("lead_magnet_landlord_checklist", false)
+          return
+        }
+        setStatus("success")
+        analytics.trackLeadGeneration("lead_magnet_landlord_checklist")
+        analytics.trackFormSubmission("lead_magnet_landlord_checklist", true)
+      } catch {
+        setErrorMsg("Something went wrong. Please try again.")
         setStatus("error")
         analytics.trackFormSubmission("lead_magnet_landlord_checklist", false)
-        return
       }
-      setStatus("success")
-      analytics.trackLeadGeneration("lead_magnet_landlord_checklist")
-      analytics.trackFormSubmission("lead_magnet_landlord_checklist", true)
     },
     [email]
   )

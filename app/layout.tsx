@@ -7,7 +7,7 @@ import "leaflet/dist/leaflet.css"
 import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
-import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getSupabaseConnectSrc, getSupabaseOrigin } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getBackendConnectSrc, getSupabaseConnectSrc, getSupabaseOrigin } from "@/lib/site"
 import { getSiteGeoMetaOther } from "@/lib/seo"
 import { DEFAULT_LOCALE } from "@/lib/locales"
 import { getSpeculationRulesJson } from "@/lib/speculation-rules"
@@ -22,6 +22,7 @@ import ServiceWorkerRegistrar from "@/components/sw-register"
 import { TrackingTags, GeoGatedGoogleTagManagerNoscript } from "@/components/analytics/tracking-tags"
 import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 import PublicAssistantWidget from "@/components/PublicAssistantWidget"
+import { StickyMobileCtaBar } from "@/components/sticky-mobile-cta-bar"
 // Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
 // Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
@@ -153,6 +154,7 @@ export const metadata: Metadata = {
 
 const supabaseOrigin = getSupabaseOrigin()
 const supabaseConnectSrc = getSupabaseConnectSrc()
+const backendConnectSrc = getBackendConnectSrc()
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Static export has no request-time locale segment/cookie, so SSR must emit
@@ -196,7 +198,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* CSP: no upgrade-insecure-requests, it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts. Note: unsafe-inline kept for style-src (required by Next.js inline styles). unsafe-eval added only in dev (React Refresh requires it). */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com${supabaseConnectSrc ? ` ${supabaseConnectSrc}` : ""} https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';`}
+          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com${supabaseConnectSrc ? ` ${supabaseConnectSrc}` : ""}${backendConnectSrc ? ` ${backendConnectSrc}` : ""} https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -218,7 +220,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <FirstVisitLeadPopup />
           <CachePurge />
           <ScrollProgress />
-          <div className="min-h-screen flex flex-col">
+          <div className="min-h-screen flex flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
             <Header />
             {/* Each page renders its own <main> landmark; this div provides the skip-link target */}
             <div id="main-content" className="flex-1">
@@ -232,6 +234,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               property-scoped LeasingChatWidget, both of which sit bottom-right. Hides itself on
               /chat, where the leasing agent already owns the conversation. */}
           <PublicAssistantWidget />
+          {/* Mobile-only sticky Call + Free rental analysis bar. Owns the bottom edge on
+              small screens; WhatsApp and assistant floats lift above it via their own CSS. */}
+          <StickyMobileCtaBar />
         </RootProvidersClient>
         <JsonLd
           id="global-jsonld"

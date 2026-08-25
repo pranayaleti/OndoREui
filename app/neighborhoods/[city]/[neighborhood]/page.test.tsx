@@ -7,6 +7,19 @@ vi.mock("@/lib/leads-api", async () => {
   return { ...actual, submitContactLead: vi.fn(async () => ({ message: "ok", leadId: "1" })) }
 })
 
+// The neighborhood page renders ContactLeadForm, which calls useRouter for
+// its optional post-submit redirect. Server-component tests don't wrap in
+// AppRouterProvider, so stub useRouter here — the form's redirect path is
+// off by default anyway.
+vi.mock("next/navigation", async () => {
+  const actual = await vi.importActual<typeof import("next/navigation")>("next/navigation")
+  return {
+    ...actual,
+    useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn(), back: vi.fn(), forward: vi.fn(), prefetch: vi.fn() }),
+    usePathname: () => "/neighborhoods/salt-lake-city/sugar-house",
+  }
+})
+
 const params = Promise.resolve({ city: "salt-lake-city", neighborhood: "sugar-house" })
 
 describe("neighborhood page metadata", () => {

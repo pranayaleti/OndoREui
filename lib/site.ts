@@ -159,3 +159,29 @@ export function getSupabaseConnectSrc(): string {
   if (!origin) return ""
   return `${origin} ${origin}/functions/v1`
 }
+
+function originFromEnvUrl(raw: string | undefined): string | null {
+  const trimmed = raw?.trim()
+  if (!trimmed) return null
+  try {
+    return new URL(trimmed).origin
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Space-delimited connect-src origins for the runtime API the browser calls
+ * (Express in local dev, Edge Functions in prod, optional public-assistant override).
+ * Without these, CSP blocks lead forms and the public assistant with Failed to fetch.
+ */
+export function getBackendConnectSrc(): string {
+  const origins = new Set<string>()
+  for (const origin of [
+    originFromEnvUrl(process.env.NEXT_PUBLIC_BACKEND_BASE_URL),
+    originFromEnvUrl(process.env.NEXT_PUBLIC_PUBLIC_ASSISTANT_URL),
+  ]) {
+    if (origin) origins.add(origin)
+  }
+  return [...origins].join(" ")
+}

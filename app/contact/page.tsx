@@ -51,7 +51,7 @@ export default function ContactPage() {
               <h2 className="text-xl font-semibold dark:text-foreground mb-4">
                 Send a message
               </h2>
-              <ContactLeadForm />
+              <ContactLeadForm routeAfterSubmit />
             </div>
             <div>
               <h2 className="text-xl font-semibold dark:text-foreground mb-4">

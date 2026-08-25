@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import {
+  TourProductScreen,
+  TOUR_SAMPLE_DISCLAIMER,
+  TOUR_ASSISTANT_DISCLAIMER,
+  type TourScreenId,
+} from "@/components/tour/tour-product-screen"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/tour") },
@@ -11,11 +17,15 @@ export const metadata: Metadata = {
   description: "Take a guided tour of the Ondo platform, owner dashboard, tenant portal, AI assistant, and vendor tools.",
 }
 
-const tourSteps = [
-  { title: "Owner Dashboard", description: "See every property, tenant, and payment at a glance." },
-  { title: "Tenant Portal", description: "Tenants pay rent, submit requests, and message you in one place." },
-  { title: "AI Assistant", description: "Ask questions, get insights, and take action: all in natural language." },
-  { title: "Vendor Tools", description: "Coordinate maintenance and manage your vendor network." },
+const tourSteps: {
+  id: TourScreenId
+  title: string
+  description: string
+}[] = [
+  { id: "owner", title: "Owner Dashboard", description: "See every property, tenant, and payment at a glance." },
+  { id: "tenant", title: "Tenant Portal", description: "Tenants pay rent, submit requests, and message you in one place." },
+  { id: "assistant", title: "AI Assistant", description: "Ask questions, get insights, and take action: all in natural language." },
+  { id: "vendor", title: "Vendor Tools", description: "Coordinate maintenance and manage your vendor network." },
 ]
 
 export default function TourPage() {
@@ -31,26 +41,34 @@ export default function TourPage() {
         subtitle="Explore every feature: owner dashboard, tenant portal, AI assistant, and more."
       />
 
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 max-w-3xl">
+      <section className="bg-background py-16" aria-labelledby="tour-steps-heading">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 id="tour-steps-heading" className="sr-only">
+            Platform tour steps
+          </h2>
           <div className="flex flex-col gap-14">
-            {tourSteps.map(({ title, description }, i) => (
-              <div key={title} className="flex flex-col gap-4">
+            {tourSteps.map(({ id, title, description }, i) => (
+              <article key={id} id={id} className="flex flex-col gap-4 scroll-mt-24">
                 <div className="flex items-center gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-lg font-bold">{i + 1}</span>
-                  <h2 className="text-2xl font-bold text-foreground">{title}</h2>
+                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
+                    {i + 1}
+                  </span>
+                  <h3 className="text-2xl font-bold text-foreground">{title}</h3>
                 </div>
-                <p className="text-foreground/70 text-base pl-14">{description}</p>
-                {/* Screenshot placeholder */}
-                <div className="w-full aspect-video bg-muted rounded-lg border border-border flex items-center justify-center text-foreground/40 text-sm">
-                  Screenshot coming soon
+                <p className="pl-14 text-base text-foreground/70">{description}</p>
+                <div className="pl-0 sm:pl-14">
+                  <TourProductScreen id={id} />
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="mt-16 flex flex-col sm:flex-row gap-4 justify-center">
+          <p className="mt-12 text-center text-xs text-foreground/50">
+            {TOUR_SAMPLE_DISCLAIMER} {TOUR_ASSISTANT_DISCLAIMER} Owner, tenant, and vendor
+            portals are invitation-only.
+          </p>
+
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Button asChild size="lg">
               <Link href="/demo">Try it yourself</Link>
             </Button>
