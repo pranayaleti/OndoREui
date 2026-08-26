@@ -158,10 +158,10 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
         ref={launcherRef}
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-50 flex items-center gap-2 rounded-full bg-[#0B0B0B] px-5 py-3
+        className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] left-6 z-50 flex items-center gap-2 rounded-full bg-[#0B0B0B] px-5 py-3
                    text-sm font-semibold text-white shadow-lg transition hover:bg-[#1a1a1a]
                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                   focus-visible:outline-[#FF6A13]"
+                   focus-visible:outline-[#FF6A13] md:bottom-6"
         aria-label="Open the Ondo assistant to ask about property management, renting, buying, or loans"
       >
         <MessageSquare className="h-4 w-4" aria-hidden="true" />
@@ -175,7 +175,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
       className={
         inline
           ? 'flex h-[560px] w-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white'
-          : 'fixed bottom-6 left-6 z-50 flex h-[560px] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl'
+          : 'fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] left-6 z-50 flex h-[560px] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl md:bottom-6'
       }
       aria-label="Ondo assistant"
     >

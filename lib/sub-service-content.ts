@@ -48,7 +48,7 @@ const tenantScreening: SubServiceDefinition = {
     { step: "3", title: "Owner Review & Decision", desc: "You review the full report in your owner dashboard. Our team flags any concerns and provides a placement recommendation based on comparable applicant data in your market. You always make the final decision." },
   ],
   localizedIntro: (city, data) =>
-    `Finding the right tenant in ${city} is critical to protecting your investment. With a median home price of ${fmtUsd(data.medianHomePrice)} and median rent of ${fmtUsd(data.medianRent)}/month, a single bad placement can cost $8,000–15,000 in lost rent, legal fees, and turnover costs. Our systematic screening process applies consistent, documented criteria to every applicant, protecting your asset and keeping you compliant with Utah Fair Housing law. In ${city}'s ${data.schoolDistrict} area, where ${pct(data.ownerOccupiedPct)} of homes are owner-occupied, the rental market is competitive and attracting quality tenants quickly matters. Our screening typically returns results within 24 hours, so you never lose a strong applicant to delays.`,
+    `Finding the right tenant in ${city} is critical to protecting your investment. With a median home price of ${fmtUsd(data.medianHomePrice)} and median rent of ${fmtUsd(data.medianRent)}/month, a single bad placement can cost $8,000–15,000 in lost rent, legal fees, and turnover costs. Our systematic screening process applies consistent, documented criteria to every applicant, protecting your asset and keeping you compliant with Utah Fair Housing law. In ${city}'s ${data.schoolDistrict} area, where ${pct(data.ownerOccupiedPct)} of homes are owner-occupied, the rental market is competitive and filling vacancies quickly matters. Our screening typically returns results within 24 hours, so you never lose a strong applicant to delays.`,
   localizedBenefits: (city, data) => [
     `Screen against ${city}-specific rental comps, we know that ${fmtUsd(data.medianRent)}/month is the local benchmark and set income thresholds accordingly`,
     `${data.schoolDistrict} families applying for school-adjacent rentals get the same thorough screening as every other applicant, no shortcuts`,
@@ -90,7 +90,7 @@ const maintenanceCoordination: SubServiceDefinition = {
     `Local vendor network familiar with ${city} building codes and ${data.schoolDistrict} area HOA requirements`,
     `Preventive maintenance scheduling tailored to ${city}'s elevation and climate conditions`,
     `Transparent pricing, we share vendor bids and never mark up materials or labor`,
-    `Average maintenance response time under 4 hours for ${city} properties`,
+    `24/7 emergency line plus portal maintenance requests for ${city} properties, with urgent issues triaged 24–48 hours and routine work scheduled during business hours`,
   ],
   baseFaqs: [
     { q: "How do tenants submit maintenance requests?", a: "Tenants submit requests through the Ondo portal or mobile app, 24/7. They can include photos and detailed descriptions of the issue. Requests are automatically categorized by urgency, emergency issues like water leaks or no heat trigger immediate alerts, while routine requests are scheduled during normal business hours. Tenants receive status updates at each stage." },
@@ -303,7 +303,7 @@ const jumboLoans: SubServiceDefinition = {
     { step: "3", title: "Appraisal & Close", desc: "High-value properties often require a full appraisal by an appraiser experienced with luxury homes. We ensure the appraiser has comparable sales data that supports your purchase price, and manage the underwriting process to a smooth close." },
   ],
   localizedIntro: (city, data) =>
-    `For ${city} properties priced above conforming loan limits, a jumbo mortgage provides the financing you need. With a median home price of ${fmtUsd(data.medianHomePrice)}, ${city} has a range of properties from starter homes to luxury estates, and the high end requires specialized financing. Jumbo loans are ideal for ${city}'s premium neighborhoods where homes regularly exceed $750,000. Buyers in the ${data.schoolDistrict} area's top-tier neighborhoods, where home values can reach $1M+, benefit from jumbo lenders who understand the local luxury market and can structure financing to match complex income profiles common among ${city}'s professional residents.`,
+    `For ${city} properties priced above conforming loan limits, a jumbo mortgage is the financing path when the purchase price exceeds FHFA limits. With a median home price of ${fmtUsd(data.medianHomePrice)}, ${city} includes both entry-level and high-value homes, and the high end requires specialized financing. Jumbo loans are used for ${city} neighborhoods where homes regularly exceed $750,000. Buyers in the ${data.schoolDistrict} area where home values can reach $1M+ work with jumbo lenders who can structure financing around complex income documentation common in ${city}'s tech and professional employment base.`,
   localizedBenefits: (city, _data) => [
     `Finance ${city} luxury properties above the conforming limit with competitive rates`,
     `Multiple term options: 30-year fixed, 7/1 ARM, 10/1 ARM, and interest-only for qualified borrowers`,

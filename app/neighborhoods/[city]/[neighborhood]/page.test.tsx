@@ -7,6 +7,19 @@ vi.mock("@/lib/leads-api", async () => {
   return { ...actual, submitContactLead: vi.fn(async () => ({ message: "ok", leadId: "1" })) }
 })
 
+// The neighborhood page renders ContactLeadForm, which calls useRouter for
+// its optional post-submit redirect. Server-component tests don't wrap in
+// AppRouterProvider, so stub useRouter here — the form's redirect path is
+// off by default anyway.
+vi.mock("next/navigation", async () => {
+  const actual = await vi.importActual<typeof import("next/navigation")>("next/navigation")
+  return {
+    ...actual,
+    useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn(), back: vi.fn(), forward: vi.fn(), prefetch: vi.fn() }),
+    usePathname: () => "/neighborhoods/salt-lake-city/sugar-house",
+  }
+})
+
 const params = Promise.resolve({ city: "salt-lake-city", neighborhood: "sugar-house" })
 
 describe("neighborhood page metadata", () => {
@@ -81,10 +94,8 @@ describe("neighborhood page, market context, map, and FAQ", () => {
 
   it("renders the FAQ answers visibly, not just in JSON-LD", async () => {
     render(await Page({ params }))
-    // "Sugar House Is Best For" (the pre-existing Best For heading) and
-    // "What is Sugar House known for?" (the new FAQ question) both exist on
-    // the page simultaneously, so an OR-regex over both matches multiple
-    // elements. Assert on the FAQ-specific text alone.
     expect(screen.getByText(/What is Sugar House known for\?/i)).toBeInTheDocument()
+    expect(screen.getByText(/What housing is typical in Sugar House\?/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Who is Sugar House best for\?/i)).not.toBeInTheDocument()
   })
 })

@@ -9,23 +9,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { FileQuestion, Home, Search, Calculator, Users, Building, ArrowLeft, MapPin, Phone } from "lucide-react"
 import { SITE_URL, SITE_PHONE, SITE_EMAILS, APP_PORTAL_IS_EXTERNAL, APP_PORTAL_LOGIN_URL } from "@/lib/site"
 import SEO from "@/components/seo"
+import { PropertyListingDetailClient } from "@/components/properties/property-listing-detail-client"
+import { publicIdFromPathname } from "@/lib/public-property"
 
 export default function NotFound() {
   const router = useRouter()
   const pathname = usePathname()
   const hasRedirected = useRef(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [listingPublicId, setListingPublicId] = useState<string | null>(null)
 
   // Track when component is mounted (client-side only)
   useEffect(() => {
     setIsMounted(true)
+    if (typeof window !== "undefined") {
+      setListingPublicId(publicIdFromPathname(window.location.pathname))
+    }
   }, [])
 
   // Automatically step back one breadcrumb level for unknown routes.
   // Only runs on client side after mount to avoid build/SSR issues
   useEffect(() => {
     // Only run after component is mounted and in browser
-    if (!isMounted || typeof window === "undefined" || hasRedirected.current || !pathname) {
+    if (!isMounted || listingPublicId || typeof window === "undefined" || hasRedirected.current || !pathname) {
       return
     }
 
@@ -58,7 +64,15 @@ export default function NotFound() {
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [isMounted, pathname, router])
+  }, [isMounted, listingPublicId, pathname, router])
+
+  if (!isMounted) {
+    return <div className="min-h-screen bg-background" />
+  }
+
+  if (listingPublicId) {
+    return <PropertyListingDetailClient publicId={listingPublicId} />
+  }
 
   const popularPages: { name: string; href: string; icon: React.ReactNode; description: string; external?: boolean }[] = [
     { name: "Properties", href: "/properties", icon: <Building className="h-4 w-4" />, description: "Browse available rentals" },

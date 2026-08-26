@@ -1,7 +1,21 @@
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { CityGuidePage } from "./city-guide-page"
 import { findCityBySlug } from "@/lib/utah-cities"
+
+vi.mock("@/lib/leads-api", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/leads-api")>("@/lib/leads-api")
+  return { ...actual, submitContactLead: vi.fn(async () => ({ message: "ok", leadId: "1" })) }
+})
+
+vi.mock("next/navigation", async () => {
+  const actual = await vi.importActual<typeof import("next/navigation")>("next/navigation")
+  return {
+    ...actual,
+    useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn(), back: vi.fn(), forward: vi.fn(), prefetch: vi.fn() }),
+    usePathname: () => "/locations/salt-lake-city",
+  }
+})
 
 const slc = findCityBySlug("salt-lake-city")!
 
@@ -34,5 +48,13 @@ describe("CityGuidePage", () => {
     render(<CityGuidePage city={slc} />)
     const link = screen.getByRole("link", { name: /Avenues/i })
     expect(link).toHaveAttribute("href", "/neighborhoods/salt-lake-city/the-avenues/")
+  })
+
+  it("mounts lead capture, city testimonials, and resource hub links", () => {
+    render(<CityGuidePage city={slc} />)
+    expect(screen.getAllByLabelText(/name/i).length).toBeGreaterThanOrEqual(2)
+    expect(screen.getByText(/What Salt Lake City Clients Say/i)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /Guides & resources/i })).toHaveAttribute("href", "/resources/")
+    expect(screen.getByRole("link", { name: /^Blog$/i })).toHaveAttribute("href", "/blog/")
   })
 })

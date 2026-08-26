@@ -45,20 +45,20 @@ export default function BestNeighborhoodsDraper() {
 
             <h2>1. South Mountain: Hillside Estates with Valley Panoramas</h2>
             <p>South Mountain is Draper&apos;s premium address. Large-lot custom homes start around $800K and stretch well past $1.5M for the finest builds. Every street faces toward the valley, and morning light on the Wasatch peaks is a daily fixture. Residents walk directly to the Corner Canyon trail network, one of the best mountain biking systems in the state with 50+ miles of ridgeline paths.</p>
-            <p><strong>Best for:</strong> Executives, remote workers wanting space, families with older kids who mountain bike or trail run.</p>
-            <p><strong>School highlight:</strong> Corner Canyon High School consistently ranks among Utah&apos;s top schools for AP exam participation and scores.</p>
+            <p><strong>Housing notes:</strong> Large-lot custom homes, valley views, direct Corner Canyon trail access.</p>
+            <p><strong>School geography:</strong> Corner Canyon High School is the local high school in Canyons School District.</p>
             <p><strong>Investment note:</strong> Lower rental yield (1–2% gross) due to high prices, but appreciation has been strong. Better suited for owner-occupancy than buy-and-hold.</p>
 
             <h2>2. Suncrest: Mountain Living Above It All</h2>
             <p>Perched above Draper proper, Suncrest is a master-planned mountain community. Homes are newer (2005–present), typically 3,000–5,000 sqft, and priced $650K–$1.2M. The HOA maintains common areas and the mountain setting creates a resort-like atmosphere. 360-degree views on clear days stretch from Utah Lake to the Oquirrh Mountains.</p>
             <p>Commute note: Suncrest requires a 10-minute mountain drive to reach I-15, which turns to 20+ minutes in winter weather. Consider this if you&apos;re commuting daily to downtown SLC.</p>
-            <p><strong>Best for:</strong> Tech workers with flexible/hybrid schedules, families who want community events and HOA structure, view-seekers.</p>
-            <p><strong>Investment note:</strong> Strong rental demand from tech employees who prefer mountain ambiance. Twilight photography and 60-second video tours consistently outperform in marketing.</p>
+            <p><strong>Housing notes:</strong> Post-2005 3,000–5,000 sqft homes, HOA commons, mountain views; 10–20 minute drive to I-15 depending on weather.</p>
+            <p><strong>Investment note:</strong> Twilight photography and 60-second video tours consistently outperform in marketing. Price for the longer winter commute to I-15.</p>
 
             <h2>3. Draper Peaks: Convenience Meets Modern Living</h2>
-            <p>Draper Peaks is where newer construction meets retail convenience. Priced $500K–$800K for single-family and $350K–$500K for townhomes, it&apos;s the most accessible entry into Draper. 12300 South runs through the neighborhood with craft pizza, boba tea, and boutique fitness within walking distance. Cowabunga Bay waterpark is five minutes away, beloved by families with young kids.</p>
-            <p><strong>Best for:</strong> Young families, first-time buyers who want Draper zip codes without the hillside price premium.</p>
-            <p><strong>Investment note:</strong> Best rental yield in Draper (3.5–5% gross). Townhomes especially perform well with tenant profiles: tech contractors and dual-income couples without children.</p>
+            <p>Draper Peaks is where newer construction meets retail convenience. Priced $500K–$800K for single-family and $350K–$500K for townhomes, it&apos;s the most accessible entry into Draper. 12300 South runs through the neighborhood with craft pizza, boba tea, and boutique fitness within walking distance. Cowabunga Bay waterpark is five minutes away.</p>
+            <p><strong>Housing notes:</strong> Newer single-family and townhomes at a lower price band than South Mountain or Suncrest; 12300 South retail walkability.</p>
+            <p><strong>Investment note:</strong> Highest rental yield in Draper (3.5–5% gross). Townhomes with attached garages and updated kitchens lease fastest.</p>
 
             <h2>Market Snapshot: Draper Real Estate in 2026</h2>
             <ul>
@@ -70,7 +70,7 @@ export default function BestNeighborhoodsDraper() {
             </ul>
 
             <h2>Bottom Line</h2>
-            <p>Draper rewards buyers who match the neighborhood to their lifestyle. South Mountain and Suncrest are premium owner-occupancy picks; Draper Peaks is the investor sweet spot. If you&apos;re managing a Draper rental or hunting for your next property, Ondo RE has local agents who live and work in this corridor.</p>
+            <p>South Mountain and Suncrest are premium, large-lot product; Draper Peaks is the lower entry and higher-yield townhome/SFR band. If you&apos;re managing a Draper rental or hunting for your next property, Ondo RE has local agents who live and work in this corridor.</p>
 
             <div className="not-prose mt-8 flex flex-wrap gap-3">
               <Button asChild>

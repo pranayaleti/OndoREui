@@ -31,7 +31,7 @@ export default function OwnerFAQPage() {
     },
     {
       question: "What are your management fees?",
-      answer: "Our management fees typically range from 7-10% of monthly collected rent, depending on the property type, size, and services required. We also charge a leasing fee of 50-75% of the first month's rent for new tenant placement. We don't get paid unless you get paid, aligning our interests with yours."
+      answer: "Starter is 10% of collected rent for 1–4 units; Growth is 8% for 5–15 units. Leasing is a one-time 50% of first month’s rent when we place a new tenant (none on renewals). You only pay management when rent is collected."
     },
     {
       question: "How do you handle maintenance and repairs?",

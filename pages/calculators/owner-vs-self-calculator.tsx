@@ -370,7 +370,7 @@ const OwnerVsSelfCalculator: React.FC = () => {
             </div>
 
             <p className="text-xs text-foreground/50 leading-relaxed">
-              Estimates only. Actual results depend on tenant quality, property condition, market rent at lease-up,
+              Estimates only. Actual results depend on occupancy, property condition, market rent at lease-up,
               and applicable Utah landlord-tenant law. Repair % uses the industry rule of thumb; your property may vary.
               Ondo fees shown are illustrative, request a quote for your exact pricing.
             </p>

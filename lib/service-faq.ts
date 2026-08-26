@@ -4,10 +4,10 @@ export type ServiceKey = "property-management" | "buy-sell" | "loans"
 
 export const propertyManagementFaqBank: CityFaq[] = [
   { q: "What areas do you manage in Utah?", a: "We manage single-family homes, townhomes, and small multifamily across the Wasatch Front, including Salt Lake City, Utah County, Davis County, and Weber County." },
-  { q: "What are your management and leasing fees?", a: "Management typically ranges 7–10% of collected rent, and leasing is a one-time fee due upon tenant placement. Fees vary by property type and portfolio size." },
-  { q: "How quickly can you lease my property?", a: "Well-priced, well-presented homes typically lease in 7–21 days depending on seasonality and local comps. We share weekly activity metrics and recommendations." },
+  { q: "What are your management and leasing fees?", a: "Starter is 10% of collected rent for 1–4 units; Growth is 8% for 5–15 units. Leasing is a one-time 50% of first month’s rent when we place a new tenant (none on renewals). You only pay management when rent is collected." },
+  { q: "How quickly can you lease my property?", a: "Most homes we list, when priced to local comps, typically lease within a few weeks depending on seasonality. We share weekly showing and application activity rather than a fill-by date." },
   { q: "How do you screen tenants?", a: "We verify income, credit, criminal background, prior evictions, rental history, and employment. Applications are scored against fair, written criteria." },
-  { q: "How is maintenance handled?", a: "Tenants submit requests online 24/7. We triage, dispatch vetted vendors, and keep owners informed. Emergency issues are handled immediately." },
+  { q: "How is maintenance handled?", a: "Tenants submit requests online 24/7. We triage, dispatch vetted vendors, and keep owners informed. Emergencies route to the 24/7 emergency line and are triaged as they come in." },
   { q: "Is there a maintenance reserve or markups?", a: "We maintain a small operating reserve to cover minor repairs and do not add markups to vendor invoices. You receive copies of all bills in monthly statements." },
   { q: "How often do you inspect properties?", a: "We complete move-in/move-out inspections, annual or semi-annual checkups, and spot checks as needed, with detailed photo reports." },
   { q: "When will I receive owner payouts?", a: "Owner disbursements are sent monthly after rent clears and expenses are reconciled. You’ll receive a statement itemizing all income and costs." },
@@ -51,6 +51,12 @@ export function getServiceFaqBank(service: ServiceKey): CityFaq[] {
   if (service === "property-management") return propertyManagementFaqBank
   if (service === "loans") return loansFaqBank
   return buySellFaqBank
+}
+
+export const HOMEPAGE_OWNER_FAQ_COUNT = 6
+
+export function getHomepageOwnerFaqs(): CityFaq[] {
+  return propertyManagementFaqBank.slice(0, HOMEPAGE_OWNER_FAQ_COUNT)
 }
 
 

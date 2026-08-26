@@ -4,8 +4,8 @@ import { PropertiesAgentIntro } from "@/components/properties/properties-agent-i
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/properties", {
-  title: "Utah Properties for Sale & Rent | Ondo Real Estate",
-  description: "Browse homes, condos, and investment properties across Utah.",
+  title: "Utah Rental Properties",
+  description: "Browse available rental homes, apartments, condos, and townhomes managed by Ondo Real Estate across the Wasatch Front.",
 })
 
 

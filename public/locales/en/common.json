@@ -35,7 +35,23 @@
     "more": "More",
     "search": "Search",
     "portal": "Property Management Portal",
-    "portalShort": "Portal"
+    "portalShort": "Portal",
+    "login": "Log in",
+    "ownerLogin": "Owner login",
+    "tenantLogin": "Tenant login",
+    "residentLogin": "Resident login",
+    "owners": "Owners",
+    "propertyManagement": "Property management",
+    "ownerFaqs": "Owner FAQs",
+    "freeRentalAnalysis": "Free rental analysis",
+    "availableRentals": "Available rentals",
+    "compareUtahPms": "Compare Utah PMs"
+  },
+  "utilityBar": {
+    "freeRentalAnalysis": "Free rental analysis",
+    "availableRentals": "Available rentals",
+    "ownerLogin": "Owner login",
+    "residentLogin": "Resident login"
   },
   "actions": {
     "save": "Save",
@@ -447,7 +463,17 @@
     "messageLabel": "Message",
     "messagePlaceholder": "How can we help?",
     "sending": "Sending...",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "audience": {
+      "legend": "How can we help?",
+      "required": "Please tell us which one describes you.",
+      "owner": "I own a rental (interested in management)",
+      "renter": "I'm looking for a home to rent",
+      "agent": "I'm a real estate agent (referrals)",
+      "currentClient": "I'm a current owner or resident",
+      "vendor": "I'm a vendor",
+      "other": "Something else (loans, notary, buying, selling)"
+    }
   },
   "consultationModal": {
     "titleDefault": "View Available Times & Book Now",

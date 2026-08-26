@@ -23,6 +23,7 @@ import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Calculator, Loader2, CheckCircle2, AlertCircle, ArrowRight, Home, DollarSign, MapPin } from "lucide-react"
 import { cityMarketData } from "@/lib/city-market-data"
+import { estimateHomeValue } from "@/lib/home-value-estimate"
 import { submitContactLead } from "@/lib/leads-api"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { isValidEmail } from "@/lib/security"
@@ -30,49 +31,6 @@ import { analytics } from "@/lib/analytics"
 
 const fmtUSD = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })
-
-// Bedroom multipliers, based on Utah multi-family / SFR market spreads.
-const BEDROOM_MULTIPLIERS: Record<number, number> = {
-  1: 0.70,
-  2: 0.90,
-  3: 1.00, // baseline (median rent assumes ~3bd)
-  4: 1.15,
-  5: 1.30,
-}
-
-// Square-feet adjustment: linear ±5% per 100 sqft from the 1800 sqft baseline.
-function sqftAdjustment(sqft: number): number {
-  const delta = (sqft - 1800) / 100
-  return 1 + delta * 0.05
-}
-
-interface Estimate {
-  rentLow: number
-  rentHigh: number
-  saleLow: number
-  saleHigh: number
-  rentBase: number
-  saleBase: number
-}
-
-function calculate(city: string, bedrooms: number, sqft: number): Estimate | null {
-  const data = cityMarketData[city]
-  if (!data) return null
-
-  const bedroomMult = BEDROOM_MULTIPLIERS[bedrooms] ?? 1.0
-  const sqftMult = sqftAdjustment(sqft)
-
-  const rentBase = Math.round(data.medianRent * bedroomMult * sqftMult)
-  // Show as a ±10% range so we don't pretend pinpoint accuracy.
-  const rentLow = Math.round(rentBase * 0.9)
-  const rentHigh = Math.round(rentBase * 1.1)
-
-  const saleBase = Math.round(data.medianHomePrice * bedroomMult * sqftMult)
-  const saleLow = Math.round(saleBase * 0.9)
-  const saleHigh = Math.round(saleBase * 1.1)
-
-  return { rentLow, rentHigh, saleLow, saleHigh, rentBase, saleBase }
-}
 
 const cities = Object.keys(cityMarketData).sort()
 
@@ -90,7 +48,7 @@ export function HomeValueEstimator() {
 
   const estimate = useMemo(() => {
     if (!city) return null
-    return calculate(city, bedrooms, sqft)
+    return estimateHomeValue(city, bedrooms, sqft)
   }, [city, bedrooms, sqft])
 
   const handleCalculate = () => {

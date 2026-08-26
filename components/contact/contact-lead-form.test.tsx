@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from "vitest"
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
+import enCommon from "@/public/locales/en/common.json"
 import { ContactLeadForm } from "./contact-lead-form"
 
 vi.mock("@/lib/leads-api", async () => {
@@ -7,7 +8,64 @@ vi.mock("@/lib/leads-api", async () => {
   return { ...actual, submitContactLead: vi.fn(async () => ({ success: true, message: "ok", leadId: "1" })) }
 })
 
+const push = vi.fn()
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push }),
+}))
+
+// react-i18next is not initialized in the vitest setup, so useTranslation()
+// falls back to returning the key. Mock it to walk the actual en/common.json
+// tree so audience radio labels resolve to real English (which the tests
+// then match by regex).
+vi.mock("react-i18next", () => {
+  function translate(key: string, opts?: Record<string, unknown>): string {
+    const path = key.split(".")
+    let node: unknown = enCommon
+    for (const segment of path) {
+      if (node && typeof node === "object" && segment in (node as object)) {
+        node = (node as Record<string, unknown>)[segment]
+      } else {
+        return key
+      }
+    }
+    if (typeof node !== "string") return key
+    if (!opts) return node
+    return node.replace(/\{\{(.*?)\}\}/g, (_, name: string) =>
+      String(opts[name.trim()] ?? ""),
+    )
+  }
+  return { useTranslation: () => ({ t: translate, i18n: {} }) }
+})
+
 import { submitContactLead } from "@/lib/leads-api"
+
+/**
+ * The anti-spam gate stores Date.now() at mount time (via useRef) and rejects
+ * submits that arrive within minDwellMs (2500ms). We mock Date.now BEFORE
+ * render so mountedAt is deterministic, then advance it before submit to
+ * clear the dwell gate.
+ */
+const NOW_BASE = 1_700_000_000_000
+let nowSpy: ReturnType<typeof vi.spyOn>
+
+beforeEach(() => {
+  nowSpy = vi.spyOn(Date, "now").mockReturnValue(NOW_BASE)
+  vi.mocked(submitContactLead).mockClear()
+  push.mockClear()
+})
+
+afterEach(() => {
+  nowSpy.mockRestore()
+})
+
+function advancePastAntiSpamDwell() {
+  nowSpy.mockReturnValue(NOW_BASE + 3_000)
+}
+
+function fillRequiredFields() {
+  fireEvent.change(screen.getByLabelText(/name/i), { target: { value: "Jane Doe" } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: "jane@example.com" } })
+}
 
 describe("ContactLeadForm", () => {
   it("exposes declarative WebMCP attributes on the form", () => {
@@ -30,32 +88,97 @@ describe("ContactLeadForm", () => {
     expect(screen.getByLabelText(/message/i)).toHaveValue("I'm interested in Sugar House, Salt Lake City.")
   })
 
-  // The anti-spam submit-time gate (lib/anti-spam.ts) rejects submits that
-  // arrive within minDwellMs (2500ms default) of mount, so we advance
-  // Date.now() between render and submit to clear the gate.
-  it("submits with source='website' by default", async () => {
-    const base = 1_700_000_000_000
-    const nowSpy = vi.spyOn(Date, "now").mockReturnValue(base)
+  it("shows every audience option and requires one before submitting", async () => {
     render(<ContactLeadForm />)
-    nowSpy.mockReturnValue(base + 3_000)
-    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: "Jane Doe" } })
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: "jane@example.com" } })
+    expect(screen.getByLabelText(/I own a rental/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/looking for a home to rent/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/real estate agent/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/current owner or resident/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/vendor/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Something else/i)).toBeInTheDocument()
+
+    advancePastAntiSpamDwell()
+    fillRequiredFields()
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(/which one describes you/i)
+    expect(submitContactLead).not.toHaveBeenCalled()
+  })
+
+  it("submits with the selected inquiryType and source='website' by default", async () => {
+    render(<ContactLeadForm />)
+    advancePastAntiSpamDwell()
+    fireEvent.click(screen.getByLabelText(/I own a rental/i))
+    fillRequiredFields()
+    fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
-    expect(submitContactLead).toHaveBeenCalledWith(expect.objectContaining({ source: "website" }))
-    nowSpy.mockRestore()
+    expect(submitContactLead).toHaveBeenCalledWith(
+      expect.objectContaining({ source: "website", inquiryType: "owner" }),
+    )
   })
 
   it("submits with the given source prop", async () => {
-    const base = 1_700_000_000_000
-    const nowSpy = vi.spyOn(Date, "now").mockReturnValue(base)
     render(<ContactLeadForm source="popup" />)
-    nowSpy.mockReturnValue(base + 3_000)
-    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: "Jane Doe" } })
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: "jane@example.com" } })
+    advancePastAntiSpamDwell()
+    fireEvent.click(screen.getByLabelText(/I own a rental/i))
+    fillRequiredFields()
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
     expect(submitContactLead).toHaveBeenCalledWith(expect.objectContaining({ source: "popup" }))
+  })
+
+  it("hides the audience question when defaultInquiryType is set, and tags the submit with it", async () => {
+    render(<ContactLeadForm defaultInquiryType="renter" />)
+    expect(screen.queryByLabelText(/I own a rental/i)).not.toBeInTheDocument()
+    advancePastAntiSpamDwell()
+    fillRequiredFields()
+    fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
+    await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
+    expect(submitContactLead).toHaveBeenCalledWith(
+      expect.objectContaining({ inquiryType: "renter" }),
+    )
+  })
+
+  it("routes renters to /properties after a successful submit when routeAfterSubmit is on", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    // Re-establish the Date.now spy on top of fake timers, since useFakeTimers
+    // installs its own mock. Order matters: fake timers first, then our spy.
     nowSpy.mockRestore()
+    nowSpy = vi.spyOn(Date, "now").mockReturnValue(NOW_BASE)
+    try {
+      render(<ContactLeadForm routeAfterSubmit />)
+      advancePastAntiSpamDwell()
+      fireEvent.click(screen.getByLabelText(/looking for a home to rent/i))
+      fillRequiredFields()
+      fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
+      await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
+      await vi.advanceTimersByTimeAsync(1200)
+      expect(push).toHaveBeenCalledWith("/properties")
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it("does not route after submit by default", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    nowSpy.mockRestore()
+    nowSpy = vi.spyOn(Date, "now").mockReturnValue(NOW_BASE)
+    try {
+      render(<ContactLeadForm />)
+      advancePastAntiSpamDwell()
+      fireEvent.click(screen.getByLabelText(/looking for a home to rent/i))
+      fillRequiredFields()
+      fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
+      await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
+      await vi.advanceTimersByTimeAsync(2000)
+      expect(push).not.toHaveBeenCalled()
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })

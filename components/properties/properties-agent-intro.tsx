@@ -7,12 +7,13 @@ import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site"
  * block, agents fetching the HTML shell (including Cloudflare's `Accept: text/markdown`
  * conversion) would see spinners rather than content.
  *
- * The visual treatment stays soft so it renders as a preamble for humans too.
+ * The visual treatment stays out of the human UI (list + map). Agents and
+ * no-JS HTML still receive this summary via `data-agent-intro`.
  */
 export function PropertiesAgentIntro() {
   return (
     <section
-      className="border-b border-border/40 bg-background/60 py-8"
+      className="hidden"
       aria-labelledby="properties-agent-intro"
       data-agent-intro="properties"
     >

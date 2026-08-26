@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useMemo } from "react"
 import Script from "next/script"
-import { SITE_PHONE } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,10 +11,12 @@ import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
 import { generateFAQJsonLd } from "@/lib/seo"
-import { neighborhoodsByCity } from "@/lib/neighborhood-content"
+import { findNeighborhoodForCard } from "@/lib/neighborhood-content"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { CityTeamSection } from "@/components/city-team-section"
+import { CityTestimonials } from "@/components/city-testimonials"
+import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import {
   MapPin,
   School,
@@ -27,9 +28,7 @@ import {
   DollarSign,
   Briefcase,
   Mountain,
-  Phone,
   Building2,
-  ArrowRight,
 } from "lucide-react"
 
 type CityGuidePageProps = {
@@ -40,17 +39,6 @@ function fmtUsd(n: number): string {
   if (n >= 1_000_000) return "$" + (n / 1_000_000).toFixed(1) + "M"
   if (n >= 1_000) return "$" + (n / 1_000).toFixed(0) + "K"
   return "$" + n.toLocaleString("en-US")
-}
-
-function findNeighborhoodSlugForCard(cityName: string, cardLabel: string): string | null {
-  const candidates = neighborhoodsByCity[cityName]
-  if (!candidates) return null
-  const normalized = cardLabel.trim().toLowerCase()
-  const match = candidates.find((n) => {
-    const name = n.name.toLowerCase()
-    return name === normalized || name === `the ${normalized}` || `the ${name}` === normalized
-  })
-  return match?.slug ?? null
 }
 
 export function CityGuidePage({ city }: CityGuidePageProps) {
@@ -110,6 +98,14 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
           </div>
         </div>
       </section>
+
+      <div className="container mx-auto px-4 py-8">
+        <CityPageLeadCapture
+          cityName={city.name}
+          heading={`Talk with our ${city.name} team`}
+          prefillMessage={`I'm interested in real estate in ${city.name}.`}
+        />
+      </div>
 
       <div className="container mx-auto px-4 py-12 space-y-16">
 
@@ -196,7 +192,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {content.neighborhoods.map((hood) => {
                 const [name, desc] = hood.includes(", ") ? hood.split(", ") : [hood, null]
-                const neighborhoodSlug = findNeighborhoodSlugForCard(city.name, name)
+                const neighborhoodSlug = findNeighborhoodForCard(city.name, name)?.slug
                 const cardBody = (
                   <Card className={neighborhoodSlug ? "hover:bg-muted/50 transition-colors cursor-pointer h-full" : undefined}>
                     <CardHeader className="pb-2">
@@ -339,33 +335,11 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
 
         <Separator />
 
-        {/* CTA */}
-        <section className="text-center py-8">
-          <h2 className="text-2xl font-bold mb-3">Ready to Get Started in {city.name}?</h2>
-          <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
-            Whether you&apos;re buying, selling, investing, or need property management, our local team is here to help.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg">
-              <Link href={`/property-management/${citySlug}/`}>
-                <Building2 className="mr-2 h-4 w-4" />
-                Property Management
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}>
-                <Phone className="mr-2 h-4 w-4" />
-                {SITE_PHONE}
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact/">
-                Schedule Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </section>
+        <CityPageLeadCapture
+          cityName={city.name}
+          heading={`Ready to get started in ${city.name}?`}
+          prefillMessage={`I'm interested in real estate in ${city.name}.`}
+        />
 
         {/* Nearby Cities */}
         {nearbyCities.length > 0 && (
@@ -389,6 +363,8 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
         {/* Team section */}
         <CityTeamSection cityName={city.name} />
 
+        <CityTestimonials cityName={city.name} />
+
         {/* Cross-links to services */}
         <CrossLinkSection
           title={`${city.name} Real Estate Services`}
@@ -398,6 +374,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             { label: `Buy or Sell in ${city.name}`, href: `/buy-sell/${citySlug}/` },
             { label: `${city.name} Home Loans`, href: `/loans/${citySlug}/` },
             { label: "Investment Opportunities", href: "/investments/opportunities/" },
+            { label: "Guides & resources", href: "/resources/" },
             { label: "Calculators", href: "/calculators/" },
             { label: "Blog", href: "/blog/" },
           ]}

@@ -33,7 +33,11 @@ export function OperatorsSection() {
             </Button>
           </div>
 
-          {/* Right: social proof / quote */}
+          {/* Right: social proof / quote.
+              Attribution is intentionally generic (no fabricated name) —
+              compliance rule: we don't invent testimonials. When we have a
+              named, opt-in reference, replace this block with their name,
+              role, and company. */}
           <div className="min-w-0">
             <blockquote className="rounded-xl bg-card/80 border border-border p-6 sm:p-8">
               <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
@@ -41,7 +45,7 @@ export function OperatorsSection() {
                 + maintenance, and we stopped chasing spreadsheets.&rdquo;
               </p>
               <footer className="mt-4 text-sm text-slate-400">
-               , Property manager, Utah
+                &mdash; Wasatch Front property manager (small portfolio)
               </footer>
             </blockquote>
           </div>

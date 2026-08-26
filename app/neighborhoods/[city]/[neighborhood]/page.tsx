@@ -63,8 +63,8 @@ function buildNeighborhoodFaqs(
       answer: `Homes in ${hood.name} typically range ${hood.priceRange}. Common home types: ${hood.typicalHomes}.`,
     },
     {
-      question: `Who is ${hood.name} best for?`,
-      answer: `${hood.name} tends to suit ${hood.bestFor.join(", ")}.`,
+      question: `What housing is typical in ${hood.name}?`,
+      answer: `Homes in ${hood.name} are typically ${hood.typicalHomes}. Listed prices commonly fall ${hood.priceRange}. Walkability is ${hood.walkability.toLowerCase()}.`,
     },
     {
       question: `Is ${hood.name} walkable?`,
@@ -216,11 +216,13 @@ export default async function Page({ params }: { params: Params }) {
             </section>
           )}
 
-          {/* Best For */}
           <section>
-            <h2 className="text-xl font-bold mb-4">{hood.name} Is Best For</h2>
+            <h2 className="text-xl font-bold mb-4">{hood.name} highlights</h2>
+            <p className="mb-4 text-sm text-foreground/60">
+              Housing stock, amenities, and location facts, not who should live here.
+            </p>
             <div className="flex flex-wrap gap-2">
-              {hood.bestFor.map((b) => (
+              {hood.highlights.map((b) => (
                 <span key={b} className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm">
                   <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
                   {b}

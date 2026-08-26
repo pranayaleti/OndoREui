@@ -34,6 +34,12 @@ export const DEMO_DASHBOARD_URL =
     ? configuredDemoDashboardUrl.replace(/\/$/, "")
     : ""
 export const DEMO_VIDEO_EMBED_URL = process.env["NEXT_PUBLIC_DEMO_VIDEO_EMBED_URL"]?.trim() || ""
+/**
+ * Public phone. Override with NEXT_PUBLIC_SITE_PHONE.
+ * Default remains +1-408-538-0420 (also used in the dashboard companyInfo).
+ * No documented Utah (801/385) production number exists in this workspace — do not invent one.
+ * Office hours are SITE_HOURS_LABEL (Mon–Fri 9–5 MT). 24/7 copy is the emergency *line*, not office hours.
+ */
 export const SITE_PHONE = process.env['NEXT_PUBLIC_SITE_PHONE'] || "+1-408-538-0420"
 export const SITE_HOURS = "Mo-Fr 09:00-17:00"
 export const SITE_ADDRESS = "2701 N Thanksgiving Way, Lehi, UT 84043"
@@ -158,4 +164,30 @@ export function getSupabaseConnectSrc(): string {
   const origin = getSupabaseOrigin()
   if (!origin) return ""
   return `${origin} ${origin}/functions/v1`
+}
+
+function originFromEnvUrl(raw: string | undefined): string | null {
+  const trimmed = raw?.trim()
+  if (!trimmed) return null
+  try {
+    return new URL(trimmed).origin
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Space-delimited connect-src origins for the runtime API the browser calls
+ * (Express in local dev, Edge Functions in prod, optional public-assistant override).
+ * Without these, CSP blocks lead forms and the public assistant with Failed to fetch.
+ */
+export function getBackendConnectSrc(): string {
+  const origins = new Set<string>()
+  for (const origin of [
+    originFromEnvUrl(process.env.NEXT_PUBLIC_BACKEND_BASE_URL),
+    originFromEnvUrl(process.env.NEXT_PUBLIC_PUBLIC_ASSISTANT_URL),
+  ]) {
+    if (origin) origins.add(origin)
+  }
+  return [...origins].join(" ")
 }

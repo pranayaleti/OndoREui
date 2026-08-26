@@ -3,12 +3,14 @@ import Link from "next/link"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { FeeAlignmentWidget } from "@/components/landing/fee-alignment-widget"
+import { IncludedVsTypicalTable } from "@/components/pricing/included-vs-typical-table"
 import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: `Pricing | ${SITE_BRAND_SHORT}`,
+  title: "Pricing",
   description:
     "Transparent property management pricing for Utah property owners. No hidden fees, just percentage-based plans that scale with your portfolio.",
   alternates: { canonical: `${SITE_URL}/pricing/` },
@@ -65,7 +67,7 @@ const tiers = [
       "Bulk lease management",
       "Investor portal access",
       "API access & integrations",
-      "SLA guarantees",
+      "Negotiated response-time terms",
     ],
     cta: "Contact us",
     highlighted: false,
@@ -84,7 +86,7 @@ const includedInEveryPlan = [
 const faqs = [
   {
     q: "Are there any hidden fees beyond the management percentage?",
-    a: "No. Our management fee is a straightforward percentage of collected rent. You only pay when your tenants pay. The only additional cost is the one-time leasing fee when we place a new tenant.",
+    a: "No. Our management fee is a straightforward percentage of collected rent. You only pay that percentage when rent is collected. The only additional cost we publish is the one-time leasing fee when we place a new tenant. There is no setup fee.",
   },
   {
     q: "What is the leasing fee and when does it apply?",
@@ -171,6 +173,8 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <FeeAlignmentWidget />
+
       {/* Leasing fee callout */}
       <section className="mx-auto max-w-4xl px-4 pb-16">
         <Card className="border-dashed bg-muted/40">
@@ -199,6 +203,8 @@ export default function PricingPage() {
           ))}
         </div>
       </section>
+
+      <IncludedVsTypicalTable />
 
       {/* FAQ */}
       <section className="border-t border-border py-20 px-4">

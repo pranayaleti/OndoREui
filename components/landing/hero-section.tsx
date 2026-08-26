@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Calculator } from "lucide-react"
+import { Building, Calculator, Calendar } from "lucide-react"
 import { HeroZipServiceSelectorLazy } from "@/components/landing/hero-zip-service-selector-lazy"
 
 export function HeroSection() {
@@ -30,23 +30,58 @@ export function HeroSection() {
         <section aria-label="Property search" className="relative flex justify-center">
           <HeroZipServiceSelectorLazy />
         </section>
-        <p className="mt-6 text-sm text-foreground/50">
-          Trusted by property owners from North Ogden to Nephi &bull; 4.9★ average rating
-        </p>
         {/*
-          Secondary CTA: owners shopping a property manager need a number to
-          chew on before they'll book a call. The ROI calculator is that
-          number. Kept low-key so it doesn't compete with the primary ZIP search.
+          Trio of equal-weight CTAs mirroring what high-converting local PM
+          sites use above the fold: browse rentals (renter intent), book a
+          call (owner intent), free rental report (owner + investor intent).
+          Sits directly under the ZIP widget so PM shoppers who aren't ready
+          to type a ZIP still have three obvious next steps.
         */}
-        <p className="mt-5 text-sm text-foreground/80">
+        <nav
+          aria-label="Primary calls to action"
+          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+        >
           <Link
-            href="/calculators/owner-vs-self"
-            className="inline-flex items-center gap-1.5 font-medium text-primary hover:text-primary/80 transition-colors group"
+            href="/properties"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-transparent px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors"
+          >
+            <Building className="h-4 w-4" aria-hidden="true" />
+            Browse rentals
+          </Link>
+          <Link
+            href="/contact#book-a-call"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <Calendar className="h-4 w-4" aria-hidden="true" />
+            Book a call
+          </Link>
+          <Link
+            href="/whats-my-home-worth"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-transparent px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors"
           >
             <Calculator className="h-4 w-4" aria-hidden="true" />
-            Are you a Utah landlord? Run the numbers: self-manage vs Ondo
-            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+            Free rental report
           </Link>
+        </nav>
+        <p className="mt-6 text-sm text-foreground/50">
+          Trusted by property owners from North Ogden to Nephi{" "}
+          &bull;{" "}
+          <Link
+            href="/licensing"
+            className="underline underline-offset-4 hover:text-foreground/80"
+          >
+            Licensed brokerage, property management, and NMLS
+          </Link>
+        </p>
+        <p className="mt-2 text-xs text-foreground/50">
+          Landlord shopping a manager?{" "}
+          <Link
+            href="/calculators/owner-vs-self"
+            className="underline underline-offset-4 hover:text-foreground/80"
+          >
+            Run the numbers on self-manage vs Ondo
+          </Link>
+          .
         </p>
       </div>
     </section>

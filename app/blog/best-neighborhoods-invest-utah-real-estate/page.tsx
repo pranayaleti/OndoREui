@@ -84,7 +84,7 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             <h2>Draper / South Jordan: Silicon Slopes Premium</h2>
             <p>Draper consistently ranks as one of Utah's highest-demand rental markets. Proximity to the Silicon Slopes tech corridor, Adobe, Workday, Domo, and dozens of high-growth startups, attracts high-income renters who can afford quality homes but are delaying purchase. Single-family 3–4BR rentals in Draper command $2,800–$3,800/month.</p>
             <ul>
-              <li><strong>Best for:</strong> Appreciation-focused investors with higher acquisition budgets</li>
+              <li><strong>Investor profile:</strong> Appreciation-focused investors with higher acquisition budgets</li>
               <li><strong>Price range:</strong> $550,000–$800,000+ for rentable SFR</li>
               <li><strong>Vacancy:</strong> 2–3% for well-priced SFR</li>
               <li><strong>Watch for:</strong> HOA restrictions on rentals in newer developments</li>
@@ -93,34 +93,34 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             <h2>Payson / Santaquin: I-15 Southbound Value Play</h2>
             <p>As Utah County prices have risen, investors have moved south. Payson and Santaquin offer entry-level price points ($350,000–$480,000 for 3BR SFR) with rents of $1,800–$2,400/month, producing price-to-rent ratios that are materially better than northern Utah County. Infrastructure improvements along the I-15 south corridor and new development in Salem-Payson are accelerating appreciation.</p>
             <ul>
-              <li><strong>Best for:</strong> Cash flow investors at lower acquisition cost</li>
+              <li><strong>Investor profile:</strong> Cash flow investors at lower acquisition cost</li>
               <li><strong>Price range:</strong> $350,000–$480,000</li>
               <li><strong>Vacancy:</strong> 3–5%, slightly more volatile than established submarkets</li>
               <li><strong>Watch for:</strong> Longer lease-up periods; tenant pool is smaller than northern submarkets</li>
             </ul>
 
             <h2>Orem / Lindon: University Corridor</h2>
-            <p>Orem sits between BYU (Provo) and UVU, two large university campuses that generate year-round rental demand from graduate students, faculty, young families, and tech workers at the nearby Silicon Slopes offices. The 2BR and 3BR segments perform particularly well. Orem's price-to-rent ratio is among the most favorable in Utah County.</p>
+            <p>Orem sits between BYU (Provo) and UVU, two large university campuses that generate year-round rental demand from graduate students, faculty, and Silicon Slopes commute housing. The 2BR and 3BR segments perform particularly well. Orem's price-to-rent ratio is among the most favorable in Utah County.</p>
             <ul>
-              <li><strong>Best for:</strong> Balanced cash flow + appreciation investors</li>
+              <li><strong>Investor profile:</strong> Balanced cash flow + appreciation investors</li>
               <li><strong>Price range:</strong> $420,000–$580,000 for 3BR SFR</li>
               <li><strong>Vacancy:</strong> 3–4%</li>
               <li><strong>Watch for:</strong> August turnover peak tied to the academic calendar</li>
             </ul>
 
-            <h2>West Valley City / Kearns: Working-Class Value</h2>
-            <p>West Valley City offers the best cash flow yields in Salt Lake County on an absolute basis. Rents of $1,400–$1,800/month on properties acquired for $350,000–$450,000 produce gross yields of 4.5–5.5%, meaningful in a low-yield environment. Tenant demand is deep and stable, anchored by essential workers, logistics, and manufacturing employers.</p>
+            <h2>West Valley City / Kearns: Entry-Price Cash Flow</h2>
+            <p>West Valley City offers the best cash flow yields in Salt Lake County on an absolute basis. Rents of $1,400–$1,800/month on properties acquired for $350,000–$450,000 produce gross yields of 4.5–5.5%, meaningful in a low-yield environment. Demand is deep and stable, anchored by logistics and manufacturing employers along the west-side corridor.</p>
             <ul>
-              <li><strong>Best for:</strong> Cash flow maximizers; investors comfortable with class B/C properties</li>
+              <li><strong>Investor profile:</strong> Cash flow maximizers; investors comfortable with class B/C properties</li>
               <li><strong>Price range:</strong> $350,000–$450,000</li>
               <li><strong>Vacancy:</strong> 4–6%</li>
               <li><strong>Watch for:</strong> Higher maintenance intensity on older housing stock; require property condition inspection pre-acquisition</li>
             </ul>
 
             <h2>Sandy / Midvale: Mid-Tier Balanced Play</h2>
-            <p>Sandy represents the Wasatch Front's most balanced submarket: reasonable acquisition prices ($480,000–$620,000 for 3BR SFR), strong rents ($2,200–$2,900/month), stable vacancy (3–4%), and excellent schools that attract long-term family tenants. Proximity to the TRAX light rail line broadens the renter pool.</p>
+            <p>Sandy represents the Wasatch Front's most balanced submarket: reasonable acquisition prices ($480,000–$620,000 for 3BR SFR), strong rents ($2,200–$2,900/month), stable vacancy (3–4%), Canyons School District zoning, and TRAX light-rail access.</p>
             <ul>
-              <li><strong>Best for:</strong> First-time real estate investors seeking a balance of yield and stability</li>
+              <li><strong>Investor profile:</strong> First-time real estate investors seeking a balance of yield and stability</li>
               <li><strong>Price range:</strong> $480,000–$620,000</li>
               <li><strong>Vacancy:</strong> 3–4%</li>
               <li><strong>Watch for:</strong> Competition from active buyer market in spring, be ready to move quickly on acquisitions</li>
@@ -129,7 +129,7 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             <h2>Lehi: Silicon Slopes Ground Zero</h2>
             <p>Lehi is Utah's fastest-growing city and home to the highest concentration of tech employer headquarters along the Wasatch Front. Demand for rental properties remains extraordinary. However, significant new multifamily construction has introduced more competition in the apartment segment. Single-family rentals remain tight.</p>
             <ul>
-              <li><strong>Best for:</strong> Long-horizon investors willing to pay for growth</li>
+              <li><strong>Investor profile:</strong> Long-horizon investors willing to pay for growth</li>
               <li><strong>Price range:</strong> $500,000–$750,000+</li>
               <li><strong>Vacancy:</strong> 2–4% SFR; 5–8% apartments (new supply impact)</li>
               <li><strong>Watch for:</strong> New apartment competition if investing in multifamily</li>
@@ -138,7 +138,7 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             <h2>Key Takeaways for Utah Real Estate Investors</h2>
             <ul>
               <li>Cash flow and appreciation rarely peak in the same submarket, decide which objective is primary before buying</li>
-              <li>Schools, commute times, and employer proximity drive long-term tenant quality more than any single rent metric</li>
+              <li>Commute times, employer proximity, and housing-stock fit drive absorption and renewal rates more than any single rent metric</li>
               <li>Buying below replacement cost remains difficult in most Wasatch Front markets, focus on cash-on-cash yield relative to your financing</li>
               <li>Professional <Link href="/property-management">property management</Link> reduces effective vacancy by 1–2 percentage points for most investors, a material boost to net operating income</li>
             </ul>

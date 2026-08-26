@@ -89,19 +89,75 @@ const Header = memo(() => {
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-200 bg-background ${isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : ""}`}>
+      {/*
+        Utility strip: mirrors the "conversion CTAs stay on-screen" pattern
+        that local PM sites (e.g. Keyrenter) use — free rental analysis,
+        available rentals, and both portal logins are one click from every
+        page. Desktop-only; the mobile drawer already exposes portal logins
+        and the sticky mobile CTA bar covers rental analysis + call.
+      */}
+      <div className="hidden md:block border-b border-border/50 bg-muted/40 text-xs">
+        <div className="container flex items-center justify-end gap-4 px-4 py-1.5 sm:px-6 lg:px-8">
+          <Link
+            href="/whats-my-home-worth"
+            className="font-medium text-foreground/80 hover:text-primary transition-colors"
+          >
+            {t("utilityBar.freeRentalAnalysis")}
+          </Link>
+          <span aria-hidden="true" className="text-foreground/30">
+            |
+          </span>
+          <Link
+            href="/properties"
+            className="font-medium text-foreground/80 hover:text-primary transition-colors"
+          >
+            {t("utilityBar.availableRentals")}
+          </Link>
+          <span aria-hidden="true" className="text-foreground/30">
+            |
+          </span>
+          <Link
+            href={APP_PORTAL_LOGIN_URL}
+            className="font-medium text-foreground/80 hover:text-primary transition-colors"
+          >
+            {t("utilityBar.ownerLogin")}
+          </Link>
+          <span aria-hidden="true" className="text-foreground/30">
+            |
+          </span>
+          <Link
+            href={APP_PORTAL_LOGIN_URL}
+            className="font-medium text-foreground/80 hover:text-primary transition-colors"
+          >
+            {t("utilityBar.residentLogin")}
+          </Link>
+        </div>
+      </div>
       <div className="container flex h-16 items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo (left) */}
         <div className="flex shrink-0 items-center">
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+            {/* Light theme: ink wordmark. Dark theme: white wordmark. */}
             <Image
-              src="/logo.png"
+              src="/logo-light.png"
               alt="Ondo Real Estate"
-              width={200}
-              height={60}
-              className="h-10 w-auto md:h-12"
+              width={656}
+              height={256}
+              className="h-10 w-auto md:h-12 dark:hidden"
               priority
               quality={90}
-              sizes="(max-width: 768px) 160px, 200px"
+              sizes="(max-width: 768px) 103px, 123px"
+            />
+            <Image
+              src="/logo-dark.png"
+              alt=""
+              aria-hidden="true"
+              width={656}
+              height={256}
+              className="hidden h-10 w-auto md:h-12 dark:block"
+              priority
+              quality={90}
+              sizes="(max-width: 768px) 103px, 123px"
             />
           </Link>
         </div>
@@ -173,12 +229,41 @@ const Header = memo(() => {
           </div>
 
           <ModeToggle />
-          <Button variant="ghost" size="sm" className="shrink-0 hidden sm:inline-flex" asChild>
-            <Link href={APP_PORTAL_LOGIN_URL}>
-              <span className="hidden md:inline">{t("nav.portal")}</span>
-              <span className="md:hidden">{t("nav.portalShort")}</span>
-            </Link>
-          </Button>
+          {/*
+            Login: single dashboard URL, but present it as separate Owner /
+            Tenant entry points so visitors instantly see the app is for them.
+            Both links resolve to APP_PORTAL_LOGIN_URL; the dashboard
+            role-redirects after auth. Do not fabricate distinct portal URLs.
+          */}
+          <div className="hidden sm:inline-flex shrink-0">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" aria-label={t("nav.login")}>
+                  <span className="hidden md:inline">{t("nav.login")}</span>
+                  <span className="md:hidden">{t("nav.portalShort")}</span>
+                  <ChevronDown className="ml-1 h-4 w-4" aria-hidden />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" sideOffset={6} className="w-48 py-2 z-[100]">
+                <DropdownMenuItem asChild>
+                  <Link
+                    href={APP_PORTAL_LOGIN_URL}
+                    className="flex items-center px-3 py-2 cursor-pointer"
+                  >
+                    {t("nav.ownerLogin")}
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href={APP_PORTAL_LOGIN_URL}
+                    className="flex items-center px-3 py-2 cursor-pointer"
+                  >
+                    {t("nav.tenantLogin")}
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           {/* Mobile hamburger */}
           <button
             className="flex md:hidden p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
@@ -208,12 +293,12 @@ const Header = memo(() => {
             <Navigation
               className="flex flex-col gap-2"
               onLinkClick={handleMenuClose}
-              items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/resources" && i.href !== "/notary")}
+              items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/resources" && i.href !== "/notary" && i.href !== "/property-management")}
             />
 
-            {/* Solutions + Resources + Notary, mobile inline (children sourced from allNavigationItems to stay DRY) */}
+            {/* Owners + Solutions + Resources + Notary, mobile inline (children sourced from allNavigationItems to stay DRY) */}
             {allNavigationItems
-              .filter(i => i.href === "/solutions" || i.href === "/resources" || i.href === "/notary")
+              .filter(i => i.href === "/property-management" || i.href === "/solutions" || i.href === "/resources" || i.href === "/notary")
               .map(item => (
                 <div key={item.href} className="pt-2">
                   <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 px-3 mb-1">{t(item.labelKey)}</p>
@@ -239,14 +324,24 @@ const Header = memo(() => {
                 <Phone className="h-4 w-4" />
                 {SITE_PHONE}, Free Consultation
               </a>
-              <a
-                href={APP_PORTAL_LOGIN_URL}
-                onClick={handleMenuClose}
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  {t("nav.portal")}
-                </Button>
-              </a>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href={APP_PORTAL_LOGIN_URL}
+                  onClick={handleMenuClose}
+                >
+                  <Button variant="outline" size="sm" className="w-full">
+                    {t("nav.ownerLogin")}
+                  </Button>
+                </Link>
+                <Link
+                  href={APP_PORTAL_LOGIN_URL}
+                  onClick={handleMenuClose}
+                >
+                  <Button variant="outline" size="sm" className="w-full">
+                    {t("nav.tenantLogin")}
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

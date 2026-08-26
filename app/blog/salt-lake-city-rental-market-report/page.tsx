@@ -74,10 +74,10 @@ export default function SaltLakeCityRentalMarketReport() {
             </p>
 
             <h2>Vacancy Rates</h2>
-            <p>Salt Lake County's apartment vacancy rate has hovered between 5% and 7% over the past 18 months, higher than the historic lows seen in 2021–2022, but still well below the national average of approximately 7.8%. The softening reflects a wave of new multifamily deliveries in the Downtown, Sugar House, and South Jordan submarkets. However, single-family rentals continue to experience tighter vacancy, particularly in the 3–4 bedroom segment sought by families priced out of homeownership.</p>
+            <p>Salt Lake County's apartment vacancy rate has hovered between 5% and 7% over the past 18 months, higher than the historic lows seen in 2021–2022, but still well below the national average of approximately 7.8%. The softening reflects a wave of new multifamily deliveries in the Downtown, Sugar House, and South Jordan submarkets. However, single-family rentals continue to experience tighter vacancy, particularly in the 3–4 bedroom segment.</p>
             <ul>
               <li><strong>Studio / 1BR:</strong> 6.5–8% vacancy, most affected by new supply</li>
-              <li><strong>2BR:</strong> 5–6% vacancy, stable demand from young professionals and couples</li>
+              <li><strong>2BR:</strong> 5–6% vacancy, stable demand in walkable 1–2BR product</li>
               <li><strong>3–4BR SFR:</strong> 3–4% vacancy, tightest segment in the market</li>
             </ul>
 
@@ -88,14 +88,14 @@ export default function SaltLakeCityRentalMarketReport() {
               <li><strong>Sugar House:</strong> $1,500–$1,900/mo for 1BR; $1,900–$2,500/mo for 2BR</li>
               <li><strong>East Bench / Millcreek:</strong> $1,700–$2,400/mo for 2BR; $2,400–$3,200/mo for 3BR SFR</li>
               <li><strong>West Valley City / Kearns:</strong> $1,200–$1,600/mo for 2BR, most affordable in the county</li>
-              <li><strong>Holladay / Cottonwood Heights:</strong> $2,200–$3,500/mo for 3–4BR SFR, premium family submarket</li>
+              <li><strong>Holladay / Cottonwood Heights:</strong> $2,200–$3,500/mo for 3–4BR SFR, premium canyon-adjacent submarket</li>
             </ul>
             <p>Year-over-year rent growth has moderated to approximately 1–3% in most SLC submarkets, down from double-digit growth in 2021–2022. Owners who purchased at lower basis pre-2021 remain in an excellent cash flow position; those who acquired at peak 2022 prices may be experiencing tighter margins.</p>
 
             <h2>Demand Drivers in 2026</h2>
             <p>Several structural factors continue to support Salt Lake City rental demand:</p>
             <ul>
-              <li><strong>Silicon Slopes employment:</strong> Lehi and Draper office parks anchor high-income renter demand across the county. Major tech and fintech employers continue expanding Wasatch Front headcount.</li>
+              <li><strong>Silicon Slopes employment:</strong> Lehi and Draper office parks support $2,000+ rent bands across the county. Major tech and fintech employers continue expanding Wasatch Front headcount.</li>
               <li><strong>University of Utah and Westminster University:</strong> Graduate and professional programs sustain demand for 1–2BR units near the east side and Sugar House.</li>
               <li><strong>Homeownership affordability gap:</strong> The median SLC home price remains above $500,000, keeping many households in the rental market longer than historically normal.</li>
               <li><strong>In-migration from California and the Pacific Northwest:</strong> Utah continues to see net positive domestic migration, adding demand particularly for larger single-family rentals.</li>

@@ -4,76 +4,33 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
+import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
 import { Check, ArrowRight } from "lucide-react"
 
-const title = "Utah Property Management Companies Compared (2026) | Ondo RE"
+const title = "Utah Property Management Companies Compared (2026)"
+const ogTitle = `${title} | Ondo RE`
 const description =
-  "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and which owners each one fits best."
+  "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and how each offering differs."
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/compare-utah-property-managers/` },
-  openGraph: { title, description, url: `${SITE_URL}/compare-utah-property-managers/` },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/` },
+  twitter: { card: "summary_large_image", title: ogTitle, description },
   robots: { index: true, follow: true },
 }
 
 // NOTE: Competitor fees and features below are based on publicly available
 // information at the time of writing. Verify before relying on this for
-// procurement decisions, providers update pricing without notice.
-const competitors = [
-  {
-    name: "Ondo RE",
-    headline: "Tech-forward, owner + tenant portals, AI risk alerts",
-    mgmtFee: "8% (typical), quote on volume",
-    leasingFee: "50% of one month's rent",
-    setupFee: "Waived for first property",
-    techStack: "Custom Next.js + Supabase platform, multi-language portal, AI dashboard",
-    bestFor: "Owners who want real-time visibility + a tech-forward partner",
-    cons: "Newer (2024 founded), smaller than incumbents",
-    isUs: true,
-  },
-  {
-    name: "Rentomatic",
-    headline: "Established Utah PM, all-inclusive flat fee model",
-    mgmtFee: "Flat $89–$129/mo per unit (varies)",
-    leasingFee: "One month's rent",
-    setupFee: "Standard onboarding",
-    techStack: "AppFolio-based",
-    bestFor: "Owners who prefer flat-fee predictability",
-    cons: "Less custom tooling; flat fees less efficient at low rents",
-    isUs: false,
-  },
-  {
-    name: "Rhino Property Management",
-    headline: "Wasatch Front legacy player, full-service",
-    mgmtFee: "8–10% typical",
-    leasingFee: "One month's rent",
-    setupFee: "Standard onboarding",
-    techStack: "AppFolio / Buildium",
-    bestFor: "Owners who value long-tenured local team",
-    cons: "Mixed reviews on responsiveness; legacy software",
-    isUs: false,
-  },
-  {
-    name: "Wolfnest Property Management",
-    headline: "Salt Lake / Provo focused, owner-friendly reporting",
-    mgmtFee: "8–10%",
-    leasingFee: "75% of one month's rent",
-    setupFee: "Standard",
-    techStack: "Propertyware / AppFolio",
-    bestFor: "Owners who want detailed monthly reporting",
-    cons: "Smaller geographic coverage outside core metro",
-    isUs: false,
-  },
-]
+// procurement decisions; providers update pricing without notice.
+const competitors = UTAH_PM_COMPARISON
 
 const faqs = [
   {
     question: "What does Utah property management actually cost in 2026?",
     answer:
-      "Most Wasatch Front property managers charge 8–10% of collected rent for full-service management, plus a leasing fee (typically 50–100% of one month's rent) when a new tenant is placed. Some companies offer flat-fee models ($89–$130/month/unit). Ondo RE's typical fee is 8% of collected rent with a 50% leasing fee.",
+      "Most Wasatch Front property managers advertise 8–12% of collected rent for full-service management (as of Aug 2026 — verify), plus a leasing fee (typically 50–100% of one month's rent) when a new tenant is placed. Some companies advertise a flat monthly fee (about $159/month/unit as of Aug 2026 — verify). Ondo RE is Starter 10% (1–4 units) or Growth 8% (5–15 units) of collected rent, with a 50% leasing fee. There is no setup fee.",
   },
   {
     question: "Are flat-fee or percentage-based property management fees better?",
@@ -83,12 +40,12 @@ const faqs = [
   {
     question: "What's the difference between a leasing fee and a setup fee?",
     answer:
-      "A leasing fee is charged when a new tenant is placed, covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost when you first hire the management company, covering account setup, property inspection, and document collection. Ondo waives the setup fee for first-time clients.",
+      "A leasing fee is charged when a new tenant is placed, covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost some management companies charge when you first hire them. Ondo does not charge a setup fee; the one-time extra we publish is the leasing fee when we place a tenant.",
   },
   {
     question: "What questions should I ask a Utah property management company?",
     answer:
-      "Five must-asks: (1) Are you licensed under the new Utah property-management law that takes effect July 1, 2026? (2) What's your average response time for maintenance requests? (3) How do you handle tenant screening, and what's your eviction rate? (4) Can I see a sample owner statement before I sign? (5) What's your average tenant tenure?",
+      "Five must-asks: (1) Are you licensed under Utah's Real Estate Licensing and Practices Act, and will you hold the separate property manager license required beginning January 1, 2027? (2) What's your average response time for maintenance requests? (3) How do you handle tenant screening, and what's your eviction rate? (4) Can I see a sample owner statement before I sign? (5) What's your average tenant tenure?",
   },
   {
     question: "How long does it take to switch property managers in Utah?",
@@ -126,7 +83,7 @@ export default function CompareUtahPropertyManagersPage() {
           generateServiceJsonLd({
             name: `${SITE_NAME}, Property Management Comparison`,
             description:
-              "Side-by-side comparison of Utah's leading property management companies, covering fees, technology, services, and ideal customer fit.",
+              "Side-by-side comparison of Utah's leading property management companies, covering fees, technology, and services.",
             serviceType: "Comparison Guide",
             areaServed: "Utah",
           }),
@@ -142,7 +99,7 @@ export default function CompareUtahPropertyManagersPage() {
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-foreground/70">
             An honest side-by-side of how Ondo RE stacks up against the established Wasatch Front incumbents.
-            Fees, tech, services, and which owners each one actually fits.
+            Fees, tech, services, and how the offerings differ.
           </p>
           <p className="mt-4 text-xs text-foreground/50 max-w-xl mx-auto">
             We're biased, this is our website, but the data points below are publicly available.
@@ -180,7 +137,7 @@ export default function CompareUtahPropertyManagersPage() {
               {row("Leasing fee", (c) => c.leasingFee)}
               {row("Setup fee", (c) => c.setupFee)}
               {row("Technology", (c) => c.techStack)}
-              {row("Best for", (c) => c.bestFor)}
+              {row("Owner fit", (c) => c.ownerFit)}
               {row("Trade-off", (c) => c.cons)}
             </tbody>
           </table>
@@ -193,9 +150,8 @@ export default function CompareUtahPropertyManagersPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">An honest take from the founder</h2>
           <div className="prose prose-lg prose-invert max-w-none text-foreground/80">
             <p>
-              You should pick Ondo RE if you want real-time owner visibility, multi-language tenant
-              support, and a partner that built its own software stack rather than licensing the
-              same AppFolio everyone else uses. If you have a portfolio of 1–20 units and value
+              You should pick Ondo RE if you want real-time owner visibility, a
+              custom owner portal and AI assistant, and a partner that built its own software stack rather than licensing the same AppFolio everyone else uses. If you have a portfolio of 1–20 units and value
               transparent dashboards over a thicker rolodex of long-tenured local relationships, we
               fit.
             </p>
@@ -205,8 +161,16 @@ export default function CompareUtahPropertyManagersPage() {
               of doors. Their software is older but their people know the Wasatch Front.
             </p>
             <p>
-              You should pick Rentomatic if flat-fee predictability matters more than percentage
-              alignment, and you prefer a single-line P&L cost.
+              You should pick Rentomatic if a flat advertised monthly fee and $0
+              placement (as advertised Aug 2026) matter more than paying a
+              percentage of collected rent and a one-time 50% leasing fee.
+              Confirm their current numbers before you rely on this row.
+            </p>
+            <p>
+              You should look at Keyrenter Salt Lake if the reassurance of a national franchise
+              brand and their advertised performance guarantees are more valuable to you than a
+              bespoke local operator. Read the guarantee fine print with each franchisee, terms
+              vary by market and Utah franchisees set their own leasing/eviction policies.
             </p>
             <p>
               The right move before any of these conversations: run your own numbers in our{" "}
@@ -223,7 +187,7 @@ export default function CompareUtahPropertyManagersPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Five things to verify with any Utah property manager</h2>
           <ul className="space-y-3">
             {[
-              "Licensed under the new July 1, 2026 Utah property manager law (state license OR principal broker)",
+              "Licensed under Utah's Real Estate Licensing and Practices Act (separate property manager license required beginning January 1, 2027)",
               "Average maintenance response time documented, not just promised",
               "Tenant screening criteria written and applied consistently, ask for the rubric",
               "Sample owner statement BEFORE you sign, not after",
