@@ -36,4 +36,19 @@ describe("generateMetadata title is not doubled by the layout title template", (
     // it must be wrapped in `{ absolute: ... }`, not returned as a bare string.
     expect(source).toMatch(/title:\s*\{\s*absolute:/)
   })
+
+  it("homepage uses an absolute title because HOME_PAGE_TITLE already includes the brand", () => {
+    const source = readFileSync(join(ROOT, "app/page.tsx"), "utf8")
+    expect(source).toMatch(/title:\s*\{\s*absolute:\s*HOME_PAGE_TITLE/)
+  })
+
+  it("pricing and compare document titles let the layout template add Ondo RE once", () => {
+    const pricing = readFileSync(join(ROOT, "app/pricing/page.tsx"), "utf8")
+    expect(pricing).toMatch(/export const metadata: Metadata = \{\s*title:\s*"Pricing"/)
+    expect(pricing).not.toMatch(/export const metadata: Metadata = \{\s*title:\s*`Pricing \| \$\{SITE_BRAND_SHORT\}`/)
+
+    const compare = readFileSync(join(ROOT, "app/compare-utah-property-managers/page.tsx"), "utf8")
+    expect(compare).toMatch(/const title = "Utah Property Management Companies Compared \(2026\)"/)
+    expect(compare).not.toMatch(/const title = "Utah Property Management Companies Compared \(2026\) \| Ondo RE"/)
+  })
 })

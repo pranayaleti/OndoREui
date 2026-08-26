@@ -7,7 +7,7 @@ import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/", {
-  title: HOME_PAGE_TITLE,
+  title: { absolute: HOME_PAGE_TITLE },
   description: HOME_PAGE_DESCRIPTION,
   openGraph: {
     type: "website",

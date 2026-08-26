@@ -28,6 +28,11 @@
     @apply bg-background;
     scrollbar-gutter: stable;
   }
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-family-base);
@@ -62,30 +67,32 @@
     display: none;  /* Chrome, Safari and Opera */
   }
 
-  /* Smooth fade-in animation */
-  .fade-in {
-    animation: fadeIn 0.6s ease-out both;
-  }
+  /* Smooth fade-in animation — disabled for users who prefer reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+      animation: fadeIn 0.6s ease-out both;
+    }
 
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out both;
-  }
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out both;
+    }
 
-  .fade-in-delayed {
-    animation: fadeIn 0.6s ease-out 0.2s both;
-  }
+    .fade-in-delayed {
+      animation: fadeIn 0.6s ease-out 0.2s both;
+    }
 
-  /* Stagger animations for lists */
-  .stagger-fade-in > * {
-    animation: fadeInUp 0.6s ease-out both;
-  }
+    /* Stagger animations for lists */
+    .stagger-fade-in > * {
+      animation: fadeInUp 0.6s ease-out both;
+    }
 
-  .stagger-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
-  .stagger-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
+    .stagger-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
+    .stagger-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
+  }
 
   /* Hide number input spinners (use on type="number" inputs) */
   .input-no-spinner {
@@ -98,14 +105,24 @@
     margin: 0;
   }
 
-  /* Smooth hover transitions */
+  /* Smooth hover transitions — suppressed for prefers-reduced-motion */
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+    @apply transition-all duration-300;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hover-lift {
+      @apply hover:-translate-y-2 hover:shadow-xl;
+    }
   }
 
   /* Interactive button effects */
   .btn-interactive {
     @apply transition-all duration-200 active:scale-95 focus:scale-95;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-interactive {
+      @apply transition-none active:scale-100 focus:scale-100;
+    }
   }
 }
 
@@ -145,6 +162,23 @@
     box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
   }
 
+  .ondo-price-pin {
+    width: auto;
+    min-width: 3.5rem;
+    height: 1.75rem;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    border-width: 2px;
+  }
+
+  .ondo-price-pin--selected {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    box-shadow: 0 0 0 2px hsl(var(--primary));
+  }
+
   .btn {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
@@ -165,7 +199,12 @@
   
   /* Card hover effects */
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02];
+    @apply transition-all duration-300 hover:shadow-lg;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card-hover {
+      @apply hover:-translate-y-1 hover:scale-[1.02];
+    }
   }
   
   /* Focus visible improvements */
@@ -188,15 +227,17 @@
     @apply relative overflow-hidden bg-muted rounded;
   }
 
-  .skeleton-shimmer::before {
-    @apply absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite];
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    content: '';
-  }
+  @media (prefers-reduced-motion: no-preference) {
+    .skeleton-shimmer::before {
+      @apply absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite];
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      content: '';
+    }
 
-  @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
+    @keyframes shimmer {
+      100% {
+        transform: translateX(100%);
+      }
     }
   }
   

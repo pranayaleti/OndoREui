@@ -63,4 +63,18 @@ describe("FeeAlignmentWidget", () => {
     expect(screen.getByText(/\$159/)).toBeInTheDocument()
     expect(screen.getByText(/\$1,988/)).toBeInTheDocument()
   })
+
+  it("does not share one radio name across two mounted ledgers", () => {
+    const { container } = render(
+      <>
+        <FeeAlignmentWidget />
+        <FeeAlignmentWidget />
+      </>,
+    )
+    const names = [...container.querySelectorAll('input[type="radio"]')].map((el) =>
+      el.getAttribute("name"),
+    )
+    expect(names).toHaveLength(4)
+    expect(new Set(names).size).toBe(2)
+  })
 })

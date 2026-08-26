@@ -33,6 +33,7 @@ function unitsForMode(mode: "starter" | "growth"): number {
 export function FeeAlignmentWidget() {
   const rentId = useId()
   const timeId = useId()
+  const bandGroupName = useId()
   const [rent, setRent] = useState(DEFAULT_EXAMPLE_MONTHLY_RENT)
   const [mode, setMode] = useState<"starter" | "growth">("starter")
   const [showTime, setShowTime] = useState(false)
@@ -102,11 +103,11 @@ export function FeeAlignmentWidget() {
                 <legend className="mb-2 text-sm font-medium text-foreground">
                   Published rate (does not multiply the ledger)
                 </legend>
-                <div className="grid grid-cols-2 gap-2">
-                  <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  <label className="flex scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5 md:scroll-mb-0">
                     <input
                       type="radio"
-                      name="fee-band"
+                      name={bandGroupName}
                       value="starter"
                       checked={mode === "starter"}
                       onChange={() => setMode("starter")}
@@ -114,10 +115,10 @@ export function FeeAlignmentWidget() {
                     />
                     1–4 doors · Starter 10%
                   </label>
-                  <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                  <label className="flex scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5 md:scroll-mb-0">
                     <input
                       type="radio"
-                      name="fee-band"
+                      name={bandGroupName}
                       value="growth"
                       checked={mode === "growth"}
                       onChange={() => setMode("growth")}

@@ -10,7 +10,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: `Pricing | ${SITE_BRAND_SHORT}`,
+  title: "Pricing",
   description:
     "Transparent property management pricing for Utah property owners. No hidden fees, just percentage-based plans that scale with your portfolio.",
   alternates: { canonical: `${SITE_URL}/pricing/` },

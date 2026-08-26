@@ -7,7 +7,8 @@ import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
 import { Check, ArrowRight } from "lucide-react"
 
-const title = "Utah Property Management Companies Compared (2026) | Ondo RE"
+const title = "Utah Property Management Companies Compared (2026)"
+const ogTitle = `${title} | Ondo RE`
 const description =
   "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and how each offering differs."
 
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/compare-utah-property-managers/` },
-  openGraph: { title, description, url: `${SITE_URL}/compare-utah-property-managers/` },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/` },
+  twitter: { card: "summary_large_image", title: ogTitle, description },
   robots: { index: true, follow: true },
 }
 

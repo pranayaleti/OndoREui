@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, useMemo, useCallback } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useState, useMemo, useRef } from "react";
+import type { Map as LeafletMap, Marker as LeafletMarker, PopupEvent } from "leaflet";
 
-// Types
 interface MapProperty {
   id: string;
   title: string;
@@ -22,41 +21,12 @@ interface PropertyMapProps {
   center?: [number, number];
   zoom?: number;
   onPropertyClick?: (propertyId: string) => void;
+  /** When set, that listing's pin uses the selected price-chip treatment. */
+  selectedPropertyId?: string | null;
   className?: string;
 }
 
-// Dynamically import the map to avoid SSR issues with Leaflet
-const MapContainer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
-  { ssr: false }
-);
-const TileLayer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.TileLayer),
-  { ssr: false }
-);
-const Marker = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Marker),
-  { ssr: false }
-);
-const Popup = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Popup),
-  { ssr: false }
-);
-const UseMapEvents = dynamic(
-  () => import("react-leaflet").then((mod) => {
-    // Return a component that calls map.invalidateSize() when the map is ready
-    const { useMap } = mod;
-    function MapReadyHandler({ onReady }: { onReady: (map: import("leaflet").Map) => void }) {
-      const map = useMap();
-      useEffect(() => {
-        onReady(map);
-      }, [map, onReady]);
-      return null;
-    }
-    return MapReadyHandler;
-  }),
-  { ssr: false }
-);
+type LeafletHostElement = HTMLDivElement & { _leaflet_id?: number };
 
 function formatPrice(price: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -66,19 +36,80 @@ function formatPrice(price: number): string {
   }).format(price);
 }
 
+export function escapeMapPopupText(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/** Resize must never remount a Leaflet host — that re-inits on the same node. */
+export function syncLeafletSizeAfterContainerResize(
+  map: { invalidateSize: () => void } | null,
+): void {
+  map?.invalidateSize();
+}
+
+/**
+ * react-leaflet's MapContainer uses a callback ref that can call L.map() twice
+ * on the same node (React Strict Mode / dynamic import). Clear a leftover id
+ * so the second init does not throw "Map container is already initialized".
+ */
+export function prepareLeafletHost(node: HTMLDivElement): HTMLDivElement {
+  const host = node as LeafletHostElement;
+  if (host._leaflet_id) {
+    host._leaflet_id = undefined;
+  }
+  return host;
+}
+
+export function buildListingPopupHtml(
+  property: Pick<MapProperty, "id" | "title" | "price" | "bedrooms" | "bathrooms" | "type" | "image">,
+  options: { showListingAction: boolean },
+): string {
+  const title = escapeMapPopupText(property.title);
+  const image = property.image
+    ? `<img src="${escapeMapPopupText(property.image)}" alt="${title}" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:8px" />`
+    : "";
+  const priceLine =
+    property.price !== undefined
+      ? `<p style="margin:0 0 4px;font-size:16px;font-weight:700;color:hsl(var(--primary))">${escapeMapPopupText(formatPrice(property.price))}/mo</p>`
+      : "";
+  const facts = [
+    property.bedrooms !== undefined ? `${property.bedrooms} bed` : null,
+    property.bathrooms !== undefined ? `${property.bathrooms} bath` : null,
+    property.type ? escapeMapPopupText(property.type) : null,
+  ]
+    .filter((part): part is string => Boolean(part))
+    .join(" · ");
+  const factsLine = facts
+    ? `<p style="margin:0;font-size:12px;color:hsl(var(--muted-foreground))">${facts}</p>`
+    : "";
+  const action = options.showListingAction
+    ? `<button type="button" class="ondo-map-show-listing mt-2 w-full cursor-pointer rounded-md border-0 bg-primary px-3 py-1.5 text-[13px] font-medium text-primary-foreground" data-listing-id="${escapeMapPopupText(property.id)}">Show listing</button>`
+    : "";
+  return `<div style="min-width:200px;padding:4px">${image}<h3 style="margin:0 0 4px;font-size:14px;font-weight:600">${title}</h3>${priceLine}${factsLine}${action}</div>`;
+}
+
 export default function PropertyMap({
   properties,
   center = [40.7608, -111.891],
   zoom = 11,
   onPropertyClick,
+  selectedPropertyId = null,
   className = "",
 }: PropertyMapProps) {
   const [isClient, setIsClient] = useState(false);
   const [L, setL] = useState<typeof import("leaflet") | null>(null);
-  // Key increments on container resize to force Leaflet to re-render and
-  // correctly fill the new dimensions (fixes blank tile / incorrect tile
-  // sizing issues after responsive layout changes).
-  const [mapKey, setMapKey] = useState(0);
+  const [mapError, setMapError] = useState(false);
+  const hostRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<LeafletMap | null>(null);
+  const markersRef = useRef<LeafletMarker[]>([]);
+  const onPropertyClickRef = useRef(onPropertyClick);
+  const [mapReadyToken, setMapReadyToken] = useState(0);
+  onPropertyClickRef.current = onPropertyClick;
 
   useEffect(() => {
     setIsClient(true);
@@ -87,51 +118,122 @@ export default function PropertyMap({
     });
   }, []);
 
-  // Re-key the MapContainer whenever the outer element is resized so Leaflet
-  // re-initialises with correct dimensions.
+  const validProperties = useMemo(
+    () => properties.filter((p) => p.lat && p.lng && !isNaN(p.lat) && !isNaN(p.lng)),
+    [properties],
+  );
+
   useEffect(() => {
-    if (!isClient || typeof ResizeObserver === "undefined") return;
-    const el = document.getElementById("property-map-container");
+    if (!L) return;
+    const node = hostRef.current;
+    if (!node) return;
+
+    let map: LeafletMap;
+    try {
+      map = L.map(prepareLeafletHost(node), { scrollWheelZoom: true });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      if (!message.includes("already initialized")) {
+        setMapError(true);
+        return;
+      }
+      map = L.map(prepareLeafletHost(node), { scrollWheelZoom: true });
+    }
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    mapInstanceRef.current = map;
+    setMapReadyToken((n) => n + 1);
+    requestAnimationFrame(() => {
+      syncLeafletSizeAfterContainerResize(map);
+    });
+
+    const onPopupOpen = (event: PopupEvent) => {
+      const btn = event.popup.getElement()?.querySelector<HTMLButtonElement>(".ondo-map-show-listing");
+      if (!btn) return;
+      const listingId = btn.dataset.listingId;
+      const onClick = () => {
+        if (listingId) onPropertyClickRef.current?.(listingId);
+      };
+      btn.addEventListener("click", onClick);
+      map.once("popupclose", () => btn.removeEventListener("click", onClick));
+    };
+    map.on("popupopen", onPopupOpen);
+
+    return () => {
+      map.off("popupopen", onPopupOpen);
+      map.remove();
+      mapInstanceRef.current = null;
+    };
+  }, [L]);
+
+  useEffect(() => {
+    if (!isClient || !L || typeof ResizeObserver === "undefined") return;
+    const el = hostRef.current;
     if (!el) return;
+    let frame = 0;
     const ro = new ResizeObserver(() => {
-      setMapKey((k) => k + 1);
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        syncLeafletSizeAfterContainerResize(mapInstanceRef.current);
+      });
     });
     ro.observe(el);
-    return () => ro.disconnect();
-  }, [isClient]);
+    return () => {
+      cancelAnimationFrame(frame);
+      ro.disconnect();
+    };
+  }, [isClient, L]);
 
-  // Call invalidateSize once the map instance is available so tiles fill the
-  // container correctly after the first render.
-  const handleMapReady = useCallback((map: import("leaflet").Map) => {
-    // Defer slightly to ensure the container has its final painted size
-    requestAnimationFrame(() => {
-      map.invalidateSize();
-    });
-  }, []);
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!L || !map || mapReadyToken === 0) return;
 
-  const customIcon = useMemo(() => {
-    if (!L) return undefined;
-    return L.divIcon({
+    for (const marker of markersRef.current) {
+      marker.remove();
+    }
+    markersRef.current = [];
+
+    const locationIcon = L.divIcon({
       className: "custom-map-marker",
       html: '<div class="custom-map-marker-pin">&#127968;</div>',
       iconSize: [32, 32],
       iconAnchor: [16, 32],
       popupAnchor: [0, -32],
     });
-  }, [L]);
 
-  // Filter properties with valid coordinates
-  const validProperties = useMemo(
-    () => properties.filter((p) => p.lat && p.lng && !isNaN(p.lat) && !isNaN(p.lng)),
-    [properties]
-  );
+    const latLngs = validProperties.map((property) => {
+      const selected = property.id === selectedPropertyId;
+      const icon =
+        property.price !== undefined
+          ? L.divIcon({
+              className: "custom-map-marker",
+              html: `<div class="custom-map-marker-pin ondo-price-pin${selected ? " ondo-price-pin--selected" : ""}">${escapeMapPopupText(formatPrice(property.price))}</div>`,
+              iconSize: [72, 28],
+              iconAnchor: [36, 28],
+              popupAnchor: [0, -28],
+            })
+          : locationIcon;
 
-  // Auto-fit bounds
-  const bounds = useMemo(() => {
-    if (!L || validProperties.length === 0) return undefined;
-    const latLngs = validProperties.map((p) => L.latLng(p.lat, p.lng));
-    return L.latLngBounds(latLngs).pad(0.1);
-  }, [L, validProperties]);
+      const marker = L.marker([property.lat, property.lng], { icon })
+        .bindPopup(
+          buildListingPopupHtml(property, { showListingAction: Boolean(onPropertyClickRef.current) }),
+        )
+        .on("click", () => onPropertyClickRef.current?.(property.id))
+        .addTo(map);
+
+      markersRef.current.push(marker);
+      return L.latLng(property.lat, property.lng);
+    });
+
+    if (latLngs.length > 0) {
+      map.fitBounds(L.latLngBounds(latLngs).pad(0.1));
+    } else {
+      map.setView(center, zoom);
+    }
+  }, [L, validProperties, selectedPropertyId, center, zoom, mapReadyToken]);
 
   if (!isClient || !L) {
     return (
@@ -145,81 +247,26 @@ export default function PropertyMap({
     );
   }
 
+  if (mapError) {
+    return (
+      <div
+        id="property-map-container"
+        className={`flex min-h-[220px] items-center justify-center rounded-lg bg-muted px-4 text-center text-sm text-foreground/70 ${className}`}
+        role="status"
+      >
+        Map could not load. Browse homes in the list.
+      </div>
+    );
+  }
+
   return (
     <div
       id="property-map-container"
-      className={`rounded-lg overflow-hidden border border-gray-200 ${className}`}
-      style={{ width: "100%" }}
-    >
-      {/*
-        The MapContainer itself is set to 100% width and height so it fills
-        whatever the outer container provides. The outer container drives the
-        responsive sizing via className (e.g. "h-[50vw] max-h-[500px]") or a
-        CSS aspect-ratio rule applied by the caller.
-      */}
-      <MapContainer
-        key={mapKey}
-        center={bounds ? undefined : center}
-        bounds={bounds}
-        zoom={bounds ? undefined : zoom}
-        style={{ height: "100%", width: "100%", minHeight: 220 }}
-        scrollWheelZoom={true}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/* Invalidate tile layout once the map instance is ready */}
-        <UseMapEvents onReady={handleMapReady} />
-        {validProperties.map((property) => (
-          <Marker
-            key={property.id}
-            position={[property.lat, property.lng]}
-            icon={customIcon}
-          >
-            <Popup>
-              <div style={{ minWidth: 200, padding: 4 }}>
-                {property.image && (
-                  // eslint-disable-next-line @next/next/no-img-element -- Leaflet Popup renders outside the React tree; next/image's optimizer can't bind here.
-                  <img
-                    src={property.image}
-                    alt={property.title}
-                    style={{ width: "100%", height: 120, objectFit: "cover", borderRadius: 6, marginBottom: 8 }}
-                  />
-                )}
-                <h3 style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 600 }}>
-                  {property.title}
-                </h3>
-                {property.price !== undefined && (
-                  <p style={{ margin: "0 0 4px", fontSize: 16, fontWeight: 700, color: "#2563eb" }}>
-                    {formatPrice(property.price)}/mo
-                  </p>
-                )}
-                {(property.bedrooms !== undefined || property.bathrooms !== undefined || property.type) && (
-                  <p style={{ margin: 0, fontSize: 12, color: "#6b7280" }}>
-                    {[
-                      property.bedrooms !== undefined ? `${property.bedrooms} bed` : null,
-                      property.bathrooms !== undefined ? `${property.bathrooms} bath` : null,
-                      property.type,
-                    ]
-                      .filter(Boolean)
-                      .join(" \u00B7 ")}
-                  </p>
-                )}
-                {onPropertyClick && (
-                  <button
-                    type="button"
-                    onClick={() => onPropertyClick(property.id)}
-                    className="mt-2 w-full cursor-pointer rounded-md border-0 bg-primary px-3 py-1.5 text-[13px] font-medium text-primary-foreground"
-                  >
-                    View Details
-                  </button>
-                )}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
+      ref={hostRef}
+      className={`rounded-lg overflow-hidden border border-border ${className}`}
+      style={{ width: "100%", height: "100%", minHeight: 220 }}
+      aria-label="Property location map. Use the listing cards for keyboard access."
+      role="region"
+    />
   );
 }

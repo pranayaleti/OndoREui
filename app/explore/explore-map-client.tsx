@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import PropertySearchMap from "@/components/map/property-search-map";
 import type { PropertySummary } from "@/lib/api/types";
+import { listingDetailPath } from "@/lib/public-property";
 
 interface ExploreMapClientProps {
   properties: PropertySummary[];
@@ -70,7 +71,7 @@ export default function ExploreMapClient({ properties }: ExploreMapClientProps) 
   return (
     <PropertySearchMap
       properties={mapped}
-      onPropertyClick={(id) => router.push(`/buy/${id}`)}
+      onPropertyClick={(id) => router.push(listingDetailPath(id))}
     />
   );
 }
