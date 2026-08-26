@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useMemo } from "react"
 import Script from "next/script"
-import { SITE_PHONE } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,6 +15,8 @@ import { neighborhoodsByCity } from "@/lib/neighborhood-content"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { CityTeamSection } from "@/components/city-team-section"
+import { CityTestimonials } from "@/components/city-testimonials"
+import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import {
   MapPin,
   School,
@@ -27,9 +28,7 @@ import {
   DollarSign,
   Briefcase,
   Mountain,
-  Phone,
   Building2,
-  ArrowRight,
 } from "lucide-react"
 
 type CityGuidePageProps = {
@@ -110,6 +109,14 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
           </div>
         </div>
       </section>
+
+      <div className="container mx-auto px-4 py-8">
+        <CityPageLeadCapture
+          cityName={city.name}
+          heading={`Talk with our ${city.name} team`}
+          prefillMessage={`I'm interested in real estate in ${city.name}.`}
+        />
+      </div>
 
       <div className="container mx-auto px-4 py-12 space-y-16">
 
@@ -339,33 +346,11 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
 
         <Separator />
 
-        {/* CTA */}
-        <section className="text-center py-8">
-          <h2 className="text-2xl font-bold mb-3">Ready to Get Started in {city.name}?</h2>
-          <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
-            Whether you&apos;re buying, selling, investing, or need property management, our local team is here to help.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg">
-              <Link href={`/property-management/${citySlug}/`}>
-                <Building2 className="mr-2 h-4 w-4" />
-                Property Management
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}>
-                <Phone className="mr-2 h-4 w-4" />
-                {SITE_PHONE}
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact/">
-                Schedule Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </section>
+        <CityPageLeadCapture
+          cityName={city.name}
+          heading={`Ready to get started in ${city.name}?`}
+          prefillMessage={`I'm interested in real estate in ${city.name}.`}
+        />
 
         {/* Nearby Cities */}
         {nearbyCities.length > 0 && (
@@ -389,6 +374,8 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
         {/* Team section */}
         <CityTeamSection cityName={city.name} />
 
+        <CityTestimonials cityName={city.name} />
+
         {/* Cross-links to services */}
         <CrossLinkSection
           title={`${city.name} Real Estate Services`}
@@ -398,6 +385,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             { label: `Buy or Sell in ${city.name}`, href: `/buy-sell/${citySlug}/` },
             { label: `${city.name} Home Loans`, href: `/loans/${citySlug}/` },
             { label: "Investment Opportunities", href: "/investments/opportunities/" },
+            { label: "Guides & resources", href: "/resources/" },
             { label: "Calculators", href: "/calculators/" },
             { label: "Blog", href: "/blog/" },
           ]}

@@ -94,10 +94,8 @@ describe("neighborhood page, market context, map, and FAQ", () => {
 
   it("renders the FAQ answers visibly, not just in JSON-LD", async () => {
     render(await Page({ params }))
-    // "Sugar House Is Best For" (the pre-existing Best For heading) and
-    // "What is Sugar House known for?" (the new FAQ question) both exist on
-    // the page simultaneously, so an OR-regex over both matches multiple
-    // elements. Assert on the FAQ-specific text alone.
     expect(screen.getByText(/What is Sugar House known for\?/i)).toBeInTheDocument()
+    expect(screen.getByText(/What housing is typical in Sugar House\?/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Who is Sugar House best for\?/i)).not.toBeInTheDocument()
   })
 })

@@ -1,12 +1,36 @@
 "use client"
 
-import { Building, MapPin, Star, Clock } from "lucide-react"
+import { Building, MapPin, ShieldCheck, Clock } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 
-const stats = [
+type CountStat = {
+  kind?: "count"
+  icon: typeof MapPin
+  value: number
+  suffix: string
+  label: string
+  decimals?: number
+}
+
+type LinkStat = {
+  kind: "link"
+  icon: typeof ShieldCheck
+  href: string
+  valueLabel: string
+  label: string
+}
+
+const stats: Array<CountStat | LinkStat> = [
   { icon: MapPin, value: 55, suffix: "+", label: "Utah cities served" },
   { icon: Building, value: 200, suffix: "+", label: "Properties managed & growing" },
-  { icon: Star, value: 4.9, suffix: "★", label: "Average client rating", decimals: 1 },
+  {
+    kind: "link",
+    icon: ShieldCheck,
+    href: "/licensing",
+    valueLabel: "Licensed",
+    label: "Brokerage, PM & NMLS disclosures",
+  },
   { icon: Clock, value: 24, suffix: "/7", label: "Emergency maintenance response" },
 ]
 
@@ -57,7 +81,7 @@ function useCountUp(target: number, decimals = 0, duration = 1200) {
   return { value, ref }
 }
 
-function StatItem({ icon: Icon, value: target, suffix, label, decimals = 0 }: (typeof stats)[number]) {
+function StatItem({ icon: Icon, value: target, suffix, label, decimals = 0 }: CountStat) {
   const { value, ref } = useCountUp(target, decimals)
 
   return (
@@ -71,14 +95,33 @@ function StatItem({ icon: Icon, value: target, suffix, label, decimals = 0 }: (t
   )
 }
 
+function LinkStatItem({ icon: Icon, href, valueLabel, label }: LinkStat) {
+  return (
+    <Link
+      href={href}
+      className="flex flex-col items-center text-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    >
+      <Icon className="h-6 w-6 text-primary" aria-hidden />
+      <span className="text-2xl font-bold text-foreground underline-offset-4 hover:underline">
+        {valueLabel}
+      </span>
+      <span className="text-sm text-foreground/60">{label}</span>
+    </Link>
+  )
+}
+
 export function SocialProofBar() {
   return (
     <section className="py-10 bg-muted/50 dark:bg-muted/10 border-y border-border/40">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <StatItem key={stat.label} {...stat} />
-          ))}
+          {stats.map((stat) =>
+            stat.kind === "link" ? (
+              <LinkStatItem key={stat.label} {...stat} />
+            ) : (
+              <StatItem key={stat.label} {...stat} />
+            ),
+          )}
         </div>
       </div>
     </section>

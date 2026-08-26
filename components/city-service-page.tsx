@@ -20,8 +20,10 @@ import { CityTestimonials } from "@/components/city-testimonials"
 import { CityTeamSection } from "@/components/city-team-section"
 import { SeasonalCallout } from "@/components/seasonal-callout"
 import { BreadcrumbNav } from "@/components/breadcrumb-nav"
+import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import { getSubServicesForParent } from "@/lib/sub-service-content"
 import { School, TreePine } from "lucide-react"
+import type { ContactInquiryType } from "@/lib/leads-api"
 
 type CityServicePageProps = {
   city: UtahCity
@@ -36,10 +38,29 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
   const nearbyCities = useMemo(() => getNearbyCities(city.name, 6), [city.name])
 
   const headline = useMemo(() => {
-    if (service === "property-management") return `#1 Choice for ${city.name} Property Management`
-    if (service === "buy-sell") return `Buy or Sell Property in ${city.name}, Utah`
-    return `Home Loans and Mortgage Options in ${city.name}, Utah`
+    switch (service) {
+      case "property-management":
+        return `Property Management in ${city.name}, Utah`
+      case "buy-sell":
+        return `Buy or Sell Property in ${city.name}, Utah`
+      case "loans":
+        return `Home Loans and Mortgage Options in ${city.name}, Utah`
+      default: {
+        const _exhaustive: never = service
+        return _exhaustive
+      }
+    }
   }, [city.name, service])
+
+  const leadInquiryType: ContactInquiryType | undefined =
+    service === "property-management" ? "owner" : undefined
+
+  const leadPrefill =
+    service === "property-management"
+      ? `I'd like property management information for ${city.name}.`
+      : service === "buy-sell"
+        ? `I'm interested in buying or selling in ${city.name}.`
+        : `I'd like home loan information for ${city.name}.`
 
   const faqHref = useMemo(() => {
     if (service === "property-management") return "/faq/owner-faqs"
@@ -140,6 +161,12 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
       ]} />
       <SeasonalCallout cityName={city.name} audience={service === "property-management" ? "owner" : "investor"} />
       <LocalProofCTA city={city} service={service} marketData={marketData} />
+      <CityPageLeadCapture
+        cityName={city.name}
+        heading={`Talk with our ${city.name} team`}
+        prefillMessage={leadPrefill}
+        defaultInquiryType={leadInquiryType}
+      />
 
       <Card>
         <CardHeader>
@@ -332,7 +359,31 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         links={[
           { label: `${city.name} City Guide`, href: `/locations/${citySlug}/` },
           { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
+          { label: `${city.name} Market Report`, href: `/market-reports/${citySlug}/` },
+          { label: "Guides & resources", href: "/resources/" },
+          { label: "Blog", href: "/blog/" },
         ]}
+      />
+
+      {faqList.length > 0 && (
+        <section>
+          <h2 className="text-xl font-bold mb-6">{city.name} {serviceLabel} FAQ</h2>
+          <div className="space-y-4">
+            {faqList.map((item) => (
+              <details key={item.q} className="group cursor-pointer rounded-lg border p-4">
+                <summary className="font-medium text-foreground group-open:mb-2">{item.q}</summary>
+                <p className="text-sm text-foreground/70">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <CityPageLeadCapture
+        cityName={city.name}
+        heading={`Get in touch about ${city.name}`}
+        prefillMessage={leadPrefill}
+        defaultInquiryType={leadInquiryType}
       />
 
       <Card>
@@ -344,7 +395,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
             For detailed FAQs on buying, selling, property management, payments, Notary, and more, visit our centralized Help Center.
           </p>
           <Link href={faqHref}>
-            <Button size="lg">View FAQs</Button>
+            <Button size="lg">View all FAQs</Button>
           </Link>
         </CardContent>
       </Card>

@@ -61,7 +61,7 @@ export default function CostOfLivingDraper() {
             <p>Draper is served by Rocky Mountain Power and Questar Gas. Many newer builds are electric-only and pair well with solar (Utah has 300+ sunny days/year).</p>
 
             <h2>Groceries & Dining</h2>
-            <p>Draper has excellent retail access. Costco, Harmons, Trader Joe&apos;s, and Whole Foods are all within 10 minutes. Weekly groceries for a family of 4: $200–$280. Dining out: casual restaurant meals run $15–$25/person; nicer spots along 12300 South average $40–$60/person before drinks.</p>
+            <p>Draper has excellent retail access. Costco, Harmons, Trader Joe&apos;s, and Whole Foods are all within 10 minutes. Weekly groceries for a household of 4: $200–$280. Dining out: casual restaurant meals run $15–$25/person; nicer spots along 12300 South average $40–$60/person before drinks.</p>
 
             <h2>Commute Costs</h2>
             <p>Most Draper residents drive. Key routes:</p>
@@ -73,13 +73,13 @@ export default function CostOfLivingDraper() {
             <p>Gas in Utah typically runs $0.20–$0.30/gallon below the national average. Monthly fuel costs for a 25-mile daily commute: $120–$180. TRAX Blue Line has a Draper station, about 40 minutes to downtown SLC with one transfer.</p>
 
             <h2>Childcare & Education</h2>
-            <p>Public schools (Canyons School District) are free and highly rated, Corner Canyon High School is regularly ranked in Utah&apos;s top 3 by AP participation. Private preschool and daycare run $1,200–$2,000/mo for full-time care.</p>
+            <p>Draper is in Canyons School District; Corner Canyon High School is the local high school. Private preschool and daycare run $1,200–$2,000/mo for full-time care.</p>
 
             <h2>Draper vs. Salt Lake City: Quick Comparison</h2>
-            <p>Draper costs approximately 15–25% more than SLC proper for equivalent housing, offset by lower crime rates, higher-rated schools, and newer infrastructure. For tech workers earning $120K+, the premium is often worth it for the lifestyle and school quality.</p>
+            <p>Draper costs approximately 15–25% more than SLC proper for equivalent housing, with newer infrastructure and a shorter Silicon Slopes commute. Check official school and public-safety sources for a specific address rather than city-wide headlines.</p>
 
             <h2>Bottom Line</h2>
-            <p>A comfortable family budget in Draper requires $8,000–$12,000/month all-in, with housing being the dominant expense. For renters, $5,000–$7,000/month covers housing, utilities, food, and transportation. High earners in tech find Draper a significant quality-of-life upgrade from comparable California or PNW cities at the same income level.</p>
+            <p>A comfortable household budget in Draper requires $8,000–$12,000/month all-in, with housing being the dominant expense. For renters, $5,000–$7,000/month covers housing, utilities, food, and transportation. Silicon Slopes compensation bands often stretch further here than in comparable California or PNW cities.</p>
 
             <div className="not-prose mt-8 flex flex-wrap gap-3">
               <Button asChild>

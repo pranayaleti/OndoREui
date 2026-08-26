@@ -47,7 +47,7 @@ const markets = [
   { name: "Salt Lake City", drivers: "Tech growth, transit, diverse employment" },
   { name: "Lehi / Silicon Slopes", drivers: "High-paying tech jobs, new construction" },
   { name: "Provo / Orem", drivers: "University anchor, stable rent demand" },
-  { name: "American Fork / Pleasant Grove", drivers: "Commuter access, family housing" },
+  { name: "American Fork / Pleasant Grove", drivers: "Commuter access, 3–4 bedroom housing stock" },
   { name: "Ogden", drivers: "Value play, transportation hub" },
   { name: "St. George", drivers: "Migration inflow, short-term rental corridors" },
 ]

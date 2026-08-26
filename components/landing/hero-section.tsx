@@ -64,7 +64,14 @@ export function HeroSection() {
           </Link>
         </nav>
         <p className="mt-6 text-sm text-foreground/50">
-          Trusted by property owners from North Ogden to Nephi &bull; 4.9★ average rating
+          Trusted by property owners from North Ogden to Nephi{" "}
+          &bull;{" "}
+          <Link
+            href="/licensing"
+            className="underline underline-offset-4 hover:text-foreground/80"
+          >
+            Licensed brokerage, property management, and NMLS
+          </Link>
         </p>
         <p className="mt-2 text-xs text-foreground/50">
           Landlord shopping a manager?{" "}

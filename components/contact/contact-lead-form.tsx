@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useId } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -95,6 +95,8 @@ export function ContactLeadForm({
 }: ContactLeadFormProps = {}) {
   const { t } = useTranslation()
   const router = useRouter()
+  const instanceId = useId().replace(/:/g, "")
+  const fieldId = (name: string) => `contact-${name}-${instanceId}`
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -349,11 +351,11 @@ export function ContactLeadForm({
                 }}
                 aria-required="true"
                 aria-invalid={inquiryError ? "true" : undefined}
-                aria-describedby={inquiryError ? "contact-inquiry-error" : undefined}
+                aria-describedby={inquiryError ? fieldId("inquiry-error") : undefined}
                 className="grid gap-2 sm:grid-cols-2"
               >
                 {CONTACT_INQUIRY_OPTIONS.map((option) => {
-                  const inputId = `contact-inquiry-${option.value}`
+                  const inputId = fieldId(`inquiry-${option.value}`)
                   return (
                     <div key={option.value} className="flex items-center gap-2">
                       <RadioGroupItem value={option.value} id={inputId} />
@@ -366,7 +368,7 @@ export function ContactLeadForm({
               </RadioGroup>
               {inquiryError && (
                 <p
-                  id="contact-inquiry-error"
+                  id={fieldId("inquiry-error")}
                   className="text-sm text-red-600 dark:text-red-400"
                   role="alert"
                 >
@@ -376,9 +378,9 @@ export function ContactLeadForm({
             </fieldset>
           )}
           <div className="space-y-2">
-            <Label htmlFor="contact-name">{t('contactForm.nameLabel')}</Label>
+            <Label htmlFor={fieldId("name")}>{t('contactForm.nameLabel')}</Label>
             <Input
-              id="contact-name"
+              id={fieldId("name")}
               name="name"
               value={formData.name}
               onChange={handleInputChange}
@@ -388,9 +390,9 @@ export function ContactLeadForm({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="contact-email">{t('contactForm.emailLabel')}</Label>
+            <Label htmlFor={fieldId("email")}>{t('contactForm.emailLabel')}</Label>
             <Input
-              id="contact-email"
+              id={fieldId("email")}
               name="email"
               value={formData.email}
               onChange={handleInputChange}
@@ -401,9 +403,9 @@ export function ContactLeadForm({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="contact-phone">{t('contactForm.phoneLabel')}</Label>
+            <Label htmlFor={fieldId("phone")}>{t('contactForm.phoneLabel')}</Label>
             <Input
-              id="contact-phone"
+              id={fieldId("phone")}
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
@@ -413,10 +415,10 @@ export function ContactLeadForm({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="contact-message">{t('contactForm.messageLabel')}</Label>
+            <Label htmlFor={fieldId("message")}>{t('contactForm.messageLabel')}</Label>
             <Textarea
               className="min-h-[120px]"
-              id="contact-message"
+              id={fieldId("message")}
               name="message"
               value={formData.message}
               onChange={handleInputChange}

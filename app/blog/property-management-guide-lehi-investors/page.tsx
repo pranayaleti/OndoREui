@@ -41,19 +41,19 @@ export default function PropertyManagementGuideLehi() {
           </div>
           <div className="prose prose-lg max-w-none dark:prose-invert">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Lehi is the epicenter of Utah&apos;s tech boom. Adobe, Vivint, Podium, and over 100 startups have made it one of the state&apos;s fastest-growing cities. That&apos;s created a rental market unlike anywhere else on the Wasatch Front, higher incomes, lower vacancy, and tenant profiles that demand a quality product. Here&apos;s what investors need to know.
+              Lehi is the epicenter of Utah&apos;s tech boom. Adobe, Vivint, Podium, and over 100 startups have made it one of the state&apos;s fastest-growing cities. That&apos;s created a rental market unlike anywhere else on the Wasatch Front, higher incomes, lower vacancy, and applicants who expect updated finishes. Here&apos;s what investors need to know.
             </p>
 
-            <h2>Who Rents in Lehi?</h2>
-            <p>The Lehi renter profile in 2026 is overwhelmingly tech sector. Expect:</p>
+            <h2>What Lehi Listings Compete On</h2>
+            <p>Silicon Slopes employment is the demand driver. Typical listing facts that move applications:</p>
             <ul>
-              <li>Household incomes of $90K–$160K (tech salaries, often dual-income)</li>
-              <li>Ages 25–40, typically without children or with young kids</li>
+              <li>Household incomes in the $90K–$160K band are common among dual-income tech-corridor applicants</li>
+              <li>3–4 bedroom and townhome product both lease</li>
               <li>High expectations for in-unit laundry, attached garage, and smart home features</li>
-              <li>Short-to-medium term tenure (18–30 months) before buying</li>
+              <li>Short-to-medium term tenure (18–30 months) before many households purchase</li>
               <li>Pet owners at higher-than-average rates</li>
             </ul>
-            <p>This means properties marketed to tech workers command a premium when presentation is right. Twilight photography, professional video walkthroughs, and updated fixtures drive above-median rents consistently.</p>
+            <p>Twilight photography, professional video walkthroughs, and updated fixtures drive above-median rents consistently when commute and garage features are in the listing.</p>
 
             <h2>What You Can Charge</h2>
             <p>Current Lehi rental pricing ranges (2026):</p>
@@ -96,7 +96,7 @@ export default function PropertyManagementGuideLehi() {
               <li><strong>Leasing fee (new tenant):</strong> 50–100% of first month&apos;s rent</li>
               <li><strong>Maintenance:</strong> Cost + coordination fee</li>
             </ul>
-            <p>On a $2,200/mo unit: management fee = $176–$220/mo. Annual cost: ~$2,100–$2,640, plus one leasing fee at turnover. Most owners find this pays for itself via lower vacancy, better tenant quality, and avoided legal costs.</p>
+            <p>On a $2,200/mo unit: management fee = $176–$220/mo. Annual cost: ~$2,100–$2,640, plus one leasing fee at turnover. Most owners find this pays for itself via lower vacancy, fewer legal misses, and faster turns.</p>
 
             <h2>Investment Returns in Lehi</h2>
             <p>At current prices and rents:</p>

@@ -8,7 +8,7 @@ import { Check, ArrowRight } from "lucide-react"
 
 const title = "Utah Property Management Companies Compared (2026) | Ondo RE"
 const description =
-  "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and which owners each one fits best."
+  "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and how each offering differs."
 
 export const metadata: Metadata = {
   title,
@@ -30,7 +30,7 @@ const competitors = [
     leasingFee: "50% of one month's rent",
     setupFee: "Waived for first property",
     techStack: "Custom Next.js + Supabase platform, multi-language portal, AI dashboard",
-    bestFor: "Owners who want real-time visibility + a tech-forward partner",
+    ownerFit: "Real-time owner portal and custom tech stack",
     cons: "Newer (2024 founded), smaller than incumbents",
     isUs: true,
   },
@@ -41,7 +41,7 @@ const competitors = [
     leasingFee: "One month's rent",
     setupFee: "Standard onboarding",
     techStack: "AppFolio-based",
-    bestFor: "Owners who prefer flat-fee predictability",
+    ownerFit: "Flat-fee monthly pricing",
     cons: "Less custom tooling; flat fees less efficient at low rents",
     isUs: false,
   },
@@ -52,7 +52,7 @@ const competitors = [
     leasingFee: "One month's rent",
     setupFee: "Standard onboarding",
     techStack: "AppFolio / Buildium",
-    bestFor: "Owners who value long-tenured local team",
+    ownerFit: "Long-tenured Wasatch Front team",
     cons: "Mixed reviews on responsiveness; legacy software",
     isUs: false,
   },
@@ -63,7 +63,7 @@ const competitors = [
     leasingFee: "75% of one month's rent",
     setupFee: "Standard",
     techStack: "Propertyware / AppFolio",
-    bestFor: "Owners who want detailed monthly reporting",
+    ownerFit: "Detailed monthly owner reporting",
     cons: "Smaller geographic coverage outside core metro",
     isUs: false,
   },
@@ -79,7 +79,7 @@ const competitors = [
     leasingFee: "35% of one month's rent (Keyrenter Salt Lake site, as of Aug 2026)",
     setupFee: "Standard onboarding",
     techStack: "AppFolio-class franchise stack",
-    bestFor: "Owners who want the reassurance of a national franchise brand + named guarantees",
+    ownerFit: "National franchise brand and named performance guarantees",
     cons: "Franchisee-run, guarantee terms vary by market; less bespoke than local operators",
     isUs: false,
   },
@@ -142,7 +142,7 @@ export default function CompareUtahPropertyManagersPage() {
           generateServiceJsonLd({
             name: `${SITE_NAME}, Property Management Comparison`,
             description:
-              "Side-by-side comparison of Utah's leading property management companies, covering fees, technology, services, and ideal customer fit.",
+              "Side-by-side comparison of Utah's leading property management companies, covering fees, technology, and services.",
             serviceType: "Comparison Guide",
             areaServed: "Utah",
           }),
@@ -158,7 +158,7 @@ export default function CompareUtahPropertyManagersPage() {
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-foreground/70">
             An honest side-by-side of how Ondo RE stacks up against the established Wasatch Front incumbents.
-            Fees, tech, services, and which owners each one actually fits.
+            Fees, tech, services, and how the offerings differ.
           </p>
           <p className="mt-4 text-xs text-foreground/50 max-w-xl mx-auto">
             We're biased, this is our website, but the data points below are publicly available.
@@ -196,7 +196,7 @@ export default function CompareUtahPropertyManagersPage() {
               {row("Leasing fee", (c) => c.leasingFee)}
               {row("Setup fee", (c) => c.setupFee)}
               {row("Technology", (c) => c.techStack)}
-              {row("Best for", (c) => c.bestFor)}
+              {row("Owner fit", (c) => c.ownerFit)}
               {row("Trade-off", (c) => c.cons)}
             </tbody>
           </table>
