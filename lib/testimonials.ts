@@ -62,7 +62,7 @@ export const testimonials: Testimonial[] = [
     role: "Investor",
     city: "Lehi",
     service: "investments",
-    quote: "The Traverse Mountain townhome Ondo helped me acquire has been fully occupied since day one. Their tenant screening is thorough, quality tenants, zero turnover in 18 months.",
+    quote: "The Traverse Mountain townhome Ondo helped me acquire has been fully occupied since day one. Their screening is documented and consistent, and the unit has had zero turnover in 18 months.",
     rating: 5,
   },
   {

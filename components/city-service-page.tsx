@@ -21,6 +21,10 @@ import { CityTeamSection } from "@/components/city-team-section"
 import { SeasonalCallout } from "@/components/seasonal-callout"
 import { BreadcrumbNav } from "@/components/breadcrumb-nav"
 import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
+import { CityTrustChips } from "@/components/city-trust-chips"
+import { NeighborhoodHousingCards } from "@/components/neighborhood-housing-cards"
+import { OwnerProcessSection } from "@/components/owner-process-section"
+import { CityOwnerOpsSection } from "@/components/city-owner-ops-section"
 import { getSubServicesForParent } from "@/lib/sub-service-content"
 import { School, TreePine } from "lucide-react"
 import type { ContactInquiryType } from "@/lib/leads-api"
@@ -159,7 +163,6 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         { label: serviceLabel, href: `/${serviceBasePath}/` },
         { label: city.name },
       ]} />
-      <SeasonalCallout cityName={city.name} audience={service === "property-management" ? "owner" : "investor"} />
       <LocalProofCTA city={city} service={service} marketData={marketData} />
       <CityPageLeadCapture
         cityName={city.name}
@@ -173,6 +176,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           <h1 className="text-xl font-semibold leading-none tracking-tight sm:text-2xl md:text-3xl">
             {headline}
           </h1>
+          <CityTrustChips />
         </CardHeader>
         <CardContent className="space-y-6">
           {cityContent?.overview && <p>{cityContent.overview}</p>}
@@ -255,7 +259,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
             <p>
               We serve the entire {city.name} area and surrounding communities in {city.county || "Utah"} County, including all listed ZIP codes.
             </p>
-            {cityContent?.neighborhoods && (
+            {service !== "property-management" && cityContent?.neighborhoods && (
               <>
                 <p className="mt-2 font-medium">Key Neighborhoods</p>
                 <ul className="list-disc pl-6">
@@ -321,9 +325,19 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         </div>
       )}
 
-      <Separator />
+      {service === "property-management" && (
+        <NeighborhoodHousingCards cityName={city.name} />
+      )}
 
-      {/* Specialized sub-service cross-links */}
+      {service === "property-management" && (
+        <OwnerProcessSection cityName={city.name} />
+      )}
+
+      {service === "property-management" && (
+        <CityOwnerOpsSection cityName={city.name} />
+      )}
+
+      <SeasonalCallout cityName={city.name} audience={service === "property-management" ? "owner" : "investor"} />
       {subServices.length > 0 && (
         <CrossLinkSection
           title={`Specialized Services in ${city.name}`}
@@ -331,6 +345,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           links={subServices.map((s) => ({
             label: `${s.name} in ${city.name}`,
             href: `/${service}/${citySlug}/${s.slug}/`,
+            description: s.features[0]?.description,
           }))}
         />
       )}

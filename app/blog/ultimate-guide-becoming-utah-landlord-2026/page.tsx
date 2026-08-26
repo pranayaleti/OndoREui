@@ -126,7 +126,7 @@ export default function UltimateUtahLandlordGuide2026() {
               Three rules for a first rental:
             </p>
             <ul>
-              <li><strong>Buy in a market you'd want to live in.</strong> Tenant quality follows neighborhood quality.</li>
+              <li><strong>Buy in a market you can underwrite.</strong> Occupancy and renewals track housing condition, pricing, and maintenance, not a neighborhood stereotype.</li>
               <li><strong>Avoid HOA-heavy condos for your first deal.</strong> Special assessments and rental caps will eat your margin.</li>
               <li><strong>Get a Utah-specific inspection.</strong> Mountain-front properties have radon, foundation movement, and ice-dam roof issues a generic inspection misses. Pay for the radon test.</li>
             </ul>

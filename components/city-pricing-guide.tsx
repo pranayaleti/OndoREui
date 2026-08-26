@@ -121,7 +121,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
             <ul className="space-y-2">
               {[
                 "Online rent collection with direct deposit",
-                "24/7 emergency maintenance response",
+                "24/7 emergency maintenance line",
                 "Monthly financial statements and tax-ready reports",
                 "Tenant screening (credit, criminal, eviction, income)",
                 "Real-time owner dashboard with AI insights",

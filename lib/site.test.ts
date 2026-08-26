@@ -40,9 +40,18 @@ describe("site", () => {
   it("SITE_PHONE contains digits", () => {
     expect(SITE_PHONE).toMatch(/\d/)
   })
+  it("default SITE_PHONE stays the documented 408 fallback when env is unset", () => {
+    // No documented Utah public number exists in this workspace; do not invent 801/385.
+    expect(SITE_PHONE).toBe("+1-408-538-0420")
+  })
   it("SITE_HOURS and SITE_HOURS_LABEL are set", () => {
     expect(SITE_HOURS).toBeTruthy()
     expect(SITE_HOURS_LABEL).toBeTruthy()
+  })
+  it("office hours are weekday Mountain Time, not a 24/7 office claim", () => {
+    expect(SITE_HOURS).toBe("Mo-Fr 09:00-17:00")
+    expect(SITE_HOURS_LABEL).toMatch(/Mon–Fri 9:00 AM – 5:00 PM MT/)
+    expect(SITE_HOURS_LABEL).not.toMatch(/24\/7/)
   })
   it("SITE_ADDRESS and parts are consistent", () => {
     expect(SITE_ADDRESS).toContain(SITE_ADDRESS_CITY)

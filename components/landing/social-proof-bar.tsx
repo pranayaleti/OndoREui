@@ -3,6 +3,11 @@
 import { Building, MapPin, ShieldCheck, Clock } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import {
+  LICENSING_HREF,
+  PROPERTIES_MANAGED,
+  UTAH_CITIES_SERVED,
+} from "@/lib/social-proof-stats"
 
 type CountStat = {
   kind?: "count"
@@ -22,12 +27,12 @@ type LinkStat = {
 }
 
 const stats: Array<CountStat | LinkStat> = [
-  { icon: MapPin, value: 55, suffix: "+", label: "Utah cities served" },
-  { icon: Building, value: 200, suffix: "+", label: "Properties managed & growing" },
+  { icon: MapPin, value: UTAH_CITIES_SERVED, suffix: "+", label: "Utah cities served" },
+  { icon: Building, value: PROPERTIES_MANAGED, suffix: "+", label: "Properties managed & growing" },
   {
     kind: "link",
     icon: ShieldCheck,
-    href: "/licensing",
+    href: LICENSING_HREF,
     valueLabel: "Licensed",
     label: "Brokerage, PM & NMLS disclosures",
   },

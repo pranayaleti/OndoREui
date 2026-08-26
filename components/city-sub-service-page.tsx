@@ -15,6 +15,8 @@ import { MarketDataCard } from "@/components/market-data-card"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { LocalProofCTA } from "@/components/local-proof-cta"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
+import { CityTrustChips } from "@/components/city-trust-chips"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
@@ -213,6 +215,18 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
           marketData={marketData}
           focusName={subService.name}
         />
+
+        {subService.parentService === "property-management" && (
+          <>
+            <CityTrustChips />
+            <CityPageLeadCapture
+              cityName={city.name}
+              heading={`Talk with our ${city.name} team`}
+              prefillMessage={`I'd like ${subService.name.toLowerCase()} information for ${city.name}.`}
+              defaultInquiryType="owner"
+            />
+          </>
+        )}
 
         {/* Localized intro */}
         {marketData && (
@@ -431,6 +445,15 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
               ))}
             </Accordion>
           </section>
+        )}
+
+        {subService.parentService === "property-management" && (
+          <CityPageLeadCapture
+            cityName={city.name}
+            heading={`Get in touch about ${subService.name} in ${city.name}`}
+            prefillMessage={`I'd like ${subService.name.toLowerCase()} information for ${city.name}.`}
+            defaultInquiryType="owner"
+          />
         )}
 
         {/* CTA */}

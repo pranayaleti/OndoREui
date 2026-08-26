@@ -1208,7 +1208,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What are typical Highland rents?",
-        a: "4-bedroom homes in Highland typically rent for $2,500–$3,500, with 5-6 bedroom homes on large lots reaching $3,500–$5,000. These rents reflect the premium location, school district, and property quality. Acquisition costs in the $600K–$900K range mean cash-on-cash returns are modest, but appreciation has been strong and consistent. Highland is a wealth-building market for investors who value stability, low management intensity, and high-quality tenants. The small inventory of rentals means well-priced listings generate immediate interest.",
+        a: "4-bedroom homes in Highland typically rent for $2,500–$3,500, with 5-6 bedroom homes on large lots reaching $3,500–$5,000. These rents reflect the premium location, school district, and property quality. Acquisition costs in the $600K–$900K range mean cash-on-cash returns are modest, but appreciation has been strong and consistent. Highland is a wealth-building market for investors who value stability, low management intensity, and longer average occupancy. The small inventory of rentals means well-priced listings generate immediate interest.",
       },
     ],
     lifestyleDescription:

@@ -11,7 +11,7 @@ import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
 import { generateFAQJsonLd } from "@/lib/seo"
-import { neighborhoodsByCity } from "@/lib/neighborhood-content"
+import { findNeighborhoodForCard } from "@/lib/neighborhood-content"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { CityTeamSection } from "@/components/city-team-section"
@@ -39,17 +39,6 @@ function fmtUsd(n: number): string {
   if (n >= 1_000_000) return "$" + (n / 1_000_000).toFixed(1) + "M"
   if (n >= 1_000) return "$" + (n / 1_000).toFixed(0) + "K"
   return "$" + n.toLocaleString("en-US")
-}
-
-function findNeighborhoodSlugForCard(cityName: string, cardLabel: string): string | null {
-  const candidates = neighborhoodsByCity[cityName]
-  if (!candidates) return null
-  const normalized = cardLabel.trim().toLowerCase()
-  const match = candidates.find((n) => {
-    const name = n.name.toLowerCase()
-    return name === normalized || name === `the ${normalized}` || `the ${name}` === normalized
-  })
-  return match?.slug ?? null
 }
 
 export function CityGuidePage({ city }: CityGuidePageProps) {
@@ -203,7 +192,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {content.neighborhoods.map((hood) => {
                 const [name, desc] = hood.includes(", ") ? hood.split(", ") : [hood, null]
-                const neighborhoodSlug = findNeighborhoodSlugForCard(city.name, name)
+                const neighborhoodSlug = findNeighborhoodForCard(city.name, name)?.slug
                 const cardBody = (
                   <Card className={neighborhoodSlug ? "hover:bg-muted/50 transition-colors cursor-pointer h-full" : undefined}>
                     <CardHeader className="pb-2">

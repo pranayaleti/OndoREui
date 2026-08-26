@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { neighborhoodsByCity } from "./neighborhood-content"
+import { neighborhoodsByCity, findNeighborhoodForCard } from "./neighborhood-content"
 
 describe("neighborhood center coordinates", () => {
   it("every neighborhood has a plausible Utah lat/lng", () => {
@@ -30,6 +30,45 @@ describe("neighborhood center coordinates", () => {
         expect(chip, `${hood.name}: "${chip}"`).not.toMatch(steering)
       }
       expect(hood.character, hood.name).not.toMatch(/family-friendly|family-oriented|family-first|family-centric|family address|who (should )?live/i)
+    }
+  })
+})
+
+describe("findNeighborhoodForCard", () => {
+  it("matches city-content labels to neighborhood-content entries, including The Avenues", () => {
+    expect(findNeighborhoodForCard("Salt Lake City", "Avenues")?.slug).toBe("the-avenues")
+    expect(findNeighborhoodForCard("Salt Lake City", "Sugar House")?.slug).toBe("sugar-house")
+    expect(findNeighborhoodForCard("Lehi", "Traverse Mountain, master-planned with retail village")?.slug).toBe(
+      "traverse-mountain",
+    )
+  })
+
+  it("matches abbreviated city-content labels to existing Ogden and Provo entries", () => {
+    expect(findNeighborhoodForCard("Ogden", "Downtown/25th St")?.slug).toBe("downtown-25th-street")
+    expect(findNeighborhoodForCard("Provo", "East Bench/Edgemont")?.slug).toBe("edgemont-oak-hills")
+  })
+})
+
+describe("housing-stock coverage for major PM cities", () => {
+  const majorCities = [
+    "Sandy",
+    "Orem",
+    "South Jordan",
+    "West Jordan",
+    "Riverton",
+    "Bountiful",
+    "Layton",
+    "Murray",
+  ]
+
+  it("adds typicalHomes for major remaining PM cities already listed in city-content", () => {
+    for (const city of majorCities) {
+      const hoods = neighborhoodsByCity[city]
+      expect(hoods?.length, city).toBeGreaterThanOrEqual(3)
+      for (const hood of hoods) {
+        expect(hood.typicalHomes, `${city}/${hood.name}`).toMatch(/\S/)
+        expect(hood.character, hood.name).not.toMatch(/who (should )?live/i)
+      }
     }
   })
 })

@@ -342,7 +342,7 @@ const Footer = memo(() => {
                 >
                   {SITE_PHONE}
                 </a>
-                <p className="text-xs text-foreground/70">{SITE_HOURS_LABEL}</p>
+                <p className="text-xs text-foreground/70">Office hours: {SITE_HOURS_LABEL}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">

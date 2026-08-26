@@ -4,6 +4,7 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
+import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
 import { Check, ArrowRight } from "lucide-react"
 
 const title = "Utah Property Management Companies Compared (2026) | Ondo RE"
@@ -21,75 +22,14 @@ export const metadata: Metadata = {
 
 // NOTE: Competitor fees and features below are based on publicly available
 // information at the time of writing. Verify before relying on this for
-// procurement decisions, providers update pricing without notice.
-const competitors = [
-  {
-    name: "Ondo RE",
-    headline: "Tech-forward, owner + tenant portals, AI risk alerts",
-    mgmtFee: "8% (typical), quote on volume",
-    leasingFee: "50% of one month's rent",
-    setupFee: "Waived for first property",
-    techStack: "Custom Next.js + Supabase platform, multi-language portal, AI dashboard",
-    ownerFit: "Real-time owner portal and custom tech stack",
-    cons: "Newer (2024 founded), smaller than incumbents",
-    isUs: true,
-  },
-  {
-    name: "Rentomatic",
-    headline: "Established Utah PM, all-inclusive flat fee model",
-    mgmtFee: "Flat $89–$129/mo per unit (varies)",
-    leasingFee: "One month's rent",
-    setupFee: "Standard onboarding",
-    techStack: "AppFolio-based",
-    ownerFit: "Flat-fee monthly pricing",
-    cons: "Less custom tooling; flat fees less efficient at low rents",
-    isUs: false,
-  },
-  {
-    name: "Rhino Property Management",
-    headline: "Wasatch Front legacy player, full-service",
-    mgmtFee: "8–10% typical",
-    leasingFee: "One month's rent",
-    setupFee: "Standard onboarding",
-    techStack: "AppFolio / Buildium",
-    ownerFit: "Long-tenured Wasatch Front team",
-    cons: "Mixed reviews on responsiveness; legacy software",
-    isUs: false,
-  },
-  {
-    name: "Wolfnest Property Management",
-    headline: "Salt Lake / Provo focused, owner-friendly reporting",
-    mgmtFee: "8–10%",
-    leasingFee: "75% of one month's rent",
-    setupFee: "Standard",
-    techStack: "Propertyware / AppFolio",
-    ownerFit: "Detailed monthly owner reporting",
-    cons: "Smaller geographic coverage outside core metro",
-    isUs: false,
-  },
-  {
-    name: "Keyrenter Salt Lake",
-    // Publicly listed franchise operating out of Midvale; conversion-heavy
-    // marketing (owner-first nav, three-CTA hero, named performance
-    // guarantees on lease-in-30, evictions, and maintenance rework). Fees
-    // below are from their public site + Utah PM industry norms — verify
-    // before signing since franchisees can adjust locally.
-    headline: "Franchise PM, guarantee-forward marketing, Midvale HQ",
-    mgmtFee: "~9% typical (franchise range; verify locally)",
-    leasingFee: "35% of one month's rent (Keyrenter Salt Lake site, as of Aug 2026)",
-    setupFee: "Standard onboarding",
-    techStack: "AppFolio-class franchise stack",
-    ownerFit: "National franchise brand and named performance guarantees",
-    cons: "Franchisee-run, guarantee terms vary by market; less bespoke than local operators",
-    isUs: false,
-  },
-]
+// procurement decisions; providers update pricing without notice.
+const competitors = UTAH_PM_COMPARISON
 
 const faqs = [
   {
     question: "What does Utah property management actually cost in 2026?",
     answer:
-      "Most Wasatch Front property managers charge 8–10% of collected rent for full-service management, plus a leasing fee (typically 50–100% of one month's rent) when a new tenant is placed. Some companies offer flat-fee models ($89–$130/month/unit). Ondo RE's typical fee is 8% of collected rent with a 50% leasing fee.",
+      "Most Wasatch Front property managers advertise 8–12% of collected rent for full-service management (as of Aug 2026 — verify), plus a leasing fee (typically 50–100% of one month's rent) when a new tenant is placed. Some companies advertise a flat monthly fee (about $159/month/unit as of Aug 2026 — verify). Ondo RE is Starter 10% (1–4 units) or Growth 8% (5–15 units) of collected rent, with a 50% leasing fee. There is no setup fee.",
   },
   {
     question: "Are flat-fee or percentage-based property management fees better?",
@@ -99,7 +39,7 @@ const faqs = [
   {
     question: "What's the difference between a leasing fee and a setup fee?",
     answer:
-      "A leasing fee is charged when a new tenant is placed, covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost when you first hire the management company, covering account setup, property inspection, and document collection. Ondo waives the setup fee for first-time clients.",
+      "A leasing fee is charged when a new tenant is placed, covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost some management companies charge when you first hire them. Ondo does not charge a setup fee; the one-time extra we publish is the leasing fee when we place a tenant.",
   },
   {
     question: "What questions should I ask a Utah property management company?",
@@ -209,9 +149,8 @@ export default function CompareUtahPropertyManagersPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">An honest take from the founder</h2>
           <div className="prose prose-lg prose-invert max-w-none text-foreground/80">
             <p>
-              You should pick Ondo RE if you want real-time owner visibility, multi-language tenant
-              support, and a partner that built its own software stack rather than licensing the
-              same AppFolio everyone else uses. If you have a portfolio of 1–20 units and value
+              You should pick Ondo RE if you want real-time owner visibility, a
+              custom owner portal and AI assistant, and a partner that built its own software stack rather than licensing the same AppFolio everyone else uses. If you have a portfolio of 1–20 units and value
               transparent dashboards over a thicker rolodex of long-tenured local relationships, we
               fit.
             </p>
@@ -221,8 +160,10 @@ export default function CompareUtahPropertyManagersPage() {
               of doors. Their software is older but their people know the Wasatch Front.
             </p>
             <p>
-              You should pick Rentomatic if flat-fee predictability matters more than percentage
-              alignment, and you prefer a single-line P&L cost.
+              You should pick Rentomatic if a flat advertised monthly fee and $0
+              placement (as advertised Aug 2026) matter more than paying a
+              percentage of collected rent and a one-time 50% leasing fee.
+              Confirm their current numbers before you rely on this row.
             </p>
             <p>
               You should look at Keyrenter Salt Lake if the reassurance of a national franchise

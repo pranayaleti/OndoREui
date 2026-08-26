@@ -13,6 +13,7 @@ const LOCATION_COPY_FILES = [
   "app/blog/property-management-guide-lehi-investors/page.tsx",
   "app/blog/why-utah-best-real-estate-investment/page.tsx",
   "app/compare-utah-property-managers/page.tsx",
+  "lib/utah-pm-comparison.ts",
 ] as const
 
 function stripHousingTypes(text: string): string {
@@ -23,7 +24,7 @@ function stripHousingTypes(text: string): string {
 }
 
 const STEERING =
-  /family-oriented|family-first|family-friendly|family-centric|family-focused|family-paced|family-lifestyle|young professionals?|empty nesters?|immigrant families|byu families|great for families|best for families|who is .+ best for|safe neighborhood|crime-free|quiet community|ideal for couples|working-class character|working-class value|blue-collar workers|ethnically diverse|tenant quality|young families|military families|family tenants|family housing/i
+  /family-oriented|family-first|family-friendly|family-centric|family-focused|family-paced|family-lifestyle|young professionals?|empty nesters?|immigrant families|byu families|great for families|best for families|who is .+ best for|safe neighborhood|crime-free|quiet community|ideal for couples|working-class character|working-class value|blue-collar workers|ethnically diverse|tenant quality|young families|military families|family tenants|family housing|quality tenants|high-quality tenants/i
 
 const CRIME_CHARACTERIZATION =
   /elevated crime|higher crime|low crime|crime rates|crime statistics|crime concerns|crime perception|perfectly safe/i
@@ -66,8 +67,11 @@ describe("location marketing Fair Housing", () => {
 
   it("compare page uses ownerFit, not occupant “best for”", () => {
     const compare = sources.find((s) => s.rel.includes("compare-utah-property-managers"))
-    expect(compare?.text).toContain("ownerFit:")
+    const table = sources.find((s) => s.rel.includes("utah-pm-comparison"))
+    expect(table?.text).toContain("ownerFit:")
+    expect(compare?.text).toContain('row("Owner fit"')
     expect(compare?.text).not.toMatch(/\bbestFor:/)
+    expect(table?.text).not.toMatch(/\bbestFor:/)
     expect(compare?.text).not.toMatch(/\{row\("Best for"/)
   })
 })

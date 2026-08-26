@@ -1,11 +1,12 @@
 import Link from "next/link"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight } from "lucide-react"
 
 type CrossLink = {
   label: string
   href: string
+  description?: string
 }
 
 type CrossLinkSectionProps = {
@@ -24,12 +25,17 @@ export function CrossLinkSection({ title, links, variant }: CrossLinkSectionProp
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {links.map((link) => (
             <Link key={link.href} href={link.href}>
-              <Card className="hover:bg-muted/50 transition-colors cursor-pointer">
+              <Card className="hover:bg-muted/50 transition-colors cursor-pointer h-full">
                 <CardHeader className="py-3 px-4">
-                  <CardTitle className="text-sm font-medium flex items-center justify-between">
+                  <CardTitle className="text-sm font-medium flex items-center justify-between gap-2">
                     {link.label}
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                    <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
                   </CardTitle>
+                  {link.description ? (
+                    <CardDescription className="text-xs leading-relaxed pt-1">
+                      {link.description}
+                    </CardDescription>
+                  ) : null}
                 </CardHeader>
               </Card>
             </Link>

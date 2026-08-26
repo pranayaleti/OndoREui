@@ -90,7 +90,7 @@ const maintenanceCoordination: SubServiceDefinition = {
     `Local vendor network familiar with ${city} building codes and ${data.schoolDistrict} area HOA requirements`,
     `Preventive maintenance scheduling tailored to ${city}'s elevation and climate conditions`,
     `Transparent pricing, we share vendor bids and never mark up materials or labor`,
-    `Average maintenance response time under 4 hours for ${city} properties`,
+    `24/7 emergency line plus portal maintenance requests for ${city} properties, with urgent issues triaged 24–48 hours and routine work scheduled during business hours`,
   ],
   baseFaqs: [
     { q: "How do tenants submit maintenance requests?", a: "Tenants submit requests through the Ondo portal or mobile app, 24/7. They can include photos and detailed descriptions of the issue. Requests are automatically categorized by urgency, emergency issues like water leaks or no heat trigger immediate alerts, while routine requests are scheduled during normal business hours. Tenants receive status updates at each stage." },

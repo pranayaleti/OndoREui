@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { MessageCircle, Phone, Calendar, X } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { SITE_PHONE } from "@/lib/site"
 
 interface ConsultationForm {
   name: string
@@ -310,11 +311,11 @@ export default function ClientConsultationWidget() {
           <div className="text-center text-sm text-foreground/70 pt-4 border-t">
             <p>Or call us directly:</p>
             <a
-              href="tel:+1-408-538-0420"
+              href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`}
               className="text-primary hover:underline font-medium flex items-center justify-center gap-1 mt-1"
             >
               <Phone className="h-4 w-4" />
-              +1 (408) 538-0420
+              {SITE_PHONE}
             </a>
           </div>
         </DialogContent>
