@@ -83,7 +83,7 @@ describe("findPublicProperty", () => {
   it("matches a UUID publicId even when it differs from the internal id", () => {
     const row = listing()
     expect(findPublicProperty({ data: [row] }, row.publicId!)?.title).toBe(row.title)
-    expect(findPublicProperty([row], row.id)?.title).toBe(row.title)
+    expect(findPublicProperty([row], row.id!)?.title).toBe(row.title)
   })
 })
 
