@@ -40,6 +40,13 @@ describe("pageCanonicalMetadata", () => {
     expect(meta.alternates?.canonical).toBe(`${SITE_URL}/about/`)
     expect(meta.openGraph?.url).toBe(`${SITE_URL}/about/`)
   })
+
+  it("advertises the sibling Markdown twin for agents", () => {
+    const meta = pageCanonicalMetadata("/about", { title: "About" })
+    expect(meta.alternates?.types).toMatchObject({
+      "text/markdown": `${SITE_URL.replace(/\/$/, "")}/about.md`,
+    })
+  })
 })
 
 describe("legacy Pages Router calculator URLs", () => {

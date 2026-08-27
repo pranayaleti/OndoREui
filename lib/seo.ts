@@ -15,6 +15,7 @@ import {
 } from "./site"
 import { testimonials } from "./testimonials"
 import { toAbsoluteSiteUrl } from "./site-index"
+import { htmlPathToMarkdownPath } from "./html-to-agent-markdown"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 
@@ -698,11 +699,15 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
 
   const ogImage = toAbsoluteUrl(image) ?? `${baseSiteUrl}/modern-office-building.webp`
 
-  const markdownUrl = markdownAlternate
-    ? markdownAlternate.startsWith("http://") || markdownAlternate.startsWith("https://")
-      ? markdownAlternate
-      : `${baseSiteUrl}${markdownAlternate.startsWith("/") ? markdownAlternate : `/${markdownAlternate}`}`
-    : undefined
+  const markdownUrl = (() => {
+    if (markdownAlternate) {
+      return markdownAlternate.startsWith("http://") || markdownAlternate.startsWith("https://")
+        ? markdownAlternate
+        : `${baseSiteUrl}${markdownAlternate.startsWith("/") ? markdownAlternate : `/${markdownAlternate}`}`
+    }
+    const sibling = htmlPathToMarkdownPath(pathname)
+    return sibling ? toAbsoluteSiteUrl(sibling) : undefined
+  })()
 
   return {
     title,

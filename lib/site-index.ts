@@ -820,8 +820,11 @@ export function buildLlmsTxtBody(): string {
     `- security.txt: ${toAbsoluteSiteUrl("/.well-known/security.txt")}`,
     "",
     "## How to fetch Markdown",
-    `- Send \`Accept: text/markdown\` to any public HTML page and the Cloudflare edge returns Markdown (see ${toAbsoluteSiteUrl("/sitemap.md")}).`,
-    "- Client-heavy pages (property search, calculators, contact form, homepage) also have first-party Markdown twins so the content is not lost when JS does not run:",
+    "- Every public HTML page has a sibling `.md` file: `/about/` → `/about.md`, `/` → `/index.md`. Prefer those URLs; they work on the static origin without JavaScript.",
+    `- Example: ${toAbsoluteSiteUrl("/about/")} → ${toAbsoluteSiteUrl("/about.md")}.`,
+    `- Full index: ${toAbsoluteSiteUrl("/sitemap.md")}.`,
+    "- Optionally send `Accept: text/markdown` to the HTML URL. A Cloudflare Snippet (or Markdown for Agents on Pro) maps that request to the sibling `.md` file.",
+    "- Client-heavy pages (property search, calculators, contact form, homepage) also have first-party Markdown twins so widget content is not lost when JS does not run:",
     ...AGENT_MARKDOWN_TWINS.map(
       ({ html, md, label }) =>
         `  - ${label}: ${toAbsoluteSiteUrl(html)} → ${toAbsoluteSiteUrl(md)}`,
@@ -1009,7 +1012,7 @@ export function buildLlmsFullTxtBody(): string {
     "",
     "## Content negotiation and Markdown twins",
     "",
-    "Any public HTML page returns Markdown when the request carries `Accept: text/markdown` (via Cloudflare Markdown for Agents). In addition, these pages have first-party Markdown twins so JS-heavy widgets remain readable when JavaScript does not execute:",
+    "Any public HTML page has a sibling `.md` twin (`/about/` → `/about.md`). Hand-written twins exist for JS-heavy widgets. Optionally send `Accept: text/markdown` to the HTML URL (Cloudflare Snippet or Markdown for Agents on Pro):",
     "",
     ...AGENT_MARKDOWN_TWINS.map(
       ({ html, md, label }) =>
@@ -1096,7 +1099,7 @@ export function buildSitemapMdBody(): string {
   const lines: string[] = [
     "# Ondo Real Estate, Markdown sitemap",
     "",
-    `> Curated index of every public page on ${baseSiteUrl}/. Send \`Accept: text/markdown\` to any HTML URL for a Markdown response, or fetch the sibling \`.md\` twin where listed.`,
+    `> Curated index of every public page on ${baseSiteUrl}/. Every HTML URL has a sibling \`.md\` twin (strip the trailing slash and add \`.md\`). Optionally send \`Accept: text/markdown\` to the HTML URL.`,
     "",
     "## First-party Markdown twins",
     "",
@@ -1173,7 +1176,7 @@ export function buildLlmsJsonData() {
     contentNegotiation: {
       acceptHeader: "text/markdown",
       description:
-        "Send `Accept: text/markdown` to any public HTML page. The Cloudflare edge (Markdown for Agents) returns the page as Markdown; JSON-LD is preserved.",
+        "Every public HTML page has a sibling `.md` twin (`/about/` → `/about.md`). Optionally send `Accept: text/markdown` to the HTML URL; a Cloudflare Snippet (or Markdown for Agents on Pro) maps that request to the twin.",
       firstPartyMarkdownTwins: AGENT_MARKDOWN_TWINS.map(({ html, md, label }) => ({
         label,
         html: toAbsoluteSiteUrl(html),

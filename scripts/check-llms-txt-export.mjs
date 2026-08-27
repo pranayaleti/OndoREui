@@ -68,4 +68,11 @@ if (!fs.existsSync(path.resolve(sampleCalculatorMd))) {
   process.exit(1)
 }
 
+const aboutHtml = "out/about/index.html"
+const aboutMd = "out/about.md"
+if (fs.existsSync(path.resolve(aboutHtml)) && !fs.existsSync(path.resolve(aboutMd))) {
+  console.error(`missing ${aboutMd} — generate:html-md did not convert ${aboutHtml}`)
+  process.exit(1)
+}
+
 console.log("llms.txt + Markdown twin static export ok (plain text + disclosures + .md files)")

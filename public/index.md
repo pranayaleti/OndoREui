@@ -33,7 +33,8 @@ canonical: https://www.ondorealestate.com/
 - Markdown sitemap: https://www.ondorealestate.com/sitemap.md
 - Structured index (JSON): https://www.ondorealestate.com/llms.json
 - Agent manifest (WebMCP-aligned): https://www.ondorealestate.com/.well-known/agents.json
-- Content negotiation: send `Accept: text/markdown` to any public page for a Markdown response.
+- Sibling Markdown: strip the trailing slash and add `.md` (`/about/` → `/about.md`).
+- Optionally send `Accept: text/markdown` to the HTML URL for the same twin.
 
 ## Authenticated product
 

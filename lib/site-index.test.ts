@@ -48,6 +48,8 @@ describe("LLM briefs", () => {
     const brief = buildLlmsTxtBody()
     expect(brief).toMatch(/How to fetch Markdown/i)
     expect(brief).toMatch(/Accept: text\/markdown/)
+    expect(brief).toMatch(/sibling `?\.md`? file/i)
+    expect(brief).toContain("/about.md")
     for (const twin of AGENT_MARKDOWN_TWINS) {
       expect(brief).toContain(twin.md)
     }

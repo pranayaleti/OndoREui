@@ -3,7 +3,7 @@
   "rule": {
     "ref": "cache-html-www-apex",
     "description": "Cache static HTML on www and apex (504 mitigation)",
-    "expression": "(http.host in {\"www.ondorealestate.com\" \"ondorealestate.com\"}) and not http.host in {\"api.ondorealestate.com\" \"app.ondorealestate.com\"} and http.request.method in {\"GET\" \"HEAD\"} and not starts_with(http.request.uri.path, \"/api/\")",
+    "expression": "(http.host in {\"www.ondorealestate.com\" \"ondorealestate.com\"}) and not http.host in {\"api.ondorealestate.com\" \"app.ondorealestate.com\"} and http.request.method in {\"GET\" \"HEAD\"} and not starts_with(http.request.uri.path, \"/api/\") and not any(lower(http.request.headers[\"accept\"][*]) contains \"text/markdown\")",
     "action": "set_cache_settings",
     "enabled": true,
     "action_parameters": {

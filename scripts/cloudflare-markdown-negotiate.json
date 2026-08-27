@@ -1,0 +1,11 @@
+{
+  "expected_zone_name": "ondorealestate.com",
+  "snippet_name": "markdown-negotiate",
+  "main_module": "main.js",
+  "source_file": "cloudflare-markdown-negotiate.js",
+  "rule": {
+    "expression": "(http.host in {\"www.ondorealestate.com\" \"ondorealestate.com\"}) and not http.host in {\"api.ondorealestate.com\" \"app.ondorealestate.com\"} and http.request.method in {\"GET\" \"HEAD\"} and any(lower(http.request.headers[\"accept\"][*]) contains \"text/markdown\") and not http.request.uri.path matches \"\\\\.(md|txt|xml|json|css|js|mjs|map|png|jpe?g|webp|svg|ico|woff2?)$\"",
+    "description": "Serve sibling .md when Accept: text/markdown (agent readability)",
+    "enabled": true
+  }
+}

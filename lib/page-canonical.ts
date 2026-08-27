@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { CALCULATOR_SLUGS } from "@/lib/calculator-catalog"
+import { htmlPathToMarkdownPath } from "@/lib/html-to-agent-markdown"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { toAbsoluteSiteUrl } from "@/lib/site-index"
 
@@ -18,12 +19,25 @@ export function toCanonicalPageUrl(pathname: string): string {
 export function pageCanonicalMetadata(pathname: string, extra: Metadata = {}): Metadata {
   const canonical = toCanonicalPageUrl(pathname)
   const { alternates: extraAlternates, openGraph: extraOpenGraph, ...rest } = extra
+  const markdownPath = htmlPathToMarkdownPath(pathname)
+  const extraTypes = extraAlternates?.types
+  const restExtraAlternates = extraAlternates
+    ? Object.fromEntries(Object.entries(extraAlternates).filter(([key]) => key !== "types"))
+    : {}
   return {
     ...rest,
     alternates: {
       canonical,
       languages: buildMetadataLanguages(pathname),
-      ...extraAlternates,
+      ...(markdownPath || extraTypes
+        ? {
+            types: {
+              ...(markdownPath ? { "text/markdown": toAbsoluteSiteUrl(markdownPath) } : {}),
+              ...extraTypes,
+            },
+          }
+        : {}),
+      ...restExtraAlternates,
     },
     openGraph: {
       url: canonical,

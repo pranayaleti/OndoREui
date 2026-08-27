@@ -212,6 +212,23 @@ async function main() {
       problems.push("body missing 'Content-Signal: search=yes, ai-input=yes, ai-train=yes'")
     }
     if (!body.includes("User-agent: ClaudeBot")) problems.push("body missing 'User-agent: ClaudeBot'")
+    if (body.includes("BEGIN Cloudflare Managed content")) {
+      problems.push(
+        "Cloudflare managed robots.txt is prepended (GPTBot/ClaudeBot Disallow: /). Turn OFF 'Instruct AI bot traffic with robots.txt' or run: npm run cloudflare:agent-readability",
+      )
+    }
+    return problems
+  })
+
+  await checkGet("/about.md", "/about.md", ({ status, contentType, body }) => {
+    const problems = []
+    if (status !== 200) problems.push(`expected status 200, got ${status}`)
+    if (contentType && !/text\/(markdown|plain)/i.test(contentType) && /html/i.test(contentType)) {
+      problems.push(`expected markdown content-type, got ${contentType}`)
+    }
+    if (!body.includes("#") && !body.startsWith("---")) {
+      problems.push("body does not look like Markdown (missing heading or frontmatter)")
+    }
     return problems
   })
 

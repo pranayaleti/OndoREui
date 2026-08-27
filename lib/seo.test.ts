@@ -132,6 +132,17 @@ describe("seo", () => {
       expect(ogImage).toMatchObject({ alt: "Ondo Real Estate: Buy a Home" })
       expect(meta.other).toMatchObject(getSiteGeoMetaOther())
     })
+
+    it("defaults to a sibling Markdown alternate", () => {
+      const meta = buildPageMetadata({
+        title: "Buy a Home",
+        description: "Utah home buying",
+        pathname: "/buy",
+      })
+      expect(meta.alternates?.types).toMatchObject({
+        "text/markdown": expect.stringMatching(/\/buy\.md$/),
+      })
+    })
   })
 
   describe("generateBreadcrumbJsonLd", () => {
