@@ -6,7 +6,6 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, ArrowRight } from "lucide-react"
 import { backendUrl } from "@/lib/backend"
 import { SITE_URL } from "@/lib/site"
@@ -103,6 +102,8 @@ export default function EventsClient() {
   const [events, setEvents] = useState<EventItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  // Capture "now" once on mount so bucketing is stable across re-renders.
+  const [now] = useState(() => Date.now())
 
   useEffect(() => {
     let cancelled = false
@@ -126,10 +127,13 @@ export default function EventsClient() {
     }
   }, [])
 
-  const now = Date.now()
-  const upcoming = events.filter((e) => new Date(e.startsAt).getTime() >= now)
+  // An event is "over" only once its end time (or its start, when it has no
+  // end) has passed — so an in-progress ("live") event stays in Upcoming rather
+  // than being greyed out under Past. Mirrors the mobile events fix (audit #14).
+  const eventEnd = (e: EventItem) => new Date(e.endsAt ?? e.startsAt).getTime()
+  const upcoming = events.filter((e) => eventEnd(e) >= now)
   const past = events
-    .filter((e) => new Date(e.startsAt).getTime() < now)
+    .filter((e) => eventEnd(e) < now)
     .sort((a, b) => new Date(b.startsAt).getTime() - new Date(a.startsAt).getTime())
 
   return (
@@ -143,7 +147,11 @@ export default function EventsClient() {
       {upcoming.length > 0 ? (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd(upcoming)) }}
+          dangerouslySetInnerHTML={{
+            // Escape "<" so an event title/description containing "</script>"
+            // cannot break out of the JSON-LD block.
+            __html: JSON.stringify(eventJsonLd(upcoming)).replace(/</g, "\\u003c"),
+          }}
         />
       ) : null}
 
