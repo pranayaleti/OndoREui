@@ -39,10 +39,9 @@ describe("neighborhood page content", () => {
   it("renders the city team section and testimonials", async () => {
     render(await Page({ params }))
     // CityTeamSection renders "Your {cityName} Real Estate Team" and
-    // CityTestimonials renders "What {cityName} Clients Say", assert on
-    // both components' actual headings rather than guessed copy.
+    // CityTestimonials renders "Example stories from {cityName}".
     expect(screen.getByText(/Real Estate Team/i)).toBeInTheDocument()
-    expect(screen.getByText(/Clients Say/i)).toBeInTheDocument()
+    expect(screen.getByText(/Example stories from/i)).toBeInTheDocument()
   })
 
   it("links to a calculator", async () => {

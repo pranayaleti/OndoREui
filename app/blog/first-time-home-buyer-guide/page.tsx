@@ -64,7 +64,7 @@ export default function FirstTimeHomeBuyerGuide() {
             </ul>
 
             <h2>Step 3: Find the Right Agent and Search Smart</h2>
-            <p>A buyer's agent costs you nothing (seller pays both commissions in most transactions) and gives you negotiation expertise, contract knowledge, and access to off-market listings. Look for someone who specialises in your target corridor, Wasatch Front dynamics differ dramatically from Park City or St. George.</p>
+            <p>A buyer&apos;s agent works under a written buyer-broker agreement. Compensation is negotiated — it is not typically free, and the seller does not automatically pay both sides. That agreement is how you get negotiation help, contract knowledge, and a search that includes MLS inventory your agent can access. Look for someone who specialises in your target corridor; Wasatch Front dynamics differ dramatically from Park City or St. George.</p>
             <p>Search tips for Utah:</p>
             <ul>
               <li>Watch days-on-market. Anything under 7 days in the Salt Lake metro usually means multiple offers.</li>

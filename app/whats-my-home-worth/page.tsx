@@ -4,6 +4,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { HomeValueEstimator } from "@/components/home-value-estimator"
+import { ListingPacketForm } from "@/components/leads/listing-packet-form"
 
 const title = "What's My Utah Home Worth?: Free Rent + Sale Estimate | Ondo RE"
 const description =
@@ -51,6 +52,17 @@ export default function WhatsMyHomeWorthPage() {
           </p>
         </header>
         <HomeValueEstimator />
+
+        <div className="mt-16 max-w-3xl mx-auto">
+          <h2 className="mb-3 text-center text-2xl font-bold text-foreground">
+            Want a listing packet after the estimate?
+          </h2>
+          <p className="mb-8 text-center text-sm text-foreground/70">
+            The widget is a city-median estimate, not a CMA. Send the address and we will follow up
+            about listing next steps. This does not create an account.
+          </p>
+          <ListingPacketForm />
+        </div>
 
         <div className="mt-12 max-w-3xl mx-auto text-center">
           <p className="text-sm text-foreground/60 mb-3">

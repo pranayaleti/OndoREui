@@ -73,7 +73,7 @@ describe("arrival path routing", () => {
   it("maps each path to a real contact inquiry type", () => {
     expect(arrivalPathInquiryType("rent")).toBe("renter")
     expect(arrivalPathInquiryType("leaving-a-home")).toBe("owner")
-    expect(arrivalPathInquiryType("buy")).toBe("other")
+    expect(arrivalPathInquiryType("buy")).toBe("buyer")
     expect(arrivalPathInquiryType("people-ops")).toBe("other")
   })
 

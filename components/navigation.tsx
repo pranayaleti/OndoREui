@@ -80,6 +80,8 @@ export const allNavigationItems: NavigationItem[] = [
     labelKey: "nav.resources",
     children: [
       { href: "/tour", labelKey: "nav.platformTour" },
+      { href: "/academy", labelKey: "nav.academy" },
+      { href: "/about/testimonials", labelKey: "nav.reviews" },
       { href: "/blog", labelKey: "nav.blogAndGuides" },
       { href: "/news", labelKey: "nav.news" },
       { href: "/socials", labelKey: "nav.socials" },

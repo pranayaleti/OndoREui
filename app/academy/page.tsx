@@ -1,55 +1,80 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { TrendingUp, Wrench, DollarSign, MapPin } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { BookOpen, Calculator, CalendarDays, FileText, Home, Landmark, PlayCircle, Users } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
-import { SITE_CLAUDE_ASK_ONDO_URL } from "@/lib/site"
-import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { CalendlyBookSection } from "@/components/contact/calendly-inline-embed"
+import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { SITE_URL } from "@/lib/site"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
-export const metadata: Metadata = {
-  alternates: { canonical: toCanonicalPageUrl("/academy") },
-  title: "Ondo Academy | Real Estate Education",
-  description: "Free guides, tools, and resources to help you make smarter real estate decisions in Utah.",
-}
+export const metadata: Metadata = pageCanonicalMetadata("/academy", {
+  title: "Ondo Academy | Free Utah Real Estate Training",
+  description:
+    "Free training for Utah owners, investors, buyers, and tenants: templates, calculators, videos, events, and a call with our team.",
+})
 
-const topics = [
+const startHerePaths = [
   {
-    icon: TrendingUp,
-    title: "Investing",
-    links: [
-      { label: "Why Utah Is the Best Real Estate Investment Market", href: "/blog/why-utah-best-real-estate-investment" },
-      { label: "Renting vs Owning: The Hidden Math", href: "/blog/renting-vs-owning-hidden-math" },
-      { label: "Investment Opportunities", href: "/investments" },
-    ],
+    icon: Home,
+    title: "Owners",
+    description: "Property management, pricing, and a free rental analysis for Utah landlords.",
+    href: "/property-management",
+    label: "Owner start here",
   },
   {
-    icon: Wrench,
-    title: "Property Management",
-    links: [
-      { label: "New Landlord Mistakes and the Systems That Fix Them", href: "/blog/new-landlord-mistakes-systems" },
-      { label: "Property Management Automation Checklist", href: "/blog/property-management-automation-checklist" },
-      { label: "Maintenance & CapEx Strategy", href: "/blog/maintenance-capex-strategy" },
-    ],
+    icon: Landmark,
+    title: "Investors",
+    description: "Portfolio strategy, opportunities, and the numbers that actually matter.",
+    href: "/solutions/investors",
+    label: "Investor start here",
   },
   {
-    icon: DollarSign,
-    title: "Loans & Financing",
-    links: [
-      { label: "Mortgage Rate Trends 2025", href: "/blog/mortgage-rate-trends-2025" },
-      { label: "Mortgage Calculators", href: "/calculators" },
-      { label: "Loan Types Explained", href: "/loans" },
-    ],
+    icon: Users,
+    title: "Buyers",
+    description: "Utah buying paths, loan education, and calculators — estimates, not promises.",
+    href: "/buy",
+    label: "Buyer start here",
   },
   {
-    icon: MapPin,
-    title: "Utah Market",
-    links: [
-      { label: "Utah Rent vs Buy: Wasatch Front", href: "/blog/utah-rent-vs-buy-wasatch-front" },
-      { label: "Why Utah: Market Overview", href: "/why-utah" },
-      { label: "Utah Real Estate Market Data", href: "/data" },
-    ],
+    icon: BookOpen,
+    title: "Tenants",
+    description: "How renting with Ondo works: applications, payments, and maintenance.",
+    href: "/solutions/tenants",
+    label: "Tenant start here",
+  },
+]
+
+const libraryLinks = [
+  {
+    icon: FileText,
+    title: "Templates",
+    description: "Utah-oriented lease, checklist, maintenance, and onboarding forms.",
+    href: "/resources/templates",
+    label: "Browse templates",
+  },
+  {
+    icon: Calculator,
+    title: "Calculators",
+    description: "Mortgage, affordability, and owner tools. Results are informational.",
+    href: "/calculators",
+    label: "Open calculators",
+  },
+  {
+    icon: PlayCircle,
+    title: "Video library",
+    description: "Walkthroughs for owners, tenants, investors, and the platform.",
+    href: "/video-library",
+    label: "Watch videos",
+  },
+  {
+    icon: CalendarDays,
+    title: "Events",
+    description: "Upcoming sessions and community events across Utah.",
+    href: "/events",
+    label: "See events",
   },
 ]
 
@@ -57,35 +82,43 @@ export default function AcademyPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Ondo Academy | Real Estate Education"
-        description="Free guides, tools, and resources to help you make smarter real estate decisions in Utah."
+        title="Ondo Academy | Free Utah Real Estate Training"
+        description="Free training for Utah owners, investors, buyers, and tenants: templates, calculators, videos, events, and a call with our team."
         pathname="/academy"
+        jsonLd={generateBreadcrumbJsonLd([
+          { name: "Home", url: SITE_URL },
+          { name: "Academy", url: `${SITE_URL}/academy` },
+        ])}
       />
       <PageBanner
         title="Ondo Academy"
-        subtitle="Free guides, tools, and resources to help you make smarter real estate decisions."
+        subtitle="Free training for owners, investors, buyers, and tenants. Start with a path, then use the templates, calculators, videos, and events already on this site."
       />
 
-      {/* Topic cards */}
-      <section className="py-16 bg-background">
+      <section className="bg-background py-16" aria-labelledby="academy-start-heading">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {topics.map(({ icon: Icon, title, links }) => (
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <h2 id="academy-start-heading" className="mb-3 text-3xl font-bold">
+              Start here
+            </h2>
+            <p className="text-foreground/70">
+              Pick the role that matches you. Each path goes to a live page — not a course upsell.
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2">
+            {startHerePaths.map(({ icon: Icon, title, description, href, label }) => (
               <Card key={title} className="border border-border">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <Icon className="h-6 w-6 text-primary" />
-                    <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+                <CardHeader>
+                  <div className="mb-2 flex items-center gap-3">
+                    <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
+                    <CardTitle>{title}</CardTitle>
                   </div>
-                  <ul className="flex flex-col gap-2">
-                    {links.map(({ label, href }) => (
-                      <li key={href}>
-                        <Link href={href} className="text-sm text-primary underline-offset-2 hover:underline">
-                          {label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <CardDescription>{description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild>
+                    <Link href={href}>{label}</Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -93,27 +126,38 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* Ask AI callout */}
-      <section className="py-12 bg-muted">
-        <div className="container mx-auto px-4 max-w-xl text-center">
-          <div className="bg-background border border-border rounded-lg p-8">
-            <h2 className="text-xl font-bold text-foreground mb-3">Have a specific question?</h2>
-            <p className="text-foreground/70 mb-6">Ask the Ondo AI assistant, it knows Utah real estate inside out.</p>
-            <Button asChild>
-              <a href={SITE_CLAUDE_ASK_ONDO_URL} target="_blank" rel="noopener noreferrer">Ask AI</a>
-            </Button>
+      <section className="bg-muted py-16" aria-labelledby="academy-library-heading">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <h2 id="academy-library-heading" className="mb-3 text-3xl font-bold">
+              Free training library
+            </h2>
+            <p className="text-foreground/70">
+              Practical tools we already publish. Use them on your own, or bring questions to a call.
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2">
+            {libraryLinks.map(({ icon: Icon, title, description, href, label }) => (
+              <Card key={title} className="border border-border bg-card">
+                <CardHeader>
+                  <div className="mb-2 flex items-center gap-3">
+                    <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
+                    <CardTitle>{title}</CardTitle>
+                  </div>
+                  <CardDescription>{description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild variant="outline">
+                    <Link href={href}>{label}</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-background text-center">
-        <div className="container mx-auto px-4">
-          <Button asChild size="lg" variant="outline">
-            <Link href="/blog">Read the blog</Link>
-          </Button>
-        </div>
-      </section>
+      <CalendlyBookSection />
     </main>
   )
 }

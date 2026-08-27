@@ -199,11 +199,6 @@ export default function ResourcesPage() {
         subtitle="Everything you need to understand Utah real estate, financing, property management, and notary workflows: without the jargon."
       />
 
-      <PageBanner
-        title="Real Estate Resources"
-        subtitle="Everything you need to understand Utah real estate, financing, property management, and notary workflows: without the jargon."
-      />
-
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 space-y-12">
           {/* Audience paths */}
@@ -213,6 +208,20 @@ export default function ResourcesPage() {
               Whether you are buying, selling, investing, managing rentals, or just learning, this page connects you to
               the most useful tools and deep-dive content across the site.
             </p>
+            <div className="mb-8 flex flex-wrap gap-3">
+              <Button asChild variant="outline">
+                <Link href="/academy">Academy</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/about/testimonials">Reviews</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/resources/templates">Templates</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/video-library">Video library</Link>
+              </Button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card className="h-full">
                 <CardHeader>

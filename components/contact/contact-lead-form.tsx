@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { SITE_PHONE } from "@/lib/site"
 import {
+  isContactInquiryType,
   submitContactLead,
   type ContactInquiryType,
   type ContactLeadSource,
@@ -33,13 +34,15 @@ const DEFAULT_SOURCE: ContactLeadSource = "website"
 
 const WEBMCP_TOOL_NAME = "submit_contact_lead"
 
-// Audience list is intentionally short: it maps 1:1 to how sales routes leads
-// downstream (owner + agent → PM ops, renter → leasing, current_client →
-// support, vendor → operations, other → catch-all).
+// Audience list maps 1:1 to how sales routes leads (buyer → brokerage,
+// seller → listing, owner + agent → PM ops, renter → leasing,
+// current_client → support, vendor → operations, other → catch-all).
 export const CONTACT_INQUIRY_OPTIONS: ReadonlyArray<{
   value: ContactInquiryType
   labelKey: string
 }> = [
+  { value: "buyer", labelKey: "contactForm.audience.buyer" },
+  { value: "seller", labelKey: "contactForm.audience.seller" },
   { value: "owner", labelKey: "contactForm.audience.owner" },
   { value: "renter", labelKey: "contactForm.audience.renter" },
   { value: "agent", labelKey: "contactForm.audience.agent" },
@@ -61,12 +64,19 @@ function postSubmitPathFor(inquiryType: ContactInquiryType | ""): string | null 
     case "agent":
       return "/affiliate"
     case "owner":
+    case "seller":
       return "/contact#book-a-call"
+    case "buyer":
+      return "/get-matched"
     case "current_client":
     case "vendor":
     case "other":
     case "":
       return null
+    default: {
+      const _exhaustive: never = inquiryType
+      return _exhaustive
+    }
   }
 }
 
@@ -80,6 +90,12 @@ type ContactLeadFormProps = {
    */
   defaultInquiryType?: ContactInquiryType
   /**
+   * Pre-selects an audience radio without hiding the question. Use when the
+   * visitor arrived with intent (`/contact?audience=buyer`) but may still
+   * change their mind.
+   */
+  initialInquiryType?: ContactInquiryType
+  /**
    * When true (default on the standalone /contact page), a successful submit
    * routes the visitor per {@link postSubmitPathFor}. Turn off for embeds
    * where a redirect would surprise users mid-scroll.
@@ -91,6 +107,7 @@ export function ContactLeadForm({
   source = DEFAULT_SOURCE,
   prefillMessage = "",
   defaultInquiryType,
+  initialInquiryType,
   routeAfterSubmit = false,
 }: ContactLeadFormProps = {}) {
   const { t } = useTranslation()
@@ -104,7 +121,7 @@ export function ContactLeadForm({
     message: prefillMessage,
   })
   const [inquiryType, setInquiryType] = useState<ContactInquiryType | "">(
-    defaultInquiryType ?? "",
+    defaultInquiryType ?? initialInquiryType ?? "",
   )
   const [inquiryError, setInquiryError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -230,7 +247,7 @@ export function ContactLeadForm({
               type: "string",
               enum: CONTACT_INQUIRY_OPTIONS.map((o) => o.value),
               description:
-                "Which audience the visitor identifies with (owner, renter, agent, current_client, vendor, other). Helps sales route the lead.",
+                "Which audience the visitor identifies with (buyer, seller, owner, renter, agent, current_client, vendor, other). Helps sales route the lead.",
             },
           },
           required: ["name", "email"],
@@ -346,7 +363,8 @@ export function ContactLeadForm({
               <RadioGroup
                 value={inquiryType}
                 onValueChange={(value) => {
-                  setInquiryType(value as ContactInquiryType)
+                  if (!isContactInquiryType(value)) return
+                  setInquiryType(value)
                   setInquiryError(null)
                 }}
                 aria-required="true"

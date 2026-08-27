@@ -7,51 +7,44 @@ import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Search, DollarSign, Shield, Users } from "lucide-react"
+import { CheckCircle, Handshake, Landmark, Search, Users } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import { WebMCPMortgageTool } from "@/components/buy/webmcp-mortgage-tool"
+import { BuyLendingStrip } from "@/components/buy/buy-lending-strip"
+import { BuySellHowItWorksSection } from "@/components/landing/buy-sell-how-it-works-section"
+import { BuySellNextSteps } from "@/components/buy-sell/next-steps-links"
+import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
+import { LICENSING_HREF } from "@/lib/social-proof-stats"
 
 export const metadata: Metadata = {
-  title: "Buy Homes in Utah | Expert Real Estate Agents | Salt Lake City, Lehi, Provo",
-  description: "Find your dream home in Utah with expert real estate agents. Browse homes for sale in Salt Lake City, Lehi, Provo, and surrounding areas. Get pre-approved for a mortgage.",
+  title: "Buy a Home in Utah | Agent-Led Search & Lending | Ondo Real Estate",
+  description:
+    "Work with an Ondo buyer’s agent across the Wasatch Front. Agent-led for-sale search, in-house mortgages, and rental inventory on this site. Not a public MLS feed. Not a commitment to lend.",
   keywords: [
-    // Core
-    "homes for sale Utah",
-    "houses for sale Utah",
-    "real estate Utah",
-    "Utah real estate listings",
-    // Buyer intent
     "buy house Utah",
     "Utah home buying",
     "first-time home buyer Utah",
-    "down payment assistance Utah",
-    "Utah closing costs",
-    // Geos
-    "Salt Lake City homes for sale",
-    "Lehi homes for sale",
-    "Provo homes for sale",
-    "Orem homes for sale",
-    "Sandy homes for sale",
-    "Draper homes for sale",
-    // Finance
-    "mortgage pre-approval Utah",
-    "Utah mortgage rates",
+    "Utah mortgage",
+    "Salt Lake City real estate agents",
+    "Lehi buyer’s agent",
+    "Provo home buying",
   ],
   alternates: {
     canonical: `${SITE_URL}/buy/`,
   },
   openGraph: {
-    title: "Buy Homes in Utah | Expert Real Estate Agents",
-    description: "Find your dream home in Utah with expert real estate agents. Browse homes for sale across the Wasatch Front.",
+    title: "Buy a Home in Utah | Agent-Led Search & Lending",
+    description:
+      "Shop with an Ondo agent, run the numbers on /loans and calculators, and browse rentals we actually list on this site.",
     url: `${SITE_URL}/buy/`,
     images: [
       {
         url: `${SITE_URL}/suburban-house-garden.png`,
         width: 1200,
         height: 630,
-        alt: "Beautiful Utah home for sale",
+        alt: "Utah home along the Wasatch Front",
       },
     ],
   },
@@ -59,24 +52,28 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    icon: <Search className="h-8 w-8" />,
-    title: "Property Search & Discovery",
-    description: "Advanced MLS search tools and personalized property recommendations based on your criteria.",
-  },
-  {
-    icon: <DollarSign className="h-8 w-8" />,
-    title: "Mortgage Pre-Approval",
-    description: "Connect with trusted lenders to get pre-approved and strengthen your buying power.",
-  },
-  {
-    icon: <Shield className="h-8 w-8" />,
-    title: "Negotiation & Contracts",
-    description: "Expert negotiation skills to secure the best price and terms for your new home.",
-  },
-  {
     icon: <Users className="h-8 w-8" />,
-    title: "Closing Support",
-    description: "Complete guidance through inspections, appraisals, and closing process.",
+    title: "Work with an agent",
+    description:
+      "An Ondo agent searches live for-sale inventory with you, including the MLS. This website does not run a public homes-for-sale feed.",
+  },
+  {
+    icon: <Landmark className="h-8 w-8" />,
+    title: "Loans in the same shop",
+    description:
+      "Talk with a loan officer about conventional, FHA, VA, and USDA options. Estimates here are illustration only — not a commitment to lend.",
+  },
+  {
+    icon: <Search className="h-8 w-8" />,
+    title: "Rentals on this site",
+    description:
+      "Live listings at /properties are rentals we manage. Use them if you are comparing rent vs own, not as a for-sale catalog.",
+  },
+  {
+    icon: <Handshake className="h-8 w-8" />,
+    title: "Offer through close",
+    description:
+      "Offer strategy, negotiation, inspections, and closing coordination under a written buyer-broker agreement.",
   },
 ]
 
@@ -85,42 +82,46 @@ export default function BuyPage() {
     <>
       <WebMCPMortgageTool />
       <SEO
-        title="Buy Homes in Utah | Expert Real Estate Agents"
-        description="Find your dream home in Utah with expert real estate agents. Browse homes for sale across the Wasatch Front."
+        title="Buy a Home in Utah | Agent-Led Search & Lending"
+        description="Work with an Ondo buyer’s agent. Agent-led for-sale search, in-house mortgages, and rental inventory on this site. Not a public MLS feed."
         pathname="/buy/"
         image={`${SITE_URL}/suburban-house-garden.png`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
-            { name: "Buy Homes in Utah", url: `${SITE_URL}/buy/` },
+            { name: "Buy a home in Utah", url: `${SITE_URL}/buy/` },
           ]),
           generateServiceJsonLd({
             name: "Utah home buying services",
-            description: "Agent-led home searches, tours, and negotiations across Utah.",
+            description: "Agent-led home searches, tours, negotiations, and mortgage origination across Utah.",
             serviceType: "Home Buying",
             areaServed: "Utah",
           }),
         ]}
       />
       <PageBanner
-        title="Buy Homes in Utah"
-        subtitle="Find your dream home with expert real estate agents across the Wasatch Front"
+        title="Buy a home in Utah"
+        subtitle="Shop with an agent, run the loan numbers, and compare rent vs own. For-sale search is agent-led — this site lists rentals we manage."
         backgroundImage="/suburban-house-garden.png"
       />
 
-      <section className="py-16 bg-background">
+      <BuyLendingStrip />
+
+      <BuySellHowItWorksSection audience="buyer" />
+
+      <section className="bg-background py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Your Utah Home Buying Journey Starts Here</h2>
+          <div className="mx-auto mb-12 max-w-4xl text-center">
+            <h2 className="mb-4 text-3xl font-bold text-foreground">What buying with Ondo includes</h2>
             <p className="text-xl text-foreground/70">
-              Whether you're a first-time buyer or looking to upgrade, our experienced agents will guide you 
-              through every step of finding and purchasing your perfect Utah home.
+              Representation, lending, and rental inventory you can actually use on this site.
+              We do not advertise a self-serve MLS search or a four-minute pre-qualification letter.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {services.map((service, index) => (
-              <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow">
+          <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => (
+              <Card key={service.title} className="p-6 text-center">
                 <CardHeader>
                   <div className="mx-auto mb-4 text-primary">{service.icon}</div>
                   <CardTitle className="text-xl">{service.title}</CardTitle>
@@ -132,49 +133,74 @@ export default function BuyPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
-              <h3 className="text-2xl font-bold mb-6">Why Choose Our Home Buying Services?</h3>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+              <h3 className="mb-6 text-2xl font-bold text-foreground">How search actually works here</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <CheckCircle className="mr-3 mt-1 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
                   <div>
-                    <h4 className="font-semibold">Local Market Expertise</h4>
-                    <p className="text-foreground/70">Deep knowledge of Utah neighborhoods, schools, and market trends</p>
+                    <h4 className="font-semibold">Agent-led for-sale search</h4>
+                    <p className="text-foreground/70">
+                      Your agent uses MLS and other sources with you. There is no public “advanced MLS search” on this website.
+                    </p>
                   </div>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="mr-3 mt-1 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
                   <div>
-                    <h4 className="font-semibold">Advanced Search Tools</h4>
-                    <p className="text-foreground/70">Access to exclusive listings and advanced MLS search capabilities</p>
+                    <h4 className="font-semibold">Written buyer agreement</h4>
+                    <p className="text-foreground/70">
+                      Buyer-broker compensation is negotiated and written down. It is not typically free, and the seller does not automatically pay your agent.
+                    </p>
                   </div>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="mr-3 mt-1 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
                   <div>
-                    <h4 className="font-semibold">Negotiation Excellence</h4>
-                    <p className="text-foreground/70">Proven track record of securing the best deals for our clients</p>
+                    <h4 className="font-semibold">Lending in parallel</h4>
+                    <p className="text-foreground/70">
+                      Start on{" "}
+                      <Link href="/loans" className="font-medium text-primary underline-offset-4 hover:underline">
+                        /loans
+                      </Link>{" "}
+                      and the calculators. You are not required to use Ondo for financing to buy with Ondo.
+                    </p>
                   </div>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="mr-3 mt-1 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
                   <div>
-                    <h4 className="font-semibold">Full-Service Support</h4>
-                    <p className="text-foreground/70">Complete guidance from initial search through closing and beyond</p>
+                    <h4 className="font-semibold">Rent vs own, with live rentals</h4>
+                    <p className="text-foreground/70">
+                      Compare on{" "}
+                      <Link href="/calculators/rent-vs-own" className="font-medium text-primary underline-offset-4 hover:underline">
+                        rent vs own
+                      </Link>
+                      , then browse{" "}
+                      <Link href="/properties" className="font-medium text-primary underline-offset-4 hover:underline">
+                        rentals we manage
+                      </Link>
+                      .
+                    </p>
                   </div>
-                </div>
-              </div>
+                </li>
+              </ul>
+              <p className="mt-6 text-xs leading-relaxed text-foreground/60">
+                {ARRIVAL_LENDING_DISCLOSURE}{" "}
+                <Link href={LICENSING_HREF} className="font-medium text-primary underline underline-offset-4">
+                  Licensing disclosures
+                </Link>
+              </p>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
+            <div className="relative h-96 overflow-hidden rounded-lg">
               <Image
                 src="/modern-townhouse-garage.png"
-                alt="Modern Utah townhouse for sale in Midvale featuring attached garage and contemporary design"
+                alt="Utah townhouse along the Wasatch Front"
                 fill
                 className="object-cover"
                 sizes="100vw"
-                title="Modern Utah Townhouse for Sale - Midvale"
-                aria-label="Modern Utah townhouse for sale in Midvale featuring attached garage and contemporary design"
+                title="Utah townhouse"
                 loading="lazy"
               />
             </div>
@@ -182,84 +208,49 @@ export default function BuyPage() {
         </div>
       </section>
 
-      {/* Consultation CTA Section */}
-      <section className="py-16 bg-background">
+      <BuySellNextSteps audience="buyer" />
+
+      <section className="bg-background py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <ConsultationCTA 
-              title="Ready to Start Your Home Buying Journey?"
-              description="Get personalized guidance from our Utah real estate experts. Book a free consultation to discuss your home buying goals and get expert market insights."
+          <div className="mx-auto max-w-4xl">
+            <ConsultationCTA
+              title="Ready to work with a buyer’s agent?"
+              description="Book a 30-minute call to talk neighborhoods, budget, and a written buyer agreement. Not a loan application."
               variant="card"
             />
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
+      <section className="bg-card py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Find Your Utah Dream Home?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Start your home buying journey with expert guidance and local market knowledge.
+          <h2 className="mb-4 text-3xl font-bold text-foreground">Questions about buying in Utah?</h2>
+          <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/70">
+            Compensation, agreements, and process — including what changed after 2024.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-card text-primary hover:bg-muted">
-              <Link href="/contact">Start Your Search</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-foreground hover:bg-card hover:text-primary">
-              <Link href="/properties">Browse Listings</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Service JSON-LD + Business JSON-LD */}
-      <Script id="buy-service-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': ['Service'],
-          name: 'Home Buying Services',
-          description: 'Expert real estate agents helping buyers find and purchase homes in Utah.',
-          provider: {
-            '@type': ['Organization','LocalBusiness','RealEstateAgent'],
-            name: SITE_NAME,
-            url: SITE_URL,
-            areaServed: ['Lehi UT','Salt Lake City UT','Draper UT','Utah County'],
-            sameAs: SITE_SOCIALS
-          },
-          areaServed: ['Lehi UT','Salt Lake City UT','Draper UT','Utah County'],
-          serviceType: 'Real Estate Sales',
-          offers: { '@type': 'Offer', description: 'Professional home buying representation and guidance' },
-        })}
-      </Script>
-      <Script id="buy-business-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': ['Organization','LocalBusiness','RealEstateAgent'],
-          name: SITE_NAME,
-          url: SITE_URL,
-          areaServed: ['Lehi UT','Salt Lake City UT','Draper UT','Utah County'],
-          sameAs: SITE_SOCIALS,
-          makesOffer: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Property Management' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Home Buying' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Home Selling' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Home Loans' } }
-          ]
-        })}
-      </Script>
-
-      {/* Centralized FAQs live on /faq */}
-      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Questions about buying in Utah?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
-            Browse our dedicated Help Center for detailed FAQs on buying, financing, payments, and more.
-          </p>
-          <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-card hover:text-black">
-            <Link href="/faq/buying-selling-faqs">View Buying FAQs</Link>
+          <Button asChild size="lg" variant="outline">
+            <Link href="/faq/buying-selling-faqs">View buying FAQs</Link>
           </Button>
         </div>
       </section>
+
+      <Script id="buy-service-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": ["Service"],
+          name: "Home Buying Services",
+          description: "Agent-led representation and mortgage origination for Utah buyers. Not a public MLS search.",
+          provider: {
+            "@type": ["Organization", "LocalBusiness", "RealEstateAgent"],
+            name: SITE_NAME,
+            url: SITE_URL,
+            areaServed: ["Lehi UT", "Salt Lake City UT", "Draper UT", "Utah County"],
+            sameAs: SITE_SOCIALS,
+          },
+          areaServed: ["Lehi UT", "Salt Lake City UT", "Draper UT", "Utah County"],
+          serviceType: "Real Estate Sales",
+        })}
+      </Script>
     </>
   )
 }

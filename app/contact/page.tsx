@@ -1,8 +1,10 @@
+import { Suspense } from "react"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
 import { ContactLeadForm } from "@/components/contact/contact-lead-form"
+import { ContactPageForm } from "@/components/contact/contact-page-form"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
 import { WebMCPContactInfoTool } from "@/components/contact/webmcp-contact-info-tool"
 import { Mail, Phone } from "lucide-react"
@@ -51,7 +53,9 @@ export default function ContactPage() {
               <h2 className="text-xl font-semibold dark:text-foreground mb-4">
                 Send a message
               </h2>
-              <ContactLeadForm routeAfterSubmit />
+              <Suspense fallback={<ContactLeadForm routeAfterSubmit />}>
+                <ContactPageForm />
+              </Suspense>
             </div>
             <div>
               <h2 className="text-xl font-semibold dark:text-foreground mb-4">

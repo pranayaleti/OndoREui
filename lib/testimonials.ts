@@ -1,12 +1,52 @@
+export type TestimonialRole = "Owner" | "Tenant" | "Investor" | "Buyer" | "Seller"
+export type TestimonialService = "property-management" | "buy-sell" | "loans" | "investments"
+/**
+ * `composite` = illustrative copy (first name + optional stock photo, no review date).
+ * Do not present composites as Google reviews. Add `review` only for permissioned,
+ * dated quotes.
+ */
+export type TestimonialKind = "composite" | "review"
+
 export type Testimonial = {
   name: string
-  role: "Owner" | "Tenant" | "Investor" | "Buyer" | "Seller"
+  role: TestimonialRole
   city: string
-  service: "property-management" | "buy-sell" | "loans" | "investments"
+  service: TestimonialService
   quote: string
   rating: number
   image?: string
+  kind?: TestimonialKind
+  reviewDate?: string
 }
+
+export function getTestimonialKind(item: Testimonial): TestimonialKind {
+  if (item.kind) return item.kind
+  if (item.reviewDate) return "review"
+  return "composite"
+}
+
+/** Display order for role chips. Only roles present in `testimonials` are shown. */
+export const TESTIMONIAL_ROLE_ORDER: TestimonialRole[] = [
+  "Owner",
+  "Tenant",
+  "Investor",
+  "Buyer",
+  "Seller",
+]
+
+export const TESTIMONIAL_SERVICE_LABELS: Record<TestimonialService, string> = {
+  "property-management": "Property management",
+  "buy-sell": "Buy & sell",
+  loans: "Loans",
+  investments: "Investments",
+}
+
+const TESTIMONIAL_SERVICE_ORDER: TestimonialService[] = [
+  "property-management",
+  "buy-sell",
+  "loans",
+  "investments",
+]
 
 export const testimonials: Testimonial[] = [
   // Salt Lake City
@@ -154,6 +194,16 @@ export const testimonials: Testimonial[] = [
     rating: 5,
   },
 ]
+
+export function getPresentTestimonialRoles(): TestimonialRole[] {
+  const present = new Set(testimonials.map((item) => item.role))
+  return TESTIMONIAL_ROLE_ORDER.filter((role) => present.has(role))
+}
+
+export function getPresentTestimonialServices(): TestimonialService[] {
+  const present = new Set(testimonials.map((item) => item.service))
+  return TESTIMONIAL_SERVICE_ORDER.filter((service) => present.has(service))
+}
 
 /**
  * Get testimonials for a specific city, falling back to nearby-city testimonials

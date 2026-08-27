@@ -532,7 +532,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "Property search",
           href: "/search",
-          description: "Filter rentals and for-sale inventory we market.",
+          description: "Filter rentals we manage. For-sale search is agent-led on /buy.",
         },
         {
           name: "Properties",
@@ -906,7 +906,7 @@ export function buildLlmsFullTxtBody(): string {
     "## Services in detail",
     "",
     "### Buy a home",
-    "Ondo helps Utah buyers from first search to closing. Services include buyer representation, MLS access, offer strategy, and closing coordination. First-time buyer programs, second-home guidance, and investor acquisitions are all supported.",
+    "Ondo helps Utah buyers from first conversation to closing. Services include buyer representation, agent-led MLS search (this website lists rentals, not a public for-sale feed), offer strategy, closing coordination, and in-house mortgage origination. Loan information is not a commitment to lend.",
     "",
     "### Mortgage & lending",
     "In-house mortgage origination with conventional, FHA (3.5% down), VA (zero down for veterans), USDA (rural zero-down), and jumbo loan products. City- and ZIP-specific landing pages provide local rate context. Refinance analysis available.",

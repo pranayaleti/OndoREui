@@ -18,12 +18,12 @@ export const propertyManagementFaqBank: CityFaq[] = [
 ]
 
 export const buySellFaqBank: CityFaq[] = [
-  { q: "How do I get started buying a home in Utah?", a: "Begin with a quick consultation and mortgage pre-approval. We then refine neighborhoods, must-haves, and budget before touring homes." },
+  { q: "How are buyer’s agents paid after 2024?", a: "Buyer-broker compensation is negotiated and written into a buyer-broker agreement before we tour homes. A seller offer of compensation is not automatic. We explain the agreement, including what you might pay, before you sign. This is not a rebate offer." },
   { q: "What down payment do I need?", a: "Conventional loans can start as low as 3% down. FHA often requires 3.5%, VA and USDA can be 0% for eligible buyers. Your lender will confirm options." },
   { q: "How competitive is the market right now?", a: "Competitiveness varies by city and price band. We share current absorption rates, days on market, and strategy for winning in multiple-offer scenarios." },
   { q: "Should I waive inspections or appraisal?", a: "We protect your interests. We rarely recommend waiving protections; instead we tailor timelines, escalation terms, and credits to strengthen offers." },
   { q: "What closing costs should I expect?", a: "Plan for 2–3% of purchase price for lender, title, and prepaid items. We can pursue seller credits to offset costs where appropriate." },
-  { q: "Do you represent new construction buyers?", a: "Yes. We help evaluate builders, negotiate upgrades, review timelines, and coordinate inspections, representation costs are typically covered by the builder." },
+  { q: "Do you represent new construction buyers?", a: "Yes. We help evaluate builders, negotiate upgrades, review timelines, and coordinate inspections. Compensation on new construction is also negotiated — it is not automatically covered by the builder. You will have a written buyer agreement before we tour." },
   { q: "Can you help me sell my current home and buy another?", a: "Yes. We coordinate pricing, timing, and financing, often with leasebacks or extended closings, to minimize overlap and stress." },
   { q: "What is earnest money?", a: "A good-faith deposit credited at closing. It signals commitment and is protected by your contract’s contingencies and timelines." },
   { q: "How long does a typical purchase take?", a: "Most close in 30–45 days from acceptance. Cash can be faster. Pre-approval and document readiness help keep timelines tight." },

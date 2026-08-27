@@ -5,16 +5,18 @@ import { SITE_URL } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { FileText, ClipboardList, Home, BookOpen } from "lucide-react"
+import { TemplateRequestForm } from "@/components/resources/template-request-form"
+import { FileText, ClipboardList, Home, BookOpen, ClipboardCheck } from "lucide-react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Utah Landlord Templates & Forms | Ondo Real Estate",
-  description: "Download Utah-compliant landlord templates: residential lease, move-in checklist, maintenance request form, and a 90-day onboarding playbook.",
+  title: "Utah Landlord Templates & Seller Listing-Prep | Ondo Real Estate",
+  description:
+    "Request Utah landlord templates and a seller listing-prep checklist. We email the file after you request it — not an instant download.",
   alternates: { canonical: `${SITE_URL}/resources/templates/` },
   openGraph: {
     title: "Utah Landlord Templates & Forms | Ondo Real Estate",
-    description: "Download Utah-compliant landlord templates: residential lease, move-in checklist, maintenance request form, and a 90-day onboarding playbook.",
+    description: "Request Utah-oriented landlord templates plus a seller listing-prep checklist. Files are emailed after you request them.",
   },
   twitter: {
     card: "summary_large_image",
@@ -25,12 +27,12 @@ export const metadata: Metadata = {
 
 const templates = [
   {
+    id: "residential-lease",
     title: "Residential Lease Agreement",
     description:
       "A Utah-compliant lease covering rent terms, security deposit rules, maintenance responsibilities, entry notice requirements, and lease renewal conditions. Drafted to align with Utah Code Title 57 (Property) and current statutory limits.",
-    badge: "Request via contact",
-    badgeHref: "/contact",
     icon: <FileText className="h-6 w-6" />,
+    inquiryType: "owner" as const,
     details: [
       "Utah-specific statutory language",
       "Security deposit and pet deposit provisions",
@@ -39,12 +41,12 @@ const templates = [
     ],
   },
   {
+    id: "move-in-checklist",
     title: "Move-In / Move-Out Checklist",
     description:
       "A room-by-room condition checklist designed to protect both landlords and tenants at turnover. Includes a photo log section and a signature block for mutual agreement at move-in and move-out.",
-    badge: "Download PDF",
-    badgeHref: "/contact",
     icon: <ClipboardList className="h-6 w-6" />,
+    inquiryType: "owner" as const,
     details: [
       "Room-by-room condition fields",
       "Photo log documentation section",
@@ -53,12 +55,12 @@ const templates = [
     ],
   },
   {
+    id: "maintenance-request",
     title: "Maintenance Request Form",
     description:
       "A tenant-facing form that categorises issues by urgency tier (emergency, urgent, routine) so your maintenance team can triage and schedule appropriately. This form is integrated into the Ondo owner portal workflow.",
-    badge: "Used in owner portal",
-    badgeHref: "/contact",
     icon: <Home className="h-6 w-6" />,
+    inquiryType: "owner" as const,
     details: [
       "Three urgency tiers: emergency / urgent / routine",
       "Entry permission checkbox",
@@ -67,17 +69,31 @@ const templates = [
     ],
   },
   {
+    id: "landlord-onboarding-playbook",
     title: "Landlord Onboarding Playbook",
     description:
       "A structured 90-day guide for new Utah landlords covering entity setup, insurance review, banking, screening criteria, lease execution, and systems configuration. Includes a checklist of tools and services to put in place before your first tenant moves in.",
-    badge: "Request via contact",
-    badgeHref: "/contact",
     icon: <BookOpen className="h-6 w-6" />,
+    inquiryType: "owner" as const,
     details: [
       "First 90-day milestone calendar",
       "Legal and insurance setup checklist",
       "Screening and lease execution guide",
       "Systems and automation recommendations",
+    ],
+  },
+  {
+    id: "listing-prep-showing-feedback",
+    title: "Listing-Prep & Showing-Feedback Checklist",
+    description:
+      "A brokerage checklist for sellers getting a home ready to list and collecting showing notes afterward. We email the file after you request it — this is not a QR code, text-for-info shortcode, or YouTube tour product.",
+    icon: <ClipboardCheck className="h-6 w-6" />,
+    inquiryType: "seller" as const,
+    details: [
+      "Prep before photos: declutter, repairs, curb appeal",
+      "Showing-day checklist for occupants",
+      "How to record showing feedback we send you",
+      "Request the file — we email it, not an instant download",
     ],
   },
 ]
@@ -87,7 +103,7 @@ export default function TemplatesPage() {
     <main className="min-h-screen">
       <SEO
         title="Utah Landlord Templates & Forms"
-        description="Download Utah-compliant landlord templates: residential lease, move-in checklist, maintenance request form, and a 90-day onboarding playbook."
+        description="Request Utah landlord templates and a seller listing-prep checklist. We email the file after you request it."
         pathname="/resources/templates"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -98,7 +114,7 @@ export default function TemplatesPage() {
       />
       <PageBanner
         title="Templates & Resources"
-        subtitle="Practical, Utah-compliant forms and playbooks that help landlords protect their investment and run tighter operations"
+        subtitle="Utah-oriented landlord forms plus a seller listing-prep checklist. Request the file — we email it."
         backgroundImage="/modern-apartment-balcony.png"
       />
 
@@ -110,7 +126,7 @@ export default function TemplatesPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Why We Publish These Templates</h2>
               <p className="text-lg text-foreground/70">
-                Most landlord mistakes happen before a tenant ever moves in, an informal lease, a skipped move-in checklist, or no documented process for maintenance. These templates reflect the same forms and workflows we use inside Ondo&apos;s property management platform. They are written for Utah law, tested across hundreds of rentals, and free to use as a starting point. If you need a version customised to your specific portfolio or want us to manage the whole process, reach out and we will walk through it with you.
+                These templates reflect forms we use at Ondo. Landlord files are written for Utah law. Sellers can request a listing-prep and showing-feedback checklist — we email the file; it is not a QR, SMS, or YouTube product. Leave your name and email on each card.
               </p>
             </div>
 
@@ -134,9 +150,11 @@ export default function TemplatesPage() {
                         </li>
                       ))}
                     </ul>
-                    <Button asChild size="sm" className="self-start">
-                      <Link href={t.badgeHref}>{t.badge}</Link>
-                    </Button>
+                    <TemplateRequestForm
+                      templateId={t.id}
+                      templateTitle={t.title}
+                      inquiryType={t.inquiryType}
+                    />
                   </div>
                 </Card>
               ))}

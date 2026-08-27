@@ -6,15 +6,24 @@ export type ContactLeadSource = "website" | "referral" | "direct" | "social" | "
 /**
  * Self-identified audience from the contact form. Kept in sync with the
  * Express/Edge Zod schemas and the `website_leads.inquiry_type` CHECK
- * constraint (migration 20260825155417).
+ * constraint (migration 20260827155628).
  */
-export type ContactInquiryType =
-  | "owner"
-  | "renter"
-  | "agent"
-  | "current_client"
-  | "vendor"
-  | "other"
+export const CONTACT_INQUIRY_TYPES = [
+  "owner",
+  "renter",
+  "buyer",
+  "seller",
+  "agent",
+  "current_client",
+  "vendor",
+  "other",
+] as const
+
+export type ContactInquiryType = (typeof CONTACT_INQUIRY_TYPES)[number]
+
+export function isContactInquiryType(value: string): value is ContactInquiryType {
+  return (CONTACT_INQUIRY_TYPES as readonly string[]).includes(value)
+}
 
 export interface SubmitContactLeadPayload {
   name: string

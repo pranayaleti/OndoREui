@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getHomepageOwnerFaqs, propertyManagementFaqBank } from "./service-faq"
+import { buySellFaqBank, getHomepageOwnerFaqs, propertyManagementFaqBank } from "./service-faq"
 
 describe("getHomepageOwnerFaqs", () => {
   it("returns the first six items from the property-management FAQ bank", () => {
@@ -20,5 +20,17 @@ describe("getHomepageOwnerFaqs", () => {
       .join(" ")
     expect(blob).not.toMatch(/7–21 days/)
     expect(blob).not.toMatch(/handled immediately/i)
+  })
+})
+
+describe("buySellFaqBank", () => {
+  it("does not claim buyer representation is typically free or that the seller pays the buyer’s agent", () => {
+    const blob = buySellFaqBank.map((faq) => `${faq.q} ${faq.a}`).join(" ")
+    expect(blob).not.toMatch(/representation is typically free/i)
+    expect(blob).not.toMatch(/costs you nothing/i)
+    expect(blob).not.toMatch(/seller pays the commission/i)
+    expect(blob).not.toMatch(/typically covered by the builder/i)
+    expect(blob).toMatch(/negotiated/)
+    expect(blob).toMatch(/written buyer/)
   })
 })

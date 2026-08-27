@@ -49,4 +49,25 @@ describe("submitContactLead", () => {
     const body = JSON.parse(String(init.body))
     expect(body.inquiryType).toBe("owner")
   })
+
+  it("accepts buyer and seller inquiry types on the client payload", async () => {
+    vi.stubEnv("NEXT_PUBLIC_BACKEND_BASE_URL", "http://localhost:3030")
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, message: "ok", leadId: "abc" }),
+    })
+    vi.stubGlobal("fetch", fetchMock)
+    vi.resetModules()
+    const { submitContactLead } = await import("./leads-api")
+
+    await submitContactLead({
+      name: "Buyer Jane",
+      email: "buyer@example.com",
+      source: "website",
+      inquiryType: "buyer",
+    })
+
+    const [, init] = fetchMock.mock.calls[0]
+    expect(JSON.parse(String(init.body)).inquiryType).toBe("buyer")
+  })
 })

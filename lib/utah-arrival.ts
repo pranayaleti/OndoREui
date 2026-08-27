@@ -231,7 +231,7 @@ export function arrivalPathInquiryType(path: ArrivalPathId): ContactInquiryType 
     case "leaving-a-home":
       return "owner"
     case "buy":
-      return "other"
+      return "buyer"
     case "people-ops":
       return "other"
     default: {

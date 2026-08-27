@@ -53,7 +53,7 @@ describe("CityGuidePage", () => {
   it("mounts lead capture, city testimonials, and resource hub links", () => {
     render(<CityGuidePage city={slc} />)
     expect(screen.getAllByLabelText(/name/i).length).toBeGreaterThanOrEqual(2)
-    expect(screen.getByText(/What Salt Lake City Clients Say/i)).toBeInTheDocument()
+    expect(screen.getByText(/Example stories from Salt Lake City/i)).toBeInTheDocument()
     expect(screen.getByRole("link", { name: /Guides & resources/i })).toHaveAttribute("href", "/resources/")
     expect(screen.getByRole("link", { name: /^Blog$/i })).toHaveAttribute("href", "/blog/")
   })

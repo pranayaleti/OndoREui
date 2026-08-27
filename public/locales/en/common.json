@@ -25,6 +25,8 @@
     "forPropertyManagers": "For Property Managers",
     "forTenants": "For Tenants",
     "resources": "Resources",
+    "academy": "Academy",
+    "reviews": "Reviews",
     "platformTour": "Platform Tour",
     "blogAndGuides": "Blog & Guides",
     "faq": "FAQ",
@@ -468,12 +470,14 @@
     "audience": {
       "legend": "How can we help?",
       "required": "Please tell us which one describes you.",
+      "buyer": "I'm buying a home",
+      "seller": "I'm selling a home",
       "owner": "I own a rental (interested in management)",
       "renter": "I'm looking for a home to rent",
       "agent": "I'm a real estate agent (referrals)",
       "currentClient": "I'm a current owner or resident",
       "vendor": "I'm a vendor",
-      "other": "Something else (loans, notary, buying, selling)"
+      "other": "Something else (loans, notary, other)"
     }
   },
   "consultationModal": {
@@ -568,5 +572,73 @@
       "termsRequired": "You must accept the terms to submit",
       "submit": "Something went wrong. Please try again."
     }
+  },
+  "listingPacket": {
+    "title": "Request a listing packet",
+    "subtitle": "Tell us about the property. We'll follow up with a CMA conversation, marketing outline, and next steps. This is not a seller dashboard and does not create an account.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone (optional)",
+    "addressLabel": "Property address",
+    "addressPlaceholder": "Street, city, UT",
+    "timingLabel": "When are you thinking of listing?",
+    "timingPlaceholder": "Select timing",
+    "timing": {
+      "readyNow": "Ready now",
+      "oneToThree": "1–3 months",
+      "threeToSix": "3–6 months",
+      "sixToTwelve": "6–12 months",
+      "exploring": "Just exploring"
+    },
+    "notesLabel": "Notes (optional)",
+    "notesPlaceholder": "Condition, HOA, timeline, or questions for the listing agent.",
+    "photosLabel": "Photos or documents (optional)",
+    "photosHint": "Describe what you have (exterior photos, floor plan, HOA docs). We'll request files by email — this form does not upload files.",
+    "photosPlaceholder": "e.g. iPhone exteriors and a PDF floor plan",
+    "submit": "Request listing packet",
+    "sending": "Sending…",
+    "successTitle": "Listing packet request received",
+    "successBody": "We'll follow up within one business day. Owner and seller portals are invite-only — this request does not create an account.",
+    "errorFallback": "Something went wrong. Please try again.",
+    "nameRequired": "Please enter your name.",
+    "emailInvalid": "Please enter a valid email address.",
+    "addressRequired": "Please enter the property address.",
+    "timingRequired": "Please tell us your timing.",
+    "inviteOnly": "This is a seller lead, not a signup. Portals stay invite-only."
+  },
+  "buyLending": {
+    "eyebrow": "Lending",
+    "title": "Shop financing alongside the house",
+    "body": "Ondo originates mortgages in-house. Use the calculators for illustration, then talk with a loan officer. This is not a commitment to lend, and we do not issue an instant pre-qualification letter.",
+    "loansCta": "Home loans",
+    "calculatorsCta": "All calculators",
+    "affordabilityCta": "Affordability",
+    "rentVsOwnCta": "Rent vs own",
+    "paymentCta": "Mortgage payment",
+    "piTitle": "Monthly principal & interest",
+    "principal": "Loan amount (USD)",
+    "rate": "Interest rate (%)",
+    "term": "Term (years)",
+    "calculate": "Estimate P&I",
+    "result": "Estimated monthly P&I: {{amount}}",
+    "piNote": "P&I only — not taxes, insurance, or PMI. Example inputs, not a quote.",
+    "licensing": "Licensing disclosures"
+  },
+  "testimonialUi": {
+    "compositeBadge": "Example",
+    "compositeDisclaimer": "These are example stories written to illustrate typical Ondo work. They are composites, not dated third-party platform reviews.",
+    "landingTitle": "What working with Ondo can look like",
+    "landingSubtitle": "Example stories across owners, tenants, investors, buyers, and sellers in Utah.",
+    "seeAll": "See all example stories",
+    "pageHeading": "Example stories",
+    "pageIntro": "{{count}} example stories. Filter by role or service. These are composites, not Google reviews.",
+    "countOne": "1 example story",
+    "countMany": "{{count}} example stories",
+    "empty": "No stories match those filters yet.",
+    "filterRole": "Filter by role",
+    "filterService": "Filter by service",
+    "allRoles": "All roles",
+    "allServices": "All services",
+    "carouselLabel": "Example stories"
   }
 }

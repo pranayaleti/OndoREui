@@ -91,6 +91,7 @@ English only. Translation files: `public/locales/en/common.json`. Use `t()` in c
 ## Learned User Preferences
 
 <!-- Maintained automatically by the continual-learning skill. Do not edit manually. -->
+- Push `main` only. Never create a feature branch.
 
 ## Learned Workspace Facts
 

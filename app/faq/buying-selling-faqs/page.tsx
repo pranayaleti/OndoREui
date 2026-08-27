@@ -64,7 +64,12 @@ export default function BuyingSellingFAQPage() {
     {
       question: "How much do your real estate services cost for buyers?",
       answer:
-        "Our buyer representation is typically free to you - the seller pays the commission. We're committed to providing excellent service without additional fees to buyers.",
+        "Buyer-broker compensation is negotiated and written into a buyer-broker agreement before we tour homes. It is not typically free, and the seller does not automatically pay your agent. We will explain the agreement, any compensation a listing may offer, and what you might pay, before you sign. This is not a rebate offer. Fair Housing: we work with every qualified buyer using the same process.",
+    },
+    {
+      question: "Do I need a written buyer agreement?",
+      answer:
+        "Yes. After the 2024 NAR practice changes, buyers typically sign a written buyer-broker agreement before touring. It states the services we provide and how we may be paid. We walk through it in plain language before you sign.",
     },
     {
       question: "How long does a typical purchase take?",

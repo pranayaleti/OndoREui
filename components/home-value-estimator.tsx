@@ -82,6 +82,7 @@ export function HomeValueEstimator() {
       name: friendlyName,
       email: trimmedEmail,
       source: "website",
+      inquiryType: "seller",
       message: messageParts.join("\n"),
       attribution: getAttributionPayloadForApi(),
     })
