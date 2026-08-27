@@ -1,3 +1,12 @@
+/**
+ * Last internal verify of these Ondo city medians (same month-stamp voice as
+ * `FEE_COMPARISON_AS_OF`). Not MLS, appraisal, BPO, or CMA.
+ */
+export const CITY_MARKET_AS_OF = "Aug 2026"
+
+export const CITY_MARKET_DATA_DISCLOSURE =
+  `Ondo city medians as of ${CITY_MARKET_AS_OF} — verify. Not an MLS pull, appraisal, BPO, or CMA.`
+
 export type CityMarketData = {
   medianHomePrice: number
   medianRent: number

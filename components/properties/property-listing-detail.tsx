@@ -2,6 +2,7 @@ import Link from "next/link"
 import type { ApiProperty } from "@/app/types/property"
 import { GetScreenedCta } from "@/components/properties/get-screened-cta"
 import { RenterAvailabilityNote } from "@/components/properties/renter-availability-note"
+import { RenterPath } from "@/components/properties/renter-path"
 import PropertyMap from "@/components/map/property-map"
 import { generateBreadcrumbJsonLd, generatePropertyJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
@@ -163,6 +164,10 @@ export function PropertyListingDetail({
           Contact
         </Link>
       </section>
+
+      <div className="mb-8">
+        <RenterPath variant="listing-detail" />
+      </div>
 
       {property.lat != null && property.lng != null ? (
         <section className="mb-8" aria-label="Listing location">

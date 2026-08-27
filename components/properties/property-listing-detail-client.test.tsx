@@ -79,7 +79,10 @@ describe("PropertyListingDetailClient", () => {
 
     expect(await screen.findByRole("heading", { name: /avenues victorian duplex/i })).toBeInTheDocument()
     expect(fetchById).toHaveBeenCalledWith(listing.publicId)
-    expect(screen.getByRole("link", { name: /request a showing/i })).toHaveAttribute("href", "#ask-leasing")
+    const showingLinks = screen.getAllByRole("link", { name: /request a showing/i })
+    expect(showingLinks.length).toBeGreaterThan(0)
+    showingLinks.forEach((link) => expect(link).toHaveAttribute("href", "#ask-leasing"))
+    expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
     expect(screen.queryByRole("link", { name: /^apply$/i })).not.toBeInTheDocument()
   })
 

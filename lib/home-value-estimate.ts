@@ -1,4 +1,4 @@
-import { cityMarketData } from "./city-market-data"
+import { CITY_MARKET_AS_OF, cityMarketData } from "./city-market-data"
 
 /** Bedroom multipliers vs a ~3-bed Utah SFR / small-multifamily median. */
 export const BEDROOM_MULTIPLIERS: Record<number, number> = {
@@ -10,7 +10,7 @@ export const BEDROOM_MULTIPLIERS: Record<number, number> = {
 }
 
 export const ESTIMATE_DATA_DISCLOSURE =
-  "Ondo city medians used on this site, bedroom-adjusted. Not an MLS pull, appraisal, BPO, or CMA."
+  `Ondo city medians used on this site, bedroom-adjusted (as of ${CITY_MARKET_AS_OF} — verify). Not an MLS pull, appraisal, BPO, or CMA.`
 
 export const BASELINE_SQFT = 1800
 

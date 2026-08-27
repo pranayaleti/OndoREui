@@ -14,6 +14,9 @@ const LOCATION_COPY_FILES = [
   "app/blog/why-utah-best-real-estate-investment/page.tsx",
   "app/compare-utah-property-managers/page.tsx",
   "lib/utah-pm-comparison.ts",
+  "lib/utah-arrival.ts",
+  "components/moving-to-utah/utah-arrival-desk.tsx",
+  "app/moving-to-utah/page.tsx",
 ] as const
 
 function stripHousingTypes(text: string): string {

@@ -307,6 +307,7 @@ const Footer = memo(() => {
           {/* About Us */}
           <FooterNavSection label="About Us" icon={<Users className="h-5 w-5" />} href="/about">
             <li><Link href="/about/history" className="text-foreground/70 hover:text-foreground">History</Link></li>
+            <li><Link href="/moving-to-utah/" className="text-foreground/70 hover:text-foreground">New to Utah</Link></li>
             <li><Link href="/about/giving-back" className="text-foreground/70 hover:text-foreground">Giving back</Link></li>
             <li><Link href="/about/careers" className="text-foreground/70 hover:text-foreground">Careers</Link></li>
             <li><Link href="/about/news" className="text-foreground/70 hover:text-foreground">News</Link></li>

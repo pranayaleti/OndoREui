@@ -63,6 +63,16 @@ describe("PropertiesClient", () => {
     render(<PropertiesClient />)
 
     expect(screen.getByRole("heading", { name: /utah rentals on the map/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
     await waitFor(() => expect(screen.getByTestId("ask-leasing")).toHaveTextContent("empty"))
+  })
+
+  it("still offers the leasing form when live listings fail to load", async () => {
+    global.fetch = vi.fn().mockRejectedValue(new Error("network")) as unknown as typeof fetch
+
+    render(<PropertiesClient />)
+
+    await waitFor(() => expect(screen.getByTestId("ask-leasing")).toHaveTextContent("empty"))
+    expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
   })
 })

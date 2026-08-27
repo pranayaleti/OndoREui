@@ -72,10 +72,9 @@ export function publicIdsFromListBody(body: unknown): string[] {
 /**
  * Resolve a public listing by publicId (or internal id).
  *
- * `GET /api/properties/public/:id` treats UUID-shaped publicIds as internal
- * `properties.id`, so a live publicId often 404s even though the same row is
- * on `GET /api/properties/public`. Fall back to the list rather than inventing
- * a listing.
+ * `GET /api/properties/public/:id` tries `public_id` then internal `id` for
+ * approved vacant rows. Keep a list fallback for rollout (old Edge without
+ * by-id) and transient by-id failures — it cannot invent a listing.
  */
 export async function fetchPublicPropertyByPublicId(
   publicId: string,

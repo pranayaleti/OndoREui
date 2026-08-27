@@ -8,6 +8,7 @@ describe("Compare Utah property managers page", () => {
     expect(screen.getAllByText(/\$159/).length).toBeGreaterThanOrEqual(1)
     expect(screen.queryByText(/\$89–\$129/)).not.toBeInTheDocument()
     expect(screen.getAllByText(/\$0 placement/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/\$0 signup/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText(/not disclosed/i)).toBeInTheDocument()
   })
 

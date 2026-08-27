@@ -4,6 +4,7 @@ import { useId, useState } from "react"
 import Link from "next/link"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import { STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS } from "@/components/sticky-mobile-cta-bar"
 import {
   DEFAULT_EXAMPLE_MONTHLY_RENT,
   FEE_COMPARISON_AS_OF,
@@ -104,7 +105,7 @@ export function FeeAlignmentWidget() {
                   Published rate (does not multiply the ledger)
                 </legend>
                 <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  <label className="flex scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5 md:scroll-mb-0">
+                  <label className={`flex ${STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS} cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5`}>
                     <input
                       type="radio"
                       name={bandGroupName}
@@ -115,7 +116,7 @@ export function FeeAlignmentWidget() {
                     />
                     1–4 doors · Starter 10%
                   </label>
-                  <label className="flex scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5 md:scroll-mb-0">
+                  <label className={`flex ${STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS} cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5`}>
                     <input
                       type="radio"
                       name={bandGroupName}

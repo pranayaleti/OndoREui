@@ -85,6 +85,14 @@ const pages: SearchResult[] = [
     keywords: ['utah', 'location', 'why utah', 'real estate market']
   },
   {
+    id: 'moving-to-utah',
+    title: 'New to Utah',
+    description: 'Commute minutes, typical rents, and next steps for a Wasatch Front start date',
+    href: '/moving-to-utah',
+    category: 'Page',
+    keywords: ['moving', 'relocation', 'commute', 'start date', 'new to utah', 'incoming', 'wasatch']
+  },
+  {
     id: 'about',
     title: 'About Us',
     description: 'Learn about our company and mission',

@@ -12,6 +12,7 @@ import {
 } from '@/components/property-filter';
 import { RentalListingCard } from '@/components/properties/rental-listing-card';
 import { RenterAvailabilityNote } from '@/components/properties/renter-availability-note';
+import { RenterPath } from '@/components/properties/renter-path';
 import { buildRenterSearchPrefill, DEFAULT_RENT_FILTER_RANGE } from '@/lib/renter-search-prefill';
 import { listingDetailPath } from '@/lib/public-property';
 import { cn } from '@/lib/utils';
@@ -528,6 +529,9 @@ export default function PropertiesClient() {
               <PropertySearch onSearch={handleSearch} />
             </Suspense>
           </div>
+          <div className="mt-6 max-w-4xl">
+            <RenterPath />
+          </div>
         </div>
       </section>
 
@@ -778,11 +782,11 @@ export default function PropertiesClient() {
               </div>
             )}
 
-            {!loading && !error && (
+            {!loading && (
               <div className="mt-10">
                 <RenterAvailabilityNote
                   key={renterPrefill}
-                  variant={properties.length === 0 ? 'empty' : 'browse'}
+                  variant={error || properties.length === 0 ? 'empty' : 'browse'}
                   prefillMessage={renterPrefill}
                 />
               </div>

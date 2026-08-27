@@ -87,6 +87,7 @@ export const allNavigationItems: NavigationItem[] = [
       { href: "/compare", labelKey: "nav.compare" },
       { href: "/faq", labelKey: "nav.faq" },
       { href: "/why-utah", labelKey: "nav.whyUtah" },
+      { href: "/moving-to-utah", labelKey: "nav.movingToUtah" },
     ],
   },
 

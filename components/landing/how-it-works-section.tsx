@@ -9,8 +9,16 @@ export function HowItWorksSection() {
     <section className="py-16 bg-background dark:bg-[var(--gradient-overlay)]">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-4 dark:text-foreground">How Ondo RE works for property owners</h2>
-        <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-foreground/70 mb-4 max-w-2xl mx-auto">
           Hand off the day-to-day and keep full visibility. Most owners are set up within a week.
+        </p>
+        <p className="text-center text-sm text-foreground/70 mb-12 max-w-2xl mx-auto">
+          Already working with another manager? Typical onboarding is 48–72 hours, with no setup fee
+          and 30 days&apos; written notice to cancel.{" "}
+          <Link href="/contact/" className="font-medium text-primary underline-offset-4 hover:underline">
+            Talk with the team
+          </Link>
+          .
         </p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {OWNER_PROCESS_STEPS.map((step, index) => {

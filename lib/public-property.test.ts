@@ -88,7 +88,22 @@ describe("findPublicProperty", () => {
 })
 
 describe("fetchPublicPropertyByPublicId", () => {
-  it("falls back to the public list when the detail endpoint 404s a UUID publicId", async () => {
+  it("uses the by-id endpoint when it resolves a UUID publicId", async () => {
+    const row = listing()
+    global.fetch = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input)
+      if (url.includes(`/api/properties/public/${row.publicId}`)) {
+        return { ok: true, json: async () => row } as Response
+      }
+      throw new Error(`unexpected url ${url}`)
+    }) as unknown as typeof fetch
+
+    const result = await fetchPublicPropertyByPublicId(row.publicId)
+    expect(result?.publicId).toBe(row.publicId)
+    expect(global.fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it("falls back to the public list when by-id is missing (rollout / outage)", async () => {
     const row = listing()
     global.fetch = vi.fn(async (input: RequestInfo | URL) => {
       const url = String(input)
@@ -105,17 +120,6 @@ describe("fetchPublicPropertyByPublicId", () => {
     expect(result?.publicId).toBe(row.publicId)
     expect(result?.id).toBe(row.id)
     expect(result?.title).toBe("Avenues Victorian Duplex")
-  })
-
-  it("returns the detail endpoint body when it does resolve", async () => {
-    const row = listing()
-    global.fetch = vi.fn(async () => {
-      return { ok: true, json: async () => row } as Response
-    }) as unknown as typeof fetch
-
-    const result = await fetchPublicPropertyByPublicId(row.publicId)
-    expect(result?.title).toBe(row.title)
-    expect(global.fetch).toHaveBeenCalledTimes(1)
   })
 
   it("does not invent a listing for the export placeholder id", async () => {

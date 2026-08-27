@@ -32,7 +32,7 @@ export const UTAH_PM_COMPARISON: readonly UtahPmRow[] = [
     headline: "Utah PM, advertised flat monthly fee",
     mgmtFee: "$159/mo flat per unit (as advertised Aug 2026)",
     leasingFee: "$0 placement (as advertised Aug 2026)",
-    setupFee: "Standard onboarding — verify",
+    setupFee: "$0 signup (as advertised Aug 2026 — verify)",
     techStack: "PM software not disclosed on their public site — verify",
     ownerFit: "Flat monthly line item, independent of collected rent",
     cons:

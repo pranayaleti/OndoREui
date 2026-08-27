@@ -31,6 +31,10 @@ const HIDDEN_PREFIXES = [
 
 const ANALYSIS_PATH = "/whats-my-home-worth"
 
+/** Same clearance the homepage fee radios use so focus/scroll sits above this bar. */
+export const STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS =
+  "scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] md:scroll-mb-0"
+
 function isHiddenRoute(pathname: string | null): boolean {
   if (!pathname) return false
   return HIDDEN_PREFIXES.some(

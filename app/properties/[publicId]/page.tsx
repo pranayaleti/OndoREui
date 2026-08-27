@@ -88,8 +88,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
   if (property) {
     return <PropertyListingDetail property={property} publicId={publicId} />
   }
-  // Build-time miss (placeholder, stale id, UUID publicId the detail endpoint
-  // 404s): still ship a client fetch so live-API listings load in next dev and
-  // via the static-export 404 recovery path.
+  // Build-time miss (placeholder, listing added after static export): still
+  // ship a client fetch so live-API listings load in next dev and via the
+  // static-export 404 recovery path.
   return <PropertyListingDetailClient publicId={publicId} />
 }

@@ -23,6 +23,13 @@ describe("UTAH_PM_COMPARISON", () => {
     expect(rentomatic.techStack).not.toMatch(/marketing site/i)
   })
 
+  it("records Rentomatic’s advertised Aug 2026 $0 signup with a verify hedge", () => {
+    const rentomatic = byName("Rentomatic")
+    expect(rentomatic.setupFee).toMatch(/\$0 signup/)
+    expect(rentomatic.setupFee).toMatch(/as advertised [A-Z][a-z]{2} \d{4}/)
+    expect(rentomatic.setupFee).toMatch(/verify/i)
+  })
+
   it("states the percentage-alignment / leasing-fee tradeoff without insult", () => {
     const rentomatic = byName("Rentomatic")
     expect(rentomatic.cons).toMatch(/percentage|align/i)

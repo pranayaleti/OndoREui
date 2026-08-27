@@ -19,12 +19,14 @@ import { OwnerFaqSection } from "@/components/landing/owner-faq-section"
 import { CalendlyBookSection } from "@/components/contact/calendly-inline-embed"
 import { ServiceAreaSection } from "@/components/landing/service-area-section"
 import { HomepageBlogSection } from "@/components/landing/homepage-blog-section"
+import { UtahArrivalStrip } from "@/components/landing/utah-arrival-strip"
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection />
       <JourneyCardsSection />
+      <UtahArrivalStrip />
       <SocialProofBar />
       <HowItWorksSection />
       <OperatorsSection />

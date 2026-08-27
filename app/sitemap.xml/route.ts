@@ -54,6 +54,7 @@ const STATIC_PATHS: string[] = [
   "/notary/on-demand",
   "/notary/locations",
   "/get-matched",
+  "/moving-to-utah",
   "/compare-utah-property-managers",
   "/whats-my-home-worth",
   "/blog/ultimate-guide-becoming-utah-landlord-2026",

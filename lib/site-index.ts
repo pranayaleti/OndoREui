@@ -394,6 +394,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           href: "/why-utah",
           description: "Economy, quality of life, and real estate context in Utah.",
         },
+        {
+          name: "New to Utah",
+          href: "/moving-to-utah",
+          description: "Commute minutes and typical rents for a Wasatch Front start date.",
+        },
       ],
     },
     {
