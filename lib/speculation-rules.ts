@@ -57,6 +57,7 @@ const EXCLUDED_PATH_PREFIXES = [
   "/invite/",
   "/tenantOnboarding/",
   "/visit/confirm/",
+  "/visit/schedule/",
 ]
 
 interface SpeculationRule {

@@ -126,6 +126,14 @@ export default function UtahLandlordTenantLawGuide() {
               <li>Familial status (families with children under 18)</li>
             </ul>
             <p>Apply the same screening criteria, income ratio, credit threshold, eviction history, to every applicant in the same property. Keep records of every application decision for at least 3 years. A complaint to the Utah Antidiscrimination and Labor Division (UALD) or HUD can trigger an investigation even if your intent was not discriminatory.</p>
+            <p>
+              For HUD Fair Housing guidance, the Utah Fit Premises Act, and third-party landlord
+              classes (not Ondo programs), see{" "}
+              <Link href="/resources#utah-landlord-education">
+                Utah landlord education &amp; official resources
+              </Link>
+              .
+            </p>
 
             <h2>Rent Increases and Notice Requirements</h2>
             <p>Utah has no rent control. Landlords may raise rent to any amount, but must provide proper notice:</p>

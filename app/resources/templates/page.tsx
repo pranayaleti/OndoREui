@@ -2,108 +2,36 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { TemplateRequestForm } from "@/components/resources/template-request-form"
-import { FileText, ClipboardList, Home, BookOpen, ClipboardCheck } from "lucide-react"
+import { TemplatesCatalog } from "@/components/resources/templates-catalog"
+import { UtahLandlordEducationSection } from "@/components/resources/utah-landlord-education-section"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Utah Landlord Templates & Seller Listing-Prep | Ondo Real Estate",
+  title: "Landlord Templates & Seller Listing-Prep | Ondo Real Estate",
   description:
-    "Request Utah landlord templates and a seller listing-prep checklist. We email the file after you request it — not an instant download.",
+    "Browse Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet for other states. We email the file after you request it — not an instant download.",
   alternates: { canonical: `${SITE_URL}/resources/templates/` },
   openGraph: {
-    title: "Utah Landlord Templates & Forms | Ondo Real Estate",
-    description: "Request Utah-oriented landlord templates plus a seller listing-prep checklist. Files are emailed after you request them.",
+    title: "Landlord Templates, Addendums & Disclosures | Ondo Real Estate",
+    description:
+      "Request Utah-oriented lease, addendum, and disclosure packets, plus a federal lead-paint disclosure. Files are emailed after you request them.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Utah Landlord Templates | Ondo Real Estate",
-    description: "Utah-compliant lease agreement, move-in checklist, maintenance form, and landlord onboarding playbook.",
+    title: "Landlord Templates | Ondo Real Estate",
+    description:
+      "Utah lease, addendums, disclosures, and a seller listing-prep checklist. Request the file — not an instant download.",
   },
 }
-
-const templates = [
-  {
-    id: "residential-lease",
-    title: "Residential Lease Agreement",
-    description:
-      "A Utah-compliant lease covering rent terms, security deposit rules, maintenance responsibilities, entry notice requirements, and lease renewal conditions. Drafted to align with Utah Code Title 57 (Property) and current statutory limits.",
-    icon: <FileText className="h-6 w-6" />,
-    inquiryType: "owner" as const,
-    details: [
-      "Utah-specific statutory language",
-      "Security deposit and pet deposit provisions",
-      "Entry notice and habitability clauses",
-      "Late fee and grace period schedules",
-    ],
-  },
-  {
-    id: "move-in-checklist",
-    title: "Move-In / Move-Out Checklist",
-    description:
-      "A room-by-room condition checklist designed to protect both landlords and tenants at turnover. Includes a photo log section and a signature block for mutual agreement at move-in and move-out.",
-    icon: <ClipboardList className="h-6 w-6" />,
-    inquiryType: "owner" as const,
-    details: [
-      "Room-by-room condition fields",
-      "Photo log documentation section",
-      "Countersigned by owner and tenant",
-      "Prevents security deposit disputes",
-    ],
-  },
-  {
-    id: "maintenance-request",
-    title: "Maintenance Request Form",
-    description:
-      "A tenant-facing form that categorises issues by urgency tier (emergency, urgent, routine) so your maintenance team can triage and schedule appropriately. This form is integrated into the Ondo owner portal workflow.",
-    icon: <Home className="h-6 w-6" />,
-    inquiryType: "owner" as const,
-    details: [
-      "Three urgency tiers: emergency / urgent / routine",
-      "Entry permission checkbox",
-      "Photo attachment support",
-      "Auto-routes to vendor assignment",
-    ],
-  },
-  {
-    id: "landlord-onboarding-playbook",
-    title: "Landlord Onboarding Playbook",
-    description:
-      "A structured 90-day guide for new Utah landlords covering entity setup, insurance review, banking, screening criteria, lease execution, and systems configuration. Includes a checklist of tools and services to put in place before your first tenant moves in.",
-    icon: <BookOpen className="h-6 w-6" />,
-    inquiryType: "owner" as const,
-    details: [
-      "First 90-day milestone calendar",
-      "Legal and insurance setup checklist",
-      "Screening and lease execution guide",
-      "Systems and automation recommendations",
-    ],
-  },
-  {
-    id: "listing-prep-showing-feedback",
-    title: "Listing-Prep & Showing-Feedback Checklist",
-    description:
-      "A brokerage checklist for sellers getting a home ready to list and collecting showing notes afterward. We email the file after you request it — this is not a QR code, text-for-info shortcode, or YouTube tour product.",
-    icon: <ClipboardCheck className="h-6 w-6" />,
-    inquiryType: "seller" as const,
-    details: [
-      "Prep before photos: declutter, repairs, curb appeal",
-      "Showing-day checklist for occupants",
-      "How to record showing feedback we send you",
-      "Request the file — we email it, not an instant download",
-    ],
-  },
-]
 
 export default function TemplatesPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Utah Landlord Templates & Forms"
-        description="Request Utah landlord templates and a seller listing-prep checklist. We email the file after you request it."
+        title="Landlord Templates, Addendums & Disclosures"
+        description="Request Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet. We email the file after you request it."
         pathname="/resources/templates"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -114,59 +42,45 @@ export default function TemplatesPage() {
       />
       <PageBanner
         title="Templates & Resources"
-        subtitle="Utah-oriented landlord forms plus a seller listing-prep checklist. Request the file — we email it."
+        subtitle="Utah-oriented landlord forms, addendums, and disclosures, plus a seller listing-prep checklist. Samples are for reference only. Request the file — we email it. Not legal advice."
         backgroundImage="/modern-apartment-balcony.png"
       />
 
-      <section className="py-16 bg-background">
+      <section className="bg-background py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-
-            {/* Intro */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Why We Publish These Templates</h2>
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-3xl font-bold">Why We Publish These Templates</h2>
               <p className="text-lg text-foreground/70">
-                These templates reflect forms we use at Ondo. Landlord files are written for Utah law. Sellers can request a listing-prep and showing-feedback checklist — we email the file; it is not a QR, SMS, or YouTube product. Leave your name and email on each card.
+                These packets reflect forms we use at Ondo. Landlord files are written for Utah law unless
+                a card says otherwise (for example, federal lead-based paint). Each card lists when it
+                applies and what to watch for. Leave your name and email to request the file — we email
+                it; this is not an instant download or a binding contract. Samples are for reference
+                only and must be reviewed through appropriate legal channels (a licensed attorney for
+                the applicable state) before they can be approved or used.
               </p>
             </div>
 
-            {/* Template cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              {templates.map((t, i) => (
-                <Card key={i} className="flex flex-col">
-                  <CardHeader>
-                    <div className="h-12 w-12 bg-muted rounded-lg flex items-center justify-center mb-4 text-primary">
-                      {t.icon}
-                    </div>
-                    <CardTitle>{t.title}</CardTitle>
-                    <CardDescription>{t.description}</CardDescription>
-                  </CardHeader>
-                  <div className="px-6 pb-6 flex flex-col gap-4 flex-1 justify-end">
-                    <ul className="space-y-1 text-sm text-foreground/70">
-                      {t.details.map((d) => (
-                        <li key={d} className="flex items-start gap-2">
-                          <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                    <TemplateRequestForm
-                      templateId={t.id}
-                      templateTitle={t.title}
-                      inquiryType={t.inquiryType}
-                    />
-                  </div>
-                </Card>
-              ))}
+            <p className="mb-10 text-center text-sm text-foreground/70">
+              Official Utah statutes, HUD Fair Housing guidance, and third-party Good Landlord / RHA
+              Utah classes are listed separately below. They are not Ondo-authored template cards
+              and are not part of the request-the-file flow.
+            </p>
+
+            <TemplatesCatalog />
+
+            <div className="mb-16">
+              <UtahLandlordEducationSection />
             </div>
 
-            {/* Bottom CTA */}
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4">Need Something Beyond the Templates?</h3>
-              <p className="text-foreground/70 mb-6">
-                If your situation calls for custom lease language, a full management handoff, or help getting your first Utah rental set up properly, we are happy to help.
+              <h3 className="mb-4 text-2xl font-bold">Need Something Beyond the Templates?</h3>
+              <p className="mb-6 text-foreground/70">
+                If your situation calls for custom lease language, a full management handoff, or help
+                getting your first Utah rental set up properly, we are happy to help. We are not a
+                substitute for a licensed attorney.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Button asChild size="lg">
                   <Link href="/contact">Talk to Our Team</Link>
                 </Button>
@@ -175,7 +89,6 @@ export default function TemplatesPage() {
                 </Button>
               </div>
             </div>
-
           </div>
         </div>
       </section>

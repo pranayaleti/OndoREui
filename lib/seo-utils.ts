@@ -335,6 +335,7 @@ Disallow: /tenant/
 Disallow: /auth/
 Disallow: /admin/
 Disallow: /api/
+Disallow: /tools/content-studio/
 `
 }
 

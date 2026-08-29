@@ -3,6 +3,7 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { UtahLandlordEducationSection } from "@/components/resources/utah-landlord-education-section"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
 import type { Metadata } from "next"
@@ -219,6 +220,9 @@ export default function ResourcesPage() {
                 <Link href="/resources/templates">Templates</Link>
               </Button>
               <Button asChild variant="outline">
+                <Link href="#utah-landlord-education">Utah landlord education</Link>
+              </Button>
+              <Button asChild variant="outline">
                 <Link href="/video-library">Video library</Link>
               </Button>
             </div>
@@ -389,6 +393,10 @@ export default function ResourcesPage() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <UtahLandlordEducationSection />
           </div>
 
           {/* Calculators & tools */}

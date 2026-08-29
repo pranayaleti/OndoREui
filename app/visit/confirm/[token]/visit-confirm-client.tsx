@@ -51,8 +51,8 @@ export function VisitConfirmClient({ visit, token }: Props) {
         <div className="max-w-md text-center">
           <div className="text-4xl mb-4">🎉</div>
           <h1 className="text-2xl font-bold mb-2">Visit Confirmed!</h1>
-          <p className="text-gray-500 mb-6">
-            Your visit is booked for {new Date(confirmedAt).toLocaleString("en-AU", { dateStyle: "full", timeStyle: "short" })}
+            <p className="text-gray-500 mb-6">
+            Your visit is booked for {new Date(confirmedAt).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" })}
           </p>
           {(propertyTitle || visit.properties) && (
             <p className="text-gray-400 text-sm mb-6">
@@ -89,7 +89,7 @@ export function VisitConfirmClient({ visit, token }: Props) {
                 selected === i ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"
               }`}
             >
-              <span className="font-medium">{new Date(slot).toLocaleString("en-AU", { dateStyle: "full", timeStyle: "short" })}</span>
+              <span className="font-medium">{new Date(slot).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" })}</span>
             </button>
           ))}
         </div>

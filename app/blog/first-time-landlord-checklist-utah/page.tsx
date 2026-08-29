@@ -119,6 +119,14 @@ export default function FirstTimeLandlordChecklistUtah() {
               <li>Have the tenant sign and date every page</li>
               <li>Provide the tenant with a copy on move-in day</li>
             </ul>
+            <p>
+              Official statutes, HUD Fair Housing guidance, and third-party Utah landlord classes
+              are collected on{" "}
+              <Link href="/resources#utah-landlord-education">
+                Utah landlord education &amp; official resources
+              </Link>
+              {" "}— those programs are not Ondo’s lease packet.
+            </p>
 
             <h2>Move-In Day Procedures</h2>
             <ul>
