@@ -13,9 +13,10 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Phone, Calculator } from "lucide-react"
+import { Phone, Calculator, Calendar } from "lucide-react"
 import { SITE_PHONE } from "@/lib/site"
 import { analytics } from "@/lib/analytics"
+import { publicIdFromPathname } from "@/lib/public-property"
 
 const HIDDEN_PREFIXES = [
   "/login",
@@ -48,6 +49,7 @@ export function StickyMobileCtaBar() {
 
   const onAnalysisPage =
     pathname === ANALYSIS_PATH || pathname?.startsWith(`${ANALYSIS_PATH}/`)
+  const onListingDetail = Boolean(pathname && publicIdFromPathname(pathname))
 
   return (
     <div
@@ -68,7 +70,23 @@ export function StickyMobileCtaBar() {
           <Phone className="h-4 w-4" aria-hidden="true" />
           Call
         </a>
-        {!onAnalysisPage && (
+        {onListingDetail ? (
+          <a
+            href="#ask-leasing"
+            onClick={() =>
+              analytics.trackEvent(
+                "mobile_cta_request_showing",
+                "engagement",
+                "sticky_mobile_bar",
+              )
+            }
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            <Calendar className="h-4 w-4" aria-hidden="true" />
+            Request a showing
+          </a>
+        ) : null}
+        {!onAnalysisPage && !onListingDetail ? (
           <Link
             href={ANALYSIS_PATH}
             onClick={() =>
@@ -83,7 +101,7 @@ export function StickyMobileCtaBar() {
             <Calculator className="h-4 w-4" aria-hidden="true" />
             Free rental analysis
           </Link>
-        )}
+        ) : null}
       </div>
     </div>
   )

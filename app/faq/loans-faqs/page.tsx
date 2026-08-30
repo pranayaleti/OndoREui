@@ -239,6 +239,26 @@ export default function LoansFAQPage() {
       answer:
         "Sometimes, under an agency delayed-financing exception — a selling-guide exception, not a statute. Distinct from HELOC seasoning on a financed purchase. See delayed financing after a cash purchase.",
     },
+    {
+      question: "Do authorized-user tradelines help a mortgage file?",
+      answer:
+        "They can appear on a tri-merge and still be discounted or excluded. They do not make you a co-borrower. This FAQ does not teach piggybacking. See authorized-user tradelines.",
+    },
+    {
+      question: "Is an interest-only payment a teaser rate?",
+      answer:
+        "No. IO skips scheduled principal for a stated period. Payment shock when amortization starts is the risk. Distinct from an ARM and from a temporary buydown. See interest-only mortgages.",
+    },
+    {
+      question: "Should I recast or refinance after a lump sum?",
+      answer:
+        "A recast keeps the rate and re-spreads the payment. A refinance is a new note with costs. Run break-even. See recast vs refinance. This FAQ does not quote a recast fee.",
+    },
+    {
+      question: "Can I finance a manufactured home or an ADU the same way as a house?",
+      answer:
+        "No. A HUD-code manufactured home and an accessory dwelling unit are different property types, with different title, foundation, zoning, and occupancy questions. This FAQ does not invent a HUD program code. See manufactured housing and ADU financing.",
+    },
   ]
 
   return (

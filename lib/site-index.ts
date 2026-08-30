@@ -745,6 +745,51 @@ const BLOG_POSTS: SiteIndexLink[] = [
       href: "/blog/hazard-vs-ho3-vs-ho6-condo-insurance",
       description: "Lender hazard vs HO-3 vs condo HO-6 plus master. Not insurance advice.",
     },
+    {
+      name: "Authorized User Tradelines: Help or Overlay Risk",
+      href: "/blog/authorized-user-tradelines-mortgage",
+      description: "What AU tradelines do and do not do. Not a piggyback scheme.",
+    },
+    {
+      name: "Interest-Only Mortgages: Who They Are For",
+      href: "/blog/interest-only-mortgages-who-they-are-for",
+      description: "Payment shock when IO ends. Not a teaser-rate promise.",
+    },
+    {
+      name: "Manufactured Housing and ADU Financing",
+      href: "/blog/manufactured-housing-adu-financing",
+      description: "Two property types. No invented HUD codes as a permanent product.",
+    },
+    {
+      name: "Recast vs Refinance",
+      href: "/blog/recast-vs-refinance",
+      description: "Same note vs a new loan. Recast fee vs refinance costs.",
+    },
+    {
+      name: "Refinancing a Condo with an Aging HOA",
+      href: "/blog/refinancing-condo-aging-hoa",
+      description: "Reserves, litigation, insurance. Not a clone of the FHA roster how-to.",
+    },
+    {
+      name: "Title Insurance: Owner’s vs Lender’s Policy",
+      href: "/blog/title-insurance-owner-vs-lender",
+      description: "Lender’s policy protects the lien. Owner’s policy protects you. Not legal advice.",
+    },
+    {
+      name: "What Happens the Week After Funding",
+      href: "/blog/week-after-mortgage-funding",
+      description: "Recording, first payment timing, servicing transfer. Not legal advice.",
+    },
+    {
+      name: "First Mortgage Statement vs Note Rate",
+      href: "/blog/first-mortgage-statement-vs-note-rate",
+      description: "PITI and odd days, not a secret rate change.",
+    },
+    {
+      name: "Impounds vs Waiving Escrow",
+      href: "/blog/impounds-vs-waiving-escrow",
+      description: "Waiver is an overlay, not a promise at 20% down.",
+    },
 ]
 
 function titleFromBlogSlug(slug: string): string {

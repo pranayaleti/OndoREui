@@ -146,6 +146,18 @@ export default function LoansPage() {
 
           <IsThisRightForMe table="purchase" />
 
+          <p className="mb-12 text-center text-foreground/70">
+            Property type and payment structure still change the file:{" "}
+            <Link href="/blog/manufactured-housing-adu-financing" className="text-primary underline-offset-4 hover:underline">
+              manufactured housing vs ADU financing
+            </Link>{" "}
+            and{" "}
+            <Link href="/blog/interest-only-mortgages-who-they-are-for" className="text-primary underline-offset-4 hover:underline">
+              interest-only mortgages
+            </Link>
+            . Neither is a standard conforming shortcut.
+          </p>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-2xl font-bold mb-6">Why Choose Our Loan Services?</h3>

@@ -46,4 +46,18 @@ describe("StickyMobileCtaBar", () => {
     const call = screen.getByRole("link", { name: /call ondo re/i })
     expect(call.getAttribute("href")).toMatch(/^tel:/)
   })
+
+  it("swaps rental analysis for request a showing on a listing detail", () => {
+    mockPathname = "/properties/c2e653bf-1b6a-4f0c-9654-82a4896cb137/"
+    render(<StickyMobileCtaBar />)
+    const showing = screen.getByRole("link", { name: /request a showing/i })
+    expect(showing).toHaveAttribute("href", "#ask-leasing")
+    expect(screen.queryByRole("link", { name: /free rental analysis/i })).not.toBeInTheDocument()
+  })
+
+  it("keeps rental analysis on the listings browse page", () => {
+    mockPathname = "/properties"
+    render(<StickyMobileCtaBar />)
+    expect(screen.getByRole("link", { name: /free rental analysis/i })).toBeInTheDocument()
+  })
 })

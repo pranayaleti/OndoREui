@@ -36,6 +36,16 @@ describe("calculator input copy", () => {
     expect(refinanceCopy?.related.some((link) => link.href.includes("delayed-financing-after-cash-purchase"))).toBe(
       true,
     )
+    expect(refinanceCopy?.related.some((link) => link.href.includes("recast-vs-refinance"))).toBe(true)
+
+    const paymentCopy = calculatorInputCopyForSlug("mortgage-payment")
+    expect(paymentCopy?.related.some((link) => link.href.includes("interest-only-mortgages-who-they-are-for"))).toBe(
+      true,
+    )
+
+    const closingCopy = calculatorInputCopyForSlug("closing-cost")
+    expect(closingCopy?.related.some((link) => link.href.includes("title-insurance-owner-vs-lender"))).toBe(true)
+    expect(closingCopy?.related.some((link) => link.href.includes("impounds-vs-waiving-escrow"))).toBe(true)
   })
 
   it("returns undefined for unknown slugs", () => {

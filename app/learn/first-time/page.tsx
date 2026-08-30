@@ -85,7 +85,13 @@ export default function FirstTimeLearnPage() {
               </Link>{" "}
               and <Link href="/blog/escrow-cushion-how-it-is-set">how the escrow cushion is set</Link>. After the first
               year, a shortage on the analysis notice is a different letter:{" "}
-              <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>.
+              <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>. The week
+              after funding and the first statement:{" "}
+              <Link href="/blog/week-after-mortgage-funding">what happens the week after funding</Link> and{" "}
+              <Link href="/blog/first-mortgage-statement-vs-note-rate">first statement vs note rate</Link>. Owner’s vs
+              lender’s title:{" "}
+              <Link href="/blog/title-insurance-owner-vs-lender">title insurance: owner vs lender</Link>. Impounds vs a
+              waiver overlay: <Link href="/blog/impounds-vs-waiving-escrow">impounds vs waiving escrow</Link>.
             </p>
             <h2>If family or an agency is helping</h2>
             <ul>

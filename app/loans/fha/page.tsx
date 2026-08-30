@@ -144,6 +144,8 @@ export default function FHALoanPage() {
                 <Button asChild variant="outline" size="lg"><Link href="/blog/house-hacking-duplex-with-fha">FHA duplex house-hack</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA + FHA gift</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/manufactured-housing-adu-financing">Manufactured / ADU</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/refinancing-condo-aging-hoa">Condo aging HOA</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
               </div>
             </div>

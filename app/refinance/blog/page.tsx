@@ -79,6 +79,9 @@ export default function RefinanceBlogPage() {
               <Button key="/blog/biweekly-extra-principal-vs-refinance" asChild variant="outline" size="sm">
                 <Link href="/blog/biweekly-extra-principal-vs-refinance">Biweekly vs refinance</Link>
               </Button>
+              <Button key="/blog/recast-vs-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>
+              </Button>
               <Button key="/blog/rent-vs-own-calculator-guide" asChild variant="outline" size="sm">
                 <Link href="/blog/rent-vs-own-calculator-guide">Rent vs own</Link>
               </Button>

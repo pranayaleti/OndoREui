@@ -26,6 +26,96 @@ export default function BlogPage() {
 
   const blogPosts = useMemo(() => ([
     {
+      title: "Authorized User Tradelines: Help or Overlay Risk",
+      excerpt: "What AU tradelines do and do not do on a mortgage tri-merge. Not a piggyback scheme.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "authorized-user-tradelines-mortgage"
+    },
+    {
+      title: "Interest-Only Mortgages: Who They Are For, Who They Hurt",
+      excerpt: "IO skips scheduled principal for a stated period. Payment shock is the risk. Not a teaser-rate promise.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "9 min read",
+      category: "Loan Programs",
+      image: "/suburban-house-garden.png",
+      slug: "interest-only-mortgages-who-they-are-for"
+    },
+    {
+      title: "Manufactured Housing and ADU Financing",
+      excerpt: "Two property types, two underwrites. No invented HUD codes as a permanent product.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "9 min read",
+      category: "Loan Programs",
+      image: "/modern-townhouse-garage.png",
+      slug: "manufactured-housing-adu-financing"
+    },
+    {
+      title: "Recast vs Refinance",
+      excerpt: "A recast keeps the rate after a lump sum. A refinance is a new note with costs. Not a savings quote.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Refinance",
+      image: "/suburban-house-garden.png",
+      slug: "recast-vs-refinance"
+    },
+    {
+      title: "Refinancing a Condo with an Aging HOA",
+      excerpt: "Reserves, litigation, and insurance can stall a condo refinance. Not a clone of the FHA roster how-to.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "9 min read",
+      category: "Refinance",
+      image: "/modern-townhouse-garage.png",
+      slug: "refinancing-condo-aging-hoa"
+    },
+    {
+      title: "Title Insurance: Owner’s vs Lender’s Policy",
+      excerpt: "The lender’s policy protects the lien. The owner’s policy protects your equity. Not legal advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "title-insurance-owner-vs-lender"
+    },
+    {
+      title: "What Happens the Week After Funding",
+      excerpt: "Recording, first payment timing, and possible servicing transfer. Not legal advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "week-after-mortgage-funding"
+    },
+    {
+      title: "First Mortgage Statement vs Note Rate",
+      excerpt: "The first bill is usually PITI plus odd-days timing — not a secret rate change.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "first-mortgage-statement-vs-note-rate"
+    },
+    {
+      title: "Impounds vs Waiving Escrow",
+      excerpt: "Waiver is an overlay, not a promise at 20% down. Links cushion and shortage.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "impounds-vs-waiving-escrow"
+    },
+    {
       title: "What a Lock Does If Rates Drop After You Lock",
       excerpt: "A lock does not automatically follow the market down. Distinct from extension vs floating. Not a live-rate table.",
       author: "Ondo RE Team",

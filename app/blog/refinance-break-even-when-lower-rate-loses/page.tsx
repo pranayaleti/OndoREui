@@ -1,4 +1,5 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
+import { BreakEvenTable } from "@/components/content/break-even-table"
 import { EXAMPLE_NOTE, LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
@@ -49,7 +50,11 @@ export default function RefiBreakevenPage() {
       </p>
 
       <h2>The reusable table</h2>
-      <p>Break-even months ≈ cash costs ÷ monthly P&amp;I savings.</p>
+      <p>
+        Break-even months ≈ cash costs ÷ monthly P&amp;I savings. Same table on the refinance hub, the recast
+        comparison, and the refinance calculator.
+      </p>
+      <BreakEvenTable table="stay-scenarios" />
       <ul>
         <li>
           <strong>Numerator.</strong> Appraisal, title, recording, prepaid interest, origination, and discount points.
@@ -61,10 +66,10 @@ export default function RefiBreakevenPage() {
         </li>
       </ul>
       <p>
-        Illustration: $6,000 in costs (including one point) and $150 less P&amp;I is 40 months. If you sell or
-        refinance again in year two, the lower rate did not pay for itself in this simple model. Taxes, opportunity
-        cost of cash, and a shorter remaining term can change the story — that is a loan-officer model, not this
-        paragraph.
+        Illustration: $6,000 in costs (including one point) and $150 less P&amp;I is 40 months — the middle column.
+        Taxes, opportunity cost of cash, and a shorter remaining term can change the story — that is a loan-officer
+        model, not this paragraph. Recast instead of refinancing:{" "}
+        <Link href="/blog/recast-vs-refinance">recast vs refinance</Link>.
       </p>
 
       <h2>When people still refinance anyway</h2>

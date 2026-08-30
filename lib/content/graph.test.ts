@@ -72,6 +72,15 @@ import {
   PURCHASE_TIMELINE,
   CLOSING_CREDIT_CARD,
   HAZARD_HO3_HO6,
+  AUTHORIZED_USER_TRADELINES,
+  INTEREST_ONLY,
+  MANUFACTURED_AND_ADU,
+  RECAST_VS_REFI,
+  CONDO_AGING_HOA,
+  TITLE_OWNER_VS_LENDER,
+  WEEK_AFTER_FUNDING,
+  FIRST_STATEMENT_VS_NOTE,
+  ESCROW_WAIVER,
 } from "./lending-facts"
 
 const RESTRICTED = /guaranteed approval|you will qualify|best rate|lowest rate guaranteed/i
@@ -595,5 +604,117 @@ describe("mortgage content graph", () => {
     expect(card).toMatch(/CLOSING_CREDIT_CARD/)
     expect(card).toMatch(/CLOSING_CREDIT_CARD\.notARaise/)
     expect(card).toMatch(/will raise or lower a score by a number of points/)
+  })
+
+  it("registers batch-9 education slugs and wires credit / IO / recast / post-close clusters", () => {
+    const slugs = [
+      "/blog/authorized-user-tradelines-mortgage",
+      "/blog/interest-only-mortgages-who-they-are-for",
+      "/blog/manufactured-housing-adu-financing",
+      "/blog/recast-vs-refinance",
+      "/blog/refinancing-condo-aging-hoa",
+      "/blog/title-insurance-owner-vs-lender",
+      "/blog/week-after-mortgage-funding",
+      "/blog/first-mortgage-statement-vs-note-rate",
+      "/blog/impounds-vs-waiving-escrow",
+    ]
+    for (const path of slugs) {
+      expect(getContentNodeByPath(path)?.kind, path).toBe("guide")
+    }
+
+    expect(getContentNodeByPath("/blog/refinance-break-even-reusable-table")).toBeUndefined()
+    expect(getContentNodeByPath("/blog/recast-after-a-lump-sum")).toBeUndefined()
+    expect(getAllContentNodes().some((node) => node.id === "guide-break-even-table")).toBe(false)
+
+    const refiHrefs = relatedLinksForPath("/refinance", { limit: 8 }).map((link) => link.href)
+    expect(refiHrefs).toContain("/blog/recast-vs-refinance")
+    expect(refiHrefs).toContain("/blog/refinancing-condo-aging-hoa")
+    expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
+
+    const armHrefs = relatedLinksForPath("/buy/adjustable-rate", { limit: 8 }).map((link) => link.href)
+    expect(armHrefs).toContain("/blog/interest-only-mortgages-who-they-are-for")
+
+    const jumboHrefs = relatedLinksForPath("/loans/jumbo", { limit: 8 }).map((link) => link.href)
+    expect(jumboHrefs).toContain("/blog/interest-only-mortgages-who-they-are-for")
+
+    const loansHrefs = relatedLinksForPath("/loans", { limit: 8 }).map((link) => link.href)
+    expect(loansHrefs).toContain("/blog/manufactured-housing-adu-financing")
+    expect(loansHrefs).toContain("/blog/interest-only-mortgages-who-they-are-for")
+
+    const escrowHrefs = relatedLinksForPath("/faq/escrow-faqs", { limit: 8 }).map((link) => link.href)
+    expect(escrowHrefs).toContain("/blog/impounds-vs-waiving-escrow")
+
+    const firstHrefsLong = relatedLinksForPath("/learn/first-time", { limit: 12 }).map((link) => link.href)
+    expect(firstHrefsLong).toContain("/blog/week-after-mortgage-funding")
+    expect(firstHrefsLong).toContain("/blog/title-insurance-owner-vs-lender")
+
+    const triMergeHrefs = relatedLinksForPath("/blog/what-a-tri-merge-credit-report-shows", { limit: 8 }).map(
+      (link) => link.href,
+    )
+    expect(triMergeHrefs).toContain("/blog/authorized-user-tradelines-mortgage")
+
+    const rosterHrefs = relatedLinksForPath("/blog/fha-condo-roster-project-approval", { limit: 8 }).map(
+      (link) => link.href,
+    )
+    expect(rosterHrefs).toContain("/blog/refinancing-condo-aging-hoa")
+
+    const calcHrefs = relatedLinksForPath("/calculators/refinance", { limit: 8 }).map((link) => link.href)
+    expect(calcHrefs).toContain("/blog/recast-vs-refinance")
+  })
+
+  it("keeps batch-9 lending facts dated and not-advice", () => {
+    expect(AUTHORIZED_USER_TRADELINES.asOf).toBe(LENDING_FACTS_AS_OF)
+    expect(AUTHORIZED_USER_TRADELINES.notPiggyback).toMatch(/piggyback/i)
+    expect(AUTHORIZED_USER_TRADELINES.notPiggyback).toMatch(/fraud/i)
+
+    expect(INTEREST_ONLY.asOf).toBe(LENDING_FACTS_AS_OF)
+    expect(INTEREST_ONLY.notTeaser).toMatch(/not a temporary buydown/i)
+    expect(INTEREST_ONLY.notTeaser).toMatch(/Do not market IO as/i)
+
+    expect(MANUFACTURED_AND_ADU.asOf).toBe(LENDING_FACTS_AS_OF)
+    expect(MANUFACTURED_AND_ADU.noInventedHudCode).toMatch(/does not publish a permanent HUD program code/i)
+    expect(MANUFACTURED_AND_ADU.distinct).toMatch(/different property types/i)
+
+    expect(RECAST_VS_REFI.whoAllows).toMatch(/does not invent a recast right/i)
+    expect(CONDO_AGING_HOA.notRosterClone).toMatch(/not the FHA roster how-to/i)
+    expect(TITLE_OWNER_VS_LENDER.notLegalAdvice).toMatch(/not legal advice/i)
+    expect(WEEK_AFTER_FUNDING.notLegalAdvice).toMatch(/not legal advice/i)
+    expect(FIRST_STATEMENT_VS_NOTE.notARateChange).toMatch(/not the lender changing the note/i)
+    expect(ESCROW_WAIVER.notAPromise).toMatch(/does not promise you can waive/i)
+  })
+
+  it("does not teach piggybacking, teaser IO, or a permanent HUD code on batch-9 pages", () => {
+    const au = readFileSync(join(process.cwd(), "app/blog/authorized-user-tradelines-mortgage/page.tsx"), "utf8")
+    expect(au).toMatch(/AUTHORIZED_USER_TRADELINES/)
+    expect(au).toMatch(/AUTHORIZED_USER_TRADELINES\.notPiggyback/)
+    expect(au).toMatch(/Walk through how to piggyback/)
+    expect(au).not.toMatch(/buy seasoned tradelines to raise/i)
+
+    const io = readFileSync(join(process.cwd(), "app/blog/interest-only-mortgages-who-they-are-for/page.tsx"), "utf8")
+    expect(io).toMatch(/INTEREST_ONLY/)
+    expect(io).toMatch(/INTEREST_ONLY\.notTeaser/)
+    expect(io).toMatch(/treating IO as .the best rate/)
+    expect(io).not.toMatch(/\d\.\d{2}%/)
+
+    const mh = readFileSync(join(process.cwd(), "app/blog/manufactured-housing-adu-financing/page.tsx"), "utf8")
+    expect(mh).toMatch(/MANUFACTURED_AND_ADU/)
+    expect(mh).toMatch(/MANUFACTURED_AND_ADU\.noInventedHudCode/)
+    expect(mh).toMatch(/permanent HUD Title I \/ Title II product code as if it never changes/)
+
+    const breakEven = readFileSync(
+      join(process.cwd(), "app/blog/refinance-break-even-when-lower-rate-loses/page.tsx"),
+      "utf8",
+    )
+    expect(breakEven).toMatch(/BreakEvenTable/)
+    expect(breakEven).toMatch(/recast-vs-refinance/)
+
+    const recast = readFileSync(join(process.cwd(), "app/blog/recast-vs-refinance/page.tsx"), "utf8")
+    expect(recast).toMatch(/BreakEvenTable/)
+    expect(recast).toMatch(/RECAST_VS_REFI/)
+
+    const waiver = readFileSync(join(process.cwd(), "app/blog/impounds-vs-waiving-escrow/page.tsx"), "utf8")
+    expect(waiver).toMatch(/ESCROW_WAIVER\.notAPromise/)
+    expect(waiver).toMatch(/escrow-cushion-how-it-is-set/)
+    expect(waiver).toMatch(/escrow-shortage-after-first-year/)
   })
 })

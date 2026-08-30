@@ -10,6 +10,7 @@ import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { CalculatorAgentIntro } from "@/components/calculators/calculator-agent-intro"
 import { RelatedContent } from "@/components/content/related-content"
 import { CalculatorInputExplainer } from "@/components/content/calculator-input-explainer"
+import { BreakEvenTable } from "@/components/content/break-even-table"
 
 const slugToComponent: Record<string, ComponentType> = {
   "owner-vs-self": dynamic(() => import("@/pages/calculators/owner-vs-self-calculator"), {
@@ -149,6 +150,7 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
       <CalculatorAgentIntro slug={slug} />
       <div className="container mx-auto max-w-3xl px-4">
         <CalculatorInputExplainer slug={slug} />
+        {slug === "refinance" ? <BreakEvenTable table="stay-scenarios" /> : null}
       </div>
       <Component />
       <div className="container mx-auto max-w-3xl px-4 py-8">

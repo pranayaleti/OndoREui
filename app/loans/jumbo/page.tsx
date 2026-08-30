@@ -134,6 +134,7 @@ export default function JumboLoanPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg"><Link href="/blog/jumbo-vs-conforming-fhfa-county-limit">FHFA lookup how-to</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/blog/utah-county-conforming-loan-limit-lookup">Utah county lookup</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/interest-only-mortgages-who-they-are-for">Interest-only (not a teaser)</Link></Button>
               </div>
             </div>
             <RelatedContent path="/loans/jumbo" />

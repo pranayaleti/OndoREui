@@ -994,3 +994,165 @@ export const HAZARD_HO3_HO6 = {
   notAdvice:
     "This page does not pick a carrier, a deductible, or a coverage limit. Ask a licensed insurance producer. Link townhome vs condo and the FHA condo roster for project eligibility. Not insurance advice.",
 } as const
+
+export const AUTHORIZED_USER_TRADELINES = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Typical AUS and investor treatment of authorized-user tradelines on a mortgage tri-merge. Confirm the selling guide and overlay in force. Not a score-raise method.",
+  what:
+    "An authorized-user (AU) tradeline is a revolving account you can use that is contractually someone else’s. It can appear on a tri-merge. Appearance is not the same as the underwriter treating it as your credit history.",
+  whatItDoes:
+    "A long, well-paid AU card can sometimes show in a consumer score. Mortgage AUS and overlays often discount, exclude, or re-underwrite AU tradelines when the borrower is not contractually obligated. A thin file that is mostly AU cards can still fail even if an app score looks fine.",
+  whatItDoesNot:
+    "An AU tradeline does not make you a co-borrower, does not put you on the note, and does not automatically satisfy a minimum-tradeline overlay. It is not a substitute for documented alternative credit (rent, utilities) when the traditional file is thin.",
+  overlays:
+    "Investors and AUS findings often want tradelines the borrower is obligated on. Spousal or parent AU cards are a common conversation — and a common overlay haircut. Confirm the guide in force; this page does not quote a FICO delta.",
+  notPiggyback:
+    "This page does not teach adding yourself to someone else’s card to inflate a score, buying “seasoned tradelines,” or any piggyback scheme. Misrepresenting whose debt you pay can be fraud. Ask a loan officer what the tri-merge actually counted — do not manufacture credit history.",
+  vsCosign:
+    "A co-borrower is on the note. A silent auto-loan “cosigner” is not how most mortgage files work. AU is a revolving tradeline, not occupancy or title. See cosign vs co-borrower and what a tri-merge shows.",
+  fairHousing:
+    "Whose name is on a tradeline is a credit-file fact. These pages do not prefer any family structure, marital status, or protected class, and they do not steer anyone to a program based on who they are.",
+} as const
+
+export const INTEREST_ONLY = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Interest-only payment structure vs fully amortizing notes and ARM teaser language. Typical jumbo/portfolio overlays. Not a rate quote and not a teaser-rate promise.",
+  what:
+    "Interest-only (IO) means scheduled payments for a stated period cover interest, not principal. The note rate still exists. Principal usually starts amortizing when the IO period ends, or earlier if you pay extra principal.",
+  whoFor:
+    "Typical conversation: jumbo or portfolio files, high cash-flow borrowers, and some investors who plan the payment change. It is an overlay product, not a standard conforming 30-year you can assume.",
+  paymentShock:
+    "When IO ends, the payment is recalculated to amortize remaining principal over the remaining term. That payment can jump even if the note rate did not. Taxes, insurance, and HOA can still rise during IO. Plan the fully amortizing payment, not only year-one interest.",
+  notTeaser:
+    "IO is not a temporary buydown and not an ARM teaser. A 2-1 buydown subsidizes a fully amortizing note for a few years. An ARM changes the rate after a fixed period. IO changes whether principal is required. Do not market IO as “the best rate” or a forever-low payment.",
+  vsArm:
+    "Some ARMs are also IO; many are not. Caps limit rate movement on an ARM. They do not prevent IO payment shock when amortization starts. Read ARM caps and this page as different machines.",
+  notAPromise:
+    "This page does not quote an IO rate, a payment, or a promise that an IO file will be originated. Compare Loan Estimates. Extra principal during IO is a choice, not a required amortization schedule.",
+} as const
+
+export const MANUFACTURED_AND_ADU = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Agency and FHA manufactured-home and accessory-dwelling overlays. Confirm the current selling guide and HUD handbook. Do not treat a blog’s program nickname as the product you will be originated.",
+  distinct:
+    "Manufactured housing and an accessory dwelling unit (ADU) are different property types. A factory-built home on a chassis is not an ADU over a garage. Do not collapse them in underwriting or on a listing.",
+  manufactured:
+    "A manufactured home is typically built to the HUD Code and transported to the site. Many agency and FHA purchase files want it permanently affixed to a foundation, titled as real property (not chattel), and meeting current investor tests. Pre-HUD “mobile homes” and homes still titled as personal property are a different, often ineligible, conversation.",
+  noInventedHudCode:
+    "This page does not publish a permanent HUD program code, Title I vs Title II nickname, or a foundation-engineering form number as if it never changes. FHA and agencies have used different manufactured-home paths over time. Look up the handbook and investor overlay in force.",
+  landHome:
+    "Land-home (real property) financing is a different stack from chattel / personal-property loans on a home that is not real estate. Cash to close, appraisal, and title differ. This site does not originate a chattel product you can assume from a blog.",
+  adu:
+    "An ADU is a second dwelling on the same parcel — basement, garage, or detached — subject to zoning and the recorded use. Occupancy of the main house vs renting the ADU changes income calc and, sometimes, unit count. Proposed ADU rent is not Schedule E history on a house you do not own yet.",
+  aduIncome:
+    "ADU rental income, if allowed, is typically a worksheet overlay (lease, market rent, or tax-return history), not a listing screenshot. Treating an ADU rental as a duplex house-hack is only accurate when the legal unit count and occupancy match. See house-hacking a duplex with FHA when the building is actually 2–4 units you will occupy.",
+  notAQuote:
+    "Property-type overlays change. This page is a map of questions — foundation, title, zoning, occupancy — not a promise that a manufactured home or ADU will finance on a given program.",
+} as const
+
+export const RECAST_VS_REFI = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Typical servicer recast (re-amortization after a principal curtailment) vs refinance break-even including costs. Confirm the note and servicer. Not a savings quote.",
+  recast:
+    "A recast (re-amortization) is a servicing request after a lump-sum principal payment: the servicer recalculates the monthly principal-and-interest at the same note rate over the remaining term. The rate does not change. A recast fee is often a few hundred dollars — overlay, not a statute.",
+  refinance:
+    "A refinance replaces the note. Rate, term, and costs change. Break-even months ≈ cash costs (including points and origination, minus credits) ÷ monthly P&I savings. A lower rate can still lose if you move first.",
+  feeVsCosts:
+    "Compare a recast fee plus the cash you send as principal with refinance closing costs. Recast does not buy a lower rate. Refinance does not recast the old note; it is a new loan.",
+  whoAllows:
+    "Not every investor or servicer recasts. ARMs, FHA, VA, and some conventional notes are commonly limited or excluded. Ask the servicer in writing. This page does not invent a recast right.",
+  vsBiweekly:
+    "Extra principal or biweekly drafts pay the current note down without a recast. The payment often stays the same until you request a recast. See biweekly vs refinance. Matrix “recast after a lump sum” as a standalone how-to is a different page when written.",
+  notAQuote:
+    "This page does not quote a recast fee, a rate, or interest saved. Illustrate. Not a recommendation to recast or refinance.",
+} as const
+
+export const CONDO_AGING_HOA = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Fannie Mae / Freddie Mac condo project eligibility plus HUD condominium approval. Confirm the current selling guide and HOA questionnaire. Not insurance or legal advice.",
+  what:
+    "Refinancing a condo is a unit file and a project file. An aging association — thin reserves, deferred maintenance, special assessments, litigation, or insurance gaps — can stall or ineligible the project even when your credit and DTI are fine.",
+  reserves:
+    "Project reserve studies and budgeted reserves are typical questionnaire lines. A chronically underfunded HOA is a project-risk overlay, not a paint color. Special assessments can sit in DTI and in project eligibility.",
+  litigation:
+    "Pending litigation (construction defects, directors, or insurance claims) is a common ineligible or exception path. The HOA questionnaire and attorney letters matter. This is not a promise that every lawsuit kills every loan.",
+  insurance:
+    "Master policy, fidelity, and walls-in vs walls-out still apply on a refinance. An aging building with a non-renewed master or a huge deductible is a project issue. See hazard vs HO-3 vs HO-6 — not insurance advice.",
+  fannieProject:
+    "Conventional condo project review (limited vs full, and any Fannie Project Eligibility Review Service path) is dated overlay language. Do not memorize a review type from a blog. FHA files still need current HUD project approval or single-unit approval — see the FHA condo roster. They are different lists.",
+  notRosterClone:
+    "This page is aging-HOA project risk on a refinance. It is not the FHA roster how-to and not the townhome-vs-condo docs list, though those still apply.",
+  notAPromise:
+    "A well-run older building can still finance. A new building with no reserves can fail. Age is a clue, not a credit decision.",
+} as const
+
+export const TITLE_OWNER_VS_LENDER = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "ALTA owner’s vs lender’s title insurance in a purchase or refinance escrow. Utah typically funds at a title company. Not legal advice and not a premium quote.",
+  lender:
+    "A lender’s title policy protects the lender’s lien against covered title defects, up to the loan amount, subject to the policy. Most purchase and refinance mortgages require it. It does not protect your equity.",
+  owner:
+    "An owner’s title policy protects the owner’s title and equity against covered defects, up to the policy amount, subject to the policy. It is typically optional as a matter of contract — and often issued simultaneously with the lender’s policy. Optional is not the same as “you should skip it.”",
+  simultaneous:
+    "When both policies are issued in the same transaction, the owner’s premium is often a simultaneous-issue rate, not two full standalone premiums. Title companies quote this. This page does not publish a Utah tariff.",
+  utah:
+    "Utah residential closings typically sit at a title company, with a deed of trust recorded at the county. Owner’s and lender’s premiums still vary by company. See Utah closing costs. Not legal advice.",
+  refinance:
+    "A refinance usually needs a new lender’s policy (or a substitution/endorsement path the title company offers). An existing owner’s policy from the purchase may still protect the owner, subject to its date and exclusions — ask the title company, not this page.",
+  notLegalAdvice:
+    "Title insurance is a contract with exclusions (survey, zoning, later work). This is not a review of your commitment, not a claim, and not legal advice. Read the commitment with the title company.",
+} as const
+
+export const WEEK_AFTER_FUNDING = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Typical post-closing timeline after a Utah title-company funding. Ranges, not promises. Not legal advice.",
+  whatHappens:
+    "After funding, the deed and deed of trust are sent for county recording. You usually already have keys at a Utah purchase funding. The first payment date is on the note and Closing Disclosure — it is often the first of the month after the first full month, because odd-days interest was prepaid at closing.",
+  firstPayment:
+    "Do not wait for a statement to learn the first due date. The CD and note state it. A statement can arrive later, especially if servicing transfers.",
+  servicing:
+    "The originator is not always the servicer. A “hello” / servicing-transfer letter can arrive in the first weeks. Pay the party the notice names. A transfer does not change the note rate by itself.",
+  recording:
+    "Recording can take days to a few weeks depending on the county queue. Title typically handles the package. This is not a promise of a recording date.",
+  notLegalAdvice:
+    "This is a servicing and calendar map, not legal advice, not a homestead filing guide, and not a punch-list for construction defects. Ask the title company and servicer about your file.",
+} as const
+
+export const FIRST_STATEMENT_VS_NOTE = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Closing Disclosure prepaid interest, escrowed PITI, and first monthly statement. Not a rate-change notice.",
+  whyDifferent:
+    "The note rate prices principal and interest. The first mortgage statement is usually PITI: that P&I plus the escrow (impound) portion for taxes and insurance, and mortgage insurance when it applies. The total due is supposed to look larger than note-rate P&I alone.",
+  oddDays:
+    "Interest from the funding date through the end of that month is typically collected as prepaid interest at closing (odd days). That is why the first regular payment is often skipped until the next cycle. It is not a free month and not a rate change.",
+  escrow:
+    "The monthly escrow line is an estimate until the first analysis. Utah’s once-a-year tax bill makes that first analysis noisy. See the tax calendar, cushion, and shortage guides. A higher total payment than the note P&I is expected when escrow is on.",
+  notARateChange:
+    "A first statement that does not match the note-rate P&I you memorized is usually escrow, odd days, or PMI/MIP — not the lender changing the note. If the P&I line itself is wrong, call the servicer with the note in hand.",
+  notAdvice:
+    "This page does not quote your first payment. Read the CD and the first statement together. Not tax advice.",
+} as const
+
+export const ESCROW_WAIVER = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Typical conventional escrow-waiver overlays vs required impounds on FHA, VA, and many high-LTV files. Confirm the investor and state. Not a promise you can waive.",
+  impounds:
+    "Impounds (escrow, impound account) mean the servicer collects a monthly share of property taxes and homeowners insurance with the P&I, then pays those bills. Required on many government loans and many high-LTV conventional files.",
+  waiver:
+    "A conventional escrow waiver, when it exists, is an overlay: often enough equity (commonly discussed around 20% down / 80% LTV), a clean housing history, and sometimes a fee or a slightly different price. It is not a federal right, not automatic at 20%, and not available on every product.",
+  government:
+    "FHA, VA, and USDA files commonly require escrow for taxes and insurance. Do not assume a government loan can waive impounds because a conventional friend did.",
+  tradeoff:
+    "Waiving escrow lowers the monthly draft and raises cash you must have when the tax and insurance bills arrive (Utah typically November for taxes). Keeping escrow raises the monthly payment and spreads those bills. Cash-to-close at origination also changes because an escrow cushion may be collected — see how the cushion is set.",
+  notAPromise:
+    "This page does not promise you can waive escrow, quote a waiver fee, or tell you which option is cheaper. Shortage and surplus still happen on impounded loans. See escrow shortage after the first year.",
+} as const

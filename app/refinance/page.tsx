@@ -10,6 +10,7 @@ import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
+import { BreakEvenTable } from "@/components/content/break-even-table"
 
 export const metadata: Metadata = {
   title: "Mortgage Refinance in Utah | Ondo Real Estate",
@@ -127,7 +128,25 @@ export default function RefinanceHubPage() {
                   <CardDescription>One extra payment a year versus a new note. No savings promise.</CardDescription>
                 </CardHeader>
               </Card>
+              <Card key="Recast vs refinance">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/recast-vs-refinance" className="hover:text-primary">Recast vs refinance</Link>
+                  </CardTitle>
+                  <CardDescription>Keep the rate after a lump sum, or replace the note. Different costs.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="Condo aging HOA">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/refinancing-condo-aging-hoa" className="hover:text-primary">Condo with an aging HOA</Link>
+                  </CardTitle>
+                  <CardDescription>Project reserves, litigation, and insurance can stall a refinance.</CardDescription>
+                </CardHeader>
+              </Card>
             </div>
+
+            <BreakEvenTable table="stay-scenarios" />
 
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               <Button key="/refinance/process" asChild variant="outline" size="sm">

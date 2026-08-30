@@ -83,7 +83,27 @@ describe("PropertyListingDetailClient", () => {
     expect(showingLinks.length).toBeGreaterThan(0)
     showingLinks.forEach((link) => expect(link).toHaveAttribute("href", "#ask-leasing"))
     expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
+    expect(screen.getAllByText(/listed monthly rent/i).length).toBeGreaterThan(0)
+    expect(screen.getByRole("heading", { name: /what this listing includes/i })).toBeInTheDocument()
     expect(screen.queryByRole("link", { name: /^apply$/i })).not.toBeInTheDocument()
+    expect(screen.queryByText(/great for families/i)).not.toBeInTheDocument()
+  })
+
+  it("shows listed fees, move-in, and pet notes only when the payload has them", async () => {
+    fetchById.mockResolvedValue({
+      ...listing,
+      availability: "2026-10-15",
+      fees: "Trash $25/mo, listed by the manager",
+      leaseTerms: "12 months",
+      amenities: ["laundry", "pet_friendly", "parking"],
+    })
+    render(<PropertyListingDetailClient publicId={listing.publicId} />)
+
+    expect(await screen.findByText(/available oct 15, 2026/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/trash \$25\/mo, listed by the manager/i).length).toBeGreaterThan(0)
+    expect(screen.getByRole("heading", { level: 2, name: /^pets$/i })).toBeInTheDocument()
+    expect(screen.getAllByText(/pets allowed/i).length).toBeGreaterThan(0)
+    expect(screen.queryByText(/application fee \$50/i)).not.toBeInTheDocument()
   })
 
   it("shows the unavailable state when the public list does not contain that id", async () => {

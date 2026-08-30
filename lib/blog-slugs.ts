@@ -140,6 +140,15 @@ const STATIC_ROUTE_SLUGS = [
   "how-long-first-purchase-takes",
   "closing-credit-card-before-mortgage",
   "hazard-vs-ho3-vs-ho6-condo-insurance",
+  "authorized-user-tradelines-mortgage",
+  "interest-only-mortgages-who-they-are-for",
+  "manufactured-housing-adu-financing",
+  "recast-vs-refinance",
+  "refinancing-condo-aging-hoa",
+  "title-insurance-owner-vs-lender",
+  "week-after-mortgage-funding",
+  "first-mortgage-statement-vs-note-rate",
+  "impounds-vs-waiving-escrow",
 ] as const;
 
 /** Every slug that must resolve to a built blog page. */
@@ -265,6 +274,15 @@ export const BLOG_INDEX_SLUGS = [
   "how-long-first-purchase-takes",
   "closing-credit-card-before-mortgage",
   "hazard-vs-ho3-vs-ho6-condo-insurance",
+  "authorized-user-tradelines-mortgage",
+  "interest-only-mortgages-who-they-are-for",
+  "manufactured-housing-adu-financing",
+  "recast-vs-refinance",
+  "refinancing-condo-aging-hoa",
+  "title-insurance-owner-vs-lender",
+  "week-after-mortgage-funding",
+  "first-mortgage-statement-vs-note-rate",
+  "impounds-vs-waiving-escrow",
 ] as const;
 
 export function isValidBlogSlug(slug: string): boolean {

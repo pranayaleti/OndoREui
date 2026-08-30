@@ -91,7 +91,10 @@ export default function BiweeklyVsRefinancePage() {
       <ul>
         <li>You like the current rate and want faster payoff without new closing costs.</li>
         <li>You can send extra principal the servicer will apply — ask, do not assume a third-party biweekly company.</li>
-        <li>A recast after a lump sum is another servicing tool; it is not a refinance.</li>
+        <li>
+          A recast after a lump sum is another servicing tool; it is not a refinance.{" "}
+          <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>.
+        </li>
       </ul>
 
       <h2>When refinance is the conversation</h2>

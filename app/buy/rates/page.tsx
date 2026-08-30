@@ -197,7 +197,7 @@ export default function MortgageRatesPage() {
               <h3 className="text-2xl font-bold mb-6">What moves a quote</h3>
               <ul className="space-y-3 text-foreground/70">
                 <li>• Credit, occupancy (primary vs second home vs investment), and loan-to-value</li>
-                <li>• Property type (condo and manufactured overlays differ)</li>
+                <li>• Property type (condo and <Link href="/blog/manufactured-housing-adu-financing" className="text-primary underline-offset-4 hover:underline">manufactured or ADU</Link> overlays differ)</li>
                 <li>• Lock period and whether you are buying <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="text-primary underline-offset-4 hover:underline">discount points</Link> or taking a lender credit — or a <Link href="/blog/temporary-buydown-who-pays-year-three" className="text-primary underline-offset-4 hover:underline">temporary 2-1 / 3-2-1 buydown</Link>. How <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="text-primary underline-offset-4 hover:underline">APR vs rate on the Loan Estimate</Link> differ</li>
                 <li>• Program (conventional, FHA, VA, USDA, jumbo) — jumbo starts at the{" "}
                   <Link href="/blog/jumbo-vs-conforming-fhfa-county-limit" className="text-primary underline-offset-4 hover:underline">
@@ -231,6 +231,17 @@ export default function MortgageRatesPage() {
                     . Product overview:{" "}
                     <Link href="/buy/adjustable-rate" className="text-primary underline-offset-4 hover:underline">
                       adjustable-rate mortgages
+                    </Link>
+                    .
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Interest-only (not a teaser)</h4>
+                  <p className="text-foreground/70">
+                    An interest-only period skips scheduled principal for a stated window. That is not an ARM teaser
+                    and not a temporary buydown. Payment shock when amortization starts is the risk.{" "}
+                    <Link href="/blog/interest-only-mortgages-who-they-are-for" className="text-primary underline-offset-4 hover:underline">
+                      Interest-only: who it is for
                     </Link>
                     .
                   </p>

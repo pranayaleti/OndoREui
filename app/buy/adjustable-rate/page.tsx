@@ -136,6 +136,14 @@ export default function AdjustableRatePage() {
                   <p className="text-foreground/70">Fixed rate for 10 years, then adjusts annually. Longer fixed period, still an ARM after that date.</p>
                 </div>
               </div>
+              <p className="mt-6 text-foreground/70">
+                Interest-only is a different payment machine: principal is not required during a stated period. That is
+                not an ARM teaser and not a temporary buydown.{" "}
+                <Link href="/blog/interest-only-mortgages-who-they-are-for" className="underline underline-offset-4">
+                  Interest-only: who it is for
+                </Link>
+                .
+              </p>
             </div>
 
             <div className="text-center mb-12">
@@ -146,6 +154,9 @@ export default function AdjustableRatePage() {
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/blog/arm-caps-in-plain-english">Read the cap structure</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/blog/interest-only-mortgages-who-they-are-for">Interest-only vs ARM</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/contact">Speak with a Loan Officer</Link>

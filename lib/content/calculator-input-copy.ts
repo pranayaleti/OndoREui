@@ -115,6 +115,8 @@ const CLOSING: CalculatorInputCopy = {
   ],
   related: [
     { label: "Utah closing costs: title, origination, prepaids", href: "/blog/utah-closing-costs-title-origination-prepaids" },
+    { label: "Owner’s vs lender’s title insurance", href: "/blog/title-insurance-owner-vs-lender" },
+    { label: "Impounds vs waiving escrow", href: "/blog/impounds-vs-waiving-escrow" },
     { label: "Escrow shortage after the first year", href: "/blog/escrow-shortage-after-first-year" },
     { label: "Earnest money vs down payment vs closing costs", href: "/blog/earnest-money-vs-down-payment-vs-closing-costs" },
     { label: "Cash besides down payment", href: "/blog/utah-cash-to-close-besides-down-payment" },
@@ -146,6 +148,7 @@ const REFINANCE: CalculatorInputCopy = {
     { label: "“No closing cost” refinance: the cost is in the rate", href: "/blog/no-closing-cost-refinance-rate-credit-tradeoff" },
     { label: "Discount points: breakeven without a sales pitch", href: "/blog/discount-points-breakeven-without-sales-pitch" },
     { label: "FHA / VA streamline: what less docs still requires", href: "/blog/fha-va-streamline-refinance-less-docs" },
+    { label: "Recast vs refinance", href: "/blog/recast-vs-refinance" },
     { label: "Delayed financing after a cash purchase", href: "/blog/delayed-financing-after-cash-purchase" },
   ],
 }
@@ -170,6 +173,7 @@ const MORTGAGE_PAYMENT: CalculatorInputCopy = {
     { label: "How MIP vs PMI actually leaves the loan", href: "/blog/mip-vs-pmi-how-mortgage-insurance-ends" },
     { label: "DTI with HOA", href: "/blog/dti-frontend-backend-with-hoa" },
     { label: "Discount points breakeven", href: "/blog/discount-points-breakeven-without-sales-pitch" },
+    { label: "Interest-only: who it is for", href: "/blog/interest-only-mortgages-who-they-are-for" },
     { label: "Why your quote is not the 30-year average", href: "/buy/rates" },
   ],
 }

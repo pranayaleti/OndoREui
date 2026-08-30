@@ -95,7 +95,8 @@ export default function MortgagePaydownHacks() {
               <li><strong>Extra principal, early:</strong> a modest recurring extra payment in years 1–10 saves the most, because it removes the highest-interest balance first.</li>
               <li><strong>Biweekly payments:</strong> paying half the monthly amount every two weeks yields 26 half-payments, one extra full payment a year, shaving years off a 30-year loan.</li>
               <li><strong>Round up:</strong> rounding a $1,840 payment to $2,000 is a painless, automatic principal boost.</li>
-              <li><strong>Recast:</strong> after a lump-sum principal payment, ask the servicer to recast, same rate and term, lower payment. Cheaper than refinancing when your rate is already good.</li>
+              <li><strong>Recast:</strong> after a lump-sum principal payment, ask the servicer to recast, same rate and term, lower payment. Compare the fee with refinance costs in{" "}
+                <Link href="/blog/recast-vs-refinance">recast vs refinance</Link>. Not a savings quote.</li>
               <li><strong>Refinance (when rates drop):</strong> a lower rate or shorter term can cut total interest, weigh closing costs against the break-even.</li>
             </ul>
 

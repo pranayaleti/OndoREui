@@ -66,8 +66,9 @@ export default function UtahClosingCostsPage() {
           “hidden” in the note rate.
         </li>
         <li>
-          <strong>Title and recording.</strong> Owner’s vs lender’s title, escrow, and county recorder.{" "}
-          {UTAH_CLOSING_NOTES.titleVaries}
+          <strong>Title and recording.</strong>{" "}
+          <Link href="/blog/title-insurance-owner-vs-lender">Owner’s vs lender’s title</Link>, escrow, and county
+          recorder. {UTAH_CLOSING_NOTES.titleVaries}
         </li>
         <li>
           <strong>Prepaids.</strong> Insurance, interest from funding to month-end, and tax impounds. These often

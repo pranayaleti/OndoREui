@@ -9,6 +9,7 @@ import type { Metadata } from "next"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { BreakEvenTable } from "@/components/content/break-even-table"
 
 export const metadata: Metadata = {
   title: "Rate-and-Term Refinance in Utah | Ondo Real Estate",
@@ -69,9 +70,14 @@ export default function RateTermRefinancePage() {
               </Card>
             </div>
 
+            <BreakEvenTable table="stay-scenarios" />
+
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
                 <Link href="/blog/refinance-break-even-when-lower-rate-loses">When a lower rate still loses</Link>
+              </Button>
+              <Button key="/blog/recast-vs-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>
               </Button>
               <Button key="/blog/fha-va-streamline-refinance-less-docs" asChild variant="outline" size="sm">
                 <Link href="/blog/fha-va-streamline-refinance-less-docs">FHA / VA streamline</Link>

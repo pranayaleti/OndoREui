@@ -1134,6 +1134,78 @@ const blogPosts: SearchResult[] = [
     href: '/blog/hazard-vs-ho3-vs-ho6-condo-insurance',
     category: 'Blog',
     keywords: ['HO-6 condo insurance', 'HO-3 homeowners', 'hazard insurance mortgage']
+  },
+  {
+    id: 'authorized-user-tradelines-mortgage',
+    title: 'Authorized User Tradelines: Help or Overlay Risk',
+    description: 'What AU tradelines do and do not do. Not a piggyback scheme',
+    href: '/blog/authorized-user-tradelines-mortgage',
+    category: 'Blog',
+    keywords: ['authorized user tradelines', 'AU tradeline mortgage', 'piggyback credit']
+  },
+  {
+    id: 'interest-only-mortgages-who-they-are-for',
+    title: 'Interest-Only Mortgages: Who They Are For',
+    description: 'Payment shock when IO ends. Not a teaser-rate promise',
+    href: '/blog/interest-only-mortgages-who-they-are-for',
+    category: 'Blog',
+    keywords: ['interest only mortgage', 'IO payment shock', 'interest-only vs ARM']
+  },
+  {
+    id: 'manufactured-housing-adu-financing',
+    title: 'Manufactured Housing and ADU Financing',
+    description: 'Two property types. No invented HUD codes as a permanent product',
+    href: '/blog/manufactured-housing-adu-financing',
+    category: 'Blog',
+    keywords: ['manufactured home mortgage', 'ADU financing', 'HUD code home loan']
+  },
+  {
+    id: 'recast-vs-refinance',
+    title: 'Recast vs Refinance',
+    description: 'Same note vs a new loan. Recast fee vs refinance costs',
+    href: '/blog/recast-vs-refinance',
+    category: 'Blog',
+    keywords: ['recast vs refinance', 'mortgage recast', 'principal curtailment']
+  },
+  {
+    id: 'refinancing-condo-aging-hoa',
+    title: 'Refinancing a Condo with an Aging HOA',
+    description: 'Reserves, litigation, insurance, project review. Not the FHA roster how-to',
+    href: '/blog/refinancing-condo-aging-hoa',
+    category: 'Blog',
+    keywords: ['condo refinance HOA', 'aging HOA', 'condo project eligibility']
+  },
+  {
+    id: 'title-insurance-owner-vs-lender',
+    title: 'Title Insurance: Owner vs Lender Policy',
+    description: 'Lender’s policy protects the lien. Owner’s policy protects you. Not legal advice',
+    href: '/blog/title-insurance-owner-vs-lender',
+    category: 'Blog',
+    keywords: ['owner title insurance', 'lender title policy', 'Utah title insurance']
+  },
+  {
+    id: 'week-after-mortgage-funding',
+    title: 'What Happens the Week After Funding',
+    description: 'Recording, first payment timing, servicing transfer. Not legal advice',
+    href: '/blog/week-after-mortgage-funding',
+    category: 'Blog',
+    keywords: ['after funding', 'first mortgage payment', 'servicing transfer']
+  },
+  {
+    id: 'first-mortgage-statement-vs-note-rate',
+    title: 'First Mortgage Statement vs Note Rate',
+    description: 'PITI and odd days, not a secret rate change',
+    href: '/blog/first-mortgage-statement-vs-note-rate',
+    category: 'Blog',
+    keywords: ['first mortgage statement', 'note rate vs payment', 'odd days interest']
+  },
+  {
+    id: 'impounds-vs-waiving-escrow',
+    title: 'Impounds vs Waiving Escrow',
+    description: 'Waiver is an overlay, not a promise at 20% down',
+    href: '/blog/impounds-vs-waiving-escrow',
+    category: 'Blog',
+    keywords: ['waive escrow', 'impound account', 'escrow waiver']
   }
 ]
 

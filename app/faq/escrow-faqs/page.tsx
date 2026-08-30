@@ -50,7 +50,7 @@ export default function EscrowFAQPage() {
     },
     {
       question: "Can I cancel my escrow account?",
-      answer: "You may be able to cancel your escrow account once you have sufficient equity (typically 20% or more) and a good payment history. However, some lenders require escrow accounts for the life of the loan."
+      answer: "A conventional escrow waiver, when it exists, is an overlay — not a federal right and not automatic at 20% down. FHA, VA, and USDA commonly require impounds. See impounds vs waiving escrow. This FAQ does not promise you can waive."
     },
     {
       question: "What happens if my escrow account has a shortage?",
@@ -67,6 +67,14 @@ export default function EscrowFAQPage() {
     {
       question: "Is hazard insurance the same as an HO-3 or HO-6?",
       answer: "Hazard insurance is the dwelling coverage a lender requires. HO-3 is a common homeowners form for many houses. HO-6 is the common condo unit-owners form next to the master policy. See hazard vs HO-3 vs HO-6. Not insurance advice."
+    },
+    {
+      question: "Can I waive escrow if I put 20% down?",
+      answer: "Not as a promise. A conventional escrow waiver, when it exists, is an overlay — often discussed around 20% equity, still investor-specific, and often unavailable on FHA, VA, and USDA. See impounds vs waiving escrow. Link the cushion and shortage guides. This FAQ does not promise you can waive."
+    },
+    {
+      question: "Why doesn’t my first statement match the note rate?",
+      answer: "The first bill is usually PITI plus odd-days timing from closing — not a secret rate change. See first mortgage statement vs note rate and the week after funding."
     }
   ]
 

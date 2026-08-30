@@ -64,6 +64,10 @@ export default function LearnHubPage() {
               how long a first purchase takes
             </Link>
             ,{" "}
+            <Link href="/blog/week-after-mortgage-funding" className="text-primary underline-offset-4 hover:underline">
+              the week after funding
+            </Link>
+            ,{" "}
             <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="text-primary underline-offset-4 hover:underline">
               Utah tax calendar vs first escrow analysis
             </Link>

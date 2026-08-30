@@ -280,6 +280,7 @@ const Footer = memo(() => {
             <li><Link href="/refinance/rate-term" className="text-foreground/70 hover:text-foreground">Rate-and-term refinance</Link></li>
             <li><Link href="/refinance/cash-out" className="text-foreground/70 hover:text-foreground">Cash-out refinance</Link></li>
             <li><Link href="/refinance/blog" className="text-foreground/70 hover:text-foreground">Mortgage blog – Refinance</Link></li>
+            <li><Link href="/blog/recast-vs-refinance" className="text-foreground/70 hover:text-foreground">Recast vs refinance</Link></li>
           </FooterNavSection>
 
           {/* Mortgage Loans */}
@@ -325,6 +326,8 @@ const Footer = memo(() => {
             <li><Link href="/learn/investment" className="text-foreground/70 hover:text-foreground">Investment occupancy and DSCR</Link></li>
             <li><Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="text-foreground/70 hover:text-foreground">Utah tax calendar vs escrow</Link></li>
             <li><Link href="/blog/escrow-shortage-after-first-year" className="text-foreground/70 hover:text-foreground">Escrow shortage after first year</Link></li>
+            <li><Link href="/blog/impounds-vs-waiving-escrow" className="text-foreground/70 hover:text-foreground">Impounds vs waiving escrow</Link></li>
+            <li><Link href="/blog/week-after-mortgage-funding" className="text-foreground/70 hover:text-foreground">The week after funding</Link></li>
             <li><Link href="/blog/how-long-first-purchase-takes" className="text-foreground/70 hover:text-foreground">How long a first purchase takes</Link></li>
             <li><Link href="/blog/hill-afb-va-coe-occupancy" className="text-foreground/70 hover:text-foreground">Hill AFB VA: COE and occupancy</Link></li>
             <li><Link href="/qualify" className="text-foreground/70 hover:text-foreground">Start a mortgage conversation</Link></li>

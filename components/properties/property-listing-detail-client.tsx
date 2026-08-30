@@ -35,6 +35,7 @@ export function PropertyListingDetailClient({ publicId }: { publicId: string }) 
           <p className="sr-only">Loading listing</p>
           <div className="mb-6 h-8 w-2/3 animate-pulse rounded bg-muted" />
           <div className="mb-8 aspect-video max-h-96 animate-pulse rounded-lg bg-muted" />
+          <div className="mb-8 h-32 animate-pulse rounded bg-muted" />
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="h-16 animate-pulse rounded bg-muted" />
