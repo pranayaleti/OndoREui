@@ -76,7 +76,7 @@ function getPriority(path) {
   // less important than the index. Each listing also benefits from a fresh
   // BUILD_DATE lastmod (the listing data is regenerated each build).
   if (/^\/properties\/[^/]+$/.test(p)) return 0.8
-  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations']
+  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = [
     '/resources',
@@ -95,28 +95,39 @@ function getPriority(path) {
   return 0.7
 }
 
+/** File-like static export paths (`out/sitemap.xml`, `out/llms.txt`) omit a trailing slash. */
+function isFileLikeSitemapPath(path) {
+  const p = normalizeSitemapPath(path)
+  return /\.[a-z0-9]{2,8}$/i.test(p)
+}
+
 function buildAlternateRefs(path, siteUrl) {
   const base = siteUrl.replace(/\/+$/, '')
   const p = normalizeSitemapPath(path)
-  const canonical = p === '/' ? `${base}/` : `${base}${p}/`
+  const fileLike = isFileLikeSitemapPath(path)
+  const canonical = p === '/' ? `${base}/` : fileLike ? `${base}${p}` : `${base}${p}/`
+  // next-sitemap appends `loc` onto href unless hrefIsAbsolute is set.
+  const abs = (href, hreflang) => ({ href, hreflang, hrefIsAbsolute: true })
   if (!LOCALE_ROUTING_ENABLED) {
-    return [
-      { href: canonical, hreflang: 'x-default' },
-      { href: canonical, hreflang: BCP47_BY_LOCALE.en },
-    ]
+    return [abs(canonical, 'x-default'), abs(canonical, BCP47_BY_LOCALE.en)]
   }
   return [
-    { href: canonical, hreflang: 'x-default' },
-    ...SUPPORTED_LOCALES.map((loc) => ({
-      href: loc === 'en' ? canonical : `${base}/${loc}${p === '/' ? '' : p}/`,
-      hreflang: BCP47_BY_LOCALE[loc],
-    })),
+    abs(canonical, 'x-default'),
+    ...SUPPORTED_LOCALES.map((loc) =>
+      abs(
+        loc === 'en' ? canonical : `${base}/${loc}${p === '/' ? '' : p}${fileLike ? '' : '/'}`,
+        BCP47_BY_LOCALE[loc],
+      ),
+    ),
   ]
 }
 
+/** Public pages that exist but must not be indexed (noindex metadata or redirect-only). */
+const SITEMAP_NOINDEX_PATHS = ['/search', '/chat']
+
 function isExcludedPath(path) {
   const p = normalizeSitemapPath(path)
-  if (p === '/login' || p === '/feedback' || p === '/health') {
+  if (SITEMAP_NOINDEX_PATHS.includes(p)) {
     return true
   }
   // Pages Router leftovers — same calculators live at /calculators/{slug}/.
@@ -131,13 +142,9 @@ function isExcludedPath(path) {
     return true
   }
 
-  return PRIVATE_ROUTE_PREFIXES.some((prefix) => p === prefix || p.startsWith(`${prefix}/`))
-}
-
-/** Static export writes `out/sitemap.xml` and `out/llms.txt` (no trailing slash). */
-function isFileLikeSitemapPath(path) {
-  const p = normalizeSitemapPath(path)
-  return /\.[a-z0-9]{2,8}$/i.test(p)
+  // Token shells (/apply/_/, /visit/confirm/__ondo_visit_export_shell__/, etc.)
+  // and extraDisallow prefixes (/verify, /invite, /unsubscribe) stay out of XML.
+  return ROBOTS_DISALLOW.some((prefix) => p === prefix || p.startsWith(`${prefix}/`))
 }
 
 function buildRobotsCommentBlock(siteUrl) {
@@ -219,6 +226,24 @@ module.exports = {
     '/api/*',
     '/feedback',
     '/health',
+    '/search',
+    '/search/',
+    '/chat',
+    '/chat/',
+    '/apply',
+    '/apply/**',
+    '/apply/*',
+    '/invite',
+    '/invite/**',
+    '/invite/*',
+    '/tenantOnboarding',
+    '/tenantOnboarding/**',
+    '/tenantOnboarding/*',
+    '/visit',
+    '/visit/**',
+    '/visit/*',
+    '/verify',
+    '/unsubscribe',
   ],
   transform: async (config, path) => {
     if (isExcludedPath(path)) {

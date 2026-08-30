@@ -6,6 +6,10 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import type { Metadata } from "next"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 
 export const metadata: Metadata = {
   title: "Mortgage Refinance in Utah | Ondo Real Estate",
@@ -35,32 +39,92 @@ export default function RefinanceHubPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Should You Refinance?</h2>
-              <p className="text-lg text-foreground/70">Refinancing replaces your current mortgage with a new one — ideally at a lower rate, a shorter term, or to convert equity into cash. Whether it saves you money depends on your new rate, how long you’ll stay, and the closing costs. Weigh the break-even point before you commit.</p>
+              <p className="text-lg text-foreground/70">
+                Refinancing replaces your current mortgage with a new one — to change rate or term, or to convert equity
+                into cash. A lower note rate can still lose after costs if you move or refinance again first. Run
+                break-even before you treat a headline rate as savings.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
               <Card key="Rate-and-term">
                 <CardHeader>
-                  <CardTitle className="text-lg">Rate-and-term</CardTitle>
+                  <CardTitle className="text-lg">
+                    <Link href="/refinance/rate-term" className="hover:text-primary">Rate-and-term</Link>
+                  </CardTitle>
                   <CardDescription>Lower your interest rate or shorten your term without taking cash out.</CardDescription>
                 </CardHeader>
               </Card>
               <Card key="Cash-out">
                 <CardHeader>
-                  <CardTitle className="text-lg">Cash-out</CardTitle>
-                  <CardDescription>Convert home equity into cash for renovations, debt payoff, or investing.</CardDescription>
-                </CardHeader>
-              </Card>
-              <Card key="The process">
-                <CardHeader>
-                  <CardTitle className="text-lg">The process</CardTitle>
-                  <CardDescription>Application, appraisal, underwriting, and closing — usually 30–45 days.</CardDescription>
+                  <CardTitle className="text-lg">
+                    <Link href="/refinance/cash-out" className="hover:text-primary">Cash-out</Link>
+                  </CardTitle>
+                  <CardDescription>Convert home equity into cash. Different LTV and tax questions than rate-and-term.</CardDescription>
                 </CardHeader>
               </Card>
               <Card key="Break-even math">
                 <CardHeader>
-                  <CardTitle className="text-lg">Break-even math</CardTitle>
-                  <CardDescription>Divide closing costs by monthly savings to see when a refi pays off.</CardDescription>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="hover:text-primary">Break-even math</Link>
+                  </CardTitle>
+                  <CardDescription>Include points and origination. A lower note rate can still lose if you move first.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="Streamline refinance">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/fha-va-streamline-refinance-less-docs" className="hover:text-primary">FHA / VA streamline</Link>
+                  </CardTitle>
+                  <CardDescription>Less documentation is not no-docs. Occupancy, payment history, and net benefit still apply.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="No closing cost refinance">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff" className="hover:text-primary">“No closing cost” refi</Link>
+                  </CardTitle>
+                  <CardDescription>The credit that covers fees is usually paid for in the rate. Run break-even.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="Discount points">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="hover:text-primary">Discount points</Link>
+                  </CardTitle>
+                  <CardDescription>Break-even is cost divided by monthly P&amp;I savings. Not a temporary buydown.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="HELOC vs cash-out">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/heloc-vs-cash-out-refinance" className="hover:text-primary">HELOC vs cash-out</Link>
+                  </CardTitle>
+                  <CardDescription>Second lien vs replacing the first. Payment and tax questions differ.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="HELOC after year two">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/heloc-after-year-two-vs-cash-out" className="hover:text-primary">HELOC after year two</Link>
+                  </CardTitle>
+                  <CardDescription>Seasoning overlays after a recent closing — not a remake of lien structure.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="Delayed financing">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/delayed-financing-after-cash-purchase" className="hover:text-primary">Delayed financing</Link>
+                  </CardTitle>
+                  <CardDescription>Cash purchase, then a cash-out later. Agency exception — not a statute.</CardDescription>
+                </CardHeader>
+              </Card>
+              <Card key="Biweekly vs refinance">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    <Link href="/blog/biweekly-extra-principal-vs-refinance" className="hover:text-primary">Biweekly vs refinance</Link>
+                  </CardTitle>
+                  <CardDescription>One extra payment a year versus a new note. No savings promise.</CardDescription>
                 </CardHeader>
               </Card>
             </div>
@@ -87,6 +151,10 @@ export default function RefinanceHubPage() {
                 <Link href="/contact">Speak with an advisor</Link>
               </Button>
             </div>
+            <RelatedContent path="/refinance" title="Refinance education and tools" />
+            <IsThisRightForMe table="equity" />
+            <NextStepCta path="/refinance" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

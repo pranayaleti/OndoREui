@@ -63,7 +63,7 @@ function pickPageFragment(html: string): string {
   if (slots[0]) return slots[0].fragment
 
   const scoped = [extractById(html, "main-content"), extractTag(html, "main")].filter(
-    (value): value is string => Boolean(value) && fragmentScore(value) > 0,
+    (value): value is string => typeof value === "string" && fragmentScore(value) > 0,
   )
   if (scoped[0]) return scoped[0]
 
@@ -112,13 +112,13 @@ function extractTitle(html: string): string | null {
 
 function extractById(html: string, id: string): string | null {
   const open = html.match(new RegExp(`<(?<tag>[a-zA-Z][a-zA-Z0-9]*)[^>]*\\sid=["']${id}["'][^>]*>`, "i"))
-  if (!open?.groups?.tag) return null
+  if (!open?.groups?.tag || open.index == null) return null
   return sliceBalanced(html, open.index + open[0].length, open.groups.tag)
 }
 
 function extractTag(html: string, tag: string): string | null {
   const open = html.match(new RegExp(`<${tag}\\b[^>]*>`, "i"))
-  if (!open) return null
+  if (!open || open.index == null) return null
   return sliceBalanced(html, open.index + open[0].length, tag)
 }
 

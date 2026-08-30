@@ -20,6 +20,11 @@ Required monthly income = target PITI ÷ front-end DTI limit. Multiply by 12 for
 - Interest rate (%)
 - Monthly debts (USD)
 
+## Notes
+
+- This calculator cannot see overtime history, 1099 expenses, or a down year. Enter a documented average.
+- A typed rate is not a quote, a lock, or APR.
+
 ## Try the interactive version
 
 - HTML calculator: https://www.ondorealestate.com/calculators/income/

@@ -368,6 +368,22 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
       <CityTestimonials cityName={city.name} />
 
       {/* Cross-links to city guide & pricing */}
+      {service === "loans" && (
+        <CrossLinkSection
+          title="Mortgage education (not city-specific)"
+          variant="grid"
+          links={[
+            { label: "Learning hub", href: "/learn/", description: "Topic clusters, not a blog dump." },
+            { label: "Variable income", href: "/learn/variable-income/", description: "1099, overtime, and self-employed files." },
+            { label: "First-time cash and closing", href: "/learn/first-time/", description: "Cash to close, DPA, and Utah title closings." },
+            { label: "Non-QM / bank-statement / DSCR", href: "/learn/non-qm/", description: "When agency income calc does not match cash flow." },
+            { label: "Investment occupancy and DSCR", href: "/learn/investment/", description: "Occupancy, house-hack, and rental qualification." },
+            { label: "Loan FAQs", href: "/faq/loans-faqs/", description: "Down payment, DTI, and pre-approval." },
+            { label: "Affordability calculator", href: "/calculators/affordability/", description: "Illustration only." },
+          ]}
+        />
+      )}
+
       <CrossLinkSection
         title={`More ${city.name} Resources`}
         variant="pills"
@@ -376,6 +392,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
           { label: `${city.name} Market Report`, href: `/market-reports/${citySlug}/` },
           { label: "Guides & resources", href: "/resources/" },
+          { label: "Learn", href: "/learn/" },
           { label: "Blog", href: "/blog/" },
         ]}
       />

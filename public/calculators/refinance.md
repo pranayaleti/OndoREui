@@ -10,7 +10,7 @@ canonical: https://www.ondorealestate.com/calculators/refinance/
 
 ## Formula
 
-Break-even months = closing costs ÷ (old payment − new payment). If you plan to hold the home longer than the break-even horizon, the refinance likely pays back.
+Break-even months = closing costs ÷ (old payment − new payment). Holding past that horizon is the usual test — it is still not a promise the refinance saves money after tax, moving, or a second refinance.
 
 ## Inputs
 
@@ -18,11 +18,12 @@ Break-even months = closing costs ÷ (old payment − new payment). If you plan 
 - Current rate
 - New rate
 - Remaining term
-- Closing costs
+- Closing costs (include points and origination)
 
 ## Notes
 
 - Break-even ignores tax benefits and opportunity cost of the closing outlay.
+- Put discount points and origination in closing costs. A lender credit reduces the numerator.
 
 ## Try the interactive version
 

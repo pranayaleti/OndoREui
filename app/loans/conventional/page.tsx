@@ -7,15 +7,20 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
+import { CONVENTIONAL_SNAPSHOT } from "@/lib/content"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Conventional Loans in Utah | Ondo Real Estate",
-  description: "Traditional mortgages with flexible terms and competitive rates. Learn requirements and compare options.",
+  description: "Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges. This is not a quote or a credit decision.",
   alternates: { canonical: `${SITE_URL}/loans/conventional/` },
   openGraph: {
     title: "Conventional Loans in Utah | Ondo Real Estate",
-    description: "Traditional mortgages with flexible terms and competitive rates. Learn requirements and compare options.",
+    description: "Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges. This is not a quote or a credit decision.",
   },
 }
 
@@ -33,8 +38,8 @@ export default function ConventionalLoanPage() {
       icon: <Shield className="h-6 w-6" />
     },
     {
-      title: "Competitive Rates",
-      description: "Get competitive interest rates based on your credit profile",
+      title: "Pricing follows the file",
+      description: "Interest rate depends on credit, down payment, occupancy, and the market. There is no single advertised rate on this page.",
       icon: <Home className="h-6 w-6" />
     },
     {
@@ -48,7 +53,7 @@ export default function ConventionalLoanPage() {
     <main className="min-h-screen">
       <SEO
         title="Conventional Loans in Utah"
-        description="Traditional mortgages with flexible terms and competitive rates. Learn requirements and compare options."
+        description="Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges."
         pathname="/loans/conventional"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -59,7 +64,7 @@ export default function ConventionalLoanPage() {
       />
       <PageBanner
         title="Conventional Loans"
-        subtitle="Traditional home loans with flexible terms and competitive rates"
+        subtitle="Traditional home loans with flexible terms. Pricing depends on your file and the market."
       />
 
       <section className="py-16 bg-background">
@@ -68,8 +73,8 @@ export default function ConventionalLoanPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 dark:text-foreground">What is a Conventional Loan?</h2>
               <p className="text-lg text-foreground/70 dark:text-foreground/70">
-                Conventional loans are traditional mortgages not backed by government agencies like FHA, VA, or USDA. 
-                They offer flexibility and competitive rates for qualified borrowers.
+                Conventional loans are traditional mortgages not backed by government agencies like FHA, VA, or USDA.
+                Terms, pricing, and overlays depend on the investor and your documentation.
               </p>
             </div>
 
@@ -95,33 +100,32 @@ export default function ConventionalLoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-4 dark:text-foreground">Credit Score</h4>
                   <ul className="space-y-2 text-foreground/70 dark:text-foreground/70">
-                    <li>• Minimum 620 for most programs</li>
-                    <li>• 740+ for best rates</li>
-                    <li>• Higher scores = better terms</li>
+                    <li>• {CONVENTIONAL_SNAPSHOT.typicalMinimumScore}</li>
+                    <li>• Higher scores often improve pricing, but there is no single “best rate” score</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-4 dark:text-foreground">Down Payment</h4>
                   <ul className="space-y-2 text-foreground/70 dark:text-foreground/70">
-                    <li>• As low as 3% for qualified buyers</li>
-                    <li>• 20% to avoid PMI</li>
-                    <li>• Gift funds allowed</li>
+                    <li>• {CONVENTIONAL_SNAPSHOT.lowDownOptions}</li>
+                    <li>• 20% down is the common path to avoid PMI, not a requirement to apply. See <Link href="/blog/should-i-wait-for-20-percent-down" className="underline underline-offset-4">wait for 20% vs buy sooner</Link></li>
+                    <li>• {CONVENTIONAL_SNAPSHOT.giftFunds}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-4 dark:text-foreground">Debt-to-Income Ratio</h4>
                   <ul className="space-y-2 text-foreground/70 dark:text-foreground/70">
-                    <li>• Maximum 43% DTI</li>
-                    <li>• Lower DTI = better approval odds</li>
-                    <li>• Consider all monthly debts</li>
+                    <li>• {CONVENTIONAL_SNAPSHOT.dtiNote}</li>
+                    <li>• Lower DTI can help, but it is not a guarantee of approval</li>
+                    <li>• Underwriters count monthly debts the investor requires, not a DIY list</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-4 dark:text-foreground">Employment</h4>
                   <ul className="space-y-2 text-foreground/70 dark:text-foreground/70">
-                    <li>• 2+ years employment history</li>
-                    <li>• Stable income required</li>
-                    <li>• Self-employed options available</li>
+                    <li>• Many files look for about two years of history</li>
+                    <li>• Documented income; variable income is averaged, not ignored</li>
+                    <li>• Self-employed options exist with a different document stack</li>
                   </ul>
                 </div>
               </div>
@@ -134,7 +138,7 @@ export default function ConventionalLoanPage() {
                   <h4 className="text-lg font-semibold mb-3 dark:text-foreground text-primary">Conventional Advantages</h4>
                   <ul className="space-y-2 text-foreground/70 dark:text-foreground/70">
                     <li>• No upfront mortgage insurance</li>
-                    <li>• PMI can be removed</li>
+                    <li>• PMI can often be removed with equity — how it ends: <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="underline underline-offset-4">MIP vs PMI</Link>; servicer mechanics: <Link href="/blog/pmi-removal-original-value-vs-new-appraisal" className="underline underline-offset-4">original value vs new appraisal</Link></li>
                     <li>• Higher loan limits</li>
                     <li>• More flexible terms</li>
                   </ul>
@@ -158,10 +162,23 @@ export default function ConventionalLoanPage() {
                   <Link href="/calculators/mortgage-payment">Calculate Your Payment</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/contact">Get Pre-Approved</Link>
+                  <Link href="/blog/should-i-wait-for-20-percent-down">Wait for 20% down?</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/blog/pmi-removal-original-value-vs-new-appraisal">PMI removal mechanics</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">How PMI vs MIP ends</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/qualify">Talk with a loan officer</Link>
                 </Button>
               </div>
             </div>
+            <RelatedContent path="/loans/conventional" />
+            <IsThisRightForMe table="purchase" programs={["conventional", "fha", "jumbo"]} highlight="conventional" />
+            <NextStepCta path="/loans/conventional" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

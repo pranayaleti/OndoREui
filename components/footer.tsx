@@ -271,6 +271,7 @@ const Footer = memo(() => {
             <li><Link href="/buy/30-year" className="text-foreground/70 hover:text-foreground">30 year mortgage</Link></li>
             <li><Link href="/buy/15-year" className="text-foreground/70 hover:text-foreground">15 year mortgage</Link></li>
             <li><Link href="/buy/rates" className="text-foreground/70 hover:text-foreground">Mortgage rates explained</Link></li>
+            <li><Link href="/buy-sell" className="text-foreground/70 hover:text-foreground">Buy &amp; sell by city</Link></li>
           </FooterNavSection>
 
           {/* Refinance */}
@@ -313,6 +314,20 @@ const Footer = memo(() => {
             <li><Link href="/about/news" className="text-foreground/70 hover:text-foreground">News</Link></li>
             <li><Link href="/socials" className="text-foreground/70 hover:text-foreground">Socials</Link></li>
             <li><Link href="/events" className="text-foreground/70 hover:text-foreground">Events</Link></li>
+            <li><Link href="/learn" className="text-foreground/70 hover:text-foreground">Mortgage learning hub</Link></li>
+            <li><Link href="/learn/variable-income" className="text-foreground/70 hover:text-foreground">Variable income mortgages</Link></li>
+            <li><Link href="/learn/first-time" className="text-foreground/70 hover:text-foreground">First-time buyer cash and closing</Link></li>
+            <li><Link href="/locations" className="text-foreground/70 hover:text-foreground">Service areas</Link></li>
+            <li><Link href="/market-reports" className="text-foreground/70 hover:text-foreground">City market reports</Link></li>
+            <li><Link href="/neighborhoods" className="text-foreground/70 hover:text-foreground">Neighborhood guides</Link></li>
+            <li><Link href="/schools" className="text-foreground/70 hover:text-foreground">School district guides</Link></li>
+            <li><Link href="/learn/non-qm" className="text-foreground/70 hover:text-foreground">Non-QM, bank-statement, DSCR</Link></li>
+            <li><Link href="/learn/investment" className="text-foreground/70 hover:text-foreground">Investment occupancy and DSCR</Link></li>
+            <li><Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="text-foreground/70 hover:text-foreground">Utah tax calendar vs escrow</Link></li>
+            <li><Link href="/blog/escrow-shortage-after-first-year" className="text-foreground/70 hover:text-foreground">Escrow shortage after first year</Link></li>
+            <li><Link href="/blog/how-long-first-purchase-takes" className="text-foreground/70 hover:text-foreground">How long a first purchase takes</Link></li>
+            <li><Link href="/blog/hill-afb-va-coe-occupancy" className="text-foreground/70 hover:text-foreground">Hill AFB VA: COE and occupancy</Link></li>
+            <li><Link href="/qualify" className="text-foreground/70 hover:text-foreground">Start a mortgage conversation</Link></li>
             <li><Link href="/academy" className="text-foreground/70 hover:text-foreground">Academy</Link></li>
             <li><Link href="/about/testimonials" className="text-foreground/70 hover:text-foreground">Reviews</Link></li>
             <li><Link href="/news" className="text-foreground/70 hover:text-foreground">Industry news</Link></li>
@@ -325,7 +340,7 @@ const Footer = memo(() => {
             <li><Link href="/faq/payments-faqs" className="text-foreground/70 hover:text-foreground">Payment questions</Link></li>
             <li><Link href="/faq/hardship-faqs" className="text-foreground/70 hover:text-foreground">Hardship assistance</Link></li>
             <li><Link href="/faq/loan-payoffs-faqs" className="text-foreground/70 hover:text-foreground">Loan payoffs</Link></li>
-            <li><Link href="/faq/general-faqs" className="text-foreground/70 hover:text-foreground">Mortgage FAQs</Link></li>
+            <li><Link href="/faq/loans-faqs" className="text-foreground/70 hover:text-foreground">Mortgage FAQs</Link></li>
             <li><Link href="/faq/escrow-faqs" className="text-foreground/70 hover:text-foreground">Escrow</Link></li>
             <li><Link href="/faq/disaster-faqs" className="text-foreground/70 hover:text-foreground">Natural Disaster Resources</Link></li>
           </FooterNavSection>

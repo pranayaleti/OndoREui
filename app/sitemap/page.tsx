@@ -156,7 +156,7 @@ export default function SitemapPage() {
                 </p>
                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
                   <Button asChild>
-                    <Link href="/search/">Search the site</Link>
+                    <Link href="/properties/">Search listings</Link>
                   </Button>
                   <Button asChild variant="outline">
                     <Link href="/contact/">Contact us</Link>

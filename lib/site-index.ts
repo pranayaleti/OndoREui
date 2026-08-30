@@ -1,4 +1,5 @@
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
+import { BLOG_STATIC_SLUGS } from "@/lib/blog-slugs"
 import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
 import agentDiscoveryConfig from "@/lib/agent-discovery-config.json"
 import { SUPPORTED_LOCALES, SUPPORTED_LOCALE_LABELS } from "@/lib/locales"
@@ -354,7 +355,422 @@ const BLOG_POSTS: SiteIndexLink[] = [
     href: "/blog/wasatch-front-real-estate-forecast-2026",
     description: "Interest rates, inventory, rent trends, and strategic positioning for Utah property owners.",
   },
+  {
+    name: "Can I Get a Mortgage If My Income Changes Every Month?",
+    href: "/blog/can-i-get-a-mortgage-if-my-income-changes-every-month",
+    description: "How underwriters typically average overtime, commission, and 1099 income.",
+  },
+  {
+    name: "1099 Mortgage Documentation Checklist",
+    href: "/blog/1099-mortgage-documentation-checklist",
+    description: "Returns, transcripts, P&L, statements, and contracts for contract income.",
+  },
+  {
+    name: "Bank-Statement Loans When Tax Returns Undercount Income",
+    href: "/blog/bank-statement-loans-when-tax-returns-undercount-income",
+    description: "Non-QM bank-statement programs: who they are for and what they are not.",
+  },
+    {
+      name: "Gift Funds for a Down Payment",
+      href: "/blog/gift-funds-down-payment-rules",
+      description: "Gift letters and paper trails for FHA, conventional, and VA.",
+    },
+    {
+      name: "Two Years of Tax Returns vs One Year",
+      href: "/blog/two-years-of-tax-returns-vs-one-year-mortgage",
+      description: "When overlays allow a shorter self-employed history.",
+    },
+    {
+      name: "Overtime on a W-2",
+      href: "/blog/w2-overtime-likely-to-continue",
+      description: "What likely to continue means for overtime income.",
+    },
+    {
+      name: "Commission-Only Sales Averaging",
+      href: "/blog/commission-income-mortgage-averaging",
+      description: "How a down year is averaged on a commission file.",
+    },
+    {
+      name: "Cash Besides Down Payment in Utah",
+      href: "/blog/utah-cash-to-close-besides-down-payment",
+      description: "Earnest money, title, prepaids, and reserves on top of down payment.",
+    },
+    {
+      name: "DPA Stacked with an FHA Gift",
+      href: "/blog/dpa-stacked-with-fha-gift-funds",
+      description: "How assistance and gift funds can sit on the same FHA purchase.",
+    },
+    {
+      name: "VA Funding Fee: Finance vs Cash",
+      href: "/blog/va-funding-fee-finance-vs-pay-cash",
+      description: "Worked examples of financing the fee versus paying it at closing.",
+    },
+    {
+      name: "VA Entitlement and a Second VA Loan",
+      href: "/blog/va-entitlement-second-va-loan",
+      description: "Remaining entitlement, occupancy, and restoration.",
+    },
+    {
+      name: "VA Residual Income vs DTI",
+      href: "/blog/va-residual-income-vs-dti",
+      description: "Why leftover cash can fail when DTI looks fine.",
+    },
+    {
+      name: "USDA Map and Income Limit",
+      href: "/blog/usda-map-income-limit-eligibility",
+      description: "Address and household tests before you assume zero down.",
+    },
+    {
+      name: "Jumbo vs Conforming FHFA Lookup",
+      href: "/blog/jumbo-vs-conforming-fhfa-county-limit",
+      description: "How to look up this year’s county conforming limit.",
+    },
+    {
+      name: "When a Lower Rate Still Loses",
+      href: "/blog/refinance-break-even-when-lower-rate-loses",
+      description: "Break-even including points and origination.",
+    },
+    {
+      name: "HELOC vs Cash-Out Refinance",
+      href: "/blog/heloc-vs-cash-out-refinance",
+      description: "Payment, lien position, and tax questions.",
+    },
+    {
+      name: "How Underwriters Verify Income",
+      href: "/blog/how-underwriters-verify-income",
+      description: "W-2 vs 1099 vs bank-statement stacks.",
+    },
+    {
+      name: "Declined After Pre-Approval",
+      href: "/blog/declined-after-pre-approval",
+      description: "Typical condition fails between the letter and CTC.",
+    },
+    {
+      name: "Utah Closing Costs",
+      href: "/blog/utah-closing-costs-title-origination-prepaids",
+      description: "Title, origination, and prepaids that vary by county.",
+    },
+    {
+      name: "Utah County Conforming Limit How-To",
+      href: "/blog/utah-county-conforming-loan-limit-lookup",
+      description: "Look up this year’s FHFA table for the property county.",
+    },
+    {
+      name: "K-1 Income: What Usually Counts",
+      href: "/blog/k-1-income-what-usually-counts",
+      description: "Partnership and S-corp K-1 income vs distributions.",
+    },
+    {
+      name: "Schedule E Rental Income on a Purchase",
+      href: "/blog/schedule-e-rental-income-purchase-file",
+      description: "How existing rental income is averaged vs proposed rent.",
+    },
+    {
+      name: "I Just Went 1099 Last Month",
+      href: "/blog/just-went-1099-last-month",
+      description: "Why brand-new 1099 income is usually not yet a qualifying average.",
+    },
+    {
+      name: "Parent Is Gifting: Who Signs What",
+      href: "/blog/parent-gifting-down-payment-who-signs",
+      description: "Gift letter, occupancy, and title when a parent helps with down payment.",
+    },
+    {
+      name: "Student Loans and DTI After IDR / SAVE",
+      href: "/blog/student-loans-dti-idr-save",
+      description: "A $0 dashboard line is not automatically $0 in DTI.",
+    },
+    {
+      name: "ARM Caps in Plain English",
+      href: "/blog/arm-caps-in-plain-english",
+      description: "Initial, periodic, and lifetime caps on the note rate.",
+    },
+    {
+      name: "FHA Condo Roster / Project Approval",
+      href: "/blog/fha-condo-roster-project-approval",
+      description: "Look up HUD project approval before an FHA condo offer.",
+    },
+    {
+      name: "How MIP vs PMI Actually Leaves the Loan",
+      href: "/blog/mip-vs-pmi-how-mortgage-insurance-ends",
+      description: "FHA MIP clock vs conventional PMI cancellation.",
+    },
+    {
+      name: "Streamline Refi: What Less Docs Still Requires",
+      href: "/blog/fha-va-streamline-refinance-less-docs",
+      description: "FHA Streamline and VA IRRRL occupancy and net-benefit tests.",
+    },
+    {
+      name: "Large Deposits: 60-Day Paper Trail",
+      href: "/blog/large-deposits-60-day-paper-trail",
+      description: "Source large deposits on about 60 days of statements.",
+    },
+    {
+      name: "Should I Wait for 20% Down?",
+      href: "/blog/should-i-wait-for-20-percent-down",
+      description: "PMI vs saving longer: cash and timeline, not MIP exit.",
+    },
+    {
+      name: "Removing PMI: Original Value vs New Appraisal",
+      href: "/blog/pmi-removal-original-value-vs-new-appraisal",
+      description: "HPA original-value clock vs a current-value appraisal path.",
+    },
+    {
+      name: "Discount Points: Breakeven Without a Sales Pitch",
+      href: "/blog/discount-points-breakeven-without-sales-pitch",
+      description: "Cost divided by monthly P&I savings. Not a temporary buydown.",
+    },
+    {
+      name: "What a Mortgage Conversation Asks",
+      href: "/blog/what-a-mortgage-conversation-asks",
+      description: "What you will be asked and what will not be promised.",
+    },
+    {
+      name: "New Auto Loan During Underwriting",
+      href: "/blog/new-auto-loan-during-underwriting",
+      description: "A car payment after pre-approval can flip DTI and findings.",
+    },
+    {
+      name: "DTI: Front-End vs Back-End with HOA",
+      href: "/blog/dti-frontend-backend-with-hoa",
+      description: "HOA dues are housing expense in front-end DTI.",
+    },
+    {
+      name: "Pre-Approval vs AUS vs Clear to Close",
+      href: "/blog/pre-approval-vs-aus-vs-clear-to-close",
+      description: "Letter, automated findings, and underwriter CTC are three stages.",
+    },
+    {
+      name: "Using a Spouse’s W-2 to Offset 1099 Volatility",
+      href: "/blog/spouse-w2-offset-1099-volatility",
+      description: "The W-2 counts when that person is a co-borrower. Utah is not community property.",
+    },
+    {
+      name: "Temporary Buydown: Who Pays, Year 3",
+      href: "/blog/temporary-buydown-who-pays-year-three",
+      description: "2-1 and 3-2-1 payment subsidies. Distinct from discount points.",
+    },
+    {
+      name: "DSCR vs Full-Doc Rental Loan",
+      href: "/blog/dscr-vs-full-doc-rental-loan",
+      description: "Property qualifies vs borrower qualifies. Occupancy must match use.",
+    },
+    {
+      name: "Business vs Personal Co-Mingling",
+      href: "/blog/business-vs-personal-bank-co-mingling",
+      description: "Mixed accounts stall sourcing and deposit averages.",
+    },
+    {
+      name: "What a Utah REPC Deadline Does to Your Loan",
+      href: "/blog/utah-repc-deadline-and-your-loan",
+      description: "Separate 5:00 p.m. Mountain Time clocks. Not legal advice.",
+    },
+    {
+      name: "Second Home vs Investment Occupancy",
+      href: "/blog/second-home-vs-investment-occupancy",
+      description: "Occupancy types. Misstating occupancy is fraud, not a strategy.",
+    },
+    {
+      name: "Cash-Out to Buy a Rental",
+      href: "/blog/cash-out-to-buy-a-rental",
+      description: "Two occupancies and two LTV tests.",
+    },
+    {
+      name: "Medical Collections After the FICO Model Change",
+      href: "/blog/medical-collections-after-fico-model-change",
+      description: "Bureau reporting vs classic mortgage FICO. Not a score-raise promise.",
+    },
+    {
+      name: "No Traditional Credit / Alternative Credit",
+      href: "/blog/no-traditional-credit-alternative-credit",
+      description: "Thin-file references. Fair Housing safe — no steering.",
+    },
+    {
+      name: "House-Hacking a Duplex with FHA",
+      href: "/blog/house-hacking-duplex-with-fha",
+      description: "Occupy one unit. Self-sufficiency is a 3–4 unit test.",
+    },
+    {
+      name: "Relocating to Utah: Job Seasoning",
+      href: "/blog/relocating-to-utah-job-seasoning",
+      description: "Offer letters when work starts in about 60 days.",
+    },
+    {
+      name: "APR vs Rate on a Loan Estimate",
+      href: "/blog/apr-vs-rate-on-a-loan-estimate",
+      description: "Note rate vs APR. Not a live-rate table.",
+    },
+    {
+      name: "Selling with a VA Loan: Entitlement Restoration",
+      href: "/blog/selling-with-va-loan-entitlement-restoration",
+      description: "Restoration after sale and payoff. Distinct from a second VA loan while the first is open.",
+    },
+    {
+      name: "CPA Letter vs Tax Returns",
+      href: "/blog/cpa-letter-vs-tax-returns-underwriting",
+      description: "A CPA letter supports; returns and transcripts usually move agency income.",
+    },
+    {
+      name: "Rate Lock Extension vs Floating",
+      href: "/blog/rate-lock-extension-vs-floating",
+      description: "A lock is a window. An extension is usually a cost. Not a live-rate table.",
+    },
+    {
+      name: "No Closing Cost Refinance",
+      href: "/blog/no-closing-cost-refinance-rate-credit-tradeoff",
+      description: "The credit that covers fees is usually paid for in the rate.",
+    },
+    {
+      name: "What a Tri-Merge Credit Report Shows",
+      href: "/blog/what-a-tri-merge-credit-report-shows",
+      description: "Three bureaus, classic FICO, middle score. Not a monitoring-app number.",
+    },
+    {
+      name: "Earnest Money vs Down Payment vs Closing Costs",
+      href: "/blog/earnest-money-vs-down-payment-vs-closing-costs",
+      description: "Three cash lines. Earnest money is usually credited at closing.",
+    },
+    {
+      name: "Townhome vs Condo HOA Docs",
+      href: "/blog/townhome-vs-condo-hoa-docs-lenders-ask",
+      description: "Not every townhome is a condo. Lenders underwrite the plat.",
+    },
+    {
+      name: "Mortgage Reserves: Months of PITIA",
+      href: "/blog/mortgage-reserves-months-of-pitia",
+      description: "Remaining assets after cash to close, not extra closing costs.",
+    },
+    {
+      name: "Asset-Depletion Qualifying",
+      href: "/blog/asset-depletion-qualifying-non-qm",
+      description: "Eligible assets as income under a written formula. Not cash means approved.",
+    },
+    {
+      name: "Gig Plus W-2: How the Average Is Built",
+      href: "/blog/gig-plus-w2-income-mortgage-average",
+      description: "Two income streams averaged separately, then added.",
+    },
+    {
+      name: "First Rental Occupancy If You Still Live There",
+      href: "/blog/first-rental-occupancy-if-you-still-live-there",
+      description: "Stay-put rental is investment occupancy. Not a duplex house-hack.",
+    },
+    {
+      name: "Depreciation Add-Back on Schedule E",
+      href: "/blog/depreciation-add-back-schedule-e",
+      description: "What agency files allow. Not tax advice.",
+    },
+    {
+      name: "Compensating Factors in AUS Findings",
+      href: "/blog/compensating-factors-in-aus-findings",
+      description: "Documented strengths, not a guarantee findings will flip.",
+    },
+    {
+      name: "Utah Property Tax Calendar vs First Escrow Analysis",
+      href: "/blog/utah-property-tax-calendar-first-escrow-analysis",
+      description: "November 30 due date and why the first analysis can surprise.",
+    },
+    {
+      name: "Escrow Cushion: How It Is Set",
+      href: "/blog/escrow-cushion-how-it-is-set",
+      description: "RESPA 1/6 ceiling. Not a universal servicer formula.",
+    },
+    {
+      name: "USDA vs VA vs FHA for a Veteran in a Rural Tract",
+      href: "/blog/usda-vs-va-vs-fha-veteran-rural",
+      description: "Comparison of tests, not a recommendation to take one program.",
+    },
+    {
+      name: "HELOC After Year Two vs Cash-Out",
+      href: "/blog/heloc-after-year-two-vs-cash-out",
+      description: "Seasoning overlays after a recent closing, not a federal two-year wait.",
+    },
+    {
+      name: "Cross-Collateral and Using Equity to Buy Another House",
+      href: "/blog/cross-collateral-equity-to-buy-another-house",
+      description: "Educational only. Not a published agency product you can assume.",
+    },
+    {
+      name: "Biweekly Extra Principal vs Refinance",
+      href: "/blog/biweekly-extra-principal-vs-refinance",
+      description: "One extra payment a year versus a new note. No savings promise.",
+    },
+    {
+      name: "ITIN / Non-U.S. Citizen Mortgage Documentation",
+      href: "/blog/itin-non-us-citizen-mortgage-documentation",
+      description: "Legal eligibility documents, not a national-origin preference.",
+    },
+    {
+      name: "What a Lock Does If Rates Drop After You Lock",
+      href: "/blog/rate-lock-if-rates-drop",
+      description: "Float-down is a written lock policy, not automatic. Not a live-rate table.",
+    },
+    {
+      name: "Escrow Shortage After the First Year",
+      href: "/blog/escrow-shortage-after-first-year",
+      description: "Pay vs spread after the first annual analysis. Not tax advice.",
+    },
+    {
+      name: "Hill AFB / VA: COE and Occupancy",
+      href: "/blog/hill-afb-va-coe-occupancy",
+      description: "Davis County, Utah. Not a mill doorway. Occupancy must match use.",
+    },
+    {
+      name: "Delayed Financing After a Cash Purchase",
+      href: "/blog/delayed-financing-after-cash-purchase",
+      description: "Agency exception after a cash purchase. Overlay is not a statute.",
+    },
+    {
+      name: "Cosign vs Co-Borrower",
+      href: "/blog/cosign-vs-co-borrower",
+      description: "Note vs title vs gift-only help. Not a silent auto-loan cosigner.",
+    },
+    {
+      name: "First-Time Buyer File Mistakes",
+      href: "/blog/first-time-buyer-file-mistakes",
+      description: "New debt, job change, deposits, occupancy — not a lifestyle listicle.",
+    },
+    {
+      name: "How Long a First Purchase Usually Takes",
+      href: "/blog/how-long-first-purchase-takes",
+      description: "Pre-approval through CTC. Ranges, not a closing-date promise.",
+    },
+    {
+      name: "Closing a Credit Card Before You Apply",
+      href: "/blog/closing-credit-card-before-mortgage",
+      description: "Utilization vs available credit. Not a score-raise method.",
+    },
+    {
+      name: "Hazard vs HO-3 vs HO-6",
+      href: "/blog/hazard-vs-ho3-vs-ho6-condo-insurance",
+      description: "Lender hazard vs HO-3 vs condo HO-6 plus master. Not insurance advice.",
+    },
 ]
+
+function titleFromBlogSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((word) => {
+      if (word === "utah") return "Utah"
+      if (word === "vs") return "vs"
+      if (word === "pwa") return "PWA"
+      if (word === "faq" || word === "dti" || word === "pmi" || word === "hoa") return word.toUpperCase()
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    })
+    .join(" ")
+}
+
+function allBlogIndexLinks(): SiteIndexLink[] {
+  const listed = new Set(
+    BLOG_POSTS.map((post) => post.href.replace(/\/$/, "").replace(/^\/blog\//, "")),
+  )
+  const extras: SiteIndexLink[] = BLOG_STATIC_SLUGS.filter((slug) => !listed.has(slug)).map((slug) => ({
+    name: titleFromBlogSlug(slug),
+    href: `/blog/${slug}`,
+    description: "Utah real estate article from the Ondo team.",
+  }))
+  return [...BLOG_POSTS, ...extras]
+}
 
 function calculatorLinks(): SiteIndexLink[] {
   return Object.entries(CALCULATOR_CATALOG).map(([slug, meta]) => ({
@@ -483,6 +899,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         { name: "Loans in Provo", href: "/loans/provo", description: "Purchase and refinance in Provo." },
         { name: "Loans in Draper", href: "/loans/draper", description: "South Valley loan resources." },
         {
+          name: "Buy & sell by city",
+          href: "/buy-sell",
+          description: "Wasatch Front city hub for buying and selling; statewide process lives on /buy and /sell.",
+        },
+        {
           name: "Buy/sell by city (example: Lehi)",
           href: "/buy-sell/lehi",
           description: "Hyper-local buy and sell snapshot; more cities available via URL pattern.",
@@ -491,6 +912,21 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           name: "Buy/sell by ZIP (example: 84043)",
           href: "/buy-sell/zip/84043",
           description: "ZIP-level market hub; substitute other Utah ZIPs in the path.",
+        },
+        {
+          name: "City market reports",
+          href: "/market-reports",
+          description: "Index of Ondo city medians. Not an MLS pull or appraisal.",
+        },
+        {
+          name: "Neighborhood guides",
+          href: "/neighborhoods",
+          description: "Named neighborhood pages: housing stock and amenities, not resident profiles.",
+        },
+        {
+          name: "School district guides",
+          href: "/schools",
+          description: "District directory with official site links. Not a ranking.",
         },
       ],
     },
@@ -531,7 +967,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
       links: [
         {
           name: "Property search",
-          href: "/search",
+          href: "/properties",
           description: "Filter rentals we manage. For-sale search is agent-led on /buy.",
         },
         {
@@ -669,7 +1105,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
       id: "blog",
       title: "Blog & guides",
       description: "Long-form articles on Utah real estate, product, and operations.",
-      links: [{ name: "Blog", href: "/blog", description: "Latest articles and filters by topic." }, ...BLOG_POSTS],
+      links: [{ name: "Blog", href: "/blog", description: "Latest articles and filters by topic." }, ...allBlogIndexLinks()],
     },
     {
       id: "about",
@@ -736,10 +1172,37 @@ export function getSiteIndexSections(): SiteIndexSection[] {
       title: "Learn",
       description: "Research, education, and market data.",
       links: [
-        { name: "Market Data", href: "/data", description: "Utah real estate stats updated quarterly." },
+        { name: "Market Data", href: "/data", description: "How we publish city figures, and links to city reports." },
+        { name: "City market reports", href: "/market-reports", description: "Per-city Ondo medians with an as-of date." },
         { name: "Insights", href: "/insights", description: "Research, reports, and thought leadership." },
-        { name: "Video Library", href: "/video-library", description: "Step-by-step platform walkthroughs." },
+        { name: "Video Library", href: "/video-library", description: "Guides, academy, demo, and calculators for learning the platform." },
         { name: "Academy", href: "/academy", description: "Free real estate education and guides." },
+        { name: "Mortgage learning hub", href: "/learn", description: "Topic clusters for buyers and homeowners. Informational only." },
+        {
+          name: "Variable income mortgages",
+          href: "/learn/variable-income",
+          description: "1099, overtime, commission, and bank-statement files.",
+        },
+        {
+          name: "First-time buyer cash and closing",
+          href: "/learn/first-time",
+          description: "Cash to close, DPA with gifts, and Utah title closings.",
+        },
+        {
+          name: "Non-QM, bank-statement, DSCR",
+          href: "/learn/non-qm",
+          description: "When agency income calc does not match cash flow.",
+        },
+        {
+          name: "Investment occupancy and DSCR",
+          href: "/learn/investment",
+          description: "DSCR vs full-doc, occupancy, cash-out to a rental, FHA house-hack.",
+        },
+        {
+          name: "Start a mortgage conversation",
+          href: "/qualify",
+          description: "What you will be asked, and what will not be promised.",
+        },
       ],
     },
     {

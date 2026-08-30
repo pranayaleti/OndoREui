@@ -39,10 +39,58 @@ const pages: SearchResult[] = [
   {
     id: 'loans',
     title: 'Mortgage Loans',
-    description: 'Get pre-approved for a mortgage',
+    description: 'Compare conventional, FHA, VA, and USDA education. Talk with a loan officer.',
     href: '/loans',
     category: 'Service',
-    keywords: ['loans', 'mortgage', 'financing', 'pre-approval', 'lending']
+    keywords: ['loans', 'mortgage', 'financing', 'pre-approval', 'lending', 'learn']
+  },
+  {
+    id: 'learn',
+    title: 'Mortgage learning hub',
+    description: 'Topic clusters for loan programs, variable income, first-time buyers, and refinance',
+    href: '/learn',
+    category: 'Page',
+    keywords: ['mortgage education', 'learn', 'loan programs', 'variable income', 'first time buyer']
+  },
+  {
+    id: 'learn-variable-income',
+    title: 'Variable income mortgages',
+    description: 'How underwriters treat overtime, 1099, commission, and self-employed income',
+    href: '/learn/variable-income',
+    category: 'Page',
+    keywords: ['self employed', '1099', 'commission', 'variable income', 'bank statement loan', 'K-1', 'Schedule E']
+  },
+  {
+    id: 'learn-first-time',
+    title: 'First-time buyer cash and closing',
+    description: 'Cash besides down payment, DPA stacked with gifts, and Utah closing costs',
+    href: '/learn/first-time',
+    category: 'Page',
+    keywords: ['first time buyer', 'cash to close', 'down payment assistance', 'Utah closing costs', 'gift letter', 'parent gift']
+  },
+  {
+    id: 'learn-non-qm',
+    title: 'Non-QM, bank-statement, and DSCR',
+    description: 'When agency tax-return income does not match cash flow: bank-statement, DSCR, asset-depletion',
+    href: '/learn/non-qm',
+    category: 'Page',
+    keywords: ['Non-QM', 'bank statement', 'DSCR', 'asset depletion', 'self employed']
+  },
+  {
+    id: 'learn-investment',
+    title: 'Investment property financing',
+    description: 'DSCR vs full-doc, occupancy types, cash-out to buy a rental, FHA duplex house-hack',
+    href: '/learn/investment',
+    category: 'Page',
+    keywords: ['investment property', 'DSCR', 'house hack', 'occupancy', 'rental loan']
+  },
+  {
+    id: 'qualify',
+    title: 'Start a mortgage conversation',
+    description: 'What you will be asked, and what a conversation will not promise',
+    href: '/qualify',
+    category: 'Page',
+    keywords: ['qualify', 'prequalify', 'mortgage conversation', 'pre-approval questions']
   },
   {
     id: 'notary',
@@ -281,7 +329,7 @@ const calculators: SearchResult[] = [
     description: 'Calculate Debt Service Coverage Ratio for investment property loans',
     href: '/calculators/dscr',
     category: 'Calculator',
-    keywords: ['DSCR', 'debt service coverage ratio', 'investment property', 'loan']
+    keywords: ['DSCR', 'debt service coverage ratio', 'investment property', 'rental qualification', 'full doc']
   },
   {
     id: 'one-percent-rule',
@@ -462,6 +510,630 @@ const blogPosts: SearchResult[] = [
     href: '/blog/technical-seo-for-real-estate',
     category: 'Blog',
     keywords: ['SEO', 'technical SEO', 'real estate', 'marketing']
+  },
+  {
+    id: 'can-i-get-a-mortgage-if-my-income-changes-every-month',
+    title: 'Can I Get a Mortgage If My Income Changes Every Month?',
+    description: 'How underwriters average overtime, commission, and 1099 income',
+    href: '/blog/can-i-get-a-mortgage-if-my-income-changes-every-month',
+    category: 'Blog',
+    keywords: ['variable income', 'commission', 'overtime', 'mortgage qualification']
+  },
+  {
+    id: '1099-mortgage-documentation-checklist',
+    title: '1099 Mortgage Documentation Checklist',
+    description: 'Documents contract workers typically gather for a mortgage file',
+    href: '/blog/1099-mortgage-documentation-checklist',
+    category: 'Blog',
+    keywords: ['1099', 'self employed', 'mortgage documents']
+  },
+  {
+    id: 'bank-statement-loans-when-tax-returns-undercount-income',
+    title: 'Bank-Statement Loans When Tax Returns Undercount Income',
+    description: 'Non-QM bank-statement programs when write-offs shrink taxable income',
+    href: '/blog/bank-statement-loans-when-tax-returns-undercount-income',
+    category: 'Blog',
+    keywords: ['bank statement loan', 'Non-QM', 'self employed']
+  },
+  {
+    id: 'gift-funds-down-payment-rules',
+    title: 'Gift Funds for a Down Payment',
+    description: 'Gift letters and paper trails for FHA, conventional, and VA',
+    href: '/blog/gift-funds-down-payment-rules',
+    category: 'Blog',
+    keywords: ['gift funds', 'down payment', 'gift letter']
+  },
+  {
+    id: 'two-years-of-tax-returns-vs-one-year-mortgage',
+    title: 'Two Years of Tax Returns vs One Year',
+    description: 'When overlays allow a shorter self-employed history',
+    href: '/blog/two-years-of-tax-returns-vs-one-year-mortgage',
+    category: 'Blog',
+    keywords: ['self employed', 'tax returns', 'one year overlay']
+  },
+  {
+    id: 'w2-overtime-likely-to-continue',
+    title: 'Overtime on a W-2',
+    description: 'What likely to continue means for overtime income',
+    href: '/blog/w2-overtime-likely-to-continue',
+    category: 'Blog',
+    keywords: ['overtime', 'W-2', 'variable income']
+  },
+  {
+    id: 'commission-income-mortgage-averaging',
+    title: 'Commission-Only Sales Averaging',
+    description: 'How a down year is averaged on a commission file',
+    href: '/blog/commission-income-mortgage-averaging',
+    category: 'Blog',
+    keywords: ['commission', 'sales income', 'mortgage averaging']
+  },
+  {
+    id: 'utah-cash-to-close-besides-down-payment',
+    title: 'Cash Besides Down Payment in Utah',
+    description: 'Earnest money, title, prepaids, and reserves on top of down payment',
+    href: '/blog/utah-cash-to-close-besides-down-payment',
+    category: 'Blog',
+    keywords: ['cash to close', 'first time buyer', 'Utah closing']
+  },
+  {
+    id: 'dpa-stacked-with-fha-gift-funds',
+    title: 'DPA Stacked with an FHA Gift',
+    description: 'How assistance and gift funds can sit on the same FHA purchase',
+    href: '/blog/dpa-stacked-with-fha-gift-funds',
+    category: 'Blog',
+    keywords: ['DPA', 'UHC', 'gift funds', 'FHA']
+  },
+  {
+    id: 'va-funding-fee-finance-vs-pay-cash',
+    title: 'VA Funding Fee: Finance vs Cash',
+    description: 'Worked examples of financing the fee versus paying it at closing',
+    href: '/blog/va-funding-fee-finance-vs-pay-cash',
+    category: 'Blog',
+    keywords: ['VA funding fee', 'veteran', 'VA loan']
+  },
+  {
+    id: 'va-entitlement-second-va-loan',
+    title: 'Can I Use VA If I Still Have a VA Loan?',
+    description: 'Remaining entitlement, occupancy, and restoration',
+    href: '/blog/va-entitlement-second-va-loan',
+    category: 'Blog',
+    keywords: ['VA entitlement', 'second VA loan']
+  },
+  {
+    id: 'va-residual-income-vs-dti',
+    title: 'VA Residual Income vs DTI',
+    description: 'Why leftover cash can fail when DTI looks fine',
+    href: '/blog/va-residual-income-vs-dti',
+    category: 'Blog',
+    keywords: ['VA residual income', 'DTI']
+  },
+  {
+    id: 'usda-map-income-limit-eligibility',
+    title: 'USDA Map and Income Limit',
+    description: 'Address and household tests before you assume zero down',
+    href: '/blog/usda-map-income-limit-eligibility',
+    category: 'Blog',
+    keywords: ['USDA map', 'USDA income limit', 'rural']
+  },
+  {
+    id: 'jumbo-vs-conforming-fhfa-county-limit',
+    title: 'Jumbo vs Conforming FHFA Lookup',
+    description: 'How to look up this year’s county conforming limit',
+    href: '/blog/jumbo-vs-conforming-fhfa-county-limit',
+    category: 'Blog',
+    keywords: ['jumbo', 'conforming', 'FHFA', 'loan limit']
+  },
+  {
+    id: 'refinance-break-even-when-lower-rate-loses',
+    title: 'When a Lower Rate Still Loses After Costs',
+    description: 'Break-even including points and origination',
+    href: '/blog/refinance-break-even-when-lower-rate-loses',
+    category: 'Blog',
+    keywords: ['refinance', 'break even', 'points']
+  },
+  {
+    id: 'heloc-vs-cash-out-refinance',
+    title: 'HELOC vs Cash-Out Refinance',
+    description: 'Payment, lien position, and tax questions',
+    href: '/blog/heloc-vs-cash-out-refinance',
+    category: 'Blog',
+    keywords: ['HELOC', 'cash-out', 'home equity']
+  },
+  {
+    id: 'how-underwriters-verify-income',
+    title: 'How Underwriters Verify Income',
+    description: 'W-2 vs 1099 vs bank-statement stacks',
+    href: '/blog/how-underwriters-verify-income',
+    category: 'Blog',
+    keywords: ['underwriting', 'income verification', 'W-2', '1099']
+  },
+  {
+    id: 'declined-after-pre-approval',
+    title: 'Declined After Pre-Approval',
+    description: 'Typical condition fails between the letter and clear-to-close',
+    href: '/blog/declined-after-pre-approval',
+    category: 'Blog',
+    keywords: ['pre-approval', 'declined', 'underwriting conditions']
+  },
+  {
+    id: 'utah-closing-costs-title-origination-prepaids',
+    title: 'Utah Closing Costs',
+    description: 'Title, origination, and prepaids that vary by county',
+    href: '/blog/utah-closing-costs-title-origination-prepaids',
+    category: 'Blog',
+    keywords: ['Utah closing costs', 'title', 'origination']
+  },
+  {
+    id: 'utah-county-conforming-loan-limit-lookup',
+    title: 'Utah County Conforming Limit How-To',
+    description: 'Look up this year’s FHFA table for the property county',
+    href: '/blog/utah-county-conforming-loan-limit-lookup',
+    category: 'Blog',
+    keywords: ['Utah loan limit', 'FHFA', 'Summit County']
+  },
+  {
+    id: 'k-1-income-what-usually-counts',
+    title: 'K-1 Income: What Usually Counts',
+    description: 'Partnership and S-corp K-1 income vs distributions',
+    href: '/blog/k-1-income-what-usually-counts',
+    category: 'Blog',
+    keywords: ['K-1', 'S-corp', 'partnership', 'qualifying income']
+  },
+  {
+    id: 'schedule-e-rental-income-purchase-file',
+    title: 'Schedule E Rental Income on a Purchase',
+    description: 'How existing rental income is averaged vs proposed rent',
+    href: '/blog/schedule-e-rental-income-purchase-file',
+    category: 'Blog',
+    keywords: ['Schedule E', 'rental income', 'depreciation', 'purchase']
+  },
+  {
+    id: 'just-went-1099-last-month',
+    title: 'I Just Went 1099 Last Month',
+    description: 'Why brand-new 1099 income is usually not yet a qualifying average',
+    href: '/blog/just-went-1099-last-month',
+    category: 'Blog',
+    keywords: ['1099', 'contractor', 'career change', 'seasoning']
+  },
+  {
+    id: 'parent-gifting-down-payment-who-signs',
+    title: 'Parent Is Gifting: Who Signs What',
+    description: 'Gift letter, occupancy, and title when a parent helps with down payment',
+    href: '/blog/parent-gifting-down-payment-who-signs',
+    category: 'Blog',
+    keywords: ['gift letter', 'parent gift', 'down payment signatures']
+  },
+  {
+    id: 'student-loans-dti-idr-save',
+    title: 'Student Loans and DTI After IDR / SAVE',
+    description: 'A $0 dashboard line is not automatically $0 in DTI',
+    href: '/blog/student-loans-dti-idr-save',
+    category: 'Blog',
+    keywords: ['student loans', 'DTI', 'IDR', 'SAVE']
+  },
+  {
+    id: 'arm-caps-in-plain-english',
+    title: 'ARM Caps in Plain English',
+    description: 'Initial, periodic, and lifetime caps on the note rate',
+    href: '/blog/arm-caps-in-plain-english',
+    category: 'Blog',
+    keywords: ['ARM', 'caps', '2/1/5', 'adjustable rate']
+  },
+  {
+    id: 'fha-condo-roster-project-approval',
+    title: 'FHA Condo Roster / Project Approval',
+    description: 'Look up HUD project approval before an FHA condo offer',
+    href: '/blog/fha-condo-roster-project-approval',
+    category: 'Blog',
+    keywords: ['FHA condo', 'HUD roster', 'single-unit approval']
+  },
+  {
+    id: 'mip-vs-pmi-how-mortgage-insurance-ends',
+    title: 'How MIP vs PMI Actually Leaves the Loan',
+    description: 'FHA MIP clock vs conventional PMI cancellation',
+    href: '/blog/mip-vs-pmi-how-mortgage-insurance-ends',
+    category: 'Blog',
+    keywords: ['MIP', 'PMI', 'mortgage insurance', 'FHA']
+  },
+  {
+    id: 'fha-va-streamline-refinance-less-docs',
+    title: 'Streamline Refi: What Less Docs Still Requires',
+    description: 'FHA Streamline and VA IRRRL occupancy and net-benefit tests',
+    href: '/blog/fha-va-streamline-refinance-less-docs',
+    category: 'Blog',
+    keywords: ['streamline', 'IRRRL', 'FHA refinance', 'less docs']
+  },
+  {
+    id: 'large-deposits-60-day-paper-trail',
+    title: 'Large Deposits: 60-Day Paper Trail',
+    description: 'Source large deposits on about 60 days of statements',
+    href: '/blog/large-deposits-60-day-paper-trail',
+    category: 'Blog',
+    keywords: ['large deposits', 'source of funds', 'underwriting', 'gift']
+  },
+  {
+    id: 'should-i-wait-for-20-percent-down',
+    title: 'Should I Wait for 20% Down?',
+    description: 'PMI vs saving longer: a cash-and-timeline trade, not MIP exit',
+    href: '/blog/should-i-wait-for-20-percent-down',
+    category: 'Blog',
+    keywords: ['20% down', 'PMI', 'wait to buy', 'first time']
+  },
+  {
+    id: 'pmi-removal-original-value-vs-new-appraisal',
+    title: 'Removing PMI: Original Value vs New Appraisal',
+    description: 'HPA original-value clock vs a current-value appraisal path',
+    href: '/blog/pmi-removal-original-value-vs-new-appraisal',
+    category: 'Blog',
+    keywords: ['PMI removal', 'PMI cancellation', 'appraisal', 'HPA']
+  },
+  {
+    id: 'discount-points-breakeven-without-sales-pitch',
+    title: 'Discount Points: Breakeven Without a Sales Pitch',
+    description: 'Cost divided by monthly P&I savings. Not a temporary buydown',
+    href: '/blog/discount-points-breakeven-without-sales-pitch',
+    category: 'Blog',
+    keywords: ['discount points', 'buy points', 'mortgage points', 'breakeven']
+  },
+  {
+    id: 'what-a-mortgage-conversation-asks',
+    title: 'What a Mortgage Conversation Asks',
+    description: 'What you will be asked and what will not be promised',
+    href: '/blog/what-a-mortgage-conversation-asks',
+    category: 'Blog',
+    keywords: ['qualify', 'prequalify', 'mortgage questions', 'application']
+  },
+  {
+    id: 'new-auto-loan-during-underwriting',
+    title: 'New Auto Loan During Underwriting',
+    description: 'A car payment after pre-approval can flip DTI and findings',
+    href: '/blog/new-auto-loan-during-underwriting',
+    category: 'Blog',
+    keywords: ['auto loan', 'car during underwriting', 'new debt', 'DTI']
+  },
+  {
+    id: 'dti-frontend-backend-with-hoa',
+    title: 'DTI: Front-End vs Back-End with HOA',
+    description: 'HOA dues are housing expense in front-end DTI',
+    href: '/blog/dti-frontend-backend-with-hoa',
+    category: 'Blog',
+    keywords: ['DTI', 'HOA', 'front-end', 'back-end', 'condo']
+  },
+  {
+    id: 'pre-approval-vs-aus-vs-clear-to-close',
+    title: 'Pre-Approval vs AUS vs Clear to Close',
+    description: 'Letter, automated findings, and underwriter CTC are three stages',
+    href: '/blog/pre-approval-vs-aus-vs-clear-to-close',
+    category: 'Blog',
+    keywords: ['pre-approval', 'AUS', 'DU', 'LPA', 'clear to close', 'CTC']
+  },
+  {
+    id: 'spouse-w2-offset-1099-volatility',
+    title: 'Using a Spouse’s W-2 to Offset 1099 Volatility',
+    description: 'The W-2 counts when that person is a co-borrower. Utah is not community property',
+    href: '/blog/spouse-w2-offset-1099-volatility',
+    category: 'Blog',
+    keywords: ['spouse income', 'joint application', '1099', 'non-borrowing spouse']
+  },
+  {
+    id: 'temporary-buydown-who-pays-year-three',
+    title: 'Temporary Buydown: Who Pays, Year 3',
+    description: '2-1 and 3-2-1 payment subsidies. Distinct from discount points',
+    href: '/blog/temporary-buydown-who-pays-year-three',
+    category: 'Blog',
+    keywords: ['2-1 buydown', '3-2-1', 'temporary buydown', 'builder']
+  },
+  {
+    id: 'dscr-vs-full-doc-rental-loan',
+    title: 'DSCR vs Full-Doc Rental Loan',
+    description: 'Property qualifies vs borrower qualifies. Occupancy still has to match use',
+    href: '/blog/dscr-vs-full-doc-rental-loan',
+    category: 'Blog',
+    keywords: ['DSCR', 'full doc', 'investment property', 'rental loan']
+  },
+  {
+    id: 'business-vs-personal-bank-co-mingling',
+    title: 'Business vs Personal Co-Mingling',
+    description: 'Mixed business and personal deposits stall sourcing and averages',
+    href: '/blog/business-vs-personal-bank-co-mingling',
+    category: 'Blog',
+    keywords: ['co-mingling', 'business bank', 'self employed deposits', 'seasoning']
+  },
+  {
+    id: 'utah-repc-deadline-and-your-loan',
+    title: 'What a Utah REPC Deadline Does to Your Loan',
+    description: 'Due diligence vs financing clocks at 5:00 p.m. Mountain Time. Not legal advice',
+    href: '/blog/utah-repc-deadline-and-your-loan',
+    category: 'Blog',
+    keywords: ['Utah REPC', 'financing contingency', 'due diligence', 'earnest money']
+  },
+  {
+    id: 'second-home-vs-investment-occupancy',
+    title: 'Second Home vs Investment Occupancy',
+    description: 'Occupancy types. Misstating occupancy is fraud, not a strategy',
+    href: '/blog/second-home-vs-investment-occupancy',
+    category: 'Blog',
+    keywords: ['occupancy', 'second home', 'investment property', 'occupancy fraud']
+  },
+  {
+    id: 'cash-out-to-buy-a-rental',
+    title: 'Cash-Out to Buy a Rental',
+    description: 'Two occupancies and two LTV tests when proceeds fund a rental',
+    href: '/blog/cash-out-to-buy-a-rental',
+    category: 'Blog',
+    keywords: ['cash-out', 'rental down payment', 'equity', 'investment']
+  },
+  {
+    id: 'medical-collections-after-fico-model-change',
+    title: 'Medical Collections After the FICO Model Change',
+    description: 'Bureau reporting vs classic mortgage FICO. Not a score-raise promise',
+    href: '/blog/medical-collections-after-fico-model-change',
+    category: 'Blog',
+    keywords: ['medical collections', 'FICO', 'mortgage credit', 'tri-merge']
+  },
+  {
+    id: 'no-traditional-credit-alternative-credit',
+    title: 'No Traditional Credit / Alternative Credit',
+    description: 'Rent and utilities for a thin file. Fair Housing safe, no steering',
+    href: '/blog/no-traditional-credit-alternative-credit',
+    category: 'Blog',
+    keywords: ['alternative credit', 'nontraditional credit', 'thin file', 'FHA']
+  },
+  {
+    id: 'house-hacking-duplex-with-fha',
+    title: 'House-Hacking a Duplex with FHA',
+    description: 'Occupy one unit. Self-sufficiency is a 3–4 unit test',
+    href: '/blog/house-hacking-duplex-with-fha',
+    category: 'Blog',
+    keywords: ['FHA duplex', 'house hack', '2 unit', 'self-sufficiency']
+  },
+  {
+    id: 'relocating-to-utah-job-seasoning',
+    title: 'Relocating to Utah: Job Seasoning',
+    description: 'Offer letters when the job starts in about 60 days. Not a 60-day rule',
+    href: '/blog/relocating-to-utah-job-seasoning',
+    category: 'Blog',
+    keywords: ['relocating Utah', 'offer letter', 'job seasoning', 'employment start date']
+  },
+  {
+    id: 'apr-vs-rate-on-a-loan-estimate',
+    title: 'APR vs Rate on a Loan Estimate',
+    description: 'Note rate vs APR vs payment. Not a live-rate table',
+    href: '/blog/apr-vs-rate-on-a-loan-estimate',
+    category: 'Blog',
+    keywords: ['APR', 'Loan Estimate', 'interest rate', 'compare lenders']
+  },
+  {
+    id: 'selling-with-va-loan-entitlement-restoration',
+    title: 'Selling with a VA Loan: Entitlement Restoration',
+    description: 'Restoration after sale and payoff. Distinct from keeping a VA loan and buying another',
+    href: '/blog/selling-with-va-loan-entitlement-restoration',
+    category: 'Blog',
+    keywords: ['VA entitlement restoration', 'sell VA loan', 'Certificate of Eligibility']
+  },
+  {
+    id: 'cpa-letter-vs-tax-returns-underwriting',
+    title: 'CPA Letter vs Tax Returns',
+    description: 'A CPA letter supports; returns and transcripts usually move agency income',
+    href: '/blog/cpa-letter-vs-tax-returns-underwriting',
+    category: 'Blog',
+    keywords: ['CPA letter mortgage', 'self employed tax returns', 'P&L underwriting']
+  },
+  {
+    id: 'rate-lock-extension-vs-floating',
+    title: 'Rate Lock Extension vs Floating',
+    description: 'A lock is a window. An extension is usually a cost. Not a live-rate table',
+    href: '/blog/rate-lock-extension-vs-floating',
+    category: 'Blog',
+    keywords: ['rate lock', 'lock extension', 'float vs lock', 'mortgage lock']
+  },
+  {
+    id: 'no-closing-cost-refinance-rate-credit-tradeoff',
+    title: 'No Closing Cost Refinance',
+    description: 'The lender credit that covers fees is usually paid for in the rate',
+    href: '/blog/no-closing-cost-refinance-rate-credit-tradeoff',
+    category: 'Blog',
+    keywords: ['no closing cost refinance', 'lender credit', 'refinance break even']
+  },
+  {
+    id: 'what-a-tri-merge-credit-report-shows',
+    title: 'What a Tri-Merge Credit Report Shows',
+    description: 'Three bureaus, classic FICO, middle score. Not a monitoring-app number',
+    href: '/blog/what-a-tri-merge-credit-report-shows',
+    category: 'Blog',
+    keywords: ['tri-merge', 'middle FICO', 'Equifax Experian TransUnion', 'mortgage credit']
+  },
+  {
+    id: 'earnest-money-vs-down-payment-vs-closing-costs',
+    title: 'Earnest Money vs Down Payment vs Closing Costs',
+    description: 'Three cash lines. Earnest money is usually credited at closing',
+    href: '/blog/earnest-money-vs-down-payment-vs-closing-costs',
+    category: 'Blog',
+    keywords: ['earnest money', 'down payment', 'closing costs', 'Utah REPC']
+  },
+  {
+    id: 'townhome-vs-condo-hoa-docs-lenders-ask',
+    title: 'Townhome vs Condo HOA Docs',
+    description: 'Not every townhome is a condo. Lenders underwrite the plat',
+    href: '/blog/townhome-vs-condo-hoa-docs-lenders-ask',
+    category: 'Blog',
+    keywords: ['townhome vs condo', 'HOA questionnaire', 'PUD', 'FHA condo']
+  },
+  {
+    id: 'mortgage-reserves-months-of-pitia',
+    title: 'Mortgage Reserves: Months of PITIA',
+    description: 'Remaining assets after cash to close, not extra closing costs',
+    href: '/blog/mortgage-reserves-months-of-pitia',
+    category: 'Blog',
+    keywords: ['mortgage reserves', 'PITIA', 'months of reserves', 'gift funds reserves']
+  },
+  {
+    id: 'asset-depletion-qualifying-non-qm',
+    title: 'Asset-Depletion Qualifying',
+    description: 'Eligible assets as income under a written formula. Not cash means approved',
+    href: '/blog/asset-depletion-qualifying-non-qm',
+    category: 'Blog',
+    keywords: ['asset depletion', 'asset based qualifying', 'Non-QM', 'retirement assets']
+  },
+  {
+    id: 'gig-plus-w2-income-mortgage-average',
+    title: 'Gig Plus W-2: How the Average Is Built',
+    description: 'Two income streams averaged separately, then added',
+    href: '/blog/gig-plus-w2-income-mortgage-average',
+    category: 'Blog',
+    keywords: ['gig economy mortgage', 'W-2 plus 1099', 'side hustle income', 'variable income']
+  },
+  {
+    id: 'first-rental-occupancy-if-you-still-live-there',
+    title: 'First Rental Occupancy If You Still Live There',
+    description: 'Stay-put rental is investment occupancy. Not a duplex house-hack',
+    href: '/blog/first-rental-occupancy-if-you-still-live-there',
+    category: 'Blog',
+    keywords: ['first rental occupancy', 'investment occupancy', 'buy rental while occupying primary']
+  },
+  {
+    id: 'depreciation-add-back-schedule-e',
+    title: 'Depreciation Add-Back on Schedule E',
+    description: 'What agency files allow. Not tax advice',
+    href: '/blog/depreciation-add-back-schedule-e',
+    category: 'Blog',
+    keywords: ['depreciation add back', 'Schedule E rental qualifying']
+  },
+  {
+    id: 'compensating-factors-in-aus-findings',
+    title: 'Compensating Factors in AUS Findings',
+    description: 'Documented strengths, not a guarantee findings will flip',
+    href: '/blog/compensating-factors-in-aus-findings',
+    category: 'Blog',
+    keywords: ['compensating factors', 'AUS findings', 'manual underwrite']
+  },
+  {
+    id: 'utah-property-tax-calendar-first-escrow-analysis',
+    title: 'Utah Property Tax Calendar vs First Escrow Analysis',
+    description: 'November 30 due date and why the first analysis can surprise',
+    href: '/blog/utah-property-tax-calendar-first-escrow-analysis',
+    category: 'Blog',
+    keywords: ['Utah property tax', 'escrow analysis', 'November 30']
+  },
+  {
+    id: 'escrow-cushion-how-it-is-set',
+    title: 'Escrow Cushion: How It Is Set',
+    description: 'RESPA 1/6 ceiling. Not a universal servicer formula',
+    href: '/blog/escrow-cushion-how-it-is-set',
+    category: 'Blog',
+    keywords: ['escrow cushion', 'RESPA', 'impound account']
+  },
+  {
+    id: 'usda-vs-va-vs-fha-veteran-rural',
+    title: 'USDA vs VA vs FHA for a Veteran in a Rural Tract',
+    description: 'Comparison of tests, not a recommendation to take one program',
+    href: '/blog/usda-vs-va-vs-fha-veteran-rural',
+    category: 'Blog',
+    keywords: ['USDA vs VA', 'veteran rural loan', 'FHA']
+  },
+  {
+    id: 'heloc-after-year-two-vs-cash-out',
+    title: 'HELOC After Year Two vs Cash-Out',
+    description: 'Seasoning overlays after a recent closing, not a federal two-year wait',
+    href: '/blog/heloc-after-year-two-vs-cash-out',
+    category: 'Blog',
+    keywords: ['HELOC seasoning', 'cash out after purchase', 'equity']
+  },
+  {
+    id: 'cross-collateral-equity-to-buy-another-house',
+    title: 'Cross-Collateral and Using Equity to Buy Another House',
+    description: 'Educational only. Not a published agency product you can assume',
+    href: '/blog/cross-collateral-equity-to-buy-another-house',
+    category: 'Blog',
+    keywords: ['cross collateral', 'blanket mortgage', 'equity to buy another house']
+  },
+  {
+    id: 'biweekly-extra-principal-vs-refinance',
+    title: 'Biweekly Extra Principal vs Refinance',
+    description: 'One extra payment a year versus a new note. No savings promise',
+    href: '/blog/biweekly-extra-principal-vs-refinance',
+    category: 'Blog',
+    keywords: ['biweekly mortgage', 'extra principal', 'refinance break-even']
+  },
+  {
+    id: 'itin-non-us-citizen-mortgage-documentation',
+    title: 'ITIN / Non-U.S. Citizen Mortgage Documentation',
+    description: 'Legal eligibility documents, not a national-origin preference',
+    href: '/blog/itin-non-us-citizen-mortgage-documentation',
+    category: 'Blog',
+    keywords: ['ITIN mortgage', 'non-citizen documentation', 'SSN vs ITIN']
+  },
+  {
+    id: 'rate-lock-if-rates-drop',
+    title: 'What a Lock Does If Rates Drop After You Lock',
+    description: 'Float-down is a written lock policy, not automatic. Not a live-rate table',
+    href: '/blog/rate-lock-if-rates-drop',
+    category: 'Blog',
+    keywords: ['float down', 'rates dropped after lock', 'mortgage lock']
+  },
+  {
+    id: 'escrow-shortage-after-first-year',
+    title: 'Escrow Shortage After the First Year',
+    description: 'Pay vs spread after the first annual analysis. Not tax advice',
+    href: '/blog/escrow-shortage-after-first-year',
+    category: 'Blog',
+    keywords: ['escrow shortage', 'impound shortage', 'annual escrow analysis']
+  },
+  {
+    id: 'hill-afb-va-coe-occupancy',
+    title: 'Hill AFB / VA: COE and Occupancy',
+    description: 'Davis County, Utah. Not a mill doorway. Occupancy must match use',
+    href: '/blog/hill-afb-va-coe-occupancy',
+    category: 'Blog',
+    keywords: ['Hill AFB VA', 'VA COE', 'Hill Air Force Base mortgage']
+  },
+  {
+    id: 'delayed-financing-after-cash-purchase',
+    title: 'Delayed Financing After a Cash Purchase',
+    description: 'Agency exception after a cash purchase. Overlay is not a statute',
+    href: '/blog/delayed-financing-after-cash-purchase',
+    category: 'Blog',
+    keywords: ['delayed financing', 'cash purchase refinance', 'Fannie delayed financing']
+  },
+  {
+    id: 'cosign-vs-co-borrower',
+    title: 'Cosign vs Co-Borrower',
+    description: 'Note vs title vs gift-only help. Not a silent auto-loan cosigner',
+    href: '/blog/cosign-vs-co-borrower',
+    category: 'Blog',
+    keywords: ['cosign vs co-borrower', 'on the note', 'non-occupant co-borrower']
+  },
+  {
+    id: 'first-time-buyer-file-mistakes',
+    title: 'First-Time Buyer File Mistakes',
+    description: 'New debt, job change, deposits, occupancy — not a lifestyle listicle',
+    href: '/blog/first-time-buyer-file-mistakes',
+    category: 'Blog',
+    keywords: ['first-time buyer mistakes', 'mortgage file mistakes', 'underwriting conditions']
+  },
+  {
+    id: 'how-long-first-purchase-takes',
+    title: 'How Long a First Purchase Usually Takes',
+    description: 'Pre-approval through CTC. Ranges, not a closing-date promise',
+    href: '/blog/how-long-first-purchase-takes',
+    category: 'Blog',
+    keywords: ['how long to close', 'first purchase timeline', 'preapproval to closing']
+  },
+  {
+    id: 'closing-credit-card-before-mortgage',
+    title: 'Closing a Credit Card Before You Apply',
+    description: 'Utilization vs available credit. Not a score-raise method',
+    href: '/blog/closing-credit-card-before-mortgage',
+    category: 'Blog',
+    keywords: ['close credit card mortgage', 'credit utilization', 'available credit AUS']
+  },
+  {
+    id: 'hazard-vs-ho3-vs-ho6-condo-insurance',
+    title: 'Hazard vs HO-3 vs HO-6',
+    description: 'Lender hazard vs HO-3 vs condo HO-6 plus master. Not insurance advice',
+    href: '/blog/hazard-vs-ho3-vs-ho6-condo-insurance',
+    category: 'Blog',
+    keywords: ['HO-6 condo insurance', 'HO-3 homeowners', 'hazard insurance mortgage']
   }
 ]
 

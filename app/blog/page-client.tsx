@@ -26,6 +26,796 @@ export default function BlogPage() {
 
   const blogPosts = useMemo(() => ([
     {
+      title: "What a Lock Does If Rates Drop After You Lock",
+      excerpt: "A lock does not automatically follow the market down. Distinct from extension vs floating. Not a live-rate table.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Mortgages",
+      image: "/suburban-house-garden.png",
+      slug: "rate-lock-if-rates-drop"
+    },
+    {
+      title: "Escrow Shortage After the First Year",
+      excerpt: "How a shortage appears on the first annual analysis, and typical options to pay or spread. Not tax advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "escrow-shortage-after-first-year"
+    },
+    {
+      title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
+      excerpt: "Davis County, Utah. COE and occupancy — not a mill doorway. Occupancy must match use.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "9 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "hill-afb-va-coe-occupancy"
+    },
+    {
+      title: "Delayed Financing After a Cash Purchase",
+      excerpt: "Agency delayed-financing exception. Distinct from HELOC seasoning. Overlay is not a statute.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "9 min read",
+      category: "Refinance",
+      image: "/modern-townhouse-garage.png",
+      slug: "delayed-financing-after-cash-purchase"
+    },
+    {
+      title: "Cosign vs Co-Borrower",
+      excerpt: "Who is on the note, who is on title, and who is only helping credit.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "cosign-vs-co-borrower"
+    },
+    {
+      title: "First-Time Buyer Mistakes That Are Really File Mistakes",
+      excerpt: "New debt, job change, large deposits, occupancy — not a generic homebuying listicle.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "first-time-buyer-file-mistakes"
+    },
+    {
+      title: "How Long a First Purchase Usually Takes",
+      excerpt: "Pre-approval through CTC and funding. Ranges, not a closing-date promise.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "how-long-first-purchase-takes"
+    },
+    {
+      title: "Closing a Credit Card Before You Apply",
+      excerpt: "Closing a card can raise utilization by shrinking available credit. Not a score-raise method.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "closing-credit-card-before-mortgage"
+    },
+    {
+      title: "Hazard vs HO-3 vs HO-6",
+      excerpt: "Lender hazard coverage vs HO-3 for a house vs HO-6 plus master for a condo. Not insurance advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-townhouse-garage.png",
+      slug: "hazard-vs-ho3-vs-ho6-condo-insurance"
+    },
+    {
+      title: "Selling with a VA Loan: Entitlement Restoration",
+      excerpt: "Restoration after sale and payoff. Distinct from keeping a VA loan and buying another. No entitlement dollars.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "selling-with-va-loan-entitlement-restoration"
+    },
+    {
+      title: "CPA Letter vs Tax Returns: What Actually Moves Underwriting",
+      excerpt: "Agency files are moved by returns and transcripts. A CPA letter supports; it does not replace the stack.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "cpa-letter-vs-tax-returns-underwriting"
+    },
+    {
+      title: "Rate Lock Extension vs Floating",
+      excerpt: "A lock holds a quoted rate for a window. An extension is usually a cost. Not a live-rate table.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Mortgages",
+      image: "/suburban-house-garden.png",
+      slug: "rate-lock-extension-vs-floating"
+    },
+    {
+      title: "“No Closing Cost” Refinance: The Cost Is in the Rate",
+      excerpt: "A lender credit that covers fees is usually paid for with a higher note rate. Run break-even.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Refinance",
+      image: "/modern-office-building.png",
+      slug: "no-closing-cost-refinance-rate-credit-tradeoff"
+    },
+    {
+      title: "What a Tri-Merge Credit Report Actually Shows",
+      excerpt: "Equifax, Experian, and TransUnion. Mortgage files often use classic FICO and the middle score.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "what-a-tri-merge-credit-report-shows"
+    },
+    {
+      title: "Earnest Money vs Down Payment vs Closing Costs",
+      excerpt: "Three cash lines. Earnest money is usually credited at closing. Timing and the Utah REPC still matter.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "earnest-money-vs-down-payment-vs-closing-costs"
+    },
+    {
+      title: "Townhome vs Condo: HOA Docs a Lender Will Ask For",
+      excerpt: "Not every townhome is a condo. Lenders underwrite the legal regime, not the listing photo.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-townhouse-garage.png",
+      slug: "townhome-vs-condo-hoa-docs-lenders-ask"
+    },
+    {
+      title: "Mortgage Reserves: How Many Months of PITIA",
+      excerpt: "Remaining liquid assets after cash to close. Not extra closing costs. Gift funds often cannot fill this line.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "mortgage-reserves-months-of-pitia"
+    },
+    {
+      title: "Asset-Depletion Qualifying: Retirement and Investment Assets",
+      excerpt: "Eligible assets as qualifying income under a written formula. Not cash means approved.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "asset-depletion-qualifying-non-qm"
+    },
+    {
+      title: "Gig Plus W-2 Mix: How the Average Is Built",
+      excerpt: "Two streams averaged separately, then added. A peak gig month is not the qualifying method.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "gig-plus-w2-income-mortgage-average"
+    },
+    {
+      title: "First Rental: Occupancy If You Still Live in Your Home",
+      excerpt: "Stay-put rental is investment occupancy. Distinct from a duplex house-hack. Not occupancy coaching.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "first-rental-occupancy-if-you-still-live-there"
+    },
+    {
+      title: "Depreciation Add-Back: What Agency Files Allow",
+      excerpt: "How underwriters add depreciation back on Schedule E. Not tax advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "depreciation-add-back-schedule-e"
+    },
+    {
+      title: "Compensating Factors That Appear in Findings",
+      excerpt: "Documented strengths in AUS or manual underwriting. Not a guarantee findings will flip.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "compensating-factors-in-aus-findings"
+    },
+    {
+      title: "Utah Property Tax Calendar vs Your First Escrow Analysis",
+      excerpt: "Typically due November 30, billed once a year. Why the first impound analysis can surprise.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "utah-property-tax-calendar-first-escrow-analysis"
+    },
+    {
+      title: "Escrow: How the Cushion Is Set, Why It Changes",
+      excerpt: "RESPA generally caps the cushion at about two months of disbursements. Not a universal formula.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "escrow-cushion-how-it-is-set"
+    },
+    {
+      title: "USDA vs VA vs FHA for a Veteran in a Rural Tract",
+      excerpt: "Comparison of typical tests. Not a recommendation to take one program.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "9 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "usda-vs-va-vs-fha-veteran-rural"
+    },
+    {
+      title: "HELOC After Year Two vs Cash-Out",
+      excerpt: "Seasoning overlays after a recent closing. Not a remake of HELOC vs cash-out structure.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Refinance",
+      image: "/modern-townhouse-garage.png",
+      slug: "heloc-after-year-two-vs-cash-out"
+    },
+    {
+      title: "Cross-Collateral and Using Equity to Buy Another House",
+      excerpt: "Pledging more than one property versus cash-out or a HELOC. Not a published agency product.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "cross-collateral-equity-to-buy-another-house"
+    },
+    {
+      title: "Biweekly Extra Principal vs Refinance",
+      excerpt: "One extra payment a year versus a new note. This page does not quote interest saved.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Refinance",
+      image: "/modern-office-building.png",
+      slug: "biweekly-extra-principal-vs-refinance"
+    },
+    {
+      title: "ITIN / Non-U.S. Citizen Mortgage Documentation",
+      excerpt: "Legal eligibility and document categories. Not a national-origin preference.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "itin-non-us-citizen-mortgage-documentation"
+    },
+    {
+      title: "DSCR vs Full-Doc Rental Loan",
+      excerpt: "DSCR qualifies on rent versus the payment. Full-doc qualifies the borrower. Occupancy still has to match use.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "dscr-vs-full-doc-rental-loan"
+    },
+    {
+      title: "Business Bank vs Personal: Co-Mingling That Stalls Files",
+      excerpt: "Business deposits in a personal account stall sourcing and deposit averages.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "business-vs-personal-bank-co-mingling"
+    },
+    {
+      title: "What a Utah REPC Deadline Actually Does to Your Loan",
+      excerpt: "Due diligence and financing are separate 5:00 p.m. Mountain Time clocks. Not legal advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "utah-repc-deadline-and-your-loan"
+    },
+    {
+      title: "Second Home vs Investment Occupancy",
+      excerpt: "Three occupancy types. Misstating occupancy is fraud, not a strategy.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Loan Programs",
+      image: "/suburban-house-garden.png",
+      slug: "second-home-vs-investment-occupancy"
+    },
+    {
+      title: "Cash-Out to Buy a Rental: Occupancy and LTV Traps",
+      excerpt: "Two properties, two occupancy answers, two LTV tests.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Refinance",
+      image: "/modern-townhouse-garage.png",
+      slug: "cash-out-to-buy-a-rental"
+    },
+    {
+      title: "Medical Collections After the FICO Model Change",
+      excerpt: "Bureau reporting changed. Mortgage tri-merge scores are often still classic FICO. Not a score-raise promise.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "medical-collections-after-fico-model-change"
+    },
+    {
+      title: "No Traditional Credit / Alternative Credit",
+      excerpt: "Rent and utilities can document a thin file. Weak traditional credit is a different path.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "no-traditional-credit-alternative-credit"
+    },
+    {
+      title: "House-Hacking a Duplex with FHA",
+      excerpt: "Occupy one unit as your home. Self-sufficiency is a 3–4 unit test, not a duplex test.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/suburban-house-garden.png",
+      slug: "house-hacking-duplex-with-fha"
+    },
+    {
+      title: "Relocating to Utah: Job Seasoning When Work Starts in 60 Days",
+      excerpt: "An offer letter can sometimes qualify before the first paycheck. Sixty days is not a published rule.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "relocating-to-utah-job-seasoning"
+    },
+    {
+      title: "APR vs Rate on a Loan Estimate",
+      excerpt: "Note rate prices P&I. APR includes most lender prepaid finance charges. Not a live-rate table.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Mortgages",
+      image: "/suburban-house-garden.png",
+      slug: "apr-vs-rate-on-a-loan-estimate"
+    },
+    {
+      title: "Should I Wait for 20% Down?",
+      excerpt: "Waiting can avoid conventional PMI. Buying sooner is a cash-and-timeline trade — not how MIP later ends.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "should-i-wait-for-20-percent-down"
+    },
+    {
+      title: "Removing PMI: Original Value vs New Appraisal",
+      excerpt: "HPA uses original value. A new appraisal of current value is a separate investor path.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "pmi-removal-original-value-vs-new-appraisal"
+    },
+    {
+      title: "Discount Points: Breakeven Without a Sales Pitch",
+      excerpt: "One point is typically 1% of the loan. Break-even is cost divided by monthly P&I savings.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Mortgages",
+      image: "/suburban-house-garden.png",
+      slug: "discount-points-breakeven-without-sales-pitch"
+    },
+    {
+      title: "What a Mortgage Conversation Asks",
+      excerpt: "Occupancy, income type, debts, assets. A conversation is not approval or a lock.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Mortgages",
+      image: "/modern-office-building.png",
+      slug: "what-a-mortgage-conversation-asks"
+    },
+    {
+      title: "New Auto Loan During Underwriting",
+      excerpt: "A car payment signed after pre-approval usually shows on the next credit pull and changes DTI.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "new-auto-loan-during-underwriting"
+    },
+    {
+      title: "DTI: Front-End vs Back-End with HOA",
+      excerpt: "HOA dues are housing expense. A modest PITI plus a large HOA can still fail the ratio.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "dti-frontend-backend-with-hoa"
+    },
+    {
+      title: "Pre-Approval vs AUS vs Clear to Close",
+      excerpt: "Three documents, three jobs. A letter is not findings, and findings are not CTC.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "pre-approval-vs-aus-vs-clear-to-close"
+    },
+    {
+      title: "Using a Spouse’s W-2 to Offset 1099 Volatility",
+      excerpt: "The W-2 helps when that person is a co-borrower. Utah is not a community-property state.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "spouse-w2-offset-1099-volatility"
+    },
+    {
+      title: "Temporary Buydown: Who Pays, What Happens in Year 3",
+      excerpt: "2-1 and 3-2-1 subsidize the payment for a few years. The note rate does not change.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Mortgages",
+      image: "/suburban-house-garden.png",
+      slug: "temporary-buydown-who-pays-year-three"
+    },
+    {
+      title: "K-1 Income: What Usually Counts",
+      excerpt: "Partnership and S-corp K-1 income is taken from the form, not from distributions alone.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "k-1-income-what-usually-counts"
+    },
+    {
+      title: "Rental Income on Schedule E in a Purchase File",
+      excerpt: "Schedule E is history on properties you already own. Proposed rent is a different calculation.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "schedule-e-rental-income-purchase-file"
+    },
+    {
+      title: "I Just Went 1099 Last Month",
+      excerpt: "A brand-new 1099 job is usually not yet a qualifying average.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "just-went-1099-last-month"
+    },
+    {
+      title: "Parent Is Gifting: Who Signs What",
+      excerpt: "Gift letter and donor trail — not a quiet extra signature on the deed.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "parent-gifting-down-payment-who-signs"
+    },
+    {
+      title: "Student Loans and DTI After IDR / SAVE Changes",
+      excerpt: "A $0 dashboard line is not automatically $0 in underwriting.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "student-loans-dti-idr-save"
+    },
+    {
+      title: "ARM Caps in Plain English",
+      excerpt: "Initial, periodic, and lifetime caps limit the note rate — not the rest of the payment.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Mortgages",
+      image: "/suburban-house-garden.png",
+      slug: "arm-caps-in-plain-english"
+    },
+    {
+      title: "FHA Condo Roster / Project Approval",
+      excerpt: "Look the building up on HUD’s list before you write an FHA offer.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "fha-condo-roster-project-approval"
+    },
+    {
+      title: "How MIP vs PMI Actually Leaves the Loan",
+      excerpt: "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "mip-vs-pmi-how-mortgage-insurance-ends"
+    },
+    {
+      title: "Streamline Refi: What “Less Docs” Still Requires",
+      excerpt: "FHA Streamline and VA IRRRL reduce documentation. Occupancy and net benefit still apply.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "8 min read",
+      category: "Refinance",
+      image: "/modern-office-building.png",
+      slug: "fha-va-streamline-refinance-less-docs"
+    },
+    {
+      title: "Large Deposits: 60-Day Paper Trail",
+      excerpt: "Large deposits in the statement window have to be sourced. Undocumented cash stalls files.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "large-deposits-60-day-paper-trail"
+    },
+    {
+      title: "Two Years of Tax Returns vs One Year: When Overlays Allow",
+      excerpt: "Most agency self-employed files want two years of returns. Some overlays allow one year in the same line of work.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "two-years-of-tax-returns-vs-one-year-mortgage"
+    },
+    {
+      title: "Overtime on a W-2: What “Likely to Continue” Means",
+      excerpt: "Underwriters usually average overtime over a documented history. A strong month is not a qualifying method.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "w2-overtime-likely-to-continue"
+    },
+    {
+      title: "Commission-Only Sales: Averaging and a Down Year",
+      excerpt: "Commission income is typically averaged, and a down year usually counts.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "commission-income-mortgage-averaging"
+    },
+    {
+      title: "How Much Cash Do I Need Besides Down Payment in Utah?",
+      excerpt: "Earnest money, title, origination, prepaids, and reserves sit on top of down payment.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "utah-cash-to-close-besides-down-payment"
+    },
+    {
+      title: "UHC / DPA Stacked with an FHA Gift",
+      excerpt: "Down payment assistance is often a second lien. A gift is not. How they can sit on the same FHA file.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "dpa-stacked-with-fha-gift-funds"
+    },
+    {
+      title: "VA Funding Fee: Finance vs Pay Cash",
+      excerpt: "Worked examples of financing the fee versus paying it in cash. Snapshot percents, not a quote.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "va-funding-fee-finance-vs-pay-cash"
+    },
+    {
+      title: "Can I Use VA If I Still Have a VA Loan?",
+      excerpt: "Remaining entitlement, occupancy, and restoration when the first VA loan is still open.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "va-entitlement-second-va-loan"
+    },
+    {
+      title: "VA Residual Income vs DTI",
+      excerpt: "Residual income is leftover cash after PITI. It can fail when DTI looks fine.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "va-residual-income-vs-dti"
+    },
+    {
+      title: "USDA Map and Income Limit: Am I Even Eligible?",
+      excerpt: "USDA is address-specific and household-income-specific. Use the official tools first.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "usda-map-income-limit-eligibility"
+    },
+    {
+      title: "Jumbo vs Conforming: Look Up This Year’s FHFA County Limit",
+      excerpt: "A jumbo loan is above the FHFA limit for that county-year. Do not memorize a blog number.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "jumbo-vs-conforming-fhfa-county-limit"
+    },
+    {
+      title: "When a Lower Rate Still Loses After Costs",
+      excerpt: "Break-even months include points and origination. A lower note rate can still lose if you move first.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Refinance",
+      image: "/modern-office-building.png",
+      slug: "refinance-break-even-when-lower-rate-loses"
+    },
+    {
+      title: "Cash-Out vs HELOC: Payment, Lien Position, and Tax Questions",
+      excerpt: "A cash-out replaces the first lien. A HELOC sits in second position. Not tax advice.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Refinance",
+      image: "/modern-townhouse-garage.png",
+      slug: "heloc-vs-cash-out-refinance"
+    },
+    {
+      title: "How Underwriters Verify Income (W-2 vs 1099 vs Bank)",
+      excerpt: "Each stack proves a durable average with different paper.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "how-underwriters-verify-income"
+    },
+    {
+      title: "Declined After Pre-Approval: Typical Condition Fails",
+      excerpt: "A pre-approval is not a commitment to lend. Job changes, deposits, and new debt are the usual late fails.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "declined-after-pre-approval"
+    },
+    {
+      title: "Closing Costs in Utah: Title, Origination, and Prepaids",
+      excerpt: "Utah funds at title companies and has no statewide transfer tax. Fees still vary by county.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "utah-closing-costs-title-origination-prepaids"
+    },
+    {
+      title: "Utah County Conforming Limit Lookup (How-To)",
+      excerpt: "How to look up this year’s FHFA limit. Summit is not Salt Lake.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "5 min read",
+      category: "Mortgages",
+      image: "/modern-office-building.png",
+      slug: "utah-county-conforming-loan-limit-lookup"
+    },
+    {
+      title: "Can I Get a Mortgage If My Income Changes Every Month?",
+      excerpt: "Yes, if you can document a pattern. Underwriters typically average 12–24 months of variable income rather than last month’s paycheck.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "can-i-get-a-mortgage-if-my-income-changes-every-month"
+    },
+    {
+      title: "1099 Mortgage Documentation Checklist",
+      excerpt: "What contract and gig workers typically gather: returns, transcripts, YTD P&L, statements, and contracts.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "Credit",
+      image: "/modern-office-building.png",
+      slug: "1099-mortgage-documentation-checklist"
+    },
+    {
+      title: "Bank-Statement Loans When Tax Returns Undercount Income",
+      excerpt: "When write-offs shrink taxable income, some Non-QM programs look at deposits. Who they are for, and what they are not.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "7 min read",
+      category: "Loan Programs",
+      image: "/modern-office-building.png",
+      slug: "bank-statement-loans-when-tax-returns-undercount-income"
+    },
+    {
+      title: "Gift Funds for a Down Payment: What Lenders Need to See",
+      excerpt: "Gift letters, paper trails, and program differences. Family help is common. Undocumented cash is not.",
+      author: "Ondo RE Team",
+      date: "August 29, 2026",
+      readTime: "6 min read",
+      category: "First-Time Buyers",
+      image: "/suburban-house-garden.png",
+      slug: "gift-funds-down-payment-rules"
+    },
+    {
+      title: "FHA vs Conventional Loans in Utah: Which Is Right for You?",
+      excerpt: "Down payment, mortgage insurance, credit, and stay-vs-refinance scenarios for Utah buyers.",
+      author: "Ondo RE Team",
+      date: "March 23, 2026",
+      readTime: "8 min read",
+      category: "Mortgages",
+      image: "/modern-apartment-balcony.webp",
+      slug: "fha-vs-conventional-loans-utah"
+    },
+    {
       title: "The Hidden Math Behind Renting vs Owning",
       excerpt: "Opportunity cost, equity velocity, and inflation-adjusted rent modeled by a developer-landlord.",
       author: "ONDO Team",

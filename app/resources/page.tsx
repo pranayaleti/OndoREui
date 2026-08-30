@@ -551,7 +551,7 @@ export default function ResourcesPage() {
                     <Link href="/buy-sell">Explore buy/sell paths</Link>
                   </Button>
                   <Button asChild size="sm" variant="outline">
-                    <Link href="/search">Browse Utah listings</Link>
+                    <Link href="/properties">Browse Utah listings</Link>
                   </Button>
                   <Button asChild size="sm" variant="ghost">
                     <Link href="/faq/buying-selling-faqs">See more FAQs</Link>

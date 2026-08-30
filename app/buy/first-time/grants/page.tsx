@@ -8,11 +8,14 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = {
   title: "Housing Grants & Down Payment Assistance Programs",
   description:
-    "A guide to down payment assistance and homebuyer grant programs in the U.S., state housing finance agencies, FHA/VA/USDA loans, and who qualifies.",
+    "A guide to down payment assistance and homebuyer grant programs. Eligibility is determined by the agency and the lender, not this page.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
     title: "Housing Grants & Down Payment Assistance Programs | Ondo Real Estate",
@@ -107,10 +110,13 @@ export default function HousingGrantsPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Assistance for Homebuyers</h2>
               <p className="text-lg text-foreground/70">
-                The down payment is the biggest hurdle for most first-time buyers. Across the U.S.,
-                many programs, from state housing agencies to federal loans and local grants, can cover
-                part or all of it. Below is a starting map; program terms, funding, and eligibility change
-                often and vary by state and locality, so confirm current details with each provider.
+                The down payment is often the first hurdle. Across the U.S., state housing agencies, local grants, and
+                federal loan programs can cover part of it. Terms, funding, and eligibility change. Confirm with the
+                agency. If a family gift will sit next to DPA on an FHA file, read{" "}
+                <Link href="/blog/dpa-stacked-with-fha-gift-funds" className="text-primary underline-offset-4 hover:underline">
+                  how DPA stacks with an FHA gift
+                </Link>
+                .
               </p>
             </div>
 
@@ -153,7 +159,10 @@ export default function HousingGrantsPage() {
                 <Link href="/loans">Explore Loans</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/qualify">Get Pre-Qualified</Link>
+                <Link href="/qualify">Talk with a loan officer</Link>
+              </Button>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA + FHA gift</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
                 <Link href="/blog/first-time-home-buyer-guide">First-Time Buyer Blog</Link>
@@ -167,6 +176,9 @@ export default function HousingGrantsPage() {
                 variant="card"
               />
             </div>
+            <RelatedContent path="/buy/first-time/grants" />
+            <NextStepCta path="/buy/first-time/grants" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

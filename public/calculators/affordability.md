@@ -24,6 +24,8 @@ Max home price ≈ (target monthly PITI × qualifying factor) at the front-end D
 ## Notes
 
 - Front-end and back-end DTI thresholds vary by program; consult a loan officer for a binding qualification.
+- Monthly debts means counted obligations on the credit report (and other debts the investor requires), not a DIY list. HOA is usually housing, not this box.
+- Variable income is typically averaged. Do not enter last month’s best deposit as if it were base pay.
 
 ## Try the interactive version
 

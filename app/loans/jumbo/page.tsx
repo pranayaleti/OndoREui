@@ -7,21 +7,26 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
+import { CONFORMING_LIMIT_NOTE } from "@/lib/content"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate",
-  description: "Jumbo loans for Utah homes above the $766,550 conforming limit. We work with Park City, Draper, and other high-value markets. Learn requirements and get pre-approved.",
+  description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county. Look up this year’s table. This is not a quote.",
   alternates: { canonical: `${SITE_URL}/loans/jumbo/` },
-  openGraph: { title: "Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate", description: "Jumbo loans for Utah homes above the $766,550 conforming limit." },
+  openGraph: { title: "Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate", description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county." },
   twitter: { card: "summary_large_image", title: "Jumbo Loans in Utah | Ondo Real Estate", description: "Jumbo loans for high-value properties in Park City, Draper, and across Utah." },
 }
 
 const benefits = [
-  { title: "Above Conforming Limits", description: "Finance properties exceeding the $766,550 2024 Utah conforming limit: up to $3M+", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "Competitive Rates", description: "Jumbo rates are now often at parity with or below conventional: the spread has narrowed significantly", icon: <TrendingUp className="h-6 w-6" /> },
-  { title: "Utah High-Value Markets", description: "Specialists in Park City, Draper, Holladay, Cottonwood Heights, and other premium corridors", icon: <Building2 className="h-6 w-6" /> },
-  { title: "Flexible Structures", description: "Fixed and ARM options; interest-only available for qualified buyers; portfolio lending options", icon: <CheckCircle className="h-6 w-6" /> },
+  { title: "Above conforming limits", description: CONFORMING_LIMIT_NOTE, icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Pricing is file-specific", description: "Jumbo pricing can sit near conforming pricing for some files. It is not always higher, and it is not a promised spread.", icon: <TrendingUp className="h-6 w-6" /> },
+  { title: "Utah high-value markets", description: "Park City, Draper, Holladay, Cottonwood Heights, and similar corridors often need jumbo when the county limit is exceeded.", icon: <Building2 className="h-6 w-6" /> },
+  { title: "Flexible structures", description: "Fixed and ARM options exist. Interest-only and portfolio lending are overlays, not a product you are promised.", icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
 export default function JumboLoanPage() {
@@ -29,7 +34,7 @@ export default function JumboLoanPage() {
     <main className="min-h-screen">
       <SEO
         title="Jumbo Loans in Utah"
-        description="Jumbo loans for Utah homes above the $766,550 conforming limit."
+        description="Jumbo loans finance homes above the current FHFA conforming limit for the property county."
         pathname="/loans/jumbo"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -46,7 +51,7 @@ export default function JumboLoanPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Is a Jumbo Loan?</h2>
               <p className="text-lg text-foreground/70">
-                A jumbo loan is a mortgage that exceeds the conforming loan limits set by Fannie Mae and Freddie Mac. For most Utah counties in 2024, that limit is $766,550. Properties in Summit County (Park City) have a higher limit of $1,149,825 before jumbo treatment applies.
+                A jumbo loan is a mortgage that exceeds the conforming loan limits set by Fannie Mae and Freddie Mac. {CONFORMING_LIMIT_NOTE} High-cost counties (for example Summit) can have a higher ceiling than the rest of the state. Do not use a number copied from an old blog post.
               </p>
             </div>
 
@@ -68,8 +73,8 @@ export default function JumboLoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Credit Score</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Typically 700+ required; 720+ for best terms</li>
-                    <li>• No government guarantee, lenders set their own overlays</li>
+                    <li>• Credit overlays are set by the investor; 700+ is common but not a promise</li>
+                    <li>• No government guarantee; lenders set their own overlays</li>
                   </ul>
                 </div>
                 <div>
@@ -115,22 +120,26 @@ export default function JumboLoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-primary">When Jumbo Makes Sense</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Purchase price exceeds $766,550 (most Utah counties)</li>
-                    <li>• Strong credit profile and documented reserves</li>
-                    <li>• Rates competitive with or below conforming in current market</li>
-                    <li>• Preferred over two-loan (piggyback) structures</li>
+                    <li>• The purchase exceeds the current FHFA conforming limit for that county</li>
+                    <li>• Credit, reserves, and income documentation meet that investor’s overlays</li>
+                    <li>• Pricing is compared on a Loan Estimate, not assumed to beat conforming</li>
+                    <li>• A piggyback (two-loan) structure is a separate conversation, not the default</li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6">Discuss Your Jumbo Purchase</h3>
+              <h3 className="text-2xl font-bold mb-6">Discuss a jumbo purchase</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg"><Link href="/contact">Talk to a Loan Officer</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/loans">Compare All Loan Types</Link></Button>
+                <Button asChild size="lg"><Link href="/blog/jumbo-vs-conforming-fhfa-county-limit">FHFA lookup how-to</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/utah-county-conforming-loan-limit-lookup">Utah county lookup</Link></Button>
               </div>
             </div>
+            <RelatedContent path="/loans/jumbo" />
+            <IsThisRightForMe table="purchase" programs={["jumbo", "conventional"]} highlight="jumbo" />
+            <NextStepCta path="/loans/jumbo" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

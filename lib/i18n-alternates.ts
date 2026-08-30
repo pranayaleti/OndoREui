@@ -16,11 +16,11 @@ function joinUrl(base: string, path: string): string {
  */
 export function buildSitemapAlternateRefs(
   path: string,
-): Array<{ href: string; hreflang: string }> {
+): Array<{ href: string; hreflang: string; hrefIsAbsolute: boolean }> {
   const canonical = joinUrl(SITE_URL, path)
   return [
-    { href: canonical, hreflang: "x-default" },
-    { href: canonical, hreflang: "en-US" },
+    { href: canonical, hreflang: "x-default", hrefIsAbsolute: true },
+    { href: canonical, hreflang: "en-US", hrefIsAbsolute: true },
   ]
 }
 

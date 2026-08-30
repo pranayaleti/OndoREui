@@ -158,10 +158,10 @@ describe("seo", () => {
   })
 
   describe("generateWebsiteJsonLd", () => {
-    it("returns WebSite with SearchAction", () => {
+    it("returns WebSite without a SearchAction that would 404 or drop the query", () => {
       const out = generateWebsiteJsonLd()
       expect(out["@type"]).toBe("WebSite")
-      expect(out.potentialAction["@type"]).toBe("SearchAction")
+      expect("potentialAction" in out).toBe(false)
     })
   })
 

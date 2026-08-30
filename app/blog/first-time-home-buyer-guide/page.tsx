@@ -5,13 +5,16 @@ import { Button } from "@/components/ui/button"
 import { SITE_URL } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { RelatedContent } from "@/components/content/related-content"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { CONVENTIONAL_SNAPSHOT, FHA_SNAPSHOT } from "@/lib/content"
 
 const slug = "/blog/first-time-home-buyer-guide"
 const title = "First-Time Home Buyer Guide: Everything You Need to Know"
 const description = "Complete guide to buying your first home in Utah, from pre-approval to closing day."
 const published = "2024-12-10"
-const modified = "2024-12-10"
-const author = "Sarah Johnson"
+const modified = "2026-08-29"
+const author = "Ondo RE Team"
 const category = "Buying Guide"
 const image = "/suburban-house-garden.png"
 const keywords = ["first time home buyer Utah", "home buying guide", "pre-approval Utah", "FHA loan Utah", "down payment assistance Utah"]
@@ -42,25 +45,25 @@ export default function FirstTimeHomeBuyerGuide() {
           </div>
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-6">
-              Buying your first home is one of the biggest financial decisions you will make. This guide walks you through every stage of the process, from getting pre-approved to handing over the keys, so you can move forward with confidence.
+              Start with a payment you can live with, then get a documented pre-approval before you shop. This Utah walkthrough covers credit, assistance programs, offers, inspection, and closing. It is education, not a promise you will qualify.
             </p>
 
             <h2>Step 1: Know Your Numbers Before You Shop</h2>
-            <p>Before you fall in love with a listing, understand what you can actually afford. Pull your credit reports from all three bureaus (Equifax, Experian, TransUnion) and check for errors. A score of 620+ qualifies for conventional financing; 580+ for FHA. In Utah, the median home price in the Salt Lake metro exceeds $500,000, so most buyers need a plan for the down payment and closing costs (typically 2–5% of purchase price).</p>
+            <p>Before you fall in love with a listing, understand what you can actually afford. Pull your credit reports from all three bureaus (Equifax, Experian, TransUnion) and check for errors. Conventional files often start around a 620 score; FHA HUD policy allows 580+ for {FHA_SNAPSHOT.minDownPayment580Plus} down. Lender overlays can be higher. Wasatch Front prices are high enough that down payment plus closing costs need a cash plan. Confirm current medians from a current market source; this page does not lock a dollar median.</p>
             <ul>
-              <li>Target a housing payment (PITI + HOA) at or below 28–31% of gross monthly income</li>
-              <li>Total debt-to-income (all obligations) should stay under 43–45%</li>
-              <li>Have 2–3 months of reserves after closing for peace of mind</li>
+              <li>Target a housing payment (PITI + HOA) you can live with after taxes and savings, not a ratio copied from a blog.</li>
+              <li>{CONVENTIONAL_SNAPSHOT.dtiNote}</li>
+              <li>Have reserves after closing if the file requires them. The amount is a guideline, not a promise.</li>
             </ul>
 
             <h2>Step 2: Get Pre-Approved: Not Just Pre-Qualified</h2>
-            <p>A pre-qualification is a quick estimate. A pre-approval is a lender reviewing your actual tax returns, W-2s, pay stubs, and bank statements and issuing a conditional commitment. In Utah's competitive market, sellers often reject offers without a solid pre-approval letter. Use a local lender who understands Utah title, HOA, and county-specific quirks, national online lenders can cause delays at closing.</p>
-            <p>Utah first-time buyer programs to ask about:</p>
+            <p>A pre-qualification is a quick estimate from self-reported numbers. A pre-approval is a lender reviewing tax returns, W-2s, pay stubs, and bank statements to decide whether it can issue a letter. That letter is still not a commitment to lend. In competitive Utah markets, sellers often want a documented pre-approval. Work with a lender who knows Utah title, HOA, and county practices.</p>
+            <p>Utah first-time buyer programs to ask about (confirm current terms with the agency, not this page):</p>
             <ul>
-              <li><strong>Utah Housing Corporation (UHC) FirstHome Loan</strong>, below-market rate + optional DPA second mortgage</li>
-              <li><strong>UHC Score Loan</strong>, for buyers with lower credit scores who need more flexibility</li>
-              <li><strong>FHA loans</strong>, 3.5% down at 580+ FICO; works well with UHC DPA</li>
-              <li><strong>USDA Rural Development</strong>, zero down in eligible rural areas (Cache Valley, parts of Utah County)</li>
+              <li><strong>Utah Housing Corporation (UHC) FirstHome Loan</strong> — UHC publishes purchase products and optional DPA. Rate and DPA terms change; verify on UHC’s site.</li>
+              <li><strong>UHC Score Loan</strong> — ask UHC whether a lower-score product still exists for your file.</li>
+              <li><strong>FHA loans</strong> — {FHA_SNAPSHOT.minDownPayment580Plus} down at 580+ under HUD policy; overlays apply. DPA stacking is file-specific.</li>
+              <li><strong>USDA Rural Development</strong> — zero down only in eligible census tracts and when income limits fit. Check the USDA map for the property, not a city slogan.</li>
             </ul>
 
             <h2>Step 3: Find the Right Agent and Search Smart</h2>
@@ -90,10 +93,12 @@ export default function FirstTimeHomeBuyerGuide() {
                 <Link href="/loans/fha">Explore FHA Loans</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/qualify">Get Pre-Approved</Link>
+                <Link href="/qualify">Talk with a loan officer</Link>
               </Button>
             </div>
           </div>
+          <RelatedContent path="/blog/first-time-home-buyer-guide" />
+          <LendingDisclaimer className="mt-8" />
         </div>
       </article>
     </main>

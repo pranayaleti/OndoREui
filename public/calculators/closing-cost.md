@@ -19,6 +19,11 @@ Total closing costs ≈ origination + title + escrow + prepaids (property tax, h
 - Loan program
 - Prepaid months for tax and insurance
 
+## Notes
+
+- Utah title and escrow fees vary by title company and county. Treat calculator output as a range.
+- Origination can appear as a fee or a lender credit. Prepaids often dwarf origination on a first purchase.
+
 ## Try the interactive version
 
 - HTML calculator: https://www.ondorealestate.com/calculators/closing-cost/

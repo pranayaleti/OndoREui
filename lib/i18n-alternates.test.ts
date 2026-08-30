@@ -12,8 +12,8 @@ describe("i18n alternates (English-only)", () => {
 
   it("emits only x-default and en-US for sitemap alternate refs", () => {
     expect(buildSitemapAlternateRefs("/properties/test")).toEqual([
-      { href: `${SITE_URL}/properties/test/`, hreflang: "x-default" },
-      { href: `${SITE_URL}/properties/test/`, hreflang: "en-US" },
+      { href: `${SITE_URL}/properties/test/`, hreflang: "x-default", hrefIsAbsolute: true },
+      { href: `${SITE_URL}/properties/test/`, hreflang: "en-US", hrefIsAbsolute: true },
     ])
   })
 

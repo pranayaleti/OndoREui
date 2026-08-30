@@ -6,6 +6,10 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import type { Metadata } from "next"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 
 export const metadata: Metadata = {
   title: "HELOC & Home Equity Loans in Utah | Ondo Real Estate",
@@ -67,6 +71,15 @@ export default function HelocPage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out guide</Link>
+              </Button>
+              <Button key="/blog/heloc-after-year-two-vs-cash-out" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-after-year-two-vs-cash-out">HELOC after year two</Link>
+              </Button>
+              <Button key="/blog/cross-collateral-equity-to-buy-another-house" asChild variant="outline" size="sm">
+                <Link href="/blog/cross-collateral-equity-to-buy-another-house">Cross-collateral education</Link>
+              </Button>
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>
               </Button>
@@ -85,6 +98,10 @@ export default function HelocPage() {
                 <Link href="/contact">Speak with an advisor</Link>
               </Button>
             </div>
+            <RelatedContent path="/loans/heloc" />
+            <IsThisRightForMe table="equity" highlight="heloc" />
+            <NextStepCta path="/loans/heloc" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

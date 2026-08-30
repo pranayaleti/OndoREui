@@ -9,6 +9,7 @@ import {
   buildLlmsTxtBody,
   buildRobotsTxtBody,
   buildSitemapMdBody,
+  getSiteIndexSections,
   LLMS_DISCLOSURES_BLOCK,
 } from "./site-index"
 
@@ -17,6 +18,7 @@ import {
 const requireCjs = createRequire(import.meta.url)
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nextSitemapConfig = requireCjs("../next-sitemap.config.js") as {
+  transform: (config: unknown, path: string) => Promise<unknown>
   robotsTxtOptions: {
     policies: Array<{ userAgent: string; allow: string[]; disallow: string[] }>
     transformRobotsTxt: (config: { siteUrl: string }, robotsTxt: string) => Promise<string>
@@ -163,5 +165,52 @@ describe("llms.json", () => {
     expect(data.contentNegotiation.acceptHeader).toBe("text/markdown")
     expect(data.resources.markdownSitemap).toMatch(/\/sitemap\.md$/)
     expect(data.contentNegotiation.firstPartyMarkdownTwins.length).toBe(AGENT_MARKDOWN_TWINS.length)
+  })
+})
+
+describe("HTML sitemap hubs", () => {
+  it("lists local-guide hubs and does not send property search to /search", () => {
+    const hrefs = getSiteIndexSections().flatMap((section) => section.links.map((link) => link.href))
+    expect(hrefs).toContain("/buy-sell")
+    expect(hrefs).toContain("/market-reports")
+    expect(hrefs).toContain("/neighborhoods")
+    expect(hrefs).toContain("/schools")
+    expect(hrefs).not.toContain("/search")
+  })
+})
+
+describe("next-sitemap exclusions", () => {
+  it("drops token shells and noindex utilities", async () => {
+    const cfg = nextSitemapConfig
+    const excluded = [
+      "/apply/_",
+      "/invite/_",
+      "/tenantOnboarding/_",
+      "/visit/confirm/__ondo_visit_export_shell__",
+      "/search",
+      "/chat",
+      "/verify",
+      "/unsubscribe",
+    ]
+    for (const path of excluded) {
+      expect(await cfg.transform(cfg, path), path).toBeNull()
+    }
+    expect(await cfg.transform(cfg, "/buy-sell")).not.toBeNull()
+    expect(await cfg.transform(cfg, "/")).not.toBeNull()
+  })
+
+  it("emits absolute hreflang URLs that do not double the path", async () => {
+    const cfg = nextSitemapConfig
+    const buySell = (await cfg.transform(cfg, "/buy-sell")) as {
+      alternateRefs: Array<{ href: string; hrefIsAbsolute?: boolean }>
+    }
+    expect(buySell.alternateRefs[0].hrefIsAbsolute).toBe(true)
+    expect(buySell.alternateRefs[0].href).toMatch(/\/buy-sell\/$/)
+    expect(buySell.alternateRefs[0].href).not.toMatch(/\/buy-sell\/buy-sell/)
+    const txt = (await cfg.transform(cfg, "/llms.txt")) as {
+      alternateRefs: Array<{ href: string }>
+    }
+    expect(txt.alternateRefs[0].href).toMatch(/\/llms\.txt$/)
+    expect(txt.alternateRefs[0].href).not.toMatch(/llms\.txt\/llms\.txt/)
   })
 })

@@ -79,7 +79,7 @@ export default function NotFound() {
     { name: "Property Management Portal", href: APP_PORTAL_LOGIN_URL, icon: <Users className="h-4 w-4" />, description: "Owner, tenant, and staff access", external: APP_PORTAL_IS_EXTERNAL },
     { name: "Buy a Home", href: "/buy", icon: <Home className="h-4 w-4" />, description: "Find your dream home" },
     { name: "Sell a Home", href: "/sell", icon: <Home className="h-4 w-4" />, description: "Sell your property" },
-    { name: "Mortgage Loans", href: "/loans", icon: <Calculator className="h-4 w-4" />, description: "Get pre-approved" },
+    { name: "Mortgage Loans", href: "/loans", icon: <Calculator className="h-4 w-4" />, description: "Compare loan programs" },
     { name: "Calculators", href: "/calculators", icon: <Calculator className="h-4 w-4" />, description: "Real estate calculators" },
     { name: "About Us", href: "/about", icon: <Users className="h-4 w-4" />, description: "Learn about our team" },
     { name: "Contact", href: "/contact", icon: <Phone className="h-4 w-4" />, description: "Get in touch" }
@@ -212,7 +212,7 @@ export default function NotFound() {
             <CardContent className="text-center">
               <p className="text-foreground/70 mb-4">Use our search feature to find properties or information.</p>
               <Button asChild variant="outline" className="w-full">
-                <Link href="/search">Search Now</Link>
+                <Link href="/properties">Search Now</Link>
               </Button>
             </CardContent>
           </Card>

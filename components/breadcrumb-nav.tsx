@@ -25,7 +25,12 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
               {item.label}
             </Link>
           ) : (
-            <span className="text-foreground/90 font-medium">{item.label}</span>
+            <span
+              className="text-foreground/90 font-medium"
+              aria-current={i === items.length - 1 ? "page" : undefined}
+            >
+              {item.label}
+            </span>
           )}
         </span>
       ))}

@@ -4,6 +4,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
+import Link from "next/link"
 import { ARRIVAL_FAIR_HOUSING, ARRIVAL_LENDING_DISCLOSURE, ARRIVAL_REAL_ESTATE_DISCLOSURE } from "@/lib/utah-arrival"
 
 const title = "New to Utah: commute, rent, and buy"
@@ -71,7 +72,15 @@ export default function MovingToUtahPage() {
       <div className="container mx-auto px-4 py-10 md:py-14">
         <UtahArrivalDesk />
         <p className="mt-10 max-w-3xl text-sm text-foreground/70">
-          {ARRIVAL_LENDING_DISCLOSURE} {ARRIVAL_REAL_ESTATE_DISCLOSURE} {ARRIVAL_FAIR_HOUSING}
+          Buying before the first Utah paycheck is a seasoning question:{" "}
+          <Link href="/blog/relocating-to-utah-job-seasoning" className="text-primary underline-offset-4 hover:underline">
+            income when the job starts in 60 days
+          </Link>
+          . Utah purchase-contract clocks are separate from underwriting:{" "}
+          <Link href="/blog/utah-repc-deadline-and-your-loan" className="text-primary underline-offset-4 hover:underline">
+            what a REPC deadline does to your loan
+          </Link>
+          . {ARRIVAL_LENDING_DISCLOSURE} {ARRIVAL_REAL_ESTATE_DISCLOSURE} {ARRIVAL_FAIR_HOUSING}
         </p>
       </div>
     </main>

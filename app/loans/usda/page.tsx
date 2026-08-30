@@ -7,21 +7,27 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
+import { USDA_SNAPSHOT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "USDA Rural Loans in Utah | Zero Down | Ondo Real Estate",
-  description: "USDA loans offer zero down payment for eligible rural and suburban Utah areas. Learn about income limits, eligible areas (Cache Valley, Sanpete), and how to qualify.",
+  title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate",
+  description:
+    "USDA loans can be zero down when the address map, household income, and occupancy tests fit. Confirm current RD tools. Educational, not a credit decision.",
   alternates: { canonical: `${SITE_URL}/loans/usda/` },
-  openGraph: { title: "USDA Rural Loans in Utah | Zero Down | Ondo Real Estate", description: "USDA loans offer zero down payment for eligible rural Utah areas." },
-  twitter: { card: "summary_large_image", title: "USDA Loans in Utah | Ondo Real Estate", description: "Zero down payment loans for eligible rural and suburban Utah areas." },
+  openGraph: { title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate", description: "USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools." },
+  twitter: { card: "summary_large_image", title: "USDA Loans in Utah | Ondo Real Estate", description: "Zero down when map, income, and occupancy tests fit. Confirm current USDA tools." },
 }
 
 const benefits = [
-  { title: "Zero Down Payment", description: "100% financing with no down payment required for eligible properties and borrowers", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "Rural Utah Coverage", description: "Many suburban Utah areas qualify: Cache Valley, Sanpete County, rural Utah County, and more", icon: <MapPin className="h-6 w-6" /> },
-  { title: "Lower Mortgage Insurance", description: "USDA guarantee fee (1%) and annual fee (0.35%) are lower than FHA MIP over the life of the loan", icon: <Home className="h-6 w-6" /> },
-  { title: "Competitive Fixed Rates", description: "Government-backed guarantee enables competitive 30-year fixed rates for qualified borrowers", icon: <CheckCircle className="h-6 w-6" /> },
+  { title: "Zero down when eligible", description: "100% financing is available only when the property map, household income, occupancy, and overlays all fit.", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Address-specific map", description: USDA_SNAPSHOT.mapNote, icon: <MapPin className="h-6 w-6" /> },
+  { title: "Guarantee fee (snapshot)", description: `${USDA_SNAPSHOT.upfrontGuaranteeFee}. Annual: ${USDA_SNAPSHOT.annualFee}. ${USDA_SNAPSHOT.feeNote}`, icon: <Home className="h-6 w-6" /> },
+  { title: "Primary residence", description: USDA_SNAPSHOT.occupancy, icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
 export default function USDALoanPage() {
@@ -29,7 +35,7 @@ export default function USDALoanPage() {
     <main className="min-h-screen">
       <SEO
         title="USDA Rural Loans in Utah"
-        description="USDA loans offer zero down payment for eligible rural and suburban Utah areas."
+        description="USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools."
         pathname="/loans/usda"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -46,7 +52,9 @@ export default function USDALoanPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Is a USDA Loan?</h2>
               <p className="text-lg text-foreground/70">
-                USDA Rural Development loans are backed by the U.S. Department of Agriculture to support homeownership in rural and suburban communities. They offer zero down payment and competitive rates, and more Utah areas qualify than most buyers realise.
+                USDA Rural Development loans are backed by the U.S. Department of Agriculture. Zero down is available
+                only after the property address, household income, occupancy, and lender overlays all fit. Pricing is
+                file-specific. Run USDA’s published map before you write an offer as if the program is available.
               </p>
             </div>
 
@@ -68,35 +76,33 @@ export default function USDALoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Income Limits</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Household income must be ≤115% of area median income (AMI)</li>
-                    <li>• Salt Lake County: ~$110,000–130,000 for a family of 4 (verify at eligibility.sc.egov.usda.gov)</li>
-                    <li>• All household income counts, not just borrowers on the loan</li>
+                    <li>• {USDA_SNAPSHOT.incomeNote}</li>
+                    <li>• Confirm household size and the current area limit on USDA’s published tool. Do not use a marketing-page AMI figure (as of {LENDING_FACTS_AS_OF}).</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Eligible Utah Areas</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Cache Valley (Logan, Hyrum, Richmond)</li>
-                    <li>• Sanpete County (Manti, Ephraim, Mt. Pleasant)</li>
-                    <li>• Rural Utah County pockets (Elk Ridge, Woodland Hills)</li>
-                    <li>• Many Box Elder, Millard, Sevier county communities</li>
+                    <li>• {USDA_SNAPSHOT.mapNote}</li>
+                    <li>• Some Cache Valley, Sanpete, and rural Utah County pockets have been eligible in past map vintages. That is not a substitute for the current address lookup.</li>
+                    <li>• How-to: <Link href="/blog/usda-map-income-limit-eligibility" className="text-primary underline-offset-4 hover:underline">USDA map and income limit</Link></li>
+                    <li>• Veteran in a rural tract: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary underline-offset-4 hover:underline">USDA vs VA vs FHA</Link> — comparison, not a pick.</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold mb-3">Fees</h4>
+                  <h4 className="text-lg font-semibold mb-3">Fees (confirm current RD notice)</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Upfront guarantee fee: 1.0% of loan (financed)</li>
-                    <li>• Annual fee: 0.35% of remaining balance</li>
-                    <li>• No monthly PMI, annual fee is significantly lower than FHA MIP</li>
+                    <li>• Upfront: {USDA_SNAPSHOT.upfrontGuaranteeFee}</li>
+                    <li>• Annual: {USDA_SNAPSHOT.annualFee}</li>
+                    <li>• {USDA_SNAPSHOT.feeNote}</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold mb-3">Property & Credit</h4>
+                  <h4 className="text-lg font-semibold mb-3">Property &amp; Credit</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Must be primary residence; no investment properties</li>
-                    <li>• Minimum 640 credit score for GUS automated approval</li>
-                    <li>• Manual underwrite possible below 640 with strong file</li>
-                    <li>• Property must be in USDA-eligible area (verify before offer)</li>
+                    <li>• {USDA_SNAPSHOT.occupancy}</li>
+                    <li>• {USDA_SNAPSHOT.creditNote}</li>
+                    <li>• Property must be in a currently eligible census area — verify before the offer.</li>
                   </ul>
                 </div>
               </div>
@@ -108,31 +114,35 @@ export default function USDALoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-primary">USDA Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Lower annual fee (0.35% vs FHA's 0.55%+)</li>
-                    <li>• No upfront MIP structure, just the 1% guarantee fee</li>
-                    <li>• Annual fee can drop off (unlike FHA MIP for life)</li>
-                    <li>• Often lower total cost over 30 years vs FHA</li>
+                    <li>• Zero down when map, income, and occupancy tests pass</li>
+                    <li>• Guarantee fee snapshot is dated in the facts module — confirm the current RD notice</li>
+                    <li>• Compare total cost on two Loan Estimates rather than assuming USDA beats FHA</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-primary">FHA Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• No geographic restriction, works anywhere in Utah</li>
-                    <li>• Lower minimum credit score (580 vs 640 for USDA)</li>
-                    <li>• No household income cap</li>
-                    <li>• Higher loan limits for higher-priced markets</li>
+                    <li>• No geographic map test — FHA is not census-tract limited the way USDA is</li>
+                    <li>• HUD credit policy can sit lower than many USDA overlays; overlays still apply</li>
+                    <li>• No USDA household income cap</li>
+                    <li>• HUD county limits differ from USDA area limits — look up the current tables</li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6">Check Your Eligibility</h3>
+              <h3 className="text-2xl font-bold mb-6">Check the map before the offer</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg"><Link href="/qualify">Get Pre-Approved</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/loans">Compare All Loan Types</Link></Button>
+                <Button asChild size="lg"><Link href="/blog/usda-map-income-limit-eligibility">USDA map how-to</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
               </div>
             </div>
+            <RelatedContent path="/loans/usda" />
+            <IsThisRightForMe table="purchase" programs={["usda", "fha", "conventional"]} highlight="usda" />
+            <NextStepCta path="/loans/usda" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

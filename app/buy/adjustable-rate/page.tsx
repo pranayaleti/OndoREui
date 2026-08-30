@@ -9,6 +9,10 @@ import Link from "next/link"
 import { TrendingDown, Clock, Calculator, AlertCircle } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { ARM_CAPS, LENDING_FACTS_AS_OF } from "@/lib/content"
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/adjustable-rate", {
   title: "Adjustable-Rate Mortgage (ARM) Guide | Utah Real Estate",
@@ -72,7 +76,13 @@ export default function AdjustableRatePage() {
                     <Calculator className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle>Rate Caps</CardTitle>
-                  <CardDescription>Protection against excessive rate increases with lifetime and periodic caps.</CardDescription>
+                  <CardDescription>
+                    Initial, periodic, and lifetime caps limit how far the note rate can move. Read{" "}
+                    <Link href="/blog/arm-caps-in-plain-english" className="underline underline-offset-4">
+                      ARM caps in plain English
+                    </Link>
+                    .
+                  </CardDescription>
                 </CardHeader>
               </Card>
 
@@ -88,19 +98,42 @@ export default function AdjustableRatePage() {
             </div>
 
             <div className="bg-muted rounded-lg p-8 mb-12">
-              <h3 className="text-2xl font-bold mb-6">Common ARM Types</h3>
+              <h3 className="text-2xl font-bold mb-6">How caps work (as of {LENDING_FACTS_AS_OF})</h3>
+              <p className="text-foreground/70 mb-4">{ARM_CAPS.notation}</p>
+              <ul className="space-y-3 text-foreground/70">
+                <li>
+                  <strong>Initial.</strong> {ARM_CAPS.initial}
+                </li>
+                <li>
+                  <strong>Periodic.</strong> {ARM_CAPS.periodic}
+                </li>
+                <li>
+                  <strong>Lifetime.</strong> {ARM_CAPS.lifetime}
+                </li>
+              </ul>
+              <p className="mt-4 text-foreground/70">{ARM_CAPS.fullyIndexed}</p>
+              <p className="mt-2 text-foreground/70">{ARM_CAPS.paymentNote}</p>
+              <p className="mt-4">
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/blog/arm-caps-in-plain-english">ARM caps in plain English</Link>
+                </Button>
+              </p>
+            </div>
+
+            <div className="bg-muted rounded-lg p-8 mb-12">
+              <h3 className="text-2xl font-bold mb-6">Common ARM types</h3>
               <div className="space-y-4">
                 <div>
                   <h4 className="text-lg font-semibold mb-2">5/1 ARM</h4>
-                  <p className="text-foreground/70">Fixed rate for 5 years, then adjusts annually. Popular for buyers planning to move or refinance within 5-7 years.</p>
+                  <p className="text-foreground/70">Fixed rate for 5 years, then adjusts annually. Often used when the plan is to sell or refinance before the first adjustment — not a promise that you will.</p>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-2">7/1 ARM</h4>
-                  <p className="text-foreground/70">Fixed rate for 7 years, then adjusts annually. Good middle ground between 5/1 and fixed-rate mortgages.</p>
+                  <p className="text-foreground/70">Fixed rate for 7 years, then adjusts annually.</p>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-2">10/1 ARM</h4>
-                  <p className="text-foreground/70">Fixed rate for 10 years, then adjusts annually. Offers longer stability with ARM benefits.</p>
+                  <p className="text-foreground/70">Fixed rate for 10 years, then adjusts annually. Longer fixed period, still an ARM after that date.</p>
                 </div>
               </div>
             </div>
@@ -112,16 +145,22 @@ export default function AdjustableRatePage() {
                   <Link href="/calculators/mortgage-payment">Compare Loan Options</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
+                  <Link href="/blog/arm-caps-in-plain-english">Read the cap structure</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
                   <Link href="/contact">Speak with a Loan Officer</Link>
                 </Button>
               </div>
             </div>
 
-            <ConsultationCTA 
-              title="Expert ARM Guidance"
-              description="Our loan officers can help you understand if an adjustable-rate mortgage fits your financial goals and timeline."
+            <ConsultationCTA
+              title="ARM structure, not a rate promise"
+              description="A loan officer can explain index, margin, and caps on a Loan Estimate. That conversation is not a quote from this page."
               variant="card"
             />
+            <RelatedContent path="/buy/adjustable-rate" />
+            <NextStepCta path="/buy/adjustable-rate" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

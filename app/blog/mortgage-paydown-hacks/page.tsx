@@ -102,7 +102,8 @@ export default function MortgagePaydownHacks() {
             <h2>See the impact</h2>
             <p>
               Model how extra principal and rate changes affect your payoff with the{" "}
-              <Link href="/calculators/mortgage-payment">mortgage payment calculator</Link>.
+              <Link href="/calculators/mortgage-payment">mortgage payment calculator</Link>. Extra principal versus a
+              new note: <Link href="/blog/biweekly-extra-principal-vs-refinance">biweekly vs refinance</Link>.
             </p>
 
             <h2>When NOT to pay down</h2>

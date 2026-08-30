@@ -195,18 +195,18 @@ const conventionalLoans: SubServiceDefinition = {
     { step: "3", title: "Underwriting & Close", desc: "Our processing team manages appraisal ordering, title work, insurance verification, and underwriting conditions. We keep you informed at every stage and target a 30-day close for most transactions." },
   ],
   localizedIntro: (city, data) =>
-    `A conventional mortgage is the most popular loan type in ${city}, where the median home price of ${fmtUsd(data.medianHomePrice)} falls well within conforming loan limits. With strong credit and a down payment of at least 5%, you can secure competitive rates and avoid the permanent mortgage insurance that comes with FHA financing. For ${city} buyers with a median household income of ${fmtUsd(data.medianHouseholdIncome)}, conventional loans offer the most flexibility in terms, from 15-year options that build equity quickly to 30-year terms that keep monthly payments manageable. Properties in the ${data.schoolDistrict} area, near employers like ${data.topEmployers[0]}, are well-suited for conventional financing.`,
-  localizedBenefits: (city, data) => [
-    `PMI drops off automatically at 78% LTV, on a ${fmtUsd(data.medianHomePrice)} home, that's when your balance reaches ${fmtUsd(Math.round(data.medianHomePrice * 0.78))}`,
-    `No upfront mortgage insurance saves you ${fmtUsd(Math.round(data.medianHomePrice * 0.95 * 0.0175))} at closing compared to FHA`,
-    `Competitive rates for ${city} borrowers with credit scores above 700`,
-    `Investment property financing available for ${city} rental investors`,
+    `A conventional mortgage is a common loan type in ${city}. The median home price snapshot we use is ${fmtUsd(data.medianHomePrice)}; confirm whether that sits under the current FHFA conforming limit for the property county. Credit, down payment, and DTI overlays decide pricing. PMI on conventional can often be removed with enough equity, unlike typical FHA MIP on low-down files. For ${city} buyers, conventional terms still depend on the file, from 15-year options that build equity faster to 30-year terms that keep the payment lower.`,
+  localizedBenefits: (city, _data) => [
+    `PMI can often drop off at 78% of original value on conventional loans; that threshold depends on the original value, not a marketing shortcut`,
+    `No upfront MIP, unlike FHA. Do not treat a dollar comparison on this page as your cash to close.`,
+    `Pricing for ${city} borrowers still depends on credit, LTV, and occupancy, not a promised rate`,
+    `Investment property financing may be available for ${city} rental investors when occupancy and LTV fit`,
   ],
   baseFaqs: [
     { q: "What's the minimum down payment for a conventional loan?", a: "The minimum down payment is 3% for first-time homebuyers through programs like Conventional 97 or HomeReady, and 5% for most other borrowers. Putting 20% or more down eliminates private mortgage insurance entirely. For an investment property, expect a minimum of 15–25% down. We help you weigh the tradeoffs between a lower down payment (preserving cash) and a higher down payment (lower monthly payments and no PMI)." },
     { q: "How does conventional compare to FHA?", a: "Conventional loans have no upfront mortgage insurance premium, PMI cancels automatically at 78% LTV (FHA MIP is permanent on most loans), higher loan limits in many Utah counties, and no FHA-specific property condition requirements. However, FHA loans have more flexible credit requirements and lower down payment minimums. If you have a credit score above 680 and can put at least 5% down, conventional is typically the better long-term value." },
-    { q: "Can I get a conventional loan for an investment property?", a: "Yes. Conventional loans are the standard financing option for investment properties. Expect a minimum 15% down for a single-unit rental, 25% for a 2–4 unit property, and interest rates approximately 0.5–0.75% higher than primary residence rates. We work with lenders experienced in investor financing to get you the best terms available." },
-    { q: "What credit score do I need?", a: "Most conventional loan programs require a minimum credit score of 620, though you'll get the best rates with scores above 740. Scores between 620 and 700 can still qualify but may face slightly higher rates or PMI costs. We work with multiple lenders and can often find competitive options across the credit spectrum." },
+    { q: "Can I get a conventional loan for an investment property?", a: "Conventional loans are a common path for investment properties. Down payment, occupancy, and pricing differ from a primary residence. We will not publish a promised rate markup." },
+    { q: "What credit score do I need?", a: "Most conventional programs start around a 620 score, with overlays often higher. Higher scores often improve pricing, but there is no single “best rate” score. Scores between 620 and 700 can still fit some files with different PMI or pricing. That is not a promise of approval." },
   ],
 }
 
@@ -218,12 +218,12 @@ const vaLoans: SubServiceDefinition = {
   parentHref: "/loans",
   metaTitle: (city) => `VA Home Loans in ${city}, Utah`,
   metaDescription: (city) =>
-    `VA home loans in ${city}, UT, zero down payment, no PMI, and competitive rates for veterans and active-duty service members.`,
+    `VA home loans in ${city}, UT: ask about zero down and no monthly PMI when entitlement and occupancy rules are met. This is not a quote.`,
   features: [
-    { title: "Zero Down Payment", description: "100% financing with no down payment required: the most powerful home buying benefit available to veterans", iconName: "Home" },
-    { title: "No PMI", description: "No private mortgage insurance ever, regardless of your down payment amount: saving hundreds per month", iconName: "ShieldCheck" },
-    { title: "Competitive Rates", description: "VA-backed loans consistently offer some of the lowest interest rates available in the mortgage market", iconName: "TrendingDown" },
-    { title: "Flexible Qualification", description: "More lenient credit and debt-to-income requirements than conventional loans, with no maximum loan amount for eligible veterans", iconName: "UserCheck" },
+    { title: "Zero down when eligible", description: "Zero down is available only with remaining entitlement and when the loan otherwise meets VA and lender guidelines. It is not automatic.", iconName: "Home" },
+    { title: "No PMI", description: "VA loans do not charge monthly PMI. That is not a published monthly savings versus conventional.", iconName: "ShieldCheck" },
+    { title: "VA pricing", description: "VA loans are often priced differently from conventional because of the guarantee. That is not a promise of a lower rate on your file.", iconName: "TrendingDown" },
+    { title: "Credit and DTI", description: "VA residual income and DTI overlays differ from conventional. There is still a maximum loan amount that fits entitlement, residual income, and the property.", iconName: "UserCheck" },
   ],
   howItWorks: [
     { step: "1", title: "Certificate of Eligibility", desc: "We help you obtain your Certificate of Eligibility (COE) to confirm your VA loan entitlement. This can often be retrieved instantly through the VA's automated system. We verify your remaining entitlement and any prior VA loan usage." },
@@ -231,12 +231,12 @@ const vaLoans: SubServiceDefinition = {
     { step: "3", title: "VA Appraisal & Close", desc: "The VA appraisal ensures the property meets VA Minimum Property Requirements (MPRs). Our team manages the appraisal process, coordinates with the VA, and guides you through closing: typically in 30–45 days." },
   ],
   localizedIntro: (city, data) =>
-    `Veterans and active-duty service members in ${city} have earned one of the most powerful home buying benefits available, the VA home loan. With zero down payment required on a median-priced ${city} home of ${fmtUsd(data.medianHomePrice)}, you save ${fmtUsd(Math.round(data.medianHomePrice * 0.035))}–${fmtUsd(Math.round(data.medianHomePrice * 0.2))} compared to FHA or conventional loans. Combined with no private mortgage insurance, VA loans can save ${city} veterans $200–500 per month on housing costs. ${data.topEmployers.some(e => e.toLowerCase().includes("afb") || e.toLowerCase().includes("air force") || e.toLowerCase().includes("hill") || e.toLowerCase().includes("military")) ? `With ${data.topEmployers.find(e => e.toLowerCase().includes("afb") || e.toLowerCase().includes("air force") || e.toLowerCase().includes("hill")) || "nearby military installations"} in the area, many ${city} residents are eligible for VA benefits.` : `Whether you're active duty, a veteran, or a surviving spouse, ${city}'s ${data.schoolDistrict} area offers excellent neighborhoods for military families.`}`,
+    `Veterans and active-duty service members in ${city} can ask about VA eligibility. Zero down is available only with remaining entitlement. The median published home price we use for ${city} is ${fmtUsd(data.medianHomePrice)}; that is a city snapshot, not your contract price. VA loans typically have no monthly PMI. ${data.topEmployers.some(e => e.toLowerCase().includes("afb") || e.toLowerCase().includes("air force") || e.toLowerCase().includes("hill") || e.toLowerCase().includes("military")) ? `With ${data.topEmployers.find(e => e.toLowerCase().includes("afb") || e.toLowerCase().includes("air force") || e.toLowerCase().includes("hill")) || "nearby military installations"} in the area, many ${city} residents may be eligible to apply for VA benefits.` : `Whether you are active duty, a veteran, or a surviving spouse, eligibility still depends on service history, occupancy, and remaining entitlement.`}`,
   localizedBenefits: (city, data) => [
-    `Zero down payment on a ${fmtUsd(data.medianHomePrice)} ${city} home, keep your savings for moving costs and home improvements`,
-    `No PMI saves you an estimated ${fmtUsd(Math.round(data.medianHomePrice * 0.95 * 0.005 / 12))}/month compared to conventional with less than 20% down`,
-    `VA funding fee can be financed into the loan amount, reducing out-of-pocket closing costs`,
-    `No maximum loan amount for veterans with full entitlement in ${city}`,
+    `Zero down on a ${fmtUsd(data.medianHomePrice)} ${city} median snapshot only if entitlement and occupancy rules are met`,
+    `No monthly PMI. We do not publish a monthly dollar savings versus conventional.`,
+    `VA funding fee can often be financed; confirm the current published schedule before quoting`,
+    `Loan amount still has to fit remaining entitlement, residual income, and overlays in ${city}`,
   ],
   baseFaqs: [
     { q: "Who is eligible for a VA loan?", a: "VA loan eligibility extends to active-duty service members (after 90 continuous days of service during wartime or 181 days during peacetime), veterans with an honorable discharge, National Guard and Reserve members (with 6 years of service or 90 days of activation), and surviving spouses of service members who died in service or from a service-connected disability. We help you navigate your specific eligibility scenario." },
@@ -256,10 +256,10 @@ const usdaLoans: SubServiceDefinition = {
   metaDescription: (city) =>
     `USDA rural development loans in ${city}, UT, zero down payment for eligible rural and suburban areas. Check your eligibility with Ondo Real Estate.`,
   features: [
-    { title: "Zero Down Payment", description: "100% financing with no down payment required for eligible properties in rural and suburban areas", iconName: "Home" },
-    { title: "Below-Market Rates", description: "USDA-guaranteed loans often carry interest rates below conventional market rates", iconName: "TrendingDown" },
-    { title: "Low Mortgage Insurance", description: "USDA annual fee is typically lower than FHA MIP or conventional PMI, reducing your monthly cost", iconName: "Percent" },
-    { title: "Income-Based Eligibility", description: "Household income up to 115% of area median income qualifies: more generous than most first-time buyer programs", iconName: "Users" },
+    { title: "Zero down when the property qualifies", description: "100% financing is available only for eligible properties in USDA-eligible areas when income limits fit. It is not automatic for every rural-looking address.", iconName: "Home" },
+    { title: "USDA guarantee fee", description: "USDA charges guarantee fees that differ from FHA MIP and conventional PMI. Confirm the current USDA schedule; this page does not publish a single percent.", iconName: "Percent" },
+    { title: "Income-based eligibility", description: "USDA uses household income limits that change by county and household size. Confirm the current USDA table for the property.", iconName: "Users" },
+    { title: "Check the map first", description: "Eligibility is the property census tract, not a city slogan. The USDA map changes.", iconName: "TrendingDown" },
   ],
   howItWorks: [
     { step: "1", title: "Eligibility Check", desc: "We verify two things: that the property location falls within a USDA-eligible area, and that your household income meets USDA guidelines (up to 115% of area median income). Many suburban Utah communities qualify: the boundaries may surprise you." },
@@ -268,11 +268,11 @@ const usdaLoans: SubServiceDefinition = {
   ],
   localizedIntro: (city, data) =>
     `USDA rural development loans offer zero-down financing in qualifying areas of ${city} and surrounding communities. With the median home price at ${fmtUsd(data.medianHomePrice)}, a USDA loan eliminates the need for a ${fmtUsd(Math.round(data.medianHomePrice * 0.035))}–${fmtUsd(Math.round(data.medianHomePrice * 0.05))} down payment entirely. Income eligibility in the ${city} area extends to households earning up to 115% of the area median income, approximately ${fmtUsd(Math.round(data.medianHouseholdIncome * 1.15))}, which covers a large share of ${city} working families. Many buyers assume USDA loans are only for farmland, but eligible areas include suburban communities throughout Utah, check the USDA eligibility map to see if ${city} qualifies.`,
-  localizedBenefits: (city, data) => [
-    `Zero down payment eliminates the ${fmtUsd(Math.round(data.medianHomePrice * 0.035))}–${fmtUsd(Math.round(data.medianHomePrice * 0.2))} upfront barrier to homeownership in ${city}`,
-    `Income limit of ~${fmtUsd(Math.round(data.medianHouseholdIncome * 1.15))} covers most ${city} working families`,
-    `Annual guarantee fee (~0.35%) is lower than FHA MIP (0.55%), saving you ${fmtUsd(Math.round(data.medianHomePrice * 0.002 / 12))}/month`,
-    `Closing costs can be financed or covered by seller contributions up to 6%`,
+  localizedBenefits: (city, _data) => [
+    `Zero down is available only when the ${city} property is on the current USDA map and household income fits`,
+    `Income limits are published by USDA by county and household size. Confirm the table; a median-income snapshot is not your limit.`,
+    `Guarantee fees differ from FHA MIP and conventional PMI. Confirm the current USDA schedule rather than a percent on this page.`,
+    `Closing costs may be financed or covered by seller contributions only up to program rules`,
   ],
   baseFaqs: [
     { q: "Is my area USDA-eligible?", a: "USDA eligibility is determined by the property's location, not the buyer's address. Many suburban Utah communities outside Salt Lake City's urban core qualify. The USDA eligibility map is updated periodically, and areas can be added or removed. We check the current map for every property you're considering and can provide a list of USDA-eligible neighborhoods in your target area." },
@@ -290,7 +290,7 @@ const jumboLoans: SubServiceDefinition = {
   parentHref: "/loans",
   metaTitle: (city) => `Jumbo Mortgage Loans in ${city}, Utah`,
   metaDescription: (city) =>
-    `Jumbo home loans in ${city}, UT for luxury properties exceeding conforming limits. Competitive rates and flexible terms. Ondo Real Estate.`,
+    `Jumbo home loans in ${city}, UT for properties that exceed the current FHFA conforming limit for the county. This is not a quote.`,
   features: [
     { title: "Higher Loan Amounts", description: "Finance luxury and high-value properties that exceed conforming loan limits: no arbitrary ceiling on your home purchase", iconName: "Building" },
     { title: "Competitive Rates", description: "Jumbo rates have narrowed significantly and are often comparable to conforming rates for well-qualified borrowers", iconName: "TrendingDown" },
@@ -305,15 +305,15 @@ const jumboLoans: SubServiceDefinition = {
   localizedIntro: (city, data) =>
     `For ${city} properties priced above conforming loan limits, a jumbo mortgage is the financing path when the purchase price exceeds FHFA limits. With a median home price of ${fmtUsd(data.medianHomePrice)}, ${city} includes both entry-level and high-value homes, and the high end requires specialized financing. Jumbo loans are used for ${city} neighborhoods where homes regularly exceed $750,000. Buyers in the ${data.schoolDistrict} area where home values can reach $1M+ work with jumbo lenders who can structure financing around complex income documentation common in ${city}'s tech and professional employment base.`,
   localizedBenefits: (city, _data) => [
-    `Finance ${city} luxury properties above the conforming limit with competitive rates`,
-    `Multiple term options: 30-year fixed, 7/1 ARM, 10/1 ARM, and interest-only for qualified borrowers`,
-    `Portfolio lending available for self-employed buyers and complex income situations in ${city}'s tech sector`,
-    `Second home and investment property jumbo options for ${city}-area properties`,
+    `Finance ${city} properties above the current FHFA conforming limit for that county. Look up the table; do not use a number from an old post.`,
+    `Term options can include 30-year fixed and ARMs. Interest-only is an overlay, not a promise.`,
+    `Portfolio lending may exist for self-employed buyers when documentation fits`,
+    `Second home and investment jumbo options depend on occupancy and LTV, not a slogan`,
   ],
   baseFaqs: [
     { q: "What is the current conforming loan limit?", a: "Conforming loan limits are set annually by the Federal Housing Finance Agency. In most Utah counties, the limit for a single-family home is updated each year. Properties priced above this limit require jumbo financing. We can confirm the current limit for your county and help you determine whether conforming or jumbo financing is the right path. Some high-cost areas may have higher conforming limits." },
     { q: "What are jumbo loan requirements?", a: "Jumbo loans typically require a minimum credit score of 700–720, a down payment of 10–20% (some lenders offer 10% down with strong reserves), 6–12 months of reserves after closing, and a debt-to-income ratio below 43%. Requirements vary by lender, portfolio lenders often have more flexibility on income documentation and reserve requirements." },
-    { q: "Are jumbo rates higher than conforming?", a: "Not necessarily. The rate spread between jumbo and conforming loans has narrowed significantly. Well-qualified borrowers with 20% or more down and strong credit often see jumbo rates within 0.125–0.25% of conforming rates. In some cases, jumbo rates are actually lower than conforming because portfolio lenders compete aggressively for high-net-worth clients." },
+    { q: "Are jumbo rates higher than conforming?", a: "Not necessarily. The spread between jumbo and conforming pricing changes. Compare Loan Estimates. We will not publish a promised spread such as 0.125–0.25%." },
     { q: "Can I get a jumbo loan for an investment property?", a: "Yes, but expect stricter requirements. Investment property jumbo loans typically require 25–30% down, credit scores of 720+, and 12 months of reserves. Rental income from the subject property may be used to qualify if supported by a lease or comparable rent analysis. We work with lenders experienced in investor jumbo financing." },
   ],
 }
@@ -350,7 +350,7 @@ const firstTimeBuyers: SubServiceDefinition = {
   ],
   baseFaqs: [
     { q: "How much do I need for a down payment?", a: "It depends on your loan type and whether you qualify for down payment assistance. FHA loans require 3.5% down, conventional loans start at 3%, VA loans require zero down, and USDA loans require zero down in eligible areas. Utah Housing Corporation offers grants and forgivable second mortgages that can cover your entire down payment and some closing costs. We help you identify every available program to minimize your out-of-pocket costs." },
-    { q: "What's the first step to buying a home?", a: "Get pre-approved for a mortgage before you start looking at homes. Pre-approval tells you exactly how much you can afford, which loan programs you qualify for, and what your estimated monthly payment will be. It also shows sellers that you're a serious, qualified buyer, which matters in competitive markets. We can connect you with lenders who specialize in first-time buyer programs." },
+    { q: "What's the first step to buying a home?", a: "Ask a lender about a documented pre-approval before you shop. A letter can clarify a budget range and which programs might fit. It does not tell you that you will qualify or lock a payment. Sellers often want to see a letter. We can connect you with lenders who work with first-time buyer programs." },
     { q: "How long does it take to buy a home?", a: "From pre-approval to closing typically takes 45–90 days, depending on how quickly you find a home and your loan type. The home search itself varies, some buyers find a home in a week, others take several months. Once you're under contract, expect 30–45 days to close for conventional and FHA loans, and 45–60 days for VA and USDA loans. We set realistic timelines based on your specific situation." },
     { q: "What costs beyond the down payment should I budget for?", a: "Plan for closing costs (2–4% of the purchase price), home inspection ($350–500), appraisal fee ($400–600), homeowner's insurance (first year paid at closing), and moving expenses. Some of these costs can be negotiated as seller concessions. We provide a detailed cost estimate early in the process so there are no surprises." },
   ],

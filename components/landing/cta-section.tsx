@@ -6,9 +6,8 @@ import { Button } from "@/components/ui/button"
  * Bottom-of-homepage conversion block.
  *
  * Landlords need a number before they'll book a call; renters just want the
- * listing search. Both paths are one click from here. The prior ZIP form
- * had no submit handler; we route ZIP intent to /search where the search
- * page owns the interaction.
+ * listing search. Both paths are one click from here. ZIP and keyword search
+ * live on /properties.
  */
 export function CTASection() {
   return (
@@ -38,7 +37,7 @@ export function CTASection() {
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost">
-            <Link href="/search" className="inline-flex items-center gap-2">
+            <Link href="/properties" className="inline-flex items-center gap-2">
               <Search className="h-4 w-4" aria-hidden="true" />
               Search rentals by ZIP
             </Link>

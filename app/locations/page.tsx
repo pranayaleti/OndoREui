@@ -10,9 +10,9 @@ import ConsultationCTA from "@/components/ConsultationCTA"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
-import { utahCitiesFromNorthOgdenToNephi, toCitySlug } from "@/lib/utah-cities"
+import { utahCitiesFromNorthOgdenToNephi, toCitySlug, groupUtahCitiesByCounty } from "@/lib/utah-cities"
 import { cityMarketData } from "@/lib/city-market-data"
-import { Home, Users, MapPin } from "lucide-react"
+import { Home, MapPin } from "lucide-react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -28,24 +28,6 @@ export const metadata: Metadata = {
   },
 }
 
-type CountyGroup = {
-  county: string
-  cities: typeof utahCitiesFromNorthOgdenToNephi
-}
-
-function groupByCounty(): CountyGroup[] {
-  const groups: Record<string, typeof utahCitiesFromNorthOgdenToNephi> = {}
-  for (const city of utahCitiesFromNorthOgdenToNephi) {
-    const county = city.county || "Other"
-    if (!groups[county]) groups[county] = []
-    groups[county].push(city)
-  }
-  const order = ["Weber", "Davis", "Salt Lake", "Utah", "Juab"]
-  return order
-    .filter((c) => groups[c])
-    .map((county) => ({ county, cities: groups[county] }))
-}
-
 function fmt(n: number): string {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M"
   if (n >= 1_000) return (n / 1_000).toFixed(0) + "K"
@@ -53,7 +35,7 @@ function fmt(n: number): string {
 }
 
 export default function LocationsPage() {
-  const countyGroups = groupByCounty()
+  const countyGroups = groupUtahCitiesByCounty()
   const totalCities = utahCitiesFromNorthOgdenToNephi.length
 
   return (
@@ -83,10 +65,7 @@ export default function LocationsPage() {
               <MapPin className="h-4 w-4 mr-2" /> {totalCities} Cities
             </Badge>
             <Badge variant="secondary" className="text-base py-2 px-4">
-              <Home className="h-4 w-4 mr-2" /> 4 Counties
-            </Badge>
-            <Badge variant="secondary" className="text-base py-2 px-4">
-              <Users className="h-4 w-4 mr-2" /> 600+ Service Pages
+              <Home className="h-4 w-4 mr-2" /> {countyGroups.length} Counties
             </Badge>
           </div>
 

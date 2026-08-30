@@ -17,7 +17,7 @@ function audienceFromQuery(value: string | null): ContactInquiryType | undefined
 export function ContactPageForm() {
   const params = useSearchParams()
   const initialInquiryType = audienceFromQuery(
-    params.get("audience") ?? params.get("intent"),
+    params?.get("audience") ?? params?.get("intent") ?? null,
   )
 
   return (

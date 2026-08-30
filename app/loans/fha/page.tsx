@@ -7,6 +7,11 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
+import { FHA_SNAPSHOT, LENDING_FACTS_AS_OF, FHA_COUNTY_LIMIT_NOTE } from "@/lib/content"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -18,10 +23,10 @@ export const metadata: Metadata = {
 }
 
 const benefits = [
-  { title: "3.5% Down Payment", description: "As low as 3.5% down with a 580+ credit score: one of the lowest available", icon: <DollarSign className="h-6 w-6" /> },
-  { title: "Flexible Credit Standards", description: "Scores as low as 500 accepted (with 10% down); ideal for buyers rebuilding credit", icon: <Shield className="h-6 w-6" /> },
-  { title: "Gift Funds Allowed", description: "100% of the down payment can come from family gifts: no seasoning required", icon: <Users className="h-6 w-6" /> },
-  { title: "Higher DTI Tolerance", description: "Debt-to-income up to 57% with compensating factors vs 43–45% for conventional", icon: <CheckCircle className="h-6 w-6" /> },
+  { title: "Low down payment options", description: `${FHA_SNAPSHOT.minDownPayment580Plus} down with 580+ under HUD policy; overlays often sit higher. ${FHA_SNAPSHOT.scoreNote}`, icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Flexible credit policy", description: FHA_SNAPSHOT.scoreNote, icon: <Shield className="h-6 w-6" /> },
+  { title: "Gift funds", description: FHA_SNAPSHOT.giftFunds, icon: <Users className="h-6 w-6" /> },
+  { title: "DTI with compensating factors", description: FHA_SNAPSHOT.dtiNote, icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
 export default function FHALoanPage() {
@@ -68,33 +73,36 @@ export default function FHALoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Credit Score</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• 580+ → 3.5% minimum down payment</li>
-                    <li>• 500–579 → 10% minimum down payment</li>
-                    <li>• Below 500 → not eligible for FHA</li>
+                    <li>• 580+ → {FHA_SNAPSHOT.minDownPayment580Plus} minimum down (HUD; overlays apply)</li>
+                    <li>• 500–579 → {FHA_SNAPSHOT.minDownPayment500To579} minimum down</li>
+                    <li>• {FHA_SNAPSHOT.scoreNote}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Mortgage Insurance Premium (MIP)</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Upfront MIP: 1.75% of loan amount (can be financed)</li>
-                    <li>• Annual MIP: 0.55–1.05% depending on term and LTV</li>
+                    <li>• Upfront MIP: {FHA_SNAPSHOT.upfrontMip} (as of {LENDING_FACTS_AS_OF})</li>
+                    <li>• Annual MIP: {FHA_SNAPSHOT.annualMipNote}</li>
                     <li>• MIP stays for life of loan if down payment &lt; 10%</li>
+                    <li>• How annual MIP actually ends vs conventional PMI: <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="underline underline-offset-4">MIP vs PMI</Link></li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold mb-3">Loan Limits (2024, Utah)</h4>
+                  <h4 className="text-lg font-semibold mb-3">Loan limits</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Salt Lake, Utah, Davis counties: $524,225 (1-unit)</li>
-                    <li>• Summit County (Park City area): $1,149,825 (high-cost)</li>
-                    <li>• Verify current limits at HUD.gov</li>
+                    <li>• FHA publishes county loan limits each year. Utah counties differ.</li>
+                    <li>• {FHA_COUNTY_LIMIT_NOTE}</li>
+                    <li>• Confirm the property county on HUD’s current limit lookup before you quote a number.</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Property Requirements</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Must be primary residence</li>
+                    <li>• Must be primary residence. A 2–4 unit house-hack is still occupancy of one unit — see{" "}
+                      <Link href="/blog/house-hacking-duplex-with-fha" className="underline underline-offset-4">FHA duplex house-hack</Link>.</li>
                     <li>• FHA appraisal required (stricter than conventional)</li>
                     <li>• Property must meet HUD minimum property standards</li>
+                    <li>• Condos: the project must be on HUD’s current roster or qualify for single-unit approval. See the <Link href="/blog/fha-condo-roster-project-approval" className="underline underline-offset-4">FHA condo roster guide</Link>. A listing that says “townhome” is not automatically a condo — <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="underline underline-offset-4">townhome vs condo HOA docs</Link>.</li>
                   </ul>
                 </div>
               </div>
@@ -116,21 +124,33 @@ export default function FHALoanPage() {
                   <h4 className="text-lg font-semibold mb-3 text-primary">Conventional Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• No upfront MIP</li>
-                    <li>• PMI removable at 80% LTV</li>
-                    <li>• Higher loan limits</li>
-                    <li>• Faster FHA appraisal turnaround without overlays</li>
+                    <li>• PMI can often be removed with enough equity (see conventional PMI rules)</li>
+                    <li>• Higher loan limits in many counties (confirm FHFA vs HUD tables)</li>
+                    <li>• Property standards that are typically less repair-heavy than HUD MPRs</li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6">Ready to Get Pre-Approved?</h3>
+              <h3 className="text-2xl font-bold mb-6">Compare FHA with conventional</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg"><Link href="/qualify">Get Pre-Approved</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/loans">Compare All Loan Types</Link></Button>
+                <Button asChild size="lg"><Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional guide</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">Hazard vs HO-3 vs HO-6</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/fha-condo-roster-project-approval">FHA condo roster</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">Townhome vs condo HOA docs</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/should-i-wait-for-20-percent-down">Wait for 20% vs buy sooner</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">MIP vs PMI exit</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/house-hacking-duplex-with-fha">FHA duplex house-hack</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA + FHA gift</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
               </div>
             </div>
+            <RelatedContent path="/loans/fha" />
+            <IsThisRightForMe table="purchase" programs={["fha", "conventional", "va"]} highlight="fha" />
+            <NextStepCta path="/loans/fha" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

@@ -8,6 +8,8 @@ import { SITE_NAME, SITE_URL } from "@/lib/site"
 import Loading from "@/components/loading"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { CalculatorAgentIntro } from "@/components/calculators/calculator-agent-intro"
+import { RelatedContent } from "@/components/content/related-content"
+import { CalculatorInputExplainer } from "@/components/content/calculator-input-explainer"
 
 const slugToComponent: Record<string, ComponentType> = {
   "owner-vs-self": dynamic(() => import("@/pages/calculators/owner-vs-self-calculator"), {
@@ -133,7 +135,7 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
   })
   const structuredData = [breadcrumbJsonLd, webAppJsonLd].filter(Boolean)
   return (
-    <>
+    <main className="min-h-screen">
       <SEO
         title={`${prettyTitle} Calculator`}
         description={`Use our ${prettyTitle.toLowerCase()} calculator to plan your Utah real estate decisions.`}
@@ -145,8 +147,14 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
           example before the interactive widget hydrates. Progressive enhancement:
           the client `<Component />` below re-computes with user input. */}
       <CalculatorAgentIntro slug={slug} />
+      <div className="container mx-auto max-w-3xl px-4">
+        <CalculatorInputExplainer slug={slug} />
+      </div>
       <Component />
-    </>
+      <div className="container mx-auto max-w-3xl px-4 py-8">
+        <RelatedContent path={`/calculators/${slug}`} title="Related education" />
+      </div>
+    </main>
   )
 }
 

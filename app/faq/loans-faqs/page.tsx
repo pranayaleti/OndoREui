@@ -5,6 +5,9 @@ import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, DollarSign } from "lucide-react"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import Script from "next/script"
 import type { Metadata } from "next"
 
@@ -34,7 +37,7 @@ export default function LoansFAQPage() {
     {
       question: "Should I fix my credit before I buy a home?",
       answer:
-        "Small improvements to credit can sometimes save you tens of thousands over the life of a loan. Before you wait a full year, have us or your lender model your current score vs. a slightly higher score. In some cases buying now with a refinance later makes more sense than waiting; in other cases, a short credit tune‑up is worth it.",
+        "Small credit changes can change pricing. We will not claim a dollar savings on this page. Before you wait a full year, ask a loan officer to model your current file versus a slightly stronger score. Buying now versus waiting is file-specific.",
     },
     {
       question: "What monthly payment should I target?",
@@ -44,32 +47,197 @@ export default function LoansFAQPage() {
     {
       question: "What types of home loans do you offer in Utah?",
       answer:
-        "We offer conventional, FHA, VA, USDA, and jumbo loans. Our loan officers help you find the best program based on your financial situation, property location, and goals.",
+        "We originate conventional, FHA, VA, USDA, and jumbo loans when the property and file fit. A loan officer matches guidelines to your documentation, not a slogan about the 'best' program.",
     },
     {
       question: "How do I get pre-approved for a mortgage?",
       answer:
-        "Start by completing our online application or contacting our loan officers. We'll review your income, credit, and assets to provide a pre-approval letter that strengthens your buying power.",
+        "Start by completing our application or contacting a loan officer. We review income, credit, and assets to determine whether we can issue a pre-approval letter. That letter is not a commitment to lend.",
     },
     {
       question: "What are current Utah mortgage rates?",
       answer:
-        "Mortgage rates change daily and vary by loan type, credit score, and down payment. Contact our loan officers for current rates and personalized quotes based on your situation.",
+        "Mortgage rates change daily and vary by loan type, credit score, and down payment. A news 30-year average is not your Loan Estimate. Contact a loan officer for a current pricing discussion. See why your quote is not the 30-year average. This page is not a quote.",
     },
     {
       question: "How long does the loan process take?",
       answer:
-        "Typically 30-45 days from application to closing, though this can vary based on loan type and complexity. We work efficiently to meet your timeline and closing date.",
+        "Many first purchases close about 21–45 days after acceptance when the contract and file cooperate. That is a range, not a promise. Pre-approval, AUS findings, and clear-to-close are different documents. See how long a first purchase usually takes.",
+    },
+    {
+      question: "Can I get a mortgage if my income changes every month?",
+      answer:
+        "Often yes if you can document a pattern. Underwriters typically average overtime, bonus, commission, or 1099 income over a history rather than using the highest recent month. See the variable-income hub and the 1099 documentation checklist on this site.",
+    },
+    {
+      question: "Can I use gift funds for a down payment?",
+      answer:
+        "Often, when the donor is eligible and the paper trail is complete. Program rules differ for FHA, conventional, and VA. Do not move large cash without asking how it must be sourced.",
     },
     {
       question: "Do you offer first-time home buyer programs?",
       answer:
-        "Yes, we work with various first-time buyer programs including down payment assistance, low down payment options, and special rate programs available in Utah.",
+        "Yes. We work with first-time buyer programs including down payment assistance and low down payment options available in Utah. Terms are published by the agency or investor, not as a special rate on this page.",
     },
     {
       question: "Can I refinance my existing Utah mortgage?",
       answer:
-        "Absolutely! We offer rate and term refinancing, cash-out refinancing, and streamline refinancing for FHA and VA loans to help you lower payments or access equity.",
+        "You can ask about rate-and-term, cash-out, and FHA or VA streamline refinances when your file and the property fit. A refinance is not a promise of lower payments.",
+    },
+    {
+      question: "What is VA residual income?",
+      answer:
+        "Residual income is cash left after the proposed housing payment, counted debts, and estimated utilities. It is a separate VA test from DTI. Utah files typically use the West region table — confirm the current published table rather than a blog dollar figure.",
+    },
+    {
+      question: "How do I know if USDA is even available?",
+      answer:
+        "Run the property address on USDA’s published map tool and test household income against the current area limit. A city name is not a map result. See the USDA map eligibility guide on this site.",
+    },
+    {
+      question: "Why would a file be declined after pre-approval?",
+      answer:
+        "A pre-approval is not a commitment to lend. Typical later fails include a job change, undocumented large deposits, new debt, or a property that does not meet the program’s standards.",
+    },
+    {
+      question: "If I just went 1099, can that income count yet?",
+      answer:
+        "Usually not as a full average. Remaining W-2 wages and a documented history in the same occupation can still matter. Last month’s first invoice does not replace tax-year history. See the just-went-1099 guide and the variable-income hub.",
+    },
+    {
+      question: "Does a $0 student-loan IDR payment mean $0 in DTI?",
+      answer:
+        "Not automatically. Investors calculate a payment from the credit report, a servicer statement, or a percent of the balance. SAVE and other federal plans have been in flux. Confirm the current investor rule — see the student-loans DTI guide.",
+    },
+    {
+      question: "How do FHA MIP and conventional PMI actually end?",
+      answer:
+        "They are different products. Post-2013 FHA annual MIP is timed from original LTV (11 years or life of loan). Conventional borrower-paid PMI can often come off with equity under the Homeowners Protection Act. See the MIP vs PMI guide. This is not the question of whether to wait for 20% down.",
+    },
+    {
+      question: "Is a streamline refinance a no-docs refinance?",
+      answer:
+        "No. FHA Streamline and VA IRRRL reduce documentation. Occupancy, payment history, and a net-benefit test still apply. Cash-out is generally not a streamline. See the streamline guide and break-even math.",
+    },
+    {
+      question: "Do large deposits in the last 60 days have to be sourced?",
+      answer:
+        "Yes. Purchase files typically include about 60 days of statements. Large deposits need a paper trail (payroll, documented gift, sale of an asset, or transfer between your accounts). Undocumented cash is a common condition fail.",
+    },
+    {
+      question: "Should I wait until I can put 20% down?",
+      answer:
+        "Not automatically. Waiting can avoid conventional PMI; buying sooner with PMI is a cash-and-timeline trade. How MIP vs PMI later ends, and how PMI is cancelled on an existing loan, are different questions. See the wait-for-20% guide.",
+    },
+    {
+      question: "What is the difference between a pre-approval letter, AUS findings, and clear to close?",
+      answer:
+        "A letter is a snapshot for shopping. AUS (often DU or LPA) is an engine result for a program and credit file. CTC is an underwriter sign-off on this property as of that date. None of them is a guarantee you will fund. See the stages guide.",
+    },
+    {
+      question: "Can I buy a car after I am pre-approved?",
+      answer:
+        "A new auto loan usually appears on the next credit pull and changes DTI. Findings can flip. Ask before you sign. See the new-auto-loan-during-underwriting guide.",
+    },
+    {
+      question: "Is HOA part of DTI?",
+      answer:
+        "Required HOA dues are housing expense (front-end) and then sit in back-end with other counted debts. A modest note payment plus a large HOA can still fail the ratio. See the DTI + HOA guide.",
+    },
+    {
+      question: "What will a first mortgage conversation ask — and promise?",
+      answer:
+        "Expect occupancy, income type, debts, assets, and credit authorization when you are ready. A conversation does not approve you, lock a rate, or quote APR. See the qualify page.",
+    },
+    {
+      question: "Is DSCR the same as a full-doc rental loan?",
+      answer:
+        "No. DSCR typically qualifies on the property’s rent versus the payment. Full-doc qualifies the borrower with DTI and a rental worksheet. Occupancy still has to match use. See the DSCR vs full-doc guide.",
+    },
+    {
+      question: "What does a Utah REPC financing deadline do to my loan?",
+      answer:
+        "Due diligence and financing/appraisal are separate contract clocks, usually 5:00 p.m. Mountain Time. A lender timeline is not a REPC deadline. Missing written notice can put earnest money at risk. Not legal advice — see the REPC deadline guide.",
+    },
+    {
+      question: "Will paying a medical collection raise my mortgage score?",
+      answer:
+        "Not as a promise. Bureau reporting of medical collections changed in 2022–2023, but many mortgage files still use classic FICO on a tri-merge. See the medical-collections guide. This is not a score-raise claim.",
+    },
+    {
+      question: "Can I get a mortgage with no traditional credit?",
+      answer:
+        "Sometimes, if you can document alternative references such as rent and utilities. That is not the same as weak traditional credit, and it is not assigned by who you are. See the alternative-credit guide.",
+    },
+    {
+      question: "If I sell a home with a VA loan, is entitlement restored?",
+      answer:
+        "Typically when the VA loan is paid in full and the property is disposed of under current VA rules, used entitlement is restored. That is different from keeping a VA loan and buying another. This FAQ does not quote entitlement dollars. See the entitlement-restoration guide and look up current VA rules.",
+    },
+    {
+      question: "Does a CPA letter replace tax returns for a self-employed mortgage?",
+      answer:
+        "Usually no. Agency files are moved by returns and transcripts. A CPA letter and YTD P&L can support that stack. See the CPA letter vs tax returns guide.",
+    },
+    {
+      question: "Is a no-closing-cost refinance free?",
+      answer:
+        "Usually the lender credit that covers fees is paid for with a higher note rate. Prepaids can still show as cash. Run break-even. See the no-closing-cost refinance guide.",
+    },
+    {
+      question: "What does a tri-merge credit report show?",
+      answer:
+        "Equifax, Experian, and TransUnion together. Mortgage files often use classic FICO and the middle score, not a monitoring-app number. See the tri-merge guide.",
+    },
+    {
+      question: "Is earnest money extra on top of down payment?",
+      answer:
+        "It is usually credited at closing toward funds you already owe. Timing still matters: it leaves your account when the REPC is executed. See earnest vs down vs closing costs.",
+    },
+    {
+      question: "If I still live in my house, is the rental I buy a second home?",
+      answer:
+        "Usually no. A house you will rent as a business is typically investment occupancy. A duplex you will live in is a house-hack. Do not relabel occupancy for pricing. See first-rental occupancy.",
+    },
+    {
+      question: "Do compensating factors guarantee AUS will approve?",
+      answer:
+        "No. They are documented strengths that can appear in findings or a manual underwrite. They are not a second score. See compensating factors in findings.",
+    },
+    {
+      question: "Should a veteran in a rural tract always take USDA?",
+      answer:
+        "No. VA, USDA, and FHA are different tests (entitlement, map and household income, MIP). This FAQ does not pick a program. See USDA vs VA vs FHA.",
+    },
+    {
+      question: "Is an ITIN the same as an SSN for an agency mortgage?",
+      answer:
+        "Often no. Many agency and FHA files expect a valid SSN for credit and AUS. An ITIN-only file is typically a Non-QM overlay conversation. Citizenship is a legal eligibility topic, not a national-origin preference. See the ITIN documentation guide.",
+    },
+    {
+      question: "Does biweekly extra principal beat a refinance?",
+      answer:
+        "They are different tools. Biweekly is one extra payment a year on the current note. A refinance changes rate, term, and costs. This FAQ does not quote interest saved. See biweekly vs refinance and break-even.",
+    },
+    {
+      question: "If I locked and rates drop, do I automatically get the lower rate?",
+      answer:
+        "No. A lock holds the quoted rate for the window. A float-down, if it exists, is a written lock-desk policy. Distinct from extending an expiring lock. See what a lock does if rates drop.",
+    },
+    {
+      question: "Is a mortgage cosigner the same as a co-borrower?",
+      answer:
+        "If someone is on the note, they are underwritten as a borrower. Title (the deed) is a different signature from the note. A parent who only gifts is usually neither. See cosign vs co-borrower.",
+    },
+    {
+      question: "Should I close a credit card before I apply?",
+      answer:
+        "Closing a card can raise utilization by shrinking available credit. AUS reads the tri-merge. This FAQ does not quote a score change. See closing a credit card before you apply.",
+    },
+    {
+      question: "Can I cash-out refinance a house I just bought with cash?",
+      answer:
+        "Sometimes, under an agency delayed-financing exception — a selling-guide exception, not a statute. Distinct from HELOC seasoning on a financed purchase. See delayed financing after a cash purchase.",
     },
   ]
 
@@ -149,6 +317,9 @@ export default function LoansFAQPage() {
                 </Link>
               </div>
             </div>
+            <RelatedContent path="/faq/loans-faqs" title="Guides that answer these in depth" />
+            <NextStepCta path="/faq/loans-faqs" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </main>

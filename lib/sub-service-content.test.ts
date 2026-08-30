@@ -18,3 +18,28 @@ describe("maintenance coordination claims", () => {
     expect(blob).toMatch(/24\/7 emergency line/i)
   })
 })
+
+describe("loan program copy", () => {
+  it("does not promise best rates, monthly PMI savings, or a hardcoded conforming limit", () => {
+    const data = cityMarketData.Lehi
+    expect(data).toBeDefined()
+    const slugs = ["conventional", "va", "usda", "jumbo"] as const
+    const blob = slugs
+      .map((slug) => {
+        const def = subServiceDefinitions[slug]
+        return [
+          ...def.features.map((f) => `${f.title} ${f.description}`),
+          ...def.localizedBenefits("Lehi", data),
+          ...def.baseFaqs.map((f) => `${f.q} ${f.a}`),
+          def.localizedIntro("Lehi", data),
+          def.metaDescription("Lehi"),
+        ].join("\n")
+      })
+      .join("\n")
+    expect(blob).not.toMatch(/best rates/i)
+    expect(blob).not.toMatch(/lowest interest rates/i)
+    expect(blob).not.toMatch(/saving hundreds/i)
+    expect(blob).not.toMatch(/\$766,550/)
+    expect(blob).not.toMatch(/\$200–500 per month/)
+  })
+})

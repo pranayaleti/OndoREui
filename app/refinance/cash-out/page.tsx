@@ -6,6 +6,10 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import type { Metadata } from "next"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 
 export const metadata: Metadata = {
   title: "Cash-Out Refinance in Utah | Ondo Real Estate",
@@ -67,6 +71,21 @@ export default function CashOutRefinancePage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out</Link>
+              </Button>
+              <Button key="/blog/cash-out-to-buy-a-rental" asChild variant="outline" size="sm">
+                <Link href="/blog/cash-out-to-buy-a-rental">Cash-out to buy a rental</Link>
+              </Button>
+              <Button key="/blog/delayed-financing-after-cash-purchase" asChild variant="outline" size="sm">
+                <Link href="/blog/delayed-financing-after-cash-purchase">Delayed financing</Link>
+              </Button>
+              <Button key="/blog/heloc-after-year-two-vs-cash-out" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-after-year-two-vs-cash-out">HELOC after year two</Link>
+              </Button>
+              <Button key="/blog/cross-collateral-equity-to-buy-another-house" asChild variant="outline" size="sm">
+                <Link href="/blog/cross-collateral-equity-to-buy-another-house">Cross-collateral education</Link>
+              </Button>
               <Button key="/refinance/rate-term" asChild variant="outline" size="sm">
                 <Link href="/refinance/rate-term">Rate-and-term refinance</Link>
               </Button>
@@ -85,6 +104,10 @@ export default function CashOutRefinancePage() {
                 <Link href="/contact">Speak with an advisor</Link>
               </Button>
             </div>
+            <RelatedContent path="/refinance/cash-out" />
+            <IsThisRightForMe table="equity" highlight="refinance" />
+            <NextStepCta path="/refinance/cash-out" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

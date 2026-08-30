@@ -291,23 +291,38 @@ const CALCULATOR_DETAILS: Record<string, CalculatorMarkdownDetail> = {
       "Loan term (years)",
       "Loan program (conventional, FHA, VA, USDA)",
     ],
-    notes: ["Front-end and back-end DTI thresholds vary by program; consult a loan officer for a binding qualification."],
+    notes: [
+      "Front-end and back-end DTI thresholds vary by program; consult a loan officer for a binding qualification.",
+      "Monthly debts means counted obligations on the credit report (and other debts the investor requires), not a DIY list. HOA is usually housing, not this box.",
+      "Variable income is typically averaged. Do not enter last month’s best deposit as if it were base pay.",
+    ],
   },
   income: {
     formula:
       "Required monthly income = target PITI ÷ front-end DTI limit. Multiply by 12 for annual income and account for existing debts against the back-end limit.",
     inputs: ["Target home price (USD)", "Down payment (USD)", "Loan term (years)", "Interest rate (%)", "Monthly debts (USD)"],
+    notes: [
+      "This calculator cannot see overtime history, 1099 expenses, or a down year. Enter a documented average.",
+      "A typed rate is not a quote, a lock, or APR.",
+    ],
   },
   "closing-cost": {
     formula:
       "Total closing costs ≈ origination + title + escrow + prepaids (property tax, homeowners insurance, interest) + government recording fees. Ondo defaults reflect Utah averages; verify with your lender's Loan Estimate.",
     inputs: ["Home price (USD)", "Down payment (USD)", "Loan program", "Prepaid months for tax and insurance"],
+    notes: [
+      "Utah title and escrow fees vary by title company and county. Treat calculator output as a range.",
+      "Origination can appear as a fee or a lender credit. Prepaids often dwarf origination on a first purchase.",
+    ],
   },
   refinance: {
     formula:
-      "Break-even months = closing costs ÷ (old payment − new payment). If you plan to hold the home longer than the break-even horizon, the refinance likely pays back.",
-    inputs: ["Current balance", "Current rate", "New rate", "Remaining term", "Closing costs"],
-    notes: ["Break-even ignores tax benefits and opportunity cost of the closing outlay."],
+      "Break-even months = closing costs ÷ (old payment − new payment). Holding past that horizon is the usual test — it is still not a promise the refinance saves money after tax, moving, or a second refinance.",
+    inputs: ["Current balance", "Current rate", "New rate", "Remaining term", "Closing costs (include points and origination)"],
+    notes: [
+      "Break-even ignores tax benefits and opportunity cost of the closing outlay.",
+      "Put discount points and origination in closing costs. A lender credit reduces the numerator.",
+    ],
   },
   "home-sale": {
     formula:

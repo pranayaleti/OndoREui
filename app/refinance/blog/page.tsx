@@ -67,8 +67,17 @@ export default function RefinanceBlogPage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">When a lower rate still loses</Link>
+              </Button>
+              <Button key="/blog/no-closing-cost-refinance-rate-credit-tradeoff" asChild variant="outline" size="sm">
+                <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff">“No closing cost” refinance</Link>
+              </Button>
               <Button key="/blog/mortgage-paydown-hacks" asChild variant="outline" size="sm">
                 <Link href="/blog/mortgage-paydown-hacks">Mortgage pay-down hacks</Link>
+              </Button>
+              <Button key="/blog/biweekly-extra-principal-vs-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/biweekly-extra-principal-vs-refinance">Biweekly vs refinance</Link>
               </Button>
               <Button key="/blog/rent-vs-own-calculator-guide" asChild variant="outline" size="sm">
                 <Link href="/blog/rent-vs-own-calculator-guide">Rent vs own</Link>

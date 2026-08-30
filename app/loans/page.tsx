@@ -10,36 +10,20 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle, DollarSign, Shield, Users, Home } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 
 export const metadata: Metadata = {
-  title: "Utah Home Loans & Mortgages | Conventional, FHA, VA, USDA | Salt Lake City, Lehi, Provo",
-  description: "Get pre-approved for Utah home loans including conventional, FHA, VA, and USDA mortgages. Expert loan officers serving Salt Lake City, Lehi, Provo, and surrounding areas.",
-  keywords: [
-    // Core
-    "Utah home loans",
-    "Utah mortgages",
-    "mortgage lender Utah",
-    "mortgage pre-approval Utah",
-    "Utah mortgage rates",
-    // Programs
-    "conventional loans Utah",
-    "FHA loans Utah",
-    "VA loans Utah",
-    "USDA loans Utah",
-    "jumbo loans Utah",
-    "refinance Utah",
-    // Geos
-    "Salt Lake City mortgages",
-    "Lehi home loans",
-    "Provo mortgages",
-    "Utah mortgage rates",
-  ],
+  title: "Utah Home Loans & Mortgages | Ondo Real Estate",
+  description: "Compare conventional, FHA, VA, and USDA education for Utah buyers. Talk with a loan officer. This is not a credit decision or a quote.",
   alternates: {
     canonical: `${SITE_URL}/loans/`,
   },
   openGraph: {
-    title: "Utah Home Loans & Mortgages | Conventional, FHA, VA, USDA",
-    description: "Get pre-approved for Utah home loans including conventional, FHA, VA, and USDA mortgages.",
+    title: "Utah Home Loans & Mortgages | Ondo Real Estate",
+    description: "Compare conventional, FHA, VA, and USDA education for Utah buyers. Talk with a loan officer. This is not a credit decision or a quote.",
     url: `${SITE_URL}/loans/`,
     images: [
       {
@@ -56,35 +40,53 @@ const loanTypes = [
   {
     icon: <Home className="h-8 w-8" />,
     title: "Conventional Loans",
-    description: "Traditional mortgages with competitive rates for qualified borrowers with good credit.",
-    features: ["3% down payment", "No PMI with 20% down", "Flexible terms"],
+    href: "/loans/conventional",
+    description: "Conforming mortgages for borrowers who meet credit, down payment, and DTI guidelines.",
+    features: ["Some products start around 3% down", "PMI can often be removed with enough equity", "Waiting for 20% vs buying sooner is a cash-and-timeline trade"],
   },
   {
     icon: <Shield className="h-8 w-8" />,
     title: "FHA Loans",
-    description: "Government-backed loans with lower down payment requirements and flexible credit standards.",
-    features: ["3.5% down payment", "Lower credit requirements", "Gift funds allowed"],
+    href: "/loans/fha",
+    description: "Government-insured loans with lower down payment options and more flexible credit overlays, subject to MIP.",
+    features: ["3.5% down at 580+ (HUD policy; overlays apply)", "Gift funds often allowed", "Primary residence"],
   },
   {
     icon: <Users className="h-8 w-8" />,
     title: "VA Loans",
-    description: "Exclusive benefits for veterans, active military, and eligible spouses with no down payment required.",
-    features: ["0% down payment", "No PMI required", "Competitive rates"],
+    href: "/loans/va",
+    description: "For eligible veterans, active-duty service members, and some surviving spouses. Zero down only with remaining entitlement.",
+    features: ["0% down when eligible", "No monthly PMI", "Funding fee may apply or be waived"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "USDA Loans",
-    description: "Rural development loans for eligible properties in designated rural areas with no down payment.",
-    features: ["0% down payment", "Low interest rates", "Rural area eligibility"],
+    href: "/loans/usda",
+    description: "Rural development loans for eligible properties and income limits on the USDA map.",
+    features: ["0% down when eligible", "Income and map tests", "Primary residence"],
+  },
+  {
+    icon: <DollarSign className="h-8 w-8" />,
+    title: "Jumbo Loans",
+    href: "/loans/jumbo",
+    description: "Financing above the current FHFA conforming limit for the property county. Limits change annually.",
+    features: ["Look up this year’s FHFA county table", "Investor overlays on credit and reserves", "Not a single Utah-wide dollar cap"],
+  },
+  {
+    icon: <DollarSign className="h-8 w-8" />,
+    title: "Non-QM (bank-statement, DSCR)",
+    href: "/learn/non-qm",
+    description: "When agency tax-return income does not match cash flow. Bank-statement, DSCR, and asset-depletion are different stacks — not a cheaper conventional shortcut.",
+    features: ["Bank-statement deposit analysis", "DSCR on investment property rent", "Asset-depletion overlays"],
   },
 ]
 
 export default function LoansPage() {
   return (
-    <>
+    <main className="min-h-screen">
       <SEO
         title="Utah Home Loans & Mortgages | Conventional, FHA, VA, USDA"
-        description="Get pre-approved for Utah home loans including conventional, FHA, VA, and USDA mortgages."
+        description="Compare conventional, FHA, VA, and USDA education for Utah buyers. Talk with a loan officer. This is not a credit decision."
         pathname="/loans/"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={[
@@ -100,29 +102,31 @@ export default function LoansPage() {
           }),
         ]}
       />
-      <PageBanner
+          <PageBanner
         title="Utah Home Loans & Mortgages"
-        subtitle="Get pre-approved for the best mortgage rates and loan programs across Utah"
+        subtitle="Compare conventional, FHA, VA, and USDA education. Then talk with a loan officer. This is not a credit decision."
         backgroundImage="/modern-office-building.png"
       />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Find the Perfect Loan for Your Utah Home</h2>
+              <h2 className="text-3xl font-bold mb-4">Match the program to the file, not a slogan</h2>
             <p className="text-xl text-foreground/70">
-              Our experienced loan officers help you navigate the mortgage process and find the best 
-              loan program with competitive rates and terms that fit your financial situation.
+              Loan officers help you compare guidelines, documentation, and cash to close. Pricing is file-specific.
+              Nothing on this page is a quote, a lock, or an approval.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {loanTypes.map((loan, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
+            {loanTypes.map((loan) => (
+              <Card key={loan.href} className="p-6 hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-center mb-4">
                     <div className="text-primary mr-4">{loan.icon}</div>
-                    <CardTitle className="text-xl">{loan.title}</CardTitle>
+                    <CardTitle className="text-xl">
+                      <Link href={loan.href} className="hover:text-primary">{loan.title}</Link>
+                    </CardTitle>
                   </div>
                   <CardDescription className="text-foreground/70">{loan.description}</CardDescription>
                 </CardHeader>
@@ -140,6 +144,8 @@ export default function LoansPage() {
             ))}
           </div>
 
+          <IsThisRightForMe table="purchase" />
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-2xl font-bold mb-6">Why Choose Our Loan Services?</h3>
@@ -147,8 +153,8 @@ export default function LoansPage() {
                 <div className="flex items-start">
                   <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold">Competitive Rates</h4>
-                    <p className="text-foreground/70">Access to multiple lenders and loan programs for the best rates</p>
+                    <h4 className="font-semibold">Program comparison</h4>
+                    <p className="text-foreground/70">Access to multiple programs so we can compare guidelines, not a single advertised rate</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -188,19 +194,24 @@ export default function LoansPage() {
             </div>
           </div>
         </div>
+        <div className="container mx-auto max-w-4xl px-4 pb-8">
+          <RelatedContent path="/loans" title="Education that belongs with these programs" />
+          <NextStepCta path="/loans" />
+          <LendingDisclaimer />
+        </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Pre-Approved?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Start your mortgage application today and get pre-approved for your Utah home purchase.
+          <h2 className="text-3xl font-bold mb-4">Ready to talk through a file?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-foreground/80">
+            Start a conversation. Pre-approval is a document review, not a guarantee you will close.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-card text-primary hover:bg-muted">
-              <Link href="/contact">Apply Now</Link>
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link href="/qualify">Talk with a loan officer</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-foreground hover:bg-card hover:text-primary">
+            <Button asChild size="lg" variant="outline">
               <Link href="/calculators">Calculate Payment</Link>
             </Button>
           </div>
@@ -214,7 +225,7 @@ export default function LoansPage() {
           '@context': 'https://schema.org',
           '@type': ['Service'],
           name: 'Home Loan Services',
-          description: 'Utah home loans including conventional, FHA, VA, and USDA mortgages with competitive rates.',
+          description: 'Utah home loans including conventional, FHA, VA, and USDA mortgages. Education first; this is not a quote.',
           provider: {
             '@type': ['Organization','LocalBusiness','RealEstateAgent'],
             name: SITE_NAME,
@@ -246,17 +257,17 @@ export default function LoansPage() {
       />
 
       {/* Centralized FAQs live on /faq */}
-      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Questions about loans or refinancing?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-foreground/70">
             Visit our Help Center for detailed FAQs on loans, payments, escrow, and assistance options.
           </p>
-          <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-card hover:text-black">
+          <Button asChild size="lg" variant="outline">
             <Link href="/faq/loans-faqs">View Loans FAQs</Link>
           </Button>
         </div>
       </section>
-    </>
+    </main>
   )
 }

@@ -86,3 +86,30 @@ export function findCityByZip(zip: string): UtahCity | undefined {
 
 export const allCitySlugs = utahCitiesFromNorthOgdenToNephi.map((c) => toCitySlug(c.name))
 export const allZips = utahCitiesFromNorthOgdenToNephi.flatMap((c) => c.zips)
+
+/** Display order for Wasatch Front + Juab city directories. Unknown counties sort last A–Z. */
+export const UTAH_COUNTY_ORDER = ["Weber", "Davis", "Salt Lake", "Utah", "Juab"] as const
+
+export type UtahCountyGroup = {
+  county: string
+  cities: UtahCity[]
+}
+
+export function groupUtahCitiesByCounty(): UtahCountyGroup[] {
+  const groups: Record<string, UtahCity[]> = {}
+  for (const city of utahCitiesFromNorthOgdenToNephi) {
+    const county = city.county || "Other"
+    if (!groups[county]) groups[county] = []
+    groups[county].push(city)
+  }
+  const orderedKnown = UTAH_COUNTY_ORDER.filter((county) => groups[county]).map((county) => ({
+    county,
+    cities: groups[county],
+  }))
+  const known = new Set<string>(UTAH_COUNTY_ORDER)
+  const extras = Object.keys(groups)
+    .filter((county) => !known.has(county))
+    .sort((a, b) => a.localeCompare(b))
+    .map((county) => ({ county, cities: groups[county] }))
+  return [...orderedKnown, ...extras]
+}

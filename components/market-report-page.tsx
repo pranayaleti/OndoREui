@@ -52,8 +52,13 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
   if (!market) {
     return (
       <div className="container mx-auto px-4 py-20 text-center">
-        <h1 className="text-3xl font-bold mb-4">Market Report Coming Soon</h1>
-        <p className="text-foreground/70">Market data for {city.name} is being compiled.</p>
+        <h1 className="text-3xl font-bold mb-4">No city snapshot on file</h1>
+        <p className="mb-4 text-foreground/70">
+          We do not publish an Ondo market snapshot for {city.name}. That is not a coming-soon placeholder.
+        </p>
+        <Link href="/market-reports/" className="text-primary underline-offset-4 hover:underline">
+          Browse city reports
+        </Link>
       </div>
     )
   }

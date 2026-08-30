@@ -33,18 +33,18 @@ export const buySellFaqBank: CityFaq[] = [
 ]
 
 export const loansFaqBank: CityFaq[] = [
-  { q: "Which loan programs are available in Utah?", a: "Conventional, FHA, VA, USDA, jumbo, and specialty options. We match your profile and goals to the best-fit program." },
-  { q: "How does mortgage pre-approval work?", a: "We review credit, income, assets, and debts, then issue a pre-approval letter that strengthens offers and clarifies budget." },
+  { q: "Which loan programs are available in Utah?", a: "Conventional, FHA, VA, USDA, jumbo, and specialty options. We match your profile and goals to a program that may fit. That is not a promise of approval or of a particular rate." },
+  { q: "How does mortgage pre-approval work?", a: "We review credit, income, assets, and debts, then may issue a pre-approval letter if the file supports it. That is not a commitment to lend." },
   { q: "What’s the difference between rate and APR?", a: "Rate is the interest cost; APR includes most lender fees, providing a more complete cost comparison across loans." },
-  { q: "How much are closing costs?", a: "Typically 2–3% of the purchase price. We can negotiate seller credits or explore lender options to reduce cash to close." },
+  { q: "How much are closing costs?", a: "Often a few percent of the purchase price for lender, title, and prepaid items. Confirm the amount on your Loan Estimate rather than a marketing range." },
   { q: "What credit score do I need?", a: "Minimums vary by program. Stronger credit typically improves pricing. We’ll suggest steps to optimize credit before locking." },
   { q: "Can I use gift funds for my down payment?", a: "Often yes, especially with FHA and conventional loans. Your lender will outline documentation needed for compliant gift sourcing." },
   { q: "How is DTI calculated?", a: "Debt-to-income compares monthly debts vs. gross income. Most programs prefer DTI under 45%, though exceptions exist." },
-  { q: "I’m self-employed, what documents are required?", a: "Expect two years of returns, YTD P&L, and bank statements. Some programs allow alternative documentation with conditions." },
+  { q: "I’m self-employed, what documents are required?", a: "Expect tax returns, transcripts, YTD profit and loss, and bank statements on many files. Some Non-QM programs allow alternative documentation. See /learn/variable-income. This is not a promise that any stack will be accepted." },
   { q: "Should I buy points or do a buydown?", a: "Discount points can lower rate for the life of the loan; temporary buydowns reduce payments for 1–3 years. We model both scenarios." },
   { q: "How long is a rate lock?", a: "Common lock periods are 30–60 days. We select a lock that covers your closing timeline with flexibility for extensions if needed." },
   { q: "When does PMI apply and how can I remove it?", a: "PMI generally applies with <20% down on conventional loans and can be removed as equity grows, per investor guidelines." },
-  { q: "Can I refinance later?", a: "Yes. You can refinance to lower rate, change term, or access equity. We monitor markets and notify you when it’s advantageous." },
+  { q: "Can I refinance later?", a: "You can ask about refinancing later to change rate, term, or equity access. We do not promise to notify you when a refinance is advantageous." },
 ]
 
 export function getServiceFaqBank(service: ServiceKey): CityFaq[] {

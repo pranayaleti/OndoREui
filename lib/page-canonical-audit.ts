@@ -28,7 +28,7 @@ function routeFromPageFile(appDir: string, file: string): string {
 }
 
 function hasCanonicalMarker(content: string): boolean {
-  return /canonical|buildPageMetadata|pageCanonicalMetadata|toCanonicalPageUrl/.test(content)
+  return /canonical|buildPageMetadata|pageCanonicalMetadata|toCanonicalPageUrl|articleMetadata/.test(content)
 }
 
 function hasNoindex(content: string): boolean {

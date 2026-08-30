@@ -508,7 +508,7 @@ const DSCRCalculator: React.FC = () => {
               <ul className="space-y-1 list-disc list-inside">
                 <li>1.20-1.25: Minimum for most lenders</li>
                 <li>1.25-1.35: Preferred by many lenders</li>
-                <li>1.35+: Excellent, best rates available</li>
+                <li>1.35+: Stronger coverage; pricing is still file-specific, not a “best rate”</li>
                 <li>&lt; 1.0: Negative cash flow, unlikely to qualify</li>
                 <li>Requirements vary by lender and property type</li>
               </ul>

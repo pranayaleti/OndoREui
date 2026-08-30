@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { buySellFaqBank, getHomepageOwnerFaqs, propertyManagementFaqBank } from "./service-faq"
+import { buySellFaqBank, getHomepageOwnerFaqs, loansFaqBank, propertyManagementFaqBank } from "./service-faq"
 
 describe("getHomepageOwnerFaqs", () => {
   it("returns the first six items from the property-management FAQ bank", () => {
@@ -20,6 +20,15 @@ describe("getHomepageOwnerFaqs", () => {
       .join(" ")
     expect(blob).not.toMatch(/7–21 days/)
     expect(blob).not.toMatch(/handled immediately/i)
+  })
+})
+
+describe("loansFaqBank", () => {
+  it("does not promise a pre-approval letter or a refinance alert", () => {
+    const blob = loansFaqBank.map((faq) => `${faq.q} ${faq.a}`).join(" ")
+    expect(blob).not.toMatch(/then issue a pre-approval/i)
+    expect(blob).not.toMatch(/we monitor markets and notify you/i)
+    expect(blob).toMatch(/may issue a pre-approval/)
   })
 })
 

@@ -63,9 +63,16 @@ const libraryLinks = [
     label: "Open calculators",
   },
   {
+    icon: BookOpen,
+    title: "Mortgage learning hub",
+    description: "Variable income, loan programs, first-time buyers, and FAQs. Education, not a quote.",
+    href: "/learn",
+    label: "Open learning hub",
+  },
+  {
     icon: PlayCircle,
-    title: "Video library",
-    description: "Walkthroughs for owners, tenants, investors, and the platform.",
+    title: "Guides and academy",
+    description: "Written training, calculators, and a live walkthrough. Not a placeholder video wall.",
     href: "/video-library",
     label: "Watch videos",
   },

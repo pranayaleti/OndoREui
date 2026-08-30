@@ -1,24 +1,31 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import { QualificationChat } from "@/components/leads/qualification-chat";
-import { Suspense } from "react";
+"use client"
 
-function QualifyContent() {
-  const params = useSearchParams();
-  const token = params?.get("token");
-  const type = (params?.get("type") ?? "property") as "property" | "website";
-  if (!token) return <p className="text-center text-gray-500 mt-20">Invalid qualification link.</p>;
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center max-w-md">
-        <h1 className="text-2xl font-bold mb-2">Just a few quick questions</h1>
-        <p className="text-gray-500 mb-8">Answer below to help us match you with the perfect property.</p>
-        <QualificationChat sessionToken={token} leadType={type} />
-      </div>
-    </div>
-  );
+import { useSearchParams } from "next/navigation"
+import { QualificationChat } from "@/components/leads/qualification-chat"
+
+function leadTypeFromParam(value: string | null): "property" | "website" {
+  if (value === "website") return "website"
+  return "property"
 }
 
-export default function QualifyPage() {
-  return <Suspense><QualifyContent /></Suspense>;
+export default function QualifyTokenChat() {
+  const params = useSearchParams()
+  const token = params?.get("token") ?? null
+  if (!token) return null
+
+  const leadType = leadTypeFromParam(params?.get("type") ?? null)
+
+  return (
+    <section className="border-b border-border bg-muted py-10" aria-labelledby="qualify-token-heading">
+      <div className="container mx-auto flex max-w-md flex-col items-center px-4 text-center">
+        <h2 id="qualify-token-heading" className="text-2xl font-bold text-foreground">
+          Continue this qualification link
+        </h2>
+        <p className="mb-8 mt-2 text-foreground/70">
+          This chat is tied to a specific lead link. It is not a mortgage approval or a rate lock.
+        </p>
+        <QualificationChat sessionToken={token} leadType={leadType} />
+      </div>
+    </section>
+  )
 }

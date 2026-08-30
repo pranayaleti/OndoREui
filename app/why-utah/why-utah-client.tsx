@@ -171,7 +171,7 @@ export default function WhyUtahPage() {
             </li>
           </ul>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/search" className="bg-primary hover:bg-primary text-foreground px-6 py-3 rounded-lg font-semibold">
+            <Link href="/properties" className="bg-primary hover:bg-primary text-foreground px-6 py-3 rounded-lg font-semibold">
               See Available Homes
             </Link>
             <Link href="/contact" className="bg-card/10 hover:bg-card/20 text-foreground px-6 py-3 rounded-lg font-semibold border border-white/20">

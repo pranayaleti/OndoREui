@@ -6,6 +6,9 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import type { Metadata } from "next"
+import { RelatedContent } from "@/components/content/related-content"
+import { NextStepCta } from "@/components/content/next-step-cta"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = {
   title: "Rate-and-Term Refinance in Utah | Ondo Real Estate",
@@ -67,6 +70,15 @@ export default function RateTermRefinancePage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">When a lower rate still loses</Link>
+              </Button>
+              <Button key="/blog/fha-va-streamline-refinance-less-docs" asChild variant="outline" size="sm">
+                <Link href="/blog/fha-va-streamline-refinance-less-docs">FHA / VA streamline</Link>
+              </Button>
+              <Button key="/blog/no-closing-cost-refinance-rate-credit-tradeoff" asChild variant="outline" size="sm">
+                <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff">“No closing cost” refi</Link>
+              </Button>
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>
               </Button>
@@ -85,6 +97,9 @@ export default function RateTermRefinancePage() {
                 <Link href="/contact">Speak with an advisor</Link>
               </Button>
             </div>
+            <RelatedContent path="/refinance/rate-term" />
+            <NextStepCta path="/refinance/rate-term" />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

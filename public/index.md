@@ -10,7 +10,7 @@ canonical: https://www.ondorealestate.com/
 
 ## What Ondo does
 
-- **Buy a home**, buyer representation across the Wasatch Front, first-time buyer programs, and mortgage origination in-house.
+- **Buy a home**, buyer representation across the Wasatch Front, agent-led search (this website lists rentals, not a public for-sale feed), and mortgage origination in-house. Not a commitment to lend.
 - **Sell a home**, pricing strategy (CMA), listing marketing, and negotiation through close.
 - **Rent and manage**, full-service property management for Utah landlords: screening, rent collection, maintenance, owner reporting.
 - **Invest**, curated fractional and commercial real estate opportunities with per-deal detail pages.
