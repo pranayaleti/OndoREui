@@ -1,22 +1,19 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import { ContactLeadForm, CONTACT_INQUIRY_OPTIONS } from "@/components/contact/contact-lead-form"
-import type { ContactInquiryType } from "@/lib/leads-api"
-
-function audienceFromQuery(value: string | null): ContactInquiryType | undefined {
-  if (!value) return undefined
-  return CONTACT_INQUIRY_OPTIONS.find((option) => option.value === value)?.value
-}
+import { ContactLeadForm } from "@/components/contact/contact-lead-form"
+import { publicAudienceFromQuery } from "@/lib/leads-api"
 
 /**
- * Reads `audience` or `intent` from the URL so /buy and /sell can deep-link
- * into /contact with buyer or seller already selected. Static export cannot
- * do this on the server, so this stays a client wrapper.
+ * Reads `audience` or `intent` from the URL so city/owner/renter CTAs can
+ * deep-link into /contact with a public help option already selected.
+ * Legacy short names (renter, owner, agent, vendor, current_client) map to
+ * the five public radios. Static export cannot do this on the server, so
+ * this stays a client wrapper.
  */
 export function ContactPageForm() {
   const params = useSearchParams()
-  const initialInquiryType = audienceFromQuery(
+  const initialInquiryType = publicAudienceFromQuery(
     params?.get("audience") ?? params?.get("intent") ?? null,
   )
 

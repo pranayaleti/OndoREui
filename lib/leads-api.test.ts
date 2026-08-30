@@ -70,4 +70,37 @@ describe("submitContactLead", () => {
     const [, init] = fetchMock.mock.calls[0]
     expect(JSON.parse(String(init.body)).inquiryType).toBe("buyer")
   })
+
+  it("passes the five public help-audience values through to the backend", async () => {
+    vi.stubEnv("NEXT_PUBLIC_BACKEND_BASE_URL", "http://localhost:3030")
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, message: "ok", leadId: "abc" }),
+    })
+    vi.stubGlobal("fetch", fetchMock)
+    vi.resetModules()
+    const { submitContactLead } = await import("./leads-api")
+
+    await submitContactLead({
+      name: "Pat Tenant",
+      email: "pat@example.com",
+      source: "website",
+      inquiryType: "tenant_looking_to_rent",
+    })
+
+    const [, init] = fetchMock.mock.calls[0]
+    expect(JSON.parse(String(init.body)).inquiryType).toBe("tenant_looking_to_rent")
+  })
+
+  it("maps legacy audience query params onto the five public radios", async () => {
+    vi.resetModules()
+    const { publicAudienceFromQuery } = await import("./leads-api")
+    expect(publicAudienceFromQuery("renter")).toBe("tenant_looking_to_rent")
+    expect(publicAudienceFromQuery("owner")).toBe("owner_rental_services")
+    expect(publicAudienceFromQuery("agent")).toBe("agent_referrals")
+    expect(publicAudienceFromQuery("vendor")).toBe("vendor_maintenance")
+    expect(publicAudienceFromQuery("current_client")).toBe("current_resident")
+    expect(publicAudienceFromQuery("buyer")).toBeUndefined()
+    expect(publicAudienceFromQuery("seller")).toBeUndefined()
+  })
 })

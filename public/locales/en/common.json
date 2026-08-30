@@ -453,6 +453,7 @@
   },
   "contactForm": {
     "title": "Get in touch",
+    "helpTitle": "Get the help you need",
     "subtitle": "Send us a message and we'll get back to you within one business day.",
     "successTitle": "Message sent!",
     "successBody": "We'll be in touch within one business day.",
@@ -464,20 +465,12 @@
     "phoneLabel": "Phone",
     "phonePlaceholder": "(555) 123-4567",
     "messageLabel": "Message",
-    "messagePlaceholder": "How can we help?",
+    "messagePlaceholder": "Tell us a bit more (optional)",
     "sending": "Sending...",
     "sendMessage": "Send message",
     "audience": {
-      "legend": "How can we help?",
-      "required": "Please tell us which one describes you.",
-      "buyer": "I'm buying a home",
-      "seller": "I'm selling a home",
-      "owner": "I own a rental (interested in management)",
-      "renter": "I'm looking for a home to rent",
-      "agent": "I'm a real estate agent (referrals)",
-      "currentClient": "I'm a current owner or resident",
-      "vendor": "I'm a vendor",
-      "other": "Something else (loans, notary, other)"
+      "legend": "How can we help you?",
+      "required": "Please tell us which one describes you."
     }
   },
   "consultationModal": {

@@ -7,14 +7,18 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { SITE_PHONE } from "@/lib/site"
 import {
+  CONTACT_INQUIRY_TYPES,
   isContactInquiryType,
+  isPublicContactInquiryType,
   submitContactLead,
   type ContactInquiryType,
   type ContactLeadSource,
 } from "@/lib/leads-api"
+import {
+  CONTACT_AUDIENCE_OPTIONS,
+} from "@/lib/contact-audiences"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { useAntiSpam } from "@/lib/anti-spam"
 import {
@@ -24,32 +28,22 @@ import {
   webmcpFormAttrs,
   webmcpParamAttrs,
 } from "@/lib/webmcp-attrs"
+import { cn } from "@/lib/utils"
 import { CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 const CONTACT_TOOL_DESCRIPTION =
-  "Submit a contact or lead inquiry to Ondo Real Estate for property management, investments, or leasing in Utah. Requires name and email; optional phone and message."
+  "Submit a contact or lead inquiry to Ondo Real Estate. Requires name and email; optional phone, message, and inquiryType (tenant_looking_to_rent, agent_referrals, owner_rental_services, vendor_maintenance, current_resident)."
 
 const DEFAULT_SOURCE: ContactLeadSource = "website"
 
 const WEBMCP_TOOL_NAME = "submit_contact_lead"
 
-// Audience list maps 1:1 to how sales routes leads (buyer → brokerage,
-// seller → listing, owner + agent → PM ops, renter → leasing,
-// current_client → support, vendor → operations, other → catch-all).
-export const CONTACT_INQUIRY_OPTIONS: ReadonlyArray<{
-  value: ContactInquiryType
-  labelKey: string
-}> = [
-  { value: "buyer", labelKey: "contactForm.audience.buyer" },
-  { value: "seller", labelKey: "contactForm.audience.seller" },
-  { value: "owner", labelKey: "contactForm.audience.owner" },
-  { value: "renter", labelKey: "contactForm.audience.renter" },
-  { value: "agent", labelKey: "contactForm.audience.agent" },
-  { value: "current_client", labelKey: "contactForm.audience.currentClient" },
-  { value: "vendor", labelKey: "contactForm.audience.vendor" },
-  { value: "other", labelKey: "contactForm.audience.other" },
-]
+const INQUIRY_TYPE_WEBMCP_DESCRIPTION =
+  "Which audience describes the visitor: tenant_looking_to_rent, agent_referrals, owner_rental_services, vendor_maintenance, or current_resident."
+
+/** @deprecated Use CONTACT_AUDIENCE_OPTIONS. Kept so existing imports keep compiling. */
+export const CONTACT_INQUIRY_OPTIONS = CONTACT_AUDIENCE_OPTIONS
 
 /**
  * After a successful submit we send the visitor somewhere useful for their
@@ -59,17 +53,22 @@ export const CONTACT_INQUIRY_OPTIONS: ReadonlyArray<{
  */
 function postSubmitPathFor(inquiryType: ContactInquiryType | ""): string | null {
   switch (inquiryType) {
+    case "tenant_looking_to_rent":
     case "renter":
       return "/properties"
+    case "agent_referrals":
     case "agent":
       return "/affiliate"
+    case "owner_rental_services":
     case "owner":
     case "seller":
       return "/contact#book-a-call"
     case "buyer":
       return "/get-matched"
-    case "current_client":
+    case "vendor_maintenance":
     case "vendor":
+    case "current_resident":
+    case "current_client":
     case "other":
     case "":
       return null
@@ -91,7 +90,7 @@ type ContactLeadFormProps = {
   defaultInquiryType?: ContactInquiryType
   /**
    * Pre-selects an audience radio without hiding the question. Use when the
-   * visitor arrived with intent (`/contact?audience=buyer`) but may still
+   * visitor arrived with intent (`/contact?audience=owner`) but may still
    * change their mind.
    */
   initialInquiryType?: ContactInquiryType
@@ -114,14 +113,19 @@ export function ContactLeadForm({
   const router = useRouter()
   const instanceId = useId().replace(/:/g, "")
   const fieldId = (name: string) => `contact-${name}-${instanceId}`
+  const showAudience = !defaultInquiryType
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: prefillMessage,
   })
+  const initialPublic =
+    initialInquiryType && isPublicContactInquiryType(initialInquiryType)
+      ? initialInquiryType
+      : ""
   const [inquiryType, setInquiryType] = useState<ContactInquiryType | "">(
-    defaultInquiryType ?? initialInquiryType ?? "",
+    defaultInquiryType ?? initialPublic,
   )
   const [inquiryError, setInquiryError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -162,11 +166,13 @@ export function ContactLeadForm({
     const phone = String(data.get("phone") ?? formData.phone).trim()
     const message = String(data.get("message") ?? formData.message).trim()
     const honeypotFilled = String(data.get(honeypotProps.name) ?? "").trim() !== ""
+    const rawInquiry = String(data.get("inquiryType") ?? "").trim()
+    const fromForm = isContactInquiryType(rawInquiry) ? rawInquiry : ""
 
     // Audience is only required when the form actually shows the radios.
     // Persona-scoped embeds pass `defaultInquiryType` and don't render them.
     const effectiveInquiry: ContactInquiryType | "" =
-      defaultInquiryType ?? inquiryType
+      defaultInquiryType ?? (fromForm || inquiryType)
     if (!defaultInquiryType && !effectiveInquiry) {
       setInquiryError(t("contactForm.audience.required"))
       return
@@ -245,9 +251,8 @@ export function ContactLeadForm({
             message: { type: "string", description: "Message or question for the team (optional)" },
             inquiryType: {
               type: "string",
-              enum: CONTACT_INQUIRY_OPTIONS.map((o) => o.value),
-              description:
-                "Which audience the visitor identifies with (buyer, seller, owner, renter, agent, current_client, vendor, other). Helps sales route the lead.",
+              enum: [...CONTACT_INQUIRY_TYPES],
+              description: INQUIRY_TYPE_WEBMCP_DESCRIPTION,
             },
           },
           required: ["name", "email"],
@@ -268,7 +273,7 @@ export function ContactLeadForm({
           const phone = input?.phone != null ? String(input.phone).trim() : undefined
           const message = input?.message != null ? String(input.message).trim() : undefined
           const rawInquiry = input?.inquiryType != null ? String(input.inquiryType).trim() : ""
-          const inquiryValue = CONTACT_INQUIRY_OPTIONS.find((o) => o.value === rawInquiry)?.value
+          const inquiryValue = isContactInquiryType(rawInquiry) ? rawInquiry : undefined
           if (!name || !email) {
             return { content: [{ type: "text", text: JSON.stringify({ error: "name and email are required" }) }] }
           }
@@ -318,10 +323,16 @@ export function ContactLeadForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="dark:text-foreground">{t('contactForm.title')}</CardTitle>
-        <CardDescription>
-          {t('contactForm.subtitle')}
-        </CardDescription>
+        {showAudience ? (
+          <h2 className="text-xl font-extrabold uppercase tracking-wide text-foreground dark:text-foreground">
+            {t("contactForm.helpTitle")}
+          </h2>
+        ) : (
+          <CardTitle className="dark:text-foreground">{t("contactForm.title")}</CardTitle>
+        )}
+        {!showAudience ? (
+          <CardDescription>{t("contactForm.subtitle")}</CardDescription>
+        ) : null}
       </CardHeader>
       <CardContent>
         {submitStatus === "success" && (
@@ -354,36 +365,67 @@ export function ContactLeadForm({
         >
           {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
           <input {...honeypotProps} />
-          {!defaultInquiryType && (
-            <fieldset className="space-y-2">
-              <legend className="text-sm font-medium text-foreground">
+          {showAudience ? (
+            <fieldset
+              className="space-y-3"
+              aria-required="true"
+              aria-invalid={inquiryError ? "true" : undefined}
+              aria-describedby={inquiryError ? fieldId("inquiry-error") : undefined}
+            >
+              <legend className="text-base text-foreground/80">
                 {t("contactForm.audience.legend")}{" "}
-                <span aria-hidden="true" className="text-primary">*</span>
+                <span aria-hidden="true" className="text-orange-600">*</span>
               </legend>
-              <RadioGroup
-                value={inquiryType}
-                onValueChange={(value) => {
-                  if (!isContactInquiryType(value)) return
-                  setInquiryType(value)
-                  setInquiryError(null)
-                }}
-                aria-required="true"
-                aria-invalid={inquiryError ? "true" : undefined}
-                aria-describedby={inquiryError ? fieldId("inquiry-error") : undefined}
-                className="grid gap-2 sm:grid-cols-2"
-              >
-                {CONTACT_INQUIRY_OPTIONS.map((option) => {
+              <div className="grid gap-2">
+                {CONTACT_AUDIENCE_OPTIONS.map((option) => {
                   const inputId = fieldId(`inquiry-${option.value}`)
+                  const selected = inquiryType === option.value
                   return (
-                    <div key={option.value} className="flex items-center gap-2">
-                      <RadioGroupItem value={option.value} id={inputId} />
-                      <Label htmlFor={inputId} className="cursor-pointer font-normal">
-                        {t(option.labelKey)}
-                      </Label>
-                    </div>
+                    <label
+                      key={option.value}
+                      htmlFor={inputId}
+                      className={cn(
+                        "relative flex cursor-pointer items-center gap-4 rounded-xl border-2 px-4 py-4 text-left",
+                        "transition-colors motion-reduce:transition-none",
+                        "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-orange-600 has-[:focus-visible]:ring-offset-2",
+                        selected
+                          ? "border-transparent bg-gradient-to-r from-orange-500 to-red-800 text-white shadow-md"
+                          : "border-orange-500 bg-card text-foreground hover:bg-orange-50/60 dark:hover:bg-orange-950/30",
+                      )}
+                    >
+                      <input
+                        id={inputId}
+                        type="radio"
+                        name="inquiryType"
+                        value={option.value}
+                        checked={selected}
+                        onChange={() => {
+                          setInquiryType(option.value)
+                          setInquiryError(null)
+                        }}
+                        className="sr-only"
+                        {...webmcpParamAttrs(INQUIRY_TYPE_WEBMCP_DESCRIPTION, "inquiryType")}
+                      />
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
+                          selected ? "border-white bg-white" : "border-orange-500 bg-transparent",
+                        )}
+                      >
+                        {selected ? (
+                          <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-orange-500 to-red-800" />
+                        ) : null}
+                      </span>
+                      <span className={cn("text-base leading-snug", selected && "font-bold")}>
+                        {option.before}
+                        <strong className="font-bold">{option.emphasis}</strong>
+                        {option.after}
+                      </span>
+                    </label>
                   )
                 })}
-              </RadioGroup>
+              </div>
               {inquiryError && (
                 <p
                   id={fieldId("inquiry-error")}
@@ -394,6 +436,8 @@ export function ContactLeadForm({
                 </p>
               )}
             </fieldset>
+          ) : (
+            <input type="hidden" name="inquiryType" value={defaultInquiryType} />
           )}
           <div className="space-y-2">
             <Label htmlFor={fieldId("name")}>{t('contactForm.nameLabel')}</Label>

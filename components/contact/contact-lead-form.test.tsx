@@ -90,14 +90,15 @@ describe("ContactLeadForm", () => {
 
   it("shows every audience option and requires one before submitting", async () => {
     render(<ContactLeadForm />)
-    expect(screen.getByLabelText(/I'm buying a home/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/I'm selling a home/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/I own a rental/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/looking for a home to rent/i)).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /get the help you need/i })).toBeInTheDocument()
+    expect(screen.getByText(/how can we help you/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/tenant looking for a home to rent/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/real estate agent/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/current owner or resident/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/vendor/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Something else/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/rental property/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/vendor, offering maintenance/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/current resident/i)).toBeInTheDocument()
+    expect(screen.queryByLabelText(/I'm buying a home/i)).not.toBeInTheDocument()
+    expect(screen.queryByLabelText(/Something else/i)).not.toBeInTheDocument()
 
     advancePastAntiSpamDwell()
     fillRequiredFields()
@@ -110,20 +111,20 @@ describe("ContactLeadForm", () => {
   it("submits with the selected inquiryType and source='website' by default", async () => {
     render(<ContactLeadForm />)
     advancePastAntiSpamDwell()
-    fireEvent.click(screen.getByLabelText(/I own a rental/i))
+    fireEvent.click(screen.getByLabelText(/rental property/i))
     fillRequiredFields()
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
 
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
     expect(submitContactLead).toHaveBeenCalledWith(
-      expect.objectContaining({ source: "website", inquiryType: "owner" }),
+      expect.objectContaining({ source: "website", inquiryType: "owner_rental_services" }),
     )
   })
 
   it("submits with the given source prop", async () => {
     render(<ContactLeadForm source="popup" />)
     advancePastAntiSpamDwell()
-    fireEvent.click(screen.getByLabelText(/I own a rental/i))
+    fireEvent.click(screen.getByLabelText(/rental property/i))
     fillRequiredFields()
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
 
@@ -133,7 +134,8 @@ describe("ContactLeadForm", () => {
 
   it("hides the audience question when defaultInquiryType is set, and tags the submit with it", async () => {
     render(<ContactLeadForm defaultInquiryType="renter" />)
-    expect(screen.queryByLabelText(/I own a rental/i)).not.toBeInTheDocument()
+    expect(screen.queryByLabelText(/rental property/i)).not.toBeInTheDocument()
+    expect(screen.queryByRole("heading", { name: /get the help you need/i })).not.toBeInTheDocument()
     advancePastAntiSpamDwell()
     fillRequiredFields()
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
@@ -144,35 +146,45 @@ describe("ContactLeadForm", () => {
     )
   })
 
-  it("submits buyer and seller inquiry types", async () => {
-    render(<ContactLeadForm />)
-    advancePastAntiSpamDwell()
-    fireEvent.click(screen.getByLabelText(/I'm buying a home/i))
-    fillRequiredFields()
-    fireEvent.click(screen.getByRole("button", { name: /send/i }))
-
-    await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
-    expect(submitContactLead).toHaveBeenCalledWith(
-      expect.objectContaining({ inquiryType: "buyer" }),
-    )
+  it("submits each public help-audience value", async () => {
+    const cases = [
+      [/tenant looking for a home to rent/i, "tenant_looking_to_rent"],
+      [/real estate agent/i, "agent_referrals"],
+      [/vendor, offering maintenance/i, "vendor_maintenance"],
+      [/current resident/i, "current_resident"],
+    ] as const
+    for (const [label, inquiryType] of cases) {
+      vi.mocked(submitContactLead).mockClear()
+      nowSpy.mockReturnValue(NOW_BASE)
+      const { unmount } = render(<ContactLeadForm />)
+      advancePastAntiSpamDwell()
+      fireEvent.click(screen.getByLabelText(label))
+      fillRequiredFields()
+      fireEvent.click(screen.getByRole("button", { name: /send/i }))
+      await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
+      expect(submitContactLead).toHaveBeenCalledWith(
+        expect.objectContaining({ inquiryType }),
+      )
+      unmount()
+    }
   })
 
   it("pre-selects initialInquiryType without hiding the audience radios", async () => {
-    render(<ContactLeadForm initialInquiryType="seller" />)
-    const seller = screen.getByLabelText(/I'm selling a home/i)
-    expect(seller).toBeChecked()
-    expect(screen.getByLabelText(/I own a rental/i)).toBeInTheDocument()
+    render(<ContactLeadForm initialInquiryType="owner_rental_services" />)
+    const owner = screen.getByLabelText(/rental property/i)
+    expect(owner).toBeChecked()
+    expect(screen.getByLabelText(/tenant looking for a home to rent/i)).toBeInTheDocument()
     advancePastAntiSpamDwell()
     fillRequiredFields()
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
 
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
     expect(submitContactLead).toHaveBeenCalledWith(
-      expect.objectContaining({ inquiryType: "seller" }),
+      expect.objectContaining({ inquiryType: "owner_rental_services" }),
     )
   })
 
-  it("routes renters to /properties after a successful submit when routeAfterSubmit is on", async () => {
+  it("routes tenants to /properties after a successful submit when routeAfterSubmit is on", async () => {
     vi.useFakeTimers({ shouldAdvanceTime: true })
     // Re-establish the Date.now spy on top of fake timers, since useFakeTimers
     // installs its own mock. Order matters: fake timers first, then our spy.
@@ -181,7 +193,7 @@ describe("ContactLeadForm", () => {
     try {
       render(<ContactLeadForm routeAfterSubmit />)
       advancePastAntiSpamDwell()
-      fireEvent.click(screen.getByLabelText(/looking for a home to rent/i))
+      fireEvent.click(screen.getByLabelText(/tenant looking for a home to rent/i))
       fillRequiredFields()
       fireEvent.click(screen.getByRole("button", { name: /send/i }))
 
@@ -193,14 +205,13 @@ describe("ContactLeadForm", () => {
     }
   })
 
-  it("routes buyers to /get-matched after a successful submit when routeAfterSubmit is on", async () => {
+  it("routes buyers to /get-matched after a successful submit when defaultInquiryType is buyer", async () => {
     vi.useFakeTimers({ shouldAdvanceTime: true })
     nowSpy.mockRestore()
     nowSpy = vi.spyOn(Date, "now").mockReturnValue(NOW_BASE)
     try {
-      render(<ContactLeadForm routeAfterSubmit />)
+      render(<ContactLeadForm routeAfterSubmit defaultInquiryType="buyer" />)
       advancePastAntiSpamDwell()
-      fireEvent.click(screen.getByLabelText(/I'm buying a home/i))
       fillRequiredFields()
       fireEvent.click(screen.getByRole("button", { name: /send/i }))
 
@@ -219,7 +230,7 @@ describe("ContactLeadForm", () => {
     try {
       render(<ContactLeadForm />)
       advancePastAntiSpamDwell()
-      fireEvent.click(screen.getByLabelText(/looking for a home to rent/i))
+      fireEvent.click(screen.getByLabelText(/tenant looking for a home to rent/i))
       fillRequiredFields()
       fireEvent.click(screen.getByRole("button", { name: /send/i }))
 

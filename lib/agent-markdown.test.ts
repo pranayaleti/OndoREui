@@ -28,10 +28,15 @@ describe("first-party Markdown twins", () => {
     expect(md).toContain(LLMS_DISCLOSURES_BLOCK)
   })
 
-  it("contact brief lists channels and both WebMCP tools", () => {
+  it("contact brief lists channels, both WebMCP tools, and help-audience inquiry types", () => {
     const md = buildContactMarkdown()
     expect(md).toContain("get_company_contact_info")
     expect(md).toContain("submit_contact_lead")
+    expect(md).toContain("tenant_looking_to_rent")
+    expect(md).toContain("agent_referrals")
+    expect(md).toContain("owner_rental_services")
+    expect(md).toContain("vendor_maintenance")
+    expect(md).toContain("current_resident")
     expect(md).toContain("info@ondorealestate.com")
     expect(md).toContain(LLMS_DISCLOSURES_BLOCK)
   })

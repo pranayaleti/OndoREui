@@ -35,7 +35,7 @@ canonical: https://www.ondorealestate.com/contact/
 ## WebMCP tools on this page
 
 - **`get_company_contact_info`**, read-only. Returns the fields listed above.
-- **`submit_contact_lead`**, requires explicit user confirmation. Submits a lead for property management, investment, leasing, or general inquiries; captured UTM/click attribution is attached automatically.
+- **`submit_contact_lead`**, requires explicit user confirmation. Submits a lead for property management, leasing, vendor, resident, or agent-referral inquiries. Optional `inquiryType`: `tenant_looking_to_rent`, `agent_referrals`, `owner_rental_services`, `vendor_maintenance`, `current_resident`. Captured UTM/click attribution is attached automatically.
 
 AI agents must not auto-submit `submit_contact_lead`. The declarative WebMCP form on the HTML page enforces user confirmation.
 

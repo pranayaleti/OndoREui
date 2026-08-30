@@ -68,7 +68,7 @@
     },
     {
       "name": "contact_form",
-      "description": "Submit a lead or inquiry (property management, buying, selling, loans, notary).",
+      "description": "Submit a lead or inquiry. Ask which audience applies (tenant looking to rent, agent referrals, owner rental services, vendor maintenance, current resident).",
       "url": "https://ondorealestate.com/contact/",
       "access": "confirmed-submit"
     }

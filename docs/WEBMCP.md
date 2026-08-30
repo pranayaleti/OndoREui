@@ -23,7 +23,7 @@ Shared attribute helpers live in `lib/webmcp-attrs.ts`.
 
 Descriptions are written so agents know when to use each tool and what to expect. Keep them under Chrome’s recommended budgets (30 chars for names, 150 for param descriptions, 500 for tool descriptions, 1.5K per output).
 
-- **submit_contact_lead**: For property management, investments, or leasing inquiries in Utah; requires name and email. User confirmation is required. When the user’s tab has captured marketing params (UTMs / click ids from the landing URL), those are attached automatically on submit and stored on the lead in Supabase (`website_leads.attribution`).
+- **submit_contact_lead**: For property management, leasing, vendor, resident, or agent-referral inquiries in Utah; requires name and email. Optional `inquiryType` is one of `tenant_looking_to_rent`, `agent_referrals`, `owner_rental_services`, `vendor_maintenance`, `current_resident`. User confirmation is required. When the user’s tab has captured marketing params (UTMs / click ids from the landing URL), those are attached automatically on submit and stored on the lead in Supabase (`website_leads.attribution`).
 - **get_company_contact_info**: Read-only; returns company name, URL, phone, address, business hours, Calendly scheduling URL (`calendlyUrl`), and topic-specific emails (e.g. investors, notary, mortgage).
 - **list_investment_opportunities**: Read-only; returns open/coming-soon/fully-funded deals with slug, title, location, asset class, min investment, target return, hold period, status, and a short description. Optional `status` filter.
 - **get_investment_opportunity**: Read-only; returns full details for one deal by slug (title, location, description, highlights, risk factors, etc.).
