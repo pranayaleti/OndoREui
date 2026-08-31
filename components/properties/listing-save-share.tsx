@@ -1,12 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Heart, Share2 } from "lucide-react"
+import { Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
-import { getFavoritePropertyIds, toggleFavoriteProperty } from "@/lib/api/properties"
 import { accessibility } from "@/lib/accessibility"
-import { cn } from "@/lib/utils"
+import { ListingFavoriteButton } from "@/components/properties/listing-favorite-button"
+import { useState } from "react"
 
 type ListingSaveShareProps = {
   publicId: string
@@ -33,36 +32,7 @@ async function shareListing(title: string, url: string): Promise<"shared" | "cop
 
 export function ListingSaveShare({ publicId, title }: ListingSaveShareProps) {
   const { toast } = useToast()
-  const [saved, setSaved] = useState(false)
   const [status, setStatus] = useState("")
-
-  useEffect(() => {
-    let cancelled = false
-    void getFavoritePropertyIds().then((ids) => {
-      if (!cancelled) setSaved(ids.includes(publicId))
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [publicId])
-
-  const onToggleSave = async () => {
-    try {
-      const next = await toggleFavoriteProperty(publicId)
-      const isSaved = next.includes(publicId)
-      setSaved(isSaved)
-      const message = isSaved ? "Saved to your list" : "Removed from your list"
-      setStatus(message)
-      accessibility.announceToScreenReader(message)
-      toast({ title: message })
-    } catch {
-      toast({
-        title: "Could not save",
-        description: "Try again in a moment.",
-        variant: "destructive",
-      })
-    }
-  }
 
   const onShare = async () => {
     const url = typeof window !== "undefined" ? window.location.href : ""
@@ -87,16 +57,7 @@ export function ListingSaveShare({ publicId, title }: ListingSaveShareProps) {
       <p className="sr-only" aria-live="polite">
         {status}
       </p>
-      <Button
-        type="button"
-        variant="outline"
-        className="min-h-11"
-        aria-pressed={saved}
-        onClick={() => void onToggleSave()}
-      >
-        <Heart className={cn("h-4 w-4", saved && "fill-current")} aria-hidden="true" />
-        {saved ? "Saved" : "Save"}
-      </Button>
+      <ListingFavoriteButton publicId={publicId} />
       <Button type="button" variant="outline" className="min-h-11" onClick={() => void onShare()}>
         <Share2 className="h-4 w-4" aria-hidden="true" />
         Share

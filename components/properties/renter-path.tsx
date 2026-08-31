@@ -1,8 +1,8 @@
 import {
   RENTER_PATH_FAIR_HOUSING,
   RENTER_PATH_HEADING,
-  RENTER_PATH_STEPS,
   renterPathIntro,
+  renterPathSteps,
   type RenterPathVariant,
 } from "@/lib/renter-path"
 import { cn } from "@/lib/utils"
@@ -14,6 +14,7 @@ type RenterPathProps = {
 export function RenterPath({ variant = "listings" }: RenterPathProps) {
   const intro = renterPathIntro(variant)
   const compact = variant === "listing-detail"
+  const steps = renterPathSteps(variant)
 
   return (
     <section
@@ -43,7 +44,7 @@ export function RenterPath({ variant = "listings" }: RenterPathProps) {
             : "grid gap-3 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-border",
         )}
       >
-        {RENTER_PATH_STEPS.map((step, index) => (
+        {steps.map((step, index) => (
           <li
             key={step.id}
             className={cn("min-w-0", compact ? "" : "sm:px-4 first:sm:pl-0 last:sm:pr-0")}

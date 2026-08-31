@@ -72,7 +72,7 @@ export function StickyMobileCtaBar() {
         </a>
         {onListingDetail ? (
           <a
-            href="#ask-leasing"
+            href="#listing-inquire"
             onClick={() =>
               analytics.trackEvent(
                 "mobile_cta_request_showing",

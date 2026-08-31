@@ -3,6 +3,15 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import { RentalListingCard } from "./rental-listing-card"
 import type { Property } from "@/app/types/property"
 
+vi.mock("@/lib/api/properties", () => ({
+  getFavoritePropertyIds: vi.fn().mockResolvedValue([]),
+  toggleFavoriteProperty: vi.fn(),
+}))
+
+vi.mock("@/hooks/use-toast", () => ({
+  useToast: () => ({ toast: vi.fn() }),
+}))
+
 vi.mock("next/image", () => ({
   default: (props: { alt: string; src: string }) => (
     // eslint-disable-next-line @next/next/no-img-element
@@ -47,6 +56,9 @@ describe("RentalListingCard", () => {
     expect(showing).toHaveAttribute("href", "#ask-leasing")
     expect(screen.queryByRole("link", { name: /^apply$/i })).not.toBeInTheDocument()
     expect(screen.queryByText(/schedule a showing/i)).not.toBeInTheDocument()
+    const photo = screen.getByRole("link", { name: /view photos and details for cedar hollow/i })
+    expect((photo.getAttribute("href") ?? "").replace(/\/$/, "")).toBe("/properties/pub-lehi-1")
+    expect(details.compareDocumentPosition(photo) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy()
   })
 
   it("notifies the parent when someone asks to tour so the leasing note can prefill", () => {

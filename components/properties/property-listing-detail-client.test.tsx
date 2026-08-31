@@ -13,8 +13,8 @@ vi.mock("@/components/map/property-map", () => ({
   default: () => <div data-testid="listing-map" />,
 }))
 
-vi.mock("@/components/properties/get-screened-cta", () => ({
-  GetScreenedCta: () => null,
+vi.mock("@/components/rental/rental-apply-panel", () => ({
+  RentalApplyPanel: () => <div>Application requirements</div>,
 }))
 
 vi.mock("@/components/properties/renter-availability-note", () => ({
@@ -26,8 +26,24 @@ vi.mock("@/lib/public-property", async () => {
   return {
     ...actual,
     fetchPublicPropertyByPublicId: vi.fn(),
+    fetchPublicPropertyList: vi.fn().mockResolvedValue([]),
   }
 })
+
+vi.mock("@/lib/api/properties", () => ({
+  getFavoritePropertyIds: vi.fn().mockResolvedValue([]),
+  toggleFavoriteProperty: vi.fn(),
+}))
+
+vi.mock("@/hooks/use-toast", () => ({
+  useToast: () => ({ toast: vi.fn() }),
+}))
+
+vi.mock("@/lib/analytics", () => ({
+  analytics: {
+    trackEvent: vi.fn(),
+  },
+}))
 
 import { fetchPublicPropertyByPublicId } from "@/lib/public-property"
 
@@ -79,13 +95,13 @@ describe("PropertyListingDetailClient", () => {
 
     expect(await screen.findByRole("heading", { name: /avenues victorian duplex/i })).toBeInTheDocument()
     expect(fetchById).toHaveBeenCalledWith(listing.publicId)
-    const showingLinks = screen.getAllByRole("link", { name: /request a showing/i })
-    expect(showingLinks.length).toBeGreaterThan(0)
-    showingLinks.forEach((link) => expect(link).toHaveAttribute("href", "#ask-leasing"))
+    const inquireLinks = screen.getAllByRole("link", { name: /apply now/i })
+    expect(inquireLinks.length).toBeGreaterThan(0)
+    inquireLinks.forEach((link) => expect(link).toHaveAttribute("href", "#listing-apply"))
+    expect(screen.getAllByRole("link", { name: /schedule a tour/i }).length).toBeGreaterThan(0)
     expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
     expect(screen.getAllByText(/listed monthly rent/i).length).toBeGreaterThan(0)
-    expect(screen.getByRole("heading", { name: /what this listing includes/i })).toBeInTheDocument()
-    expect(screen.queryByRole("link", { name: /^apply$/i })).not.toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /^highlights$/i })).toBeInTheDocument()
     expect(screen.queryByText(/great for families/i)).not.toBeInTheDocument()
   })
 

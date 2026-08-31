@@ -73,6 +73,8 @@ export function mapApiProperty(p: ApiProperty): Property {
     },
     lat: p.lat ?? null,
     lng: p.lng ?? null,
+    status: p.status,
+    listingKind: p.listingKind ?? null,
     contact: {
       name: contactName,
       phone: contactPhone,

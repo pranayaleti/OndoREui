@@ -1,16 +1,19 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { ApplyPageClient } from "./apply-page-client"
+import { ApplyTokenClient } from "@/components/rental/apply-token-client"
+import { RENTAL_STATIC_PLACEHOLDER } from "@/lib/rental-static-paths"
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-
-// Dynamic token URLs are handled client-side via the 404 fallback.
-// We generate one placeholder so Next.js static export is satisfied.
+/**
+ * Required under `output: "export"`. Tokens are not enumerable at build time.
+ * Omit `dynamicParams = false` so next dev still renders this page; GitHub
+ * Pages recovers via `app/not-found.tsx`.
+ */
 export function generateStaticParams() {
-  return [{ token: '_' }]
+  return [{ token: RENTAL_STATIC_PLACEHOLDER }]
 }
 
 export default function ApplyPage() {
@@ -22,7 +25,7 @@ export default function ApplyPage() {
         </div>
       }
     >
-      <ApplyPageClient />
+      <ApplyTokenClient />
     </Suspense>
   )
 }

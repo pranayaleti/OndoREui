@@ -4,17 +4,17 @@ import { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Building, Home, Search, ArrowUpDown, List, Map } from 'lucide-react';
-import Image from 'next/image';
+import { ArrowUpDown, List, Map } from 'lucide-react';
 import {
   type PropertyFilters,
+  DEFAULT_PROPERTY_FILTERS,
 } from '@/components/property-filter';
 import { RentalListingCard } from '@/components/properties/rental-listing-card';
 import { RenterAvailabilityNote } from '@/components/properties/renter-availability-note';
 import { RenterPath } from '@/components/properties/renter-path';
 import { buildRenterSearchPrefill, DEFAULT_RENT_FILTER_RANGE } from '@/lib/renter-search-prefill';
 import { listingDetailPath } from '@/lib/public-property';
+import { availabilityBadge } from '@/lib/listing-presentation';
 import { cn } from '@/lib/utils';
 
 // Dynamic load with Next.js (avoids React.lazy + webpack "reading 'call'" issues)
@@ -91,105 +91,6 @@ function sortOptionLabel(sortBy: LocalSortOption): string {
   }
 }
 
-const SAMPLE_PROPERTIES: Property[] = [
-  {
-    id: 'sample-1',
-    title: 'Modern Downtown Apartment',
-    type: 'apartment',
-    address: 'Salt Lake City, UT',
-    price: 1850,
-    bedrooms: 2,
-    bathrooms: 2,
-    sqft: 900,
-    phone: '',
-    website: null,
-    leaseTerms: null,
-    fees: null,
-    availability: null,
-    rating: 0,
-    reviewCount: 0,
-    amenities: [],
-    specialties: [],
-    services: [],
-    valueRanges: [],
-    images: ['/modern-apartment-balcony.webp'],
-    image: '/modern-apartment-balcony.webp',
-    dateAdded: new Date(),
-    logo: '',
-    description: 'A modern apartment in the heart of downtown Salt Lake City.',
-    contact: {
-      name: 'Ondo Real Estate',
-      phone: '',
-      email: '',
-      role: 'property',
-    },
-  },
-  {
-    id: 'sample-2',
-    title: 'Three-Bedroom House with Yard',
-    type: 'house',
-    address: 'Holladay, UT 84117',
-    price: 2400,
-    bedrooms: 3,
-    bathrooms: 2.5,
-    sqft: 1800,
-    phone: '',
-    website: null,
-    leaseTerms: null,
-    fees: null,
-    availability: null,
-    rating: 0,
-    reviewCount: 0,
-    amenities: [],
-    specialties: [],
-    services: [],
-    valueRanges: [],
-    images: ['/suburban-house-garden.webp'],
-    image: '/suburban-house-garden.webp',
-    dateAdded: new Date(),
-    logo: '',
-    description: 'Three-bedroom, 2.5-bath house with a fenced yard in Holladay.',
-    contact: {
-      name: 'Ondo Real Estate',
-      phone: '',
-      email: '',
-      role: 'property',
-    },
-  },
-  {
-    id: 'sample-3',
-    title: 'Modern Townhouse',
-    type: 'townhouse',
-    address: 'Midvale, UT 84047',
-    price: 1650,
-    bedrooms: 2,
-    bathrooms: 1.5,
-    sqft: 1100,
-    phone: '',
-    website: null,
-    leaseTerms: null,
-    fees: null,
-    availability: null,
-    rating: 0,
-    reviewCount: 0,
-    amenities: [],
-    specialties: [],
-    services: [],
-    valueRanges: [],
-    images: ['/modern-townhouse-garage.webp'],
-    image: '/modern-townhouse-garage.webp',
-    dateAdded: new Date(),
-    logo: '',
-    description: 'A modern townhouse with garage in Midvale.',
-    contact: {
-      name: 'Ondo Real Estate',
-      phone: '',
-      email: '',
-      role: 'property',
-    },
-  },
-];
-
 export default function PropertiesClient() {
   const router = useRouter();
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
@@ -202,11 +103,8 @@ export default function PropertiesClient() {
   const [retryCount, setRetryCount] = useState(0);
 
   const [filters, setFilters] = useState<PropertyFilters>({
+    ...DEFAULT_PROPERTY_FILTERS,
     priceRange: [DEFAULT_RENT_FILTER_RANGE[0], DEFAULT_RENT_FILTER_RANGE[1]],
-    bedrooms: 'any',
-    bathrooms: 'any',
-    propertyType: 'any',
-    amenities: [],
   });
 
   const [sortBy, setSortBy] = useState<LocalSortOption>('newest');
@@ -215,8 +113,17 @@ export default function PropertiesClient() {
   // Deep-link support: /properties?query=... from PropertySearch fallback navigation
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const q = new URLSearchParams(window.location.search).get('query')?.trim()
+    const params = new URLSearchParams(window.location.search)
+    const q = params.get('query')?.trim()
+    const type = params.get('type')?.trim()
+    const city = params.get('city')?.trim()
     if (q) setSearchQuery(q)
+    if (type) {
+      setFilters((prev) => ({ ...prev, propertyType: type }))
+    }
+    if (city) {
+      setFilters((prev) => ({ ...prev, location: city }))
+    }
   }, [])
 
   // 3a) Fetch from backend API
@@ -355,6 +262,33 @@ export default function PropertiesClient() {
     if (filters.amenities.length > 0) {
       filtered = filtered.filter((p) =>
         filters.amenities.every((a) => p.amenities.includes(a))
+      );
+    }
+
+    if (filters.location.trim()) {
+      const loc = filters.location.trim().toLowerCase();
+      filtered = filtered.filter((p) => {
+        const city = p.addressParts?.city ?? '';
+        const zip = p.addressParts?.zipcode ?? '';
+        return (
+          p.title.toLowerCase().includes(loc) ||
+          p.address.toLowerCase().includes(loc) ||
+          city.toLowerCase().includes(loc) ||
+          zip.toLowerCase().includes(loc)
+        );
+      });
+    }
+
+    if (filters.minSqft !== 'any') {
+      const min = Number.parseInt(filters.minSqft, 10);
+      if (!Number.isNaN(min)) {
+        filtered = filtered.filter((p) => p.sqft >= min);
+      }
+    }
+
+    if (filters.availability === 'now' || filters.availability === 'upcoming') {
+      filtered = filtered.filter(
+        (p) => availabilityBadge(p.availability).tone === filters.availability,
       );
     }
 
@@ -575,12 +509,14 @@ export default function PropertiesClient() {
                     ))}
                   </div>
                 )}
-                <Suspense fallback={<div className="h-10 w-32 animate-pulse rounded bg-muted" />}>
-                  <PropertyFilter
-                    onFilterChange={handleFilterChange}
-                    initialFilters={filters}
-                  />
-                </Suspense>
+                <div className="lg:hidden">
+                  <Suspense fallback={<div className="h-10 w-32 animate-pulse rounded bg-muted" />}>
+                    <PropertyFilter
+                      onFilterChange={handleFilterChange}
+                      initialFilters={filters}
+                    />
+                  </Suspense>
+                </div>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -620,6 +556,16 @@ export default function PropertiesClient() {
               </div>
             </div>
 
+            <div className="lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-start lg:gap-6">
+              <div className="mb-6 hidden lg:block">
+                <PropertyFilter
+                  variant="sidebar"
+                  onFilterChange={handleFilterChange}
+                  initialFilters={filters}
+                />
+              </div>
+              <div>
+
             {loading ? (
               <div
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -644,75 +590,25 @@ export default function PropertiesClient() {
                 ))}
               </div>
             ) : error ? (
-              <div>
-                <div className="mb-8 flex items-start gap-3 rounded-lg border border-primary/30 bg-primary/10 px-5 py-4 text-sm text-foreground" role="status">
-                  <svg className="h-5 w-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                  </svg>
-                  <div>
-                    <p className="font-semibold">Live listings temporarily unavailable</p>
-                    <p className="mt-0.5 text-foreground/80">
-                      We&apos;re having trouble connecting to our listing database. The properties below are representative examples.{' '}
-                      <a href="/contact" className="underline hover:no-underline">Contact us</a> to ask about current availability.
-                    </p>
-                  </div>
+              <div
+                className="rounded-xl border border-border bg-card px-5 py-8 text-center"
+                role="alert"
+              >
+                <p className="font-semibold">Live listings are temporarily unavailable</p>
+                <p className="mt-2 text-sm text-foreground/80">
+                  {error} We are not showing example homes in their place.
+                </p>
+                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                  <Button
+                    className="min-h-11"
+                    onClick={() => setRetryCount((c) => c + 1)}
+                  >
+                    Try again
+                  </Button>
+                  <Button asChild variant="outline" className="min-h-11">
+                    <a href="/contact">Contact leasing</a>
+                  </Button>
                 </div>
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Sample rental properties">
-                  {SAMPLE_PROPERTIES.map((property) => (
-                    <li key={property.id}>
-                    <Card
-                      className="overflow-hidden card-hover hover-lift focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 btn-interactive h-full"
-                    >
-                      <div className="relative aspect-video">
-                        <Image
-                          src={property.image || '/placeholder.svg'}
-                          alt={property.title}
-                          fill
-                          className="object-cover"
-                          loading="lazy"
-                          quality={85}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                        <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 rounded-md font-medium">
-                          ${property.price.toLocaleString()}/mo
-                        </div>
-                        <div className="absolute left-2 top-2 rounded bg-foreground/90 px-2 py-1 text-xs text-background">Example only — not an available listing</div>
-                      </div>
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-center mb-2">
-                          <h3 className="font-semibold text-lg">
-                            {property.title}
-                          </h3>
-                        </div>
-                        <p className="text-foreground/80 text-sm mb-2">
-                          {property.address}
-                        </p>
-                        <div className="flex items-center gap-4 text-sm" role="list" aria-label="Property specifications">
-                          <span className="flex items-center gap-1" role="listitem">
-                            <Home className="h-4 w-4" aria-hidden="true" />{' '}
-                            {property.bedrooms === 0
-                              ? 'Studio'
-                              : `${property.bedrooms} Beds`}
-                          </span>
-                          <span className="flex items-center gap-1" role="listitem">
-                            <Building className="h-4 w-4" aria-hidden="true" /> {property.bathrooms}{' '}
-                            Baths
-                          </span>
-                          <span className="flex items-center gap-1" role="listitem">
-                            <Search className="h-4 w-4" aria-hidden="true" /> {property.sqft} sqft
-                          </span>
-                        </div>
-                        <Button
-                          asChild
-                          className="w-full mt-4 min-h-[44px] text-base btn-interactive hover-lift"
-                        >
-                          <a href="/contact">Inquire About Availability</a>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                    </li>
-                  ))}
-                </ul>
               </div>
             ) : properties.length > 0 ? (
               <div
@@ -765,11 +661,8 @@ export default function PropertiesClient() {
                 <Button
                   onClick={() => {
                     setFilters({
+                      ...DEFAULT_PROPERTY_FILTERS,
                       priceRange: [DEFAULT_RENT_FILTER_RANGE[0], DEFAULT_RENT_FILTER_RANGE[1]],
-                      bedrooms: 'any',
-                      bathrooms: 'any',
-                      propertyType: 'any',
-                      amenities: [],
                     });
                     setSearchQuery('');
                     setShowingInterestId(null);
@@ -791,6 +684,8 @@ export default function PropertiesClient() {
                 />
               </div>
             )}
+              </div>
+            </div>
           </div>
         </section>
       </main>

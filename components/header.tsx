@@ -15,7 +15,7 @@ import { Menu, X, Search, ChevronDown, Phone } from "lucide-react"
 import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
-import { APP_PORTAL_LOGIN_URL, SITE_PHONE } from "@/lib/site"
+import { APP_PORTAL_LOGIN_URL, SITE_NAME, SITE_PHONE } from "@/lib/site"
 import { useTranslation } from "react-i18next"
 
 const Header = memo(() => {
@@ -136,7 +136,11 @@ const Header = memo(() => {
       <div className="container flex h-16 items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo (left) */}
         <div className="flex shrink-0 items-center">
-          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+          <Link
+            href="/"
+            aria-label={`${SITE_NAME} home`}
+            className="flex items-center hover:opacity-80 transition-opacity"
+          >
             {/* Light theme: ink wordmark. Dark theme: white wordmark. */}
             <Image
               src="/logo-light.png"

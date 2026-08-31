@@ -17,7 +17,7 @@ export const ARRIVAL_RENT_DISCLOSURE =
   `Typical rents and any home-value figures are city medians from our 55-city Utah coverage set, compiled by Ondo Real Estate as of ${CITY_MARKET_AS_OF} — verify. They are estimates for a city, not a quote for a specific home, and are not an MLS pull, an appraisal, a broker price opinion, or a comparative market analysis.`
 
 export const ARRIVAL_FAIR_HOUSING =
-  "Equal Housing Opportunity. We consider every complete rental application using the same written criteria. Apply by invite after a showing — there is no public apply form. Reasonable accommodations, including alternatives to an in-person showing, are available on request."
+  "Equal Housing Opportunity. We consider every complete rental application using the same written, property-specific criteria. Starting an application is not an approval. Reasonable accommodations, including alternatives to an in-person showing, are available on request."
 
 export type ArrivalPathId = "rent" | "buy" | "leaving-a-home" | "people-ops"
 

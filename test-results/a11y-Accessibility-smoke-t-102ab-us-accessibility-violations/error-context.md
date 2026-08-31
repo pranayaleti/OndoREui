@@ -1,0 +1,1542 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e7]:
+        - link "Free rental analysis" [ref=e8] [cursor=pointer]:
+          - /url: /whats-my-home-worth/
+        - generic [ref=e9]: "|"
+        - link "Available rentals" [ref=e10] [cursor=pointer]:
+          - /url: /properties/
+        - generic [ref=e11]: "|"
+        - link "Owner login" [ref=e12] [cursor=pointer]:
+          - /url: http://localhost:3001/login
+        - generic [ref=e13]: "|"
+        - link "Resident login" [ref=e14] [cursor=pointer]:
+          - /url: http://localhost:3001/login
+      - generic [ref=e15]:
+        - link "Ondo Real Estate home" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img [ref=e18] [cursor=pointer]
+        - navigation "Primary navigation" [ref=e20]:
+          - navigation [ref=e21]:
+            - link "Buy" [ref=e22] [cursor=pointer]:
+              - /url: /buy/
+            - link "Sell" [ref=e23] [cursor=pointer]:
+              - /url: /sell/
+            - link "Properties" [ref=e24] [cursor=pointer]:
+              - /url: /properties/
+            - link "Loans" [ref=e25] [cursor=pointer]:
+              - /url: /loans/
+            - button "Notary" [ref=e26] [cursor=pointer]:
+              - text: Notary
+              - img [ref=e27] [cursor=pointer]
+            - button "Owners" [ref=e29] [cursor=pointer]:
+              - text: Owners
+              - img [ref=e30] [cursor=pointer]
+            - button "Resources" [ref=e32] [cursor=pointer]:
+              - text: Resources
+              - img [ref=e33] [cursor=pointer]
+        - generic [ref=e35]:
+          - link "Call +1-408-538-0420" [ref=e36] [cursor=pointer]:
+            - /url: tel:+1-408-538-0420
+            - img [ref=e37] [cursor=pointer]
+            - generic [ref=e39] [cursor=pointer]: +1-408-538-0420
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img
+          - button "More navigation" [ref=e42] [cursor=pointer]:
+            - img [ref=e43] [cursor=pointer]
+            - img [ref=e45] [cursor=pointer]
+            - generic [ref=e46] [cursor=pointer]: More
+          - button "Toggle theme" [ref=e47] [cursor=pointer]:
+            - img
+            - img
+            - generic [ref=e48] [cursor=pointer]: Toggle theme
+          - button "Log in" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51] [cursor=pointer]: Log in
+            - img
+    - main [ref=e53]:
+      - generic [ref=e54]:
+        - banner "Hero section" [ref=e55]:
+          - img [ref=e57]
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - heading "Utah's Full-Service Real Estate Partner" [level=1] [ref=e60]
+              - paragraph [ref=e61]: Property management, home loans, and brokerage across 55+ Wasatch Front cities. Owners get real-time visibility. Tenants get responsive support. Investors see exactly how assets perform.
+            - region "Property search" [ref=e62]
+            - navigation "Primary calls to action" [ref=e66]:
+              - link "Browse rentals" [ref=e67] [cursor=pointer]:
+                - /url: /properties/
+                - img [ref=e68] [cursor=pointer]
+                - text: Browse rentals
+              - link "Book a call" [ref=e71] [cursor=pointer]:
+                - /url: /contact/#book-a-call
+                - img [ref=e72] [cursor=pointer]
+                - text: Book a call
+              - link "Free rental report" [ref=e74] [cursor=pointer]:
+                - /url: /whats-my-home-worth/
+                - img [ref=e75] [cursor=pointer]
+                - text: Free rental report
+            - paragraph [ref=e77]:
+              - text: Trusted by property owners from North Ogden to Nephi •
+              - link "Licensed brokerage, property management, and NMLS" [ref=e78] [cursor=pointer]:
+                - /url: /licensing/
+            - paragraph [ref=e79]:
+              - text: Landlord shopping a manager?
+              - link "Run the numbers on self-manage vs Ondo" [ref=e80] [cursor=pointer]:
+                - /url: /calculators/owner-vs-self/
+              - text: .
+        - region "Choose your next step" [ref=e81]:
+          - generic [ref=e82]:
+            - heading "Choose your next step" [level=2] [ref=e83]
+            - list [ref=e84]:
+              - listitem [ref=e85]:
+                - link "Owners & investors Property management Full-service leasing, screening, rent collection, maintenance, and owner reporting across 55+ Utah cities. See what we handle" [ref=e86] [cursor=pointer]:
+                  - /url: /property-management/
+                  - img [ref=e88] [cursor=pointer]
+                  - paragraph [ref=e92] [cursor=pointer]: Owners & investors
+                  - heading "Property management" [level=3] [ref=e93] [cursor=pointer]
+                  - paragraph [ref=e94] [cursor=pointer]: Full-service leasing, screening, rent collection, maintenance, and owner reporting across 55+ Utah cities.
+                  - generic [ref=e95] [cursor=pointer]:
+                    - text: See what we handle
+                    - generic [ref=e96] [cursor=pointer]: →
+              - listitem [ref=e97]:
+                - link "Free rental analysis What could your home earn? Instant rent and sale estimate for any Wasatch Front city. No signup to see your number. Get my estimate" [ref=e98] [cursor=pointer]:
+                  - /url: /whats-my-home-worth/
+                  - img [ref=e100] [cursor=pointer]
+                  - paragraph [ref=e102] [cursor=pointer]: Free rental analysis
+                  - heading "What could your home earn?" [level=3] [ref=e103] [cursor=pointer]
+                  - paragraph [ref=e104] [cursor=pointer]: Instant rent and sale estimate for any Wasatch Front city. No signup to see your number.
+                  - generic [ref=e105] [cursor=pointer]:
+                    - text: Get my estimate
+                    - generic [ref=e106] [cursor=pointer]: →
+              - listitem [ref=e107]:
+                - link "Renters Available rentals Browse Ondo-managed homes and apartments from Salt Lake City to Provo, Lehi to Ogden. Browse rentals" [ref=e108] [cursor=pointer]:
+                  - /url: /properties/
+                  - img [ref=e110] [cursor=pointer]
+                  - paragraph [ref=e113] [cursor=pointer]: Renters
+                  - heading "Available rentals" [level=3] [ref=e114] [cursor=pointer]
+                  - paragraph [ref=e115] [cursor=pointer]: Browse Ondo-managed homes and apartments from Salt Lake City to Provo, Lehi to Ogden.
+                  - generic [ref=e116] [cursor=pointer]:
+                    - text: Browse rentals
+                    - generic [ref=e117] [cursor=pointer]: →
+            - paragraph [ref=e118]: Rental estimates are informational only and are not an appraisal, BPO, or CMA.
+        - region "Starting a job in Utah?" [ref=e119]:
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - paragraph [ref=e122]: Wasatch Front start dates
+              - heading "Starting a job in Utah?" [level=2] [ref=e123]
+              - paragraph [ref=e124]: Pick the city you'll commute to. See typical rents nearby, then rent, buy, or leave a home on the books — invite-only apply after a showing.
+            - link "Open the arrival desk" [ref=e125] [cursor=pointer]:
+              - /url: /moving-to-utah/
+        - generic [ref=e128]:
+          - generic [ref=e129]:
+            - img [ref=e130]
+            - generic [ref=e133]: 55+
+            - generic [ref=e134]: Utah cities served
+          - generic [ref=e135]:
+            - img [ref=e136]
+            - generic [ref=e139]: 200+
+            - generic [ref=e140]: Properties managed & growing
+          - link "Licensed Brokerage, PM & NMLS disclosures" [ref=e141] [cursor=pointer]:
+            - /url: /licensing/
+            - img [ref=e142] [cursor=pointer]
+            - generic [ref=e145] [cursor=pointer]: Licensed
+            - generic [ref=e146] [cursor=pointer]: Brokerage, PM & NMLS disclosures
+          - generic [ref=e147]:
+            - img [ref=e148]
+            - generic [ref=e151]: 24/7
+            - generic [ref=e152]: Emergency maintenance response
+        - generic [ref=e154]:
+          - heading "How Ondo RE works for property owners" [level=2] [ref=e155]
+          - paragraph [ref=e156]: Hand off the day-to-day and keep full visibility. Most owners are set up within a week.
+          - paragraph [ref=e157]:
+            - text: Already working with another manager? Typical onboarding is 48–72 hours, with no setup fee and 30 days' written notice to cancel.
+            - link "Talk with the team" [ref=e158] [cursor=pointer]:
+              - /url: /contact/
+            - text: .
+          - generic [ref=e159]:
+            - generic [ref=e160]:
+              - img [ref=e162]
+              - heading "1. Onboard your property" [level=3] [ref=e165]
+              - paragraph [ref=e166]: Add your rental, upload documents, and we handle tenant placement and screening.
+            - generic [ref=e167]:
+              - img [ref=e169]
+              - heading "2. Collect rent automatically" [level=3] [ref=e172]
+              - paragraph [ref=e173]: Tenants pay online. You get direct deposits and real-time financial statements.
+            - generic [ref=e174]:
+              - img [ref=e176]
+              - heading "3. We handle maintenance" [level=3] [ref=e178]
+              - paragraph [ref=e179]: Tenants submit requests in the portal. We coordinate vendors and keep you updated.
+            - generic [ref=e180]:
+              - img [ref=e182]
+              - heading "4. Track everything live" [level=3] [ref=e184]
+              - paragraph [ref=e185]: Your owner dashboard shows rent status, expenses, occupancy, and AI-powered risk alerts.
+          - generic [ref=e186]:
+            - link "See pricing" [ref=e187] [cursor=pointer]:
+              - /url: /pricing/
+            - link "Browse rentals" [ref=e188] [cursor=pointer]:
+              - /url: /properties/
+        - region "Why Utah property managers switch to Ondo RE" [ref=e189]:
+          - generic [ref=e191]:
+            - generic [ref=e192]:
+              - heading "Why Utah property managers switch to Ondo RE" [level=2] [ref=e193]
+              - paragraph [ref=e194]: Purpose-built for Utah landlords and managers running 1–20 rental units and scaling.
+              - paragraph [ref=e195]: Autopay rent collection, tenant screening, and maintenance coordination in one platform. Owners see real-time financials and maintenance status; tenants get a single portal to pay rent and request repairs.
+              - link "Get started" [ref=e196] [cursor=pointer]:
+                - /url: /contact/#book-a-call
+            - blockquote [ref=e198]:
+              - paragraph [ref=e199]: “We launched autopay + screening in a weekend. Owners finally see real-time rent + maintenance, and we stopped chasing spreadsheets.”
+              - generic [ref=e200]: — Wasatch Front property manager (small portfolio)
+        - region "Ondo RE solutions for tenants, investors & home buyers" [ref=e201]:
+          - generic [ref=e202]:
+            - heading "Ondo RE solutions for tenants, investors & home buyers" [level=2] [ref=e203]
+            - paragraph [ref=e204]: One tech-forward real estate platform, rooted in Utah, built to scale with you across markets.
+            - generic [ref=e205]:
+              - article [ref=e206]:
+                - generic [ref=e207]:
+                  - img [ref=e208]
+                  - heading "Tenants" [level=3] [ref=e211]
+                - paragraph [ref=e212]: Pay rent, request maintenance, and stay organized in one place, backed by responsive property management.
+                - paragraph [ref=e213]:
+                  - link "Tenant solutions" [ref=e214] [cursor=pointer]:
+                    - /url: /solutions/tenants/
+              - article [ref=e215]:
+                - generic [ref=e216]:
+                  - img [ref=e217]
+                  - heading "Investors" [level=3] [ref=e220]
+                - paragraph [ref=e221]: "Evaluate opportunities with clearer operations: reporting, coordination, and tools designed for portfolio visibility."
+                - paragraph [ref=e222]:
+                  - link "Investor solutions" [ref=e223] [cursor=pointer]:
+                    - /url: /solutions/investors/
+              - article [ref=e224]:
+                - generic [ref=e225]:
+                  - img [ref=e226]
+                  - heading "Buying & loans" [level=3] [ref=e230]
+                - paragraph [ref=e231]: Education-first guidance for purchases and refinances, loan programs and calculators to match your goals.
+                - paragraph [ref=e232]:
+                  - link "Mortgages" [ref=e233] [cursor=pointer]:
+                    - /url: /loans/
+                  - link "Buy a home" [ref=e234] [cursor=pointer]:
+                    - /url: /buy/
+        - generic [ref=e238]:
+          - heading "Property management for Utah owners & landlords" [level=2] [ref=e239]
+          - paragraph [ref=e240]: Ondo RE delivers full-service property management across the Wasatch Front — leasing, tenant screening, rent collection, maintenance, and real-time owner reporting. From Salt Lake City to Payson, we handle the operations so you focus on growing your portfolio.
+          - heading "Property management services" [level=3] [ref=e241]
+          - generic [ref=e242]:
+            - tablist "Owner services" [ref=e243]:
+              - tab "Screening" [selected] [ref=e244] [cursor=pointer]
+              - tab "Advertising" [ref=e245] [cursor=pointer]
+              - tab "Rent" [ref=e246] [cursor=pointer]
+              - tab "Maintenance" [ref=e247] [cursor=pointer]
+              - tab "Evictions" [ref=e248] [cursor=pointer]
+              - tab "Reporting" [ref=e249] [cursor=pointer]
+            - tabpanel "Screening" [ref=e250]:
+              - heading "Fair-Housing-compliant tenant screening" [level=3] [ref=e251]
+              - paragraph [ref=e252]: Credit, criminal, eviction, and income checks against consistent, documented criteria — applied to every applicant the same way. We follow HUD guidance on the use of criminal records in housing decisions.
+              - link "See our screening process" [ref=e253] [cursor=pointer]:
+                - /url: /property-management/tenant-screening/
+                - text: See our screening process
+                - img [ref=e254] [cursor=pointer]
+          - generic [ref=e256]:
+            - link "Free rental analysis" [ref=e257] [cursor=pointer]:
+              - /url: /whats-my-home-worth/
+            - link "Property management services" [ref=e258] [cursor=pointer]:
+              - /url: /property-management/
+            - link "Talk to our team" [ref=e259] [cursor=pointer]:
+              - /url: /contact/
+          - 'link "Run the numbers: self-manage vs Ondo" [ref=e260] [cursor=pointer]':
+            - /url: /calculators/owner-vs-self/
+            - img [ref=e261] [cursor=pointer]
+            - text: "Run the numbers: self-manage vs Ondo"
+            - generic [ref=e263] [cursor=pointer]: →
+        - region "Four stock types. Long-term residential only." [ref=e265]:
+          - generic [ref=e266]:
+            - generic [ref=e267]:
+              - paragraph [ref=e268]: Wasatch housing we actually take on
+              - heading "Four stock types. Long-term residential only." [level=2] [ref=e269]
+              - paragraph [ref=e270]: Single-family, townhomes, condos with HOAs, and small multifamily across 55+ Utah cities. Each note below is pulled from housing we already document — not a generic “we manage everything” grid.
+            - generic [ref=e271]:
+              - article [ref=e272]:
+                - heading "Single-family homes" [level=3] [ref=e273]
+                - paragraph [ref=e274]: Victorian, Craftsman, and mid-century houses — the Avenues-style stock already on our neighborhood pages.
+                - paragraph [ref=e275]: Wasatch winters mean furnace inspections and pipe insulation before freeze-up. Working heat is a landlord obligation; after-hours no-heat goes to the 24/7 emergency line.
+                - link "Avenues housing notes" [ref=e276] [cursor=pointer]:
+                  - /url: /neighborhoods/salt-lake-city/the-avenues/
+              - generic [ref=e277]:
+                - article [ref=e278]:
+                  - heading "Townhomes" [level=3] [ref=e279]
+                  - paragraph [ref=e280]: Infill and new-construction townhomes like the Sugar House mix of bungalows, ramblers, and attached product.
+                  - paragraph [ref=e281]: Shared walls change how we schedule exterior work. We read the CC&Rs before listing so snow removal and paint cycles are not a surprise.
+                  - link "Sugar House housing notes" [ref=e282] [cursor=pointer]:
+                    - /url: /neighborhoods/salt-lake-city/sugar-house/
+                - article [ref=e283]:
+                  - heading "Condos and HOA communities" [level=3] [ref=e284]
+                  - paragraph [ref=e285]: Downtown lofts, converted warehouses, and association buildings where rental caps and move-in windows live in the CC&Rs.
+                  - paragraph [ref=e286]: We coordinate against HOA billing, elevator reservations, and rental-registration rules. Occupant type is never the filter — the documents are.
+                  - link "Downtown housing notes" [ref=e287] [cursor=pointer]:
+                    - /url: /neighborhoods/salt-lake-city/downtown/
+                - article [ref=e288]:
+                  - heading "Small multifamily" [level=3] [ref=e289]
+                  - paragraph [ref=e290]: Duplexes, fourplexes, and 2–8 unit conversions — the Liberty Wells mix of bungalows and small multi-family.
+                  - paragraph [ref=e291]: Several doors under one owner is why Growth pricing (5+) is a different rate than Starter. We manage the building, not a nightly calendar.
+                  - link "Liberty Wells housing notes" [ref=e292] [cursor=pointer]:
+                    - /url: /neighborhoods/salt-lake-city/liberty-wells/
+        - region "Four commitments, written down" [ref=e293]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - paragraph [ref=e296]: What owners can count on
+              - heading "Four commitments, written down" [level=2] [ref=e297]
+              - paragraph [ref=e298]: No fine print. No franchise promises we can’t back. Just the terms every Ondo owner sees in writing before signing.
+            - list [ref=e299]:
+              - listitem [ref=e300]:
+                - img [ref=e302]
+                - heading "You pay when rent is collected" [level=3] [ref=e305]
+                - paragraph [ref=e306]: Management fee is a percentage of collected rent — not a flat retainer, not a per-door subscription. When your tenants pay, we get paid.
+                - link "See pricing tiers" [ref=e307] [cursor=pointer]:
+                  - /url: /pricing/
+                  - text: See pricing tiers
+                  - generic [ref=e308] [cursor=pointer]: →
+              - listitem [ref=e309]:
+                - img [ref=e311]
+                - heading "30-day notice, no long-term lock-in" [level=3] [ref=e314]
+                - paragraph [ref=e315]: Cancel with 30 days' written notice. We earn your business month to month, not with a five-page contract.
+                - link "Read the cancellation terms" [ref=e316] [cursor=pointer]:
+                  - /url: /pricing/
+                  - text: Read the cancellation terms
+                  - generic [ref=e317] [cursor=pointer]: →
+              - listitem [ref=e318]:
+                - img [ref=e320]
+                - heading "24/7 emergency maintenance line" [level=3] [ref=e324]
+                - paragraph [ref=e325]: After-hours line for burst pipes, no-heat, and lockout emergencies. Included in every management plan so urgent issues don't wait until Monday.
+                - link "See maintenance coordination" [ref=e326] [cursor=pointer]:
+                  - /url: /property-management/maintenance-coordination/
+                  - text: See maintenance coordination
+                  - generic [ref=e327] [cursor=pointer]: →
+              - listitem [ref=e328]:
+                - img [ref=e330]
+                - heading "Fair Housing–compliant screening" [level=3] [ref=e333]
+                - paragraph [ref=e334]: Credit, criminal, eviction, and income checks applied to every applicant against consistent, documented criteria — with HUD-aligned handling of criminal records.
+                - link "See our screening process" [ref=e335] [cursor=pointer]:
+                  - /url: /property-management/tenant-screening/
+                  - text: See our screening process
+                  - generic [ref=e336] [cursor=pointer]: →
+        - region "Fees that wait for the rent" [ref=e337]:
+          - generic [ref=e338]:
+            - generic [ref=e339]:
+              - paragraph [ref=e340]: Aligned with collected rent
+              - heading "Fees that wait for the rent" [level=2] [ref=e341]
+              - paragraph [ref=e342]:
+                - text: Ondo bills a percentage of rent that actually hits the account. Dollars below are
+                - strong [ref=e343]: per unit
+                - text: — door count only picks Starter 10% (1–4) or Growth 8% (5–15). Leasing stays on its own one-time line.
+            - generic [ref=e346]:
+              - generic [ref=e347]:
+                - generic [ref=e348]:
+                  - generic [ref=e349]:
+                    - generic [ref=e350]: Monthly rent per unit
+                    - generic [ref=e351]: $2,200
+                  - slider "Monthly rent per unit" [ref=e352]: "2200"
+                  - generic [ref=e353]:
+                    - generic [ref=e354]: $1,000
+                    - generic [ref=e355]: $4,500
+                - group "Published rate (does not multiply the ledger)" [ref=e356]:
+                  - generic [ref=e357]: Published rate (does not multiply the ledger)
+                  - generic [ref=e358]:
+                    - generic [ref=e359] [cursor=pointer]:
+                      - radio "1–4 doors · Starter 10%" [checked] [ref=e360]
+                      - text: 1–4 doors · Starter 10%
+                    - generic [ref=e361] [cursor=pointer]:
+                      - radio "5–15 doors · Growth 8%" [ref=e362]
+                      - text: 5–15 doors · Growth 8%
+                  - paragraph [ref=e363]: 16+ units is a custom Portfolio quote — not illustrated here.
+                - generic [ref=e364]:
+                  - switch "Price my time too" [ref=e365] [cursor=pointer]
+                  - checkbox
+                  - generic [ref=e366] [cursor=pointer]: Price my time too
+              - generic [ref=e367]:
+                - paragraph [ref=e368]: Per-unit ledger
+                - generic [ref=e369]:
+                  - generic [ref=e370]:
+                    - term [ref=e371]: Ondo per unit this month
+                    - definition [ref=e372]: $220
+                  - generic [ref=e373]:
+                    - term [ref=e374]: Typical advertised 8–12% per unit
+                    - definition [ref=e375]: $176–$264
+                  - generic [ref=e376]:
+                    - term [ref=e377]: One-time leasing per new placement
+                    - definition [ref=e378]: $1,100
+                - paragraph [ref=e379]: Illustrative, not a quote. Figures are per unit. Management is a percentage of collected rent; leasing is billed only when we place a new tenant. Some Utah shops advertise a flat ~$159/mo as of Aug 2026 regardless of rent; at 8% that crosses around $1,988. Verify current pricing with any provider.
+        - region "See a rent range before you leave a name" [ref=e380]:
+          - generic [ref=e381]:
+            - generic [ref=e382]:
+              - paragraph [ref=e383]: Number first, name second
+              - heading "See a rent range before you leave a name" [level=2] [ref=e384]
+              - paragraph [ref=e385]: City and bedrooms in, a median-based rent range out. Contact is optional and only shows after the number — one form, tagged as an owner inquiry.
+            - generic [ref=e386]:
+              - generic [ref=e387]:
+                - generic [ref=e388]:
+                  - generic [ref=e389]: City
+                  - combobox "City" [ref=e390]:
+                    - option "Select a Utah city…" [selected]
+                    - option "Alpine"
+                    - option "American Fork"
+                    - option "Bluffdale"
+                    - option "Bountiful"
+                    - option "Centerville"
+                    - option "Clearfield"
+                    - option "Clinton"
+                    - option "Cottonwood Heights"
+                    - option "Draper"
+                    - option "Eagle Mountain"
+                    - option "Farmington"
+                    - option "Herriman"
+                    - option "Highland"
+                    - option "Holladay"
+                    - option "Hooper"
+                    - option "Kaysville"
+                    - option "Kearns"
+                    - option "Layton"
+                    - option "Lehi"
+                    - option "Lindon"
+                    - option "Magna"
+                    - option "Mapleton"
+                    - option "Midvale"
+                    - option "Millcreek"
+                    - option "Murray"
+                    - option "Nephi"
+                    - option "North Ogden"
+                    - option "North Salt Lake"
+                    - option "Ogden"
+                    - option "Orem"
+                    - option "Payson"
+                    - option "Pleasant Grove"
+                    - option "Provo"
+                    - option "Riverdale"
+                    - option "Riverton"
+                    - option "Roy"
+                    - option "Salem"
+                    - option "Salt Lake City"
+                    - option "Sandy"
+                    - option "Santaquin"
+                    - option "Saratoga Springs"
+                    - option "South Jordan"
+                    - option "South Ogden"
+                    - option "South Salt Lake"
+                    - option "Spanish Fork"
+                    - option "Springville"
+                    - option "Sunset"
+                    - option "Syracuse"
+                    - option "Taylorsville"
+                    - option "Vineyard"
+                    - option "Washington Terrace"
+                    - option "West Jordan"
+                    - option "West Point"
+                    - option "West Valley City"
+                    - option "Woods Cross"
+                - group "Bedrooms" [ref=e391]:
+                  - generic [ref=e392]: Bedrooms
+                  - generic [ref=e393]:
+                    - generic [ref=e394] [cursor=pointer]:
+                      - radio "1" [ref=e395]
+                      - text: "1"
+                    - generic [ref=e396] [cursor=pointer]:
+                      - radio "2" [ref=e397]
+                      - text: "2"
+                    - generic [ref=e398] [cursor=pointer]:
+                      - radio "3" [checked] [ref=e399]
+                      - text: "3"
+                    - generic [ref=e400] [cursor=pointer]:
+                      - radio "4" [ref=e401]
+                      - text: "4"
+                    - generic [ref=e402] [cursor=pointer]:
+                      - radio "5+" [ref=e403]
+                      - text: 5+
+                - button "See estimated rent" [disabled]
+                - paragraph [ref=e404]: Pick a city, then reveal the range. We ask for contact after that.
+              - generic [ref=e406]: Your note to the team appears here after the rent range — one owner form, not a second copy of the same fields.
+        - region "You didn’t buy the property to answer maintenance calls at 10pm." [ref=e407]:
+          - generic [ref=e409]:
+            - generic [ref=e410]:
+              - paragraph [ref=e411]: Self-managing your rental?
+              - heading "You didn’t buy the property to answer maintenance calls at 10pm." [level=2] [ref=e412]
+              - paragraph [ref=e413]: Ondo takes over the day-to-day so owners get their evenings back. See what your home could rent for, then talk through whether full- service management pencils out for your portfolio.
+              - generic [ref=e414]:
+                - link "Get my free rental analysis" [ref=e415] [cursor=pointer]:
+                  - /url: /whats-my-home-worth/
+                  - img [ref=e416] [cursor=pointer]
+                  - text: Get my free rental analysis
+                - link "Book a call" [ref=e418] [cursor=pointer]:
+                  - /url: /contact/#book-a-call
+                  - img [ref=e419] [cursor=pointer]
+                  - text: Book a call
+              - paragraph [ref=e421]:
+                - text: Prefer to see the math first?
+                - link "Run the self-manage vs Ondo calculator" [ref=e422] [cursor=pointer]:
+                  - /url: /calculators/owner-vs-self/
+                - text: .
+            - generic [ref=e423]:
+              - heading "What Ondo takes off your plate" [level=3] [ref=e424]
+              - list [ref=e425]:
+                - listitem [ref=e426]:
+                  - paragraph [ref=e427]: Screening applicants
+                  - paragraph [ref=e428]: Consistent, documented criteria across credit, eviction, criminal, and income — applied the same way to every applicant so every decision is traceable.
+                - listitem [ref=e429]:
+                  - paragraph [ref=e430]: Filling vacancies
+                  - paragraph [ref=e431]: Photos, syndicated listings, showings, and application flow that keeps units marketed until they're leased — instead of stopping after the first weekend.
+                - listitem [ref=e432]:
+                  - paragraph [ref=e433]: Collecting rent on time
+                  - paragraph [ref=e434]: Online payments with a lease-anchored late-fee policy and automated reminders, so you're not the person chasing a Venmo.
+                - listitem [ref=e435]:
+                  - paragraph [ref=e436]: Coordinating maintenance
+                  - paragraph [ref=e437]: Trusted local vendors, per-owner cost thresholds, and a 24/7 emergency line — routed with photo and video documentation for each work order.
+                - listitem [ref=e438]:
+                  - paragraph [ref=e439]: Serving notices
+                  - paragraph [ref=e440]: Procedural support under Utah landlord–tenant law when notices, cure periods, or evictions are required. Your attorney gives the legal advice; we handle the paperwork trail.
+        - region "Featured Utah rental properties" [ref=e441]:
+          - generic [ref=e442]:
+            - heading "Featured Utah rental properties" [level=2] [ref=e444]
+            - link "View all properties" [ref=e450] [cursor=pointer]:
+              - /url: /properties/
+        - region "Browse by home type" [ref=e451]:
+          - generic [ref=e452]:
+            - heading "Browse by home type" [level=2] [ref=e453]
+            - paragraph [ref=e454]: These links open current Ondo-managed rentals. Counts are not shown unless a live listing exists for that type.
+            - list [ref=e455]:
+              - listitem [ref=e456]:
+                - link "Houses" [ref=e457] [cursor=pointer]:
+                  - /url: /properties/?type=house
+              - listitem [ref=e458]:
+                - link "Townhomes" [ref=e459] [cursor=pointer]:
+                  - /url: /properties/?type=townhouse
+              - listitem [ref=e460]:
+                - link "Condos" [ref=e461] [cursor=pointer]:
+                  - /url: /properties/?type=condo
+              - listitem [ref=e462]:
+                - link "Apartments" [ref=e463] [cursor=pointer]:
+                  - /url: /properties/?type=apartment
+        - region "What working with Ondo can look like" [ref=e464]:
+          - generic [ref=e465]:
+            - heading "What working with Ondo can look like" [level=2] [ref=e466]
+            - paragraph [ref=e467]: Example stories across owners, tenants, investors, buyers, and sellers in Utah.
+            - paragraph [ref=e468]: These are example stories written to illustrate typical Ondo work. They are composites, not dated third-party platform reviews.
+            - generic [ref=e469]:
+              - group "Filter by role" [ref=e470]:
+                - button "All roles" [pressed] [ref=e471] [cursor=pointer]
+                - button "Owner" [ref=e472] [cursor=pointer]
+                - button "Tenant" [ref=e473] [cursor=pointer]
+                - button "Investor" [ref=e474] [cursor=pointer]
+                - button "Buyer" [ref=e475] [cursor=pointer]
+                - button "Seller" [ref=e476] [cursor=pointer]
+              - generic [ref=e477]:
+                - region "Example stories" [ref=e478]:
+                  - generic [ref=e480]:
+                    - generic [ref=e481]:
+                      - generic [ref=e484]:
+                        - generic [ref=e485]: Sarah J.
+                        - generic [ref=e486]: Tenant • Salt Lake City
+                      - generic [ref=e488]: Example
+                    - generic [ref=e489]:
+                      - generic "5 out of 5 stars" [ref=e490]:
+                        - img [ref=e491]
+                        - img [ref=e493]
+                        - img [ref=e495]
+                        - img [ref=e497]
+                        - img [ref=e499]
+                      - paragraph [ref=e501]: “Ondo RE made finding my new apartment in Sugar House so easy. Their team was responsive and helped me find exactly what I was looking for, walkable to TRAX and within my budget.”
+                  - generic [ref=e503]:
+                    - generic [ref=e504]:
+                      - generic [ref=e507]:
+                        - generic [ref=e508]: Michael T.
+                        - generic [ref=e509]: Owner • Salt Lake City
+                      - generic [ref=e511]: Example
+                    - generic [ref=e512]:
+                      - generic "5 out of 5 stars" [ref=e513]:
+                        - img [ref=e514]
+                        - img [ref=e516]
+                        - img [ref=e518]
+                        - img [ref=e520]
+                        - img [ref=e522]
+                      - paragraph [ref=e524]: “Since hiring Ondo to manage my Avenues duplex, I've had zero stress. They handle everything professionally and my rental income has actually increased with better tenant placement.”
+                  - generic [ref=e526]:
+                    - generic [ref=e527]:
+                      - generic [ref=e530]:
+                        - generic [ref=e531]: Jennifer L.
+                        - generic [ref=e532]: Investor • Salt Lake City
+                      - generic [ref=e534]: Example
+                    - generic [ref=e535]:
+                      - generic "5 out of 5 stars" [ref=e536]:
+                        - img [ref=e537]
+                        - img [ref=e539]
+                        - img [ref=e541]
+                        - img [ref=e543]
+                        - img [ref=e545]
+                      - paragraph [ref=e547]: “The data-driven approach Ondo RE takes to investment analysis helped me identify undervalued properties near the University of Utah. My portfolio has grown 15% in one year.”
+                  - generic [ref=e549]:
+                    - generic [ref=e550]:
+                      - generic [ref=e551]:
+                        - generic [ref=e552]: D
+                        - generic [ref=e553]:
+                          - generic [ref=e554]: David K.
+                          - generic [ref=e555]: Owner • Draper
+                      - generic [ref=e557]: Example
+                    - generic [ref=e558]:
+                      - generic "5 out of 5 stars" [ref=e559]:
+                        - img [ref=e560]
+                        - img [ref=e562]
+                        - img [ref=e564]
+                        - img [ref=e566]
+                        - img [ref=e568]
+                      - paragraph [ref=e570]: “Managing my Suncrest rental from out of state was a nightmare until I found Ondo. Their owner dashboard shows me everything, rent status, maintenance, financials, in real time.”
+                  - generic [ref=e572]:
+                    - generic [ref=e573]:
+                      - generic [ref=e574]:
+                        - generic [ref=e575]: A
+                        - generic [ref=e576]:
+                          - generic [ref=e577]: Amanda R.
+                          - generic [ref=e578]: Buyer • Draper
+                      - generic [ref=e580]: Example
+                    - generic [ref=e581]:
+                      - generic "5 out of 5 stars" [ref=e582]:
+                        - img [ref=e583]
+                        - img [ref=e585]
+                        - img [ref=e587]
+                        - img [ref=e589]
+                        - img [ref=e591]
+                      - paragraph [ref=e593]: “We relocated from California for the Silicon Slopes tech jobs. Ondo's local knowledge of Draper neighborhoods saved us from a bad HOA situation and found us a home near Corner Canyon trails.”
+                  - generic [ref=e595]:
+                    - generic [ref=e596]:
+                      - generic [ref=e597]:
+                        - generic [ref=e598]: J
+                        - generic [ref=e599]:
+                          - generic [ref=e600]: Jason M.
+                          - generic [ref=e601]: Investor • Lehi
+                      - generic [ref=e603]: Example
+                    - generic [ref=e604]:
+                      - generic "5 out of 5 stars" [ref=e605]:
+                        - img [ref=e606]
+                        - img [ref=e608]
+                        - img [ref=e610]
+                        - img [ref=e612]
+                        - img [ref=e614]
+                      - paragraph [ref=e616]: “The Traverse Mountain townhome Ondo helped me acquire has been fully occupied since day one. Their screening is documented and consistent, and the unit has had zero turnover in 18 months.”
+                  - generic [ref=e618]:
+                    - generic [ref=e619]:
+                      - generic [ref=e620]:
+                        - generic [ref=e621]: P
+                        - generic [ref=e622]:
+                          - generic [ref=e623]: Priya S.
+                          - generic [ref=e624]: Tenant • Lehi
+                      - generic [ref=e626]: Example
+                    - generic [ref=e627]:
+                      - generic "5 out of 5 stars" [ref=e628]:
+                        - img [ref=e629]
+                        - img [ref=e631]
+                        - img [ref=e633]
+                        - img [ref=e635]
+                        - img [ref=e637]
+                      - paragraph [ref=e639]: “Maintenance requests get handled within 24 hours. I submitted a plumbing issue at 10 PM and had a plumber there by 9 AM the next morning. That's unheard of with other management companies.”
+                  - generic [ref=e641]:
+                    - generic [ref=e642]:
+                      - generic [ref=e643]:
+                        - generic [ref=e644]: T
+                        - generic [ref=e645]:
+                          - generic [ref=e646]: Tyler B.
+                          - generic [ref=e647]: Owner • Provo
+                      - generic [ref=e649]: Example
+                    - generic [ref=e650]:
+                      - generic "5 out of 5 stars" [ref=e651]:
+                        - img [ref=e652]
+                        - img [ref=e654]
+                        - img [ref=e656]
+                        - img [ref=e658]
+                        - img [ref=e660]
+                      - paragraph [ref=e662]: “I own three rentals near BYU campus. Ondo handles the student turnover seamlessly, properties are cleaned, repaired, and re-listed within days of lease end. Vacancy stays under two weeks.”
+                  - generic [ref=e664]:
+                    - generic [ref=e665]:
+                      - generic [ref=e666]:
+                        - generic [ref=e667]: L
+                        - generic [ref=e668]:
+                          - generic [ref=e669]: Lisa N.
+                          - generic [ref=e670]: Seller • Sandy
+                      - generic [ref=e672]: Example
+                    - generic [ref=e673]:
+                      - generic "5 out of 5 stars" [ref=e674]:
+                        - img [ref=e675]
+                        - img [ref=e677]
+                        - img [ref=e679]
+                        - img [ref=e681]
+                        - img [ref=e683]
+                      - paragraph [ref=e685]: “Ondo's twilight photography and video tour of our Sandy home generated 12 showings in the first weekend. We got three offers above asking price and closed in 21 days.”
+                  - generic [ref=e687]:
+                    - generic [ref=e688]:
+                      - generic [ref=e689]:
+                        - generic [ref=e690]: M
+                        - generic [ref=e691]:
+                          - generic [ref=e692]: Mark H.
+                          - generic [ref=e693]: Owner • Orem
+                      - generic [ref=e695]: Example
+                    - generic [ref=e696]:
+                      - generic "5 out of 5 stars" [ref=e697]:
+                        - img [ref=e698]
+                        - img [ref=e700]
+                        - img [ref=e702]
+                        - img [ref=e704]
+                        - img [ref=e706]
+                      - paragraph [ref=e708]: “The AI-powered risk alerts caught a potential late payment trend early. Ondo reached out to the tenant proactively and set up a payment plan before it became an issue. Smart management.”
+                  - generic [ref=e710]:
+                    - generic [ref=e711]:
+                      - generic [ref=e712]:
+                        - generic [ref=e713]: R
+                        - generic [ref=e714]:
+                          - generic [ref=e715]: Rachel W.
+                          - generic [ref=e716]: Investor • Ogden
+                      - generic [ref=e718]: Example
+                    - generic [ref=e719]:
+                      - generic "5 out of 5 stars" [ref=e720]:
+                        - img [ref=e721]
+                        - img [ref=e723]
+                        - img [ref=e725]
+                        - img [ref=e727]
+                        - img [ref=e729]
+                      - paragraph [ref=e731]: “Ondo identified a value-add fourplex near 25th Street that I would have overlooked. After renovations their recommended contractor completed, rents increased 30%. Incredible ROI guidance.”
+                  - generic [ref=e733]:
+                    - generic [ref=e734]:
+                      - generic [ref=e735]:
+                        - generic [ref=e736]: C
+                        - generic [ref=e737]:
+                          - generic [ref=e738]: Chris D.
+                          - generic [ref=e739]: Tenant • Bountiful
+                      - generic [ref=e741]: Example
+                    - generic [ref=e742]:
+                      - generic "5 out of 5 stars" [ref=e743]:
+                        - img [ref=e744]
+                        - img [ref=e746]
+                        - img [ref=e748]
+                        - img [ref=e750]
+                        - img [ref=e752]
+                      - paragraph [ref=e754]: “The online portal makes everything simple, rent payments, maintenance requests, document storage. I've rented from three different companies and Ondo's tech is leagues ahead.”
+                  - generic [ref=e756]:
+                    - generic [ref=e757]:
+                      - generic [ref=e758]:
+                        - generic [ref=e759]: K
+                        - generic [ref=e760]:
+                          - generic [ref=e761]: Karen P.
+                          - generic [ref=e762]: Owner • Layton
+                      - generic [ref=e764]: Example
+                    - generic [ref=e765]:
+                      - generic "5 out of 5 stars" [ref=e766]:
+                        - img [ref=e767]
+                        - img [ref=e769]
+                        - img [ref=e771]
+                        - img [ref=e773]
+                        - img [ref=e775]
+                      - paragraph [ref=e777]: “With my husband deployed, having Ondo manage our rental near Hill AFB gives me peace of mind. They handle everything from inspections to lease renewals. Professional and caring team.”
+                  - generic [ref=e779]:
+                    - generic [ref=e780]:
+                      - generic [ref=e781]:
+                        - generic [ref=e782]: R
+                        - generic [ref=e783]:
+                          - generic [ref=e784]: Robert G.
+                          - generic [ref=e785]: Buyer • South Jordan
+                      - generic [ref=e787]: Example
+                    - generic [ref=e788]:
+                      - generic "5 out of 5 stars" [ref=e789]:
+                        - img [ref=e790]
+                        - img [ref=e792]
+                        - img [ref=e794]
+                        - img [ref=e796]
+                        - img [ref=e798]
+                      - paragraph [ref=e800]: “Ondo's loan team got us pre-approved in 48 hours and locked in a great rate. The whole process from application to closing on our South Jordan home took just 28 days.”
+                  - generic [ref=e802]:
+                    - generic [ref=e803]:
+                      - generic [ref=e804]:
+                        - generic [ref=e805]: S
+                        - generic [ref=e806]:
+                          - generic [ref=e807]: Stephanie F.
+                          - generic [ref=e808]: Owner • Riverton
+                      - generic [ref=e810]: Example
+                    - generic [ref=e811]:
+                      - generic "5 out of 5 stars" [ref=e812]:
+                        - img [ref=e813]
+                        - img [ref=e815]
+                        - img [ref=e817]
+                        - img [ref=e819]
+                        - img [ref=e821]
+                      - paragraph [ref=e823]: “I switched to Ondo from another PM company and immediately saw the difference. Better communication, faster maintenance, and my monthly statements are clear and detailed.”
+                - generic [ref=e824]:
+                  - button "Previous reviews" [ref=e825] [cursor=pointer]:
+                    - img
+                  - button "Next reviews" [ref=e826] [cursor=pointer]:
+                    - img
+            - paragraph [ref=e827]:
+              - link "See all example stories" [ref=e828] [cursor=pointer]:
+                - /url: /about/testimonials/
+        - region "55+ Cities Along Utah's Wasatch Front" [ref=e829]:
+          - generic [ref=e830]:
+            - generic [ref=e831]:
+              - heading "55+ Cities Along Utah's Wasatch Front" [level=2] [ref=e832]
+              - paragraph [ref=e833]: From North Ogden to Nephi. Type a city to see median rent, then open the guide — no hover required.
+            - generic [ref=e834]:
+              - generic [ref=e835]: Find your city
+              - generic [ref=e836]:
+                - img
+                - searchbox "Find your city" [ref=e837]
+            - generic [ref=e838]:
+              - generic [ref=e839]:
+                - generic [ref=e840]:
+                  - generic [ref=e841]:
+                    - paragraph [ref=e842]: City
+                    - paragraph [ref=e843]: Salt Lake City
+                  - generic [ref=e844]:
+                    - paragraph [ref=e845]:
+                      - img [ref=e846]
+                      - text: Median price
+                    - paragraph [ref=e849]: $535K
+                  - generic [ref=e850]:
+                    - paragraph [ref=e851]:
+                      - img [ref=e852]
+                      - text: Median rent
+                    - paragraph [ref=e854]: $1,650/mo
+                  - generic [ref=e855]:
+                    - paragraph [ref=e856]:
+                      - img [ref=e857]
+                      - text: Growth
+                    - paragraph [ref=e860]: 1.5%
+                - generic [ref=e861]:
+                  - link "City guide" [ref=e862] [cursor=pointer]:
+                    - /url: /locations/salt-lake-city/
+                  - link "Property management" [ref=e863] [cursor=pointer]:
+                    - /url: /property-management/salt-lake-city/
+              - paragraph [ref=e864]: Ondo city medians as of Aug 2026 — verify. Not an MLS pull, appraisal, BPO, or CMA.
+            - generic [ref=e865]:
+              - generic [ref=e866]:
+                - paragraph [ref=e867]: Weber County
+                - generic [ref=e869]:
+                  - link "North Ogden" [ref=e870] [cursor=pointer]:
+                    - /url: /locations/north-ogden/
+                    - img [ref=e871] [cursor=pointer]
+                    - text: North Ogden
+                  - link "Ogden" [ref=e874] [cursor=pointer]:
+                    - /url: /locations/ogden/
+                    - img [ref=e875] [cursor=pointer]
+                    - text: Ogden
+                  - link "South Ogden" [ref=e878] [cursor=pointer]:
+                    - /url: /locations/south-ogden/
+                    - img [ref=e879] [cursor=pointer]
+                    - text: South Ogden
+                  - link "Washington Terrace" [ref=e882] [cursor=pointer]:
+                    - /url: /locations/washington-terrace/
+                    - img [ref=e883] [cursor=pointer]
+                    - text: Washington Terrace
+                  - link "Riverdale" [ref=e886] [cursor=pointer]:
+                    - /url: /locations/riverdale/
+                    - img [ref=e887] [cursor=pointer]
+                    - text: Riverdale
+                  - link "Roy" [ref=e890] [cursor=pointer]:
+                    - /url: /locations/roy/
+                    - img [ref=e891] [cursor=pointer]
+                    - text: Roy
+                  - link "Hooper" [ref=e894] [cursor=pointer]:
+                    - /url: /locations/hooper/
+                    - img [ref=e895] [cursor=pointer]
+                    - text: Hooper
+              - generic [ref=e898]:
+                - paragraph [ref=e899]: Davis County
+                - generic [ref=e901]:
+                  - link "Clinton" [ref=e902] [cursor=pointer]:
+                    - /url: /locations/clinton/
+                    - img [ref=e903] [cursor=pointer]
+                    - text: Clinton
+                  - link "West Point" [ref=e906] [cursor=pointer]:
+                    - /url: /locations/west-point/
+                    - img [ref=e907] [cursor=pointer]
+                    - text: West Point
+                  - link "Sunset" [ref=e910] [cursor=pointer]:
+                    - /url: /locations/sunset/
+                    - img [ref=e911] [cursor=pointer]
+                    - text: Sunset
+                  - link "Syracuse" [ref=e914] [cursor=pointer]:
+                    - /url: /locations/syracuse/
+                    - img [ref=e915] [cursor=pointer]
+                    - text: Syracuse
+                  - link "Clearfield" [ref=e918] [cursor=pointer]:
+                    - /url: /locations/clearfield/
+                    - img [ref=e919] [cursor=pointer]
+                    - text: Clearfield
+                  - link "Layton" [ref=e922] [cursor=pointer]:
+                    - /url: /locations/layton/
+                    - img [ref=e923] [cursor=pointer]
+                    - text: Layton
+                  - link "Kaysville" [ref=e926] [cursor=pointer]:
+                    - /url: /locations/kaysville/
+                    - img [ref=e927] [cursor=pointer]
+                    - text: Kaysville
+                  - link "Farmington" [ref=e930] [cursor=pointer]:
+                    - /url: /locations/farmington/
+                    - img [ref=e931] [cursor=pointer]
+                    - text: Farmington
+                  - link "Centerville" [ref=e934] [cursor=pointer]:
+                    - /url: /locations/centerville/
+                    - img [ref=e935] [cursor=pointer]
+                    - text: Centerville
+                  - link "Bountiful" [ref=e938] [cursor=pointer]:
+                    - /url: /locations/bountiful/
+                    - img [ref=e939] [cursor=pointer]
+                    - text: Bountiful
+                  - link "Woods Cross" [ref=e942] [cursor=pointer]:
+                    - /url: /locations/woods-cross/
+                    - img [ref=e943] [cursor=pointer]
+                    - text: Woods Cross
+                  - link "North Salt Lake" [ref=e946] [cursor=pointer]:
+                    - /url: /locations/north-salt-lake/
+                    - img [ref=e947] [cursor=pointer]
+                    - text: North Salt Lake
+              - generic [ref=e950]:
+                - paragraph [ref=e951]: Salt Lake County
+                - generic [ref=e953]:
+                  - link "Salt Lake City" [ref=e954] [cursor=pointer]:
+                    - /url: /locations/salt-lake-city/
+                    - img [ref=e955] [cursor=pointer]
+                    - text: Salt Lake City
+                  - link "West Valley City" [ref=e958] [cursor=pointer]:
+                    - /url: /locations/west-valley-city/
+                    - img [ref=e959] [cursor=pointer]
+                    - text: West Valley City
+                  - link "Magna" [ref=e962] [cursor=pointer]:
+                    - /url: /locations/magna/
+                    - img [ref=e963] [cursor=pointer]
+                    - text: Magna
+                  - link "Kearns" [ref=e966] [cursor=pointer]:
+                    - /url: /locations/kearns/
+                    - img [ref=e967] [cursor=pointer]
+                    - text: Kearns
+                  - link "Taylorsville" [ref=e970] [cursor=pointer]:
+                    - /url: /locations/taylorsville/
+                    - img [ref=e971] [cursor=pointer]
+                    - text: Taylorsville
+                  - link "Murray" [ref=e974] [cursor=pointer]:
+                    - /url: /locations/murray/
+                    - img [ref=e975] [cursor=pointer]
+                    - text: Murray
+                  - link "South Salt Lake" [ref=e978] [cursor=pointer]:
+                    - /url: /locations/south-salt-lake/
+                    - img [ref=e979] [cursor=pointer]
+                    - text: South Salt Lake
+                  - link "Millcreek" [ref=e982] [cursor=pointer]:
+                    - /url: /locations/millcreek/
+                    - img [ref=e983] [cursor=pointer]
+                    - text: Millcreek
+                  - link "Holladay" [ref=e986] [cursor=pointer]:
+                    - /url: /locations/holladay/
+                    - img [ref=e987] [cursor=pointer]
+                    - text: Holladay
+                  - link "Cottonwood Heights" [ref=e990] [cursor=pointer]:
+                    - /url: /locations/cottonwood-heights/
+                    - img [ref=e991] [cursor=pointer]
+                    - text: Cottonwood Heights
+                  - link "Midvale" [ref=e994] [cursor=pointer]:
+                    - /url: /locations/midvale/
+                    - img [ref=e995] [cursor=pointer]
+                    - text: Midvale
+                  - link "Sandy" [ref=e998] [cursor=pointer]:
+                    - /url: /locations/sandy/
+                    - img [ref=e999] [cursor=pointer]
+                    - text: Sandy
+                  - link "West Jordan" [ref=e1002] [cursor=pointer]:
+                    - /url: /locations/west-jordan/
+                    - img [ref=e1003] [cursor=pointer]
+                    - text: West Jordan
+                  - link "South Jordan" [ref=e1006] [cursor=pointer]:
+                    - /url: /locations/south-jordan/
+                    - img [ref=e1007] [cursor=pointer]
+                    - text: South Jordan
+                  - link "Riverton" [ref=e1010] [cursor=pointer]:
+                    - /url: /locations/riverton/
+                    - img [ref=e1011] [cursor=pointer]
+                    - text: Riverton
+                  - link "Herriman" [ref=e1014] [cursor=pointer]:
+                    - /url: /locations/herriman/
+                    - img [ref=e1015] [cursor=pointer]
+                    - text: Herriman
+                  - link "Bluffdale" [ref=e1018] [cursor=pointer]:
+                    - /url: /locations/bluffdale/
+                    - img [ref=e1019] [cursor=pointer]
+                    - text: Bluffdale
+                  - link "Draper" [ref=e1022] [cursor=pointer]:
+                    - /url: /locations/draper/
+                    - img [ref=e1023] [cursor=pointer]
+                    - text: Draper
+              - generic [ref=e1026]:
+                - paragraph [ref=e1027]: Utah County
+                - generic [ref=e1029]:
+                  - link "Lehi" [ref=e1030] [cursor=pointer]:
+                    - /url: /locations/lehi/
+                    - img [ref=e1031] [cursor=pointer]
+                    - text: Lehi
+                  - link "Saratoga Springs" [ref=e1034] [cursor=pointer]:
+                    - /url: /locations/saratoga-springs/
+                    - img [ref=e1035] [cursor=pointer]
+                    - text: Saratoga Springs
+                  - link "Eagle Mountain" [ref=e1038] [cursor=pointer]:
+                    - /url: /locations/eagle-mountain/
+                    - img [ref=e1039] [cursor=pointer]
+                    - text: Eagle Mountain
+                  - link "Alpine" [ref=e1042] [cursor=pointer]:
+                    - /url: /locations/alpine/
+                    - img [ref=e1043] [cursor=pointer]
+                    - text: Alpine
+                  - link "Highland" [ref=e1046] [cursor=pointer]:
+                    - /url: /locations/highland/
+                    - img [ref=e1047] [cursor=pointer]
+                    - text: Highland
+                  - link "American Fork" [ref=e1050] [cursor=pointer]:
+                    - /url: /locations/american-fork/
+                    - img [ref=e1051] [cursor=pointer]
+                    - text: American Fork
+                  - link "Pleasant Grove" [ref=e1054] [cursor=pointer]:
+                    - /url: /locations/pleasant-grove/
+                    - img [ref=e1055] [cursor=pointer]
+                    - text: Pleasant Grove
+                  - link "Lindon" [ref=e1058] [cursor=pointer]:
+                    - /url: /locations/lindon/
+                    - img [ref=e1059] [cursor=pointer]
+                    - text: Lindon
+                  - link "Vineyard" [ref=e1062] [cursor=pointer]:
+                    - /url: /locations/vineyard/
+                    - img [ref=e1063] [cursor=pointer]
+                    - text: Vineyard
+                  - link "Orem" [ref=e1066] [cursor=pointer]:
+                    - /url: /locations/orem/
+                    - img [ref=e1067] [cursor=pointer]
+                    - text: Orem
+                  - link "Provo" [ref=e1070] [cursor=pointer]:
+                    - /url: /locations/provo/
+                    - img [ref=e1071] [cursor=pointer]
+                    - text: Provo
+                  - link "Springville" [ref=e1074] [cursor=pointer]:
+                    - /url: /locations/springville/
+                    - img [ref=e1075] [cursor=pointer]
+                    - text: Springville
+                  - link "Mapleton" [ref=e1078] [cursor=pointer]:
+                    - /url: /locations/mapleton/
+                    - img [ref=e1079] [cursor=pointer]
+                    - text: Mapleton
+                  - link "Spanish Fork" [ref=e1082] [cursor=pointer]:
+                    - /url: /locations/spanish-fork/
+                    - img [ref=e1083] [cursor=pointer]
+                    - text: Spanish Fork
+                  - link "Salem" [ref=e1086] [cursor=pointer]:
+                    - /url: /locations/salem/
+                    - img [ref=e1087] [cursor=pointer]
+                    - text: Salem
+                  - link "Payson" [ref=e1090] [cursor=pointer]:
+                    - /url: /locations/payson/
+                    - img [ref=e1091] [cursor=pointer]
+                    - text: Payson
+                  - link "Santaquin" [ref=e1094] [cursor=pointer]:
+                    - /url: /locations/santaquin/
+                    - img [ref=e1095] [cursor=pointer]
+                    - text: Santaquin
+              - generic [ref=e1098]:
+                - paragraph [ref=e1099]: Juab County
+                - link "Nephi" [ref=e1102] [cursor=pointer]:
+                  - /url: /locations/nephi/
+                  - img [ref=e1103] [cursor=pointer]
+                  - text: Nephi
+            - link "Explore All City Guides" [ref=e1107] [cursor=pointer]:
+              - /url: /locations/
+              - img [ref=e1108] [cursor=pointer]
+              - text: Explore All City Guides
+        - region "Utah landlord guides" [ref=e1111]:
+          - generic [ref=e1112]:
+            - generic [ref=e1113]:
+              - generic [ref=e1114]:
+                - heading "Utah landlord guides" [level=2] [ref=e1115]
+                - paragraph [ref=e1116]: Practical writing from the Ondo team — how to price, screen, maintain, and scale rentals along the Wasatch Front.
+              - link "All articles" [ref=e1117] [cursor=pointer]:
+                - /url: /blog/
+                - text: All articles
+                - img [ref=e1118] [cursor=pointer]
+            - list [ref=e1120]:
+              - listitem [ref=e1121]:
+                - link "Owners 8 min read How to choose a property management company in Utah What to ask, what to compare, and what red flags to walk away from before signing. Read guide" [ref=e1122] [cursor=pointer]:
+                  - /url: /blog/how-to-choose-property-management-company-utah/
+                  - generic [ref=e1123] [cursor=pointer]:
+                    - generic [ref=e1124] [cursor=pointer]: Owners
+                    - generic [ref=e1125] [cursor=pointer]: 8 min read
+                  - heading "How to choose a property management company in Utah" [level=3] [ref=e1126] [cursor=pointer]
+                  - paragraph [ref=e1127] [cursor=pointer]: What to ask, what to compare, and what red flags to walk away from before signing.
+                  - generic [ref=e1128] [cursor=pointer]:
+                    - text: Read guide
+                    - generic [ref=e1129] [cursor=pointer]: →
+              - listitem [ref=e1130]:
+                - link "Owners 7 min read Property management tips for Utah landlords Screening, pricing, maintenance reserves, and the seasonal rhythms of the Wasatch Front rental market. Read guide" [ref=e1131] [cursor=pointer]:
+                  - /url: /blog/property-management-tips-utah-landlords/
+                  - generic [ref=e1132] [cursor=pointer]:
+                    - generic [ref=e1133] [cursor=pointer]: Owners
+                    - generic [ref=e1134] [cursor=pointer]: 7 min read
+                  - heading "Property management tips for Utah landlords" [level=3] [ref=e1135] [cursor=pointer]
+                  - paragraph [ref=e1136] [cursor=pointer]: Screening, pricing, maintenance reserves, and the seasonal rhythms of the Wasatch Front rental market.
+                  - generic [ref=e1137] [cursor=pointer]:
+                    - text: Read guide
+                    - generic [ref=e1138] [cursor=pointer]: →
+              - listitem [ref=e1139]:
+                - link "Guides 12 min read The ultimate guide to becoming a Utah landlord From LLC vs personal ownership to your first tenant renewal, without the wishful thinking. Read guide" [ref=e1140] [cursor=pointer]:
+                  - /url: /blog/ultimate-guide-becoming-utah-landlord-2026/
+                  - generic [ref=e1141] [cursor=pointer]:
+                    - generic [ref=e1142] [cursor=pointer]: Guides
+                    - generic [ref=e1143] [cursor=pointer]: 12 min read
+                  - heading "The ultimate guide to becoming a Utah landlord" [level=3] [ref=e1144] [cursor=pointer]
+                  - paragraph [ref=e1145] [cursor=pointer]: From LLC vs personal ownership to your first tenant renewal, without the wishful thinking.
+                  - generic [ref=e1146] [cursor=pointer]:
+                    - text: Read guide
+                    - generic [ref=e1147] [cursor=pointer]: →
+              - listitem [ref=e1148]:
+                - link "Landlording 6 min read New-landlord mistakes and the systems that prevent them Documentation, reserves, maintenance states, and comms playbooks that keep small problems small. Read guide" [ref=e1149] [cursor=pointer]:
+                  - /url: /blog/new-landlord-mistakes-systems/
+                  - generic [ref=e1150] [cursor=pointer]:
+                    - generic [ref=e1151] [cursor=pointer]: Landlording
+                    - generic [ref=e1152] [cursor=pointer]: 6 min read
+                  - heading "New-landlord mistakes and the systems that prevent them" [level=3] [ref=e1153] [cursor=pointer]
+                  - paragraph [ref=e1154] [cursor=pointer]: Documentation, reserves, maintenance states, and comms playbooks that keep small problems small.
+                  - generic [ref=e1155] [cursor=pointer]:
+                    - text: Read guide
+                    - generic [ref=e1156] [cursor=pointer]: →
+              - listitem [ref=e1157]:
+                - link "Operations 6 min read Property management automation checklist The highest-ROI automations for rent collection, maintenance triage, and owner reporting. Read guide" [ref=e1158] [cursor=pointer]:
+                  - /url: /blog/property-management-automation-checklist/
+                  - generic [ref=e1159] [cursor=pointer]:
+                    - generic [ref=e1160] [cursor=pointer]: Operations
+                    - generic [ref=e1161] [cursor=pointer]: 6 min read
+                  - heading "Property management automation checklist" [level=3] [ref=e1162] [cursor=pointer]
+                  - paragraph [ref=e1163] [cursor=pointer]: The highest-ROI automations for rent collection, maintenance triage, and owner reporting.
+                  - generic [ref=e1164] [cursor=pointer]:
+                    - text: Read guide
+                    - generic [ref=e1165] [cursor=pointer]: →
+              - listitem [ref=e1166]:
+                - link "Market 5 min read Salt Lake City rental market report Current rent, vacancy, and days-on-market signals across SLC and neighboring corridors. Read guide" [ref=e1167] [cursor=pointer]:
+                  - /url: /blog/salt-lake-city-rental-market-report/
+                  - generic [ref=e1168] [cursor=pointer]:
+                    - generic [ref=e1169] [cursor=pointer]: Market
+                    - generic [ref=e1170] [cursor=pointer]: 5 min read
+                  - heading "Salt Lake City rental market report" [level=3] [ref=e1171] [cursor=pointer]
+                  - paragraph [ref=e1172] [cursor=pointer]: Current rent, vacancy, and days-on-market signals across SLC and neighboring corridors.
+                  - generic [ref=e1173] [cursor=pointer]:
+                    - text: Read guide
+                    - generic [ref=e1174] [cursor=pointer]: →
+        - generic [ref=e1177]:
+          - generic [ref=e1179]:
+            - generic:
+              - img "Pranay Reddy Aleti, Founder and CEO of Ondo Real Estate, professional headshot"
+          - generic [ref=e1180]:
+            - heading "Founder's note" [level=2] [ref=e1181]
+            - paragraph [ref=e1182]: "\"Real estate is more than property, it is about people, growth, and legacy. At Ondo RE, we are building a modern property management and real estate platform rooted in trust, transparency, and technology so Utah owners rest easy and tenants feel right at home.\""
+            - link "Read the full letter" [ref=e1183] [cursor=pointer]:
+              - /url: /founders-letter/
+        - region "Owner questions, answered" [ref=e1184]:
+          - generic [ref=e1185]:
+            - heading "Owner questions, answered" [level=2] [ref=e1186]
+            - generic [ref=e1187]:
+              - heading "What areas do you manage in Utah?" [level=3] [ref=e1189]:
+                - button "What areas do you manage in Utah?" [ref=e1190] [cursor=pointer]:
+                  - text: What areas do you manage in Utah?
+                  - img [ref=e1191] [cursor=pointer]
+              - heading "What are your management and leasing fees?" [level=3] [ref=e1194]:
+                - button "What are your management and leasing fees?" [ref=e1195] [cursor=pointer]:
+                  - text: What are your management and leasing fees?
+                  - img [ref=e1196] [cursor=pointer]
+              - heading "How quickly can you lease my property?" [level=3] [ref=e1199]:
+                - button "How quickly can you lease my property?" [ref=e1200] [cursor=pointer]:
+                  - text: How quickly can you lease my property?
+                  - img [ref=e1201] [cursor=pointer]
+              - heading "How do you screen tenants?" [level=3] [ref=e1204]:
+                - button "How do you screen tenants?" [ref=e1205] [cursor=pointer]:
+                  - text: How do you screen tenants?
+                  - img [ref=e1206] [cursor=pointer]
+              - heading "How is maintenance handled?" [level=3] [ref=e1209]:
+                - button "How is maintenance handled?" [ref=e1210] [cursor=pointer]:
+                  - text: How is maintenance handled?
+                  - img [ref=e1211] [cursor=pointer]
+              - heading "Is there a maintenance reserve or markups?" [level=3] [ref=e1214]:
+                - button "Is there a maintenance reserve or markups?" [ref=e1215] [cursor=pointer]:
+                  - text: Is there a maintenance reserve or markups?
+                  - img [ref=e1216] [cursor=pointer]
+        - generic [ref=e1220]:
+          - img [ref=e1222]
+          - heading "Utah landlord checklist, stay in the loop" [level=2] [ref=e1225]
+          - paragraph [ref=e1226]: Leave your email and we'll share practical landlord tips and follow up with the checklist materials.
+          - list [ref=e1227]:
+            - listitem [ref=e1228]:
+              - img [ref=e1229]
+              - generic [ref=e1231]: Utah tenant screening checklist & red flags
+            - listitem [ref=e1232]:
+              - img [ref=e1233]
+              - generic [ref=e1235]: Lease compliance requirements specific to Utah law
+            - listitem [ref=e1236]:
+              - img [ref=e1237]
+              - generic [ref=e1239]: Rent collection & late fee procedures
+            - listitem [ref=e1240]:
+              - img [ref=e1241]
+              - generic [ref=e1243]: Maintenance request response time standards
+          - generic [ref=e1244]:
+            - textbox "Email address" [ref=e1245]
+            - button "Get updates" [ref=e1246] [cursor=pointer]:
+              - text: Get updates
+              - img [ref=e1247] [cursor=pointer]
+          - paragraph [ref=e1249]: No spam. Unsubscribe anytime.
+        - region "Schedule a call" [ref=e1250]:
+          - generic [ref=e1251]:
+            - heading "Schedule a call" [level=2] [ref=e1252]
+            - paragraph [ref=e1253]: Pick a time that works for you, property management, buying, selling, loans, notary, and general questions.
+            - generic [ref=e1254]:
+              - generic [ref=e1255]:
+                - button "Open scheduling calendar in fullscreen" [ref=e1257] [cursor=pointer]:
+                  - img
+                  - generic [ref=e1258] [cursor=pointer]: Fullscreen
+                - iframe [ref=e1259]:
+                  - img [ref=f1e5]
+              - paragraph [ref=e1260]:
+                - link "Open scheduling in a new tab" [ref=e1261] [cursor=pointer]:
+                  - /url: https://calendly.com/scheduleondo/30min
+                - text: if the calendar does not load.
+        - region "What could your Utah rental earn?" [ref=e1262]:
+          - generic [ref=e1263]:
+            - heading "What could your Utah rental earn?" [level=2] [ref=e1264]
+            - paragraph [ref=e1265]: See a free rent and sale estimate for your property, or book a 30-minute call to talk through management, buying, or loans with the Ondo team.
+            - generic [ref=e1266]:
+              - link "Free rental analysis" [ref=e1267] [cursor=pointer]:
+                - /url: /whats-my-home-worth/
+                - img
+                - text: Free rental analysis
+              - link "Book a call" [ref=e1268] [cursor=pointer]:
+                - /url: /contact/#book-a-call
+                - img
+                - text: Book a call
+              - link "Search rentals by ZIP" [ref=e1269] [cursor=pointer]:
+                - /url: /properties/
+                - img
+                - text: Search rentals by ZIP
+            - paragraph [ref=e1270]: Estimates are informational only and are not an appraisal, BPO, or CMA.
+    - contentinfo [ref=e1271]:
+      - generic [ref=e1273]:
+        - generic [ref=e1274]:
+          - img [ref=e1276]
+          - generic [ref=e1278]:
+            - paragraph [ref=e1279]: Got ideas?
+            - paragraph [ref=e1280]: We're listening! Share feedback.
+        - link "Share feedback" [ref=e1281] [cursor=pointer]:
+          - /url: /feedback/
+      - generic "Ondo Real Estate footer navigation" [ref=e1282]:
+        - generic [ref=e1283]:
+          - navigation "Buying a Home" [ref=e1284]:
+            - heading "Buying a Home" [level=3] [ref=e1285]:
+              - link "Buying a Home" [ref=e1286] [cursor=pointer]:
+                - /url: /buy/
+                - img [ref=e1287] [cursor=pointer]
+                - generic [ref=e1290] [cursor=pointer]: Buying a Home
+            - list [ref=e1291]:
+              - listitem [ref=e1292]:
+                - link "First-time homebuyer" [ref=e1293] [cursor=pointer]:
+                  - /url: /buy/first-time/
+              - listitem [ref=e1294]:
+                - link "Buying a second home" [ref=e1295] [cursor=pointer]:
+                  - /url: /buy/second-home/
+              - listitem [ref=e1296]:
+                - link "Fixed-rate mortgage" [ref=e1297] [cursor=pointer]:
+                  - /url: /buy/fixed-rate/
+              - listitem [ref=e1298]:
+                - link "Adjustable-rate mortgage" [ref=e1299] [cursor=pointer]:
+                  - /url: /buy/adjustable-rate/
+              - listitem [ref=e1300]:
+                - link "30 year mortgage" [ref=e1301] [cursor=pointer]:
+                  - /url: /buy/30-year/
+              - listitem [ref=e1302]:
+                - link "15 year mortgage" [ref=e1303] [cursor=pointer]:
+                  - /url: /buy/15-year/
+              - listitem [ref=e1304]:
+                - link "Mortgage rates explained" [ref=e1305] [cursor=pointer]:
+                  - /url: /buy/rates/
+              - listitem [ref=e1306]:
+                - link "Buy & sell by city" [ref=e1307] [cursor=pointer]:
+                  - /url: /buy-sell/
+          - navigation "Refinance" [ref=e1308]:
+            - heading "Refinance" [level=3] [ref=e1309]:
+              - link "Refinance" [ref=e1310] [cursor=pointer]:
+                - /url: /refinance/process/
+                - img [ref=e1311] [cursor=pointer]
+                - generic [ref=e1314] [cursor=pointer]: Refinance
+            - list [ref=e1315]:
+              - listitem [ref=e1316]:
+                - link "Mortgage refinance process" [ref=e1317] [cursor=pointer]:
+                  - /url: /refinance/process/
+              - listitem [ref=e1318]:
+                - link "Rate-and-term refinance" [ref=e1319] [cursor=pointer]:
+                  - /url: /refinance/rate-term/
+              - listitem [ref=e1320]:
+                - link "Cash-out refinance" [ref=e1321] [cursor=pointer]:
+                  - /url: /refinance/cash-out/
+              - listitem [ref=e1322]:
+                - link "Mortgage blog – Refinance" [ref=e1323] [cursor=pointer]:
+                  - /url: /refinance/blog/
+              - listitem [ref=e1324]:
+                - link "Recast vs refinance" [ref=e1325] [cursor=pointer]:
+                  - /url: /blog/recast-vs-refinance/
+          - navigation "Mortgage Loans" [ref=e1326]:
+            - heading "Mortgage Loans" [level=3] [ref=e1327]:
+              - link "Mortgage Loans" [ref=e1328] [cursor=pointer]:
+                - /url: /loans/
+                - img [ref=e1329] [cursor=pointer]
+                - generic [ref=e1332] [cursor=pointer]: Mortgage Loans
+            - list [ref=e1333]:
+              - listitem [ref=e1334]:
+                - link "Conventional" [ref=e1335] [cursor=pointer]:
+                  - /url: /loans/conventional/
+              - listitem [ref=e1336]:
+                - link "FHA" [ref=e1337] [cursor=pointer]:
+                  - /url: /loans/fha/
+              - listitem [ref=e1338]:
+                - link "USDA" [ref=e1339] [cursor=pointer]:
+                  - /url: /loans/usda/
+              - listitem [ref=e1340]:
+                - link "VA" [ref=e1341] [cursor=pointer]:
+                  - /url: /loans/va/
+              - listitem [ref=e1342]:
+                - link "HELOC / HELOAN" [ref=e1343] [cursor=pointer]:
+                  - /url: /loans/heloc/
+              - listitem [ref=e1344]:
+                - link "Reverse Mortgage" [ref=e1345] [cursor=pointer]:
+                  - /url: /loans/reverse/
+              - listitem [ref=e1346]:
+                - link "Jumbo Loans" [ref=e1347] [cursor=pointer]:
+                  - /url: /loans/jumbo/
+          - navigation "Calculators" [ref=e1348]:
+            - heading "Calculators" [level=3] [ref=e1349]:
+              - link "Calculators" [ref=e1350] [cursor=pointer]:
+                - /url: /calculators/
+                - img [ref=e1351] [cursor=pointer]
+                - generic [ref=e1353] [cursor=pointer]: Calculators
+            - list [ref=e1354]:
+              - listitem [ref=e1355]:
+                - link "Self-manage vs Ondo ROI" [ref=e1356] [cursor=pointer]:
+                  - /url: /calculators/owner-vs-self/
+              - listitem [ref=e1357]:
+                - link "Mortgage payment calculator" [ref=e1358] [cursor=pointer]:
+                  - /url: /calculators/mortgage-payment/
+              - listitem [ref=e1359]:
+                - link "Affordability calculator" [ref=e1360] [cursor=pointer]:
+                  - /url: /calculators/affordability/
+              - listitem [ref=e1361]:
+                - link "Income calculator" [ref=e1362] [cursor=pointer]:
+                  - /url: /calculators/income/
+              - listitem [ref=e1363]:
+                - link "Closing cost calculator" [ref=e1364] [cursor=pointer]:
+                  - /url: /calculators/closing-cost/
+              - listitem [ref=e1365]:
+                - link "Refinance calculator" [ref=e1366] [cursor=pointer]:
+                  - /url: /calculators/refinance/
+              - listitem [ref=e1367]:
+                - link "Home sale calculator" [ref=e1368] [cursor=pointer]:
+                  - /url: /calculators/home-sale/
+              - listitem [ref=e1369]:
+                - link "Buying power calculator" [ref=e1370] [cursor=pointer]:
+                  - /url: /calculators/buying-power/
+          - navigation "About Us" [ref=e1371]:
+            - heading "About Us" [level=3] [ref=e1372]:
+              - link "About Us" [ref=e1373] [cursor=pointer]:
+                - /url: /about/
+                - img [ref=e1374] [cursor=pointer]
+                - generic [ref=e1379] [cursor=pointer]: About Us
+            - list [ref=e1380]:
+              - listitem [ref=e1381]:
+                - link "History" [ref=e1382] [cursor=pointer]:
+                  - /url: /about/history/
+              - listitem [ref=e1383]:
+                - link "New to Utah" [ref=e1384] [cursor=pointer]:
+                  - /url: /moving-to-utah/
+              - listitem [ref=e1385]:
+                - link "Giving back" [ref=e1386] [cursor=pointer]:
+                  - /url: /about/giving-back/
+              - listitem [ref=e1387]:
+                - link "Careers" [ref=e1388] [cursor=pointer]:
+                  - /url: /about/careers/
+              - listitem [ref=e1389]:
+                - link "News" [ref=e1390] [cursor=pointer]:
+                  - /url: /about/news/
+              - listitem [ref=e1391]:
+                - link "Socials" [ref=e1392] [cursor=pointer]:
+                  - /url: /socials/
+              - listitem [ref=e1393]:
+                - link "Events" [ref=e1394] [cursor=pointer]:
+                  - /url: /events/
+              - listitem [ref=e1395]:
+                - link "Mortgage learning hub" [ref=e1396] [cursor=pointer]:
+                  - /url: /learn/
+              - listitem [ref=e1397]:
+                - link "Variable income mortgages" [ref=e1398] [cursor=pointer]:
+                  - /url: /learn/variable-income/
+              - listitem [ref=e1399]:
+                - link "First-time buyer cash and closing" [ref=e1400] [cursor=pointer]:
+                  - /url: /learn/first-time/
+              - listitem [ref=e1401]:
+                - link "Service areas" [ref=e1402] [cursor=pointer]:
+                  - /url: /locations/
+              - listitem [ref=e1403]:
+                - link "City market reports" [ref=e1404] [cursor=pointer]:
+                  - /url: /market-reports/
+              - listitem [ref=e1405]:
+                - link "Neighborhood guides" [ref=e1406] [cursor=pointer]:
+                  - /url: /neighborhoods/
+              - listitem [ref=e1407]:
+                - link "School district guides" [ref=e1408] [cursor=pointer]:
+                  - /url: /schools/
+              - listitem [ref=e1409]:
+                - link "Non-QM, bank-statement, DSCR" [ref=e1410] [cursor=pointer]:
+                  - /url: /learn/non-qm/
+              - listitem [ref=e1411]:
+                - link "Investment occupancy and DSCR" [ref=e1412] [cursor=pointer]:
+                  - /url: /learn/investment/
+              - listitem [ref=e1413]:
+                - link "Utah tax calendar vs escrow" [ref=e1414] [cursor=pointer]:
+                  - /url: /blog/utah-property-tax-calendar-first-escrow-analysis/
+              - listitem [ref=e1415]:
+                - link "Escrow shortage after first year" [ref=e1416] [cursor=pointer]:
+                  - /url: /blog/escrow-shortage-after-first-year/
+              - listitem [ref=e1417]:
+                - link "Impounds vs waiving escrow" [ref=e1418] [cursor=pointer]:
+                  - /url: /blog/impounds-vs-waiving-escrow/
+              - listitem [ref=e1419]:
+                - link "The week after funding" [ref=e1420] [cursor=pointer]:
+                  - /url: /blog/week-after-mortgage-funding/
+              - listitem [ref=e1421]:
+                - link "How long a first purchase takes" [ref=e1422] [cursor=pointer]:
+                  - /url: /blog/how-long-first-purchase-takes/
+              - listitem [ref=e1423]:
+                - 'link "Hill AFB VA: COE and occupancy" [ref=e1424] [cursor=pointer]':
+                  - /url: /blog/hill-afb-va-coe-occupancy/
+              - listitem [ref=e1425]:
+                - link "Start a mortgage conversation" [ref=e1426] [cursor=pointer]:
+                  - /url: /qualify/
+              - listitem [ref=e1427]:
+                - link "Academy" [ref=e1428] [cursor=pointer]:
+                  - /url: /academy/
+              - listitem [ref=e1429]:
+                - link "Reviews" [ref=e1430] [cursor=pointer]:
+                  - /url: /about/testimonials/
+              - listitem [ref=e1431]:
+                - link "Industry news" [ref=e1432] [cursor=pointer]:
+                  - /url: /news/
+              - listitem [ref=e1433]:
+                - link "Investor relations" [ref=e1434] [cursor=pointer]:
+                  - /url: /about/investor-relations/
+              - listitem [ref=e1435]:
+                - link "Affiliate Program" [ref=e1436] [cursor=pointer]:
+                  - /url: /affiliate/
+          - navigation "Help Center" [ref=e1437]:
+            - heading "Help Center" [level=3] [ref=e1438]:
+              - link "Help Center" [ref=e1439] [cursor=pointer]:
+                - /url: /faq/
+                - img [ref=e1440] [cursor=pointer]
+                - generic [ref=e1443] [cursor=pointer]: Help Center
+            - list [ref=e1444]:
+              - listitem [ref=e1445]:
+                - link "Payment questions" [ref=e1446] [cursor=pointer]:
+                  - /url: /faq/payments-faqs/
+              - listitem [ref=e1447]:
+                - link "Hardship assistance" [ref=e1448] [cursor=pointer]:
+                  - /url: /faq/hardship-faqs/
+              - listitem [ref=e1449]:
+                - link "Loan payoffs" [ref=e1450] [cursor=pointer]:
+                  - /url: /faq/loan-payoffs-faqs/
+              - listitem [ref=e1451]:
+                - link "Mortgage FAQs" [ref=e1452] [cursor=pointer]:
+                  - /url: /faq/loans-faqs/
+              - listitem [ref=e1453]:
+                - link "Escrow" [ref=e1454] [cursor=pointer]:
+                  - /url: /faq/escrow-faqs/
+              - listitem [ref=e1455]:
+                - link "Natural Disaster Resources" [ref=e1456] [cursor=pointer]:
+                  - /url: /faq/disaster-faqs/
+        - generic [ref=e1458]:
+          - generic [ref=e1459]:
+            - img [ref=e1460]
+            - generic [ref=e1462]:
+              - paragraph [ref=e1463]: Loan Servicing Help Center
+              - link "Call +1-408-538-0420" [ref=e1464] [cursor=pointer]:
+                - /url: tel:+14085380420
+                - text: +1-408-538-0420
+              - paragraph [ref=e1465]: "Office hours: Mon–Fri 9:00 AM – 5:00 PM MT"
+          - generic [ref=e1466]:
+            - img [ref=e1467]
+            - generic [ref=e1470]:
+              - paragraph [ref=e1471]: Email Us
+              - link "Email info@ondorealestate.com" [ref=e1472] [cursor=pointer]:
+                - /url: mailto:info@ondorealestate.com
+                - text: info@ondorealestate.com
+          - generic [ref=e1473]:
+            - img [ref=e1474]
+            - generic [ref=e1477]:
+              - paragraph [ref=e1478]: Our Location
+              - link "Open address in Google Maps" [ref=e1479] [cursor=pointer]:
+                - /url: https://www.google.com/maps/search/?api=1&query=2701%20N%20Thanksgiving%20Way%2C%20Lehi%2C%20UT%2084043
+                - generic [ref=e1480] [cursor=pointer]: 2701 N Thanksgiving Way
+                - generic [ref=e1481] [cursor=pointer]: Lehi, UT 84043
+        - generic [ref=e1483]:
+          - generic [ref=e1484]:
+            - generic [ref=e1485]: "Follow us:"
+            - link "Instagram" [ref=e1486] [cursor=pointer]:
+              - /url: https://www.instagram.com/OndoRealEstate
+              - img [ref=e1487] [cursor=pointer]
+            - link "Linktree" [ref=e1490] [cursor=pointer]:
+              - /url: https://linktr.ee/ondorealestate
+              - img [ref=e1491] [cursor=pointer]
+            - generic [ref=e1493]:
+              - link "Scan QR code to access all social media links" [ref=e1494] [cursor=pointer]:
+                - /url: https://linktr.ee/ondorealestate
+                - img "Linktree QR Code - Scan to access all social media" [ref=e1495] [cursor=pointer]
+              - generic [ref=e1496]: Click or Scan for all links
+          - generic [ref=e1497]:
+            - generic [ref=e1498]:
+              - img [ref=e1499]
+              - generic [ref=e1505]: Equal Housing Opportunity
+            - generic [ref=e1507]:
+              - generic [ref=e1508]: R
+              - generic [ref=e1509]: REALTOR
+            - generic [ref=e1511]:
+              - generic [ref=e1512]: MLS
+              - generic [ref=e1513]: Multiple Listing Service
+      - generic [ref=e1516]:
+        - generic [ref=e1517]:
+          - paragraph [ref=e1518]: © 2026 Ondo Real Estate. All rights reserved.
+          - paragraph [ref=e1519]:
+            - generic [ref=e1520]: Designed. Developed. Deployed by
+            - link "OndoSoft" [ref=e1521] [cursor=pointer]:
+              - /url: https://www.ondosoft.com/?utm_source=ondorealestate
+            - generic [ref=e1522]:
+              - text: The digital engine behind
+              - link "Ondo Real Estate" [ref=e1523] [cursor=pointer]:
+                - /url: /
+              - text: .
+        - generic [ref=e1524]:
+          - link "Licensing" [ref=e1526] [cursor=pointer]:
+            - /url: /licensing/
+          - link "Privacy Policy" [ref=e1527] [cursor=pointer]:
+            - /url: /privacy-policy/
+          - link "Terms of Use" [ref=e1528] [cursor=pointer]:
+            - /url: /terms-of-service/
+          - link "Accessibility" [ref=e1529] [cursor=pointer]:
+            - /url: /accessibility/
+          - link "Site Map" [ref=e1530] [cursor=pointer]:
+            - /url: /sitemap/
+  - button "Open the Ondo assistant to ask about property management, renting, buying, or loans" [ref=e1531] [cursor=pointer]:
+    - img [ref=e1532] [cursor=pointer]
+    - text: Ask Ondo
+  - button "Schedule a free consultation with Ondo Real Estate" [ref=e1535] [cursor=pointer]:
+    - img
+  - region "Notifications (F8)":
+    - list
+```

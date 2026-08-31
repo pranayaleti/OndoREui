@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import type { ApiProperty } from "@/app/types/property"
 import {
   fetchPublicPropertyByPublicId,
+  fetchPublicPropertyList,
   findPublicProperty,
   listingDetailPath,
   publicIdFromPathname,
@@ -127,6 +128,20 @@ describe("fetchPublicPropertyByPublicId", () => {
     global.fetch = spy as unknown as typeof fetch
     expect(await fetchPublicPropertyByPublicId("_placeholder")).toBeNull()
     expect(spy).not.toHaveBeenCalled()
+  })
+})
+
+describe("fetchPublicPropertyList", () => {
+  it("returns approved listings from the public list envelope", async () => {
+    const row = listing()
+    global.fetch = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ data: [row] }),
+    })) as unknown as typeof fetch
+
+    const result = await fetchPublicPropertyList()
+    expect(result).toHaveLength(1)
+    expect(result[0]?.publicId).toBe(row.publicId)
   })
 })
 

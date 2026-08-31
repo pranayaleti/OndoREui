@@ -11,6 +11,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 
+import { cn } from "@/lib/utils"
+
 export type ListingGalleryPhoto = Pick<ApiPhoto, "id" | "url" | "caption" | "orderIndex">
 
 type ListingGalleryProps = {
@@ -95,7 +97,7 @@ export function ListingGallery({ title, photos }: ListingGalleryProps) {
                 <img
                   src={photo.url}
                   alt={photoAlt(title, photo, i, total)}
-                  className="h-72 w-full rounded-lg object-cover"
+                  className="h-72 w-full rounded-lg object-cover aspect-[4/3]"
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
                   fetchPriority={i === 0 ? "high" : "low"}
@@ -120,7 +122,7 @@ export function ListingGallery({ title, photos }: ListingGalleryProps) {
           <img
             src={ordered[0].url}
             alt={photoAlt(title, ordered[0], 0, total)}
-            className="h-96 w-full object-cover"
+            className="aspect-[4/3] h-auto max-h-[32rem] w-full object-cover"
             loading="eager"
             decoding="async"
             fetchPriority="high"
@@ -219,6 +221,31 @@ export function ListingGallery({ title, photos }: ListingGalleryProps) {
                   >
                     <ChevronRight className="h-5 w-5" />
                   </Button>
+                  <ul className="mt-3 flex gap-2 overflow-x-auto pb-1">
+                    {ordered.map((photo, i) => (
+                      <li key={photo.id} className="shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => go(i)}
+                          className={cn(
+                            "overflow-hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                            i === index ? "ring-2 ring-primary" : "opacity-70 hover:opacity-100",
+                          )}
+                          aria-label={`Show photo ${i + 1} of ${total}`}
+                          aria-current={i === index ? "true" : undefined}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={photo.url}
+                            alt=""
+                            className="h-16 w-24 object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </>
               ) : null}
             </div>

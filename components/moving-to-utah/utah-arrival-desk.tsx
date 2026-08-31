@@ -34,7 +34,7 @@ const PATHS: ReadonlyArray<{
   {
     id: "rent",
     title: "Rent before the start date",
-    body: "Browse Ondo-managed homes, request a showing, then apply by invite. There is no public apply form.",
+    body: "Browse Ondo-managed homes, review written requirements, then tour or apply when a listing is open.",
   },
   {
     id: "buy",

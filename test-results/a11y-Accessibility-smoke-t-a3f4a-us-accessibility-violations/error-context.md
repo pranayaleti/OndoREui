@@ -1,0 +1,640 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e7]:
+        - link "Free rental analysis" [ref=e8] [cursor=pointer]:
+          - /url: /whats-my-home-worth/
+        - generic [ref=e9]: "|"
+        - link "Available rentals" [ref=e10] [cursor=pointer]:
+          - /url: /properties/
+        - generic [ref=e11]: "|"
+        - link "Owner login" [ref=e12] [cursor=pointer]:
+          - /url: http://localhost:3001/login
+        - generic [ref=e13]: "|"
+        - link "Resident login" [ref=e14] [cursor=pointer]:
+          - /url: http://localhost:3001/login
+      - generic [ref=e15]:
+        - link "Ondo Real Estate home" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img [ref=e18] [cursor=pointer]
+        - navigation "Primary navigation" [ref=e20]:
+          - navigation [ref=e21]:
+            - link "Buy" [ref=e22] [cursor=pointer]:
+              - /url: /buy/
+            - link "Sell" [ref=e23] [cursor=pointer]:
+              - /url: /sell/
+            - link "Properties" [ref=e24] [cursor=pointer]:
+              - /url: /properties/
+            - link "Loans" [ref=e25] [cursor=pointer]:
+              - /url: /loans/
+            - button "Notary" [ref=e26] [cursor=pointer]:
+              - text: Notary
+              - img [ref=e27] [cursor=pointer]
+            - button "Owners" [ref=e29] [cursor=pointer]:
+              - text: Owners
+              - img [ref=e30] [cursor=pointer]
+            - button "Resources" [ref=e32] [cursor=pointer]:
+              - text: Resources
+              - img [ref=e33] [cursor=pointer]
+        - generic [ref=e35]:
+          - link "Call +1-408-538-0420" [ref=e36] [cursor=pointer]:
+            - /url: tel:+1-408-538-0420
+            - img [ref=e37] [cursor=pointer]
+            - generic [ref=e39] [cursor=pointer]: +1-408-538-0420
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img
+          - button "More navigation" [ref=e42] [cursor=pointer]:
+            - img [ref=e43] [cursor=pointer]
+            - img [ref=e45] [cursor=pointer]
+            - generic [ref=e46] [cursor=pointer]: More
+          - button "Toggle theme" [ref=e47] [cursor=pointer]:
+            - img
+            - img
+            - generic [ref=e48] [cursor=pointer]: Toggle theme
+          - button "Log in" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51] [cursor=pointer]: Log in
+            - img
+    - main [ref=e53]:
+      - generic [ref=e54]:
+        - img "Modern apartment building background representing Utah rental properties and property management services" [ref=e57]
+        - generic [ref=e60]:
+          - heading "Contact us" [level=1] [ref=e61]
+          - paragraph [ref=e62]: "We're your first point of contact: qualified leads, strategic outreach, and a relationship-driven team ready to help with property management, investments, and leasing"
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - heading "Send a message" [level=2] [ref=e67]
+          - generic [ref=e68]:
+            - heading "Get the help you need" [level=2] [ref=e70]
+            - generic [ref=e72]:
+              - textbox
+              - group "How can we help you?" [ref=e73]:
+                - generic [ref=e74]:
+                  - text: How can we help you?
+                  - generic [ref=e75]: "*"
+                - generic [ref=e76]:
+                  - generic [ref=e77] [cursor=pointer]:
+                    - radio "I am a tenant looking for a home to rent." [ref=e78]
+                    - generic [ref=e79] [cursor=pointer]:
+                      - text: I am a
+                      - strong [ref=e80] [cursor=pointer]: tenant
+                      - text: looking for a home to rent.
+                  - generic [ref=e81] [cursor=pointer]:
+                    - radio "I am a real estate agent, interested in referrals." [ref=e82]
+                    - generic [ref=e83] [cursor=pointer]:
+                      - text: I am a
+                      - strong [ref=e84] [cursor=pointer]: real estate agent
+                      - text: ", interested in referrals."
+                  - generic [ref=e85] [cursor=pointer]:
+                    - radio "I own a rental property, interested in services." [ref=e86]
+                    - generic [ref=e87] [cursor=pointer]:
+                      - text: I own a
+                      - strong [ref=e88] [cursor=pointer]: rental property
+                      - text: ", interested in services."
+                  - generic [ref=e89] [cursor=pointer]:
+                    - radio "I am a vendor, offering maintenance services." [ref=e90]
+                    - generic [ref=e91] [cursor=pointer]:
+                      - text: I am a
+                      - strong [ref=e92] [cursor=pointer]: vendor
+                      - text: ", offering maintenance services."
+                  - generic [ref=e93] [cursor=pointer]:
+                    - radio "I am a current resident." [ref=e94]
+                    - generic [ref=e95] [cursor=pointer]:
+                      - text: I am a
+                      - strong [ref=e96] [cursor=pointer]: current resident
+                      - text: .
+              - generic [ref=e97]:
+                - generic [ref=e98]: Name *
+                - textbox "Name *" [ref=e99]
+              - generic [ref=e100]:
+                - generic [ref=e101]: Email *
+                - textbox "Email *" [ref=e102]
+              - generic [ref=e103]:
+                - generic [ref=e104]: Phone
+                - textbox "Phone" [ref=e105]
+              - generic [ref=e106]:
+                - generic [ref=e107]: Message
+                - textbox "Message" [ref=e108]
+              - button "Send message" [ref=e109] [cursor=pointer]
+        - generic [ref=e110]:
+          - heading "Other ways to reach us" [level=2] [ref=e111]
+          - list [ref=e112]:
+            - listitem [ref=e113]:
+              - img [ref=e114]
+              - link "+1-408-538-0420" [ref=e116] [cursor=pointer]:
+                - /url: tel:14085380420
+            - listitem [ref=e117]:
+              - img [ref=e118]
+              - link "info@ondorealestate.com" [ref=e121] [cursor=pointer]:
+                - /url: mailto:info@ondorealestate.com
+          - generic [ref=e123]:
+            - heading "Book a 30-minute call" [level=3] [ref=e124]:
+              - img [ref=e125]
+              - text: Book a 30-minute call
+            - generic [ref=e127]:
+              - button "Open scheduling calendar in fullscreen" [ref=e129] [cursor=pointer]:
+                - img
+                - generic [ref=e130] [cursor=pointer]: Fullscreen
+              - iframe [ref=e131]:
+                - generic [active] [ref=f1e1]:
+                  - generic [ref=f1e6]:
+                    - link "powered by Calendly":
+                      - /url: https://calendly.com/?utm_campaign=sign_up&utm_medium=badge&utm_source=invitee
+                      - generic [ref=f1e7] [cursor=pointer]:
+                        - generic [ref=f1e8] [cursor=pointer]: powered by
+                        - generic [ref=f1e9] [cursor=pointer]: Calendly
+                    - generic [ref=f1e18]:
+                      - generic [ref=f1e19]:
+                        - img "Pranay Ondo" [ref=f1e20]
+                        - generic [ref=f1e21]: Pranay Ondo
+                        - heading "30 Minute Meeting" [level=1] [ref=f1e22]
+                      - generic [ref=f1e25]:
+                        - img [ref=f1e28]
+                        - text: 30 min
+                    - generic [ref=f1e32]:
+                      - generic [ref=f1e36]:
+                        - heading "Select a Day" [level=2] [ref=f1e37]
+                        - generic [ref=f1e38]:
+                          - generic [ref=f1e39]:
+                            - generic [ref=f1e40]:
+                              - generic [ref=f1e41]:
+                                - button "Go to previous month" [disabled]:
+                                  - generic:
+                                    - img
+                              - generic [ref=f1e42]: August 2026
+                              - button "Go to next month" [ref=f1e44] [cursor=pointer]:
+                                - img [ref=f1e46] [cursor=pointer]
+                              - status [ref=f1e48]: August is now displayed
+                            - generic [ref=f1e49]:
+                              - table "Select a Day" [ref=f1e50]:
+                                - rowgroup [ref=f1e51]:
+                                  - row "Sun Mon Tue Wed Thu Fri Sat" [ref=f1e52]:
+                                    - cell "Sun" [ref=f1e53]
+                                    - cell "Mon" [ref=f1e54]
+                                    - cell "Tue" [ref=f1e55]
+                                    - cell "Wed" [ref=f1e56]
+                                    - cell "Thu" [ref=f1e57]
+                                    - cell "Fri" [ref=f1e58]
+                                    - cell "Sat" [ref=f1e59]
+                                - rowgroup [ref=f1e60]:
+                                  - row "Saturday, August 1 - No times available" [ref=f1e61]:
+                                    - gridcell [ref=f1e62]
+                                    - gridcell [ref=f1e63]
+                                    - gridcell [ref=f1e64]
+                                    - gridcell [ref=f1e65]
+                                    - gridcell [ref=f1e66]
+                                    - gridcell [ref=f1e67]
+                                    - gridcell "Saturday, August 1 - No times available" [ref=f1e68]:
+                                      - button "Saturday, August 1 - No times available" [disabled]:
+                                        - generic: "1"
+                                  - row "Sunday, August 2 - No times available Monday, August 3 - No times available Tuesday, August 4 - No times available Wednesday, August 5 - No times available Thursday, August 6 - No times available Friday, August 7 - No times available Saturday, August 8 - No times available" [ref=f1e69]:
+                                    - gridcell "Sunday, August 2 - No times available" [ref=f1e70]:
+                                      - button "Sunday, August 2 - No times available" [disabled]:
+                                        - generic: "2"
+                                    - gridcell "Monday, August 3 - No times available" [ref=f1e71]:
+                                      - button "Monday, August 3 - No times available" [disabled]:
+                                        - generic: "3"
+                                    - gridcell "Tuesday, August 4 - No times available" [ref=f1e72]:
+                                      - button "Tuesday, August 4 - No times available" [disabled]:
+                                        - generic: "4"
+                                    - gridcell "Wednesday, August 5 - No times available" [ref=f1e73]:
+                                      - button "Wednesday, August 5 - No times available" [disabled]:
+                                        - generic: "5"
+                                    - gridcell "Thursday, August 6 - No times available" [ref=f1e74]:
+                                      - button "Thursday, August 6 - No times available" [disabled]:
+                                        - generic: "6"
+                                    - gridcell "Friday, August 7 - No times available" [ref=f1e75]:
+                                      - button "Friday, August 7 - No times available" [disabled]:
+                                        - generic: "7"
+                                    - gridcell "Saturday, August 8 - No times available" [ref=f1e76]:
+                                      - button "Saturday, August 8 - No times available" [disabled]:
+                                        - generic: "8"
+                                  - row "Sunday, August 9 - No times available Monday, August 10 - No times available Tuesday, August 11 - No times available Wednesday, August 12 - No times available Thursday, August 13 - No times available Friday, August 14 - No times available Saturday, August 15 - No times available" [ref=f1e77]:
+                                    - gridcell "Sunday, August 9 - No times available" [ref=f1e78]:
+                                      - button "Sunday, August 9 - No times available" [disabled]:
+                                        - generic: "9"
+                                    - gridcell "Monday, August 10 - No times available" [ref=f1e79]:
+                                      - button "Monday, August 10 - No times available" [disabled]:
+                                        - generic: "10"
+                                    - gridcell "Tuesday, August 11 - No times available" [ref=f1e80]:
+                                      - button "Tuesday, August 11 - No times available" [disabled]:
+                                        - generic: "11"
+                                    - gridcell "Wednesday, August 12 - No times available" [ref=f1e81]:
+                                      - button "Wednesday, August 12 - No times available" [disabled]:
+                                        - generic: "12"
+                                    - gridcell "Thursday, August 13 - No times available" [ref=f1e82]:
+                                      - button "Thursday, August 13 - No times available" [disabled]:
+                                        - generic: "13"
+                                    - gridcell "Friday, August 14 - No times available" [ref=f1e83]:
+                                      - button "Friday, August 14 - No times available" [disabled]:
+                                        - generic: "14"
+                                    - gridcell "Saturday, August 15 - No times available" [ref=f1e84]:
+                                      - button "Saturday, August 15 - No times available" [disabled]:
+                                        - generic: "15"
+                                  - row "Sunday, August 16 - No times available Monday, August 17 - No times available Tuesday, August 18 - No times available Wednesday, August 19 - No times available Thursday, August 20 - No times available Friday, August 21 - No times available Saturday, August 22 - No times available" [ref=f1e85]:
+                                    - gridcell "Sunday, August 16 - No times available" [ref=f1e86]:
+                                      - button "Sunday, August 16 - No times available" [disabled]:
+                                        - generic: "16"
+                                    - gridcell "Monday, August 17 - No times available" [ref=f1e87]:
+                                      - button "Monday, August 17 - No times available" [disabled]:
+                                        - generic: "17"
+                                    - gridcell "Tuesday, August 18 - No times available" [ref=f1e88]:
+                                      - button "Tuesday, August 18 - No times available" [disabled]:
+                                        - generic: "18"
+                                    - gridcell "Wednesday, August 19 - No times available" [ref=f1e89]:
+                                      - button "Wednesday, August 19 - No times available" [disabled]:
+                                        - generic: "19"
+                                    - gridcell "Thursday, August 20 - No times available" [ref=f1e90]:
+                                      - button "Thursday, August 20 - No times available" [disabled]:
+                                        - generic: "20"
+                                    - gridcell "Friday, August 21 - No times available" [ref=f1e91]:
+                                      - button "Friday, August 21 - No times available" [disabled]:
+                                        - generic: "21"
+                                    - gridcell "Saturday, August 22 - No times available" [ref=f1e92]:
+                                      - button "Saturday, August 22 - No times available" [disabled]:
+                                        - generic: "22"
+                                  - row "Sunday, August 23 - No times available Monday, August 24 - No times available Tuesday, August 25 - No times available Wednesday, August 26 - No times available Thursday, August 27 - No times available Friday, August 28 - No times available Saturday, August 29 - No times available" [ref=f1e93]:
+                                    - gridcell "Sunday, August 23 - No times available" [ref=f1e94]:
+                                      - button "Sunday, August 23 - No times available" [disabled]:
+                                        - generic: "23"
+                                    - gridcell "Monday, August 24 - No times available" [ref=f1e95]:
+                                      - button "Monday, August 24 - No times available" [disabled]:
+                                        - generic: "24"
+                                    - gridcell "Tuesday, August 25 - No times available" [ref=f1e96]:
+                                      - button "Tuesday, August 25 - No times available" [disabled]:
+                                        - generic: "25"
+                                    - gridcell "Wednesday, August 26 - No times available" [ref=f1e97]:
+                                      - button "Wednesday, August 26 - No times available" [disabled]:
+                                        - generic: "26"
+                                    - gridcell "Thursday, August 27 - No times available" [ref=f1e98]:
+                                      - button "Thursday, August 27 - No times available" [disabled]:
+                                        - generic: "27"
+                                    - gridcell "Friday, August 28 - No times available" [ref=f1e99]:
+                                      - button "Friday, August 28 - No times available" [disabled]:
+                                        - generic: "28"
+                                    - gridcell "Saturday, August 29 - No times available" [ref=f1e100]:
+                                      - button "Saturday, August 29 - No times available" [disabled]:
+                                        - generic: "29"
+                                  - row "Sunday, August 30 - No times available Monday, August 31 - No times available" [ref=f1e101]:
+                                    - gridcell "Sunday, August 30 - No times available" [ref=f1e102]:
+                                      - button "Sunday, August 30 - No times available" [disabled]:
+                                        - generic: "30"
+                                    - gridcell "Monday, August 31 - No times available" [ref=f1e103]:
+                                      - button "Monday, August 31 - No times available" [disabled]:
+                                        - generic: "31"
+                                    - gridcell [ref=f1e104]
+                                    - gridcell [ref=f1e105]
+                                    - gridcell [ref=f1e106]
+                                    - gridcell [ref=f1e107]
+                                    - gridcell [ref=f1e108]
+                              - img [ref=f1e113]
+                              - status [ref=f1e123]
+                          - generic [ref=f1e125]:
+                            - paragraph [ref=f1e126]: Time zone
+                            - button "Time zone Mountain Time - US & Canada (10:36am)" [ref=f1e128] [cursor=pointer]:
+                              - img [ref=f1e130] [cursor=pointer]
+                              - generic [ref=f1e134] [cursor=pointer]: Mountain Time - US & Canada
+                              - generic [ref=f1e135] [cursor=pointer]: (10:36am)
+                              - img [ref=f1e137] [cursor=pointer]
+                      - button "Cookie settings" [ref=f1e143] [cursor=pointer]:
+                        - generic [ref=f1e144] [cursor=pointer]: Cookie settings
+                  - region "Cookie banner" [ref=f1e145]:
+                    - dialog "Privacy" [ref=f1e146]:
+                      - generic [ref=f1e147]:
+                        - generic [ref=f1e150]:
+                          - text: We use cookies and similar technologies to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing. Click “Decline” to decline optional cookies or “Cookie Settings” to manage individual settings. To learn more, visit our
+                          - link "privacy notice" [ref=f1e151] [cursor=pointer]:
+                            - /url: https://calendly.com/legal/privacy-notice
+                          - text: .
+                        - generic [ref=f1e153]:
+                          - button "Cookie settings, Opens the preference center dialog" [ref=f1e154] [cursor=pointer]: Cookie settings
+                          - generic [ref=f1e155]:
+                            - button "Decline" [ref=f1e156] [cursor=pointer]
+                            - button "I understand" [ref=f1e157] [cursor=pointer]
+                        - button "Close" [ref=f1e159] [cursor=pointer]
+            - paragraph [ref=e132]:
+              - link "Open scheduling in a new tab" [ref=e133] [cursor=pointer]:
+                - /url: https://calendly.com/scheduleondo/30min
+              - text: if the calendar does not load.
+    - contentinfo [ref=e134]:
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - img [ref=e139]
+          - generic [ref=e141]:
+            - paragraph [ref=e142]: Got ideas?
+            - paragraph [ref=e143]: We're listening! Share feedback.
+        - link "Share feedback" [ref=e144] [cursor=pointer]:
+          - /url: /feedback/
+      - generic "Ondo Real Estate footer navigation" [ref=e145]:
+        - generic [ref=e146]:
+          - navigation "Buying a Home" [ref=e147]:
+            - heading "Buying a Home" [level=3] [ref=e148]:
+              - link "Buying a Home" [ref=e149] [cursor=pointer]:
+                - /url: /buy/
+                - img [ref=e150] [cursor=pointer]
+                - generic [ref=e153] [cursor=pointer]: Buying a Home
+            - list [ref=e154]:
+              - listitem [ref=e155]:
+                - link "First-time homebuyer" [ref=e156] [cursor=pointer]:
+                  - /url: /buy/first-time/
+              - listitem [ref=e157]:
+                - link "Buying a second home" [ref=e158] [cursor=pointer]:
+                  - /url: /buy/second-home/
+              - listitem [ref=e159]:
+                - link "Fixed-rate mortgage" [ref=e160] [cursor=pointer]:
+                  - /url: /buy/fixed-rate/
+              - listitem [ref=e161]:
+                - link "Adjustable-rate mortgage" [ref=e162] [cursor=pointer]:
+                  - /url: /buy/adjustable-rate/
+              - listitem [ref=e163]:
+                - link "30 year mortgage" [ref=e164] [cursor=pointer]:
+                  - /url: /buy/30-year/
+              - listitem [ref=e165]:
+                - link "15 year mortgage" [ref=e166] [cursor=pointer]:
+                  - /url: /buy/15-year/
+              - listitem [ref=e167]:
+                - link "Mortgage rates explained" [ref=e168] [cursor=pointer]:
+                  - /url: /buy/rates/
+              - listitem [ref=e169]:
+                - link "Buy & sell by city" [ref=e170] [cursor=pointer]:
+                  - /url: /buy-sell/
+          - navigation "Refinance" [ref=e171]:
+            - heading "Refinance" [level=3] [ref=e172]:
+              - link "Refinance" [ref=e173] [cursor=pointer]:
+                - /url: /refinance/process/
+                - img [ref=e174] [cursor=pointer]
+                - generic [ref=e177] [cursor=pointer]: Refinance
+            - list [ref=e178]:
+              - listitem [ref=e179]:
+                - link "Mortgage refinance process" [ref=e180] [cursor=pointer]:
+                  - /url: /refinance/process/
+              - listitem [ref=e181]:
+                - link "Rate-and-term refinance" [ref=e182] [cursor=pointer]:
+                  - /url: /refinance/rate-term/
+              - listitem [ref=e183]:
+                - link "Cash-out refinance" [ref=e184] [cursor=pointer]:
+                  - /url: /refinance/cash-out/
+              - listitem [ref=e185]:
+                - link "Mortgage blog – Refinance" [ref=e186] [cursor=pointer]:
+                  - /url: /refinance/blog/
+              - listitem [ref=e187]:
+                - link "Recast vs refinance" [ref=e188] [cursor=pointer]:
+                  - /url: /blog/recast-vs-refinance/
+          - navigation "Mortgage Loans" [ref=e189]:
+            - heading "Mortgage Loans" [level=3] [ref=e190]:
+              - link "Mortgage Loans" [ref=e191] [cursor=pointer]:
+                - /url: /loans/
+                - img [ref=e192] [cursor=pointer]
+                - generic [ref=e195] [cursor=pointer]: Mortgage Loans
+            - list [ref=e196]:
+              - listitem [ref=e197]:
+                - link "Conventional" [ref=e198] [cursor=pointer]:
+                  - /url: /loans/conventional/
+              - listitem [ref=e199]:
+                - link "FHA" [ref=e200] [cursor=pointer]:
+                  - /url: /loans/fha/
+              - listitem [ref=e201]:
+                - link "USDA" [ref=e202] [cursor=pointer]:
+                  - /url: /loans/usda/
+              - listitem [ref=e203]:
+                - link "VA" [ref=e204] [cursor=pointer]:
+                  - /url: /loans/va/
+              - listitem [ref=e205]:
+                - link "HELOC / HELOAN" [ref=e206] [cursor=pointer]:
+                  - /url: /loans/heloc/
+              - listitem [ref=e207]:
+                - link "Reverse Mortgage" [ref=e208] [cursor=pointer]:
+                  - /url: /loans/reverse/
+              - listitem [ref=e209]:
+                - link "Jumbo Loans" [ref=e210] [cursor=pointer]:
+                  - /url: /loans/jumbo/
+          - navigation "Calculators" [ref=e211]:
+            - heading "Calculators" [level=3] [ref=e212]:
+              - link "Calculators" [ref=e213] [cursor=pointer]:
+                - /url: /calculators/
+                - img [ref=e214] [cursor=pointer]
+                - generic [ref=e216] [cursor=pointer]: Calculators
+            - list [ref=e217]:
+              - listitem [ref=e218]:
+                - link "Self-manage vs Ondo ROI" [ref=e219] [cursor=pointer]:
+                  - /url: /calculators/owner-vs-self/
+              - listitem [ref=e220]:
+                - link "Mortgage payment calculator" [ref=e221] [cursor=pointer]:
+                  - /url: /calculators/mortgage-payment/
+              - listitem [ref=e222]:
+                - link "Affordability calculator" [ref=e223] [cursor=pointer]:
+                  - /url: /calculators/affordability/
+              - listitem [ref=e224]:
+                - link "Income calculator" [ref=e225] [cursor=pointer]:
+                  - /url: /calculators/income/
+              - listitem [ref=e226]:
+                - link "Closing cost calculator" [ref=e227] [cursor=pointer]:
+                  - /url: /calculators/closing-cost/
+              - listitem [ref=e228]:
+                - link "Refinance calculator" [ref=e229] [cursor=pointer]:
+                  - /url: /calculators/refinance/
+              - listitem [ref=e230]:
+                - link "Home sale calculator" [ref=e231] [cursor=pointer]:
+                  - /url: /calculators/home-sale/
+              - listitem [ref=e232]:
+                - link "Buying power calculator" [ref=e233] [cursor=pointer]:
+                  - /url: /calculators/buying-power/
+          - navigation "About Us" [ref=e234]:
+            - heading "About Us" [level=3] [ref=e235]:
+              - link "About Us" [ref=e236] [cursor=pointer]:
+                - /url: /about/
+                - img [ref=e237] [cursor=pointer]
+                - generic [ref=e242] [cursor=pointer]: About Us
+            - list [ref=e243]:
+              - listitem [ref=e244]:
+                - link "History" [ref=e245] [cursor=pointer]:
+                  - /url: /about/history/
+              - listitem [ref=e246]:
+                - link "New to Utah" [ref=e247] [cursor=pointer]:
+                  - /url: /moving-to-utah/
+              - listitem [ref=e248]:
+                - link "Giving back" [ref=e249] [cursor=pointer]:
+                  - /url: /about/giving-back/
+              - listitem [ref=e250]:
+                - link "Careers" [ref=e251] [cursor=pointer]:
+                  - /url: /about/careers/
+              - listitem [ref=e252]:
+                - link "News" [ref=e253] [cursor=pointer]:
+                  - /url: /about/news/
+              - listitem [ref=e254]:
+                - link "Socials" [ref=e255] [cursor=pointer]:
+                  - /url: /socials/
+              - listitem [ref=e256]:
+                - link "Events" [ref=e257] [cursor=pointer]:
+                  - /url: /events/
+              - listitem [ref=e258]:
+                - link "Mortgage learning hub" [ref=e259] [cursor=pointer]:
+                  - /url: /learn/
+              - listitem [ref=e260]:
+                - link "Variable income mortgages" [ref=e261] [cursor=pointer]:
+                  - /url: /learn/variable-income/
+              - listitem [ref=e262]:
+                - link "First-time buyer cash and closing" [ref=e263] [cursor=pointer]:
+                  - /url: /learn/first-time/
+              - listitem [ref=e264]:
+                - link "Service areas" [ref=e265] [cursor=pointer]:
+                  - /url: /locations/
+              - listitem [ref=e266]:
+                - link "City market reports" [ref=e267] [cursor=pointer]:
+                  - /url: /market-reports/
+              - listitem [ref=e268]:
+                - link "Neighborhood guides" [ref=e269] [cursor=pointer]:
+                  - /url: /neighborhoods/
+              - listitem [ref=e270]:
+                - link "School district guides" [ref=e271] [cursor=pointer]:
+                  - /url: /schools/
+              - listitem [ref=e272]:
+                - link "Non-QM, bank-statement, DSCR" [ref=e273] [cursor=pointer]:
+                  - /url: /learn/non-qm/
+              - listitem [ref=e274]:
+                - link "Investment occupancy and DSCR" [ref=e275] [cursor=pointer]:
+                  - /url: /learn/investment/
+              - listitem [ref=e276]:
+                - link "Utah tax calendar vs escrow" [ref=e277] [cursor=pointer]:
+                  - /url: /blog/utah-property-tax-calendar-first-escrow-analysis/
+              - listitem [ref=e278]:
+                - link "Escrow shortage after first year" [ref=e279] [cursor=pointer]:
+                  - /url: /blog/escrow-shortage-after-first-year/
+              - listitem [ref=e280]:
+                - link "Impounds vs waiving escrow" [ref=e281] [cursor=pointer]:
+                  - /url: /blog/impounds-vs-waiving-escrow/
+              - listitem [ref=e282]:
+                - link "The week after funding" [ref=e283] [cursor=pointer]:
+                  - /url: /blog/week-after-mortgage-funding/
+              - listitem [ref=e284]:
+                - link "How long a first purchase takes" [ref=e285] [cursor=pointer]:
+                  - /url: /blog/how-long-first-purchase-takes/
+              - listitem [ref=e286]:
+                - 'link "Hill AFB VA: COE and occupancy" [ref=e287] [cursor=pointer]':
+                  - /url: /blog/hill-afb-va-coe-occupancy/
+              - listitem [ref=e288]:
+                - link "Start a mortgage conversation" [ref=e289] [cursor=pointer]:
+                  - /url: /qualify/
+              - listitem [ref=e290]:
+                - link "Academy" [ref=e291] [cursor=pointer]:
+                  - /url: /academy/
+              - listitem [ref=e292]:
+                - link "Reviews" [ref=e293] [cursor=pointer]:
+                  - /url: /about/testimonials/
+              - listitem [ref=e294]:
+                - link "Industry news" [ref=e295] [cursor=pointer]:
+                  - /url: /news/
+              - listitem [ref=e296]:
+                - link "Investor relations" [ref=e297] [cursor=pointer]:
+                  - /url: /about/investor-relations/
+              - listitem [ref=e298]:
+                - link "Affiliate Program" [ref=e299] [cursor=pointer]:
+                  - /url: /affiliate/
+          - navigation "Help Center" [ref=e300]:
+            - heading "Help Center" [level=3] [ref=e301]:
+              - link "Help Center" [ref=e302] [cursor=pointer]:
+                - /url: /faq/
+                - img [ref=e303] [cursor=pointer]
+                - generic [ref=e306] [cursor=pointer]: Help Center
+            - list [ref=e307]:
+              - listitem [ref=e308]:
+                - link "Payment questions" [ref=e309] [cursor=pointer]:
+                  - /url: /faq/payments-faqs/
+              - listitem [ref=e310]:
+                - link "Hardship assistance" [ref=e311] [cursor=pointer]:
+                  - /url: /faq/hardship-faqs/
+              - listitem [ref=e312]:
+                - link "Loan payoffs" [ref=e313] [cursor=pointer]:
+                  - /url: /faq/loan-payoffs-faqs/
+              - listitem [ref=e314]:
+                - link "Mortgage FAQs" [ref=e315] [cursor=pointer]:
+                  - /url: /faq/loans-faqs/
+              - listitem [ref=e316]:
+                - link "Escrow" [ref=e317] [cursor=pointer]:
+                  - /url: /faq/escrow-faqs/
+              - listitem [ref=e318]:
+                - link "Natural Disaster Resources" [ref=e319] [cursor=pointer]:
+                  - /url: /faq/disaster-faqs/
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - img [ref=e323]
+            - generic [ref=e325]:
+              - paragraph [ref=e326]: Loan Servicing Help Center
+              - link "Call +1-408-538-0420" [ref=e327] [cursor=pointer]:
+                - /url: tel:+14085380420
+                - text: +1-408-538-0420
+              - paragraph [ref=e328]: "Office hours: Mon–Fri 9:00 AM – 5:00 PM MT"
+          - generic [ref=e329]:
+            - img [ref=e330]
+            - generic [ref=e333]:
+              - paragraph [ref=e334]: Email Us
+              - link "Email info@ondorealestate.com" [ref=e335] [cursor=pointer]:
+                - /url: mailto:info@ondorealestate.com
+                - text: info@ondorealestate.com
+          - generic [ref=e336]:
+            - img [ref=e337]
+            - generic [ref=e340]:
+              - paragraph [ref=e341]: Our Location
+              - link "Open address in Google Maps" [ref=e342] [cursor=pointer]:
+                - /url: https://www.google.com/maps/search/?api=1&query=2701%20N%20Thanksgiving%20Way%2C%20Lehi%2C%20UT%2084043
+                - generic [ref=e343] [cursor=pointer]: 2701 N Thanksgiving Way
+                - generic [ref=e344] [cursor=pointer]: Lehi, UT 84043
+        - generic [ref=e346]:
+          - generic [ref=e347]:
+            - generic [ref=e348]: "Follow us:"
+            - link "Instagram" [ref=e349] [cursor=pointer]:
+              - /url: https://www.instagram.com/OndoRealEstate
+              - img [ref=e350] [cursor=pointer]
+            - link "Linktree" [ref=e353] [cursor=pointer]:
+              - /url: https://linktr.ee/ondorealestate
+              - img [ref=e354] [cursor=pointer]
+            - generic [ref=e356]:
+              - link "Scan QR code to access all social media links" [ref=e357] [cursor=pointer]:
+                - /url: https://linktr.ee/ondorealestate
+                - img "Linktree QR Code - Scan to access all social media" [ref=e358] [cursor=pointer]
+              - generic [ref=e359]: Click or Scan for all links
+          - generic [ref=e360]:
+            - generic [ref=e361]:
+              - img [ref=e362]
+              - generic [ref=e368]: Equal Housing Opportunity
+            - generic [ref=e370]:
+              - generic [ref=e371]: R
+              - generic [ref=e372]: REALTOR
+            - generic [ref=e374]:
+              - generic [ref=e375]: MLS
+              - generic [ref=e376]: Multiple Listing Service
+      - generic [ref=e379]:
+        - generic [ref=e380]:
+          - paragraph [ref=e381]: © 2026 Ondo Real Estate. All rights reserved.
+          - paragraph [ref=e382]:
+            - generic [ref=e383]: Designed. Developed. Deployed by
+            - link "OndoSoft" [ref=e384] [cursor=pointer]:
+              - /url: https://www.ondosoft.com/?utm_source=ondorealestate
+            - generic [ref=e385]:
+              - text: The digital engine behind
+              - link "Ondo Real Estate" [ref=e386] [cursor=pointer]:
+                - /url: /
+              - text: .
+        - generic [ref=e387]:
+          - link "Licensing" [ref=e389] [cursor=pointer]:
+            - /url: /licensing/
+          - link "Privacy Policy" [ref=e390] [cursor=pointer]:
+            - /url: /privacy-policy/
+          - link "Terms of Use" [ref=e391] [cursor=pointer]:
+            - /url: /terms-of-service/
+          - link "Accessibility" [ref=e392] [cursor=pointer]:
+            - /url: /accessibility/
+          - link "Site Map" [ref=e393] [cursor=pointer]:
+            - /url: /sitemap/
+  - button "Open the Ondo assistant to ask about property management, renting, buying, or loans" [ref=e394] [cursor=pointer]:
+    - img [ref=e395] [cursor=pointer]
+    - text: Ask Ondo
+  - button "Schedule a free consultation with Ondo Real Estate" [ref=e398] [cursor=pointer]:
+    - img
+  - region "Notifications (F8)":
+    - list
+```

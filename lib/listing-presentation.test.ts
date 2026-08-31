@@ -4,13 +4,21 @@ import {
   bathsLabel,
   bedsLabel,
   formatAmenityLabel,
+  formatCapRate,
   formatMonthlyRent,
   formatPropertyType,
   formatSqft,
   groupAmenities,
   listingCostRows,
+  listingEmbedFromUrl,
   listingHighlights,
+  listingMarketStatus,
+  listingMetricRows,
+  listingInquiryDraftMessage,
+  listingPublicDocuments,
+  listingSpecRows,
   petNotesFromAmenities,
+  pickRelatedListings,
 } from "./listing-presentation"
 
 describe("listing presentation", () => {
@@ -53,6 +61,59 @@ describe("listing presentation", () => {
     expect(labels).toMatch(/Parking/)
     expect(labels).not.toMatch(/family|safe neighborhood|schools|young professional|exclusive/i)
     expect(highlights.length).toBeLessThanOrEqual(6)
+  })
+
+  it("maps approved vacant listings to For Lease, not For Sale", () => {
+    expect(listingMarketStatus({ status: "approved" })).toEqual({
+      label: "For Lease",
+      tone: "lease",
+    })
+    expect(listingMarketStatus({ status: "pending" })?.label).toBe("Pending")
+    expect(listingMarketStatus({ status: "occupied" })?.label).toBe("Leased")
+    expect(listingMarketStatus({ status: "approved", listingKind: "sale" })?.label).toBe("For Sale")
+  })
+
+  it("omits spec rows and metrics that were not on the listing", () => {
+    const rows = listingSpecRows({
+      price: 2195,
+      type: "house",
+      bedrooms: 3,
+      bathrooms: 2,
+      sqft: 1600,
+    })
+    expect(rows.map((r) => r.id)).toEqual(["price", "type", "beds", "baths", "sqft"])
+    expect(listingMetricRows({ price: 2195, sqft: 1600 }).map((r) => r.id)).toEqual(["priceSf"])
+    expect(listingMetricRows({ price: 2195, sqft: 0 })).toEqual([])
+    expect(formatCapRate(0)).toBeNull()
+  })
+
+  it("ranks related homes by type and city instead of padding at random", () => {
+    const current = {
+      publicId: "a",
+      type: "house",
+      city: "Lehi",
+      state: "UT",
+      price: 2000,
+      sqft: 1600,
+    }
+    const related = pickRelatedListings(current, [
+      { publicId: "a", type: "house", city: "Lehi", state: "UT", price: 2000, sqft: 1600 },
+      { publicId: "b", type: "house", city: "Lehi", state: "UT", price: 2100, sqft: 1500 },
+      { publicId: "c", type: "condo", city: "Ogden", state: "WY", price: 900, sqft: 700 },
+    ])
+    expect(related.map((r) => r.publicId)).toEqual(["b"])
+  })
+
+  it("embeds YouTube or Matterport URLs and ignores ordinary websites", () => {
+    expect(listingEmbedFromUrl("https://www.youtube.com/watch?v=dQw4w9wgccc")?.kind).toBe("youtube")
+    expect(listingEmbedFromUrl("https://my.matterport.com/show/?m=abc")?.kind).toBe("matterport")
+    expect(listingEmbedFromUrl("https://ondorealestate.com")).toBeNull()
+    expect(listingPublicDocuments([{ id: "1", title: "Flyer", type: "flyer", url: "not-a-url" }])).toEqual([])
+    expect(
+      listingPublicDocuments([
+        { id: "1", title: "Flyer", type: "flyer", url: "https://cdn.example/flyer.pdf" },
+      ]),
+    ).toHaveLength(1)
   })
 
   it("does not invent highlights when the listing has no supporting fields", () => {
@@ -110,6 +171,13 @@ describe("listing presentation", () => {
     })
     expect(withFees.map((r) => r.id)).toEqual(["rent", "fees", "lease"])
     expect(withFees.every((r) => r.source === "listing")).toBe(true)
+  })
+
+  it("drafts an inquiry from the real address and stays quiet without one", () => {
+    expect(listingInquiryDraftMessage("333 Main St, Park City, UT, 84060")).toBe(
+      "I'm interested in 333 Main St, Park City, UT, 84060.",
+    )
+    expect(listingInquiryDraftMessage("  ")).toBe("")
   })
 
   it("labels studio vs beds without inventing a bedroom count", () => {

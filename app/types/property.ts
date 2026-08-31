@@ -14,7 +14,29 @@ export interface ApiContact {
   lastName?: string | null;
   email?: string | null;
   phone?: string | null;
+  title?: string | null;
+  bio?: string | null;
+  photoUrl?: string | null;
 }
+
+/** Public marketing document. Only render when `url` is a real http(s) link. */
+export type ListingDocumentKind =
+  | "flyer"
+  | "om"
+  | "brochure"
+  | "floor_plan"
+  | "site_plan"
+  | "financial"
+  | "other"
+
+export interface ApiListingDocument {
+  id: string
+  title: string
+  type: ListingDocumentKind | string
+  url: string
+}
+
+export type ListingKind = "lease" | "sale"
 
 export interface ApiProperty {
   /** Internal UUID, used for screening-cta and other property-scoped APIs. */
@@ -52,6 +74,27 @@ export interface ApiProperty {
   lng?: number | null;
   owner?: ApiContact | null;
   manager?: ApiContact | null;
+  /**
+   * Optional marketing fields. Current public listings omit these.
+   * UI must hide any section whose values are missing — never invent figures.
+   */
+  listingKind?: ListingKind | null;
+  yearBuilt?: number | null;
+  lotSqft?: number | null;
+  parking?: string | null;
+  stories?: number | null;
+  units?: number | null;
+  occupancy?: string | null;
+  zoning?: string | null;
+  capRate?: number | null;
+  yearRenovated?: number | null;
+  hoa?: string | null;
+  taxes?: string | null;
+  availableSqft?: number | null;
+  noi?: number | null;
+  virtualTourUrl?: string | null;
+  videoUrl?: string | null;
+  documents?: ApiListingDocument[] | null;
 }
 
 export interface Property {
@@ -81,6 +124,8 @@ export interface Property {
   description: string;
   lat?: number | null;
   lng?: number | null;
+  status?: string;
+  listingKind?: ListingKind | null;
   addressParts?: {
     line1?: string | null;
     line2?: string | null;

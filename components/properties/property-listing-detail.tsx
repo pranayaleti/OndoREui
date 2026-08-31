@@ -6,20 +6,30 @@ import { RenterPath } from "@/components/properties/renter-path"
 import { ListingGallery, ListingGalleryEmptyNotice } from "@/components/properties/listing-gallery"
 import { ListingInquiryCard } from "@/components/properties/listing-inquiry-card"
 import { ListingSaveShare } from "@/components/properties/listing-save-share"
+import { ListingAgentCard } from "@/components/properties/listing-agent-card"
+import { ListingRelated } from "@/components/properties/listing-related"
+import { RentalApplyPanel } from "@/components/rental/rental-apply-panel"
+import { RentalApplyHashLink, RentalPropertyViewTracker } from "@/components/rental/rental-listing-funnel"
+import { ListingMediaEmbed } from "@/components/properties/listing-media-embed"
+import { ListingDocuments } from "@/components/properties/listing-documents"
+import { ListingMetrics } from "@/components/properties/listing-metrics"
 import PropertyMap from "@/components/map/property-map"
-import { generateBreadcrumbJsonLd, generatePropertyJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { generateBreadcrumbJsonLd, generatePropertyJsonLd, generateRealEstateAgentJsonLd } from "@/lib/seo"
+import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL } from "@/lib/site"
 import { buildRenterSearchPrefill } from "@/lib/renter-search-prefill"
 import {
   availabilityBadge,
-  bathsLabel,
-  bedsLabel,
-  formatMonthlyRent,
-  formatPropertyType,
-  formatSqft,
   groupAmenities,
+  listingAgents,
   listingCostRows,
+  listingDescriptionSections,
   listingHighlights,
+  listingMarketStatus,
+  listingMediaEmbeds,
+  listingMetricRows,
+  listingPublicDocuments,
+  listingSpecRows,
+  marketStatusBadgeClass,
   petNotesFromAmenities,
   type AvailabilityTone,
 } from "@/lib/listing-presentation"
@@ -70,16 +80,20 @@ export function PropertyUnavailable() {
 export function PropertyListingDetail({
   property,
   publicId,
+  related = [],
 }: {
   property: ApiProperty
   publicId: string
+  related?: ApiProperty[]
 }) {
   const cityState = [property.city, property.state].filter(Boolean).join(", ")
   const fullAddress = [property.addressLine1, cityState, property.zipcode].filter(Boolean).join(", ")
   const heroImage = property.photos?.[0]?.url
-  const typeLabel = formatPropertyType(property.type)
-  const sqftLabel = formatSqft(property.sqft)
   const moveIn = availabilityBadge(property.availability)
+  const market = listingMarketStatus({
+    status: property.status,
+    listingKind: property.listingKind,
+  })
   const highlights = listingHighlights({
     amenities: property.amenities,
     type: property.type,
@@ -95,6 +109,66 @@ export function PropertyListingDetail({
     fees: property.fees,
     leaseTerms: property.leaseTerms,
   })
+  const specRows = listingSpecRows({
+    price: property.price,
+    listingKind: property.listingKind,
+    type: property.type,
+    bedrooms: property.bedrooms,
+    bathrooms: property.bathrooms,
+    sqft: property.sqft,
+    leaseTerms: property.leaseTerms,
+    fees: property.fees,
+    availability: property.availability,
+    yearBuilt: property.yearBuilt,
+    lotSqft: property.lotSqft,
+    parking: property.parking,
+    stories: property.stories,
+    units: property.units,
+    occupancy: property.occupancy,
+    zoning: property.zoning,
+    yearRenovated: property.yearRenovated,
+    hoa: property.hoa,
+    taxes: property.taxes,
+    availableSqft: property.availableSqft,
+    amenities: property.amenities,
+  })
+  const metricRows = listingMetricRows({
+    price: property.price,
+    sqft: property.sqft,
+    listingKind: property.listingKind,
+    capRate: property.capRate,
+    noi: property.noi,
+    occupancy: property.occupancy,
+    leaseTerms: property.leaseTerms,
+  })
+  const descriptionSections = listingDescriptionSections({
+    description: property.description,
+    highlights,
+    address: fullAddress,
+    city: property.city,
+    state: property.state,
+    costRows,
+    type: property.type,
+    sqft: property.sqft,
+    amenities: property.amenities,
+    fees: property.fees,
+    leaseTerms: property.leaseTerms,
+    website: property.website,
+  })
+  const agents = listingAgents({
+    manager: property.manager,
+    owner: property.owner,
+    propertyPhone: property.phone,
+    companyPhone: SITE_PHONE,
+    companyEmail: SITE_EMAILS.primary,
+  })
+  const embeds = listingMediaEmbeds({
+    virtualTourUrl: property.virtualTourUrl,
+    videoUrl: property.videoUrl,
+    website: property.website,
+  })
+  const documents = listingPublicDocuments(property.documents)
+  const showMap = property.lat != null && property.lng != null
 
   const propertyJsonLd = generatePropertyJsonLd({
     name: property.title,
@@ -117,13 +191,30 @@ export function PropertyListingDetail({
     },
   })
 
+  const agentJsonLd = generateRealEstateAgentJsonLd({
+    name: agents[0]?.name || SITE_NAME,
+    telephone: agents[0]?.phone || SITE_PHONE,
+    email: agents[0]?.email || SITE_EMAILS.primary,
+    url: SITE_URL,
+    worksFor: SITE_NAME,
+  })
+
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: "Properties", url: `${SITE_URL}/properties` },
     { name: property.title, url: `${SITE_URL}/properties/${publicId}` },
   ])
 
+  const navItems = [
+    { href: "#listing-photos", label: "Photos", show: true },
+    { href: "#listing-highlights", label: "Highlights", show: specRows.length > 0 },
+    { href: "#listing-overview", label: "Overview", show: Boolean(property.description) },
+    { href: "#listing-location", label: "Location", show: showMap || Boolean(fullAddress) },
+    { href: "#listing-inquire", label: "Inquire", show: true },
+  ].filter((item) => item.show)
+
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-8">
+    <main className="bg-background">
+      <RentalPropertyViewTracker propertyRef={publicId} />
       {propertyJsonLd ? (
         <script
           type="application/ld+json"
@@ -134,192 +225,250 @@ export function PropertyListingDetail({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }}
+      />
 
-      <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
-        <Link href="/properties" className="hover:underline">
-          Properties
-        </Link>{" "}
-        / <span aria-current="page">{property.title}</span>
-      </nav>
+      <div className="container mx-auto max-w-6xl px-4 py-6">
+        <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
+          <Link href="/properties" className="hover:underline">
+            Properties
+          </Link>{" "}
+          / <span aria-current="page">{property.title}</span>
+        </nav>
 
-      <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0">
-          <div className="mb-2 flex flex-wrap items-center gap-2">
-            <Badge className={cn("font-medium", availabilityBadgeClass(moveIn.tone))}>
-              {moveIn.label}
-            </Badge>
-            {typeLabel ? (
-              <Badge variant="outline" className="font-medium">
-                {typeLabel}
+        <header className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+              {market ? (
+                <Badge className={cn("font-medium", marketStatusBadgeClass(market.tone))}>
+                  {market.label}
+                </Badge>
+              ) : null}
+              <Badge className={cn("font-medium", availabilityBadgeClass(moveIn.tone))}>
+                {moveIn.label}
               </Badge>
-            ) : null}
+            </div>
+            <h1 className="font-outfit text-3xl font-bold tracking-tight md:text-4xl">{property.title}</h1>
+            <p className="mt-1 text-muted-foreground">{fullAddress}</p>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">{property.title}</h1>
-          <p className="text-muted-foreground">{fullAddress}</p>
+          <ListingSaveShare publicId={publicId} title={property.title} />
+        </header>
+
+        <nav
+          aria-label="Listing sections"
+          className="mb-4 flex gap-2 overflow-x-auto border-b border-border pb-2 text-sm"
+        >
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="inline-flex min-h-11 shrink-0 items-center rounded-md px-3 font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div id="listing-photos">
+          {property.photos?.length ? (
+            <ListingGallery title={property.title} photos={property.photos} />
+          ) : (
+            <ListingGalleryEmptyNotice />
+          )}
         </div>
-        <ListingSaveShare publicId={publicId} title={property.title} />
-      </header>
 
-      {property.photos?.length ? (
-        <ListingGallery title={property.title} photos={property.photos} />
-      ) : (
-        <ListingGalleryEmptyNotice />
-      )}
-
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <div className="min-w-0">
-          <section
-            aria-label="Listing facts"
-            className="mb-8 overflow-hidden rounded-xl border border-border bg-card shadow-sm"
-          >
-            <div className="h-1 bg-primary" aria-hidden="true" />
-            <div className="px-4 py-5 sm:px-6">
-            <div className="flex flex-wrap items-end justify-between gap-2">
+        <div
+          id="listing-highlights"
+          className="relative z-10 mb-8 -mt-2 scroll-mt-24 rounded-xl border border-border bg-card shadow-md md:-mt-10"
+        >
+          <div className="h-1 rounded-t-xl bg-gradient-to-r from-orange-500 to-red-800" aria-hidden="true" />
+          <div className="px-4 py-5 sm:px-6">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <p>
-                <span className="block text-3xl font-bold tracking-tight">
-                  {formatMonthlyRent(property.price)}
-                  <span className="text-lg font-medium text-muted-foreground">/mo</span>
+                <span className="block font-outfit text-3xl font-bold tracking-tight md:text-4xl">
+                  {costRows[0]?.value}
                 </span>
                 <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Listed monthly rent
+                  {costRows[0]?.label ?? "Listed monthly rent"}
                 </span>
               </p>
+            <div className="flex flex-wrap gap-2">
+                <RentalApplyHashLink
+                  propertyRef={publicId}
+                  className="inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-5 font-medium text-primary-foreground hover:opacity-90"
+                >
+                  Apply now
+                </RentalApplyHashLink>
+                <a
+                  href="#listing-inquire"
+                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-input px-5 font-medium hover:bg-muted"
+                >
+                  Schedule a tour
+                </a>
+                <a
+                  href="#listing-inquire"
+                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-input px-5 font-medium hover:bg-muted"
+                >
+                  Ask a question
+                </a>
+              </div>
             </div>
-            <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Beds</dt>
-                <dd className="text-xl font-semibold">{bedsLabel(property.bedrooms)}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Baths</dt>
-                <dd className="text-xl font-semibold">{bathsLabel(property.bathrooms)}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Size</dt>
-                <dd className="text-xl font-semibold">{sqftLabel ?? "Not listed"}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Home type</dt>
-                <dd className="text-xl font-semibold">{typeLabel ?? "Not listed"}</dd>
-              </div>
-            </dl>
-            </div>
-          </section>
-
-          <div className="mb-8 lg:hidden">
-            <ListingInquiryCard costRows={costRows} propertyId={property.id} />
-          </div>
-
-          {highlights.length > 0 ? (
-            <section className="mb-8" aria-labelledby="listing-highlights-heading">
-              <h2 id="listing-highlights-heading" className="mb-3 text-xl font-semibold">
-                What this listing includes
-              </h2>
-              <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {highlights.map((item) => (
-                  <li
-                    key={item.id}
-                    className="rounded-md border border-border bg-muted/40 px-3 py-2 text-sm"
-                  >
-                    {item.label}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-
-          {property.description ? (
-            <section className="prose mb-8 max-w-none dark:prose-invert">
-              <h2 className="text-xl font-semibold">About this property</h2>
-              <p>{property.description}</p>
-            </section>
-          ) : null}
-
-          {petNotes.length > 0 ? (
-            <section className="mb-8 rounded-xl border border-border bg-card p-5" aria-labelledby="listing-pets-heading">
-              <h2 id="listing-pets-heading" className="text-xl font-semibold">
-                Pets
-              </h2>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {petNotes.map((note) => (
-                  <li key={note.raw} className="rounded-full bg-muted px-3 py-1.5 text-sm">
-                    {note.label}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs text-muted-foreground">
-                Pet deposits and monthly pet rent, if any, are confirmed with leasing. They are not
-                estimated here.
-              </p>
-            </section>
-          ) : null}
-
-          {amenityGroups.length > 0 ? (
-            <section className="mb-8" aria-labelledby="listing-amenities-heading">
-              <h2 id="listing-amenities-heading" className="mb-4 text-xl font-semibold">
-                Amenities
-              </h2>
-              <div className="grid gap-6 sm:grid-cols-2">
-                {amenityGroups.map((group) => (
-                  <div key={group.id}>
-                    <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-primary">
-                      {group.label}
-                    </h3>
-                    <ul className="space-y-1.5">
-                      {group.items.map((item) => (
-                        <li key={item.raw} className="rounded-md bg-muted px-3 py-1.5 text-sm">
-                          {item.label}
-                        </li>
-                      ))}
-                    </ul>
+            <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              {specRows
+                .filter((row) => row.id !== "price")
+                .slice(0, 8)
+                .map((row) => (
+                  <div key={row.id}>
+                    <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      {row.label}
+                    </dt>
+                    <dd className="text-lg font-semibold">{row.value}</dd>
                   </div>
                 ))}
-              </div>
-            </section>
-          ) : null}
-
-          <div className="mb-8">
-            <RenterPath variant="listing-detail" />
+            </dl>
           </div>
         </div>
 
-        <div className="hidden lg:block">
-          <div className="sticky top-24">
-            <ListingInquiryCard costRows={costRows} propertyId={property.id} />
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+          <div className="lg:col-start-2 lg:row-start-1">
+            <div className="mb-8 lg:sticky lg:top-24 lg:mb-0">
+              <ListingInquiryCard
+                costRows={costRows}
+                propertyId={property.id}
+                title={property.title}
+                address={fullAddress}
+              />
+            </div>
+          </div>
+          <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+
+            {descriptionSections
+              .filter((section) => section.id !== "location")
+              .map((section) => (
+              <section
+                key={section.id}
+                id={section.id === "overview" ? "listing-overview" : undefined}
+                className="mb-8"
+                aria-labelledby={`listing-section-${section.id}`}
+              >
+                <h2 id={`listing-section-${section.id}`} className="mb-3 text-xl font-semibold">
+                  {section.title}
+                </h2>
+                {section.paragraphs?.map((p) => (
+                  <p key={p.slice(0, 24)} className="mb-2 text-foreground/80">
+                    {p}
+                  </p>
+                ))}
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {section.bullets.map((item) => (
+                      <li key={item} className="rounded-md border border-border bg-muted/40 px-3 py-2 text-sm">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </section>
+            ))}
+
+            {petNotes.length > 0 ? (
+              <section className="mb-8 rounded-xl border border-border bg-card p-5" aria-labelledby="listing-pets-heading">
+                <h2 id="listing-pets-heading" className="text-xl font-semibold">
+                  Pets
+                </h2>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {petNotes.map((note) => (
+                    <li key={note.raw} className="rounded-full bg-muted px-3 py-1.5 text-sm">
+                      {note.label}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-xs text-muted-foreground">
+                  Pet deposits and monthly pet rent, if any, are confirmed with leasing. They are not
+                  estimated here.
+                </p>
+              </section>
+            ) : null}
+
+            {amenityGroups.length > 0 ? (
+              <section className="mb-8" aria-labelledby="listing-amenities-heading">
+                <h2 id="listing-amenities-heading" className="mb-4 text-xl font-semibold">
+                  Amenities
+                </h2>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {amenityGroups.map((group) => (
+                    <div key={group.id}>
+                      <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-primary">
+                        {group.label}
+                      </h3>
+                      <ul className="space-y-1.5">
+                        {group.items.map((item) => (
+                          <li key={item.raw} className="rounded-md bg-muted px-3 py-1.5 text-sm">
+                            {item.label}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            <ListingMetrics rows={metricRows} />
+            <ListingDocuments documents={documents} />
+            <ListingMediaEmbed embeds={embeds} />
+            <ListingAgentCard agents={agents} />
+
+            {property.id ? (
+              <RentalApplyPanel propertyId={property.id} publicId={publicId} />
+            ) : null}
+
+            <div className="mb-8">
+              <RenterPath variant="listing-detail" />
+            </div>
           </div>
         </div>
+
+        {showMap ? (
+          <section id="listing-location" className="mb-8 scroll-mt-24" aria-label="Listing location">
+            <h2 className="mb-3 text-xl font-semibold">Location</h2>
+            <p className="mb-3 text-sm text-muted-foreground">{fullAddress}</p>
+            <PropertyMap
+              className="h-[280px]"
+              selectedPropertyId={publicId}
+              properties={[
+                {
+                  id: publicId,
+                  title: property.title,
+                  price: property.price,
+                  bedrooms: property.bedrooms,
+                  bathrooms: property.bathrooms,
+                  lat: property.lat!,
+                  lng: property.lng!,
+                  image: heroImage,
+                  type: property.type,
+                },
+              ]}
+            />
+          </section>
+        ) : fullAddress ? (
+          <section id="listing-location" className="mb-8 scroll-mt-24">
+            <h2 className="mb-3 text-xl font-semibold">Location</h2>
+            <p className="text-sm text-muted-foreground">{fullAddress}</p>
+          </section>
+        ) : null}
+
+        <ListingRelated listings={related} />
+
+        <RenterAvailabilityNote
+          prefillMessage={buildRenterSearchPrefill({
+            listingTitle: property.title,
+            listingAddress: fullAddress,
+          })}
+        />
       </div>
-
-      {property.lat != null && property.lng != null ? (
-        <section className="mb-8" aria-label="Listing location">
-          <h2 className="mb-3 text-xl font-semibold">Location</h2>
-          <p className="mb-3 text-sm text-muted-foreground">{fullAddress}</p>
-          <PropertyMap
-            className="h-[280px]"
-            selectedPropertyId={publicId}
-            properties={[
-              {
-                id: publicId,
-                title: property.title,
-                price: property.price,
-                bedrooms: property.bedrooms,
-                bathrooms: property.bathrooms,
-                lat: property.lat,
-                lng: property.lng,
-                image: heroImage,
-                type: property.type,
-              },
-            ]}
-          />
-        </section>
-      ) : null}
-
-      <RenterAvailabilityNote
-        prefillMessage={buildRenterSearchPrefill({
-          listingTitle: property.title,
-          listingAddress: fullAddress,
-        })}
-      />
     </main>
   )
 }

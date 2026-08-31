@@ -9,8 +9,10 @@ import { PropertyListingDetail } from "@/components/properties/property-listing-
 import {
   PROPERTY_DETAIL_PLACEHOLDER_ID,
   fetchPublicPropertyByPublicId,
+  fetchPublicPropertyList,
   publicIdsFromListBody,
 } from "@/lib/public-property"
+import { pickRelatedListings } from "@/lib/listing-presentation"
 import { backendUrl } from "@/lib/backend"
 
 interface PageProps {
@@ -52,9 +54,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const cityState = [property.city, property.state].filter(Boolean).join(", ")
   const title = `${property.title} – ${cityState} | ${SITE_NAME}`
-  const description =
-    property.description?.slice(0, 160) ??
-    `${property.bedrooms} BR / ${property.bathrooms} BA in ${cityState}. $${property.price}/mo.`
+  const fallback = `${property.bedrooms} BR / ${property.bathrooms} BA in ${cityState}. Listed at $${property.price}/mo. Review written rental requirements, then tour or apply.`
+  const description = property.description?.slice(0, 160) ?? fallback
   const canonicalPath = `/properties/${publicId}`
   const canonical = `${SITE_URL}${canonicalPath}/`
   const image = property.photos?.[0]?.url
@@ -86,7 +87,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
   const { publicId } = await params
   const property = await fetchPublicPropertyByPublicId(publicId)
   if (property) {
-    return <PropertyListingDetail property={property} publicId={publicId} />
+    const related = pickRelatedListings(property, await fetchPublicPropertyList())
+    return <PropertyListingDetail property={property} publicId={publicId} related={related} />
   }
   // Build-time miss (placeholder, listing added after static export): still
   // ship a client fetch so live-API listings load in next dev and via the

@@ -51,7 +51,7 @@ describe("StickyMobileCtaBar", () => {
     mockPathname = "/properties/c2e653bf-1b6a-4f0c-9654-82a4896cb137/"
     render(<StickyMobileCtaBar />)
     const showing = screen.getByRole("link", { name: /request a showing/i })
-    expect(showing).toHaveAttribute("href", "#ask-leasing")
+    expect(showing).toHaveAttribute("href", "#listing-inquire")
     expect(screen.queryByRole("link", { name: /free rental analysis/i })).not.toBeInTheDocument()
   })
 

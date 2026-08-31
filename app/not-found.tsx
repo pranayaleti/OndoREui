@@ -10,7 +10,15 @@ import { FileQuestion, Home, Search, Calculator, Users, Building, ArrowLeft, Map
 import { SITE_URL, SITE_PHONE, SITE_EMAILS, APP_PORTAL_IS_EXTERNAL, APP_PORTAL_LOGIN_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { PropertyListingDetailClient } from "@/components/properties/property-listing-detail-client"
+import { ApplyTokenClient } from "@/components/rental/apply-token-client"
+import { CoApplicantClient } from "@/components/rental/co-applicant-client"
+import { RentalStartClient } from "@/components/rental/rental-start-client"
+import { ResumeApplicationClient } from "@/components/rental/resume-application-client"
 import { publicIdFromPathname } from "@/lib/public-property"
+import {
+  rentalClientRouteFromPathname,
+  type RentalClientRoute,
+} from "@/lib/rental-static-paths"
 
 export default function NotFound() {
   const router = useRouter()
@@ -18,12 +26,14 @@ export default function NotFound() {
   const hasRedirected = useRef(false)
   const [isMounted, setIsMounted] = useState(false)
   const [listingPublicId, setListingPublicId] = useState<string | null>(null)
+  const [rentalRoute, setRentalRoute] = useState<RentalClientRoute | null>(null)
 
   // Track when component is mounted (client-side only)
   useEffect(() => {
     setIsMounted(true)
     if (typeof window !== "undefined") {
       setListingPublicId(publicIdFromPathname(window.location.pathname))
+      setRentalRoute(rentalClientRouteFromPathname(window.location.pathname))
     }
   }, [])
 
@@ -31,7 +41,7 @@ export default function NotFound() {
   // Only runs on client side after mount to avoid build/SSR issues
   useEffect(() => {
     // Only run after component is mounted and in browser
-    if (!isMounted || listingPublicId || typeof window === "undefined" || hasRedirected.current || !pathname) {
+    if (!isMounted || listingPublicId || rentalRoute || typeof window === "undefined" || hasRedirected.current || !pathname) {
       return
     }
 
@@ -64,7 +74,7 @@ export default function NotFound() {
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [isMounted, listingPublicId, pathname, router])
+  }, [isMounted, listingPublicId, rentalRoute, pathname, router])
 
   if (!isMounted) {
     return <div className="min-h-screen bg-background" />
@@ -72,6 +82,19 @@ export default function NotFound() {
 
   if (listingPublicId) {
     return <PropertyListingDetailClient publicId={listingPublicId} />
+  }
+
+  if (rentalRoute?.kind === "apply-start") {
+    return <RentalStartClient propertyId={rentalRoute.propertyId} />
+  }
+  if (rentalRoute?.kind === "apply-token") {
+    return <ApplyTokenClient token={rentalRoute.token} />
+  }
+  if (rentalRoute?.kind === "co-applicant") {
+    return <CoApplicantClient token={rentalRoute.token} />
+  }
+  if (rentalRoute?.kind === "application") {
+    return <ResumeApplicationClient applicationId={rentalRoute.applicationId} />
   }
 
   const popularPages: { name: string; href: string; icon: React.ReactNode; description: string; external?: boolean }[] = [

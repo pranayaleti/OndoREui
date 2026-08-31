@@ -50,6 +50,23 @@ export function findPublicProperty(body: unknown, publicId: string): ApiProperty
   )
 }
 
+export function listingRowsFromBody(body: unknown): ApiProperty[] {
+  return listingRows(body)
+}
+
+export async function fetchPublicPropertyList(
+  fetchImpl: typeof fetch = fetch,
+): Promise<ApiProperty[]> {
+  try {
+    const listRes = await fetchImpl(backendUrl("/api/properties/public"))
+    if (!listRes.ok) return []
+    const body: unknown = await listRes.json()
+    return listingRows(body)
+  } catch {
+    return []
+  }
+}
+
 export function publicIdsFromListBody(body: unknown): string[] {
   const raw = Array.isArray(body)
     ? body

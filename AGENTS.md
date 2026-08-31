@@ -92,6 +92,7 @@ English only. Translation files: `public/locales/en/common.json`. Use `t()` in c
 
 <!-- Maintained automatically by the continual-learning skill. Do not edit manually. -->
 - Push `main` only. Never create a feature branch.
+- Always run `npm run db:push` in OndoREBackend whenever a migration is added or schema must be applied; do not wait to be asked.
 
 ## Learned Workspace Facts
 

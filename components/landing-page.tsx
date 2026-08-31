@@ -4,6 +4,7 @@ import { SocialProofBar } from "@/components/landing/social-proof-bar"
 import { HowItWorksSection } from "@/components/landing/how-it-works-section"
 import { OperatorsSection } from "@/components/landing/operators-section"
 import { FeaturedPropertiesSection } from "@/components/landing/featured-properties-section"
+import { BrowseByTypeSection } from "@/components/landing/browse-by-type-section"
 import { AudienceSolutionsSection } from "@/components/landing/audience-solutions-section"
 import { PropertyOwnerSection } from "@/components/landing/property-owner-section"
 import { HousingWeManageSection } from "@/components/landing/housing-we-manage-section"
@@ -38,6 +39,7 @@ export default function LandingPage() {
       <RentSnapshotSection />
       <SelfManagingSection />
       <FeaturedPropertiesSection />
+      <BrowseByTypeSection />
       <TestimonialsSection />
       <ServiceAreaSection />
       <HomepageBlogSection />

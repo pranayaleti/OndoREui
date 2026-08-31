@@ -1,0 +1,667 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e7]:
+        - link "Free rental analysis" [ref=e8] [cursor=pointer]:
+          - /url: /whats-my-home-worth/
+        - generic [ref=e9]: "|"
+        - link "Available rentals" [ref=e10] [cursor=pointer]:
+          - /url: /properties/
+        - generic [ref=e11]: "|"
+        - link "Owner login" [ref=e12] [cursor=pointer]:
+          - /url: http://localhost:3001/login
+        - generic [ref=e13]: "|"
+        - link "Resident login" [ref=e14] [cursor=pointer]:
+          - /url: http://localhost:3001/login
+      - generic [ref=e15]:
+        - link "Ondo Real Estate home" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img [ref=e18] [cursor=pointer]
+        - navigation "Primary navigation" [ref=e20]:
+          - navigation [ref=e21]:
+            - link "Buy" [ref=e22] [cursor=pointer]:
+              - /url: /buy/
+            - link "Sell" [ref=e23] [cursor=pointer]:
+              - /url: /sell/
+            - link "Properties" [ref=e24] [cursor=pointer]:
+              - /url: /properties/
+            - link "Loans" [ref=e25] [cursor=pointer]:
+              - /url: /loans/
+            - button "Notary" [ref=e26] [cursor=pointer]:
+              - text: Notary
+              - img [ref=e27] [cursor=pointer]
+            - button "Owners" [ref=e29] [cursor=pointer]:
+              - text: Owners
+              - img [ref=e30] [cursor=pointer]
+            - button "Resources" [ref=e32] [cursor=pointer]:
+              - text: Resources
+              - img [ref=e33] [cursor=pointer]
+        - generic [ref=e35]:
+          - link "Call +1-408-538-0420" [ref=e36] [cursor=pointer]:
+            - /url: tel:+1-408-538-0420
+            - img [ref=e37] [cursor=pointer]
+            - generic [ref=e39] [cursor=pointer]: +1-408-538-0420
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img
+          - button "More navigation" [ref=e42] [cursor=pointer]:
+            - img [ref=e43] [cursor=pointer]
+            - img [ref=e45] [cursor=pointer]
+            - generic [ref=e46] [cursor=pointer]: More
+          - button "Toggle theme" [ref=e47] [cursor=pointer]:
+            - img
+            - img
+            - generic [ref=e48] [cursor=pointer]: Toggle theme
+          - button "Log in" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51] [cursor=pointer]: Log in
+            - img
+    - main [ref=e53]:
+      - generic [ref=e54]:
+        - img "Background image for Utah Home Loans & Mortgages page showing Compare conventional, FHA, VA, and USDA education. Then talk with a loan officer. This is not a credit decision." [ref=e57]
+        - generic [ref=e60]:
+          - heading "Utah Home Loans & Mortgages" [level=1] [ref=e61]
+          - paragraph [ref=e62]: Compare conventional, FHA, VA, and USDA education. Then talk with a loan officer. This is not a credit decision.
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - heading "Match the program to the file, not a slogan" [level=2] [ref=e66]
+            - paragraph [ref=e67]: Loan officers help you compare guidelines, documentation, and cash to close. Pricing is file-specific. Nothing on this page is a quote, a lock, or an approval.
+          - generic [ref=e68]:
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - generic [ref=e71]:
+                  - img [ref=e73]
+                  - link "Conventional Loans" [ref=e77] [cursor=pointer]:
+                    - /url: /loans/conventional/
+                - generic [ref=e78]: Conforming mortgages for borrowers who meet credit, down payment, and DTI guidelines.
+              - list [ref=e80]:
+                - listitem [ref=e81]:
+                  - img [ref=e82]
+                  - generic [ref=e85]: Some products start around 3% down
+                - listitem [ref=e86]:
+                  - img [ref=e87]
+                  - generic [ref=e90]: PMI can often be removed with enough equity
+                - listitem [ref=e91]:
+                  - img [ref=e92]
+                  - generic [ref=e95]: Waiting for 20% vs buying sooner is a cash-and-timeline trade
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - generic [ref=e98]:
+                  - img [ref=e100]
+                  - link "FHA Loans" [ref=e103] [cursor=pointer]:
+                    - /url: /loans/fha/
+                - generic [ref=e104]: Government-insured loans with lower down payment options and more flexible credit overlays, subject to MIP.
+              - list [ref=e106]:
+                - listitem [ref=e107]:
+                  - img [ref=e108]
+                  - generic [ref=e111]: 3.5% down at 580+ (HUD policy; overlays apply)
+                - listitem [ref=e112]:
+                  - img [ref=e113]
+                  - generic [ref=e116]: Gift funds often allowed
+                - listitem [ref=e117]:
+                  - img [ref=e118]
+                  - generic [ref=e121]: Primary residence
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - generic [ref=e124]:
+                  - img [ref=e126]
+                  - link "VA Loans" [ref=e132] [cursor=pointer]:
+                    - /url: /loans/va/
+                - generic [ref=e133]: For eligible veterans, active-duty service members, and some surviving spouses. Zero down only with remaining entitlement.
+              - list [ref=e135]:
+                - listitem [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e140]: 0% down when eligible
+                - listitem [ref=e141]:
+                  - img [ref=e142]
+                  - generic [ref=e145]: No monthly PMI
+                - listitem [ref=e146]:
+                  - img [ref=e147]
+                  - generic [ref=e150]: Funding fee may apply or be waived
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - generic [ref=e153]:
+                  - img [ref=e155]
+                  - link "USDA Loans" [ref=e158] [cursor=pointer]:
+                    - /url: /loans/usda/
+                - generic [ref=e159]: Rural development loans for eligible properties and income limits on the USDA map.
+              - list [ref=e161]:
+                - listitem [ref=e162]:
+                  - img [ref=e163]
+                  - generic [ref=e166]: 0% down when eligible
+                - listitem [ref=e167]:
+                  - img [ref=e168]
+                  - generic [ref=e171]: Income and map tests
+                - listitem [ref=e172]:
+                  - img [ref=e173]
+                  - generic [ref=e176]: Primary residence
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - generic [ref=e179]:
+                  - img [ref=e181]
+                  - link "Jumbo Loans" [ref=e184] [cursor=pointer]:
+                    - /url: /loans/jumbo/
+                - generic [ref=e185]: Financing above the current FHFA conforming limit for the property county. Limits change annually.
+              - list [ref=e187]:
+                - listitem [ref=e188]:
+                  - img [ref=e189]
+                  - generic [ref=e192]: Look up this year’s FHFA county table
+                - listitem [ref=e193]:
+                  - img [ref=e194]
+                  - generic [ref=e197]: Investor overlays on credit and reserves
+                - listitem [ref=e198]:
+                  - img [ref=e199]
+                  - generic [ref=e202]: Not a single Utah-wide dollar cap
+            - generic [ref=e203]:
+              - generic [ref=e204]:
+                - generic [ref=e205]:
+                  - img [ref=e207]
+                  - link "Non-QM (bank-statement, DSCR)" [ref=e210] [cursor=pointer]:
+                    - /url: /learn/non-qm/
+                - generic [ref=e211]: When agency tax-return income does not match cash flow. Bank-statement, DSCR, and asset-depletion are different stacks — not a cheaper conventional shortcut.
+              - list [ref=e213]:
+                - listitem [ref=e214]:
+                  - img [ref=e215]
+                  - generic [ref=e218]: Bank-statement deposit analysis
+                - listitem [ref=e219]:
+                  - img [ref=e220]
+                  - generic [ref=e223]: DSCR on investment property rent
+                - listitem [ref=e224]:
+                  - img [ref=e225]
+                  - generic [ref=e228]: Asset-depletion overlays
+          - region "Is this program a fit for the file?" [ref=e229]:
+            - heading "Is this program a fit for the file?" [level=2] [ref=e230]
+            - paragraph [ref=e231]: Use this as a map of typical overlays, not a score. A loan officer still has to apply the guide that is in force for your product and your documentation.
+            - region "Typical program differences as of 2026-08. Confirm current published rules." [ref=e232]:
+              - table "Typical program differences as of 2026-08. Confirm current published rules." [ref=e233]:
+                - caption [ref=e234]: Typical program differences as of 2026-08. Confirm current published rules.
+                - rowgroup [ref=e235]:
+                  - row "Question Conventional FHA VA USDA Jumbo" [ref=e236]:
+                    - columnheader "Question" [ref=e237]
+                    - columnheader "Conventional" [ref=e238]:
+                      - link "Conventional" [ref=e239] [cursor=pointer]:
+                        - /url: /loans/conventional/
+                    - columnheader "FHA" [ref=e240]:
+                      - link "FHA" [ref=e241] [cursor=pointer]:
+                        - /url: /loans/fha/
+                    - columnheader "VA" [ref=e242]:
+                      - link "VA" [ref=e243] [cursor=pointer]:
+                        - /url: /loans/va/
+                    - columnheader "USDA" [ref=e244]:
+                      - link "USDA" [ref=e245] [cursor=pointer]:
+                        - /url: /loans/usda/
+                    - columnheader "Jumbo" [ref=e246]:
+                      - link "Jumbo" [ref=e247] [cursor=pointer]:
+                        - /url: /loans/jumbo/
+                - rowgroup [ref=e248]:
+                  - row "Credit (typical overlay, not a promise) 620 (overlays often higher) HUD allows 580+ for 3.5% down and 500–579 with 10% down. Many lenders set higher overlays. A 500 score is not a promise that a file will be originated. VA does not publish a single FICO floor. Lender overlays still apply. Automated GUS findings and lender overlays often sit near the mid-600s. That is not a published floor that guarantees an approval. Investor overlays; often stronger than conforming conventional. Not a published floor." [ref=e249]:
+                    - rowheader "Credit (typical overlay, not a promise)" [ref=e250]
+                    - cell "620 (overlays often higher)" [ref=e251]
+                    - cell "HUD allows 580+ for 3.5% down and 500–579 with 10% down. Many lenders set higher overlays. A 500 score is not a promise that a file will be originated." [ref=e252]
+                    - cell "VA does not publish a single FICO floor. Lender overlays still apply." [ref=e253]
+                    - cell "Automated GUS findings and lender overlays often sit near the mid-600s. That is not a published floor that guarantees an approval." [ref=e254]
+                    - cell "Investor overlays; often stronger than conforming conventional. Not a published floor." [ref=e255]
+                  - row "Down payment / equity Some first-time and low-down conventional products start around 3% down for eligible borrowers. 3.5% down at 580+ under HUD policy; overlays often sit higher. 10% at 500–579. Zero down is available only with remaining entitlement and when the loan otherwise meets VA and lender guidelines. It is not automatic for every veteran. Zero down when the property map, household income, and occupancy tests are met. Often 10–20% depending on loan size and reserves. Overlay, not a statute." [ref=e256]:
+                    - rowheader "Down payment / equity" [ref=e257]
+                    - cell "Some first-time and low-down conventional products start around 3% down for eligible borrowers." [ref=e258]
+                    - cell "3.5% down at 580+ under HUD policy; overlays often sit higher. 10% at 500–579." [ref=e259]
+                    - cell "Zero down is available only with remaining entitlement and when the loan otherwise meets VA and lender guidelines. It is not automatic for every veteran." [ref=e260]
+                    - cell "Zero down when the property map, household income, and occupancy tests are met." [ref=e261]
+                    - cell "Often 10–20% depending on loan size and reserves. Overlay, not a statute." [ref=e262]
+                  - row "Occupancy Primary, second home, and investment — each with different pricing and overlays. Primary residence (with limited exceptions) Primary residence. Remaining-entitlement cases still have an occupancy test. Primary residence. Investment property is not eligible. Primary, second home, and investment exist as overlays. Pricing and down payment change with occupancy." [ref=e263]:
+                    - rowheader "Occupancy" [ref=e264]
+                    - cell "Primary, second home, and investment — each with different pricing and overlays." [ref=e265]
+                    - cell "Primary residence (with limited exceptions)" [ref=e266]
+                    - cell "Primary residence. Remaining-entitlement cases still have an occupancy test." [ref=e267]
+                    - cell "Primary residence. Investment property is not eligible." [ref=e268]
+                    - cell "Primary, second home, and investment exist as overlays. Pricing and down payment change with occupancy." [ref=e269]
+                  - row "Property type 1–4 units, condos and PUDs when the project meets investor rules. 1–4 units as a primary. Condos need FHA project approval. HUD minimum property standards apply. VA MPRs and an occupancy appraisal. Condos need VA project approval. Address must be on the USDA map. Existing homes and some new construction; not an investment rental. Project and property overlays are investor-specific. High-cost condos can be harder than detached." [ref=e270]:
+                    - rowheader "Property type" [ref=e271]
+                    - cell "1–4 units, condos and PUDs when the project meets investor rules." [ref=e272]
+                    - cell "1–4 units as a primary. Condos need FHA project approval. HUD minimum property standards apply." [ref=e273]
+                    - cell "VA MPRs and an occupancy appraisal. Condos need VA project approval." [ref=e274]
+                    - cell "Address must be on the USDA map. Existing homes and some new construction; not an investment rental." [ref=e275]
+                    - cell "Project and property overlays are investor-specific. High-cost condos can be harder than detached." [ref=e276]
+                  - row [ref=e277]:
+                    - rowheader "MIP / PMI / funding fee / guarantee fee" [ref=e278]
+                    - cell "Conventional PMI can usually be removed once the loan reaches the investor’s equity threshold (commonly 20% based on original value, or by a new appraisal under the program rules)." [ref=e279]
+                    - cell "Upfront MIP 1.75% of the base loan amount (often financed). Annual MIP is a range that depends on term, loan amount, and LTV. It is not a single published percent for every file. Life-of-loan MIP is common below 10% down." [ref=e280]
+                    - 'cell "Funding fee may apply or be waived. First-use, less than 5% down snapshot: 2.15%. The funding fee is typically waived for veterans with a qualifying service-connected disability rating and for some surviving spouses. Entitlement and occupancy rules also apply. No monthly PMI." [ref=e281]'
+                    - cell "1.00% of the loan amount (often financed); annual 0.35% of remaining principal (annualized; confirm current RD fee notice). USDA publishes an upfront guarantee fee and an annual fee. The percents in this module are a dated snapshot, not a quote. Confirm the current RD fee notice before anyone prices a file." [ref=e282]
+                    - cell "Some jumbo files have no monthly PMI at lower LTVs. Others price risk into rate. Compare Loan Estimates." [ref=e283]
+                  - row "Loan limits FHFA conforming limit for the property county. Look up this year’s table. HUD FHA county limit. Different table from FHFA. Look up the property county. County limits matter when entitlement is partial. Full entitlement files follow current VA/FHFA interaction — confirm, do not memorize a number. Area loan limits exist. The map and income tests usually bind first. Any amount above the FHFA conforming limit for that county. Not a single Utah-wide number." [ref=e284]:
+                    - rowheader "Loan limits" [ref=e285]
+                    - cell "FHFA conforming limit for the property county. Look up this year’s table." [ref=e286]
+                    - cell "HUD FHA county limit. Different table from FHFA. Look up the property county." [ref=e287]
+                    - cell "County limits matter when entitlement is partial. Full entitlement files follow current VA/FHFA interaction — confirm, do not memorize a number." [ref=e288]
+                    - cell "Area loan limits exist. The map and income tests usually bind first." [ref=e289]
+                    - cell "Any amount above the FHFA conforming limit for that county. Not a single Utah-wide number." [ref=e290]
+              - paragraph [ref=e291]: Program rules, fees, and county loan limits change. Confirm the current published schedule and lender overlays. Nothing here is a quote, a lock, or a credit decision.
+          - paragraph [ref=e292]:
+            - text: "Property type and payment structure still change the file:"
+            - link "manufactured housing vs ADU financing" [ref=e293] [cursor=pointer]:
+              - /url: /blog/manufactured-housing-adu-financing/
+            - text: and
+            - link "interest-only mortgages" [ref=e294] [cursor=pointer]:
+              - /url: /blog/interest-only-mortgages-who-they-are-for/
+            - text: . Neither is a standard conforming shortcut.
+          - generic [ref=e295]:
+            - generic [ref=e296]:
+              - heading "Why Choose Our Loan Services?" [level=3] [ref=e297]
+              - generic [ref=e298]:
+                - generic [ref=e299]:
+                  - img [ref=e300]
+                  - generic [ref=e303]:
+                    - heading "Program comparison" [level=4] [ref=e304]
+                    - paragraph [ref=e305]: Access to multiple programs so we can compare guidelines, not a single advertised rate
+                - generic [ref=e306]:
+                  - img [ref=e307]
+                  - generic [ref=e310]:
+                    - heading "Local Expertise" [level=4] [ref=e311]
+                    - paragraph [ref=e312]: Deep understanding of Utah real estate market and local programs
+                - generic [ref=e313]:
+                  - img [ref=e314]
+                  - generic [ref=e317]:
+                    - heading "Fast Processing" [level=4] [ref=e318]
+                    - paragraph [ref=e319]: Streamlined application process with quick pre-approvals and closings
+                - generic [ref=e320]:
+                  - img [ref=e321]
+                  - generic [ref=e324]:
+                    - heading "Personalized Service" [level=4] [ref=e325]
+                    - paragraph [ref=e326]: Dedicated loan officer guidance throughout the entire process
+            - img "Map showing Utah mortgage and loan service areas including Salt Lake City, Lehi, Provo, Orem, Sandy, Draper and surrounding communities" [ref=e328]
+        - generic [ref=e329]:
+          - generic [ref=e331]:
+            - heading "Education that belongs with these programs" [level=2] [ref=e332]
+            - generic [ref=e333]:
+              - link "Conventional loans in Utah Conforming conventional purchase and refinance, PMI, and typical documentation." [ref=e334] [cursor=pointer]:
+                - /url: /loans/conventional/
+                - generic [ref=e336] [cursor=pointer]:
+                  - generic [ref=e337] [cursor=pointer]:
+                    - text: Conventional loans in Utah
+                    - img [ref=e338] [cursor=pointer]
+                  - generic [ref=e340] [cursor=pointer]: Conforming conventional purchase and refinance, PMI, and typical documentation.
+              - link "FHA loans in Utah Low down payment, MIP, gift funds, and credit overlays for Utah primary-residence buyers." [ref=e341] [cursor=pointer]:
+                - /url: /loans/fha/
+                - generic [ref=e343] [cursor=pointer]:
+                  - generic [ref=e344] [cursor=pointer]:
+                    - text: FHA loans in Utah
+                    - img [ref=e345] [cursor=pointer]
+                  - generic [ref=e347] [cursor=pointer]: Low down payment, MIP, gift funds, and credit overlays for Utah primary-residence buyers.
+              - link "VA home loans in Utah Zero-down eligibility, funding fee, COE, and Utah military context. For eligible veterans and service members." [ref=e348] [cursor=pointer]:
+                - /url: /loans/va/
+                - generic [ref=e350] [cursor=pointer]:
+                  - generic [ref=e351] [cursor=pointer]:
+                    - text: VA home loans in Utah
+                    - img [ref=e352] [cursor=pointer]
+                  - generic [ref=e354] [cursor=pointer]: Zero-down eligibility, funding fee, COE, and Utah military context. For eligible veterans and service members.
+              - 'link "Non-QM besides bank-statement: asset depletion and DSCR Bank-statement, DSCR, and asset-depletion are different Non-QM stacks. When agency tax-return income does not match cash flow — not a cheaper conventional shortcut." [ref=e355] [cursor=pointer]':
+                - /url: /learn/non-qm/
+                - generic [ref=e357] [cursor=pointer]:
+                  - generic [ref=e358] [cursor=pointer]:
+                    - text: "Non-QM besides bank-statement: asset depletion and DSCR"
+                    - img [ref=e359] [cursor=pointer]
+                  - generic [ref=e361] [cursor=pointer]: Bank-statement, DSCR, and asset-depletion are different Non-QM stacks. When agency tax-return income does not match cash flow — not a cheaper conventional shortcut.
+              - 'link "Investment property financing: DSCR, occupancy, and house-hacking DSCR vs full-doc rental qualification, occupancy types, cash-out to buy a rental, and FHA duplex house-hacks. Informational only — not occupancy coaching." [ref=e362] [cursor=pointer]':
+                - /url: /learn/investment/
+                - generic [ref=e364] [cursor=pointer]:
+                  - generic [ref=e365] [cursor=pointer]:
+                    - text: "Investment property financing: DSCR, occupancy, and house-hacking"
+                    - img [ref=e366] [cursor=pointer]
+                  - generic [ref=e368] [cursor=pointer]: DSCR vs full-doc rental qualification, occupancy types, cash-out to buy a rental, and FHA duplex house-hacks. Informational only — not occupancy coaching.
+              - 'link "Interest-Only Mortgages: Who They Are For, Who They Hurt IO payments skip scheduled principal for a stated period. Payment shock when amortization starts is the risk. Not a teaser-rate promise." [ref=e369] [cursor=pointer]':
+                - /url: /blog/interest-only-mortgages-who-they-are-for/
+                - generic [ref=e371] [cursor=pointer]:
+                  - generic [ref=e372] [cursor=pointer]:
+                    - text: "Interest-Only Mortgages: Who They Are For, Who They Hurt"
+                    - img [ref=e373] [cursor=pointer]
+                  - generic [ref=e375] [cursor=pointer]: IO payments skip scheduled principal for a stated period. Payment shock when amortization starts is the risk. Not a teaser-rate promise.
+          - region "What to do next" [ref=e376]:
+            - heading "What to do next" [level=2] [ref=e377]
+            - paragraph [ref=e378]: Education first. A conversation with a loan officer is how you find out what may actually fit your file.
+            - generic [ref=e379]:
+              - link "Compare programs" [ref=e380] [cursor=pointer]:
+                - /url: /loans/
+              - link "Conventional loans in Utah" [ref=e381] [cursor=pointer]:
+                - /url: /loans/conventional/
+              - link "FHA loans in Utah" [ref=e382] [cursor=pointer]:
+                - /url: /loans/fha/
+          - paragraph [ref=e383]:
+            - text: Loan information is provided by Ondo Real Estate (NMLS ID on file). This is not a commitment to lend, a loan approval, or an offer of credit. Rates, terms, and payments shown are estimates for illustration only, are not a quote, and are subject to credit approval, underwriting, and market conditions. You are not required to use Ondo for financing to buy or sell with Ondo. Equal Housing Lender. Program rules, fees, and county loan limits change. Confirm the current published schedule and lender overlays. Nothing here is a quote, a lock, or a credit decision.
+            - link "Licensing and disclosures" [ref=e384] [cursor=pointer]:
+              - /url: /licensing/
+      - generic [ref=e386]:
+        - heading "Ready to talk through a file?" [level=2] [ref=e387]
+        - paragraph [ref=e388]: Start a conversation. Pre-approval is a document review, not a guarantee you will close.
+        - generic [ref=e389]:
+          - link "Talk with a loan officer" [ref=e390] [cursor=pointer]:
+            - /url: /qualify/
+          - link "Calculate Payment" [ref=e391] [cursor=pointer]:
+            - /url: /calculators/
+      - generic [ref=e393]:
+        - heading "Questions about loans or refinancing?" [level=2] [ref=e394]
+        - paragraph [ref=e395]: Visit our Help Center for detailed FAQs on loans, payments, escrow, and assistance options.
+        - link "View Loans FAQs" [ref=e396] [cursor=pointer]:
+          - /url: /faq/loans-faqs/
+    - contentinfo [ref=e397]:
+      - generic [ref=e399]:
+        - generic [ref=e400]:
+          - img [ref=e402]
+          - generic [ref=e404]:
+            - paragraph [ref=e405]: Got ideas?
+            - paragraph [ref=e406]: We're listening! Share feedback.
+        - link "Share feedback" [ref=e407] [cursor=pointer]:
+          - /url: /feedback/
+      - generic "Ondo Real Estate footer navigation" [ref=e410]:
+        - generic [ref=e411]:
+          - navigation "Buying a Home" [ref=e412]:
+            - heading "Buying a Home" [level=3] [ref=e413]:
+              - link "Buying a Home" [ref=e414] [cursor=pointer]:
+                - /url: /buy/
+                - img [ref=e415] [cursor=pointer]
+                - generic [ref=e418] [cursor=pointer]: Buying a Home
+            - list [ref=e419]:
+              - listitem [ref=e420]:
+                - link "First-time homebuyer" [ref=e421] [cursor=pointer]:
+                  - /url: /buy/first-time/
+              - listitem [ref=e422]:
+                - link "Buying a second home" [ref=e423] [cursor=pointer]:
+                  - /url: /buy/second-home/
+              - listitem [ref=e424]:
+                - link "Fixed-rate mortgage" [ref=e425] [cursor=pointer]:
+                  - /url: /buy/fixed-rate/
+              - listitem [ref=e426]:
+                - link "Adjustable-rate mortgage" [ref=e427] [cursor=pointer]:
+                  - /url: /buy/adjustable-rate/
+              - listitem [ref=e428]:
+                - link "30 year mortgage" [ref=e429] [cursor=pointer]:
+                  - /url: /buy/30-year/
+              - listitem [ref=e430]:
+                - link "15 year mortgage" [ref=e431] [cursor=pointer]:
+                  - /url: /buy/15-year/
+              - listitem [ref=e432]:
+                - link "Mortgage rates explained" [ref=e433] [cursor=pointer]:
+                  - /url: /buy/rates/
+              - listitem [ref=e434]:
+                - link "Buy & sell by city" [ref=e435] [cursor=pointer]:
+                  - /url: /buy-sell/
+          - navigation "Refinance" [ref=e436]:
+            - heading "Refinance" [level=3] [ref=e437]:
+              - link "Refinance" [ref=e438] [cursor=pointer]:
+                - /url: /refinance/process/
+                - img [ref=e439] [cursor=pointer]
+                - generic [ref=e442] [cursor=pointer]: Refinance
+            - list [ref=e443]:
+              - listitem [ref=e444]:
+                - link "Mortgage refinance process" [ref=e445] [cursor=pointer]:
+                  - /url: /refinance/process/
+              - listitem [ref=e446]:
+                - link "Rate-and-term refinance" [ref=e447] [cursor=pointer]:
+                  - /url: /refinance/rate-term/
+              - listitem [ref=e448]:
+                - link "Cash-out refinance" [ref=e449] [cursor=pointer]:
+                  - /url: /refinance/cash-out/
+              - listitem [ref=e450]:
+                - link "Mortgage blog – Refinance" [ref=e451] [cursor=pointer]:
+                  - /url: /refinance/blog/
+              - listitem [ref=e452]:
+                - link "Recast vs refinance" [ref=e453] [cursor=pointer]:
+                  - /url: /blog/recast-vs-refinance/
+          - navigation "Mortgage Loans" [ref=e454]:
+            - heading "Mortgage Loans" [level=3] [ref=e455]:
+              - link "Mortgage Loans" [ref=e456] [cursor=pointer]:
+                - /url: /loans/
+                - img [ref=e457] [cursor=pointer]
+                - generic [ref=e460] [cursor=pointer]: Mortgage Loans
+            - list [ref=e461]:
+              - listitem [ref=e462]:
+                - link "Conventional" [ref=e463] [cursor=pointer]:
+                  - /url: /loans/conventional/
+              - listitem [ref=e464]:
+                - link "FHA" [ref=e465] [cursor=pointer]:
+                  - /url: /loans/fha/
+              - listitem [ref=e466]:
+                - link "USDA" [ref=e467] [cursor=pointer]:
+                  - /url: /loans/usda/
+              - listitem [ref=e468]:
+                - link "VA" [ref=e469] [cursor=pointer]:
+                  - /url: /loans/va/
+              - listitem [ref=e470]:
+                - link "HELOC / HELOAN" [ref=e471] [cursor=pointer]:
+                  - /url: /loans/heloc/
+              - listitem [ref=e472]:
+                - link "Reverse Mortgage" [ref=e473] [cursor=pointer]:
+                  - /url: /loans/reverse/
+              - listitem [ref=e474]:
+                - link "Jumbo Loans" [ref=e475] [cursor=pointer]:
+                  - /url: /loans/jumbo/
+          - navigation "Calculators" [ref=e476]:
+            - heading "Calculators" [level=3] [ref=e477]:
+              - link "Calculators" [ref=e478] [cursor=pointer]:
+                - /url: /calculators/
+                - img [ref=e479] [cursor=pointer]
+                - generic [ref=e481] [cursor=pointer]: Calculators
+            - list [ref=e482]:
+              - listitem [ref=e483]:
+                - link "Self-manage vs Ondo ROI" [ref=e484] [cursor=pointer]:
+                  - /url: /calculators/owner-vs-self/
+              - listitem [ref=e485]:
+                - link "Mortgage payment calculator" [ref=e486] [cursor=pointer]:
+                  - /url: /calculators/mortgage-payment/
+              - listitem [ref=e487]:
+                - link "Affordability calculator" [ref=e488] [cursor=pointer]:
+                  - /url: /calculators/affordability/
+              - listitem [ref=e489]:
+                - link "Income calculator" [ref=e490] [cursor=pointer]:
+                  - /url: /calculators/income/
+              - listitem [ref=e491]:
+                - link "Closing cost calculator" [ref=e492] [cursor=pointer]:
+                  - /url: /calculators/closing-cost/
+              - listitem [ref=e493]:
+                - link "Refinance calculator" [ref=e494] [cursor=pointer]:
+                  - /url: /calculators/refinance/
+              - listitem [ref=e495]:
+                - link "Home sale calculator" [ref=e496] [cursor=pointer]:
+                  - /url: /calculators/home-sale/
+              - listitem [ref=e497]:
+                - link "Buying power calculator" [ref=e498] [cursor=pointer]:
+                  - /url: /calculators/buying-power/
+          - navigation "About Us" [ref=e499]:
+            - heading "About Us" [level=3] [ref=e500]:
+              - link "About Us" [ref=e501] [cursor=pointer]:
+                - /url: /about/
+                - img [ref=e502] [cursor=pointer]
+                - generic [ref=e507] [cursor=pointer]: About Us
+            - list [ref=e508]:
+              - listitem [ref=e509]:
+                - link "History" [ref=e510] [cursor=pointer]:
+                  - /url: /about/history/
+              - listitem [ref=e511]:
+                - link "New to Utah" [ref=e512] [cursor=pointer]:
+                  - /url: /moving-to-utah/
+              - listitem [ref=e513]:
+                - link "Giving back" [ref=e514] [cursor=pointer]:
+                  - /url: /about/giving-back/
+              - listitem [ref=e515]:
+                - link "Careers" [ref=e516] [cursor=pointer]:
+                  - /url: /about/careers/
+              - listitem [ref=e517]:
+                - link "News" [ref=e518] [cursor=pointer]:
+                  - /url: /about/news/
+              - listitem [ref=e519]:
+                - link "Socials" [ref=e520] [cursor=pointer]:
+                  - /url: /socials/
+              - listitem [ref=e521]:
+                - link "Events" [ref=e522] [cursor=pointer]:
+                  - /url: /events/
+              - listitem [ref=e523]:
+                - link "Mortgage learning hub" [ref=e524] [cursor=pointer]:
+                  - /url: /learn/
+              - listitem [ref=e525]:
+                - link "Variable income mortgages" [ref=e526] [cursor=pointer]:
+                  - /url: /learn/variable-income/
+              - listitem [ref=e527]:
+                - link "First-time buyer cash and closing" [ref=e528] [cursor=pointer]:
+                  - /url: /learn/first-time/
+              - listitem [ref=e529]:
+                - link "Service areas" [ref=e530] [cursor=pointer]:
+                  - /url: /locations/
+              - listitem [ref=e531]:
+                - link "City market reports" [ref=e532] [cursor=pointer]:
+                  - /url: /market-reports/
+              - listitem [ref=e533]:
+                - link "Neighborhood guides" [ref=e534] [cursor=pointer]:
+                  - /url: /neighborhoods/
+              - listitem [ref=e535]:
+                - link "School district guides" [ref=e536] [cursor=pointer]:
+                  - /url: /schools/
+              - listitem [ref=e537]:
+                - link "Non-QM, bank-statement, DSCR" [ref=e538] [cursor=pointer]:
+                  - /url: /learn/non-qm/
+              - listitem [ref=e539]:
+                - link "Investment occupancy and DSCR" [ref=e540] [cursor=pointer]:
+                  - /url: /learn/investment/
+              - listitem [ref=e541]:
+                - link "Utah tax calendar vs escrow" [ref=e542] [cursor=pointer]:
+                  - /url: /blog/utah-property-tax-calendar-first-escrow-analysis/
+              - listitem [ref=e543]:
+                - link "Escrow shortage after first year" [ref=e544] [cursor=pointer]:
+                  - /url: /blog/escrow-shortage-after-first-year/
+              - listitem [ref=e545]:
+                - link "Impounds vs waiving escrow" [ref=e546] [cursor=pointer]:
+                  - /url: /blog/impounds-vs-waiving-escrow/
+              - listitem [ref=e547]:
+                - link "The week after funding" [ref=e548] [cursor=pointer]:
+                  - /url: /blog/week-after-mortgage-funding/
+              - listitem [ref=e549]:
+                - link "How long a first purchase takes" [ref=e550] [cursor=pointer]:
+                  - /url: /blog/how-long-first-purchase-takes/
+              - listitem [ref=e551]:
+                - 'link "Hill AFB VA: COE and occupancy" [ref=e552] [cursor=pointer]':
+                  - /url: /blog/hill-afb-va-coe-occupancy/
+              - listitem [ref=e553]:
+                - link "Start a mortgage conversation" [ref=e554] [cursor=pointer]:
+                  - /url: /qualify/
+              - listitem [ref=e555]:
+                - link "Academy" [ref=e556] [cursor=pointer]:
+                  - /url: /academy/
+              - listitem [ref=e557]:
+                - link "Reviews" [ref=e558] [cursor=pointer]:
+                  - /url: /about/testimonials/
+              - listitem [ref=e559]:
+                - link "Industry news" [ref=e560] [cursor=pointer]:
+                  - /url: /news/
+              - listitem [ref=e561]:
+                - link "Investor relations" [ref=e562] [cursor=pointer]:
+                  - /url: /about/investor-relations/
+              - listitem [ref=e563]:
+                - link "Affiliate Program" [ref=e564] [cursor=pointer]:
+                  - /url: /affiliate/
+          - navigation "Help Center" [ref=e565]:
+            - heading "Help Center" [level=3] [ref=e566]:
+              - link "Help Center" [ref=e567] [cursor=pointer]:
+                - /url: /faq/
+                - img [ref=e568] [cursor=pointer]
+                - generic [ref=e571] [cursor=pointer]: Help Center
+            - list [ref=e572]:
+              - listitem [ref=e573]:
+                - link "Payment questions" [ref=e574] [cursor=pointer]:
+                  - /url: /faq/payments-faqs/
+              - listitem [ref=e575]:
+                - link "Hardship assistance" [ref=e576] [cursor=pointer]:
+                  - /url: /faq/hardship-faqs/
+              - listitem [ref=e577]:
+                - link "Loan payoffs" [ref=e578] [cursor=pointer]:
+                  - /url: /faq/loan-payoffs-faqs/
+              - listitem [ref=e579]:
+                - link "Mortgage FAQs" [ref=e580] [cursor=pointer]:
+                  - /url: /faq/loans-faqs/
+              - listitem [ref=e581]:
+                - link "Escrow" [ref=e582] [cursor=pointer]:
+                  - /url: /faq/escrow-faqs/
+              - listitem [ref=e583]:
+                - link "Natural Disaster Resources" [ref=e584] [cursor=pointer]:
+                  - /url: /faq/disaster-faqs/
+        - generic [ref=e586]:
+          - generic [ref=e587]:
+            - img [ref=e588]
+            - generic [ref=e590]:
+              - paragraph [ref=e591]: Loan Servicing Help Center
+              - link "Call +1-408-538-0420" [ref=e592] [cursor=pointer]:
+                - /url: tel:+14085380420
+                - text: +1-408-538-0420
+              - paragraph [ref=e593]: "Office hours: Mon–Fri 9:00 AM – 5:00 PM MT"
+          - generic [ref=e594]:
+            - img [ref=e595]
+            - generic [ref=e598]:
+              - paragraph [ref=e599]: Email Us
+              - link "Email info@ondorealestate.com" [ref=e600] [cursor=pointer]:
+                - /url: mailto:info@ondorealestate.com
+                - text: info@ondorealestate.com
+          - generic [ref=e601]:
+            - img [ref=e602]
+            - generic [ref=e605]:
+              - paragraph [ref=e606]: Our Location
+              - link "Open address in Google Maps" [ref=e607] [cursor=pointer]:
+                - /url: https://www.google.com/maps/search/?api=1&query=2701%20N%20Thanksgiving%20Way%2C%20Lehi%2C%20UT%2084043
+                - generic [ref=e608] [cursor=pointer]: 2701 N Thanksgiving Way
+                - generic [ref=e609] [cursor=pointer]: Lehi, UT 84043
+        - generic [ref=e611]:
+          - generic [ref=e612]:
+            - generic [ref=e613]: "Follow us:"
+            - link "Instagram" [ref=e614] [cursor=pointer]:
+              - /url: https://www.instagram.com/OndoRealEstate
+              - img [ref=e615] [cursor=pointer]
+            - link "Linktree" [ref=e618] [cursor=pointer]:
+              - /url: https://linktr.ee/ondorealestate
+              - img [ref=e619] [cursor=pointer]
+            - generic [ref=e621]:
+              - link "Scan QR code to access all social media links" [ref=e622] [cursor=pointer]:
+                - /url: https://linktr.ee/ondorealestate
+                - img "Linktree QR Code - Scan to access all social media" [ref=e623] [cursor=pointer]
+              - generic [ref=e624]: Click or Scan for all links
+          - generic [ref=e625]:
+            - generic [ref=e626]:
+              - img [ref=e627]
+              - generic [ref=e633]: Equal Housing Opportunity
+            - generic [ref=e635]:
+              - generic [ref=e636]: R
+              - generic [ref=e637]: REALTOR
+            - generic [ref=e639]:
+              - generic [ref=e640]: MLS
+              - generic [ref=e641]: Multiple Listing Service
+      - generic [ref=e644]:
+        - generic [ref=e645]:
+          - paragraph [ref=e646]: © 2026 Ondo Real Estate. All rights reserved.
+          - paragraph [ref=e647]:
+            - generic [ref=e648]: Designed. Developed. Deployed by
+            - link "OndoSoft" [ref=e649] [cursor=pointer]:
+              - /url: https://www.ondosoft.com/?utm_source=ondorealestate
+            - generic [ref=e650]:
+              - text: The digital engine behind
+              - link "Ondo Real Estate" [ref=e651] [cursor=pointer]:
+                - /url: /
+              - text: .
+        - generic [ref=e652]:
+          - link "Licensing" [ref=e654] [cursor=pointer]:
+            - /url: /licensing/
+          - link "Privacy Policy" [ref=e655] [cursor=pointer]:
+            - /url: /privacy-policy/
+          - link "Terms of Use" [ref=e656] [cursor=pointer]:
+            - /url: /terms-of-service/
+          - link "Accessibility" [ref=e657] [cursor=pointer]:
+            - /url: /accessibility/
+          - link "Site Map" [ref=e658] [cursor=pointer]:
+            - /url: /sitemap/
+  - button "Open the Ondo assistant to ask about property management, renting, buying, or loans" [ref=e659] [cursor=pointer]:
+    - img [ref=e660] [cursor=pointer]
+    - text: Ask Ondo
+  - button "Schedule a free consultation with Ondo Real Estate" [ref=e663] [cursor=pointer]:
+    - img
+  - region "Notifications (F8)":
+    - list
+```
