@@ -6,6 +6,7 @@ import { generateBreadcrumbJsonLd, generateFAQJsonLd, generateServiceJsonLd } fr
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
 import { Check, ArrowRight } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = "Utah Property Management Companies Compared (2026)"
 const ogTitle = `${title} | Ondo RE`
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/compare-utah-property-managers/` },
-  openGraph: { title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/` },
-  twitter: { card: "summary_large_image", title: ogTitle, description },
+  openGraph: { title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/`, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: ogTitle, description, images: [DEFAULT_OG_IMAGE_URL] },
   robots: { index: true, follow: true },
 }
 

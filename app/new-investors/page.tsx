@@ -16,6 +16,7 @@ import {
   BookOpen,
   Phone,
 } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "New Investors | Get Started with Ondo Real Estate",
@@ -27,7 +28,9 @@ export const metadata: Metadata = {
     description:
       "New to real estate investing? Learn how Ondo Real Estate can help you build passive income through professionally managed properties in Utah.",
     url: `${SITE_URL}/new-investors`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const steps = [

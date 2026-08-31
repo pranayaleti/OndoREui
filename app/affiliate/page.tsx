@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { AffiliateContent } from "./affiliate-content"
 import { SITE_URL } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = "Become an Ondo RE Affiliate | Ondo Real Estate"
 const description =
@@ -16,7 +17,8 @@ export const metadata: Metadata = {
     canonical,
     languages: buildMetadataLanguages("/affiliate"),
   },
-  openGraph: { title, description, url: canonical },
+  openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function AffiliatePage() {

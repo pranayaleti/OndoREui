@@ -8,6 +8,7 @@ import type { Metadata } from "next"
 import { RelatedContent } from "@/components/content/related-content"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { CONVENTIONAL_SNAPSHOT, FHA_SNAPSHOT } from "@/lib/content"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const slug = "/blog/first-time-home-buyer-guide"
 const title = "First-Time Home Buyer Guide: Everything You Need to Know"
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
   title: `${title} | Ondo Real Estate`,
   description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: `${title} | Ondo Real Estate`, description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author] },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo Real Estate`, description },
+  openGraph: { title: `${title} | Ondo Real Estate`, description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: `${title} | Ondo Real Estate`, description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function FirstTimeHomeBuyerGuide() {

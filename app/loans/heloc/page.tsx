@@ -10,13 +10,14 @@ import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "HELOC & Home Equity Loans in Utah | Ondo Real Estate",
   description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.",
   alternates: { canonical: `${SITE_URL}/loans/heloc/` },
-  openGraph: { title: "HELOC & Home Equity Loans in Utah | Ondo Real Estate", description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.", url: `${SITE_URL}/loans/heloc/` },
-  twitter: { card: "summary_large_image", title: "HELOC & Home Equity Loans in Utah | Ondo Real Estate", description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits." },
+  openGraph: { title: "HELOC & Home Equity Loans in Utah | Ondo Real Estate", description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.", url: `${SITE_URL}/loans/heloc/`, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: "HELOC & Home Equity Loans in Utah | Ondo Real Estate", description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function HelocPage() {

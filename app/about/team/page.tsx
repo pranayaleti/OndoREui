@@ -46,7 +46,7 @@ export default function TeamPage() {
     {
       name: "David Thompson",
       title: "Financial Controller",
-      image: "/placeholder-user.jpg",
+      image: "/placeholder.svg",
       bio: "David manages our financial operations and provides detailed reporting to property owners.",
       credentials: ["CPA License", "MBA Finance", "15+ years experience"],
       department: "Finance"
@@ -54,7 +54,7 @@ export default function TeamPage() {
     {
       name: "Lisa Park",
       title: "Customer Success Manager",
-      image: "/placeholder-user.jpg",
+      image: "/placeholder.svg",
       bio: "Lisa ensures both property owners and tenants have exceptional experiences with our services.",
       credentials: ["Customer Service Excellence", "Utah Real Estate License", "6+ years experience"],
       department: "Customer Success"
@@ -62,7 +62,7 @@ export default function TeamPage() {
     {
       name: "Robert Wilson",
       title: "Technology Director",
-      image: "/placeholder-user.jpg",
+      image: "/placeholder.svg",
       bio: "Robert leads our technology initiatives and ensures our systems provide the best user experience.",
       credentials: ["Computer Science Degree", "AWS Certified", "10+ years experience"],
       department: "Technology"

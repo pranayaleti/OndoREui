@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import Link from "next/link"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: `${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`,
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
     description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. AI-powered risk scoring, 10 calculators, full PWA offline support, and 6 auth roles vs TurboTenant's basic free tier.`,
     url: `${SITE_URL}/vs/turbotenant/`,
     type: "website",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 type FeatureRow = {

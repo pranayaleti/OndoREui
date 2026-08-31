@@ -10,6 +10,7 @@ import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import Script from "next/script"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Loans & Financing FAQs | Ondo Real Estate",
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Loans & Financing FAQs | Ondo Real Estate",
     description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate",
@@ -18,11 +19,13 @@ export const metadata: Metadata = {
     publishedTime: "2025-01-10",
     modifiedTime: "2025-01-10",
     authors: ["ONDO Notary Team"],
+    images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: "Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate",
     description: "Follow this RON checklist to pass ID verification, avoid rescheduling, and receive sealed documents immediately after your remote online notarization.",
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 }
 

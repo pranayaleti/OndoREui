@@ -7,6 +7,7 @@ import { SITE_URL, SITE_EMAILS, SITE_PHONE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { FileText, Shield, TrendingUp, Building2, Mail, Phone } from "lucide-react"
 import { BrochureRequestForm } from "@/components/leads/brochure-request-form"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Investor Brochure | Ondo Real Estate",
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
     description:
       "Request our investor overview, strategy overview, portfolio highlights, and how to get started with Ondo Real Estate.",
     url: `${SITE_URL}/brochure`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const highlights = [

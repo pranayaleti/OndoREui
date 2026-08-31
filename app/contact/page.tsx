@@ -8,6 +8,7 @@ import { ContactPageForm } from "@/components/contact/contact-page-form"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
 import { WebMCPContactInfoTool } from "@/components/contact/webmcp-contact-info-tool"
 import { Mail, Phone } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata = {
   title: "Contact Us",
@@ -23,7 +24,9 @@ export const metadata = {
     title: "Contact Us | Ondo Real Estate",
     description: "Ondo Real Estate, your first point of contact for property management and real estate services in Utah. Qualified leads, strategic outreach.",
     url: `${SITE_URL}/contact`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function ContactPage() {

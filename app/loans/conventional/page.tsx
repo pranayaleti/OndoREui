@@ -13,6 +13,7 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { CONVENTIONAL_SNAPSHOT } from "@/lib/content"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Conventional Loans in Utah | Ondo Real Estate",
@@ -21,7 +22,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Conventional Loans in Utah | Ondo Real Estate",
     description: "Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges. This is not a quote or a credit decision.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

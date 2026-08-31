@@ -13,14 +13,15 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { USDA_SNAPSHOT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate",
   description:
     "USDA loans can be zero down when the address map, household income, and occupancy tests fit. Confirm current RD tools. Educational, not a credit decision.",
   alternates: { canonical: `${SITE_URL}/loans/usda/` },
-  openGraph: { title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate", description: "USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools." },
-  twitter: { card: "summary_large_image", title: "USDA Loans in Utah | Ondo Real Estate", description: "Zero down when map, income, and occupancy tests fit. Confirm current USDA tools." },
+  openGraph: { title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate", description: "USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: "USDA Loans in Utah | Ondo Real Estate", description: "Zero down when map, income, and occupancy tests fit. Confirm current USDA tools.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const benefits = [

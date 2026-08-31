@@ -5,6 +5,7 @@ import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { HomeValueEstimator } from "@/components/home-value-estimator"
 import { ListingPacketForm } from "@/components/leads/listing-packet-form"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = "What's My Utah Home Worth?: Free Rent + Sale Estimate | Ondo RE"
 const description =
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/whats-my-home-worth/` },
-  openGraph: { title, description, url: `${SITE_URL}/whats-my-home-worth/` },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { title, description, url: `${SITE_URL}/whats-my-home-worth/`, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title, description, images: [DEFAULT_OG_IMAGE_URL] },
   robots: { index: true, follow: true },
 }
 

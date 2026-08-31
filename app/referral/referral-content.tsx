@@ -1,22 +1,19 @@
 "use client"
 
+import { Suspense } from "react"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import { Building2, Users, Home, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
-import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
+import {
+  ReferralBonusBanner,
+  ReferralSignupButton,
+  ReferralSignupButtonFallback,
+} from "./referral-ref-code"
 
 export function ReferralContent() {
   const { t } = useTranslation()
-  const searchParams = useSearchParams()
-  const refCode = searchParams?.get("ref") ?? ""
-
-  /** Invite signup is `/signup/:inviteToken`; we pass program ref via query so it survives until signup API call. */
-  const signupUrl = refCode
-    ? `${APP_PORTAL_LOGIN_URL}?ref=${encodeURIComponent(refCode)}`
-    : APP_PORTAL_LOGIN_URL
 
   const benefits = [
     {
@@ -84,29 +81,16 @@ export function ReferralContent() {
           </div>
         </section>
 
-        {/* Referral bonus banner */}
-        {refCode && (
-          <section
-            aria-labelledby="referral-bonus-heading"
-            className="rounded-xl border border-amber-300 bg-amber-50 p-6 dark:border-amber-700 dark:bg-amber-950/40"
-          >
-            <h2
-              id="referral-bonus-heading"
-              className="mb-2 text-lg font-semibold text-amber-900 dark:text-amber-200"
-            >
-              {t("referral.bonusTitle")}
-            </h2>
-            <p className="text-sm text-amber-800 dark:text-amber-300">
-              {t("referral.bonusDesc", { code: refCode })}
-            </p>
-          </section>
-        )}
+        {/* Referral bonus banner — depends on `?ref=`, so it resolves after hydration. */}
+        <Suspense fallback={null}>
+          <ReferralBonusBanner />
+        </Suspense>
 
         {/* CTA buttons */}
         <section className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-red-700 hover:from-orange-600 hover:to-red-800 text-white border-0 px-8">
-            <a href={signupUrl}>{t("referral.signUpNow")}</a>
-          </Button>
+          <Suspense fallback={<ReferralSignupButtonFallback />}>
+            <ReferralSignupButton />
+          </Suspense>
           <Button asChild size="lg" variant="outline">
             <Link href="/sweepstakes">{t("referral.enterSweepstakes")}</Link>
           </Button>

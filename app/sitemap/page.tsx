@@ -76,13 +76,13 @@ export default function SitemapPage() {
             <h1 className="mb-4 text-4xl font-bold tracking-tight">Site map</h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               Browse every public page on this site by topic. For crawlers, use the{" "}
-              <Link href="/sitemap.xml" className="text-primary underline-offset-4 hover:underline">
+              <a href="/sitemap.xml" className="text-primary underline-offset-4 hover:underline">
                 XML sitemap
-              </Link>{" "}
+              </a>{" "}
               or the{" "}
-              <Link href="/llms.txt" className="text-primary underline-offset-4 hover:underline">
+              <a href="/llms.txt" className="text-primary underline-offset-4 hover:underline">
                 LLM / agent brief
-              </Link>
+              </a>
               .
             </p>
           </header>

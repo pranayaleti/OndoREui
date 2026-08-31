@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Remote Online Notary for Real Estate Closings | Ondo Real Estate",
@@ -18,11 +19,13 @@ export const metadata: Metadata = {
     publishedTime: "2025-01-10",
     modifiedTime: "2025-01-10",
     authors: ["ONDO Notary Team"],
+    images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: "Remote Online Notary for Real Estate Closings | Ondo Real Estate",
     description: "Use ONDO Remote Online Notary for purchases, refinances, HELOCs, and investor closings with compliant ID checks, audit trails, and title-ready documents.",
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 }
 

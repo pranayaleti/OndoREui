@@ -9,6 +9,7 @@ import { InvestmentCard } from "@/components/investments/investment-card"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { WebMCPOpportunitiesTool } from "@/components/investments/webmcp-opportunities-tool"
 import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 // API functions available for runtime use in client components
 // import { getOpportunities } from "@/lib/investments-api"
 
@@ -22,7 +23,9 @@ export const metadata: Metadata = {
     description:
       "Browse current commercial real estate and fractional ownership investment opportunities in Utah.",
     url: `${SITE_URL}/investments/opportunities/`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default async function OpportunitiesPage() {

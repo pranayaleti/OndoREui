@@ -21,6 +21,7 @@ import {
   Calendar,
   BarChart3,
 } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Building2,
@@ -41,7 +42,9 @@ export const metadata: Metadata = {
     description:
       "Explore commercial real estate asset classes and investment structures in Utah's high-growth markets.",
     url: `${SITE_URL}/investments/commercial-real-estate/`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const sampleDeal = {

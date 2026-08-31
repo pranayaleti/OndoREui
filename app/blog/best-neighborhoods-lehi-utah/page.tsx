@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { SITE_URL } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const slug = "/blog/best-neighborhoods-lehi-utah"
 const title = "Best Neighborhoods in Lehi, Utah (2026 Guide)"
@@ -19,7 +20,8 @@ export const metadata: Metadata = {
   title: `${title} | Ondo Real Estate`,
   description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: `${title} | Ondo Real Estate`, description, type: "article", publishedTime: published, authors: [author] },
+  openGraph: { title: `${title} | Ondo Real Estate`, description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function BestNeighborhoodsLehi() {

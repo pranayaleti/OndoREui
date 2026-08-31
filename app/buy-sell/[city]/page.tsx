@@ -5,6 +5,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 type Params = Promise<{ city: string }>
 
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Buy & Sell Homes in ${cityName}, Utah | ${SITE_NAME}`
   const description = `Top local agents in ${cityName}. Expert pricing, marketing, and smooth closings for buyers and sellers.`
   const canonical = `${SITE_URL}/buy-sell/${citySlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {

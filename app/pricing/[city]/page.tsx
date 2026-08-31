@@ -5,6 +5,7 @@ import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 type Params = Promise<{ city: string }>
 
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Cost of Real Estate Services in ${cityName}, Utah | ${SITE_BRAND_SHORT}`
   const description = `Property management fees, home buying costs, mortgage estimates, and rental market data for ${cityName}, UT. Compare with nearby cities.`
   const canonical = `${SITE_URL}/pricing/${citySlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {

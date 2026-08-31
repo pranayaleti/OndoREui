@@ -7,6 +7,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Mortgage Refinance Process | Ondo Real Estate",
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mortgage Refinance Process | Ondo Real Estate",
     description: "Step-by-step guide to refinancing your home loan in Utah, from evaluation to closing.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

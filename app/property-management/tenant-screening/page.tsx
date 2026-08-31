@@ -8,13 +8,14 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Tenant Screening Utah | Property Management | Ondo Real Estate",
   description: "Comprehensive tenant screening for Utah landlords: credit, criminal, eviction, and income verification. Fair Housing compliant. Powered by the Ondo owner portal.",
   alternates: { canonical: `${SITE_URL}/property-management/tenant-screening/` },
-  openGraph: { title: "Tenant Screening Utah | Ondo Real Estate", description: "Credit, criminal, eviction, and income verification for Utah rental properties." },
-  twitter: { card: "summary_large_image", title: "Tenant Screening | Ondo Real Estate", description: "Comprehensive tenant screening for Utah landlords." },
+  openGraph: { title: "Tenant Screening Utah | Ondo Real Estate", description: "Credit, criminal, eviction, and income verification for Utah rental properties.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: "Tenant Screening | Ondo Real Estate", description: "Comprehensive tenant screening for Utah landlords.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const checks = [

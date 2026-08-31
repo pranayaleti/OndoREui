@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Shield, Eye, Lock, Database, Mail, Phone } from "lucide-react"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Ondo Real Estate",
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Privacy Policy | Ondo Real Estate",
     description: "Learn how Ondo Real Estate protects your personal information and privacy. Read our comprehensive privacy policy.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

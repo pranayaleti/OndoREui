@@ -14,6 +14,7 @@ import { utahCitiesFromNorthOgdenToNephi, toCitySlug, groupUtahCitiesByCounty } 
 import { cityMarketData } from "@/lib/city-market-data"
 import { Home, MapPin } from "lucide-react"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: `Real Estate Services Across Utah | ${SITE_BRAND_SHORT}`,
@@ -25,7 +26,9 @@ export const metadata: Metadata = {
     description:
       "Property management, home loans, and buying & selling services across 55 Utah cities.",
     url: `${SITE_URL}/locations/`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 function fmt(n: number): string {

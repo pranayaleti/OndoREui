@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ArrowLeft, CheckCircle } from "lucide-react"
 import Script from "next/script"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Hardship & Assistance Options FAQs | Ondo Real Estate",
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hardship & Assistance Options FAQs | Ondo Real Estate",
     description: "Find answers to questions about hardship assistance, mortgage forbearance, loan modification, and payment relief options.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

@@ -85,7 +85,14 @@ export function findCityByZip(zip: string): UtahCity | undefined {
 }
 
 export const allCitySlugs = utahCitiesFromNorthOgdenToNephi.map((c) => toCitySlug(c.name))
-export const allZips = utahCitiesFromNorthOgdenToNephi.flatMap((c) => c.zips)
+/**
+ * Unique ZIPs across all cities. Several ZIPs span multiple cities (84015 covers
+ * Clinton, West Point, Sunset and Clearfield), so the raw flatMap yields 100
+ * entries for 78 ZIPs — duplicate `generateStaticParams` entries for every
+ * `/{service}/zip/[zip]/` route. `findCityByZip` returns the first match either
+ * way, so dedupe at the source.
+ */
+export const allZips = [...new Set(utahCitiesFromNorthOgdenToNephi.flatMap((c) => c.zips))]
 
 /** Display order for Wasatch Front + Juab city directories. Unknown counties sort last A–Z. */
 export const UTAH_COUNTY_ORDER = ["Weber", "Davis", "Salt Lake", "Utah", "Juab"] as const

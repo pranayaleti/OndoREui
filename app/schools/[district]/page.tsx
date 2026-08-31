@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { School, Users, MapPin, ExternalLink, CheckCircle2, BookOpen, ArrowRight } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 type Params = Promise<{ district: string }>
 
@@ -27,7 +28,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     ? `${district.name} serves ${district.citiesServed.slice(0, 3).join(", ")} and more, ${district.enrollment.toLocaleString()} students, top programs, and school listings.`
     : ""
   const canonical = `${SITE_URL}/schools/${districtSlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {

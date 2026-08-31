@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import Link from "next/link"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: `Ondo RE vs Buildium: The Better Buildium Alternative | ${SITE_BRAND_SHORT}`,
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
     description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience.`,
     url: `${SITE_URL}/vs/buildium/`,
     type: "website",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 // ─── Types ───────────────────────────────────────────────────────────────────

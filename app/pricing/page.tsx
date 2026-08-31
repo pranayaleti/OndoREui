@@ -8,6 +8,7 @@ import { IncludedVsTypicalTable } from "@/components/pricing/included-vs-typical
 import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
     description:
       "Property management pricing Utah, percentage-based plans for portfolios of every size. Tenant screening, rent collection, maintenance, and more.",
     url: `${SITE_URL}/pricing`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const tiers = [

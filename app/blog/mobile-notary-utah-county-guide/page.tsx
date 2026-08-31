@@ -13,6 +13,7 @@ import {
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const TITLE = "Notary in Utah County: Remote Online Notarization, Fees, and How to Book"
 const DESCRIPTION =
@@ -29,11 +30,13 @@ export const metadata: Metadata = {
     publishedTime: "2025-01-10",
     modifiedTime: "2026-08-13",
     authors: ["ONDO Notary Team"],
+    images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 }
 

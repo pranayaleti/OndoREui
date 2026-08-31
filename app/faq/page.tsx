@@ -6,6 +6,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_EMAILS } from "@/lib/site"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "FAQs | Property Management & Rentals | Ondo Real Estate",
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FAQs | Property Management & Rentals | Ondo Real Estate",
     description: "Find answers to common questions about our property management services and renting with Ondo Real Estate.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

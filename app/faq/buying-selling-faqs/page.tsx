@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ArrowLeft, Home } from "lucide-react"
 import Script from "next/script"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Buying & Selling FAQs | Ondo Real Estate",
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Buying & Selling FAQs | Ondo Real Estate",
     description: "Get answers to common questions about buying homes, selling properties, renting vs buying, home valuations, and the Utah real estate market.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 

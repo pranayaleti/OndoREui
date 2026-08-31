@@ -15,6 +15,7 @@ import { CityTeamSection } from "@/components/city-team-section"
 import { CityTestimonials } from "@/components/city-testimonials"
 import { ContactLeadForm } from "@/components/contact/contact-lead-form"
 import { MapPin, Home, School, TreePine, Users, Phone, ArrowRight, CheckCircle2 } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 // NOTE: unlike app/properties/page-client.tsx (a Client Component, where
 // `{ ssr: false }` is allowed), this file is an async Server Component , 
@@ -98,7 +99,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: { absolute: title },
     description,
     alternates: { canonical },
-    openGraph: { title, description, url: canonical },
+    openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+    twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
   }
 }
 

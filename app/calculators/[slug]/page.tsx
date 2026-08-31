@@ -11,6 +11,7 @@ import { CalculatorAgentIntro } from "@/components/calculators/calculator-agent-
 import { RelatedContent } from "@/components/content/related-content"
 import { CalculatorInputExplainer } from "@/components/content/calculator-input-explainer"
 import { BreakEvenTable } from "@/components/content/break-even-table"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const slugToComponent: Record<string, ComponentType> = {
   "owner-vs-self": dynamic(() => import("@/pages/calculators/owner-vs-self-calculator"), {
@@ -104,7 +105,9 @@ export async function generateMetadata({
       title: `${detail.name} | ${SITE_NAME}`,
       description: detail.description,
       url: canonical,
+      images: DEFAULT_OG_IMAGES,
     },
+    twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
   }
 }
 

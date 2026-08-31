@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { SITE_URL } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const slug = "/blog/understanding-property-taxes-utah"
 const title = "Understanding Property Taxes in Utah"
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
   title: `${title} | Ondo Real Estate`,
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: `${title} | Ondo Real Estate`, description: description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author] },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo Real Estate`, description: description },
+  openGraph: { title: `${title} | Ondo Real Estate`, description: description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: `${title} | Ondo Real Estate`, description: description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function UnderstandingPropertyTaxesUtah() {

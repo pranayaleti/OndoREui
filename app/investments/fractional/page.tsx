@@ -18,6 +18,7 @@ import {
   LogOut,
   CheckCircle,
 } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Fractional Real Estate Ownership",
@@ -29,7 +30,9 @@ export const metadata: Metadata = {
     description:
       "Fractional ownership makes commercial real estate accessible. Learn about the structure, returns, and exit strategies.",
     url: `${SITE_URL}/investments/fractional/`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const steps = [

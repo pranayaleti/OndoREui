@@ -6,6 +6,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Case Studies | Ondo Real Estate Utah",
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Case Studies | Ondo Real Estate Utah",
     description: "Real outcomes from Utah owners and buyers: faster leasing, FHA closings, investor yields, and jumbo refinances handled by Ondo Real Estate.",
+    images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: "Case Studies | Ondo Real Estate Utah",
     description: "Real outcomes from Utah owners and buyers: faster leasing, FHA closings, investor yields, and jumbo refinances handled by Ondo Real Estate.",
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 }
 

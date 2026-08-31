@@ -14,13 +14,14 @@ import { ContentFaq } from "@/components/content/content-faq"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { VA_FUNDING_FEE, EXAMPLE_NOTE, EXAMPLE_PURCHASE_PRICE_UTAH, HILL_AFB_VA, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "VA Home Loans in Utah | Zero Down for Veterans | Ondo Real Estate",
   description: "VA loans offer zero down payment and no PMI for eligible veterans and active-duty service members in Utah. Learn about the funding fee, COE, and Hill AFB area lenders.",
   alternates: { canonical: `${SITE_URL}/loans/va/` },
-  openGraph: { title: "VA Home Loans in Utah | Zero Down for Veterans | Ondo Real Estate", description: "VA loans offer zero down payment and no PMI for eligible veterans in Utah." },
-  twitter: { card: "summary_large_image", title: "VA Loans in Utah | Ondo Real Estate", description: "Zero down payment home loans for eligible veterans and service members in Utah." },
+  openGraph: { title: "VA Home Loans in Utah | Zero Down for Veterans | Ondo Real Estate", description: "VA loans offer zero down payment and no PMI for eligible veterans in Utah.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: "VA Loans in Utah | Ondo Real Estate", description: "Zero down payment home loans for eligible veterans and service members in Utah.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const benefits = [

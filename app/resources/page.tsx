@@ -7,6 +7,7 @@ import { UtahLandlordEducationSection } from "@/components/resources/utah-landlo
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate",
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate",
     description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 
@@ -439,7 +442,7 @@ export default function ResourcesPage() {
                       <Link href="/calculators/affordability">Affordability</Link>
                     </Button>
                     <Button asChild size="sm" variant="outline">
-                      <Link href="/blog/rent-vs-owning-hidden-math">Rent vs. own guide</Link>
+                      <Link href="/blog/renting-vs-owning-hidden-math">Rent vs. own guide</Link>
                     </Button>
                   </div>
                 </CardContent>

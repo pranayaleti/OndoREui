@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { SITE_URL } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const slug = "/blog/best-neighborhoods-invest-utah-real-estate"
 const title = "Best Neighborhoods to Invest in Utah Real Estate (Wasatch Front)"
@@ -33,8 +34,9 @@ export const metadata: Metadata = {
     publishedTime: published,
     modifiedTime: modified,
     authors: [author],
+    images: DEFAULT_OG_IMAGES,
   },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo RE`, description },
+  twitter: { card: "summary_large_image", title: `${title} | Ondo RE`, description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function BestNeighborhoodsInvestUtahRealEstate() {

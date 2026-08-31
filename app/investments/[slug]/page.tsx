@@ -26,6 +26,7 @@ import {
   ArrowLeft,
   Lightbulb,
 } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const statusConfig: Record<
   InvestmentOpportunity["status"],
@@ -58,7 +59,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
-    openGraph: { title, description, url: canonical },
+    openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+    twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
   }
 }
 

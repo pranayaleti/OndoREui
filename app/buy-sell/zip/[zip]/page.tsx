@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 type Params = Promise<{ zip: string }>
 
@@ -18,7 +19,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `Real Estate Agents ${zip} (${cityName}) | ${SITE_NAME}`
   const description = `Buy or sell a home in ${cityName} ${zip}. Local expertise and full-service support.`
   const canonical = `${SITE_URL}/buy-sell/zip/${zip}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {

@@ -17,6 +17,7 @@ import {
   FHA_COUNTY_LIMIT_NOTE,
   FHA_SNAPSHOT,
 } from "@/lib/content"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const slug = "/blog/fha-vs-conventional-loans-utah"
 const title = "FHA vs Conventional Loans in Utah: Which Is Right for You?"
@@ -46,8 +47,9 @@ export const metadata: Metadata = {
     publishedTime: published,
     modifiedTime: modified,
     authors: [author],
+    images: DEFAULT_OG_IMAGES,
   },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo RE`, description },
+  twitter: { card: "summary_large_image", title: `${title} | Ondo RE`, description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function FhaVsConventionalLoansUtah() {

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { Clock, TrendingUp, ShieldCheck, MapPin, Landmark, Users } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Opportunity Zone Investing: How It Works",
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
     description:
       "Understand Qualified Opportunity Zone tax benefits and how designated tracts across the U.S. fit a long-term real estate strategy.",
     url: `${SITE_URL}/investments/opportunity-zones/`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const taxBenefits = [

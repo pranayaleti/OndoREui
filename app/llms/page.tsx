@@ -110,9 +110,9 @@ export default function LlmsDiscoveryPage() {
               HTML sitemap
             </Link>{" "}
             or{" "}
-            <Link href="/humans.txt" className="text-primary underline-offset-4 hover:underline">
+            <a href="/humans.txt" className="text-primary underline-offset-4 hover:underline">
               humans.txt
-            </Link>
+            </a>
             .
           </p>
         </header>
@@ -128,7 +128,9 @@ export default function LlmsDiscoveryPage() {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <Button asChild variant="secondary" size="sm">
-                    <Link href={item.href}>Open {item.href}</Link>
+                    {/* Static files, not Next routes — <Link> would prefetch a
+                        nonexistent RSC payload (e.g. /llms.txt.txt?_rsc=…) and 404. */}
+                    <a href={item.href}>Open {item.href}</a>
                   </Button>
                 </CardContent>
               </Card>
@@ -138,13 +140,13 @@ export default function LlmsDiscoveryPage() {
 
         <p className="mt-10 text-center text-sm text-muted-foreground">
           XML &amp; robots:{" "}
-          <Link href="/sitemap.xml" className="text-primary underline-offset-4 hover:underline">
+          <a href="/sitemap.xml" className="text-primary underline-offset-4 hover:underline">
             sitemap.xml
-          </Link>
+          </a>
           {" · "}
-          <Link href="/robots.txt" className="text-primary underline-offset-4 hover:underline">
+          <a href="/robots.txt" className="text-primary underline-offset-4 hover:underline">
             robots.txt
-          </Link>
+          </a>
         </p>
       </div>
     </main>

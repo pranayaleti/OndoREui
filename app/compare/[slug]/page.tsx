@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { Minus, ArrowRight } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 // Generate pairs for adjacent cities (neighbor pairs)
 const CITY_PAIRS: [string, string][] = [
@@ -49,7 +50,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`
   const description = `Compare ${a.name} and ${b.name} side-by-side: home prices, rent, schools, commute, growth rate, and lifestyle.`
   const canonical = `${SITE_URL}/compare/${slug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical } }
+  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 
 function fmtUsd(n: number) {

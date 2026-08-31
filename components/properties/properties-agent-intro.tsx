@@ -18,9 +18,9 @@ export function PropertiesAgentIntro() {
       data-agent-intro="properties"
     >
       <div className="container mx-auto max-w-4xl px-4">
-        <h1 id="properties-agent-intro" className="text-2xl font-semibold text-foreground">
+        <h2 id="properties-agent-intro" className="text-2xl font-semibold text-foreground">
           Utah rental property search
-        </h1>
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Browse Ondo Real Estate&apos;s current Utah rentals along the Wasatch Front. The results below load a
           client-side search, filter, and map, this summary keeps the essentials available for AI agents and no-JS
@@ -29,7 +29,7 @@ export function PropertiesAgentIntro() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <div>
-            <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">Filter by</h2>
+            <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">Filter by</h3>
             <ul className="mt-2 space-y-1 text-sm text-foreground/90">
               <li>City (partial, case-insensitive, e.g. Lehi, Salt Lake)</li>
               <li>Minimum bedrooms</li>
@@ -38,7 +38,7 @@ export function PropertiesAgentIntro() {
             </ul>
           </div>
           <div>
-            <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">Each listing returns</h2>
+            <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">Each listing returns</h3>
             <ul className="mt-2 space-y-1 text-sm text-foreground/90">
               <li>id, title, city, address</li>
               <li>Monthly price, bedrooms, bathrooms, sqft</li>

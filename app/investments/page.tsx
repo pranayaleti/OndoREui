@@ -15,12 +15,15 @@ export const metadata: Metadata = {
     title: "Utah Investment Properties | Ondo Real Estate",
     description:
       "Discover high-yield investment properties in Utah. Turnkey rentals, multi-family, and commercial opportunities with expert management.",
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { Building2, Users, LayoutGrid, MapPin, ArrowRight } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const sections = [
   {

@@ -16,6 +16,7 @@ import {
   MapPin,
   ArrowRight,
 } from "lucide-react"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Investment Strategy | Ondo Real Estate",
@@ -27,7 +28,9 @@ export const metadata: Metadata = {
     description:
       "Ondo's disciplined acquisition and property management strategy focuses on Utah's high-growth markets to generate long-term passive income for investors.",
     url: `${SITE_URL}/strategy`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const pillars = [

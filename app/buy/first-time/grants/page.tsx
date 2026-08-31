@@ -11,6 +11,7 @@ import ConsultationCTA from "@/components/ConsultationCTA"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Housing Grants & Down Payment Assistance Programs",
@@ -22,7 +23,9 @@ export const metadata: Metadata = {
     description:
       "Down payment assistance and grant programs for U.S. homebuyers, with eligibility summaries and official links.",
     url: `${SITE_URL}/buy/first-time/grants/`,
+    images: DEFAULT_OG_IMAGES,
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 interface GrantProgram {

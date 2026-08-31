@@ -8,13 +8,14 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Maintenance Coordination | Property Management Utah | Ondo",
   description: "Ondo handles tenant maintenance requests end-to-end: intake, vendor dispatch, owner approval, and completion tracking. Keep your Utah rental in top condition.",
   alternates: { canonical: `${SITE_URL}/property-management/maintenance-coordination/` },
-  openGraph: { title: "Maintenance Coordination | Ondo Real Estate", description: "End-to-end maintenance coordination for Utah rental properties." },
-  twitter: { card: "summary_large_image", title: "Maintenance Coordination | Ondo", description: "We handle tenant maintenance requests from intake to completion." },
+  openGraph: { title: "Maintenance Coordination | Ondo Real Estate", description: "End-to-end maintenance coordination for Utah rental properties.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: "Maintenance Coordination | Ondo", description: "We handle tenant maintenance requests from intake to completion.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const features = [

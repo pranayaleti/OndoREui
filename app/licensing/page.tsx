@@ -22,6 +22,7 @@ import {
   SITE_ADDRESS_REGION,
   SITE_ADDRESS_POSTAL_CODE,
 } from "@/lib/site"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = `Licensing & Disclosures | ${SITE_NAME}`
 const description =
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/licensing/` },
-  openGraph: { title, description, url: `${SITE_URL}/licensing/` },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { title, description, url: `${SITE_URL}/licensing/`, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title, description, images: [DEFAULT_OG_IMAGE_URL] },
   robots: { index: true, follow: true },
 }
 

@@ -7,6 +7,7 @@ import Link from "next/link"
 import { TemplatesCatalog } from "@/components/resources/templates-catalog"
 import { UtahLandlordEducationSection } from "@/components/resources/utah-landlord-education-section"
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Landlord Templates & Seller Listing-Prep | Ondo Real Estate",
@@ -17,12 +18,14 @@ export const metadata: Metadata = {
     title: "Landlord Templates, Addendums & Disclosures | Ondo Real Estate",
     description:
       "Request Utah-oriented lease, addendum, and disclosure packets, plus a federal lead-paint disclosure. Files are emailed after you request them.",
+    images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: "Landlord Templates | Ondo Real Estate",
     description:
       "Utah lease, addendums, disclosures, and a seller listing-prep checklist. Request the file — not an instant download.",
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 }
 

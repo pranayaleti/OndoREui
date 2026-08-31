@@ -23,6 +23,7 @@ const keywords = [
 
 
 import type { Metadata } from "next"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: `${title} | Ondo Real Estate`,
@@ -35,11 +36,13 @@ export const metadata: Metadata = {
     publishedTime: published,
     modifiedTime: modified || published,
     authors: [author],
+    images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: `${title} | Ondo Real Estate`,
     description: description,
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 }
 
