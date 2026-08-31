@@ -368,6 +368,7 @@ export function ContactLeadForm({
           {showAudience ? (
             <fieldset
               className="space-y-3"
+              role="radiogroup"
               aria-required="true"
               aria-invalid={inquiryError ? "true" : undefined}
               aria-describedby={inquiryError ? fieldId("inquiry-error") : undefined}

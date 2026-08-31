@@ -148,11 +148,11 @@ export default function LoansPage() {
 
           <p className="mb-12 text-center text-foreground/70">
             Property type and payment structure still change the file:{" "}
-            <Link href="/blog/manufactured-housing-adu-financing" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/blog/manufactured-housing-adu-financing" className="text-primary underline underline-offset-4">
               manufactured housing vs ADU financing
             </Link>{" "}
             and{" "}
-            <Link href="/blog/interest-only-mortgages-who-they-are-for" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/blog/interest-only-mortgages-who-they-are-for" className="text-primary underline underline-offset-4">
               interest-only mortgages
             </Link>
             . Neither is a standard conforming shortcut.

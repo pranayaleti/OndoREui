@@ -19,6 +19,12 @@ import {
   rentalClientRouteFromPathname,
   type RentalClientRoute,
 } from "@/lib/rental-static-paths"
+import {
+  visitClientRouteFromPathname,
+  type VisitClientRoute,
+} from "@/lib/visit-static-paths"
+import { VisitScheduleClient } from "@/app/visit/schedule/[token]/visit-schedule-client"
+import { VisitConfirmClient } from "@/app/visit/confirm/[token]/visit-confirm-client"
 
 export default function NotFound() {
   const router = useRouter()
@@ -27,6 +33,7 @@ export default function NotFound() {
   const [isMounted, setIsMounted] = useState(false)
   const [listingPublicId, setListingPublicId] = useState<string | null>(null)
   const [rentalRoute, setRentalRoute] = useState<RentalClientRoute | null>(null)
+  const [visitRoute, setVisitRoute] = useState<VisitClientRoute | null>(null)
 
   // Track when component is mounted (client-side only)
   useEffect(() => {
@@ -34,6 +41,7 @@ export default function NotFound() {
     if (typeof window !== "undefined") {
       setListingPublicId(publicIdFromPathname(window.location.pathname))
       setRentalRoute(rentalClientRouteFromPathname(window.location.pathname))
+      setVisitRoute(visitClientRouteFromPathname(window.location.pathname))
     }
   }, [])
 
@@ -41,7 +49,7 @@ export default function NotFound() {
   // Only runs on client side after mount to avoid build/SSR issues
   useEffect(() => {
     // Only run after component is mounted and in browser
-    if (!isMounted || listingPublicId || rentalRoute || typeof window === "undefined" || hasRedirected.current || !pathname) {
+    if (!isMounted || listingPublicId || rentalRoute || visitRoute || typeof window === "undefined" || hasRedirected.current || !pathname) {
       return
     }
 
@@ -74,7 +82,7 @@ export default function NotFound() {
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [isMounted, listingPublicId, rentalRoute, pathname, router])
+  }, [isMounted, listingPublicId, rentalRoute, visitRoute, pathname, router])
 
   if (!isMounted) {
     return <div className="min-h-screen bg-background" />
@@ -95,6 +103,12 @@ export default function NotFound() {
   }
   if (rentalRoute?.kind === "application") {
     return <ResumeApplicationClient applicationId={rentalRoute.applicationId} />
+  }
+  if (visitRoute?.kind === "schedule") {
+    return <VisitScheduleClient token={visitRoute.token} />
+  }
+  if (visitRoute?.kind === "confirm") {
+    return <VisitConfirmClient token={visitRoute.token} />
   }
 
   const popularPages: { name: string; href: string; icon: React.ReactNode; description: string; external?: boolean }[] = [

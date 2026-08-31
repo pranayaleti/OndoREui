@@ -187,6 +187,7 @@ describe("next-sitemap exclusions", () => {
       "/invite/_",
       "/tenantOnboarding/_",
       "/visit/confirm/__ondo_visit_export_shell__",
+      "/visit/schedule/__ondo_schedule_export_shell__",
       "/search",
       "/chat",
       "/verify",

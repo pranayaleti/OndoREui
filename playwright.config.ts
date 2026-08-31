@@ -1,15 +1,29 @@
+import { existsSync } from "node:fs"
 import { defineConfig, devices } from "@playwright/test"
 
-const a11yBackendUrl =
-  process.env.NEXT_PUBLIC_BACKEND_BASE_URL ?? "http://127.0.0.1:3030"
+const STATIC_EXPORT_DIR = "out"
 
 /**
  * Playwright config for accessibility smoke tests.
  *
- * Starts a mock backend so generateStaticParams does not ECONNREFUSED when
- * OndoREBackend is offline. Uses `next dev` for fast iteration; webpack and
- * JSON-LD fixes in next.config / components suppress dev-server noise.
+ * Runs against the built static export — the artifact that actually ships.
+ *
+ * This previously served `next dev`, which tested a build no user ever sees and
+ * was wrong in both directions: it missed a production-only colour-contrast
+ * failure on /properties, and it invented a failure on /properties/_placeholder/
+ * (a build-time stub that only exists in the export, so dev threw
+ * "missing param in generateStaticParams()" instead of rendering a page).
+ *
+ * A mock backend still runs on :3030 because the exported listing pages fetch
+ * /api/properties/public client-side; `.env` points NEXT_PUBLIC_BACKEND_BASE_URL
+ * at that port, so the bundle calls the mock rather than a real API.
  */
+if (!existsSync(STATIC_EXPORT_DIR)) {
+  throw new Error(
+    `Accessibility tests run against the static export, but ./${STATIC_EXPORT_DIR} is missing. ` +
+      "Run `npm run build` first (CI builds before this step).",
+  )
+}
 export default defineConfig({
   testDir: "./tests",
   timeout: 60_000,
@@ -35,15 +49,10 @@ export default defineConfig({
       },
     },
     {
-      command: "npm run dev -- --hostname 127.0.0.1 --port 3000",
+      command: `npx --yes serve@14 ${STATIC_EXPORT_DIR} -l 3000 --no-clipboard`,
       url: "http://127.0.0.1:3000",
       reuseExistingServer: true,
       timeout: 120_000,
-      env: {
-        NEXT_PUBLIC_BACKEND_BASE_URL: a11yBackendUrl,
-        NEXT_PUBLIC_APP_PORTAL_URL:
-          process.env.NEXT_PUBLIC_APP_PORTAL_URL ?? "http://localhost:3001",
-      },
     },
   ],
 })

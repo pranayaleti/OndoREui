@@ -1,35 +1,20 @@
 import type { Metadata } from "next"
-import { getVisitByToken } from "@/lib/api/site-visits"
+import { CONFIRM_EXPORT_SHELL } from "@/lib/visit-static-paths"
 import { VisitConfirmClient } from "./visit-confirm-client"
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-interface Props { params: Promise<{ token: string }> }
-
-/** Static export requires at least one path; real tokens use the same client bundle (invalid token shows “not found”). */
+/**
+ * Required under `output: "export"`. Tokens are not enumerable at build time.
+ * Omit `dynamicParams = false` so next dev still renders this page; static
+ * hosts recover via `app/not-found.tsx`.
+ */
 export function generateStaticParams(): { token: string }[] {
-  return [{ token: "__ondo_visit_export_shell__" }]
+  return [{ token: CONFIRM_EXPORT_SHELL }]
 }
 
-export default async function VisitConfirmPage({ params }: Props) {
-  const { token } = await params;
-
-  let visit;
-  try {
-    visit = await getVisitByToken(token);
-  } catch {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <div className="max-w-md text-center">
-          <h1 className="text-2xl font-bold mb-2">Link not found</h1>
-          <p className="text-gray-500">This confirmation link is invalid or has already been used.</p>
-          <p className="text-gray-400 text-sm mt-4">Contact us at <a href="mailto:hello@ondorealestate.com" className="underline">hello@ondorealestate.com</a></p>
-        </div>
-      </div>
-    );
-  }
-
-  return <VisitConfirmClient visit={visit} token={token} />;
+export default function VisitConfirmPage() {
+  return <VisitConfirmClient />
 }

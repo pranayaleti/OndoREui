@@ -52,6 +52,17 @@ test.describe("Accessibility smoke tests", () => {
       }
       await page.waitForTimeout(300)
 
+      // Freeze transitions/animations before sampling. axe reads *computed* colours,
+      // and Tailwind's `transition-colors` on freshly rendered listing cards was still
+      // interpolating when the scan ran — yielding mid-transition values (#a85115 on one
+      // run, #af5415 on the next) and colour-contrast failures that disappeared once the
+      // transition finished. Freezing first makes the scan measure the steady state that
+      // WCAG actually applies to, and makes the result deterministic.
+      await page.addStyleTag({
+        content: "*, *::before, *::after { transition: none !important; animation: none !important; }",
+      })
+      await page.waitForTimeout(100)
+
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa"])
         .options({ resultTypes: ["violations"] })

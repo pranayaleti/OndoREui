@@ -65,7 +65,7 @@ export function TestimonialCard({ testimonial, showService = false }: Testimonia
         </div>
       </CardHeader>
       <CardContent>
-        <div className="mb-2 flex" aria-label={`${rating} out of 5 stars`}>
+        <div className="mb-2 flex" role="img" aria-label={`${rating} out of 5 stars`}>
           {Array.from({ length: rating }).map((_, index) => (
             <Star key={index} className="h-4 w-4 fill-current text-primary" aria-hidden="true" />
           ))}

@@ -77,6 +77,12 @@ export function TestimonialsCarousel() {
         <div
           ref={scrollerRef}
           role="region"
+          // A horizontally scrollable region must be reachable by keyboard (axe
+          // scrollable-region-focusable / WCAG 2.1.1). The cards hold no focusable
+          // children, so the scroller itself has to take focus. jsx-a11y only
+          // allowlists `tabpanel` for this, hence the targeted exception.
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          tabIndex={0}
           aria-roledescription="carousel"
           aria-label={t("testimonialUi.carouselLabel")}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scroll-smooth motion-reduce:scroll-auto"

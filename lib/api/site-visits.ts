@@ -11,8 +11,13 @@ export interface SiteVisitPublic {
   properties?: { title: string; addressLine1: string; city: string };
 }
 
+const FETCH_TIMEOUT_MS = 15_000;
+
 export async function getVisitByToken(token: string): Promise<SiteVisitPublic> {
-  const res = await fetch(backendUrl(`/api/site-visits/by-token/${token}`));
+  const res = await fetch(backendUrl(`/api/site-visits/by-token/${encodeURIComponent(token)}`), {
+    cache: "no-store",
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
   if (!res.ok) throw new Error("Visit not found");
   return res.json();
 }
@@ -36,7 +41,10 @@ export type SchedulePayload = {
 };
 
 export async function getSchedule(token: string): Promise<SchedulePayload> {
-  const res = await fetch(backendUrl(`/api/site-visits/schedule/${token}`));
+  const res = await fetch(backendUrl(`/api/site-visits/schedule/${encodeURIComponent(token)}`), {
+    cache: "no-store",
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
   if (!res.ok) throw new Error("Schedule not found");
   return res.json();
 }
