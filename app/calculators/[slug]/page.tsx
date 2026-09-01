@@ -71,6 +71,9 @@ const slugToComponent: Record<string, ComponentType> = {
   "fifty-percent-rule": dynamic(() => import("@/pages/calculators/fifty-percent-rule-calculator"), {
     loading: () => <Loading />
   }),
+  "cost-of-living": dynamic(() => import("@/pages/calculators/cost-of-living-calculator"), {
+    loading: () => <Loading />
+  }),
 }
 
 // Generate static params for all calculator slugs at build time

@@ -4,7 +4,7 @@ import { calculatorInputCopyForSlug, calculatorInputCopySlugs } from "./calculat
 describe("calculator input copy", () => {
   it("covers affordability, income, closing-cost, refinance, payment, and temporary buydown", () => {
     expect(calculatorInputCopySlugs().sort()).toEqual(
-      ["affordability", "closing-cost", "dscr", "income", "mortgage-payment", "refinance", "temporary-buydown"].sort(),
+      ["affordability", "closing-cost", "cost-of-living", "dscr", "income", "mortgage-payment", "refinance", "temporary-buydown"].sort(),
     )
   })
 
@@ -42,6 +42,10 @@ describe("calculator input copy", () => {
     expect(paymentCopy?.related.some((link) => link.href.includes("interest-only-mortgages-who-they-are-for"))).toBe(
       true,
     )
+
+    const living = calculatorInputCopyForSlug("cost-of-living")
+    expect(living?.lead).not.toMatch(/you will qualify/i)
+    expect(living?.lead).toMatch(/not a loan quote/i)
 
     const closingCopy = calculatorInputCopyForSlug("closing-cost")
     expect(closingCopy?.related.some((link) => link.href.includes("title-insurance-owner-vs-lender"))).toBe(true)

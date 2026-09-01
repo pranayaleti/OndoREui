@@ -82,6 +82,11 @@ export const CALCULATOR_CATALOG: Record<
     name: "50% Rule Calculator",
     description: "Estimate expenses quickly using the 50% rental rule.",
   },
+  "cost-of-living": {
+    name: "Monthly Cost of Living Calculator",
+    description:
+      "Estimate your monthly living expenses, housing costs, transportation, utilities, food, insurance, and more with Ondo’s interactive cost of living calculator.",
+  },
 }
 
 export const CALCULATOR_SLUGS = Object.keys(CALCULATOR_CATALOG)

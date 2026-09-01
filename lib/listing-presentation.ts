@@ -4,6 +4,8 @@
  * invents fees, availability, amenities, or neighborhood facts.
  */
 
+import { findCityBySlug, toCitySlug } from "@/lib/utah-cities"
+
 export type AmenityGroupId =
   | "interior"
   | "outdoor"
@@ -36,6 +38,16 @@ export type CostRow = {
   value: string
   /** Confirmed listing field vs. an absence we refuse to fill in. */
   source: "listing"
+}
+
+/** Public listing pet facts. Fees only when the API sent a positive listed amount. */
+export type PublicPetPolicy = {
+  petsAllowed: boolean
+  allowedSpecies: string[]
+  maxPets: number | null
+  maxWeightLbs: number | null
+  monthlyPetRentCents: number | null
+  petDepositCents: number | null
 }
 
 const AMENITY_LABELS: Record<string, string> = {
@@ -206,6 +218,176 @@ export function listingHighlights(input: {
   }
 
   return highlights.slice(0, 6)
+}
+
+export function petsAllowedFromListing(input: {
+  amenities?: string[] | null
+  petPolicy?: PublicPetPolicy | null
+}): boolean {
+  if (input.petPolicy) return input.petPolicy.petsAllowed
+  return petNotesFromAmenities(input.amenities).length > 0
+}
+
+/** Scan chips for browse cards. Amenity-derived only, plus pets when the listing says so. */
+export function listingCardChips(input: {
+  amenities?: string[] | null
+  petPolicy?: PublicPetPolicy | null
+}): ListingHighlight[] {
+  const chips: ListingHighlight[] = []
+  if (petsAllowedFromListing(input)) {
+    chips.push({ id: "pets", label: "Pets allowed" })
+  }
+  for (const highlight of listingHighlights({ amenities: input.amenities })) {
+    if (highlight.id === "pets") continue
+    if (chips.some((chip) => chip.id === highlight.id || chip.label === highlight.label)) continue
+    chips.push(highlight)
+    if (chips.length >= 4) break
+  }
+  return chips
+}
+
+export function formatListedCents(cents: number | null | undefined): string | null {
+  if (cents == null || !Number.isFinite(cents) || cents <= 0) return null
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(cents / 100)
+}
+
+export function listingPetPolicyRows(
+  policy: PublicPetPolicy | null | undefined,
+): { id: string; label: string; value: string }[] {
+  if (!policy) return []
+  if (!policy.petsAllowed) {
+    return [{ id: "allowed", label: "Pets", value: "Not allowed" }]
+  }
+  const rows: { id: string; label: string; value: string }[] = [
+    { id: "allowed", label: "Pets", value: "Pets allowed" },
+  ]
+  if (policy.allowedSpecies.length > 0) {
+    const labels = policy.allowedSpecies.map((species) => {
+      if (species === "dog") return "Dogs"
+      if (species === "cat") return "Cats"
+      return formatAmenityLabel(species)
+    })
+    rows.push({ id: "species", label: "Listed species", value: labels.join(", ") })
+  }
+  if (policy.maxPets != null) {
+    rows.push({
+      id: "maxPets",
+      label: "Maximum pets",
+      value: String(policy.maxPets),
+    })
+  }
+  if (policy.maxWeightLbs != null) {
+    rows.push({
+      id: "weight",
+      label: "Weight limit",
+      value: `${policy.maxWeightLbs} lbs`,
+    })
+  }
+  const rent = formatListedCents(policy.monthlyPetRentCents)
+  if (rent) rows.push({ id: "rent", label: "Listed monthly pet rent", value: rent })
+  const deposit = formatListedCents(policy.petDepositCents)
+  if (deposit) rows.push({ id: "deposit", label: "Listed pet deposit", value: deposit })
+  return rows
+}
+
+export const ASSISTANCE_ANIMALS_NOTE =
+  "Assistance animals are not pets. Ask leasing about any animal that assists with a disability."
+
+export type LocationFact = {
+  id: string
+  label: string
+  value: string
+}
+
+export function listingLocationFacts(input: {
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  state?: string | null
+  zipcode?: string | null
+}): LocationFact[] {
+  const facts: LocationFact[] = []
+  const street = [input.addressLine1, input.addressLine2].filter((part) => part?.trim()).join(", ")
+  if (street) facts.push({ id: "street", label: "Address", value: street })
+  if (input.city?.trim()) facts.push({ id: "city", label: "City", value: input.city.trim() })
+  if (input.state?.trim()) facts.push({ id: "state", label: "State", value: input.state.trim() })
+  if (input.zipcode?.trim()) facts.push({ id: "zip", label: "ZIP", value: input.zipcode.trim() })
+  return facts
+}
+
+/** Link to an existing Ondo city page only. Never invent neighborhood stats. */
+export function listingCityGuideHref(city: string | null | undefined): string | null {
+  const name = city?.trim()
+  if (!name) return null
+  const slug = toCitySlug(name)
+  if (!findCityBySlug(slug)) return null
+  return `/locations/${slug}/`
+}
+
+export function listingCompareFieldValue(input: {
+  id: "rent" | "type" | "beds" | "baths" | "sqft" | "location" | "availability" | "amenities" | "pets"
+  price: number
+  type?: string | null
+  bedrooms: number
+  bathrooms: number
+  sqft: number
+  city?: string | null
+  state?: string | null
+  availability?: string | null
+  amenities?: string[] | null
+  petPolicy?: PublicPetPolicy | null
+}): string {
+  switch (input.id) {
+    case "rent":
+      return input.price > 0 ? `${formatMonthlyRent(input.price)}/mo` : "Not listed"
+    case "type":
+      return formatPropertyType(input.type) ?? "Not listed"
+    case "beds":
+      return bedsLabel(input.bedrooms)
+    case "baths":
+      return bathsLabel(input.bathrooms)
+    case "sqft":
+      return formatSqft(input.sqft) ?? "Not listed"
+    case "location": {
+      const place = [input.city, input.state].filter((part) => part?.trim()).join(", ")
+      return place || "Not listed"
+    }
+    case "availability":
+      return availabilityBadge(input.availability).label
+    case "amenities": {
+      const labels = listingHighlights({ amenities: input.amenities }).map((h) => h.label)
+      return labels.length > 0 ? labels.join(", ") : "Not listed"
+    }
+    case "pets":
+      if (input.petPolicy) {
+        return input.petPolicy.petsAllowed ? "Pets allowed" : "Not allowed"
+      }
+      return petsAllowedFromListing(input) ? "Pets allowed" : "Ask leasing"
+    default: {
+      const _exhaustive: never = input.id
+      return _exhaustive
+    }
+  }
+}
+
+export function availabilityBadgeClass(tone: AvailabilityTone): string {
+  switch (tone) {
+    case "now":
+      return "border-transparent bg-primary text-primary-foreground"
+    case "upcoming":
+      return "border-transparent bg-secondary text-secondary-foreground"
+    case "listed":
+      return "border-border bg-background text-foreground"
+    case "ask":
+      return "border-border bg-muted text-muted-foreground"
+    default: {
+      const _exhaustive: never = tone
+      return _exhaustive
+    }
+  }
 }
 
 export function petNotesFromAmenities(

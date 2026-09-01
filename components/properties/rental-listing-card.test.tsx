@@ -61,6 +61,30 @@ describe("RentalListingCard", () => {
     expect(details.compareDocumentPosition(photo) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy()
   })
 
+  it("shows amenity chips and a pet-friendly mark only when the listing has those facts", () => {
+    render(
+      <RentalListingCard
+        property={{
+          ...listing,
+          amenities: ["laundry", "pet_friendly", "parking"],
+          availability: "now",
+        }}
+      />,
+    )
+    expect(screen.getByText(/house · 3 beds · 2 baths/i)).toBeInTheDocument()
+    expect(screen.getByText("Pets allowed")).toBeInTheDocument()
+    expect(screen.getByText("Laundry")).toBeInTheDocument()
+    expect(screen.getByText("Parking")).toBeInTheDocument()
+    expect(screen.getByText("Available now")).toBeInTheDocument()
+    expect(screen.queryByText(/walk score|great schools|family-friendly/i)).not.toBeInTheDocument()
+  })
+
+  it("does not invent amenity chips when the listing has none", () => {
+    render(<RentalListingCard property={listing} />)
+    expect(screen.queryByLabelText(/listed highlights/i)).not.toBeInTheDocument()
+    expect(screen.queryByText("Pets allowed")).not.toBeInTheDocument()
+  })
+
   it("notifies the parent when someone asks to tour so the leasing note can prefill", () => {
     const onRequestShowing = vi.fn()
     render(<RentalListingCard property={listing} onRequestShowing={onRequestShowing} />)

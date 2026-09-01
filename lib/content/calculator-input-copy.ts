@@ -236,6 +236,35 @@ const DSCR: CalculatorInputCopy = {
   ],
 }
 
+const COST_OF_LIVING: CalculatorInputCopy = {
+  slug: "cost-of-living",
+  heading: "What this cost of living calculator is (and is not)",
+  lead: `This tool adds typical monthly expense categories so you can plan a household budget. Suggested amounts are starting points, not local averages or your actual bills. Snapshot as of ${LENDING_FACTS_AS_OF}. It is not a loan quote, a credit decision, or underwriting.`,
+  fields: [
+    {
+      name: "Housing (buy or rent)",
+      meaning:
+        "Buy mode uses principal and interest from the standard mortgage formula plus tax, insurance, HOA, and maintenance. The typed rate is not a quote. Rent mode uses rent plus optional renters insurance, parking, and amenity fees. Insurance and utilities entered in housing are not added again later.",
+    },
+    {
+      name: "Vehicles",
+      meaning:
+        "Each car card is a monthly estimate. Auto insurance typed here is excluded from the Insurance step so it is not counted twice.",
+    },
+    {
+      name: "Income and savings (optional)",
+      meaning:
+        "Used only to show cash flow and a housing payment range that may fit. It is not a qualification, DTI finding, or offer of credit.",
+    },
+  ],
+  related: [
+    { label: "Home affordability calculator", href: "/calculators/affordability" },
+    { label: "Mortgage payment calculator", href: "/calculators/mortgage-payment" },
+    { label: "DTI: front-end vs back-end with HOA", href: "/blog/dti-frontend-backend-with-hoa" },
+    { label: "First-time buyer hub", href: "/learn/first-time" },
+  ],
+}
+
 const COPY_BY_SLUG: Record<string, CalculatorInputCopy> = {
   affordability: AFFORDABILITY,
   income: INCOME,
@@ -244,6 +273,7 @@ const COPY_BY_SLUG: Record<string, CalculatorInputCopy> = {
   "mortgage-payment": MORTGAGE_PAYMENT,
   "temporary-buydown": TEMPORARY_BUYDOWN_COPY,
   dscr: DSCR,
+  "cost-of-living": COST_OF_LIVING,
 }
 
 export function calculatorInputCopyForSlug(slug: string): CalculatorInputCopy | undefined {

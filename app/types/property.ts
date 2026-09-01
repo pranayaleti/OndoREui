@@ -1,3 +1,5 @@
+import type { PublicPetPolicy } from "@/lib/listing-presentation"
+
 export type PropertyType = "apartment" | "house" | "townhouse" | "condo" | "studio";
 
 export interface ApiPhoto {
@@ -95,6 +97,7 @@ export interface ApiProperty {
   virtualTourUrl?: string | null;
   videoUrl?: string | null;
   documents?: ApiListingDocument[] | null;
+  petPolicy?: PublicPetPolicy | null;
 }
 
 export interface Property {
@@ -126,6 +129,7 @@ export interface Property {
   lng?: number | null;
   status?: string;
   listingKind?: ListingKind | null;
+  petPolicy?: PublicPetPolicy | null;
   addressParts?: {
     line1?: string | null;
     line2?: string | null;

@@ -75,6 +75,7 @@ export function mapApiProperty(p: ApiProperty): Property {
     lng: p.lng ?? null,
     status: p.status,
     listingKind: p.listingKind ?? null,
+    petPolicy: p.petPolicy ?? null,
     contact: {
       name: contactName,
       phone: contactPhone,

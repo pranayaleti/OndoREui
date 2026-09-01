@@ -123,7 +123,7 @@ function buildAlternateRefs(path, siteUrl) {
 }
 
 /** Public pages that exist but must not be indexed (noindex metadata or redirect-only). */
-const SITEMAP_NOINDEX_PATHS = ['/search', '/chat']
+const SITEMAP_NOINDEX_PATHS = ['/search', '/chat', '/properties/compare']
 
 function isExcludedPath(path) {
   const p = normalizeSitemapPath(path)

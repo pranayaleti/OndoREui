@@ -10,6 +10,7 @@ import {
   DEFAULT_PROPERTY_FILTERS,
 } from '@/components/property-filter';
 import { RentalListingCard } from '@/components/properties/rental-listing-card';
+import { ListingCompareBar } from '@/components/properties/listing-compare-bar';
 import { RenterAvailabilityNote } from '@/components/properties/renter-availability-note';
 import { RenterPath } from '@/components/properties/renter-path';
 import { buildRenterSearchPrefill, DEFAULT_RENT_FILTER_RANGE } from '@/lib/renter-search-prefill';
@@ -117,12 +118,22 @@ export default function PropertiesClient() {
     const q = params.get('query')?.trim()
     const type = params.get('type')?.trim()
     const city = params.get('city')?.trim()
+    const maxPriceRaw = params.get('maxPrice')?.trim() ?? params.get('maxRent')?.trim()
     if (q) setSearchQuery(q)
     if (type) {
       setFilters((prev) => ({ ...prev, propertyType: type }))
     }
     if (city) {
       setFilters((prev) => ({ ...prev, location: city }))
+    }
+    if (maxPriceRaw) {
+      const maxPrice = Number(maxPriceRaw)
+      if (Number.isFinite(maxPrice) && maxPrice > 0) {
+        setFilters((prev) => ({
+          ...prev,
+          priceRange: [prev.priceRange[0], maxPrice],
+        }))
+      }
     }
   }, [])
 
@@ -565,6 +576,9 @@ export default function PropertiesClient() {
                 />
               </div>
               <div>
+            <div className="mb-4">
+              <ListingCompareBar />
+            </div>
 
             {loading ? (
               <div

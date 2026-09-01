@@ -8,14 +8,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { listingDetailPath } from "@/lib/public-property"
 import { ListingFavoriteButton } from "@/components/properties/listing-favorite-button"
+import { ListingCompareToggle } from "@/components/properties/listing-compare-toggle"
 import {
   availabilityBadge,
-  bedsLabel,
+  availabilityBadgeClass,
   bathsLabel,
+  bedsLabel,
   formatMonthlyRent,
   formatPropertyType,
   formatSqft,
-  listingHighlights,
+  listingCardChips,
   listingMarketStatus,
   marketStatusBadgeClass,
 } from "@/lib/listing-presentation"
@@ -41,15 +43,13 @@ export function RentalListingCard({
     listingKind: property.listingKind,
   })
   const moveIn = availabilityBadge(property.availability)
-  const highlight = listingHighlights({
+  const chips = listingCardChips({
     amenities: property.amenities,
-    type: property.type,
-    sqft: property.sqft,
-    leaseTerms: property.leaseTerms,
-  })[0]
+    petPolicy: property.petPolicy,
+  })
   const snippet = property.description?.trim()
     ? property.description.trim().slice(0, 90)
-    : highlight?.label
+    : null
 
   return (
     <Card
@@ -82,14 +82,20 @@ export function RentalListingCard({
             </Badge>
           ) : null}
           {moveIn.tone === "now" || moveIn.tone === "upcoming" ? (
-            <Badge variant="secondary" className="font-medium">
+            <Badge className={cn("font-medium", availabilityBadgeClass(moveIn.tone))}>
               {moveIn.label}
             </Badge>
           ) : null}
         </div>
-        <div className="absolute right-2 top-2 z-10">
+        <div className="absolute right-2 top-2 z-10 flex flex-col gap-1">
           <ListingFavoriteButton
             publicId={property.id}
+            compact
+            className="border-0 bg-background/90 shadow-sm"
+          />
+          <ListingCompareToggle
+            publicId={property.id}
+            title={property.title}
             compact
             className="border-0 bg-background/90 shadow-sm"
           />
@@ -114,6 +120,18 @@ export function RentalListingCard({
             .filter(Boolean)
             .join(" · ")}
         </p>
+        {chips.length > 0 ? (
+          <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Listed highlights">
+            {chips.map((chip) => (
+              <li
+                key={chip.id}
+                className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground"
+              >
+                {chip.label}
+              </li>
+            ))}
+          </ul>
+        ) : null}
         {snippet ? (
           <p className="mt-2 line-clamp-2 text-sm text-foreground/70">
             {snippet}

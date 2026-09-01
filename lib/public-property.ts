@@ -3,9 +3,14 @@ import { backendUrl } from "@/lib/backend"
 
 /** Emitted by generateStaticParams when the public list is empty or unreachable. */
 export const PROPERTY_DETAIL_PLACEHOLDER_ID = "_placeholder"
+export const LISTING_STATIC_SEGMENTS = ["compare", PROPERTY_DETAIL_PLACEHOLDER_ID] as const
 
 export function listingDetailPath(publicId: string): string {
   return `/properties/${encodeURIComponent(publicId)}`
+}
+
+export function listingComparePath(): string {
+  return "/properties/compare"
 }
 
 /**
@@ -22,7 +27,9 @@ export function publicIdFromPathname(pathname: string): string | null {
   } catch {
     return null
   }
-  if (!id || id === PROPERTY_DETAIL_PLACEHOLDER_ID) return null
+  if (!id || (LISTING_STATIC_SEGMENTS as readonly string[]).includes(id)) {
+    return null
+  }
   return id
 }
 
@@ -97,7 +104,9 @@ export async function fetchPublicPropertyByPublicId(
   publicId: string,
   fetchImpl: typeof fetch = fetch,
 ): Promise<ApiProperty | null> {
-  if (!publicId || publicId === PROPERTY_DETAIL_PLACEHOLDER_ID) return null
+  if (!publicId || (LISTING_STATIC_SEGMENTS as readonly string[]).includes(publicId)) {
+    return null
+  }
 
   try {
     const detailRes = await fetchImpl(

@@ -442,6 +442,9 @@ export default function ResourcesPage() {
                       <Link href="/calculators/affordability">Affordability</Link>
                     </Button>
                     <Button asChild size="sm" variant="outline">
+                      <Link href="/calculators/cost-of-living">Cost of living</Link>
+                    </Button>
+                    <Button asChild size="sm" variant="outline">
                       <Link href="/blog/renting-vs-owning-hidden-math">Rent vs. own guide</Link>
                     </Button>
                   </div>

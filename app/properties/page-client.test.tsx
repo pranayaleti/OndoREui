@@ -34,6 +34,10 @@ vi.mock("@/components/properties/rental-listing-card", () => ({
   ),
 }))
 
+vi.mock("@/components/properties/listing-compare-bar", () => ({
+  ListingCompareBar: () => null,
+}))
+
 vi.mock("@/lib/backend", () => ({
   backendUrl: (path: string) => `http://localhost:3030${path}`,
 }))

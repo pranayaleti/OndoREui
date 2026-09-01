@@ -73,6 +73,9 @@ export function BuyLendingStrip() {
               <Button asChild variant="outline">
                 <Link href="/calculators/rent-vs-own">{t("buyLending.rentVsOwnCta")}</Link>
               </Button>
+              <Button asChild variant="outline">
+                <Link href="/calculators/cost-of-living">{t("buyLending.costOfLivingCta")}</Link>
+              </Button>
               <Button asChild variant="ghost">
                 <Link href="/calculators">{t("buyLending.calculatorsCta")}</Link>
               </Button>

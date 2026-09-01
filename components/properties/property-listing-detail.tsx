@@ -6,6 +6,7 @@ import { RenterPath } from "@/components/properties/renter-path"
 import { ListingGallery, ListingGalleryEmptyNotice } from "@/components/properties/listing-gallery"
 import { ListingInquiryCard } from "@/components/properties/listing-inquiry-card"
 import { ListingSaveShare } from "@/components/properties/listing-save-share"
+import { ListingCompareToggle } from "@/components/properties/listing-compare-toggle"
 import { ListingAgentCard } from "@/components/properties/listing-agent-card"
 import { ListingRelated } from "@/components/properties/listing-related"
 import { RentalApplyPanel } from "@/components/rental/rental-apply-panel"
@@ -19,38 +20,25 @@ import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL } from "@/lib/site"
 import { buildRenterSearchPrefill } from "@/lib/renter-search-prefill"
 import {
   availabilityBadge,
+  availabilityBadgeClass,
   groupAmenities,
   listingAgents,
+  listingCityGuideHref,
   listingCostRows,
   listingDescriptionSections,
   listingHighlights,
+  listingLocationFacts,
   listingMarketStatus,
   listingMediaEmbeds,
   listingMetricRows,
+  listingPetPolicyRows,
   listingPublicDocuments,
   listingSpecRows,
+  ASSISTANCE_ANIMALS_NOTE,
   marketStatusBadgeClass,
   petNotesFromAmenities,
-  type AvailabilityTone,
 } from "@/lib/listing-presentation"
 import { cn } from "@/lib/utils"
-
-function availabilityBadgeClass(tone: AvailabilityTone): string {
-  switch (tone) {
-    case "now":
-      return "border-transparent bg-primary text-primary-foreground"
-    case "upcoming":
-      return "border-transparent bg-secondary text-secondary-foreground"
-    case "listed":
-      return "border-border bg-background text-foreground"
-    case "ask":
-      return "border-border bg-muted text-muted-foreground"
-    default: {
-      const _exhaustive: never = tone
-      return _exhaustive
-    }
-  }
-}
 
 export function PropertyUnavailable() {
   return (
@@ -101,9 +89,23 @@ export function PropertyListingDetail({
     leaseTerms: property.leaseTerms,
   })
   const petNotes = petNotesFromAmenities(property.amenities)
+  const petPolicyRows = listingPetPolicyRows(property.petPolicy)
+  const extraPetNotes =
+    petPolicyRows.length > 0
+      ? petNotes.filter((note) => note.label !== "Pets allowed")
+      : petNotes
+  const showPets = petPolicyRows.length > 0 || extraPetNotes.length > 0
   const amenityGroups = groupAmenities(property.amenities).filter(
-    (group) => petNotes.length === 0 || group.id !== "pets",
+    (group) => !showPets || group.id !== "pets",
   )
+  const locationFacts = listingLocationFacts({
+    addressLine1: property.addressLine1,
+    addressLine2: property.addressLine2,
+    city: property.city,
+    state: property.state,
+    zipcode: property.zipcode,
+  })
+  const cityGuideHref = listingCityGuideHref(property.city)
   const costRows = listingCostRows({
     price: property.price,
     fees: property.fees,
@@ -253,7 +255,10 @@ export function PropertyListingDetail({
             <h1 className="font-outfit text-3xl font-bold tracking-tight md:text-4xl">{property.title}</h1>
             <p className="mt-1 text-muted-foreground">{fullAddress}</p>
           </div>
-          <ListingSaveShare publicId={publicId} title={property.title} />
+          <div className="flex flex-col items-stretch gap-2 sm:items-end">
+            <ListingSaveShare publicId={publicId} title={property.title} />
+            <ListingCompareToggle publicId={publicId} title={property.title} />
+          </div>
         </header>
 
         <nav
@@ -373,22 +378,39 @@ export function PropertyListingDetail({
               </section>
             ))}
 
-            {petNotes.length > 0 ? (
+            {showPets ? (
               <section className="mb-8 rounded-xl border border-border bg-card p-5" aria-labelledby="listing-pets-heading">
                 <h2 id="listing-pets-heading" className="text-xl font-semibold">
                   Pets
                 </h2>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {petNotes.map((note) => (
-                    <li key={note.raw} className="rounded-full bg-muted px-3 py-1.5 text-sm">
-                      {note.label}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-3 text-xs text-muted-foreground">
-                  Pet deposits and monthly pet rent, if any, are confirmed with leasing. They are not
-                  estimated here.
-                </p>
+                {petPolicyRows.length > 0 ? (
+                  <dl className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {petPolicyRows.map((row) => (
+                      <div key={row.id}>
+                        <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                          {row.label}
+                        </dt>
+                        <dd className="font-medium">{row.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : null}
+                {extraPetNotes.length > 0 ? (
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {extraPetNotes.map((note) => (
+                      <li key={note.raw} className="rounded-full bg-muted px-3 py-1.5 text-sm">
+                        {note.label}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                <p className="mt-3 text-xs text-muted-foreground">{ASSISTANCE_ANIMALS_NOTE}</p>
+                {petPolicyRows.every((row) => row.id !== "rent" && row.id !== "deposit") ? (
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Pet deposits and monthly pet rent, if any, are confirmed with leasing. They are
+                    not estimated here.
+                  </p>
+                ) : null}
               </section>
             ) : null}
 
@@ -431,32 +453,59 @@ export function PropertyListingDetail({
           </div>
         </div>
 
-        {showMap ? (
-          <section id="listing-location" className="mb-8 scroll-mt-24" aria-label="Listing location">
-            <h2 className="mb-3 text-xl font-semibold">Location</h2>
-            <p className="mb-3 text-sm text-muted-foreground">{fullAddress}</p>
-            <PropertyMap
-              className="h-[280px]"
-              selectedPropertyId={publicId}
-              properties={[
-                {
-                  id: publicId,
-                  title: property.title,
-                  price: property.price,
-                  bedrooms: property.bedrooms,
-                  bathrooms: property.bathrooms,
-                  lat: property.lat!,
-                  lng: property.lng!,
-                  image: heroImage,
-                  type: property.type,
-                },
-              ]}
-            />
-          </section>
-        ) : fullAddress ? (
-          <section id="listing-location" className="mb-8 scroll-mt-24">
-            <h2 className="mb-3 text-xl font-semibold">Location</h2>
-            <p className="text-sm text-muted-foreground">{fullAddress}</p>
+        {locationFacts.length > 0 || showMap ? (
+          <section id="listing-location" className="mb-8 scroll-mt-24" aria-labelledby="listing-location-heading">
+            <h2 id="listing-location-heading" className="mb-3 text-xl font-semibold">
+              Location
+            </h2>
+            {locationFacts.length > 0 ? (
+              <dl className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {locationFacts.map((fact) => (
+                  <div key={fact.id}>
+                    <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      {fact.label}
+                    </dt>
+                    <dd className="font-medium">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+            <p className="mb-3 text-sm text-muted-foreground">
+              Map pin and address come from this listing. We do not add walk scores, school ratings,
+              or travel times.
+            </p>
+            {cityGuideHref ? (
+              <p className="mb-3 text-sm">
+                <Link href={cityGuideHref} className="font-medium underline-offset-2 hover:underline">
+                  Ondo city guide for {property.city}
+                </Link>
+              </p>
+            ) : null}
+            {showMap ? (
+              <PropertyMap
+                className="h-[280px]"
+                selectedPropertyId={publicId}
+                properties={[
+                  {
+                    id: publicId,
+                    title: property.title,
+                    price: property.price,
+                    bedrooms: property.bedrooms,
+                    bathrooms: property.bathrooms,
+                    lat: property.lat!,
+                    lng: property.lng!,
+                    image: heroImage,
+                    type: property.type,
+                  },
+                ]}
+              />
+            ) : null}
+            <a
+              href="#listing-inquire"
+              className="mt-4 inline-flex min-h-11 items-center text-sm font-medium underline-offset-2 hover:underline"
+            >
+              Ask leasing about this address
+            </a>
           </section>
         ) : null}
 

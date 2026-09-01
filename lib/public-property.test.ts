@@ -72,10 +72,12 @@ describe("publicIdFromPathname", () => {
     )
   })
 
-  it("does not treat the browse page or the build placeholder as a listing", () => {
+  it("does not treat the browse page, compare page, or the build placeholder as a listing", () => {
     expect(publicIdFromPathname("/properties")).toBeNull()
     expect(publicIdFromPathname("/properties/")).toBeNull()
     expect(publicIdFromPathname("/properties/_placeholder/")).toBeNull()
+    expect(publicIdFromPathname("/properties/compare")).toBeNull()
+    expect(publicIdFromPathname("/properties/compare/")).toBeNull()
     expect(publicIdFromPathname("/properties/abc/extra")).toBeNull()
   })
 })

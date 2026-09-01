@@ -13,6 +13,7 @@
  */
 import { CALCULATOR_CATALOG } from "./calculator-catalog"
 import { DEFAULT_MORTGAGE_RATE, calculateMonthlyPI } from "./mortgage-utils"
+import { calculateCostOfLiving, createDefaultState, formatCurrency as formatColCurrency } from "./cost-of-living"
 import { LLMS_DISCLOSURES_BLOCK, toAbsoluteSiteUrl } from "./site-index"
 import {
   APP_PORTAL_LOGIN_URL,
@@ -245,6 +246,16 @@ function formatUsd(value: number): string {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 })
 }
 
+function costOfLivingWorkedExample(): string {
+  const result = calculateCostOfLiving(createDefaultState())
+  return [
+    "- Example household: 2 adults, 0 children, 0 pets, buy a $450,000 home with 20% down at the example rate, one vehicle.",
+    `- Estimated monthly expenses: **${formatColCurrency(result.expensesTotal)}**`,
+    `- Estimated annual expenses: **${formatColCurrency(result.annualExpenses)}**`,
+    "- Suggested line items are typical starting points, not local averages or quotes. Housing insurance is counted in housing, not again under Insurance.",
+  ].join("\n")
+}
+
 function mortgageWorkedExample(): string {
   const homePrice = 300_000
   const downPayment = 60_000
@@ -388,6 +399,23 @@ const CALCULATOR_DETAILS: Record<string, CalculatorMarkdownDetail> = {
     formula:
       "Compare (a) self-manage: gross rent − direct expenses − opportunity cost of your time × hours/month against (b) Ondo: gross rent − Ondo fees − direct expenses.",
     inputs: ["Monthly rent", "Direct operating expenses", "Hours/month you spend managing", "Value of your time", "Ondo management + leasing fees"],
+  },
+  "cost-of-living": {
+    formula:
+      "Monthly expenses = housing + transportation + utilities + food + insurance + healthcare + personal + children + pets + debt + lifestyle. Housing buy uses P&I from the mortgage formula plus tax, insurance, HOA, and maintenance. Lines already counted in housing or vehicles are excluded from later insurance/utility totals.",
+    inputs: [
+      "Household size (adults, children, pets)",
+      "Optional monthly income and savings goal",
+      "Buy vs rent housing inputs",
+      "Vehicles and other transportation",
+      "Utilities, food, insurance, healthcare, personal, debt, lifestyle",
+    ],
+    workedExample: costOfLivingWorkedExample(),
+    notes: [
+      "Suggested amounts are typical starting points, not local averages or exact bills.",
+      "This is not a loan quote, credit decision, or financial advice.",
+      "Loan information is provided by Ondo Real Estate (NMLS ID on file).",
+    ],
   },
 }
 

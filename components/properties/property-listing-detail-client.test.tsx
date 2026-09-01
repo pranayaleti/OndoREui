@@ -122,6 +122,29 @@ describe("PropertyListingDetailClient", () => {
     expect(screen.queryByText(/application fee \$50/i)).not.toBeInTheDocument()
   })
 
+  it("shows listed pet rent and deposit from the public pet policy payload", async () => {
+    fetchById.mockResolvedValue({
+      ...listing,
+      amenities: ["laundry"],
+      petPolicy: {
+        petsAllowed: true,
+        allowedSpecies: ["dog", "cat"],
+        maxPets: 2,
+        maxWeightLbs: 40,
+        monthlyPetRentCents: 2500,
+        petDepositCents: 30000,
+      },
+    })
+    render(<PropertyListingDetailClient publicId={listing.publicId} />)
+
+    expect(await screen.findByRole("heading", { level: 2, name: /^pets$/i })).toBeInTheDocument()
+    expect(screen.getByText("Listed monthly pet rent")).toBeInTheDocument()
+    expect(screen.getByText("$25.00")).toBeInTheDocument()
+    expect(screen.getByText("Listed pet deposit")).toBeInTheDocument()
+    expect(screen.getByText("$300.00")).toBeInTheDocument()
+    expect(screen.queryByText(/great for families|school rating of/i)).not.toBeInTheDocument()
+  })
+
   it("shows the unavailable state when the public list does not contain that id", async () => {
     fetchById.mockResolvedValue(null)
     render(<PropertyListingDetailClient publicId="missing-id" />)

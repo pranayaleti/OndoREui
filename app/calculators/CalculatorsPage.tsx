@@ -18,7 +18,8 @@ import {
   DollarSign,
   Percent,
   Building2,
-  TrendingDown
+  TrendingDown,
+  Wallet
 } from 'lucide-react'
 
 interface CalculatorTile {
@@ -203,6 +204,15 @@ const CalculatorsPage: React.FC = () => {
       icon: <Percent className="h-8 w-8" />,
       category: 'Investment',
       color: 'from-orange-500 to-orange-600',
+    },
+    {
+      id: 'cost-of-living',
+      name: 'Monthly Cost of Living Calculator',
+      description: 'Estimate housing, transportation, utilities, food, and the rest of a monthly budget.',
+      path: '/calculators/cost-of-living',
+      icon: <Wallet className="h-8 w-8" />,
+      category: 'Planning',
+      color: 'from-primary to-primary',
     }
   ]
 

@@ -304,6 +304,7 @@ const Footer = memo(() => {
             <li><Link href="/calculators/refinance" className="text-foreground/70 hover:text-foreground">Refinance calculator</Link></li>
             <li><Link href="/calculators/home-sale" className="text-foreground/70 hover:text-foreground">Home sale calculator</Link></li>
             <li><Link href="/calculators/buying-power" className="text-foreground/70 hover:text-foreground">Buying power calculator</Link></li>
+            <li><Link href="/calculators/cost-of-living" className="text-foreground/70 hover:text-foreground">Cost of living calculator</Link></li>
           </FooterNavSection>
 
           {/* About Us */}
