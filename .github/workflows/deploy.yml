@@ -1,9 +1,13 @@
 name: Deploy static site to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  # Deploy only after "OndoREui CI" passes on main. This previously ran on every
+  # push to main with no dependency on CI, so a commit failing a11y or unit tests
+  # still shipped the licensed public site.
+  workflow_run:
+    workflows: ["OndoREui CI"]
+    types: [completed]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -13,10 +17,15 @@ permissions:
 
 concurrency:
   group: pages-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
+    # workflow_run fires on completion whatever the outcome, so gate on success.
+    # workflow_dispatch stays open as a deliberate manual escape hatch.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -26,10 +35,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # workflow_run defaults to the default branch; pin to the exact commit CI
+          # validated so we never ship something CI did not actually test.
+          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          # CI/deploy use Node 24 (GitHub Actions). .nvmrc 20.19.0 is the local floor matching engines >=20.19.0.
           node-version: '24'
           cache: 'npm'
 
@@ -147,3 +161,37 @@ jobs:
               fail("Cloudflare cache purge failed. Token needs Zone Cache Purge. Payload is hostname purge for www + apex (not purge_everything).")
           print("Cloudflare cache purged by hostname for www.ondorealestate.com and ondorealestate.com.")
           PY
+
+  # A deploy that reports success but never reaches the edge is now a red build.
+  # Static export has no hashed entry chunk in the HTML the way the dashboard SPA
+  # does, so this checks live URL 200s (cache-busted) rather than a build id.
+  verify-production:
+    needs: purge-cloudflare
+    if: success()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Verify production URLs return 200
+        run: |
+          URLS="https://www.ondorealestate.com/ https://www.ondorealestate.com/blog/two-years-of-tax-returns-vs-one-year-mortgage/ https://www.ondorealestate.com/calculators/cost-of-living/"
+
+          for attempt in $(seq 1 20); do
+            ALL_OK=1
+            for url in $URLS; do
+              CB=$(date +%s%N)
+              STATUS=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "${url}?cb=${CB}" || true)
+              echo "attempt ${attempt}/20: ${url} -> ${STATUS}"
+              if [ "$STATUS" != "200" ]; then
+                ALL_OK=0
+              fi
+            done
+            if [ "$ALL_OK" = "1" ]; then
+              echo "All production URLs returned 200."
+              exit 0
+            fi
+            sleep 15
+          done
+
+          echo "::error::Production never returned 200 for all smoke URLs after deploy+purge."
+          exit 1

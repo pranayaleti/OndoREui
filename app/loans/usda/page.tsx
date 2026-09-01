@@ -86,8 +86,8 @@ export default function USDALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• {USDA_SNAPSHOT.mapNote}</li>
                     <li>• Some Cache Valley, Sanpete, and rural Utah County pockets have been eligible in past map vintages. That is not a substitute for the current address lookup.</li>
-                    <li>• How-to: <Link href="/blog/usda-map-income-limit-eligibility" className="text-primary underline-offset-4 hover:underline">USDA map and income limit</Link></li>
-                    <li>• Veteran in a rural tract: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary underline-offset-4 hover:underline">USDA vs VA vs FHA</Link> — comparison, not a pick.</li>
+                    <li>• How-to: <Link href="/blog/usda-map-income-limit-eligibility" className="text-primary underline underline-offset-4">USDA map and income limit</Link></li>
+                    <li>• Veteran in a rural tract: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary underline underline-offset-4">USDA vs VA vs FHA</Link> — comparison, not a pick.</li>
                   </ul>
                 </div>
                 <div>

@@ -29,6 +29,9 @@ reports/theme-audit/after/*.png
 reports/theme-audit/before/*.png
 reports/theme-audit/diff/*.png
 
+# Playwright (local traces/screenshots — generate anytime; do not commit)
+/test-results/
+
 # vercel
 .vercel
 

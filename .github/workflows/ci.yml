@@ -19,11 +19,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          # CI uses Node 24 (GitHub Actions). .nvmrc 20.19.0 is the local floor matching engines >=20.19.0.
           node-version: "24"
           cache: "npm"
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Dependency audit
+        # Remaining highs are Next 15's nested postcss (fix is next@16) and sharp 0.35
+        # (breaking for the image optimizer). Do not --force those majors.
+        run: npm audit --audit-level=critical
 
       - name: TypeScript check
         run: npx tsc --noEmit
