@@ -27,7 +27,8 @@ jobs:
         run: npm ci
 
       - name: Dependency audit
-        # Remaining highs are Next 15's nested postcss (fix is next@16) and sharp 0.35
+        # browserslist is pinned via package.json overrides (>=4.28.8). Remaining
+        # highs are Next 15's nested postcss (fix is next@16) and sharp 0.35
         # (breaking for the image optimizer). Do not --force those majors.
         run: npm audit --audit-level=critical
 

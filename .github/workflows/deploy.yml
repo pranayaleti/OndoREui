@@ -53,10 +53,18 @@ jobs:
       - name: Build and export static site
         run: npm run build
 
-      - name: Add CNAME and disable Jekyll processing
+      - name: Add CNAME, disable Jekyll, write build id
+        env:
+          BUILD_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
           cp CNAME out/CNAME
           touch out/.nojekyll
+          python3 - <<'PY'
+          import json, os, pathlib
+          sha = os.environ["BUILD_SHA"]
+          pathlib.Path("out/ondo-build.json").write_text(json.dumps({"sha": sha}) + "\n", encoding="utf-8")
+          print(f"Wrote out/ondo-build.json sha={sha}")
+          PY
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -163,8 +171,8 @@ jobs:
           PY
 
   # A deploy that reports success but never reaches the edge is now a red build.
-  # Static export has no hashed entry chunk in the HTML the way the dashboard SPA
-  # does, so this checks live URL 200s (cache-busted) rather than a build id.
+  # Cache-busted 200s alone can pass on stale Cloudflare HTML. ondo-build.json is
+  # written with this workflow's commit SHA so smoke proves THIS build is live.
   verify-production:
     needs: purge-cloudflare
     if: success()
@@ -172,9 +180,19 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Verify production URLs return 200
+      - name: Verify production URLs return 200 and this build SHA
+        env:
+          EXPECTED_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
+          set -euo pipefail
           URLS="https://www.ondorealestate.com/ https://www.ondorealestate.com/blog/two-years-of-tax-returns-vs-one-year-mortgage/ https://www.ondorealestate.com/calculators/cost-of-living/"
+          BUILD_URL="https://www.ondorealestate.com/ondo-build.json"
+
+          if [ -z "${EXPECTED_SHA}" ]; then
+            echo "::error::No expected commit SHA; cannot verify this deploy."
+            exit 1
+          fi
+          echo "Expecting production ondo-build.json sha=${EXPECTED_SHA}"
 
           for attempt in $(seq 1 20); do
             ALL_OK=1
@@ -186,12 +204,24 @@ jobs:
                 ALL_OK=0
               fi
             done
+
+            CB=$(date +%s%N)
+            BUILD_STATUS=$(curl -sS -o /tmp/ondo-build.json -w '%{http_code}' --max-time 30 "${BUILD_URL}?cb=${CB}" || true)
+            LIVE_SHA=""
+            if [ "$BUILD_STATUS" = "200" ]; then
+              LIVE_SHA=$(python3 -c 'import json,sys; d=json.load(open("/tmp/ondo-build.json",encoding="utf-8")); print(d.get("sha") if isinstance(d,dict) and isinstance(d.get("sha"),str) else "")' 2>/dev/null || true)
+            fi
+            echo "attempt ${attempt}/20: ${BUILD_URL} -> ${BUILD_STATUS} sha=${LIVE_SHA:-none} expected=${EXPECTED_SHA}"
+            if [ "$BUILD_STATUS" != "200" ] || [ "$LIVE_SHA" != "$EXPECTED_SHA" ]; then
+              ALL_OK=0
+            fi
+
             if [ "$ALL_OK" = "1" ]; then
-              echo "All production URLs returned 200."
+              echo "Production URLs returned 200 and ondo-build.json matches ${EXPECTED_SHA}."
               exit 0
             fi
             sleep 15
           done
 
-          echo "::error::Production never returned 200 for all smoke URLs after deploy+purge."
+          echo "::error::Production never returned 200 for all smoke URLs with ondo-build.json sha=${EXPECTED_SHA} after deploy+purge."
           exit 1

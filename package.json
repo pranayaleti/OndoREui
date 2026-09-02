@@ -5,6 +5,9 @@
     "node": ">=20.19.0"
   },
   "private": true,
+  "overrides": {
+    "browserslist": "^4.28.8"
+  },
   "homepage": "https://www.ondorealestate.com",
   "scripts": {
     "clean": "rm -rf .next node_modules/.cache",
