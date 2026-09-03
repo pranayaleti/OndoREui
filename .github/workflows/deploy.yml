@@ -62,8 +62,12 @@ jobs:
           python3 - <<'PY'
           import json, os, pathlib
           sha = os.environ["BUILD_SHA"]
-          pathlib.Path("out/ondo-build.json").write_text(json.dumps({"sha": sha}) + "\n", encoding="utf-8")
-          print(f"Wrote out/ondo-build.json sha={sha}")
+          payload = json.dumps({"sha": sha}) + "\n"
+          pathlib.Path("out/ondo-build.json").write_text(payload, encoding="utf-8")
+          build_dir = pathlib.Path("out/ondo-build")
+          build_dir.mkdir(parents=True, exist_ok=True)
+          (build_dir / "index.json").write_text(payload, encoding="utf-8")
+          print(f"Wrote out/ondo-build.json and out/ondo-build/index.json sha={sha}")
           PY
 
       - name: Setup Pages
@@ -91,8 +95,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      purged: ${{ steps.purge.outputs.purged }}
     steps:
       - name: Purge Cloudflare cache (www + apex hosts)
+        id: purge
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
@@ -103,6 +110,7 @@ jobs:
           TOKEN="${CF_API_TOKEN:-${CLOUDFLARE_API_TOKEN:-}}"
           ZONE="${CF_ZONE_ID:-${CLOUDFLARE_ZONE_ID:-}}"
           if [ -z "$TOKEN" ] || [ -z "$ZONE" ]; then
+            echo "purged=skipped" >> "$GITHUB_OUTPUT"
             echo "::warning::Cloudflare cache purge skipped: set repository secrets CF_API_TOKEN and CF_ZONE_ID (aliases CLOUDFLARE_API_TOKEN and CLOUDFLARE_ZONE_ID). Forks without secrets still succeed."
             exit 0
           fi
@@ -119,10 +127,38 @@ jobs:
           zone = os.environ["ZONE"]
           expected = "ondorealestate.com"
           http = os.environ.get("CF_ZONE_HTTP", "")
+          github_output = os.environ["GITHUB_OUTPUT"]
 
           def fail(msg: str) -> None:
               print(f"::error::{msg}", file=sys.stderr)
               sys.exit(1)
+
+          def purge(payload: dict, label: str) -> None:
+              req = urllib.request.Request(
+                  f"https://api.cloudflare.com/client/v4/zones/{zone}/purge_cache",
+                  data=json.dumps(payload).encode(),
+                  method="POST",
+                  headers={
+                      "Authorization": f"Bearer {token}",
+                      "Content-Type": "application/json",
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=20) as resp:
+                      purge_http = resp.status
+                      data = json.loads(resp.read())
+              except urllib.error.HTTPError as exc:
+                  purge_http = exc.code
+                  raw = exc.read().decode()
+                  try:
+                      data = json.loads(raw)
+                  except json.JSONDecodeError:
+                      fail(f"Cloudflare cache purge HTTP {purge_http}: {raw[:240]}")
+              except urllib.error.URLError as exc:
+                  fail(f"Cloudflare cache purge network error: {exc}")
+              print(label, json.dumps({k: data.get(k) for k in ("success", "errors", "messages")}, indent=2))
+              if purge_http != 200 or not data.get("success"):
+                  fail(f"Cloudflare cache purge failed ({label}). Token needs Zone Cache Purge. Never purge_everything.")
 
           try:
               with open("/tmp/cf-zone.json", encoding="utf-8") as f:
@@ -140,39 +176,25 @@ jobs:
                   fail(f"Refusing purge: zone is {name!r}, expected {expected!r}.")
               print(f"Zone ok: {name}")
 
-          payload = json.dumps({"hosts": ["www.ondorealestate.com", "ondorealestate.com"]}).encode()
-          req = urllib.request.Request(
-              f"https://api.cloudflare.com/client/v4/zones/{zone}/purge_cache",
-              data=payload,
-              method="POST",
-              headers={
-                  "Authorization": f"Bearer {token}",
-                  "Content-Type": "application/json",
-              },
-          )
-          try:
-              with urllib.request.urlopen(req, timeout=20) as resp:
-                  purge_http = resp.status
-                  data = json.loads(resp.read())
-          except urllib.error.HTTPError as exc:
-              purge_http = exc.code
-              raw = exc.read().decode()
-              try:
-                  data = json.loads(raw)
-              except json.JSONDecodeError:
-                  fail(f"Cloudflare cache purge HTTP {purge_http}: {raw[:240]}")
-          except urllib.error.URLError as exc:
-              fail(f"Cloudflare cache purge network error: {exc}")
-
-          print(json.dumps({k: data.get(k) for k in ("success", "errors", "messages")}, indent=2))
-          if purge_http != 200 or not data.get("success"):
-              fail("Cloudflare cache purge failed. Token needs Zone Cache Purge. Payload is hostname purge for www + apex (not purge_everything).")
-          print("Cloudflare cache purged by hostname for www.ondorealestate.com and ondorealestate.com.")
+          # Cloudflare allows only one of hosts/files/tags/prefixes per request.
+          purge({"hosts": ["www.ondorealestate.com", "ondorealestate.com"]}, "hosts")
+          purge({"files": [
+              "https://www.ondorealestate.com/",
+              "https://www.ondorealestate.com/index.html",
+              "https://www.ondorealestate.com/ondo-build.json",
+              "https://www.ondorealestate.com/ondo-build/index.json",
+              "https://ondorealestate.com/",
+          ]}, "files")
+          with open(github_output, "a", encoding="utf-8") as fh:
+              fh.write("purged=yes\n")
+          print("Cloudflare cache purged for www + apex (hosts and HTML/JSON URLs).")
           PY
 
   # A deploy that reports success but never reaches the edge is now a red build.
   # Cache-busted 200s alone can pass on stale Cloudflare HTML. ondo-build.json is
   # written with this workflow's commit SHA so smoke proves THIS build is live.
+  # GitHub Pages Fastly uses max-age=600; 40×15s covers that TTL when CF secrets
+  # are missing and hostname purge is skipped.
   verify-production:
     needs: purge-cloudflare
     if: success()
@@ -183,45 +205,108 @@ jobs:
       - name: Verify production URLs return 200 and this build SHA
         env:
           EXPECTED_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+          PURGED: ${{ needs.purge-cloudflare.outputs.purged }}
         run: |
           set -euo pipefail
           URLS="https://www.ondorealestate.com/ https://www.ondorealestate.com/blog/two-years-of-tax-returns-vs-one-year-mortgage/ https://www.ondorealestate.com/calculators/cost-of-living/"
-          BUILD_URL="https://www.ondorealestate.com/ondo-build.json"
+          BUILD_URLS="https://www.ondorealestate.com/ondo-build.json https://www.ondorealestate.com/ondo-build/index.json"
+          PAGES_IP="185.199.108.153"
+          ATTEMPTS=40
 
           if [ -z "${EXPECTED_SHA}" ]; then
             echo "::error::No expected commit SHA; cannot verify this deploy."
             exit 1
           fi
-          echo "Expecting production ondo-build.json sha=${EXPECTED_SHA}"
+          echo "Expecting production build sha=${EXPECTED_SHA} (cloudflare_purge=${PURGED:-unknown})"
 
-          for attempt in $(seq 1 20); do
+          extract_sha() {
+            python3 - "$1" "$2" <<'PY'
+          import json, pathlib, sys
+          raw = pathlib.Path(sys.argv[1]).read_text(encoding="utf-8", errors="replace")
+          ctype = sys.argv[2].lower()
+          stripped = raw.lstrip()
+          if "json" not in ctype and not stripped.startswith("{"):
+              raise SystemExit(0)
+          try:
+              data = json.loads(raw)
+          except json.JSONDecodeError:
+              raise SystemExit(0)
+          sha = data.get("sha") if isinstance(data, dict) else None
+          if isinstance(sha, str) and sha:
+              print(sha)
+          PY
+          }
+
+          header_ctype() {
+            python3 - "$1" <<'PY'
+          import sys
+          text = open(sys.argv[1], encoding="utf-8", errors="replace").read().split("\r\n\r\n", 1)[0]
+          ctype = ""
+          for line in text.splitlines():
+              if line.lower().startswith("content-type:"):
+                  ctype = line.split(":", 1)[1].strip()
+          print(ctype)
+          PY
+          }
+
+          ORIGIN_MATCH=0
+          for attempt in $(seq 1 "$ATTEMPTS"); do
             ALL_OK=1
             for url in $URLS; do
               CB=$(date +%s%N)
               STATUS=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "${url}?cb=${CB}" || true)
-              echo "attempt ${attempt}/20: ${url} -> ${STATUS}"
+              echo "attempt ${attempt}/${ATTEMPTS}: ${url} -> ${STATUS}"
               if [ "$STATUS" != "200" ]; then
                 ALL_OK=0
               fi
             done
 
-            CB=$(date +%s%N)
-            BUILD_STATUS=$(curl -sS -o /tmp/ondo-build.json -w '%{http_code}' --max-time 30 "${BUILD_URL}?cb=${CB}" || true)
             LIVE_SHA=""
-            if [ "$BUILD_STATUS" = "200" ]; then
-              LIVE_SHA=$(python3 -c 'import json,sys; d=json.load(open("/tmp/ondo-build.json",encoding="utf-8")); print(d.get("sha") if isinstance(d,dict) and isinstance(d.get("sha"),str) else "")' 2>/dev/null || true)
-            fi
-            echo "attempt ${attempt}/20: ${BUILD_URL} -> ${BUILD_STATUS} sha=${LIVE_SHA:-none} expected=${EXPECTED_SHA}"
-            if [ "$BUILD_STATUS" != "200" ] || [ "$LIVE_SHA" != "$EXPECTED_SHA" ]; then
+            MATCH_URL=""
+            for burl in $BUILD_URLS; do
+              CB=$(date +%s%N)
+              BUILD_STATUS=$(curl -sS -D /tmp/ondo-build.hdr -o /tmp/ondo-build.body -w '%{http_code}' --max-time 30 "${burl}?cb=${CB}" || true)
+              CTYPE=$(header_ctype /tmp/ondo-build.hdr)
+              CANDIDATE=""
+              if [ "$BUILD_STATUS" = "200" ]; then
+                CANDIDATE=$(extract_sha /tmp/ondo-build.body "$CTYPE" || true)
+              fi
+              echo "attempt ${attempt}/${ATTEMPTS}: ${burl} -> ${BUILD_STATUS} type=${CTYPE:-none} sha=${CANDIDATE:-none}"
+              if [ "$CANDIDATE" = "$EXPECTED_SHA" ]; then
+                LIVE_SHA="$CANDIDATE"
+                MATCH_URL="$burl"
+                break
+              fi
+            done
+            if [ -z "$LIVE_SHA" ]; then
               ALL_OK=0
             fi
 
+            ORIGIN_SHA=""
+            ORIGIN_STATUS=$(curl -sk --resolve "www.ondorealestate.com:443:${PAGES_IP}" -D /tmp/ondo-origin.hdr -o /tmp/ondo-origin.body -w '%{http_code}' --max-time 20 "https://www.ondorealestate.com/ondo-build.json" || true)
+            ORIGIN_CTYPE=$(header_ctype /tmp/ondo-origin.hdr)
+            if [ "$ORIGIN_STATUS" = "200" ]; then
+              ORIGIN_SHA=$(extract_sha /tmp/ondo-origin.body "$ORIGIN_CTYPE" || true)
+            fi
+            echo "attempt ${attempt}/${ATTEMPTS}: pages-origin -> ${ORIGIN_STATUS} sha=${ORIGIN_SHA:-none}"
+            if [ "${ORIGIN_SHA:-}" = "$EXPECTED_SHA" ]; then
+              ORIGIN_MATCH=1
+              if [ "$ALL_OK" != "1" ]; then
+                echo "::warning::GitHub Pages origin has this SHA but www.ondorealestate.com does not. Cloudflare is serving stale HTML."
+              fi
+            fi
+
             if [ "$ALL_OK" = "1" ]; then
-              echo "Production URLs returned 200 and ondo-build.json matches ${EXPECTED_SHA}."
+              echo "Production URLs returned 200 and ${MATCH_URL} matches ${EXPECTED_SHA}."
               exit 0
             fi
             sleep 15
           done
 
-          echo "::error::Production never returned 200 for all smoke URLs with ondo-build.json sha=${EXPECTED_SHA} after deploy+purge."
+          echo "::error::Production never returned 200 for all smoke URLs with build sha=${EXPECTED_SHA} after deploy+purge."
+          if [ "$ORIGIN_MATCH" = "1" ]; then
+            echo "::error::GitHub Pages origin already has this SHA; Cloudflare is not serving Pages. Set CF_API_TOKEN and CF_ZONE_ID on OndoREui."
+          elif [ "${PURGED:-}" = "skipped" ]; then
+            echo "::error::Cloudflare cache purge was skipped. Set CF_API_TOKEN and CF_ZONE_ID on OndoREui so www.ondorealestate.com is not left serving a cached 404/HTML document."
+          fi
           exit 1
