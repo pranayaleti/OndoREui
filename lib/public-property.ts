@@ -9,6 +9,11 @@ export function listingDetailPath(publicId: string): string {
   return `/properties/${encodeURIComponent(publicId)}`
 }
 
+/** Existing PDP worksheet hash — not a second investor funnel. */
+export function listingWorksheetPath(publicId: string): string {
+  return `${listingDetailPath(publicId)}#underwrite`
+}
+
 export function listingComparePath(): string {
   return "/properties/compare"
 }

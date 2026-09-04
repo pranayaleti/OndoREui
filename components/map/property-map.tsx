@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo, useRef } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker, PopupEvent } from "leaflet";
+import { listingWorksheetPath } from "@/lib/public-property";
 
 interface MapProperty {
   id: string;
@@ -90,7 +91,11 @@ export function buildListingPopupHtml(
   const action = options.showListingAction
     ? `<button type="button" class="ondo-map-show-listing mt-2 w-full cursor-pointer rounded-md border-0 bg-primary px-3 py-1.5 text-[13px] font-medium text-primary-foreground" data-listing-id="${escapeMapPopupText(property.id)}">Show listing</button>`
     : "";
-  return `<div style="min-width:200px;padding:4px">${image}<h3 style="margin:0 0 4px;font-size:14px;font-weight:600">${title}</h3>${priceLine}${factsLine}${action}</div>`;
+  const worksheet =
+    property.price !== undefined
+      ? `<a href="${escapeMapPopupText(listingWorksheetPath(property.id))}" class="mt-2 inline-flex min-h-11 items-center text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">Worksheet</a>`
+      : "";
+  return `<div style="min-width:200px;padding:4px">${image}<h3 style="margin:0 0 4px;font-size:14px;font-weight:600">${title}</h3>${priceLine}${factsLine}${action}${worksheet}</div>`;
 }
 
 export default function PropertyMap({

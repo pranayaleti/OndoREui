@@ -13,6 +13,9 @@ import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { submitContactLead } from "@/lib/leads-api"
 import { buildListingInquiryMessage, listingInquiryDraftMessage } from "@/lib/listing-presentation"
 import { emailValidation, phoneValidation } from "@/lib/validations"
+import { STICKY_HEADER_SCROLL_MARGIN_CLASS } from "@/lib/scroll-margins"
+import { STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS } from "@/components/sticky-mobile-cta-bar"
+import { cn } from "@/lib/utils"
 
 type PreferredContact = "email" | "phone" | "text"
 
@@ -61,6 +64,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
     phone: "",
     preferredContact: "email" as PreferredContact,
     wantsTour: false,
+    evaluatingAsInvestor: false,
     message: listingInquiryDraftMessage(address),
   })
   const [tour, setTour] = useState({
@@ -124,6 +128,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
         address,
         preferredContact: info.preferredContact,
         notes: info.message,
+        evaluatingAsInvestor: info.evaluatingAsInvestor,
       }),
       ...(propertyId && { propertyId }),
       source: "website",
@@ -142,6 +147,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
       phone: "",
       preferredContact: "email",
       wantsTour: false,
+      evaluatingAsInvestor: false,
       message: listingInquiryDraftMessage(address),
     })
   }
@@ -187,7 +193,10 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
   const tourNameId = `tour-name-${instanceId}`
 
   return (
-    <div id="listing-inquire" className="scroll-mt-24">
+    <div
+      id="listing-inquire"
+      className={cn("scroll-mt-24", STICKY_HEADER_SCROLL_MARGIN_CLASS, STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS)}
+    >
       <Tabs defaultValue="information">
         <TabsList className="grid h-auto w-full grid-cols-2">
           <TabsTrigger value="information" className="min-h-11">
@@ -278,6 +287,20 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
                   I would also like to tour this home
                 </Label>
               </div>
+              <div className="flex items-center gap-2">
+                <input
+                  id={`info-investor-${instanceId}`}
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-input"
+                  checked={info.evaluatingAsInvestor}
+                  onChange={(e) =>
+                    setInfo((prev) => ({ ...prev, evaluatingAsInvestor: e.target.checked }))
+                  }
+                />
+                <Label htmlFor={`info-investor-${instanceId}`} className="font-normal">
+                  I&apos;m evaluating as an investor
+                </Label>
+              </div>
               <div className="space-y-1.5">
                 <Label htmlFor={`info-message-${instanceId}`}>Message</Label>
                 <Textarea
@@ -294,7 +317,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
                   {infoError}
                 </p>
               ) : null}
-              <Button type="submit" className="min-h-11 w-full" disabled={infoStatus === "submitting"}>
+              <Button type="submit" className={cn("min-h-11 w-full", STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS)} disabled={infoStatus === "submitting"}>
                 {infoStatus === "submitting" ? "Sending…" : "Request information"}
               </Button>
             </form>

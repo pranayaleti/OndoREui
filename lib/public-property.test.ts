@@ -5,6 +5,7 @@ import {
   fetchPublicPropertyList,
   findPublicProperty,
   listingDetailPath,
+  listingWorksheetPath,
   publicIdFromPathname,
   publicIdsFromListBody,
 } from "./public-property"
@@ -62,6 +63,12 @@ describe("listingDetailPath", () => {
     expect(listingDetailPath("c2e653bf-1b6a-4f0c-9654-82a4896cb137")).toBe(
       "/properties/c2e653bf-1b6a-4f0c-9654-82a4896cb137",
     )
+  })
+})
+
+describe("listingWorksheetPath", () => {
+  it("points at the listing worksheet hash, not a second investor funnel", () => {
+    expect(listingWorksheetPath("pub-lehi-1")).toBe("/properties/pub-lehi-1#underwrite")
   })
 })
 

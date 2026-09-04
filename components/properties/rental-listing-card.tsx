@@ -6,7 +6,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { listingDetailPath } from "@/lib/public-property"
+import { listingDetailPath, listingWorksheetPath } from "@/lib/public-property"
 import { ListingFavoriteButton } from "@/components/properties/listing-favorite-button"
 import { ListingCompareToggle } from "@/components/properties/listing-compare-toggle"
 import {
@@ -155,6 +155,12 @@ export function RentalListingCard({
               Request a showing
             </a>
           </Button>
+          <Link
+            href={listingWorksheetPath(property.id)}
+            className="inline-flex min-h-11 items-center self-start text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            Worksheet
+          </Link>
         </div>
       </CardContent>
     </Card>

@@ -5,6 +5,8 @@ import { RenterAvailabilityNote } from "@/components/properties/renter-availabil
 import { RenterPath } from "@/components/properties/renter-path"
 import { ListingGallery, ListingGalleryEmptyNotice } from "@/components/properties/listing-gallery"
 import { ListingInquiryCard } from "@/components/properties/listing-inquiry-card"
+import { ListingInvestorWorksheet } from "@/components/properties/listing-investor-worksheet"
+import { ListingOndoManages } from "@/components/properties/listing-ondo-manages"
 import { ListingSaveShare } from "@/components/properties/listing-save-share"
 import { ListingCompareToggle } from "@/components/properties/listing-compare-toggle"
 import { ListingAgentCard } from "@/components/properties/listing-agent-card"
@@ -211,6 +213,7 @@ export function PropertyListingDetail({
     { href: "#listing-highlights", label: "Highlights", show: specRows.length > 0 },
     { href: "#listing-overview", label: "Overview", show: Boolean(property.description) },
     { href: "#listing-location", label: "Location", show: showMap || Boolean(fullAddress) },
+    { href: "#underwrite", label: "Worksheet", show: true },
     { href: "#listing-inquire", label: "Inquire", show: true },
   ].filter((item) => item.show)
 
@@ -232,7 +235,7 @@ export function PropertyListingDetail({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }}
       />
 
-      <div className="container mx-auto max-w-6xl px-4 py-6">
+      <div className="container mx-auto max-w-6xl px-4 pt-6 pb-24 md:pb-6">
         <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
           <Link href="/properties" className="hover:underline">
             Properties
@@ -438,7 +441,9 @@ export function PropertyListingDetail({
               </section>
             ) : null}
 
+            <ListingOndoManages />
             <ListingMetrics rows={metricRows} />
+            <ListingInvestorWorksheet listedMonthlyRent={property.price} />
             <ListingDocuments documents={documents} />
             <ListingMediaEmbed embeds={embeds} />
             <ListingAgentCard agents={agents} />

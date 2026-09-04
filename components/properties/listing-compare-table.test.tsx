@@ -52,5 +52,15 @@ describe("ListingCompareTable", () => {
     expect(screen.getByText("Ask leasing for move-in")).toBeInTheDocument()
     expect(screen.getByText("Pets allowed")).toBeInTheDocument()
     expect(screen.queryByText(/best value|walk score|great schools/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/cap rate|cash-on-cash|5-year return|estimated rent/i)).not.toBeInTheDocument()
+    const worksheetLinks = screen.getAllByRole("link", { name: /^worksheet$/i })
+    expect(worksheetLinks).toHaveLength(2)
+    expect(worksheetLinks[0]?.getAttribute("href") ?? "").toMatch(/#underwrite/)
+    expect((worksheetLinks[0]?.getAttribute("href") ?? "").replace(/\/(?=#)/, "").replace(/\/$/, "")).toBe(
+      "/properties/a#underwrite",
+    )
+    expect((worksheetLinks[1]?.getAttribute("href") ?? "").replace(/\/(?=#)/, "").replace(/\/$/, "")).toBe(
+      "/properties/b#underwrite",
+    )
   })
 })

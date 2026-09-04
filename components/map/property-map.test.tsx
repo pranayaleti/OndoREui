@@ -122,6 +122,17 @@ describe("listing popup HTML", () => {
     expect(html).toContain("2 bath")
     expect(html).toContain("Show listing")
     expect(html).toContain('data-listing-id="1"')
+    expect(html).toMatch(/<a[^>]+href="[^"]*#underwrite"[^>]*>Worksheet<\/a>/)
+    expect(html).not.toMatch(/cap rate|cash-on-cash|5-year return|estimated rent/i)
+  })
+
+  it("does not add a worksheet link on a location-only pin", () => {
+    const html = buildListingPopupHtml(
+      { id: "sugar-house", title: "Sugar House, Salt Lake City" },
+      { showListingAction: false },
+    )
+    expect(html).not.toContain("Worksheet")
+    expect(html).not.toContain("#underwrite")
   })
 
   it("does not emit undefined bath when bathrooms is missing", () => {

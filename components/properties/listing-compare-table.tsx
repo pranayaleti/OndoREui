@@ -1,6 +1,6 @@
 import Link from "next/link"
 import type { ApiProperty } from "@/app/types/property"
-import { listingDetailPath } from "@/lib/public-property"
+import { listingDetailPath, listingWorksheetPath } from "@/lib/public-property"
 import {
   listingCompareFieldValue,
   type PublicPetPolicy,
@@ -86,29 +86,37 @@ export function ListingCompareTable({ listings, onRemove }: ListingCompareTableP
             </th>
             {listings.map((listing) => (
               <th key={listing.publicId} scope="col" className="min-w-[10rem] p-3 text-left align-top">
-                {listing.photoUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={listing.photoUrl}
-                    alt=""
-                    className="mb-2 h-24 w-full rounded-md object-cover"
-                  />
-                ) : (
-                  <div className="mb-2 h-24 w-full rounded-md bg-muted" />
-                )}
-                <Link href={listingDetailPath(listing.publicId)} className="font-semibold hover:underline">
-                  {listing.title}
-                </Link>
-                {onRemove ? (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="mt-1 h-auto min-h-11 px-0 text-sm"
-                    onClick={() => onRemove(listing.publicId)}
+                <div className="flex flex-col items-start">
+                  {listing.photoUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={listing.photoUrl}
+                      alt=""
+                      className="mb-2 h-24 w-full rounded-md object-cover"
+                    />
+                  ) : (
+                    <div className="mb-2 h-24 w-full rounded-md bg-muted" />
+                  )}
+                  <Link href={listingDetailPath(listing.publicId)} className="font-semibold hover:underline">
+                    {listing.title}
+                  </Link>
+                  <Link
+                    href={listingWorksheetPath(listing.publicId)}
+                    className="inline-flex min-h-11 items-center text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   >
-                    Remove
-                  </Button>
-                ) : null}
+                    Worksheet
+                  </Link>
+                  {onRemove ? (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="h-auto min-h-11 px-0 text-sm"
+                      onClick={() => onRemove(listing.publicId)}
+                    >
+                      Remove
+                    </Button>
+                  ) : null}
+                </div>
               </th>
             ))}
           </tr>

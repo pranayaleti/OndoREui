@@ -1038,6 +1038,8 @@ export function buildListingInquiryMessage(input: {
   tourDate?: string
   tourTime?: string
   notes?: string
+  /** Stays on the renter lead; appended to the existing message field. */
+  evaluatingAsInvestor?: boolean
 }): string {
   const lines = [
     input.intent === "tour" ? "Schedule a tour" : "Request more information",
@@ -1047,6 +1049,7 @@ export function buildListingInquiryMessage(input: {
     input.tourDate ? `Preferred date: ${input.tourDate}` : null,
     input.tourTime ? `Preferred time: ${input.tourTime}` : null,
     input.notes?.trim() ? input.notes.trim() : null,
+    input.evaluatingAsInvestor ? "I'm evaluating as an investor." : null,
   ]
   return lines.filter((line): line is string => Boolean(line)).join("\n").slice(0, 2000)
 }

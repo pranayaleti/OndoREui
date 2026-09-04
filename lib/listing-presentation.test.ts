@@ -20,6 +20,7 @@ import {
   listingMarketStatus,
   listingMetricRows,
   listingInquiryDraftMessage,
+  buildListingInquiryMessage,
   listingPetPolicyRows,
   listingPublicDocuments,
   listingSpecRows,
@@ -184,6 +185,27 @@ describe("listing presentation", () => {
       "I'm interested in 333 Main St, Park City, UT, 84060.",
     )
     expect(listingInquiryDraftMessage("  ")).toBe("")
+  })
+
+  it("appends the investor evaluation note to the existing renter inquiry message", () => {
+    const withFlag = buildListingInquiryMessage({
+      intent: "information",
+      title: "Cedar Hollow",
+      address: "1 Main St, Lehi, UT",
+      notes: "I'm interested in 1 Main St, Lehi, UT.",
+      evaluatingAsInvestor: true,
+    })
+    expect(withFlag).toMatch(/Request more information/)
+    expect(withFlag).toMatch(/I'm interested in 1 Main St, Lehi, UT/)
+    expect(withFlag).toMatch(/I'm evaluating as an investor/)
+
+    const withoutFlag = buildListingInquiryMessage({
+      intent: "information",
+      title: "Cedar Hollow",
+      address: "1 Main St, Lehi, UT",
+      notes: "I'm interested in 1 Main St, Lehi, UT.",
+    })
+    expect(withoutFlag).not.toMatch(/evaluating as an investor/i)
   })
 
   it("labels studio vs beds without inventing a bedroom count", () => {

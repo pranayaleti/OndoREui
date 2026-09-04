@@ -102,6 +102,11 @@ describe("PropertyListingDetailClient", () => {
     expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
     expect(screen.getAllByText(/listed monthly rent/i).length).toBeGreaterThan(0)
     expect(screen.getByRole("heading", { name: /^highlights$/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /illustrative investor worksheet/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /^worksheet$/i })).toHaveAttribute("href", "#underwrite")
+    expect(screen.getByRole("heading", { name: /^ondo manages this$/i })).toBeInTheDocument()
+    expect(screen.getByText(/leasing and maintenance/i)).toBeInTheDocument()
+    expect(screen.queryByText(/set it and forget it|guaranteed income|high-yield|safe neighborhood|good schools/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/great for families/i)).not.toBeInTheDocument()
   })
 

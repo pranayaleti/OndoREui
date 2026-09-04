@@ -59,6 +59,15 @@ describe("RentalListingCard", () => {
     const photo = screen.getByRole("link", { name: /view photos and details for cedar hollow/i })
     expect((photo.getAttribute("href") ?? "").replace(/\/$/, "")).toBe("/properties/pub-lehi-1")
     expect(details.compareDocumentPosition(photo) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy()
+    const worksheet = screen.getByRole("link", { name: /^worksheet$/i })
+    expect(worksheet.getAttribute("href") ?? "").toMatch(/#underwrite/)
+    expect((worksheet.getAttribute("href") ?? "").replace(/\/(?=#)/, "").replace(/\/$/, "")).toBe(
+      "/properties/pub-lehi-1#underwrite",
+    )
+    expect(screen.queryByText(/cap rate/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/5-year return/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/estimated rent/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/cash-on-cash/i)).not.toBeInTheDocument()
   })
 
   it("shows amenity chips and a pet-friendly mark only when the listing has those facts", () => {

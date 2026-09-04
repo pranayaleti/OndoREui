@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useMemo, useCallback } from "react";
+import { listingWorksheetPath } from "@/lib/public-property";
 import PropertyMap from "./property-map";
 
 interface SearchProperty {
@@ -231,6 +233,14 @@ export default function PropertySearchMap({
                 {property.bedrooms} bed &middot; {property.bathrooms} bath
                 {property.type && ` \u00B7 ${property.type}`}
               </p>
+              <Link
+                href={listingWorksheetPath(property.id)}
+                className="mt-2 inline-flex min-h-11 items-center text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                onClick={(event) => event.stopPropagation()}
+                onKeyDown={(event) => event.stopPropagation()}
+              >
+                Worksheet
+              </Link>
             </div>
           </div>
         ))}
