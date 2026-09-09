@@ -69,7 +69,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
           <Card className="w-full max-w-md">
             <CardHeader className="text-center">
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
-                <AlertTriangle className="h-6 w-6 text-destructive" />
+                <AlertTriangle className="h-6 w-6 text-destructive-emphasis" />
               </div>
               <CardTitle className="text-xl">Something went wrong</CardTitle>
               <CardDescription>

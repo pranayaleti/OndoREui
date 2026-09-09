@@ -144,7 +144,7 @@ export function RentalApplicationWizard({
   if (error && !bundle) {
     return (
       <main className="mx-auto max-w-xl px-4 py-12">
-        <p className="text-destructive">{error}</p>
+        <p className="text-destructive-emphasis">{error}</p>
       </main>
     )
   }
@@ -491,7 +491,7 @@ export function RentalApplicationWizard({
         </section>
       ) : null}
 
-      {error ? <p className="mt-4 text-sm text-destructive">{error}</p> : null}
+      {error ? <p className="mt-4 text-sm text-destructive-emphasis">{error}</p> : null}
 
       <div className="fixed inset-x-0 bottom-0 border-t border-border bg-background/95 p-3 backdrop-blur">
         <div className="mx-auto flex max-w-2xl gap-2">

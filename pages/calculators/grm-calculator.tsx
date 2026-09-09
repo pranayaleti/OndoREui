@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface GRMData {
   purchasePrice: number;
@@ -74,7 +75,7 @@ const GRMCalculator: React.FC = () => {
     if (grm <= 10) return 'text-green-600';
     if (grm <= 15) return 'text-primary';
     if (grm <= 20) return 'text-yellow-600';
-    return 'text-destructive';
+    return 'text-destructive-emphasis';
   };
 
   return (
@@ -85,6 +86,7 @@ const GRMCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">Gross Rent Multiplier Calculator</h1>
           </div>
@@ -99,72 +101,44 @@ const GRMCalculator: React.FC = () => {
             
             <div className="space-y-6">
               {/* Purchase Price */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Purchase Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.purchasePrice || ''}
-                    onChange={(e) => handleInputChange('purchasePrice', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="300,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="purchasePrice"
+                label="Purchase Price"
+                kind="currency"
+                value={formData.purchasePrice}
+                onChange={(next) => handleInputChange('purchasePrice', next)}
+              />
 
               {/* Monthly Rent */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Monthly Rent
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.monthlyRent || ''}
-                    onChange={(e) => handleInputChange('monthlyRent', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="2,500"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="monthlyRent"
+                label="Monthly Rent"
+                kind="currency"
+                value={formData.monthlyRent}
+                onChange={(next) => handleInputChange('monthlyRent', next)}
+              />
 
               {/* Annual Rent (optional) */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Rent (optional, leave 0 to use monthly × 12)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.annualRent || ''}
-                    onChange={(e) => handleInputChange('annualRent', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="annualRent"
+                label="Annual Rent (optional, leave 0 to use monthly × 12)"
+                kind="currency"
+                value={formData.annualRent}
+                onChange={(next) => handleInputChange('annualRent', next)}
+              />
 
               {/* Target GRM */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Target GRM (for comparison)
                 </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.1"
-                  value={targetGRM || ''}
-                  onChange={(e) => setTargetGRM(Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="12.0"
+                <NumberField
+                  id="targetGRM"
+                  label="Target GRM (for comparison)"
+                  kind="percent"
+                  min={0}
+                  value={targetGRM}
+                  onChange={(next) => setTargetGRM(next)}
                 />
                 <p className="text-sm text-foreground/70 mt-1">
                   Typical GRM: 8-12 for good deals, 12-15 average, 15+ may be overpriced
@@ -243,7 +217,7 @@ const GRMCalculator: React.FC = () => {
                     ) : results.grossRentMultiplier <= 20 ? (
                       <p className="text-yellow-600 font-medium">⚠ Moderate GRM. Consider if appreciation potential justifies the lower income ratio.</p>
                     ) : (
-                      <p className="text-destructive font-medium">⚠ High GRM. This property may be overpriced relative to rental income.</p>
+                      <p className="text-destructive-emphasis font-medium">⚠ High GRM. This property may be overpriced relative to rental income.</p>
                     )}
                     <p>• Lower GRM = better income-to-price ratio</p>
                     <p>• GRM doesn't account for expenses or financing</p>

@@ -78,7 +78,7 @@ export function CoApplicantClient({ token: tokenProp }: { token?: string }) {
             I authorize {key} verification
           </label>
         ))}
-        {error ? <p className="text-sm text-destructive">{error}</p> : null}
+        {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
         <Button type="submit" className="min-h-11 w-full" disabled={busy}>
           Save my application
         </Button>

@@ -138,7 +138,7 @@ export function EmailCaptureSection() {
             </form>
           )}
           {status === "error" && errorMsg && (
-            <p className="mt-3 inline-flex items-center justify-center gap-1.5 text-sm text-destructive" role="alert">
+            <p className="mt-3 inline-flex items-center justify-center gap-1.5 text-sm text-destructive-emphasis" role="alert">
               <AlertCircle className="h-4 w-4" aria-hidden="true" />
               {errorMsg}
             </p>

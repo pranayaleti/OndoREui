@@ -93,7 +93,9 @@ export function DemoForm() {
       </div>
 
       {state === "error" && (
-        <p className="text-sm text-destructive">
+        // role="alert" so the failure is announced: without it a screen-reader
+        // user submits, nothing is spoken, and the form looks like it worked.
+        <p role="alert" className="text-sm text-destructive-emphasis">
           {t("demo.form.error")}{" "}
           <a href={`mailto:${SITE_EMAILS.primary}`} className="underline">{SITE_EMAILS.primary}</a>{" "}
           {t("demo.form.errorSuffix")}

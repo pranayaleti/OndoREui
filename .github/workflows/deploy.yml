@@ -50,6 +50,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore IndexNow submit state
+        uses: actions/cache@v4
+        with:
+          path: .indexnow-cache
+          # Unique key each run so the updated state is always saved; restore-keys
+          # pulls the most recent prior state. A cold cache just means a full submit.
+          key: indexnow-state-${{ github.run_id }}
+          restore-keys: |
+            indexnow-state-
+
       - name: Build and export static site
         run: npm run build
 
@@ -81,6 +91,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Tells Bing (and therefore Copilot / ChatGPT's Bing-backed retrieval) which
+      # URLs changed, instead of waiting on a crawl cycle. Submits only pages whose
+      # exported bytes moved since the last run. A failed ping must never fail a
+      # deploy that already shipped, hence continue-on-error.
+      - name: Ping IndexNow with changed URLs
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          NEXT_PUBLIC_SITE_URL: https://www.ondorealestate.com
+        run: npm run indexnow
 
   # Required repository secrets (do not commit values; never echo the token):
   #   CF_API_TOKEN  — Zone Cache Purge + Zone Read (alias: CLOUDFLARE_API_TOKEN)

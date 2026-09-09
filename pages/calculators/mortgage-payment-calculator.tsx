@@ -5,6 +5,27 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LoanProgram, calculateMonthlyPI, clampCreditScore, getProgramMI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field"
+import { ARM_CAPS, DTI_HOA } from "@/lib/content/lending-facts"
+
+/** 7/6 = seven years fixed, then the rate may adjust every six months. */
+type RateStructure = 'fixed' | 'arm-7-6'
+
+/** Field defaults, kept in one place so each input can show "Est." and offer a revert. */
+const DEFAULTS = {
+  homePrice: 300000,
+  downPayment: 60000,
+  loanAmount: 240000,
+  interestRate: DEFAULT_MORTGAGE_RATE,
+  loanTerm: 30,
+  propertyTax: 3000,
+  insurance: 1200,
+  hoaMonthly: 0,
+  creditScore: 740,
+  armInitialCap: 2,
+  armPeriodicCap: 1,
+  armLifetimeCap: 5,
+} as const
 
 interface MortgageData {
   homePrice: number;
@@ -14,10 +35,17 @@ interface MortgageData {
   loanTerm: number;
   propertyTax: number;
   insurance: number;
+  /** Monthly association dues. Housing expense for DTI, not an "other debt". */
+  hoaMonthly: number;
   pmi: number;
   program: LoanProgram;
   creditScore: number;
   financeUpfront: boolean;
+  rateStructure: RateStructure;
+  /** Percentage-point caps from the note. Only meaningful when rateStructure is an ARM. */
+  armInitialCap: number;
+  armPeriodicCap: number;
+  armLifetimeCap: number;
 }
 
 interface PaymentBreakdown {
@@ -26,8 +54,12 @@ interface PaymentBreakdown {
   tax: number;
   insurance: number;
   pmi: number;
+  hoa: number;
   monthlyPI: number;
   totalMonthly: number;
+  /** Worst-case P&I once an ARM may adjust, at the note's caps. Null for fixed. */
+  armFirstAdjustmentPI: number | null;
+  armLifetimeMaxPI: number | null;
   totalYearly: number;
   totalCost: number;
   totalInterest: number;
@@ -49,10 +81,15 @@ const MortgagePaymentCalculator: React.FC = () => {
     loanTerm: 30,
     propertyTax: 3000,
     insurance: 1200,
+    hoaMonthly: DEFAULTS.hoaMonthly,
     pmi: 0,
     program: 'conventional',
     creditScore: 740,
-    financeUpfront: true
+    financeUpfront: true,
+    rateStructure: 'fixed',
+    armInitialCap: DEFAULTS.armInitialCap,
+    armPeriodicCap: DEFAULTS.armPeriodicCap,
+    armLifetimeCap: DEFAULTS.armLifetimeCap,
   });
 
   const [results, setResults] = useState<PaymentBreakdown | null>(null);
@@ -64,7 +101,7 @@ const MortgagePaymentCalculator: React.FC = () => {
   useEffect(() => { setIsMounted(true) }, []);
 
   const calculateMortgage = useCallback(() => {
-    const { homePrice, downPayment, loanAmount, interestRate, loanTerm, propertyTax, insurance, program } = formData;
+    const { homePrice, downPayment, loanAmount, interestRate, loanTerm, propertyTax, insurance, hoaMonthly, program } = formData;
 
     // Calculate monthly interest rate
     const monthlyRate = interestRate / 100 / 12;
@@ -81,8 +118,9 @@ const MortgagePaymentCalculator: React.FC = () => {
     const monthlyTax = propertyTax / 12;
     const monthlyInsurance = insurance / 12;
     const monthlyPmi = monthlyMI;
+    const monthlyHoa = Math.max(0, hoaMonthly);
 
-    const totalMonthly = monthlyPayment + monthlyTax + monthlyInsurance + monthlyPmi;
+    const totalMonthly = monthlyPayment + monthlyTax + monthlyInsurance + monthlyPmi + monthlyHoa;
     const totalYearly = totalMonthly * 12;
     const totalCost = totalYearly * loanTerm;
     const totalInterest = (monthlyPayment * totalPayments) - financedLoanAmount;
@@ -90,7 +128,9 @@ const MortgagePaymentCalculator: React.FC = () => {
     const amortizationSchedule = [];
     let remainingBalance = financedLoanAmount;
 
-    for (let month = 1; month <= Math.min(360, totalPayments); month++) {
+    // Was Math.min(360, ...), which silently truncated any term beyond 30 years —
+    // a 50-year schedule stopped at year 30 and never reached a zero balance.
+    for (let month = 1; month <= totalPayments; month++) {
       const interestPayment = remainingBalance * monthlyRate;
       const principalPayment = monthlyPayment - interestPayment;
       remainingBalance -= principalPayment;
@@ -108,14 +148,37 @@ const MortgagePaymentCalculator: React.FC = () => {
 
     const firstMonthInterest = financedLoanAmount * monthlyRate;
 
+    // ARM worst case. These are NOT forecasts: they are arithmetic on the caps the
+    // borrower's own note carries. After the fixed period the rate is index plus
+    // margin, limited by those caps — the index is unknowable, the ceiling is not.
+    // Payments are re-amortized over the balance remaining when the fixed period ends.
+    let armFirstAdjustmentPI: number | null = null;
+    let armLifetimeMaxPI: number | null = null;
+    if (formData.rateStructure === 'arm-7-6') {
+      const fixedYears = 7;
+      const monthsFixed = Math.min(fixedYears * 12, totalPayments);
+      const balanceAtReset =
+        amortizationSchedule[monthsFixed - 1]?.remainingBalance ?? financedLoanAmount;
+      const yearsRemaining = (totalPayments - monthsFixed) / 12;
+      if (balanceAtReset > 0 && yearsRemaining > 0) {
+        const firstAdjustRate = interestRate + Math.max(0, formData.armInitialCap);
+        const lifetimeMaxRate = interestRate + Math.max(0, formData.armLifetimeCap);
+        armFirstAdjustmentPI = calculateMonthlyPI(balanceAtReset, firstAdjustRate, yearsRemaining);
+        armLifetimeMaxPI = calculateMonthlyPI(balanceAtReset, lifetimeMaxRate, yearsRemaining);
+      }
+    }
+
     setResults({
       principal: monthlyPayment - firstMonthInterest,
       interest: firstMonthInterest,
       tax: monthlyTax,
       insurance: monthlyInsurance,
       pmi: monthlyPmi,
+      hoa: monthlyHoa,
       monthlyPI: monthlyPayment,
       totalMonthly,
+      armFirstAdjustmentPI,
+      armLifetimeMaxPI,
       totalYearly,
       totalCost,
       totalInterest,
@@ -157,6 +220,7 @@ const MortgagePaymentCalculator: React.FC = () => {
             <div className="flex items-center space-x-4">
               <Link href="/calculators" className="text-primary hover:text-primary">
                 <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
               </Link>
               <h1 className="text-2xl font-bold text-foreground">Mortgage Payment Calculator</h1>
             </div>
@@ -171,156 +235,227 @@ const MortgagePaymentCalculator: React.FC = () => {
             <h2 className="text-xl font-semibold text-foreground mb-6">Enter Your Information</h2>
 
             <div className="space-y-6">
-              {/* Home Price */}
+              <NumberField
+                id="homePrice"
+                label="Home Price"
+                kind="currency"
+                min={0}
+                step={5000}
+                value={formData.homePrice}
+                defaultValue={DEFAULTS.homePrice}
+                onChange={(next) => handleInputChange('homePrice', next)}
+              />
+
+              {/* Down payment: amount and percent are two views of one number, so
+                  each is edited independently and written back through the other. */}
               <div>
-                <label htmlFor="homePrice" className="block text-sm font-medium text-foreground mb-2">
-                  Home Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="homePrice"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.homePrice || ''}
-                    onChange={(e) => handleInputChange('homePrice', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="300,000"
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <NumberField
+                    id="downPaymentAmount"
+                    label="Down Payment"
+                    kind="currency"
+                    min={0}
+                    max={formData.homePrice}
+                    step={1000}
+                    value={formData.downPayment}
+                    defaultValue={DEFAULTS.downPayment}
+                    onChange={(next) => handleInputChange('downPayment', next)}
+                  />
+                  <NumberField
+                    id="downPaymentPercent"
+                    label="Down Payment %"
+                    kind="percent"
+                    min={0}
+                    max={100}
+                    value={
+                      formData.homePrice > 0
+                        ? Math.round((formData.downPayment / formData.homePrice) * 1000) / 10
+                        : 0
+                    }
+                    onChange={(percent) =>
+                      handleInputChange(
+                        'downPayment',
+                        Math.round((percent / 100) * formData.homePrice),
+                      )
+                    }
+                    hint="Linked to the amount"
                   />
                 </div>
+                {formData.downPayment < formData.homePrice * 0.2 ? (
+                  <p className="mt-2 text-sm text-foreground/70">
+                    Under 20% down, a conventional loan generally carries PMI.
+                  </p>
+                ) : null}
               </div>
 
-              {/* Down Payment */}
-              <div>
-                <label htmlFor="downPaymentAmount" className="block text-sm font-medium text-foreground mb-2">
-                  Down Payment
-                </label>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative">
-                    <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                    <input
-                      id="downPaymentAmount"
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.downPayment || ''}
-                      onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
-                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                      placeholder="60,000"
-                    />
-                  </div>
-                  <div className="relative">
-                    <input
-                      id="downPaymentPercent"
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={((formData.downPayment / formData.homePrice) * 100).toFixed(1)}
-                      onChange={(e) => {
-                        const percent = Number(e.target.value);
-                        const newDownPayment = (percent / 100) * formData.homePrice;
-                        handleInputChange('downPayment', newDownPayment);
-                      }}
-                      className="w-full pr-8 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                      placeholder="20.0"
-                    />
-                    <span className="absolute right-3 top-3 text-foreground/70">%</span>
-                  </div>
-                </div>
-                <p className="text-sm text-foreground/70 mt-1">
-                  {formData.downPayment < formData.homePrice * 0.2 &&
-                    "Note: Less than 20% down payment will require PMI"
-                  }
-                </p>
-              </div>
+              <NumberField
+                id="loanAmount"
+                label="Loan Amount"
+                kind="currency"
+                min={0}
+                step={1000}
+                value={formData.loanAmount}
+                defaultValue={DEFAULTS.loanAmount}
+                onChange={(next) => handleInputChange('loanAmount', next)}
+              />
 
-              {/* Loan Amount */}
-              <div>
-                <label htmlFor="loanAmount" className="block text-sm font-medium text-foreground mb-2">
-                  Loan Amount
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="loanAmount"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.loanAmount || ''}
-                    onChange={(e) => handleInputChange('loanAmount', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="240,000"
-                  />
-                </div>
-              </div>
-
-              {/* Interest Rate */}
-              <div>
-                <label htmlFor="interestRate" className="block text-sm font-medium text-foreground mb-2">
-                  Interest Rate (%)
-                </label>
-                <input
-                  id="interestRate"
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.01"
-                  value={formData.interestRate || ''}
-                  onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder={String(DEFAULT_MORTGAGE_RATE)}
-                />
-              </div>
+              <NumberField
+                id="interestRate"
+                label="Interest Rate"
+                kind="rate"
+                min={0}
+                max={25}
+                value={formData.interestRate}
+                defaultValue={DEFAULTS.interestRate}
+                onChange={(next) => handleInputChange('interestRate', next)}
+                hint="Arrow keys move in eighths, the way rate sheets are priced."
+              />
 
               {/* Loan Term */}
               <div>
                 <label htmlFor="loanTerm" className="block text-sm font-medium text-foreground mb-2">
-                  Loan Term (years)
+                  Loan Term
                 </label>
-                <select
-                  id="loanTerm"
-                  value={formData.loanTerm}
-                  onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                >
-                  <option value={15}>15 years</option>
-                  <option value={20}>20 years</option>
-                  <option value={30}>30 years</option>
-                </select>
+                <div className="flex flex-wrap gap-2">
+                  {[15, 20, 30, 50].map((years) => (
+                    <button
+                      key={years}
+                      type="button"
+                      aria-pressed={formData.loanTerm === years}
+                      onClick={() => handleInputChange('loanTerm', years)}
+                      className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none ${
+                        formData.loanTerm === years
+                          ? 'border-primary bg-primary text-primary-foreground'
+                          : 'border-border bg-card/60 text-foreground/80 hover:border-primary/50'
+                      }`}
+                    >
+                      {years} years
+                    </button>
+                  ))}
+                </div>
+                {formData.loanTerm === 50 ? (
+                  <p className="mt-2 text-sm text-foreground/70">
+                    A 50-year term is a portfolio / non-agency product — it is not offered on FHA, VA,
+                    or USDA loans, and the lower payment is bought with substantially more total
+                    interest. Compare the totals below against 30 years before assuming it is cheaper.
+                  </p>
+                ) : null}
               </div>
 
-              {/* Property Tax */}
+              {/* Rate structure */}
               <div>
-                <label htmlFor="propertyTax" className="block text-sm font-medium text-foreground mb-2">
-                  Annual Property Tax
+                <label htmlFor="rateStructure" className="block text-sm font-medium text-foreground mb-2">
+                  Rate Structure
                 </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="propertyTax"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.propertyTax || ''}
-                    onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="3,000"
-                  />
+                <div className="flex flex-wrap gap-2">
+                  {([
+                    { id: 'fixed', label: 'Fixed rate' },
+                    { id: 'arm-7-6', label: '7/6 ARM' },
+                  ] as const).map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      aria-pressed={formData.rateStructure === option.id}
+                      onClick={() => handleInputChange('rateStructure', option.id)}
+                      className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none ${
+                        formData.rateStructure === option.id
+                          ? 'border-primary bg-primary text-primary-foreground'
+                          : 'border-border bg-card/60 text-foreground/80 hover:border-primary/50'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
                 </div>
+
+                {formData.rateStructure === 'arm-7-6' ? (
+                  <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4">
+                    <p className="text-sm text-foreground/80">
+                      7/6 means the rate is fixed for seven years, then may adjust every six months.
+                      {' '}{ARM_CAPS.fullyIndexed}
+                    </p>
+                    <p className="mt-2 text-sm text-foreground/70">{ARM_CAPS.notation}</p>
+                    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                      <NumberField
+                        id="armInitialCap"
+                        label="Initial cap"
+                        kind="percent"
+                        min={0}
+                        max={10}
+                        step={0.5}
+                        value={formData.armInitialCap}
+                        defaultValue={DEFAULTS.armInitialCap}
+                        onChange={(next) => handleInputChange('armInitialCap', next)}
+                      />
+                      <NumberField
+                        id="armPeriodicCap"
+                        label="Periodic cap"
+                        kind="percent"
+                        min={0}
+                        max={10}
+                        step={0.5}
+                        value={formData.armPeriodicCap}
+                        defaultValue={DEFAULTS.armPeriodicCap}
+                        onChange={(next) => handleInputChange('armPeriodicCap', next)}
+                      />
+                      <NumberField
+                        id="armLifetimeCap"
+                        label="Lifetime cap"
+                        kind="percent"
+                        min={0}
+                        max={15}
+                        step={0.5}
+                        value={formData.armLifetimeCap}
+                        defaultValue={DEFAULTS.armLifetimeCap}
+                        onChange={(next) => handleInputChange('armLifetimeCap', next)}
+                      />
+                    </div>
+                    <p className="mt-3 text-xs text-foreground/60">
+                      Enter the caps from your own Loan Estimate — the values above are placeholders,
+                      not a quote. {ARM_CAPS.paymentNote}
+                    </p>
+                  </div>
+                ) : null}
               </div>
 
-              {/* Insurance */}
+              <NumberField
+                id="propertyTax"
+                label="Annual Property Tax"
+                kind="currency"
+                min={0}
+                step={100}
+                value={formData.propertyTax}
+                defaultValue={DEFAULTS.propertyTax}
+                onChange={(next) => handleInputChange('propertyTax', next)}
+              />
+
+              <NumberField
+                id="insurance"
+                label="Annual Homeowners Insurance"
+                kind="currency"
+                min={0}
+                step={100}
+                value={formData.insurance}
+                defaultValue={DEFAULTS.insurance}
+                onChange={(next) => handleInputChange('insurance', next)}
+              />
+
               <div>
-                <label htmlFor="insurance" className="block text-sm font-medium text-foreground mb-2">
-                  Annual Homeowners Insurance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="insurance"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.insurance || ''}
-                    onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,200"
-                  />
-                </div>
+                <NumberField
+                  id="hoaMonthly"
+                  label="Monthly HOA Dues"
+                  kind="currency"
+                  min={0}
+                  step={25}
+                  value={formData.hoaMonthly}
+                  defaultValue={DEFAULTS.hoaMonthly}
+                  defaultBadge="None"
+                  onChange={(next) => handleInputChange('hoaMonthly', next)}
+                  hint="Leave at 0 if the property has no association."
+                />
+                {formData.hoaMonthly > 0 ? (
+                  <p className="mt-2 text-sm text-foreground/70">{DTI_HOA.frontEnd}</p>
+                ) : null}
               </div>
 
               {/* Loan Program */}
@@ -341,23 +476,17 @@ const MortgagePaymentCalculator: React.FC = () => {
                 </select>
               </div>
 
-              {/* Credit Score */}
-              <div>
-                <label htmlFor="creditScore" className="block text-sm font-medium text-foreground mb-2">
-                  Credit Score
-                </label>
-                <input
-                  id="creditScore"
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  min={300}
-                  max={850}
-                  value={formData.creditScore || ''}
-                  onChange={(e) => handleInputChange('creditScore', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="740"
-                />
-              </div>
+              <NumberField
+                id="creditScore"
+                label="Credit Score"
+                kind="count"
+                min={300}
+                max={850}
+                step={10}
+                value={formData.creditScore}
+                defaultValue={DEFAULTS.creditScore}
+                onChange={(next) => handleInputChange('creditScore', next)}
+              />
 
               {/* Finance Upfront Fee */}
               <div className="flex items-center space-x-2">
@@ -391,7 +520,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-foreground/70">• Interest (first month):</span>
-                      <span className="text-destructive">{formatCurrency(results.interest)}</span>
+                      <span className="text-destructive-emphasis">{formatCurrency(results.interest)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-foreground/70">Property Tax:</span>
@@ -407,11 +536,61 @@ const MortgagePaymentCalculator: React.FC = () => {
                         <span className="font-semibold">{formatCurrency(results.pmi)}</span>
                       </div>
                     )}
+                    {results.hoa > 0 && (
+                      <div className="flex justify-between">
+                        <span className="text-foreground/70">HOA dues:</span>
+                        <span className="font-semibold">{formatCurrency(results.hoa)}</span>
+                      </div>
+                    )}
                     <hr className="my-3" />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total Monthly Payment:</span>
                       <span className="text-primary">{formatCurrency(results.totalMonthly)}</span>
                     </div>
+
+                    {formData.rateStructure === 'arm-7-6' && results.armLifetimeMaxPI !== null ? (
+                      <div className="mt-5 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+                        <h3 className="text-sm font-semibold text-foreground">
+                          After the 7-year fixed period — worst case
+                        </h3>
+                        <p className="mt-1 text-xs text-foreground/70">
+                          The rate after year 7 is the index plus your margin, which nobody can
+                          quote today. What the note does fix is the ceiling. These are principal
+                          and interest at your caps, re-amortized over the balance left at reset —
+                          a maximum, not a prediction.
+                        </p>
+                        <div className="mt-3 space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-foreground/70">
+                              Now (fixed, years 1–7):
+                            </span>
+                            <span className="font-semibold">{formatCurrency(results.monthlyPI)}</span>
+                          </div>
+                          {results.armFirstAdjustmentPI !== null ? (
+                            <div className="flex justify-between">
+                              <span className="text-foreground/70">
+                                Max at first adjustment (+{formData.armInitialCap}%):
+                              </span>
+                              <span className="font-semibold">
+                                {formatCurrency(results.armFirstAdjustmentPI)}
+                              </span>
+                            </div>
+                          ) : null}
+                          <div className="flex justify-between">
+                            <span className="text-foreground/70">
+                              Max ever (+{formData.armLifetimeCap}% lifetime cap):
+                            </span>
+                            <span className="font-semibold text-foreground">
+                              {formatCurrency(results.armLifetimeMaxPI)}
+                            </span>
+                          </div>
+                        </div>
+                        <p className="mt-3 text-xs text-foreground/60">
+                          Taxes, insurance and HOA sit on top of these figures and can rise
+                          independently of any rate cap.
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
 
@@ -443,6 +622,7 @@ const MortgagePaymentCalculator: React.FC = () => {
                       { label: 'Property Tax', value: results.tax, color: 'bg-emerald-500' },
                       { label: 'Insurance', value: results.insurance, color: 'bg-amber-500' },
                       ...(results.pmi > 0 ? [{ label: 'PMI', value: results.pmi, color: 'bg-red-400' }] : []),
+                      ...(results.hoa > 0 ? [{ label: 'HOA', value: results.hoa, color: 'bg-purple-400' }] : []),
                     ].map(({ label, value, color }) => (
                       <div key={label}>
                         <div className="flex justify-between text-sm mb-1">
@@ -494,7 +674,16 @@ const MortgagePaymentCalculator: React.FC = () => {
                     }
 
                     return (
-                      <div className="max-h-[500px] overflow-y-auto overflow-x-auto -mx-2 px-2">
+                      <div
+                  // A scrollable region must be reachable by keyboard (axe
+                  // scrollable-region-focusable / WCAG 2.1.1): the table holds no
+                  // focusable children, so the scroller itself takes focus.
+                  // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Amortization schedule, scrollable"
+                  className="max-h-[500px] overflow-y-auto overflow-x-auto -mx-2 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
                         <table className="w-full text-sm min-w-[480px]">
                           <thead className="bg-muted sticky top-0 z-10">
                             <tr>
@@ -576,7 +765,7 @@ function YearRow({ yr, formatCurrency }: {
           Year {yr.year}
         </td>
         <td className="px-2 py-2 text-right text-primary">{formatCurrency(yr.totalPrincipal)}</td>
-        <td className="px-2 py-2 text-right text-destructive">{formatCurrency(yr.totalInterest)}</td>
+        <td className="px-2 py-2 text-right text-destructive-emphasis">{formatCurrency(yr.totalInterest)}</td>
         <td className="px-2 py-2 text-right font-medium">{formatCurrency(yr.totalPayment)}</td>
         <td className="px-2 py-2 text-right text-foreground/70">{formatCurrency(yr.endBalance)}</td>
       </tr>
@@ -584,7 +773,7 @@ function YearRow({ yr, formatCurrency }: {
         <tr key={row.month} className="border-b border-gray-50 bg-muted/20 text-xs">
           <td className="px-2 py-1.5 pl-8 text-foreground/60">Mo {row.month}</td>
           <td className="px-2 py-1.5 text-right text-primary/80">{formatCurrency(row.principal)}</td>
-          <td className="px-2 py-1.5 text-right text-destructive/80">{formatCurrency(row.interest)}</td>
+          <td className="px-2 py-1.5 text-right text-destructive-emphasis/80">{formatCurrency(row.interest)}</td>
           <td className="px-2 py-1.5 text-right">{formatCurrency(row.payment)}</td>
           <td className="px-2 py-1.5 text-right text-foreground/60">{formatCurrency(row.remainingBalance)}</td>
         </tr>

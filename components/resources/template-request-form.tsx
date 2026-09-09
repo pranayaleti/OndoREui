@@ -117,7 +117,7 @@ export function TemplateRequestForm({
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             {status === "error" && errorMsg ? (
-              <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
+              <p className="flex items-start gap-2 text-sm text-destructive-emphasis" role="alert">
                 <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                 {errorMsg}
               </p>

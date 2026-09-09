@@ -70,7 +70,7 @@ export function RentalContactForm({ propertyId }: { propertyId: string }) {
         <Label htmlFor="cmsg">Message</Label>
         <Textarea id="cmsg" className="mt-1" value={message} onChange={(e) => setMessage(e.target.value)} />
       </div>
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
       <Button type="submit" variant="outline" className="min-h-11" disabled={busy}>
         {busy ? "Sending…" : "Send message"}
       </Button>

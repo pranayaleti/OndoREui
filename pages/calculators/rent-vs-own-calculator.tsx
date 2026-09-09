@@ -6,6 +6,7 @@ import { ArrowLeft, TrendingUp, Home, Building2, Eye, EyeOff } from 'lucide-reac
 import { LoanProgram, getProgramMI, clampCreditScore, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { useFinancialVisibility } from '@/lib/financial-visibility';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface RentVsOwnData {
   // Rent scenario
@@ -235,6 +236,7 @@ const RentVsOwnCalculator: React.FC = () => {
             <div className="flex items-center space-x-4">
               <Link href="/calculators" className="text-primary hover:text-primary">
                 <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
               </Link>
               <h1 className="text-2xl font-bold text-foreground">Rent vs Own Calculator</h1>
             </div>
@@ -267,55 +269,35 @@ const RentVsOwnCalculator: React.FC = () => {
                   Rent Scenario
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Monthly Rent
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.monthlyRent || ''}
-                      onChange={(e) => handleInputChange('monthlyRent', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Rent Increase (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.rentIncrease || ''}
-                      onChange={(e) => handleInputChange('rentIncrease', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Security Deposit
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.securityDeposit || ''}
-                      onChange={(e) => handleInputChange('securityDeposit', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Renters Insurance
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.rentersInsurance || ''}
-                      onChange={(e) => handleInputChange('rentersInsurance', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="monthlyRent"
+                    label="Monthly Rent"
+                    kind="years"
+                    value={formData.monthlyRent}
+                    onChange={(next) => handleInputChange('monthlyRent', next)}
+                  />
+                  <NumberField
+                    id="rentIncrease"
+                    label="Annual Rent Increase"
+                    kind="currency"
+                    step={0.1}
+                    value={formData.rentIncrease}
+                    onChange={(next) => handleInputChange('rentIncrease', next)}
+                  />
+                  <NumberField
+                    id="securityDeposit"
+                    label="Security Deposit"
+                    kind="currency"
+                    value={formData.securityDeposit}
+                    onChange={(next) => handleInputChange('securityDeposit', next)}
+                  />
+                  <NumberField
+                    id="rentersInsurance"
+                    label="Annual Renters Insurance"
+                    kind="currency"
+                    value={formData.rentersInsurance}
+                    onChange={(next) => handleInputChange('rentersInsurance', next)}
+                  />
                 </div>
               </div>
 
@@ -326,43 +308,27 @@ const RentVsOwnCalculator: React.FC = () => {
                   Buy Scenario
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Home Price
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.homePrice || ''}
-                      onChange={(e) => handleInputChange('homePrice', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Down Payment
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.downPayment || ''}
-                      onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Interest Rate (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.interestRate || ''}
-                      onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="homePrice"
+                    label="Home Price"
+                    kind="currency"
+                    value={formData.homePrice}
+                    onChange={(next) => handleInputChange('homePrice', next)}
+                  />
+                  <NumberField
+                    id="downPayment"
+                    label="Down Payment"
+                    kind="currency"
+                    value={formData.downPayment}
+                    onChange={(next) => handleInputChange('downPayment', next)}
+                  />
+                  <NumberField
+                    id="interestRate"
+                    label="Interest Rate"
+                    kind="rate"
+                    value={formData.interestRate}
+                    onChange={(next) => handleInputChange('interestRate', next)}
+                  />
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
                     Loan Program
@@ -378,80 +344,50 @@ const RentVsOwnCalculator: React.FC = () => {
                     <option value="usda">USDA</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Credit Score
-                  </label>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    min={300}
-                    max={850}
-                    value={formData.creditScore || ''}
-                    onChange={(e) => handleInputChange('creditScore', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
+                <NumberField
+                  id="creditScore"
+                  label="Credit Score"
+                  kind="count"
+                  min={300}
+                  max={850}
+                  value={formData.creditScore}
+                  onChange={(next) => handleInputChange('creditScore', next)}
+                />
+                  <NumberField
+                    id="loanTerm"
+                    label="Loan Term"
+                    kind="years"
+                    value={formData.loanTerm}
+                    onChange={(next) => handleInputChange('loanTerm', next)}
                   />
-                </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Loan Term (years)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.loanTerm || ''}
-                      onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Property Tax
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.propertyTax || ''}
-                      onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Homeowners Insurance
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.homeownersInsurance || ''}
-                      onChange={(e) => handleInputChange('homeownersInsurance', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Maintenance
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.maintenance || ''}
-                      onChange={(e) => handleInputChange('maintenance', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual HOA Fees
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.hoa || ''}
-                      onChange={(e) => handleInputChange('hoa', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="propertyTax"
+                    label="Annual Property Tax"
+                    kind="currency"
+                    value={formData.propertyTax}
+                    onChange={(next) => handleInputChange('propertyTax', next)}
+                  />
+                  <NumberField
+                    id="homeownersInsurance"
+                    label="Annual Homeowners Insurance"
+                    kind="currency"
+                    value={formData.homeownersInsurance}
+                    onChange={(next) => handleInputChange('homeownersInsurance', next)}
+                  />
+                  <NumberField
+                    id="maintenance"
+                    label="Annual Maintenance"
+                    kind="currency"
+                    value={formData.maintenance}
+                    onChange={(next) => handleInputChange('maintenance', next)}
+                  />
+                  <NumberField
+                    id="hoa"
+                    label="Annual HOA Fees"
+                    kind="currency"
+                    value={formData.hoa}
+                    onChange={(next) => handleInputChange('hoa', next)}
+                  />
                 </div>
               </div>
 
@@ -462,44 +398,29 @@ const RentVsOwnCalculator: React.FC = () => {
                   Analysis Settings
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Analysis Period (years)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.analysisYears || ''}
-                      onChange={(e) => handleInputChange('analysisYears', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Investment Return (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.investmentReturn || ''}
-                      onChange={(e) => handleInputChange('investmentReturn', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Home Appreciation (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.homeAppreciation || ''}
-                      onChange={(e) => handleInputChange('homeAppreciation', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="analysisYears"
+                    label="Analysis Period"
+                    kind="currency"
+                    value={formData.analysisYears}
+                    onChange={(next) => handleInputChange('analysisYears', next)}
+                  />
+                  <NumberField
+                    id="investmentReturn"
+                    label="Investment Return"
+                    kind="currency"
+                    step={0.1}
+                    value={formData.investmentReturn}
+                    onChange={(next) => handleInputChange('investmentReturn', next)}
+                  />
+                  <NumberField
+                    id="homeAppreciation"
+                    label="Home Appreciation"
+                    kind="currency"
+                    step={0.1}
+                    value={formData.homeAppreciation}
+                    onChange={(next) => handleInputChange('homeAppreciation', next)}
+                  />
                 </div>
               </div>
             </div>
@@ -579,7 +500,7 @@ const RentVsOwnCalculator: React.FC = () => {
                                 {showValues ? formatCurrency(year.equity) : '••••'}
                               </td>
                               <td className={`px-3 py-2 whitespace-nowrap text-sm font-medium ${
-                                year.difference > 0 ? 'text-destructive' : 'text-primary'
+                                year.difference > 0 ? 'text-destructive-emphasis' : 'text-primary'
                               }`}>
                                 {showValues ? `${year.difference > 0 ? '+' : ''}${formatCurrency(year.difference)}` : '••••'}
                               </td>

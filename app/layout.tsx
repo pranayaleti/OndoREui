@@ -23,8 +23,6 @@ import { TrackingTags, GeoGatedGoogleTagManagerNoscript } from "@/components/ana
 import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 import PublicAssistantWidget from "@/components/PublicAssistantWidget"
 import { StickyMobileCtaBar } from "@/components/sticky-mobile-cta-bar"
-// Push notification prompt disabled until backend push endpoint + VAPID keys are configured.
-// Re-enable by importing PushNotificationPrompt from @/components/notifications/push-notification-prompt-loader
 // Vercel Analytics is disabled for static exports (GitHub Pages)
 // It only works on Vercel's platform, not with static site generation
 // const Analytics = dynamic(() => import('@vercel/analytics/react').then(mod => mod.Analytics), { ssr: false })
@@ -147,6 +145,12 @@ export const metadata: Metadata = {
     google: process.env['NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION'],
     other: {
       'p:domain_verify': process.env['NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY'] ?? '',
+      // Bing Webmaster Tools ownership. Spread conditionally: an EMPTY
+      // msvalidate.01 fails verification, whereas an absent tag just falls
+      // through to the XML-file / DNS methods.
+      ...(process.env['NEXT_PUBLIC_BING_SITE_VERIFICATION']
+        ? { 'msvalidate.01': process.env['NEXT_PUBLIC_BING_SITE_VERIFICATION'] }
+        : {}),
     },
   },
   other: getSiteGeoMetaOther(),

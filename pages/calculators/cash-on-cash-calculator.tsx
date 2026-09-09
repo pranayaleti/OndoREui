@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface CashOnCashData {
   purchasePrice: number;
@@ -168,7 +169,7 @@ const CashOnCashCalculator: React.FC = () => {
     if (returnPercent >= 10) return 'text-green-600';
     if (returnPercent >= 6) return 'text-primary';
     if (returnPercent >= 3) return 'text-yellow-600';
-    return 'text-destructive';
+    return 'text-destructive-emphasis';
   };
 
   return (
@@ -180,6 +181,7 @@ const CashOnCashCalculator: React.FC = () => {
             <div className="flex items-center space-x-4">
               <Link href="/calculators" className="text-primary hover:text-primary">
                 <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
               </Link>
               <h1 className="text-2xl font-bold text-foreground">Cash-on-Cash Return Calculator</h1>
             </div>
@@ -195,74 +197,40 @@ const CashOnCashCalculator: React.FC = () => {
 
             <div className="space-y-6">
               {/* Purchase Price */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Purchase Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.purchasePrice || ''}
-                    onChange={(e) => handleInputChange('purchasePrice', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="300,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="purchasePrice"
+                label="Purchase Price"
+                kind="currency"
+                value={formData.purchasePrice}
+                onChange={(next) => handleInputChange('purchasePrice', next)}
+              />
 
               {/* Down Payment */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Down Payment
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.downPayment || ''}
-                    onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="75,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="downPayment"
+                label="Down Payment"
+                kind="currency"
+                value={formData.downPayment}
+                onChange={(next) => handleInputChange('downPayment', next)}
+              />
 
               {/* Loan Amount */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Loan Amount
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.loanAmount || ''}
-                    onChange={(e) => handleInputChange('loanAmount', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="225,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="loanAmount"
+                label="Loan Amount"
+                kind="currency"
+                value={formData.loanAmount}
+                onChange={(next) => handleInputChange('loanAmount', next)}
+              />
 
               {/* Interest Rate */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Interest Rate (%)
-                </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.01"
-                  value={formData.interestRate || ''}
-                  onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="6.5"
-                />
-              </div>
+              <NumberField
+                id="interestRate"
+                label="Interest Rate"
+                kind="rate"
+                value={formData.interestRate}
+                onChange={(next) => handleInputChange('interestRate', next)}
+              />
 
               {/* Loan Term */}
               <div>
@@ -281,183 +249,95 @@ const CashOnCashCalculator: React.FC = () => {
               </div>
 
               {/* Monthly Rent */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Monthly Rent
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.monthlyRent || ''}
-                    onChange={(e) => handleInputChange('monthlyRent', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="2,500"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="monthlyRent"
+                label="Monthly Rent"
+                kind="currency"
+                value={formData.monthlyRent}
+                onChange={(next) => handleInputChange('monthlyRent', next)}
+              />
 
               {/* Annual Rent (optional) */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Rent (optional, leave 0 to use monthly × 12)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.annualRent || ''}
-                    onChange={(e) => handleInputChange('annualRent', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="annualRent"
+                label="Annual Rent (optional, leave 0 to use monthly × 12)"
+                kind="currency"
+                value={formData.annualRent}
+                onChange={(next) => handleInputChange('annualRent', next)}
+              />
 
               {/* Property Tax */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Property Tax
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.propertyTax || ''}
-                    onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="3,600"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="propertyTax"
+                label="Annual Property Tax"
+                kind="currency"
+                value={formData.propertyTax}
+                onChange={(next) => handleInputChange('propertyTax', next)}
+              />
 
               {/* Insurance */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Insurance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.insurance || ''}
-                    onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,200"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="insurance"
+                label="Annual Insurance"
+                kind="currency"
+                value={formData.insurance}
+                onChange={(next) => handleInputChange('insurance', next)}
+              />
 
               {/* Maintenance */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Maintenance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.maintenance || ''}
-                    onChange={(e) => handleInputChange('maintenance', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="3,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="maintenance"
+                label="Annual Maintenance"
+                kind="currency"
+                value={formData.maintenance}
+                onChange={(next) => handleInputChange('maintenance', next)}
+              />
 
               {/* Property Management */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Property Management (annual $ or % as decimal, e.g., 0.10 for 10%)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    step="0.01"
-                    value={formData.propertyManagement || ''}
-                    onChange={(e) => handleInputChange('propertyManagement', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="propertyManagement"
+                label="Property Management (annual $ or % as decimal, e.g., 0.10 for 10%)"
+                kind="percent"
+                step={0.01}
+                value={formData.propertyManagement}
+                onChange={(next) => handleInputChange('propertyManagement', next)}
+              />
 
               {/* Vacancy Rate */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Vacancy Rate (%)
-                </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.1"
-                  value={formData.vacancyRate || ''}
-                  onChange={(e) => handleInputChange('vacancyRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="5.0"
-                />
-              </div>
+              <NumberField
+                id="vacancyRate"
+                label="Vacancy Rate"
+                kind="rate"
+                value={formData.vacancyRate}
+                onChange={(next) => handleInputChange('vacancyRate', next)}
+              />
 
               {/* Other Expenses */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Other Annual Expenses
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.otherExpenses || ''}
-                    onChange={(e) => handleInputChange('otherExpenses', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="otherExpenses"
+                label="Other Annual Expenses"
+                kind="currency"
+                value={formData.otherExpenses}
+                onChange={(next) => handleInputChange('otherExpenses', next)}
+              />
 
               {/* Closing Costs */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Closing Costs
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.closingCosts || ''}
-                    onChange={(e) => handleInputChange('closingCosts', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="9,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="closingCosts"
+                label="Closing Costs"
+                kind="currency"
+                value={formData.closingCosts}
+                onChange={(next) => handleInputChange('closingCosts', next)}
+              />
 
               {/* Repairs */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Initial Repairs/Rehab
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.repairs || ''}
-                    onChange={(e) => handleInputChange('repairs', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="5,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="repairs"
+                label="Initial Repairs/Rehab"
+                kind="currency"
+                value={formData.repairs}
+                onChange={(next) => handleInputChange('repairs', next)}
+              />
             </div>
           </div>
 
@@ -484,13 +364,13 @@ const CashOnCashCalculator: React.FC = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="text-center p-3 bg-muted rounded-lg">
                         <p className="text-sm text-foreground/70 mb-1">Annual Cash Flow</p>
-                        <p className={`text-lg font-semibold ${results.annualCashFlow >= 0 ? 'text-primary' : 'text-destructive'}`}>
+                        <p className={`text-lg font-semibold ${results.annualCashFlow >= 0 ? 'text-primary' : 'text-destructive-emphasis'}`}>
                           {formatCurrency(results.annualCashFlow)}
                         </p>
                       </div>
                       <div className="text-center p-3 bg-muted rounded-lg">
                         <p className="text-sm text-foreground/70 mb-1">Monthly Cash Flow</p>
-                        <p className={`text-lg font-semibold ${results.monthlyCashFlow >= 0 ? 'text-primary' : 'text-destructive'}`}>
+                        <p className={`text-lg font-semibold ${results.monthlyCashFlow >= 0 ? 'text-primary' : 'text-destructive-emphasis'}`}>
                           {formatCurrency(results.monthlyCashFlow)}
                         </p>
                       </div>
@@ -508,7 +388,7 @@ const CashOnCashCalculator: React.FC = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-foreground/70">Operating Expenses:</span>
-                      <span className="font-semibold text-destructive">{formatCurrency(results.annualOperatingExpenses)}</span>
+                      <span className="font-semibold text-destructive-emphasis">{formatCurrency(results.annualOperatingExpenses)}</span>
                     </div>
                     <hr className="my-3" />
                     <div className="flex justify-between">
@@ -517,12 +397,12 @@ const CashOnCashCalculator: React.FC = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-foreground/70">Annual Debt Service:</span>
-                      <span className="font-semibold text-destructive">{formatCurrency(results.annualDebtService)}</span>
+                      <span className="font-semibold text-destructive-emphasis">{formatCurrency(results.annualDebtService)}</span>
                     </div>
                     <hr className="my-3" />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Annual Cash Flow:</span>
-                      <span className={results.annualCashFlow >= 0 ? 'text-primary' : 'text-destructive'}>
+                      <span className={results.annualCashFlow >= 0 ? 'text-primary' : 'text-destructive-emphasis'}>
                         {formatCurrency(results.annualCashFlow)}
                       </span>
                     </div>
@@ -578,7 +458,7 @@ const CashOnCashCalculator: React.FC = () => {
                     ) : results.cashOnCashReturn >= 3 ? (
                       <p className="text-yellow-600 font-medium">⚠ Moderate return. Consider if appreciation potential justifies the lower cash flow.</p>
                     ) : (
-                      <p className="text-destructive font-medium">⚠ Low or negative return. This property may not be a good cash flow investment.</p>
+                      <p className="text-destructive-emphasis font-medium">⚠ Low or negative return. This property may not be a good cash flow investment.</p>
                     )}
                     <p>• Cash-on-Cash Return measures the annual return on your actual cash investment</p>
                     <p>• A good CoC return is typically 8-12% or higher for rental properties</p>

@@ -81,7 +81,7 @@ export function RentalStartClient({
           <Label htmlFor="em">Email</Label>
           <Input id="em" type="email" className="mt-1" required value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        {error ? <p className="text-sm text-destructive">{error}</p> : null}
+        {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
         <Button type="submit" className="min-h-11 w-full" disabled={busy}>
           {busy ? "Starting…" : "Continue"}
         </Button>

@@ -15,6 +15,7 @@ import {
   SITE_SOCIALS,
   SITE_URL,
 } from "@/lib/site"
+import { glossaryHref, sortedGlossaryTerms } from "@/lib/content/glossary"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 const discoveryConfig = agentDiscoveryConfig as {
@@ -825,6 +826,14 @@ function calculatorLinks(): SiteIndexLink[] {
   }))
 }
 
+function glossaryLinks(): SiteIndexLink[] {
+  return sortedGlossaryTerms().map((entry) => ({
+    name: entry.term,
+    href: glossaryHref(entry.slug).replace(/\/$/, ""),
+    description: entry.short,
+  }))
+}
+
 function investmentDetailLinks(): SiteIndexLink[] {
   return MOCK_OPPORTUNITIES.map((o) => ({
     name: o.title,
@@ -1125,6 +1134,19 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           description: "Directory of mortgage and investment calculators.",
         },
         ...calculatorLinks(),
+      ],
+    },
+    {
+      id: "glossary",
+      title: "Glossary",
+      description: "Plain-English definitions for the terms used across buying, lending, investing, leasing, and closing.",
+      links: [
+        {
+          name: "Real estate glossary",
+          href: "/glossary",
+          description: "Searchable index of every term, by topic and A–Z.",
+        },
+        ...glossaryLinks(),
       ],
     },
     {

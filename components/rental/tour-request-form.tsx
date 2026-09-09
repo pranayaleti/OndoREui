@@ -81,7 +81,7 @@ export function TourRequestForm({ propertyId }: { propertyId: string }) {
         <Label htmlFor="tphone">Phone (optional)</Label>
         <Input id="tphone" type="tel" className="mt-1" value={phone} onChange={(e) => setPhone(e.target.value)} />
       </div>
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
       <Button type="submit" className="min-h-11" disabled={busy}>
         {busy ? "Sending…" : "Request tour"}
       </Button>

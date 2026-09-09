@@ -47,7 +47,7 @@ function todayIsoDate(): string {
 function fieldError(id: string, message: string | undefined) {
   if (!message) return null
   return (
-    <p id={id} className="text-sm text-destructive" role="alert">
+    <p id={id} className="text-sm text-destructive-emphasis" role="alert">
       {message}
     </p>
   )
@@ -312,7 +312,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
                 />
               </div>
               {infoStatus === "error" && infoError ? (
-                <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
+                <p className="flex items-start gap-2 text-sm text-destructive-emphasis" role="alert">
                   <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   {infoError}
                 </p>
@@ -410,7 +410,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
                 </div>
               </div>
               {tourStatus === "error" && tourError ? (
-                <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
+                <p className="flex items-start gap-2 text-sm text-destructive-emphasis" role="alert">
                   <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   {tourError}
                 </p>

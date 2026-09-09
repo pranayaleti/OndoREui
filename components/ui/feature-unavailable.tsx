@@ -28,7 +28,7 @@ export function FeatureUnavailable({
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="bg-red-100 p-3 rounded-full">
-              <AlertTriangle className="h-8 w-8 text-destructive" />
+              <AlertTriangle className="h-8 w-8 text-destructive-emphasis" />
             </div>
           </div>
           <CardTitle className="text-xl">{title}</CardTitle>

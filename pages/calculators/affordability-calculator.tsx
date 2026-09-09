@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI, calculateMaxLoanFromPayment, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface AffordabilityData {
   annualIncome: number;
@@ -146,9 +147,9 @@ const AffordabilityCalculator: React.FC = () => {
 
   const getRatioStatus = (ratio: number, type: 'front' | 'back') => {
     if (type === 'front') {
-      return ratio <= 28 ? 'text-primary' : ratio <= 31 ? 'text-yellow-600' : 'text-destructive';
+      return ratio <= 28 ? 'text-primary' : ratio <= 31 ? 'text-yellow-600' : 'text-destructive-emphasis';
     } else {
-      return ratio <= 36 ? 'text-primary' : ratio <= 43 ? 'text-yellow-600' : 'text-destructive';
+      return ratio <= 36 ? 'text-primary' : ratio <= 43 ? 'text-yellow-600' : 'text-destructive-emphasis';
     }
   };
 
@@ -182,89 +183,48 @@ const AffordabilityCalculator: React.FC = () => {
             
             <div className="space-y-6">
               {/* Annual Income */}
-              <div>
-                <label htmlFor="annualIncome" className="block text-sm font-medium text-foreground mb-2">
-                  Annual Income
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="annualIncome"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    min={0}
-                    max={10000000}
-                    value={formData.annualIncome || ''}
-                    onChange={(e) => handleInputChange('annualIncome', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="80,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="annualIncome"
+                label="Annual Income"
+                kind="currency"
+                min={0}
+                max={10000000}
+                value={formData.annualIncome}
+                onChange={(next) => handleInputChange('annualIncome', next)}
+              />
 
               {/* Monthly Debts */}
-              <div>
-                <label htmlFor="monthlyDebts" className="block text-sm font-medium text-foreground mb-2">
-                  Monthly Debt Payments
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="monthlyDebts"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    min={0}
-                    max={100000}
-                    value={formData.monthlyDebts || ''}
-                    onChange={(e) => handleInputChange('monthlyDebts', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="500"
-                  />
-                </div>
-                <p className="text-sm text-foreground/70 mt-1">
-                  Credit cards, car loans, student loans, etc.
-                </p>
-              </div>
+              <NumberField
+                id="monthlyDebts"
+                label="Monthly Debt Payments"
+                kind="currency"
+                min={0}
+                max={100000}
+                value={formData.monthlyDebts}
+                onChange={(next) => handleInputChange('monthlyDebts', next)}
+              />
 
               {/* Down Payment */}
-              <div>
-                <label htmlFor="downPayment" className="block text-sm font-medium text-foreground mb-2">
-                  Available Down Payment
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    id="downPayment"
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    min={0}
-                    max={10000000}
-                    value={formData.downPayment || ''}
-                    onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="20,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="downPayment"
+                label="Available Down Payment"
+                kind="currency"
+                min={0}
+                max={10000000}
+                value={formData.downPayment}
+                onChange={(next) => handleInputChange('downPayment', next)}
+              />
 
               {/* Interest Rate */}
-              <div>
-                <label htmlFor="interestRate" className="block text-sm font-medium text-foreground mb-2">
-                  Expected Interest Rate (%)
-                </label>
-                <input
-                  id="interestRate"
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.01"
-                  min={0}
-                  max={30}
-                  value={formData.interestRate || ''}
-                  onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder={String(DEFAULT_MORTGAGE_RATE)}
-                />
-              </div>
+              <NumberField
+                id="interestRate"
+                label="Expected Interest Rate"
+                kind="rate"
+                min={0}
+                max={30}
+                value={formData.interestRate}
+                onChange={(next) => handleInputChange('interestRate', next)}
+              />
 
               {/* Loan Term */}
               <div>
@@ -284,42 +244,26 @@ const AffordabilityCalculator: React.FC = () => {
               </div>
 
               {/* Property Tax Rate */}
-              <div>
-                <label htmlFor="propertyTaxRate" className="block text-sm font-medium text-foreground mb-2">
-                  Property Tax Rate (% of home value)
-                </label>
-                <input
-                  id="propertyTaxRate"
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.1"
-                  min={0}
-                  max={10}
-                  value={formData.propertyTaxRate || ''}
-                  onChange={(e) => handleInputChange('propertyTaxRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="1.2"
-                />
-              </div>
+              <NumberField
+                id="propertyTaxRate"
+                label="Property Tax Rate (% of home value)"
+                kind="rate"
+                min={0}
+                max={10}
+                value={formData.propertyTaxRate}
+                onChange={(next) => handleInputChange('propertyTaxRate', next)}
+              />
 
               {/* Insurance Rate */}
-              <div>
-                <label htmlFor="insuranceRate" className="block text-sm font-medium text-foreground mb-2">
-                  Homeowners Insurance Rate (% of home value)
-                </label>
-                <input
-                  id="insuranceRate"
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.1"
-                  min={0}
-                  max={5}
-                  value={formData.insuranceRate || ''}
-                  onChange={(e) => handleInputChange('insuranceRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="0.5"
-                />
-              </div>
+              <NumberField
+                id="insuranceRate"
+                label="Homeowners Insurance Rate (% of home value)"
+                kind="rate"
+                min={0}
+                max={5}
+                value={formData.insuranceRate}
+                onChange={(next) => handleInputChange('insuranceRate', next)}
+              />
 
               {/* Loan Program */}
               <div>
@@ -340,22 +284,15 @@ const AffordabilityCalculator: React.FC = () => {
               </div>
 
               {/* Credit Score */}
-              <div>
-                <label htmlFor="creditScore" className="block text-sm font-medium text-foreground mb-2">
-                  Credit Score
-                </label>
-                <input
-                  id="creditScore"
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  min={300}
-                  max={850}
-                  value={formData.creditScore || ''}
-                  onChange={(e) => handleInputChange('creditScore', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="740"
-                />
-              </div>
+              <NumberField
+                id="creditScore"
+                label="Credit Score"
+                kind="count"
+                min={300}
+                max={850}
+                value={formData.creditScore}
+                onChange={(next) => handleInputChange('creditScore', next)}
+              />
             </div>
           </div>
 

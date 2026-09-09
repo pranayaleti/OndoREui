@@ -127,7 +127,6 @@ export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
   { url: "https://www.linkedin.com/company/OndoRealEstate", live: false },
   { url: "https://x.com/OndoRealEstate",                 live: false },
   { url: "https://www.pinterest.com/ondorealestate",     live: false },
-  { url: "https://yelp.com/biz/ondo-real-estate-lehi",   live: false },
   // Linktree is treated as the canonical "all our links" hub, keep live.
   { url: "https://linktr.ee/ondorealestate",             live: true  },
   // TODO: Implement WhatsApp group integration once the group is stable.
@@ -136,17 +135,59 @@ export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
 ]
 
 /**
+ * Place / directory listings for the business as an ENTITY, as distinct from
+ * the social profiles above.
+ *
+ * These matter for a different reason than social does. Assistants and search
+ * engines resolve "who is this business" by finding the same name, address and
+ * phone across independent place databases. Foursquare in particular is not
+ * just a consumer app -- its Places dataset is licensed downstream into Apple
+ * Maps, X, Uber, Samsung and several assistant stacks, so one claimed Foursquare
+ * venue propagates much further than its own traffic suggests. Bing Places feeds
+ * Bing, Copilot, and ChatGPT's search results; Google Business Profile feeds
+ * Google and Gemini; Apple Business Connect feeds Siri and Spotlight.
+ *
+ * These are deliberately NOT part of SITE_SOCIAL_LINKS: they are entity records,
+ * not social accounts, and they must never render as footer social icons.
+ *
+ * Same discipline as above -- flip `live: true` only once the listing is claimed
+ * and its NAP matches SITE_ADDRESS_OBJ and SITE_PHONE EXACTLY. A listing whose
+ * address differs even in formatting creates a second, competing entity and
+ * splits the trust signal instead of consolidating it.
+ *
+ * Replace each placeholder URL with the real one at claim time; the URLs below
+ * are the expected shape, not verified live records.
+ */
+export const SITE_PLACE_LISTINGS: readonly SocialLink[] = [
+  { url: "https://foursquare.com/v/ondo-real-estate/",                live: false, label: "Foursquare" },
+  { url: "https://www.bingplaces.com/",                               live: false, label: "Bing Places" },
+  { url: "https://www.google.com/maps/place/Ondo+Real+Estate",        live: false, label: "Google Business Profile" },
+  { url: "https://maps.apple.com/place?q=Ondo+Real+Estate",           live: false, label: "Apple Business Connect" },
+  { url: "https://yelp.com/biz/ondo-real-estate-lehi",                live: false, label: "Yelp" },
+]
+
+/**
  * Live-only social URLs (string array), used by JSON-LD `sameAs`,
  * metadata, and any code that historically read SITE_SOCIALS as URLs.
  *
  * Backwards-compatible with the previous string[] export.
  */
-export const SITE_SOCIALS: readonly string[] = SITE_SOCIAL_LINKS
+export const SITE_SOCIALS: readonly string[] = [
+  ...SITE_SOCIAL_LINKS,
+  // Place listings belong in sameAs for entity resolution even though they are
+  // not social accounts. Every consumer of SITE_SOCIALS is a sameAs feed -- the
+  // footer reads SITE_SOCIAL_LINKS directly -- so including them here does not
+  // put a Foursquare venue in the footer icon row.
+  ...SITE_PLACE_LISTINGS,
+]
   .filter((s) => s.live)
   .map((s) => s.url)
 
 /** Every social URL regardless of live status, for marketing dashboards / audits. */
-export const SITE_SOCIALS_ALL: readonly string[] = SITE_SOCIAL_LINKS.map((s) => s.url)
+export const SITE_SOCIALS_ALL: readonly string[] = [
+  ...SITE_SOCIAL_LINKS,
+  ...SITE_PLACE_LISTINGS,
+].map((s) => s.url)
 
 /** Supabase project origin from NEXT_PUBLIC_SUPABASE_URL (for CSP / preconnect). */
 export function getSupabaseOrigin(): string | null {

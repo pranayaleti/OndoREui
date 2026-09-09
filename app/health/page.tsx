@@ -92,7 +92,7 @@ export default function HealthPage() {
                 )}
               </div>
             ) : (
-              <div className="flex items-center gap-2 text-destructive">
+              <div className="flex items-center gap-2 text-destructive-emphasis">
                 <XCircle className="h-5 w-5" />
                 <span>{backend.error ?? "Request failed"}</span>
               </div>

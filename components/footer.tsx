@@ -177,8 +177,8 @@ const Footer = memo(() => {
   // Define social media mapping in a deterministic order to prevent hydration issues
   const socialMediaMap = [
     { pattern: "facebook.com", name: "Facebook", Component: Facebook, hover: "hover:text-primary" },
-    { pattern: "youtube.com", name: "YouTube", Component: Youtube, hover: "hover:text-destructive" },
-    { pattern: "youtu.be", name: "YouTube", Component: Youtube, hover: "hover:text-destructive" },
+    { pattern: "youtube.com", name: "YouTube", Component: Youtube, hover: "hover:text-destructive-emphasis" },
+    { pattern: "youtu.be", name: "YouTube", Component: Youtube, hover: "hover:text-destructive-emphasis" },
     { pattern: "instagram.com", name: "Instagram", Component: Instagram, hover: "hover:text-pink-500" },
     { pattern: "tiktok.com", name: "TikTok", Component: TiktokIcon, hover: "hover:text-fuchsia-500" },
     { pattern: "linkedin.com", name: "LinkedIn", Component: Linkedin, hover: "hover:text-primary" },
@@ -305,6 +305,7 @@ const Footer = memo(() => {
             <li><Link href="/calculators/home-sale" className="text-foreground/70 hover:text-foreground">Home sale calculator</Link></li>
             <li><Link href="/calculators/buying-power" className="text-foreground/70 hover:text-foreground">Buying power calculator</Link></li>
             <li><Link href="/calculators/cost-of-living" className="text-foreground/70 hover:text-foreground">Cost of living calculator</Link></li>
+            <li><Link href="/glossary" className="text-foreground/70 hover:text-foreground">Real estate glossary</Link></li>
           </FooterNavSection>
 
           {/* About Us */}

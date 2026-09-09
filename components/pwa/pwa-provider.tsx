@@ -32,17 +32,6 @@ async function registerServiceWorker(): Promise<void> {
   }
 }
 
-async function requestPushPermission(): Promise<void> {
-  if (typeof window === "undefined" || !("Notification" in window)) return
-  if (Notification.permission !== "default") return
-
-  try {
-    await Notification.requestPermission()
-  } catch {
-    // Ignore push permission errors in unsupported environments.
-  }
-}
-
 export function PwaProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     void registerServiceWorker()
@@ -58,9 +47,16 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  useEffect(() => {
-    void requestPushPermission()
-  }, [])
+  // Deliberately NOT requesting notification permission here.
+  //
+  // This used to call Notification.requestPermission() from a bare mount effect,
+  // so every first-time visitor got a native browser permission dialog on page
+  // load without asking for it. Chrome treats an ungestured permission request
+  // as abuse and can auto-deny it site-wide, which costs the permission for the
+  // visitors who would actually have said yes.
+  //
+  // Re-enable only from a real user gesture -- a "Notify me" control the visitor
+  // clicks -- not from a lifecycle effect.
 
   return (
     <PwaInstallProvider>

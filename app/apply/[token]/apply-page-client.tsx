@@ -302,7 +302,7 @@ export function ApplyPageClient() {
     return (
       <div className="min-h-screen bg-muted/30 px-4 py-12">
         <div className="mx-auto max-w-md rounded-2xl border bg-background p-10 text-center shadow-sm">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-destructive/10 text-2xl font-semibold text-destructive">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-destructive/10 text-2xl font-semibold text-destructive-emphasis">
             !
           </div>
           <h1 className="mb-2 text-2xl font-semibold text-foreground">{t("applyFlow.error.title")}</h1>
@@ -421,7 +421,7 @@ export function ApplyPageClient() {
 
               {step === "disclosure" && ctaStatus === "error" && (
                 <div className="space-y-4">
-                  <p className="text-sm text-destructive">{t("applyFlow.disclosure.ctaLoadFailed")}</p>
+                  <p className="text-sm text-destructive-emphasis">{t("applyFlow.disclosure.ctaLoadFailed")}</p>
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <Button
                       variant="outline"
@@ -990,7 +990,7 @@ function DisclosureStep({
         </label>
       </div>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className="text-sm text-destructive-emphasis">{error}</p>}
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <Button variant="outline" onClick={onBack} className="sm:min-w-36">
@@ -1074,7 +1074,7 @@ function PersonalStep({
         <p className="text-sm leading-6 text-foreground/70">{subtitle}</p>
       </div>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className="text-sm text-destructive-emphasis">{error}</p>}
 
       <div className="grid gap-4 md:grid-cols-2">
         <Field label={labels.firstName} required>
@@ -1196,7 +1196,7 @@ function QuestionsStep({
         <p className="text-sm leading-6 text-foreground/70">{subtitle}</p>
       </div>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className="text-sm text-destructive-emphasis">{error}</p>}
 
       <div className="space-y-6">
         {questions.map((question) => (
@@ -1385,7 +1385,7 @@ function ReviewStep({
         {disclosureConfirmedLabel}
       </div>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className="text-sm text-destructive-emphasis">{error}</p>}
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <Button variant="outline" onClick={onBack} className="sm:min-w-36">
@@ -1483,7 +1483,7 @@ function Field({
     <div className="space-y-2">
       <Label className="text-sm font-medium text-foreground">
         {label}
-        {required && <span className="ml-1 text-destructive">*</span>}
+        {required && <span className="ml-1 text-destructive-emphasis">*</span>}
       </Label>
       {children}
     </div>

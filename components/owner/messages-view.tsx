@@ -296,7 +296,7 @@ export function MessagesView() {
                       <DropdownMenuItem>Search in Conversation</DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>Mute Notifications</DropdownMenuItem>
-                      <DropdownMenuItem className="text-destructive">Delete Conversation</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive-emphasis">Delete Conversation</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>

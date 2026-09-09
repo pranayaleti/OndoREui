@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LoanProgram, getProgramMI, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface ClosingCostData {
   homePrice: number;
@@ -146,6 +147,7 @@ const ClosingCostCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">Closing Cost Calculator</h1>
           </div>
@@ -160,110 +162,58 @@ const ClosingCostCalculator: React.FC = () => {
             
             <div className="space-y-6">
               {/* Home Price */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Home Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.homePrice || ''}
-                    onChange={(e) => handleInputChange('homePrice', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="300,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="homePrice"
+                label="Home Price"
+                kind="currency"
+                value={formData.homePrice}
+                onChange={(next) => handleInputChange('homePrice', next)}
+              />
 
               {/* Down Payment */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Down Payment
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.downPayment || ''}
-                    onChange={(e) => handleInputChange('downPayment', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="60,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="downPayment"
+                label="Down Payment"
+                kind="currency"
+                value={formData.downPayment}
+                onChange={(next) => handleInputChange('downPayment', next)}
+              />
 
               {/* Loan Amount */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Loan Amount
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.loanAmount || ''}
-                    onChange={(e) => handleInputChange('loanAmount', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="240,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="loanAmount"
+                label="Loan Amount"
+                kind="currency"
+                value={formData.loanAmount}
+                onChange={(next) => handleInputChange('loanAmount', next)}
+              />
 
               {/* Property Tax */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Property Tax
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.propertyTax || ''}
-                    onChange={(e) => handleInputChange('propertyTax', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="3,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="propertyTax"
+                label="Annual Property Tax"
+                kind="currency"
+                value={formData.propertyTax}
+                onChange={(next) => handleInputChange('propertyTax', next)}
+              />
 
               {/* Insurance */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Annual Homeowners Insurance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.insurance || ''}
-                    onChange={(e) => handleInputChange('insurance', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,200"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="insurance"
+                label="Annual Homeowners Insurance"
+                kind="currency"
+                value={formData.insurance}
+                onChange={(next) => handleInputChange('insurance', next)}
+              />
 
               {/* Interest Rate */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Interest Rate (%)
-                </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.01"
-                  value={formData.interestRate || ''}
-                  onChange={(e) => handleInputChange('interestRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="6.5"
-                />
-              </div>
+              <NumberField
+                id="interestRate"
+                label="Interest Rate"
+                kind="rate"
+                value={formData.interestRate ?? 0}
+                onChange={(next) => handleInputChange('interestRate', next)}
+              />
 
               {/* Loan Term */}
               <div>
@@ -297,125 +247,68 @@ const ClosingCostCalculator: React.FC = () => {
               </div>
 
               {/* Title Insurance */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Title Insurance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.titleInsurance || ''}
-                    onChange={(e) => handleInputChange('titleInsurance', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="titleInsurance"
+                label="Title Insurance"
+                kind="currency"
+                value={formData.titleInsurance}
+                onChange={(next) => handleInputChange('titleInsurance', next)}
+              />
 
               {/* Appraisal */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Appraisal Fee
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.appraisal || ''}
-                    onChange={(e) => handleInputChange('appraisal', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="500"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="appraisal"
+                label="Appraisal Fee"
+                kind="currency"
+                value={formData.appraisal}
+                onChange={(next) => handleInputChange('appraisal', next)}
+              />
 
               {/* Inspection */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Home Inspection
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.inspection || ''}
-                    onChange={(e) => handleInputChange('inspection', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="400"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="inspection"
+                label="Home Inspection"
+                kind="currency"
+                value={formData.inspection}
+                onChange={(next) => handleInputChange('inspection', next)}
+              />
 
               {/* Origination Fee */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Origination Fee
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.originationFee || ''}
-                    onChange={(e) => handleInputChange('originationFee', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,200"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="originationFee"
+                label="Origination Fee"
+                kind="currency"
+                value={formData.originationFee}
+                onChange={(next) => handleInputChange('originationFee', next)}
+              />
 
               {/* Discount Points */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Discount Points (% of loan)
-                </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.125"
-                  value={formData.discountPoints || ''}
-                  onChange={(e) => handleInputChange('discountPoints', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="0"
-                />
-              </div>
+              <NumberField
+                id="discountPoints"
+                label="Discount Points (% of loan)"
+                kind="percent"
+                step={0.125}
+                value={formData.discountPoints}
+                onChange={(next) => handleInputChange('discountPoints', next)}
+              />
 
               {/* Prepaid Interest */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Prepaid Interest (days)
-                </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  value={formData.prepaidInterest || ''}
-                  onChange={(e) => handleInputChange('prepaidInterest', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="0"
-                />
-              </div>
+              <NumberField
+                id="prepaidInterest"
+                label="Prepaid Interest (days)"
+                kind="currency"
+                value={formData.prepaidInterest}
+                onChange={(next) => handleInputChange('prepaidInterest', next)}
+              />
 
               {/* Escrow Reserves */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Escrow Reserves
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.escrowReserves || ''}
-                    onChange={(e) => handleInputChange('escrowReserves', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="escrowReserves"
+                label="Escrow Reserves"
+                kind="currency"
+                value={formData.escrowReserves}
+                onChange={(next) => handleInputChange('escrowReserves', next)}
+              />
             </div>
           </div>
 
@@ -429,7 +322,7 @@ const ClosingCostCalculator: React.FC = () => {
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
-                        <p className="text-sm text-destructive mb-1">Total Closing Costs</p>
+                        <p className="text-sm text-destructive-emphasis mb-1">Total Closing Costs</p>
                         <p className="text-3xl font-bold text-red-700">{formatCurrency(results.totalClosingCosts)}</p>
                       </div>
                     </div>
@@ -462,7 +355,7 @@ const ClosingCostCalculator: React.FC = () => {
                     <hr className="my-3" />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total:</span>
-                      <span className="text-destructive">{formatCurrency(results.totalClosingCosts)}</span>
+                      <span className="text-destructive-emphasis">{formatCurrency(results.totalClosingCosts)}</span>
                     </div>
                   </div>
                 </div>

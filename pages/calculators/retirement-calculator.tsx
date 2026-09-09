@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Home, Landmark, PiggyBank } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface RetirementData {
   // Personal Information
@@ -228,6 +229,7 @@ const RetirementCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">Retirement Planning Calculator</h1>
           </div>
@@ -248,42 +250,27 @@ const RetirementCalculator: React.FC = () => {
                   Personal Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Current Age
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.currentAge || ''}
-                      onChange={(e) => handleInputChange('currentAge', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Retirement Age
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.retirementAge || ''}
-                      onChange={(e) => handleInputChange('retirementAge', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Life Expectancy
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.lifeExpectancy || ''}
-                      onChange={(e) => handleInputChange('lifeExpectancy', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="currentAge"
+                    label="Current Age"
+                    kind="currency"
+                    value={formData.currentAge}
+                    onChange={(next) => handleInputChange('currentAge', next)}
+                  />
+                  <NumberField
+                    id="retirementAge"
+                    label="Retirement Age"
+                    kind="currency"
+                    value={formData.retirementAge}
+                    onChange={(next) => handleInputChange('retirementAge', next)}
+                  />
+                  <NumberField
+                    id="lifeExpectancy"
+                    label="Life Expectancy"
+                    kind="currency"
+                    value={formData.lifeExpectancy}
+                    onChange={(next) => handleInputChange('lifeExpectancy', next)}
+                  />
                 </div>
               </div>
 
@@ -294,42 +281,27 @@ const RetirementCalculator: React.FC = () => {
                   Current Financial Status
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Current Savings
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.currentSavings || ''}
-                      onChange={(e) => handleInputChange('currentSavings', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Income
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.currentIncome || ''}
-                      onChange={(e) => handleInputChange('currentIncome', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Expenses
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.currentExpenses || ''}
-                      onChange={(e) => handleInputChange('currentExpenses', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="currentSavings"
+                    label="Current Savings"
+                    kind="currency"
+                    value={formData.currentSavings}
+                    onChange={(next) => handleInputChange('currentSavings', next)}
+                  />
+                  <NumberField
+                    id="currentIncome"
+                    label="Annual Income"
+                    kind="currency"
+                    value={formData.currentIncome}
+                    onChange={(next) => handleInputChange('currentIncome', next)}
+                  />
+                  <NumberField
+                    id="currentExpenses"
+                    label="Annual Expenses"
+                    kind="currency"
+                    value={formData.currentExpenses}
+                    onChange={(next) => handleInputChange('currentExpenses', next)}
+                  />
                 </div>
               </div>
 
@@ -340,55 +312,35 @@ const RetirementCalculator: React.FC = () => {
                   Real Estate Investments
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Current Real Estate Value
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.currentRealEstateValue || ''}
-                      onChange={(e) => handleInputChange('currentRealEstateValue', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Real Estate Income
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.realEstateIncome || ''}
-                      onChange={(e) => handleInputChange('realEstateIncome', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Annual Real Estate Expenses
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.realEstateExpenses || ''}
-                      onChange={(e) => handleInputChange('realEstateExpenses', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Real Estate Appreciation (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.realEstateAppreciation || ''}
-                      onChange={(e) => handleInputChange('realEstateAppreciation', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="currentRealEstateValue"
+                    label="Current Real Estate Value"
+                    kind="currency"
+                    value={formData.currentRealEstateValue}
+                    onChange={(next) => handleInputChange('currentRealEstateValue', next)}
+                  />
+                  <NumberField
+                    id="realEstateIncome"
+                    label="Annual Real Estate Income"
+                    kind="currency"
+                    value={formData.realEstateIncome}
+                    onChange={(next) => handleInputChange('realEstateIncome', next)}
+                  />
+                  <NumberField
+                    id="realEstateExpenses"
+                    label="Annual Real Estate Expenses"
+                    kind="currency"
+                    value={formData.realEstateExpenses}
+                    onChange={(next) => handleInputChange('realEstateExpenses', next)}
+                  />
+                  <NumberField
+                    id="realEstateAppreciation"
+                    label="Real Estate Appreciation"
+                    kind="currency"
+                    step={0.1}
+                    value={formData.realEstateAppreciation}
+                    onChange={(next) => handleInputChange('realEstateAppreciation', next)}
+                  />
                 </div>
               </div>
 
@@ -399,44 +351,28 @@ const RetirementCalculator: React.FC = () => {
                   Investment Strategy
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Monthly Contribution
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.monthlyContribution || ''}
-                      onChange={(e) => handleInputChange('monthlyContribution', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Investment Return (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.investmentReturn || ''}
-                      onChange={(e) => handleInputChange('investmentReturn', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Inflation Rate (%)
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      step="0.1"
-                      value={formData.inflationRate || ''}
-                      onChange={(e) => handleInputChange('inflationRate', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="monthlyContribution"
+                    label="Monthly Contribution"
+                    kind="years"
+                    value={formData.monthlyContribution}
+                    onChange={(next) => handleInputChange('monthlyContribution', next)}
+                  />
+                  <NumberField
+                    id="investmentReturn"
+                    label="Investment Return"
+                    kind="currency"
+                    step={0.1}
+                    value={formData.investmentReturn}
+                    onChange={(next) => handleInputChange('investmentReturn', next)}
+                  />
+                  <NumberField
+                    id="inflationRate"
+                    label="Inflation Rate"
+                    kind="rate"
+                    value={formData.inflationRate}
+                    onChange={(next) => handleInputChange('inflationRate', next)}
+                  />
                 </div>
               </div>
 
@@ -447,42 +383,27 @@ const RetirementCalculator: React.FC = () => {
                   Retirement Goals
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Desired Retirement Income
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.desiredRetirementIncome || ''}
-                      onChange={(e) => handleInputChange('desiredRetirementIncome', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Social Security Income
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.socialSecurityIncome || ''}
-                      onChange={(e) => handleInputChange('socialSecurityIncome', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Other Income
-                    </label>
-                    <input
-                      type="number"
-                    onFocus={(e) => e.target.select()}
-                      value={formData.otherIncome || ''}
-                      onChange={(e) => handleInputChange('otherIncome', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
-                    />
-                  </div>
+                  <NumberField
+                    id="desiredRetirementIncome"
+                    label="Desired Retirement Income"
+                    kind="currency"
+                    value={formData.desiredRetirementIncome}
+                    onChange={(next) => handleInputChange('desiredRetirementIncome', next)}
+                  />
+                  <NumberField
+                    id="socialSecurityIncome"
+                    label="Social Security Income"
+                    kind="currency"
+                    value={formData.socialSecurityIncome}
+                    onChange={(next) => handleInputChange('socialSecurityIncome', next)}
+                  />
+                  <NumberField
+                    id="otherIncome"
+                    label="Other Income"
+                    kind="currency"
+                    value={formData.otherIncome}
+                    onChange={(next) => handleInputChange('otherIncome', next)}
+                  />
                 </div>
               </div>
             </div>

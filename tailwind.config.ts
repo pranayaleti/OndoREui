@@ -41,6 +41,8 @@ const config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+          // Use for destructive TEXT. `DEFAULT` is a fill and fails contrast as text on dark.
+          emphasis: "hsl(var(--destructive-emphasis))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

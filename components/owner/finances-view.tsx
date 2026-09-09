@@ -327,7 +327,7 @@ export function FinancesView() {
                         <span>{property.name}</span>
                         <span
                           className={
-                            property.netIncome >= 0 ? "text-primary font-medium" : "text-destructive font-medium"
+                            property.netIncome >= 0 ? "text-primary font-medium" : "text-destructive-emphasis font-medium"
                           }
                         >
                           ${property.netIncome.toLocaleString()}
@@ -412,7 +412,7 @@ export function FinancesView() {
                         </span>
                       </TableCell>
                       <TableCell
-                        className={`text-right ${transaction.type === "income" ? "text-primary" : "text-destructive"}`}
+                        className={`text-right ${transaction.type === "income" ? "text-primary" : "text-destructive-emphasis"}`}
                       >
                         {transaction.type === "income" ? "+" : "-"}${transaction.amount.toLocaleString()}
                       </TableCell>
@@ -567,7 +567,7 @@ export function FinancesView() {
                           </span>
                         </TableCell>
                         <TableCell
-                          className={`text-right ${transaction.type === "income" ? "text-primary" : "text-destructive"}`}
+                          className={`text-right ${transaction.type === "income" ? "text-primary" : "text-destructive-emphasis"}`}
                         >
                           {transaction.type === "income" ? "+" : "-"}${transaction.amount.toLocaleString()}
                         </TableCell>
@@ -749,11 +749,11 @@ export function FinancesView() {
                         <TableCell className="text-right">${property.income.toLocaleString()}</TableCell>
                         <TableCell className="text-right">${property.expenses.toLocaleString()}</TableCell>
                         <TableCell
-                          className={`text-right ${property.netIncome >= 0 ? "text-primary" : "text-destructive"}`}
+                          className={`text-right ${property.netIncome >= 0 ? "text-primary" : "text-destructive-emphasis"}`}
                         >
                           ${property.netIncome.toLocaleString()}
                         </TableCell>
-                        <TableCell className={`text-right ${property.roi >= 0 ? "text-primary" : "text-destructive"}`}>
+                        <TableCell className={`text-right ${property.roi >= 0 ? "text-primary" : "text-destructive-emphasis"}`}>
                           {property.roi.toFixed(1)}%
                         </TableCell>
                       </TableRow>

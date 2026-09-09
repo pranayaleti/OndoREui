@@ -296,7 +296,7 @@ export function FirstVisitLeadPopup() {
               {status === "error" && errorMessage ? (
                 <div
                   role="alert"
-                  className="rounded-lg border border-destructive/25 bg-destructive/5 p-3 text-sm text-destructive"
+                  className="rounded-lg border border-destructive/25 bg-destructive/5 p-3 text-sm text-destructive-emphasis"
                 >
                   <div className="flex items-start gap-2">
                     <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />

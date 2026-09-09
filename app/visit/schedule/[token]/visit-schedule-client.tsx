@@ -149,7 +149,7 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
               type="button"
               onClick={() => void cancel()}
               disabled={loading}
-              className="mt-2 text-destructive underline"
+              className="mt-2 text-destructive-emphasis underline"
             >
               Cancel showing
             </button>
@@ -175,7 +175,7 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
             ))
           )}
         </div>
-        {error ? <p className="mb-3 text-sm text-destructive">{error}</p> : null}
+        {error ? <p className="mb-3 text-sm text-destructive-emphasis">{error}</p> : null}
         <button
           type="button"
           onClick={() => void book()}

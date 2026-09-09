@@ -70,7 +70,7 @@ export function DocumentQAWidget({ propertyId }: { propertyId: string }) {
         {guardrailError && (
           <p
             role="alert"
-            className="text-sm text-destructive text-center py-2"
+            className="text-sm text-destructive-emphasis text-center py-2"
           >
             {guardrailError}
           </p>

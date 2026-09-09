@@ -258,7 +258,7 @@ export function ScreeningGateStep({
           <h2 className="text-2xl font-semibold text-foreground">{labels.blockedTitle}</h2>
           <p className="text-sm leading-6 text-foreground/70">{labels.blockedBody}</p>
           {blockedDetail ? (
-            <p className="text-sm text-destructive">{blockedDetail}</p>
+            <p className="text-sm text-destructive-emphasis">{blockedDetail}</p>
           ) : null}
         </div>
         <p className="text-sm text-foreground/60">
@@ -315,7 +315,7 @@ export function ScreeningGateStep({
           })}
         </div>
 
-        {error ? <p className="text-sm text-destructive">{error}</p> : null}
+        {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
 
         <Button
           variant="outline"
@@ -347,12 +347,12 @@ export function ScreeningGateStep({
           onError={(message) => setError(message)}
         />
       ) : (
-        <p className="text-sm text-destructive">
+        <p className="text-sm text-destructive-emphasis">
           Payment form is unavailable. Retry or contact the property team.
         </p>
       )}
 
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
 
       {portable.length > 0 ? (
         <Button variant="outline" onClick={() => setMode("portable")} disabled={busy}>

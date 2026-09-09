@@ -22,7 +22,7 @@ export default function CalculatorsError({
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
-            <AlertTriangle className="h-6 w-6 text-destructive" />
+            <AlertTriangle className="h-6 w-6 text-destructive-emphasis" />
           </div>
           <CardTitle className="text-xl">Calculator Error</CardTitle>
           <CardDescription>

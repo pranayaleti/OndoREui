@@ -167,7 +167,7 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
             </button>
           ))}
         </div>
-        {error ? <p className="mb-3 text-sm text-destructive">{error}</p> : null}
+        {error ? <p className="mb-3 text-sm text-destructive-emphasis">{error}</p> : null}
         <button
           type="button"
           onClick={() => void handleConfirm()}

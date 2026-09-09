@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface OnePercentRuleData {
   purchasePrice: number;
@@ -82,6 +83,7 @@ const OnePercentRuleCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">1% Rule Calculator</h1>
           </div>
@@ -96,61 +98,31 @@ const OnePercentRuleCalculator: React.FC = () => {
             
             <div className="space-y-6">
               {/* Purchase Price */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Purchase Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.purchasePrice || ''}
-                    onChange={(e) => handleInputChange('purchasePrice', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="100,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="purchasePrice"
+                label="Purchase Price"
+                kind="currency"
+                value={formData.purchasePrice}
+                onChange={(next) => handleInputChange('purchasePrice', next)}
+              />
 
               {/* Monthly Rent */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Monthly Rent
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.monthlyRent || ''}
-                    onChange={(e) => handleInputChange('monthlyRent', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="1,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="monthlyRent"
+                label="Monthly Rent"
+                kind="currency"
+                value={formData.monthlyRent}
+                onChange={(next) => handleInputChange('monthlyRent', next)}
+              />
 
               {/* After Repair Value (optional) */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  After Repair Value (ARV) - optional
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.afterRepairValue || ''}
-                    onChange={(e) => handleInputChange('afterRepairValue', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-                <p className="text-sm text-foreground/70 mt-1">
-                  Use ARV for fix-and-flip or rehab properties
-                </p>
-              </div>
+              <NumberField
+                id="afterRepairValue"
+                label="After Repair Value (ARV) - optional"
+                kind="currency"
+                value={formData.afterRepairValue}
+                onChange={(next) => handleInputChange('afterRepairValue', next)}
+              />
             </div>
           </div>
 

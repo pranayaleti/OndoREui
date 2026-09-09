@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { computeCagr } from '@/lib/investment-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface CAGRData {
   beginningValue: number;
@@ -66,6 +67,7 @@ const CAGRCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">CAGR Calculator</h1>
           </div>
@@ -80,58 +82,31 @@ const CAGRCalculator: React.FC = () => {
 
             <div className="space-y-6">
               {/* Beginning Value */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Beginning Value
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.beginningValue || ''}
-                    onChange={(e) => handleInputChange('beginningValue', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="100,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="beginningValue"
+                label="Beginning Value"
+                kind="currency"
+                value={formData.beginningValue}
+                onChange={(next) => handleInputChange('beginningValue', next)}
+              />
 
               {/* Ending Value */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Ending Value
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.endingValue || ''}
-                    onChange={(e) => handleInputChange('endingValue', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="161,051"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="endingValue"
+                label="Ending Value"
+                kind="currency"
+                value={formData.endingValue}
+                onChange={(next) => handleInputChange('endingValue', next)}
+              />
 
               {/* Years */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Number of Years
-                </label>
-                <input
-                  type="number"
-                  onFocus={(e) => e.target.select()}
-                  value={formData.years || ''}
-                  onChange={(e) => handleInputChange('years', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="5"
-                />
-                <p className="text-sm text-foreground/70 mt-1">
-                  The holding period over which the value grew
-                </p>
-              </div>
+              <NumberField
+                id="years"
+                label="Number of Years"
+                kind="years"
+                value={formData.years}
+                onChange={(next) => handleInputChange('years', next)}
+              />
             </div>
           </div>
 

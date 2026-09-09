@@ -2,6 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
+import { UTAH_RENTAL_LAW_DISCLAIMER, utahRulesAsFaqs } from "@/lib/content/utah-rental-law"
 import { SITE_URL, SITE_PHONE } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, Home } from "lucide-react"
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 
 export default function TenantFAQPage() {
-  const faqs = [
+  const businessFaqs = [
     {
       question: "How do I apply for a property?",
       answer: 'You can apply for a property by clicking the "View Details" button on any property listing. This will open an application form where you can provide your information. Once submitted, a property manager will review your application and contact you within 1-2 business days.'
@@ -57,6 +58,11 @@ export default function TenantFAQPage() {
       answer: "We typically contact tenants 60-90 days before lease expiration to discuss renewal options. You can also reach out to us directly to start the renewal process. Renewal terms and any rent adjustments will be discussed during this process."
     }
   ]
+
+  // Utah statutory answers live in one cited module so the FAQ page, the
+  // FAQPage JSON-LD, and any other surface stay consistent. These are the
+  // questions people actually type, which is also what assistants get asked.
+  const faqs = [...businessFaqs, ...utahRulesAsFaqs("tenant")]
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -116,6 +122,10 @@ export default function TenantFAQPage() {
                 </AccordionItem>
               ))}
             </Accordion>
+
+            <p className="mt-8 rounded-lg border border-border bg-muted/40 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+              {UTAH_RENTAL_LAW_DISCLAIMER}
+            </p>
 
             <div className="mt-12 text-center">
               <p className="text-gray-300 mb-4">Still have questions?</p>

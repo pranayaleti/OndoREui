@@ -39,3 +39,6 @@ reports/theme-audit/diff/*.png
 *.tsbuildinfo
 next-env.d.ts
 .cursor/mcp.json
+
+# IndexNow submit state (restored in CI via actions/cache)
+.indexnow-cache/

@@ -77,7 +77,7 @@ export function DocumentUploader({
         </a>
       ) : null}
       {needsReplace ? (
-        <p className="mt-2 text-xs text-destructive">Please upload a replacement. The previous file was not accepted or has expired.</p>
+        <p className="mt-2 text-xs text-destructive-emphasis">Please upload a replacement. The previous file was not accepted or has expired.</p>
       ) : null}
       <input
         id={`upload-${documentType}`}
@@ -113,7 +113,7 @@ export function DocumentUploader({
         }}
       />
       {busy ? <p className="mt-2 text-xs text-muted-foreground">Uploading…</p> : null}
-      {error ? <p className="mt-2 text-xs text-destructive">{error}</p> : null}
+      {error ? <p className="mt-2 text-xs text-destructive-emphasis">{error}</p> : null}
       <p className="mt-2 text-xs text-muted-foreground">PDF or photo, 10 MB max. On a phone you can use the camera.</p>
     </div>
   )

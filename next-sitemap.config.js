@@ -12,6 +12,7 @@ const LOCALE_ROUTING_ENABLED = process.env.NEXT_PUBLIC_I18N_ROUTED === '1'
 // Static lastmod dates by path prefix (no trailing slash; paths normalized in getLastmod).
 const SECTION_LASTMOD = {
   '/blog': '2026-03-07',
+  '/glossary': '2026-09-07',
   '/buy': '2026-03-07',
   '/sell': '2026-03-07',
   '/loans': '2026-03-07',
@@ -76,7 +77,7 @@ function getPriority(path) {
   // less important than the index. Each listing also benefits from a fresh
   // BUILD_DATE lastmod (the listing data is regenerated each build).
   if (/^\/properties\/[^/]+$/.test(p)) return 0.8
-  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools']
+  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools', '/glossary']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = [
     '/resources',

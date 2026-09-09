@@ -19,6 +19,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Calculator as CalcIcon, Info, Clock, DollarSign } from "lucide-react"
+import { NumberField as SharedNumberField } from "@/components/calculators/number-field";
 
 interface Inputs {
   monthlyRent: number
@@ -74,31 +75,21 @@ function NumberField({
   suffix?: string
   hint?: string
 }) {
+  // Delegates to the shared NumberField so this calculator gets the same editing
+  // behaviour as the rest: thousands separators at rest, kind-aware arrow
+  // stepping, and a real committed-vs-draft split.
+  const id = `ovs-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`
   return (
-    <label className="block">
-      <span className="text-sm font-medium text-foreground/90">{label}</span>
-      {hint && <span className="block text-xs text-foreground/50 mt-0.5">{hint}</span>}
-      <div className="mt-1.5 relative flex items-center">
-        {prefix && (
-          <span className="absolute left-3 text-sm text-foreground/50 pointer-events-none">{prefix}</span>
-        )}
-        <input
-          type="number"
-          inputMode="decimal"
-          min={min}
-          step={step}
-          value={Number.isFinite(value) ? value : 0}
-          onChange={(e) => {
-            const parsed = parseFloat(e.target.value)
-            onChange(Number.isNaN(parsed) ? 0 : parsed)
-          }}
-          className={`w-full rounded-md border border-border bg-background py-2.5 ${prefix ? "pl-7" : "pl-3"} ${suffix ? "pr-12" : "pr-3"} text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
-        />
-        {suffix && (
-          <span className="absolute right-3 text-sm text-foreground/50 pointer-events-none">{suffix}</span>
-        )}
-      </div>
-    </label>
+    <SharedNumberField
+      id={id}
+      label={label}
+      kind={suffix === "%" ? "percent" : prefix === "$" ? "currency" : "count"}
+      min={min}
+      step={step}
+      value={Number.isFinite(value) ? value : 0}
+      onChange={onChange}
+      {...(hint ? { hint } : {})}
+    />
   )
 }
 

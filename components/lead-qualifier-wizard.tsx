@@ -387,7 +387,7 @@ export function LeadQualifierWizard() {
             No spam. We'll use this to send your personalized match within one business day.
           </p>
           {submitError && (
-            <p className="text-sm text-destructive inline-flex items-center gap-1.5" role="alert">
+            <p className="text-sm text-destructive-emphasis inline-flex items-center gap-1.5" role="alert">
               <AlertCircle className="h-4 w-4" aria-hidden="true" />
               {submitError}
             </p>

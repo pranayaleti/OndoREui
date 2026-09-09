@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import CalculatorsPage from "./CalculatorsPage"
+import { GlossaryCategoryGrid } from "@/components/content/glossary-terms"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
@@ -41,6 +42,16 @@ export default function CalculatorsIndexPage() {
         ])}
       />
       <CalculatorsPage />
+      {/* Server-rendered: a reader who does not recognise "cap rate" or "DTI" gets a
+          definition without leaving, and each chip is a crawlable internal link. */}
+      <section className="border-t border-border bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <GlossaryCategoryGrid
+            heading="Not sure what an input means?"
+            lead="Every figure these calculators ask for has a plain-English definition — what it is, and what changes if you get it wrong."
+          />
+        </div>
+      </section>
     </>
   )
 }

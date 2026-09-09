@@ -9,6 +9,7 @@ import {
   type BuydownStructure,
   calculateTemporaryBuydown,
 } from '@/lib/mortgage-utils'
+import { NumberField } from "@/components/calculators/number-field";
 
 interface BuydownFormData {
   loanAmount: number;
@@ -84,6 +85,7 @@ const TemporaryBuydownCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">Temporary Buydown Calculator</h1>
           </div>
@@ -100,40 +102,21 @@ const TemporaryBuydownCalculator: React.FC = () => {
             </p>
 
             <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Loan Amount
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.loanAmount || ''}
-                    onChange={(e) => handleInputChange('loanAmount', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="300,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="loanAmount"
+                label="Loan Amount"
+                kind="currency"
+                value={formData.loanAmount}
+                onChange={(next) => handleInputChange('loanAmount', next)}
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Note Interest Rate (%)
-                </label>
-                <input
-                  type="number"
-                  onFocus={(e) => e.target.select()}
-                  step="0.01"
-                  value={formData.noteRate || ''}
-                  onChange={(e) => handleInputChange('noteRate', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder={String(DEFAULT_MORTGAGE_RATE)}
-                />
-                <p className="text-sm text-foreground/70 mt-1">
-                  Permanent note rate (example default {DEFAULT_MORTGAGE_RATE}%, not a live quote)
-                </p>
-              </div>
+              <NumberField
+                id="noteRate"
+                label="Note Interest Rate"
+                kind="rate"
+                value={formData.noteRate}
+                onChange={(next) => handleInputChange('noteRate', next)}
+              />
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
@@ -152,23 +135,13 @@ const TemporaryBuydownCalculator: React.FC = () => {
 
               {formData.structure === 'flat' && (
                 <>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Temporary Buydown Rate (%)
-                    </label>
-                    <input
-                      type="number"
-                      onFocus={(e) => e.target.select()}
-                      step="0.01"
-                      value={formData.flatBuydownRate || ''}
-                      onChange={(e) => handleInputChange('flatBuydownRate', Number(e.target.value))}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                      placeholder={String(DEFAULT_MORTGAGE_RATE - 2)}
-                    />
-                    <p className="text-sm text-foreground/70 mt-1">
-                      Must be lower than the note rate
-                    </p>
-                  </div>
+                  <NumberField
+                    id="flatBuydownRate"
+                    label="Temporary Buydown Rate"
+                    kind="rate"
+                    value={formData.flatBuydownRate}
+                    onChange={(next) => handleInputChange('flatBuydownRate', next)}
+                  />
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
                       Buydown Period (years)
@@ -201,25 +174,13 @@ const TemporaryBuydownCalculator: React.FC = () => {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Quoted Buydown Cost (optional)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.quotedBuydownCost || ''}
-                    onChange={(e) => handleInputChange('quotedBuydownCost', Number(e.target.value) || 0)}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-                <p className="text-sm text-foreground/70 mt-1">
-                  Optional: compare a lender/seller quote to the estimated subsidy cost below
-                </p>
-              </div>
+              <NumberField
+                id="quotedBuydownCost"
+                label="Quoted Buydown Cost (optional)"
+                kind="currency"
+                value={formData.quotedBuydownCost}
+                onChange={(next) => handleInputChange('quotedBuydownCost', next)}
+              />
             </div>
           </div>
 

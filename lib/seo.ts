@@ -13,7 +13,7 @@ import {
   SITE_GEO,
   SITE_CALENDLY_URL,
 } from "./site"
-import { testimonials } from "./testimonials"
+import { getTestimonialKind, testimonials } from "./testimonials"
 import { toAbsoluteSiteUrl } from "./site-index"
 import { htmlPathToMarkdownPath } from "./html-to-agent-markdown"
 
@@ -227,7 +227,24 @@ export function generateOrganizationJsonLd() {
  * the result without leaving stub fields in the JSON-LD output.
  */
 function buildBusinessRatingAndReviews() {
-  const rated = testimonials.filter((t) => typeof t.rating === "number" && t.rating > 0)
+  // Only genuine, permissioned, dated reviews may become Review/AggregateRating.
+  //
+  // testimonials.ts defines `composite` as illustrative copy and says outright:
+  // "Do not present composites as Google reviews." The visible UI honours that --
+  // testimonial cards render a composite badge and /about/testimonials states the
+  // stories are not Google reviews. JSON-LD carries no such badge, so emitting
+  // composites here published an undisclosed claim that the visible page never
+  // made: a 5.00 aggregate over 15 "reviews" with named authors.
+  //
+  // That is three separate problems. Google requires structured data to represent
+  // the visible content of the page; review markup about your own business on your
+  // own site is self-serving and ineligible for review rich results; and invented
+  // reviews risk a spammy-structured-markup manual action. Filtering by kind fixes
+  // all three, and the markup returns automatically once real reviews are added
+  // with `kind: "review"` and a reviewDate.
+  const rated = testimonials.filter(
+    (t) => typeof t.rating === "number" && t.rating > 0 && getTestimonialKind(t) === "review",
+  )
   if (rated.length === 0) return undefined
 
   const ratingValue = (rated.reduce((sum, t) => sum + t.rating, 0) / rated.length).toFixed(2)
@@ -591,6 +608,84 @@ export function generateBlogPostingJsonLd(params: {
     },
     ...(keywordList && keywordList.length ? { keywords: keywordList } : {}),
     ...(articleSection ? { articleSection } : {}),
+  }
+}
+
+/**
+ * `DefinedTerm` for a single glossary entry.
+ *
+ * Google does not render a rich result for DefinedTerm today, but it is the
+ * schema.org type that actually describes the page, and `inDefinedTermSet` ties
+ * each entry back to the glossary so the set is understood as one work rather
+ * than ~100 unrelated pages.
+ */
+export function generateDefinedTermJsonLd(params: {
+  name: string
+  description: string
+  url: string
+  termSetName: string
+  termSetUrl: string
+  inCategory?: string
+}) {
+  const { name, description, url, termSetName, termSetUrl, inCategory } = params
+  if (!name || !description || !url) return null
+
+  const absoluteUrl = toAbsoluteUrl(url)
+  const absoluteSetUrl = toAbsoluteUrl(termSetUrl)
+  if (!absoluteUrl || !absoluteSetUrl) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTerm',
+    name,
+    description,
+    url: absoluteUrl,
+    ...(inCategory ? { inDefinedTermSet: { '@type': 'DefinedTermSet', name: termSetName, url: absoluteSetUrl }, termCode: inCategory } : {
+      inDefinedTermSet: { '@type': 'DefinedTermSet', name: termSetName, url: absoluteSetUrl },
+    }),
+  }
+}
+
+/**
+ * `DefinedTermSet` for the glossary index, listing its entries by URL.
+ *
+ * Kept to name/description/url per member — repeating each full definition here
+ * would duplicate every term page's own markup for no gain.
+ */
+export function generateDefinedTermSetJsonLd(params: {
+  name: string
+  description: string
+  url: string
+  terms: ReadonlyArray<{ name: string; description: string; url: string }>
+}) {
+  const { name, description, url, terms } = params
+  if (!name || !url || terms.length === 0) return null
+
+  const absoluteUrl = toAbsoluteUrl(url)
+  if (!absoluteUrl) return null
+
+  const members = terms
+    .map((term) => {
+      const absoluteTermUrl = toAbsoluteUrl(term.url)
+      if (!absoluteTermUrl || !term.name) return null
+      return {
+        '@type': 'DefinedTerm',
+        name: term.name,
+        description: term.description,
+        url: absoluteTermUrl,
+      }
+    })
+    .filter(Boolean)
+
+  if (members.length === 0) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    name,
+    description,
+    url: absoluteUrl,
+    hasDefinedTerm: members,
   }
 }
 

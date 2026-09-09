@@ -68,6 +68,8 @@
 	--accent: 25 95% 53%;
 	--accent-foreground: 0 0% 0%;
 	--destructive: 0 84.2% 60.2%;
+	/* Readable as TEXT on the page background; --destructive is for fills. */
+	--destructive-emphasis: 0 72% 42%;
 	--destructive-foreground: 0 0% 98%;
 	--border: 0 0% 88%;
 	--input: 0 0% 88%;
@@ -111,6 +113,8 @@
 	--accent: 25 95% 53%;
 	--accent-foreground: 0 0% 0%;
 	--destructive: 0 62.8% 30.6%;
+	/* Dark theme: the fill colour above is 1.78:1 as text, so text uses this. */
+	--destructive-emphasis: 0 84% 70%;
 	--destructive-foreground: 0 0% 98%;
 	--border: 222 20% 17%;
 	--input: 222 20% 17%;

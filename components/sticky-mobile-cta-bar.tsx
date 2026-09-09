@@ -28,6 +28,11 @@ const HIDDEN_PREFIXES = [
   "/invite",
   "/chat",
   "/tenantOnboarding",
+  // These two render their own page-specific fixed bottom bar. Without this the
+  // global bar stacks underneath theirs and the visitor loses that much viewport
+  // to two competing CTAs.
+  "/notary",
+  "/calculators/cost-of-living",
 ] as const
 
 const ANALYSIS_PATH = "/whats-my-home-worth"

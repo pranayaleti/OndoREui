@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
+import { NumberField } from "@/components/calculators/number-field";
 
 interface HomeSaleData {
   homeValue: number;
@@ -94,6 +95,7 @@ const HomeSaleCalculator: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/calculators" className="text-primary hover:text-primary">
               <ArrowLeft className="h-6 w-6" />
+              <span className="sr-only">Back to all calculators</span>
             </Link>
             <h1 className="text-2xl font-bold text-foreground">Home Sale Calculator</h1>
           </div>
@@ -108,170 +110,86 @@ const HomeSaleCalculator: React.FC = () => {
             
             <div className="space-y-6">
               {/* Home Value */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Estimated Home Sale Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.homeValue || ''}
-                    onChange={(e) => handleInputChange('homeValue', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="400,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="homeValue"
+                label="Estimated Home Sale Price"
+                kind="currency"
+                value={formData.homeValue}
+                onChange={(next) => handleInputChange('homeValue', next)}
+              />
 
               {/* Mortgage Balance */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Remaining Mortgage Balance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.mortgageBalance || ''}
-                    onChange={(e) => handleInputChange('mortgageBalance', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="250,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="mortgageBalance"
+                label="Remaining Mortgage Balance"
+                kind="currency"
+                value={formData.mortgageBalance}
+                onChange={(next) => handleInputChange('mortgageBalance', next)}
+              />
 
               {/* Realtor Commission */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Realtor Commission (%)
-                </label>
-                <input
-                  type="number"
-                    onFocus={(e) => e.target.select()}
-                  step="0.1"
-                  value={formData.realtorCommission || ''}
-                  onChange={(e) => handleInputChange('realtorCommission', Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                  placeholder="6.0"
-                />
-              </div>
+              <NumberField
+                id="realtorCommission"
+                label="Realtor Commission"
+                kind="currency"
+                step={0.1}
+                value={formData.realtorCommission}
+                onChange={(next) => handleInputChange('realtorCommission', next)}
+              />
 
               {/* Closing Costs */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Closing Costs
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.closingCosts || ''}
-                    onChange={(e) => handleInputChange('closingCosts', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="8,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="closingCosts"
+                label="Closing Costs"
+                kind="currency"
+                value={formData.closingCosts}
+                onChange={(next) => handleInputChange('closingCosts', next)}
+              />
 
               {/* Repairs */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Repairs & Improvements
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.repairs || ''}
-                    onChange={(e) => handleInputChange('repairs', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="5,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="repairs"
+                label="Repairs & Improvements"
+                kind="currency"
+                value={formData.repairs}
+                onChange={(next) => handleInputChange('repairs', next)}
+              />
 
               {/* Moving Costs */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Moving Costs
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.movingCosts || ''}
-                    onChange={(e) => handleInputChange('movingCosts', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="2,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="movingCosts"
+                label="Moving Costs"
+                kind="currency"
+                value={formData.movingCosts}
+                onChange={(next) => handleInputChange('movingCosts', next)}
+              />
 
               {/* Capital Gains Tax */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Capital Gains Tax (if applicable)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.capitalGainsTax || ''}
-                    onChange={(e) => handleInputChange('capitalGainsTax', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-                <p className="text-sm text-foreground/70 mt-1">
-                  Usually exempt for primary residence if lived in 2+ years
-                </p>
-              </div>
+              <NumberField
+                id="capitalGainsTax"
+                label="Capital Gains Tax (if applicable)"
+                kind="currency"
+                value={formData.capitalGainsTax}
+                onChange={(next) => handleInputChange('capitalGainsTax', next)}
+              />
 
               {/* Original Purchase Price */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Original Purchase Price
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.originalPurchasePrice || ''}
-                    onChange={(e) => handleInputChange('originalPurchasePrice', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="320,000"
-                  />
-                </div>
-              </div>
+              <NumberField
+                id="originalPurchasePrice"
+                label="Original Purchase Price"
+                kind="currency"
+                value={formData.originalPurchasePrice ?? 0}
+                onChange={(next) => handleInputChange('originalPurchasePrice', next)}
+              />
 
               {/* Capital Improvements */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Capital Improvements (lifetime)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-foreground/70">$</span>
-                  <input
-                    type="number"
-                    onFocus={(e) => e.target.select()}
-                    value={formData.originalImprovements || ''}
-                    onChange={(e) => handleInputChange('originalImprovements', Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
-                    placeholder="0"
-                  />
-                </div>
-                <p className="text-sm text-foreground/70 mt-1">
-                  Major improvements increasing basis (e.g., additions, new roof)
-                </p>
-              </div>
+              <NumberField
+                id="originalImprovements"
+                label="Capital Improvements (lifetime)"
+                kind="currency"
+                value={formData.originalImprovements ?? 0}
+                onChange={(next) => handleInputChange('originalImprovements', next)}
+              />
             </div>
           </div>
 
@@ -332,7 +250,7 @@ const HomeSaleCalculator: React.FC = () => {
                     <hr className="my-3" />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total Costs:</span>
-                      <span className="text-destructive">{formatCurrency(results.totalCosts)}</span>
+                      <span className="text-destructive-emphasis">{formatCurrency(results.totalCosts)}</span>
                     </div>
                   </div>
                 </div>

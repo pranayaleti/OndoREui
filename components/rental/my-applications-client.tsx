@@ -98,7 +98,7 @@ export function MyApplicationsClient() {
   if (error) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-10">
-        <p className="text-destructive">{error}</p>
+        <p className="text-destructive-emphasis">{error}</p>
       </main>
     )
   }

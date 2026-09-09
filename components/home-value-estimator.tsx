@@ -267,7 +267,7 @@ export function HomeValueEstimator() {
                       )}
                     </button>
                     {status === "error" && errorMsg && (
-                      <p className="text-sm text-destructive inline-flex items-center gap-1.5" role="alert">
+                      <p className="text-sm text-destructive-emphasis inline-flex items-center gap-1.5" role="alert">
                         <AlertCircle className="h-4 w-4" aria-hidden="true" />
                         {errorMsg}
                       </p>

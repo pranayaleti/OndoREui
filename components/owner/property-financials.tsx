@@ -214,7 +214,7 @@ export function PropertyFinancials({ property }: PropertyFinancialsProps) {
                     )}
                   </TableCell>
                   <TableCell
-                    className={`text-right ${transaction.type === "income" ? "text-primary" : "text-destructive"}`}
+                    className={`text-right ${transaction.type === "income" ? "text-primary" : "text-destructive-emphasis"}`}
                   >
                     {transaction.type === "income" ? "+" : "-"}${transaction.amount.toLocaleString()}
                   </TableCell>
