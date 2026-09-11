@@ -168,6 +168,12 @@ const Header = memo(() => {
 
         {/* Centered desktop navigation, flex-1 so it fills space between logo and controls without overlapping */}
         <div className="hidden md:flex flex-1 min-w-0 justify-center items-center">
+          {/*
+            Stays overflow-x-auto at every width: measured at 768/1024/1280 the
+            seven pinned items are wider than the space between the logo and the
+            right-hand controls, so visible overflow makes them collide. The
+            mega-menu panels escape this scroll container via a portal instead.
+          */}
           <nav
             className="flex justify-center w-full min-w-0 overflow-x-auto scrollbar-hide"
             aria-label="Primary navigation"

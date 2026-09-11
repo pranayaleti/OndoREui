@@ -195,3 +195,91 @@ test.describe("Accessibility smoke tests", () => {
   }
 })
 
+
+/**
+ * Desktop mega-menu.
+ *
+ * The primary nav's panels are hover-first, which is exactly the pattern that
+ * ships broken for everyone who isn't holding a mouse. They are also portalled
+ * to <body> to escape the nav's overflow-x-auto scroll container, so the panel
+ * is nowhere near its trigger in DOM order — the wiring that makes it reachable
+ * (aria-controls, roving focus, Escape) is the only thing holding it together
+ * and needs a gate.
+ */
+test.describe("Accessibility — primary nav mega-menu", () => {
+  const activeHref = (page: import("@playwright/test").Page) =>
+    page.evaluate(() => (document.activeElement as HTMLAnchorElement)?.getAttribute("href") ?? "(none)")
+
+  const trigger = (page: import("@playwright/test").Page, name: RegExp) =>
+    page.locator('nav[aria-label="Primary navigation"]').getByRole("button", { name })
+
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+  })
+
+  test("opens by keyboard, roams by arrows, closes on Escape", async ({ page }) => {
+    await page.goto("/")
+    const owners = trigger(page, /^Owners/)
+    await owners.focus()
+    await expect(owners).toHaveAttribute("aria-expanded", "false")
+
+    await page.keyboard.press("Enter")
+    await expect(owners).toHaveAttribute("aria-expanded", "true")
+    await expect(page.locator(`#${await owners.getAttribute("aria-controls")}`)).toBeVisible()
+
+    await page.keyboard.press("ArrowDown")
+    await expect.poll(() => activeHref(page)).toBe("/property-management/")
+    await page.keyboard.press("ArrowDown")
+    await expect.poll(() => activeHref(page)).toBe("/pricing/")
+    // Wraps to the last item rather than escaping the panel.
+    await page.keyboard.press("ArrowUp")
+    await page.keyboard.press("ArrowUp")
+    await expect.poll(() => activeHref(page)).toBe("/compare-utah-property-managers/")
+
+    await page.keyboard.press("Escape")
+    await expect(owners).toHaveAttribute("aria-expanded", "false")
+    await expect(owners, "Escape must return focus to the trigger, not drop it on <body>").toBeFocused()
+  })
+
+  test("closed panels are not in the tab order", async ({ page }) => {
+    await page.goto("/")
+    const links = page.locator('[role="menu"] [role="menuitem"]')
+    await expect(links.first()).not.toBeVisible()
+    // visibility:hidden, not display:none — the links stay crawlable but must
+    // not be focus stops while the panel is shut.
+    const focusable = await page.evaluate(
+      () =>
+        Array.from(document.querySelectorAll('[role="menu"] [role="menuitem"]')).filter(
+          (el) => (el as HTMLElement).offsetParent !== null,
+        ).length,
+    )
+    expect(focusable).toBe(0)
+  })
+
+  test("an open panel introduces no serious violations", async ({ page }) => {
+    await page.goto("/")
+    const resources = trigger(page, /^Resources/)
+    await resources.hover()
+    await expect(page.locator(`#${await resources.getAttribute("aria-controls")}`)).toBeVisible()
+
+    const violations = await scanForViolations(page)
+    reportViolations("/ with the Resources mega-menu open", violations)
+    expect.soft(violations, "Serious/critical a11y violations with a mega-menu open").toEqual([])
+  })
+
+  test("panels stay inside the viewport down to the md breakpoint", async ({ page }) => {
+    // The 600px Resources panel measured out at x=-185 when it was anchored
+    // inside the scrolling nav; it is now clamped against the viewport.
+    for (const width of [768, 1024, 1280, 1440]) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto("/")
+      const resources = trigger(page, /^Resources/)
+      await resources.hover()
+      const panel = page.locator(`#${await resources.getAttribute("aria-controls")}`)
+      await expect(panel).toBeVisible()
+      const box = (await panel.boundingBox())!
+      expect.soft(box.x, `Resources panel off the left edge at ${width}px`).toBeGreaterThanOrEqual(0)
+      expect.soft(box.x + box.width, `Resources panel off the right edge at ${width}px`).toBeLessThanOrEqual(width)
+    }
+  })
+})

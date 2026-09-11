@@ -4,24 +4,46 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useCallback, memo } from "react"
 import { useTranslation } from "react-i18next"
-import { ChevronDown } from "lucide-react"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+  BookOpen,
+  Building2,
+  Calculator,
+  Clock,
+  Compass,
+  GitCompare,
+  GraduationCap,
+  HelpCircle,
+  MapPin,
+  Mountain,
+  Newspaper,
+  PlayCircle,
+  Scale,
+  Share2,
+  Stamp,
+  Star,
+  Tag,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react"
+import { NavMegaMenu } from "@/components/nav-mega-menu"
+
 export interface NavigationItemChild {
   href: string
   labelKey: string
   external?: boolean
+  /** Rendered in the tinted chip at the start of the mega-menu row. */
+  icon?: LucideIcon
+  /** One-line "what is this" under the title. "Free rental analysis" tells a
+   *  visitor nothing; "See what your home rents for today" tells them why to click. */
+  descriptionKey?: string
 }
 
 export interface NavigationItem {
   href: string
   labelKey: string
   special?: boolean
-  /** When set, this item is rendered as a dropdown with these links (e.g. Property Management → Login to Portal). */
+  icon?: LucideIcon
+  /** When set, this item is rendered as a hover mega-menu of these links. */
   children?: NavigationItemChild[]
 }
 
@@ -39,10 +61,11 @@ export const allNavigationItems: NavigationItem[] = [
   {
     href: "/notary",
     labelKey: "nav.notary",
+    icon: Stamp,
     children: [
-      { href: "/notary", labelKey: "nav.notaryServices" },
-      { href: "/notary/on-demand", labelKey: "nav.onDemandNotary" },
-      { href: "/notary/locations/", labelKey: "nav.notaryLocations" },
+      { href: "/notary", labelKey: "nav.notaryServices", icon: Stamp, descriptionKey: "nav.notaryServicesDesc" },
+      { href: "/notary/on-demand", labelKey: "nav.onDemandNotary", icon: Clock, descriptionKey: "nav.onDemandNotaryDesc" },
+      { href: "/notary/locations/", labelKey: "nav.notaryLocations", icon: MapPin, descriptionKey: "nav.notaryLocationsDesc" },
     ],
   },
 
@@ -52,12 +75,13 @@ export const allNavigationItems: NavigationItem[] = [
   {
     href: "/property-management",
     labelKey: "nav.owners",
+    icon: Building2,
     children: [
-      { href: "/property-management", labelKey: "nav.propertyManagement" },
-      { href: "/pricing", labelKey: "nav.pricing" },
-      { href: "/whats-my-home-worth", labelKey: "nav.freeRentalAnalysis" },
-      { href: "/faq/owner-faqs", labelKey: "nav.ownerFaqs" },
-      { href: "/compare-utah-property-managers", labelKey: "nav.compareUtahPms" },
+      { href: "/property-management", labelKey: "nav.propertyManagement", icon: Building2, descriptionKey: "nav.propertyManagementDesc" },
+      { href: "/pricing", labelKey: "nav.pricing", icon: Tag, descriptionKey: "nav.pricingDesc" },
+      { href: "/whats-my-home-worth", labelKey: "nav.freeRentalAnalysis", icon: TrendingUp, descriptionKey: "nav.freeRentalAnalysisDesc" },
+      { href: "/faq/owner-faqs", labelKey: "nav.ownerFaqs", icon: HelpCircle, descriptionKey: "nav.ownerFaqsDesc" },
+      { href: "/compare-utah-property-managers", labelKey: "nav.compareUtahPms", icon: Scale, descriptionKey: "nav.compareUtahPmsDesc" },
     ],
   },
 
@@ -65,12 +89,13 @@ export const allNavigationItems: NavigationItem[] = [
   {
     href: "/solutions",
     labelKey: "nav.solutions",
+    icon: Compass,
     children: [
-      { href: "/solutions/investors", labelKey: "nav.forInvestors" },
-      { href: "/solutions/landlords", labelKey: "nav.forLandlords" },
-      { href: "/solutions/property-managers", labelKey: "nav.forPropertyManagers" },
-      { href: "/solutions/tenants", labelKey: "nav.forTenants" },
-      { href: "/pricing", labelKey: "nav.pricing" },
+      { href: "/solutions/investors", labelKey: "nav.forInvestors", icon: TrendingUp, descriptionKey: "nav.forInvestorsDesc" },
+      { href: "/solutions/landlords", labelKey: "nav.forLandlords", icon: Building2, descriptionKey: "nav.forLandlordsDesc" },
+      { href: "/solutions/property-managers", labelKey: "nav.forPropertyManagers", icon: Scale, descriptionKey: "nav.forPropertyManagersDesc" },
+      { href: "/solutions/tenants", labelKey: "nav.forTenants", icon: HelpCircle, descriptionKey: "nav.forTenantsDesc" },
+      { href: "/pricing", labelKey: "nav.pricing", icon: Tag, descriptionKey: "nav.pricingDesc" },
     ],
   },
 
@@ -78,18 +103,19 @@ export const allNavigationItems: NavigationItem[] = [
   {
     href: "/resources",
     labelKey: "nav.resources",
+    icon: BookOpen,
     children: [
-      { href: "/tour", labelKey: "nav.platformTour" },
-      { href: "/academy", labelKey: "nav.academy" },
-      { href: "/about/testimonials", labelKey: "nav.reviews" },
-      { href: "/blog", labelKey: "nav.blogAndGuides" },
-      { href: "/news", labelKey: "nav.news" },
-      { href: "/socials", labelKey: "nav.socials" },
-      { href: "/calculators", labelKey: "nav.calculators" },
-      { href: "/compare", labelKey: "nav.compare" },
-      { href: "/faq", labelKey: "nav.faq" },
-      { href: "/why-utah", labelKey: "nav.whyUtah" },
-      { href: "/moving-to-utah", labelKey: "nav.movingToUtah" },
+      { href: "/tour", labelKey: "nav.platformTour", icon: PlayCircle, descriptionKey: "nav.platformTourDesc" },
+      { href: "/academy", labelKey: "nav.academy", icon: GraduationCap, descriptionKey: "nav.academyDesc" },
+      { href: "/about/testimonials", labelKey: "nav.reviews", icon: Star, descriptionKey: "nav.reviewsDesc" },
+      { href: "/blog", labelKey: "nav.blogAndGuides", icon: BookOpen, descriptionKey: "nav.blogAndGuidesDesc" },
+      { href: "/news", labelKey: "nav.news", icon: Newspaper, descriptionKey: "nav.newsDesc" },
+      { href: "/socials", labelKey: "nav.socials", icon: Share2, descriptionKey: "nav.socialsDesc" },
+      { href: "/calculators", labelKey: "nav.calculators", icon: Calculator, descriptionKey: "nav.calculatorsDesc" },
+      { href: "/compare", labelKey: "nav.compare", icon: GitCompare, descriptionKey: "nav.compareDesc" },
+      { href: "/faq", labelKey: "nav.faq", icon: HelpCircle, descriptionKey: "nav.faqDesc" },
+      { href: "/why-utah", labelKey: "nav.whyUtah", icon: Mountain, descriptionKey: "nav.whyUtahDesc" },
+      { href: "/moving-to-utah", labelKey: "nav.movingToUtah", icon: MapPin, descriptionKey: "nav.movingToUtahDesc" },
     ],
   },
 
@@ -151,36 +177,15 @@ export const Navigation = memo(function Navigation({
     <nav className={className}>
       {items.map((item) =>
         item.children?.length ? (
-          <DropdownMenu key={item.href}>
-            <DropdownMenuTrigger
-              className={`inline-flex items-center gap-0.5 ${linkClass(item)} border-0 bg-transparent cursor-pointer`}
-              aria-haspopup="menu"
-              aria-expanded={undefined}
-            >
-              {t(item.labelKey)}
-              <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="min-w-[220px]">
-              {item.children.map((child) => (
-                <DropdownMenuItem key={child.href} asChild>
-                  {child.external ? (
-                    <a
-                      href={child.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={onLinkClick}
-                    >
-                      {t(child.labelKey)}
-                    </a>
-                  ) : (
-                    <Link href={child.href} prefetch={false} onClick={onLinkClick}>
-                      {t(child.labelKey)}
-                    </Link>
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <NavMegaMenu
+            key={item.href}
+            item={item}
+            onLinkClick={onLinkClick}
+            triggerClassName={`${linkClass(item)} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
+            // Six-plus children in one column runs past 600px tall; split those
+            // into two columns instead of a scrolling ribbon of links.
+            wide={item.children.length > 6}
+          />
         ) : (
           <Link
             key={item.href}

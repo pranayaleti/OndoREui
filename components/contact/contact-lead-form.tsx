@@ -168,6 +168,14 @@ export function ContactLeadForm({
     const honeypotFilled = String(data.get(honeypotProps.name) ?? "").trim() !== ""
     const rawInquiry = String(data.get("inquiryType") ?? "").trim()
     const fromForm = isContactInquiryType(rawInquiry) ? rawInquiry : ""
+    console.log("[contact] submitContactLead", {
+      name,
+      email,
+      phone,
+      message,
+      source,
+      inquiryType: fromForm,
+    })
 
     // Audience is only required when the form actually shows the radios.
     // Persona-scoped embeds pass `defaultInquiryType` and don't render them.
@@ -188,6 +196,7 @@ export function ContactLeadForm({
       // faster than minDwell. Render success so bots can't probe the gate.
       // Agent fills can be instant, so skip the dwell check when Chrome
       // marks the submit as agentInvoked.
+      console.log("[contact] honeypotFilled", honeypotFilled, "agentInvoked", agentInvoked, "gate.isLikelyBot()", gate.isLikelyBot())
       if (honeypotFilled || (!agentInvoked && gate.isLikelyBot())) {
         gate.recordAttempt()
         setSubmitStatus("success")
@@ -196,6 +205,15 @@ export function ContactLeadForm({
       }
 
       const attribution = getAttributionPayloadForApi()
+      console.log("[contact] submitContactLead", {
+        name,
+        email,
+        phone,
+        message,
+        source,
+        inquiryType: effectiveInquiry,
+        attribution,
+      })
       const result = await submitContactLead({
         name,
         email,
@@ -287,6 +305,15 @@ export function ContactLeadForm({
             return { content: [{ type: "text", text: JSON.stringify({ status: "cancelled" }) }] }
           }
           const attr = getAttributionPayloadForApi()
+          console.log("[contact] submitContactLead (agent)", {
+            name,
+            email,
+            phone,
+            message,
+            source: DEFAULT_SOURCE,
+            inquiryType: inquiryValue,
+            attribution: attr,
+          })
           const result = await submitContactLead({
             name,
             email,

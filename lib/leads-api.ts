@@ -102,6 +102,7 @@ export async function submitContactLead(
   payload: SubmitContactLeadPayload
 ): Promise<SubmitContactLeadSuccess | SubmitContactLeadError> {
   const url = backendUrl("/api/leads/contact")
+  console.log(payload, "payload")
   try {
     const res = await fetch(url, {
       method: "POST",
