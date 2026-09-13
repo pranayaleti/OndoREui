@@ -149,7 +149,7 @@ const ClosingCostCalculator: React.FC = () => {
               <ArrowLeft className="h-6 w-6" />
               <span className="sr-only">Back to all calculators</span>
             </Link>
-            <h1 className="text-2xl font-bold text-foreground">Closing Cost Calculator</h1>
+            <h1 className="text-2xl font-bold text-foreground">Utah Closing Cost Calculator</h1>
           </div>
         </div>
       </div>

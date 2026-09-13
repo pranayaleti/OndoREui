@@ -77,10 +77,10 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
             Market Report, {city.county} County
           </p>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
-            {city.name}, Utah Real Estate Market Report
+            {city.name}, Utah Housing Market
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-foreground/70">
-            Comprehensive market data, pricing trends, employment, schools, and investment metrics for {city.name}.
+            Median sale price, median rent, days on market, inventory and rent-to-price ratio for {city.name}, with nearby cities for comparison.
           </p>
         </div>
       </section>

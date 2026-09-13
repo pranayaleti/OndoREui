@@ -97,7 +97,7 @@ const HomeSaleCalculator: React.FC = () => {
               <ArrowLeft className="h-6 w-6" />
               <span className="sr-only">Back to all calculators</span>
             </Link>
-            <h1 className="text-2xl font-bold text-foreground">Home Sale Calculator</h1>
+            <h1 className="text-2xl font-bold text-foreground">Utah Home Sale Calculator</h1>
           </div>
         </div>
       </div>

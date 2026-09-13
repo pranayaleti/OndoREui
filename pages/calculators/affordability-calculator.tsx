@@ -170,7 +170,7 @@ const AffordabilityCalculator: React.FC = () => {
             <Link href="/calculators" aria-label="Back to Calculators" className="text-primary hover:text-primary">
               <ArrowLeft aria-hidden="true" className="h-6 w-6" />
             </Link>
-            <h1 className="text-2xl font-bold text-foreground">Mortgage Affordability Calculator</h1>
+            <h1 className="text-2xl font-bold text-foreground">Utah Mortgage Affordability Calculator</h1>
           </div>
         </div>
       </div>
