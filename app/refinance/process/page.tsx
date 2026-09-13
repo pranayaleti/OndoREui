@@ -5,17 +5,17 @@ import Link from "next/link"
 import { TrendingUp, FileText, Clock, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Mortgage Refinance Process | Ondo Real Estate",
-  description: "Step-by-step guide to refinancing your home loan in Utah, from evaluation to closing.",
+  title: pageTitle("Utah Refinance Process: Timeline & Documents"),
+  description: "What refinancing a Utah mortgage takes: the document checklist, appraisal step, typical 21 to 30 day timeline, and when break-even makes sense.",
   alternates: { canonical: `${SITE_URL}/refinance/process/` },
   openGraph: {
-    title: "Mortgage Refinance Process | Ondo Real Estate",
-    description: "Step-by-step guide to refinancing your home loan in Utah, from evaluation to closing.",
+    title: pageTitleText("Utah Refinance Process: Timeline & Documents"),
+    description: "What refinancing a Utah mortgage takes: the document checklist, appraisal step, typical 21 to 30 day timeline, and when break-even makes sense.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },

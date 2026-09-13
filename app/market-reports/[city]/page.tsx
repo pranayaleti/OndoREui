@@ -1,7 +1,8 @@
 import { MarketReportPage } from "@/components/market-report-page"
 import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { marketReportDescription, marketReportTitle } from "@/lib/seo-titles"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
@@ -17,10 +18,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { city: citySlug } = await params
   const city = findCityBySlug(citySlug)
   const cityName = city?.name ?? citySlug
-  const title = `${cityName}, Utah Real Estate Market Report | ${SITE_BRAND_SHORT}`
-  const description = `${cityName} market data: median home prices, rent, population growth, employment, schools, and investment metrics. Compare with nearby Utah cities.`
+  const title = pageTitleText(marketReportTitle(cityName))
+  const description = marketReportDescription(cityName)
   const canonical = `${SITE_URL}/market-reports/${citySlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 
@@ -33,8 +34,8 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <>
       <SEO
-        title={`${city.name}, Utah Real Estate Market Report | ${SITE_BRAND_SHORT}`}
-        description={`Comprehensive market data for ${city.name}, UT, prices, rent, growth, employment, and schools.`}
+        title={marketReportTitle(city.name)}
+        description={marketReportDescription(city.name)}
         pathname={`/market-reports/${citySlug}/`}
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([

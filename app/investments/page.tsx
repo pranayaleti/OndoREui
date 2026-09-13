@@ -3,18 +3,18 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/investments") },
-  title: "Utah Investment Properties | Ondo Real Estate",
+  title: pageTitle("Utah Investment Property: Rentals & Multifamily"),
   description:
-    "Discover high-yield investment properties in Utah. Turnkey rentals, multi-family, and commercial opportunities with expert management.",
+    "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
   openGraph: {
-    title: "Utah Investment Properties | Ondo Real Estate",
+    title: pageTitleText("Utah Investment Property: Rentals & Multifamily"),
     description:
-      "Discover high-yield investment properties in Utah. Turnkey rentals, multi-family, and commercial opportunities with expert management.",
+      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -31,28 +31,28 @@ const sections = [
     icon: Building2,
     title: "Commercial Real Estate",
     description:
-      "Explore asset classes, office, retail, industrial, multifamily, and learn how institutional-quality CRE deals are structured.",
+      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
   },
   {
     href: "/investments/opportunity-zones",
     icon: MapPin,
     title: "Opportunity Zones",
     description:
-      "Learn how Qualified Opportunity Zones defer and reduce capital-gains tax when you reinvest gains into designated tracts for the long term.",
+      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
   },
   {
     href: "/investments/fractional",
     icon: Users,
     title: "Fractional Ownership",
     description:
-      "Understand how LLC/SPV structures let you invest alongside other qualified investors with lower minimums and professional management.",
+      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
   },
   {
     href: "/investments/opportunities",
     icon: LayoutGrid,
     title: "Current Opportunities",
     description:
-      "Browse open, upcoming, and recently funded deals across Utah. Each listing includes projected returns, hold periods, and risk factors.",
+      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
   },
 ]
 

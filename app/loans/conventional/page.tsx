@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Home, DollarSign, Shield, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
@@ -16,12 +16,12 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Conventional Loans in Utah | Ondo Real Estate",
-  description: "Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges. This is not a quote or a credit decision.",
+  title: pageTitle("Conventional Loans in Utah: 3% Down & PMI Rules"),
+  description: "Conventional mortgages in Utah with as little as 3% down. See loan limits, credit tiers and exactly when PMI drops off at 78% LTV.",
   alternates: { canonical: `${SITE_URL}/loans/conventional/` },
   openGraph: {
-    title: "Conventional Loans in Utah | Ondo Real Estate",
-    description: "Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges. This is not a quote or a credit decision.",
+    title: pageTitleText("Conventional Loans in Utah: 3% Down & PMI Rules"),
+    description: "Conventional mortgages in Utah with as little as 3% down. See loan limits, credit tiers and exactly when PMI drops off at 78% LTV.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },

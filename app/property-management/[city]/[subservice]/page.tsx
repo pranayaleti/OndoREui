@@ -3,7 +3,7 @@ import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
 import { subServiceDefinitions, getSubServiceSlugsForParent } from "@/lib/sub-service-content"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -23,11 +23,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const city = findCityBySlug(citySlug)
   const def = subServiceDefinitions[subservice]
   if (!city || !def) return {}
-  const title = `${def.metaTitle(city.name)} | ${SITE_BRAND_SHORT}`
+  const title = pageTitleText(`${def.metaTitle(city.name)} | ${SITE_BRAND_SHORT}`)
   const description = def.metaDescription(city.name)
   const canonical = `${SITE_URL}/property-management/${citySlug}/${subservice}/`
   return {
-    title: { absolute: title },
+    title: pageTitle(title),
     description,
     alternates: { canonical },
     openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },

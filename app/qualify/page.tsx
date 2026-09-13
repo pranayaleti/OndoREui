@@ -11,7 +11,7 @@ import { ContentFaq } from "@/components/content/content-faq"
 import { ComparisonTable } from "@/components/content/comparison-table"
 import { Button } from "@/components/ui/button"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { LENDING_FACTS_AS_OF, QUALIFY_CONVERSATION } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
@@ -57,7 +57,7 @@ const rows: readonly ComparisonRow[] = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/qualify", {
-  title: "Start a Mortgage Conversation | What You Will Be Asked | Ondo Real Estate",
+  title: pageTitle("Start a Mortgage Conversation | What You Will Be Asked | Ondo Real Estate"),
   description:
     "What a first mortgage conversation asks, and what it will not promise. Not an approval, a lock, or a credit decision.",
 })

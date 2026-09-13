@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -11,7 +11,7 @@ import { Calendar, User, ArrowRight, Phone, Mail } from "lucide-react"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about/news", {
-  title: "News & Updates | Ondo Real Estate",
+  title: pageTitle("News & Updates | Ondo Real Estate"),
   description: "Stay informed with the latest news and insights from Ondo Real Estate.",
 })
 

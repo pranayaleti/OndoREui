@@ -1,7 +1,7 @@
 import { CityServicePage } from "@/components/city-service-page"
 import { findCityByZip, allZips } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { zip } = await params
   const city = findCityByZip(zip)
   const cityName = city?.name ?? "Utah"
-  const title = `Real Estate Agents ${zip} (${cityName}) | ${SITE_NAME}`
+  const title = pageTitleText(`Real Estate Agents ${zip} (${cityName}) | ${SITE_NAME}`)
   const description = `Buy or sell a home in ${cityName} ${zip}. Local expertise and full-service support.`
   const canonical = `${SITE_URL}/buy-sell/zip/${zip}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

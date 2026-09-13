@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -12,7 +12,7 @@ import { Award } from "lucide-react"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about/team", {
-  title: "Our Team | Ondo Real Estate",
+  title: pageTitle("Our Team | Ondo Real Estate"),
   description: "Experienced professionals dedicated to your success across Utah real estate.",
 })
 

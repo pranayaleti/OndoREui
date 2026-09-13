@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
@@ -13,11 +13,11 @@ import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Cash-Out Refinance in Utah | Ondo Real Estate",
+  title: pageTitle("Cash-Out Refinance in Utah | Ondo Real Estate"),
   description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.",
   alternates: { canonical: `${SITE_URL}/refinance/cash-out/` },
-  openGraph: { title: "Cash-Out Refinance in Utah | Ondo Real Estate", description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", url: `${SITE_URL}/refinance/cash-out/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "Cash-Out Refinance in Utah | Ondo Real Estate", description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("Cash-Out Refinance in Utah | Ondo Real Estate"), description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", url: `${SITE_URL}/refinance/cash-out/`, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("Cash-Out Refinance in Utah | Ondo Real Estate"), description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function CashOutRefinancePage() {

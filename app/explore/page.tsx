@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import ExploreMapClient from "./explore-map-client";
 import { fetchProperties } from "@/lib/api/properties";
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/explore") },
-  title: "Explore properties | Ondo",
+  title: pageTitle("Explore properties | Ondo"),
   description: "Map view of available properties.",
 };
 

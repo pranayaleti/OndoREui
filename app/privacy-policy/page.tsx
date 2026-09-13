@@ -4,7 +4,7 @@
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -13,11 +13,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Ondo Real Estate",
+  title: pageTitle("Privacy Policy | Ondo Real Estate"),
   description: "Learn how Ondo Real Estate protects your personal information and privacy. Read our comprehensive privacy policy.",
   alternates: { canonical: `${SITE_URL}/privacy-policy/` },
   openGraph: {
-    title: "Privacy Policy | Ondo Real Estate",
+    title: pageTitleText("Privacy Policy | Ondo Real Estate"),
     description: "Learn how Ondo Real Estate protects your personal information and privacy. Read our comprehensive privacy policy.",
     images: DEFAULT_OG_IMAGES,
   },

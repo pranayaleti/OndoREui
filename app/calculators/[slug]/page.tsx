@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateWebApplicationJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Loading from "@/components/loading"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { CalculatorAgentIntro } from "@/components/calculators/calculator-agent-intro"
@@ -98,16 +98,20 @@ export async function generateMetadata({
   const detail = CALCULATOR_CATALOG[slug]
   if (!detail) return {}
   const canonical = `${SITE_URL}/calculators/${slug}/`
+  // Geo-qualify: these rank against "<tool> calculator utah" and
+  // "how much are closing costs in utah", never against the bare tool name.
+  const seoTitle = detail.seoTitle ?? `Utah ${detail.name}`
+  const seoDescription = detail.seoDescription ?? detail.description
   return {
-    title: `${detail.name}`,
-    description: detail.description,
+    title: pageTitle(seoTitle),
+    description: seoDescription,
     alternates: {
       canonical,
       types: { "text/markdown": `${SITE_URL}/calculators/${slug}.md` },
     },
     openGraph: {
-      title: `${detail.name} | ${SITE_NAME}`,
-      description: detail.description,
+      title: pageTitleText(seoTitle),
+      description: seoDescription,
       url: canonical,
       images: DEFAULT_OG_IMAGES,
     },

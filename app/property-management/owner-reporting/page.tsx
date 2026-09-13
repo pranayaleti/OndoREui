@@ -5,17 +5,17 @@ import Link from "next/link"
 import { BarChart3, FileText, DollarSign, FolderOpen } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
+import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Owner Reporting | Property Management Utah | Ondo Real Estate",
+  title: pageTitle("Owner Reporting | Property Management Utah | Ondo Real Estate"),
   description: "Real-time owner reporting for Utah rental properties: monthly statements, NOI tracking, maintenance history, and document vault, all in one dashboard.",
   alternates: { canonical: `${SITE_URL}/property-management/owner-reporting/` },
-  openGraph: { title: "Owner Reporting | Ondo Real Estate", description: "Monthly statements, NOI tracking, and document vault for Utah rental owners.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "Owner Reporting | Ondo", description: "Real-time financial and maintenance reporting for Utah rental owners.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("Owner Reporting | Ondo Real Estate"), description: "Monthly statements, NOI tracking, and document vault for Utah rental owners.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("Owner Reporting | Ondo"), description: "Real-time financial and maintenance reporting for Utah rental owners.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const features = [

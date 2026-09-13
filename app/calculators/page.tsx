@@ -3,19 +3,18 @@ import CalculatorsPage from "./CalculatorsPage"
 import { GlossaryCategoryGrid } from "@/components/content/glossary-terms"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_NAME } from "@/lib/site"
-
+import { SITE_URL, SITE_NAME, pageTitleText } from "@/lib/site"
 export const metadata: Metadata = {
   title: "Mortgage & Affordability Calculators",
   description:
-    "Use our free mortgage payment, affordability, refinance, and investment calculators to plan your Utah home purchase, refinance, or real estate investment.",
+    "Free Utah calculators for buyers, sellers and landlords: mortgage payment, closing costs, net sale proceeds and refinance break-even.",
   alternates: {
     canonical: `${SITE_URL}/calculators/`,
   },
   openGraph: {
-    title: `Mortgage & Affordability Calculators | ${SITE_NAME}`,
+    title: pageTitleText("Utah Real Estate Calculators: Mortgage & Closing Cost"),
     description:
-      "Free real estate calculators for mortgage payments, home affordability, refinance break-even, rental ROI, and more.",
+      "Free Utah calculators for buyers, sellers and landlords: mortgage payment, closing costs, net sale proceeds and refinance break-even.",
     url: `${SITE_URL}/calculators`,
     images: [
       {

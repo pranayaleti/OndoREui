@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import SubscribePageClient from "./page-client"
+import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = pageCanonicalMetadata("/subscribe", {
-  title: "Subscribe | Ondo Real Estate",
+  title: pageTitle("Subscribe | Ondo Real Estate"),
   description: "Get Utah market updates, owner tips, and Ondo Real Estate news by email.",
 })
 

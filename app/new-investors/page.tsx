@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, pageTitle, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,12 +19,12 @@ import {
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "New Investors | Get Started with Ondo Real Estate",
+  title: pageTitle("New Investors | Get Started with Ondo Real Estate"),
   description:
     "New to real estate investing? Ondo Real Estate guides first-time investors through passive income, multifamily properties, and long-term wealth-building in Utah.",
   alternates: { canonical: `${SITE_URL}/new-investors/` },
   openGraph: {
-    title: "New Investors | Get Started with Ondo Real Estate",
+    title: pageTitleText("New Investors | Get Started with Ondo Real Estate"),
     description:
       "New to real estate investing? Learn how Ondo Real Estate can help you build passive income through professionally managed properties in Utah.",
     url: `${SITE_URL}/new-investors`,

@@ -3,10 +3,9 @@ import SEO from "@/components/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/turbotenant-vs-buildium-vs-ondo"
-const title = "TurboTenant vs Buildium vs Ondo: The Honest Comparison (2026)"
+const title = pageTitleText("TurboTenant vs Buildium vs Ondo: The Honest Comparison (2026)")
 const description = "A straight comparison of TurboTenant, Buildium, and Ondo across pricing, features, tenant fees, and who each one actually fits."
 const published = "2026-07-24"
 const modified = "2026-07-24"
@@ -23,11 +22,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo Real Estate`,
+  title: pageTitle(`${title} | Ondo Real Estate`),
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
   openGraph: {
-    title: `${title} | Ondo Real Estate`,
+    title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
     type: "article",
     publishedTime: published,
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${title} | Ondo Real Estate`,
+    title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
     images: [DEFAULT_OG_IMAGE_URL],
   },

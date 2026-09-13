@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, DollarSign } from "lucide-react"
 import { RelatedContent } from "@/components/content/related-content"
@@ -13,11 +13,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Loans & Financing FAQs | Ondo Real Estate",
+  title: pageTitle("Loans & Financing FAQs | Ondo Real Estate"),
   description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
   alternates: { canonical: `${SITE_URL}/faq/loans-faqs/` },
   openGraph: {
-    title: "Loans & Financing FAQs | Ondo Real Estate",
+    title: pageTitleText("Loans & Financing FAQs | Ondo Real Estate"),
     description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
     images: DEFAULT_OG_IMAGES,
   },

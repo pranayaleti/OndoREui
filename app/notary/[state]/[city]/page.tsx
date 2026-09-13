@@ -17,14 +17,7 @@ import {
   generateLocalBusinessJsonLd,
   generateServiceJsonLd,
 } from "@/lib/seo"
-import {
-  SITE_ADDRESS_OBJ,
-  SITE_GEO,
-  SITE_HOURS,
-  SITE_PHONE,
-  SITE_URL,
-} from "@/lib/site"
-
+import { SITE_ADDRESS_OBJ, SITE_GEO, SITE_HOURS, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
 type Params = Promise<{ state: string; city: string }>
 
 /** Static export cannot render unknown city slugs on demand. */
@@ -54,7 +47,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
         `RON ${city.name}`,
       ],
     }),
-    title: { absolute: title },
+    title: pageTitle(title),
   }
 }
 

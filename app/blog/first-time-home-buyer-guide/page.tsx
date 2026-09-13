@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { RelatedContent } from "@/components/content/related-content"
@@ -21,11 +21,11 @@ const image = "/suburban-house-garden.png"
 const keywords = ["first time home buyer Utah", "home buying guide", "pre-approval Utah", "FHA loan Utah", "down payment assistance Utah"]
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo Real Estate`,
+  title: pageTitle(`${title} | Ondo Real Estate`),
   description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: `${title} | Ondo Real Estate`, description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo Real Estate`, description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo Real Estate`), description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function FirstTimeHomeBuyerGuide() {

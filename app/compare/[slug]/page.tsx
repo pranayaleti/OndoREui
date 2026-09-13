@@ -2,7 +2,7 @@ import Link from "next/link"
 import { findCityBySlug, utahCitiesFromNorthOgdenToNephi, toCitySlug } from "@/lib/utah-cities"
 import { cityMarketData } from "@/lib/city-market-data"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
@@ -47,10 +47,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const a = findCityBySlug(pair.aSlug)
   const b = findCityBySlug(pair.bSlug)
   if (!a || !b) return {}
-  const title = `${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`
+  const title = pageTitleText(`${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`)
   const description = `Compare ${a.name} and ${b.name} side-by-side: home prices, rent, schools, commute, growth rate, and lifestyle.`
   const canonical = `${SITE_URL}/compare/${slug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

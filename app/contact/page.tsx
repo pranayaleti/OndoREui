@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
+import { SITE_URL, SITE_PHONE, SITE_EMAILS, pageTitleText } from "@/lib/site"
 import { ContactLeadForm } from "@/components/contact/contact-lead-form"
 import { ContactPageForm } from "@/components/contact/contact-page-form"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
@@ -13,7 +13,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Ondo Real Estate. We're your first point of contact, qualified leads and strategic outreach for property management, investments, and leasing across Utah.",
+    "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. Most messages get a same-day reply.",
   alternates: {
     canonical: `${SITE_URL}/contact/`,
     // First-party Markdown twin for AI agents. Also served on-the-fly via
@@ -21,8 +21,8 @@ export const metadata = {
     types: { "text/markdown": `${SITE_URL}/contact.md` },
   },
   openGraph: {
-    title: "Contact Us | Ondo Real Estate",
-    description: "Ondo Real Estate, your first point of contact for property management and real estate services in Utah. Qualified leads, strategic outreach.",
+    title: pageTitleText("Contact Ondo Real Estate: Utah Agents & Lenders"),
+    description: "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. Most messages get a same-day reply.",
     url: `${SITE_URL}/contact`,
     images: DEFAULT_OG_IMAGES,
   },

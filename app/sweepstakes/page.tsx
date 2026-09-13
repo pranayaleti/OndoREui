@@ -3,13 +3,13 @@ import { Gift, Trophy, Sparkles, Star, Award } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { SweepstakesContent } from "./sweepstakes-content"
 import Image from "next/image"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/sweepstakes", {
-  title: "Apple Tech Giveaway Sweepstakes | Ondo Real Estate",
+  title: pageTitle("Apple Tech Giveaway Sweepstakes | Ondo Real Estate"),
   description: "Enter Ondo Real Estate sweepstakes for a chance to win Apple products. Official rules apply.",
 })
 

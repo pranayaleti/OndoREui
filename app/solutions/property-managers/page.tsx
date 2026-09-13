@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/solutions/property-managers") },
-  title: "For Property Managers | Ondo Real Estate",
+  title: pageTitle("For Property Managers | Ondo Real Estate"),
   description: "Scale your property management operation with automated maintenance routing, vendor management, and owner reporting.",
 }
 

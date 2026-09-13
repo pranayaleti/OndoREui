@@ -5,7 +5,7 @@ import { ArrowRight, Calculator } from "lucide-react"
 import SEO from "@/components/seo"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { generateBreadcrumbJsonLd, generateDefinedTermJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import {
@@ -29,9 +29,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!entry) return {}
 
   // "What is X?" mirrors how the term is actually searched, without keyword stuffing.
-  const title = `${entry.term} — What It Means | ${SITE_NAME}`
+  const title = pageTitleText(`${entry.term} — What It Means | ${SITE_NAME}`)
   return pageCanonicalMetadata(glossaryHref(entry.slug), {
-    title: { absolute: title },
+    title: pageTitle(title),
     description: entry.short,
     keywords: [entry.term, ...(entry.aliases ?? [])],
     openGraph: {

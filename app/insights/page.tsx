@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/insights") },
-  title: "Research & Insights | Ondo Real Estate",
+  title: pageTitle("Research & Insights | Ondo Real Estate"),
   description: "Market analysis, guides, and thought leadership from the Ondo team.",
 }
 

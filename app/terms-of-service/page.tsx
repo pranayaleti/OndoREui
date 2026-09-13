@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -10,7 +10,7 @@ import { FileText, Scale, Shield, AlertTriangle, CheckCircle, Users } from "luci
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/terms-of-service", {
-  title: "Terms of Service | Ondo Real Estate",
+  title: pageTitle("Terms of Service | Ondo Real Estate"),
   description: "Terms of service for using the Ondo Real Estate website and related services.",
 })
 

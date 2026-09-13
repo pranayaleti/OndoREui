@@ -8,7 +8,7 @@ import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { ContentFaq } from "@/components/content/content-faq"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { DTI_EDUCATION, LENDING_FACTS_AS_OF } from "@/lib/content"
 
@@ -36,7 +36,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/learn/variable-income", {
-  title: "Mortgages When Income Changes Monthly | Ondo Real Estate",
+  title: pageTitle("Mortgages When Income Changes Monthly | Ondo Real Estate"),
   description:
     "How underwriters average overtime, 1099, commission, and self-employed income. Educational, not a credit decision.",
 })

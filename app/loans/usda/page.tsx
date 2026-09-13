@@ -5,7 +5,7 @@ import Link from "next/link"
 import { DollarSign, MapPin, Home, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
@@ -16,18 +16,18 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate",
+  title: pageTitle("USDA Loans in Utah: Zero Down in Rural Areas"),
   description:
-    "USDA loans can be zero down when the address map, household income, and occupancy tests fit. Confirm current RD tools. Educational, not a credit decision.",
+    "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.",
   alternates: { canonical: `${SITE_URL}/loans/usda/` },
-  openGraph: { title: "USDA Rural Loans in Utah | Map and Income Tests | Ondo Real Estate", description: "USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "USDA Loans in Utah | Ondo Real Estate", description: "Zero down when map, income, and occupancy tests fit. Confirm current USDA tools.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const benefits = [
-  { title: "Zero down when eligible", description: "100% financing is available only when the property map, household income, occupancy, and overlays all fit.", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Zero down when eligible", description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", icon: <DollarSign className="h-6 w-6" /> },
   { title: "Address-specific map", description: USDA_SNAPSHOT.mapNote, icon: <MapPin className="h-6 w-6" /> },
-  { title: "Guarantee fee (snapshot)", description: `${USDA_SNAPSHOT.upfrontGuaranteeFee}. Annual: ${USDA_SNAPSHOT.annualFee}. ${USDA_SNAPSHOT.feeNote}`, icon: <Home className="h-6 w-6" /> },
+  { title: "Guarantee fee (snapshot)", description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", icon: <Home className="h-6 w-6" /> },
   { title: "Primary residence", description: USDA_SNAPSHOT.occupancy, icon: <CheckCircle className="h-6 w-6" /> },
 ]
 

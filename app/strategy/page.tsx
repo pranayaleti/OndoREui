@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,12 +19,12 @@ import {
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Investment Strategy | Ondo Real Estate",
+  title: pageTitle("Investment Strategy | Ondo Real Estate"),
   description:
     "Learn how Ondo Real Estate identifies, acquires, and manages value-add multifamily and single-family properties in Utah to deliver consistent returns for investors.",
   alternates: { canonical: `${SITE_URL}/strategy/` },
   openGraph: {
-    title: "Investment Strategy | Ondo Real Estate",
+    title: pageTitleText("Investment Strategy | Ondo Real Estate"),
     description:
       "Ondo's disciplined acquisition and property management strategy focuses on Utah's high-growth markets to generate long-term passive income for investors.",
     url: `${SITE_URL}/strategy`,

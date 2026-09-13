@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PageBanner } from "@/components/page-banner"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import ConsultationCTA from "@/components/ConsultationCTA"
 
 export const metadata: Metadata = {
-  title: "Utah Property Management | Owners & Investors | Ondo Real Estate",
+  title: pageTitle("Utah Property Management: Fees, Leasing & Screening"),
   description:
-    "Full-service Utah property management: tenant screening, rent collection, maintenance, owner dashboards, and transparent reporting. One team with brokerage, mortgage, and notary support.",
+    "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
   keywords: [
     "Utah property management",
     "property management Lehi",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/property-management/`,
   },
   openGraph: {
-    title: `Utah Property Management | ${SITE_NAME}`,
+    title: pageTitleText("Utah Property Management: Fees, Leasing & Screening"),
     description:
-      "Professional property management across Utah: leasing, screening, maintenance, and real-time visibility for owners.",
+      "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
     url: `${SITE_URL}/property-management/`,
     images: [
       {
@@ -45,22 +45,22 @@ const pillars = [
   {
     icon: <ClipboardCheck className="h-8 w-8 text-primary" aria-hidden />,
     title: "Leasing & screening",
-    description: "Marketing vacant units, showings, applications, and thorough tenant screening so you start with the right residents.",
+    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
   },
   {
     icon: <Wallet className="h-8 w-8 text-primary" aria-hidden />,
     title: "Rent & reporting",
-    description: "Rent collection, owner statements, and clear financial reporting so you always know how the asset is performing.",
+    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
   },
   {
     icon: <Wrench className="h-8 w-8 text-primary" aria-hidden />,
     title: "Maintenance & compliance",
-    description: "Coordinated repairs, vendor relationships, and documented work, plus support for Utah rental compliance expectations.",
+    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
   },
   {
     icon: <Shield className="h-8 w-8 text-primary" aria-hidden />,
     title: "Owner & tenant experience",
-    description: "Dedicated workflows for owners and tenants: fewer handoffs, faster responses, and a single partner accountable for outcomes.",
+    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
   },
 ]
 

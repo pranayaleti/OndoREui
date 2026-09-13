@@ -1,4 +1,4 @@
-import { SITE_SOCIALS } from "@/lib/site"
+import { SITE_SOCIALS, pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
@@ -19,7 +19,7 @@ import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 import { LICENSING_HREF } from "@/lib/social-proof-stats"
 
 export const metadata: Metadata = {
-  title: "Buy a Home in Utah | Agent-Led Search & Lending | Ondo Real Estate",
+  title: pageTitle("Buy a Home in Utah | Agent-Led Search & Lending | Ondo Real Estate"),
   description:
     "Work with an Ondo buyer’s agent across the Wasatch Front. Agent-led for-sale search, in-house mortgages, and rental inventory on this site. Not a public MLS feed. Not a commitment to lend.",
   keywords: [

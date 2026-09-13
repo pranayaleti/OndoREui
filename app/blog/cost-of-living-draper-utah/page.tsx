@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -17,10 +17,10 @@ const image = "/city-map-with-pin.png"
 const keywords = ["cost of living Draper Utah", "Draper UT housing costs", "Draper Utah expenses", "is Draper Utah expensive", "Draper vs Salt Lake City cost"]
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo Real Estate`,
+  title: pageTitle(`${title} | Ondo Real Estate`),
   description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: `${title} | Ondo Real Estate`, description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
+  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

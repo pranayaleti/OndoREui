@@ -9,7 +9,7 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { ContentFaq } from "@/components/content/content-faq"
 import { ComparisonTable } from "@/components/content/comparison-table"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { LENDING_FACTS_AS_OF, OCCUPANCY_TYPES } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
@@ -51,7 +51,7 @@ const rows: readonly ComparisonRow[] = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/learn/investment", {
-  title: "Investment Property Financing | Ondo Real Estate",
+  title: pageTitle("Investment Property Financing | Ondo Real Estate"),
   description:
     "DSCR vs full-doc, occupancy types, cash-out to buy a rental, and FHA duplex house-hacks. Informational, not occupancy coaching.",
 })

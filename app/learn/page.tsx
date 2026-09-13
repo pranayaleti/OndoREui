@@ -8,11 +8,11 @@ import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/learn", {
-  title: "Mortgage Learning Hub | Ondo Real Estate",
+  title: pageTitle("Mortgage Learning Hub | Ondo Real Estate"),
   description:
     "Utah mortgage education by topic: first-time buyers, loan programs, variable income, refinance, VA, FHA, credit, and calculators. Informational, not a credit decision.",
 })

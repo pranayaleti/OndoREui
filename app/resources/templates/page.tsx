@@ -1,7 +1,7 @@
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { TemplatesCatalog } from "@/components/resources/templates-catalog"
@@ -10,19 +10,19 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Landlord Templates & Seller Listing-Prep | Ondo Real Estate",
+  title: pageTitle("Landlord Templates & Seller Listing-Prep | Ondo Real Estate"),
   description:
     "Browse Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet for other states. We email the file after you request it — not an instant download.",
   alternates: { canonical: `${SITE_URL}/resources/templates/` },
   openGraph: {
-    title: "Landlord Templates, Addendums & Disclosures | Ondo Real Estate",
+    title: pageTitleText("Landlord Templates, Addendums & Disclosures | Ondo Real Estate"),
     description:
       "Request Utah-oriented lease, addendum, and disclosure packets, plus a federal lead-paint disclosure. Files are emailed after you request them.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Landlord Templates | Ondo Real Estate",
+    title: pageTitleText("Landlord Templates | Ondo Real Estate"),
     description:
       "Utah lease, addendums, disclosures, and a seller listing-prep checklist. Request the file — not an instant download.",
     images: [DEFAULT_OG_IMAGE_URL],

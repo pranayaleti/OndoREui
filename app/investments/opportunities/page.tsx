@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitleText } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { InvestmentCard } from "@/components/investments/investment-card"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "Browse current commercial real estate and fractional ownership investment opportunities in Utah. View deal details, projected returns, and investment minimums.",
   alternates: { canonical: `${SITE_URL}/investments/opportunities/` },
   openGraph: {
-    title: "Investment Opportunities | Ondo Real Estate",
+    title: pageTitleText("Investment Opportunities | Ondo Real Estate"),
     description:
       "Browse current commercial real estate and fractional ownership investment opportunities in Utah.",
     url: `${SITE_URL}/investments/opportunities/`,

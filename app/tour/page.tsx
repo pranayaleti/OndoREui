@@ -10,10 +10,11 @@ import {
   TOUR_ASSISTANT_DISCLAIMER,
   type TourScreenId,
 } from "@/components/tour/tour-product-screen"
+import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/tour") },
-  title: "Platform Tour | Ondo Real Estate",
+  title: pageTitle("Platform Tour | Ondo Real Estate"),
   description: "Take a guided tour of the Ondo platform, owner dashboard, tenant portal, AI assistant, and vendor tools.",
 }
 

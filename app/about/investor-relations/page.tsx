@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -10,8 +10,8 @@ import { FileText, Download, Phone, Mail, Calendar } from "lucide-react"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about/investor-relations", {
-  title: "Investor Relations | Ondo Real Estate",
-  description: "Financial information and resources for investors and stakeholders.",
+  title: pageTitle("Ondo Real Estate Investor Relations"),
+  description: "Reporting, distributions and deal documents for Ondo Real Estate investors, plus how to get on the list for upcoming Utah opportunities today.",
 })
 
 

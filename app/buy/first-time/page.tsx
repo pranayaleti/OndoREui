@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -14,8 +14,8 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/first-time", {
-  title: "First-Time Homebuyer Guide | Utah Real Estate",
-  description: "Step-by-step guidance, programs, and calculators for first-time homebuyers in Utah.",
+  title: pageTitle("First-Time Home Buyers in Utah: Grants & Steps"),
+  description: "What a first-time buyer in Utah needs: down payment assistance programs, credit and income limits, and the step-by-step timeline to closing.",
 })
 
 

@@ -6,7 +6,7 @@ import {
   generateWebsiteJsonLd,
 } from "@/lib/seo"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { getFlatSiteIndexForJsonLd, getSiteIndexSections } from "@/lib/site-index"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -29,7 +29,7 @@ import {
 } from "lucide-react"
 
 export const metadata: Metadata = pageCanonicalMetadata("/sitemap", {
-  title: "HTML Sitemap | Ondo Real Estate",
+  title: pageTitle("HTML Sitemap | Ondo Real Estate"),
   description: "Browse every public Ondo Real Estate page, services, locations, blog, and tools.",
 })
 

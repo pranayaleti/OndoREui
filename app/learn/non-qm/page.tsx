@@ -9,7 +9,7 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { ContentFaq } from "@/components/content/content-faq"
 import { ComparisonTable } from "@/components/content/comparison-table"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { LENDING_FACTS_AS_OF, NON_QM } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
@@ -55,7 +55,7 @@ const rows: readonly ComparisonRow[] = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/learn/non-qm", {
-  title: "Non-QM, Bank-Statement, and DSCR | Ondo Real Estate",
+  title: pageTitle("Non-QM, Bank-Statement, and DSCR | Ondo Real Estate"),
   description:
     "Bank-statement, DSCR, and asset-depletion are different Non-QM stacks. Informational, not a credit decision or a cheaper conventional shortcut.",
 })

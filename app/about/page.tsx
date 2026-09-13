@@ -4,17 +4,12 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { ChatGptBrandIcon, ClaudeBrandIcon } from "@/components/ai-assistant-brand-icons"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import {
-  SITE_URL,
-  SITE_AI_VERIFY_QUESTION,
-  SITE_CLAUDE_ASK_ONDO_URL,
-  SITE_CHATGPT_REFERRAL_URL,
-} from "@/lib/site"
+import { SITE_URL, SITE_AI_VERIFY_QUESTION, SITE_CLAUDE_ASK_ONDO_URL, SITE_CHATGPT_REFERRAL_URL, pageTitle } from "@/lib/site"
 import Image from "next/image"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about", {
-  title: "Ondo Real Estate: One-Stop Property Services | Buy • Sell • Manage • Loans",
+  title: pageTitle("Ondo Real Estate: One-Stop Property Services | Buy • Sell • Manage • Loans"),
   description: "Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help, one team instead of fragmented vendors.",
 })
 

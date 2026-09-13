@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { FeeAlignmentWidget } from "@/components/landing/fee-alignment-widget"
 import { IncludedVsTypicalTable } from "@/components/pricing/included-vs-typical-table"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Transparent property management pricing for Utah property owners. No hidden fees, just percentage-based plans that scale with your portfolio.",
   alternates: { canonical: `${SITE_URL}/pricing/` },
   openGraph: {
-    title: `Pricing | ${SITE_BRAND_SHORT}`,
+    title: pageTitleText(`Pricing | ${SITE_BRAND_SHORT}`),
     description:
       "Property management pricing Utah, percentage-based plans for portfolios of every size. Tenant screening, rent collection, maintenance, and more.",
     url: `${SITE_URL}/pricing`,

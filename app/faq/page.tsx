@@ -4,16 +4,16 @@ import { AlertCircle, DollarSign, Home, Building2, AlertTriangle, CheckCircle, C
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "FAQs | Property Management & Rentals | Ondo Real Estate",
+  title: pageTitle("FAQs | Property Management & Rentals | Ondo Real Estate"),
   description: "Find answers to common questions about our property management services and renting with Ondo Real Estate.",
   alternates: { canonical: `${SITE_URL}/faq/` },
   openGraph: {
-    title: "FAQs | Property Management & Rentals | Ondo Real Estate",
+    title: pageTitleText("FAQs | Property Management & Rentals | Ondo Real Estate"),
     description: "Find answers to common questions about our property management services and renting with Ondo Real Estate.",
     images: DEFAULT_OG_IMAGES,
   },

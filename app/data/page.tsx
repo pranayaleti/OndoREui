@@ -6,29 +6,28 @@ import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
 import { CITY_MARKET_AS_OF, CITY_MARKET_DATA_DISCLOSURE } from "@/lib/city-market-data"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle } from "@/lib/site"
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/data") },
-  title: "Utah Real Estate Market Data | Ondo Real Estate",
+  title: pageTitle("Utah Housing Data: Prices, Rents & Inventory"),
   description:
-    "How Ondo publishes city-level housing and rent medians for the Wasatch Front, with links to each city report. Not an MLS pull, appraisal, or statewide average.",
+    "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
 }
 
 const reportKinds = [
   {
     title: "City market reports",
-    description: "Ondo medians, commute notes, and service links for each published city.",
+    description: "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
     href: "/market-reports/",
   },
   {
     title: "Locations directory",
-    description: "Every city we publish service pages for, grouped by county.",
+    description: "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
     href: "/locations/",
   },
   {
     title: "School district guides",
-    description: "District geography and official websites. Confirm details with the district.",
+    description: "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
     href: "/schools/",
   },
 ]

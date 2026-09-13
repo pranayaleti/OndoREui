@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Reverse Mortgages in Utah | Ondo Real Estate",
+  title: pageTitle("Reverse Mortgages in Utah | Ondo Real Estate"),
   description: "A reverse mortgage lets Utah homeowners 62+ convert home equity into income without monthly mortgage payments. Learn how HECMs work and the trade-offs.",
   alternates: { canonical: `${SITE_URL}/loans/reverse/` },
-  openGraph: { title: "Reverse Mortgages in Utah | Ondo Real Estate", description: "A reverse mortgage lets Utah homeowners 62+ convert home equity into income without monthly mortgage payments. Learn how HECMs work and the trade-offs.", url: `${SITE_URL}/loans/reverse/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "Reverse Mortgages in Utah | Ondo Real Estate", description: "A reverse mortgage lets Utah homeowners 62+ convert home equity into income without monthly mortgage payments. Learn how HECMs work and the trade-offs.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description: "A reverse mortgage lets Utah homeowners 62+ convert home equity into income without monthly mortgage payments. Learn how HECMs work and the trade-offs.", url: `${SITE_URL}/loans/reverse/`, images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description: "A reverse mortgage lets Utah homeowners 62+ convert home equity into income without monthly mortgage payments. Learn how HECMs work and the trade-offs.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function ReverseMortgagePage() {

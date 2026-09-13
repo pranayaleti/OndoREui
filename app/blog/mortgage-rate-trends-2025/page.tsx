@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -18,11 +18,11 @@ const image = "/modern-townhouse-garage.png"
 const keywords = ["mortgage rate trends 2025", "Utah mortgage rates", "when to lock mortgage rate", "Fed rate cuts 2025", "refinance timing Utah"]
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo Real Estate`,
+  title: pageTitle(`${title} | Ondo Real Estate`),
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: `${title} | Ondo Real Estate`, description: description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo Real Estate`, description: description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description: description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo Real Estate`), description: description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function MortgageRateTrends2025() {

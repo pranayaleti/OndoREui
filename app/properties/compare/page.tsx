@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ListingCompareClient } from "./page-client"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
-
+import { SITE_NAME, SITE_URL, pageTitle } from "@/lib/site"
 export const metadata: Metadata = {
-  title: `Compare listings | ${SITE_NAME}`,
+  title: pageTitle(`Compare listings | ${SITE_NAME}`),
   description: "Compare two or three Ondo rental listings using the facts on each public listing.",
   robots: { index: false, follow: true },
   alternates: { canonical: `${SITE_URL}/properties/compare/` },

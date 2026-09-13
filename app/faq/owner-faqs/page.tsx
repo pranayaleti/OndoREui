@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { UTAH_RENTAL_LAW_DISCLAIMER, utahRulesAsFaqs } from "@/lib/content/utah-rental-law"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, Building2 } from "lucide-react"
 import Script from "next/script"
@@ -11,11 +11,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Owner FAQs | Ondo Real Estate",
+  title: pageTitle("Owner FAQs | Ondo Real Estate"),
   description: "Find answers to property owner questions about management services, fees, tenant screening, maintenance, and reporting.",
   alternates: { canonical: `${SITE_URL}/faq/owner-faqs/` },
   openGraph: {
-    title: "Owner FAQs | Ondo Real Estate",
+    title: pageTitleText("Owner FAQs | Ondo Real Estate"),
     description: "Find answers to property owner questions about management services, fees, tenant screening, maintenance, and reporting.",
     images: DEFAULT_OG_IMAGES,
   },

@@ -12,19 +12,10 @@ import { Button } from "@/components/ui/button"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import {
-  SITE_URL,
-  SITE_NAME,
-  SITE_EMAILS,
-  SITE_PHONE,
-  SITE_ADDRESS_STREET,
-  SITE_ADDRESS_CITY,
-  SITE_ADDRESS_REGION,
-  SITE_ADDRESS_POSTAL_CODE,
-} from "@/lib/site"
+import { SITE_URL, SITE_NAME, SITE_EMAILS, SITE_PHONE, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, pageTitleText } from "@/lib/site"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-const title = `Licensing & Disclosures | ${SITE_NAME}`
+const title = pageTitleText(`Licensing & Disclosures | ${SITE_NAME}`)
 const description =
   "Real estate brokerage, property management, and mortgage licensing disclosures for Ondo Real Estate. Equal Housing Lender / Equal Housing Opportunity."
 

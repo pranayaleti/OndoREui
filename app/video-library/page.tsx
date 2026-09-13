@@ -6,11 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle } from "@/lib/site"
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/video-library") },
-  title: "Learn Ondo | Guides, Academy & Calculators",
+  title: pageTitle("Learn Ondo | Guides, Academy & Calculators"),
   description:
     "Learning paths for owners, tenants, buyers, and investors: academy, written guides, calculators, and a live walkthrough. We do not host a placeholder video grid.",
 }

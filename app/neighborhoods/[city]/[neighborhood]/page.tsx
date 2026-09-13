@@ -4,7 +4,7 @@ import { findCityBySlug } from "@/lib/utah-cities"
 import { findNeighborhood, allNeighborhoodParams, type NeighborhoodInfo } from "@/lib/neighborhood-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL, SITE_PHONE } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, SITE_PHONE, pageTitle } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
@@ -96,7 +96,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const description = hood ? buildNeighborhoodDescription(hood, city!.name) : ""
   const canonical = `${SITE_URL}/neighborhoods/${citySlug}/${neighborhoodSlug}/`
   return {
-    title: { absolute: title },
+    title: pageTitle(title),
     description,
     alternates: { canonical },
     openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },

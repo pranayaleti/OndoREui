@@ -2,12 +2,12 @@
 import type { Metadata } from "next"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_NAME } from "@/lib/site"
+import { SITE_URL, SITE_NAME, pageTitleText } from "@/lib/site"
 import { HomeValueEstimator } from "@/components/home-value-estimator"
 import { ListingPacketForm } from "@/components/leads/listing-packet-form"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-const title = "What's My Utah Home Worth?: Free Rent + Sale Estimate | Ondo RE"
+const title = pageTitleText("What's My Utah Home Worth?: Free Rent + Sale Estimate | Ondo RE")
 const description =
   "Free instant estimate of what your Utah home would rent for AND sell for. Covers 55+ Wasatch Front cities, from Salt Lake City to Provo, Lehi to Ogden. No signup to see your number."
 

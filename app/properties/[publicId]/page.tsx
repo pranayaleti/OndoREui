@@ -2,7 +2,7 @@
 // English for SEO under output: "export". Tracked as a Phase 1 follow-up:
 // move client-only sections into a "use client" subtree wired to useTranslation.
 import { Metadata } from "next"
-import { SITE_URL, SITE_NAME } from "@/lib/site"
+import { SITE_URL, SITE_NAME, pageTitle, pageTitleText } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { PropertyListingDetailClient } from "@/components/properties/property-listing-detail-client"
 import { PropertyListingDetail } from "@/components/properties/property-listing-detail"
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!property) return { title: "Property not found", robots: { index: false, follow: false } }
 
   const cityState = [property.city, property.state].filter(Boolean).join(", ")
-  const title = `${property.title} – ${cityState} | ${SITE_NAME}`
+  const title = pageTitleText(`${property.title} – ${cityState} | ${SITE_NAME}`)
   const fallback = `${property.bedrooms} BR / ${property.bathrooms} BA in ${cityState}. Listed at $${property.price}/mo. Review written rental requirements, then tour or apply.`
   const description = property.description?.slice(0, 160) ?? fallback
   const canonicalPath = `/properties/${publicId}`
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const image = property.photos?.[0]?.url
 
   return {
-    title: { absolute: title },
+    title: pageTitle(title),
     description,
     alternates: {
       canonical,

@@ -18,8 +18,7 @@ import {
   generateFAQJsonLd,
   generateServiceJsonLd,
 } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle } from "@/lib/site"
 type Params = Promise<{ state: string }>
 
 /** Static export cannot render unknown state slugs on demand. */
@@ -46,7 +45,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
         `RON ${state.name}`,
       ],
     }),
-    title: { absolute: title },
+    title: pageTitle(title),
   }
 }
 

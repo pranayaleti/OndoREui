@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -14,9 +14,9 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/second-home", {
-  title: "Buying a Second Home | Utah Real Estate",
+  title: pageTitle("Second Home Loans in Utah: Down Payment & Rules"),
   description:
-    "Second-home occupancy is exclusive use for part of the year. A rental is investment occupancy. Education, not a credit decision.",
+    "Buying a second home or cabin in Utah: down payment and rate differences vs a primary residence, occupancy rules and short-term rental rules.",
 })
 
 

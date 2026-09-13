@@ -1,7 +1,7 @@
 import { CityPricingGuide } from "@/components/city-pricing-guide"
 import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { city: citySlug } = await params
   const city = findCityBySlug(citySlug)
   const cityName = city?.name ?? citySlug
-  const title = `Cost of Real Estate Services in ${cityName}, Utah | ${SITE_BRAND_SHORT}`
+  const title = pageTitleText(`Cost of Real Estate Services in ${cityName}, Utah | ${SITE_BRAND_SHORT}`)
   const description = `Property management fees, home buying costs, mortgage estimates, and rental market data for ${cityName}, UT. Compare with nearby cities.`
   const canonical = `${SITE_URL}/pricing/${citySlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

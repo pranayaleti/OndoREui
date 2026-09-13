@@ -1,11 +1,11 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import { ReferralContent } from "./referral-content"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitleText } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-const title = "You've Been Invited to Ondo RE | Ondo Real Estate"
+const title = pageTitleText("You've Been Invited to Ondo RE | Ondo Real Estate")
 const description =
   "Your friend invited you to Ondo RE, the platform connecting property managers, owners, and tenants. Sign up now and your friend earns a free month."
 const canonical = `${SITE_URL}/referral/`

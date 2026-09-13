@@ -6,11 +6,11 @@ import { PageBanner } from "@/components/page-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { APP_PORTAL_LOGIN_URL, APP_PORTAL_URL, SITE_URL } from "@/lib/site"
+import { APP_PORTAL_LOGIN_URL, APP_PORTAL_URL, SITE_URL, pageTitle } from "@/lib/site"
 import { CONTENT_TYPES, contentStudioPortalPath, type ContentType } from "@/lib/api/content-generation"
 
 export const metadata: Metadata = {
-  title: "Content studio | Ondo Real Estate",
+  title: pageTitle("Content studio | Ondo Real Estate"),
   description:
     "Draft listing video scripts, local content ideas, buyer Q&A, and market commentary from the Ondo portal. Scripts only — disclosures are appended after generation.",
   robots: { index: false },

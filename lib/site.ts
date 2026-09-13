@@ -232,3 +232,60 @@ export function getBackendConnectSrc(): string {
   }
   return [...origins].join(" ")
 }
+
+/* ------------------------------------------------------------------ *
+ * Page titles
+ *
+ * app/layout.tsx declares `template: "%s | Ondo RE"`, so any page that also
+ * appends the brand itself renders it twice ("... | Ondo Real Estate | Ondo
+ * RE"). Google truncates around 60 characters, so the doubled brand pushed
+ * the differentiating half of the title out of the SERP entirely.
+ *
+ * Every page title goes through pageTitle(). It strips whatever brand the
+ * caller passed, appends the short brand exactly once, and drops the brand
+ * when the core title already fills the budget: nobody searches "Ondo RE",
+ * so the brand is the first thing to cut, never the head term.
+ * ------------------------------------------------------------------ */
+
+/** Rendered title budget before Google truncates (~600px, ~60 characters). */
+export const SITE_TITLE_MAX = 60
+
+const BRAND_SUFFIX_RE = /\s*[|·|–|—|-]\s*(Ondo Real Estate|Ondo RE|Ondo)\s*$/i
+
+/** Remove any trailing brand the caller already appended, however many times. */
+export function stripBrand(raw: string): string {
+  let title = String(raw ?? "").trim()
+  for (;;) {
+    const next = title.replace(BRAND_SUFFIX_RE, "").trim()
+    if (next === title || next.length === 0) break
+    title = next
+  }
+  return title || String(raw ?? "").trim()
+}
+
+/** Canonical title string: brand appended once, and only if it still fits. */
+export function pageTitleText(raw: string): string {
+  const core = stripBrand(raw)
+  const branded = `${core} | ${SITE_BRAND_SHORT}`
+  return branded.length <= SITE_TITLE_MAX ? branded : core
+}
+
+/**
+ * Canonical `Metadata["title"]`. Always absolute so the root layout template
+ * cannot append a second brand on top.
+ */
+export function pageTitle(raw: string): { absolute: string } {
+  return { absolute: pageTitleText(raw) }
+}
+
+/**
+ * First candidate that fits the SERP budget, else the shortest.
+ * Lets a templated title degrade gracefully for long city names
+ * ("Cottonwood Heights", "Washington Terrace") instead of truncating.
+ */
+export function fitTitle(...candidates: string[]): string {
+  for (const candidate of candidates) {
+    if (candidate.length <= SITE_TITLE_MAX) return candidate
+  }
+  return candidates.reduce((a, b) => (b.length < a.length ? b : a))
+}

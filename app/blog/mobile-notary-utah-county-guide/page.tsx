@@ -14,17 +14,18 @@ import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { pageTitle, pageTitleText } from "@/lib/site"
 
 const TITLE = "Notary in Utah County: Remote Online Notarization, Fees, and How to Book"
 const DESCRIPTION =
   "ONDO Notary serves Utah County by Remote Online Notarization (RON), $25 per remote act, same-day when capacity allows. No mobile travel or in-office appointments."
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Ondo Real Estate`,
+  title: pageTitle(`${TITLE} | Ondo Real Estate`),
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/blog/mobile-notary-utah-county-guide/` },
   openGraph: {
-    title: `${TITLE} | Ondo Real Estate`,
+    title: pageTitleText(`${TITLE} | Ondo Real Estate`),
     description: DESCRIPTION,
     type: "article",
     publishedTime: "2025-01-10",

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { DollarSign, Shield, Star, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
@@ -17,18 +17,18 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "VA Home Loans in Utah | Zero Down for Veterans | Ondo Real Estate",
-  description: "VA loans offer zero down payment and no PMI for eligible veterans and active-duty service members in Utah. Learn about the funding fee, COE, and Hill AFB area lenders.",
+  title: pageTitle("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"),
+  description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.",
   alternates: { canonical: `${SITE_URL}/loans/va/` },
-  openGraph: { title: "VA Home Loans in Utah | Zero Down for Veterans | Ondo Real Estate", description: "VA loans offer zero down payment and no PMI for eligible veterans in Utah.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "VA Loans in Utah | Ondo Real Estate", description: "Zero down payment home loans for eligible veterans and service members in Utah.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const benefits = [
   { title: "Zero down when eligible", description: VA_FUNDING_FEE.downPaymentNote, icon: <DollarSign className="h-6 w-6" /> },
-  { title: "No private mortgage insurance", description: "VA loans do not charge monthly PMI. That is not a published monthly savings versus conventional.", icon: <Shield className="h-6 w-6" /> },
-  { title: "VA pricing", description: "VA loans are often priced differently from conventional because of the guarantee. That is not a promise of a lower rate on your file.", icon: <Star className="h-6 w-6" /> },
-  { title: "Closing costs", description: "VA rules allow sellers to pay some or all of certain closing costs, up to program limits. It is not automatic.", icon: <CheckCircle className="h-6 w-6" /> },
+  { title: "No private mortgage insurance", description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", icon: <Shield className="h-6 w-6" /> },
+  { title: "VA pricing", description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", icon: <Star className="h-6 w-6" /> },
+  { title: "Closing costs", description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
 export default function VALoanPage() {

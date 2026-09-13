@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
+import { SITE_URL, SITE_PHONE, SITE_EMAILS, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, HelpCircle } from "lucide-react"
 import Script from "next/script"
@@ -10,11 +10,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "General FAQs | Ondo Real Estate",
+  title: pageTitle("General FAQs | Ondo Real Estate"),
   description: "Get answers to general questions about Ondo Real Estate property management services, areas we serve, and how to get started.",
   alternates: { canonical: `${SITE_URL}/faq/general-faqs/` },
   openGraph: {
-    title: "General FAQs | Ondo Real Estate",
+    title: pageTitleText("General FAQs | Ondo Real Estate"),
     description: "Get answers to general questions about Ondo Real Estate property management services, areas we serve, and how to get started.",
     images: DEFAULT_OG_IMAGES,
   },

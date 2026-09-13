@@ -79,9 +79,15 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
       <section className="relative bg-gradient-to-br from-primary/5 to-background py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm font-medium text-primary mb-2">{city.county} County, Utah</p>
+          {/* H1 matches the query these pages actually rank for
+              ("<city> utah", "moving to <city>", "cost of living in <city>"),
+              not the sales framing that earned zero clicks. */}
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Why {city.name} Is a Great Place to Live &amp; Invest
+            Living in {city.name}, Utah
           </h1>
+          <p className="max-w-3xl mx-auto text-lg font-medium text-foreground/80 mb-3">
+            Cost of living, home prices, schools and neighborhoods
+          </p>
           {content?.overview && (
             <p className="max-w-3xl mx-auto text-lg text-foreground/70">{content.overview}</p>
           )}

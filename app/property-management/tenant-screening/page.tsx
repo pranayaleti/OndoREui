@@ -5,24 +5,24 @@ import Link from "next/link"
 import { UserCheck, Shield, FileText, Clock } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
+import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Tenant Screening Utah | Property Management | Ondo Real Estate",
-  description: "Comprehensive tenant screening for Utah landlords: credit, criminal, eviction, and income verification. Fair Housing compliant. Powered by the Ondo owner portal.",
+  title: pageTitle("Utah Tenant Screening: Credit, Criminal & Eviction"),
+  description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.",
   alternates: { canonical: `${SITE_URL}/property-management/tenant-screening/` },
-  openGraph: { title: "Tenant Screening Utah | Ondo Real Estate", description: "Credit, criminal, eviction, and income verification for Utah rental properties.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "Tenant Screening | Ondo Real Estate", description: "Comprehensive tenant screening for Utah landlords.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const checks = [
-  { title: "Credit Report", description: "Full tri-merge credit report with score, payment history, collections, and debt load", icon: <FileText className="h-6 w-6" /> },
-  { title: "Criminal Background", description: "National and state-level criminal background search with sex offender registry check", icon: <Shield className="h-6 w-6" /> },
-  { title: "Eviction History", description: "National eviction database search covering court filings and judgments", icon: <UserCheck className="h-6 w-6" /> },
-  { title: "Income Verification", description: "Employer verification, pay stub review, and bank statement analysis for 3× rent threshold", icon: <Clock className="h-6 w-6" /> },
+  { title: "Credit Report", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <FileText className="h-6 w-6" /> },
+  { title: "Criminal Background", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <Shield className="h-6 w-6" /> },
+  { title: "Eviction History", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <UserCheck className="h-6 w-6" /> },
+  { title: "Income Verification", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <Clock className="h-6 w-6" /> },
 ]
 
 export default function TenantScreeningPage() {

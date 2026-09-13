@@ -1,7 +1,7 @@
 import { CityServicePage } from "@/components/city-service-page"
 import { findCityByZip, allZips } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { zip } = await params
   const city = findCityByZip(zip)
   const cityName = city?.name ?? "Utah"
-  const title = `Property Management ${zip} (${cityName}) | ${SITE_BRAND_SHORT}`
+  const title = pageTitleText(`Property Management ${zip} (${cityName}) | ${SITE_BRAND_SHORT}`)
   const description = `Rental property management in ${zip} ${cityName}, tenant screening, rent collection, and maintenance. Get a free rental analysis.`
   const canonical = `${SITE_URL}/property-management/zip/${zip}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

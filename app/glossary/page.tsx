@@ -3,7 +3,7 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { generateBreadcrumbJsonLd, generateDefinedTermSetJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { GLOSSARY_TERMS, glossaryHref, sortedGlossaryTerms } from "@/lib/content/glossary"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { GlossaryClient } from "./glossary-client"
@@ -12,7 +12,7 @@ const TITLE = "Real Estate Glossary"
 const DESCRIPTION = `Plain-English definitions of ${GLOSSARY_TERMS.length} real estate, mortgage, investing, and property management terms — what each one means and why it matters.`
 
 export const metadata: Metadata = pageCanonicalMetadata("/glossary", {
-  title: `${TITLE} | ${SITE_NAME}`,
+  title: pageTitle(`${TITLE} | ${SITE_NAME}`),
   description: DESCRIPTION,
   keywords: [
     "real estate glossary",
@@ -23,7 +23,7 @@ export const metadata: Metadata = pageCanonicalMetadata("/glossary", {
     "what does escrow mean",
   ],
   openGraph: {
-    title: `${TITLE} | ${SITE_NAME}`,
+    title: pageTitleText(`${TITLE} | ${SITE_NAME}`),
     description: DESCRIPTION,
     type: "website",
   },

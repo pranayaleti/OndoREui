@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -10,8 +10,8 @@ import { Users, TrendingUp, Award, Home, Building } from "lucide-react"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about/history", {
-  title: "Our History | Ondo Real Estate",
-  description: "Building trust and excellence in Utah real estate and property management.",
+  title: pageTitle("About Ondo Real Estate: How We Started"),
+  description: "Ondo Real Estate is a Utah brokerage, mortgage and property management shop under one roof. How the company came together and who runs it.",
 })
 
 

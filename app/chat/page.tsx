@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import ChatSessionClient from './chat-session-client';
+import { pageTitle } from "@/lib/site"
 
 /**
  * Conversation resume page.
@@ -10,7 +11,7 @@ import ChatSessionClient from './chat-session-client';
  * fastest touchpoint in the funnel the most broken one.
  */
 export const metadata: Metadata = {
-  title: 'Your conversation | Ondo Real Estate',
+  title: pageTitle('Your conversation | Ondo Real Estate'),
   description: 'Pick up your conversation with the Ondo leasing team.',
   robots: { index: false, follow: false },
 };

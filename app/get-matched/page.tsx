@@ -2,11 +2,11 @@
 import type { Metadata } from "next"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_NAME } from "@/lib/site"
+import { SITE_URL, SITE_NAME, pageTitleText } from "@/lib/site"
 import { LeadQualifierWizard } from "@/components/lead-qualifier-wizard"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-const title = "Get Matched with the Right Ondo RE Service | 60-Second Quiz"
+const title = pageTitleText("Get Matched with the Right Ondo RE Service | 60-Second Quiz")
 const description =
   "Answer 5 quick questions and get matched with the right Ondo Real Estate service, property management, mortgages, buying, selling, or notary. No commitment, real-person follow-up within 1 business day."
 

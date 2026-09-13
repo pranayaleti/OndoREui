@@ -3,11 +3,11 @@ import LandingPage from "@/components/landing-page"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { HOME_PAGE_DESCRIPTION, HOME_PAGE_TITLE, homeOpenGraphImages } from "@/lib/home-metadata"
-import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/", {
-  title: { absolute: HOME_PAGE_TITLE },
+  title: pageTitle(HOME_PAGE_TITLE),
   description: HOME_PAGE_DESCRIPTION,
   openGraph: {
     type: "website",

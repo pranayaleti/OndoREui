@@ -4,10 +4,9 @@ import SEO from "@/components/seo"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle } from "@/lib/site"
 export const metadata: Metadata = {
-  title: "LLM & agent discovery | Ondo Real Estate",
+  title: pageTitle("LLM & agent discovery | Ondo Real Estate"),
   description:
     "Machine-readable briefs and structured data for AI assistants and crawlers covering Ondo Real Estate, Utah brokerage, mortgages, property management, and notary.",
   alternates: {

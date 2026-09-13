@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { InvestmentFAQ } from "@/components/investments/investment-faq"
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "Learn how fractional ownership works, invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management.",
   alternates: { canonical: `${SITE_URL}/investments/fractional/` },
   openGraph: {
-    title: "Fractional Real Estate Ownership | Ondo Real Estate",
+    title: pageTitleText("Fractional Real Estate Ownership | Ondo Real Estate"),
     description:
       "Fractional ownership makes commercial real estate accessible. Learn about the structure, returns, and exit strategies.",
     url: `${SITE_URL}/investments/fractional/`,

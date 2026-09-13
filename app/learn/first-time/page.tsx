@@ -8,7 +8,7 @@ import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { ContentFaq } from "@/components/content/content-faq"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { LENDING_FACTS_AS_OF } from "@/lib/content"
 
@@ -31,7 +31,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/learn/first-time", {
-  title: "First-Time Buyer Cash, Assistance, and Closing | Ondo Real Estate",
+  title: pageTitle("First-Time Buyer Cash, Assistance, and Closing | Ondo Real Estate"),
   description:
     "Utah first-time education: cash besides down payment, DPA stacked with gifts, and how closings fund at title. Informational, not a credit decision.",
 })

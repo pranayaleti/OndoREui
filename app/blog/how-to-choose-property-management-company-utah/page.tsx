@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -24,11 +24,11 @@ const keywords = [
 ]
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo RE`,
+  title: pageTitle(`${title} | Ondo RE`),
   description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
   openGraph: {
-    title: `${title} | Ondo RE`,
+    title: pageTitleText(`${title} | Ondo RE`),
     description,
     type: "article",
     publishedTime: published,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     authors: [author],
     images: DEFAULT_OG_IMAGES,
   },
-  twitter: { card: "summary_large_image", title: `${title} | Ondo RE`, description, images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 export default function HowToChoosePropertyManagementCompanyUtah() {

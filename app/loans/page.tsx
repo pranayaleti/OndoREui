@@ -1,4 +1,4 @@
-import { SITE_SOCIALS } from "@/lib/site"
+import { SITE_SOCIALS, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
@@ -16,14 +16,14 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 
 export const metadata: Metadata = {
-  title: "Utah Home Loans & Mortgages | Ondo Real Estate",
-  description: "Compare conventional, FHA, VA, and USDA education for Utah buyers. Talk with a loan officer. This is not a credit decision or a quote.",
+  title: pageTitle("Utah Home Loans: FHA, VA, USDA, Conventional & Jumbo"),
+  description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
   alternates: {
     canonical: `${SITE_URL}/loans/`,
   },
   openGraph: {
-    title: "Utah Home Loans & Mortgages | Ondo Real Estate",
-    description: "Compare conventional, FHA, VA, and USDA education for Utah buyers. Talk with a loan officer. This is not a credit decision or a quote.",
+    title: pageTitleText("Utah Home Loans: FHA, VA, USDA, Conventional & Jumbo"),
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     url: `${SITE_URL}/loans/`,
     images: [
       {
@@ -41,42 +41,42 @@ const loanTypes = [
     icon: <Home className="h-8 w-8" />,
     title: "Conventional Loans",
     href: "/loans/conventional",
-    description: "Conforming mortgages for borrowers who meet credit, down payment, and DTI guidelines.",
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     features: ["Some products start around 3% down", "PMI can often be removed with enough equity", "Waiting for 20% vs buying sooner is a cash-and-timeline trade"],
   },
   {
     icon: <Shield className="h-8 w-8" />,
     title: "FHA Loans",
     href: "/loans/fha",
-    description: "Government-insured loans with lower down payment options and more flexible credit overlays, subject to MIP.",
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     features: ["3.5% down at 580+ (HUD policy; overlays apply)", "Gift funds often allowed", "Primary residence"],
   },
   {
     icon: <Users className="h-8 w-8" />,
     title: "VA Loans",
     href: "/loans/va",
-    description: "For eligible veterans, active-duty service members, and some surviving spouses. Zero down only with remaining entitlement.",
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     features: ["0% down when eligible", "No monthly PMI", "Funding fee may apply or be waived"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "USDA Loans",
     href: "/loans/usda",
-    description: "Rural development loans for eligible properties and income limits on the USDA map.",
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     features: ["0% down when eligible", "Income and map tests", "Primary residence"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "Jumbo Loans",
     href: "/loans/jumbo",
-    description: "Financing above the current FHFA conforming limit for the property county. Limits change annually.",
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     features: ["Look up this year’s FHFA county table", "Investor overlays on credit and reserves", "Not a single Utah-wide dollar cap"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "Non-QM (bank-statement, DSCR)",
     href: "/learn/non-qm",
-    description: "When agency tax-return income does not match cash flow. Bank-statement, DSCR, and asset-depletion are different stacks — not a cheaper conventional shortcut.",
+    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     features: ["Bank-statement deposit analysis", "DSCR on investment property rent", "Asset-depletion overlays"],
   },
 ]

@@ -3,8 +3,7 @@ import SEO from "@/components/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/commercial-real-estate-101-tenant-mix"
 const title = "Commercial Real Estate 101: Cap Rates, NNN, and Tenant Mix"
 const description = "An operator’s primer on how cap rates, lease structure, and tenant mix shape commercial value and risk."
@@ -25,11 +24,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo Real Estate`,
+  title: pageTitle(`${title} | Ondo Real Estate`),
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
   openGraph: {
-    title: `${title} | Ondo Real Estate`,
+    title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
     type: "article",
     publishedTime: published,
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${title} | Ondo Real Estate`,
+    title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
     images: [DEFAULT_OG_IMAGE_URL],
   },

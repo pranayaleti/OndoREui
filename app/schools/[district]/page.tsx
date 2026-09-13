@@ -2,7 +2,7 @@ import Link from "next/link"
 import { findDistrictBySlug, allDistrictSlugs } from "@/lib/school-district-content"
 import { toCitySlug } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
@@ -23,12 +23,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { district: districtSlug } = await params
   const district = findDistrictBySlug(districtSlug)
   const name = district?.name ?? districtSlug
-  const title = `${name} | Schools & Education Guide | ${SITE_BRAND_SHORT}`
+  const title = pageTitleText(`${name} | Schools & Education Guide | ${SITE_BRAND_SHORT}`)
   const description = district
     ? `${district.name} serves ${district.citiesServed.slice(0, 3).join(", ")} and more, ${district.enrollment.toLocaleString()} students, top programs, and school listings.`
     : ""
   const canonical = `${SITE_URL}/schools/${districtSlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

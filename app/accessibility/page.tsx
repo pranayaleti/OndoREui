@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -11,7 +11,7 @@ import { Accessibility, Eye, Volume2, MousePointer, Keyboard, Smartphone, Monito
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/accessibility", {
-  title: "Accessibility | Ondo Real Estate",
+  title: pageTitle("Accessibility | Ondo Real Estate"),
   description: "Accessibility features and commitment for the Ondo Real Estate website and services.",
 })
 

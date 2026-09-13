@@ -7,11 +7,11 @@ import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { CalendlyBookSection } from "@/components/contact/calendly-inline-embed"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/academy", {
-  title: "Ondo Academy | Free Utah Real Estate Training",
+  title: pageTitle("Ondo Academy | Free Utah Real Estate Training"),
   description:
     "Free training for Utah owners, investors, buyers, and tenants: templates, calculators, videos, events, and a call with our team.",
 })

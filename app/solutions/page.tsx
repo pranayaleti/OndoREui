@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/solutions") },
-  title: "Solutions | Ondo Real Estate",
+  title: pageTitle("Solutions | Ondo Real Estate"),
   description: "One platform built for investors, landlords, property managers, and tenants across Utah.",
 }
 

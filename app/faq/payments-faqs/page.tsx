@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_PHONE, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, DollarSign, AlertCircle } from "lucide-react"
 import Script from "next/script"
@@ -10,11 +10,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Payments & Billing FAQs | Ondo Real Estate",
+  title: pageTitle("Payments & Billing FAQs | Ondo Real Estate"),
   description: "Find answers to payment questions about due dates, payment methods, auto-pay, late fees, and online payments.",
   alternates: { canonical: `${SITE_URL}/faq/payments-faqs/` },
   openGraph: {
-    title: "Payments & Billing FAQs | Ondo Real Estate",
+    title: pageTitleText("Payments & Billing FAQs | Ondo Real Estate"),
     description: "Find answers to payment questions about due dates, payment methods, auto-pay, late fees, and online payments.",
     images: DEFAULT_OG_IMAGES,
   },

@@ -9,15 +9,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { getLatestNewsItems } from "@/lib/news-items"
 import { SOCIAL_POSTS } from "@/lib/social-posts"
-import { SITE_SOCIAL_LINKS, SITE_URL } from "@/lib/site"
-
+import { SITE_SOCIAL_LINKS, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 export const metadata: Metadata = {
-  title: "Socials & Updates | Ondo Real Estate",
+  title: pageTitle("Socials & Updates | Ondo Real Estate"),
   description:
     "Latest Ondo social posts, profile links, and curated real estate news, follow along on Linktree and our public channels.",
   alternates: { canonical: `${SITE_URL}/socials/` },
   openGraph: {
-    title: "Socials & Updates | Ondo Real Estate",
+    title: pageTitleText("Socials & Updates | Ondo Real Estate"),
     description:
       "Curated social highlights, live profile links, and the latest industry news we track for Utah buyers, owners, and investors.",
     url: `${SITE_URL}/socials/`,
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Socials & Updates | Ondo Real Estate",
+    title: pageTitleText("Socials & Updates | Ondo Real Estate"),
     description: "Curated posts, Linktree, and the latest real estate news we track.",
     images: [`${SITE_URL}/modern-office-building.webp`],
   },

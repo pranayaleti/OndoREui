@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -61,9 +61,9 @@ const newsVsQuoteRows: readonly ComparisonRow[] = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/rates", {
-  title: "Why Your Quote Is Not the 30-Year Average | Ondo Real Estate",
+  title: pageTitle("Utah Mortgage Rates Today: Compare Loan Programs"),
   description:
-    "Rate vs APR vs payment, what moves a Loan Estimate, and why a news average is not your quote. Not a live rate table.",
+    "Compare Utah mortgage rates across conventional, FHA, VA and jumbo. See how credit score, down payment and points move your actual payment.",
 })
 
 

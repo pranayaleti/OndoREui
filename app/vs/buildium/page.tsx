@@ -2,19 +2,19 @@ import type { Metadata } from "next"
 import { Check, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import Link from "next/link"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: `Ondo RE vs Buildium: The Better Buildium Alternative | ${SITE_BRAND_SHORT}`,
+  title: pageTitle(`Ondo RE vs Buildium: The Better Buildium Alternative | ${SITE_BRAND_SHORT}`),
   description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience. No $62/mo entry fee.`,
   alternates: {
     canonical: `${SITE_URL}/vs/buildium/`,
   },
   openGraph: {
-    title: `Ondo RE vs Buildium: The Better Buildium Alternative`,
+    title: pageTitleText(`Ondo RE vs Buildium: The Better Buildium Alternative`),
     description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience.`,
     url: `${SITE_URL}/vs/buildium/`,
     type: "website",

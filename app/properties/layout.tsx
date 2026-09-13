@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Utah Properties for Sale & Rent | Ondo Real Estate",
+  title: pageTitle("Utah Properties for Sale & Rent | Ondo Real Estate"),
   description:
     "Browse homes, condos, and investment properties across Utah. Updated listings with photos, pricing, and neighborhood info.",
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     types: { "text/markdown": `${SITE_URL}/properties.md` },
   },
   openGraph: {
-    title: "Utah Properties for Sale & Rent | Ondo Real Estate",
+    title: pageTitleText("Utah Properties for Sale & Rent | Ondo Real Estate"),
     description:
       "Browse homes, condos, and investment properties across Utah. Updated listings with photos, pricing, and neighborhood info.",
     images: DEFAULT_OG_IMAGES,

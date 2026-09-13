@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_PHONE, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, Building2 } from "lucide-react"
 import Script from "next/script"
@@ -10,11 +10,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Loan Payoffs & Closings FAQs | Ondo Real Estate",
+  title: pageTitle("Loan Payoffs & Closings FAQs | Ondo Real Estate"),
   description: "Find answers to questions about paying off your mortgage, getting payoff quotes, refinancing, and the payoff process.",
   alternates: { canonical: `${SITE_URL}/faq/loan-payoffs-faqs/` },
   openGraph: {
-    title: "Loan Payoffs & Closings FAQs | Ondo Real Estate",
+    title: pageTitleText("Loan Payoffs & Closings FAQs | Ondo Real Estate"),
     description: "Find answers to questions about paying off your mortgage, getting payoff quotes, refinancing, and the payoff process.",
     images: DEFAULT_OG_IMAGES,
   },

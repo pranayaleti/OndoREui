@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import ConsultationCTA from "@/components/ConsultationCTA"
@@ -35,12 +35,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 export const metadata: Metadata = {
   title: "Commercial Real Estate Investing",
   description:
-    "Learn about commercial real estate investment opportunities in Utah. Explore asset classes including office, retail, industrial, multifamily, medical office, and self-storage.",
+    "Commercial real estate in Utah: retail, office, industrial and Opportunity Zone deals, with underwriting and asset management handled for you.",
   alternates: { canonical: `${SITE_URL}/investments/commercial-real-estate/` },
   openGraph: {
-    title: "Commercial Real Estate Investing | Ondo Real Estate",
+    title: pageTitleText("Utah Commercial Real Estate Investment Opportunities"),
     description:
-      "Explore commercial real estate asset classes and investment structures in Utah's high-growth markets.",
+      "Commercial real estate in Utah: retail, office, industrial and Opportunity Zone deals, with underwriting and asset management handled for you.",
     url: `${SITE_URL}/investments/commercial-real-estate/`,
     images: DEFAULT_OG_IMAGES,
   },

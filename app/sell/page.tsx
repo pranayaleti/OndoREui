@@ -1,4 +1,4 @@
-import { SITE_SOCIALS } from "@/lib/site"
+import { SITE_SOCIALS, pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
@@ -18,9 +18,9 @@ import { ListingPacketForm } from "@/components/leads/listing-packet-form"
 import { SELL_INCLUDED_ROWS } from "@/lib/sell-included"
 
 export const metadata: Metadata = {
-  title: "Sell Your Utah Home | CMA, Listing & Negotiation | Ondo Real Estate",
+  title: pageTitle("Sell Your Utah Home: Pricing, Photos & Negotiation"),
   description:
-    "List with Ondo: comparative market analysis, professional photography, MLS syndication, and negotiation through close. Compensation is quoted in writing — no savings guarantee.",
+    "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
   keywords: [
     "sell house Utah",
     "home valuation Utah",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sell Your Utah Home | CMA, Listing & Negotiation",
     description:
-      "Pricing strategy, photography, MLS syndication, and negotiation. Request a listing packet or book a call.",
+      "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
     url: `${SITE_URL}/sell/`,
     images: [
       {
@@ -53,22 +53,22 @@ const services = [
   {
     icon: <LineChart className="h-8 w-8" />,
     title: "CMA & pricing",
-    description: "Comparative market analysis and a written pricing strategy before you list.",
+    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
   },
   {
     icon: <Camera className="h-8 w-8" />,
     title: "Photography & marketing",
-    description: "Professional photography, staging guidance, and MLS syndication to major portals.",
+    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
   },
   {
     icon: <Users className="h-8 w-8" />,
     title: "Showings",
-    description: "Coordinated showings while the home is on market — not a promised days-on-market.",
+    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
   },
   {
     icon: <Shield className="h-8 w-8" />,
     title: "Negotiation through close",
-    description: "Offer review, negotiation, and closing coordination with your listing agent.",
+    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
   },
 ]
 

@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
@@ -13,11 +13,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Escrow, Taxes & Insurance FAQs | Ondo Real Estate",
+  title: pageTitle("Escrow, Taxes & Insurance FAQs | Ondo Real Estate"),
   description: "Find answers to questions about escrow accounts, property taxes, homeowners insurance, and how escrow works.",
   alternates: { canonical: `${SITE_URL}/faq/escrow-faqs/` },
   openGraph: {
-    title: "Escrow, Taxes & Insurance FAQs | Ondo Real Estate",
+    title: pageTitleText("Escrow, Taxes & Insurance FAQs | Ondo Real Estate"),
     description: "Find answers to questions about escrow accounts, property taxes, homeowners insurance, and how escrow works.",
     images: DEFAULT_OG_IMAGES,
   },

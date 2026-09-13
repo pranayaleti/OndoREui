@@ -7,13 +7,14 @@ import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { pageTitle, pageTitleText } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate",
+  title: pageTitle("Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate"),
   description: "Follow this RON checklist to pass ID verification, avoid rescheduling, and receive sealed documents immediately after your remote online notarization.",
   alternates: { canonical: `${SITE_URL}/blog/prepare-for-remote-online-notary-session/` },
   openGraph: {
-    title: "Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate",
+    title: pageTitleText("Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate"),
     description: "Follow this RON checklist to pass ID verification, avoid rescheduling, and receive sealed documents immediately after your remote online notarization.",
     type: "article",
     publishedTime: "2025-01-10",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate",
+    title: pageTitleText("Checklist: Prepare for Your Remote Online Notary Session | Ondo Real Estate"),
     description: "Follow this RON checklist to pass ID verification, avoid rescheduling, and receive sealed documents immediately after your remote online notarization.",
     images: [DEFAULT_OG_IMAGE_URL],
   },

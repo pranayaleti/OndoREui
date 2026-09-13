@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { utahCitiesFromNorthOgdenToNephi, toCitySlug, groupUtahCitiesByCounty } from "@/lib/utah-cities"
 import { cityMarketData } from "@/lib/city-market-data"
 import { Home, MapPin } from "lucide-react"
@@ -17,14 +17,14 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: `Real Estate Services Across Utah | ${SITE_BRAND_SHORT}`,
+  title: pageTitle("Utah City Guides: Cost of Living & Home Prices"),
   description:
-    "Property management, home loans, and buying & selling services across 55 Utah cities. Find local real estate expertise in your city.",
+    "Compare 55 Utah cities on median home price, rent, commute time and schools. Find the Wasatch Front town that fits your budget and drive.",
   alternates: { canonical: `${SITE_URL}/locations/` },
   openGraph: {
-    title: `Real Estate Services Across Utah | ${SITE_BRAND_SHORT}`,
+    title: pageTitleText("Utah City Guides: Cost of Living & Home Prices"),
     description:
-      "Property management, home loans, and buying & selling services across 55 Utah cities.",
+      "Compare 55 Utah cities on median home price, rent, commute time and schools. Find the Wasatch Front town that fits your budget and drive.",
     url: `${SITE_URL}/locations/`,
     images: DEFAULT_OG_IMAGES,
   },

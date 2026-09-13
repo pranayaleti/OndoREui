@@ -1,3 +1,5 @@
+import { fitTitle } from "@/lib/site"
+
 import type { CityMarketData } from "./city-market-data"
 
 export type SubServiceDefinition = {
@@ -33,9 +35,14 @@ const tenantScreening: SubServiceDefinition = {
   parentService: "property-management",
   parentName: "Property Management",
   parentHref: "/property-management",
-  metaTitle: (city) => `Tenant Screening in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `${city} Tenant Screening: Credit, Criminal & Eviction`,
+      `${city} Tenant Screening: Credit & Eviction Checks`,
+      `Tenant Screening in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `Comprehensive tenant screening for ${city} landlords, credit, criminal, eviction, and income verification. Fair Housing compliant. Powered by Ondo Real Estate.`,
+    `Screen ${city} rental applicants on credit, criminal, eviction history and income. Fair Housing compliant, with a clear written recommendation.`,
   features: [
     { title: "Credit Report", description: "Full tri-merge credit report with score, payment history, collections, and debt-to-income analysis", iconName: "FileText" },
     { title: "Criminal Background", description: "National and state-level criminal background search with sex offender registry check", iconName: "Shield" },
@@ -70,9 +77,13 @@ const maintenanceCoordination: SubServiceDefinition = {
   parentService: "property-management",
   parentName: "Property Management",
   parentHref: "/property-management",
-  metaTitle: (city) => `Maintenance Coordination in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `${city} Rental Maintenance Coordination, 24/7`,
+      `Rental Maintenance in ${city}, UT: 24/7`,
+    ),
   metaDescription: (city) =>
-    `24/7 maintenance coordination for ${city} rental properties. Licensed vendors, transparent pricing, and owner approval workflows. Ondo Real Estate.`,
+    `24/7 maintenance coordination for ${city} rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.`,
   features: [
     { title: "24/7 Emergency Line", description: "Round-the-clock emergency response for after-hours issues like burst pipes, HVAC failures, and lockouts", iconName: "Phone" },
     { title: "Licensed Vendor Network", description: "Pre-vetted, licensed, and insured contractors across plumbing, electrical, HVAC, roofing, and general repair", iconName: "Wrench" },
@@ -106,9 +117,13 @@ const ownerReporting: SubServiceDefinition = {
   parentService: "property-management",
   parentName: "Property Management",
   parentHref: "/property-management",
-  metaTitle: (city) => `Owner Reporting & Analytics in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `${city} Rental Owner Reporting & Statements`,
+      `Owner Reporting in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `Real-time financial reporting and property analytics for ${city} rental owners. Monthly statements, year-end tax packages, and performance dashboards.`,
+    `Monthly statements, year-end tax packages and live dashboards for ${city} rental owners. See every dollar in and out of your property.`,
   features: [
     { title: "Monthly Statements", description: "Detailed income and expense statements with line-item breakdowns for rent, maintenance, and management fees", iconName: "BarChart3" },
     { title: "Real-Time Dashboard", description: "Live view of rent collections, vacancy status, maintenance tickets, and lease expirations across your portfolio", iconName: "LayoutDashboard" },
@@ -144,9 +159,13 @@ const fhaLoans: SubServiceDefinition = {
   parentService: "loans",
   parentName: "Loans",
   parentHref: "/loans",
-  metaTitle: (city) => `FHA Loans in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `FHA Mortgage in ${city}, UT: 3.5% Down`,
+      `FHA Loans in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `FHA home loans in ${city}, UT, 3.5% down payment, flexible credit requirements, and competitive rates. Get pre-qualified with Ondo Real Estate.`,
+    `FHA home loans in ${city}, Utah: 3.5% down, flexible credit, and current county loan limits. Pre-qualify with a local licensed loan officer.`,
   features: [
     { title: "Low Down Payment", description: "As little as 3.5% down: significantly less than the 20% required for many conventional loans", iconName: "Percent" },
     { title: "Flexible Credit", description: "Credit scores as low as 580 may qualify with 3.5% down; scores 500–579 may qualify with 10% down", iconName: "CreditCard" },
@@ -180,9 +199,13 @@ const conventionalLoans: SubServiceDefinition = {
   parentService: "loans",
   parentName: "Loans",
   parentHref: "/loans",
-  metaTitle: (city) => `Conventional Home Loans in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `Conventional Mortgage in ${city}, UT: 3% Down`,
+      `Conventional Loans in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `Conventional mortgage options in ${city}, UT, competitive rates, flexible terms, and no upfront mortgage insurance. Ondo Real Estate.`,
+    `Conventional mortgages in ${city}, Utah with as little as 3% down. Loan limits, credit tiers, and exactly when PMI drops off at 78% LTV.`,
   features: [
     { title: "No Upfront MIP", description: "Unlike FHA loans, conventional loans have no upfront mortgage insurance premium: reducing your closing costs", iconName: "BadgeDollarSign" },
     { title: "PMI Cancellation", description: "Private mortgage insurance automatically drops off when you reach 78% loan-to-value: saving you hundreds per month", iconName: "ShieldOff" },
@@ -216,7 +239,12 @@ const vaLoans: SubServiceDefinition = {
   parentService: "loans",
   parentName: "Loans",
   parentHref: "/loans",
-  metaTitle: (city) => `VA Home Loans in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `VA Home Loans in ${city}, UT: Zero Down, No PMI`,
+      `VA Home Loans in ${city}, UT: Zero Down`,
+      `VA Loans in ${city}, UT`,
+    ),
   metaDescription: (city) =>
     `VA home loans in ${city}, UT: ask about zero down and no monthly PMI when entitlement and occupancy rules are met. This is not a quote.`,
   features: [
@@ -252,9 +280,13 @@ const usdaLoans: SubServiceDefinition = {
   parentService: "loans",
   parentName: "Loans",
   parentHref: "/loans",
-  metaTitle: (city) => `USDA Home Loans in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `USDA Mortgage in ${city}, UT: Zero Down`,
+      `USDA Loans in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `USDA rural development loans in ${city}, UT, zero down payment for eligible rural and suburban areas. Check your eligibility with Ondo Real Estate.`,
+    `USDA rural development loans in ${city}, Utah: zero down in eligible areas. Check the eligibility map, income limits and guarantee fee.`,
   features: [
     { title: "Zero down when the property qualifies", description: "100% financing is available only for eligible properties in USDA-eligible areas when income limits fit. It is not automatic for every rural-looking address.", iconName: "Home" },
     { title: "USDA guarantee fee", description: "USDA charges guarantee fees that differ from FHA MIP and conventional PMI. Confirm the current USDA schedule; this page does not publish a single percent.", iconName: "Percent" },
@@ -288,7 +320,11 @@ const jumboLoans: SubServiceDefinition = {
   parentService: "loans",
   parentName: "Loans",
   parentHref: "/loans",
-  metaTitle: (city) => `Jumbo Mortgage Loans in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `Jumbo Mortgage in ${city}, UT: Rates & Limits`,
+      `Jumbo Loans in ${city}, UT`,
+    ),
   metaDescription: (city) =>
     `Jumbo home loans in ${city}, UT for properties that exceed the current FHFA conforming limit for the county. This is not a quote.`,
   features: [
@@ -326,9 +362,13 @@ const firstTimeBuyers: SubServiceDefinition = {
   parentService: "buy-sell",
   parentName: "Buy & Sell",
   parentHref: "/buy-sell",
-  metaTitle: (city) => `First-Time Home Buyers in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `${city}, UT First-Time Buyers: Down Payment Help`,
+      `First-Time Buyers in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `First-time home buyer guide for ${city}, UT, down payment assistance, loan options, and local agent guidance. Ondo Real Estate.`,
+    `Buying your first home in ${city}, Utah: down payment assistance, what you need at closing, and the current median price and days on market.`,
   features: [
     { title: "Down Payment Assistance", description: "Access Utah Housing Corporation grants and loans that cover up to 6% of your purchase price for down payment and closing costs", iconName: "PiggyBank" },
     { title: "Buyer Education", description: "Free homebuyer education courses that satisfy lender requirements and help you make informed decisions", iconName: "GraduationCap" },
@@ -362,9 +402,13 @@ const investmentProperties: SubServiceDefinition = {
   parentService: "buy-sell",
   parentName: "Buy & Sell",
   parentHref: "/buy-sell",
-  metaTitle: (city) => `Investment Properties in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `${city}, UT Investment Property: Rents & Returns`,
+      `Investment Property in ${city}, UT`,
+    ),
   metaDescription: (city) =>
-    `Find and analyze rental investment properties in ${city}, UT. Cap rates, cash flow analysis, and property management. Ondo Real Estate.`,
+    `Buy a rental in ${city}, Utah: current rents, cap rates, which neighborhoods actually cash flow, and what management costs.`,
   features: [
     { title: "Cash Flow Analysis", description: "Detailed pro forma projections including rent estimates, operating expenses, debt service, and net cash flow", iconName: "Calculator" },
     { title: "Market Comparables", description: "Rental and sales comparables to validate purchase price and projected rental income", iconName: "BarChart3" },
@@ -398,9 +442,13 @@ const homeValuation: SubServiceDefinition = {
   parentService: "buy-sell",
   parentName: "Buy & Sell",
   parentHref: "/buy-sell",
-  metaTitle: (city) => `Home Valuation in ${city}, Utah`,
+  metaTitle: (city) =>
+    fitTitle(
+      `What Is My ${city}, UT Home Worth? Free Valuation`,
+      `What Is My ${city}, UT Home Worth?`,
+    ),
   metaDescription: (city) =>
-    `Free home valuation for ${city}, UT properties. Accurate CMA based on recent sales, condition, and local market trends. Ondo Real Estate.`,
+    `A real valuation on your ${city}, Utah home, not an automated guess: recent comparable sales, buyer demand and a realistic list price range.`,
   features: [
     { title: "Comparative Market Analysis", description: "Detailed CMA using recent sales of similar homes in your neighborhood: not just Zestimate-style algorithms", iconName: "Search" },
     { title: "Condition Adjustments", description: "Adjustments for upgrades, deferred maintenance, lot size, and view premiums that automated tools miss", iconName: "SlidersHorizontal" },

@@ -4,8 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
-import { SITE_URL } from "@/lib/site"
-
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const published = "2024-11-20"
 const modified = "2024-11-20"
 const slug = "/blog/why-utah-best-real-estate-investment"
@@ -26,11 +25,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: `${title} | Ondo Real Estate`,
+  title: pageTitle(`${title} | Ondo Real Estate`),
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
   openGraph: {
-    title: `${title} | Ondo Real Estate`,
+    title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
     type: "article",
     publishedTime: published,
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${title} | Ondo Real Estate`,
+    title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
     images: [DEFAULT_OG_IMAGE_URL],
   },

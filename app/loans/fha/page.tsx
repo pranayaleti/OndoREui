@@ -5,7 +5,7 @@ import Link from "next/link"
 import { DollarSign, Shield, Users, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
@@ -16,11 +16,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "FHA Loans in Utah | Low Down Payment | Ondo Real Estate",
+  title: pageTitle("FHA Loans in Utah | Low Down Payment | Ondo Real Estate"),
   description: "FHA loans let Utah buyers put as little as 3.5% down with a 580+ credit score. Learn requirements, MIP costs, and how FHA compares to conventional.",
   alternates: { canonical: `${SITE_URL}/loans/fha/` },
-  openGraph: { title: "FHA Loans in Utah | Low Down Payment | Ondo Real Estate", description: "FHA loans let Utah buyers put as little as 3.5% down with a 580+ credit score.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: "FHA Loans in Utah | Ondo Real Estate", description: "FHA loans let Utah buyers put as little as 3.5% down with a 580+ credit score.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { title: pageTitleText("FHA Loans in Utah | Low Down Payment | Ondo Real Estate"), description: "FHA loans let Utah buyers put as little as 3.5% down with a 580+ credit score.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("FHA Loans in Utah | Ondo Real Estate"), description: "FHA loans let Utah buyers put as little as 3.5% down with a 580+ credit score.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const benefits = [

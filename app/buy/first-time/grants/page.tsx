@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "A guide to down payment assistance and homebuyer grant programs. Eligibility is determined by the agency and the lender, not this page.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
-    title: "Housing Grants & Down Payment Assistance Programs | Ondo Real Estate",
+    title: pageTitleText("Housing Grants & Down Payment Assistance Programs | Ondo Real Estate"),
     description:
       "Down payment assistance and grant programs for U.S. homebuyers, with eligibility summaries and official links.",
     url: `${SITE_URL}/buy/first-time/grants/`,

@@ -3,19 +3,19 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle, pageTitleText } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { FileText, Shield, TrendingUp, Building2, Mail, Phone } from "lucide-react"
 import { BrochureRequestForm } from "@/components/leads/brochure-request-form"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Investor Brochure | Ondo Real Estate",
+  title: pageTitle("Investor Brochure | Ondo Real Estate"),
   description:
     "Request the Ondo Real Estate investor overview to learn about our strategy, track record, team, and investment approach in Utah.",
   alternates: { canonical: `${SITE_URL}/brochure/` },
   openGraph: {
-    title: "Investor Brochure | Ondo Real Estate",
+    title: pageTitleText("Investor Brochure | Ondo Real Estate"),
     description:
       "Request our investor overview, strategy overview, portfolio highlights, and how to get started with Ondo Real Estate.",
     url: `${SITE_URL}/brochure`,

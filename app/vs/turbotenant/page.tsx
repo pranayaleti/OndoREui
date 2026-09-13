@@ -2,19 +2,19 @@ import type { Metadata } from "next"
 import { Check, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import Link from "next/link"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: `${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`,
+  title: pageTitle(`${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`),
   description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. See why property owners choose Ondo RE for AI risk scoring, 10 financial calculators, 6 auth roles, full PWA, and a complete owner-to-tenant platform.`,
   alternates: {
     canonical: `${SITE_URL}/vs/turbotenant/`,
   },
   openGraph: {
-    title: `${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`,
+    title: pageTitleText(`${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`),
     description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. AI-powered risk scoring, 10 calculators, full PWA offline support, and 6 auth roles vs TurboTenant's basic free tier.`,
     url: `${SITE_URL}/vs/turbotenant/`,
     type: "website",

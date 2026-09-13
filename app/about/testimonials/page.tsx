@@ -3,14 +3,14 @@ import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { TestimonialsBrowser } from "@/components/about/testimonials-browser"
 import { testimonials } from "@/lib/testimonials"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about/testimonials", {
-  title: "Example Stories | Ondo Real Estate",
+  title: pageTitle("Example Stories | Ondo Real Estate"),
   description:
     "Example stories from property owners, tenants, investors, buyers, and sellers across Utah. These are composites, not Google reviews.",
 })

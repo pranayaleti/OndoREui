@@ -1,7 +1,7 @@
 import { CityServicePage } from "@/components/city-service-page"
 import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { city: citySlug } = await params
   const city = findCityBySlug(citySlug)
   const cityName = city?.name ?? citySlug
-  const title = `Home Loans in ${cityName}, Utah | ${SITE_NAME}`
+  const title = pageTitleText(`Home Loans in ${cityName}, Utah | ${SITE_NAME}`)
   const description = `Conventional, FHA, VA, USDA, and jumbo loans serving ${cityName}. Get pre-qualified.`
   const canonical = `${SITE_URL}/loans/${citySlug}/`
-  return { title: { absolute: title }, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

@@ -5,16 +5,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { UtahLandlordEducationSection } from "@/components/resources/utah-landlord-education-section"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, APP_PORTAL_URL } from "@/lib/site"
+import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate",
+  title: pageTitle("Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate"),
   description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
   alternates: { canonical: `${SITE_URL}/resources/` },
   openGraph: {
-    title: "Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate",
+    title: pageTitleText("Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate"),
     description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
     images: DEFAULT_OG_IMAGES,
   },

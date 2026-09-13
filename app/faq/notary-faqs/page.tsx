@@ -2,7 +2,7 @@ import { PageBanner } from "@/components/page-banner"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { NOTARY_PRICING_SUMMARY } from "@/lib/notary-fees"
 import Link from "next/link"
 import { ArrowLeft, FileText } from "lucide-react"
@@ -11,11 +11,11 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Notary & Closings FAQs | Ondo Real Estate",
+  title: pageTitle("Notary & Closings FAQs | Ondo Real Estate"),
   description: "Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing.",
   alternates: { canonical: `${SITE_URL}/faq/notary-faqs/` },
   openGraph: {
-    title: "Notary & Closings FAQs | Ondo Real Estate",
+    title: pageTitleText("Notary & Closings FAQs | Ondo Real Estate"),
     description: "Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing.",
     images: DEFAULT_OG_IMAGES,
   },

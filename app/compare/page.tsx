@@ -2,12 +2,12 @@ import type { Metadata } from "next"
 import { Check, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { SITE_BRAND_SHORT, SITE_URL } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_URL, pageTitle } from "@/lib/site"
 import Link from "next/link"
 import SEO from "@/components/seo"
 
 export const metadata: Metadata = {
-  title: `Compare Property Management Software | ${SITE_BRAND_SHORT}`,
+  title: pageTitle(`Compare Property Management Software | ${SITE_BRAND_SHORT}`),
   description: `See how ${SITE_BRAND_SHORT} compares to Buildium, AppFolio, TurboTenant, and RentRedi. Utah-local expertise, AI-powered risk scoring, and full-service property management.`,
   alternates: {
     canonical: `${SITE_URL}/compare/`,
