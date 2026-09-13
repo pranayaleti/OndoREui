@@ -128,8 +128,10 @@ export default function FinishingBasementRoi() {
             <h2>Takeaway</h2>
             <p>
               Finish to code, match the finish level to the neighborhood, and decide up front whether
-              you’re buying use, resale value, or rental income. For the seasonal upkeep that keeps a
-              finished basement dry, see our{" "}
+              you’re buying use, resale value, or rental income. Not sure what you're starting with,
+              full, partial, walkout, daylight? See our{" "}
+              <Link href="/blog/types-of-basements">basement types guide</Link> first. For the seasonal
+              upkeep that keeps a finished basement dry, see our{" "}
               <Link href="/blog/home-maintenance-schedule">home maintenance schedule</Link>, and
               for outdoor projects, our{" "}
               <Link href="/blog/backyard-upgrades-and-fertilizer-guide">backyard upgrades guide</Link>.

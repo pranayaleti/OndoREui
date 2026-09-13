@@ -26,6 +26,17 @@ export default function BlogPage() {
 
   const blogPosts = useMemo(() => ([
     {
+      title: "Types of Basements: What Each One Actually Means for Your Home",
+      excerpt:
+        "Full, partial, walkout, walk-up, daylight, and crawlspace. Six basement types explained, plus the egress rule that decides if a basement room is a legal bedroom.",
+      author: "Ondo RE Team",
+      date: "September 13, 2026",
+      readTime: "6 min read",
+      category: "Buying Guide",
+      image: "/suburban-house-garden.png",
+      slug: "types-of-basements"
+    },
+    {
       title: "Authorized User Tradelines: Help or Overlay Risk",
       excerpt: "What AU tradelines do and do not do on a mortgage tri-merge. Not a piggyback scheme.",
       author: "Ondo RE Team",
