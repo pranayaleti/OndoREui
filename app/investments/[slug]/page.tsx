@@ -59,6 +59,9 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
+    // Sample deals: MOCK_OPPORTUNITIES are illustrative product-demo records, not live
+    // offerings, so these detail pages must never be indexed or listed in the sitemap.
+    robots: { index: false, follow: true },
     openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
     twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
   }
@@ -91,6 +94,19 @@ export default async function InvestmentDetailPage({
       />
 
       <PageBanner title={opportunity.title} subtitle={opportunity.location} />
+
+      <section className="border-b bg-muted/40" aria-label="Sample deal notice">
+        <div className="container mx-auto px-4 py-3">
+          <p className="text-sm text-foreground/70 text-center max-w-3xl mx-auto">
+            This is a sample deal page used to demonstrate how Ondo presents an offering. The
+            property, figures, and returns shown are illustrative, not a live investment.{" "}
+            <Link href="/contact/" className="text-primary hover:underline">
+              Contact us
+            </Link>{" "}
+            for current offerings.
+          </p>
+        </div>
+      </section>
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

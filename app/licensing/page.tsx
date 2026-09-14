@@ -20,7 +20,7 @@ const description =
   "Real estate brokerage, property management, and mortgage licensing disclosures for Ondo Real Estate. Equal Housing Lender / Equal Housing Opportunity."
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   alternates: { canonical: `${SITE_URL}/licensing/` },
   openGraph: { title, description, url: `${SITE_URL}/licensing/`, images: DEFAULT_OG_IMAGES },

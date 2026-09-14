@@ -278,7 +278,7 @@ export default function FAQPage() {
                   Send us an email
                 </a>
                 <a
-                  href="/contact"
+                  href="/contact/"
                   className="inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-medium rounded-md text-primary bg-background hover:bg-muted transition-colors duration-200"
                 >
                   Contact us

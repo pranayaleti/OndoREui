@@ -1,6 +1,5 @@
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { BLOG_STATIC_SLUGS } from "@/lib/blog-slugs"
-import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
 import agentDiscoveryConfig from "@/lib/agent-discovery-config.json"
 import { SUPPORTED_LOCALES, SUPPORTED_LOCALE_LABELS } from "@/lib/locales"
 import {
@@ -834,14 +833,6 @@ function glossaryLinks(): SiteIndexLink[] {
   }))
 }
 
-function investmentDetailLinks(): SiteIndexLink[] {
-  return MOCK_OPPORTUNITIES.map((o) => ({
-    name: o.title,
-    href: `/investments/${o.slug}`,
-    description: o.description.slice(0, 160) + (o.description.length > 160 ? "…" : ""),
-  }))
-}
-
 export function getSiteIndexSections(): SiteIndexSection[] {
   return [
     {
@@ -936,6 +927,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           description: "Financing above conforming limits for Park City, Draper, and Utah's high-value markets.",
         },
         {
+          name: "Refinance overview",
+          href: "/refinance",
+          description: "Rate-and-term vs cash-out refinancing in Utah and when each makes sense.",
+        },
+        {
           name: "Refinance process",
           href: "/refinance/process",
           description: "Steps and timeline to refinance with Ondo.",
@@ -1011,7 +1007,21 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           href: "/investments/opportunity-zones",
           description: "Capital-gains deferral via Qualified Opportunity Zone tracts.",
         },
-        ...investmentDetailLinks(),
+        {
+          name: "Investment strategy",
+          href: "/strategy",
+          description: "How Ondo identifies, acquires, and manages value-add Utah properties.",
+        },
+        {
+          name: "New investors",
+          href: "/new-investors",
+          description: "Getting started with passive income and long-term wealth in Utah real estate.",
+        },
+        {
+          name: "Investor overview",
+          href: "/brochure",
+          description: "Request the investor overview: strategy, track record, team, and approach.",
+        },
       ],
     },
     {
@@ -1033,6 +1043,36 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           name: "Property management",
           href: "/property-management",
           description: "Full-service management for Utah landlords.",
+        },
+        {
+          name: "Pricing",
+          href: "/pricing",
+          description: "Transparent percentage-based property management plans.",
+        },
+        {
+          name: "Explore listings on a map",
+          href: "/explore",
+          description: "Map view of homes and rentals available now.",
+        },
+        {
+          name: "Compare property management software",
+          href: "/compare",
+          description: "Ondo RE vs Buildium, AppFolio, TurboTenant, and RentRedi.",
+        },
+        {
+          name: "Utah property management companies compared",
+          href: "/compare-utah-property-managers",
+          description: "Side-by-side fees, tech, and services across Utah managers.",
+        },
+        {
+          name: "Ondo RE vs Buildium",
+          href: "/vs/buildium",
+          description: "Price, features, AI tools, and tenant experience compared.",
+        },
+        {
+          name: "Ondo RE vs TurboTenant",
+          href: "/vs/turbotenant",
+          description: "Risk scoring, calculators, roles, and PWA compared.",
         },
         {
           name: "Tenant screening",
@@ -1200,7 +1240,6 @@ export function getSiteIndexSections(): SiteIndexSection[] {
       description: "Reach the team and follow public updates.",
       links: [
         { name: "Contact", href: "/contact", description: "Phone, email, and appointment booking." },
-        { name: "Feedback", href: "/feedback", description: "Product and website feedback." },
         { name: "News", href: "/news", description: "Updates and industry notes." },
         {
           name: "Events",
@@ -1216,6 +1255,21 @@ export function getSiteIndexSections(): SiteIndexSection[] {
           name: "Sweepstakes",
           href: "/sweepstakes",
           description: "Official rules for active promotions.",
+        },
+        {
+          name: "Subscribe",
+          href: "/subscribe",
+          description: "Utah market updates, owner tips, and Ondo news by email.",
+        },
+        {
+          name: "Get matched",
+          href: "/get-matched",
+          description: "A 60-second quiz that routes you to the right Ondo service.",
+        },
+        {
+          name: "Referral program",
+          href: "/referral",
+          description: "Invite a friend to Ondo RE and earn a free month.",
         },
       ],
     },

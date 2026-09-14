@@ -10,7 +10,7 @@ import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { ContentFaq, type ContentFaqItem } from "@/components/content/content-faq"
 
@@ -30,10 +30,11 @@ export type ArticleShellMeta = {
 
 export function articleMetadata(meta: ArticleShellMeta): Metadata {
   return pageCanonicalMetadata(meta.path, {
-    title: `${meta.title} | Ondo Real Estate`,
+    // Absolute so the root layout template cannot append a second brand.
+    title: pageTitle(`${meta.title} | Ondo Real Estate`),
     description: meta.description,
     openGraph: {
-      title: `${meta.title} | Ondo Real Estate`,
+      title: pageTitleText(`${meta.title} | Ondo Real Estate`),
       description: meta.description,
       type: "article",
       publishedTime: meta.published,
@@ -41,7 +42,7 @@ export function articleMetadata(meta: ArticleShellMeta): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${meta.title} | Ondo Real Estate`,
+      title: pageTitleText(`${meta.title} | Ondo Real Estate`),
       description: meta.description,
     },
   })

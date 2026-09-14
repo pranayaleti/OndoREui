@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import PropertySearchMap from "@/components/map/property-search-map";
@@ -57,12 +58,13 @@ export default function ExploreMapClient({ properties }: ExploreMapClientProps) 
   if (mapped.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-gray-300 p-8 text-center">
-        <p className="text-gray-600">
-          No properties with map coordinates yet.
+        <p className="text-foreground/80">
+          No listings are on the map right now.
         </p>
-        <p className="text-sm text-gray-500 mt-2">
-          Property locations are populated on creation. Existing listings can
-          be backfilled with <code className="rounded bg-gray-100 px-1 py-0.5">npm run backfill:coords</code> in the backend.
+        <p className="text-sm text-foreground/60 mt-2">
+          New listings appear here as soon as they are published with an address. Browse the full
+          list of available homes on the <Link href="/properties" className="text-primary underline-offset-4 hover:underline">properties page</Link>, or{" "}
+          <Link href="/contact" className="text-primary underline-offset-4 hover:underline">contact us</Link> to hear about homes before they list.
         </p>
       </div>
     );

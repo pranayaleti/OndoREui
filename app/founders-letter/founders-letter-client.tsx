@@ -121,7 +121,7 @@ export default function FoundersLetterPage() {
                 I purchased my first home in <strong className="text-primary">2019</strong>, that experience sparked something in me. Since then, I've been helping friends and family purchase their own homes, place tenants, and navigate the real estate journey confidently.
               </p>
               <p className="text-foreground/70 text-lg leading-relaxed mb-4">
-                What started as a personal passion evolved into a full-time vision: to invest in real estate and eventually dedicate my career to it. In early <strong className="text-primary">2022</strong>, I launched both <a href="https://ondosoft.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 font-semibold decoration-2 underline-offset-2 transition-colors">OndoSoft</a> and <strong className="text-primary">Ondo Real Estate</strong>, blending technology and real estate innovation.
+                What started as a personal passion evolved into a full-time vision: to invest in real estate and eventually dedicate my career to it. In early <strong className="text-primary">2022</strong>, I launched both <a href="https://www.ondosoft.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 font-semibold decoration-2 underline-offset-2 transition-colors">OndoSoft</a> and <strong className="text-primary">Ondo Real Estate</strong>, blending technology and real estate innovation.
               </p>
               <p className="text-foreground/70 text-lg leading-relaxed">
                 Around the same time, I began building this very website, a continuous work in progress that evolves as I do. Every update reflects a step forward in our mission to make property management smarter, more transparent, and deeply human.
@@ -386,7 +386,7 @@ export default function FoundersLetterPage() {
           <div className="bg-card rounded-xl p-6 border border-border shadow-sm group-hover:shadow-lg transition-all duration-300 group-hover:border-primary/50">
             <h3 className="text-xl font-bold text-foreground mb-3">The Launch</h3>
             <p className="text-foreground/70 text-sm leading-relaxed">
-              Founded <strong className="text-primary">Ondo Real Estate</strong> and launched <a href="https://ondosoft.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 font-semibold decoration-2 underline-offset-2 transition-colors">OndoSoft</a>. 
+              Founded <strong className="text-primary">Ondo Real Estate</strong> and launched <a href="https://www.ondosoft.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 font-semibold decoration-2 underline-offset-2 transition-colors">OndoSoft</a>. 
               Started building the platform that would merge cutting-edge technology with real estate expertise.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">

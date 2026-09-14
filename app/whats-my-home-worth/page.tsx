@@ -12,7 +12,7 @@ const description =
   "Free instant estimate of what your Utah home would rent for AND sell for. Covers 55+ Wasatch Front cities, from Salt Lake City to Provo, Lehi to Ogden. No signup to see your number."
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   alternates: { canonical: `${SITE_URL}/whats-my-home-worth/` },
   openGraph: { title, description, url: `${SITE_URL}/whats-my-home-worth/`, images: DEFAULT_OG_IMAGES },

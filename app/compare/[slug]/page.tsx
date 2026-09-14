@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { findCityBySlug, utahCitiesFromNorthOgdenToNephi, toCitySlug } from "@/lib/utah-cities"
+import { CITY_PAIRS, comparisonLink } from "@/lib/city-compare-pairs"
+import { findCityBySlug } from "@/lib/utah-cities"
 import { cityMarketData } from "@/lib/city-market-data"
 import type { Metadata } from "next"
 import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
@@ -12,21 +13,6 @@ import { CrossLinkSection } from "@/components/cross-link-section"
 import { Minus, ArrowRight } from "lucide-react"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-// Generate pairs for adjacent cities (neighbor pairs)
-const CITY_PAIRS: [string, string][] = [
-  ["draper", "lehi"],
-  ["draper", "sandy"],
-  ["lehi", "saratoga-springs"],
-  ["salt-lake-city", "draper"],
-  ["salt-lake-city", "sandy"],
-  ["provo", "orem"],
-  ["ogden", "layton"],
-  ["lehi", "american-fork"],
-  ["sandy", "riverton"],
-  ["south-jordan", "riverton"],
-  ["bountiful", "salt-lake-city"],
-  ["west-jordan", "south-jordan"],
-]
 
 type Params = Promise<{ slug: string }>
 
@@ -279,13 +265,9 @@ export default async function Page({ params }: { params: Params }) {
           <CrossLinkSection
             title="More Comparisons"
             variant="pills"
-            links={CITY_PAIRS.filter(([x, y]) => `${x}-vs-${y}` !== slug).slice(0, 8).map(([x, y]) => {
-              const cityA = utahCitiesFromNorthOgdenToNephi.find((c) => toCitySlug(c.name) === x)
-              const cityB = utahCitiesFromNorthOgdenToNephi.find((c) => toCitySlug(c.name) === y)
-              return {
-                label: `${cityA?.name ?? x} vs ${cityB?.name ?? y}`,
-                href: `/compare/${x}-vs-${y}/`,
-              }
+            links={CITY_PAIRS.filter(([x, y]) => `${x}-vs-${y}` !== slug).map(([x, y]) => {
+              const link = comparisonLink(x, y)
+              return { label: link.label, href: link.href }
             })}
           />
         </div>

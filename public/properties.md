@@ -30,7 +30,7 @@ See the [WebMCP alignment notes](https://www.ondorealestate.com/docs/WEBMCP.md) 
 
 ## For binding decisions
 
-- Application flow (invite-required): http://localhost:3001/login
+- Application flow (invite-required): https://app.ondorealestate.com/login
 - Contact leasing: info@ondorealestate.com · +1-408-538-0420
 
 ---

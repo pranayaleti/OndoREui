@@ -38,7 +38,7 @@ canonical: https://www.ondorealestate.com/
 
 ## Authenticated product
 
-The manager / owner / tenant portal lives at http://localhost:3001 (login: http://localhost:3001/login). Access is invitation-only. There is no self-serve signup on the marketing site.
+The manager / owner / tenant portal lives at https://app.ondorealestate.com (login: https://app.ondorealestate.com/login). Access is invitation-only. There is no self-serve signup on the marketing site.
 
 ## Contact
 

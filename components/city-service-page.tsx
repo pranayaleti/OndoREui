@@ -359,6 +359,17 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         }))}
       />
 
+      {city.zips.length > 0 && (
+        <CrossLinkSection
+          title={`${city.name} ZIP codes we serve`}
+          variant="pills"
+          links={city.zips.map((zip) => ({
+            label: zip,
+            href: `/${service}/zip/${zip}/`,
+          }))}
+        />
+      )}
+
       <Separator />
 
       {/* Team section */}

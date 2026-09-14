@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, ArrowRight } from "lucide-react"
@@ -112,6 +110,12 @@ export default function EventsClient() {
         const res = await fetch(backendUrl("/api/events"), {
           headers: { Accept: "application/json" },
         })
+        // 404 = the events API is not deployed / has no events collection yet. That is
+        // "no events scheduled", not an outage, so render the empty state instead of an error.
+        if (res.status === 404) {
+          if (!cancelled) setEvents([])
+          return
+        }
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const body = (await res.json()) as { data?: EventItem[] }
         if (!cancelled) setEvents(Array.isArray(body.data) ? body.data : [])
@@ -137,13 +141,7 @@ export default function EventsClient() {
     .sort((a, b) => new Date(b.startsAt).getTime() - new Date(a.startsAt).getTime())
 
   return (
-    <main id="main-content" className="min-h-screen">
-      <SEO
-        title="ONDO Events"
-        description="Upcoming ONDO events, homebuyer workshops, investor mixers, and community gatherings. RSVP and join us."
-        pathname="/events"
-        image={`${SITE_URL}/modern-office-building.png`}
-      />
+    <>
       {upcoming.length > 0 ? (
         <script
           type="application/ld+json"
@@ -155,14 +153,12 @@ export default function EventsClient() {
         />
       ) : null}
 
-      <PageBanner
-        title="ONDO Events"
-        subtitle="Workshops, mixers, and community events: come say hi."
-      />
-
-      <section className="py-16 bg-background">
+      <section className="py-4 bg-background" aria-labelledby="events-list-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
+            <h2 id="events-list-heading" className="text-2xl font-bold mb-6 dark:text-foreground">
+              Upcoming events
+            </h2>
             {loading ? (
               <p className="text-center text-foreground/70">Loading events…</p>
             ) : error ? (
@@ -178,17 +174,17 @@ export default function EventsClient() {
               <Card>
                 <CardContent className="py-12 text-center">
                   <p className="text-foreground/70 mb-4">
-                    No events are scheduled right now. Check back soon!
+                    No events are scheduled right now. Join the email list and we will let you
+                    know when the next one is confirmed.
                   </p>
                   <Button asChild variant="outline">
-                    <Link href="/contact">Get notified</Link>
+                    <Link href="/subscribe">Get notified</Link>
                   </Button>
                 </CardContent>
               </Card>
             ) : (
               <div className="space-y-12">
                 <div>
-                  <h2 className="text-2xl font-bold mb-6 dark:text-foreground">Upcoming</h2>
                   {upcoming.length > 0 ? (
                     <div className="grid gap-6">
                       {upcoming.map((e) => (
@@ -217,6 +213,6 @@ export default function EventsClient() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   )
 }

@@ -10,7 +10,7 @@ const description =
 const canonical = `${SITE_URL}/affiliate/`
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   robots: { index: true, follow: true },
   alternates: {

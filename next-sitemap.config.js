@@ -44,7 +44,6 @@ const AGENT_DISCOVERY_PATHS = [
   '/properties.md',
   '/contact.md',
   '/.well-known/agents.json',
-  '/loans/heloc/index.txt',
 ]
 const ROBOTS_COMMENT_RESOURCES = [...AGENT_DISCOVERY_PATHS, '/humans.txt', '/.well-known/security.txt']
 
@@ -126,9 +125,25 @@ function buildAlternateRefs(path, siteUrl) {
 /** Public pages that exist but must not be indexed (noindex metadata or redirect-only). */
 const SITEMAP_NOINDEX_PATHS = ['/search', '/chat', '/properties/compare']
 
+/**
+ * /investments/<static-subpage> (fractional, opportunity-zones, …) are real content.
+ * /investments/[slug] pages are rendered from MOCK_OPPORTUNITIES (sample deals for product
+ * demos, noindex) and must never reach the sitemap. Derive the allow-list from the route
+ * tree so a new static subpage is picked up automatically.
+ */
+const INVESTMENT_STATIC_SUBPAGES = new Set(
+  require('fs')
+    .readdirSync(require('path').join(__dirname, 'app', 'investments'), { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !d.name.startsWith('['))
+    .map((d) => `/investments/${d.name}`),
+)
+
 function isExcludedPath(path) {
   const p = normalizeSitemapPath(path)
   if (SITEMAP_NOINDEX_PATHS.includes(p)) {
+    return true
+  }
+  if (/^\/investments\/[^/]+$/.test(p) && !INVESTMENT_STATIC_SUBPAGES.has(p)) {
     return true
   }
   // Pages Router leftovers — same calculators live at /calculators/{slug}/.

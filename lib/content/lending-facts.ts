@@ -86,7 +86,7 @@ export const EXAMPLE_NOTE =
 export const FHFA_LOOKUP = {
   asOf: LENDING_FACTS_AS_OF,
   officialUrl: "https://www.fhfa.gov/data/conforming-loan-limit",
-  hudFhaLimitsUrl: "https://www.hud.gov/program_offices/housing/sfh/lender/origination/mortgagelimits",
+  hudFhaLimitsUrl: "https://entp.hud.gov/idapp/html/hicostlook.cfm",
   howTo:
     "Look up the property county on FHFA’s current-year conforming loan limit table. High-cost counties can have a higher ceiling than the baseline. A loan above that county’s limit is jumbo for conventional conforming purposes. FHA uses a different HUD table.",
   utahNote:

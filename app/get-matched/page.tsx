@@ -11,7 +11,7 @@ const description =
   "Answer 5 quick questions and get matched with the right Ondo Real Estate service, property management, mortgages, buying, selling, or notary. No commitment, real-person follow-up within 1 business day."
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   alternates: { canonical: `${SITE_URL}/get-matched/` },
   openGraph: { title, description, url: `${SITE_URL}/get-matched/`, images: DEFAULT_OG_IMAGES },

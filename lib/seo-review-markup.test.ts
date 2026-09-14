@@ -35,7 +35,7 @@ describe("business JSON-LD never publishes composite testimonials as reviews", (
     )
     const leaked = reviews
       .map((r) => r.author?.name)
-      .filter((name): name is string => Boolean(name) && compositeNames.has(name))
+      .filter((name): name is string => typeof name === "string" && compositeNames.has(name))
     expect(leaked, "composite testimonial names must not appear as review authors").toEqual([])
   })
 

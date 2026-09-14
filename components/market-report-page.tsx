@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
+import { comparisonsForCitySlug } from "@/lib/city-compare-pairs"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import {
@@ -48,6 +49,7 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
   const citySlug = toCitySlug(city.name)
   const market = cityMarketData[city.name]
   const nearbyCities = useMemo(() => getNearbyCities(city.name, 6), [city.name])
+  const comparisons = useMemo(() => comparisonsForCitySlug(citySlug), [citySlug])
 
   if (!market) {
     return (
@@ -217,6 +219,14 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
               </table>
             </div>
           </section>
+        )}
+
+        {comparisons.length > 0 && (
+          <CrossLinkSection
+            title={`Head-to-head: ${city.name} vs nearby cities`}
+            variant="pills"
+            links={comparisons.map((c) => ({ label: c.label, href: c.href }))}
+          />
         )}
 
         <Separator />

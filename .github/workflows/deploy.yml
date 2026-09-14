@@ -62,6 +62,14 @@ jobs:
 
       - name: Build and export static site
         run: npm run build
+        env:
+          # Production API (Supabase Edge Function, same value the Dashboard deploy uses).
+          # Without it the static export falls back to same-origin /api/* paths that do not
+          # exist on GitHub Pages: listings never load, /explore is empty, and
+          # generateStaticParams emits only /properties/_placeholder/.
+          NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
+          NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
+          NEXT_PUBLIC_SITE_URL: https://www.ondorealestate.com
 
       - name: Add CNAME, disable Jekyll, write build id
         env:
