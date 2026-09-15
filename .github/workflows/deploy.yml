@@ -239,7 +239,11 @@ jobs:
           URLS="https://www.ondorealestate.com/ https://www.ondorealestate.com/blog/two-years-of-tax-returns-vs-one-year-mortgage/ https://www.ondorealestate.com/calculators/cost-of-living/"
           BUILD_URLS="https://www.ondorealestate.com/ondo-build.json https://www.ondorealestate.com/ondo-build/index.json"
           PAGES_IP="185.199.108.153"
-          ATTEMPTS=40
+          # 40 attempts * 15s = exactly the documented ~10min Fastly cache TTL, so a deploy
+          # that lands right at the edge of that window (e.g. 9a2b469c on 2026-09-14) fails
+          # verification even though production is correct seconds later. 56 attempts = 14min
+          # gives real margin over the TTL without dragging out an already-long workflow.
+          ATTEMPTS=56
           FASTLY_GRACE=8
 
           if [ -z "${EXPECTED_SHA}" ]; then
