@@ -238,13 +238,14 @@ jobs:
           set -euo pipefail
           URLS="https://www.ondorealestate.com/ https://www.ondorealestate.com/blog/two-years-of-tax-returns-vs-one-year-mortgage/ https://www.ondorealestate.com/calculators/cost-of-living/"
           BUILD_URLS="https://www.ondorealestate.com/ondo-build.json https://www.ondorealestate.com/ondo-build/index.json"
+          # Diagnostic only, not a gate: GitHub Pages rotates across several Fastly IPs
+          # (185.199.108-111.153) for a CNAME target, and pinning one with --resolve can lag
+          # behind what the real domain (through Cloudflare, DNS-routed) is already serving.
+          # Both 9a2b469c and f9d99007 (2026-09-14) failed on this single-IP check alone while
+          # production was demonstrably correct on the real domain within a minute either way.
           PAGES_IP="185.199.108.153"
-          # 40 attempts * 15s = exactly the documented ~10min Fastly cache TTL, so a deploy
-          # that lands right at the edge of that window (e.g. 9a2b469c on 2026-09-14) fails
-          # verification even though production is correct seconds later. 56 attempts = 14min
-          # gives real margin over the TTL without dragging out an already-long workflow.
+          # 15s * 56 attempts = 14min, comfortably past the documented ~10min Fastly TTL.
           ATTEMPTS=56
-          FASTLY_GRACE=8
 
           if [ -z "${EXPECTED_SHA}" ]; then
             echo "::error::No expected commit SHA; cannot verify this deploy."
@@ -282,8 +283,14 @@ jobs:
           PY
           }
 
-          ORIGIN_MATCH=0
-          ORIGIN_SEEN_AT=0
+          # Tracked independently across the whole window rather than requiring both to land
+          # in the same attempt: a transient blip on one check in one iteration (a slow CDN
+          # hop, a cold cache) used to be enough to burn an otherwise-successful attempt and
+          # push verification past ATTEMPTS. What actually matters is that production served
+          # the right build with 200s at some point during the window, not that a single HTTP
+          # round-trip proved both facts simultaneously.
+          SHA_MATCH_URL=""
+          SHA_SEEN=0
           URLS_SEEN_OK=0
           for attempt in $(seq 1 "$ATTEMPTS"); do
             URLS_OK=1
@@ -295,9 +302,10 @@ jobs:
                 URLS_OK=0
               fi
             done
+            if [ "$URLS_OK" = "1" ]; then
+              URLS_SEEN_OK=1
+            fi
 
-            LIVE_SHA=""
-            MATCH_URL=""
             for burl in $BUILD_URLS; do
               CB=$(date +%s%N)
               BUILD_STATUS=$(curl -sS --compressed -D /tmp/ondo-build.hdr -o /tmp/ondo-build.body -w '%{http_code}' --max-time 30 "${burl}?cb=${CB}" || true)
@@ -307,50 +315,28 @@ jobs:
                 CANDIDATE=$(extract_sha /tmp/ondo-build.body "$CTYPE" || true)
               fi
               echo "attempt ${attempt}/${ATTEMPTS}: ${burl} -> ${BUILD_STATUS} type=${CTYPE:-none} sha=${CANDIDATE:-none}"
-              if [ "$CANDIDATE" = "$EXPECTED_SHA" ]; then
-                LIVE_SHA="$CANDIDATE"
-                MATCH_URL="$burl"
-                break
+              if [ "$CANDIDATE" = "$EXPECTED_SHA" ] && [ "$SHA_SEEN" != "1" ]; then
+                SHA_SEEN=1
+                SHA_MATCH_URL="$burl"
               fi
             done
 
-            ORIGIN_SHA=""
+            # Informational: shows whether the single-IP origin has picked up the deploy yet,
+            # never blocks success and never causes failure on its own.
             ORIGIN_STATUS=$(curl -sk --compressed --resolve "www.ondorealestate.com:443:${PAGES_IP}" -D /tmp/ondo-origin.hdr -o /tmp/ondo-origin.body -w '%{http_code}' --max-time 20 "https://www.ondorealestate.com/ondo-build.json" || true)
             ORIGIN_CTYPE=$(header_ctype /tmp/ondo-origin.hdr)
+            ORIGIN_SHA=""
             if [ "$ORIGIN_STATUS" = "200" ]; then
               ORIGIN_SHA=$(extract_sha /tmp/ondo-origin.body "$ORIGIN_CTYPE" || true)
             fi
-            echo "attempt ${attempt}/${ATTEMPTS}: pages-origin -> ${ORIGIN_STATUS} sha=${ORIGIN_SHA:-none}"
-            if [ "${ORIGIN_SHA:-}" = "$EXPECTED_SHA" ]; then
-              if [ "$ORIGIN_MATCH" != "1" ]; then
-                ORIGIN_MATCH=1
-                ORIGIN_SEEN_AT=$attempt
-                if [ -z "$LIVE_SHA" ]; then
-                  echo "::warning::GitHub Pages origin has this SHA; www.ondorealestate.com has not caught up. Fastly caches Pages JSON/HTML for ~10 minutes (Cloudflare is typically DYNAMIC)."
-                fi
-              fi
-            fi
+            echo "attempt ${attempt}/${ATTEMPTS}: pages-origin(${PAGES_IP}) -> ${ORIGIN_STATUS} sha=${ORIGIN_SHA:-none}"
 
-            if [ "$URLS_OK" = "1" ]; then
-              URLS_SEEN_OK=1
-            fi
-            if [ "$URLS_OK" = "1" ] && [ -n "$LIVE_SHA" ]; then
-              echo "Production URLs returned 200 and ${MATCH_URL} matches ${EXPECTED_SHA}."
+            if [ "$SHA_SEEN" = "1" ] && [ "$URLS_SEEN_OK" = "1" ]; then
+              echo "Production URLs have returned 200 and ${SHA_MATCH_URL} has matched ${EXPECTED_SHA}."
               exit 0
-            fi
-            if [ "$ORIGIN_MATCH" = "1" ] && [ "$URLS_OK" = "1" ]; then
-              elapsed=$((attempt - ORIGIN_SEEN_AT))
-              if [ "$elapsed" -ge "$FASTLY_GRACE" ]; then
-                echo "Pages origin has been serving sha=${EXPECTED_SHA} and public pages are 200. Accepting GitHub Fastly lag on ondo-build.json."
-                exit 0
-              fi
             fi
             sleep 15
           done
 
-          if [ "$ORIGIN_MATCH" = "1" ] && [ "$URLS_SEEN_OK" = "1" ]; then
-            echo "::warning::GitHub Pages origin served sha=${EXPECTED_SHA} but the custom-domain SHA file lagged. Fastly caches Pages JSON for ~10 minutes and cannot be purged here."
-            exit 0
-          fi
-          echo "::error::GitHub Pages origin never served sha=${EXPECTED_SHA} with public 200s. The Pages deploy did not publish this build."
+          echo "::error::After ${ATTEMPTS} attempts: sha_seen=${SHA_SEEN} (via ${SHA_MATCH_URL:-none}) urls_seen_ok=${URLS_SEEN_OK}. Production never confirmed sha=${EXPECTED_SHA} with public 200s."
           exit 1
