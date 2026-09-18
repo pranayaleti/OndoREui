@@ -48,6 +48,21 @@ describe("ArticleShell", () => {
     expect(screen.getByText("Pranay Reddy Aleti")).toBeInTheDocument()
   })
 
+  it("renders an at-a-glance box when the post supplies takeaways", () => {
+    render(
+      <ArticleShell meta={{ ...meta, takeaways: ["MIP is timed from original LTV."] }}>
+        <h2>Only heading</h2>
+      </ArticleShell>,
+    )
+    expect(screen.getByRole("region", { name: "Key takeaways" })).toBeInTheDocument()
+    expect(screen.getByText("MIP is timed from original LTV.")).toBeInTheDocument()
+  })
+
+  it("omits the at-a-glance box when the post supplies none", () => {
+    renderShell(<h2>Only heading</h2>)
+    expect(screen.queryByRole("region", { name: "Key takeaways" })).not.toBeInTheDocument()
+  })
+
   it("still renders the body when a post has no headings at all", () => {
     renderShell(<p>Body with no headings.</p>)
     expect(screen.getByText("Body with no headings.")).toBeInTheDocument()

@@ -16,6 +16,7 @@ import { ContentFaq, type ContentFaqItem } from "@/components/content/content-fa
 import { ArticleToc } from "@/components/content/article-toc"
 import { ArticleByline } from "@/components/content/article-byline"
 import { extractOutline } from "@/lib/content/article-outline"
+import { KeyTakeaways } from "@/components/content/key-takeaways"
 
 const DEFAULT_AUTHOR = "Ondo Real Estate Editorial Team"
 
@@ -30,6 +31,8 @@ export type ArticleShellMeta = {
   image?: string
   keywords?: string[]
   bannerSubtitle?: string
+  /** Optional "at a glance" bullets shown above the body. */
+  takeaways?: readonly string[]
   faqs?: readonly ContentFaqItem[]
 }
 
@@ -113,6 +116,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
               <Link href="/learn">← Mortgage learning hub</Link>
             </Button>
           </div>
+          {meta.takeaways?.length ? <KeyTakeaways items={meta.takeaways} className="mb-8" /> : null}
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start lg:gap-12">
             <div className="min-w-0">
               <ArticleToc
