@@ -1,4 +1,5 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
+import { ArticleCallout } from "@/components/content/article-callout"
 import { ComparisonTable } from "@/components/content/comparison-table"
 import { LENDING_FACTS_AS_OF, OCCUPANCY_TYPES } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
@@ -76,6 +77,12 @@ export default function OccupancyPage() {
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "Occupancy is how you will use the house. It is not a pricing coupon.",
+        takeaways: [
+          "Occupancy states how you will actually use the property. It is not a pricing tier you get to select.",
+          "Primary, second home, and investment are three different answers, with different overlays, down payment expectations, and pricing.",
+          "Second-home overlays typically expect exclusive use and limit treating the property as a rental business. Those are investor tests, not a recipe for making a rental look like a second home.",
+          "Living in one unit of a duplex and renting the other is usually primary occupancy, not investment.",
+        ],
         faqs,
         keywords: ["second home occupancy", "investment property occupancy"],
       }}
@@ -86,6 +93,14 @@ export default function OccupancyPage() {
         {OCCUPANCY_TYPES.fraud} Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{OCCUPANCY_TYPES.fairHousing}</p>
+
+      <ArticleCallout variant="warning" title="Occupancy is not a pricing choice">
+        Investment pricing is higher than second-home pricing, which makes the cheaper label tempting. Lenders also
+        put the occupancy promise in the security instrument itself — Section 6 of the uniform instrument, replaced by
+        a Second Home Rider on second homes — so a use that does not match what was stated can have consequences long
+        after closing. If your plan for the property is genuinely uncertain, that is a
+        conversation to have with a loan officer before the application, not a box to guess at.
+      </ArticleCallout>
 
       <h2>Three occupancy types</h2>
       <ComparisonTable

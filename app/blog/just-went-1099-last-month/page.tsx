@@ -1,4 +1,5 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
+import { StepList } from "@/components/content/step-list"
 import { ComparisonTable } from "@/components/content/comparison-table"
 import { JUST_WENT_1099, LENDING_FACTS_AS_OF, SELF_EMPLOYED_HISTORY } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
@@ -71,6 +72,12 @@ export default function JustWent1099Page() {
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "A career change is not a documentation shortcut. The average still needs a history.",
+        takeaways: [
+          "Going 1099 last month usually stalls the file because there is no filed history yet to average.",
+          "The income that can be documented today is what a loan officer has to work with — not what the new arrangement is expected to pay.",
+          "One-year self-employed documentation exists on some products, with its own tests. It is not a general shortcut.",
+          "If you have to buy before a tax year of 1099s exists, the realistic levers are usually a co-borrower, a smaller loan, or waiting.",
+        ],
         faqs,
         keywords: ["1099 last month mortgage", "contractor seasoning"],
       }}
@@ -111,21 +118,40 @@ export default function JustWent1099Page() {
       </ul>
 
       <h2>What to do this month</h2>
-      <ol>
-        <li>Do not write an offer that assumes the new 1099 income will count.</li>
-        <li>
-          Bring W-2s, the last paystubs from the job you left, and any contracts — then ask which lines can be used{" "}
-          <em>now</em>.
-        </li>
-        <li>
-          Use the <Link href="/calculators/income">income calculator</Link> with income you can already document.
-        </li>
-        <li>
-          If you must buy before a tax year of 1099s exists, the conversation may be a co-borrower, a smaller loan, or
-          waiting — not a hidden exception.{" "}
-          <Link href="/learn/variable-income">Variable income hub</Link>.
-        </li>
-      </ol>
+      <StepList
+        steps={[
+          {
+            title: "Do not write an offer that assumes the new 1099 income will count",
+            body: "Until there is filed history to average, underwriting has nothing to use.",
+          },
+          {
+            title: "Gather what is already documentable",
+            body: (
+              <>
+                W-2s, the last paystubs from the job you left, and any contracts — then ask which lines can be used{" "}
+                <em>now</em>.
+              </>
+            ),
+          },
+          {
+            title: "Run the numbers on documented income only",
+            body: (
+              <>
+                Use the <Link href="/calculators/income">income calculator</Link> with income you can already document.
+              </>
+            ),
+          },
+          {
+            title: "If you must buy now, talk through the real levers",
+            body: (
+              <>
+                A co-borrower, a smaller loan, or waiting — not a hidden exception.{" "}
+                <Link href="/learn/variable-income">Variable income hub</Link>.
+              </>
+            ),
+          },
+        ]}
+      />
     </ArticleShell>
   )
 }

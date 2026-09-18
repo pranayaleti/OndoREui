@@ -1,4 +1,5 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
+import { ArticleCallout } from "@/components/content/article-callout"
 import { FHA_SNAPSHOT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
@@ -38,6 +39,12 @@ export default function GiftFundsPage() {
         published: "2026-08-29",
         category: "First-Time Buyers",
         bannerSubtitle: "A gift can be a legitimate source of funds. A mystery deposit is not.",
+        takeaways: [
+          "A gift is a legitimate source of funds. An undocumented deposit is not — on this file, the paperwork is the product.",
+          "Three pieces usually have to be in the file: a letter stating repayment is not required, evidence the donor had the money, and evidence it moved.",
+          "Gift funds solve cash to close. They do not replace qualifying income.",
+          "Donor eligibility and deposit seasoning differ by program, and Utah assistance programs have their own rules about stacking with a gift.",
+        ],
         faqs,
         keywords: ["gift funds down payment", "mortgage gift letter"],
       }}
@@ -61,6 +68,13 @@ export default function GiftFundsPage() {
         allowed in many cases, but the occupancy and entitlement file still has to work. USDA has its own income and
         property-map tests that a gift does not override.
       </p>
+
+      <ArticleCallout variant="pitfall">
+        A gift that is quietly expected to be repaid is not treated as a gift. Lenders underwrite a repayable advance
+        as a debt, and the gift letter asks the donor to state that repayment is not expected. If there is an
+        expectation of repayment, say so — disclosed, it is usually just another monthly obligation in the DTI;
+        undisclosed, it is the kind of thing that unwinds a file late.
+      </ArticleCallout>
 
       <h2>If your income is also variable</h2>
       <p>

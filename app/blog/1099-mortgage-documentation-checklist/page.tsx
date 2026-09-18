@@ -39,6 +39,12 @@ export default function TenNinetyNineDocsPage() {
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "Bring the file an underwriter can trace. Not a folder of screenshots.",
+        takeaways: [
+          "A 1099 file is proving a durable average from filed returns, so the documents that matter are the ones the IRS already has.",
+          "Expect two years of personal returns with all schedules; some files qualify on one year, and lenders commonly order IRS transcripts that must match what was filed.",
+          "A year-to-date profit and loss supports the current year. Note whether it is CPA-prepared or self-prepared — lenders weigh those differently.",
+          "Write-offs that lower taxable income also lower qualifying income. That trade-off is the single most common surprise on these files.",
+        ],
         faqs,
         keywords: ["1099 mortgage documents", "gig worker mortgage"],
       }}

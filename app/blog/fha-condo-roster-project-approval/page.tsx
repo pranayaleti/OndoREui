@@ -1,4 +1,5 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
+import { StepList } from "@/components/content/step-list"
 import { ComparisonTable } from "@/components/content/comparison-table"
 import { FHA_CONDO_ROSTER, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
@@ -72,6 +73,12 @@ export default function FhaCondoRosterPage() {
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "FHA finances a unit in an approved project — or a unit HUD agrees to review. Not every condo.",
+        takeaways: [
+          "An FHA condo loan needs the project to qualify, not only the borrower.",
+          "Check HUD's condominium list before writing an FHA offer. Expired, withdrawn, and rejected are all different from approved — and none of them are approved.",
+          "Match the legal project name, not the marketing name on a listing site.",
+          "Single-unit approval is a separate path for a unit in a project that is not on the roster. It is a review, not a workaround.",
+        ],
         faqs,
         keywords: ["FHA approved condo", "HUD condo list"],
       }}
@@ -83,22 +90,35 @@ export default function FhaCondoRosterPage() {
       </p>
 
       <h2>How to look it up</h2>
-      <ol>
-        <li>
-          Open HUD’s condominium search (opens HUD.gov in a new tab):{" "}
-          <a
-            href={FHA_CONDO_ROSTER.rosterUrl}
-            className="underline underline-offset-4"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            HUD condominium approval search
-          </a>
-          . Confirm it is still the published tool; HUD moves URLs.
-        </li>
-        <li>Search by project name, city, or state. Match the legal project name, not the marketing name on Zillow.</li>
-        <li>Status must be currently approved. Expired, rejected, and withdrawn are different statuses.</li>
-      </ol>
+      <StepList
+        steps={[
+          {
+            title: "Open HUD's condominium search",
+            body: (
+              <>
+                Opens HUD.gov in a new tab:{" "}
+                <a
+                  href={FHA_CONDO_ROSTER.rosterUrl}
+                  className="underline underline-offset-4"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  HUD condominium approval search
+                </a>
+                . Confirm it is still the published tool; HUD moves URLs.
+              </>
+            ),
+          },
+          {
+            title: "Search by project name, city, or state",
+            body: "Match the legal project name, not the marketing name used on listing sites.",
+          },
+          {
+            title: "Read the status, not just the listing",
+            body: "Status must be currently approved. Expired, rejected, and withdrawn are different statuses.",
+          },
+        ]}
+      />
       <p>{FHA_CONDO_ROSTER.recertification}</p>
 
       <ComparisonTable

@@ -1,5 +1,6 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { BreakEvenTable } from "@/components/content/break-even-table"
+import { ProsCons } from "@/components/content/pros-cons"
 import { EXAMPLE_NOTE, LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
@@ -40,6 +41,12 @@ export default function RefiBreakevenPage() {
         published: "2026-08-29",
         category: "Refinance",
         bannerSubtitle: "A lower note rate is not a savings until costs are earned back.",
+        takeaways: [
+          "Break-even months ≈ total cash costs ÷ the monthly principal-and-interest saving. Discount points and origination belong in the cost side, not just the appraisal.",
+          "A lower note rate is not a saving until those costs are earned back.",
+          "Break-even only pays off if you keep the loan that long — a 36-month break-even does nothing for a file that sells in month 18. Some refinances are still worth doing for reasons other than payment, such as leaving an ARM.",
+          "Only the principal-and-interest difference counts. A tax or insurance change is not a refinance saving.",
+        ],
         faqs,
         keywords: ["refinance break-even months", "refinance points origination"],
       }}
@@ -72,13 +79,24 @@ export default function RefiBreakevenPage() {
         <Link href="/blog/recast-vs-refinance">recast vs refinance</Link>.
       </p>
 
-      <h2>When people still refinance anyway</h2>
-      <ul>
-        <li>Removing a risky ARM reset, even if break-even is long.</li>
-        <li>Changing term (for example, 30 to 15) for a payoff goal, not a payment cut.</li>
-        <li>Cash-out needs — then compare a <Link href="/blog/heloc-vs-cash-out-refinance">HELOC</Link> instead of
-          assuming cash-out is cheaper.</li>
-      </ul>
+      <h2>When it still makes sense, and when it does not</h2>
+      <ProsCons
+        prosHeading="People still refinance when"
+        consHeading="A lower rate still loses when"
+        pros={[
+          "They are removing a risky ARM reset, even if break-even is long.",
+          "They are changing term — 30 to 15, say — for a payoff goal rather than a payment cut.",
+          "There is a cash-out need, after comparing a HELOC rather than assuming cash-out is cheaper.",
+        ]}
+        cons={[
+          "Break-even runs longer than they will keep the loan.",
+          "Discount points and origination were left out of the cost side.",
+          "The “saving” was a tax or insurance change, not a lower principal-and-interest payment.",
+        ]}
+      />
+      <p>
+        Comparing a second lien instead: <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out refinance</Link>.
+      </p>
 
       <h2>What happens next</h2>
       <p>

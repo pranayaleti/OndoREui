@@ -1,6 +1,15 @@
 import { Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+/**
+ * This box is the most extractable block on the page: search snippets, AI answer
+ * engines, and the generated Markdown twins all lift it intact, without the
+ * disclaimer the shell appends at the foot. It therefore carries its own line
+ * saying it is a summary.
+ */
+export const KEY_TAKEAWAYS_CAPTION =
+  "Summary only. The detail, the current figures, and the disclosures are in the article below."
+
 type KeyTakeawaysProps = {
   items: readonly string[]
   heading?: string
@@ -31,6 +40,7 @@ export function KeyTakeaways({ items, heading = "Key takeaways", className }: Ke
           </li>
         ))}
       </ul>
+      <p className="mt-4 border-t border-border/60 pt-3 text-xs text-foreground/50">{KEY_TAKEAWAYS_CAPTION}</p>
     </section>
   )
 }

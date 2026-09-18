@@ -1,4 +1,5 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
+import { ArticleCallout } from "@/components/content/article-callout"
 import { LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
@@ -39,6 +40,12 @@ export default function DeclinedAfterPreapprovalPage() {
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "The letter is a snapshot. The underwrite is the file.",
+        takeaways: [
+          "A pre-approval letter is a snapshot of what was verified that day. It is not a commitment to lend.",
+          "Late declines are usually a failed condition rather than a changed market: a job or income change, an unsourced deposit, new debt, or a property that does not meet the program.",
+          "Anything that moves DTI during underwriting can undo the letter — a financed sofa counts.",
+          "If you are declined, the lender owes you a written notice — either the specific principal reasons or your right to request them. Get the failed condition in writing; that is what tells you whether a fix and a re-run are possible.",
+        ],
         faqs,
         keywords: ["pre-approval declined", "mortgage underwriting conditions"],
       }}
@@ -76,6 +83,12 @@ export default function DeclinedAfterPreapprovalPage() {
           late.
         </li>
       </ul>
+
+      <ArticleCallout variant="pitfall" title="The two that catch people mid-underwriting">
+        Opening new credit and moving large amounts of cash are the two things most likely to undo a letter you already
+        have, and both usually feel harmless at the time. Neither is a reason to panic if it has happened — it is a
+        reason to tell your loan officer before underwriting finds it.
+      </ArticleCallout>
 
       <h2>What a pre-approval was never doing</h2>
       <p>

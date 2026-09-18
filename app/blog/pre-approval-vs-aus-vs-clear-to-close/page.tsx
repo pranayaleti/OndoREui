@@ -75,6 +75,12 @@ export default function PreapprovalStagesPage() {
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "Sellers want a letter. The file needs findings. Closing needs CTC.",
+        takeaways: [
+          "These are three different artifacts doing three different jobs, not three words for approval.",
+          "The pre-approval letter is a snapshot that helps you shop. It is not a commitment to lend.",
+          "AUS findings are an engine result testing one program against the credit file. An automated approval is not a human sign-off.",
+          "Clear to close is an underwriter stating that this property's conditions are satisfied as of that date — which is why it can still move if the file changes.",
+        ],
         faqs,
         keywords: ["pre-approval vs AUS vs CTC", "what is clear to close"],
       }}

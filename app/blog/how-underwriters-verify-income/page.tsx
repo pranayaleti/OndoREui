@@ -39,6 +39,12 @@ export default function VerifyIncomePage() {
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "Each stack is proving a durable average, not a good week.",
+        takeaways: [
+          "Underwriting is trying to establish a durable average it can use in DTI — not to confirm that last month was good.",
+          "W-2 files prove it with paystubs, W-2s, and a verification of employment. Overtime, bonus, and commission additionally need a history that is likely to continue.",
+          "Self-employed files prove it with returns and transcripts that match what was filed. A CPA letter can support the business, but it does not replace returns for calculating qualifying income.",
+          "Bank-statement programs count eligible deposits instead of taxable income. That is a separate Non-QM product with its own pricing and overlays, not a conventional shortcut.",
+        ],
         faqs,
         keywords: ["underwriter income verification", "W-2 1099 bank statement"],
       }}
