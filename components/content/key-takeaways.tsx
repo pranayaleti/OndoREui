@@ -13,6 +13,8 @@ export const KEY_TAKEAWAYS_CAPTION =
 type KeyTakeawaysProps = {
   items: readonly string[]
   heading?: string
+  /** Override for legal-adjacent articles, whose extracted box needs its own framing. */
+  caption?: string
   className?: string
 }
 
@@ -20,7 +22,12 @@ type KeyTakeawaysProps = {
  * The "at a glance" summary that sits above the article body. Opt-in: an
  * article only gets one when someone has written the takeaways.
  */
-export function KeyTakeaways({ items, heading = "Key takeaways", className }: KeyTakeawaysProps) {
+export function KeyTakeaways({
+  items,
+  heading = "Key takeaways",
+  caption = KEY_TAKEAWAYS_CAPTION,
+  className,
+}: KeyTakeawaysProps) {
   if (items.length === 0) return null
   const headingId = `key-takeaways-${heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
 
@@ -40,7 +47,7 @@ export function KeyTakeaways({ items, heading = "Key takeaways", className }: Ke
           </li>
         ))}
       </ul>
-      <p className="mt-4 border-t border-border/60 pt-3 text-xs text-foreground/50">{KEY_TAKEAWAYS_CAPTION}</p>
+      <p className="mt-4 border-t border-border/60 pt-3 text-xs text-foreground/50">{caption}</p>
     </section>
   )
 }

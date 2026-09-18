@@ -33,3 +33,12 @@ describe("KeyTakeaways compliance framing", () => {
     expect(screen.getByText(KEY_TAKEAWAYS_CAPTION)).toBeInTheDocument()
   })
 })
+
+describe("KeyTakeaways caption override", () => {
+  it("lets a legal-adjacent article replace the caption that travels with the extracted box", () => {
+    const caption = "Summary only, and general information rather than legal advice."
+    render(<KeyTakeaways items={items} caption={caption} />)
+    expect(screen.getByText(caption)).toBeInTheDocument()
+    expect(screen.queryByText(KEY_TAKEAWAYS_CAPTION)).not.toBeInTheDocument()
+  })
+})

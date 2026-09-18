@@ -33,6 +33,8 @@ export type ArticleShellMeta = {
   bannerSubtitle?: string
   /** Optional "at a glance" bullets shown above the body. */
   takeaways?: readonly string[]
+  /** Override the takeaways caption; legal-adjacent articles need their own. */
+  takeawaysCaption?: string
   faqs?: readonly ContentFaqItem[]
 }
 
@@ -116,7 +118,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
               <Link href="/learn">← Mortgage learning hub</Link>
             </Button>
           </div>
-          {meta.takeaways?.length ? <KeyTakeaways items={meta.takeaways} className="mb-8" /> : null}
+          {meta.takeaways?.length ? <KeyTakeaways items={meta.takeaways} caption={meta.takeawaysCaption} className="mb-8" /> : null}
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start lg:gap-12">
             <div className="min-w-0">
               <ArticleToc

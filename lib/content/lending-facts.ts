@@ -1156,3 +1156,99 @@ export const ESCROW_WAIVER = {
   notAPromise:
     "This page does not promise you can waive escrow, quote a waiver fee, or tell you which option is cheaper. Shortage and surplus still happen on impounded loans. See escrow shortage after the first year.",
 } as const
+
+export const LOAN_ASSUMPTION = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "HUD Handbook 4000.1 (FHA assumptions) and the VA Lender's Handbook (assumption, substitution of entitlement, release of liability). Confirm current policy and the servicer's own process before relying on any of this.",
+  whatItIs:
+    "An assumption transfers the existing loan to the buyer on its existing terms, rather than the buyer taking out a new loan. The rate, remaining term, and balance travel with the loan. Whether a given loan may be assumed is set by the note and the program, not by agreement between buyer and seller.",
+  whichLoansTypical:
+    "FHA and VA loans are generally assumable with agency and servicer approval. USDA loans can also be assumed, but the assuming buyer must meet USDA's own eligibility, including household income limits and property location, and some USDA loans are assumed on new rates and terms rather than the existing ones. Conventional loans usually contain a due-on-sale clause that lets the lender call the balance due on transfer, so they are typically not assumable — though federal law limits when that clause may be enforced, including on certain transfers between spouses and transfers resulting from a divorce decree or property settlement.",
+  creditStillApplies:
+    "An assumption is not a way around underwriting. The servicer typically reviews the buyer's credit, income, and debts to program standards, and can decline. An approved assumption is a decision on that buyer's file, not a formality.",
+  theEquityGap:
+    "The buyer must cover the difference between the purchase price and the remaining loan balance, in cash or through other financing. On a seasoned loan that gap is often larger than a normal down payment, which is why a low assumed rate does not automatically mean less cash to close.",
+  occupancy:
+    "FHA assumptions generally require the assuming buyer to occupy the property as a principal residence. Occupancy is a program rule on an assumption as much as on a new purchase.",
+  mipContinues:
+    "An assumed FHA loan keeps the mortgage insurance terms it already has. Assuming the loan does not restart or remove annual MIP; the original schedule travels with the loan.",
+  vaEntitlement:
+    "On a VA loan, the seller's entitlement generally stays tied up unless a VA-eligible buyer assumes the loan and substitutes their own entitlement, and the VA and servicer approve a release of liability. A veteran seller who skips that step can remain liable and lose the use of that entitlement.",
+  releaseOfLiability:
+    "Without a documented release of liability, a seller can remain responsible for the debt after the sale. Ask for it in writing as part of the assumption, not after closing.",
+  timing:
+    "Assumptions run through the servicer's assumption department rather than a normal origination pipeline, and processing times vary widely. Build that uncertainty into contract deadlines instead of assuming a standard closing timeline.",
+  notAPromise:
+    "This page does not quote assumption fees, promise that a specific loan is assumable, or predict approval. The servicer of that specific loan, and the note itself, are the source of truth.",
+} as const
+
+export const SELLER_CONCESSIONS = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Agency and agency-insured seller-contribution limits (Fannie Mae, Freddie Mac, HUD Handbook 4000.1, VA Lender's Handbook). Caps change; confirm the current limit for the program, occupancy, and LTV on the file.",
+  whatItIs:
+    "A seller concession is money the seller credits the buyer at closing toward closing costs, prepaids, or a rate buydown. It is negotiated in the contract and shown on the closing disclosure.",
+  capped:
+    "Every program caps what the seller may contribute, and the cap varies by program, occupancy, and loan-to-value. A concession above the cap is generally reduced or reallocated rather than paid, which is why the number belongs in the offer only after a loan officer confirms it.",
+  notDownPayment:
+    "Seller concessions generally cannot be applied to the down payment on agency financing. They address closing costs, prepaids, and buydowns. A buyer short on down payment needs a different solution, such as documented gift funds.",
+  priceInteraction:
+    "A concession is usually paid for somewhere. Raising the price to fund a credit changes the loan amount and has to appraise at the higher figure. The appraisal does not care how the parties labelled the money.",
+  buydownUse:
+    "Concessions are often used to fund a temporary or permanent rate buydown. Whether that beats a price reduction depends on how long the buyer keeps the loan, which is a break-even question, not a rule.",
+  notAPromise:
+    "This page does not quote a cap percentage or promise a seller credit will be allowed on your file. The program guide in force and the lender reviewing the contract decide that.",
+} as const
+
+export const APPRAISAL_GAP = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Agency appraisal and LTV policy plus the Utah REPC appraisal condition. Confirm the contract actually signed and current program policy.",
+  whatItIs:
+    "An appraisal gap is the difference between the contract price and a lower appraised value. Lenders generally size the loan from the lower of price or appraised value, so the gap becomes cash the buyer must cover, a renegotiation, or a cancellation.",
+  lowerOfNote:
+    "This is why a low appraisal changes the file even when the buyer's income and credit are unchanged: the loan amount is constrained by value, not by what the parties agreed to pay.",
+  optionsNote:
+    "The usual paths are renegotiating the price, covering the difference in cash, asking for reconsideration of value with genuine comparable sales, or cancelling under the contract's appraisal condition if that right still exists.",
+  reconsideration:
+    "A reconsideration of value is a documented request based on relevant comparable sales the appraiser did not use. It is not an appeal of the outcome and it is not a renegotiation tool; many requests do not change the value.",
+  utahDeadline:
+    "In Utah the appraisal condition shares the Financing & Appraisal Deadline, and cancelling on value typically requires written notice by that deadline. Missing the notice can put earnest money at risk even when the appraisal genuinely came in low.",
+  notAPromise:
+    "This page does not predict appraised value, promise a reconsideration will succeed, or tell you whether your earnest money is refundable. Read the contract you signed with your agent.",
+} as const
+
+export const CREDIT_BEFORE_MORTGAGE = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Credit-scoring model documentation and lender rescore practice. Not credit repair, and not a promise of a score change.",
+  rescoreIsLenderSide:
+    "A rapid rescore is a lender-initiated process that asks the bureaus to reflect a correction or a paid-down balance sooner than the normal reporting cycle. Consumers cannot buy it directly, and it only speeds up reporting of something already true.",
+  notRepair:
+    "A rescore does not remove accurate information. Services promising to delete accurate items are a separate, federally regulated industry, and an underwriter who learns a score was produced by suppressing accurate information will not be able to rely on it.",
+  utilizationNote:
+    "Revolving utilisation is one of the larger score factors and one of the few a borrower can change quickly, because balances update each cycle. Paying a card down before the statement cuts is usually more effective than paying it after.",
+  closingCardsNote:
+    "Closing an old card can shorten average account age and reduce available credit, which can move a score in the wrong direction during a loan file. Talk to the loan officer before closing anything.",
+  disputeWarning:
+    "You always have the right to dispute inaccurate information with the credit bureaus under federal law, and nothing here is a reason not to. This is about timing: an open dispute flag on a tradeline can stall an underwriting decision, so if you are mid-file, tell your loan officer first so the file can be sequenced around it.",
+  notAPromise:
+    "This page does not promise a score increase, a timeline, or an approval. Scores are model output on data you do not control the reporting of.",
+} as const
+
+export const DIVORCE_AND_MORTGAGE = {
+  asOf: LENDING_FACTS_AS_OF,
+  source:
+    "Agency policy on obligations, assumptions, and equity buyouts, plus general Utah practice. Education only — not legal advice and not a substitute for a family-law attorney.",
+  decreeDoesNotBind:
+    "A divorce decree allocates responsibility between the parties. It does not remove either borrower from the note. The lender was not a party to the decree, and a missed payment can still reach both credit reports.",
+  threePaths:
+    "The usual ways to separate a mortgage are refinancing into one borrower's name, assuming the loan where the program and servicer allow it, or selling. Which are available depends on the loan, the equity, and whether one party qualifies alone.",
+  qualifyingAlone:
+    "Refinancing or assuming means qualifying on one income. A creditor cannot discount support income just because of where it comes from, but it can require documentation that the payments have been received and will continue — an underwriting question rather than a settled fact.",
+  equityBuyout:
+    "A refinance that buys out a co-owner's interest is often treated as a limited cash-out rather than a cash-out under agency policy — but only when specific conditions are met, including a minimum period of joint ownership before the new loan disburses, a signed written agreement between the parties stating the terms and where the proceeds go, and the remaining borrower taking none of the proceeds in cash. Confirm the current policy and each condition against your file; do not assume the favourable treatment applies.",
+  notAPromise:
+    "This page does not tell you what your decree requires, whether you will qualify alone, or what your equity is. Talk to a family-law attorney about the decree and a loan officer about the file.",
+} as const
