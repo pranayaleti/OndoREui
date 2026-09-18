@@ -1,9 +1,4 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const slug = "/blog/crypto-and-real-estate-hedge"
 const title = "Crypto and Real Estate: Building a Barbell Hedge"
 const description = "A practitioner view on using fast/volatile assets and slow/real assets together without magical thinking."
@@ -19,73 +14,32 @@ const keywords = [
   "Utah investors"
 ]
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Strategy",
+})
 
 export default function CryptoAndRealEstateHedge() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Strategy"
-        tags={["Strategy", "Crypto", "Real Estate"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Fast beta on one side, slow cash on the other."
-        backgroundImage="/modern-apartment-balcony.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Strategy</Badge>
-            <Badge variant="outline">Crypto</Badge>
-            <Badge variant="outline">Real Estate</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Strategy",
+        bannerSubtitle: "Fast beta on one side, slow cash on the other.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               I hold volatile assets (crypto) and slow, cashflowing assets (rentals) for different jobs. The trick is letting each leg do its job without forcing them into the same risk bucket.
             </p>
@@ -122,9 +76,8 @@ Rule: never co-mingle operating reserves with speculative leg`}
 
             <h2>Takeaway</h2>
             <p>Crypto and real estate can coexist if each has a role: one for upside, one for stability. Separate reserves, watch sizing, and let time do the heavy lifting.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

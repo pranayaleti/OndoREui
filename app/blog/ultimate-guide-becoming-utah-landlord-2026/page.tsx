@@ -1,12 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/ultimate-guide-becoming-utah-landlord-2026"
 const title = "The Ultimate Guide to Becoming a Utah Landlord (2026 Edition)"
 const description =
@@ -26,62 +19,34 @@ const keywords = [
   "Utah rental cap rate",
 ]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo RE`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo RE`),
-    description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function UltimateUtahLandlordGuide2026() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}${image}`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section={category}
-        tags={keywords}
-      />
-      <PageBanner
-        title={title}
-        subtitle="Start, scale, and protect a Utah rental portfolio in 2026: without learning the hard way."
-        backgroundImage={image}
-      />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Utah</Badge>
-            <Badge variant="outline">2026 Edition</Badge>
-            <Badge variant="outline">Pillar Guide</Badge>
-          </div>
-          <div className="not-prose mb-6 flex flex-wrap gap-2">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href="/calculators/owner-vs-self">Run the ROI numbers →</Link>
-            </Button>
-            <Button asChild variant="outline" size="sm">
-              <Link href="/get-matched">Get matched in 60 seconds</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Start, scale, and protect a Utah rental portfolio in 2026: without learning the hard way.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Becoming a landlord in Utah in 2026 is more profitable, and more regulated, than it was even two years ago. Multi-family supply is finally hitting the Wasatch Front, the state has imposed its first dedicated property-management license, and tenant expectations have shifted to expect tech-forward operations. This guide walks you end-to-end: the math, the legal setup, the operations, and the moment you should stop self-managing.
             </p>
@@ -225,9 +190,8 @@ export default function UltimateUtahLandlordGuide2026() {
                 Written by Pranay Reddy Aleti, founder of Ondo Real Estate, a Utah-based property management and brokerage platform serving owners and tenants across 55+ Wasatch Front cities. Last updated {modified}. Information is general guidance, not legal or tax advice. Confirm specifics with a Utah-licensed attorney, CPA, or insurance professional before acting.
               </p>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

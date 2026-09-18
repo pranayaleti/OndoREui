@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/how-to-choose-property-management-company-utah"
 const title = "How to Choose a Property Management Company in Utah (2026 Guide)"
 const description = "A step-by-step guide to evaluating Utah property management companies, fees, services, communication, and red flags to watch for."
@@ -23,54 +17,34 @@ const keywords = [
   "property management services Utah",
 ]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo RE`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo RE`),
-    description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function HowToChoosePropertyManagementCompanyUtah() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}${image}`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section={category}
-        tags={keywords}
-      />
-      <PageBanner
-        title={title}
-        subtitle="Compare fees, services, and track records before signing a management agreement."
-        backgroundImage={image}
-      />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Utah</Badge>
-            <Badge variant="outline">Landlords</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Compare fees, services, and track records before signing a management agreement.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Utah's rental market is one of the fastest-growing in the country, and choosing the wrong property management company can cost you months of vacancy, legal headaches, and eroded returns. This guide walks you through every question to ask before signing a management agreement.
             </p>
@@ -151,9 +125,8 @@ export default function HowToChoosePropertyManagementCompanyUtah() {
             <p>Once you've selected a company, get everything in writing: management fee, leasing fee, cancellation terms, maintenance authorization limits, and communication expectations. Review the first three monthly statements carefully to ensure disbursements match your agreement. A good property manager makes your investment passive, a bad one makes it a second job.</p>
 
             <p>For owners along the <Link href="/property-management/salt-lake-city">Salt Lake City</Link>, <Link href="/property-management/provo">Provo</Link>, <Link href="/property-management/draper">Draper</Link>, and <Link href="/property-management/sandy">Sandy</Link> corridors, Ondo RE offers full-service property management with transparent pricing, a dedicated owner portal, and no maintenance markups. <Link href="/contact">Get a free rental analysis</Link> to see what your property should be earning.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

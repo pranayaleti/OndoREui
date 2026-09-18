@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/collect-rent-with-crypto-guide"
 const title = "How to Collect Rent Using Crypto: A Landlord's Guide"
 const description = "A practical guide to accepting rent in crypto — stablecoins vs volatile assets, tax and record-keeping, and how to keep it low-risk."
@@ -18,72 +14,32 @@ const keywords = [
   "crypto rent payment landlord",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Payments",
+})
 
 export default function CollectRentWithCryptoGuide() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Payments"
-        tags={["Payments", "Crypto", "Operations"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Optional, fast settlement — done without taking on price risk."
-        backgroundImage="/modern-apartment-balcony.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Payments</Badge>
-            <Badge variant="outline">Crypto</Badge>
-            <Badge variant="outline">Operations</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Payments",
+        bannerSubtitle: "Optional, fast settlement — done without taking on price risk.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Accepting rent in crypto can mean faster settlement and a differentiator for tech-forward tenants — but only if you handle volatility, taxes, and records deliberately.
             </p>
@@ -107,9 +63,8 @@ export default function CollectRentWithCryptoGuide() {
 
             <h2>Takeaway</h2>
             <p>Crypto rent is a feature, not a strategy: stablecoins, instant USD conversion, and clean records. For how alternative assets fit a broader portfolio, read <Link href="/blog/crypto-and-real-estate-hedge">Crypto and Real Estate: Building a Barbell Hedge</Link>.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

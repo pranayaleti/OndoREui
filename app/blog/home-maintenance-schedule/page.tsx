@@ -1,9 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/home-maintenance-schedule"
 const title = "Home Maintenance Schedule: A Monthly & Annual Checklist"
 const description = "A complete home-care checklist for homeowners, filters, HVAC, gutters, winterizing, and how ONDO can auto-remind you."
@@ -20,72 +17,32 @@ const keywords = [
   "maintenance reminders",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Home Care",
+})
 
 export default function HomeMaintenanceSchedule() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-townhouse-garage.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Home Care"
-        tags={["Maintenance", "Home Care", "Seasonal"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Small, scheduled tasks that protect a big investment."
-        backgroundImage="/modern-townhouse-garage.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Home Care</Badge>
-            <Badge variant="outline">Maintenance</Badge>
-            <Badge variant="outline">Seasonal</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Home Care",
+        bannerSubtitle: "Small, scheduled tasks that protect a big investment.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Deferred maintenance is the most expensive kind. A simple, repeating checklist keeps
               systems efficient, prevents emergency repairs, and preserves your home’s value, and if
@@ -138,9 +95,8 @@ export default function HomeMaintenanceSchedule() {
               and lifecycle planning, see our{" "}
               <Link href="/blog/maintenance-capex-strategy">Maintenance and CapEx Strategy</Link> guide.
             </p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/cost-of-living-draper-utah"
 const title = "Cost of Living in Draper, Utah (2026)"
 const description = "Real numbers on housing, utilities, groceries, taxes, and commute costs in Draper, UT, compared to SLC and the national average."
@@ -16,31 +10,32 @@ const category = "Cost of Living"
 const image = "/city-map-with-pin.png"
 const keywords = ["cost of living Draper Utah", "Draper UT housing costs", "Draper Utah expenses", "is Draper Utah expensive", "Draper vs Salt Lake City cost"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function CostOfLivingDraper() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="Transparent numbers so you can plan your move to Draper." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-6">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Draper, UT</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Transparent numbers so you can plan your move to Draper.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Draper is one of Utah&apos;s most desirable addresses, but what does it actually cost to live there? This guide breaks down every major expense category with real 2026 numbers, so you can decide if Draper fits your budget.
             </p>
@@ -94,9 +89,8 @@ export default function CostOfLivingDraper() {
                 <Link href="/loans/draper/">Draper Home Loans</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

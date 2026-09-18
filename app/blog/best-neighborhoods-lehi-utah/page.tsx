@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/best-neighborhoods-lehi-utah"
 const title = "Best Neighborhoods in Lehi, Utah (2026 Guide)"
 const description = "Traverse Mountain, Thanksgiving Point, or Lehi Old Town? A local breakdown of Lehi's top neighborhoods with home prices, schools, commute, and investment notes."
@@ -16,31 +10,32 @@ const category = "Neighborhood Guide"
 const image = "/modern-townhouse-garage.png"
 const keywords = ["best neighborhoods Lehi Utah", "Traverse Mountain Lehi", "Thanksgiving Point neighborhood", "living in Lehi Utah", "Lehi real estate"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function BestNeighborhoodsLehi() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="Silicon Slopes lifestyle: three very different Lehi neighborhoods compared." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-6">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Lehi, UT</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Silicon Slopes lifestyle: three very different Lehi neighborhoods compared.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Lehi is the fastest-growing city on the Wasatch Front and the beating heart of Silicon Slopes. Adobe, Vivint, Podium, and dozens of startups call it home. But Lehi isn&apos;t one neighborhood, it&apos;s three distinct communities with very different lifestyles and price points. Here&apos;s how to choose.
             </p>
@@ -86,9 +81,8 @@ export default function BestNeighborhoodsLehi() {
                 <Link href="/locations/lehi/">Lehi City Guide</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

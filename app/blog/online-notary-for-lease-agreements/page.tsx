@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/online-notary-for-lease-agreements"
 const title = "Online Notary for Lease Agreements: What Landlords Need to Know"
 const description = "When a lease needs notarization, how remote online notarization (RON) works, and what makes it legally sound across states."
@@ -18,72 +14,32 @@ const keywords = [
   "RON landlord",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Notary",
+})
 
 export default function OnlineNotaryForLeaseAgreements() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Notary"
-        tags={["Notary", "Leasing", "Legal"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Sign and notarize from anywhere — with an audit trail that holds up."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Notary</Badge>
-            <Badge variant="outline">Leasing</Badge>
-            <Badge variant="outline">Legal</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Notary",
+        bannerSubtitle: "Sign and notarize from anywhere — with an audit trail that holds up.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Most residential leases do not require notarization, but many landlord documents do — and remote online notarization (RON) makes that step painless and defensible.
             </p>
@@ -107,9 +63,8 @@ export default function OnlineNotaryForLeaseAgreements() {
 
             <h2>Takeaway</h2>
             <p>Know which of your documents truly need a notary, then handle them online with a proper audit trail. Learn more about <Link href="/blog/remote-online-notary-real-estate-closings">RON for real estate closings</Link> and <Link href="/blog/prepare-for-remote-online-notary-session">how to prepare for a session</Link>.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

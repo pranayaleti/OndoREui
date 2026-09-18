@@ -1,10 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const published = "2024-11-20"
 const modified = "2024-11-20"
 const slug = "/blog/why-utah-best-real-estate-investment"
@@ -20,30 +15,16 @@ const keywords = [
   "Wasatch Front investing"
 ]
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Investment",
+})
 
 const markets = [
   { name: "Salt Lake City", drivers: "Tech growth, transit, diverse employment" },
@@ -64,63 +45,26 @@ const riskMitigations = [
 
 export default function WhyUtahBestInvestment() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/city-map-with-pin.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Investment"
-        tags={["Investment", "Utah", "Market Analysis"]}
-        keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: title,
-          description: description,
-          author: { "@type": "Person", name: author },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Jobs, population growth, and landlord-friendly laws make Utah a standout market for long-term holds and cash-flow plays."
-        backgroundImage="/city-map-with-pin.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Investment</Badge>
-            <Badge variant="outline">Utah Market</Badge>
-            <Badge variant="outline">Growth</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          {/* Gestalt: quick anchors */}
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Investment",
+        bannerSubtitle: "Jobs, population growth, and landlord-friendly laws make Utah a standout market for long-term holds and cash-flow plays.",
+      }}
+    >
+{/* Gestalt: quick anchors */}
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
             <CardSpot title="Thesis" body="Jobs + in-migration + landlord-friendly laws create durable demand." />
             <CardSpot title="Plays" body="Value-add in Ogden, appreciation in Lehi, stability in Provo/Orem." />
             <CardSpot title="Guardrails" body="Stress-test vacancy, taxes, and rates; hold 3–6 month reserves." />
           </div>
 
-          <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
               Utah combines job growth, net in-migration, and landlord-friendly regulation into a unique investment landscape. Whether you target cash flow in Ogden or appreciation in Lehi, the Wasatch Front offers diversified entry points for investors.
             </p>
@@ -225,10 +169,8 @@ export default function WhyUtahBestInvestment() {
                 Utah's combination of job growth, population inflow, and landlord-friendly laws creates a resilient environment for real estate investors. Target cash flow in value submarkets, appreciation in tech corridors, and protect your downside with conservative underwriting, fixed-rate debt, and healthy reserves.
               </p>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
 

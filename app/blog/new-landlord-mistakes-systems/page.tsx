@@ -1,9 +1,4 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const slug = "/blog/new-landlord-mistakes-systems"
 const title = "New Landlord Mistakes and the Systems That Prevent Them"
 const description = "Evergreen pitfalls, maintenance, documentation, vacancy, and the operational playbooks that stop them."
@@ -19,73 +14,32 @@ const keywords = [
   "Utah rentals"
 ]
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Operations",
+})
 
 export default function NewLandlordMistakesSystems() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Operations"
-        tags={["Landlording", "Operations", "Playbooks"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Systems beat luck every time."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Landlording</Badge>
-            <Badge variant="outline">Operations</Badge>
-            <Badge variant="outline">Utah</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Operations",
+        bannerSubtitle: "Systems beat luck every time.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               After managing and coding systems for rentals, the biggest mistakes I see are operational, not financial. Here are the recurring ones and the simple systems that stop them.
             </p>
@@ -136,9 +90,8 @@ export default function NewLandlordMistakesSystems() {
 
             <h2>Takeaway</h2>
             <p>Landlording is a process business. If you build simple systems, docs, reserves, maintenance states, you avoid the expensive mistakes most new landlords make.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

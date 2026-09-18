@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/real-estate-agents-manage-own-rentals"
 const title = "Why Real Estate Agents Should Manage Their Own Rentals"
 const description = "Agents already have the market data, network, and licensing edge — here is why self-managing your rentals compounds that advantage."
@@ -18,72 +14,32 @@ const keywords = [
   "property management for agents",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "For Agents",
+})
 
 export default function RealEstateAgentsManageOwnRentals() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="For Agents"
-        tags={["For Agents", "Investing", "Strategy"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Your license is an asset — put it to work on your own doors."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">For Agents</Badge>
-            <Badge variant="outline">Investing</Badge>
-            <Badge variant="outline">Strategy</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "For Agents",
+        bannerSubtitle: "Your license is an asset — put it to work on your own doors.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Real estate agents are uniquely positioned to manage rentals: you already read markets, run comps, and know the paperwork. Handing that to a third party leaves money and control on the table.
             </p>
@@ -107,9 +63,8 @@ export default function RealEstateAgentsManageOwnRentals() {
 
             <h2>Takeaway</h2>
             <p>You have the hardest parts — market knowledge and licensing — already. Automate the operations and keep the fee, the data, and the relationship. See how the platform is <Link href="/vs/turbotenant">built for the agent-plus-manager</Link> workflow.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/finishing-basement-roi"
 const title = "Finishing a Basement: Costs, Permits & ROI"
 const description = "What a finished basement really costs, the permits and egress rules that matter, and how the ROI compares to other projects."
@@ -20,72 +16,32 @@ const keywords = [
   "basement apartment",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Home Improvement",
+})
 
 export default function FinishingBasementRoi() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-townhouse-garage.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Home Improvement"
-        tags={["Home Improvement", "Renovation", "ROI"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Add square footage without moving: if the numbers work."
-        backgroundImage="/modern-townhouse-garage.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Home Improvement</Badge>
-            <Badge variant="outline">Renovation</Badge>
-            <Badge variant="outline">ROI</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Home Improvement",
+        bannerSubtitle: "Add square footage without moving: if the numbers work.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               A finished basement is one of the highest-leverage ways to add usable space in a home , 
               often at a lower cost per square foot than an addition. But the return depends on doing it
@@ -135,9 +91,8 @@ export default function FinishingBasementRoi() {
               for outdoor projects, our{" "}
               <Link href="/blog/backyard-upgrades-and-fertilizer-guide">backyard upgrades guide</Link>.
             </p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/home-staging-tips-that-work"
 const title = "Home Staging Tips That Actually Work"
 const description = "Professional staging tips to help your home sell faster and for more money."
@@ -17,31 +11,34 @@ const category = "Selling"
 const image = "/modern-apartment-balcony.png"
 const keywords = ["home staging tips", "sell home faster Utah", "staging ROI", "curb appeal Utah", "listing preparation"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description: description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo Real Estate`), description: description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function HomeStagingTipsThatWork() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} modifiedTime={modified} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="The moves that actually move buyers: from curb to close." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Utah</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "The moves that actually move buyers: from curb to close.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Staged homes sell faster and typically for more money. These are the moves that actually matter, from decluttering and lighting to the small details buyers notice on first walk-through.
             </p>
@@ -82,9 +79,8 @@ export default function HomeStagingTipsThatWork() {
                 <Link href="/contact">Request a Listing Consult</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

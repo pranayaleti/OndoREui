@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/salt-lake-city-rental-market-report"
 const title = "Salt Lake City Rental Market Report: Vacancy Rates, Rents & Trends"
 const description = "A data-driven look at the Salt Lake City rental market in 2026, vacancy rates, average rents by neighborhood, and what landlords should expect."
@@ -23,54 +17,34 @@ const keywords = [
   "Utah rental market data",
 ]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo RE`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo RE`),
-    description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function SaltLakeCityRentalMarketReport() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}${image}`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section={category}
-        tags={keywords}
-      />
-      <PageBanner
-        title={title}
-        subtitle="What landlords and investors need to know about SLC rents in 2026."
-        backgroundImage={image}
-      />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Salt Lake City</Badge>
-            <Badge variant="outline">Investors</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "What landlords and investors need to know about SLC rents in 2026.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Salt Lake City remains one of the most watched rental markets in the Mountain West. Population growth, Silicon Slopes expansion, and constrained housing supply continue to shape conditions for landlords and investors. Here is what the data shows heading into the remainder of 2026.
             </p>
@@ -124,9 +98,8 @@ export default function SaltLakeCityRentalMarketReport() {
             </div>
 
             <p>Ondo RE manages rental properties across <Link href="/property-management/salt-lake-city">Salt Lake City</Link>, <Link href="/property-management/draper">Draper</Link>, <Link href="/property-management/sandy">Sandy</Link>, and surrounding communities. Our owner portal gives you real-time visibility into rent collection, vacancy, and maintenance, so you can make data-driven decisions. <Link href="/contact">Request a free rental analysis</Link> for your property.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

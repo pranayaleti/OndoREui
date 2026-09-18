@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/backyard-upgrades-and-fertilizer-guide"
 const title = "Backyard Upgrades & Lawn Care: A Seasonal Fertilizer Guide"
 const description = "Value-adding backyard projects plus a simple seasonal fertilizer schedule and the common DIY fixes that keep a yard healthy."
@@ -20,72 +16,32 @@ const keywords = [
   "sprinkler repair",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Home Improvement",
+})
 
 export default function BackyardUpgradesAndFertilizerGuide() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Home Improvement"
-        tags={["Home Improvement", "Landscaping", "Curb Appeal"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Curb appeal and a healthy lawn: on a schedule you can keep."
-        backgroundImage="/modern-apartment-balcony.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Home Improvement</Badge>
-            <Badge variant="outline">Landscaping</Badge>
-            <Badge variant="outline">Curb Appeal</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Home Improvement",
+        bannerSubtitle: "Curb appeal and a healthy lawn: on a schedule you can keep.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               The backyard is where lifestyle value and curb appeal meet. A few well-chosen upgrades
               and a consistent lawn routine do more for enjoyment, and first impressions, than almost
@@ -129,9 +85,8 @@ export default function BackyardUpgradesAndFertilizerGuide() {
               <Link href="/blog/finishing-basement-roi">basement finishing guide</Link> and the{" "}
               <Link href="/blog/home-maintenance-schedule">home maintenance schedule</Link>.
             </p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

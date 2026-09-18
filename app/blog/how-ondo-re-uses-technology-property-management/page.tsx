@@ -1,12 +1,7 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/how-ondo-re-uses-technology-property-management"
 const title = pageTitleText("How Ondo RE Uses Technology to Manage Utah Rental Properties")
 const description = "A behind-the-scenes look at how Ondo RE uses AI, real-time reporting, and automated workflows to deliver better outcomes for Utah property owners and tenants."
@@ -23,54 +18,34 @@ const keywords = [
   "Ondo Real Estate platform",
 ]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo RE`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo RE`),
-    description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function HowOndoReUsesTechnology() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}${image}`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section={category}
-        tags={keywords}
-      />
-      <PageBanner
-        title={title}
-        subtitle="Real-time visibility, AI-powered operations, and automated workflows: all in one platform."
-        backgroundImage={image}
-      />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Ondo RE</Badge>
-            <Badge variant="outline">Property Management</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Real-time visibility, AI-powered operations, and automated workflows: all in one platform.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Traditional property management runs on phone calls, spreadsheets, and manual follow-up. Ondo RE was built differently, as a tech-forward real estate company from the ground up. Here is how our platform delivers better outcomes for Utah property owners and their tenants.
             </p>
@@ -137,9 +112,8 @@ export default function HowOndoReUsesTechnology() {
             </div>
 
             <p>Ondo RE manages properties across <Link href="/property-management/salt-lake-city">Salt Lake City</Link>, <Link href="/property-management/draper">Draper</Link>, <Link href="/property-management/sandy">Sandy</Link>, <Link href="/property-management/provo">Provo</Link>, and throughout the Wasatch Front. <Link href="/contact">Get in touch</Link> to see how our technology-forward approach changes the property management experience.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

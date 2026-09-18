@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/renting-vs-buying-salt-lake-city"
 const title = "Renting vs. Buying in Salt Lake City (2026 Analysis)"
 const description = "Should you rent or buy in Salt Lake City right now? A data-driven breakdown covering break-even timeline, total cost of ownership, and neighborhood-level analysis."
@@ -16,31 +10,32 @@ const category = "Finance"
 const image = "/city-map-with-pin.png"
 const keywords = ["renting vs buying Salt Lake City", "SLC rent or buy 2026", "Salt Lake City housing market", "buy a home SLC", "rent Salt Lake City"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function RentingVsBuyingSLC() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="The honest math behind one of Salt Lake City's biggest financial decisions." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-6">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Salt Lake City</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "The honest math behind one of Salt Lake City's biggest financial decisions.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Salt Lake City&apos;s housing market has cooled from its 2021–2022 peak, but home prices remain elevated. With mortgage rates still above 6%, many households are genuinely uncertain: is it smarter to rent or buy right now? Here&apos;s the honest breakdown.
             </p>
@@ -96,9 +91,8 @@ export default function RentingVsBuyingSLC() {
                 <Link href="/market-reports/salt-lake-city/">SLC Market Report</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

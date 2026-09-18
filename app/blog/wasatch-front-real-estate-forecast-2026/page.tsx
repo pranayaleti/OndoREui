@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/wasatch-front-real-estate-forecast-2026"
 const title = "Wasatch Front Real Estate Forecast: What Owners and Investors Should Watch"
 const description = "An outlook for the Wasatch Front real estate market in 2026, interest rates, inventory, rent trends, and strategic positioning for Utah property owners and investors."
@@ -23,54 +17,34 @@ const keywords = [
   "Salt Lake City real estate forecast",
 ]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo RE`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo RE`),
-    description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function WasatchFrontRealEstateForecast2026() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}${image}`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section={category}
-        tags={keywords}
-      />
-      <PageBanner
-        title={title}
-        subtitle="Rates, inventory, and market dynamics shaping the Wasatch Front in 2026."
-        backgroundImage={image}
-      />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Wasatch Front</Badge>
-            <Badge variant="outline">Market Analysis</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Rates, inventory, and market dynamics shaping the Wasatch Front in 2026.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Utah's Wasatch Front has been one of the most closely watched real estate markets in the country for the past four years. After the pandemic-era run-up, the 2023–2024 correction, and the rate-induced affordability squeeze, where does the market stand heading deeper into 2026? Here is our outlook for owners and investors.
             </p>
@@ -133,9 +107,8 @@ export default function WasatchFrontRealEstateForecast2026() {
             <p>Ondo RE provides property management, mortgage lending, and investment advisory services across the Wasatch Front. Whether you are optimizing an existing portfolio or evaluating a new acquisition in <Link href="/property-management/salt-lake-city">Salt Lake City</Link>, <Link href="/property-management/draper">Draper</Link>, <Link href="/property-management/provo">Provo</Link>, or <Link href="/property-management/payson">Payson</Link>, our team can help you make data-driven decisions. <Link href="/contact">Schedule a consultation</Link> with our team.</p>
 
             <p>Also read: <Link href="/blog/best-neighborhoods-invest-utah-real-estate">Best Neighborhoods to Invest in Utah Real Estate</Link> | <Link href="/blog/salt-lake-city-rental-market-report">Salt Lake City Rental Market Report</Link></p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

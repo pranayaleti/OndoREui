@@ -1,10 +1,6 @@
-import { PageBanner } from "@/components/page-banner";
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import SEO from "@/components/seo";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { SITE_URL, SITE_EMAILS } from "@/lib/site";
-import Link from "next/link";
-
 const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/modernizing-notary-workflows-integration";
@@ -20,91 +16,39 @@ const keywords = [
   "React Scheduling Components"
 ];
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-import { pageTitle, pageTitleText } from "@/lib/site"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Product",
+})
 
 export default function ModernizingNotaryWorkflows() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Product"
-        tags={["Product", "Notary", "Workflow", "UX"]}
-        keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: title,
-          description: description,
-          author: { "@type": "Organization", name: author },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Bridging the gap between digital real estate and legal compliance."
-        backgroundImage="/modern-apartment-balcony.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Product</Badge>
-            <Badge variant="outline">Notary</Badge>
-            <Badge variant="outline">UX</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          {/* Gestalt: quick anchors for the story */}
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Product",
+        bannerSubtitle: "Bridging the gap between digital real estate and legal compliance.",
+      }}
+    >
+{/* Gestalt: quick anchors for the story */}
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
             <CardSpot title="Pain" body="Signatures were the offline bottleneck in an otherwise digital journey." />
             <CardSpot title="Solution" body="One booking surface for remote online notarization, routed by document type." />
             <CardSpot title="Outcome" body="Faster closings, fewer reschedules, clearer audit trails for lenders." />
           </div>
 
-          <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
               Real estate transactions are 90% digital, until you need a signature. At <strong>Ondo</strong>, we bridged this gap by integrating <strong>Remote Online Notary (RON)</strong> booking directly into our platform.
             </p>
@@ -198,11 +142,9 @@ export default function ModernizingNotaryWorkflows() {
                 Ondo Real Estate integrates Remote Online Notary (RON) scheduling directly into its React-based platform. The <code>NotaryBooking</code> component simplifies the &quot;last mile&quot; of real estate transactions by allowing users to schedule certified remote sessions for loan signings, estate planning, and I-9 verification. The system uses a specialized routing logic to direct requests to the appropriate department and leverages <code>ConsultationModal</code> for a consistent UX across the application.
               </p>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
-  );
+          
+    </ArticleShell>
+  )
 }
 
 function CardSpot({ title, body }: { title: string; body: string }) {

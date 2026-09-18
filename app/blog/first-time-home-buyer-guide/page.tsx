@@ -1,15 +1,7 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { RelatedContent } from "@/components/content/related-content"
-import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { CONVENTIONAL_SNAPSHOT, FHA_SNAPSHOT } from "@/lib/content"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/first-time-home-buyer-guide"
 const title = "First-Time Home Buyer Guide: Everything You Need to Know"
 const description = "Complete guide to buying your first home in Utah, from pre-approval to closing day."
@@ -20,31 +12,34 @@ const category = "Buying Guide"
 const image = "/suburban-house-garden.png"
 const keywords = ["first time home buyer Utah", "home buying guide", "pre-approval Utah", "FHA loan Utah", "down payment assistance Utah"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, modifiedTime: modified || published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo Real Estate`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function FirstTimeHomeBuyerGuide() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} modifiedTime={modified} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="Step-by-step guidance from pre-approval to keys in hand." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Utah</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Step-by-step guidance from pre-approval to keys in hand.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Start with a payment you can live with, then get a documented pre-approval before you shop. This Utah walkthrough covers credit, assistance programs, offers, inspection, and closing. It is education, not a promise you will qualify.
             </p>
@@ -97,11 +92,8 @@ export default function FirstTimeHomeBuyerGuide() {
                 <Link href="/qualify">Talk with a loan officer</Link>
               </Button>
             </div>
-          </div>
-          <RelatedContent path="/blog/first-time-home-buyer-guide" />
-          <LendingDisclaimer className="mt-8" />
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

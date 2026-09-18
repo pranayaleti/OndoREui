@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/property-management-calculators-which-one"
 const title = "Property Management Calculators: Which One Should You Use and When"
 const description = "A field guide to the core real-estate calculators — cash-on-cash, cap rate, DSCR, ROI, and more — and exactly when each one earns its keep."
@@ -19,72 +15,32 @@ const keywords = [
   "which real estate calculator",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Calculators",
+})
 
 export default function PropertyManagementCalculatorsWhichOne() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Calculators"
-        tags={["Calculators", "Finance", "Investing"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="The right metric for the decision in front of you."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Calculators</Badge>
-            <Badge variant="outline">Finance</Badge>
-            <Badge variant="outline">Investing</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Calculators",
+        bannerSubtitle: "The right metric for the decision in front of you.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               There is no single "right" number in real estate — each calculator answers a specific question. Use the wrong one and a good deal looks bad (or a bad one looks good).
             </p>
@@ -109,9 +65,8 @@ export default function PropertyManagementCalculatorsWhichOne() {
 
             <h2>Takeaway</h2>
             <p>Match the calculator to the decision: filters to screen, yield to judge returns, DSCR to finance. Browse the full set on the <Link href="/calculators">calculators hub</Link>.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

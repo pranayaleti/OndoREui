@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/best-neighborhoods-invest-utah-real-estate"
 const title = "Best Neighborhoods to Invest in Utah Real Estate (Wasatch Front)"
 const description = "A data-driven look at the top Utah neighborhoods for real estate investment in 2026, cash flow, appreciation, and rental demand by submarket."
@@ -23,54 +17,34 @@ const keywords = [
   "invest real estate Utah",
 ]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo RE`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo RE`),
-    description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", title: pageTitleText(`${title} | Ondo RE`), description, images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  modified,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function BestNeighborhoodsInvestUtahRealEstate() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}${image}`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section={category}
-        tags={keywords}
-      />
-      <PageBanner
-        title={title}
-        subtitle="Where to find rental income and appreciation along the I-15 corridor in 2026."
-        backgroundImage={image}
-      />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Wasatch Front</Badge>
-            <Badge variant="outline">Investors</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Where to find rental income and appreciation along the I-15 corridor in 2026.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Utah's Wasatch Front remains one of the most compelling real estate investment markets in the country, strong employment, consistent in-migration, and constrained land supply all support both rental income and long-term appreciation. But not all submarkets perform equally. Here is our 2026 breakdown by investment profile.
             </p>
@@ -155,9 +129,8 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             </div>
 
             <p>Ondo RE manages investment properties across the Wasatch Front, including <Link href="/property-management/draper">Draper</Link>, <Link href="/property-management/sandy">Sandy</Link>, <Link href="/property-management/payson">Payson</Link>, and <Link href="/property-management/orem">Orem</Link>. Use our <Link href="/calculators">investment calculators</Link> to model cash flow for any Utah property before you buy.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

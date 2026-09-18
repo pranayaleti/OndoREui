@@ -1,9 +1,4 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const slug = "/blog/dashboards-for-landlords"
 const title = "Dashboards for Landlords: See Patterns, Act Faster"
 const description = "What to track, how to visualize it, and why dashboards turn rentals into a real business."
@@ -19,73 +14,32 @@ const keywords = [
   "vacancy metrics"
 ]
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Analytics",
+})
 
 export default function DashboardsForLandlords() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Analytics"
-        tags={["Analytics", "Operations", "Product"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="From gut feel to instrument panel."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Analytics</Badge>
-            <Badge variant="outline">Operations</Badge>
-            <Badge variant="outline">Product</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Analytics",
+        bannerSubtitle: "From gut feel to instrument panel.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               A dashboard is a mirror: it shows whether your systems are healthy. Here’s what to track and why.
             </p>
@@ -117,9 +71,8 @@ export default function DashboardsForLandlords() {
 
             <h2>Takeaway</h2>
             <p>Dashboards turn rentals into a managed system. Track the few KPIs that drive outcomes, connect them to actions, and review them on a cadence.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

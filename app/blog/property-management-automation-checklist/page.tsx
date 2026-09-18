@@ -1,9 +1,4 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const slug = "/blog/property-management-automation-checklist"
 const title = "Property Management Automation Checklist"
 const description = "High-ROI automations for rent, maintenance, and owner reporting, built by a dev who also manages units."
@@ -19,73 +14,32 @@ const keywords = [
   "landlord dashboard"
 ]
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Operations",
+})
 
 export default function PropertyManagementAutomationChecklist() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Operations"
-        tags={["Automation", "Landlording", "Operations"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Automate the boring; save human energy for decisions."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Automation</Badge>
-            <Badge variant="outline">Operations</Badge>
-            <Badge variant="outline">Engineering</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Operations",
+        bannerSubtitle: "Automate the boring; save human energy for decisions.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Automations should remove toil, not add opacity. Here are the flows that consistently pay off across small portfolios.
             </p>
@@ -120,9 +74,8 @@ export default function PropertyManagementAutomationChecklist() {
 
             <h2>Takeaway</h2>
             <p>Automate reminders, receipts, status changes, and reports. Keep decisions human. Your tenants and owners feel the difference immediately.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

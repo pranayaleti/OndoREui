@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/cash-on-cash-return-explained"
 const title = "Cash-on-Cash Return, Explained (with the Math)"
 const description = "What cash-on-cash return measures, the exact formula, a worked example, and how it differs from cap rate and CAGR."
@@ -20,72 +16,32 @@ const keywords = [
   "investment property metrics",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Finance",
+})
 
 export default function CashOnCashReturnExplained() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Finance"
-        tags={["Finance", "Investing", "Metrics"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="The return that actually lands in your pocket each year."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Finance</Badge>
-            <Badge variant="outline">Investing</Badge>
-            <Badge variant="outline">Metrics</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Finance",
+        bannerSubtitle: "The return that actually lands in your pocket each year.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Cash-on-cash return answers a simple question: for every dollar of your own cash you put
               into a property, how many cents come back as cash each year? It’s the metric that best
@@ -134,9 +90,8 @@ export default function CashOnCashReturnExplained() {
               <Link href="/blog/mortgage-paydown-hacks">mortgage pay-down hacks</Link> for how debt
               choices change the cash flow.
             </p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

@@ -1,9 +1,5 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/build-rental-portfolio-investor-2026"
 const title = "How to Build a Rental Portfolio as a Real Estate Investor in 2026"
 const description = "A staged playbook for going from one rental to a portfolio — financing, metrics, systems, and when to scale."
@@ -18,72 +14,32 @@ const keywords = [
   "real estate investing 2026",
 ]
 
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Investing",
+})
 
 export default function BuildRentalPortfolioInvestor2026() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Investing"
-        tags={["Investing", "Strategy", "Portfolio"]}
-        keywords={keywords}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="From your first door to a system that scales."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Investing</Badge>
-            <Badge variant="outline">Strategy</Badge>
-            <Badge variant="outline">Portfolio</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          <div className="prose prose-lg prose-invert max-w-none">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Investing",
+        bannerSubtitle: "From your first door to a system that scales.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               A portfolio is not ten random purchases — it is a repeatable system: buy on the numbers, finance deliberately, and operate so the eleventh door is no harder than the first.
             </p>
@@ -108,9 +64,8 @@ export default function BuildRentalPortfolioInvestor2026() {
 
             <h2>Takeaway</h2>
             <p>Buy on discipline, finance with intent, and let systems carry the operations. That is how one rental becomes a portfolio without becoming a full-time job.</p>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

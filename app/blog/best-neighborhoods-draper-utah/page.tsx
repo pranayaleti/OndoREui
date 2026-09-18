@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/best-neighborhoods-draper-utah"
 const title = "Best Neighborhoods in Draper, Utah (2026 Guide)"
 const description = "A local guide to Draper's top neighborhoods, South Mountain, Suncrest, and Draper Peaks, with home prices, schools, lifestyle, and investment notes."
@@ -16,31 +10,32 @@ const category = "Neighborhood Guide"
 const image = "/suburban-house-garden.png"
 const keywords = ["best neighborhoods Draper Utah", "Draper neighborhoods", "Suncrest Draper", "South Mountain Draper", "living in Draper Utah"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function BestNeighborhoodsDraper() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="Everything you need to know before buying or renting in Draper." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-6">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Draper, UT</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "Everything you need to know before buying or renting in Draper.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Draper sits at the southern gateway of Salt Lake Valley, where tech campuses meet mountain trails and hillside estates. Whether you&apos;re relocating for Silicon Slopes or looking for your next investment property, choosing the right Draper neighborhood matters. Here&apos;s a local breakdown.
             </p>
@@ -85,9 +80,8 @@ export default function BestNeighborhoodsDraper() {
                 <Link href="/locations/draper/">Draper City Guide</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+

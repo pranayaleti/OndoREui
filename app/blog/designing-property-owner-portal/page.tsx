@@ -1,10 +1,4 @@
-import { PageBanner } from "@/components/page-banner";
-import SEO from "@/components/seo";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { SITE_URL } from "@/lib/site";
-
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/designing-property-owner-portal";
@@ -20,91 +14,39 @@ const keywords = [
   "Tenant Portal"
 ];
 
-
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-import { pageTitle, pageTitleText } from "@/lib/site"
-
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
-  description: description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: {
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    type: "article",
-    publishedTime: published,
-    modifiedTime: modified || published,
-    authors: [author],
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitleText(`${title} | Ondo Real Estate`),
-    description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
-  },
-}
+export const metadata = articleMetadata({
+  path: slug,
+  title,
+  description,
+  published,
+  modified,
+  author,
+  keywords,
+  category: "Product",
+})
 
 export default function DesigningPropertyOwnerPortal() {
   return (
-    <main className="min-h-screen">
-      <SEO
-        title={title}
-        description={description}
-        pathname={slug}
-        image={`${SITE_URL}/modern-office-building.png`}
-        publishedTime={published}
-        modifiedTime={modified}
-        author={author}
-        section="Product"
-        tags={["Product", "UI/UX", "Dashboard", "Property Management"]}
-        keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: title,
-          description: description,
-          author: { "@type": "Organization", name: author },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
-      />
-
-      <PageBanner
-        title={title}
-        subtitle="Moving from spreadsheets to a unified digital command center."
-        backgroundImage="/modern-office-building.png"
-      />
-
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-8">
-            <Badge variant="secondary">Product</Badge>
-            <Badge variant="outline">Dashboard</Badge>
-            <Badge variant="outline">UI/UX</Badge>
-          </div>
-
-          <div className="not-prose mb-6">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-
-          {/* Gestalt: quick scan anchors */}
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        modified,
+        author,
+        keywords,
+        category: "Product",
+        bannerSubtitle: "Moving from spreadsheets to a unified digital command center.",
+      }}
+    >
+{/* Gestalt: quick scan anchors */}
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
             <CardSpot title="Audience" body="Landlords and operators who need one command center." />
             <CardSpot title="Promise" body="See financials, maintenance, and documents without tab sprawl." />
             <CardSpot title="Outcome" body="Move from reactive to proactive management with clear signals." />
           </div>
 
-          <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
               For landlords, transparency is everything. The <strong>Ondo Owner Dashboard</strong> was designed to replace the mess of spreadsheets and emails with a single, secure command center.
             </p>
@@ -183,11 +125,9 @@ export default function DesigningPropertyOwnerPortal() {
                 The Ondo Owner Portal is a React-based dashboard designed for comprehensive property asset management. It features modules for Financial Tracking (income/expense charts), Maintenance Management (ticketing system), and Document Storage (digital lease repository). Built on Supabase, it enforces strict data privacy via Row Level Security. The dashboard enables landlords to manage tenants, approve repairs, and visualize portfolio performance through interactive charts, replacing disparate manual tools with a unified digital experience.
               </p>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
-  );
+          
+    </ArticleShell>
+  )
 }
 
 function CardSpot({ title, body }: { title: string; body: string }) {

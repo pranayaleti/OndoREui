@@ -1,12 +1,6 @@
-import { PageBanner } from "@/components/page-banner"
-import SEO from "@/components/seo"
-import { Badge } from "@/components/ui/badge"
+import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-
 const slug = "/blog/property-management-guide-lehi-investors"
 const title = "Lehi, Utah Property Management Guide for Investors (2026)"
 const description = "Everything you need to know about managing rental property in Lehi, UT, tenant profiles, pricing, legal requirements, and what a professional PM company handles for you."
@@ -16,32 +10,32 @@ const category = "Property Management"
 const image = "/property-manager-meeting.png"
 const keywords = ["property management Lehi Utah", "Lehi rental property", "Lehi UT landlord guide", "Silicon Slopes rental investment", "Lehi property manager"]
 
-export const metadata: Metadata = {
-  title: pageTitle(`${title} | Ondo Real Estate`),
+export const metadata = articleMetadata({
+  path: slug,
+  title,
   description,
-  alternates: { canonical: `${SITE_URL}${slug}/` },
-  openGraph: { title: pageTitleText(`${title} | Ondo Real Estate`), description, type: "article", publishedTime: published, authors: [author], images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
+  published,
+  author,
+  category,
+  image,
+  keywords,
+})
 
 export default function PropertyManagementGuideLehi() {
   return (
-    <main className="min-h-screen">
-      <SEO title={title} description={description} pathname={slug} image={`${SITE_URL}${image}`} publishedTime={published} author={author} section={category} tags={keywords} />
-      <PageBanner title={title} subtitle="The Lehi rental market is one of Utah's strongest: here's how to operate in it." backgroundImage={image} />
-      <article className="bg-background py-12">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-6">
-            <Badge variant="secondary">{category}</Badge>
-            <Badge variant="outline">Lehi, UT</Badge>
-            <Badge variant="outline">Investors</Badge>
-          </div>
-          <div className="not-prose mb-6">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/blog">← Back to blog</Link>
-            </Button>
-          </div>
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+    <ArticleShell
+      meta={{
+        path: slug,
+        title,
+        description,
+        published,
+        author,
+        category,
+        image,
+        keywords,
+        bannerSubtitle: "The Lehi rental market is one of Utah's strongest: here's how to operate in it.",
+      }}
+    >
             <p className="lead text-xl text-foreground/70 mb-6">
               Lehi is the epicenter of Utah&apos;s tech boom. Adobe, Vivint, Podium, and over 100 startups have made it one of the state&apos;s fastest-growing cities. That&apos;s created a rental market unlike anywhere else on the Wasatch Front, higher incomes, lower vacancy, and applicants who expect updated finishes. Here&apos;s what investors need to know.
             </p>
@@ -120,9 +114,8 @@ export default function PropertyManagementGuideLehi() {
                 <Link href="/investments/opportunities/">Investment Opportunities</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </article>
-    </main>
+          
+    </ArticleShell>
   )
 }
+
