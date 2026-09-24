@@ -241,6 +241,9 @@ module.exports = {
     '/api/**',
     '/api/*',
     '/feedback',
+    // Link-in-bio hub for social profiles; noindex, so it must not be submitted either.
+    '/links',
+    '/links/',
     '/health',
     '/search',
     '/search/',

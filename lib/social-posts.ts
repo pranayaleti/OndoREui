@@ -1,7 +1,7 @@
 import { SITE_URL } from "./site"
 
 export type SocialPlatform =
-  | "Linktree"
+  | "Links"
   | "Blog"
   | "News"
   | "Notary"
@@ -24,17 +24,17 @@ const base = SITE_URL.replace(/\/$/, "")
 
 /**
  * Curated highlights for `/socials`.
- * Prefer real Ondo pages / Linktree until platform accounts are live.
+ * Prefer real Ondo pages (and /links, our link-in-bio hub) over third-party hosts.
  * Replace entries when you publish new campaigns or posts.
  */
 export const SOCIAL_POSTS: readonly SocialPost[] = [
   {
-    platform: "Linktree",
+    platform: "Links",
     title: "All Ondo links in one place",
     excerpt:
-      "Booking, tools, and public profiles, Linktree is our always-on hub while we launch each social channel.",
-    url: "https://linktr.ee/ondorealestate",
-    date: "2026-07-01",
+      "Book a call, see what your rental should earn, browse homes, or log in to your portal. One page, on our own site.",
+    url: `${base}/links/`,
+    date: "2026-09-24",
   },
   {
     platform: "Notary",

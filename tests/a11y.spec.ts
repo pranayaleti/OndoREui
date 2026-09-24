@@ -25,6 +25,8 @@ const routes = [
   // New public/marketing routes added in Phase 0
   "/locations",
   "/privacy-policy",
+  // Link-in-bio hub every social profile points at; renders without site chrome.
+  "/links/",
   // Calculators were entirely untested here, which is how 146 inputs without an
   // associated <label> went unnoticed. Cover the index plus two tools: the most
   // complex form and a small one.

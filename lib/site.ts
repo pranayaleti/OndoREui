@@ -120,15 +120,17 @@ export type SocialLink = {
 }
 
 export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
-  { url: "https://www.facebook.com/OndoRealEstate",      live: false },
-  { url: "https://www.youtube.com/@OndoRealEstate",      live: false },
+  { url: "https://www.facebook.com/OndoRealEstate",      live: true },
+  { url: "https://www.youtube.com/@OndoRealEstate",      live: true },
   { url: "https://www.instagram.com/OndoRealEstate",     live: true },
-  { url: "https://www.tiktok.com/@OndoRealEstate",       live: false },
-  { url: "https://www.linkedin.com/company/OndoRealEstate", live: false },
-  { url: "https://x.com/OndoRealEstate",                 live: false },
+  { url: "https://www.tiktok.com/@OndoRealEstate",       live: true },
+  { url: "https://www.linkedin.com/company/OndoRealEstate", live: true },
+  { url: "https://x.com/OndoRealEstate",                 live: true },
   { url: "https://www.pinterest.com/ondorealestate",     live: false },
-  // Linktree is treated as the canonical "all our links" hub, keep live.
-  { url: "https://linktr.ee/ondorealestate",             live: true  },
+  // The "all our links" hub is now /links on our own domain (lib/links-page.ts).
+  // Linktree stays claimed so old bios and printed QR codes still resolve, but
+  // it only forwards to /links, so it is kept out of the footer and sameAs.
+  { url: "https://linktr.ee/ondorealestate",             live: false },
   // TODO: Implement WhatsApp group integration once the group is stable.
   // { url: "https://chat.whatsapp.com/GFnQbVD7kriKlz3kHpTx2c", live: false },
   // { url: "https://www.reddit.com/user/ondorealestate/",      live: false },

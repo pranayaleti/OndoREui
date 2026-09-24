@@ -22,6 +22,7 @@ import { TrackingTags, GeoGatedGoogleTagManagerNoscript } from "@/components/ana
 import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 import PublicAssistantWidget from "@/components/PublicAssistantWidget"
 import { StickyMobileCtaBar } from "@/components/sticky-mobile-cta-bar"
+import { SiteChrome } from "@/components/site-chrome"
 // Vercel Analytics is disabled for static exports (GitHub Pages)
 // It only works on Vercel's platform, not with static site generation
 // const Analytics = dynamic(() => import('@vercel/analytics/react').then(mod => mod.Analytics), { ssr: false })
@@ -219,26 +220,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>
-          <FirstVisitLeadPopup />
           <CachePurge />
-          <ScrollProgress />
+          {/* SiteChrome drops everything it wraps on standalone routes (/links), see lib/standalone-routes.ts. */}
+          <SiteChrome>
+            <FirstVisitLeadPopup />
+            <ScrollProgress />
+          </SiteChrome>
           <div className="min-h-screen flex flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
-            <Header />
+            <SiteChrome>
+              <Header />
+            </SiteChrome>
             {/* Each page renders its own <main> landmark; this div provides the skip-link target */}
             <div id="main-content" className="flex-1">
               <ErrorBoundary>{children}</ErrorBoundary>
             </div>
-            <Footer />
+            <SiteChrome>
+              <Footer />
+            </SiteChrome>
           </div>
-          {/* Floating WhatsApp CTA, env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
-          <WhatsAppFloatButton />
-          {/* Site-wide public assistant. Bottom-left so it never overlaps the WhatsApp CTA or the
-              property-scoped LeasingChatWidget, both of which sit bottom-right. Hides itself on
-              /chat, where the leasing agent already owns the conversation. */}
-          <PublicAssistantWidget />
-          {/* Mobile-only sticky Call + Free rental analysis bar. Owns the bottom edge on
-              small screens; WhatsApp and assistant floats lift above it via their own CSS. */}
-          <StickyMobileCtaBar />
+          <SiteChrome>
+            {/* Floating WhatsApp CTA, env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
+            <WhatsAppFloatButton />
+            {/* Site-wide public assistant. Bottom-left so it never overlaps the WhatsApp CTA or the
+                property-scoped LeasingChatWidget, both of which sit bottom-right. Hides itself on
+                /chat, where the leasing agent already owns the conversation. */}
+            <PublicAssistantWidget />
+            {/* Mobile-only sticky Call + Free rental analysis bar. Owns the bottom edge on
+                small screens; WhatsApp and assistant floats lift above it via their own CSS. */}
+            <StickyMobileCtaBar />
+          </SiteChrome>
         </RootProvidersClient>
         <JsonLd
           id="global-jsonld"

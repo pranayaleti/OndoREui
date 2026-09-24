@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -197,32 +198,25 @@ export default function ContactPage() {
                         Connect with us on social media for updates and insights
                       </p>
                       <div className="flex items-center gap-2">
-                        <a
-                          href="https://linktr.ee/ondorealestate"
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <Link
+                          href="/links/"
+                          aria-label="All Ondo links in one place"
                           className="text-primary hover:text-primary/80 transition-colors"
                         >
                           <Image
-                            src="/Linktree.png"
-                            alt="Linktree QR Code"
+                            src="/links-qr.svg"
+                            alt=""
                             width={64}
                             height={64}
                             className="h-16 w-16 rounded border bg-card p-1"
-                            quality={85}
                             sizes="64px"
                           />
-                        </a>
+                        </Link>
                         <div className="text-xs text-foreground/70">
-                          <p>Scan QR code or visit</p>
-                          <a 
-                            href="https://linktr.ee/ondorealestate" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline"
-                          >
-                            linktr.ee/ondorealestate
-                          </a>
+                          <p>Scan the code or visit</p>
+                          <Link href="/links/" className="text-primary hover:underline">
+                            ondorealestate.com/links
+                          </Link>
                         </div>
                       </div>
                     </div>

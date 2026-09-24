@@ -13,7 +13,7 @@ import { SITE_SOCIAL_LINKS, SITE_URL, pageTitle, pageTitleText } from "@/lib/sit
 export const metadata: Metadata = {
   title: pageTitle("Socials & Updates | Ondo Real Estate"),
   description:
-    "Latest Ondo social posts, profile links, and curated real estate news, follow along on Linktree and our public channels.",
+    "Latest Ondo social posts, profile links, and curated real estate news. Every Ondo link lives at ondorealestate.com/links.",
   alternates: { canonical: `${SITE_URL}/socials/` },
   openGraph: {
     title: pageTitleText("Socials & Updates | Ondo Real Estate"),
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: pageTitleText("Socials & Updates | Ondo Real Estate"),
-    description: "Curated posts, Linktree, and the latest real estate news we track.",
+    description: "Curated posts, every Ondo link, and the latest real estate news we track.",
     images: [`${SITE_URL}/modern-office-building.webp`],
   },
 }
@@ -120,8 +120,8 @@ export default function SocialsPage() {
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-2xl font-bold mb-2">Follow us</h2>
           <p className="text-sm text-foreground/70 mb-8 max-w-2xl">
-            Live profiles only, we list channels once they&apos;re claimed and active. Linktree is the
-            always-on hub for every public link.
+            Live profiles only, we list channels once they&apos;re claimed and active. Our links page is
+            the always-on hub for every public link.
           </p>
           <div className="flex flex-wrap gap-3 mb-8">
             {liveProfiles.map((profile) => {
@@ -138,20 +138,13 @@ export default function SocialsPage() {
           </div>
 
           <div className="rounded-lg border border-border bg-background p-8 text-center max-w-xl mx-auto">
-            <h3 className="text-xl font-semibold mb-2">Linktree hub</h3>
+            <h3 className="text-xl font-semibold mb-2">Every Ondo link, one page</h3>
             <p className="text-sm text-foreground/70 mb-6">
-              Open our Linktree for every public booking link, tool, and profile in one place.
-              (Embeds are often blocked by browsers, a direct link is more reliable.)
+              Booking, rent estimates, listings, portal login, and every profile, on our own site at
+              ondorealestate.com/links.
             </p>
-            <Button asChild size="lg" className="gap-2">
-              <Link
-                href="https://linktr.ee/ondorealestate"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open Linktree
-                <ExternalLink className="h-4 w-4" />
-              </Link>
+            <Button asChild size="lg">
+              <Link href="/links/">See every Ondo link</Link>
             </Button>
           </div>
         </div>
