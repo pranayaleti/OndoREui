@@ -52,6 +52,14 @@ describe("/links page", () => {
     expect(buy).not.toHaveAttribute("target")
   })
 
+  // Owner's call: profiles sit up top like a Linktree header, before any link section.
+  it("shows the social profiles above the first link section", () => {
+    render(<LinksPage />)
+    const instagram = screen.getByRole("link", { name: "Ondo on Instagram" })
+    const firstSection = screen.getByRole("heading", { level: 2, name: "Start here" })
+    expect(instagram.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
   it("offers email, a phone call, and each live social profile", () => {
     render(<LinksPage />)
     expect(screen.getByRole("link", { name: "Email Ondo" })).toHaveAttribute(

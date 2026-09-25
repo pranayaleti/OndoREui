@@ -96,6 +96,22 @@ export default function LinksPage() {
           <p className="mt-1.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Utah property management, buying and selling, home loans and notary.
           </p>
+          <ul className="mt-5 flex flex-wrap justify-center gap-2.5" aria-label="Ondo on social media">
+            {socials.map(({ href, name, Icon }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ondo on ${name}`}
+                  data-links-id={`social-${name.toLowerCase()}`}
+                  className={iconButton}
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </header>
 
         <div className="mt-9 flex flex-col gap-8">
@@ -150,23 +166,6 @@ export default function LinksPage() {
               Call
             </a>
           </div>
-
-          <ul className="flex flex-wrap justify-center gap-2.5" aria-label="Ondo on social media">
-            {socials.map(({ href, name, Icon }) => (
-              <li key={href}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Ondo on ${name}`}
-                  data-links-id={`social-${name.toLowerCase()}`}
-                  className={iconButton}
-                >
-                  <Icon className="h-[18px] w-[18px]" />
-                </a>
-              </li>
-            ))}
-          </ul>
 
           <div className="space-y-2 text-xs leading-relaxed text-muted-foreground">
             <p className="flex items-center justify-center gap-2">
