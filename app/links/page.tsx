@@ -4,12 +4,12 @@ import Link from "next/link"
 import { ArrowUpRight, ChevronRight, Mail, MessageSquare, Phone } from "lucide-react"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
 import { analyticsAttributes } from "@/lib/analytics"
-import { LINKS_PAGE_SECTIONS, linksPageSocials, type LinksPageLink } from "@/lib/links-page"
+import { LINKS_PAGE_INTRO, LINKS_PAGE_SECTIONS, linksPageSocials, type LinksPageLink } from "@/lib/links-page"
 import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
 
 const canonical = `${SITE_URL}/links/`
 const description =
-  "Book a call, see what your rental should earn, browse homes, or log in to your portal. Every Ondo Real Estate link in one place."
+  "Meet the founder of Ondo Real Estate in Lehi, Utah. Book a free call, get a rent estimate, browse homes, or read his story. Every Ondo link in one place."
 const ogImage = `${SITE_URL}/modern-office-building.webp`
 
 export const metadata: Metadata = {
@@ -115,7 +115,25 @@ export default function LinksPage() {
           </ul>
         </header>
 
-        <div className="mt-9 flex flex-col gap-8">
+        <section aria-labelledby="links-intro" className="mt-8 rounded-2xl border border-primary/70 bg-card p-5">
+          <h2 id="links-intro" className="font-outfit text-lg font-semibold">
+            {LINKS_PAGE_INTRO.heading}
+          </h2>
+          {LINKS_PAGE_INTRO.paragraphs.map((paragraph) => (
+            <p key={paragraph} className="mt-2 text-[0.95rem] leading-relaxed text-foreground/85">
+              {paragraph}
+            </p>
+          ))}
+          <ul className="mt-4 flex flex-wrap gap-2" aria-label="Quick facts">
+            {LINKS_PAGE_INTRO.facts.map((fact) => (
+              <li key={fact} className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-foreground">
+                {fact}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <div className="mt-8 flex flex-col gap-8">
           {LINKS_PAGE_SECTIONS.map((section) => {
             const primary = section.links.filter((link) => link.primary)
             const rest = section.links.filter((link) => !link.primary)

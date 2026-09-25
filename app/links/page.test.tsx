@@ -9,12 +9,36 @@ vi.mock("@/lib/site", async (importOriginal) => ({
   ],
 }))
 
+import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 import LinksPage from "./page"
 
 describe("/links page", () => {
   it("names the business in the page's one h1", () => {
     render(<LinksPage />)
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Ondo Real Estate")
+  })
+
+  // Visitors arrive from a video of the founder, so who he is comes before the links.
+  it("introduces the founder in his own words before the first link section", () => {
+    render(<LinksPage />)
+    const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i })
+    const firstSection = screen.getByRole("heading", { level: 2, name: "Start here" })
+    expect(intro.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(intro.closest("section")).toHaveTextContent(/own and manage rental property myself/i)
+  })
+
+  it("shows the same service-area and portfolio numbers as the homepage", () => {
+    render(<LinksPage />)
+    expect(screen.getByText(`${UTAH_CITIES_SERVED}+ Utah cities`)).toBeInTheDocument()
+    expect(screen.getByText(`${PROPERTIES_MANAGED}+ properties managed`)).toBeInTheDocument()
+  })
+
+  it("offers the founder's story and the company background in one place", () => {
+    render(<LinksPage />)
+    const heading = screen.getByRole("heading", { level: 2, name: "Get to know me" })
+    const group = heading.closest("section")!
+    expect(within(group).getByRole("link", { name: /read my story/i })).toHaveAttribute("href", "/founders-letter/")
+    expect(within(group).getByRole("link", { name: /about ondo real estate/i })).toHaveAttribute("href", "/about/")
   })
 
   it("groups links under headings screen readers can jump between", () => {

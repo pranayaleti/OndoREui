@@ -1,4 +1,5 @@
 import { APP_PORTAL_LOGIN_URL, SITE_CALENDLY_URL, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
+import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 
 /**
  * Content for /links, the link-in-bio page that replaced linktr.ee/ondorealestate.
@@ -23,6 +24,20 @@ export type LinksPageSection = {
   links: readonly LinksPageLink[]
 }
 
+/**
+ * First thing a new visitor reads after watching a video: who Pranay is, in his own
+ * words (adapted from the founder's letter at /founders-letter). No license claims here.
+ */
+export const LINKS_PAGE_INTRO = {
+  heading: "Hi, I'm Pranay",
+  paragraphs: [
+    "I spent over a decade building software, and I own and manage rental property myself. Property management felt stuck in the past, so I built Ondo to make owning a rental stress-free and renting a home feel fair.",
+    "Everything's in one place here. Start with a free call, or pick your path below.",
+  ],
+  /** Same numbers the homepage shows (lib/social-proof-stats.ts), so the two never drift apart. */
+  facts: [`${UTAH_CITIES_SERVED}+ Utah cities`, `${PROPERTIES_MANAGED}+ properties managed`, "Based in Lehi, Utah"],
+} as const
+
 export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
   {
     id: "start",
@@ -31,6 +46,15 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
       { id: "book-call", label: "Book a free 30-minute call", href: SITE_CALENDLY_URL, primary: true },
       // U+00A0 non-breaking space keeps "60 seconds" together when the label wraps on phones.
       { id: "quiz", label: "Get matched to the right service in 60 seconds", href: "/get-matched/" },
+    ],
+  },
+  {
+    id: "about",
+    heading: "Get to know me",
+    links: [
+      { id: "founder-story", label: "Read my story", href: "/founders-letter/" },
+      { id: "about", label: "About Ondo Real Estate", href: "/about/" },
+      { id: "platform-tour", label: "Take the platform tour", href: "/tour/" },
     ],
   },
   {
