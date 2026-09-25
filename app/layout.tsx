@@ -23,6 +23,7 @@ import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 import PublicAssistantWidget from "@/components/PublicAssistantWidget"
 import { StickyMobileCtaBar } from "@/components/sticky-mobile-cta-bar"
 import { SiteChrome } from "@/components/site-chrome"
+import { ClickTracker } from "@/components/analytics/click-tracker"
 // Vercel Analytics is disabled for static exports (GitHub Pages)
 // It only works on Vercel's platform, not with static site generation
 // const Analytics = dynamic(() => import('@vercel/analytics/react').then(mod => mod.Analytics), { ssr: false })
@@ -201,7 +202,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* CSP: no upgrade-insecure-requests, it forces https://localhost during next start / local HTTP and breaks API fetch. Deployed site is HTTPS already. HubSpot: explicit regional script hosts. Note: unsafe-inline kept for style-src (required by Next.js inline styles). unsafe-eval added only in dev (React Refresh requires it). */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com${supabaseConnectSrc ? ` ${supabaseConnectSrc}` : ""}${backendConnectSrc ? ` ${backendConnectSrc}` : ""} https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';`}
+          content={`default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://js.hsforms.net https://js.hs-banner.com https://js.hs-analytics.net https://js.stripe.com https://static.cloudflareinsights.com https://connect.facebook.net https://analytics.tiktok.com https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://ddwl4m2hdecbv.cloudfront.net https://pro.ip-api.com${supabaseConnectSrc ? ` ${supabaseConnectSrc}` : ""}${backendConnectSrc ? ` ${backendConnectSrc}` : ""} https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com https://cta-service-cms2.hubspot.com https://api.hubapi.com https://js.hs-scripts.com https://js-na1.hs-scripts.com https://js-na2.hs-scripts.com https://js-eu1.hs-scripts.com https://api.stripe.com https://cloudflareinsights.com https://www.facebook.com https://analytics.tiktok.com https://px.ads.linkedin.com; frame-src 'self' https://calendly.com https://*.calendly.com https://app.hubspot.com https://js.stripe.com https://hooks.stripe.com https://td.doubleclick.net https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -220,6 +221,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>
+          {/* Turns data-analytics-* attributes (lib/analytics analyticsAttributes) into GA4 events site-wide. */}
+          <ClickTracker />
           <CachePurge />
           {/* SiteChrome drops everything it wraps on standalone routes (/links), see lib/standalone-routes.ts. */}
           <SiteChrome>

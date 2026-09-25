@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { analyticsAttributes } from "@/lib/analytics"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -202,6 +203,7 @@ export default function ContactPage() {
                           href="/links/"
                           aria-label="All Ondo links in one place"
                           className="text-primary hover:text-primary/80 transition-colors"
+                          {...analyticsAttributes("links_hub_click", "contact_page", "qr")}
                         >
                           <Image
                             src="/links-qr.svg"
@@ -214,7 +216,11 @@ export default function ContactPage() {
                         </Link>
                         <div className="text-xs text-foreground/70">
                           <p>Scan the code or visit</p>
-                          <Link href="/links/" className="text-primary hover:underline">
+                          <Link
+                            href="/links/"
+                            className="text-primary hover:underline"
+                            {...analyticsAttributes("links_hub_click", "contact_page", "text_link")}
+                          >
                             ondorealestate.com/links
                           </Link>
                         </div>

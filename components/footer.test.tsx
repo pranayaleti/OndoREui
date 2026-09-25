@@ -37,6 +37,14 @@ describe("Footer", () => {
     expect(screen.queryByRole("link", { name: "Facebook" })).not.toBeInTheDocument()
   })
 
+  it("reports taps on footer social icons as social_click with the platform", () => {
+    render(<Footer />)
+    const instagram = screen.getByRole("link", { name: "Instagram" })
+    expect(instagram).toHaveAttribute("data-analytics-event", "social_click")
+    expect(instagram).toHaveAttribute("data-analytics-category", "footer")
+    expect(instagram).toHaveAttribute("data-analytics-label", "instagram")
+  })
+
   it("sends the all-links QR to /links/ on our own domain", () => {
     render(<Footer />)
     expect(screen.getByRole("link", { name: /all ondo links/i })).toHaveAttribute("href", "/links/")

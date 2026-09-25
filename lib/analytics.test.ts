@@ -105,6 +105,26 @@ describe("analytics", () => {
         expect.objectContaining({ event_label: "prop-1" })
       )
     })
+
+    // Social ad platforms optimize delivery on these standard conversion events.
+    it("reports the lead to the Meta and TikTok pixels when they are loaded", () => {
+      const fbq = vi.fn()
+      const ttq = { track: vi.fn() }
+      Object.assign(window, { fbq, ttq })
+      analytics.trackLeadGeneration("homebuyer_quiz")
+      expect(fbq).toHaveBeenCalledWith("track", "Lead", { content_name: "homebuyer_quiz" })
+      expect(ttq.track).toHaveBeenCalledWith("SubmitForm", { content_name: "homebuyer_quiz" })
+      Object.assign(window, { fbq: undefined, ttq: undefined })
+    })
+
+    it("still records the lead when no pixels are loaded", () => {
+      expect(() => analytics.trackLeadGeneration("contact")).not.toThrow()
+      expect((window as { gtag?: (a: string, b: string, c?: object) => void }).gtag).toHaveBeenCalledWith(
+        "event",
+        "generate_lead",
+        expect.objectContaining({ event_label: "contact" })
+      )
+    })
   })
 
   describe("trackCalculatorUsage", () => {

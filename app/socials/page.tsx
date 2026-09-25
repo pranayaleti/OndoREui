@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { analyticsAttributes } from "@/lib/analytics"
 import { getLatestNewsItems } from "@/lib/news-items"
 import { SOCIAL_POSTS } from "@/lib/social-posts"
 import { SITE_SOCIAL_LINKS, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
@@ -103,7 +104,12 @@ export default function SocialsPage() {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <Button asChild size="sm" className="w-full justify-center gap-2">
-                    <Link href={post.url} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      {...analyticsAttributes("social_post_click", "socials_page", post.platform.toLowerCase())}
+                    >
                       View post
                       <ExternalLink className="h-3 w-3" />
                     </Link>
@@ -128,7 +134,13 @@ export default function SocialsPage() {
               const label = profile.label ?? platformLabelFromUrl(profile.url)
               return (
                 <Button key={profile.url} asChild variant="outline">
-                  <Link href={profile.url} target="_blank" rel="noopener noreferrer" className="gap-2">
+                  <Link
+                    href={profile.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="gap-2"
+                    {...analyticsAttributes("social_click", "socials_page", label.toLowerCase())}
+                  >
                     {label}
                     <ExternalLink className="h-3 w-3" />
                   </Link>
@@ -144,7 +156,9 @@ export default function SocialsPage() {
               ondorealestate.com/links.
             </p>
             <Button asChild size="lg">
-              <Link href="/links/">See every Ondo link</Link>
+              <Link href="/links/" {...analyticsAttributes("links_hub_click", "socials_page", "button")}>
+                See every Ondo link
+              </Link>
             </Button>
           </div>
         </div>
@@ -198,7 +212,12 @@ export default function SocialsPage() {
                     </span>
                   </div>
                   <Button asChild size="sm" className="w-full justify-center gap-2">
-                    <Link href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      {...analyticsAttributes("news_click", "socials_page", item.source)}
+                    >
                       View on {item.source}
                       <ExternalLink className="h-3 w-3" />
                     </Link>

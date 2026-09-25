@@ -60,6 +60,15 @@ describe("HomebuyerQuiz", () => {
     expect(screen.queryByText("Upper end")).not.toBeInTheDocument()
   })
 
+  it("reports which next step the buyer takes", () => {
+    render(<HomebuyerQuiz />)
+    answerAll()
+    const book = screen.getByRole("link", { name: /book a free call/i })
+    expect(book).toHaveAttribute("data-analytics-event", "quiz_cta_click")
+    expect(book).toHaveAttribute("data-analytics-category", "homebuyer_quiz")
+    expect(book).toHaveAttribute("data-analytics-label", "book")
+  })
+
   it("matches the next step to where the buyer is", () => {
     render(<HomebuyerQuiz />)
     answerAll({ stage: "Under contract" })

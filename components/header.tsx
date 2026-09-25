@@ -16,6 +16,7 @@ import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigat
 import { SearchDialog } from "@/components/search-dialog"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL, SITE_NAME, SITE_PHONE } from "@/lib/site"
+import { analyticsAttributes } from "@/lib/analytics"
 import { useTranslation } from "react-i18next"
 
 const Header = memo(() => {
@@ -192,6 +193,7 @@ const Header = memo(() => {
             href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
             className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent transition-colors shrink-0"
             aria-label={`Call ${SITE_PHONE}`}
+            {...analyticsAttributes("contact_click", "header", "call")}
           >
             <Phone className="h-4 w-4 text-primary" />
             <span className="hidden lg:inline text-foreground/80">{SITE_PHONE}</span>
@@ -330,6 +332,7 @@ const Header = memo(() => {
                 href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-primary/5 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
                 onClick={handleMenuClose}
+                {...analyticsAttributes("contact_click", "header_menu", "call")}
               >
                 <Phone className="h-4 w-4" />
                 {SITE_PHONE}, Free Consultation

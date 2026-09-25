@@ -70,6 +70,18 @@ jobs:
           NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
           NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
           NEXT_PUBLIC_SITE_URL: https://www.ondorealestate.com
+          # Analytics and ad-pixel IDs. They are public by design (they ship in page source), so they
+          # live as repository variables: Settings > Secrets and variables > Actions > Variables.
+          # Unset means that tag stays off. Without these the site shipped with no analytics at all.
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+          NEXT_PUBLIC_HUBSPOT_PORTAL_ID: ${{ vars.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || '245076632' }}
+          # Ad pixels (Meta, TikTok, LinkedIn) share browsing data for ad targeting. Update
+          # app/privacy-policy first: it currently says we do not share data for cross-context
+          # behavioral advertising, which stops being true the moment these IDs are set.
+          NEXT_PUBLIC_META_PIXEL_ID: ${{ vars.NEXT_PUBLIC_META_PIXEL_ID }}
+          NEXT_PUBLIC_TIKTOK_PIXEL_ID: ${{ vars.NEXT_PUBLIC_TIKTOK_PIXEL_ID }}
+          NEXT_PUBLIC_LINKEDIN_PARTNER_ID: ${{ vars.NEXT_PUBLIC_LINKEDIN_PARTNER_ID }}
 
       - name: Add CNAME, disable Jekyll, write build id
         env:

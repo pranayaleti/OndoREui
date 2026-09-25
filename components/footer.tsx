@@ -30,6 +30,7 @@ import {
 } from "lucide-react"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
+import { analyticsAttributes } from "@/lib/analytics"
 
 /** Lazy-mount wrapper: children only render once the sentinel scrolls into view. */
 function LazySection({ children, fallbackHeight = "200px" }: { children: React.ReactNode; fallbackHeight?: string }) {
@@ -262,6 +263,7 @@ const Footer = memo(() => {
                   href={`tel:${SITE_PHONE.replace(/[^+\d]/g, "")}`}
                   className="text-foreground/70 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary rounded"
                   aria-label={`Call ${SITE_PHONE}`}
+                  {...analyticsAttributes("contact_click", "footer", "call")}
                 >
                   {SITE_PHONE}
                 </a>
@@ -276,6 +278,7 @@ const Footer = memo(() => {
                   href={`mailto:${SITE_EMAILS.primary}`}
                   className="text-foreground/70 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary rounded"
                   aria-label={`Email ${SITE_EMAILS.primary}`}
+                  {...analyticsAttributes("contact_click", "footer", "email")}
                 >
                   {SITE_EMAILS.primary}
                 </a>
@@ -313,6 +316,7 @@ const Footer = memo(() => {
                   aria-label={name}
                   target="_blank"
                   rel="noopener noreferrer"
+                  {...analyticsAttributes("social_click", "footer", name.toLowerCase())}
                   className={`text-foreground/70 transition-colors ${hoverClass}`}
                 >
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -323,6 +327,7 @@ const Footer = memo(() => {
                   href="/links/"
                   className="text-foreground/70 hover:text-foreground transition-colors"
                   aria-label="All Ondo links in one place"
+                  {...analyticsAttributes("links_hub_click", "footer", "qr")}
                 >
                   <Image
                     src="/links-qr.svg"

@@ -49,6 +49,12 @@ export const analytics = {
     if (propertyId) {
       analytics.trackEvent('property_lead', 'lead_generation', propertyId)
     }
+    // Standard conversion events for the social ad pixels; no-ops unless the
+    // geo-gated TrackingTags loaded them.
+    if (typeof window !== 'undefined') {
+      window.fbq?.('track', 'Lead', { content_name: source })
+      window.ttq?.track?.('SubmitForm', { content_name: source })
+    }
   },
 
   // Track calculator usage
@@ -129,4 +135,19 @@ export const ecommerceTracking = {
       })
     }
   },
+}
+
+/**
+ * Data attributes that the site-wide ClickTracker (mounted in app/layout.tsx) turns
+ * into `gtag("event", event, { event_category: category, event_label: label })` when
+ * the element is clicked. Spread onto any link or button, including in server components.
+ * Conventions: category is where the element sits ("footer", "links_page"), label is
+ * what it is ("instagram", "book-call").
+ */
+export function analyticsAttributes(event: string, category: string, label?: string): Record<string, string> {
+  return {
+    "data-analytics-event": event,
+    "data-analytics-category": category,
+    ...(label ? { "data-analytics-label": label } : {}),
+  }
 }

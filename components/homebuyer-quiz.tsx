@@ -13,7 +13,7 @@ import {
   useLeadSubmission,
   type ContactValues,
 } from "@/components/lead-contact-fields"
-import { analytics } from "@/lib/analytics"
+import { analytics, analyticsAttributes } from "@/lib/analytics"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { formatCurrency } from "@/lib/cost-of-living"
 import {
@@ -326,7 +326,11 @@ function QuizResult({
           </p>
           <p className="mt-2 text-sm leading-relaxed text-foreground/80">
             A loan type that may fit:{" "}
-            <Link href={`/loans/${estimate.program}/`} className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link
+              href={`/loans/${estimate.program}/`}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+              {...analyticsAttributes("quiz_cta_click", "homebuyer_quiz", `program_${estimate.program}`)}
+            >
               {PROGRAM_LABELS[estimate.program]}
             </Link>
             .
@@ -352,28 +356,29 @@ function QuizResult({
         <div className="mt-4 flex flex-wrap gap-2">
           {next.actions.map((action, index) => {
             const className = index === 0 ? primaryButton : secondaryButton
+            const ctaTracking = analyticsAttributes("quiz_cta_click", "homebuyer_quiz", action)
             switch (action) {
               case "book":
                 return (
-                  <a key={action} href={SITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={className}>
+                  <a key={action} href={SITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={className} {...ctaTracking}>
                     Book a free call
                   </a>
                 )
               case "call":
                 return (
-                  <a key={action} href={`tel:${phoneDigits}`} className={className}>
+                  <a key={action} href={`tel:${phoneDigits}`} className={className} {...ctaTracking}>
                     Call us
                   </a>
                 )
               case "text":
                 return (
-                  <a key={action} href={`sms:${phoneDigits}`} className={className}>
+                  <a key={action} href={`sms:${phoneDigits}`} className={className} {...ctaTracking}>
                     Text us
                   </a>
                 )
               case "browse":
                 return (
-                  <Link key={action} href="/properties/" className={className}>
+                  <Link key={action} href="/properties/" className={className} {...ctaTracking}>
                     Browse homes
                   </Link>
                 )
