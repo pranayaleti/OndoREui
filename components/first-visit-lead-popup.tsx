@@ -27,6 +27,7 @@ const POPUP_SCROLL_RATIO = 0.6
 const EXCLUDED_EXACT_PATHS = new Set([
   "/contact",
   "/qualify",
+  "/buy/quiz",
   "/demo",
   "/apply",
   "/invite",
@@ -54,7 +55,7 @@ function normalizePathname(pathname: string): string {
   return pathname.replace(/\/+$/, "")
 }
 
-function isEligiblePath(pathname: string): boolean {
+export function isEligiblePath(pathname: string): boolean {
   const normalized = normalizePathname(pathname)
 
   if (EXCLUDED_EXACT_PATHS.has(normalized)) return false

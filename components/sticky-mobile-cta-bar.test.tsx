@@ -26,6 +26,12 @@ describe("StickyMobileCtaBar", () => {
     expect(container.firstChild).toBeNull()
   })
 
+  it("hides itself on the homebuyer quiz so a rental-owner CTA doesn't cover a buyer's form", () => {
+    mockPathname = "/buy/quiz/"
+    const { container } = render(<StickyMobileCtaBar />)
+    expect(container.firstChild).toBeNull()
+  })
+
   it("hides itself on tokenized apply flow", () => {
     mockPathname = "/apply/abc123"
     const { container } = render(<StickyMobileCtaBar />)
