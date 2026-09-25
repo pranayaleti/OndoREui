@@ -27,6 +27,21 @@ describe("/links page", () => {
     expect(intro.closest("section")).toHaveTextContent(/own and manage rental property myself/i)
   })
 
+  // Owner's call: buying, selling and home loans lead, in the copy and in the tile order.
+  it("highlights buying, selling and home loans in the intro", () => {
+    render(<LinksPage />)
+    const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i }).closest("section")!
+    const highlighted = Array.from(intro.querySelectorAll("strong")).map((node) => node.textContent)
+    expect(highlighted).toEqual(["buy a home", "sell your home", "find the right home loan"])
+  })
+
+  it("lists buying, then selling, then home loans right after Start here", () => {
+    render(<LinksPage />)
+    const headings = screen.getAllByRole("heading", { level: 2 }).map((heading) => heading.textContent)
+    const start = headings.indexOf("Start here")
+    expect(headings.slice(start, start + 4)).toEqual(["Start here", "Buying a home", "Selling a home", "Home loans"])
+  })
+
   it("shows the same service-area and portfolio numbers as the homepage", () => {
     render(<LinksPage />)
     expect(screen.getByText(`${UTAH_CITIES_SERVED}+ Utah cities`)).toBeInTheDocument()

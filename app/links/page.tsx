@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -95,7 +96,7 @@ export default function LinksPage() {
           </div>
           <h1 className="mt-4 font-outfit text-[1.75rem] font-bold leading-tight tracking-tight">{SITE_NAME}</h1>
           <p className="mt-1.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Utah property management, buying and selling, home loans and notary.
+            Buy, sell and finance a home in Utah. Property management and notary too.
           </p>
           <ul className="mt-5 flex flex-wrap justify-center gap-2.5" aria-label="Ondo on social media">
             {socials.map(({ href, name, Icon }) => (
@@ -119,9 +120,17 @@ export default function LinksPage() {
           <h2 id="links-intro" className="font-outfit text-lg font-semibold">
             {LINKS_PAGE_INTRO.heading}
           </h2>
-          {LINKS_PAGE_INTRO.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="mt-2 text-[0.95rem] leading-relaxed text-foreground/85">
-              {paragraph}
+          {LINKS_PAGE_INTRO.paragraphs.map((segments, paragraphIndex) => (
+            <p key={paragraphIndex} className="mt-2 text-[0.95rem] leading-relaxed text-foreground/85">
+              {segments.map((segment, index) =>
+                typeof segment === "string" ? (
+                  <Fragment key={index}>{segment}</Fragment>
+                ) : (
+                  <strong key={index} className="font-semibold text-primary">
+                    {segment.highlight}
+                  </strong>
+                ),
+              )}
             </p>
           ))}
           <ul className="mt-4 flex flex-wrap gap-2" aria-label="Quick facts">

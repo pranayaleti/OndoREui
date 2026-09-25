@@ -24,20 +24,38 @@ export type LinksPageSection = {
   links: readonly LinksPageLink[]
 }
 
+/** Plain text, or a phrase the page highlights in the brand color. */
+export type IntroSegment = string | { highlight: string }
+
 /**
  * First thing a new visitor reads after watching a video: who Pranay is, in his own
- * words (adapted from the founder's letter at /founders-letter). No license claims here.
+ * words (adapted from the founder's letter at /founders-letter), with buying, selling
+ * and home loans highlighted as Ondo's lead services. No personal license titles:
+ * neither license is active yet, so the copy names services, not roles.
  */
-export const LINKS_PAGE_INTRO = {
+export const LINKS_PAGE_INTRO: {
+  heading: string
+  paragraphs: readonly (readonly IntroSegment[])[]
+  facts: readonly string[]
+} = {
   heading: "Hi, I'm Pranay",
   paragraphs: [
-    "I spent over a decade building software, and I own and manage rental property myself. Property management felt stuck in the past, so I built Ondo to make owning a rental stress-free and renting a home feel fair.",
-    "Everything's in one place here. Start with a free call, or pick your path below.",
+    [
+      "I spent over a decade building software, and I own and manage rental property myself. I built Ondo to make real estate simpler. We help you ",
+      { highlight: "buy a home" },
+      ", ",
+      { highlight: "sell your home" },
+      " and ",
+      { highlight: "find the right home loan" },
+      " in Utah, and we manage rentals too.",
+    ],
+    ["Everything's in one place here. Start with a free call, or pick your path below."],
   ],
   /** Same numbers the homepage shows (lib/social-proof-stats.ts), so the two never drift apart. */
   facts: [`${UTAH_CITIES_SERVED}+ Utah cities`, `${PROPERTIES_MANAGED}+ properties managed`, "Based in Lehi, Utah"],
-} as const
+}
 
+/** Order is priority: buying, selling and home loans lead, right after "Start here". */
 export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
   {
     id: "start",
@@ -49,12 +67,28 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     ],
   },
   {
-    id: "about",
-    heading: "Get to know me",
+    id: "buying",
+    heading: "Buying a home",
     links: [
-      { id: "founder-story", label: "Read my story", href: "/founders-letter/" },
-      { id: "about", label: "About Ondo Real Estate", href: "/about/" },
-      { id: "platform-tour", label: "Take the platform tour", href: "/tour/" },
+      { id: "afford-quiz", label: "See how much home you can afford", href: "/buy/quiz/" },
+      { id: "buy", label: "Buy a home in Utah", href: "/buy/" },
+      { id: "browse-for-sale", label: "Browse homes for sale", href: "/properties/" },
+    ],
+  },
+  {
+    id: "selling",
+    heading: "Selling a home",
+    links: [
+      { id: "home-value", label: "See what your home could sell for", href: "/whats-my-home-worth/" },
+      { id: "sell", label: "Sell your home", href: "/sell/" },
+    ],
+  },
+  {
+    id: "loans",
+    heading: "Home loans",
+    links: [
+      { id: "loans", label: "Explore home loans", href: "/loans/" },
+      { id: "refinance", label: "Refinance your home", href: "/refinance/" },
     ],
   },
   {
@@ -67,20 +101,10 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     ],
   },
   {
-    id: "buy-sell",
-    heading: "Buying, selling and loans",
-    links: [
-      { id: "afford-quiz", label: "See how much home you can afford", href: "/buy/quiz/" },
-      { id: "buy", label: "Buy a home in Utah", href: "/buy/" },
-      { id: "sell", label: "Sell your home", href: "/sell/" },
-      { id: "loans", label: "Home loans and refinancing", href: "/loans/" },
-    ],
-  },
-  {
     id: "clients",
     heading: "Renters and clients",
     links: [
-      { id: "browse-homes", label: "Browse homes for rent and sale", href: "/properties/" },
+      { id: "browse-homes", label: "Browse homes for rent", href: "/properties/" },
       { id: "portal-login", label: "Tenant and owner portal login", href: APP_PORTAL_LOGIN_URL },
     ],
   },
@@ -90,6 +114,15 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     links: [
       { id: "agent-referral", label: "Refer a client to Ondo", href: "/contact/?audience=agent_referrals" },
       { id: "affiliate", label: "Join our affiliate program", href: "/affiliate/" },
+    ],
+  },
+  {
+    id: "about",
+    heading: "Get to know me",
+    links: [
+      { id: "founder-story", label: "Read my story", href: "/founders-letter/" },
+      { id: "about", label: "About Ondo Real Estate", href: "/about/" },
+      { id: "platform-tour", label: "Take the platform tour", href: "/tour/" },
     ],
   },
   {
