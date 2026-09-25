@@ -31,6 +31,9 @@ const routes = [
   "/buy/quiz/",
   // Service matcher behind the /links "60-second" button (first question).
   "/get-matched/",
+  // Loan forms linked from /links (deploy only once the NMLS license is active).
+  "/loans/second-look/",
+  "/refinance/watch/",
   // Calculators were entirely untested here, which is how 146 inputs without an
   // associated <label> went unnoticed. Cover the index plus two tools: the most
   // complex form and a small one.

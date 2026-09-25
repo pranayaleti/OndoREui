@@ -2,9 +2,9 @@ import { formatCurrency } from "@/lib/cost-of-living"
 import { CREDIT_BANDS, type QuizAnswers } from "@/lib/homebuyer-quiz"
 
 /**
- * Lead summaries for the Loan Estimate second look and the refinance rate watch.
- * Both pages are built but unpublished (app/loans/_second-look, app/refinance/_watch)
- * until Ondo's NMLS license is active: they solicit mortgage business.
+ * Lead summaries for the Loan Estimate second look (/loans/second-look) and the
+ * refinance rate watch (/refinance/watch). Both solicit mortgage business, so the
+ * owner deploys them only once his NMLS license is active.
  */
 
 export const CASH_SOURCES = [

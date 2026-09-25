@@ -89,7 +89,10 @@ const STEPS: readonly Step[] = [
   },
 ]
 
-const NEXT_STEPS: Record<QuizAnswers["stage"], { title: string; body: string; actions: ("book" | "call" | "text" | "browse")[] }> = {
+const NEXT_STEPS: Record<
+  QuizAnswers["stage"],
+  { title: string; body: string; actions: ("book" | "call" | "text" | "browse" | "second_look")[] }
+> = {
   starting: {
     title: "Start touring with a plan",
     body: "Browse homes in your range, then book a call when you want a second set of eyes.",
@@ -101,9 +104,9 @@ const NEXT_STEPS: Record<QuizAnswers["stage"], { title: string; body: string; ac
     actions: ["book", "call", "text"],
   },
   under_contract: {
-    title: "Questions before closing?",
-    body: "Call or text and we'll help you sort out what comes next.",
-    actions: ["call", "text", "book"],
+    title: "Get a second look before you close",
+    body: "Send us the key numbers from your Loan Estimate and we'll walk you through how they compare.",
+    actions: ["second_look", "call", "text"],
   },
   questions: {
     title: "Ask us anything",
@@ -375,6 +378,12 @@ function QuizResult({
                   <a key={action} href={`sms:${phoneDigits}`} className={className} {...ctaTracking}>
                     Text us
                   </a>
+                )
+              case "second_look":
+                return (
+                  <Link key={action} href="/loans/second-look/" className={className} {...ctaTracking}>
+                    Get a second look
+                  </Link>
                 )
               case "browse":
                 return (

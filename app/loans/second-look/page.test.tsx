@@ -1,10 +1,11 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
-import RateWatchPage from "./page"
+import SecondLookPage from "./page"
 
-describe("/refinance/watch (unpublished)", () => {
+describe("/loans/second-look", () => {
+  // Lending disclosures are a template property: the page carries them, not each instance.
   it("carries the lending disclosure in the page template", () => {
-    render(<RateWatchPage />)
+    render(<SecondLookPage />)
     expect(screen.getByText(/not a commitment to lend/i)).toBeInTheDocument()
     expect(screen.getByText(/equal housing lender/i)).toBeInTheDocument()
   })

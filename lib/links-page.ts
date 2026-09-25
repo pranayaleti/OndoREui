@@ -29,9 +29,12 @@ export type IntroSegment = string | { highlight: string }
 
 /**
  * First thing a new visitor reads after watching a video: who Pranay is, in his own
- * words (adapted from the founder's letter at /founders-letter), with buying, selling
- * and home loans highlighted as Ondo's lead services. No personal license titles:
- * neither license is active yet, so the copy names services, not roles.
+ * words (adapted from the founder's letter at /founders-letter), with his roles and
+ * Ondo's buy, sell and loan services highlighted.
+ *
+ * LICENSE CLAIMS: "real estate agent", "loan officer" and the NMLS ID are only true
+ * once his licenses are active. He deploys this page only after licensing; do not
+ * push these lines before then.
  */
 export const LINKS_PAGE_INTRO: {
   heading: string
@@ -41,13 +44,20 @@ export const LINKS_PAGE_INTRO: {
   heading: "Hi, I'm Pranay",
   paragraphs: [
     [
-      "I spent over a decade building software, and I own and manage rental property myself. I built Ondo to make real estate simpler. We help you ",
+      "I spent over a decade building software, and I own and manage rental property myself. I built Ondo to make real estate simpler.",
+    ],
+    [
+      "As a Utah ",
+      { highlight: "real estate agent" },
+      " and ",
+      { highlight: "loan officer" },
+      " (NMLS #2699085), I help you ",
       { highlight: "buy a home" },
       ", ",
       { highlight: "sell your home" },
       " and ",
       { highlight: "find the right home loan" },
-      " in Utah, and we manage rentals too.",
+      ". My team manages rentals too.",
     ],
     ["Everything's in one place here. Start with a free call, or pick your path below."],
   ],
@@ -88,7 +98,9 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     heading: "Home loans",
     links: [
       { id: "loans", label: "Explore home loans", href: "/loans/" },
+      { id: "second-look", label: "Get a second look at your Loan Estimate", href: "/loans/second-look/" },
       { id: "refinance", label: "Refinance your home", href: "/refinance/" },
+      { id: "rate-watch", label: "Join the refinance rate watch", href: "/refinance/watch/" },
     ],
   },
   {

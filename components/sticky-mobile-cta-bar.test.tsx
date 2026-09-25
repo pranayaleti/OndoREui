@@ -32,6 +32,12 @@ describe("StickyMobileCtaBar", () => {
     expect(container.firstChild).toBeNull()
   })
 
+  it.each(["/loans/second-look/", "/refinance/watch/"])("hides itself on the loan form %s", (pathname) => {
+    mockPathname = pathname
+    const { container } = render(<StickyMobileCtaBar />)
+    expect(container.firstChild).toBeNull()
+  })
+
   it("hides itself on the service matcher quiz so it doesn't cover the answer options", () => {
     mockPathname = "/get-matched/"
     const { container } = render(<StickyMobileCtaBar />)

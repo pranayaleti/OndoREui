@@ -28,11 +28,31 @@ describe("/links page", () => {
   })
 
   // Owner's call: buying, selling and home loans lead, in the copy and in the tile order.
-  it("highlights buying, selling and home loans in the intro", () => {
+  it("highlights his roles and the buy, sell and loan services in the intro", () => {
     render(<LinksPage />)
     const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i }).closest("section")!
     const highlighted = Array.from(intro.querySelectorAll("strong")).map((node) => node.textContent)
-    expect(highlighted).toEqual(["buy a home", "sell your home", "find the right home loan"])
+    expect(highlighted).toEqual([
+      "real estate agent",
+      "loan officer",
+      "buy a home",
+      "sell your home",
+      "find the right home loan",
+    ])
+  })
+
+  // Mortgage advertising names the originator's NMLS ID next to the loan officer claim.
+  it("puts the NMLS ID right beside the loan officer title", () => {
+    render(<LinksPage />)
+    const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i }).closest("section")!
+    expect(intro).toHaveTextContent(/loan officer \(NMLS #2699085\)/)
+  })
+
+  it("links the Loan Estimate second look and the rate watch from Home loans", () => {
+    render(<LinksPage />)
+    const group = screen.getByRole("heading", { level: 2, name: "Home loans" }).closest("section")!
+    expect(within(group).getByRole("link", { name: /second look/i })).toHaveAttribute("href", "/loans/second-look/")
+    expect(within(group).getByRole("link", { name: /rate watch/i })).toHaveAttribute("href", "/refinance/watch/")
   })
 
   it("lists buying, then selling, then home loans right after Start here", () => {

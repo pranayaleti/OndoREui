@@ -29,6 +29,8 @@ const EXCLUDED_EXACT_PATHS = new Set([
   "/qualify",
   "/buy/quiz",
   "/get-matched",
+  "/loans/second-look",
+  "/refinance/watch",
   "/demo",
   "/apply",
   "/invite",

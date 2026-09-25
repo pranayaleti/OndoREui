@@ -1,7 +1,4 @@
-// UNPUBLISHED. The leading underscore makes this a Next.js private folder: no route, not exported.
-// This page solicits mortgage business, so it waits for Ondo's NMLS license to be active.
-// To launch: rename the folder to `watch`, add it to lib/links-page.ts ("Get on the rate watch
-// list"), and add "/refinance/watch/" to tests/a11y.spec.ts.
+// Solicits mortgage business: only deploy once the NMLS license is active (see lib/lending-leads.ts).
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import Link from "next/link"

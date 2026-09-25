@@ -69,10 +69,11 @@ describe("HomebuyerQuiz", () => {
     expect(book).toHaveAttribute("data-analytics-label", "book")
   })
 
-  it("matches the next step to where the buyer is", () => {
+  it("sends a buyer who is already under contract to the Loan Estimate second look", () => {
     render(<HomebuyerQuiz />)
     answerAll({ stage: "Under contract" })
-    expect(screen.getByRole("heading", { name: /questions before closing/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /second look before you close/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /get a second look/i })).toHaveAttribute("href", "/loans/second-look/")
   })
 
   it("sends every answer, the estimate and the texting consent with the buyer lead", async () => {
