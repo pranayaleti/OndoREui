@@ -18,7 +18,7 @@ export type LinksPageLink = {
 
 export type LinksPageSection = {
   id: string
-  /** Phrased as the visitor's situation so they can find their path at a glance. */
+  /** Who the section is for, so visitors can find their path at a glance. */
   heading: string
   links: readonly LinksPageLink[]
 }
@@ -29,24 +29,24 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     heading: "Start here",
     links: [
       { id: "book-call", label: "Book a free 30-minute call", href: SITE_CALENDLY_URL, primary: true },
-      // U+2011 non-breaking hyphen: a plain one wraps as "60-" / "second" on phones.
-      { id: "quiz", label: "Not sure yet? Take the 60‑second quiz", href: "/get-matched/" },
+      // U+00A0 non-breaking space keeps "60 seconds" together when the label wraps on phones.
+      { id: "quiz", label: "Get matched to the right service in 60 seconds", href: "/get-matched/" },
     ],
   },
   {
     id: "owners",
-    heading: "Own a rental?",
+    heading: "Rental owners",
     links: [
-      { id: "rent-estimate", label: "See what it should rent for", href: "/whats-my-home-worth/" },
-      { id: "management", label: "What management costs and covers", href: "/property-management/" },
-      { id: "new-investors", label: "New to investing? Start here", href: "/new-investors/" },
+      { id: "rent-estimate", label: "Get a free rent estimate", href: "/whats-my-home-worth/" },
+      { id: "management", label: "Management pricing and what's included", href: "/property-management/" },
+      { id: "new-investors", label: "Start investing in Utah rentals", href: "/new-investors/" },
     ],
   },
   {
     id: "buy-sell",
-    heading: "Buying, selling or borrowing?",
+    heading: "Buying, selling and loans",
     links: [
-      { id: "afford-quiz", label: "See what you can afford", href: "/buy/quiz/" },
+      { id: "afford-quiz", label: "See how much home you can afford", href: "/buy/quiz/" },
       { id: "buy", label: "Buy a home in Utah", href: "/buy/" },
       { id: "sell", label: "Sell your home", href: "/sell/" },
       { id: "loans", label: "Home loans and refinancing", href: "/loans/" },
@@ -54,15 +54,15 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
   },
   {
     id: "clients",
-    heading: "Renting, or already a client?",
+    heading: "Renters and clients",
     links: [
       { id: "browse-homes", label: "Browse homes for rent and sale", href: "/properties/" },
-      { id: "portal-login", label: "Log in to your tenant or owner portal", href: APP_PORTAL_LOGIN_URL },
+      { id: "portal-login", label: "Tenant and owner portal login", href: APP_PORTAL_LOGIN_URL },
     ],
   },
   {
     id: "agents",
-    heading: "Real estate agent?",
+    heading: "Real estate agents",
     links: [
       { id: "agent-referral", label: "Refer a client to Ondo", href: "/contact/?audience=agent_referrals" },
       { id: "affiliate", label: "Join our affiliate program", href: "/affiliate/" },
@@ -70,10 +70,10 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
   },
   {
     id: "more",
-    heading: "Something else?",
+    heading: "More from Ondo",
     links: [
-      { id: "notary", label: "Remote online notary, nationwide", href: "/notary/" },
-      { id: "faq", label: "Questions? Read the FAQs", href: "/faq/" },
+      { id: "notary", label: "Book a remote online notary", href: "/notary/" },
+      { id: "faq", label: "Read the FAQs", href: "/faq/" },
       { id: "newsletter", label: "Get Utah market updates by email", href: "/subscribe/" },
       { id: "home", label: "Explore the full Ondo site", href: "/" },
     ],

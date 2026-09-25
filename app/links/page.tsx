@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, ChevronRight, Mail, MessageSquare, Phone } from "lucide-react"
-import { LinkClickTracker } from "@/components/links/link-click-tracker"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
+import { analyticsAttributes } from "@/lib/analytics"
 import { LINKS_PAGE_SECTIONS, linksPageSocials, type LinksPageLink } from "@/lib/links-page"
 import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
 
@@ -56,14 +56,14 @@ function LinkLabel({ link }: { link: LinksPageLink }) {
 function PageLink({ link, className }: { link: LinksPageLink; className: string }) {
   if (isOffSite(link.href)) {
     return (
-      <a href={link.href} target="_blank" rel="noopener noreferrer" data-links-id={link.id} className={className}>
+      <a href={link.href} target="_blank" rel="noopener noreferrer" {...analyticsAttributes("links_click", "links_page", link.id)} className={className}>
         <LinkLabel link={link} />
       </a>
     )
   }
   // No prefetch: a visitor taps one of these, so fetching all of them on a phone connection wastes their data.
   return (
-    <Link href={link.href} prefetch={false} data-links-id={link.id} className={className}>
+    <Link href={link.href} prefetch={false} {...analyticsAttributes("links_click", "links_page", link.id)} className={className}>
       <LinkLabel link={link} />
     </Link>
   )
@@ -76,12 +76,11 @@ export default function LinksPage() {
     const platform = socialPlatformFor(href)
     return platform ? [{ href, ...platform }] : []
   })
-  const iconButton = `grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-foreground/80 transition-colors hover:border-primary hover:text-foreground ${focusRing}`
-  const contactPill = `inline-flex h-11 items-center gap-2 rounded-full border border-border bg-card px-5 text-sm font-medium text-foreground transition-colors hover:border-primary ${focusRing}`
+  const iconButton = `grid h-11 w-11 place-items-center rounded-full border border-primary/70 bg-card text-foreground/85 transition-colors hover:border-primary hover:bg-primary/10 hover:text-foreground ${focusRing}`
+  const contactPill = `inline-flex h-11 items-center gap-2 rounded-full border border-primary/70 bg-card px-5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-primary/10 ${focusRing}`
 
   return (
     <main className="min-h-screen bg-background">
-      <LinkClickTracker />
       <div className="mx-auto flex w-full max-w-md flex-col px-4 pb-12 pt-10 sm:pt-16">
         <header className="flex flex-col items-center text-center">
           <div className="rounded-full bg-gradient-to-br from-orange-500 to-red-800 p-[3px]">
@@ -106,7 +105,7 @@ export default function LinksPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Ondo on ${name}`}
-                  data-links-id={`social-${name.toLowerCase()}`}
+                  {...analyticsAttributes("social_click", "links_page", name.toLowerCase())}
                   className={iconButton}
                 >
                   <Icon className="h-[18px] w-[18px]" />
@@ -136,7 +135,7 @@ export default function LinksPage() {
                   />
                 ))}
                 {rest.length > 0 ? (
-                  <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+                  <ul className="divide-y divide-primary/25 overflow-hidden rounded-2xl border border-primary/70 bg-card">
                     {rest.map((link) => (
                       <li key={link.id}>
                         <PageLink
@@ -154,20 +153,20 @@ export default function LinksPage() {
 
         <footer className="mt-12 flex flex-col items-center gap-6 text-center">
           <div className="flex gap-3">
-            <a href={`mailto:${SITE_EMAILS.primary}`} aria-label="Email Ondo" data-links-id="email" className={contactPill}>
+            <a href={`mailto:${SITE_EMAILS.primary}`} aria-label="Email Ondo" {...analyticsAttributes("contact_click", "links_page", "email")} className={contactPill}>
               <Mail className="h-4 w-4" aria-hidden="true" />
               Email
             </a>
             <a
               href={`tel:${phoneDigits}`}
               aria-label="Call Ondo"
-              data-links-id="call"
+              {...analyticsAttributes("contact_click", "links_page", "call")}
               className={contactPill}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call
             </a>
-            <a href={`sms:${phoneDigits}`} aria-label="Text Ondo" data-links-id="text" className={contactPill}>
+            <a href={`sms:${phoneDigits}`} aria-label="Text Ondo" {...analyticsAttributes("contact_click", "links_page", "text")} className={contactPill}>
               <MessageSquare className="h-4 w-4" aria-hidden="true" />
               Text
             </a>
@@ -180,10 +179,20 @@ export default function LinksPage() {
             </p>
             <p>{SITE_NAME}, Lehi, Utah. NMLS ID on file.</p>
             <p className="flex justify-center gap-4">
-              <Link href="/licensing/" prefetch={false} className="underline underline-offset-4 hover:text-foreground">
+              <Link
+                href="/licensing/"
+                prefetch={false}
+                {...analyticsAttributes("links_click", "links_page", "licensing")}
+                className="underline underline-offset-4 hover:text-foreground"
+              >
                 Licensing
               </Link>
-              <Link href="/privacy-policy/" prefetch={false} className="underline underline-offset-4 hover:text-foreground">
+              <Link
+                href="/privacy-policy/"
+                prefetch={false}
+                {...analyticsAttributes("links_click", "links_page", "privacy")}
+                className="underline underline-offset-4 hover:text-foreground"
+              >
                 Privacy
               </Link>
             </p>

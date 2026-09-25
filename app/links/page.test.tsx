@@ -19,21 +19,28 @@ describe("/links page", () => {
 
   it("groups links under headings screen readers can jump between", () => {
     render(<LinksPage />)
-    const heading = screen.getByRole("heading", { level: 2, name: "Own a rental?" })
+    const heading = screen.getByRole("heading", { level: 2, name: "Rental owners" })
     const group = heading.closest("section")!
-    expect(within(group).getByRole("link", { name: /see what it should rent for/i })).toHaveAttribute(
+    expect(within(group).getByRole("link", { name: /free rent estimate/i })).toHaveAttribute(
       "href",
       "/whats-my-home-worth/",
     )
   })
 
-  it("tags every button with its analytics id", () => {
+  // ClickTracker (app/layout.tsx) turns these attributes into GA4 events.
+  it("tags every button, social profile and contact tap for analytics", () => {
     render(<LinksPage />)
-    expect(screen.getByRole("link", { name: /book a free 30-minute call/i })).toHaveAttribute(
-      "data-links-id",
-      "book-call",
-    )
-    expect(screen.getByRole("link", { name: /buy a home in utah/i })).toHaveAttribute("data-links-id", "buy")
+    const booking = screen.getByRole("link", { name: /book a free 30-minute call/i })
+    expect(booking).toHaveAttribute("data-analytics-event", "links_click")
+    expect(booking).toHaveAttribute("data-analytics-category", "links_page")
+    expect(booking).toHaveAttribute("data-analytics-label", "book-call")
+    expect(screen.getByRole("link", { name: /buy a home in utah/i })).toHaveAttribute("data-analytics-label", "buy")
+    const instagram = screen.getByRole("link", { name: "Ondo on Instagram" })
+    expect(instagram).toHaveAttribute("data-analytics-event", "social_click")
+    expect(instagram).toHaveAttribute("data-analytics-label", "instagram")
+    const text = screen.getByRole("link", { name: "Text Ondo" })
+    expect(text).toHaveAttribute("data-analytics-event", "contact_click")
+    expect(text).toHaveAttribute("data-analytics-label", "text")
   })
 
   it("opens outside links in a new tab without handing them this window", () => {
