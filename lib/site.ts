@@ -55,6 +55,14 @@ export const SITE_ADDRESS_REGION = "UT"
 export const SITE_ADDRESS_POSTAL_CODE = "84043"
 export const SITE_ADDRESS_COUNTRY = "US"
 
+/**
+ * The loan officer named on pages that solicit mortgage business (/links, the Loan
+ * Estimate second look, the rate watch). 2699085 is Pranay's personal (individual)
+ * NMLS ID. Mortgage ads also name the sponsoring company and its NMLS ID; that belongs
+ * in ARRIVAL_LENDING_DISCLOSURE (lib/utah-arrival.ts) once the sponsor is licensed.
+ */
+export const SITE_LOAN_OFFICER = { name: "Pranay Reddy Aleti", nmlsId: "2699085" } as const
+
 /** 30-minute Calendly; override in env for staging or alternate event types */
 export const SITE_CALENDLY_URL =
   process.env["NEXT_PUBLIC_SITE_CALENDLY_URL"]?.trim() ||

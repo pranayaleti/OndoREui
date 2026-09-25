@@ -2,7 +2,7 @@
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import { SecondLookForm } from "@/components/lending/second-look-form"
-import { SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_LOAN_OFFICER, SITE_URL, pageTitle } from "@/lib/site"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
@@ -54,6 +54,9 @@ export default function SecondLookPage() {
           Most buyers can still switch lenders while under contract, as long as it fits the deadlines in the purchase
           agreement. Send us the key numbers from your Loan Estimate and a licensed loan officer will walk you through how
           they compare. No credit check to start.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Loan officer: {SITE_LOAN_OFFICER.name}, NMLS #{SITE_LOAN_OFFICER.nmlsId}
         </p>
 
         <section aria-labelledby="lines-to-compare" className="mt-10">

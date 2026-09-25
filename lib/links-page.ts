@@ -1,4 +1,4 @@
-import { APP_PORTAL_LOGIN_URL, SITE_CALENDLY_URL, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
+import { APP_PORTAL_LOGIN_URL, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
 import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 
 /**
@@ -51,7 +51,7 @@ export const LINKS_PAGE_INTRO: {
       { highlight: "real estate agent" },
       " and ",
       { highlight: "loan officer" },
-      " (NMLS #2699085), I help you ",
+      ` (NMLS #${SITE_LOAN_OFFICER.nmlsId}), I help you `,
       { highlight: "buy a home" },
       ", ",
       { highlight: "sell your home" },
