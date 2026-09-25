@@ -28,6 +28,7 @@ const EXCLUDED_EXACT_PATHS = new Set([
   "/contact",
   "/qualify",
   "/buy/quiz",
+  "/get-matched",
   "/demo",
   "/apply",
   "/invite",

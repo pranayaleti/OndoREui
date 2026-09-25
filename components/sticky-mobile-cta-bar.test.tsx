@@ -32,6 +32,12 @@ describe("StickyMobileCtaBar", () => {
     expect(container.firstChild).toBeNull()
   })
 
+  it("hides itself on the service matcher quiz so it doesn't cover the answer options", () => {
+    mockPathname = "/get-matched/"
+    const { container } = render(<StickyMobileCtaBar />)
+    expect(container.firstChild).toBeNull()
+  })
+
   it("hides itself on tokenized apply flow", () => {
     mockPathname = "/apply/abc123"
     const { container } = render(<StickyMobileCtaBar />)

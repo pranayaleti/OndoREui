@@ -1,443 +1,361 @@
 "use client"
 
 /**
- * Public 5-question lead qualifier wizard.
+ * Public lead qualifier behind /get-matched (the "60-second quiz" on /links).
  *
- * Maps to playbook idea #7 ("AI lead-qualifying chatbot · 5 Qs → Calendly if
- * hot, drip if cold"). Implemented as a multi-step wizard rather than a true
- * LLM chat because:
- *   - Backend lead-qualify endpoint currently requires a pre-issued session
- *     token (invite flow only).
- *   - Multi-step wizards convert better than single forms for high-intent
- *     CTAs (commitment escalation + visible progress).
- *   - Honest framing, we're guiding, not pretending the bot is AI.
+ * One tap per answer, and a question only when it applies: rental owners and
+ * investors get the unit count, everyone else skips it. Rental owners ready within
+ * 30 days (hot) get a call link; everyone else gets next steps matched to what they
+ * asked for. Every submission posts to /api/leads/contact through lib/leads-api with
+ * the same "Role / Intent / Location / Units / Urgency" trail HubSpot already reads.
  *
- * Behavior:
- *   - Q1–Q5 collect role, intent, location, units, urgency, contact info.
- *   - Hot leads (owner / signing soon) → "Book a call now" CTA → Calendly.
- *   - Warm + cold leads → submit + show next-step resources.
- *   - All submissions POST to /api/leads/contact via lib/leads-api with a
- *     structured message so HubSpot sees the full qualification trail.
- *
- * NOTE(i18n): user-facing copy is English-only for now. Migrate to
- * react-i18next when we add full locale routing for marketing pages.
+ * NOTE(i18n): user-facing copy is English-only, per OndoREui/CLAUDE.md.
  */
 
-import { useCallback, useMemo, useState } from "react"
+import { useEffect, useId, useRef, useState, type FormEvent } from "react"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, CheckCircle2, Loader2, AlertCircle, Calendar, Phone } from "lucide-react"
-import { submitContactLead } from "@/lib/leads-api"
+import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Loader2, Phone } from "lucide-react"
+import {
+  EMPTY_CONTACT,
+  LeadContactFields,
+  LeadFormError,
+  contactIsComplete,
+  contactPayload,
+  useLeadSubmission,
+  type ContactValues,
+} from "@/components/lead-contact-fields"
+import { analytics, analyticsAttributes } from "@/lib/analytics"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
-import { isValidEmail } from "@/lib/security"
-import { analytics } from "@/lib/analytics"
+import type { ContactInquiryType } from "@/lib/leads-api"
 import { SITE_CALENDLY_URL, SITE_PHONE } from "@/lib/site"
 
-type Role = "owner" | "tenant" | "buyer" | "seller" | "investor" | "other"
-type Intent = "manage_rental" | "find_rental" | "buy_home" | "sell_home" | "loan" | "notary" | "other"
+type Intent = "manage_rental" | "buy_home" | "sell_home" | "find_rental" | "invest" | "loan" | "notary" | "other"
 type Urgency = "now" | "30_days" | "90_days" | "exploring"
+type StepId = "intent" | "units" | "location" | "urgency" | "contact"
 
-interface Answers {
-  role: Role | null
-  intent: Intent | null
-  location: string
-  units: string
-  urgency: Urgency | null
-  name: string
-  email: string
-  phone: string
-}
-
-const INITIAL: Answers = {
-  role: null,
-  intent: null,
-  location: "",
-  units: "",
-  urgency: null,
-  name: "",
-  email: "",
-  phone: "",
-}
-
-type Step =
-  | { id: "role"; title: string; type: "single"; options: { value: Role; label: string; emoji: string }[] }
-  | { id: "intent"; title: string; type: "single"; options: { value: Intent; label: string; emoji: string }[] }
-  | { id: "location"; title: string; type: "text"; placeholder: string }
-  | { id: "units"; title: string; type: "text"; placeholder: string; optional?: boolean }
-  | { id: "urgency"; title: string; type: "single"; options: { value: Urgency; label: string; emoji: string }[] }
-  | { id: "contact"; title: string; type: "contact" }
-
-const STEPS: Step[] = [
-  {
-    id: "role",
-    title: "Which best describes you?",
-    type: "single",
-    options: [
-      { value: "owner", label: "Property owner / landlord", emoji: "🏠" },
-      { value: "investor", label: "Investor", emoji: "📈" },
-      { value: "buyer", label: "Home buyer", emoji: "🔑" },
-      { value: "seller", label: "Home seller", emoji: "🏡" },
-      { value: "tenant", label: "Renter / tenant", emoji: "🛋️" },
-      { value: "other", label: "Something else", emoji: "🤔" },
-    ],
-  },
-  {
-    id: "intent",
-    title: "What brings you to Ondo RE?",
-    type: "single",
-    options: [
-      { value: "manage_rental", label: "Manage my rental property", emoji: "🛠️" },
-      { value: "find_rental", label: "Find a place to rent", emoji: "🔍" },
-      { value: "buy_home", label: "Buy a home", emoji: "🏡" },
-      { value: "sell_home", label: "Sell my home", emoji: "📝" },
-      { value: "loan", label: "Mortgage or refinance", emoji: "💸" },
-      { value: "notary", label: "Mobile / remote notary", emoji: "✍️" },
-      { value: "other", label: "Just exploring", emoji: "👀" },
-    ],
-  },
-  {
-    id: "location",
-    title: "Which Utah city or ZIP?",
-    type: "text",
-    placeholder: "e.g. Lehi, Provo, 84043",
-  },
-  {
-    id: "units",
-    title: "How many rental units (if any)?",
-    type: "text",
-    placeholder: "e.g. 1, 3, 12, or leave blank",
-    optional: true,
-  },
-  {
-    id: "urgency",
-    title: "When do you want to move on this?",
-    type: "single",
-    options: [
-      { value: "now", label: "ASAP, this week", emoji: "🔥" },
-      { value: "30_days", label: "Within 30 days", emoji: "⏱️" },
-      { value: "90_days", label: "Within 90 days", emoji: "📅" },
-      { value: "exploring", label: "Just exploring", emoji: "💭" },
-    ],
-  },
-  {
-    id: "contact",
-    title: "Where should we send your match?",
-    type: "contact",
-  },
+/** `role` keeps the HubSpot trail's "Role:" line; `inquiryType` routes the lead in the CRM. */
+const INTENTS: readonly { value: Intent; label: string; role: string; inquiryType: ContactInquiryType }[] = [
+  { value: "manage_rental", label: "Manage my rental property", role: "owner", inquiryType: "owner" },
+  { value: "buy_home", label: "Buy a home", role: "buyer", inquiryType: "buyer" },
+  { value: "sell_home", label: "Sell a home", role: "seller", inquiryType: "seller" },
+  { value: "find_rental", label: "Find a place to rent", role: "tenant", inquiryType: "renter" },
+  { value: "invest", label: "Invest in rental property", role: "investor", inquiryType: "owner" },
+  { value: "loan", label: "Home loan or refinance", role: "other", inquiryType: "other" },
+  { value: "notary", label: "Notary service", role: "other", inquiryType: "other" },
+  { value: "other", label: "Something else", role: "other", inquiryType: "other" },
 ]
 
-/** Routing logic, determines whether this is a HOT lead worth pushing to Calendly. */
-function classifyLead(a: Answers): "hot" | "warm" | "cold" {
-  const isOwnerOrInvestor = a.role === "owner" || a.role === "investor"
-  const isManageRental = a.intent === "manage_rental"
-  const isReadyNow = a.urgency === "now" || a.urgency === "30_days"
+const UNIT_OPTIONS = ["None yet", "1", "2 to 4", "5 to 20", "More than 20"] as const
 
-  if (isOwnerOrInvestor && isManageRental && isReadyNow) return "hot"
-  if (isOwnerOrInvestor || isReadyNow) return "warm"
+const URGENCY_OPTIONS: readonly { value: Urgency; label: string }[] = [
+  { value: "now", label: "This week" },
+  { value: "30_days", label: "Within 30 days" },
+  { value: "90_days", label: "Within 3 months" },
+  { value: "exploring", label: "Just exploring" },
+]
+
+const QUESTIONS: Record<StepId, string> = {
+  intent: "What can we help you with?",
+  units: "How many rental units do you own?",
+  location: "Which city or ZIP code?",
+  urgency: "How soon do you want to get started?",
+  contact: "Where should we send your match?",
+}
+
+/** Next steps after sending, matched to what the visitor asked for. */
+const NEXT_STEPS: Record<Intent, readonly { id: string; label: string; href: string }[]> = {
+  manage_rental: [
+    { id: "owner_vs_self", label: "Run the self-manage vs Ondo numbers", href: "/calculators/owner-vs-self/" },
+    { id: "rent_estimate", label: "Get a free rent estimate", href: "/whats-my-home-worth/" },
+  ],
+  invest: [
+    { id: "new_investors", label: "Read the new investor guide", href: "/new-investors/" },
+    { id: "browse", label: "Browse homes", href: "/properties/" },
+  ],
+  buy_home: [
+    { id: "afford_quiz", label: "See how much home you can afford", href: "/buy/quiz/" },
+    { id: "browse", label: "Browse homes", href: "/properties/" },
+  ],
+  sell_home: [
+    { id: "home_value", label: "See what your home is worth", href: "/whats-my-home-worth/" },
+    { id: "sell", label: "How we sell homes", href: "/sell/" },
+  ],
+  find_rental: [{ id: "browse", label: "Browse homes for rent", href: "/properties/" }],
+  loan: [{ id: "loans", label: "Explore home loans", href: "/loans/" }],
+  notary: [{ id: "notary", label: "See notary options", href: "/notary/" }],
+  other: [{ id: "home", label: "Browse all our services", href: "/" }],
+}
+
+function stepsFor(intent: Intent | undefined): StepId[] {
+  const needsUnits = intent === "manage_rental" || intent === "invest"
+  return needsUnits ? ["intent", "units", "location", "urgency", "contact"] : ["intent", "location", "urgency", "contact"]
+}
+
+/** HOT: a rental owner ready within 30 days, the fastest path to a management client. */
+function classify(intent: Intent | undefined, urgency: Urgency | undefined): "hot" | "warm" | "cold" {
+  const ready = urgency === "now" || urgency === "30_days"
+  if (intent === "manage_rental" && ready) return "hot"
+  if (intent === "manage_rental" || intent === "invest" || ready) return "warm"
   return "cold"
 }
 
+const phoneDigits = SITE_PHONE.replace(/[^+\d]/g, "")
+const primaryButton =
+  "inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60"
+const secondaryButton =
+  "inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+
 export function LeadQualifierWizard() {
-  const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState<Answers>(INITIAL)
-  const [submitting, setSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState<string | null>(null)
-  const [submitted, setSubmitted] = useState(false)
+  const [stepIndex, setStepIndex] = useState(0)
+  const [intent, setIntent] = useState<Intent>()
+  const [units, setUnits] = useState<string>()
+  const [location, setLocation] = useState("")
+  const [urgency, setUrgency] = useState<Urgency>()
+  const [contact, setContact] = useState<ContactValues>(EMPTY_CONTACT)
+  const { status, error, send } = useLeadSubmission("lead_qualifier_wizard")
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const hasNavigated = useRef(false)
+  const headingId = useId()
 
-  const current = STEPS[step]
-  const progress = Math.round(((step + 1) / STEPS.length) * 100)
+  const steps = stepsFor(intent)
+  const step = steps[Math.min(stepIndex, steps.length - 1)]!
 
-  const canAdvance = useMemo(() => {
-    switch (current.id) {
-      case "role":
-        return answers.role !== null
-      case "intent":
-        return answers.intent !== null
-      case "location":
-        return answers.location.trim().length >= 2
-      case "units":
-        return true
-      case "urgency":
-        return answers.urgency !== null
-      case "contact":
-        return answers.name.trim().length > 0 && isValidEmail(answers.email.trim())
-      default:
-        return false
-    }
-  }, [current, answers])
+  // Move focus to each new question so keyboard and screen reader users follow along.
+  useEffect(() => {
+    if (hasNavigated.current) headingRef.current?.focus()
+  }, [stepIndex, status])
 
-  const goNext = useCallback(() => {
-    if (!canAdvance) return
-    if (step < STEPS.length - 1) {
-      setStep((s) => s + 1)
-      analytics.trackEvent("wizard_step_complete", "lead_qualifier", current.id, step + 1)
-    }
-  }, [canAdvance, step, current])
+  function goTo(index: number) {
+    hasNavigated.current = true
+    setStepIndex(index)
+  }
 
-  const goBack = useCallback(() => {
-    if (step > 0) setStep((s) => s - 1)
-  }, [step])
+  function next(completed: StepId, nextSteps: StepId[] = steps) {
+    analytics.trackEvent("wizard_step_complete", "lead_qualifier", completed, stepIndex + 1)
+    goTo(Math.min(stepIndex + 1, nextSteps.length - 1))
+  }
 
-  const handleSubmit = useCallback(async () => {
-    if (!canAdvance || submitting) return
-    setSubmitting(true)
-    setSubmitError(null)
-
-    const classification = classifyLead(answers)
-    const messageParts: string[] = [
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+    if (!intent || !urgency || !contactIsComplete(contact)) return
+    const chosen = INTENTS.find((option) => option.value === intent)!
+    const classification = classify(intent, urgency)
+    const message = [
       `Lead qualifier wizard, classification: ${classification.toUpperCase()}`,
-      `Role: ${answers.role}`,
-      `Intent: ${answers.intent}`,
-      `Location: ${answers.location}`,
-      answers.units ? `Units: ${answers.units}` : null,
-      `Urgency: ${answers.urgency}`,
-      answers.phone ? `Phone: ${answers.phone}` : null,
-    ].filter(Boolean) as string[]
+      `Role: ${chosen.role}`,
+      `Intent: ${intent}`,
+      `Location: ${location.trim()}`,
+      units ? `Units: ${units}` : null,
+      `Urgency: ${urgency}`,
+      contact.phone.trim() ? `Phone: ${contact.phone.trim()}` : null,
+      `OK to text: ${contact.textConsent ? "Yes" : "No"}`,
+    ]
+      .filter((line): line is string => line !== null)
+      .join("\n")
 
-    const result = await submitContactLead({
-      name: answers.name.trim(),
-      email: answers.email.trim().toLowerCase(),
-      phone: answers.phone.trim() || undefined,
+    const sent = await send({
+      ...contactPayload(contact),
       source: "website",
-      message: messageParts.join("\n"),
+      inquiryType: chosen.inquiryType,
+      message,
       attribution: getAttributionPayloadForApi(),
     })
+    if (sent) analytics.trackEvent("lead_classified", "lead_qualifier", classification)
+  }
 
-    if ("error" in result) {
-      setSubmitError(result.error || "Something went wrong. Please try again or call us directly.")
-      setSubmitting(false)
-      analytics.trackFormSubmission("lead_qualifier_wizard", false)
-      return
-    }
-
-    setSubmitted(true)
-    setSubmitting(false)
-    analytics.trackFormSubmission("lead_qualifier_wizard", true)
-    analytics.trackLeadGeneration(`wizard_${classification}`)
-  }, [answers, canAdvance, submitting])
-
-  // ---------- Success state ----------
-  if (submitted) {
-    const classification = classifyLead(answers)
-    const isHot = classification === "hot"
-
+  if (status === "sent") {
+    const isHot = classify(intent, urgency) === "hot"
     return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 mb-6">
-          <CheckCircle2 className="h-9 w-9 text-primary" aria-hidden="true" />
+      <div className="mx-auto max-w-xl text-center">
+        <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+          <CheckCircle2 className="h-8 w-8 text-primary" aria-hidden="true" />
         </div>
-        <h2 className="text-3xl font-bold text-foreground mb-3">
-          {isHot ? "We're a great fit. Pick a time below." : "Got it, we'll be in touch."}
+        <h2 ref={headingRef} tabIndex={-1} className="font-outfit text-2xl font-bold focus:outline-none md:text-3xl">
+          {isHot ? "You're a great fit. Pick a time." : "Got it. We'll be in touch."}
         </h2>
-        <p className="text-foreground/70 mb-8 max-w-md mx-auto">
+        <p className="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
           {isHot
-            ? `Based on your answers, the fastest path is a 30-minute call. Pick whatever works, we'll have your file open before we dial in.`
-            : `We'll send a personalized recommendation to ${answers.email} within one business day, along with the next steps tailored to your situation.`}
+            ? "The fastest path is a 30-minute call. Pick a time and we'll have your details open before we dial in."
+            : `We'll send your match to ${contact.email.trim()} within one business day. In the meantime:`}
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
           {isHot ? (
             <>
               <a
                 href={SITE_CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+                className={primaryButton}
+                {...analyticsAttributes("quiz_cta_click", "get_matched", "book")}
               >
                 <Calendar className="h-4 w-4" aria-hidden="true" />
                 Book a 30-minute call
               </a>
-              <a
-                href={`tel:${SITE_PHONE.replace(/[^+\d]/g, "")}`}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
-              >
+              <a href={`tel:${phoneDigits}`} className={secondaryButton} {...analyticsAttributes("quiz_cta_click", "get_matched", "call")}>
                 <Phone className="h-4 w-4" aria-hidden="true" />
-                Or call {SITE_PHONE}
+                Call {SITE_PHONE}
               </a>
             </>
           ) : (
-            <>
+            (intent ? NEXT_STEPS[intent] : NEXT_STEPS.other).map((action, index) => (
               <Link
-                href="/calculators/owner-vs-self"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+                key={action.id}
+                href={action.href}
+                className={index === 0 ? primaryButton : secondaryButton}
+                {...analyticsAttributes("quiz_cta_click", "get_matched", action.id)}
               >
-                Run the Self-Manage vs Ondo numbers
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                {action.label}
               </Link>
-              <Link
-                href="/blog"
-                className="inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
-              >
-                Read the Utah landlord blog
-              </Link>
-            </>
+            ))
           )}
         </div>
       </div>
     )
   }
 
-  // ---------- Wizard ----------
+  const progress = Math.round(((stepIndex + 1) / steps.length) * 100)
+
   return (
-    <div className="max-w-2xl mx-auto">
-      {/* Progress bar */}
+    <div className="mx-auto max-w-xl">
       <div className="mb-8">
-        <div className="flex justify-between text-xs text-foreground/50 mb-2">
-          <span>Step {step + 1} of {STEPS.length}</span>
+        <div className="mb-2 flex justify-between text-xs text-muted-foreground">
+          <span>
+            Question {stepIndex + 1} of {steps.length}
+          </span>
           <span>{progress}%</span>
         </div>
-        <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary transition-all duration-500"
-            style={{ width: `${progress}%` }}
-            aria-hidden="true"
-          />
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted" aria-hidden="true">
+          <div className="h-full bg-primary transition-all duration-300" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
-      <h1 className="text-3xl md:text-4xl font-extrabold text-foreground mb-8 text-center">
-        {current.title}
-      </h1>
+      <h2 id={headingId} ref={headingRef} tabIndex={-1} className="font-outfit text-2xl font-bold leading-snug focus:outline-none md:text-3xl">
+        {QUESTIONS[step]}
+      </h2>
 
-      {/* Step body */}
-      {current.type === "single" && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={current.title}>
-          {current.options.map((opt) => {
-            const selected =
-              (current.id === "role" && answers.role === opt.value) ||
-              (current.id === "intent" && answers.intent === opt.value) ||
-              (current.id === "urgency" && answers.urgency === opt.value)
-            return (
-              <button
-                key={opt.value}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                onClick={() => {
-                  if (current.id === "role") setAnswers((a) => ({ ...a, role: opt.value as Role }))
-                  if (current.id === "intent") setAnswers((a) => ({ ...a, intent: opt.value as Intent }))
-                  if (current.id === "urgency") setAnswers((a) => ({ ...a, urgency: opt.value as Urgency }))
-                }}
-                className={`flex items-center gap-3 rounded-lg border-2 p-4 text-left transition-all ${
-                  selected
-                    ? "border-primary bg-primary/5 ring-2 ring-primary/20"
-                    : "border-border bg-card hover:border-primary/40"
-                }`}
-              >
-                <span className="text-2xl" aria-hidden="true">{opt.emoji}</span>
-                <span className="font-medium text-foreground">{opt.label}</span>
-              </button>
-            )
-          })}
-        </div>
-      )}
+      {step === "intent" ? (
+        <Choices
+          labelledBy={headingId}
+          options={INTENTS}
+          selected={intent}
+          onChoose={(value) => {
+            setIntent(value)
+            if (value !== "manage_rental" && value !== "invest") setUnits(undefined)
+            next("intent", stepsFor(value))
+          }}
+        />
+      ) : null}
 
-      {current.type === "text" && (
-        <div>
-          <input
-            type="text"
-            value={current.id === "location" ? answers.location : answers.units}
-            onChange={(e) => {
-              if (current.id === "location") setAnswers((a) => ({ ...a, location: e.target.value }))
-              if (current.id === "units") setAnswers((a) => ({ ...a, units: e.target.value }))
-            }}
-            placeholder={current.placeholder}
-            className="w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && canAdvance) goNext()
-            }}
-          />
-          {current.id === "units" && (
-            <p className="text-xs text-foreground/50 mt-2">Optional, skip if not applicable.</p>
-          )}
-        </div>
-      )}
+      {step === "units" ? (
+        <Choices
+          labelledBy={headingId}
+          options={UNIT_OPTIONS.filter((option) => intent === "invest" || option !== "None yet").map((option) => ({
+            value: option,
+            label: option,
+          }))}
+          selected={units}
+          onChoose={(value) => {
+            setUnits(value)
+            next("units")
+          }}
+        />
+      ) : null}
 
-      {current.type === "contact" && (
-        <div className="space-y-4">
-          <label className="block">
-            <span className="text-sm font-medium text-foreground/90">Name</span>
-            <input
-              type="text"
-              required
-              value={answers.name}
-              onChange={(e) => setAnswers((a) => ({ ...a, name: e.target.value }))}
-              className="mt-1.5 w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </label>
-          <label className="block">
-            <span className="text-sm font-medium text-foreground/90">Email</span>
-            <input
-              type="email"
-              required
-              value={answers.email}
-              onChange={(e) => setAnswers((a) => ({ ...a, email: e.target.value }))}
-              className="mt-1.5 w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </label>
-          <label className="block">
-            <span className="text-sm font-medium text-foreground/90">Phone (optional)</span>
-            <input
-              type="tel"
-              value={answers.phone}
-              onChange={(e) => setAnswers((a) => ({ ...a, phone: e.target.value }))}
-              className="mt-1.5 w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="+1 (XXX) XXX-XXXX"
-            />
-          </label>
-          <p className="text-xs text-foreground/50">
-            No spam. We'll use this to send your personalized match within one business day.
-          </p>
-          {submitError && (
-            <p className="text-sm text-destructive-emphasis inline-flex items-center gap-1.5" role="alert">
-              <AlertCircle className="h-4 w-4" aria-hidden="true" />
-              {submitError}
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* Navigation */}
-      <div className="mt-10 flex justify-between items-center">
-        <button
-          type="button"
-          onClick={goBack}
-          disabled={step === 0}
-          className="inline-flex items-center gap-1.5 text-sm text-foreground/60 hover:text-foreground disabled:opacity-40 disabled:cursor-not-allowed"
+      {step === "location" ? (
+        <form
+          className="mt-6"
+          onSubmit={(event) => {
+            event.preventDefault()
+            if (location.trim().length >= 2) next("location")
+          }}
         >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          Back
-        </button>
-
-        {current.id === "contact" ? (
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={!canAdvance || submitting}
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {submitting ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                Submitting…
-              </>
-            ) : (
-              <>
-                Get my match
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </>
-            )}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={goNext}
-            disabled={!canAdvance}
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-          >
+          <input
+            aria-labelledby={headingId}
+            autoComplete="address-level2"
+            placeholder="For example, Lehi or 84043"
+            value={location}
+            onChange={(event) => setLocation(event.target.value)}
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          />
+          <button type="submit" disabled={location.trim().length < 2} className={`${primaryButton} mt-4 w-full`}>
             Next
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
-        )}
-      </div>
+        </form>
+      ) : null}
+
+      {step === "urgency" ? (
+        <Choices
+          labelledBy={headingId}
+          options={URGENCY_OPTIONS}
+          selected={urgency}
+          onChoose={(value) => {
+            setUrgency(value)
+            next("urgency")
+          }}
+        />
+      ) : null}
+
+      {step === "contact" ? (
+        <form onSubmit={handleSubmit} className="mt-6" noValidate>
+          <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my match." />
+          <LeadFormError message={error} />
+          <button
+            type="submit"
+            disabled={!contactIsComplete(contact) || status === "sending"}
+            className={`${primaryButton} mt-5 w-full`}
+          >
+            {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
+            Get my match
+          </button>
+          <p className="mt-3 text-xs text-muted-foreground">No spam. A real person follows up within one business day.</p>
+        </form>
+      ) : null}
+
+      <button
+        type="button"
+        onClick={() => goTo(Math.max(0, stepIndex - 1))}
+        disabled={stepIndex === 0}
+        className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+        Back
+      </button>
+    </div>
+  )
+}
+
+function Choices<T extends string>({
+  labelledBy,
+  options,
+  selected,
+  onChoose,
+}: {
+  labelledBy: string
+  options: readonly { value: T; label: string }[]
+  selected: T | undefined
+  onChoose: (value: T) => void
+}) {
+  return (
+    <div role="radiogroup" aria-labelledby={labelledBy} className="mt-6 grid gap-3">
+      {options.map((option) => {
+        const isSelected = selected === option.value
+        return (
+          <button
+            key={option.value}
+            type="button"
+            role="radio"
+            aria-checked={isSelected}
+            onClick={() => onChoose(option.value)}
+            className={`flex min-h-[3.5rem] items-center justify-between rounded-xl border px-4 py-3 text-left text-[0.95rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              isSelected ? "border-primary bg-primary/10" : "border-border bg-card hover:border-primary/60"
+            }`}
+          >
+            {option.label}
+            <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
+          </button>
+        )
+      })}
     </div>
   )
 }

@@ -8,7 +8,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = pageTitleText("Get Matched with the Right Ondo RE Service | 60-Second Quiz")
 const description =
-  "Answer 5 quick questions and get matched with the right Ondo Real Estate service, property management, mortgages, buying, selling, or notary. No commitment, real-person follow-up within 1 business day."
+  "Answer a few quick questions and get matched with the right Ondo Real Estate service: property management, buying, selling, renting, loans, or notary. No commitment, and a real person follows up within one business day."
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -35,13 +35,19 @@ export default function GetMatchedPage() {
           generateServiceJsonLd({
             name: `${SITE_NAME}, Service Matcher`,
             description:
-              "Free 5-question lead qualifier that matches Utah property owners, buyers, renters, and investors with the right Ondo RE service in under a minute.",
+              "Free lead qualifier, four or five quick questions, that matches Utah property owners, buyers, renters, and investors with the right Ondo RE service in under a minute.",
             serviceType: "Online Lead Qualifier",
             areaServed: "Utah",
           }),
         ]}
       />
       <div className="container mx-auto px-4">
+        <header className="mx-auto mb-10 max-w-xl">
+          <h1 className="font-outfit text-3xl font-bold tracking-tight md:text-4xl">Get matched in 60 seconds</h1>
+          <p className="mt-3 leading-relaxed text-muted-foreground">
+            A few quick questions, then we point you to the right Ondo service. No commitment.
+          </p>
+        </header>
         <LeadQualifierWizard />
       </div>
     </main>

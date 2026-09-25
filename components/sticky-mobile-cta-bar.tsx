@@ -28,8 +28,9 @@ const HIDDEN_PREFIXES = [
   "/invite",
   "/chat",
   "/tenantOnboarding",
-  // Homebuyer quiz: a focused buyer flow, and the bar's CTA is for rental owners.
+  // Quiz flows: the bar would cover answer options, and its CTA is for rental owners.
   "/buy/quiz",
+  "/get-matched",
   // These two render their own page-specific fixed bottom bar. Without this the
   // global bar stacks underneath theirs and the visitor loses that much viewport
   // to two competing CTAs.

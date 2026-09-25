@@ -29,6 +29,8 @@ const routes = [
   "/links/",
   // Homebuyer budget quiz (first question; the results screen is covered by unit tests).
   "/buy/quiz/",
+  // Service matcher behind the /links "60-second" button (first question).
+  "/get-matched/",
   // Calculators were entirely untested here, which is how 146 inputs without an
   // associated <label> went unnoticed. Cover the index plus two tools: the most
   // complex form and a small one.

@@ -97,8 +97,9 @@ export function useLeadSubmission(formName: string) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle")
   const [error, setError] = useState<string | null>(null)
 
-  async function send(payload: SubmitContactLeadPayload) {
-    if (status === "sending") return
+  /** Resolves true once the lead is saved, so callers can record follow-up analytics. */
+  async function send(payload: SubmitContactLeadPayload): Promise<boolean> {
+    if (status === "sending") return false
     setStatus("sending")
     setError(null)
     const result = await submitContactLead(payload)
@@ -106,11 +107,12 @@ export function useLeadSubmission(formName: string) {
       setError(result.error || "That didn't go through. Call or text us instead.")
       setStatus("idle")
       analytics.trackFormSubmission(formName, false)
-      return
+      return false
     }
     setStatus("sent")
     analytics.trackFormSubmission(formName, true)
     analytics.trackLeadGeneration(formName)
+    return true
   }
 
   return { status, error, send }
