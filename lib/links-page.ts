@@ -46,6 +46,7 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     id: "buy-sell",
     heading: "Buying, selling or borrowing?",
     links: [
+      { id: "afford-quiz", label: "See what you can afford", href: "/buy/quiz/" },
       { id: "buy", label: "Buy a home in Utah", href: "/buy/" },
       { id: "sell", label: "Sell your home", href: "/sell/" },
       { id: "loans", label: "Home loans and refinancing", href: "/loans/" },
@@ -60,11 +61,19 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     ],
   },
   {
+    id: "agents",
+    heading: "Real estate agent?",
+    links: [
+      { id: "agent-referral", label: "Refer a client to Ondo", href: "/contact/?audience=agent_referrals" },
+      { id: "affiliate", label: "Join our affiliate program", href: "/affiliate/" },
+    ],
+  },
+  {
     id: "more",
     heading: "Something else?",
     links: [
       { id: "notary", label: "Remote online notary, nationwide", href: "/notary/" },
-      { id: "affiliate", label: "Agents and pros: join our affiliate program", href: "/affiliate/" },
+      { id: "faq", label: "Questions? Read the FAQs", href: "/faq/" },
       { id: "newsletter", label: "Get Utah market updates by email", href: "/subscribe/" },
       { id: "home", label: "Explore the full Ondo site", href: "/" },
     ],

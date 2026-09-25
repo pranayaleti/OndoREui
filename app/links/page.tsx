@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, ChevronRight, Mail, Phone } from "lucide-react"
+import { ArrowUpRight, ChevronRight, Mail, MessageSquare, Phone } from "lucide-react"
 import { LinkClickTracker } from "@/components/links/link-click-tracker"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
 import { LINKS_PAGE_SECTIONS, linksPageSocials, type LinksPageLink } from "@/lib/links-page"
@@ -68,6 +68,8 @@ function PageLink({ link, className }: { link: LinksPageLink; className: string 
     </Link>
   )
 }
+
+const phoneDigits = SITE_PHONE.replace(/[^+\d]/g, "")
 
 export default function LinksPage() {
   const socials = linksPageSocials().flatMap((href) => {
@@ -157,13 +159,17 @@ export default function LinksPage() {
               Email
             </a>
             <a
-              href={`tel:${SITE_PHONE.replace(/[^+\d]/g, "")}`}
+              href={`tel:${phoneDigits}`}
               aria-label="Call Ondo"
               data-links-id="call"
               className={contactPill}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call
+            </a>
+            <a href={`sms:${phoneDigits}`} aria-label="Text Ondo" data-links-id="text" className={contactPill}>
+              <MessageSquare className="h-4 w-4" aria-hidden="true" />
+              Text
             </a>
           </div>
 

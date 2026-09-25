@@ -60,13 +60,14 @@ describe("/links page", () => {
     expect(instagram.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 
-  it("offers email, a phone call, and each live social profile", () => {
+  it("offers email, a call, a text, and each live social profile", () => {
     render(<LinksPage />)
     expect(screen.getByRole("link", { name: "Email Ondo" })).toHaveAttribute(
       "href",
       "mailto:info@ondorealestate.com",
     )
     expect(screen.getByRole("link", { name: "Call Ondo" })).toHaveAttribute("href", "tel:+14085380420")
+    expect(screen.getByRole("link", { name: "Text Ondo" })).toHaveAttribute("href", "sms:+14085380420")
     expect(screen.getByRole("link", { name: "Ondo on Instagram" })).toHaveAttribute(
       "href",
       "https://www.instagram.com/OnDoRealEstate",
