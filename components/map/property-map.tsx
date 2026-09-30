@@ -1,5 +1,7 @@
 "use client";
 
+// Map styles ship with the map, not the root layout: pages without a map (like /links) skip ~15 KB of render-blocking CSS.
+import "leaflet/dist/leaflet.css";
 import { useEffect, useState, useMemo, useRef } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker, PopupEvent } from "leaflet";
 import { listingWorksheetPath } from "@/lib/public-property";

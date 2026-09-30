@@ -1,5 +1,6 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
@@ -9,11 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { FileQuestion, Home, Search, Calculator, Users, Building, ArrowLeft, MapPin, Phone } from "lucide-react"
 import { SITE_URL, SITE_PHONE, SITE_EMAILS, APP_PORTAL_IS_EXTERNAL, APP_PORTAL_LOGIN_URL } from "@/lib/site"
 import SEO from "@/components/seo"
-import { PropertyListingDetailClient } from "@/components/properties/property-listing-detail-client"
-import { ApplyTokenClient } from "@/components/rental/apply-token-client"
-import { CoApplicantClient } from "@/components/rental/co-applicant-client"
-import { RentalStartClient } from "@/components/rental/rental-start-client"
-import { ResumeApplicationClient } from "@/components/rental/resume-application-client"
 import { publicIdFromPathname } from "@/lib/public-property"
 import {
   rentalClientRouteFromPathname,
@@ -23,8 +19,40 @@ import {
   visitClientRouteFromPathname,
   type VisitClientRoute,
 } from "@/lib/visit-static-paths"
-import { VisitScheduleClient } from "@/app/visit/schedule/[token]/visit-schedule-client"
-import { VisitConfirmClient } from "@/app/visit/confirm/[token]/visit-confirm-client"
+import { PageLoading } from "@/components/loading-states"
+
+// These route clients render only after mount, once useEffect has matched the path, so they
+// load on demand. Imported statically they rode along with the root not-found boundary onto
+// every page of the site, rental application wizard and Stripe (~890 KB) included.
+// (next/dynamic requires its options inline, hence the repetition.)
+const PropertyListingDetailClient = dynamic(
+  () => import("@/components/properties/property-listing-detail-client").then((m) => m.PropertyListingDetailClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
+const ApplyTokenClient = dynamic(
+  () => import("@/components/rental/apply-token-client").then((m) => m.ApplyTokenClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
+const CoApplicantClient = dynamic(
+  () => import("@/components/rental/co-applicant-client").then((m) => m.CoApplicantClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
+const RentalStartClient = dynamic(
+  () => import("@/components/rental/rental-start-client").then((m) => m.RentalStartClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
+const ResumeApplicationClient = dynamic(
+  () => import("@/components/rental/resume-application-client").then((m) => m.ResumeApplicationClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
+const VisitScheduleClient = dynamic(
+  () => import("@/app/visit/schedule/[token]/visit-schedule-client").then((m) => m.VisitScheduleClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
+const VisitConfirmClient = dynamic(
+  () => import("@/app/visit/confirm/[token]/visit-confirm-client").then((m) => m.VisitConfirmClient),
+  { ssr: false, loading: () => <PageLoading /> },
+)
 
 export default function NotFound() {
   const router = useRouter()
