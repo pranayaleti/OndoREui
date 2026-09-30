@@ -1,0 +1,9 @@
+[
+  { "id": "card", "label": "Business cards", "source": "business_card", "medium": "qr" },
+  { "id": "sign", "label": "Yard and for-sale signs", "source": "yard_sign", "medium": "qr" },
+  { "id": "flyer", "label": "Flyers, postcards and brochures", "source": "flyer", "medium": "qr" },
+  { "id": "openhouse", "label": "Open house table tents and sign-in sheets", "source": "open_house", "medium": "qr" },
+  { "id": "office", "label": "Office window and door", "source": "office_window", "medium": "qr" },
+  { "id": "web", "label": "QR codes shown on ondorealestate.com", "source": "website", "medium": "qr" },
+  { "id": "email", "label": "Email signature link (not a QR code)", "source": "email_signature", "medium": "email" }
+]

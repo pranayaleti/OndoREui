@@ -244,6 +244,10 @@ module.exports = {
     // Link-in-bio hub for social profiles; noindex, so it must not be submitted either.
     '/links',
     '/links/',
+    // QR short links redirect to /links; the contact card is a file, not a page.
+    '/go/*',
+    '/go/**',
+    '/ondo-real-estate.vcf',
     '/health',
     '/search',
     '/search/',
