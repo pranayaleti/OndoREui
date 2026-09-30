@@ -177,6 +177,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/manifest.json" />
         <link rel="alternate" type="text/plain" title="LLM brief (llms.txt)" href={`${SITE_URL.replace(/\/$/, "")}/llms.txt`} />
         <link rel="alternate" type="application/json" title="Structured LLM index" href={`${SITE_URL.replace(/\/$/, "")}/llms.json`} />
+        {/* Feed discovery for readers; the file is written after the build by scripts/generate-discovery-files.ts. */}
+        <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} Blog`} href={`${SITE_URL.replace(/\/$/, "")}/feed.xml`} />
         {/* Homepage Markdown twin (mirrors `/`) and the section-grouped sitemap. */}
         <link rel="alternate" type="text/markdown" title="Homepage (Markdown)" href={`${SITE_URL.replace(/\/$/, "")}/index.md`} />
         <link rel="alternate" type="text/markdown" title="Markdown sitemap" href={`${SITE_URL.replace(/\/$/, "")}/sitemap.md`} />
