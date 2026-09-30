@@ -140,7 +140,15 @@ export default function SEO({
   return <JsonLd data={payload.length === 1 ? payload[0] : payload} id="seo-jsonld" />
 }
 
-function buildBreadcrumbItems({
+/**
+ * Path prefixes that have no page of their own, mapped to the hub that covers them.
+ * Without this, /vs/buildium/ got a breadcrumb pointing at /vs, which is a 404.
+ */
+const BREADCRUMB_HUBS: Record<string, { name: string; path: string }> = {
+  "/vs": { name: "Compare", path: "/compare/" },
+}
+
+export function buildBreadcrumbItems({
   pathname,
   title,
   domain,
@@ -152,12 +160,16 @@ function buildBreadcrumbItems({
   const segments = pathname.split("/").filter(Boolean)
   const items: Array<{ name: string; url: string }> = [{ name: "Home", url: `${domain}/` }]
 
-  let current = domain
+  let current = ""
   segments.forEach((segment, index) => {
     current += `/${segment}`
     const isLast = index === segments.length - 1
-    const name = isLast ? title : humanizeSegment(segment)
-    items.push({ name, url: current })
+    const hub = isLast ? undefined : BREADCRUMB_HUBS[current]
+    // Canonical URLs end with "/" (trailingSlash: true); without it every crumb is a 301 hop.
+    items.push({
+      name: hub?.name ?? (isLast ? title : humanizeSegment(segment)),
+      url: `${domain}${hub?.path ?? `${current}/`}`,
+    })
   })
 
   return items

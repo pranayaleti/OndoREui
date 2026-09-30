@@ -17,5 +17,6 @@ export const metadata: Metadata = {
 }
 
 export default function NotaryPage() {
-  return <NotaryClient />
+  // Same image as the Open Graph preview; the schema used to point at a notary-cover.jpg that never existed.
+  return <NotaryClient imageUrl={DEFAULT_OG_IMAGE_URL} />
 }

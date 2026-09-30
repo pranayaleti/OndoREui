@@ -398,6 +398,22 @@ export function generateRealEstateBusinessJsonLd() {
 /**
  * Generate breadcrumb JSON-LD
  */
+/**
+ * Site page URLs end with "/" (trailingSlash: true). Crumbs written as `${SITE_URL}/notary`
+ * point at a 301 instead of the canonical page, so add the slash here once for every caller.
+ * Files, other hosts, and anything already canonical pass through untouched.
+ */
+function canonicalCrumbUrl(url: string): string {
+  const siteOrigin = SITE_URL.replace(/\/+$/, "")
+  if (!url.startsWith("/") && !url.startsWith(`${siteOrigin}/`) && url !== siteOrigin) return url
+  const [base = "", ...rest] = url.split(/(?=[?#])/)
+  const suffix = rest.join("")
+  const path = base.startsWith(siteOrigin) ? base.slice(siteOrigin.length) : base
+  const lastSegment = path.slice(path.lastIndexOf("/") + 1)
+  if (path.endsWith("/") || /\.[a-z0-9]{2,5}$/i.test(lastSegment)) return url
+  return `${base}/${suffix}`
+}
+
 export function generateBreadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
   return {
     '@context': 'https://schema.org',
@@ -406,7 +422,7 @@ export function generateBreadcrumbJsonLd(items: Array<{ name: string; url: strin
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: canonicalCrumbUrl(item.url),
     })),
   }
 }

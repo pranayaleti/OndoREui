@@ -15,6 +15,7 @@ import { CALCULATOR_CATALOG } from "./calculator-catalog"
 import { DEFAULT_MORTGAGE_RATE, calculateMonthlyPI } from "./mortgage-utils"
 import { calculateCostOfLiving, createDefaultState, formatCurrency as formatColCurrency } from "./cost-of-living"
 import { LLMS_DISCLOSURES_BLOCK, toAbsoluteSiteUrl } from "./site-index"
+import { backendUrl } from "./backend"
 import {
   APP_PORTAL_LOGIN_URL,
   APP_PORTAL_URL,
@@ -28,6 +29,11 @@ import {
 } from "./site"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
+
+/** Public listings JSON the property search tool reads. */
+const PROPERTIES_DATA_FEED_URL = backendUrl("/api/properties/public")
+/** docs/ is not part of the static export, so the notes are linked where they are published. */
+const WEBMCP_NOTES_URL = "https://github.com/pranayaleti/OndoREui/blob/main/docs/WEBMCP.md"
 
 interface Frontmatter {
   title: string
@@ -153,11 +159,13 @@ export function buildPropertiesMarkdown(): string {
     "- **Name**: `search_available_properties`",
     "- **Access**: read-only (no user confirmation required)",
     `- **Page**: ${toAbsoluteSiteUrl("/properties")}`,
-    `- **Data feed**: ${toAbsoluteSiteUrl("/api/properties/public")} (routed to the Ondo backend at deploy time)`,
+    // The site host has no /api (GitHub Pages), so point agents at the API itself, and
+    // only when the build knows its absolute address.
+    ...(/^https?:\/\//.test(PROPERTIES_DATA_FEED_URL) ? [`- **Data feed**: ${PROPERTIES_DATA_FEED_URL} (JSON, read-only)`] : []),
     "",
     "The HTML search box on the same page is the declarative tool `search_listings_by_text` (toolautosubmit). Prefer `search_available_properties` when the agent has city, bedroom, or price filters.",
     "",
-    "See the [WebMCP alignment notes](" + toAbsoluteSiteUrl("/docs/WEBMCP.md") + ") for the full tool schema.",
+    `See the [WebMCP alignment notes](${WEBMCP_NOTES_URL}) for the full tool schema.`,
     "",
     "## For binding decisions",
     "",

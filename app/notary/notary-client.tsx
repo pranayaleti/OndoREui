@@ -63,7 +63,8 @@ const KEYWORDS = Array.from(
   ])
 );
 
-export default function NotaryPage() {
+/** `imageUrl` comes from the server page so this client bundle stays free of lib/page-canonical. */
+export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -73,7 +74,7 @@ export default function NotaryPage() {
       title="Remote Online Notary – Available Nationwide | ONDO Notary"
       description="Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments."
       pathname="/notary"
-      image={`${SITE_URL}/notary-cover.jpg`}
+      image={imageUrl}
       keywords={KEYWORDS}
       jsonLd={[
         generateBreadcrumbJsonLd([
@@ -84,7 +85,7 @@ export default function NotaryPage() {
           name: "ONDO Notary Services",
           url: `${SITE_URL}/notary`,
           telephone: SITE_PHONE,
-          image: `${SITE_URL}/notary-cover.jpg`,
+          image: imageUrl,
           areaServed: "United States",
           openingHours: "Mo-Fr 09:00-19:00",
           address: {

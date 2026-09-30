@@ -28,6 +28,15 @@ describe("first-party Markdown twins", () => {
     expect(md).toContain(LLMS_DISCLOSURES_BLOCK)
   })
 
+  // GitHub Pages serves no /api or /docs, so both links used to 404 for every agent that followed them.
+  it("properties brief never links agents to paths the static site does not serve", () => {
+    const md = buildPropertiesMarkdown()
+    expect(md).not.toMatch(/ondorealestate\.com\/(api|docs)\//)
+    expect(md).toContain("https://github.com/pranayaleti/OndoREui/blob/main/docs/WEBMCP.md")
+    const feed = /\*\*Data feed\*\*: (\S+)/.exec(md)?.[1]
+    if (feed) expect(feed).toMatch(/^https?:\/\//)
+  })
+
   it("contact brief lists channels, both WebMCP tools, and help-audience inquiry types", () => {
     const md = buildContactMarkdown()
     expect(md).toContain("get_company_contact_info")

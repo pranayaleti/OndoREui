@@ -15,7 +15,7 @@ import {
   getSiteGeoMetaOther,
   buildPageMetadata,
 } from "./seo"
-import { SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_GEO } from "./site"
+import { SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_GEO, SITE_URL } from "./site"
 
 describe("seo", () => {
   describe("generateServiceJsonLd", () => {
@@ -154,6 +154,25 @@ describe("seo", () => {
       expect(out["@type"]).toBe("BreadcrumbList")
       expect(out.itemListElement).toHaveLength(2)
       expect(out.itemListElement[0].position).toBe(1)
+    })
+
+    it("points every site crumb at the canonical trailing-slash URL, not a 301", () => {
+      const out = generateBreadcrumbJsonLd([
+        { name: "Home", url: SITE_URL },
+        { name: "Notary", url: `${SITE_URL}/notary` },
+        { name: "Blog", url: "/blog?category=Selling" },
+        { name: "Already canonical", url: `${SITE_URL}/buy/` },
+        { name: "Card", url: `${SITE_URL}/ondo-real-estate.vcf` },
+        { name: "Elsewhere", url: "https://example.com/page" },
+      ])
+      expect(out.itemListElement.map((element) => element.item)).toEqual([
+        `${SITE_URL}/`,
+        `${SITE_URL}/notary/`,
+        "/blog/?category=Selling",
+        `${SITE_URL}/buy/`,
+        `${SITE_URL}/ondo-real-estate.vcf`,
+        "https://example.com/page",
+      ])
     })
   })
 
