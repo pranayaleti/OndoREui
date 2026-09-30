@@ -55,3 +55,11 @@ jobs:
         env:
           NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
           NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
+
+      - name: Link-in-bio page guards
+        # /links is what every social bio and printed QR code opens: no payment scripts, a
+        # script budget, the booking button on the first screen, and working /go/ short links.
+        run: npm run test:links
+        env:
+          NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
+          NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
