@@ -18,9 +18,12 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 const OUT_DIR = process.env.OUT_DIR || 'out'
 const REDIRECTS_FILE = path.join('public', '_redirects')
+
+const isAbsoluteUrl = (value) => /^https?:\/\//i.test(value)
 
 /** `/calculators/affordability-calculator` → `/calculators/affordability/` (App Router home). */
 function resolveLegacyCalculatorPath(pathname) {
@@ -34,29 +37,54 @@ function withTrailingSlash(p) {
   return p.endsWith('/') ? p : `${p}/`
 }
 
-/** Follow a redirect target through further hops so stubs point at the final URL. */
-function resolveFinalTarget(target, seen = new Set()) {
-  if (seen.has(target)) return target
-  seen.add(target)
-  const next = resolveLegacyCalculatorPath(target)
-  return next ? resolveFinalTarget(next, seen) : withTrailingSlash(target)
+/** The destination of a meta-refresh redirect page, or null for a normal page. */
+export function metaRefreshTarget(html) {
+  for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
+    if (!/http-equiv=["']?refresh/i.test(tag)) continue
+    const content = /content=["']([^"']*)["']/i.exec(tag)?.[1] ?? ''
+    const url = /url=(.+)$/i.exec(content)?.[1]?.trim()
+    if (url) return url.replace(/&amp;/g, '&')
+  }
+  return null
 }
 
-function parseRedirects(text) {
+/** Reads the exported page for a site path (null when the build has no page there). */
+function readExportedPage(target, outDir) {
+  const file = path.join(outDir, target.replace(/^\/+/, ''), 'index.html')
+  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null
+}
+
+/**
+ * Follow a redirect target through further hops so stubs point at the final URL: legacy
+ * calculator paths, and pages the build already turned into redirects (for example /login/,
+ * which forwards to the portal). Absolute URLs are final.
+ */
+export function resolveFinalTarget(target, { readPage = (p) => readExportedPage(p, OUT_DIR) } = {}, seen = new Set()) {
+  if (isAbsoluteUrl(target) || seen.has(target)) return target
+  seen.add(target)
+  const next = resolveLegacyCalculatorPath(target)
+  if (next) return resolveFinalTarget(next, { readPage }, seen)
+  const canonical = withTrailingSlash(target)
+  const html = canonical.endsWith('/') ? readPage(canonical) : null
+  const forwarded = html ? metaRefreshTarget(html) : null
+  return forwarded ? resolveFinalTarget(forwarded, { readPage }, seen) : canonical
+}
+
+export function parseRedirects(text) {
   const rules = []
   for (const raw of text.split('\n')) {
     const line = raw.trim()
     if (!line || line.startsWith('#')) continue
     const [from, to, code] = line.split(/\s+/)
-    if (!from || !to || !from.startsWith('/')) continue
+    if (!from || !to || !from.startsWith('/') || !(to.startsWith('/') || isAbsoluteUrl(to))) continue
     if (code && code !== '301' && code !== '308') continue
     rules.push({ from: from.replace(/\/+$/, ''), to })
   }
   return rules
 }
 
-function redirectHtml(target, siteUrl) {
-  const absolute = `${siteUrl.replace(/\/+$/, '')}${target}`
+export function redirectHtml(target, siteUrl) {
+  const absolute = isAbsoluteUrl(target) ? target : `${siteUrl.replace(/\/+$/, '')}${target}`
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -107,4 +135,5 @@ function main() {
   for (const t of targets) console.log(`  ${t}`)
 }
 
-main()
+// Run only as a script (postbuild), not when tests import the helpers above.
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main()
