@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import type React from "react"
-import { useEffect, useRef, useState } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { FileQuestion, Home, Search, Calculator, Users, Building, ArrowLeft, MapPin, Phone } from "lucide-react"
@@ -20,6 +20,7 @@ import {
   type VisitClientRoute,
 } from "@/lib/visit-static-paths"
 import { PageLoading } from "@/components/loading-states"
+import { NotFoundSuggestions } from "@/components/not-found-suggestions"
 
 // These route clients render only after mount, once useEffect has matched the path, so they
 // load on demand. Imported statically they rode along with the root not-found boundary onto
@@ -55,9 +56,7 @@ const VisitConfirmClient = dynamic(
 )
 
 export default function NotFound() {
-  const router = useRouter()
   const pathname = usePathname()
-  const hasRedirected = useRef(false)
   const [isMounted, setIsMounted] = useState(false)
   const [listingPublicId, setListingPublicId] = useState<string | null>(null)
   const [rentalRoute, setRentalRoute] = useState<RentalClientRoute | null>(null)
@@ -72,45 +71,6 @@ export default function NotFound() {
       setVisitRoute(visitClientRouteFromPathname(window.location.pathname))
     }
   }, [])
-
-  // Automatically step back one breadcrumb level for unknown routes.
-  // Only runs on client side after mount to avoid build/SSR issues
-  useEffect(() => {
-    // Only run after component is mounted and in browser
-    if (!isMounted || listingPublicId || rentalRoute || visitRoute || typeof window === "undefined" || hasRedirected.current || !pathname) {
-      return
-    }
-
-    // Use requestAnimationFrame to ensure this runs after initial render
-    const timeoutId = setTimeout(() => {
-      // Double-check we haven't redirected and still have a valid pathname
-      if (hasRedirected.current || !pathname) return
-
-      // Normalize path by removing trailing slashes (except for root)
-      const normalizedPath = pathname !== "/" ? pathname.replace(/\/+$/, "") : pathname
-
-      if (!normalizedPath || normalizedPath === "/") return
-
-      // Find parent path (e.g. /about/careers/kl -> /about/careers)
-      const lastSlashIndex = normalizedPath.lastIndexOf("/")
-
-      // If we're already at root or there's no parent, do nothing
-      if (lastSlashIndex <= 0) return
-
-      const parentPath = normalizedPath.slice(0, lastSlashIndex) || "/"
-
-      // Avoid redirect loops: only redirect if the parent is different and valid
-      if (parentPath !== normalizedPath && parentPath !== pathname) {
-        hasRedirected.current = true
-        // Use replace to avoid adding to history
-        router.replace(parentPath)
-      }
-    }, 100) // Small delay to ensure hydration is complete
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [isMounted, listingPublicId, rentalRoute, visitRoute, pathname, router])
 
   if (!isMounted) {
     return <div className="min-h-screen bg-background" />
@@ -179,6 +139,9 @@ export default function NotFound() {
             Don't worry - we'll help you find what you need!
           </p>
         </div>
+
+        {/* Replaces a silent bounce to the parent path, which hid typos and dead links from visitors. */}
+        <NotFoundSuggestions pathname={pathname ?? ""} />
 
         {/* Quick Actions */}
         <Card className="mb-8">
@@ -290,7 +253,7 @@ export default function NotFound() {
             <CardContent className="text-center">
               <p className="text-foreground/70 mb-4">Speak with our team for immediate assistance.</p>
               <Button asChild variant="outline" className="w-full">
-                <Link href={`tel:${SITE_PHONE.replace(/[^+\\d]/g, "")}`}>{SITE_PHONE}</Link>
+                <a href={`tel:${SITE_PHONE.replace(/[^+\d]/g, "")}`}>{SITE_PHONE}</a>
               </Button>
             </CardContent>
           </Card>
