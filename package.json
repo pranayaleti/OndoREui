@@ -35,6 +35,7 @@
     "generate:legacy-redirects": "node scripts/generate-legacy-redirects.mjs",
     "generate:discovery": "npx tsx scripts/generate-discovery-files.ts",
     "check:llms-txt": "node scripts/check-llms-txt-export.mjs",
+    "check:links": "npx tsx scripts/check-links.ts",
     "verify:agent-readability": "node scripts/verify-agent-readability.mjs",
     "cloudflare:markdown": "node scripts/enable-cloudflare-markdown.mjs",
     "cloudflare:agent-readability": "python3 scripts/apply-cloudflare-agent-readability.py",

@@ -44,6 +44,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Broken link check
+        # Every link, image, JSON-LD URL, redirect and Markdown link in the export must resolve,
+        # so new 404s fail here instead of shipping. Old and guessed URLs live in public/_redirects.
+        run: npm run check:links
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
