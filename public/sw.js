@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const SW_VERSION = "v2"
+const SW_VERSION = "v3"
 const STATIC_CACHE = `ondo-static-${SW_VERSION}`
 const RUNTIME_CACHE = `ondo-runtime-${SW_VERSION}`
 const API_CACHE = `ondo-api-${SW_VERSION}`
@@ -9,21 +9,23 @@ const DB_NAME = "ondo-pwa-db"
 const DB_VERSION = 1
 const STORE_NAME = "syncQueue"
 
+// Page URLs keep their trailing slash: GitHub Pages answers "/platform" with a 301, and a cached
+// redirect cannot be served to a navigation (the page fails to load offline).
 const APP_SHELL = [
   "/",
-  "/platform",
-  "/platform/properties",
+  "/platform/",
+  "/platform/properties/",
   "/favicon.svg",
   "/manifest.json",
 ]
 
 const WARM_ROUTES = [
-  "/buy",
-  "/sell",
-  "/properties",
-  "/contact",
-  "/loans",
-  "/calculators",
+  "/buy/",
+  "/sell/",
+  "/properties/",
+  "/contact/",
+  "/loans/",
+  "/calculators/",
 ]
 
 const API_CACHE_MAX_AGE_MS = 5 * 60 * 1000
@@ -234,7 +236,7 @@ self.addEventListener("fetch", (event) => {
         request,
         event.preloadResponse,
         RUNTIME_CACHE,
-        caches.match("/platform").then((res) => res || caches.match("/")),
+        caches.match("/platform/").then((res) => res || caches.match("/")),
       ).then((res) => {
         trimCache(RUNTIME_CACHE, RUNTIME_CACHE_MAX_ENTRIES)
         return res
