@@ -150,6 +150,10 @@ function isExcludedPath(path) {
   if (/^\/calculators\/[^/]+-calculator$/.test(p)) {
     return true
   }
+  // /neighborhoods/{city}/ only redirects to the hub's city section (the neighborhood pages sit one level down).
+  if (/^\/neighborhoods\/[^/]+$/.test(p)) {
+    return true
+  }
   // /properties/_placeholder is the build-time stub emitted by
   // generateStaticParams in app/properties/[publicId]/page.tsx when the
   // backend is unreachable during the build (CI without BACKEND_BASE_URL).
