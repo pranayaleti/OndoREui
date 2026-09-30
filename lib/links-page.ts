@@ -1,4 +1,4 @@
-import { APP_PORTAL_LOGIN_URL, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
+import { APP_PORTAL_URL, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
 import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 
 /**
@@ -13,8 +13,6 @@ export type LinksPageLink = {
   label: string
   /** Site path with trailing slash (same tab, keeps UTM attribution) or absolute URL (new tab). */
   href: string
-  /** Renders in the brand gradient. One per page, or nothing stands out. */
-  primary?: boolean
 }
 
 export type LinksPageSection = {
@@ -65,13 +63,22 @@ export const LINKS_PAGE_INTRO: {
   facts: [`${UTAH_CITIES_SERVED}+ Utah cities`, `${PROPERTIES_MANAGED}+ properties managed`, "Based in Lehi, Utah"],
 }
 
+/**
+ * The one solid-orange button, right under Call / Text / Email / Save. It sits above the intro
+ * so it is on the first screen of a phone in Instagram's or TikTok's in-app browser.
+ */
+export const LINKS_PAGE_PRIMARY_CTA: LinksPageLink = {
+  id: "book-call",
+  label: "Book a free 30-minute call",
+  href: SITE_CALENDLY_URL,
+}
+
 /** Order is priority: buying, selling and home loans lead, right after "Start here". */
 export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
   {
     id: "start",
     heading: "Start here",
     links: [
-      { id: "book-call", label: "Book a free 30-minute call", href: SITE_CALENDLY_URL, primary: true },
       // U+00A0 non-breaking space keeps "60 seconds" together when the label wraps on phones.
       { id: "quiz", label: "Get matched to the right service in 60 seconds", href: "/get-matched/" },
     ],
@@ -117,7 +124,8 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     heading: "Renters and clients",
     links: [
       { id: "browse-homes", label: "Browse homes for rent", href: "/properties/" },
-      { id: "portal-login", label: "Tenant and owner portal login", href: APP_PORTAL_LOGIN_URL },
+      // Portal root, not /login: the SPA serves deep links with a 404 status, which link checkers flag.
+      { id: "portal-login", label: "Tenant and owner portal login", href: APP_PORTAL_URL },
     ],
   },
   {

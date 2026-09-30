@@ -2,10 +2,10 @@ import { describe, it, expect } from "vitest"
 import { existsSync } from "node:fs"
 import { join } from "node:path"
 import type { SocialLink } from "@/lib/site"
-import { LINKS_PAGE_SECTIONS, linksPageSocials } from "@/lib/links-page"
+import { LINKS_PAGE_PRIMARY_CTA, LINKS_PAGE_SECTIONS, linksPageSocials } from "@/lib/links-page"
 
 const APP = join(__dirname, "..", "app")
-const allLinks = LINKS_PAGE_SECTIONS.flatMap((section) => section.links)
+const allLinks = [LINKS_PAGE_PRIMARY_CTA, ...LINKS_PAGE_SECTIONS.flatMap((section) => section.links)]
 const sitePaths = allLinks.filter((link) => link.href.startsWith("/"))
 const offSite = allLinks.filter((link) => !link.href.startsWith("/"))
 

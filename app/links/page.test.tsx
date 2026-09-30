@@ -76,6 +76,24 @@ describe("/links page", () => {
     expect(within(group).getByRole("link", { name: /about ondo real estate/i })).toHaveAttribute("href", "/about/")
   })
 
+  // On a phone, the booking button has to be on the first screen, before the intro.
+  it("puts the booking button right under the contact actions, before the intro", () => {
+    render(<LinksPage />)
+    const booking = screen.getByRole("link", { name: /book a free 30-minute call/i })
+    const call = screen.getByRole("link", { name: "Call Ondo" })
+    const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i })
+    expect(call.compareDocumentPosition(booking) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(booking.compareDocumentPosition(intro) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
+  it("opens Start here with the quick message, then the 60-second matcher", () => {
+    render(<LinksPage />)
+    const start = screen.getByRole("heading", { level: 2, name: "Start here" }).closest("section")!
+    const message = within(start).getByRole("button", { name: /send me a quick message/i })
+    const matcher = within(start).getByRole("link", { name: /get matched/i })
+    expect(message.compareDocumentPosition(matcher) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
   it("groups links under headings screen readers can jump between", () => {
     render(<LinksPage />)
     const heading = screen.getByRole("heading", { level: 2, name: "Rental owners" })
@@ -124,6 +142,20 @@ describe("/links page", () => {
     const instagram = screen.getByRole("link", { name: "Ondo on Instagram" })
     const firstSection = screen.getByRole("heading", { level: 2, name: "Start here" })
     expect(instagram.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
+  // QR scans land here; saving the contact is how a scan turns into a lasting lead.
+  it("offers call, text, email and save-contact above Start here", () => {
+    render(<LinksPage />)
+    const save = screen.getByRole("link", { name: /save contact/i })
+    expect(save).toHaveAttribute("href", "/ondo-real-estate.vcf")
+    expect(save).toHaveAttribute("data-analytics-event", "contact_click")
+    expect(save).toHaveAttribute("data-analytics-label", "save_contact")
+    const firstSection = screen.getByRole("heading", { level: 2, name: "Start here" })
+    for (const name of ["Call Ondo", "Text Ondo", "Email Ondo"]) {
+      const action = screen.getByRole("link", { name })
+      expect(action.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    }
   })
 
   it("offers email, a call, a text, and each live social profile", () => {

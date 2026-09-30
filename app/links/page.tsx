@@ -2,16 +2,25 @@ import { Fragment } from "react"
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, ChevronRight, Mail, MessageSquare, Phone } from "lucide-react"
+import { ArrowUpRight, ChevronRight, Mail, MessageSquare, Phone, UserPlus } from "lucide-react"
+import { LinksQuickMessage } from "@/components/links/links-quick-message"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
 import { analyticsAttributes } from "@/lib/analytics"
-import { LINKS_PAGE_INTRO, LINKS_PAGE_SECTIONS, linksPageSocials, type LinksPageLink } from "@/lib/links-page"
+import {
+  LINKS_PAGE_INTRO,
+  LINKS_PAGE_PRIMARY_CTA,
+  LINKS_PAGE_SECTIONS,
+  linksPageSocials,
+  type LinksPageLink,
+} from "@/lib/links-page"
 import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
 
 const canonical = `${SITE_URL}/links/`
 const description =
   "Meet the founder of Ondo Real Estate in Lehi, Utah. Book a free call, get a rent estimate, browse homes, or read his story. Every Ondo link in one place."
-const ogImage = `${SITE_URL}/modern-office-building.webp`
+// Branded preview for DMs and texts; regenerate with `node scripts/generate-links-og.mjs`.
+const ogImage = `${SITE_URL}/links-og.jpg`
+const ogAlt = "Ondo Real Estate: buy, sell and finance a home in Utah"
 
 export const metadata: Metadata = {
   title: pageTitle("Links"),
@@ -23,7 +32,7 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     description,
     url: canonical,
-    images: [{ url: ogImage, width: 1200, height: 630, alt: SITE_NAME }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: ogAlt }],
   },
   twitter: {
     card: "summary_large_image",
@@ -78,7 +87,21 @@ export default function LinksPage() {
     return platform ? [{ href, ...platform }] : []
   })
   const iconButton = `grid h-11 w-11 place-items-center rounded-full border border-primary/70 bg-card text-foreground/85 transition-colors hover:border-primary hover:bg-primary/10 hover:text-foreground ${focusRing}`
-  const contactPill = `inline-flex h-11 items-center gap-2 rounded-full border border-primary/70 bg-card px-5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-primary/10 ${focusRing}`
+  const contactAction = `flex h-[4.25rem] flex-col items-center justify-center gap-1.5 rounded-2xl border border-primary/70 bg-card text-foreground transition-colors hover:border-primary hover:bg-primary/10 ${focusRing}`
+  const contactActions = [
+    { label: "Call", ariaLabel: "Call Ondo", href: `tel:${phoneDigits}`, analyticsLabel: "call", Icon: Phone },
+    { label: "Text", ariaLabel: "Text Ondo", href: `sms:${phoneDigits}`, analyticsLabel: "text", Icon: MessageSquare },
+    { label: "Email", ariaLabel: "Email Ondo", href: `mailto:${SITE_EMAILS.primary}`, analyticsLabel: "email", Icon: Mail },
+    // Imports straight into the phone's contacts, the natural next step after a QR scan.
+    {
+      label: "Save",
+      ariaLabel: "Save contact",
+      href: "/ondo-real-estate.vcf",
+      analyticsLabel: "save_contact",
+      Icon: UserPlus,
+      download: "Ondo Real Estate.vcf",
+    },
+  ]
 
   return (
     <main className="min-h-screen bg-background">
@@ -114,6 +137,26 @@ export default function LinksPage() {
               </li>
             ))}
           </ul>
+          <ul className="mt-5 grid w-full grid-cols-4 gap-2" aria-label="Contact Ondo">
+            {contactActions.map(({ label, ariaLabel, href, analyticsLabel, Icon, download }) => (
+              <li key={analyticsLabel}>
+                <a
+                  href={href}
+                  aria-label={ariaLabel}
+                  download={download}
+                  {...analyticsAttributes("contact_click", "links_page", analyticsLabel)}
+                  className={contactAction}
+                >
+                  <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <span className="text-xs font-medium">{label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <PageLink
+            link={LINKS_PAGE_PRIMARY_CTA}
+            className={`mt-3 flex min-h-[3.75rem] w-full items-center justify-between gap-3 rounded-2xl bg-primary px-5 py-4 text-left text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:brightness-110 ${focusRing}`}
+          />
         </header>
 
         <section aria-labelledby="links-intro" className="mt-8 rounded-2xl border border-primary/70 bg-card p-5">
@@ -144,8 +187,6 @@ export default function LinksPage() {
 
         <div className="mt-8 flex flex-col gap-8">
           {LINKS_PAGE_SECTIONS.map((section) => {
-            const primary = section.links.filter((link) => link.primary)
-            const rest = section.links.filter((link) => !link.primary)
             return (
               <section key={section.id} aria-labelledby={`links-${section.id}`}>
                 <h2
@@ -154,16 +195,11 @@ export default function LinksPage() {
                 >
                   {section.heading}
                 </h2>
-                {primary.map((link) => (
-                  <PageLink
-                    key={link.id}
-                    link={link}
-                    className={`mb-3 flex min-h-[3.75rem] items-center justify-between gap-3 rounded-2xl bg-primary px-5 py-4 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:brightness-110 ${focusRing}`}
-                  />
-                ))}
-                {rest.length > 0 ? (
+                {/* Visitors who won't book or browse can still leave their details, in place. */}
+                {section.id === "start" ? <LinksQuickMessage /> : null}
+                {section.links.length > 0 ? (
                   <ul className="divide-y divide-primary/25 overflow-hidden rounded-2xl border border-primary/70 bg-card">
-                    {rest.map((link) => (
+                    {section.links.map((link) => (
                       <li key={link.id}>
                         <PageLink
                           link={link}
@@ -179,26 +215,6 @@ export default function LinksPage() {
         </div>
 
         <footer className="mt-12 flex flex-col items-center gap-6 text-center">
-          <div className="flex gap-3">
-            <a href={`mailto:${SITE_EMAILS.primary}`} aria-label="Email Ondo" {...analyticsAttributes("contact_click", "links_page", "email")} className={contactPill}>
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              Email
-            </a>
-            <a
-              href={`tel:${phoneDigits}`}
-              aria-label="Call Ondo"
-              {...analyticsAttributes("contact_click", "links_page", "call")}
-              className={contactPill}
-            >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              Call
-            </a>
-            <a href={`sms:${phoneDigits}`} aria-label="Text Ondo" {...analyticsAttributes("contact_click", "links_page", "text")} className={contactPill}>
-              <MessageSquare className="h-4 w-4" aria-hidden="true" />
-              Text
-            </a>
-          </div>
-
           <div className="space-y-2 text-xs leading-relaxed text-muted-foreground">
             <p className="flex items-center justify-center gap-2">
               <EqualHousingIcon className="h-4 w-4" />
