@@ -6,7 +6,8 @@ import "./globals.css"
 import { RootProvidersClient } from "@/components/root-providers-client"
 import { JsonLd } from "@/components/json-ld"
 import { generateRealEstateBusinessJsonLd, generateWebsiteJsonLd } from "@/lib/seo"
-import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getBackendConnectSrc, getSupabaseConnectSrc, getSupabaseOrigin } from "@/lib/site"
+import { SITE_BRAND_SHORT, SITE_NAME, SITE_URL, getBackendConnectSrc, getSupabaseConnectSrc } from "@/lib/site"
+import { resourceHints } from "@/lib/resource-hints"
 import { getSiteGeoMetaOther } from "@/lib/seo"
 import { DEFAULT_LOCALE } from "@/lib/locales"
 import Header from "@/components/header"
@@ -156,7 +157,7 @@ export const metadata: Metadata = {
   other: getSiteGeoMetaOther(),
 }
 
-const supabaseOrigin = getSupabaseOrigin()
+const connectionHints = resourceHints(process.env)
 const supabaseConnectSrc = getSupabaseConnectSrc()
 const backendConnectSrc = getBackendConnectSrc()
 
@@ -167,17 +168,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={DEFAULT_LOCALE} suppressHydrationWarning className="dark">
       <head>
-        {/* Preconnect to external domains for faster resource loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        {supabaseOrigin ? (
-          <link rel="preconnect" href={supabaseOrigin} crossOrigin="anonymous" />
-        ) : null}
-        <link rel="dns-prefetch" href="https://ddwl4m2hdecbv.cloudfront.net" />
-        <link rel="dns-prefetch" href="https://js.hs-scripts.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://supabase.co" />
+        {/* Connection hints only for hosts pages actually contact (see lib/resource-hints.ts). */}
+        {connectionHints.map((hint) => (
+          <link key={`${hint.rel}:${hint.href}`} rel={hint.rel} href={hint.href} crossOrigin={hint.crossOrigin} />
+        ))}
 
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="manifest" href="/manifest.json" />
