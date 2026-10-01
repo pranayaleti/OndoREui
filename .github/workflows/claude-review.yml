@@ -1,7 +1,10 @@
 name: Claude PR Review
 
 # Automated review on every pull request. Requires repository secret ANTHROPIC_API_KEY.
-# The prompt routes to the Ondo agent fleet defined in the umbrella repo's .claude/agents/.
+# The prompt covers OndoREui's own risks (static export, SEO, licensing copy, brand voice).
+# The action is pinned to a commit SHA because this job holds ANTHROPIC_API_KEY; to upgrade,
+# resolve the new tag's commit (git ls-remote https://github.com/anthropics/claude-code-action
+# 'refs/tags/v1^{}') and update the SHA below.
 
 on:
   pull_request:
@@ -16,10 +19,16 @@ permissions:
 
 jobs:
   review:
-    # Skip drafts; allow "@claude" comment to trigger a re-review on demand.
+    # Skip drafts and fork PRs; allow an "@claude" comment on a PR to trigger a re-review,
+    # but only from repository owners, members and collaborators.
     if: |
-      (github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
+      (github.event_name == 'pull_request' &&
+        github.event.pull_request.draft == false &&
+        github.event.pull_request.head.repo.full_name == github.repository) ||
+      (github.event_name == 'issue_comment' &&
+        github.event.issue.pull_request &&
+        contains(github.event.comment.body, '@claude') &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association))
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -29,44 +38,48 @@ jobs:
           fetch-depth: 0
 
       - name: Claude review
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@12dd8d74c712f5f3669365b2369b558c495b1104 # v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            Review this pull request for the Ondo Real Estate platform.
+            Review this pull request for OndoREui, the public Ondo Real Estate website.
+            It is a Next.js 15 static export (output: 'export', trailingSlash: true) served
+            from GitHub Pages behind Cloudflare. Follow AGENTS.md and CLAUDE.md in this repo.
 
             Priorities, in strict order. Anything in 1 or 2 is a blocking comment.
 
-            1. CROSS-TENANT DATA LEAKAGE. Ondo is multi-tenant: tenants, owners,
-               co-owners, managers. Verify all four isolation layers for every touched
-               query — route role guard, scope id derived from the verified JWT (never
-               from req.params/body/query), an explicit principal filter in the query,
-               and RLS on the table. The Express runtime uses the Supabase service-role
-               key and BYPASSES RLS, so the application-level filter is load-bearing.
-               Flag any IDOR.
+            1. LICENSING AND FAIR HOUSING COPY. The owner holds real estate and NMLS
+               licences. Flag: lending copy or payment figures without the shared
+               disclosure; "guaranteed", "you qualify", "pre-approved", "lowest rate";
+               new NMLS numbers or licensed-activity claims; REALTOR or MLS marks;
+               invented facts (numbers, people, awards, reviews, partners); and Fair
+               Housing problems in listing or neighborhood copy that describes the
+               intended occupant ("great for families", "safe neighborhood", "no
+               vouchers") instead of the property.
 
-            2. LICENSING COMPLIANCE. The owner holds real estate and NMLS licences.
-               Flag: lending copy without NMLS identification or Reg Z disclosures;
-               "guaranteed", "you qualify", "pre-approved", "lowest rate"; automated
-               valuations described as appraisals or CMAs; and Fair Housing violations
-               in any generated listing or neighborhood copy — describing the intended
-               occupant ("great for families", "safe neighborhood", "good schools",
-               "no vouchers") instead of the property.
+            2. SECURITY AND PRIVACY. Secrets or tokens in client code or workflows;
+               token URLs (apply, visit, showing, co-applicant) sent to analytics or
+               HubSpot; API responses or cross-origin requests cached by the service
+               worker; new third-party scripts; workflow changes that widen
+               permissions or deploy for forks.
 
-            3. AI SURFACES. If assistantConfig.ts, any ai*Service, or ondo-ai-agent
-               changed: is tool authorization decided server-side from the session
-               rather than by the model? Is retrieved/user content treated as data and
-               not as instructions? Are disclosures appended server-side after
-               generation rather than left to the model?
+            3. STATIC-EXPORT AND SEO BREAKAGE. Features that need a server at runtime;
+               canonical URLs without a trailing slash; missing or wrong
+               `export const metadata` (components/seo.tsx is JSON-LD only); noindex set
+               in the wrong place; pageTitle() not used for titles; blog slugs outside
+               lib/blog-slugs.ts; sitemap or redirect gaps; link prefetch or speculation
+               rules (the project does not use them).
 
-            4. CONTRACT PARITY. Production is Supabase Edge Functions; Express is
-               dev-only. A route added to src/ but not to supabase/functions/ ships
-               nothing. Check both runtimes and the three clients.
+            4. TRACKING AND LEAD CAPTURE. Lead forms must post through
+               submitContactLead() (lib/leads-api.ts); analytics go through
+               lib/analytics.ts and analyticsAttributes(), one conversion event per
+               successful lead.
 
-            5. Correctness, tests, and the repo conventions in CLAUDE.md / AGENTS.md —
-               controllers throw errors.* rather than hand-rolling res.status(500);
-               Zod schemas are the source of truth.
+            5. BRAND VOICE AND CODE QUALITY. Copy is direct and plain: no em dashes, never
+               "straightforward", "genuinely" or "honestly". Design tokens instead of hard-coded
+               colors, server components by default, TypeScript strict, tests for behavior
+               changes.
 
             Be specific: quote file:line and give the minimal fix. Do not restate the
-            diff. If the PR is clean on 1-4, say so in one line and keep the rest short.
+            diff. If the PR is clean on 1-3, say so in one line and keep the rest short.
           claude_args: "--max-turns 25"

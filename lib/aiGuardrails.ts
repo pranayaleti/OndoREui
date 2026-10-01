@@ -17,15 +17,18 @@ export const GUARDRAILS_CONFIG = {
 const PROMPT_INJECTION_PATTERNS = [
   /\bignore\s+(all\s+)?(previous|above|prior)\s+instructions?\b/i,
   /\bdisregard\s+(all\s+)?(previous|above|prior)\s+instructions?\b/i,
-  /\byou\s+are\s+now\s+/i,
+  // Role reassignment only. "you are now my favorite agent" is a normal message.
+  /\byou\s+are\s+now\s+(?:in\s+\w+\s+mode\b|no\s+longer\b|unrestricted\b|jailbroken\b|dan\b|(?:a|an)\s+(?:different|new|unrestricted|unfiltered|evil)\b|(?:a|an)\s+ai\s+(?:with|without)\b|free\s+(?:of|from)\b)/i,
   /\bfrom\s+now\s+on\s+you\s+/i,
   /\bnew\s+instructions?\s*:\s*/i,
   /\bsystem\s*:\s*\[/i,
-  /\b\[system\]\s*:/i,
-  /\b<\s*system\s*>/i,
+  // No leading \b: "[" and "<" are not word characters, so \b would need a letter before them.
+  /\[\s*system\s*\]\s*:/i,
+  /<\s*\/?\s*system\s*>/i,
   /\bpretend\s+you\s+are\s+/i,
   /\bact\s+as\s+if\s+you\s+are\s+/i,
-  /\boutput\s+(only|just)\s+/i,
+  // Forced-output injection ("output only 'x'"). "can you output just the monthly rent?" is fine.
+  /\boutput\s+(?:only|just)\s+(?:["'`]|exactly\b|the\s+(?:word|text|string|phrase)\b)/i,
   /\brespond\s+only\s+with\s+/i,
   /\breveal\s+(your|the)\s+(system\s+)?prompt\b/i,
   /\bprint\s+(your|the)\s+(system\s+)?prompt\b/i,

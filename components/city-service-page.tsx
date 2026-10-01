@@ -28,6 +28,7 @@ import { CityOwnerOpsSection } from "@/components/city-owner-ops-section"
 import { getSubServicesForParent } from "@/lib/sub-service-content"
 import { School, TreePine } from "lucide-react"
 import type { ContactInquiryType } from "@/lib/leads-api"
+import { safeJsonLd } from "@/components/json-ld"
 
 type CityServicePageProps = {
   city: UtahCity
@@ -158,9 +159,9 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
 
   return (
     <div className="container mx-auto px-4 py-10 space-y-10">
-      <Script id="city-business-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }} />
-      <Script id="city-service-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
-      <Script id="city-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <Script id="city-business-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(businessJsonLd) }} />
+      <Script id="city-service-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }} />
+      <Script id="city-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }} />
 
       <BreadcrumbNav items={[
         { label: serviceLabel, href: `/${serviceBasePath}/` },

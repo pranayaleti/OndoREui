@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { safeJsonLd } from "@/components/json-ld"
 
 export const metadata: Metadata = {
   title: pageTitle("Case Studies | Ondo Real Estate Utah"),
@@ -136,19 +137,19 @@ export default function CaseStudiesPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(story1JsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(story1JsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(story2JsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(story2JsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(story3JsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(story3JsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(story4JsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(story4JsonLd) }}
       />
       <PageBanner
         title="Case Studies"

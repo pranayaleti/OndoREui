@@ -4,5 +4,5 @@
 Contact: mailto:security@ondorealestate.com
 Contact: mailto:legal@ondorealestate.com
 Preferred-Languages: en
-Canonical: https://ondorealestate.com/.well-known/security.txt
+Canonical: https://www.ondorealestate.com/.well-known/security.txt
 Expires: 2027-04-05T00:00:00.000Z

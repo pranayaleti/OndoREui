@@ -41,6 +41,7 @@ import {
   petNotesFromAmenities,
 } from "@/lib/listing-presentation"
 import { cn } from "@/lib/utils"
+import { safeJsonLd } from "@/components/json-ld"
 
 export function PropertyUnavailable() {
   return (
@@ -223,16 +224,16 @@ export function PropertyListingDetail({
       {propertyJsonLd ? (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(propertyJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(propertyJsonLd) }}
         />
       ) : null}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(agentJsonLd) }}
       />
 
       <div className="container mx-auto max-w-6xl px-4 pt-6 pb-24 md:pb-6">

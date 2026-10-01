@@ -65,6 +65,7 @@ import {
   TreePine,
   School,
 } from "lucide-react"
+import { safeJsonLd } from "@/components/json-ld"
 
 const iconMap: Record<string, React.ReactNode> = {
   FileText: <FileText className="h-6 w-6" />,
@@ -187,18 +188,18 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
       <Script
         id={`subservice-business-jsonld-${citySlug}-${subService.slug}`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(businessJsonLd) }}
       />
       <Script
         id={`subservice-service-jsonld-${citySlug}-${subService.slug}`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }}
       />
       {allFaqs.length > 0 ? (
         <Script
           id={`subservice-faq-jsonld-${citySlug}-${subService.slug}`}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
         />
       ) : null}
 

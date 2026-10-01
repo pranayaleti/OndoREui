@@ -125,15 +125,14 @@ export function CalendlyInlineEmbed({
         return;
       }
 
-      const isFsShortcutShift =
-        (e.key === "f" || e.key === "F") && e.shiftKey && (e.ctrlKey || e.metaKey);
       // Ctrl+F / ⌘F only while pointer is over this embed so browser Find still works elsewhere.
+      // There is no page-wide shortcut: the footer renders this embed on most routes.
       const isFsShortcutPlainF =
         (e.key === "f" || e.key === "F") &&
         !e.shiftKey &&
         (e.ctrlKey || e.metaKey) &&
         pointerInShellRef.current;
-      if (!isFsShortcutShift && !isFsShortcutPlainF) return;
+      if (!isFsShortcutPlainF) return;
 
       const target = e.target;
       if (
@@ -194,11 +193,10 @@ export function CalendlyInlineEmbed({
               className="h-9 gap-1.5 border border-border/80 bg-background/95 shadow-sm backdrop-blur-sm sm:px-3"
               onClick={() => void toggleFullscreen()}
               aria-pressed={isFullscreen}
-              aria-keyshortcuts="Control+Shift+F Meta+Shift+F"
               title={
                 isFullscreen
-                  ? "Exit fullscreen (Escape, Ctrl+F over calendar, or Ctrl+Shift+F)"
-                  : "Fullscreen, Ctrl+F (⌘F) while cursor is over the calendar, or Ctrl+Shift+F anywhere"
+                  ? "Exit fullscreen (Escape, or Ctrl+F over calendar)"
+                  : "Fullscreen, or Ctrl+F (⌘F) while cursor is over the calendar"
               }
               aria-label={
                 isFullscreen
@@ -222,7 +220,7 @@ export function CalendlyInlineEmbed({
           src={iframeSrc}
           className={iframeClass}
           loading="lazy"
-          allow="camera; microphone; fullscreen; payment"
+          allow="fullscreen; payment"
         />
       </div>
       {showFallbackLink && (

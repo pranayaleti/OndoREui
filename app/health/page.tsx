@@ -13,8 +13,18 @@ type BackendHealth = {
 
 export default function HealthPage() {
   const [backend, setBackend] = useState<{ status: "ok" | "error"; data?: BackendHealth; error?: string } | null>(null)
+  // Set after mount: the static export has no per-request time or window, so rendering
+  // these during SSR caused a hydration mismatch (React #418).
+  const [checkedAt, setCheckedAt] = useState<string | null>(null)
+  const [backendOrigin, setBackendOrigin] = useState<string | null>(null)
 
   useEffect(() => {
+    setCheckedAt(new Date().toISOString())
+    try {
+      setBackendOrigin(new URL(backendUrl("/"), window.location.origin).origin)
+    } catch {
+      setBackendOrigin(null)
+    }
     const url = backendUrl("/health")
     fetch(url, { cache: "no-store" })
       .then(async (res) => {
@@ -56,11 +66,11 @@ export default function HealthPage() {
                 NODE_ENV: {process.env.NODE_ENV ?? "unknown"}
               </Badge>
               <Badge variant="outline">
-                Checked at: {new Date().toISOString()}
+                Checked at: {checkedAt ?? "..."}
               </Badge>
             </div>
-            <p className="text-xs text-muted-foreground">
-              BACKEND_BASE_URL (origin only): {typeof window !== "undefined" ? new URL(backendUrl("/")).origin : "Not available"}
+            <p className="text-xs text-muted-foreground break-all">
+              BACKEND_BASE_URL (origin only): {backendOrigin ?? "Not available"}
             </p>
           </CardContent>
         </Card>
@@ -71,7 +81,7 @@ export default function HealthPage() {
               <Server className="h-5 w-5" />
               Backend API
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="break-all">
               {backendUrl("/health")}
             </CardDescription>
           </CardHeader>

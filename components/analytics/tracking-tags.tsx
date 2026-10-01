@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { isMarketingRestrictedRegion } from "@/lib/region"
 import {
   ALPHANUM_ID_PATTERN,
+  isTokenRoute,
   GA_ID_PATTERN,
   GTM_ID_PATTERN,
   NUMERIC_ID_PATTERN,
@@ -251,6 +252,17 @@ export function HubSpotTrackingTag() {
 }
 
 /**
+ * Whether marketing tags may load for this visitor on this page: not in a
+ * restricted region, and not on a bearer-token URL (see {@link isTokenRoute}).
+ * Reads window.location rather than usePathname(): on GitHub Pages the 404
+ * shell can report a different router pathname than the URL in the browser.
+ */
+function trackingAllowedHere(): boolean {
+  if (isMarketingRestrictedRegion()) return false
+  return !isTokenRoute(window.location.pathname)
+}
+
+/**
  * Client-side geo gate for GTM <noscript>. Visitors without JavaScript still
  * receive the prerendered noscript iframe (accepted trade-off documented below).
  */
@@ -258,7 +270,7 @@ export function GeoGatedGoogleTagManagerNoscript() {
   const [allowed, setAllowed] = useState(false)
 
   useEffect(() => {
-    setAllowed(!isMarketingRestrictedRegion())
+    setAllowed(trackingAllowedHere())
   }, [])
 
   if (!allowed) return null
@@ -284,7 +296,7 @@ export function TrackingTags() {
   const [allowed, setAllowed] = useState(false)
 
   useEffect(() => {
-    setAllowed(!isMarketingRestrictedRegion())
+    setAllowed(trackingAllowedHere())
   }, [])
 
   if (!allowed) return null

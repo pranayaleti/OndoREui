@@ -56,7 +56,8 @@ const nextConfig = {
     scrollRestoration: true,
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    // Keep error/warn in production so real failures stay visible; log/debug are stripped.
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
 
   output: 'export',

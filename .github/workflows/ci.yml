@@ -27,10 +27,16 @@ jobs:
         run: npm ci
 
       - name: Dependency audit
-        # browserslist is pinned via package.json overrides (>=4.28.8). Remaining
-        # highs are Next 15's nested postcss (fix is next@16) and sharp 0.35
-        # (breaking for the image optimizer). Do not --force those majors.
+        # Blocks on critical only. browserslist is pinned via package.json overrides
+        # (>=4.28.8). Some highs stay open on purpose: Next 15's nested postcss (fix is
+        # next@16) and sharp 0.35 (breaking for the image optimizer). Do not --force those
+        # majors. The next step lists the highs so new ones are seen.
         run: npm audit --audit-level=critical
+
+      - name: Dependency audit (production highs, informational)
+        # Never fails the build. Read the output in the job log: a new high on the
+        # production path (--omit=dev) should be triaged, not merged unnoticed.
+        run: npm audit --omit=dev --audit-level=high || true
 
       - name: TypeScript check
         run: npx tsc --noEmit

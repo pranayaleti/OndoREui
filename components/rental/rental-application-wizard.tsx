@@ -22,6 +22,7 @@ import {
   employmentRecordsForEdit,
   petAnimalsForEdit,
   residencesForEdit,
+  forgetRentalApplication,
   rememberRentalApplication,
   restoreChargeablePetRow,
   setNoChargeablePets,
@@ -78,13 +79,17 @@ export function RentalApplicationWizard({
   const refresh = useCallback(async () => {
     const next = await getRentalApplication(applicationId, resumeToken)
     setBundle(next)
-    rememberRentalApplication({
-      id: applicationId,
-      resumeToken: resumeToken ?? "",
-      propertyId: next.application.propertyId,
-      propertyTitle: next.property?.title,
-      updatedAt: new Date().toISOString(),
-    })
+    if (next.application.status === "withdrawn") {
+      forgetRentalApplication(applicationId)
+    } else {
+      rememberRentalApplication({
+        id: applicationId,
+        resumeToken: resumeToken ?? "",
+        propertyId: next.application.propertyId,
+        propertyTitle: next.property?.title,
+        updatedAt: new Date().toISOString(),
+      })
+    }
     return next
   }, [applicationId, resumeToken])
 
@@ -489,6 +494,8 @@ export function RentalApplicationWizard({
                 trackRentalFunnel("application_completed", bundle?.property?.publicId || bundle?.property?.id)
                 trackRentalFunnel("application_submitted", bundle?.property?.publicId || bundle?.property?.id)
                 await refresh()
+                // Submitted: the resume token is no longer needed in this browser.
+                forgetRentalApplication(applicationId)
                 setSubmitted(true)
               } catch (err) {
                 setError(err instanceof Error ? err.message : "Submit failed")

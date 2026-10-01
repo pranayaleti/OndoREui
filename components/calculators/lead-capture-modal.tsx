@@ -73,7 +73,7 @@ export function LeadCaptureModal({
       setFailed(true)
       return
     }
-    markLeadCaptured(email)
+    markLeadCaptured()
     setSubmitted(true)
   }
 

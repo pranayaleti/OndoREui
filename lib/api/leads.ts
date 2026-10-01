@@ -18,9 +18,12 @@ export function hasLeadBeenCaptured(): boolean {
   return SecureStorage.getItem(LEAD_STORAGE_KEY) === "true"
 }
 
-export function markLeadCaptured(email: string): void {
+// Only the "already captured" flag is kept. The visitor's email is not stored in the browser: nothing
+// reads it back, and localStorage is readable by every script on the origin.
+export function markLeadCaptured(): void {
   SecureStorage.setItem(LEAD_STORAGE_KEY, "true")
-  SecureStorage.setItem("ondo_lead_email", email)
+  // Earlier versions stored the email here; clear it from browsers that still have it.
+  SecureStorage.removeItem("ondo_lead_email")
 }
 
 /**

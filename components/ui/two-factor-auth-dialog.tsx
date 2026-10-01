@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -14,6 +14,15 @@ import { useToast } from "@/hooks/use-toast"
 import { Loader2, Shield, Smartphone } from "lucide-react"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { supabase } from "@/lib/supabase"
+
+/**
+ * Supabase returns the TOTP QR either as a ready data URL or as raw SVG markup,
+ * depending on the client version. Always hand the browser an image URL so the
+ * markup is never parsed as HTML.
+ */
+function qrImageSrc(qr: string): string {
+  return qr.startsWith("data:image/") ? qr : `data:image/svg+xml;utf-8,${encodeURIComponent(qr)}`
+}
 
 interface TwoFactorAuthDialogProps {
   open: boolean
@@ -39,16 +48,35 @@ export function TwoFactorAuthDialog({
   const [qrCode, setQrCode] = useState<string | null>(null)
   const { toast } = useToast()
 
+  // Factor that was enrolled but not yet verified. Supabase counts unverified factors
+  // against the per-user limit, so it is removed whenever the dialog is abandoned.
+  const pendingFactorRef = useRef<string | null>(null)
+
+  const discardPendingFactor = useCallback(async () => {
+    const id = pendingFactorRef.current
+    pendingFactorRef.current = null
+    if (!id || !supabase) return
+    try {
+      await supabase.auth.mfa.unenroll({ factorId: id })
+    } catch (error) {
+      console.error("Failed to remove unverified MFA factor:", error)
+    }
+  }, [])
+
   // Load TOTP factor when dialog opens with method === "app"
   useEffect(() => {
-    if (!open || currentValue) return
+    if (!open || currentValue) return undefined
 
     if (method === "app") {
+      let cancelled = false
       const enrollApp = async () => {
         setIsProcessing(true)
         try {
           if (!supabase) throw new Error("Supabase client is not configured")
-          
+
+          // Switching from SMS: drop the unverified phone factor first.
+          await discardPendingFactor()
+
           // Enroll TOTP
           const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp" })
           if (error) {
@@ -56,7 +84,14 @@ export function TwoFactorAuthDialog({
             console.error("Supabase MFA Enroll Error:", error.message)
             throw error
           }
-          
+
+          if (cancelled) {
+            // Dialog closed or method changed while enrolling: do not leave the factor behind.
+            await supabase.auth.mfa.unenroll({ factorId: data.id })
+            return
+          }
+
+          pendingFactorRef.current = data.id
           setFactorId(data.id)
           if (data.totp?.qr_code) {
              setQrCode(data.totp.qr_code)
@@ -65,12 +100,31 @@ export function TwoFactorAuthDialog({
           console.error("MFA Initialization failed:", error)
           // Fallback UI or silent error if just mocking for now
         } finally {
-          setIsProcessing(false)
+          if (!cancelled) setIsProcessing(false)
         }
       }
       enrollApp()
+      return () => {
+        cancelled = true
+        setIsProcessing(false)
+        setQrCode(null)
+        setFactorId(null)
+        void discardPendingFactor()
+      }
     }
-  }, [open, method, currentValue])
+    return undefined
+  }, [open, method, currentValue, discardPendingFactor])
+
+  // Closing the dialog (cancel, overlay, Escape or parent-driven) drops any SMS factor too.
+  useEffect(() => {
+    if (!open) {
+      void discardPendingFactor()
+      setFactorId(null)
+      setChallengeId(null)
+    }
+  }, [open, discardPendingFactor])
+
+  useEffect(() => () => void discardPendingFactor(), [discardPendingFactor])
 
   const handleSendCode = async () => {
     if (!phoneNumber) {
@@ -85,6 +139,9 @@ export function TwoFactorAuthDialog({
     setIsSendingCode(true)
     try {
       if (!supabase) throw new Error("Supabase client is not configured")
+
+      // Re-sending after "Change" must not orphan the previous unverified phone factor.
+      await discardPendingFactor()
       
       // Phone factor isn't in the supabase-js v2 type defs yet, so cast just the enroll arg.
       const { data: enrollData, error: enrollError } = await supabase.auth.mfa.enroll({
@@ -97,6 +154,7 @@ export function TwoFactorAuthDialog({
         throw enrollError
       }
       
+      pendingFactorRef.current = enrollData.id
       setFactorId(enrollData.id)
 
       const { data: challengeData, error: challengeError } = await supabase.auth.mfa.challenge({
@@ -136,7 +194,9 @@ export function TwoFactorAuthDialog({
         const allFactors = factors?.all || []
         for (const factor of allFactors) {
           if (factor.status === "verified") {
-            await supabase.auth.mfa.unenroll({ factorId: factor.id })
+            const { error: unenrollErr } = await supabase.auth.mfa.unenroll({ factorId: factor.id })
+            // Do not report 2FA as disabled while a factor is still enrolled.
+            if (unenrollErr) throw unenrollErr
           }
         }
 
@@ -200,6 +260,8 @@ export function TwoFactorAuthDialog({
           if (verifyErr) throw verifyErr
         }
 
+        // Verified: keep the factor, it is no longer pending.
+        pendingFactorRef.current = null
         onConfirm(true, method, verificationCode)
         toast({
           title: "Two-Factor Authentication Enabled",
@@ -312,7 +374,8 @@ export function TwoFactorAuthDialog({
                   </p>
                   <div className="border rounded-md p-4 bg-muted/50 flex items-center justify-center">
                     {qrCode ? (
-                      <div dangerouslySetInnerHTML={{ __html: qrCode }} className="w-48 h-48" />
+                      // eslint-disable-next-line @next/next/no-img-element -- data URL, nothing for next/image to optimize
+                      <img src={qrImageSrc(qrCode)} alt="QR code for your authenticator app" className="w-48 h-48" />
                     ) : (
                       <div className="flex flex-col items-center justify-center h-48 py-8 text-xs text-muted-foreground">
                         {isProcessing ? <Loader2 className="h-6 w-6 animate-spin mb-2" /> : "Failed to load QR Code"}

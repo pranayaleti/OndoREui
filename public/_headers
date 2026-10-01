@@ -1,5 +1,8 @@
-# Cache headers for GitHub Pages
-# Note: GitHub Pages supports _headers file for custom headers
+# INERT ON GITHUB PAGES. GitHub Pages ignores this file: the site is served from there behind
+# Cloudflare, so none of the rules below (cache or security headers) reach a browser. It is kept as
+# the source for hosts that do read _headers (Cloudflare Pages, Netlify).
+# The headers that matter are set with Cloudflare Transform Rules: see docs/SECURITY_HEADERS.md.
+# Cache behaviour on the live site comes from Cloudflare Cache Rules (scripts/cloudflare-cache-html-rule.json).
 
 # Cache static assets for 1 year
 /_next/static/*

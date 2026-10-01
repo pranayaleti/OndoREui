@@ -4,7 +4,9 @@ import {
   GA_ID_PATTERN,
   GTM_ID_PATTERN,
   NUMERIC_ID_PATTERN,
+  isTokenRoute,
   sanitizeTrackingId,
+  templateTokenPath,
 } from "./tracking-ids"
 
 describe("sanitizeTrackingId", () => {
@@ -29,5 +31,45 @@ describe("sanitizeTrackingId", () => {
     expect(sanitizeTrackingId(undefined, GTM_ID_PATTERN)).toBeNull()
     expect(sanitizeTrackingId("", GTM_ID_PATTERN)).toBeNull()
     expect(sanitizeTrackingId("   ", GTM_ID_PATTERN)).toBeNull()
+  })
+})
+
+describe("isTokenRoute", () => {
+  it("flags every route whose last segment is a bearer token", () => {
+    for (const path of [
+      "/apply/co/sampletoken123/",
+      "/apply/sampletoken123/",
+      "/visit/schedule/sampletoken456/",
+      "/visit/confirm/sampletoken789",
+      "/invite/abc/",
+      "/tenantOnboarding/abc/",
+    ]) {
+      expect(isTokenRoute(path), path).toBe(true)
+    }
+  })
+
+  it("leaves ordinary pages and token-free application routes alone", () => {
+    for (const path of ["/", "/apply/", "/apply/start/prop-1/", "/visit/", "/invite/", "/buy/", "/applications/", "/rental/apply/"]) {
+      expect(isTokenRoute(path), path).toBe(false)
+    }
+    expect(isTokenRoute(null)).toBe(false)
+    expect(isTokenRoute("")).toBe(false)
+  })
+})
+
+describe("templateTokenPath", () => {
+  it("replaces only the token segment", () => {
+    expect(templateTokenPath("/apply/co/sampletoken123/")).toBe("/apply/co/[token]/")
+    expect(templateTokenPath("/apply/sampletoken123/")).toBe("/apply/[token]/")
+    expect(templateTokenPath("/visit/schedule/tok456/")).toBe("/visit/schedule/[token]/")
+    expect(templateTokenPath("/visit/confirm/tok789")).toBe("/visit/confirm/[token]")
+    expect(templateTokenPath("/invite/abc/")).toBe("/invite/[token]/")
+    expect(templateTokenPath("/tenantOnboarding/abc/")).toBe("/tenantOnboarding/[token]/")
+  })
+
+  it("leaves paths without a token unchanged", () => {
+    for (const path of ["/", "/apply/", "/apply/start/prop-1/", "/visit/", "/buy/"]) {
+      expect(templateTokenPath(path)).toBe(path)
+    }
   })
 })

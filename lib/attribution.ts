@@ -9,6 +9,8 @@
  *   with contact form submissions to the API, which stores JSON in Supabase `website_leads.attribution`.
  */
 
+import { templateTokenPath } from "@/lib/tracking-ids"
+
 export const MARKETING_ATTRIBUTION_STORAGE_KEY = "ondo.marketing_attribution.v1"
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const
@@ -173,10 +175,13 @@ export function getAttributionPayloadForApi(): MarketingAttribution | undefined 
  */
 export function captureMarketingAttributionFromWindow(): void {
   if (typeof window === "undefined") return
+  // Token URLs (co-applicant, showing, visit, invite) are recorded with the token replaced by
+  // "[token]": attribution is sent with leads to the CRM, and the token is a working credential.
+  const path = templateTokenPath(window.location.pathname)
   const campaignTouch = parseTouchFromSearch(
     window.location.search,
-    window.location.pathname,
-    window.location.href
+    path,
+    `${window.location.origin}${path}${window.location.search}`
   )
 
   const prev = readMarketingAttribution()
@@ -190,8 +195,8 @@ export function captureMarketingAttributionFromWindow(): void {
     parseTouchFromReferrer(
       document.referrer,
       window.location.hostname,
-      window.location.pathname,
-      `${window.location.origin}${window.location.pathname}`,
+      path,
+      `${window.location.origin}${path}`,
     )
   const next: MarketingAttribution = {
     first: prev?.first ?? touch,

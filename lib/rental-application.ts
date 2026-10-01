@@ -68,20 +68,46 @@ export type StoredRentalApplication = {
   updatedAt: string
 }
 
-export function readStoredApplications(): StoredRentalApplication[] {
+/**
+ * How long a resume token stays in localStorage after the application was last
+ * opened or saved. The token unlocks the application's personal data, and any
+ * script on the origin can read localStorage, so it must not live forever on a
+ * shared computer. Every open or save of the application renews it.
+ */
+export const STORED_APPLICATION_TTL_MS = 45 * 24 * 60 * 60 * 1000
+
+function isFresh(row: StoredRentalApplication, now: number): boolean {
+  const savedAt = Date.parse(row.updatedAt)
+  return Number.isFinite(savedAt) && now - savedAt < STORED_APPLICATION_TTL_MS
+}
+
+function writeStoredApplications(rows: StoredRentalApplication[]): void {
+  try {
+    if (rows.length === 0) window.localStorage.removeItem(STORAGE_KEY)
+    else window.localStorage.setItem(STORAGE_KEY, JSON.stringify(rows.slice(0, 20)))
+  } catch {
+    // Storage blocked or full: resume simply will not be remembered.
+  }
+}
+
+export function readStoredApplications(now: number = Date.now()): StoredRentalApplication[] {
   if (typeof window === "undefined") return []
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw) as unknown
     if (!Array.isArray(parsed)) return []
-    return parsed.filter(
+    const valid = parsed.filter(
       (row): row is StoredRentalApplication =>
         typeof row === "object" &&
         row !== null &&
         typeof (row as StoredRentalApplication).id === "string" &&
         typeof (row as StoredRentalApplication).resumeToken === "string",
     )
+    // Rows saved before the expiry existed have no usable updatedAt and are dropped too.
+    const fresh = valid.filter((row) => isFresh(row, now))
+    if (fresh.length !== parsed.length) writeStoredApplications(fresh)
+    return fresh
   } catch {
     return []
   }
@@ -91,7 +117,15 @@ export function rememberRentalApplication(entry: StoredRentalApplication): void 
   if (typeof window === "undefined") return
   const next = readStoredApplications().filter((row) => row.id !== entry.id)
   next.unshift(entry)
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next.slice(0, 20)))
+  writeStoredApplications(next)
+}
+
+/** Drops the stored resume token once the application is submitted or withdrawn. */
+export function forgetRentalApplication(id: string): void {
+  if (typeof window === "undefined") return
+  const all = readStoredApplications()
+  const next = all.filter((row) => row.id !== id)
+  if (next.length !== all.length) writeStoredApplications(next)
 }
 
 export function storedApplication(id: string): StoredRentalApplication | undefined {

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, ArrowRight } from "lucide-react"
 import { backendUrl } from "@/lib/backend"
 import { SITE_URL } from "@/lib/site"
+import { safeJsonLd } from "@/components/json-ld"
 
 interface EventItem {
   id: string
@@ -146,9 +147,7 @@ export default function EventsClient() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            // Escape "<" so an event title/description containing "</script>"
-            // cannot break out of the JSON-LD block.
-            __html: JSON.stringify(eventJsonLd(upcoming)).replace(/</g, "\\u003c"),
+            __html: safeJsonLd(eventJsonLd(upcoming)),
           }}
         />
       ) : null}

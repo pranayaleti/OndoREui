@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest"
+import { beforeEach, describe, expect, it } from "vitest"
 import {
   adultProgressFromListRow,
   addEmploymentRecord,
@@ -6,6 +6,10 @@ import {
   emptyEmploymentRecord,
   emptyPetAnimal,
   emptyResidence,
+  forgetRentalApplication,
+  readStoredApplications,
+  rememberRentalApplication,
+  STORED_APPLICATION_TTL_MS,
   employmentRecordsForEdit,
   hasNoChargeablePets,
   householdOccupantsForEdit,
@@ -123,5 +127,39 @@ describe("rental history residences", () => {
       landlordPhone: "8015550199",
     })
     expect(removeResidence(updated, 1).rentalHistory?.residences).toEqual([first])
+  })
+})
+
+describe("stored resume tokens", () => {
+  const entry = (id: string, updatedAt: string) => ({ id, resumeToken: `tok-${id}`, propertyId: "p1", updatedAt })
+
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
+  it("keeps a recently saved application and returns it", () => {
+    rememberRentalApplication(entry("a", new Date().toISOString()))
+    expect(readStoredApplications().map((row) => row.id)).toEqual(["a"])
+  })
+
+  it("prunes applications older than the expiry, and rows with no usable date, from storage", () => {
+    const now = Date.now()
+    const stale = new Date(now - STORED_APPLICATION_TTL_MS - 1000).toISOString()
+    localStorage.setItem(
+      "ondo.rental.applications",
+      JSON.stringify([entry("old", stale), entry("new", new Date(now).toISOString()), { id: "legacy", resumeToken: "t" }]),
+    )
+    expect(readStoredApplications(now).map((row) => row.id)).toEqual(["new"])
+    const saved = JSON.parse(localStorage.getItem("ondo.rental.applications") ?? "[]") as { id: string }[]
+    expect(saved.map((row) => row.id)).toEqual(["new"])
+  })
+
+  it("forgets one application on submit or withdrawal and removes the key when none are left", () => {
+    rememberRentalApplication(entry("a", new Date().toISOString()))
+    rememberRentalApplication(entry("b", new Date().toISOString()))
+    forgetRentalApplication("a")
+    expect(readStoredApplications().map((row) => row.id)).toEqual(["b"])
+    forgetRentalApplication("b")
+    expect(localStorage.getItem("ondo.rental.applications")).toBeNull()
   })
 })

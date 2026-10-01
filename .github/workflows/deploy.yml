@@ -22,10 +22,16 @@ concurrency:
 jobs:
   build-and-deploy:
     # workflow_run fires on completion whatever the outcome, so gate on success.
+    # It also fires for CI runs started by fork pull requests, whose head branch
+    # can be named "main"; the job runs with the production env and publishes to
+    # the live site, so only a push from this repository's own main may deploy.
     # workflow_dispatch stays open as a deliberate manual escape hatch.
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.head_branch == 'main')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

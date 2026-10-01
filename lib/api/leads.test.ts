@@ -70,8 +70,15 @@ describe("submitLead", () => {
 describe("lead captured flag", () => {
   it("is off until a lead is marked captured", () => {
     expect(hasLeadBeenCaptured()).toBe(false)
-    markLeadCaptured("a@b.co")
+    markLeadCaptured()
     expect(hasLeadBeenCaptured()).toBe(true)
+  })
+
+  it("keeps only the flag: no email is written, and a legacy stored email is cleared", () => {
+    localStorage.setItem("ondo_lead_email", "old@b.co")
+    markLeadCaptured()
+    expect(localStorage.getItem("ondo_lead_email")).toBeNull()
+    expect(Object.values({ ...localStorage })).toEqual(["true"])
   })
 })
 
@@ -85,7 +92,7 @@ describe("lead storage when the browser blocks it", () => {
     })
     vi.spyOn(console, "warn").mockImplementation(() => undefined)
     expect(hasLeadBeenCaptured()).toBe(false)
-    expect(() => markLeadCaptured("a@b.co")).not.toThrow()
+    expect(() => markLeadCaptured()).not.toThrow()
     vi.restoreAllMocks()
   })
 })

@@ -30,6 +30,7 @@ import {
   Mountain,
   Building2,
 } from "lucide-react"
+import { safeJsonLd } from "@/components/json-ld"
 
 type CityGuidePageProps = {
   city: UtahCity
@@ -65,13 +66,13 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
       <Script
         id="city-guide-jsonld"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       {faqJsonLd && (
         <Script
           id="city-guide-faq-jsonld"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
         />
       )}
 

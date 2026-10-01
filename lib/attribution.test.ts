@@ -49,11 +49,26 @@ describe("marketing attribution", () => {
   })
 
   it("drops the query string from a landing page with no campaign params, so invite tokens are not stored", () => {
-    visit("/apply/co-applicant/?token=secret-invite-token#step-2", "https://example.org/")
+    visit("/applications/?token=secret-invite-token#step-2", "https://example.org/")
     const first = getAttributionPayloadForApi()?.first
-    expect(first?.path).toBe("/apply/co-applicant/")
-    expect(first?.href).toBe(`${window.location.origin}/apply/co-applicant/`)
+    expect(first?.path).toBe("/applications/")
+    expect(first?.href).toBe(`${window.location.origin}/applications/`)
     expect(localStorage.getItem(KEY)).not.toContain("secret-invite-token")
+  })
+
+  it("records a token URL with the token replaced, with or without campaign params", () => {
+    visit("/apply/co/secret-co-token/", "https://mail.example.com/")
+    const stored = localStorage.getItem(KEY) ?? ""
+    expect(stored).not.toContain("secret-co-token")
+    expect(getAttributionPayloadForApi()?.first?.path).toBe("/apply/co/[token]/")
+
+    localStorage.clear()
+    visit("/visit/schedule/secret-visit-token/?utm_source=email&utm_medium=showing")
+    const payload = getAttributionPayloadForApi()
+    expect(JSON.stringify(payload)).not.toContain("secret-visit-token")
+    expect(payload?.first?.path).toBe("/visit/schedule/[token]/")
+    expect(payload?.first?.href).toBe(`${window.location.origin}/visit/schedule/[token]/?utm_source=email&utm_medium=showing`)
+    expect(payload?.first?.utm_source).toBe("email")
   })
 
   it("keeps first touch and moves last touch when a later visit carries params", () => {

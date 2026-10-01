@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
-const SW_VERSION = "v3"
+// v4: API responses are no longer cached. Bumping the version makes activate delete every older
+// cache, including the ondo-api-v3 cache that held cookie-authenticated API answers.
+const SW_VERSION = "v4"
 const STATIC_CACHE = `ondo-static-${SW_VERSION}`
 const RUNTIME_CACHE = `ondo-runtime-${SW_VERSION}`
-const API_CACHE = `ondo-api-${SW_VERSION}`
 const LAST_VIEWED_CACHE = `ondo-last-viewed-${SW_VERSION}`
 
 const DB_NAME = "ondo-pwa-db"
@@ -32,9 +33,7 @@ const WARM_ROUTES = [
   "/calculators/",
 ]
 
-const API_CACHE_MAX_AGE_MS = 5 * 60 * 1000
 const RUNTIME_CACHE_MAX_ENTRIES = 60
-const API_CACHE_MAX_ENTRIES = 40
 
 // ---------------------------------------------------------------------------
 // Install
@@ -61,7 +60,7 @@ self.addEventListener("activate", (event) => {
             keys
               .filter(
                 (key) =>
-                  ![STATIC_CACHE, RUNTIME_CACHE, API_CACHE, LAST_VIEWED_CACHE].includes(key),
+                  ![STATIC_CACHE, RUNTIME_CACHE, LAST_VIEWED_CACHE].includes(key),
               )
               .map((key) => caches.delete(key)),
           ),
@@ -98,6 +97,19 @@ async function warmCaches() {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+// This worker only handles this site's own pages and static files. It never caches another
+// origin (analytics, Stripe, the API host) and never caches an API answer: those can be
+// per-user (cookie or Authorization based) and must always come from the network. Offline
+// fallback for API data is handled by the app's own IndexedDB cache and sync queue.
+function shouldBypass(request, requestUrl) {
+  return (
+    requestUrl.origin !== self.location.origin ||
+    isApiRequest(requestUrl) ||
+    request.cache === "no-store" ||
+    request.headers.has("Authorization")
+  )
+}
+
 function isStaticAsset(requestUrl) {
   return (
     requestUrl.pathname.startsWith("/_next/static/") ||
@@ -113,8 +125,8 @@ function isStaticAsset(requestUrl) {
   )
 }
 
-function isApiRequest(url) {
-  return url.includes("/api/") || url.includes("supabase.co/functions/v1/api")
+function isApiRequest(requestUrl) {
+  return requestUrl.pathname.startsWith("/api/") || requestUrl.href.includes("supabase.co/functions/v1/api")
 }
 
 // ---------------------------------------------------------------------------
@@ -188,7 +200,7 @@ async function networkFirstWithPreload(request, preloadResponse, cacheName, fall
 }
 
 // ---------------------------------------------------------------------------
-// Cache maintenance – enforce max entries & API staleness
+// Cache maintenance – enforce max entries
 // ---------------------------------------------------------------------------
 async function trimCache(cacheName, maxEntries) {
   const cache = await caches.open(cacheName)
@@ -207,24 +219,11 @@ self.addEventListener("fetch", (event) => {
 
   const requestUrl = new URL(request.url)
 
+  // Not handled: the browser fetches it as if no worker existed.
+  if (shouldBypass(request, requestUrl)) return
+
   if (isStaticAsset(requestUrl)) {
     event.respondWith(cacheFirst(request, STATIC_CACHE))
-    return
-  }
-
-  if (isApiRequest(request.url)) {
-    event.respondWith(
-      staleWhileRevalidate(request, API_CACHE).then((res) => {
-        trimCache(API_CACHE, API_CACHE_MAX_ENTRIES)
-        return (
-          res ||
-          new Response(JSON.stringify({ error: "Offline and no cached data available" }), {
-            headers: { "Content-Type": "application/json" },
-            status: 503,
-          })
-        )
-      }),
-    )
     return
   }
 
@@ -387,19 +386,42 @@ self.addEventListener("push", (event) => {
   )
 })
 
+// A push payload is data from outside this origin. Only a URL on this site may be opened:
+// anything else (another origin, a javascript: or data: URL, an unparsable string) becomes "/".
+function resolveNotificationTarget(rawUrl) {
+  try {
+    const target = new URL(String(rawUrl), self.location.origin)
+    if (target.origin === self.location.origin) return target
+  } catch {
+    /* fall through to the home page */
+  }
+  return new URL("/", self.location.origin)
+}
+
 self.addEventListener("notificationclick", (event) => {
   event.notification.close()
   if (event.notification.data?.url) {
     event.waitUntil(
       self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((windowClients) => {
-        const targetUrl = event.notification.data.url
+        const target = resolveNotificationTarget(event.notification.data.url)
         for (const client of windowClients) {
-          if (client.url.includes(targetUrl) && "focus" in client) {
+          let clientUrl = null
+          try {
+            clientUrl = new URL(client.url)
+          } catch {
+            /* skip a client with an unparsable URL */
+          }
+          if (
+            clientUrl &&
+            clientUrl.origin === target.origin &&
+            clientUrl.pathname === target.pathname &&
+            "focus" in client
+          ) {
             return client.focus()
           }
         }
         if (self.clients.openWindow) {
-          return self.clients.openWindow(targetUrl)
+          return self.clients.openWindow(target.href)
         }
         return null
       }),
