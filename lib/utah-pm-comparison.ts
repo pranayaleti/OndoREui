@@ -1,3 +1,5 @@
+import { FOUNDED_YEAR } from "./social-proof-stats"
+
 export type UtahPmRow = {
   name: string
   headline: string
@@ -24,7 +26,7 @@ export const UTAH_PM_COMPARISON: readonly UtahPmRow[] = [
     setupFee: "None — onboarding is included",
     techStack: "Custom owner portal + AI assistant (Next.js + Supabase)",
     ownerFit: "Real-time owner portal and custom tech stack",
-    cons: "Newer (2024 founded), smaller than incumbents",
+    cons: `Newer (founded ${FOUNDED_YEAR}), smaller than incumbents`,
     isUs: true,
   },
   {

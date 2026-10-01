@@ -8,6 +8,7 @@ import { IncludedVsTypicalTable } from "@/components/pricing/included-vs-typical
 import { SITE_BRAND_SHORT, SITE_URL, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { GROWTH_MGMT_RATE, STARTER_MGMT_RATE } from "@/lib/fee-comparison"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ const tiers = [
   {
     name: "Starter",
     units: "1\u20134 units",
-    price: "10%",
+    price: `${Math.round(STARTER_MGMT_RATE * 100)}%`,
     priceLabel: "of collected rent",
     description: "Perfect for individual property owners getting started with professional management.",
     features: [
@@ -45,7 +46,7 @@ const tiers = [
   {
     name: "Growth",
     units: "5\u201315 units",
-    price: "8%",
+    price: `${Math.round(GROWTH_MGMT_RATE * 100)}%`,
     priceLabel: "of collected rent",
     description: "For growing landlords who need hands-off management and proactive property care.",
     features: [

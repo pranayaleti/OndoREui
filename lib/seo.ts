@@ -606,8 +606,9 @@ export function generateBlogPostingJsonLd(params: {
     datePublished,
     dateModified: dateModified || datePublished,
     mainEntityOfPage: absoluteUrl,
+    // Blog authors are the company, never an individual we cannot document.
     author: {
-      '@type': 'Person',
+      '@type': 'Organization',
       name: authorName || SITE_NAME,
     },
     publisher: {

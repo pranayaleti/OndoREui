@@ -20,6 +20,7 @@ import React, { useCallback, useMemo, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Calculator as CalcIcon, Info, Clock, DollarSign } from "lucide-react"
 import { NumberField as SharedNumberField } from "@/components/calculators/number-field";
+import { LEASING_FEE_RATE, STARTER_MGMT_RATE } from "@/lib/fee-comparison"
 
 interface Inputs {
   monthlyRent: number
@@ -100,8 +101,11 @@ const DEFAULTS: Inputs = {
   insurance: 1100,
   repairsPct: 8,
   otherExpenses: 600,
-  managementFeePct: 8,
-  leasingFeePctRent: 50, // 50% of one month's rent annualized over 24-month avg tenant stay
+  // Published Starter (1-4 units) rate. This tool models a single rental, so the
+  // 5-15 unit Growth rate does not apply. Both come from lib/fee-comparison.ts.
+  managementFeePct: Math.round(STARTER_MGMT_RATE * 100),
+  // Published leasing fee, annualized over a 24-month average tenant stay below.
+  leasingFeePctRent: Math.round(LEASING_FEE_RATE * 100),
   selfHoursPerMonth: 6,
   hourlyTimeValue: 50,
 }
@@ -320,8 +324,12 @@ const OwnerVsSelfCalculator: React.FC = () => {
               </p>
               <p className="mt-2 text-sm text-foreground/70">
                 You'd get back <strong>{results.annualHoursSaved} hours/year</strong>{" "}
-                ({results.annualHoursSaved >= 40 ? "≈ a full work-week" : "of weekends and evenings"}) , 
+                ({results.annualHoursSaved >= 40 ? "≈ a full work-week" : "of weekends and evenings"}),
                 worth about {fmtUSD(results.timeValueSaved)} at your hourly rate.
+              </p>
+              <p className="mt-2 text-xs text-foreground/60" data-testid="owner-vs-self-fee-basis">
+                Based on Ondo&apos;s {inputs.managementFeePct}% management fee and a {inputs.leasingFeePctRent}% leasing
+                fee (one-time, per new tenant). Change them under assumptions.
               </p>
               <div className="mt-4 flex flex-col sm:flex-row gap-3">
                 <Link

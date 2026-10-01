@@ -1,3 +1,13 @@
+/**
+ * Every record in MOCK_OPPORTUNITIES is a sample used to show how a deal page is laid out.
+ * None of them is a live offering, a past deal or a real tenant. Keep it that way: no real
+ * company names, no track-record claims ("funded", "reached occupancy"), and show
+ * SAMPLE_DEAL_LABEL wherever a record appears.
+ */
+export const SAMPLE_DEAL_LABEL = "Sample deal"
+export const SAMPLE_DEAL_NOTICE =
+  "Sample deals are illustrations of how an offering could be presented. The properties, figures and returns are made up, nothing here is for sale, and Ondo has no investment open to investors on this site."
+
 export interface CreativeFinancing {
   headline: string
   overview: string
@@ -200,7 +210,7 @@ export const MOCK_OPPORTUNITIES: InvestmentOpportunity[] = [
     status: "coming-soon",
     image: "/modern-apartment-balcony.webp",
     description:
-      "A two-building medical office park totaling 32,000 sq ft leased to Intermountain Health affiliates and independent specialists. Located in the Draper corridor with strong population growth.",
+      "A two-building medical office park totaling 32,000 sq ft leased to healthcare providers and independent specialists. Located in the Draper corridor with strong population growth.",
     highlights: [
       "Healthcare tenants provide recession-resistant income",
       "Long-term leases with annual rent escalations",
@@ -280,9 +290,9 @@ export const MOCK_OPPORTUNITIES: InvestmentOpportunity[] = [
     status: "fully-funded",
     image: "/modern-apartment-balcony.webp",
     description:
-      "A 450-unit climate-controlled self-storage facility in American Fork serving the north Utah County market. The facility opened in 2021 and has reached stabilized occupancy ahead of projections.",
+      "A 450-unit climate-controlled self-storage facility in American Fork serving the north Utah County market. This sample assumes a stabilized facility.",
     highlights: [
-      "90% occupancy achieved within 18 months of opening",
+      "Assumes 90% stabilized occupancy",
       "Climate-controlled units command premium rental rates",
       "Limited new storage supply in the immediate trade area",
       "Month-to-month leases allow dynamic pricing adjustments",
@@ -290,20 +300,20 @@ export const MOCK_OPPORTUNITIES: InvestmentOpportunity[] = [
     riskFactors: [
       "Self-storage is sensitive to local supply additions",
       "Month-to-month lease structure creates revenue volatility",
-      "Fully funded, this opportunity is no longer accepting investors",
+      "This sample is not accepting investors",
       "Operational costs may increase with utility rate changes",
     ],
     creativeFinancing: {
       headline: "Stabilized permanent loan with potential recapitalization",
       overview:
-        "This self-storage facility has already been fully capitalized and placed into a long-term financing structure. While no new equity is being accepted, investors may benefit from future recapitalization or sale should performance continue to outperform underwriting.",
+        "This sample shows how a stabilized self-storage facility might be presented: a long-term financing structure with no new equity being raised, and a possible recapitalization or sale later if performance supports it.",
       structures: [
         "Long-term permanent loan sized to stabilized NOI",
-        "Equity interests already fully subscribed through prior offering",
+        "Equity interests shown as already subscribed in this sample",
         "Potential recapitalization event or sale providing liquidity in the medium term",
       ],
       notes: [
-        "No additional investor capital is being raised for this opportunity at this time.",
+        "No investor capital is being raised for this sample.",
         "Any recapitalization or sale will be evaluated based on market conditions and investor approval thresholds.",
       ],
     },

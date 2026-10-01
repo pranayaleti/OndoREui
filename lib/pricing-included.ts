@@ -4,6 +4,9 @@ import {
   TYPICAL_UTAH_PM_RANGE_LABEL,
 } from "./fee-comparison"
 
+/** Vendor invoice policy, shared by /pricing and the per-city pricing guides. */
+export const VENDOR_INVOICE_POLICY = "No markup"
+
 export type PricingIncludedRow = {
   item: string
   ondo: string
@@ -42,7 +45,7 @@ export const PRICING_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   },
   {
     item: "Vendor invoices",
-    ondo: "No markup. Copies of bills sit in the monthly owner statement.",
+    ondo: `${VENDOR_INVOICE_POLICY}. Copies of bills sit in the monthly owner statement.`,
     typical: "Markup or preferred-vendor premiums are common. Ask how invoices are billed through.",
   },
   {

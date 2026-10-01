@@ -20,7 +20,6 @@ import {
   Scale,
   Share2,
   Stamp,
-  Star,
   Tag,
   TrendingUp,
   type LucideIcon,
@@ -107,7 +106,6 @@ export const allNavigationItems: NavigationItem[] = [
     children: [
       { href: "/tour", labelKey: "nav.platformTour", icon: PlayCircle, descriptionKey: "nav.platformTourDesc" },
       { href: "/academy", labelKey: "nav.academy", icon: GraduationCap, descriptionKey: "nav.academyDesc" },
-      { href: "/about/testimonials", labelKey: "nav.reviews", icon: Star, descriptionKey: "nav.reviewsDesc" },
       { href: "/blog", labelKey: "nav.blogAndGuides", icon: BookOpen, descriptionKey: "nav.blogAndGuidesDesc" },
       { href: "/news", labelKey: "nav.news", icon: Newspaper, descriptionKey: "nav.newsDesc" },
       { href: "/socials", labelKey: "nav.socials", icon: Share2, descriptionKey: "nav.socialsDesc" },
@@ -125,7 +123,6 @@ export const allNavigationItems: NavigationItem[] = [
   { href: "/founders-letter", labelKey: "nav.foundersLetter" },
   { href: "/refinance/process", labelKey: "nav.refinanceProcess" },
   { href: "/affiliate", labelKey: "nav.becomeAffiliate" },
-  { href: "/sweepstakes", labelKey: "nav.winPrizes", special: true },
 ]
 
 // These are the items that stay visible in the main

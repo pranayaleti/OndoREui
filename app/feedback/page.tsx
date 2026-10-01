@@ -14,7 +14,6 @@ export default function FeedbackPage() {
   const [suggestion, setSuggestion] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
-  const [submittedCount, setSubmittedCount] = useState(0)
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
   const successTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -52,7 +51,6 @@ export default function FeedbackPage() {
         return
       }
 
-      setSubmittedCount((prev) => prev + 1)
       setSuggestion("")
       setEmail("")
       setPhone("")
@@ -68,7 +66,7 @@ export default function FeedbackPage() {
     <main className="min-h-screen bg-background dark:bg-transparent">
       <SEO
         title="Suggest Improvements | Ondo Real Estate"
-        description="Share ideas to improve Ondo Real Estate. Our suggestion tracker highlights the best ideas, and top contributors can receive gift cards as a thank-you."
+        description="Share ideas to improve Ondo Real Estate. We read every suggestion and use the useful ones to decide what to build next."
         pathname="/feedback"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -82,16 +80,15 @@ export default function FeedbackPage() {
         <div className="mx-auto max-w-7xl px-4 py-20">
           <div className="inline-flex items-center gap-2 rounded-full bg-background/80 px-4 py-2 text-xs font-medium text-primary shadow-sm">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
-            <span>Suggestion Tracker</span>
+            <span>Suggestions</span>
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Share feedback. Shape the future of Ondo.
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-foreground/80 md:text-xl">
-            We&apos;re building Ondo in the open and your ideas directly influence what we build next.{" "}
+            Your ideas help decide what we build next.{" "}
             <span className="font-semibold text-primary">
-              The best suggestions will be highlighted in our suggestion tracker, and top contributors may receive
-              gift cards as a thank-you.
+              We read every suggestion and use the useful ones to improve Ondo.
             </span>
           </p>
         </div>
@@ -189,7 +186,7 @@ export default function FeedbackPage() {
               >
                 {status === "success" && (
                   <span className="font-medium text-emerald-500">
-                    Thank you for sharing your idea, it&apos;s been added to our suggestion tracker.
+                    Thank you for sharing your idea. We have received it.
                   </span>
                 )}
                 {status === "submitting" && (
@@ -204,8 +201,8 @@ export default function FeedbackPage() {
 
           <aside className="space-y-4 rounded-xl border border-border bg-card/60 p-8">
             <div className="flex items-center gap-2">
-              <Gift className="h-5 w-5 text-primary" aria-hidden="true" />
-              <h2 className="text-base font-semibold text-foreground">How the suggestion tracker works</h2>
+              <MessageCircle className="h-5 w-5 text-primary" aria-hidden="true" />
+              <h2 className="text-base font-semibold text-foreground">How suggestions are used</h2>
             </div>
             <ul className="space-y-3 text-sm text-foreground/80">
               <li>
@@ -213,25 +210,14 @@ export default function FeedbackPage() {
                 a rolling basis and group them into themes.
               </li>
               <li>
-                <span className="font-semibold text-foreground">2. We highlight the best ones.</span> The most impactful
-                and actionable ideas are added to our internal roadmap and public suggestion tracker.
+                <span className="font-semibold text-foreground">2. We act on the useful ones.</span> The most impactful
+                and actionable ideas can inform what we work on next.
               </li>
               <li>
-                <span className="font-semibold text-foreground">3. Gift card thank-yous.</span> From time to time, we
-                reach out to selected contributors with gift cards to say thanks for helping us improve.
+                <span className="font-semibold text-foreground">3. We follow up if you ask.</span> If you leave an
+                email or phone number, we may reach out with questions about your idea.
               </li>
             </ul>
-
-            <div className="rounded-lg border border-dashed border-primary/40 bg-primary/5 p-4 text-xs text-foreground/80">
-              <p className="mb-1 font-semibold text-foreground">Suggestions from this browser</p>
-              <p className="text-foreground/70">
-                You&apos;ve submitted{" "}
-                <span className="font-semibold text-primary">
-                  {submittedCount} {submittedCount === 1 ? "suggestion" : "suggestions"}
-                </span>
-                . We&apos;ll share overall community stats once the tracker launches publicly.
-              </p>
-            </div>
           </aside>
         </section>
       </div>
@@ -250,7 +236,7 @@ export default function FeedbackPage() {
             {t("referral.feedbackSectionTitle")}
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-foreground/70">
-            {t("referral.feedbackSectionDesc")}
+            Refer a friend or colleague to the Ondo RE portal from your referral dashboard.
           </p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
@@ -258,12 +244,6 @@ export default function FeedbackPage() {
               className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               {t("referral.getYourLink")}
-            </Link>
-            <Link
-              href="/sweepstakes"
-              className="inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground shadow-sm transition hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            >
-              {t("referral.enterSweepstakes")}
             </Link>
           </div>
         </div>

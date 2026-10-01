@@ -16,9 +16,15 @@ describe("/socials", () => {
     expect(instagram).toHaveAttribute("data-analytics-label", "instagram")
   })
 
-  it("features the /links hub in the social posts grid", () => {
+  it("does not present Ondo site pages as social posts", () => {
     render(<SocialsPage />)
-    const posts = screen.getAllByRole("link", { name: /view post/i }).map((link) => link.getAttribute("href"))
-    expect(posts).toContain("https://www.ondorealestate.com/links/")
+    expect(screen.queryByRole("link", { name: /view post/i })).toBeNull()
+    expect(screen.queryByRole("heading", { name: /social posts/i })).toBeNull()
+  })
+
+  it("labels the news cards as outside sources without freshness claims", () => {
+    const { container } = render(<SocialsPage />)
+    expect(screen.getByRole("heading", { name: /news sources we follow/i })).toBeInTheDocument()
+    expect(container.textContent).not.toMatch(/updated (daily|weekly|monthly|regularly)/i)
   })
 })

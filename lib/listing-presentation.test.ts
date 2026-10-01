@@ -10,6 +10,7 @@ import {
   formatPropertyType,
   formatSqft,
   groupAmenities,
+  listingAgents,
   listingCardChips,
   listingCityGuideHref,
   listingCompareFieldValue,
@@ -277,5 +278,35 @@ describe("listing presentation", () => {
       bathrooms: 2,
       sqft: 0,
     })).toBe("Not listed")
+  })
+})
+
+describe("listingAgents", () => {
+  const base = { companyPhone: "(801) 555-0100", companyEmail: "info@example-ondo.test" }
+
+  it("falls back to Ondo Real Estate Leasing for the seeded Admin User manager", () => {
+    const [agent] = listingAgents({
+      ...base,
+      manager: { firstName: "Admin", lastName: "User", email: "admin@ondorealestate.com" },
+    })
+    expect(agent.name).toBe("Ondo Real Estate Leasing")
+    expect(agent.email).toBe(base.companyEmail)
+  })
+
+  it("does not publish an owner whose email is on a seed-data domain", () => {
+    const agents = listingAgents({
+      ...base,
+      owner: { firstName: "Rachel", lastName: "Thompson", email: "rachel.thompson@email.com" },
+    })
+    expect(agents).toHaveLength(1)
+    expect(agents[0].name).toBe("Ondo Real Estate Leasing")
+  })
+
+  it("still shows a named manager with a real email", () => {
+    const [agent] = listingAgents({
+      ...base,
+      manager: { firstName: "Sam", lastName: "Lee", email: "sam@ondorealestate.com" },
+    })
+    expect(agent.name).toBe("Sam Lee")
   })
 })

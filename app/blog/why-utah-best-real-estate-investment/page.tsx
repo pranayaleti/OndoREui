@@ -4,8 +4,8 @@ const published = "2024-11-20"
 const modified = "2024-11-20"
 const slug = "/blog/why-utah-best-real-estate-investment"
 const title = "Why Utah is the Best Place to Invest in Real Estate"
-const description = "Discover why Utah's fundamentalsjobs, population growth, and landlord-friendly policiesmake it a top-tier market for real estate investors."
-const author = "David Thompson"
+const description = "Discover why Utah's fundamentals (jobs, population growth, and landlord-friendly policies) make it a top-tier market for real estate investors."
+const author = "Ondo Real Estate"
 
 const keywords = [
   "Utah real estate investment",

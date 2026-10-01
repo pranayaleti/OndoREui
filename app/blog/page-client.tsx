@@ -1079,7 +1079,7 @@ export default function BlogPage() {
     },
     {
       title: "Engineering Accuracy: Behind the Scenes of Real Estate Investment Calculators",
-      excerpt: "How we built the web's most accurate real estate financial calculators using React and TypeScript.",
+      excerpt: "How we built the real estate financial calculators on this site using React and TypeScript.",
       author: "Engineering Team",
       date: "December 10, 2025",
       readTime: "7 min read",
@@ -1150,7 +1150,7 @@ export default function BlogPage() {
     {
       title: "First-Time Home Buyer Guide: Everything You Need to Know",
       excerpt: "Complete guide to buying your first home in Utah, from pre-approval to closing day.",
-      author: "Sarah Johnson",
+      author: "Ondo Real Estate",
       date: "December 10, 2024",
       readTime: "8 min read",
       category: "Buying Guide",
@@ -1160,7 +1160,7 @@ export default function BlogPage() {
     {
       title: "Property Management Tips for Utah Landlords",
       excerpt: "Essential tips for managing rental properties in Utah's competitive market.",
-      author: "Michael Chen",
+      author: "Ondo Real Estate",
       date: "December 5, 2024",
       readTime: "6 min read",
       category: "Property Management",
@@ -1171,7 +1171,7 @@ export default function BlogPage() {
     {
       title: "Mortgage Rate Trends: What to Expect in 2025",
       excerpt: "Analysis of current mortgage rate trends and predictions for the coming year.",
-      author: "Jennifer Martinez",
+      author: "Ondo Real Estate",
       date: "November 28, 2024",
       readTime: "4 min read",
       category: "Mortgage",
@@ -1181,7 +1181,7 @@ export default function BlogPage() {
     {
       title: "Why Utah is the Best Place to Invest in Real Estate",
       excerpt: "Discover why Utah's real estate market offers excellent investment opportunities.",
-      author: "David Thompson",
+      author: "Ondo Real Estate",
       date: "November 20, 2024",
       readTime: "7 min read",
       category: "Investment",
@@ -1192,7 +1192,7 @@ export default function BlogPage() {
     {
       title: "Home Staging Tips That Actually Work",
       excerpt: "Professional staging tips to help your home sell faster and for more money.",
-      author: "Lisa Park",
+      author: "Ondo Real Estate",
       date: "November 15, 2024",
       readTime: "5 min read",
       category: "Selling",
@@ -1202,7 +1202,7 @@ export default function BlogPage() {
     {
       title: "Understanding Property Taxes in Utah",
       excerpt: "Complete breakdown of Utah property taxes and how they affect your investment.",
-      author: "Robert Wilson",
+      author: "Ondo Real Estate",
       date: "November 8, 2024",
       readTime: "6 min read",
       category: "Taxes",

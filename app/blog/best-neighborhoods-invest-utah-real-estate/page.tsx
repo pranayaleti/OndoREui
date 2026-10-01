@@ -116,7 +116,7 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
               <li>Cash flow and appreciation rarely peak in the same submarket, decide which objective is primary before buying</li>
               <li>Commute times, employer proximity, and housing-stock fit drive absorption and renewal rates more than any single rent metric</li>
               <li>Buying below replacement cost remains difficult in most Wasatch Front markets, focus on cash-on-cash yield relative to your financing</li>
-              <li>Professional <Link href="/property-management">property management</Link> reduces effective vacancy by 1–2 percentage points for most investors, a material boost to net operating income</li>
+              <li>Professional <Link href="/property-management">property management</Link> can help limit vacancy and turnover costs, which supports net operating income</li>
             </ul>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">

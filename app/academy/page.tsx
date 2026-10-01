@@ -13,7 +13,7 @@ import { pageCanonicalMetadata } from "@/lib/page-canonical"
 export const metadata: Metadata = pageCanonicalMetadata("/academy", {
   title: pageTitle("Ondo Academy | Free Utah Real Estate Training"),
   description:
-    "Free training for Utah owners, investors, buyers, and tenants: templates, calculators, videos, events, and a call with our team.",
+    "Free training for Utah owners, investors, buyers, and tenants: templates, calculators, guides, and a call with our team.",
 })
 
 const startHerePaths = [
@@ -74,7 +74,7 @@ const libraryLinks = [
     title: "Guides and academy",
     description: "Written training, calculators, and a live walkthrough. Not a placeholder video wall.",
     href: "/video-library",
-    label: "Watch videos",
+    label: "Open learning guides",
   },
   {
     icon: CalendarDays,
@@ -90,7 +90,7 @@ export default function AcademyPage() {
     <main className="min-h-screen">
       <SEO
         title="Ondo Academy | Free Utah Real Estate Training"
-        description="Free training for Utah owners, investors, buyers, and tenants: templates, calculators, videos, events, and a call with our team."
+        description="Free training for Utah owners, investors, buyers, and tenants: templates, calculators, guides, and a call with our team."
         pathname="/academy"
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
@@ -99,7 +99,7 @@ export default function AcademyPage() {
       />
       <PageBanner
         title="Ondo Academy"
-        subtitle="Free training for owners, investors, buyers, and tenants. Start with a path, then use the templates, calculators, videos, and events already on this site."
+        subtitle="Free training for owners, investors, buyers, and tenants. Start with a path, then use the templates, calculators, guides, and events pages already on this site."
       />
 
       <section className="bg-background py-16" aria-labelledby="academy-start-heading">

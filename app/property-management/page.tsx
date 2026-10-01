@@ -118,9 +118,9 @@ export default function PropertyManagementPage() {
 
         {/* Platform features, AI & automation */}
         <section className="max-w-5xl mx-auto mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Built-in technology other PMs don&apos;t have</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Built-in technology for owners</h2>
           <p className="text-center text-foreground/70 mb-10 max-w-2xl mx-auto">
-            Our platform goes beyond basic PM software with AI-powered tools that protect your investment.
+            Our platform includes AI-assisted tools to help you keep an eye on your investment.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[

@@ -6,16 +6,22 @@ import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site
 import SEO from "@/components/seo"
 import Link from "next/link"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import {
+  BUILDIUM_CATEGORIES,
+  BUILDIUM_QUICK_STATS,
+  COMPETITOR_FACTS_NOTE,
+  ONDO_PRICING_FRAMING,
+} from "@/lib/vs-comparisons"
 
 export const metadata: Metadata = {
-  title: pageTitle(`Ondo RE vs Buildium: The Better Buildium Alternative | ${SITE_BRAND_SHORT}`),
-  description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience. No $62/mo entry fee.`,
+  title: pageTitle(`Ondo RE vs Buildium: Full-Service vs DIY Software | ${SITE_BRAND_SHORT}`),
+  description: `Ondo RE is full-service management; Buildium is software you run yourself. See how they compare on price, features, and tenant experience.`,
   alternates: {
     canonical: `${SITE_URL}/vs/buildium/`,
   },
   openGraph: {
-    title: pageTitleText(`Ondo RE vs Buildium: The Better Buildium Alternative`),
-    description: `Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience.`,
+    title: pageTitleText(`Ondo RE vs Buildium: Full-Service vs DIY Software`),
+    description: `Ondo RE is full-service management; Buildium is software you run yourself. See how they compare on price, features, and tenant experience.`,
     url: `${SITE_URL}/vs/buildium/`,
     type: "website",
     images: DEFAULT_OG_IMAGES,
@@ -23,76 +29,11 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-type FeatureRow = {
-  feature: string
-  ondo: boolean | string
-  buildium: boolean | string
-}
-
-type CategoryBlock = {
-  category: string
-  rows: FeatureRow[]
-}
-
-// ─── Data ────────────────────────────────────────────────────────────────────
-
-const featureCategories: CategoryBlock[] = [
-  {
-    category: "Core Platform",
-    rows: [
-      { feature: "Owner portal", ondo: true, buildium: true },
-      { feature: "Tenant portal", ondo: "Full portal", buildium: "Resident Center" },
-      { feature: "PWA offline access", ondo: true, buildium: false },
-      { feature: "White-label branding", ondo: false, buildium: true },
-      { feature: "Starting price", ondo: "Contact us", buildium: "$62/mo" },
-    ],
-  },
-  {
-    category: "Payments & Accounting",
-    rows: [
-      { feature: "Rent collection", ondo: true, buildium: true },
-      { feature: "Full GL accounting", ondo: "Basic", buildium: true },
-      { feature: "Owner disbursements", ondo: true, buildium: true },
-      { feature: "1099 generation", ondo: true, buildium: true },
-      { feature: "Financial calculators", ondo: "10 built-in", buildium: false },
-    ],
-  },
-  {
-    category: "Screening & Leasing",
-    rows: [
-      { feature: "Tenant screening", ondo: true, buildium: true },
-      { feature: "State lease templates", ondo: false, buildium: true },
-      { feature: "E-signatures", ondo: true, buildium: "Dropbox Sign" },
-      { feature: "Lease renewal", ondo: true, buildium: true },
-    ],
-  },
-  {
-    category: "Unique to Ondo RE",
-    rows: [
-      { feature: "RE agent tools", ondo: true, buildium: false },
-      { feature: "Loan officer integration", ondo: true, buildium: false },
-      { feature: "Notary services", ondo: true, buildium: false },
-      { feature: "AI assistant", ondo: "10 tools", buildium: "2026 roadmap" },
-      { feature: "Tenant risk scoring", ondo: true, buildium: false },
-      { feature: "Tenant credit building", ondo: "4 bureaus", buildium: false },
-    ],
-  },
-]
-
-const quickStats = [
-  { label: "Starting price", ondo: "Contact us", buildium: "$62/mo" },
-  { label: "Financial calculators", ondo: "10", buildium: "0" },
-  { label: "Phone support", ondo: "All tiers", buildium: "$192+/mo" },
-  { label: "Offline access", ondo: "Full PWA", buildium: "None" },
-]
-
 const ondoBetterCards = [
   {
-    title: "You don't want to pay $62/mo before you start",
+    title: "You want the rental managed, not another tool to run",
     description:
-      "Buildium's Essential plan starts at $62/mo with limited support. Ondo RE doesn't charge you before you've seen value.",
+      "Buildium is software you operate yourself. Ondo RE manages the rental for a percentage of collected rent, so tenant calls, rent collection and maintenance are ours to handle.",
   },
   {
     title: "You're an investor who also buys and sells",
@@ -102,12 +43,12 @@ const ondoBetterCards = [
   {
     title: "You care about your tenants' experience",
     description:
-      "Ondo builds for both sides of the lease, tenants get credit building across 4 bureaus, a full portal, and offline PWA access.",
+      "Ondo builds for both sides of the lease: tenants get a full portal and offline PWA access.",
   },
   {
-    title: "You need AI that's ready today",
+    title: "You want an AI assistant built into your portal",
     description:
-      "Buildium's AI features are on their 2026 roadmap. Ondo's AI assistant with 10 live tools is available right now.",
+      "Ondo's AI assistant is part of the owner and manager portals today. Check Buildium's site for what they offer now.",
   },
 ]
 
@@ -136,8 +77,8 @@ export default function VsBuildiumPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <SEO
-        title="Ondo RE vs Buildium: The Better Buildium Alternative"
-        description="Looking for a Buildium alternative? See how Ondo RE compares to Buildium on price, features, AI tools, and tenant experience."
+        title="Ondo RE vs Buildium: Full-Service vs DIY Software"
+        description="Ondo RE is full-service management; Buildium is software you run yourself. See how they compare on price, features, and tenant experience."
         pathname="/vs/buildium/"
         keywords={["Buildium alternative", "Buildium vs Ondo", "property management software alternative", "Buildium competitor"]}
       />
@@ -148,15 +89,15 @@ export default function VsBuildiumPage() {
           {SITE_BRAND_SHORT} vs Buildium
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/70">
-          A head-to-head comparison for property owners who want more than legacy PM software , 
-          better AI, integrated services, and no surprise entry fees.
+          A side-by-side look at full-service management and PM software you run yourself, with
+          Ondo&apos;s published fees next to Buildium&apos;s.
         </p>
       </section>
 
       {/* Quick Stats */}
       <section className="mb-16">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {quickStats.map((stat) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {BUILDIUM_QUICK_STATS.map((stat) => (
             <Card key={stat.label} className="border-foreground/10">
               <CardContent className="p-5 text-center">
                 <p className="mb-3 text-xs font-medium uppercase tracking-wide text-foreground/50">
@@ -170,13 +111,19 @@ export default function VsBuildiumPage() {
                   <div className="h-8 w-px bg-foreground/10" />
                   <div>
                     <p className="text-xs text-foreground/50 mb-1">Buildium</p>
-                    <p className="text-base font-semibold text-foreground/70">{stat.buildium}</p>
+                    <p className="text-base font-semibold text-foreground/70">{stat.competitor}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
+      </section>
+
+      <section className="mb-16">
+        <p className="mx-auto max-w-3xl text-center text-sm text-foreground/70">
+          {ONDO_PRICING_FRAMING} <Link href="/pricing/" className="text-primary hover:underline">See Ondo&apos;s full pricing</Link>.
+        </p>
       </section>
 
       {/* Feature Comparison Table */}
@@ -199,7 +146,7 @@ export default function VsBuildiumPage() {
             </tr>
           </thead>
           <tbody>
-            {featureCategories.map((block) => (
+            {BUILDIUM_CATEGORIES.map((block) => (
               <>
                 <tr key={`cat-${block.category}`}>
                   <td
@@ -225,7 +172,7 @@ export default function VsBuildiumPage() {
                       <CellValue value={row.ondo} />
                     </td>
                     <td className="border-b border-foreground/5 px-4 py-3 text-center">
-                      <CellValue value={row.buildium} />
+                      <CellValue value={row.competitor} />
                     </td>
                   </tr>
                 ))}
@@ -233,6 +180,7 @@ export default function VsBuildiumPage() {
             ))}
           </tbody>
         </table>
+        <p className="mt-4 text-center text-xs text-foreground/60">{COMPETITOR_FACTS_NOTE}</p>
       </section>
 
       {/* When Ondo is better */}
@@ -278,11 +226,10 @@ export default function VsBuildiumPage() {
       {/* CTA */}
       <section className="rounded-2xl bg-primary/5 px-6 py-12 text-center dark:bg-[var(--gradient-overlay)]">
         <h2 className="mb-4 text-2xl font-bold text-foreground">
-          Ready to try the Buildium alternative?
+          Ready to talk it through?
         </h2>
         <p className="mb-6 text-foreground/70">
-          See why Utah property owners are choosing {SITE_BRAND_SHORT} for better AI, integrated
-          services, and a team that actually picks up the phone.
+          See Ondo&apos;s published pricing, or book a call to talk through your rentals.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button asChild>

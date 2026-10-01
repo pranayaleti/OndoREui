@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Calendar, ExternalLink, Globe2, Share2 } from "lucide-react"
+import { ExternalLink, Globe2 } from "lucide-react"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Badge } from "@/components/ui/badge"
@@ -9,17 +9,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { analyticsAttributes } from "@/lib/analytics"
 import { getLatestNewsItems } from "@/lib/news-items"
-import { SOCIAL_POSTS } from "@/lib/social-posts"
 import { SITE_SOCIAL_LINKS, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 export const metadata: Metadata = {
   title: pageTitle("Socials & Updates | Ondo Real Estate"),
   description:
-    "Latest Ondo social posts, profile links, and curated real estate news. Every Ondo link lives at ondorealestate.com/links.",
+    "Ondo social profiles, the Ondo links page, and the real estate news sources we follow. Every Ondo link lives at ondorealestate.com/links.",
   alternates: { canonical: `${SITE_URL}/socials/` },
   openGraph: {
     title: pageTitleText("Socials & Updates | Ondo Real Estate"),
     description:
-      "Curated social highlights, live profile links, and the latest industry news we track for Utah buyers, owners, and investors.",
+      "Live Ondo profile links and the real estate news sources we follow for Utah buyers, owners, and investors.",
     url: `${SITE_URL}/socials/`,
     images: [
       {
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: pageTitleText("Socials & Updates | Ondo Real Estate"),
-    description: "Curated posts, every Ondo link, and the latest real estate news we track.",
+    description: "Ondo profile links and the real estate news sources we follow.",
     images: [`${SITE_URL}/modern-office-building.webp`],
   },
 }
@@ -64,7 +63,7 @@ export default function SocialsPage() {
     <main className="min-h-screen">
       <SEO
         title="Socials & Updates | Ondo Real Estate"
-        description="Latest Ondo social posts, profile links, and curated real estate news."
+        description="Ondo social profiles and the real estate news sources we follow."
         pathname="/socials"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -75,54 +74,12 @@ export default function SocialsPage() {
 
       <PageBanner
         title="Socials & updates"
-        subtitle="Posts, profiles, and the latest news we track"
+        subtitle="Our profiles and the news sources we follow"
         backgroundImage="/modern-office-building.webp"
       />
 
-      {/* Social posts */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="mb-8 flex items-center gap-2">
-            <Share2 className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-bold">Social posts</h2>
-          </div>
-          <p className="text-sm text-foreground/70 mb-8 max-w-2xl">
-            Highlights and announcements from Ondo. Click through to the full post or page.
-          </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {SOCIAL_POSTS.map((post) => (
-              <Card key={`${post.platform}-${post.title}`} className="h-full flex flex-col justify-between">
-                <CardHeader className="pb-3">
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <Badge variant="outline" className="text-[11px]">
-                      {post.platform}
-                    </Badge>
-                    <span className="text-xs text-foreground/60">{post.date}</span>
-                  </div>
-                  <CardTitle className="text-lg">{post.title}</CardTitle>
-                  <CardDescription className="mt-2 text-sm">{post.excerpt}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <Button asChild size="sm" className="w-full justify-center gap-2">
-                    <Link
-                      href={post.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      {...analyticsAttributes("social_post_click", "socials_page", post.platform.toLowerCase())}
-                    >
-                      View post
-                      <ExternalLink className="h-3 w-3" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Follow us */}
-      <section className="py-16 bg-card border-y border-border">
+      <section className="py-16 bg-card border-b border-border">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-2xl font-bold mb-2">Follow us</h2>
           <p className="text-sm text-foreground/70 mb-8 max-w-2xl">
@@ -169,7 +126,7 @@ export default function SocialsPage() {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold">Latest news</h2>
+              <h2 className="text-2xl font-bold">News sources we follow</h2>
               <p className="mt-2 text-sm text-foreground/70">
                 Same curated sources as our{" "}
                 <Link href="/news" className="text-primary underline-offset-4 hover:underline">
@@ -205,10 +162,6 @@ export default function SocialsPage() {
                     <span className="inline-flex items-center gap-1">
                       <Globe2 className="h-3 w-3" />
                       {item.source}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {item.date}
                     </span>
                   </div>
                   <Button asChild size="sm" className="w-full justify-center gap-2">

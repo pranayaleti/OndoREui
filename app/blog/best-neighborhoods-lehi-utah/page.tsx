@@ -68,7 +68,7 @@ export default function BestNeighborhoodsLehi() {
             </ul>
 
             <h2>Bottom Line</h2>
-            <p>Traverse Mountain for HOA retail and commute. Thanksgiving Point for museums, gardens, and golf. Old Town for acquisition basis and renovation upside. Match housing stock and commute to the investment thesis, and call Ondo RE before you finalize a decision. We manage over 200 Lehi units and know every micro-market in the city.</p>
+            <p>Traverse Mountain for HOA retail and commute. Thanksgiving Point for museums, gardens, and golf. Old Town for acquisition basis and renovation upside. Match housing stock and commute to the investment thesis, and talk to Ondo RE before you finalize a decision.</p>
 
             <div className="not-prose mt-8 flex flex-wrap gap-3">
               <Button asChild>

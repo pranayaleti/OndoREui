@@ -50,10 +50,10 @@ describe("CityGuidePage", () => {
     expect(link).toHaveAttribute("href", "/neighborhoods/salt-lake-city/the-avenues/")
   })
 
-  it("mounts lead capture, city testimonials, and resource hub links", () => {
+  it("mounts lead capture and resource hub links, with no invented testimonials", () => {
     render(<CityGuidePage city={slc} />)
     expect(screen.getAllByLabelText(/name/i).length).toBeGreaterThanOrEqual(2)
-    expect(screen.getByText(/Example stories from Salt Lake City/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Example stories from/i)).not.toBeInTheDocument()
     expect(screen.getByRole("link", { name: /Guides & resources/i })).toHaveAttribute("href", "/resources/")
     expect(screen.getByRole("link", { name: /^Blog$/i })).toHaveAttribute("href", "/blog/")
   })

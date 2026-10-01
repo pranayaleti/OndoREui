@@ -7,6 +7,16 @@ import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cityMarketData } from "@/lib/city-market-data"
+import {
+  DEFAULT_EXAMPLE_MONTHLY_RENT,
+  GROWTH_MGMT_RATE,
+  GROWTH_MIN_UNITS,
+  LEASING_FEE_RATE,
+  PORTFOLIO_MIN_UNITS,
+  STARTER_MAX_UNITS,
+  STARTER_MGMT_RATE,
+} from "@/lib/fee-comparison"
+import { VENDOR_INVOICE_POLICY } from "@/lib/pricing-included"
 import { getNearbyCities } from "@/lib/nearby-cities"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import {
@@ -40,12 +50,19 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
   const market = cityMarketData[city.name]
   const nearbyCities = useMemo(() => getNearbyCities(city.name, 4), [city.name])
 
+  // Ondo's published fees, from the same constants /pricing/ uses. The example is
+  // the Starter rate on this city's median rent (1 unit), not a quote.
+  const pct = (rate: number) => `${Math.round(rate * 100)}%`
+  const exampleRent = market ? market.medianRent : DEFAULT_EXAMPLE_MONTHLY_RENT
   const pmFees = {
-    monthlyMgmt: { pct: "8–10%", example: market ? Math.round(market.medianRent * 0.09) : 135 },
-    leasing: "50–100% of first month's rent",
-    vacancy: "Included in management fee",
-    maintenance: "Billed at cost + coordination fee",
-    eviction: "$500–$1,500 (varies by case)",
+    monthlyMgmt: {
+      pct: `${pct(STARTER_MGMT_RATE)} (1–${STARTER_MAX_UNITS} units), ${pct(GROWTH_MGMT_RATE)} (${GROWTH_MIN_UNITS}–${PORTFOLIO_MIN_UNITS - 1} units)`,
+      example: Math.round(exampleRent * STARTER_MGMT_RATE),
+    },
+    leasing: `${pct(LEASING_FEE_RATE)} of first month's rent, one-time`,
+    vacancy: "No separate vacancy fee. Management is a percentage of collected rent.",
+    maintenance: `${VENDOR_INVOICE_POLICY} on vendor invoices`,
+    eviction: "Not part of the published fee schedule. Ask us.",
   }
 
   const monthlyPayment30 = market ? Math.round(estimateMonthlyPayment(market.medianHomePrice, 20, 6.75, 30)) : null
@@ -83,7 +100,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
               </div>
               <div className="text-right">
                 <p className="font-bold text-primary">{pmFees.monthlyMgmt.pct}</p>
-                <p className="text-sm text-foreground/60">≈ {fmtUsd(pmFees.monthlyMgmt.example)}/mo</p>
+                <p className="text-sm text-foreground/60">≈ {fmtUsd(pmFees.monthlyMgmt.example)}/mo at {pct(STARTER_MGMT_RATE)}</p>
               </div>
             </div>
             <div className="flex justify-between items-center rounded-lg border p-4">

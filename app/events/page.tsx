@@ -12,12 +12,15 @@ import { BookOpen, Calculator, GraduationCap, Mail, Share2, Users } from "lucide
 export const metadata: Metadata = {
   title: pageTitle("ONDO Events | Ondo Real Estate"),
   description:
-    "Upcoming ONDO events, homebuyer workshops, investor mixers, and community gatherings. RSVP and join us.",
+    "Ondo workshops and community events. Dates and RSVP links are posted here once an event is confirmed.",
   alternates: { canonical: `${SITE_URL}/events/` },
+  // No events are published yet (the events API returns none), so keep the page out of
+  // the index until it has real content. Remove this once events are scheduled.
+  robots: { index: false, follow: true },
   openGraph: {
     title: pageTitleText("ONDO Events | Ondo Real Estate"),
     description:
-      "Upcoming ONDO events, homebuyer workshops, investor mixers, and community gatherings.",
+      "Ondo workshops and community events. Dates and RSVP links are posted here once an event is confirmed.",
     url: `${SITE_URL}/events/`,
     images: DEFAULT_OG_IMAGES,
   },

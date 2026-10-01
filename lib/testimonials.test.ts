@@ -3,6 +3,8 @@ import {
   getPresentTestimonialRoles,
   getPresentTestimonialServices,
   getTestimonialKind,
+  getTestimonialsForCity,
+  getTestimonialsForService,
   testimonials,
 } from "./testimonials"
 
@@ -15,27 +17,33 @@ describe("testimonials Fair Housing", () => {
       expect(t.quote, `${t.name} (${t.city})`).not.toMatch(OCCUPANT_QUALITY)
     }
   })
+})
 
-  it("exposes every role present in the data, including Seller when present", () => {
-    const roles = getPresentTestimonialRoles()
-    const unique = new Set(testimonials.map((item) => item.role))
-    expect(roles).toHaveLength(unique.size)
-    expect(roles).toEqual(expect.arrayContaining([...unique]))
-    expect(roles).toContain("Seller")
-  })
-
-  it("exposes every service present in the data", () => {
-    const services = getPresentTestimonialServices()
-    const unique = new Set(testimonials.map((item) => item.service))
-    expect(services).toHaveLength(unique.size)
-    expect(services).toEqual(expect.arrayContaining([...unique]))
-  })
-
-  it("labels current quotes as composites, not Google reviews", () => {
+describe("testimonials only hold real reviews", () => {
+  it("publishes no composite or undated entries", () => {
     for (const item of testimonials) {
-      expect(getTestimonialKind(item), `${item.name} (${item.city})`).toBe("composite")
-      expect(item.reviewDate).toBeUndefined()
-      expect(item.quote).not.toMatch(/google/i)
+      expect(getTestimonialKind(item), `${item.name} (${item.city})`).toBe("review")
+      expect(item.reviewDate, `${item.name} (${item.city})`).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     }
+  })
+
+  it("never publishes loan testimonials", () => {
+    expect(testimonials.filter((item) => item.service === "loans")).toEqual([])
+  })
+
+  it("does not ship the removed composite names", () => {
+    const removed = ["Sarah J.", "Michael T.", "Jennifer L.", "Priya S.", "Rachel W.", "Robert G."]
+    const names = testimonials.map((item) => item.name)
+    for (const name of removed) expect(names).not.toContain(name)
+  })
+
+  it("derives roles and services from the data", () => {
+    expect(getPresentTestimonialRoles()).toHaveLength(new Set(testimonials.map((item) => item.role)).size)
+    expect(getPresentTestimonialServices()).toHaveLength(new Set(testimonials.map((item) => item.service)).size)
+  })
+
+  it("returns only what exists for a city or service", () => {
+    expect(getTestimonialsForCity("Lehi")).toHaveLength(Math.min(3, testimonials.length))
+    expect(getTestimonialsForService("property-management")).toHaveLength(Math.min(3, testimonials.length))
   })
 })

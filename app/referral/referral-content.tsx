@@ -1,10 +1,8 @@
 "use client"
 
 import { Suspense } from "react"
-import Link from "next/link"
 import { useTranslation } from "react-i18next"
 import { Building2, Users, Home, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import {
   ReferralBonusBanner,
@@ -91,9 +89,6 @@ export function ReferralContent() {
           <Suspense fallback={<ReferralSignupButtonFallback />}>
             <ReferralSignupButton />
           </Suspense>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/sweepstakes">{t("referral.enterSweepstakes")}</Link>
-          </Button>
         </section>
 
         {/* Trusted by */}

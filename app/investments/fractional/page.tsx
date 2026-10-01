@@ -23,12 +23,12 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata: Metadata = {
   title: "Fractional Real Estate Ownership",
   description:
-    "Learn how fractional ownership works, invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management.",
+    "Learn how fractional ownership of commercial real estate works: LLC/SPV structures, distributions, exits and the risks to weigh before you invest.",
   alternates: { canonical: `${SITE_URL}/investments/fractional/` },
   openGraph: {
     title: pageTitleText("Fractional Real Estate Ownership | Ondo Real Estate"),
     description:
-      "Fractional ownership makes commercial real estate accessible. Learn about the structure, returns, and exit strategies.",
+      "Learn how fractional ownership of commercial real estate works: the structure, distributions, exit strategies and risks.",
     url: `${SITE_URL}/investments/fractional/`,
     images: DEFAULT_OG_IMAGES,
   },
@@ -41,28 +41,28 @@ const steps = [
     icon: FileText,
     title: "Deal Sourcing & Structuring",
     description:
-      "We identify and underwrite commercial properties in Utah's growth corridors. Each deal is held in a dedicated LLC or SPV with a clear operating agreement.",
+      "In a typical fractional deal, a sponsor identifies and underwrites a commercial property. The deal is held in a dedicated LLC or SPV with its own operating agreement.",
   },
   {
     number: 2,
     icon: Users,
     title: "Investor Syndication",
     description:
-      "Qualified investors purchase membership interests in the entity. The minimum investment, terms, and projected returns are disclosed in the offering materials.",
+      "In a typical structure, qualified investors purchase membership interests in the entity. The minimum investment, terms, and projected returns are disclosed in the offering materials.",
   },
   {
     number: 3,
     icon: DollarSign,
     title: "Acquisition & Management",
     description:
-      "Once funded, the entity acquires the property. Professional managers handle leasing, operations, maintenance, and financial reporting on behalf of investors.",
+      "Once funded, the entity acquires the property. A property manager typically handles leasing, operations, maintenance, and financial reporting on behalf of investors.",
   },
   {
     number: 4,
     icon: TrendingUp,
     title: "Distributions & Reporting",
     description:
-      "Investors receive cash-flow distributions (monthly or quarterly) and regular performance reports. All financials are transparent and accessible.",
+      "Investors typically receive cash-flow distributions (for example monthly or quarterly) and periodic performance reports, as set out in the operating agreement.",
   },
   {
     number: 5,
@@ -78,7 +78,7 @@ export default function FractionalPage() {
     <main id="main-content" className="min-h-screen">
       <SEO
         title="Fractional Real Estate Ownership"
-        description="Learn how fractional ownership works, invest in commercial real estate through LLC/SPV structures with lower minimums, quarterly distributions, and professional management."
+        description="Learn how fractional ownership of commercial real estate works: LLC/SPV structures, distributions, exits and the risks to weigh before you invest."
         pathname="/investments/fractional"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={[
@@ -95,7 +95,7 @@ export default function FractionalPage() {
 
       <PageBanner
         title="Fractional Real Estate Ownership"
-        subtitle="Own a share of institutional-quality commercial properties with lower minimums and professional management"
+        subtitle="How owning a share of a commercial property through an LLC works. Ondo has no offering open to investors today."
       />
 
       {/* Explanation */}
@@ -157,10 +157,10 @@ export default function FractionalPage() {
                   <CardTitle className="dark:text-foreground">Minimum Investment</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold text-primary mb-2">$10,000–$50,000</p>
+                  <p className="text-2xl font-bold text-primary mb-2">Set per offering</p>
                   <p className="text-sm text-foreground/70 dark:text-foreground/70">
-                    Varies by offering. Significantly lower than purchasing an entire commercial
-                    property outright.
+                    Each offering sets its own minimum. It is usually far lower than buying an
+                    entire commercial property outright.
                   </p>
                 </CardContent>
               </Card>
@@ -174,10 +174,10 @@ export default function FractionalPage() {
                   <CardTitle className="dark:text-foreground">Distribution Model</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold text-primary mb-2">Monthly or Quarterly</p>
+                  <p className="text-2xl font-bold text-primary mb-2">Set per offering</p>
                   <p className="text-sm text-foreground/70 dark:text-foreground/70">
-                    Cash-flow distributions from net operating income are paid to investors on a
-                    regular schedule as defined in the operating agreement.
+                    Cash-flow distributions from net operating income are usually paid on a
+                    regular schedule defined in the operating agreement. They are not guaranteed.
                   </p>
                 </CardContent>
               </Card>
@@ -191,10 +191,10 @@ export default function FractionalPage() {
                   <CardTitle className="dark:text-foreground">Exit Strategy</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold text-primary mb-2">3–10 Year Hold</p>
+                  <p className="text-2xl font-bold text-primary mb-2">Defined hold period</p>
                   <p className="text-sm text-foreground/70 dark:text-foreground/70">
-                    Properties are held for a defined period, then sold. Net proceeds, including
-                    any appreciation, are distributed proportionally to investors.
+                    Properties are usually held for a defined period, then sold. Net proceeds,
+                    including any appreciation, are distributed proportionally to investors.
                   </p>
                 </CardContent>
               </Card>
@@ -209,10 +209,9 @@ export default function FractionalPage() {
                 {[
                   "Lower capital requirement than direct ownership",
                   "Diversification across multiple properties and asset classes",
-                  "Professional asset management and reporting",
+                  "Potential for professional asset management and reporting",
                   "Liability protection through LLC/SPV structure",
                   "Pass-through tax benefits including depreciation",
-                  "Access to institutional-quality commercial deals",
                 ].map((benefit) => (
                   <div key={benefit} className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
@@ -241,7 +240,7 @@ export default function FractionalPage() {
                 <Link href="/investments/commercial-real-estate">Commercial Real Estate</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/investments/opportunities">Browse Opportunities</Link>
+                <Link href="/investments/opportunities">Sample Deals</Link>
               </Button>
             </div>
 

@@ -7,17 +7,20 @@ import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle, pageTitleText } from "@/l
 import { Button } from "@/components/ui/button"
 import { FileText, Shield, TrendingUp, Building2, Mail, Phone } from "lucide-react"
 import { BrochureRequestForm } from "@/components/leads/brochure-request-form"
+import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
+// Noindex until counsel approves the investment wording. Not listed in the sitemap.
 export const metadata: Metadata = {
   title: pageTitle("Investor Brochure | Ondo Real Estate"),
   description:
-    "Request the Ondo Real Estate investor overview to learn about our strategy, track record, team, and investment approach in Utah.",
+    "Ask Ondo Real Estate for investor information about our approach to Utah rental properties. General information only, not an offer.",
+  robots: { index: false, follow: true },
   alternates: { canonical: `${SITE_URL}/brochure/` },
   openGraph: {
     title: pageTitleText("Investor Brochure | Ondo Real Estate"),
     description:
-      "Request our investor overview, strategy overview, portfolio highlights, and how to get started with Ondo Real Estate.",
+      "Ask Ondo Real Estate for investor information about our approach to Utah rental properties.",
     url: `${SITE_URL}/brochure`,
     images: DEFAULT_OG_IMAGES,
   },
@@ -28,17 +31,17 @@ const highlights = [
   {
     icon: <TrendingUp className="h-6 w-6" />,
     title: "Investment strategy",
-    description: "Our value-add playbook and target returns",
+    description: "How we approach value-add rental properties",
   },
   {
     icon: <Building2 className="h-6 w-6" />,
-    title: "Portfolio overview",
-    description: "Current properties and performance data",
+    title: "Properties we manage",
+    description: "An overview of the rental properties Ondo manages",
   },
   {
     icon: <Shield className="h-6 w-6" />,
     title: "Risk management",
-    description: "How we protect investor capital at every stage",
+    description: "The risks of real estate investing and how we review deals",
   },
   {
     icon: <FileText className="h-6 w-6" />,
@@ -52,7 +55,7 @@ export default function BrochurePage() {
     <main className="min-h-screen">
       <SEO
         title="Investor Brochure | Ondo Real Estate"
-        description="Request the Ondo Real Estate investor overview, strategy, portfolio, and how to start earning passive income."
+        description="Ask Ondo Real Estate for investor information about our approach to Utah rental properties."
         pathname="/brochure"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -87,8 +90,8 @@ export default function BrochurePage() {
 
               <div className="p-4 rounded-lg border bg-muted/40">
                 <p className="text-sm text-foreground/70">
-                  Prefer to talk first? Our investor relations team is happy to walk you through
-                  anything before you request materials.
+                  Prefer to talk first? Call or email and we will answer questions before you request
+                  anything.
                 </p>
                 <div className="mt-3 space-y-2">
                   <a href={`tel:${SITE_PHONE.replace(/\D/g, "")}`} className="flex items-center gap-2 text-sm hover:underline text-foreground/80">
@@ -120,6 +123,12 @@ export default function BrochurePage() {
               <Link href="/investments">Browse investments</Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-background">
+        <div className="container mx-auto px-4">
+          <RiskDisclosure />
         </div>
       </section>
     </main>

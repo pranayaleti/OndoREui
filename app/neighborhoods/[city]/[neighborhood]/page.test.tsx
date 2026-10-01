@@ -36,12 +36,12 @@ describe("neighborhood page content", () => {
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
   })
 
-  it("renders the city team section and testimonials", async () => {
+  it("renders the founder contact section and no invented testimonials", async () => {
     render(await Page({ params }))
-    // CityTeamSection renders "Your {cityName} Real Estate Team" and
-    // CityTestimonials renders "Example stories from {cityName}".
-    expect(screen.getByText(/Real Estate Team/i)).toBeInTheDocument()
-    expect(screen.getByText(/Example stories from/i)).toBeInTheDocument()
+    // CityTeamSection renders "Questions about {cityName}? Talk to the founder".
+    // CityTestimonials renders nothing until real, permissioned reviews exist.
+    expect(screen.getByText(/Talk to the founder/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Example stories from/i)).not.toBeInTheDocument()
   })
 
   it("links to a calculator", async () => {

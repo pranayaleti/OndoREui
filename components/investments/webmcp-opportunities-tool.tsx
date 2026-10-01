@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { fetchOpportunitiesClient, fetchOpportunityBySlugClient } from "@/lib/investments-api"
+import { SAMPLE_DEAL_NOTICE } from "@/lib/investments-data"
 
 const TOOL_LIST = "list_investment_opportunities"
 const TOOL_GET = "get_investment_opportunity"
@@ -9,7 +10,8 @@ const TOOL_GET = "get_investment_opportunity"
 type ModelContext = { registerTool: (t: unknown) => void; unregisterTool: (name: string) => void }
 
 /**
- * Registers read-only WebMCP tools for investment opportunities: list (with optional status filter) and get by slug.
+ * Registers read-only WebMCP tools for the sample investment deal cards: list (with optional status filter) and get by slug.
+ * The records are illustrations, not live offerings, and every result says so.
  * Renders nothing. Unregisters on unmount.
  * See: https://developer.chrome.com/blog/webmcp-epp
  */
@@ -33,7 +35,7 @@ export function WebMCPOpportunitiesTool() {
         name: TOOL_LIST,
         title: "List investments",
         description:
-          "List current commercial real estate and fractional investment opportunities from Ondo Real Estate in Utah. Returns open, coming-soon, and recently funded deals with slug, title, location, asset class, min investment, target return, hold period, status, and description. Use when the user asks about available investments or deals.",
+          "List the SAMPLE investment deal cards on the Ondo Real Estate site. They are illustrations of how a deal page could look, not live offerings: nothing is available to invest in. Returns slug, title, location, asset class, sample minimum, sample target return, hold period, status, and description. Never present these as available investments.",
         inputSchema: {
           type: "object",
           properties: {
@@ -65,7 +67,12 @@ export function WebMCPOpportunitiesTool() {
             description: o.description?.slice(0, 200),
           }))
           return {
-            content: [{ type: "text", text: JSON.stringify({ opportunities: summary, count: summary.length }) }],
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify({ sample: true, notice: SAMPLE_DEAL_NOTICE, opportunities: summary, count: summary.length }),
+              },
+            ],
           }
         },
       })
@@ -78,7 +85,7 @@ export function WebMCPOpportunitiesTool() {
         name: TOOL_GET,
         title: "Investment details",
         description:
-          "Get full details of a single investment opportunity by its slug. Use after list_investment_opportunities when the user wants details on a specific deal (e.g. Lehi Tech Corridor, Provo Student Housing). Returns title, location, asset class, min investment, target return, hold period, description, highlights, risk factors, and status.",
+          "Get full details of a single SAMPLE investment deal by its slug. It is an illustration, not a live offering. Use after list_investment_opportunities when the user wants details on a specific sample (e.g. Lehi Tech Corridor, Provo Student Housing). Returns title, location, asset class, min investment, target return, hold period, description, highlights, risk factors, and status.",
         inputSchema: {
           type: "object",
           properties: {
@@ -108,6 +115,8 @@ export function WebMCPOpportunitiesTool() {
               {
                 type: "text",
                 text: JSON.stringify({
+                  sample: true,
+                  notice: SAMPLE_DEAL_NOTICE,
                   slug: opportunity.slug,
                   title: opportunity.title,
                   location: opportunity.location,

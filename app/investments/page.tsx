@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/investments") },
   title: pageTitle("Utah Investment Property: Rentals & Multifamily"),
   description:
-    "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
+    "Utah investment property that cash flows: single-family rentals, small multifamily, and how commercial and fractional ownership work, with management in-house.",
   openGraph: {
     title: pageTitleText("Utah Investment Property: Rentals & Multifamily"),
     description:
-      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
+      "Utah investment property that cash flows: single-family rentals, small multifamily, and how commercial and fractional ownership work, with management in-house.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -50,9 +50,9 @@ const sections = [
   {
     href: "/investments/opportunities",
     icon: LayoutGrid,
-    title: "Current Opportunities",
+    title: "Sample Deals",
     description:
-      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
+      "See how a commercial or fractional deal page could look. These are samples, not live offerings.",
   },
 ]
 
@@ -60,8 +60,8 @@ export default function InvestmentsPage() {
   return (
     <main id="main-content" className="min-h-screen">
       <SEO
-        title="Commercial & Fractional Investment Opportunities"
-        description="Explore commercial real estate and fractional ownership investment opportunities in Utah. Access institutional-quality properties with lower investment minimums."
+        title="Commercial & Fractional Real Estate Investing in Utah"
+        description="Learn how commercial real estate and fractional ownership investing works in Utah. Sample deal pages show how an offering could be presented; there is no live offering."
         pathname="/investments"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -71,8 +71,8 @@ export default function InvestmentsPage() {
       />
 
       <PageBanner
-        title="Commercial & Fractional Investment Opportunities"
-        subtitle="Build wealth through professionally managed real estate investments in Utah's fastest-growing markets"
+        title="Commercial & Fractional Real Estate Investing"
+        subtitle="How commercial and fractional ownership work in Utah, and what to ask before you invest"
       />
 
       {/* Quick Navigation */}
@@ -89,7 +89,7 @@ export default function InvestmentsPage() {
               <Link href="/investments/fractional">Fractional Ownership</Link>
             </Button>
             <Button asChild variant="outline" size="sm">
-              <Link href="/investments/opportunities">Browse Opportunities</Link>
+              <Link href="/investments/opportunities">Sample Deals</Link>
             </Button>
           </nav>
         </div>
@@ -143,17 +143,20 @@ export default function InvestmentsPage() {
             {/* Thesis Detail */}
             <div className="max-w-3xl mx-auto mb-16 space-y-4 text-foreground/70 dark:text-foreground/70">
               <p>
-                Ondo Real Estate brings together institutional-quality deal sourcing, professional
-                asset management, and transparent investor reporting. Whether you are looking to
-                diversify into commercial real estate for the first time or expand an existing
-                portfolio, our platform connects you with vetted opportunities across multiple asset
-                classes.
+                Ondo Real Estate manages rental properties in Utah. This section explains how
+                commercial and fractional real estate investing works, so you can decide whether it
+                fits your plan. Ondo has no investment open to investors on this site today, and the
+                deal pages here are samples. If you want to be told if that changes,{" "}
+                <Link href="/contact/" className="text-primary hover:underline">
+                  get in touch
+                </Link>
+                .
               </p>
               <p>
-                Each offering is structured as a standalone LLC or SPV, providing investors with
-                liability protection, pass-through tax benefits, and clearly defined distribution and
-                exit terms. We focus exclusively on the Utah market, where our local expertise and
-                operator relationships give us a sourcing and management advantage.
+                Deals like these are often held in a standalone LLC or SPV, which can separate
+                liability and pass income through for tax purposes. Distribution and exit terms are
+                set in each offering&apos;s documents, so read them closely and talk to an attorney
+                and tax professional before you invest.
               </p>
             </div>
 
@@ -161,7 +164,7 @@ export default function InvestmentsPage() {
             <div className="text-center mb-16">
               <Button asChild size="lg">
                 <Link href="/investments/opportunities">
-                  View Current Opportunities
+                  See Sample Deals
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </Link>
               </Button>

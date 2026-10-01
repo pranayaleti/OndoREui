@@ -211,11 +211,7 @@ const Footer = memo(() => {
 
           {/* About Us */}
           <FooterNavSection label="About Us" icon={<Users className="h-5 w-5" />} href="/about">
-            <li><Link href="/about/history" className="text-foreground/70 hover:text-foreground">History</Link></li>
             <li><Link href="/moving-to-utah/" className="text-foreground/70 hover:text-foreground">New to Utah</Link></li>
-            <li><Link href="/about/giving-back" className="text-foreground/70 hover:text-foreground">Giving back</Link></li>
-            <li><Link href="/about/careers" className="text-foreground/70 hover:text-foreground">Careers</Link></li>
-            <li><Link href="/about/news" className="text-foreground/70 hover:text-foreground">News</Link></li>
             <li><Link href="/socials" className="text-foreground/70 hover:text-foreground">Socials</Link></li>
             <li><Link href="/events" className="text-foreground/70 hover:text-foreground">Events</Link></li>
             <li><Link href="/learn" className="text-foreground/70 hover:text-foreground">Mortgage learning hub</Link></li>
@@ -235,9 +231,7 @@ const Footer = memo(() => {
             <li><Link href="/blog/hill-afb-va-coe-occupancy" className="text-foreground/70 hover:text-foreground">Hill AFB VA: COE and occupancy</Link></li>
             <li><Link href="/qualify" className="text-foreground/70 hover:text-foreground">Start a mortgage conversation</Link></li>
             <li><Link href="/academy" className="text-foreground/70 hover:text-foreground">Academy</Link></li>
-            <li><Link href="/about/testimonials" className="text-foreground/70 hover:text-foreground">Reviews</Link></li>
             <li><Link href="/news" className="text-foreground/70 hover:text-foreground">Industry news</Link></li>
-            <li><Link href="/about/investor-relations" className="text-foreground/70 hover:text-foreground">Investor relations</Link></li>
             <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
           </FooterNavSection>
 

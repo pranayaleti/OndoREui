@@ -7,7 +7,7 @@ const links = [
   { href: "/investments", label: "Overview" },
   { href: "/investments/commercial-real-estate", label: "Commercial" },
   { href: "/investments/fractional", label: "Fractional" },
-  { href: "/investments/opportunities", label: "Opportunities" },
+  { href: "/investments/opportunities", label: "Sample deals" },
 ]
 
 export function InvestmentsSubNav() {

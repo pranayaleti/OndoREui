@@ -248,6 +248,17 @@ describe("seo", () => {
       })
       expect(out?.["@type"]).toBe("BlogPosting")
     })
+
+    it("credits the author as an Organization, not a Person", () => {
+      const out = generateBlogPostingJsonLd({
+        title: "Post",
+        description: "Desc",
+        url: "/blog/post",
+        datePublished: "2024-01-01",
+        authorName: "Ondo Real Estate",
+      })
+      expect(out?.author).toEqual({ "@type": "Organization", name: "Ondo Real Estate" })
+    })
   })
 
   describe("generateWebApplicationJsonLd", () => {

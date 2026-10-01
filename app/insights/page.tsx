@@ -17,9 +17,7 @@ const contentTypes = [
   { label: "Blog", href: "/blog", cta: "Read the blog" },
   { label: "News", href: "/news", cta: "Browse news" },
   { label: "Socials", href: "/socials", cta: "See socials" },
-  { label: "Reports", href: "/contact", cta: "Request a report" },
-  { label: "Webinars", href: "/contact", cta: "Join upcoming webinars" },
-  { label: "Events", href: "/contact", cta: "See upcoming events" },
+  { label: "Events", href: "/events/", cta: "See events" },
 ]
 
 const featured = [

@@ -955,9 +955,34 @@ function contactDisplayName(c?: { firstName?: string | null; lastName?: string |
   return [c?.firstName, c?.lastName].filter(Boolean).join(" ").trim()
 }
 
+const SYSTEM_ACCOUNT_NAME = /^(admin|administrator|test|system|user)\b/i
+const SYSTEM_ACCOUNT_EMAIL_LOCAL = /^(admin|noreply|no-reply|test)$/i
+/** Domains used by seed and demo data, never by a real leasing contact. */
+const PLACEHOLDER_EMAIL_DOMAIN = /^(example\.(com|org|net)|email\.com|test\.com)$/i
+
+type ListingContactInput = {
+  firstName?: string | null
+  lastName?: string | null
+  email?: string | null
+} | null | undefined
+
+/**
+ * True for placeholder or system accounts ("Admin User", admin@, noreply@, test@, or a
+ * seed-data email domain such as email.com).
+ * These come from seed data and must never be shown as a leasing contact or
+ * published as the listing agent.
+ */
+export function isSystemAccountContact(c: ListingContactInput): boolean {
+  const name = contactDisplayName(c)
+  if (name && SYSTEM_ACCOUNT_NAME.test(name)) return true
+  const [local = "", domain = ""] = c?.email?.trim().split("@") ?? []
+  return SYSTEM_ACCOUNT_EMAIL_LOCAL.test(local) || PLACEHOLDER_EMAIL_DOMAIN.test(domain)
+}
+
 /**
  * Public listing contact. Uses named manager/owner when the API sends names,
  * plus the published company phone/email. Does not surface redacted personal emails.
+ * Placeholder/system accounts are ignored and fall back to the "Ondo Real Estate Leasing" card.
  */
 export function listingAgents(input: {
   manager?: {
@@ -984,8 +1009,8 @@ export function listingAgents(input: {
 }): ListingAgentCardData[] {
   const phone = input.propertyPhone?.trim() || input.companyPhone
   const email = input.companyEmail
-  const managerName = contactDisplayName(input.manager)
-  const ownerName = contactDisplayName(input.owner)
+  const managerName = isSystemAccountContact(input.manager) ? "" : contactDisplayName(input.manager)
+  const ownerName = isSystemAccountContact(input.owner) ? "" : contactDisplayName(input.owner)
 
   if (managerName) {
     return [
@@ -1013,7 +1038,7 @@ export function listingAgents(input: {
   }
   return [
     {
-      name: "Ondo Real Estate",
+      name: "Ondo Real Estate Leasing",
       title: "Leasing team",
       phone,
       email,

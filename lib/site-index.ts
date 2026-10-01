@@ -85,13 +85,13 @@ const AGENT_ACTIONS: AgentAction[] = [
     path: "/investments/opportunities",
     toolName: "list_investment_opportunities",
     access: "read-only",
-    description: "List current investment opportunities with filters such as status when available.",
+    description: "List the sample investment deal cards. They are illustrations, not live offerings.",
   },
   {
     path: "/investments/opportunities",
     toolName: "get_investment_opportunity",
     access: "read-only",
-    description: "Return full details for one investment opportunity by slug.",
+    description: "Return full details for one sample investment deal by slug. It is an illustration, not a live offering.",
   },
   {
     path: "/buy",
@@ -986,11 +986,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
       description: "Listings strategy, fractional and commercial opportunities.",
       links: [
         { name: "Sell your home", href: "/sell", description: "Pricing, prep, and listing with Ondo." },
-        { name: "Investments overview", href: "/investments", description: "How we surface vetted opportunities." },
+        { name: "Investments overview", href: "/investments", description: "How commercial and fractional investing works." },
         {
-          name: "Investment opportunities",
+          name: "Sample investment deals",
           href: "/investments/opportunities",
-          description: "Browse open and waitlisted offerings.",
+          description: "Illustrations of how a deal page could look. Not live offerings.",
         },
         {
           name: "Fractional real estate",
@@ -1217,21 +1217,11 @@ export function getSiteIndexSections(): SiteIndexSection[] {
     {
       id: "about",
       title: "About Ondo",
-      description: "Team, history, careers, and investor relations.",
+      description: "Team and case studies.",
       links: [
         { name: "About us", href: "/about", description: "Mission, services, and service area." },
-        { name: "Team", href: "/about/team", description: "Leadership and licensed professionals." },
-        { name: "Careers", href: "/about/careers", description: "Open roles and culture." },
-        { name: "Testimonials", href: "/about/testimonials", description: "Client and partner stories." },
-        { name: "Case studies", href: "/about/case-studies", description: "Documented outcomes from Utah owners, buyers, and investors." },
-        { name: "History", href: "/about/history", description: "Milestones and growth." },
-        { name: "Giving back", href: "/about/giving-back", description: "Community and nonprofit support." },
-        {
-          name: "Investor relations",
-          href: "/about/investor-relations",
-          description: "Institutional and accredited investor inquiries.",
-        },
-        { name: "Company news", href: "/about/news", description: "Press and announcements." },
+        { name: "Team", href: "/about/team", description: "The founder of Ondo Real Estate." },
+        { name: "Case studies", href: "/about/case-studies", description: "Illustrative scenarios for Utah owners, buyers, and investors." },
       ],
     },
     {
@@ -1249,12 +1239,7 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "Socials",
           href: "/socials",
-          description: "Curated posts, profile links, and latest news.",
-        },
-        {
-          name: "Sweepstakes",
-          href: "/sweepstakes",
-          description: "Official rules for active promotions.",
+          description: "Profile links and news sources we follow.",
         },
         {
           name: "Subscribe",

@@ -171,14 +171,6 @@ const pages: SearchResult[] = [
     href: '/blog',
     category: 'Page',
     keywords: ['blog', 'articles', 'insights', 'tips', 'news']
-  },
-  {
-    id: 'sweepstakes',
-    title: 'Win Prizes',
-    description: 'Enter our sweepstakes to win prizes',
-    href: '/sweepstakes',
-    category: 'Page',
-    keywords: ['sweepstakes', 'prizes', 'win', 'contest']
   }
 ]
 

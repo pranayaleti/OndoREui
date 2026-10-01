@@ -76,7 +76,7 @@ function getPriority(path) {
   // less important than the index. Each listing also benefits from a fresh
   // BUILD_DATE lastmod (the listing data is regenerated each build).
   if (/^\/properties\/[^/]+$/.test(p)) return 0.8
-  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/sweepstakes', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools', '/glossary']
+  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools', '/glossary']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = [
     '/resources',
@@ -123,7 +123,23 @@ function buildAlternateRefs(path, siteUrl) {
 }
 
 /** Public pages that exist but must not be indexed (noindex metadata or redirect-only). */
-const SITEMAP_NOINDEX_PATHS = ['/search', '/chat', '/properties/compare']
+const SITEMAP_NOINDEX_PATHS = [
+  '/search',
+  '/chat',
+  '/properties/compare',
+  // Placeholder pages whose original content could not be verified (noindex).
+  '/about/history',
+  '/about/news',
+  '/about/giving-back',
+  '/about/investor-relations',
+  '/about/careers',
+  '/sweepstakes',
+  // Sample deal cards only; no live offering exists.
+  '/investments/opportunities',
+  // Investment wording is pending counsel review (noindex).
+  '/strategy',
+  '/brochure',
+]
 
 /**
  * /investments/<static-subpage> (fractional, opportunity-zones, …) are real content.
@@ -245,9 +261,18 @@ module.exports = {
     '/api/**',
     '/api/*',
     '/feedback',
+    // No events published yet, so the page is noindex and must not be submitted either.
+    '/events',
+    '/events/',
+    // Illustrative scenarios, not verified case studies: noindex until real ones replace them.
+    '/about/case-studies',
+    '/about/case-studies/',
     // Link-in-bio hub for social profiles; noindex, so it must not be submitted either.
     '/links',
     '/links/',
+    // Example stories were removed (unverifiable); the page is a noindex notice.
+    '/about/testimonials',
+    '/about/testimonials/',
     // QR short links redirect to /links; the contact card is a file, not a page.
     '/go/*',
     '/go/**',

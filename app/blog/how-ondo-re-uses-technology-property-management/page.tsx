@@ -76,7 +76,6 @@ export default function HowOndoReUsesTechnology() {
             <ul>
               <li><strong>Maintenance routing:</strong> The AI reviews incoming maintenance requests, assesses urgency, and suggests vendor assignment based on issue type, location, and vendor performance history</li>
               <li><strong>Lease review:</strong> AI-assisted lease review flags non-standard clauses, missing required Utah disclosures, and potential compliance issues before a lease is executed</li>
-              <li><strong>At-risk tenant identification:</strong> The system monitors payment patterns, maintenance request frequency, and communication sentiment to flag tenants who may be struggling, before a late payment becomes a non-payment crisis</li>
               <li><strong>Market pricing:</strong> AI-powered rent analysis pulls comparable rental data to recommend optimal pricing at lease renewal or vacancy</li>
             </ul>
 
@@ -93,14 +92,14 @@ export default function HowOndoReUsesTechnology() {
             <p>Ondo RE maintains a vetted vendor network across the Wasatch Front, licensed, insured, and price-compared. Our platform tracks vendor performance on response time, completion rate, and owner/tenant satisfaction. Underperforming vendors are removed from the active pool. We do not mark up vendor invoices, every invoice is passed through at cost, visible in the owner portal.</p>
 
             <h2>What This Means in Practice</h2>
-            <p>A typical Ondo RE property owner with two SFRs in Sandy and Draper experiences:</p>
+            <p>For a property owner, the platform is meant to provide:</p>
             <ul>
-              <li>Rent collected automatically by the 5th of each month, disbursed by the 10th</li>
-              <li>Maintenance requests resolved in an average of 48–72 hours for routine issues</li>
+              <li>Online rent collection with reminders and a record of every payment</li>
+              <li>Maintenance requests tracked from submission to completion</li>
               <li>A real-time dashboard that replaces the need to call the office for updates</li>
-              <li>Annual inspection reports with photos, delivered digitally within 48 hours of the inspection</li>
+              <li>Inspection reports with photos, delivered digitally</li>
             </ul>
-            <p>The goal is to make owning a rental property genuinely passive, not just theoretically passive.</p>
+            <p>The goal is to make owning a rental property passive in practice, not just in theory.</p>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">

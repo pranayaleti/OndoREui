@@ -9,14 +9,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Calendar, Globe2, ExternalLink } from "lucide-react"
+import { Globe2, ExternalLink } from "lucide-react"
 
 export default function NewsPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Real Estate News Aggregator | Ondo Real Estate"
-        description="Curated real estate news and market updates from trusted national and Utah-focused sources, all in one place."
+        title="Real Estate News Sources | Ondo Real Estate"
+        description="Links to the national and Utah real estate news and data sources we follow."
         pathname="/news"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -26,8 +26,8 @@ export default function NewsPage() {
       />
 
       <PageBanner
-        title="Real Estate News"
-        subtitle="Curated headlines and data sources for serious buyers, sellers, and investors"
+        title="Real Estate News Sources"
+        subtitle="The outside news and data sources we follow, linked in one place"
         backgroundImage="/modern-office-building.png"
       />
 
@@ -36,10 +36,10 @@ export default function NewsPage() {
           <div className="max-w-5xl mx-auto">
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-2xl font-bold">Trusted Real Estate News Sources</h2>
+                <h2 className="text-2xl font-bold">News and data sources we follow</h2>
                 <p className="mt-2 text-sm text-foreground/70">
-                  We aggregate high-signal real estate news and data so you can quickly scan what matters, then click
-                  through to the original source for full details.
+                  These are links to outside publishers. Ondo does not write or update their content, so visit
+                  each source for its latest reporting.
                 </p>
               </div>
               <div className="flex items-center gap-2 text-xs text-foreground/70">
@@ -66,15 +66,9 @@ export default function NewsPage() {
                     <CardDescription className="mt-2 text-sm">{item.excerpt}</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-0 flex flex-col gap-4">
-                    <div className="flex items-center justify-between text-xs text-foreground/70">
-                      <div className="flex items-center gap-1">
-                        <Globe2 className="h-3 w-3" />
-                        <span>{item.source}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        <span>{item.date}</span>
-                      </div>
+                    <div className="flex items-center gap-1 text-xs text-foreground/70">
+                      <Globe2 className="h-3 w-3" />
+                      <span>{item.source}</span>
                     </div>
                     <Button asChild size="sm" className="w-full justify-center gap-2">
                       <Link href={item.sourceUrl} target="_blank" rel="noopener noreferrer">

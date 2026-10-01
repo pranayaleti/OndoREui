@@ -3,9 +3,13 @@
 import Link from "next/link"
 import { useTranslation } from "react-i18next"
 import { TestimonialsCarousel } from "@/components/landing/testimonials-carousel"
+import { testimonials } from "@/lib/testimonials"
 
 export function TestimonialsSection() {
   const { t } = useTranslation()
+
+  // No reviews to show means no section: never render an empty carousel or placeholder quotes.
+  if (testimonials.length === 0) return null
 
   return (
     <section className="bg-muted py-16 dark:bg-[var(--gradient-overlay)]" aria-labelledby="testimonials-heading">

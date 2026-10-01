@@ -17,8 +17,6 @@ import {
   Users,
   Calendar,
   TrendingUp,
-  Quote,
-  Star,
   Award,
   Building2,
 } from "lucide-react";
@@ -418,78 +416,6 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
         </section>
       </div>
     </section>
-
-      {/* TESTIMONIALS */}
-      <section className="py-16 md:py-24 bg-card dark:bg-background">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            What Clients Say About ONDO Notary
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* 1 */}
-            <div className="p-6 bg-background border border-primary rounded-lg">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                ))}
-              </div>
-              <Quote className="w-6 h-6 text-primary mb-3" />
-              <p className="text-gray-300 italic mb-4">
-                “We closed on our Colorado property from home. The remote online notarization was
-                accepted by our title company without a hitch and took under 20 minutes.”
-              </p>
-              <p className="text-primary font-semibold">,  Sarah M., Denver, CO</p>
-            </div>
-
-            {/* 2 */}
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                ))}
-              </div>
-              <Quote className="w-6 h-6 text-primary mb-3" />
-              <p className="text-foreground italic mb-4">
-                “I’m in Texas and needed an out-of-state investment package notarized. The RON
-                session met my lender’s requirements, and every document was verified on the call.”
-              </p>
-              <p className="text-primary font-semibold">,  Jason T., Dallas, TX</p>
-            </div>
-
-            {/* 3 */}
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                ))}
-              </div>
-              <Quote className="w-6 h-6 text-primary mb-3" />
-              <p className="text-foreground italic mb-4">
-                “Clear instructions, identity checks, and a smooth video session. I received the
-                signed, sealed documents instantly after the call.”
-              </p>
-              <p className="text-primary font-semibold">,  Michelle R., Salt Lake City, UT</p>
-            </div>
-
-            {/* 4 */}
-            <div className="p-6 bg-background border border-primary rounded-lg">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                ))}
-              </div>
-              <Quote className="w-6 h-6 text-primary mb-3" />
-              <p className="text-gray-300 italic mb-4">
-                “Needed a sworn statement notarized for a New York employer while I was in Utah.
-                They provided the electronic seal, audit trail, and confirmation the receiving state
-                needed.”
-              </p>
-              <p className="text-primary font-semibold">,  Daniel K., New York, NY</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Centralized FAQs live on /faq */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card">

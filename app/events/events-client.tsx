@@ -21,27 +21,32 @@ interface EventItem {
   coverImage: string | null
 }
 
-function formatWhen(startsAt: string, endsAt: string | null): string {
+// Ondo events are Utah events, so always show Mountain time instead of the visitor's zone.
+const EVENT_TIME_ZONE = "America/Denver"
+
+export function formatWhen(startsAt: string, endsAt: string | null): string {
   const start = new Date(startsAt)
   if (Number.isNaN(start.getTime())) return ""
   const dateStr = start.toLocaleDateString("en-US", {
+    timeZone: EVENT_TIME_ZONE,
     weekday: "short",
     month: "long",
     day: "numeric",
     year: "numeric",
   })
-  const startTime = start.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
+  const timeOpts: Intl.DateTimeFormatOptions = { timeZone: EVENT_TIME_ZONE, hour: "numeric", minute: "2-digit" }
+  const startTime = start.toLocaleTimeString("en-US", timeOpts)
   if (endsAt) {
     const end = new Date(endsAt)
     if (!Number.isNaN(end.getTime())) {
-      const endTime = end.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
-      return `${dateStr} · ${startTime}–${endTime}`
+      const endTime = end.toLocaleTimeString("en-US", timeOpts)
+      return `${dateStr} · ${startTime}–${endTime} MT`
     }
   }
-  return `${dateStr} · ${startTime}`
+  return `${dateStr} · ${startTime} MT`
 }
 
-function eventJsonLd(events: EventItem[]) {
+export function eventJsonLd(events: EventItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -54,7 +59,9 @@ function eventJsonLd(events: EventItem[]) {
         startDate: e.startsAt,
         ...(e.endsAt ? { endDate: e.endsAt } : {}),
         ...(e.description ? { description: e.description } : {}),
-        ...(e.location ? { location: { "@type": "Place", name: e.location } } : {}),
+        // Google requires location.address on Event; the API only has a free-text location,
+        // so use it as the address text as well as the place name.
+        ...(e.location ? { location: { "@type": "Place", name: e.location, address: e.location } } : {}),
         ...(e.rsvpUrl ? { url: e.rsvpUrl } : {}),
         eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
         organizer: { "@type": "Organization", name: "Ondo Real Estate", url: SITE_URL },

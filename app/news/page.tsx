@@ -4,8 +4,8 @@ import NewsPageClient from "./page-client"
 import { pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = pageCanonicalMetadata("/news", {
-  title: pageTitle("Utah Real Estate News & Market Updates"),
-  description: "Utah housing news that affects what you pay: rate moves, new construction, zoning changes and monthly market shifts along the Wasatch Front.",
+  title: pageTitle("Real Estate News Sources We Follow"),
+  description: "Links to the national and Utah real estate news and data sources we follow, including Redfin, HousingWire, KSL, Zillow Research and NAR.",
 })
 
 export default function Page() {

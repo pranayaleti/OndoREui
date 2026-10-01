@@ -13,7 +13,7 @@ import { pageTitle } from "@/lib/site"
 export const metadata: Metadata = pageCanonicalMetadata("/feedback", {
   title: pageTitle("Suggest Improvements | Ondo Real Estate"),
   description:
-    "Share ideas to improve Ondo Real Estate. Our suggestion tracker highlights the best ideas, and top contributors can receive gift cards as a thank-you.",
+    "Share ideas to improve Ondo Real Estate. We read every suggestion and use the useful ones to decide what to build next.",
   robots: { index: false, follow: true },
 })
 

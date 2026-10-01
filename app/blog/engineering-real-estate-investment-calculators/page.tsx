@@ -9,7 +9,7 @@ const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/engineering-real-estate-investment-calculators";
 const title = "Engineering Accuracy: Behind the Scenes of Real Estate Investment Calculators";
-const description = "How we built the web's most accurate real estate financial calculators using React and TypeScript.";
+const description = "How we built the real estate financial calculators on this site using React and TypeScript.";
 const author = "Engineering Team";
 
 const keywords = [

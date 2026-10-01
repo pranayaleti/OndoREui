@@ -54,7 +54,7 @@ export default function PropertyManagersPage() {
       {/* Scale callout */}
       <section className="py-12 bg-muted">
         <div className="container mx-auto px-4 max-w-2xl text-center">
-          <p className="text-xl text-foreground font-medium">Built for portfolios of any size, from 20 units to 500+.</p>
+          <p className="text-xl text-foreground font-medium">Built to grow with your portfolio.</p>
         </div>
       </section>
 

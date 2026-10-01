@@ -10,9 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
-import { InvestmentInquiryForm } from "@/components/investments/investment-inquiry-form"
-import { MOCK_OPPORTUNITIES } from "@/lib/investments-data"
-import type { InvestmentOpportunity } from "@/lib/investments-data"
+import { MOCK_OPPORTUNITIES, SAMPLE_DEAL_LABEL, SAMPLE_DEAL_NOTICE } from "@/lib/investments-data"
 // API functions available for runtime use in client components
 // import { getOpportunities, getOpportunityBySlug } from "@/lib/investments-api"
 import {
@@ -28,15 +26,6 @@ import {
 } from "lucide-react"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-const statusConfig: Record<
-  InvestmentOpportunity["status"],
-  { label: string; variant: "default" | "secondary" | "outline" }
-> = {
-  open: { label: "Open for Investment", variant: "default" },
-  "coming-soon": { label: "Coming Soon", variant: "secondary" },
-  "fully-funded": { label: "Fully Funded", variant: "outline" },
-}
-
 export async function generateStaticParams() {
   // Always use mock data at build time, the backend API is not available during SSG
   return MOCK_OPPORTUNITIES.map((o) => ({ slug: o.slug }))
@@ -51,8 +40,8 @@ export async function generateMetadata({
   const opportunity = MOCK_OPPORTUNITIES.find((o) => o.slug === slug) ?? null
   if (!opportunity) return {}
 
-  const title = `${opportunity.title} | Investment Opportunity`
-  const description = opportunity.description
+  const title = `${opportunity.title} | ${SAMPLE_DEAL_LABEL}`
+  const description = `${SAMPLE_DEAL_LABEL}, not a live offering. ${opportunity.description}`
   const canonical = `${SITE_URL}/investments/${slug}/`
 
   return {
@@ -76,19 +65,17 @@ export default async function InvestmentDetailPage({
   const opportunity = MOCK_OPPORTUNITIES.find((o) => o.slug === slug) ?? null
   if (!opportunity) return notFound()
 
-  const status = statusConfig[opportunity.status]
-
   return (
     <main id="main-content" className="min-h-screen">
       <SEO
-        title={`${opportunity.title} | Investment Opportunity`}
-        description={opportunity.description}
+        title={`${opportunity.title} | ${SAMPLE_DEAL_LABEL}`}
+        description={`${SAMPLE_DEAL_LABEL}, not a live offering. ${opportunity.description}`}
         pathname={`/investments/${opportunity.slug}`}
         image={`${SITE_URL}${opportunity.image}`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Investments", url: `${SITE_URL}/investments` },
-          { name: "Opportunities", url: `${SITE_URL}/investments/opportunities` },
+          { name: "Sample deals", url: `${SITE_URL}/investments/opportunities` },
           { name: opportunity.title, url: `${SITE_URL}/investments/${opportunity.slug}` },
         ])}
       />
@@ -98,12 +85,11 @@ export default async function InvestmentDetailPage({
       <section className="border-b bg-muted/40" aria-label="Sample deal notice">
         <div className="container mx-auto px-4 py-3">
           <p className="text-sm text-foreground/70 text-center max-w-3xl mx-auto">
-            This is a sample deal page used to demonstrate how Ondo presents an offering. The
-            property, figures, and returns shown are illustrative, not a live investment.{" "}
+            {SAMPLE_DEAL_NOTICE}{" "}
             <Link href="/contact/" className="text-primary hover:underline">
               Contact us
             </Link>{" "}
-            for current offerings.
+            with questions.
           </p>
         </div>
       </section>
@@ -116,7 +102,7 @@ export default async function InvestmentDetailPage({
               <Button asChild variant="ghost" size="sm">
                 <Link href="/investments/opportunities">
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Opportunities
+                  Back to sample deals
                 </Link>
               </Button>
             </div>
@@ -134,8 +120,8 @@ export default async function InvestmentDetailPage({
                     priority
                     sizes="(max-width: 1024px) 100vw, 66vw"
                   />
-                  <Badge className="absolute top-4 left-4" variant={status.variant}>
-                    {status.label}
+                  <Badge className="absolute top-4 left-4" variant="default">
+                    {SAMPLE_DEAL_LABEL}
                   </Badge>
                 </div>
 
@@ -152,9 +138,9 @@ export default async function InvestmentDetailPage({
                 {/* Investment Summary */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="dark:text-foreground">Investment Summary</CardTitle>
+                    <CardTitle className="dark:text-foreground">Sample Investment Summary</CardTitle>
                     <CardDescription>
-                      All figures are projections and subject to change. Not a guarantee of returns.
+                      Made-up figures for illustration. Not a projection of any real deal and not a guarantee of returns.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -162,7 +148,7 @@ export default async function InvestmentDetailPage({
                       <div className="flex items-center gap-3">
                         <DollarSign className="h-5 w-5 text-primary flex-shrink-0" />
                         <div>
-                          <p className="text-sm text-foreground/70">Minimum Investment</p>
+                          <p className="text-sm text-foreground/70">Sample Minimum</p>
                           <p className="font-semibold dark:text-foreground">
                             ${opportunity.minInvestment.toLocaleString()}
                           </p>
@@ -171,7 +157,7 @@ export default async function InvestmentDetailPage({
                       <div className="flex items-center gap-3">
                         <TrendingUp className="h-5 w-5 text-primary flex-shrink-0" />
                         <div>
-                          <p className="text-sm text-foreground/70">Target Return (Projected)</p>
+                          <p className="text-sm text-foreground/70">Sample Target Return</p>
                           <p className="font-semibold dark:text-foreground">
                             {opportunity.targetReturn}
                           </p>
@@ -217,8 +203,8 @@ export default async function InvestmentDetailPage({
                         Creative Financing Options
                       </CardTitle>
                       <CardDescription>
-                        High-level overview of how this opportunity may be financed. Final terms are always
-                        defined in the official offering documents and subject to lender and regulatory approval.
+                        Illustrative financing ideas for this sample deal. There are no offering documents
+                        or terms because there is no offering.
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -270,7 +256,7 @@ export default async function InvestmentDetailPage({
                 {/* Highlights */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="dark:text-foreground">Investment Highlights</CardTitle>
+                    <CardTitle className="dark:text-foreground">Sample Highlights</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
@@ -291,7 +277,7 @@ export default async function InvestmentDetailPage({
                   <CardHeader>
                     <CardTitle className="dark:text-foreground">Risk Factors</CardTitle>
                     <CardDescription>
-                      All investments involve risk. Consider the following before investing.
+                      All investments involve risk. These are the kinds of risks an offering would need to disclose.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -309,10 +295,24 @@ export default async function InvestmentDetailPage({
                 </Card>
               </div>
 
-              {/* Sidebar: Contact Form */}
+              {/* Sidebar: no inquiry form, there is nothing to invest in */}
               <div>
                 <div className="sticky top-24">
-                  <InvestmentInquiryForm investmentTitle={opportunity.title} />
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="dark:text-foreground">This is a sample</CardTitle>
+                      <CardDescription>
+                        There is nothing to invest in on this page. If you want to talk about
+                        investing in Utah real estate, get in touch and we will answer questions
+                        or tell you if that changes.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button asChild className="w-full">
+                        <Link href="/contact/">Contact Ondo</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </div>

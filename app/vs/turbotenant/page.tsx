@@ -6,16 +6,22 @@ import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site
 import SEO from "@/components/seo"
 import Link from "next/link"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import {
+  COMPETITOR_FACTS_NOTE,
+  ONDO_PRICING_FRAMING,
+  TURBOTENANT_CATEGORIES,
+  TURBOTENANT_QUICK_STATS,
+} from "@/lib/vs-comparisons"
 
 export const metadata: Metadata = {
-  title: pageTitle(`${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`),
-  description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. See why property owners choose Ondo RE for AI risk scoring, 10 financial calculators, 6 auth roles, full PWA, and a complete owner-to-tenant platform.`,
+  title: pageTitle(`${SITE_BRAND_SHORT} vs TurboTenant: Full-Service vs DIY Software`),
+  description: `Ondo RE is full-service management; TurboTenant is software you run yourself. See how they compare on price, features, and tenant experience.`,
   alternates: {
     canonical: `${SITE_URL}/vs/turbotenant/`,
   },
   openGraph: {
-    title: pageTitleText(`${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`),
-    description: `Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. AI-powered risk scoring, 10 calculators, full PWA offline support, and 6 auth roles vs TurboTenant's basic free tier.`,
+    title: pageTitleText(`${SITE_BRAND_SHORT} vs TurboTenant: Full-Service vs DIY Software`),
+    description: `Ondo RE is full-service management; TurboTenant is software you run yourself. See how they compare on price, features, and tenant experience.`,
     url: `${SITE_URL}/vs/turbotenant/`,
     type: "website",
     images: DEFAULT_OG_IMAGES,
@@ -23,76 +29,32 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
-type FeatureRow = {
-  feature: string
-  category: string
-  ondo: boolean | string
-  turbotenant: boolean | string
-}
-
-const features: FeatureRow[] = [
-  // Core Platform
-  { category: "Core Platform", feature: "Owner portal", ondo: true, turbotenant: true },
-  { category: "Core Platform", feature: "Tenant portal", ondo: true, turbotenant: "Basic" },
-  { category: "Core Platform", feature: "PWA offline support", ondo: true, turbotenant: false },
-  { category: "Core Platform", feature: "Multi-role auth", ondo: "6 roles", turbotenant: "2 roles" },
-  // Payments
-  { category: "Payments", feature: "Rent collection", ondo: true, turbotenant: true },
-  { category: "Payments", feature: "Late fee automation", ondo: true, turbotenant: true },
-  { category: "Payments", feature: "Owner disbursements", ondo: true, turbotenant: false },
-  { category: "Payments", feature: "Mortgage calculators", ondo: "10 built-in", turbotenant: false },
-  { category: "Payments", feature: "Crypto payments", ondo: "Planned", turbotenant: false },
-  // Screening & Leasing
-  { category: "Screening & Leasing", feature: "Tenant screening", ondo: true, turbotenant: true },
-  { category: "Screening & Leasing", feature: "E-signatures", ondo: true, turbotenant: "$59/lease" },
-  { category: "Screening & Leasing", feature: "Credit building", ondo: "4 bureaus", turbotenant: true },
-  { category: "Screening & Leasing", feature: "Lease renewal", ondo: true, turbotenant: "Partial" },
-  // Unique to Ondo
-  { category: "Unique to Ondo", feature: "RE agent tools", ondo: true, turbotenant: false },
-  { category: "Unique to Ondo", feature: "Loan officer tools", ondo: true, turbotenant: false },
-  { category: "Unique to Ondo", feature: "Notary services", ondo: true, turbotenant: false },
-  { category: "Unique to Ondo", feature: "AI assistant", ondo: "10 tools", turbotenant: "Lease + listings" },
-  { category: "Unique to Ondo", feature: "Risk scoring ML", ondo: true, turbotenant: false },
-  { category: "Unique to Ondo", feature: "Vendor management", ondo: true, turbotenant: "Basic" },
-]
-
-const categories = ["Core Platform", "Payments", "Screening & Leasing", "Unique to Ondo"]
-
-const quickStats = [
-  { metric: "Financial calculators", ondo: "10", turbotenant: "0" },
-  { metric: "Auth roles", ondo: "6", turbotenant: "2" },
-  { metric: "AI tools", ondo: "10", turbotenant: "2" },
-  { metric: "Offline support", ondo: "Full PWA", turbotenant: "None" },
-]
-
 const ondoStrengths = [
   {
-    title: "10 built-in financial calculators",
+    title: "We run the rental for you",
     description:
-      "Mortgage, amortization, ROI, cap rate, cash-on-cash, and more, all built in. TurboTenant offers none. Ondo RE gives owners and agents the numbers they need to make smart investment decisions.",
+      "TurboTenant is software you operate yourself. Ondo RE manages the rental for a percentage of collected rent, so rent collection, tenant calls and maintenance coordination are ours to handle.",
   },
   {
-    title: "AI-powered tenant risk scoring",
+    title: "Tenant risk scoring",
     description:
-      "Our ML risk engine flags at-risk tenants before late payments become evictions. The AI assistant supports 10 distinct tools including portfolio summaries, maintenance triage, and proactive intervention suggestions.",
+      "Our risk engine flags at-risk tenants before late payments become evictions, alongside an AI assistant for portfolio summaries and maintenance triage.",
   },
   {
     title: "Full PWA with offline support",
     description:
-      "Ondo RE is a full Progressive Web App. Property managers and tenants can access key features without a network connection, a critical advantage for on-site inspections and maintenance.",
+      "Ondo RE is a full Progressive Web App. Property managers and tenants can access key features without a network connection, a useful advantage for on-site inspections and maintenance.",
   },
   {
-    title: "One platform for every role",
+    title: "Owner and tenant portals in one platform",
     description:
-      "Manager, owner, tenant, maintenance, agent, loan officer, all six roles have tailored dashboards and permissions. TurboTenant treats landlords and tenants as two roles, nothing more.",
+      "Owners see rent, maintenance and statements in one dashboard. Tenants pay rent and request repairs in the same system.",
   },
 ]
 
 const turbotenantAdvantages = [
-  "Free tier for landlords with a small portfolio (under 1–2 units)",
-  "State-specific lease templates included at no extra cost",
+  "A free tier for landlords who run their own rentals",
   "Simpler onboarding for non-technical landlords",
-  "Native iOS and Android apps available today",
 ]
 
 function CellValue({ value }: { value: boolean | string }) {
@@ -110,8 +72,8 @@ export default function VsTurboTenantPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <SEO
-        title={`${SITE_BRAND_SHORT} vs TurboTenant: The Best TurboTenant Alternative`}
-        description={`Compare ${SITE_BRAND_SHORT} and TurboTenant side by side. AI risk scoring, 10 calculators, full PWA, and 6 auth roles.`}
+        title={`${SITE_BRAND_SHORT} vs TurboTenant: Full-Service vs DIY Software`}
+        description={`Ondo RE is full-service management; TurboTenant is software you run yourself. See how they compare on price, features, and tenant experience.`}
         pathname="/vs/turbotenant/"
       />
 
@@ -121,20 +83,19 @@ export default function VsTurboTenantPage() {
           {SITE_BRAND_SHORT} vs TurboTenant
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/70">
-          TurboTenant is a solid free option for small landlords. But if you need AI risk scoring,
-          financial calculators, multi-role auth, or full PWA offline support, {SITE_BRAND_SHORT} is
-          the upgrade.
+          TurboTenant is a solid free option for landlords who run their own rentals. If you would
+          rather have the rental managed for you, here is how {SITE_BRAND_SHORT} compares.
         </p>
       </section>
 
       {/* Quick Stats */}
       <section className="mb-16">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {quickStats.map((stat) => (
-            <Card key={stat.metric} className="border-foreground/10">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {TURBOTENANT_QUICK_STATS.map((stat) => (
+            <Card key={stat.label} className="border-foreground/10">
               <CardContent className="p-5 text-center">
                 <p className="mb-3 text-xs font-medium uppercase tracking-wide text-foreground/50">
-                  {stat.metric}
+                  {stat.label}
                 </p>
                 <div className="flex items-center justify-center gap-3">
                   <div className="text-center">
@@ -143,7 +104,7 @@ export default function VsTurboTenantPage() {
                   </div>
                   <span className="text-foreground/20">vs</span>
                   <div className="text-center">
-                    <p className="text-xl font-bold text-foreground/40">{stat.turbotenant}</p>
+                    <p className="text-xl font-bold text-foreground/40">{stat.competitor}</p>
                     <p className="text-xs text-foreground/50">TurboTenant</p>
                   </div>
                 </div>
@@ -151,6 +112,12 @@ export default function VsTurboTenantPage() {
             </Card>
           ))}
         </div>
+      </section>
+
+      <section className="mb-16">
+        <p className="mx-auto max-w-3xl text-center text-sm text-foreground/70">
+          {ONDO_PRICING_FRAMING} <Link href="/pricing/" className="text-primary hover:underline">See Ondo&apos;s full pricing</Link>.
+        </p>
       </section>
 
       {/* Feature Comparison Table */}
@@ -173,8 +140,7 @@ export default function VsTurboTenantPage() {
             </tr>
           </thead>
           <tbody>
-            {categories.map((cat) => {
-              const rows = features.filter((f) => f.category === cat)
+            {TURBOTENANT_CATEGORIES.map(({ category: cat, rows }) => {
               return (
                 <>
                   <tr key={`cat-${cat}`}>
@@ -199,7 +165,7 @@ export default function VsTurboTenantPage() {
                         <CellValue value={row.ondo} />
                       </td>
                       <td className="border-b border-foreground/5 px-4 py-3 text-center">
-                        <CellValue value={row.turbotenant} />
+                        <CellValue value={row.competitor} />
                       </td>
                     </tr>
                   ))}
@@ -208,6 +174,7 @@ export default function VsTurboTenantPage() {
             })}
           </tbody>
         </table>
+        <p className="mt-4 text-center text-xs text-foreground/60">{COMPETITOR_FACTS_NOTE}</p>
       </section>
 
       {/* When Ondo is better */}
@@ -259,8 +226,7 @@ export default function VsTurboTenantPage() {
           Ready to try {SITE_BRAND_SHORT}?
         </h2>
         <p className="mb-6 text-foreground/70">
-          Join property owners who needed more than TurboTenant could offer. See our pricing or book
-          a 15-minute call with our team.
+          See our pricing or book a call with our team.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button asChild>

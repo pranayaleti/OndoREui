@@ -217,9 +217,6 @@ export default function ResourcesPage() {
                 <Link href="/academy">Academy</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link href="/about/testimonials">Reviews</Link>
-              </Button>
-              <Button asChild variant="outline">
                 <Link href="/resources/templates">Templates</Link>
               </Button>
               <Button asChild variant="outline">
