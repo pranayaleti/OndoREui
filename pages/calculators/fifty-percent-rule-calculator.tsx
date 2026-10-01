@@ -107,9 +107,9 @@ const FiftyPercentRuleCalculator: React.FC = () => {
   };
 
   const getExpenseRatioColor = (ratio: number) => {
-    if (ratio <= 40) return 'text-green-600';
+    if (ratio <= 40) return 'text-success-emphasis';
     if (ratio <= 50) return 'text-primary';
-    if (ratio <= 60) return 'text-yellow-600';
+    if (ratio <= 60) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -279,7 +279,7 @@ const FiftyPercentRuleCalculator: React.FC = () => {
                     ) : results.expenseRatio <= 50 ? (
                       <p className="text-primary font-medium">✓ Good! Expenses align with the 50% rule estimate.</p>
                     ) : results.expenseRatio <= 60 ? (
-                      <p className="text-yellow-600 font-medium">⚠ Expenses are higher than the 50% rule estimate. Review your costs.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Expenses are higher than the 50% rule estimate. Review your costs.</p>
                     ) : (
                       <p className="text-destructive-emphasis font-medium">⚠ High expenses! Significantly above the 50% rule estimate.</p>
                     )}

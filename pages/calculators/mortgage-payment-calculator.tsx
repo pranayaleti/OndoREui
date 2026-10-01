@@ -313,10 +313,10 @@ const MortgagePaymentCalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label htmlFor="loanTerm" className="block text-sm font-medium text-foreground mb-2">
+                <span id="loanTerm-label" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term
-                </label>
-                <div className="flex flex-wrap gap-2">
+                </span>
+                <div role="group" aria-labelledby="loanTerm-label" className="flex flex-wrap gap-2">
                   {[15, 20, 30, 50].map((years) => (
                     <button
                       key={years}
@@ -344,10 +344,10 @@ const MortgagePaymentCalculator: React.FC = () => {
 
               {/* Rate structure */}
               <div>
-                <label htmlFor="rateStructure" className="block text-sm font-medium text-foreground mb-2">
+                <span id="rateStructure-label" className="block text-sm font-medium text-foreground mb-2">
                   Rate Structure
-                </label>
-                <div className="flex flex-wrap gap-2">
+                </span>
+                <div role="group" aria-labelledby="rateStructure-label" className="flex flex-wrap gap-2">
                   {([
                     { id: 'fixed', label: 'Fixed rate' },
                     { id: 'arm-7-6', label: '7/6 ARM' },
@@ -753,16 +753,21 @@ function YearRow({ yr, formatCurrency }: {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
+      {/* Mouse users can click anywhere on the row; keyboard and screen reader users get the real button, whose click bubbles up to the row. */}
       <tr
         className="border-b border-gray-100 cursor-pointer hover:bg-muted/50 transition-colors"
         onClick={() => setExpanded(!expanded)}
-        role="button"
-        aria-expanded={expanded}
-        aria-label={`Year ${yr.year} details`}
       >
         <td className="px-2 py-2 font-medium text-foreground">
-          <span className="inline-block w-4 mr-1 text-xs text-foreground/50">{expanded ? '▼' : '▶'}</span>
-          Year {yr.year}
+          <button
+            type="button"
+            aria-expanded={expanded}
+            aria-label={`Year ${yr.year} monthly details`}
+            className="rounded font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span className="inline-block w-4 mr-1 text-xs text-foreground/50" aria-hidden="true">{expanded ? '▼' : '▶'}</span>
+            Year {yr.year}
+          </button>
         </td>
         <td className="px-2 py-2 text-right text-primary">{formatCurrency(yr.totalPrincipal)}</td>
         <td className="px-2 py-2 text-right text-destructive-emphasis">{formatCurrency(yr.totalInterest)}</td>

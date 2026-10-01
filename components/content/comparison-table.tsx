@@ -38,7 +38,7 @@ export function ComparisonTable({
         <caption className="mb-3 text-left text-sm text-foreground/70">{caption}</caption>
         <thead>
           <tr className="border-b-2 border-border">
-            <th scope="col" className="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-foreground/50">
+            <th scope="col" className="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-foreground/70">
               Question
             </th>
             {columns.map((column) => (
@@ -47,7 +47,7 @@ export function ComparisonTable({
                 scope="col"
                 className={
                   column.id === highlightId
-                    ? "bg-primary/10 px-3 py-3 text-sm font-bold text-primary"
+                    ? "bg-primary/10 px-3 py-3 text-sm font-bold text-orange-700 dark:text-primary"
                     : "px-3 py-3 text-sm font-bold text-foreground"
                 }
               >
@@ -84,7 +84,7 @@ export function ComparisonTable({
           ))}
         </tbody>
       </table>
-      {footnote ? <p className="mt-3 text-xs text-foreground/60">{footnote}</p> : null}
+      {footnote ? <p className="mt-3 text-xs text-foreground/70">{footnote}</p> : null}
     </div>
   )
 }

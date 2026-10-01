@@ -11,7 +11,7 @@ export function ProtectedPortalNotice({
   description: string
 }) {
   return (
-    <div className="container flex min-h-[60vh] items-center justify-center py-12">
+    <main className="container flex min-h-[60vh] items-center justify-center py-12">
       <div className="max-w-lg rounded-2xl border bg-background/95 p-8 text-center shadow-sm">
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-primary/5">
           <Lock className="h-5 w-5 text-primary" />
@@ -27,6 +27,6 @@ export function ProtectedPortalNotice({
           </Button>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

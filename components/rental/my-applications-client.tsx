@@ -90,7 +90,8 @@ export function MyApplicationsClient() {
   if (loading) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-10" aria-busy="true">
-        <p>Loading applications…</p>
+        <h1 className="text-2xl font-bold">My applications</h1>
+        <p className="mt-6">Loading applications…</p>
       </main>
     )
   }
@@ -98,7 +99,8 @@ export function MyApplicationsClient() {
   if (error) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-10">
-        <p className="text-destructive-emphasis">{error}</p>
+        <h1 className="text-2xl font-bold">My applications</h1>
+        <p role="alert" className="mt-6 text-destructive-emphasis">{error}</p>
       </main>
     )
   }

@@ -31,7 +31,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main id="main-content" className="min-h-screen">
+    <main className="min-h-screen">
       <WebMCPContactInfoTool />
       <SEO
         title="Contact Us"

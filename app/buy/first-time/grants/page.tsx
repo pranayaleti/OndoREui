@@ -116,7 +116,7 @@ export default function HousingGrantsPage() {
                 The down payment is often the first hurdle. Across the U.S., state housing agencies, local grants, and
                 federal loan programs can cover part of it. Terms, funding, and eligibility change. Confirm with the
                 agency. If a family gift will sit next to DPA on an FHA file, read{" "}
-                <Link href="/blog/dpa-stacked-with-fha-gift-funds" className="text-primary underline-offset-4 hover:underline">
+                <Link href="/blog/dpa-stacked-with-fha-gift-funds" className="prose-link">
                   how DPA stacks with an FHA gift
                 </Link>
                 .

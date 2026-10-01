@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useMemo, useCallback } from "react";
-import { listingWorksheetPath } from "@/lib/public-property";
+import { listingDetailPath, listingWorksheetPath } from "@/lib/public-property";
 import PropertyMap from "./property-map";
 
 interface SearchProperty {
@@ -19,6 +19,10 @@ interface SearchProperty {
   city?: string;
 }
 
+/** "Any" max price: no cap, so listings above the highest preset still show. */
+const ANY_PRICE = Number.POSITIVE_INFINITY;
+const ANY_PRICE_VALUE = "any";
+
 interface PropertySearchMapProps {
   properties: SearchProperty[];
   onPropertyClick?: (propertyId: string) => void;
@@ -29,7 +33,7 @@ export default function PropertySearchMap({
   onPropertyClick,
 }: PropertySearchMapProps) {
   const [query, setQuery] = useState("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, ANY_PRICE]);
   const [minBeds, setMinBeds] = useState(0);
   const [minBaths, setMinBaths] = useState(0);
   const [propertyType, setPropertyType] = useState("");
@@ -58,7 +62,7 @@ export default function PropertySearchMap({
 
   const handleReset = useCallback(() => {
     setQuery("");
-    setPriceRange([0, 10000]);
+    setPriceRange([0, ANY_PRICE]);
     setMinBeds(0);
     setMinBaths(0);
     setPropertyType("");
@@ -67,11 +71,11 @@ export default function PropertySearchMap({
   return (
     <div className="flex flex-col gap-4">
       {/* Search & Filters Bar */}
-      <div className="bg-card rounded-lg border border-gray-200 p-4">
+      <div className="bg-card rounded-lg border border-border p-4">
         <div className="flex flex-wrap gap-3 items-end">
           {/* Search input */}
           <div className="flex-1 min-w-[200px]">
-            <label htmlFor="search-query" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="search-query" className="block text-sm font-medium text-foreground mb-1">
               Search
             </label>
             <input
@@ -80,20 +84,25 @@ export default function PropertySearchMap({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by name or city..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md text-base md:text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
           {/* Price range */}
           <div className="min-w-[160px]">
-            <label htmlFor="filter-max-price" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="filter-max-price" className="block text-sm font-medium text-foreground mb-1">
               Max Price
             </label>
             <select
               id="filter-max-price"
-              value={priceRange[1]}
-              onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={Number.isFinite(priceRange[1]) ? priceRange[1] : ANY_PRICE_VALUE}
+              onChange={(e) =>
+                setPriceRange([
+                  priceRange[0],
+                  e.target.value === ANY_PRICE_VALUE ? ANY_PRICE : Number(e.target.value),
+                ])
+              }
+              className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md text-base md:text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             >
               <option value={1000}>$1,000/mo</option>
               <option value={1500}>$1,500/mo</option>
@@ -101,20 +110,20 @@ export default function PropertySearchMap({
               <option value={2500}>$2,500/mo</option>
               <option value={3000}>$3,000/mo</option>
               <option value={5000}>$5,000/mo</option>
-              <option value={10000}>Any</option>
+              <option value={ANY_PRICE_VALUE}>Any</option>
             </select>
           </div>
 
           {/* Bedrooms */}
           <div className="min-w-[100px]">
-            <label htmlFor="filter-min-beds" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="filter-min-beds" className="block text-sm font-medium text-foreground mb-1">
               Beds
             </label>
             <select
               id="filter-min-beds"
               value={minBeds}
               onChange={(e) => setMinBeds(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md text-base md:text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             >
               <option value={0}>Any</option>
               <option value={1}>1+</option>
@@ -126,14 +135,14 @@ export default function PropertySearchMap({
 
           {/* Bathrooms */}
           <div className="min-w-[100px]">
-            <label htmlFor="filter-min-baths" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="filter-min-baths" className="block text-sm font-medium text-foreground mb-1">
               Baths
             </label>
             <select
               id="filter-min-baths"
               value={minBaths}
               onChange={(e) => setMinBaths(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md text-base md:text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             >
               <option value={0}>Any</option>
               <option value={1}>1+</option>
@@ -145,14 +154,14 @@ export default function PropertySearchMap({
           {/* Property Type */}
           {propertyTypes.length > 0 && (
             <div className="min-w-[140px]">
-              <label htmlFor="filter-property-type" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="filter-property-type" className="block text-sm font-medium text-foreground mb-1">
                 Type
               </label>
               <select
                 id="filter-property-type"
                 value={propertyType}
                 onChange={(e) => setPropertyType(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md text-base md:text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               >
                 <option value="">All Types</option>
                 {propertyTypes.map((t) => (
@@ -167,13 +176,13 @@ export default function PropertySearchMap({
           {/* Reset */}
           <button
             onClick={handleReset}
-            className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 border border-gray-300 rounded-md hover:bg-muted"
+            className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground border border-input rounded-md hover:bg-muted"
           >
             Reset
           </button>
         </div>
 
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="text-sm text-muted-foreground mt-2">
           Showing {filteredProperties.length} of {properties.length} properties
         </p>
       </div>
@@ -200,18 +209,9 @@ export default function PropertySearchMap({
       {/* Property List (below map) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProperties.slice(0, 12).map((property) => (
-          <div
+          <article
             key={property.id}
-            role="button"
-            tabIndex={0}
-            className="bg-card rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
-            onClick={() => onPropertyClick?.(property.id)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                onPropertyClick?.(property.id);
-              }
-            }}
+            className="bg-card rounded-lg border border-border overflow-hidden hover:shadow-md transition-shadow"
           >
             {property.image && (
               <div className="relative w-full h-40">
@@ -225,24 +225,29 @@ export default function PropertySearchMap({
               </div>
             )}
             <div className="p-3">
-              <h3 className="font-semibold text-sm truncate">{property.title}</h3>
-              <p className="text-blue-600 font-bold text-lg">
+              <h3 className="font-semibold text-sm truncate">
+                <Link
+                  href={listingDetailPath(property.id)}
+                  className="underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {property.title}
+                </Link>
+              </h3>
+              <p className="text-primary font-bold text-lg">
                 ${property.price.toLocaleString()}/mo
               </p>
-              <p className="text-gray-500 text-xs">
+              <p className="text-muted-foreground text-xs">
                 {property.bedrooms} bed &middot; {property.bathrooms} bath
                 {property.type && ` \u00B7 ${property.type}`}
               </p>
               <Link
                 href={listingWorksheetPath(property.id)}
                 className="mt-2 inline-flex min-h-11 items-center text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                onClick={(event) => event.stopPropagation()}
-                onKeyDown={(event) => event.stopPropagation()}
               >
                 Worksheet
               </Link>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>

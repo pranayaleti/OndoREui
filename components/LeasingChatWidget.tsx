@@ -65,6 +65,14 @@ export default function LeasingChatWidget({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  /** Set when the visitor closes the panel, so focus goes back to the launcher once it mounts. */
+  const restoreFocusRef = useRef(false);
+
+  const closePanel = useCallback(() => {
+    restoreFocusRef.current = true;
+    setIsOpen(false);
+  }, []);
 
   const scrollToLatest = useCallback(() => {
     const el = transcriptRef.current;
@@ -75,17 +83,22 @@ export default function LeasingChatWidget({
     if (isOpen) {
       inputRef.current?.focus();
       scrollToLatest();
+    } else if (restoreFocusRef.current) {
+      // The launcher only mounts once the panel is closed, so focus it here rather than in
+      // the close handler, or keyboard users land on <body>.
+      restoreFocusRef.current = false;
+      launcherRef.current?.focus();
     }
   }, [isOpen, turns, scrollToLatest]);
 
   useEffect(() => {
     if (!isOpen || inline) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false);
+      if (e.key === 'Escape') closePanel();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [isOpen, inline]);
+  }, [isOpen, inline, closePanel]);
 
   /** Load prior turns when resuming from an emailed link. */
   useEffect(() => {
@@ -220,6 +233,7 @@ export default function LeasingChatWidget({
   if (!isOpen) {
     return (
       <button
+        ref={launcherRef}
         type="button"
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[#0B0B0B] px-5 py-3
@@ -253,7 +267,7 @@ export default function LeasingChatWidget({
         {!inline && (
           <button
             type="button"
-            onClick={() => setIsOpen(false)}
+            onClick={closePanel}
             className="ml-3 rounded p-1 text-neutral-400 transition hover:text-white
                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
                        focus-visible:outline-[#FF6A13]"

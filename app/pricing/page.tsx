@@ -108,7 +108,7 @@ const faqs = [
 
 export default function PricingPage() {
   return (
-    <main id="main-content" className="min-h-screen dark:bg-[var(--gradient-overlay)]">
+    <main className="min-h-screen dark:bg-[var(--gradient-overlay)]">
       <SEO
         title="Pricing"
         description="Transparent property management pricing for Utah property owners. No hidden fees."

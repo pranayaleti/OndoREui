@@ -112,7 +112,7 @@ export function DocumentUploader({
         }}
       />
       {busy ? <p className="mt-2 text-xs text-muted-foreground">Uploading…</p> : null}
-      {error ? <p className="mt-2 text-xs text-destructive-emphasis">{error}</p> : null}
+      {error ? <p role="alert" className="mt-2 text-xs text-destructive-emphasis">{error}</p> : null}
       <p className="mt-2 text-xs text-muted-foreground">PDF or photo, 10 MB max. On a phone you can use the camera.</p>
     </div>
   )

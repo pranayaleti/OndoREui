@@ -205,10 +205,15 @@ export default function MobileNotaryUtahCountyGuide() {
             </p>
 
             <h3>Process at a glance</h3>
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`Request → Confirm RON acceptance → Quote → Video session
-→ ID verified → Electronic seal → Documents returned`}
-            </pre>
+            <ol>
+              <li>Request</li>
+              <li>Confirm RON acceptance</li>
+              <li>Quote</li>
+              <li>Video session</li>
+              <li>ID verified</li>
+              <li>Electronic seal</li>
+              <li>Documents returned</li>
+            </ol>
 
             <h2>Book a remote session</h2>
             <ul>

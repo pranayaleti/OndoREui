@@ -168,10 +168,11 @@ const IncomeCalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-border bg-background rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -211,8 +212,9 @@ const IncomeCalculator: React.FC = () => {
 
               {/* Loan Program */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Loan Program</label>
+                <label htmlFor="loanProgram" className="block text-sm font-medium text-foreground mb-2">Loan Program</label>
                 <select
+                  id="loanProgram"
                   value={formData.program}
                   onChange={(e) => handleInputChange('program', e.target.value as LoanProgram)}
                   className="w-full px-4 py-3 border border-border bg-background rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -248,7 +250,7 @@ const IncomeCalculator: React.FC = () => {
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
                         <p className="text-sm text-primary mb-1">Annual Income Needed</p>
-                        <p className="text-3xl font-bold text-green-700">{formatCurrency(results.requiredAnnualIncome)}</p>
+                        <p className="text-3xl font-bold text-success-emphasis">{formatCurrency(results.requiredAnnualIncome)}</p>
                       </div>
                     </div>
                     

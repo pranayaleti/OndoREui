@@ -37,7 +37,7 @@ export const metadata: Metadata = pageCanonicalMetadata("/moving-to-utah", {
 
 export default function MovingToUtahPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <SEO
         title={title}
         description={description}
@@ -73,11 +73,11 @@ export default function MovingToUtahPage() {
         <UtahArrivalDesk />
         <p className="mt-10 max-w-3xl text-sm text-foreground/70">
           Buying before the first Utah paycheck is a seasoning question:{" "}
-          <Link href="/blog/relocating-to-utah-job-seasoning" className="text-primary underline-offset-4 hover:underline">
+          <Link href="/blog/relocating-to-utah-job-seasoning" className="prose-link">
             income when the job starts in 60 days
           </Link>
           . Utah purchase-contract clocks are separate from underwriting:{" "}
-          <Link href="/blog/utah-repc-deadline-and-your-loan" className="text-primary underline-offset-4 hover:underline">
+          <Link href="/blog/utah-repc-deadline-and-your-loan" className="prose-link">
             what a REPC deadline does to your loan
           </Link>
           . {ARRIVAL_LENDING_DISCLOSURE} {ARRIVAL_REAL_ESTATE_DISCLOSURE} {ARRIVAL_FAIR_HOUSING}

@@ -31,7 +31,7 @@ export function AudienceSolutionsSection() {
               Pay rent, request maintenance, and stay organized in one place, backed by responsive property management.
             </p>
             <p className="mt-4">
-              <Link href="/solutions/tenants" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/solutions/tenants" className="inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 hover:underline">
                 Tenant solutions
               </Link>
             </p>
@@ -48,7 +48,7 @@ export function AudienceSolutionsSection() {
             <p className="mt-4">
               <Link
                 href="/solutions/investors"
-                className="font-medium text-primary underline-offset-4 hover:underline"
+                className="inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 hover:underline"
               >
                 Investor solutions
               </Link>
@@ -62,11 +62,11 @@ export function AudienceSolutionsSection() {
             <p className="text-foreground/70">
               Education-first guidance for purchases and refinances, loan programs and calculators to match your goals.
             </p>
-            <p className="mt-4">
-              <Link href="/loans" className="mr-4 font-medium text-primary underline-offset-4 hover:underline">
+            <p className="mt-4 flex flex-wrap items-center gap-x-4">
+              <Link href="/loans" className="inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 hover:underline">
                 Mortgages
               </Link>
-              <Link href="/buy" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/buy" className="inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 hover:underline">
                 Buy a home
               </Link>
             </p>

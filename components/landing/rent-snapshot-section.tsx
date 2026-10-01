@@ -80,7 +80,7 @@ export function RentSnapshotSection() {
                 {[1, 2, 3, 4, 5].map((n) => (
                   <label
                     key={n}
-                    className={`flex cursor-pointer items-center justify-center rounded-md border-2 py-2.5 text-sm font-medium transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary ${
+                    className={`flex cursor-pointer items-center justify-center rounded-md border-2 py-2.5 text-sm font-medium transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary has-[:focus-visible]:ring-offset-2 ${
                       bedrooms === n
                         ? "border-primary bg-primary/5 text-primary"
                         : "border-border text-foreground/70 hover:border-primary/40"

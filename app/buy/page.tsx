@@ -79,7 +79,7 @@ const services = [
 
 export default function BuyPage() {
   return (
-    <>
+    <main>
       <WebMCPMortgageTool />
       <SEO
         title="Buy a Home in Utah | Agent-Led Search & Lending"
@@ -251,6 +251,6 @@ export default function BuyPage() {
           serviceType: "Real Estate Sales",
         })}
       </Script>
-    </>
+    </main>
   )
 }

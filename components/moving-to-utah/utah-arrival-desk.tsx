@@ -270,7 +270,7 @@ export function UtahArrivalDesk() {
           {selectedRow || path === "people-ops" || path === "buy" || path === "leaving-a-home" ? (
             <Link
               href={primaryCta.href}
-              className="inline-flex min-h-11 items-center rounded-md bg-gradient-to-r from-orange-500 to-red-800 px-4 text-base font-bold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex min-h-11 items-center rounded-md bg-primary px-4 text-base font-bold text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {primaryCta.label}
             </Link>

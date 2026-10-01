@@ -72,6 +72,8 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
+  /** Set when the visitor closes the panel, so focus goes back to the launcher once it mounts. */
+  const restoreFocusRef = useRef(false);
 
   const hidden = useMemo(
     () => HIDDEN_PATH_PREFIXES.some((p) => (pathname ?? '').startsWith(p)),
@@ -79,7 +81,15 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
   );
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      // The launcher only mounts once the panel is closed, so focus it here rather than in
+      // the close handler, or keyboard and screen reader users land on <body>.
+      if (restoreFocusRef.current) {
+        restoreFocusRef.current = false;
+        launcherRef.current?.focus();
+      }
+      return;
+    }
     inputRef.current?.focus();
     const el = transcriptRef.current;
     if (el) el.scrollTop = el.scrollHeight;
@@ -89,10 +99,10 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
     if (!isOpen || inline) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
+      // Return focus to the control that opened the panel (done in the effect above, once the
+      // launcher has mounted), or the close is a dead end for keyboard and screen reader users.
+      restoreFocusRef.current = true;
       setIsOpen(false);
-      // Return focus to the control that opened the panel, or the close is a dead end for
-      // keyboard and screen reader users.
-      launcherRef.current?.focus();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -189,8 +199,8 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
           <button
             type="button"
             onClick={() => {
+              restoreFocusRef.current = true;
               setIsOpen(false);
-              launcherRef.current?.focus();
             }}
             className="ml-3 rounded p-1 text-neutral-400 transition hover:text-white
                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2

@@ -60,17 +60,17 @@ export function RentalContactForm({ propertyId }: { propertyId: string }) {
       </label>
       <div>
         <Label htmlFor="cname">Name</Label>
-        <Input id="cname" className="mt-1" required value={name} onChange={(e) => setName(e.target.value)} />
+        <Input id="cname" className="mt-1" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
       <div>
         <Label htmlFor="cemail">Email</Label>
-        <Input id="cemail" type="email" className="mt-1" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input id="cemail" type="email" className="mt-1" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
         <Label htmlFor="cmsg">Message</Label>
         <Textarea id="cmsg" className="mt-1" value={message} onChange={(e) => setMessage(e.target.value)} />
       </div>
-      {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
+      {error ? <p role="alert" className="text-sm text-destructive-emphasis">{error}</p> : null}
       <Button type="submit" variant="outline" className="min-h-11" disabled={busy}>
         {busy ? "Sending…" : "Send message"}
       </Button>

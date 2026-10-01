@@ -159,7 +159,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
   const serviceBasePath = service === "property-management" ? "property-management" : service === "buy-sell" ? "buy-sell" : "loans"
 
   return (
-    <div className="container mx-auto px-4 py-10 space-y-10">
+    <main className="container mx-auto px-4 py-10 space-y-10">
       <Script id="city-business-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(businessJsonLd) }} />
       <Script id="city-service-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }} />
       <Script id="city-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }} />
@@ -168,14 +168,6 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         { label: serviceLabel, href: `/${serviceBasePath}/` },
         { label: city.name },
       ]} />
-      <LocalProofCTA city={city} service={service} marketData={marketData} />
-      <CityPageLeadCapture
-        cityName={city.name}
-        heading={`Talk with our ${city.name} team`}
-        prefillMessage={leadPrefill}
-        defaultInquiryType={leadInquiryType}
-      />
-
       <Card>
         <CardHeader>
           <h1 className="text-xl font-semibold leading-none tracking-tight sm:text-2xl md:text-3xl">
@@ -216,6 +208,14 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           )}
         </CardContent>
       </Card>
+
+      <LocalProofCTA city={city} service={service} marketData={marketData} />
+      <CityPageLeadCapture
+        cityName={city.name}
+        heading={`Talk with our ${city.name} team`}
+        prefillMessage={leadPrefill}
+        defaultInquiryType={leadInquiryType}
+      />
 
       {/* Market data snapshot */}
       {marketData && (
@@ -442,15 +442,15 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           <p>
             For detailed FAQs on buying, selling, property management, payments, Notary, and more, visit our centralized Help Center.
           </p>
-          <Link href={faqHref}>
-            <Button size="lg">View all FAQs</Button>
-          </Link>
+          <Button asChild size="lg">
+            <Link href={faqHref}>View all FAQs</Link>
+          </Button>
         </CardContent>
       </Card>
 
       {/* Lending disclosure is a template property: every loans city/ZIP page carries it. */}
       {service === "loans" && <LendingDisclaimer />}
-    </div>
+    </main>
   )
 }
 

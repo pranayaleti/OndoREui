@@ -154,13 +154,15 @@ export default function PrepareForRemoteOnlineNotarySession() {
             </ul>
 
             <h3>Session Flow (Diagram)</h3>
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`Pre-check: IDs + final PDF + witness rules
-          ↓
-Join call → KBA → ID scan → live notarization
-          ↓
-E-seal + audit trail → download & share with title/lender`}
-            </pre>
+            <ol>
+              <li>Pre-check: IDs + final PDF + witness rules</li>
+              <li>Join call</li>
+              <li>KBA</li>
+              <li>ID scan</li>
+              <li>Live notarization</li>
+              <li>E-seal + audit trail</li>
+              <li>Download and share with title/lender</li>
+            </ol>
 
             <h2>After the Session</h2>
             <ul>

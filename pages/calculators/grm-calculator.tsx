@@ -72,9 +72,9 @@ const GRMCalculator: React.FC = () => {
   };
 
   const getGRMColor = (grm: number) => {
-    if (grm <= 10) return 'text-green-600';
+    if (grm <= 10) return 'text-success-emphasis';
     if (grm <= 15) return 'text-primary';
-    if (grm <= 20) return 'text-yellow-600';
+    if (grm <= 20) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -129,9 +129,6 @@ const GRMCalculator: React.FC = () => {
 
               {/* Target GRM */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Target GRM (for comparison)
-                </label>
                 <NumberField
                   id="targetGRM"
                   label="Target GRM (for comparison)"
@@ -215,7 +212,7 @@ const GRMCalculator: React.FC = () => {
                     ) : results.grossRentMultiplier <= 15 ? (
                       <p className="text-primary font-medium">✓ Good GRM. This property shows decent income potential.</p>
                     ) : results.grossRentMultiplier <= 20 ? (
-                      <p className="text-yellow-600 font-medium">⚠ Moderate GRM. Consider if appreciation potential justifies the lower income ratio.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Moderate GRM. Consider if appreciation potential justifies the lower income ratio.</p>
                     ) : (
                       <p className="text-destructive-emphasis font-medium">⚠ High GRM. This property may be overpriced relative to rental income.</p>
                     )}

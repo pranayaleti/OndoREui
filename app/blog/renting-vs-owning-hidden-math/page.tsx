@@ -60,12 +60,12 @@ export default function RentingVsOwningHiddenMath() {
             </ul>
 
             <h2>Flow: Renting vs Owning</h2>
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`Down payment → (invest elsewhere?) → grows at alt return
-Mortgage → P&I + taxes/ins/HOA/maint → compare to rent
-Equity velocity → amortization + appreciation − carry costs
-Breakeven → when equity outpaces invested-down-payment scenario`}
-            </pre>
+            <ul>
+              <li><strong>Down payment</strong>: could be invested elsewhere, where it grows at an alternative return.</li>
+              <li><strong>Mortgage</strong>: P&amp;I plus taxes, insurance, HOA and maintenance; compare to rent.</li>
+              <li><strong>Equity velocity</strong>: amortization + appreciation − carry costs.</li>
+              <li><strong>Breakeven</strong>: when equity outpaces the invested-down-payment scenario.</li>
+            </ul>
 
             <h2>Stress Tests (Do This Before Deciding)</h2>
             <ul>

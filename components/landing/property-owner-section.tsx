@@ -34,7 +34,7 @@ export function PropertyOwnerSection() {
             </div>
             <Link
               href="/calculators/owner-vs-self"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
+              className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
             >
               <Calculator className="h-4 w-4" aria-hidden="true" />
               Run the numbers: self-manage vs Ondo

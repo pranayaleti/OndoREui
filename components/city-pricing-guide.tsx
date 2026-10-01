@@ -70,7 +70,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
   const closingCosts = market ? Math.round(market.medianHomePrice * 0.03) : null
 
   return (
-    <>
+    <main>
       {/* Hero */}
       <section className="bg-gradient-to-br from-primary/5 to-background py-16 md:py-20">
         <div className="container mx-auto px-4 text-center">
@@ -197,7 +197,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
                 <p className="text-2xl font-bold">{fmtUsd(monthlyPayment15!)}/mo</p>
               </div>
             </div>
-            <p className="text-xs text-foreground/40 mt-2">
+            <p className="text-xs text-muted-foreground mt-2">
               * Estimates exclude property taxes, insurance, and HOA. Rates are illustrative, get a personalized quote.
             </p>
           </section>
@@ -318,6 +318,6 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
           ]}
         />
       </div>
-    </>
+    </main>
   )
 }

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { render, screen, waitFor } from "@testing-library/react"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import LeasingChatWidget from "./LeasingChatWidget"
 
 vi.mock("next/link", () => ({
@@ -45,5 +45,26 @@ describe("LeasingChatWidget resume mode", () => {
     render(<LeasingChatWidget propertyId="" initialSessionId={SESSION} inline />)
     await waitFor(() => expect(screen.getByRole("link", { name: /contact the team/i })).toBeInTheDocument())
     expect(screen.queryByLabelText(/your message to the leasing assistant/i)).not.toBeInTheDocument()
+  })
+})
+
+describe("LeasingChatWidget focus management", () => {
+  it("moves focus into the input on open and back to the launcher on Escape", async () => {
+    render(<LeasingChatWidget propertyId="p1" />)
+    const launcher = screen.getByRole("button", { name: /open the leasing assistant/i })
+    fireEvent.click(launcher)
+    expect(screen.getByLabelText(/your message to the leasing assistant/i)).toHaveFocus()
+
+    fireEvent.keyDown(window, { key: "Escape" })
+    const relaunched = await screen.findByRole("button", { name: /open the leasing assistant/i })
+    expect(relaunched).toHaveFocus()
+  })
+
+  it("moves focus back to the launcher when the close button is used", async () => {
+    render(<LeasingChatWidget propertyId="p1" />)
+    fireEvent.click(screen.getByRole("button", { name: /open the leasing assistant/i }))
+    fireEvent.click(screen.getByRole("button", { name: /close the leasing assistant/i }))
+    const relaunched = await screen.findByRole("button", { name: /open the leasing assistant/i })
+    expect(relaunched).toHaveFocus()
   })
 })

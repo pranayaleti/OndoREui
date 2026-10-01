@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -53,6 +53,16 @@ function asPayload(value: unknown): Payload {
   return asWizardPayload(value)
 }
 
+/** Blocks "Save and continue" on the applicant step until the contact basics exist. Back still saves drafts. */
+function missingApplicantFields(applicant: NonNullable<Payload["applicant"]>): string | null {
+  if (!applicant.firstName?.trim()) return "Enter your first name to continue."
+  if (!applicant.lastName?.trim()) return "Enter your last name to continue."
+  const email = applicant.email?.trim() ?? ""
+  if (!email) return "Enter your email address to continue."
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Enter a valid email address to continue."
+  return null
+}
+
 export function RentalApplicationWizard({
   applicationId,
   resumeToken,
@@ -73,6 +83,8 @@ export function RentalApplicationWizard({
   const [submitted, setSubmitted] = useState(false)
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [feeMessage, setFeeMessage] = useState("")
+  const stepHeadingRef = useRef<HTMLHeadingElement>(null)
+  const focusHeadingOnStepChange = useRef(false)
 
   // Server-owned data only (bundle: documents, co-applicants, property, checklist).
   // Local payload and step are the applicant's unsaved edits; a refresh must not wipe them.
@@ -118,6 +130,13 @@ export function RentalApplicationWizard({
     return () => window.removeEventListener("pagehide", onPageHide)
   }, [submitted, bundle?.property?.publicId, bundle?.property?.id])
 
+  // Move focus to the step heading after the person moves to another step (not on first load).
+  useEffect(() => {
+    if (!focusHeadingOnStepChange.current) return
+    focusHeadingOnStepChange.current = false
+    stepHeadingRef.current?.focus()
+  }, [step])
+
   /** Saves progress. Resolves true only when the server accepted the save. */
   const persist = async (nextStep: WizardStepId, nextPayload = payload): Promise<boolean> => {
     setBusy(true)
@@ -131,6 +150,7 @@ export function RentalApplicationWizard({
       })
       setBundle(saved)
       setPayload(asPayload(saved.application.wizardPayload))
+      focusHeadingOnStepChange.current = nextStep !== step
       setStep(nextStep)
       return true
     } catch (err) {
@@ -159,7 +179,7 @@ export function RentalApplicationWizard({
   if (error && !bundle) {
     return (
       <main className="mx-auto max-w-xl px-4 py-12">
-        <p className="text-destructive-emphasis">{error}</p>
+        <p role="alert" className="text-destructive-emphasis">{error}</p>
       </main>
     )
   }
@@ -190,7 +210,9 @@ export function RentalApplicationWizard({
     <main className="mx-auto max-w-2xl px-4 pb-28 pt-6">
       <header className="mb-6 space-y-3">
         <p className="text-sm text-muted-foreground">Step {current.number} of {WIZARD_STEPS.length}</p>
-        <h1 className="text-2xl font-bold">{current.title}</h1>
+        <h1 ref={stepHeadingRef} tabIndex={-1} className="text-2xl font-bold outline-none">
+          {current.title}
+        </h1>
         <ApplicationProgress currentStep={step} percent={bundle.application.completionPercent} />
         <div className="flex flex-wrap items-center gap-2">
           <ApplicationStatusBadge status={bundle.application.status} />
@@ -213,23 +235,23 @@ export function RentalApplicationWizard({
         <section className="space-y-3">
           <div>
             <Label htmlFor="fn">First name</Label>
-            <Input id="fn" className="mt-1" value={applicant.firstName ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, firstName: e.target.value } }))} />
+            <Input id="fn" className="mt-1" required autoComplete="given-name" value={applicant.firstName ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, firstName: e.target.value } }))} />
           </div>
           <div>
             <Label htmlFor="ln">Last name</Label>
-            <Input id="ln" className="mt-1" value={applicant.lastName ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, lastName: e.target.value } }))} />
+            <Input id="ln" className="mt-1" required autoComplete="family-name" value={applicant.lastName ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, lastName: e.target.value } }))} />
           </div>
           <div>
             <Label htmlFor="em">Email</Label>
-            <Input id="em" type="email" className="mt-1" value={applicant.email ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, email: e.target.value } }))} />
+            <Input id="em" type="email" className="mt-1" required autoComplete="email" value={applicant.email ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, email: e.target.value } }))} />
           </div>
           <div>
             <Label htmlFor="ph">Phone</Label>
-            <Input id="ph" className="mt-1" value={applicant.phone ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, phone: e.target.value } }))} />
+            <Input id="ph" type="tel" className="mt-1" autoComplete="tel" value={applicant.phone ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, phone: e.target.value } }))} />
           </div>
           <div>
             <Label htmlFor="addr">Current address</Label>
-            <Input id="addr" className="mt-1" value={applicant.currentAddress ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, currentAddress: e.target.value } }))} />
+            <Input id="addr" className="mt-1" autoComplete="street-address" value={applicant.currentAddress ?? ""} onChange={(e) => setPayload((p) => ({ ...p, applicant: { ...applicant, currentAddress: e.target.value } }))} />
           </div>
         </section>
       ) : null}
@@ -509,7 +531,7 @@ export function RentalApplicationWizard({
         </section>
       ) : null}
 
-      {error ? <p className="mt-4 text-sm text-destructive-emphasis">{error}</p> : null}
+      {error ? <p role="alert" className="mt-4 text-sm text-destructive-emphasis">{error}</p> : null}
 
       <div className="fixed inset-x-0 bottom-0 border-t border-border bg-background/95 p-3 backdrop-blur">
         <div className="mx-auto flex max-w-2xl gap-2">
@@ -527,6 +549,13 @@ export function RentalApplicationWizard({
             className="min-h-11 flex-1"
             disabled={busy}
             onClick={() => {
+              if (step === "applicant") {
+                const missing = missingApplicantFields(applicant)
+                if (missing) {
+                  setError(missing)
+                  return
+                }
+              }
               const next = WIZARD_STEPS[Math.min(index + 1, WIZARD_STEPS.length - 1)]!.id
               void persist(next, payload)
             }}

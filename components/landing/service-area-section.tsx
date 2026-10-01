@@ -38,7 +38,6 @@ const COUNTY_ORDER = ["Weber", "Davis", "Salt Lake", "Utah", "Juab"] as const
 
 export function ServiceAreaSection() {
   const [query, setQuery] = useState("")
-  const [selectedName, setSelectedName] = useState(DEFAULT_COVERAGE_CITY)
 
   const matches = useMemo(
     () => filterCoverageCities(utahCitiesFromNorthOgdenToNephi, query),
@@ -47,7 +46,7 @@ export function ServiceAreaSection() {
   const displayCity = resolveCoverageCityName(
     utahCitiesFromNorthOgdenToNephi,
     query,
-    selectedName,
+    DEFAULT_COVERAGE_CITY,
   )
   const displayData = cityMarketData[displayCity]
   const displaySlug = toCitySlug(displayCity)
@@ -88,13 +87,13 @@ export function ServiceAreaSection() {
               className="min-h-11 pl-9"
             />
           </div>
+          {/* Announce the card change for typed searches only, not for pointer or focus movement. */}
+          <p role="status" className="sr-only">
+            {query.trim() && matches.length > 0 ? `Showing market stats for ${displayCity}.` : ""}
+          </p>
         </div>
 
-        <div
-          className="mb-8 rounded-xl border border-border bg-card px-4 py-4 sm:px-6"
-          aria-live="polite"
-          aria-atomic="true"
-        >
+        <div className="mb-8 rounded-xl border border-border bg-card px-4 py-4 sm:px-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap justify-center gap-6 text-center sm:justify-start sm:text-left">
               <div>
@@ -169,8 +168,6 @@ export function ServiceAreaSection() {
                             : "border-border/60"
                         }`}
                         aria-current={selected ? "true" : undefined}
-                        onFocus={() => setSelectedName(city.name)}
-                        onPointerEnter={() => setSelectedName(city.name)}
                       >
                         <MapPin className="h-3 w-3 text-primary shrink-0" aria-hidden="true" />
                         {city.name}

@@ -15,10 +15,10 @@ import {
 
 function FeeRow({ label, note, amount }: { label: string; note?: string; amount: string }) {
   return (
-    <div className="flex justify-between gap-4 border-b border-gray-700 py-3 last:border-b-0">
+    <div className="flex justify-between gap-4 border-b border-border py-3 last:border-b-0">
       <div>
-        <p className="text-white font-medium">{label}</p>
-        {note ? <p className="text-gray-400 text-sm mt-0.5">{note}</p> : null}
+        <p className="text-foreground font-medium">{label}</p>
+        {note ? <p className="text-muted-foreground text-sm mt-0.5">{note}</p> : null}
       </div>
       <span className="text-primary font-semibold shrink-0">{amount}</span>
     </div>
@@ -30,10 +30,10 @@ export function NotaryFees() {
     <>
       <section id="fees" className="scroll-mt-24 py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-4">
             ONDO Notary Fees & Availability
           </h2>
-          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Utah-compliant remote online notarization, quoted before we book. No in-office visits
             and no published travel schedule, sessions are completed by secure video.
           </p>
@@ -41,7 +41,7 @@ export function NotaryFees() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Remote online (RON)</h3>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-muted-foreground text-sm mb-4">
                 Available nationwide. Confirm the receiving party accepts electronic notarization
                 before you book.
               </p>
@@ -54,14 +54,14 @@ export function NotaryFees() {
 
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Hours</h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-foreground/80 mb-4">
                 {NOTARY_HOURS_LABEL}
                 <br />
                 Weekends by appointment
               </p>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 Same-day is best-effort when capacity allows, not a guaranteed SLA.{" "}
-                <Link href="/notary/on-demand" className="text-primary underline-offset-4 hover:underline">
+                <Link href="/notary/on-demand" className="text-primary underline underline-offset-4 hover:no-underline">
                   On-demand details
                 </Link>
               </p>
@@ -71,7 +71,7 @@ export function NotaryFees() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Scheduling and witnesses</h3>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-muted-foreground text-sm mb-4">
                 Same-day, after-hours and weekend sessions are best-effort when capacity allows. We
                 do not add a scheduling surcharge to a remote notarial act.
               </p>
@@ -84,7 +84,7 @@ export function NotaryFees() {
 
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Loan signing</h3>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-muted-foreground text-sm mb-4">
                 Remote signing-agent sessions for packages your title company or lender accepts by
                 RON. Notarial acts inside the package stay at ${NOTARY_RON_ACT_USD} each. Title and
                 escrow invoices welcome.
@@ -108,10 +108,10 @@ export function NotaryFees() {
 
           <div className="p-6 bg-background border border-primary rounded-lg">
             <h3 className="text-xl text-primary font-semibold mb-4">Example quotes</h3>
-            <ul className="space-y-4 text-sm text-gray-300">
+            <ul className="space-y-4 text-sm text-foreground/80">
               {NOTARY_EXAMPLE_QUOTES.map((quote) => (
                 <li key={quote.title}>
-                  <strong className="text-white">{quote.title}.</strong> {quote.detail}
+                  <strong className="text-foreground">{quote.title}.</strong> {quote.detail}
                 </li>
               ))}
             </ul>
@@ -121,10 +121,10 @@ export function NotaryFees() {
 
       <section id="policies" className="scroll-mt-24 py-16 md:py-24 bg-card dark:bg-background border-y border-border">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-4">
             Policies & what to expect
           </h2>
-          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Posted so there are no surprises at the appointment.
           </p>
 
@@ -151,7 +151,7 @@ export function NotaryFees() {
 
             <div className="p-6 bg-background border border-primary rounded-lg md:col-span-2">
               <h3 className="text-xl text-primary font-semibold mb-4">Limits we follow</h3>
-              <ul className="text-sm text-gray-300 space-y-2">
+              <ul className="text-sm text-foreground/80 space-y-2">
                 <li>
                   • ONDO Notary does not prepare legal documents or provide legal, tax, or lending
                   advice.

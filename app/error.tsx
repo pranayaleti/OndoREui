@@ -21,7 +21,7 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 bg-background dark:bg-transparent">
+    <main className="flex items-center justify-center min-h-screen p-4 bg-background dark:bg-transparent">
       <SEO
         title="Error | Ondo Real Estate"
         description="An unexpected error occurred. Please try again or return home."
@@ -51,6 +51,6 @@ export default function Error({
           </Link>
         </CardFooter>
       </Card>
-    </div>
+    </main>
   )
 }

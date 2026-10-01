@@ -59,4 +59,17 @@ describe("Footer", () => {
     // Licensing is off by default, so no lender strip yet.
     expect(text).not.toMatch(/Equal Housing Lender/)
   })
+
+  it("labels the link groups with an sr-only h2 and keeps each group heading as an h3", () => {
+    const { container } = render(<Footer />)
+    const siteLinks = screen.getByRole("heading", { level: 2, name: "Site links" })
+    expect(siteLinks).toHaveClass("sr-only")
+    // Desktop heading link and mobile accordion button are separate h3s, one hidden per breakpoint.
+    const buying = screen.getAllByRole("heading", { level: 3, name: "Buying a Home" })
+    expect(buying).toHaveLength(2)
+    expect(container.querySelector("h3 > button[aria-expanded]")).not.toBeNull()
+    // No heading in the footer is deeper than h3 without an h2 before it.
+    const order = Array.from(container.querySelectorAll("h2,h3")).map((h) => h.tagName)
+    expect(order.indexOf("H3")).toBeGreaterThan(order.indexOf("H2"))
+  })
 })

@@ -38,7 +38,7 @@ export function HousingWeManageSection() {
               <p className="mt-3 text-sm text-foreground/70">{featured.opsNote}</p>
               <Link
                 href={featured.href}
-                className="mt-6 inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline"
+                className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-primary underline-offset-4 hover:underline"
               >
                 {featured.linkLabel}
               </Link>
@@ -55,7 +55,7 @@ export function HousingWeManageSection() {
                 <p className="mt-2 text-sm text-foreground/70">{type.opsNote}</p>
                 <Link
                   href={type.href}
-                  className="mt-3 inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline"
+                  className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline-offset-4 hover:underline"
                 >
                   {type.linkLabel}
                 </Link>

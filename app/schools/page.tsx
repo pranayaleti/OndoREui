@@ -88,7 +88,7 @@ export default function SchoolsHubPage() {
                       <span key={city}>
                         <Link
                           href={`/locations/${toCitySlug(city)}/`}
-                          className="text-primary underline-offset-4 hover:underline"
+                          className="prose-link"
                         >
                           {city}
                         </Link>

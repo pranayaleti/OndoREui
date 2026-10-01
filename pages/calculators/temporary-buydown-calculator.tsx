@@ -119,10 +119,11 @@ const TemporaryBuydownCalculator: React.FC = () => {
               />
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="buydownStructure" className="block text-sm font-medium text-foreground mb-2">
                   Buydown Structure
                 </label>
                 <select
+                  id="buydownStructure"
                   value={formData.structure}
                   onChange={(e) => handleInputChange('structure', e.target.value as BuydownStructure)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
@@ -143,10 +144,11 @@ const TemporaryBuydownCalculator: React.FC = () => {
                     onChange={(next) => handleInputChange('flatBuydownRate', next)}
                   />
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="buydownPeriodYears" className="block text-sm font-medium text-foreground mb-2">
                       Buydown Period (years)
                     </label>
                     <select
+                      id="buydownPeriodYears"
                       value={formData.flatYears}
                       onChange={(e) => handleInputChange('flatYears', Number(e.target.value))}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
@@ -160,10 +162,11 @@ const TemporaryBuydownCalculator: React.FC = () => {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
@@ -289,11 +292,11 @@ const TemporaryBuydownCalculator: React.FC = () => {
                 <div className="bg-card rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold text-foreground mb-4">Effective Buydown Rate</h2>
                   <div className="bg-muted p-4 rounded-lg text-center">
-                    <p className="text-sm text-purple-600 mb-1">Avg. Rate During Buydown Period</p>
-                    <p className="text-2xl font-bold text-purple-700">
+                    <p className="text-sm text-foreground mb-1">Avg. Rate During Buydown Period</p>
+                    <p className="text-2xl font-bold text-foreground">
                       {formatPercent(results.effectiveBuydownRate)}
                     </p>
-                    <p className="text-sm text-purple-600 mt-1">
+                    <p className="text-sm text-foreground mt-1">
                       Month-weighted average over {results.buydownMonths} subsidy months (not a permanent rate)
                     </p>
                   </div>
@@ -303,11 +306,11 @@ const TemporaryBuydownCalculator: React.FC = () => {
                   <div className="bg-card rounded-lg shadow-lg p-6">
                     <h2 className="text-xl font-semibold text-foreground mb-4">Quoted Cost Payback</h2>
                     <div className="bg-muted p-4 rounded-lg text-center">
-                      <p className="text-sm text-yellow-600 mb-1">Months to Recoup Quoted Cost</p>
-                      <p className="text-2xl font-bold text-yellow-700">
+                      <p className="text-sm text-warning-emphasis mb-1">Months to Recoup Quoted Cost</p>
+                      <p className="text-2xl font-bold text-warning-emphasis">
                         {breakEvenMonths.toFixed(1)} months
                       </p>
-                      <p className="text-sm text-yellow-600 mt-1">
+                      <p className="text-sm text-warning-emphasis mt-1">
                         Using average monthly subsidy during the buydown
                       </p>
                     </div>

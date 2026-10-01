@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import Link from "next/link"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
@@ -17,6 +17,8 @@ import {
   formatUsd0,
   typicalUtahPmRangeLabel,
 } from "@/lib/fee-comparison"
+
+const LEDGER_ANNOUNCE_DELAY_MS = 800
 
 function unitsForMode(mode: "starter" | "growth"): number {
   switch (mode) {
@@ -42,6 +44,17 @@ export function FeeAlignmentWidget() {
   const units = unitsForMode(mode)
   const snap = buildFeeSnapshot(rent, units)
   const crossover = formatUsd0(flatFeeCrossoverRent(GROWTH_MGMT_RATE))
+
+  // Screen readers hear one summary after the person pauses, not every slider tick.
+  const summary = `Ondo fee per unit this month: ${formatUsd0(snap.ondoMonthlyFee)}.`
+  const [announcement, setAnnouncement] = useState("")
+  const lastSummary = useRef(summary)
+  useEffect(() => {
+    if (lastSummary.current === summary) return // nothing changed yet, so say nothing on load
+    lastSummary.current = summary
+    const timer = setTimeout(() => setAnnouncement(summary), LEDGER_ANNOUNCE_DELAY_MS)
+    return () => clearTimeout(timer)
+  }, [summary])
 
   return (
     <section
@@ -163,11 +176,7 @@ export function FeeAlignmentWidget() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-foreground/60">
                 Per-unit ledger
               </p>
-              <dl
-                className="divide-y divide-border rounded-lg border border-border"
-                aria-live="polite"
-                aria-atomic="true"
-              >
+              <dl className="divide-y divide-border rounded-lg border border-border">
                 <div className="flex items-baseline justify-between gap-4 px-4 py-3">
                   <dt className="text-sm text-foreground/70">Ondo per unit this month</dt>
                   <dd className="font-mono text-xl font-semibold tabular-nums text-foreground">
@@ -187,6 +196,9 @@ export function FeeAlignmentWidget() {
                   </dd>
                 </div>
               </dl>
+              <p role="status" className="sr-only">
+                {announcement}
+              </p>
               <p className="mt-4 text-xs leading-relaxed text-foreground/50">
                 Illustrative, not a quote. Figures are per unit. Management is a
                 percentage of collected rent; leasing is billed only when we place

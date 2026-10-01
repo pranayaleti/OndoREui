@@ -1,6 +1,3 @@
-"use client"
-
-import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { User, Building2, Lightbulb, TrendingUp, Handshake, Rocket, Code, Home, Zap, Target } from "lucide-react"
@@ -14,7 +11,7 @@ export default function FoundersLetterPage() {
   const yearsInUtah = currentYear - 2019;
 
   return (
-    <div className="min-h-screen bg-background dark:bg-transparent" aria-labelledby="founders-letter-heading">
+    <main className="min-h-screen bg-background dark:bg-transparent" aria-labelledby="founders-letter-heading">
       <SEO
         title="Founder's Letter | Ondo Real Estate"
         description="A personal letter from the founder of Ondo Real Estate on our mission, values, and the future of property management."
@@ -39,22 +36,22 @@ export default function FoundersLetterPage() {
             Ondo Real Estate and our mission to revolutionize property management.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-            <div className="bg-primary bg-opacity-20 backdrop-blur-lg rounded-lg p-6 border border-primary">
+            <div className="bg-primary/20 backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-foreground">{yearsInTech}+</div>
               <div className="text-foreground mt-2">Years in Tech</div>
               <div className="text-foreground/70 text-sm">Full Stack Development</div>
             </div>
-            <div className="bg-primary bg-opacity-20 backdrop-blur-lg rounded-lg p-6 border border-primary">
+            <div className="bg-primary/20 backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-foreground">{yearsInUtah}+</div>
               <div className="text-foreground mt-2">Years in Utah</div>
               <div className="text-foreground/70 text-sm">Local Market Expert</div>
             </div>
-            <div className="bg-primary bg-opacity-20 backdrop-blur-lg rounded-lg p-6 border border-primary">
+            <div className="bg-primary/20 backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-foreground">100%</div>
               <div className="text-foreground mt-2">Client Focused</div>
               <div className="text-foreground/70 text-sm">Personal Touch</div>
             </div>
-            <div className="bg-primary bg-opacity-20 backdrop-blur-lg rounded-lg p-6 border border-primary">
+            <div className="bg-primary/20 backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-foreground">24/7</div>
               <div className="text-foreground mt-2">Tech Platform</div>
               <div className="text-foreground/70 text-sm">Always Available</div>
@@ -67,12 +64,12 @@ export default function FoundersLetterPage() {
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-card rounded-xl p-8 border border-border">
-            <header className="flex items-center mb-6">
+            <div className="flex items-center mb-6">
               <User className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
               <h2 className="text-3xl font-bold text-foreground">Meet the Founder</h2>
-            </header>
+            </div>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
-                <div className="relative h-32 w-32 rounded-full border-4 border-primary overflow-hidden flex-shrink-0" aria-hidden="true">
+                <div className="relative h-32 w-32 rounded-full border-4 border-primary overflow-hidden flex-shrink-0">
                   <Image 
                     src="/founder-image.png" 
                     alt="Pranay Reddy Aleti, Founder and CEO of Ondo Real Estate, professional headshot" 
@@ -105,12 +102,12 @@ export default function FoundersLetterPage() {
               className="bg-card rounded-xl p-8 border border-border"
               aria-labelledby="founders-journey-heading"
             >
-              <header className="flex items-center mb-6">
+              <div className="flex items-center mb-6">
                 <TrendingUp className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
                 <h2 id="founders-journey-heading" className="text-3xl font-bold text-foreground">
                   The Journey
                 </h2>
-              </header>
+              </div>
               <p className="text-foreground/70 text-lg leading-relaxed mb-4">
                 As an immigrant, homeowner, and now a <strong className="text-primary">real estate professional in Utah</strong>, I know
                 firsthand how much real estate impacts people's lives. It's not just about transactions; it's about finding stability,
@@ -132,12 +129,12 @@ export default function FoundersLetterPage() {
               className="bg-card rounded-xl p-8 border border-border"
               aria-labelledby="why-ondo-heading"
             >
-              <header className="flex items-center mb-6">
+              <div className="flex items-center mb-6">
                 <Lightbulb className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
                 <h2 id="why-ondo-heading" className="text-3xl font-bold text-foreground">
                   Why Ondo?
                 </h2>
-              </header>
+              </div>
               <p className="text-foreground/70 text-lg leading-relaxed mb-4">
                 "Ondo" means <em className="text-primary">foundation and rhythm.</em> To me, real estate is exactly that - the foundation for
                 families and the rhythm that keeps communities thriving. I created Ondo because I saw a gap: property management was stuck in
@@ -153,12 +150,12 @@ export default function FoundersLetterPage() {
               className="bg-card rounded-xl p-8 border border-border"
               aria-labelledby="our-mission-heading"
             >
-              <header className="flex items-center mb-6">
+              <div className="flex items-center mb-6">
                 <Rocket className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
                 <h2 id="our-mission-heading" className="text-3xl font-bold text-foreground">
                   Our Mission
                 </h2>
-              </header>
+              </div>
               <p className="text-foreground/70 text-lg leading-relaxed mb-4">
                 Ondo isn't just another property management company - it's a <strong className="text-primary">modern platform built on trust,
                 transparency, and technology.</strong> My goal is simple: make property ownership stress-free, and make renting a home feel fair
@@ -174,12 +171,12 @@ export default function FoundersLetterPage() {
               className="bg-card rounded-xl p-8 border border-border"
               aria-labelledby="personal-note-heading"
             >
-              <header className="flex items-center mb-6">
+              <div className="flex items-center mb-6">
                 <Handshake className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
                 <h2 id="personal-note-heading" className="text-3xl font-bold text-foreground">
                   A Personal Note
                 </h2>
-              </header>
+              </div>
               <p className="text-foreground/70 text-lg leading-relaxed mb-4">
                 I'm not building Ondo from a distance - I live this. I own and manage rental property myself, so I understand the real challenges on
                 both sides. I've also taken risks, whether in <strong className="text-primary">real estate, technology, or investing in the
@@ -196,12 +193,12 @@ export default function FoundersLetterPage() {
               className="bg-card rounded-xl p-8 border border-border"
               aria-labelledby="looking-ahead-heading"
             >
-              <header className="flex items-center mb-6">
+              <div className="flex items-center mb-6">
                 <Building2 className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
                 <h2 id="looking-ahead-heading" className="text-3xl font-bold text-foreground">
                   Looking Ahead
                 </h2>
-              </header>
+              </div>
               <p className="text-foreground/70 text-lg leading-relaxed mb-4">
                 I believe the future of real estate lies in combining <strong className="text-primary">human connection</strong> with
                 <strong className="text-primary"> technology.</strong> That's what Ondo stands for. And if you're reading this, I'd love for you
@@ -452,6 +449,6 @@ export default function FoundersLetterPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

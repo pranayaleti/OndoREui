@@ -94,7 +94,7 @@ const BuyingPowerCalculator: React.FC = () => {
   const getCreditScoreColor = (score: number) => {
     if (score >= 750) return 'text-primary';
     if (score >= 700) return 'text-primary';
-    if (score >= 650) return 'text-yellow-600';
+    if (score >= 650) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -160,8 +160,9 @@ const BuyingPowerCalculator: React.FC = () => {
 
               {/* Loan Program */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Loan Program</label>
+                <label htmlFor="loanProgram" className="block text-sm font-medium text-foreground mb-2">Loan Program</label>
                 <select
+                  id="loanProgram"
                   value={formData.program}
                   onChange={(e) => handleInputChange('program', e.target.value as LoanProgram)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -184,10 +185,11 @@ const BuyingPowerCalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -271,8 +273,8 @@ const BuyingPowerCalculator: React.FC = () => {
                   <h2 className="text-xl font-semibold text-foreground mb-4">Recommendations</h2>
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
-                      <h3 className="font-semibold text-green-800 mb-2">Conservative Home Price</h3>
-                      <p className="text-2xl font-bold text-green-700">{formatCurrency(results.recommendedHomePrice)}</p>
+                      <h3 className="font-semibold text-success-emphasis mb-2">Conservative Home Price</h3>
+                      <p className="text-2xl font-bold text-success-emphasis">{formatCurrency(results.recommendedHomePrice)}</p>
                       <p className="text-sm text-primary mt-1">
                         This gives you a 10% buffer for unexpected expenses
                       </p>

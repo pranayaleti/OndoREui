@@ -129,15 +129,14 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
             </ol>
 
             <h3>Process Map</h3>
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`Title/Lender OK → Final docs → ID & witness check
-        ↓
-  Live RON session (recorded)
-        ↓
-  E-seal + audit log
-        ↓
-  Sealed PDFs delivered electronically`}
-            </pre>
+            <ol>
+              <li>Title/Lender OK</li>
+              <li>Final docs</li>
+              <li>ID &amp; witness check</li>
+              <li>Live RON session (recorded)</li>
+              <li>E-seal + audit log</li>
+              <li>Sealed PDFs delivered electronically</li>
+            </ol>
 
             <h2>Closings We Notarize Remotely</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

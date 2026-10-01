@@ -93,7 +93,7 @@ export function OwnerCommitmentsSection() {
                 <p className="mb-4 text-sm text-foreground/70">{commitment.body}</p>
                 <Link
                   href={commitment.href}
-                  className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                  className="mt-auto inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                 >
                   {commitment.linkLabel}
                   <span aria-hidden="true">→</span>

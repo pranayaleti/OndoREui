@@ -107,11 +107,11 @@ export function DemoPageClient() {
                     />
                   </div>
                 ) : (
-                  <div className="flex aspect-video flex-col items-center justify-center gap-4 bg-gradient-to-br from-background via-card to-muted p-8 text-center text-white">
-                    <CirclePlay className="h-12 w-12 text-orange-300" />
+                  <div className="flex aspect-video flex-col items-center justify-center gap-4 bg-gradient-to-br from-background via-card to-muted p-8 text-center text-foreground">
+                    <CirclePlay className="h-12 w-12 text-orange-600 dark:text-orange-300" />
                     <div className="space-y-2">
                       <p className="text-xl font-semibold">{t("demo.videoFallbackTitle")}</p>
-                      <p className="mx-auto max-w-md text-sm text-white/75">
+                      <p className="mx-auto max-w-md text-sm text-foreground/75">
                         {t("demo.videoFallbackBody")}
                       </p>
                     </div>
@@ -190,13 +190,13 @@ export function DemoPageClient() {
             <div className="grid gap-6 lg:grid-cols-3">
               {roles.map(({ key }) => (
                 <Card key={`preview-${key}`} className="overflow-hidden border-border bg-card/90">
-                  <div className="flex items-center justify-between border-b border-border bg-background px-4 py-3 text-white">
+                  <div className="flex items-center justify-between border-b border-border bg-background px-4 py-3 text-foreground">
                     <div className="flex items-center gap-2">
                       <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
                       <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
                       <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
                     </div>
-                    <span className="text-xs font-medium text-white/65">
+                    <span className="text-xs font-medium text-foreground/70">
                       {t(`demo.roles.${key}.previewTitle`)}
                     </span>
                   </div>

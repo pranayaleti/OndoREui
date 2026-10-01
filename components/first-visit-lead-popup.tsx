@@ -20,6 +20,7 @@ import { useAntiSpam } from "@/lib/anti-spam"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { submitContactLead } from "@/lib/leads-api"
 import { SecureStorage, isValidEmail } from "@/lib/security"
+import { FieldError, focusFirstInvalid, requiredFieldProps } from "@/components/lead-contact-fields"
 
 const POPUP_STATE_KEY = "ondo:first-visit-lead-popup:v1"
 const POPUP_TIMER_MS = 25_000
@@ -97,6 +98,7 @@ export function FirstVisitLeadPopup() {
   const [keepOpenOnSuccess, setKeepOpenOnSuccess] = useState(false)
   const [status, setStatus] = useState<PopupStatus>("idle")
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({})
   const { honeypotProps, gate } = useAntiSpam()
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const eligiblePath = useMemo(() => isEligiblePath(pathname), [pathname])
@@ -178,6 +180,7 @@ export function FirstVisitLeadPopup() {
 
   const updateFormField = (field: "name" | "email", value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    setFieldErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev))
   }
 
   const dismissPopup = () => {
@@ -209,21 +212,16 @@ export function FirstVisitLeadPopup() {
     const name = formData.name.trim()
     const email = formData.email.trim()
 
-    if (!name) {
-      setStatus("error")
-      setErrorMessage(t("leadPopup.validation.nameRequired"))
-      return
-    }
-
-    if (!email) {
-      setStatus("error")
-      setErrorMessage(t("leadPopup.validation.emailRequired"))
-      return
-    }
-
-    if (!isValidEmail(email)) {
-      setStatus("error")
-      setErrorMessage(t("leadPopup.validation.emailInvalid"))
+    // Say which field is wrong, next to the field, and move focus to the first one.
+    const errors: { name?: string; email?: string } = {}
+    if (!name) errors.name = t("leadPopup.validation.nameRequired")
+    if (!email) errors.email = t("leadPopup.validation.emailRequired")
+    else if (!isValidEmail(email)) errors.email = t("leadPopup.validation.emailInvalid")
+    setFieldErrors(errors)
+    if (errors.name || errors.email) {
+      setStatus("idle")
+      setErrorMessage(null)
+      focusFirstInvalid(event.currentTarget)
       return
     }
 
@@ -306,7 +304,7 @@ export function FirstVisitLeadPopup() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
               {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
               <input {...honeypotProps} />
               {status === "error" && errorMessage ? (
@@ -329,7 +327,9 @@ export function FirstVisitLeadPopup() {
                   placeholder={t("leadPopup.namePlaceholder")}
                   value={formData.name}
                   onChange={(event) => updateFormField("name", event.target.value)}
+                  {...requiredFieldProps("first-visit-popup-name-error", fieldErrors.name)}
                 />
+                <FieldError id="first-visit-popup-name-error" message={fieldErrors.name} />
               </div>
 
               <div className="space-y-2">
@@ -342,7 +342,9 @@ export function FirstVisitLeadPopup() {
                   placeholder={t("leadPopup.emailPlaceholder")}
                   value={formData.email}
                   onChange={(event) => updateFormField("email", event.target.value)}
+                  {...requiredFieldProps("first-visit-popup-email-error", fieldErrors.email)}
                 />
+                <FieldError id="first-visit-popup-email-error" message={fieldErrors.email} />
               </div>
 
               <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">

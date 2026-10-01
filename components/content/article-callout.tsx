@@ -17,10 +17,10 @@ type ArticleCalloutProps = {
  * survives greyscale, low vision, and a screen reader.
  */
 const VARIANTS = {
-  tip: { label: "Tip", Icon: Lightbulb, accent: "border-l-primary", tint: "text-primary" },
-  warning: { label: "Warning", Icon: AlertTriangle, accent: "border-l-destructive", tint: "text-destructive" },
-  pitfall: { label: "Watch out", Icon: TriangleAlert, accent: "border-l-amber-500", tint: "text-amber-500" },
-  note: { label: "Note", Icon: Info, accent: "border-l-border", tint: "text-foreground/60" },
+  tip: { label: "Tip", Icon: Lightbulb, accent: "border-l-primary", tint: "text-orange-700 dark:text-primary" },
+  warning: { label: "Warning", Icon: AlertTriangle, accent: "border-l-destructive", tint: "text-destructive-emphasis" },
+  pitfall: { label: "Watch out", Icon: TriangleAlert, accent: "border-l-amber-500", tint: "text-amber-700 dark:text-amber-400" },
+  note: { label: "Note", Icon: Info, accent: "border-l-border", tint: "text-foreground/70" },
 } as const
 
 export function ArticleCallout({ variant, title, children, className }: ArticleCalloutProps) {

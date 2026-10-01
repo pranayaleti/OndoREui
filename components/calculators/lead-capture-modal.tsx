@@ -109,7 +109,7 @@ export function LeadCaptureModal({
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full flex-1 rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <div className="flex gap-2">
               <Button type="submit" disabled={sending} className="bg-primary text-primary-foreground hover:bg-primary/90">

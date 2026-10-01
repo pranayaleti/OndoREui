@@ -62,7 +62,7 @@ export function ProfileForm() {
             </Avatar>
             <button
               type="button"
-              className="absolute bottom-0 right-0 p-2 bg-primary text-foreground rounded-full shadow-md hover:bg-primary/90 transition-colors"
+              className="absolute bottom-0 right-0 p-2 bg-primary text-primary-foreground rounded-full shadow-md hover:bg-primary/90 transition-colors"
             >
               <Camera className="h-4 w-4" />
             </button>

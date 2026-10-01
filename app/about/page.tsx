@@ -44,7 +44,7 @@ export default function AboutPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">

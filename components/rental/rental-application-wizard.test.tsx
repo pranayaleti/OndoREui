@@ -110,4 +110,62 @@ describe("RentalApplicationWizard", () => {
     await waitFor(() => expect(submitRentalApplication).toHaveBeenCalledTimes(1))
     expect(await screen.findByText(/application received/i)).toBeInTheDocument()
   })
+
+  it("blocks Save and continue on the applicant step until name and email are valid, with an alert", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("applicant"))
+    vi.mocked(saveRentalProgress).mockResolvedValue(makeBundle("household"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    const first = await screen.findByLabelText(/first name/i)
+    expect(first).toHaveAttribute("autocomplete", "given-name")
+    expect(screen.getByLabelText(/last name/i)).toHaveAttribute("autocomplete", "family-name")
+    expect(screen.getByLabelText(/^email/i)).toHaveAttribute("autocomplete", "email")
+    expect(screen.getByLabelText(/^phone/i)).toHaveAttribute("autocomplete", "tel")
+
+    fireEvent.click(screen.getByRole("button", { name: /save and continue/i }))
+    expect(await screen.findByRole("alert")).toHaveTextContent(/first name/i)
+    expect(saveRentalProgress).not.toHaveBeenCalled()
+
+    fireEvent.change(first, { target: { value: "Ada" } })
+    fireEvent.change(screen.getByLabelText(/last name/i), { target: { value: "Lovelace" } })
+    fireEvent.change(screen.getByLabelText(/^email/i), { target: { value: "not-an-email" } })
+    fireEvent.click(screen.getByRole("button", { name: /save and continue/i }))
+    expect(await screen.findByRole("alert")).toHaveTextContent(/valid email/i)
+    expect(saveRentalProgress).not.toHaveBeenCalled()
+
+    fireEvent.change(screen.getByLabelText(/^email/i), { target: { value: "ada@example.com" } })
+    fireEvent.click(screen.getByRole("button", { name: /save and continue/i }))
+    await waitFor(() => expect(saveRentalProgress).toHaveBeenCalledTimes(1))
+  })
+
+  it("still lets Back save a draft with blanks", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("applicant"))
+    vi.mocked(saveRentalProgress).mockResolvedValue(makeBundle("property"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    fireEvent.click(await screen.findByRole("button", { name: /^back$/i }))
+    await waitFor(() => expect(saveRentalProgress).toHaveBeenCalledTimes(1))
+  })
+
+  it("moves focus to the step heading after the step changes, not on first load", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("documents"))
+    vi.mocked(saveRentalProgress).mockResolvedValue(makeBundle("authorization"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    const heading = await screen.findByRole("heading", { level: 1 })
+    expect(heading).not.toHaveFocus()
+
+    fireEvent.click(screen.getByRole("button", { name: /save and continue/i }))
+    await waitFor(() => expect(saveRentalProgress).toHaveBeenCalledTimes(1))
+    await waitFor(() => expect(screen.getByRole("heading", { level: 1 })).toHaveFocus())
+  })
+
+  it("announces save errors with role=alert", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("documents"))
+    vi.mocked(saveRentalProgress).mockRejectedValue(new Error("Could not save answers"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    fireEvent.click(await screen.findByRole("button", { name: /save and continue/i }))
+    expect(await screen.findByRole("alert")).toHaveTextContent("Could not save answers")
+  })
 })

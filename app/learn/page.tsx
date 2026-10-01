@@ -44,39 +44,39 @@ export default function LearnHubPage() {
           </p>
           <p className="mb-10 text-sm text-foreground/70">
             Start with{" "}
-            <Link href="/learn/variable-income" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/learn/variable-income" className="prose-link">
               variable income
             </Link>
             ,{" "}
-            <Link href="/learn/first-time" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/learn/first-time" className="prose-link">
               first-time cash and closing
             </Link>
             ,{" "}
-            <Link href="/learn/non-qm" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/learn/non-qm" className="prose-link">
               Non-QM / bank-statement / DSCR
             </Link>
             ,{" "}
-            <Link href="/learn/investment" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/learn/investment" className="prose-link">
               investment occupancy and DSCR
             </Link>
             ,{" "}
-            <Link href="/blog/how-long-first-purchase-takes" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/blog/how-long-first-purchase-takes" className="prose-link">
               how long a first purchase takes
             </Link>
             ,{" "}
-            <Link href="/blog/week-after-mortgage-funding" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/blog/week-after-mortgage-funding" className="prose-link">
               the week after funding
             </Link>
             ,{" "}
-            <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="prose-link">
               Utah tax calendar vs first escrow analysis
             </Link>
             , the{" "}
-            <Link href="/loans" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/loans" className="prose-link">
               loan program hub
             </Link>
             , or{" "}
-            <Link href="/buy/rates" className="text-primary underline-offset-4 hover:underline">
+            <Link href="/buy/rates" className="prose-link">
               how quotes differ from headline rates
             </Link>
             .

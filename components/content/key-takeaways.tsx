@@ -36,7 +36,7 @@ export function KeyTakeaways({
       aria-labelledby={headingId}
       className={cn("not-prose my-8 rounded-lg border border-border bg-muted/40 p-5 md:p-6", className)}
     >
-      <h2 id={headingId} className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
+      <h2 id={headingId} className="mb-4 text-sm font-semibold uppercase tracking-wider text-orange-700 dark:text-primary">
         {heading}
       </h2>
       <ul className="space-y-2.5">
@@ -47,7 +47,7 @@ export function KeyTakeaways({
           </li>
         ))}
       </ul>
-      <p className="mt-4 border-t border-border/60 pt-3 text-xs text-foreground/50">{caption}</p>
+      <p className="mt-4 border-t border-border/60 pt-3 text-xs text-foreground/70">{caption}</p>
     </section>
   )
 }

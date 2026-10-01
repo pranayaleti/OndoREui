@@ -118,8 +118,8 @@ export default function BuyingSellingFAQPage() {
                 <Home className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Buying & Selling Questions</h2>
-                <p className="text-gray-300 text-sm">Everything about buying, selling, and renting properties</p>
+                <h2 className="text-2xl font-bold text-foreground">Buying & Selling Questions</h2>
+                <p className="text-muted-foreground text-sm">Everything about buying, selling, and renting properties</p>
               </div>
             </div>
 
@@ -128,12 +128,12 @@ export default function BuyingSellingFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
+                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
-                  <AccordionTrigger className="text-white hover:no-underline py-4">
+                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-300 pb-4 pt-2 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -141,7 +141,7 @@ export default function BuyingSellingFAQPage() {
             </Accordion>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Ready to buy or sell?</p>
+              <p className="text-muted-foreground mb-4">Ready to buy or sell?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/buy"

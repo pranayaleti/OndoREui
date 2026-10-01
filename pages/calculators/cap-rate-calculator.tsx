@@ -111,9 +111,9 @@ const CapRateCalculator: React.FC = () => {
   };
 
   const getCapRateColor = (rate: number) => {
-    if (rate >= 10) return 'text-green-600';
+    if (rate >= 10) return 'text-success-emphasis';
     if (rate >= 7) return 'text-primary';
-    if (rate >= 4) return 'text-yellow-600';
+    if (rate >= 4) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -307,7 +307,7 @@ const CapRateCalculator: React.FC = () => {
                     ) : results.capRate >= 7 ? (
                       <p className="text-primary font-medium">✓ Good cap rate. This property shows decent income potential.</p>
                     ) : results.capRate >= 4 ? (
-                      <p className="text-yellow-600 font-medium">⚠ Moderate cap rate. Consider if appreciation potential justifies the lower yield.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Moderate cap rate. Consider if appreciation potential justifies the lower yield.</p>
                     ) : (
                       <p className="text-destructive-emphasis font-medium">⚠ Low cap rate. This property may not be a good income investment.</p>
                     )}

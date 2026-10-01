@@ -183,7 +183,7 @@ const RetirementCalculator: React.FC = () => {
               {/* Investment Strategy */}
               <div>
                 <h3 className="text-lg font-medium text-foreground mb-4 flex items-center">
-                  <PiggyBank className="h-5 w-5 mr-2 text-purple-600" />
+                  <PiggyBank className="h-5 w-5 mr-2 text-primary" />
                   Investment Strategy
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -260,15 +260,15 @@ const RetirementCalculator: React.FC = () => {
                       <p className="text-2xl font-bold text-foreground">{formatCurrency(results.totalRetirementSavings)}</p>
                     </div>
                     <div className="bg-muted p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-green-900 mb-2">Real Estate Value at Retirement</h3>
-                      <p className="text-2xl font-bold text-green-900">{formatCurrency(results.realEstateValueAtRetirement)}</p>
+                      <h3 className="text-sm font-medium text-success-emphasis mb-2">Real Estate Value at Retirement</h3>
+                      <p className="text-2xl font-bold text-success-emphasis">{formatCurrency(results.realEstateValueAtRetirement)}</p>
                     </div>
                   </div>
 
                   {/* Total Assets */}
                   <div className="bg-muted p-4 rounded-lg mb-6">
-                    <h3 className="text-lg font-medium text-purple-900 mb-2">Total Retirement Assets</h3>
-                    <p className="text-3xl font-bold text-purple-900">{formatCurrency(results.totalRetirementAssets)}</p>
+                    <h3 className="text-lg font-medium text-foreground mb-2">Total Retirement Assets</h3>
+                    <p className="text-3xl font-bold text-foreground">{formatCurrency(results.totalRetirementAssets)}</p>
                   </div>
 
                   {/* Income Analysis */}
@@ -278,10 +278,10 @@ const RetirementCalculator: React.FC = () => {
                       <p className="text-xl font-bold text-foreground">{formatCurrency(results.annualRetirementIncome)}</p>
                     </div>
                     <div className="bg-muted p-4 rounded-lg">
-                      <h3 className={`text-sm font-medium mb-2 ${isSurplus ? 'text-green-900' : 'text-red-900'}`}>
+                      <h3 className={`text-sm font-medium mb-2 ${isSurplus ? 'text-success-emphasis' : 'text-destructive-emphasis'}`}>
                         {isSurplus ? 'Income Surplus' : 'Income Gap'}
                       </h3>
-                      <p className={`text-xl font-bold ${isSurplus ? 'text-green-900' : 'text-red-900'}`}>
+                      <p className={`text-xl font-bold ${isSurplus ? 'text-success-emphasis' : 'text-destructive-emphasis'}`}>
                         {formatCurrency(Math.abs(results.retirementIncomeGap))}
                       </p>
                     </div>
@@ -291,8 +291,8 @@ const RetirementCalculator: React.FC = () => {
                   <div className="p-4 rounded-lg mb-6 bg-muted">
                     <h3 className="text-lg font-medium text-foreground mb-2">Retirement Readiness</h3>
                     <p className={`text-xl font-bold mb-2 ${
-                      results.retirementReadiness === 'On Track' ? 'text-green-900' :
-                      results.retirementReadiness === 'Close to Target' ? 'text-yellow-900' : 'text-red-900'
+                      results.retirementReadiness === 'On Track' ? 'text-success-emphasis' :
+                      results.retirementReadiness === 'Close to Target' ? 'text-warning-emphasis' : 'text-destructive-emphasis'
                     }`}>
                       {results.retirementReadiness}
                     </p>

@@ -13,7 +13,7 @@ export default function WhyUtahPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background dark:bg-transparent">
+    <main className="min-h-screen bg-background dark:bg-transparent">
       <SEO
         title="Why Invest in Utah"
         description="Utah's resilient economy, tech growth, and quality of life create strong real estate investment opportunities across the Wasatch Front."
@@ -43,10 +43,10 @@ export default function WhyUtahPage() {
                 {t("whyUtahPage.hero.body")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/properties" className="bg-primary hover:bg-primary text-foreground px-6 py-3 rounded-lg font-semibold">
+                <Link href="/properties" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-semibold">
                   Browse Properties
                 </Link>
-                <Link href="/calculators/mortgage-payment" className="bg-card/10 hover:bg-card/20 text-foreground px-6 py-3 rounded-lg font-semibold border border-white/20">
+                <Link href="/calculators/mortgage-payment" className="bg-card/10 hover:bg-card/20 text-foreground px-6 py-3 rounded-lg font-semibold border border-border">
                   Run Numbers
                 </Link>
               </div>
@@ -68,23 +68,23 @@ export default function WhyUtahPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
             <div className="bg-primary backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-primary-foreground">Top 5</div>
-              <div className="text-foreground mt-2">Job Growth</div>
-              <div className="text-foreground/70 text-sm">Consistently in the U.S.</div>
+              <div className="text-primary-foreground mt-2">Job Growth</div>
+              <div className="text-primary-foreground text-sm">Consistently in the U.S.</div>
             </div>
             <div className="bg-primary backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-primary-foreground">Silicon Slopes</div>
-              <div className="text-foreground mt-2">Tech Corridor</div>
-              <div className="text-foreground/70 text-sm">Lehi–SLC–Provo</div>
+              <div className="text-primary-foreground mt-2">Tech Corridor</div>
+              <div className="text-primary-foreground text-sm">Lehi–SLC–Provo</div>
             </div>
             <div className="bg-primary backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-primary-foreground">2034</div>
-              <div className="text-foreground mt-2">Winter Olympics</div>
-              <div className="text-foreground/70 text-sm">Tourism & Infra boost</div>
+              <div className="text-primary-foreground mt-2">Winter Olympics</div>
+              <div className="text-primary-foreground text-sm">Tourism & Infra boost</div>
             </div>
             <div className="bg-primary backdrop-blur-lg rounded-lg p-6 border border-primary">
               <div className="text-4xl font-bold text-primary-foreground">Landlord</div>
-              <div className="text-foreground mt-2">Friendly</div>
-              <div className="text-foreground/70 text-sm">Predictable processes</div>
+              <div className="text-primary-foreground mt-2">Friendly</div>
+              <div className="text-primary-foreground text-sm">Predictable processes</div>
             </div>
           </div>
         </div>
@@ -171,10 +171,10 @@ export default function WhyUtahPage() {
             </li>
           </ul>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/properties" className="bg-primary hover:bg-primary text-foreground px-6 py-3 rounded-lg font-semibold">
+            <Link href="/properties" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-semibold">
               See Available Homes
             </Link>
-            <Link href="/contact" className="bg-card/10 hover:bg-card/20 text-foreground px-6 py-3 rounded-lg font-semibold border border-white/20">
+            <Link href="/contact" className="bg-card/10 hover:bg-card/20 text-foreground px-6 py-3 rounded-lg font-semibold border border-border">
               Talk to Our Team
             </Link>
           </div>
@@ -198,7 +198,7 @@ export default function WhyUtahPage() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
 
@@ -217,7 +217,7 @@ function Reason({ icon, title, children }: { icon: React.ReactNode; title: strin
 function MarketCard({ title, note }: { title: string; note: string }) {
   return (
     <div className="bg-muted rounded-lg p-5 border border-border">
-      <h4 className="text-foreground font-semibold mb-1">{title}</h4>
+      <h3 className="text-foreground font-semibold mb-1">{title}</h3>
       <p className="text-foreground/70 text-sm">{note}</p>
     </div>
   )

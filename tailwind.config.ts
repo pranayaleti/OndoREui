@@ -44,6 +44,9 @@ const config = {
           // Use for destructive TEXT. `DEFAULT` is a fill and fails contrast as text on dark.
           emphasis: "hsl(var(--destructive-emphasis))",
         },
+        // Readable-as-text status colours; see _design-tokens.css.
+        "success-emphasis": "hsl(var(--success-emphasis))",
+        "warning-emphasis": "hsl(var(--warning-emphasis))",
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
@@ -62,6 +65,14 @@ const config = {
         },
         "accent-1": "rgb(var(--color-accent-1) / <alpha-value>)",
         "accent-2": "rgb(var(--color-accent-2) / <alpha-value>)",
+      },
+      // Text colour only. `text-primary` resolves to --primary-text (darker orange in the light theme, which
+      // fails 4.5:1 as --primary); bg-, border-, ring- and fill utilities keep using --primary.
+      textColor: {
+        primary: {
+          DEFAULT: "hsl(var(--primary-text))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -85,17 +96,12 @@ const config = {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "glow-pulse": {
-          "0%, 100%": { opacity: "0.5" },
-          "50%": { opacity: "1" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out both",
         "fade-in-up": "fade-in-up 0.6s ease-out both",
-        "glow-pulse": "glow-pulse 2s ease-in-out infinite",
       },
     },
   },

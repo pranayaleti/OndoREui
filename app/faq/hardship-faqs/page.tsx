@@ -96,8 +96,8 @@ export default function HardshipFAQPage() {
                 <CheckCircle className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Hardship Help</h2>
-                <p className="text-gray-300 text-sm">Who to call when payments get hard</p>
+                <h2 className="text-2xl font-bold text-foreground">Hardship Help</h2>
+                <p className="text-muted-foreground text-sm">Who to call when payments get hard</p>
               </div>
             </div>
 
@@ -105,9 +105,9 @@ export default function HardshipFAQPage() {
               <div className="flex items-start gap-4">
                 <CheckCircle className="h-6 w-6 text-blue-400 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">Important: Call Your Servicer Early</h3>
-                  <p className="text-gray-300 text-sm">
-                    Do not wait until you are behind. The sooner you call your mortgage servicer, the more options you have. For free help, call a HUD-approved housing counselor at <strong className="text-white">{HUD_COUNSELING_PHONE}</strong>. {NOT_A_SERVICER}
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">Important: Call Your Servicer Early</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Do not wait until you are behind. The sooner you call your mortgage servicer, the more options you have. For free help, call a HUD-approved housing counselor at <strong className="text-foreground">{HUD_COUNSELING_PHONE}</strong>. {NOT_A_SERVICER}
                   </p>
                 </div>
               </div>
@@ -118,12 +118,12 @@ export default function HardshipFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
+                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
-                  <AccordionTrigger className="text-white hover:no-underline py-4">
+                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-300 pb-4 pt-2 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -131,7 +131,7 @@ export default function HardshipFAQPage() {
             </Accordion>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Renting a home we manage?</p>
+              <p className="text-muted-foreground mb-4">Renting a home we manage?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`}

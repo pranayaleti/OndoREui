@@ -92,8 +92,8 @@ export default function DisasterFAQPage() {
                 <AlertTriangle className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">After a Disaster</h2>
-                <p className="text-gray-300 text-sm">Safety, insurance, servicer and FEMA</p>
+                <h2 className="text-2xl font-bold text-foreground">After a Disaster</h2>
+                <p className="text-muted-foreground text-sm">Safety, insurance, servicer and FEMA</p>
               </div>
             </div>
 
@@ -101,12 +101,12 @@ export default function DisasterFAQPage() {
               <div className="flex items-start gap-4">
                 <AlertTriangle className="h-6 w-6 text-red-400 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">Emergency Contact</h3>
-                  <p className="text-gray-300 text-sm mb-2">
-                    For life-threatening emergencies, call <strong className="text-white">911</strong> immediately.
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">Emergency Contact</h3>
+                  <p className="text-muted-foreground text-sm mb-2">
+                    For life-threatening emergencies, call <strong className="text-foreground">911</strong> immediately.
                   </p>
-                  <p className="text-gray-300 text-sm">
-                    For mortgage relief after a disaster, call your mortgage servicer. For a property we manage, call us at <strong className="text-white">{SITE_PHONE}</strong>
+                  <p className="text-muted-foreground text-sm">
+                    For mortgage relief after a disaster, call your mortgage servicer. For a property we manage, call us at <strong className="text-foreground">{SITE_PHONE}</strong>
                   </p>
                 </div>
               </div>
@@ -117,12 +117,12 @@ export default function DisasterFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
+                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
-                  <AccordionTrigger className="text-white hover:no-underline py-4">
+                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-300 pb-4 pt-2 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -130,7 +130,7 @@ export default function DisasterFAQPage() {
             </Accordion>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Need immediate assistance?</p>
+              <p className="text-muted-foreground mb-4">Need immediate assistance?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`}

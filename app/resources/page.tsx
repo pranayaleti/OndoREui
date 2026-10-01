@@ -604,7 +604,12 @@ export default function ResourcesPage() {
                     investment decks.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4 text-sm text-foreground/80 max-h-[460px] overflow-y-auto pr-2">
+                <CardContent
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Glossary highlights, scrollable"
+                  className="space-y-4 text-sm text-foreground/80 max-h-[460px] overflow-y-auto pr-2"
+                >
                   {glossaryHighlights.map((entry) => (
                     <div key={entry.term}>
                       <p className="font-semibold">{entry.term}</p>

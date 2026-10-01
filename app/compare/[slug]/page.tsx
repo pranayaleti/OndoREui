@@ -154,29 +154,41 @@ export default async function Page({ params }: { params: Params }) {
 
           {rows.length > 0 ? (
             <section>
-              <div className="overflow-x-auto rounded-lg border">
+              <div
+                role="region"
+                aria-label={`${a.name} vs ${b.name} comparison table`}
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region must be keyboard focusable (WCAG 2.1.1)
+                tabIndex={0}
+                className="overflow-x-auto rounded-lg border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
                 <table className="w-full text-sm">
+                  <caption className="sr-only">
+                    {a.name} and {b.name} compared on housing, schools, and commute metrics, with the edge for each
+                  </caption>
                   <thead>
                     <tr className="bg-muted/50">
-                      <th className="text-left py-3 px-4 font-semibold">Metric</th>
-                      <th className="text-center py-3 px-4 font-semibold text-primary">{a.name}</th>
-                      <th className="text-center py-3 px-4 font-semibold text-primary">{b.name}</th>
-                      <th className="text-center py-3 px-4 text-xs text-foreground/50">Edge</th>
+                      <th scope="col" className="text-left py-3 px-4 font-semibold">Metric</th>
+                      <th scope="col" className="text-center py-3 px-4 font-semibold text-primary">{a.name}</th>
+                      <th scope="col" className="text-center py-3 px-4 font-semibold text-primary">{b.name}</th>
+                      <th scope="col" className="text-center py-3 px-4 text-xs text-foreground/50">Edge</th>
                     </tr>
                   </thead>
                   <tbody>
                     {rows.map((row, i) => (
                       <tr key={row.label} className={i % 2 === 0 ? "bg-background" : "bg-muted/20"}>
-                        <td className="py-3 px-4">
+                        <th scope="row" className="py-3 px-4 text-left font-normal">
                           <p className="font-medium">{row.label}</p>
                           {row.note && <p className="text-xs text-foreground/50">{row.note}</p>}
-                        </td>
+                        </th>
                         <td className="text-center py-3 px-4 font-medium">{row.aVal}</td>
                         <td className="text-center py-3 px-4 font-medium">{row.bVal}</td>
                         <td className="text-center py-3 px-4">
                           <div className="flex justify-center">
                             {row.winner === "tie" ? (
-                              <Minus className="h-4 w-4 text-foreground/30" />
+                              <>
+                                <Minus className="h-4 w-4 text-foreground/30" aria-hidden="true" />
+                                <span className="sr-only">Tie</span>
+                              </>
                             ) : row.winner === "a" ? (
                               <span className="text-xs font-semibold text-green-600">{a.name}</span>
                             ) : (

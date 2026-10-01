@@ -66,7 +66,7 @@ const pillars = [
 
 export default function PropertyManagementPage() {
   return (
-    <>
+    <main>
       <SEO
         title="Utah Property Management | Owners & Investors"
         description="Full-service Utah property management with leasing, screening, rent collection, maintenance, and owner visibility, alongside brokerage, mortgage, and notary under one roof."
@@ -192,6 +192,6 @@ export default function PropertyManagementPage() {
           description="Tell us about your units and goals, we will follow up with next steps."
         />
       </div>
-    </>
+    </main>
   )
 }

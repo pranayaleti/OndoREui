@@ -162,10 +162,11 @@ const RentVsOwnCalculator: React.FC = () => {
                     onChange={(next) => handleInputChange('interestRate', next)}
                   />
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="loanProgram" className="block text-sm font-medium text-foreground mb-2">
                     Loan Program
                   </label>
                   <select
+                    id="loanProgram"
                     value={formData.program}
                     onChange={(e) => handleInputChange('program', e.target.value as LoanProgram)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary input-no-spinner"
@@ -226,7 +227,7 @@ const RentVsOwnCalculator: React.FC = () => {
               {/* Analysis Settings */}
               <div>
                 <h3 className="text-lg font-medium text-foreground mb-4 flex items-center">
-                  <TrendingUp className="h-5 w-5 mr-2 text-purple-600" />
+                  <TrendingUp className="h-5 w-5 mr-2 text-primary" />
                   Analysis Settings
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -298,8 +299,8 @@ const RentVsOwnCalculator: React.FC = () => {
                       </p>
                     </div>
                     <div className="bg-muted p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-green-900 mb-2">Total Buy Cost ({formData.analysisYears} years)</h3>
-                      <p className="text-2xl font-bold text-green-900">
+                      <h3 className="text-sm font-medium text-success-emphasis mb-2">Total Buy Cost ({formData.analysisYears} years)</h3>
+                      <p className="text-2xl font-bold text-success-emphasis">
                         {showValues ? formatCurrency(results.buyTotalCost) : '••••'}
                       </p>
                     </div>
@@ -307,25 +308,25 @@ const RentVsOwnCalculator: React.FC = () => {
 
                   {/* Break-even Analysis */}
                   <div className="bg-muted p-4 rounded-lg mb-6">
-                    <h3 className="text-lg font-medium text-yellow-900 mb-2">Break-even Analysis</h3>
-                    <p className="text-sm text-yellow-800 mb-2">
+                    <h3 className="text-lg font-medium text-warning-emphasis mb-2">Break-even Analysis</h3>
+                    <p className="text-sm text-warning-emphasis mb-2">
                       <strong>Break-even point:</strong>{" "}
                       {results.breakEvenYears === null
                         ? `Does not break even within ${results.analysisYears} ${results.analysisYears === 1 ? 'year' : 'years'}`
                         : `${results.breakEvenYears} ${results.breakEvenYears === 1 ? 'year' : 'years'}`}
                     </p>
-                    <p className="text-sm text-yellow-800 mb-2">
+                    <p className="text-sm text-warning-emphasis mb-2">
                       <strong>Net cost of renting:</strong>{" "}
                       {showValues ? formatCurrency(results.netRentCost) : '••••'}
                     </p>
-                    <p className="text-sm text-yellow-800 mb-2">
+                    <p className="text-sm text-warning-emphasis mb-2">
                       <strong>Net cost of buying:</strong>{" "}
                       {showValues ? formatCurrency(results.netBuyCost) : '••••'}
                     </p>
-                    <p className="text-xs text-yellow-800 mb-2">
+                    <p className="text-xs text-warning-emphasis mb-2">
                       Net cost of buying counts buying and selling costs and the return your down payment could have earned, minus the equity you keep. Net cost of renting counts the return your deposit could have earned, since the deposit comes back.
                     </p>
-                    <p className="text-sm text-yellow-800">
+                    <p className="text-sm text-warning-emphasis">
                       <strong>Monthly rent equivalent:</strong>{" "}
                       {showValues ? formatCurrency(results.monthlyRentEquivalent) : '••••'}
                     </p>
@@ -333,9 +334,9 @@ const RentVsOwnCalculator: React.FC = () => {
 
                   {/* Recommendation */}
                   <div className="bg-muted p-4 rounded-lg mb-6">
-                    <h3 className="text-lg font-medium text-purple-900 mb-2">Recommendation</h3>
-                    <p className="text-lg font-semibold text-purple-900 mb-2">{results.recommendation}</p>
-                    <p className="text-sm text-purple-800">{results.explanation}</p>
+                    <h3 className="text-lg font-medium text-foreground mb-2">Recommendation</h3>
+                    <p className="text-lg font-semibold text-foreground mb-2">{results.recommendation}</p>
+                    <p className="text-sm text-foreground">{results.explanation}</p>
                   </div>
 
                   {/* Annual Comparison */}
@@ -347,8 +348,8 @@ const RentVsOwnCalculator: React.FC = () => {
                           <tr>
                             <th className="px-3 py-2 text-left text-xs font-medium text-foreground/70 uppercase tracking-wider">Year</th>
                             <th className="px-3 py-2 text-left text-xs font-medium text-primary uppercase tracking-wider">Rent Cost</th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-green-500 uppercase tracking-wider">Buy Cost</th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-green-700 uppercase tracking-wider">Principal Paid</th>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-success-emphasis uppercase tracking-wider">Buy Cost</th>
+                            <th className="px-3 py-2 text-left text-xs font-medium text-success-emphasis uppercase tracking-wider">Principal Paid</th>
                             <th className="px-3 py-2 text-left text-xs font-medium text-indigo-500 uppercase tracking-wider">Equity</th>
                             <th className="px-3 py-2 text-left text-xs font-medium text-foreground/70 uppercase tracking-wider">Difference</th>
                           </tr>
@@ -363,7 +364,7 @@ const RentVsOwnCalculator: React.FC = () => {
                               <td className="px-3 py-2 whitespace-nowrap text-sm text-primary">
                                 {showValues ? formatCurrency(year.buyCost) : '••••'}
                               </td>
-                              <td className="px-3 py-2 whitespace-nowrap text-sm text-green-700">
+                              <td className="px-3 py-2 whitespace-nowrap text-sm text-success-emphasis">
                                 {showValues ? formatCurrency(year.principalPaid) : '••••'}
                               </td>
                               <td className="px-3 py-2 whitespace-nowrap text-sm text-indigo-600">

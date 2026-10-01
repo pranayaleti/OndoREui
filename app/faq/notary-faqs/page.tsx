@@ -98,8 +98,8 @@ export default function NotaryFAQPage() {
                 <FileText className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Notary & Closings Questions</h2>
-                <p className="text-gray-300 text-sm">Everything about notarization and document signing</p>
+                <h2 className="text-2xl font-bold text-foreground">Notary & Closings Questions</h2>
+                <p className="text-muted-foreground text-sm">Everything about notarization and document signing</p>
               </div>
             </div>
 
@@ -108,12 +108,12 @@ export default function NotaryFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
+                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
-                  <AccordionTrigger className="text-white hover:no-underline py-4">
+                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-300 pb-4 pt-2 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -121,7 +121,7 @@ export default function NotaryFAQPage() {
             </Accordion>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Ready to schedule a notary appointment?</p>
+              <p className="text-muted-foreground mb-4">Ready to schedule a notary appointment?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/notary"
@@ -131,7 +131,7 @@ export default function NotaryFAQPage() {
                 </Link>
                 <Link
                   href="/notary/on-demand"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/5 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-semibold rounded-lg hover:bg-muted transition-colors"
                 >
                   On-demand / same-day
                 </Link>

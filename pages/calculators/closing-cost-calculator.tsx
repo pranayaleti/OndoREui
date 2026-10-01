@@ -139,10 +139,11 @@ const ClosingCostCalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -155,8 +156,9 @@ const ClosingCostCalculator: React.FC = () => {
 
               {/* Loan Program */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Loan Program</label>
+                <label htmlFor="loanProgram" className="block text-sm font-medium text-foreground mb-2">Loan Program</label>
                 <select
+                  id="loanProgram"
                   value={formData.program}
                   onChange={(e) => handleInputChange('program', e.target.value as LoanProgram)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -264,7 +266,7 @@ const ClosingCostCalculator: React.FC = () => {
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
                         <p className="text-sm text-destructive-emphasis mb-1">Total Closing Costs</p>
-                        <p className="text-3xl font-bold text-red-700">{formatCurrency(results.totalClosingCosts)}</p>
+                        <p className="text-3xl font-bold text-destructive-emphasis">{formatCurrency(results.totalClosingCosts)}</p>
                       </div>
                     </div>
                     
@@ -314,7 +316,7 @@ const ClosingCostCalculator: React.FC = () => {
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
                         <p className="text-sm text-primary mb-1">Closing Costs ÷ First-Month Principal</p>
-                        <p className="text-2xl font-bold text-green-700">
+                        <p className="text-2xl font-bold text-success-emphasis">
                           {results.equityPaybackMonths.toFixed(1)} months
                         </p>
                         <p className="text-sm text-primary mt-1">

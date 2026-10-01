@@ -85,6 +85,22 @@ describe("PublicAssistantWidget", () => {
     )
   })
 
+  it("returns focus to the launcher when the panel is closed with the close button", async () => {
+    openWidget()
+    fireEvent.click(screen.getByRole("button", { name: /close the ondo assistant/i }))
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /open the ondo assistant/i })).toHaveFocus(),
+    )
+  })
+
+  it("returns focus to the launcher when the panel is closed with Escape", async () => {
+    openWidget()
+    fireEvent.keyDown(window, { key: "Escape" })
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: /open the ondo assistant/i })).toHaveFocus(),
+    )
+  })
+
   it("exposes the transcript as a live region so replies are announced", () => {
     openWidget()
     expect(screen.getByRole("log", { name: /conversation transcript/i })).toHaveAttribute(

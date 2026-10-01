@@ -16,15 +16,15 @@ export function ArticleToc({ items, className }: ArticleTocProps) {
 
   return (
     <nav aria-label="On this page" className={cn("not-prose", className)}>
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-foreground/50">On this page</p>
+      <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-foreground/70">On this page</p>
       <ol className="space-y-1.5 border-l border-border">
         {items.map((item) => (
           <li key={item.id} className={item.level === 3 ? "pl-8" : "pl-4"}>
             <a
               href={`#${item.id}`}
               className={cn(
-                "block py-0.5 text-sm leading-snug text-foreground/70 transition-colors hover:text-primary focus-visible:text-primary",
-                item.level === 3 && "text-foreground/55",
+                "block py-0.5 text-sm leading-snug text-foreground/80 transition-colors hover:text-primary focus-visible:text-primary",
+                item.level === 3 && "text-foreground/70",
               )}
             >
               {item.text}

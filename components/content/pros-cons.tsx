@@ -28,7 +28,7 @@ function Column({
         id={headingId}
         className={cn(
           "mb-3 text-sm font-semibold uppercase tracking-wider",
-          tone === "pro" ? "text-primary" : "text-foreground/60",
+          tone === "pro" ? "text-orange-700 dark:text-primary" : "text-foreground/70",
         )}
       >
         {heading}

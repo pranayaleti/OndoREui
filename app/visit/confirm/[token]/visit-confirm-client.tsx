@@ -21,7 +21,7 @@ type LoadState =
 
 function LinkNotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-6">
+    <main className="flex min-h-screen items-center justify-center bg-background p-6">
       <div className="max-w-md text-center">
         <h1 className="mb-2 text-2xl font-bold text-foreground">Link not found</h1>
         <p className="text-muted-foreground">This confirmation link is invalid or has already been used.</p>
@@ -32,7 +32,7 @@ function LinkNotFound() {
           </a>
         </p>
       </div>
-    </div>
+    </main>
   )
 }
 
@@ -94,19 +94,19 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
   if (visit.status !== "proposed" && !confirmedAt) {
     if (visit.status === "confirmed") {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-6">
+        <main className="flex min-h-screen items-center justify-center bg-background p-6">
           <div className="max-w-md text-center">
             <h1 className="mb-2 text-2xl font-bold text-foreground">Visit already confirmed</h1>
             {visit.scheduledAt ? (
               <p className="text-muted-foreground">Your visit is scheduled for {formatVisitWhen(visit.scheduledAt)}</p>
             ) : null}
           </div>
-        </div>
+        </main>
       )
     }
     // Cancelled, expired or any other state: never tell the lead the visit is confirmed.
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-6">
+      <main className="flex min-h-screen items-center justify-center bg-background p-6">
         <div className="max-w-md text-center">
           <h1 className="mb-2 text-2xl font-bold text-foreground">
             {visit.status === "cancelled" ? "This visit was cancelled" : "This visit link is no longer active"}
@@ -119,7 +119,7 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
             .
           </p>
         </div>
-      </div>
+      </main>
     )
   }
 
@@ -147,7 +147,7 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
     })
 
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-6">
+      <main className="flex min-h-screen items-center justify-center bg-background p-6">
         <div className="max-w-md text-center">
           <div className="mb-4 text-4xl">🎉</div>
           <h1 className="mb-2 text-2xl font-bold text-foreground">Visit Confirmed!</h1>
@@ -170,12 +170,12 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
             Add to Google Calendar
           </a>
         </div>
-      </div>
+      </main>
     )
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-6">
+    <main className="flex min-h-screen items-center justify-center bg-background p-6">
       <div className="w-full max-w-md">
         <h1 className="mb-2 text-2xl font-bold text-foreground">Choose a time</h1>
         {visit.properties ? (
@@ -211,6 +211,6 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
           {loading ? "Confirming..." : "Confirm Visit"}
         </button>
       </div>
-    </div>
+    </main>
   )
 }

@@ -144,17 +144,13 @@ export default function RemoteOnlineNotaryAllStatesPage() {
             </ul>
 
             <h3>Session Flow (Diagram)</h3>
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`User uploads docs
-    ↓
-ID scan + KBA check
-    ↓
-Live video with notary (recorded)
-    ↓
-E-seal + journal entry
-    ↓
-PDF + audit trail delivered`}
-            </pre>
+            <ol>
+              <li>User uploads docs</li>
+              <li>ID scan + KBA check</li>
+              <li>Live video with notary (recorded)</li>
+              <li>E-seal + journal entry</li>
+              <li>PDF + audit trail delivered</li>
+            </ol>
 
             <h2>When to Choose Remote Online Notary</h2>
             <ul>

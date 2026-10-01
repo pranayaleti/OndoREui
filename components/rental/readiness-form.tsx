@@ -153,7 +153,7 @@ export function ReadinessForm({
         />
         I can obtain renters insurance if required
       </label>
-      {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
+      {error ? <p role="alert" className="text-sm text-destructive-emphasis">{error}</p> : null}
       <Button type="submit" className="min-h-11 w-full" disabled={busy}>
         {busy ? "Checking…" : "Check your application requirements"}
       </Button>

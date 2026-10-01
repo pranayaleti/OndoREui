@@ -213,7 +213,7 @@ export function AffiliateContent() {
                     id="aff-name"
                     type="text"
                     autoComplete="name"
-                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     aria-invalid={errors.name ? true : undefined}
                     aria-describedby={errors.name ? "aff-name-error" : undefined}
                     {...register("name")}
@@ -234,7 +234,7 @@ export function AffiliateContent() {
                     id="aff-email"
                     type="email"
                     autoComplete="email"
-                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     aria-invalid={errors.email ? true : undefined}
                     aria-describedby={errors.email ? "aff-email-error" : undefined}
                     {...register("email")}
@@ -258,7 +258,7 @@ export function AffiliateContent() {
                     autoComplete="url"
                     autoCapitalize="none"
                     spellCheck={false}
-                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     placeholder="yoursite.com or @yourhandle"
                     {...register("website")}
                   />
@@ -273,7 +273,7 @@ export function AffiliateContent() {
                   </label>
                   <select
                     id="aff-audience"
-                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     {...register("audienceSize")}
                   >
                     <option value="under_100">{t("affiliate.audienceUnder100")}</option>
@@ -293,7 +293,7 @@ export function AffiliateContent() {
                   <textarea
                     id="aff-why"
                     rows={4}
-                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     {...register("why")}
                   />
                 </div>

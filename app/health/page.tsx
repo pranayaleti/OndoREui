@@ -48,7 +48,7 @@ export default function HealthPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <main className="min-h-screen bg-muted/30 py-8">
       <div className="container max-w-2xl space-y-6">
         <h1 className="text-2xl font-semibold tracking-tight">Health</h1>
 
@@ -110,6 +110,6 @@ export default function HealthPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </main>
   )
 }

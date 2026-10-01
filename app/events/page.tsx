@@ -56,7 +56,7 @@ const RHA_EVENT_RESOURCES = UTAH_LANDLORD_EDUCATION_LINKS.filter((r) =>
 
 export default function EventsPage() {
   return (
-    <main id="main-content" className="min-h-screen">
+    <main className="min-h-screen">
       <PageBanner
         title="ONDO Events"
         subtitle="Workshops, mixers, and community events: come say hi."

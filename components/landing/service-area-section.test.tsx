@@ -37,4 +37,23 @@ describe("ServiceAreaSection city coverage", () => {
     expect(screen.getByText(/as of .+ — verify/i)).toBeInTheDocument()
     expect(screen.getByText(/not an mls pull/i)).toBeInTheDocument()
   })
+
+  it("does not change the stats card or announce it when a city pill is hovered or focused", () => {
+    const { container } = render(<ServiceAreaSection />)
+    const lehi = screen.getByRole("link", { name: /^lehi$/i })
+    fireEvent.pointerEnter(lehi)
+    fireEvent.focus(lehi)
+    expect(screen.getByRole("link", { name: /^city guide$/i })).toHaveAttribute(
+      "href",
+      "/locations/salt-lake-city/",
+    )
+    expect(container.querySelector("[aria-live]")).toBeNull()
+  })
+
+  it("announces the shown city once for a typed search", () => {
+    render(<ServiceAreaSection />)
+    expect(screen.getByRole("status")).toHaveTextContent("")
+    fireEvent.change(screen.getByLabelText(/find your city/i), { target: { value: "Lehi" } })
+    expect(screen.getByRole("status")).toHaveTextContent("Showing market stats for Lehi.")
+  })
 })

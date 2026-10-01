@@ -111,9 +111,15 @@ function CellValue({ value }: { value: boolean | string }) {
     return <span className="text-sm font-medium text-foreground">{value}</span>
   }
   return value ? (
-    <Check className="mx-auto h-5 w-5 text-green-600 dark:text-green-400" />
+    <>
+      <Check className="mx-auto h-5 w-5 text-green-600 dark:text-green-400" aria-hidden="true" />
+      <span className="sr-only">Yes</span>
+    </>
   ) : (
-    <X className="mx-auto h-5 w-5 text-foreground/30" />
+    <>
+      <X className="mx-auto h-5 w-5 text-foreground/30" aria-hidden="true" />
+      <span className="sr-only">No</span>
+    </>
   )
 }
 
@@ -154,16 +160,25 @@ export default function ComparePage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="mb-20 overflow-x-auto">
+      <section
+        aria-label="Feature comparison table"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region must be keyboard focusable (WCAG 2.1.1)
+        tabIndex={0}
+        className="mb-20 overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
         <table className="w-full min-w-[700px] border-collapse text-sm">
+          <caption className="sr-only">
+            Features and starting prices for {SITE_BRAND_SHORT}, Buildium, AppFolio, TurboTenant, and RentRedi
+          </caption>
           <thead>
             <tr>
-              <th className="border-b border-foreground/10 px-4 py-3 text-left font-medium text-foreground/70">
+              <th scope="col" className="border-b border-foreground/10 px-4 py-3 text-left font-medium text-foreground/70">
                 Feature
               </th>
               {competitors.map((c) => (
                 <th
                   key={c.key}
+                  scope="col"
                   className={`border-b border-foreground/10 px-4 py-3 text-center font-semibold ${
                     c.highlight
                       ? "bg-primary/5 text-primary dark:bg-primary/10"
@@ -183,9 +198,12 @@ export default function ComparePage() {
                   i % 2 === 0 ? "bg-transparent" : "bg-foreground/[0.02] dark:bg-[var(--gradient-overlay)]"
                 }
               >
-                <td className="border-b border-foreground/5 px-4 py-3 font-medium text-foreground">
+                <th
+                  scope="row"
+                  className="border-b border-foreground/5 px-4 py-3 text-left font-medium text-foreground"
+                >
                   {row.feature}
-                </td>
+                </th>
                 {competitors.map((c) => (
                   <td
                     key={c.key}

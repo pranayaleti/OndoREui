@@ -205,10 +205,10 @@ export default function FAQPage() {
                 Help &amp; Education
               </span>
               <div className="space-y-2">
-                <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
                   Find the right FAQ in a few clicks
                 </h2>
-                <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">
+                <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
                   Browse FAQ collections by topic. Click a card to jump into a dedicated page with detailed answers and step-by-step guidance.
                 </p>
               </div>
@@ -222,7 +222,7 @@ export default function FAQPage() {
                   style={{ animationDelay: `${Math.min(index * 0.07, 0.7)}s` }}
                 >
                   <Link href={tile.path} className="block group h-full">
-                    <div className="relative h-full rounded-2xl backdrop-blur-lg border border-white/10 bg-card/60 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-card/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(249,115,22,0.15)]">
+                    <div className="relative h-full rounded-2xl backdrop-blur-lg border border-border bg-card/60 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-card/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(249,115,22,0.15)]">
                       {/* Glow border like calculators page */}
                       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-1 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -242,10 +242,10 @@ export default function FAQPage() {
                       </div>
 
                       {/* Content */}
-                      <h3 className="text-lg md:text-xl font-semibold mb-2 text-white group-hover:text-orange-400 transition-colors">
+                      <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                         {tile.name}
                       </h3>
-                      <p className="text-sm text-gray-300 leading-relaxed mb-5">
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                         {tile.description}
                       </p>
 
@@ -264,10 +264,10 @@ export default function FAQPage() {
           {/* Contact Section */}
           <div className="mt-16 text-center">
             <div className="bg-muted/20 rounded-lg p-8 md:p-12 border border-border">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Have another question?
               </h3>
-              <p className="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Can't find what you're looking for? Our team is here to help. Send us an email or contact us directly.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

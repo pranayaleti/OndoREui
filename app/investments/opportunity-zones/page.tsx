@@ -79,7 +79,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function OpportunityZonesPage() {
   return (
-    <main id="main-content" className="min-h-screen">
+    <main className="min-h-screen">
       <SEO
         title="Opportunity Zone Investing: How It Works"
         description="How Qualified Opportunity Zones work, capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits."

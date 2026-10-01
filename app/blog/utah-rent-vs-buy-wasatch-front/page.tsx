@@ -59,12 +59,12 @@ export default function UtahRentVsBuy() {
             </ul>
 
             <h2>Scenario Grid</h2>
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-{`SLC urban: higher price, lower rent yield; pay for proximity + transit.
-Lehi/Draper: tech wage anchor; appreciation leaning, watch HOA/amenities.
-Ogden: value/cashflow; stress-test vacancy and older-building CapEx.
-Provo/Orem: student/education anchor; seasonality + parking constraints.`}
-            </pre>
+            <ul>
+              <li><strong>SLC urban</strong>: higher price, lower rent yield; pay for proximity + transit.</li>
+              <li><strong>Lehi/Draper</strong>: tech wage anchor; appreciation leaning, watch HOA/amenities.</li>
+              <li><strong>Ogden</strong>: value/cashflow; stress-test vacancy and older-building CapEx.</li>
+              <li><strong>Provo/Orem</strong>: student/education anchor; seasonality + parking constraints.</li>
+            </ul>
 
             <h2>House Hack Angle</h2>
             <p>Basement ADUs and duplexes along the corridor can tilt math toward owning if you underwrite vacancy and CapEx conservatively.</p>

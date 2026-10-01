@@ -84,7 +84,14 @@ export default function ModernizingNotaryWorkflows() {
               The booking system is wrapped in a <code>ConsultationModal</code> component. This modal is designed to be reusable across the site, whether a user is on a &quot;Buy&quot; page or the dedicated &quot;Notary&quot; page.
             </p>
 
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
+            <pre
+              className="bg-muted p-4 rounded-lg overflow-x-auto"
+              // Scrollable code region: keyboard users must be able to focus it to scroll.
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+              tabIndex={0}
+              role="region"
+              aria-label="Example booking modal code"
+            >
               <code>{`// Reusable booking logic
 <ConsultationModal
   isOpen={isModalOpen}

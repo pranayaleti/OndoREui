@@ -50,7 +50,7 @@ const listing: Property = {
 describe("RentalListingCard", () => {
   it("sends people to the listing page, not a cloned Schedule/Apply pair", () => {
     render(<RentalListingCard property={listing} />)
-    const details = screen.getByRole("link", { name: /view details for cedar hollow/i })
+    const details = screen.getByRole("link", { name: /^view property: cedar hollow/i })
     expect((details.getAttribute("href") ?? "").replace(/\/$/, "")).toBe("/properties/pub-lehi-1")
     const showing = screen.getByRole("link", { name: /request a showing/i })
     expect(showing).toHaveAttribute("href", "#ask-leasing")
@@ -105,7 +105,7 @@ describe("RentalListingCard", () => {
       />,
     )
     expect(screen.queryByText(/young professionals/i)).not.toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /view details for cedar hollow/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /^view property: cedar hollow/i })).toBeInTheDocument()
     warn.mockRestore()
   })
 
@@ -114,5 +114,28 @@ describe("RentalListingCard", () => {
     render(<RentalListingCard property={listing} onRequestShowing={onRequestShowing} />)
     fireEvent.click(screen.getByRole("link", { name: /request a showing/i }))
     expect(onRequestShowing).toHaveBeenCalledWith("pub-lehi-1")
+  })
+
+  it("links the title to the listing page and keeps the map action a separate button", () => {
+    const onHighlight = vi.fn()
+    render(<RentalListingCard property={listing} onHighlight={onHighlight} />)
+    const title = screen.getByRole("link", { name: "Cedar Hollow" })
+    expect((title.getAttribute("href") ?? "").replace(/\/$/, "")).toBe("/properties/pub-lehi-1")
+    fireEvent.click(screen.getByRole("button", { name: /^show on map: cedar hollow/i }))
+    expect(onHighlight).toHaveBeenCalledWith("pub-lehi-1")
+  })
+
+  it("hides the map button when no map handler is supplied", () => {
+    render(<RentalListingCard property={listing} />)
+    expect(screen.queryByRole("button", { name: /on map/i })).not.toBeInTheDocument()
+  })
+
+  it("starts the CTA accessible name with its visible text and formats the price", () => {
+    render(<RentalListingCard property={listing} />)
+    const cta = screen.getByRole("link", { name: /^view property: cedar hollow/i })
+    expect(cta).toHaveTextContent("View property")
+    expect(cta.getAttribute("aria-label")).toBe(
+      "View property: Cedar Hollow at Lehi, UT, $2,195 per month",
+    )
   })
 })

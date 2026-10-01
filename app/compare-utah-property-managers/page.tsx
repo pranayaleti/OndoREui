@@ -102,7 +102,7 @@ export default function CompareUtahPropertyManagersPage() {
             An honest side-by-side of how Ondo RE stacks up against the established Wasatch Front incumbents.
             Fees, tech, services, and how the offerings differ.
           </p>
-          <p className="mt-4 text-xs text-foreground/50 max-w-xl mx-auto">
+          <p className="mt-4 text-xs text-muted-foreground max-w-xl mx-auto">
             We're biased, this is our website, but the data points below are publicly available.
             Verify with each provider before you commit.
           </p>
@@ -111,11 +111,17 @@ export default function CompareUtahPropertyManagersPage() {
 
       {/* Comparison table */}
       <section className="py-12">
-        <div className="container mx-auto px-4 max-w-6xl overflow-x-auto">
+        <div
+          className="container mx-auto px-4 max-w-6xl overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          role="region"
+          aria-label="Property management company comparison table"
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region must be keyboard focusable (WCAG 2.1.1)
+          tabIndex={0}
+        >
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead>
               <tr className="border-b-2 border-border">
-                <th scope="col" className="text-left text-xs uppercase tracking-wide text-foreground/50 py-3 pr-4 w-44">Category</th>
+                <th scope="col" className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 pr-4 w-44">Category</th>
                 {competitors.map((c) => (
                   <th
                     key={c.name}
@@ -124,7 +130,7 @@ export default function CompareUtahPropertyManagersPage() {
                   >
                     {c.name}
                     {c.isUs && (
-                      <span className="block text-[10px] font-semibold uppercase tracking-wide text-primary/80 mt-0.5">
+                      <span className="block text-xs font-semibold uppercase tracking-wide text-primary mt-0.5">
                         That's us
                       </span>
                     )}
@@ -175,7 +181,9 @@ export default function CompareUtahPropertyManagersPage() {
             </p>
             <p>
               The right move before any of these conversations: run your own numbers in our{" "}
-              <Link href="/calculators/owner-vs-self">Self-Manage vs Ondo ROI calculator</Link>.
+              <Link href="/calculators/owner-vs-self" className="prose-link">
+                Self-Manage vs Ondo ROI calculator
+              </Link>.
               Whatever the answer, you'll walk into every PM conversation with leverage.
             </p>
           </div>

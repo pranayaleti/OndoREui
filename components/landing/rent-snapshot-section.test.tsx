@@ -55,4 +55,10 @@ describe("RentSnapshotSection", () => {
     fireEvent.click(screen.getByRole("radio", { name: "2" }))
     expect(screen.getByRole("radio", { name: "2" })).toBeChecked()
   })
+
+  it("shows a focus ring on the bedroom option that holds keyboard focus", () => {
+    render(<RentSnapshotSection />)
+    const radio = screen.getByRole("radio", { name: "3" })
+    expect(radio.closest("label")?.className).toMatch(/has-\[:focus-visible\]:ring-2/)
+  })
 })

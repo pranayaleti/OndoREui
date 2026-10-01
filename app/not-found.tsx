@@ -118,7 +118,7 @@ export default function NotFound() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-4">
+    <main className="min-h-screen bg-background text-foreground p-4">
       <SEO
         title="404 - Page Not Found | Ondo Real Estate"
         description="The page you're looking for doesn't exist. Explore our popular pages and find what you need."
@@ -279,6 +279,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

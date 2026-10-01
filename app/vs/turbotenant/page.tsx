@@ -62,9 +62,15 @@ function CellValue({ value }: { value: boolean | string }) {
     return <span className="text-sm font-medium text-foreground">{value}</span>
   }
   return value ? (
-    <Check className="mx-auto h-5 w-5 text-green-600 dark:text-green-400" />
+    <>
+      <Check className="mx-auto h-5 w-5 text-green-600 dark:text-green-400" aria-hidden="true" />
+      <span className="sr-only">Yes</span>
+    </>
   ) : (
-    <X className="mx-auto h-5 w-5 text-foreground/30" />
+    <>
+      <X className="mx-auto h-5 w-5 text-foreground/30" aria-hidden="true" />
+      <span className="sr-only">No</span>
+    </>
   )
 }
 
@@ -121,20 +127,26 @@ export default function VsTurboTenantPage() {
       </section>
 
       {/* Feature Comparison Table */}
-      <section className="mb-20 overflow-x-auto">
-        <h2 className="mb-6 text-center text-2xl font-bold tracking-tight text-foreground">
+      <section
+        aria-labelledby="vs-table-heading"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region must be keyboard focusable (WCAG 2.1.1)
+        tabIndex={0}
+        className="mb-20 overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <h2 id="vs-table-heading" className="mb-6 text-center text-2xl font-bold tracking-tight text-foreground">
           Feature-by-feature comparison
         </h2>
         <table className="w-full min-w-[500px] border-collapse text-sm">
+          <caption className="sr-only">Feature-by-feature comparison of Ondo RE and TurboTenant</caption>
           <thead>
             <tr>
-              <th className="border-b border-foreground/10 px-4 py-3 text-left font-medium text-foreground/70">
+              <th scope="col" className="border-b border-foreground/10 px-4 py-3 text-left font-medium text-foreground/70">
                 Feature
               </th>
-              <th className="border-b border-foreground/10 bg-primary/5 px-4 py-3 text-center font-semibold text-primary dark:bg-primary/10">
+              <th scope="col" className="border-b border-foreground/10 bg-primary/5 px-4 py-3 text-center font-semibold text-primary dark:bg-primary/10">
                 {SITE_BRAND_SHORT}
               </th>
-              <th className="border-b border-foreground/10 px-4 py-3 text-center font-semibold text-foreground">
+              <th scope="col" className="border-b border-foreground/10 px-4 py-3 text-center font-semibold text-foreground">
                 TurboTenant
               </th>
             </tr>
@@ -158,9 +170,9 @@ export default function VsTurboTenantPage() {
                         i % 2 === 0 ? "bg-transparent" : "bg-foreground/[0.02] dark:bg-[var(--gradient-overlay)]"
                       }
                     >
-                      <td className="border-b border-foreground/5 px-4 py-3 font-medium text-foreground">
+                      <th scope="row" className="border-b border-foreground/5 px-4 py-3 font-medium text-foreground text-left">
                         {row.feature}
-                      </td>
+                      </th>
                       <td className="border-b border-foreground/5 bg-primary/5 px-4 py-3 text-center dark:bg-primary/10">
                         <CellValue value={row.ondo} />
                       </td>

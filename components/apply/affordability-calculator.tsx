@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useId, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 interface AffordabilityCalculatorProps {
@@ -14,6 +14,7 @@ export function AffordabilityCalculator({
 }: AffordabilityCalculatorProps) {
   const { t, i18n } = useTranslation()
   const [income, setIncome] = useState("")
+  const incomeId = useId()
 
   const annualIncome = Number(income) || 0
   const monthlyIncome = annualIncome / 12
@@ -29,41 +30,48 @@ export function AffordabilityCalculator({
 
   return (
     <div className="bg-muted dark:bg-card rounded-lg p-4 space-y-3">
-      <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+      <h4 className="text-sm font-semibold text-foreground">
         {t("applyFlow.affordability.title")}
       </h4>
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-muted-foreground">
         {t("applyFlow.affordability.requirement", {
           ratio: requiredRatio,
           amount: currencyFormatter.format(requiredIncome),
         })}
       </p>
       <div>
-        <label className="text-xs text-slate-500 block mb-1">
+        <label htmlFor={incomeId} className="text-xs text-muted-foreground block mb-1">
           {t("applyFlow.affordability.inputLabel")}
         </label>
         <input
+          id={incomeId}
           type="number"
+          inputMode="numeric"
           value={income}
           onChange={(e) => setIncome(e.target.value)}
           placeholder={t("applyFlow.affordability.placeholder")}
-          className="w-full px-3 py-2 border rounded-md text-sm bg-card dark:bg-card dark:border-slate-600"
+          className="w-full px-3 py-2 border border-input rounded-md text-base md:text-sm bg-card text-foreground"
         />
       </div>
-      {income && (
-        <div className={`text-sm font-medium rounded-md px-3 py-2 ${
-          meets
-            ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400"
-            : "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
-        }`}>
-          {meets
-            ? t("applyFlow.affordability.meets", { ratio: ratio.toFixed(1) })
-            : t("applyFlow.affordability.below", {
-                ratio: ratio.toFixed(1),
-                requiredRatio,
-              })}
-        </div>
-      )}
+      {/* Always rendered so the live region exists before its text changes. */}
+      <div role="status">
+        {income && (
+          <p
+            className={`text-sm font-medium rounded-md px-3 py-2 ${
+              meets
+                ? "bg-success-emphasis/10 text-success-emphasis"
+                : "bg-destructive/10 text-destructive-emphasis"
+            }`}
+          >
+            {meets
+              ? t("applyFlow.affordability.meets", { ratio: ratio.toFixed(1) })
+              : t("applyFlow.affordability.below", {
+                  ratio: ratio.toFixed(1),
+                  requiredRatio,
+                })}
+          </p>
+        )}
+      </div>
     </div>
   )
 }

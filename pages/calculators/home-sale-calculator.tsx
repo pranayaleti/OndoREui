@@ -219,7 +219,7 @@ const HomeSaleCalculator: React.FC = () => {
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
                         <p className="text-sm text-primary mb-1">Net Proceeds</p>
-                        <p className="text-3xl font-bold text-green-700">{formatCurrency(results.netProceeds)}</p>
+                        <p className="text-3xl font-bold text-success-emphasis">{formatCurrency(results.netProceeds)}</p>
                         <p className="text-sm text-primary mt-1">
                           Cash you'll receive after sale
                         </p>
@@ -276,9 +276,9 @@ const HomeSaleCalculator: React.FC = () => {
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
-                        <p className="text-sm text-yellow-600 mb-1">Estimated Profit</p>
-                        <p className="text-2xl font-bold text-yellow-700">{formatCurrency(results.profit)}</p>
-                        <p className="text-sm text-yellow-600 mt-1">
+                        <p className="text-sm text-warning-emphasis mb-1">Estimated Profit</p>
+                        <p className="text-2xl font-bold text-warning-emphasis">{formatCurrency(results.profit)}</p>
+                        <p className="text-sm text-warning-emphasis mt-1">
                           After all costs and cost basis
                         </p>
                       </div>

@@ -497,8 +497,8 @@
     }
   },
   "consultationModal": {
-    "titleDefault": "View Available Times & Book Now",
-    "titleNotary": "Book ONDO Notary",
+    "titleDefault": "Request a Consultation",
+    "titleNotary": "Request ONDO Notary",
     "subtitleDefault": "30-minute expert consultation",
     "subtitleNotary": "Remote online notarization nationwide",
     "calendlyHint": "Prefer to pick a time yourself? Same calendar for general consultations, notary, loans, and other services.",
@@ -534,9 +534,16 @@
       "messageNotary": "Documents, state, online vs. mobile, number of signers, preferred time...",
       "messageDefault": "Tell us about your real estate goals, property preferences, timeline, and any specific questions you have..."
     },
-    "bookingNotary": "Book ONDO Notary",
-    "bookingDefault": "View Available Times & Book Now",
-    "booking": "Booking...",
+    "bookingNotary": "Request ONDO Notary",
+    "bookingDefault": "Request a Consultation",
+    "booking": "Sending...",
+    "errors": {
+      "nameRequired": "Enter your name.",
+      "emailRequired": "Enter your email.",
+      "emailInvalid": "Enter a valid email, like name@example.com.",
+      "serviceRequired": "Choose the service you need.",
+      "messageRequired": "Tell us a little about what you need."
+    },
     "cancel": "Cancel",
     "contactInfoNotary": "For urgent notarization, call or text:",
     "contactInfoDefault": "Or call us directly:",

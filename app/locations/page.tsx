@@ -110,26 +110,18 @@ export default function LocationsPage() {
                           </p>
                         )}
                         <div className="flex flex-wrap gap-1.5">
-                          <Link href={`/locations/${slug}/`}>
-                            <Button variant="default" size="sm" className="text-xs h-7">
-                              City Guide
-                            </Button>
-                          </Link>
-                          <Link href={`/property-management/${slug}/`}>
-                            <Button variant="outline" size="sm" className="text-xs h-7">
-                              Property Mgmt
-                            </Button>
-                          </Link>
-                          <Link href={`/loans/${slug}/`}>
-                            <Button variant="outline" size="sm" className="text-xs h-7">
-                              Loans
-                            </Button>
-                          </Link>
-                          <Link href={`/buy-sell/${slug}/`}>
-                            <Button variant="outline" size="sm" className="text-xs h-7">
-                              Buy & Sell
-                            </Button>
-                          </Link>
+                          <Button asChild variant="default" size="sm" className="text-xs h-7">
+                            <Link href={`/locations/${slug}/`}>City Guide</Link>
+                          </Button>
+                          <Button asChild variant="outline" size="sm" className="text-xs h-7">
+                            <Link href={`/property-management/${slug}/`}>Property Mgmt</Link>
+                          </Button>
+                          <Button asChild variant="outline" size="sm" className="text-xs h-7">
+                            <Link href={`/loans/${slug}/`}>Loans</Link>
+                          </Button>
+                          <Button asChild variant="outline" size="sm" className="text-xs h-7">
+                            <Link href={`/buy-sell/${slug}/`}>Buy & Sell</Link>
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>

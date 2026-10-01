@@ -118,8 +118,8 @@ export default function EscrowFAQPage() {
                 <CheckCircle className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Escrow & Accounts</h2>
-                <p className="text-gray-300 text-sm">Taxes, insurance, and escrow accounts</p>
+                <h2 className="text-2xl font-bold text-foreground">Escrow & Accounts</h2>
+                <p className="text-muted-foreground text-sm">Taxes, insurance, and escrow accounts</p>
               </div>
             </div>
 
@@ -128,12 +128,12 @@ export default function EscrowFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
+                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
-                  <AccordionTrigger className="text-white hover:no-underline py-4">
+                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-300 pb-4 pt-2 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -145,7 +145,7 @@ export default function EscrowFAQPage() {
             <LendingDisclaimer className="mt-8" />
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Still have questions?</p>
+              <p className="text-muted-foreground mb-4">Still have questions?</p>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-accent-1 to-accent-2 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"

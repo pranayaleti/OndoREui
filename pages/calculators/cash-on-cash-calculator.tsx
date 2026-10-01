@@ -165,9 +165,9 @@ const CashOnCashCalculator: React.FC = () => {
   };
 
   const getReturnColor = (returnPercent: number) => {
-    if (returnPercent >= 10) return 'text-green-600';
+    if (returnPercent >= 10) return 'text-success-emphasis';
     if (returnPercent >= 6) return 'text-primary';
-    if (returnPercent >= 3) return 'text-yellow-600';
+    if (returnPercent >= 3) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -233,10 +233,11 @@ const CashOnCashCalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -456,7 +457,7 @@ const CashOnCashCalculator: React.FC = () => {
                     ) : results.cashOnCashReturn >= 6 ? (
                       <p className="text-primary font-medium">✓ Good return. This property shows decent cash flow potential.</p>
                     ) : results.cashOnCashReturn >= 3 ? (
-                      <p className="text-yellow-600 font-medium">⚠ Moderate return. Consider if appreciation potential justifies the lower cash flow.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Moderate return. Consider if appreciation potential justifies the lower cash flow.</p>
                     ) : (
                       <p className="text-destructive-emphasis font-medium">⚠ Low or negative return. This property may not be a good cash flow investment.</p>
                     )}

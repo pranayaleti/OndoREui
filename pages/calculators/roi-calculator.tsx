@@ -191,9 +191,9 @@ const ROICalculator: React.FC = () => {
   };
 
   const getROIColor = (roi: number) => {
-    if (roi >= 15) return 'text-green-600';
+    if (roi >= 15) return 'text-success-emphasis';
     if (roi >= 10) return 'text-primary';
-    if (roi >= 5) return 'text-yellow-600';
+    if (roi >= 5) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -248,10 +248,11 @@ const ROICalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -450,7 +451,7 @@ const ROICalculator: React.FC = () => {
                     ) : results.totalROI >= 10 ? (
                       <p className="text-primary font-medium">✓ Good ROI. This investment shows decent return potential.</p>
                     ) : results.totalROI >= 5 ? (
-                      <p className="text-yellow-600 font-medium">⚠ Moderate ROI. Consider if the risk is acceptable.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Moderate ROI. Consider if the risk is acceptable.</p>
                     ) : (
                       <p className="text-destructive-emphasis font-medium">⚠ Low ROI. This investment may not meet your return goals.</p>
                     )}

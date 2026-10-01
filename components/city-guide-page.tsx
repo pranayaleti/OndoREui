@@ -57,7 +57,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
     : null
 
   return (
-    <>
+    <main>
       <Script
         id="city-guide-jsonld"
         type="application/ld+json"
@@ -382,6 +382,6 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
           ]}
         />
       </div>
-    </>
+    </main>
   )
 }

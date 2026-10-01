@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import VsBuildiumPage, { metadata as buildiumMeta } from "./buildium/page"
 import VsTurboTenantPage, { metadata as turbotenantMeta } from "./turbotenant/page"
 import {
@@ -56,4 +56,21 @@ describe("/vs comparison pages", () => {
       expect(row?.ondo).toBe(ONDO_FEE_SUMMARY)
     }
   })
+})
+
+describe("/vs comparison table accessibility", () => {
+  for (const { name, Page } of pages) {
+    it(`${name}: yes/no cells have text, headers have scope, and the scroll region takes focus`, () => {
+      const { container } = render(<Page />)
+      const sr = Array.from(container.querySelectorAll("td .sr-only")).map((el) => el.textContent)
+      expect(sr.some((t) => t === "Yes" || t === "No")).toBe(true)
+      container.querySelectorAll("td svg").forEach((svg) => expect(svg).toHaveAttribute("aria-hidden", "true"))
+      expect(container.querySelector("table caption")).not.toBeNull()
+      expect(container.querySelectorAll('thead th[scope="col"]').length).toBe(3)
+      expect(container.querySelectorAll('tbody th[scope="row"]').length).toBeGreaterThan(1)
+      const region = screen.getByRole("region", { name: /feature-by-feature comparison/i })
+      expect(region).toHaveAttribute("tabindex", "0")
+      expect(region.querySelector("table")).not.toBeNull()
+    })
+  }
 })

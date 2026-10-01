@@ -103,10 +103,10 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
     {/* HERO */}
     <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card text-center">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+        <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
           Remote Online Notary – Available Nationwide
         </h1>
-        <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
+        <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-8">
           ONDO Notary provides secure Remote Online Notarization (RON) from anywhere in the U.S.
           Ideal for real estate, loan packages, affidavits, POA, estate documents, and business
           agreements. No office visit and no mobile travel appointments.
@@ -143,7 +143,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
           </Button>
         </div>
 
-        <p className="text-gray-400 mt-6 text-sm">
+        <p className="text-muted-foreground mt-6 text-sm">
           On-demand available • We try to accommodate same-day • RON nationwide
         </p>
       </div>
@@ -189,18 +189,18 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
     {/* ABOUT */}
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
           Professional Remote Notary Services by ONDO Notary
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <h3 className="text-2xl font-semibold text-primary mb-4">Remote‑First, Nationwide with ONDO Notary</h3>
-            <p className="text-gray-300 leading-relaxed text-lg mb-4">
+            <p className="text-foreground/80 leading-relaxed text-lg mb-4">
               ONDO Notary provides secure, convenient Remote Online Notarization (RON) across all 50
               U.S. states. Sign your documents from anywhere via video, with no travel or delays.
             </p>
-            <p className="text-gray-300 leading-relaxed mb-6">
+            <p className="text-foreground/80 leading-relaxed mb-6">
               Backed by real estate and loan signing expertise, every ONDO Notary session is handled
               with precision and professionalism.
             </p>
@@ -209,8 +209,8 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
               <div className="flex gap-3">
                 <Shield className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="font-semibold text-white">Commissioned & Bonded</h4>
-                  <p className="text-gray-300 text-sm">
+                  <h4 className="font-semibold text-foreground">Commissioned & Bonded</h4>
+                  <p className="text-foreground/80 text-sm">
                     Fully commissioned Utah Notary Public with training, certification, and bonding.
                   </p>
                 </div>
@@ -219,8 +219,8 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
               <div className="flex gap-3">
                 <Users className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="font-semibold text-white">Real Estate & Loan Signing Expertise</h4>
-                  <p className="text-gray-300 text-sm">
+                  <h4 className="font-semibold text-foreground">Real Estate & Loan Signing Expertise</h4>
+                  <p className="text-foreground/80 text-sm">
                     Specialized in mortgage packages, refinances, closings, and investment property documents.
                   </p>
                 </div>
@@ -229,8 +229,8 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
           </div>
 
           <div className="p-8 bg-gradient-to-b from-background to-card border border-border rounded-lg">
-            <h3 className="text-xl font-semibold text-white mb-4">Why Choose ONDO Notary?</h3>
-            <ul className="space-y-3 text-gray-300">
+            <h3 className="text-xl font-semibold text-foreground mb-4">Why Choose ONDO Notary?</h3>
+            <ul className="space-y-3 text-foreground/80">
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Nationwide remote notarization</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Same-day when capacity allows</li>
               <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Real estate & loan document experts</li>
@@ -257,10 +257,10 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
             <h3 className="text-xl text-primary font-semibold mb-3">
               Remote Online Notarization (RON) by ONDO Notary
             </h3>
-            <p className="text-gray-300 mb-4">
+            <p className="text-foreground/80 mb-4">
               Secure online notarization for clients in all 50 U.S. states.
             </p>
-            <ul className="text-gray-300 text-sm space-y-2">
+            <ul className="text-foreground/80 text-sm space-y-2">
               <li>• Identity verification via government ID</li>
               <li>• Digital signatures & electronic seal</li>
               <li>• Fastest notarization method available</li>
@@ -271,10 +271,10 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
           {/* Loan Signing */}
           <div className="p-6 bg-background border border-primary rounded-lg">
             <h3 className="text-xl text-primary font-semibold mb-3">Loan Signing Agent by ONDO Notary</h3>
-            <p className="text-gray-300 text-sm mb-4">
+            <p className="text-foreground/80 text-sm mb-4">
               Full mortgage packages, refinances, and investment property closings.
             </p>
-            <ul className="text-gray-300 text-sm space-y-2">
+            <ul className="text-foreground/80 text-sm space-y-2">
               <li>• Purchases, refinances, HELOCs</li>
               <li>• Investor closings</li>
               <li>• Full borrower walkthrough</li>
@@ -284,7 +284,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
           {/* Additional */}
           <div className="p-6 bg-background border border-primary rounded-lg md:col-span-2">
             <h3 className="text-xl text-primary font-semibold mb-3">Additional Services</h3>
-            <ul className="text-gray-300 text-sm space-y-2">
+            <ul className="text-foreground/80 text-sm space-y-2">
               <li>• I‑9 Employment Verification</li>
               <li>• Apostille Assistance (Utah documents)</li>
               <li>• Certified Copy Oversight</li>
@@ -299,10 +299,10 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
       {/* WHAT TO BRING */}
       <section className="py-16 md:py-24 bg-card dark:bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             What to Bring for ONDO Notary
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
             Required items for your appointment.
           </p>
 
@@ -319,7 +319,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
 
             <div className="p-6 bg-background border border-primary rounded-lg">
               <h3 className="text-xl text-primary font-semibold mb-4">RON Appointments</h3>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-foreground/80">
                 <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Laptop or smartphone</li>
                 <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Camera & microphone</li>
                 <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Stable internet</li>
@@ -344,7 +344,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
               <h3 className="text-2xl font-semibold text-primary flex gap-2 mb-4">
                 <TrendingUp className="w-6 h-6" /> Why ONDO Notary Loan Signing Agents Matter
             </h3>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-foreground/80 leading-relaxed">
           A trained ONDO Notary signing agent ensures mortgage documents are executed correctly,
           properly notarized, and returned promptly, preventing delays and funding issues.
             </p>
@@ -380,18 +380,18 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
     {/* NATIONWIDE COVERAGE */}
     <section className="py-16 md:py-24 bg-gradient-to-b from-card to-background">
       <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-6">
           Nationwide Coverage – ONDO Notary in All 50 States
         </h2>
-        <p className="text-center text-gray-300 max-w-3xl mx-auto mb-10">
+        <p className="text-center text-foreground/80 max-w-3xl mx-auto mb-10">
           We support Remote Online Notarization for clients across the United States.
           Browse a state hub for local pages, and confirm receiving-party acceptance before you book.
         </p>
         <section className="mt-10" aria-labelledby="browse-states">
-          <h3 id="browse-states" className="text-2xl font-semibold text-white mb-3 text-center">
+          <h3 id="browse-states" className="text-2xl font-semibold text-foreground mb-3 text-center">
             Browse notary by state
           </h3>
-          <p className="text-center text-gray-300 mb-6">
+          <p className="text-center text-foreground/80 mb-6">
             Explore state hubs and curated city pages for remote online notarization.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -399,7 +399,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
               <Link
                 key={state.slug}
                 href={notaryStatePath(state.slug)}
-                className="block rounded-md border border-white/10 bg-card/60 px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-primary/10"
+                className="block rounded-md border border-border bg-card/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-primary hover:bg-primary/10"
               >
                 {state.name}
               </Link>
@@ -420,17 +420,17 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
       {/* Centralized FAQs live on /faq */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Questions about ONDO Notary services?
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
             Visit our Help Center to browse detailed FAQs on remote online notarization and document signing.
           </p>
           <Button
             asChild
             size="lg"
             variant="outline"
-            className="border-white text-white hover:bg-card hover:text-black"
+            className="border-border text-foreground hover:bg-muted"
           >
             <Link href="/faq/notary-faqs">View Notary FAQs</Link>
           </Button>
@@ -440,10 +440,10 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
       {/* CONTACT */}
       <section id="contact" className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             Contact ONDO Notary & Booking
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
             Book online, call, or text for urgent same-day remote notarization.
           </p>
 
@@ -452,24 +452,24 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
               <div className="flex gap-4">
                 <Phone className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="text-white font-semibold">Phone</h4>
-                  <p className="text-gray-300">{SITE_PHONE} <br /> Text or call for urgent requests.</p>
+                  <h3 className="text-foreground font-semibold">Phone</h3>
+                  <p className="text-foreground/80">{SITE_PHONE} <br /> Text or call for urgent requests.</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
                 <Mail className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="text-white font-semibold">Email</h4>
-                  <p className="text-gray-300">{SITE_EMAILS.notary}</p>
+                  <h3 className="text-foreground font-semibold">Email</h3>
+                  <p className="text-foreground/80">{SITE_EMAILS.notary}</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
                 <MapPin className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="text-white font-semibold">Based in Lehi</h4>
-                  <p className="text-gray-300">
+                  <h3 className="text-foreground font-semibold">Based in Lehi</h3>
+                  <p className="text-foreground/80">
                     2701 N Thanksgiving Way, Lehi, UT 84043
                     <br />
                     Remote sessions only, we do not take walk-in or mobile travel appointments.
@@ -480,8 +480,8 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
               <div className="flex gap-4">
                 <Building2 className="w-6 h-6 text-primary" />
                 <div>
-                  <h4 className="text-white font-semibold">Service Area</h4>
-                  <p className="text-gray-300">
+                  <h3 className="text-foreground font-semibold">Service Area</h3>
+                  <p className="text-foreground/80">
                     Remote online notarization across all 50 U.S. states. No in-office visits and no
                     mobile travel appointments.
                   </p>
@@ -492,14 +492,14 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
             <NotaryBooking />
           </div>
 
-          <div className="mt-14 max-w-3xl mx-auto border-t border-white/10 pt-10">
-            <h3 className="text-xl font-semibold text-white text-center mb-2">
+          <div className="mt-14 max-w-3xl mx-auto border-t border-border pt-10">
+            <h3 className="text-xl font-semibold text-foreground text-center mb-2">
               Or schedule a call
             </h3>
-            <p className="text-center text-gray-400 text-sm mb-6 max-w-md mx-auto">
+            <p className="text-center text-muted-foreground text-sm mb-6 max-w-md mx-auto">
               Same calendar for notary questions, loan signings, and general scheduling.
             </p>
-            <div className="rounded-lg border border-white/10 bg-card/50 p-2">
+            <div className="rounded-lg border border-border bg-card/50 p-2">
               <CalendlyInlineEmbed
                 variant="compact"
                 heading={null}

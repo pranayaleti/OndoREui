@@ -97,7 +97,7 @@ const AffordabilityCalculator: React.FC = () => {
 
   const getRatioStatus = (ratio: number, type: 'front' | 'back') => {
     const tone = dtiTone(ratio, type === 'front' ? dtiLimits.frontPercent : dtiLimits.backPercent);
-    return tone === 'good' ? 'text-primary' : tone === 'caution' ? 'text-yellow-600' : 'text-destructive-emphasis';
+    return tone === 'good' ? 'text-primary' : tone === 'caution' ? 'text-warning-emphasis' : 'text-destructive-emphasis';
   };
 
   return (
@@ -302,8 +302,8 @@ const AffordabilityCalculator: React.FC = () => {
                   <h2 className="text-xl font-semibold text-foreground mb-4">Recommendations</h2>
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
-                      <h3 className="font-semibold text-green-800 mb-2">Conservative Home Price</h3>
-                      <p className="text-2xl font-bold text-green-700">{formatCurrency(results.recommendedHomePrice)}</p>
+                      <h3 className="font-semibold text-success-emphasis mb-2">Conservative Home Price</h3>
+                      <p className="text-2xl font-bold text-success-emphasis">{formatCurrency(results.recommendedHomePrice)}</p>
                       <p className="text-sm text-primary mt-1">
                         This gives you a 10% buffer for unexpected expenses
                       </p>

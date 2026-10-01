@@ -116,21 +116,22 @@ export function OnboardingClient() {
 
   if (step === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/30">
+      <main className="min-h-screen flex items-center justify-center bg-muted/30" aria-busy="true">
         <div className="text-center">
+          <h1 className="sr-only">Tenant onboarding</h1>
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-foreground/60">Loading your onboarding...</p>
         </div>
-      </div>
+      </main>
     )
   }
 
   if (step === "error") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
+      <main className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle>Something Went Wrong</CardTitle>
+            <CardTitle role="heading" aria-level={1}>Something Went Wrong</CardTitle>
             <CardDescription>{error || "Invalid or expired onboarding link."}</CardDescription>
           </CardHeader>
           <CardContent>
@@ -139,32 +140,32 @@ export function OnboardingClient() {
             </p>
           </CardContent>
         </Card>
-      </div>
+      </main>
     )
   }
 
   if (step === "expired") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
+      <main className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle>Link Expired</CardTitle>
+            <CardTitle role="heading" aria-level={1}>Link Expired</CardTitle>
             <CardDescription>
               This onboarding link has expired. Please contact your property manager for a new link.
             </CardDescription>
           </CardHeader>
         </Card>
-      </div>
+      </main>
     )
   }
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <main className="min-h-screen bg-muted/30 py-8">
       <div className="mx-auto flex max-w-3xl flex-col gap-6 px-4">
         {/* Progress bar */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm">
-            <span className="font-medium text-foreground/60">Tenant Onboarding</span>
+            <h1 className="font-medium text-foreground/60">Tenant Onboarding</h1>
             <span className="text-foreground/50">
               Step {Math.min(currentStepIndex + 1, totalSteps)} of {totalSteps}
             </span>
@@ -682,6 +683,6 @@ export function OnboardingClient() {
           </Card>
         )}
       </div>
-    </div>
+    </main>
   )
 }

@@ -66,7 +66,7 @@ export default async function InvestmentDetailPage({
   if (!opportunity) return notFound()
 
   return (
-    <main id="main-content" className="min-h-screen">
+    <main className="min-h-screen">
       <SEO
         title={`${opportunity.title} | ${SAMPLE_DEAL_LABEL}`}
         description={`${SAMPLE_DEAL_LABEL}, not a live offering. ${opportunity.description}`}

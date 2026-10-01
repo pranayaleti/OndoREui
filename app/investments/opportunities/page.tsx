@@ -36,7 +36,7 @@ export default async function OpportunitiesPage() {
   const samples = MOCK_OPPORTUNITIES
 
   return (
-    <main id="main-content" className="min-h-screen">
+    <main className="min-h-screen">
       <WebMCPOpportunitiesTool />
       <SEO
         title="Sample Investment Deals"

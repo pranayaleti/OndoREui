@@ -48,15 +48,15 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
 
   if (!market) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
+      <main className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-3xl font-bold mb-4">No city snapshot on file</h1>
         <p className="mb-4 text-foreground/70">
           We do not publish an Ondo market snapshot for {city.name}. That is not a coming-soon placeholder.
         </p>
-        <Link href="/market-reports/" className="text-primary underline-offset-4 hover:underline">
+        <Link href="/market-reports/" className="prose-link">
           Browse city reports
         </Link>
-      </div>
+      </main>
     )
   }
 
@@ -65,7 +65,7 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
   const priceToIncome = (market.medianHomePrice / market.medianHouseholdIncome).toFixed(1)
 
   return (
-    <>
+    <main>
       {/* Hero */}
       <section className="bg-gradient-to-br from-primary/5 to-background py-16 md:py-20">
         <div className="container mx-auto px-4 text-center">
@@ -260,6 +260,6 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
           ]}
         />
       </div>
-    </>
+    </main>
   )
 }

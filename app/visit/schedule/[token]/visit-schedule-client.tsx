@@ -28,7 +28,7 @@ type LoadState =
 
 function LinkNotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-6">
+    <main className="flex min-h-screen items-center justify-center bg-background p-6">
       <div className="max-w-md text-center">
         <h1 className="mb-2 text-2xl font-bold text-foreground">Link not found</h1>
         <p className="text-muted-foreground">This schedule link is invalid or is no longer available.</p>
@@ -39,7 +39,7 @@ function LinkNotFound() {
           </a>
         </p>
       </div>
-    </div>
+    </main>
   )
 }
 
@@ -100,14 +100,14 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
 
   if (schedule.occupancy === "occupied") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-6">
+      <main className="flex min-h-screen items-center justify-center bg-background p-6">
         <div className="max-w-md text-center">
           <h1 className="mb-2 text-2xl font-bold text-foreground">A manager will email times to confirm</h1>
           <p className="text-muted-foreground">
             This home is currently occupied. You will receive an email with proposed visit times.
           </p>
         </div>
-      </div>
+      </main>
     )
   }
 
@@ -146,7 +146,7 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-6">
+    <main className="flex min-h-screen items-center justify-center bg-background p-6">
       <div className="w-full max-w-md">
         <h1 className="mb-2 text-2xl font-bold text-foreground">Schedule a showing</h1>
         <p className="mb-6 text-muted-foreground">
@@ -200,6 +200,6 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
               : "Book showing"}
         </button>
       </div>
-    </div>
+    </main>
   )
 }

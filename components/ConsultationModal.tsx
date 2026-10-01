@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useMemo, useState, useCallback, memo } from 'react';
+import React, { useId, useMemo, useState, useCallback, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  X,
   Calendar,
   CheckCircle,
   AlertCircle,
@@ -11,6 +10,7 @@ import {
   FileText,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,7 +20,8 @@ import { CalendlyLink } from '@/components/calendly-link';
 import { submitContactLead } from '@/lib/leads-api';
 import { ContactNotice } from '@/components/contact-notice';
 import { getAttributionPayloadForApi } from '@/lib/attribution';
-import { buildConsultationLead } from '@/lib/consultation-lead';
+import { buildConsultationLead, consultationFieldErrors, type ConsultationFieldErrors } from '@/lib/consultation-lead';
+import { FieldError, focusFirstInvalid, requiredFieldProps } from '@/components/lead-contact-fields';
 import { useAntiSpam } from '@/lib/anti-spam';
 
 interface ConsultationModalProps {
@@ -45,6 +46,9 @@ interface FormData {
 const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onClose, variant = 'default' }) => {
   const { t } = useTranslation();
   const isNotary = variant === 'notary';
+  // Unique per modal so the label/field ids never collide with a form on the page behind it.
+  const uid = useId();
+  const fieldId = (name: string) => `${uid}-${name}`;
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -60,6 +64,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<ConsultationFieldErrors>({});
   const { honeypotProps, gate } = useAntiSpam();
 
   // NOTE(i18n): enum option labels are kept in English for now and tracked as a
@@ -143,13 +148,20 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
       ...prev,
       [name]: value
     }));
+    setFieldErrors(prev => (name in prev ? { ...prev, [name]: undefined } : prev));
   }, []);
+
+  const nameError = fieldErrors.name ? t(`consultationModal.errors.${fieldErrors.name}`) : undefined;
+  const emailError = fieldErrors.email ? t(`consultationModal.errors.${fieldErrors.email}`) : undefined;
+  const serviceError = fieldErrors.serviceType ? t(`consultationModal.errors.${fieldErrors.serviceType}`) : undefined;
+  const messageError = fieldErrors.message ? t(`consultationModal.errors.${fieldErrors.message}`) : undefined;
 
   const handleSelectChange = useCallback((name: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    setFieldErrors(prev => (name in prev ? { ...prev, [name]: undefined } : prev));
   }, []);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
@@ -166,6 +178,16 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
         name: '', email: '', phone: '', propertyType: '', serviceType: '',
         timeline: '', budget: '', message: '', preferredTime: '', timezone: 'MST',
       });
+      return;
+    }
+
+    // noValidate is on the form, so the browser does not block an empty required field. Show the
+    // reason next to each field and put focus on the first one that needs fixing.
+    const errors = consultationFieldErrors(formData);
+    setFieldErrors(errors);
+    if (Object.values(errors).some(Boolean)) {
+      setSubmitStatus(null);
+      focusFirstInvalid(e.currentTarget as HTMLFormElement);
       return;
     }
 
@@ -206,13 +228,16 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
     }
   }, [formData, variant, gate]);
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-background/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border">
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
+      {/* Radix supplies role=dialog, aria-modal, the focus trap, Escape to close and focus return. It sits
+          above the Ask Ondo launcher (z-50), which used to be drawn over the form. */}
+      <DialogContent
+        closeLabel={t('consultationModal.closeAria')}
+        className="w-[calc(100%-2rem)] max-w-2xl max-h-[90vh] gap-0 overflow-y-auto rounded-2xl border bg-card p-0 sm:rounded-2xl"
+      >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center p-6 pr-14 border-b">
           <div className="flex items-center">
             <div className="bg-primary p-3 rounded-lg mr-4">
               {isNotary ? (
@@ -222,25 +247,16 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
               )}
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-card-foreground">
+              <DialogTitle className="text-2xl font-bold leading-normal tracking-normal text-card-foreground">
                 {isNotary ? t('consultationModal.titleNotary') : t('consultationModal.titleDefault')}
-              </h2>
-              <p className="text-foreground/70">
+              </DialogTitle>
+              <DialogDescription className="text-base text-foreground/70">
                 {isNotary
                   ? t('consultationModal.subtitleNotary')
                   : t('consultationModal.subtitleDefault')}
-              </p>
+              </DialogDescription>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t('consultationModal.closeAria')}
-            onClick={onClose}
-            className="text-foreground/70 hover:text-foreground"
-          >
-            <X className="h-6 w-6" aria-hidden="true" />
-          </Button>
         </div>
 
         <div className="px-6 py-4 border-b bg-muted/40">
@@ -259,82 +275,74 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6">
+        <form onSubmit={handleSubmit} noValidate className="p-6">
           {/* Honeypot: visually hidden, non-focusable. Bots fill it; humans don't. */}
           <input {...honeypotProps} />
-          {/* Success/Error Messages */}
-          {submitStatus === 'success' && (
-            <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center">
-              <CheckCircle className="text-green-500 dark:text-green-400 mr-3 flex-shrink-0" />
-              <div>
-                <p className="text-green-700 dark:text-green-300 font-semibold">{t('consultationModal.successTitle')}</p>
-                <p className="text-green-600 dark:text-green-400 text-sm">{t('consultationModal.successBody')}</p>
-              </div>
-            </div>
-          )}
-          
-          {submitStatus === 'error' && (
-            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center" role="alert">
-              <AlertCircle className="text-red-500 dark:text-red-400 mr-3 flex-shrink-0" />
-              <p className="text-red-700 dark:text-red-300">{t('consultationModal.errorMessage', { phone: SITE_PHONE })}</p>
-            </div>
-          )}
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-2">
+              <label htmlFor={fieldId('name')} className="block text-sm font-medium text-card-foreground mb-2">
                 {t('consultationModal.fields.name')}
               </label>
               <Input
                 type="text"
-                id="name"
+                id={fieldId('name')}
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                required
+                autoComplete="name"
                 placeholder={t('consultationModal.placeholders.name')}
+                {...requiredFieldProps(`${fieldId('name')}-error`, nameError)}
               />
+              <FieldError id={`${fieldId('name')}-error`} message={nameError} />
             </div>
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-card-foreground mb-2">
+              <label htmlFor={fieldId('email')} className="block text-sm font-medium text-card-foreground mb-2">
                 {t('consultationModal.fields.email')}
               </label>
               <Input
                 type="email"
-                id="email"
+                id={fieldId('email')}
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                required
+                autoComplete="email"
                 placeholder={t('consultationModal.placeholders.email')}
+                {...requiredFieldProps(`${fieldId('email')}-error`, emailError)}
               />
+              <FieldError id={`${fieldId('email')}-error`} message={emailError} />
             </div>
 
             {/* Phone */}
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-card-foreground mb-2">
+              <label htmlFor={fieldId('phone')} className="block text-sm font-medium text-card-foreground mb-2">
                 {t('consultationModal.fields.phone')}
               </label>
               <Input
                 type="tel"
-                id="phone"
+                id={fieldId('phone')}
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
+                autoComplete="tel"
                 placeholder={t('consultationModal.placeholders.phone')}
               />
             </div>
 
             {/* Service Type */}
             <div>
-              <label htmlFor="serviceType" className="block text-sm font-medium text-card-foreground mb-2">
+              <label htmlFor={fieldId('serviceType')} className="block text-sm font-medium text-card-foreground mb-2">
                 {isNotary ? t('consultationModal.fields.serviceTypeNotary') : t('consultationModal.fields.serviceTypeDefault')}
               </label>
               <Select value={formData.serviceType} onValueChange={(value) => handleSelectChange('serviceType', value)}>
-                <SelectTrigger>
+                <SelectTrigger
+                  id={fieldId('serviceType')}
+                  aria-required="true"
+                  aria-invalid={serviceError ? true : undefined}
+                  aria-describedby={serviceError ? `${fieldId('serviceType')}-error` : undefined}
+                >
                   <SelectValue placeholder={isNotary ? t('consultationModal.placeholders.serviceTypeNotary') : t('consultationModal.placeholders.serviceTypeDefault')} />
                 </SelectTrigger>
                 <SelectContent>
@@ -344,16 +352,17 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
                   ))}
                 </SelectContent>
               </Select>
+              <FieldError id={`${fieldId('serviceType')}-error`} message={serviceError} />
             </div>
 
             {/* Property Type */}
             {!isNotary && (
               <div>
-                <label htmlFor="propertyType" className="block text-sm font-medium text-card-foreground mb-2">
+                <label htmlFor={fieldId('propertyType')} className="block text-sm font-medium text-card-foreground mb-2">
                   {t('consultationModal.fields.propertyType')}
                 </label>
                 <Select value={formData.propertyType} onValueChange={(value) => handleSelectChange('propertyType', value)}>
-                  <SelectTrigger>
+                  <SelectTrigger id={fieldId('propertyType')}>
                     <SelectValue placeholder={t('consultationModal.placeholders.propertyType')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -368,11 +377,11 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
             {/* Timeline */}
             <div>
-              <label htmlFor="timeline" className="block text-sm font-medium text-card-foreground mb-2">
+              <label htmlFor={fieldId('timeline')} className="block text-sm font-medium text-card-foreground mb-2">
                 {isNotary ? t('consultationModal.fields.timelineNotary') : t('consultationModal.fields.timelineDefault')}
               </label>
               <Select value={formData.timeline} onValueChange={(value) => handleSelectChange('timeline', value)}>
-                <SelectTrigger>
+                <SelectTrigger id={fieldId('timeline')}>
                   <SelectValue placeholder={isNotary ? t('consultationModal.placeholders.timelineNotary') : t('consultationModal.placeholders.timelineDefault')} />
                 </SelectTrigger>
                 <SelectContent>
@@ -387,11 +396,11 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {/* Budget */}
             {!isNotary && (
               <div>
-                <label htmlFor="budget" className="block text-sm font-medium text-card-foreground mb-2">
+                <label htmlFor={fieldId('budget')} className="block text-sm font-medium text-card-foreground mb-2">
                   {t('consultationModal.fields.budget')}
                 </label>
                 <Select value={formData.budget} onValueChange={(value) => handleSelectChange('budget', value)}>
-                  <SelectTrigger>
+                  <SelectTrigger id={fieldId('budget')}>
                     <SelectValue placeholder={t('consultationModal.placeholders.budget')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -406,11 +415,11 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
             {/* Preferred Time */}
             <div>
-              <label htmlFor="preferredTime" className="block text-sm font-medium text-card-foreground mb-2">
+              <label htmlFor={fieldId('preferredTime')} className="block text-sm font-medium text-card-foreground mb-2">
                 {t('consultationModal.fields.preferredTime')}
               </label>
               <Select value={formData.preferredTime} onValueChange={(value) => handleSelectChange('preferredTime', value)}>
-                <SelectTrigger>
+                <SelectTrigger id={fieldId('preferredTime')}>
                   <SelectValue placeholder={t('consultationModal.placeholders.preferredTime')} />
                 </SelectTrigger>
                 <SelectContent>
@@ -425,22 +434,23 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
           {/* Message */}
           <div className="mt-6">
-            <label htmlFor="message" className="block text-sm font-medium text-card-foreground mb-2">
+            <label htmlFor={fieldId('message')} className="block text-sm font-medium text-card-foreground mb-2">
               {isNotary ? t('consultationModal.fields.messageNotary') : t('consultationModal.fields.messageDefault')}
             </label>
             <Textarea
-              id="message"
+              id={fieldId('message')}
               name="message"
               value={formData.message}
               onChange={handleInputChange}
-              required
               rows={4}
               placeholder={
                 isNotary
                   ? t('consultationModal.placeholders.messageNotary')
                   : t('consultationModal.placeholders.messageDefault')
               }
+              {...requiredFieldProps(`${fieldId('message')}-error`, messageError)}
             />
+            <FieldError id={`${fieldId('message')}-error`} message={messageError} />
           </div>
 
           {/* Benefits */}
@@ -494,6 +504,28 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
 
           <ContactNotice className="mt-6 text-xs text-muted-foreground" />
 
+          {/* Result, right above the submit button so it is never scrolled out of view. Each live region
+              stays mounted and only its content changes, which is what makes screen readers announce it. */}
+          <div role="status">
+            {submitStatus === 'success' && (
+              <div className="mt-6 p-4 bg-success-emphasis/10 border border-success-emphasis/30 rounded-lg flex items-center">
+                <CheckCircle className="text-success-emphasis mr-3 flex-shrink-0" aria-hidden="true" />
+                <div>
+                  <p className="text-success-emphasis font-semibold">{t('consultationModal.successTitle')}</p>
+                  <p className="text-foreground/80 text-sm">{t('consultationModal.successBody')}</p>
+                </div>
+              </div>
+            )}
+          </div>
+          <div role="alert">
+            {submitStatus === 'error' && (
+              <div className="mt-6 p-4 bg-destructive/10 border border-destructive/30 rounded-lg flex items-center">
+                <AlertCircle className="text-destructive-emphasis mr-3 flex-shrink-0" aria-hidden="true" />
+                <p className="text-destructive-emphasis">{t('consultationModal.errorMessage', { phone: SITE_PHONE })}</p>
+              </div>
+            )}
+          </div>
+
           {/* Submit Buttons */}
           <div className="mt-6 flex flex-col sm:flex-row gap-4">
             <Button
@@ -533,8 +565,8 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             </p>
           </div>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 });
 

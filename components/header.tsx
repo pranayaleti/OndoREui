@@ -19,13 +19,22 @@ import { APP_PORTAL_LOGIN_URL, SITE_NAME, SITE_PHONE } from "@/lib/site"
 import { analyticsAttributes } from "@/lib/analytics"
 import { useTranslation } from "react-i18next"
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
 const Header = memo(() => {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLElement>(null)
+  const menuToggleRef = useRef<HTMLButtonElement>(null)
+  const menuSearchRef = useRef<HTMLButtonElement>(null)
+  const searchButtonRef = useRef<HTMLButtonElement>(null)
+  // Element that should get focus back when the search dialog closes. Null (Cmd/Ctrl+K)
+  // leaves Radix's default of returning to whatever was focused before.
+  const searchReturnFocusRef = useRef<HTMLElement | null>(null)
   const { t } = useTranslation()
   const handleMenuClose = useCallback(() => {
     setIsMenuOpen(false)
@@ -33,6 +42,26 @@ const Header = memo(() => {
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev)
+  }, [])
+
+  const openSearchFromButton = useCallback(() => {
+    searchReturnFocusRef.current = searchButtonRef.current
+    setIsSearchOpen(true)
+  }, [])
+
+  // The menu (and its Search button) unmounts when search opens, so return focus to the toggle.
+  const openSearchFromMenu = useCallback(() => {
+    searchReturnFocusRef.current = menuToggleRef.current
+    setIsSearchOpen(true)
+    setIsMenuOpen(false)
+  }, [])
+
+  const handleSearchCloseAutoFocus = useCallback((event: Event) => {
+    const target = searchReturnFocusRef.current
+    searchReturnFocusRef.current = null
+    if (!target) return
+    event.preventDefault()
+    target.focus()
   }, [])
 
   const isHiddenPage = ["/login", "/auth", "/owner", "/tenant", "/dashboard"].some(
@@ -48,6 +77,7 @@ const Header = memo(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
         event.preventDefault()
+        searchReturnFocusRef.current = null
         setIsSearchOpen(true)
       }
     }
@@ -65,24 +95,73 @@ const Header = memo(() => {
   }, [])
 
   useEffect(() => {
+    if (!isMenuOpen) return
+
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node
       if (menuRef.current && menuRef.current.contains(target)) return
+      // The toggle handles its own click; closing here too would make it reopen the menu.
+      if (menuToggleRef.current && menuToggleRef.current.contains(target)) return
       setIsMenuOpen(false)
     }
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsMenuOpen(false)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false)
+        menuToggleRef.current?.focus()
+        return
+      }
+      if (event.key !== 'Tab') return
+
+      // Keep Tab inside the open menu (toggle + menu controls) so keyboard users do not
+      // end up in the page behind it.
+      const focusable = [
+        menuToggleRef.current,
+        ...Array.from(menuRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR) ?? []),
+      ].filter((el): el is HTMLElement => el !== null)
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement
+      const lost = active === null || active === document.body
+      if (event.shiftKey && (active === first || lost)) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && (active === last || lost)) {
+        event.preventDefault()
+        first.focus()
+      }
     }
 
-    if (isMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside)
-      document.addEventListener("keydown", handleEscape)
-    }
-
+    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("keydown", handleKeyDown)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
-      document.removeEventListener("keydown", handleEscape)
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isMenuOpen])
+
+  // Move focus into the menu when it opens.
+  useEffect(() => {
+    if (isMenuOpen && isMounted) menuSearchRef.current?.focus()
+  }, [isMenuOpen, isMounted])
+
+  // Lock page scroll while the mobile menu is open, and drop the menu (and the lock) if the
+  // viewport grows past the breakpoint where the menu is hidden.
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    const mq = typeof window.matchMedia === "function" ? window.matchMedia("(min-width: 768px)") : null
+    const onChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsMenuOpen(false)
+    }
+    mq?.addEventListener?.("change", onChange)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      mq?.removeEventListener?.("change", onChange)
     }
   }, [isMenuOpen])
 
@@ -199,10 +278,11 @@ const Header = memo(() => {
             <span className="hidden lg:inline text-foreground/80">{SITE_PHONE}</span>
           </a>
           <Button
+            ref={searchButtonRef}
             variant="ghost"
             size="icon"
             className="hidden sm:inline-flex shrink-0"
-            onClick={() => setIsSearchOpen(true)}
+            onClick={openSearchFromButton}
             aria-label="Search"
           >
             <Search className="h-5 w-5" />
@@ -278,6 +358,7 @@ const Header = memo(() => {
           </div>
           {/* Mobile hamburger */}
           <button
+            ref={menuToggleRef}
             className="flex md:hidden p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -289,15 +370,13 @@ const Header = memo(() => {
         </div>
       </div>
       {isMenuOpen && isMounted && (
-        <div ref={menuRef} id="mobile-menu" className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md shadow-lg border-t md:hidden z-50 py-4 pb-6 max-h-[calc(100vh-4rem)] overflow-y-auto" role="navigation" aria-label="Mobile navigation">
+        <nav ref={menuRef} id="mobile-menu" className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md shadow-lg border-t md:hidden z-50 py-4 pb-6 max-h-[calc(100dvh-4rem)] overflow-y-auto" aria-label="Mobile navigation">
           <div className="container px-4 sm:px-6">
             <Button
+              ref={menuSearchRef}
               variant="outline"
               className="w-full mb-4 justify-start"
-              onClick={() => {
-                setIsSearchOpen(true)
-                handleMenuClose()
-              }}
+              onClick={openSearchFromMenu}
             >
               <Search className="mr-2 h-4 w-4" />
               {t("nav.search")}
@@ -338,28 +417,22 @@ const Header = memo(() => {
                 {SITE_PHONE}, Free Consultation
               </a>
               <div className="grid grid-cols-2 gap-2">
-                <Link
-                  href={APP_PORTAL_LOGIN_URL}
-                  onClick={handleMenuClose}
-                >
-                  <Button variant="outline" size="sm" className="w-full">
+                <Button asChild variant="outline" size="sm" className="w-full">
+                  <Link href={APP_PORTAL_LOGIN_URL} onClick={handleMenuClose}>
                     {t("nav.ownerLogin")}
-                  </Button>
-                </Link>
-                <Link
-                  href={APP_PORTAL_LOGIN_URL}
-                  onClick={handleMenuClose}
-                >
-                  <Button variant="outline" size="sm" className="w-full">
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="sm" className="w-full">
+                  <Link href={APP_PORTAL_LOGIN_URL} onClick={handleMenuClose}>
                     {t("nav.tenantLogin")}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
-        </div>
+        </nav>
       )}
-      <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} />
+      <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} onCloseAutoFocus={handleSearchCloseAutoFocus} />
     </header>
   )
 })

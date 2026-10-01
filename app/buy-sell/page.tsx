@@ -75,11 +75,11 @@ export default function BuySellHubPage() {
               Use this hub when you know the city. Each local page is built from the same service template as our
               loans and property-management city guides: what we do there, nearby cities, and a way to reach the
               team. For the step-by-step purchase path, start at{" "}
-              <Link href="/buy/" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/buy/" className="font-medium prose-link">
                 Buy a home
               </Link>
               . For listing, photography, and negotiation, start at{" "}
-              <Link href="/sell/" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/sell/" className="font-medium prose-link">
                 Sell your home
               </Link>
               .
@@ -102,7 +102,7 @@ export default function BuySellHubPage() {
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-foreground/70">
                 <p>First-time paths, loan education, and what happens from offer to keys.</p>
-                <Link href="/buy/" className="font-medium text-primary underline-offset-4 hover:underline">
+                <Link href="/buy/" className="font-medium prose-link">
                   Open the buy guide
                 </Link>
               </CardContent>
@@ -116,7 +116,7 @@ export default function BuySellHubPage() {
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-foreground/70">
                 <p>CMA, marketing, MLS syndication, and negotiation through close.</p>
-                <Link href="/sell/" className="font-medium text-primary underline-offset-4 hover:underline">
+                <Link href="/sell/" className="font-medium prose-link">
                   Open the sell guide
                 </Link>
               </CardContent>
@@ -131,7 +131,7 @@ export default function BuySellHubPage() {
               <CardContent className="space-y-2 text-sm text-foreground/70">
                 <p>
                   Example:{" "}
-                  <Link href="/buy-sell/zip/84043/" className="font-medium text-primary underline-offset-4 hover:underline">
+                  <Link href="/buy-sell/zip/84043/" className="font-medium prose-link">
                     84043 (Lehi)
                   </Link>
                   . Swap in another published Utah ZIP in the same URL pattern.
@@ -172,7 +172,7 @@ export default function BuySellHubPage() {
             <p className="mb-8 max-w-3xl text-foreground/70">
               Pick a city to see local buy and sell context, then jump to loans or property management for the same
               place. Related:{" "}
-              <Link href="/locations/" className="text-primary underline-offset-4 hover:underline">
+              <Link href="/locations/" className="prose-link">
                 all service areas
               </Link>
               .

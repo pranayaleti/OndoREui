@@ -60,17 +60,25 @@
 	--popover: 0 0% 100%;
 	--popover-foreground: 0 0% 5%;
 	--primary: 25 95% 53%;
+	/* Brand orange as TEXT on the light page. --primary (fill, ring) is 2.7:1 on #FAFAFA; this is 5.1:1 or better on
+	   the light background, card and muted surfaces. Wired to Tailwind's `text-primary` in tailwind.config.ts. */
+	--primary-text: 21 90% 36%;
 	--primary-foreground: 0 0% 0%;
 	--secondary: 25 30% 90%;
 	--secondary-foreground: 25 30% 15%;
 	--muted: 0 0% 94%;
-	--muted-foreground: 0 0% 45%;
+	/* 5.7:1 on the page background and 5.1:1 on --muted (was 45%: 4.2:1 on --muted). */
+	--muted-foreground: 0 0% 40%;
 	--accent: 25 95% 53%;
 	--accent-foreground: 0 0% 0%;
 	--destructive: 0 84.2% 60.2%;
 	/* Readable as TEXT on the page background; --destructive is for fills. */
 	--destructive-emphasis: 0 72% 42%;
 	--destructive-foreground: 0 0% 98%;
+	/* Readable-as-text status colours (4.5:1+ on background, card and muted). Never use the
+	   Tailwind palette (text-green-700, text-yellow-600) for text: it is tuned for one theme only. */
+	--success-emphasis: 142 76% 22%;
+	--warning-emphasis: 32 95% 26%;
 	--border: 0 0% 88%;
 	--input: 0 0% 88%;
 	--ring: 25 95% 40%;
@@ -105,6 +113,8 @@
 	--popover: 222 20% 10%;
 	--popover-foreground: 0 0% 95%;
 	--primary: 25 95% 53%;
+	/* Dark theme: the fill orange already passes as text (6.8:1 on the page background). */
+	--primary-text: 25 95% 53%;
 	--primary-foreground: 0 0% 0%;
 	--secondary: 222 20% 15%;
 	--secondary-foreground: 0 0% 85%;
@@ -116,6 +126,8 @@
 	/* Dark theme: the fill colour above is 1.78:1 as text, so text uses this. */
 	--destructive-emphasis: 0 84% 70%;
 	--destructive-foreground: 0 0% 98%;
+	--success-emphasis: 142 70% 60%;
+	--warning-emphasis: 45 93% 60%;
 	--border: 222 20% 17%;
 	--input: 222 20% 17%;
 	--ring: 25 95% 40%;

@@ -119,7 +119,14 @@ export default function TechnicalSEOForRealEstate() {
               In <code>app/page.tsx</code> and <code>lib/seo.ts</code>, we dynamically generate JSON-LD blobs.
             </p>
 
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
+            <pre
+              className="bg-muted p-4 rounded-lg overflow-x-auto"
+              // Scrollable code region: keyboard users must be able to focus it to scroll.
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+              tabIndex={0}
+              role="region"
+              aria-label="Example breadcrumb JSON-LD code"
+            >
               <code>{`// lib/seo.ts
 export const generateBreadcrumbJsonLd = (items) => ({
   "@context": "https://schema.org",

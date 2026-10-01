@@ -107,15 +107,25 @@ export function RentalListingCard({
           {formatMonthlyRent(property.price)}
           <span className="text-sm font-medium text-muted-foreground">/mo</span>
         </p>
-        <button
-          type="button"
-          className="mt-1 w-full text-left"
-          aria-label={`Highlight ${property.title} on map`}
-          onClick={() => onHighlight?.(property.id)}
-        >
-          <h3 className="text-lg font-semibold leading-snug">{property.title}</h3>
-          <p className="text-sm text-foreground/80">{property.address}</p>
-        </button>
+        <h3 className="mt-1 text-lg font-semibold leading-snug">
+          <Link
+            href={listingDetailPath(property.id)}
+            className="underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            {property.title}
+          </Link>
+        </h3>
+        <p className="text-sm text-foreground/80">{property.address}</p>
+        {onHighlight ? (
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={`Show on map: ${property.title}`}
+            onClick={() => onHighlight(property.id)}
+          >
+            Show on map
+          </button>
+        ) : null}
         <p className="mt-2 text-sm text-muted-foreground">
           {[typeLabel, bedsLabel(property.bedrooms), bathsLabel(property.bathrooms), size]
             .filter(Boolean)
@@ -143,7 +153,7 @@ export function RentalListingCard({
           <Link
             href={listingDetailPath(property.id)}
             className={cn(buttonVariants(), "min-h-[44px] w-full text-base")}
-            aria-label={`View details for ${property.title} at ${property.address}, priced at ${property.price} per month`}
+            aria-label={`View property: ${property.title} at ${property.address}, ${formatMonthlyRent(property.price)} per month`}
           >
             View property
           </Link>

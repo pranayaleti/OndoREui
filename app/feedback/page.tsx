@@ -124,7 +124,7 @@ export default function FeedbackPage() {
                   rows={5}
                   value={suggestion}
                   onChange={(event) => setSuggestion(event.target.value)}
-                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   placeholder="Tell us what would make Ondo even better for you..."
                   required
                   aria-describedby={errorMessage ? "suggestion-error" : undefined}
@@ -146,7 +146,7 @@ export default function FeedbackPage() {
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   placeholder="Add your email if you&apos;d like us to follow up"
                 />
               </div>
@@ -165,7 +165,7 @@ export default function FeedbackPage() {
                   onChange={(event) =>
                     setPhone(event.target.value.replace(/[^0-9+()\s-]/g, ""))
                   }
-                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   placeholder="Add your phone number if you prefer a call or text"
                 />
               </div>

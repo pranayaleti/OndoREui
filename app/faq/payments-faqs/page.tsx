@@ -96,8 +96,8 @@ export default function PaymentsFAQPage() {
                 <DollarSign className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Payment Questions</h2>
-                <p className="text-gray-300 text-sm">Rent, autopay, due dates and online payments</p>
+                <h2 className="text-2xl font-bold text-foreground">Payment Questions</h2>
+                <p className="text-muted-foreground text-sm">Rent, autopay, due dates and online payments</p>
               </div>
             </div>
 
@@ -105,8 +105,8 @@ export default function PaymentsFAQPage() {
               <div className="flex items-start gap-4">
                 <AlertCircle className="h-6 w-6 text-yellow-400 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">Important Payment Information</h3>
-                  <ul className="space-y-2 text-gray-300 text-sm">
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">Important Payment Information</h3>
+                  <ul className="space-y-2 text-muted-foreground text-sm">
                     <li>• Your lease sets your rent due date, any grace period and any late fee</li>
                     <li>• Your tenant portal shows payment methods and fees</li>
                     <li>• Contact us early if you are having trouble paying rent</li>
@@ -120,12 +120,12 @@ export default function PaymentsFAQPage() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-white/10 rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
+                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
                 >
-                  <AccordionTrigger className="text-white hover:no-underline py-4">
+                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
                     <span className="text-left font-semibold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-300 pb-4 pt-2 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -133,7 +133,7 @@ export default function PaymentsFAQPage() {
             </Accordion>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Need help with payments?</p>
+              <p className="text-muted-foreground mb-4">Need help with payments?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`}

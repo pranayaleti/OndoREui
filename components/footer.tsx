@@ -75,16 +75,18 @@ function FooterNavSection({ label, icon, href, children }: { label: string; icon
           <span>{label}</span>
         </Link>
       </h3>
-      {/* Mobile: tappable toggle */}
-      <button
-        type="button"
-        className="flex w-full items-center justify-between text-lg font-semibold mb-2 md:hidden"
-        onClick={() => setOpen(prev => !prev)}
-        aria-expanded={open}
-      >
-        <span className="flex items-center gap-2">{icon}<span>{label}</span></span>
-        <svg className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-      </button>
+      {/* Mobile: tappable toggle. The button sits inside the heading, so heading navigation still finds the group. */}
+      <h3 className="mb-2 text-lg font-semibold md:hidden">
+        <button
+          type="button"
+          className="flex w-full items-center justify-between"
+          onClick={() => setOpen(prev => !prev)}
+          aria-expanded={open}
+        >
+          <span className="flex items-center gap-2">{icon}<span>{label}</span></span>
+          <svg aria-hidden="true" className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+        </button>
+      </h3>
       {/* Content: visible on md+, toggled on mobile */}
       <ul className={`space-y-2 text-sm ${open ? "block" : "hidden"} md:block`}>
         {children}
@@ -163,6 +165,7 @@ const Footer = memo(() => {
 
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-12" aria-label="Ondo Real Estate footer navigation">
+        <h2 className="sr-only">Site links</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           
           {/* Buying a Home */}
@@ -313,7 +316,7 @@ const Footer = memo(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                   {...analyticsAttributes("social_click", "footer", name.toLowerCase())}
-                  className={`text-foreground/70 transition-colors ${hoverClass}`}
+                  className={`inline-flex h-11 w-11 items-center justify-center text-foreground/70 transition-colors ${hoverClass}`}
                 >
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </Link>

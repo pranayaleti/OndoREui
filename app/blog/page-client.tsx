@@ -1278,7 +1278,7 @@ export default function BlogPage() {
                   <div className="relative h-64 lg:h-full">
                     <Image
                       src={featuredPost.image}
-                      alt={featuredPost.title}
+                      alt=""
                       fill
                       className="object-cover"
                     />
@@ -1288,7 +1288,7 @@ export default function BlogPage() {
                       <Badge variant="secondary">{featuredPost.category}</Badge>
                       <span className="text-sm text-foreground/70">{featuredPost.readTime}</span>
                     </div>
-                    <CardTitle className="text-2xl mb-4">{featuredPost.title}</CardTitle>
+                    <h3 className="text-2xl font-semibold leading-none tracking-tight mb-4">{featuredPost.title}</h3>
                     <CardDescription className="text-lg mb-6">{featuredPost.excerpt}</CardDescription>
                     <div className="flex items-center gap-4 text-sm text-foreground/70 mb-6">
                       <div className="flex items-center gap-1">
@@ -1302,8 +1302,8 @@ export default function BlogPage() {
                     </div>
                     <Button asChild>
                       <Link href={`/blog/${featuredPost.slug}`}>
-                        Read More
-                        <ArrowRight className="h-4 w-4 ml-2" />
+                        Read More<span className="sr-only">: {featuredPost.title}</span>
+                        <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
                       </Link>
                     </Button>
                   </CardContent>
@@ -1316,13 +1316,13 @@ export default function BlogPage() {
               <div className="lg:col-span-3">
                 <h2 className="text-3xl font-bold mb-8">Latest Articles</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filteredPosts.map((post, index) => (
-                    <Link key={index} href={`/blog/${post.slug}`} className="group block h-full">
+                  {filteredPosts.map((post) => (
+                    <div key={post.slug} className="group relative h-full">
                       <Card className="h-full hover:shadow-lg transition-shadow group-hover:border-primary/60">
                       <div className="relative h-48">
                         <Image
                           src={post.image}
-                          alt={post.title}
+                          alt=""
                           fill
                             className="object-cover transition-transform duration-200 group-hover:scale-[1.01]"
                         />
@@ -1332,9 +1332,14 @@ export default function BlogPage() {
                           <Badge variant="outline" className="text-xs">{post.category}</Badge>
                           <span className="text-xs text-foreground/70">{post.readTime}</span>
                         </div>
-                          <CardTitle className="text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            {post.title}
-                          </CardTitle>
+                          <h3 className="text-lg font-semibold leading-none tracking-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            <Link
+                              href={`/blog/${post.slug}`}
+                              className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring"
+                            >
+                              {post.title}
+                            </Link>
+                          </h3>
                         <CardDescription className="mb-4 line-clamp-2">{post.excerpt}</CardDescription>
                           <div className="flex items-center gap-4 text-xs text-foreground/70">
                           <div className="flex items-center gap-1">
@@ -1348,7 +1353,7 @@ export default function BlogPage() {
                         </div>
                       </CardContent>
                     </Card>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -1432,7 +1437,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-background to-card text-white">
+      <section className="py-16 bg-gradient-to-b from-background to-card text-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Make Your Real Estate Move?</h2>

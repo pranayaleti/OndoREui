@@ -153,10 +153,11 @@ const RefinanceCalculator: React.FC = () => {
               />
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="newLoanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   New Loan Term (years)
                 </label>
                 <select
+                  id="newLoanTermYears"
                   value={formData.newTerm}
                   onChange={(e) => handleInputChange('newTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
@@ -211,13 +212,13 @@ const RefinanceCalculator: React.FC = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="text-center p-3 bg-muted rounded-lg">
                         <p className="text-sm text-destructive-emphasis mb-1">Current Payment</p>
-                        <p className="text-lg font-semibold text-red-700">
+                        <p className="text-lg font-semibold text-destructive-emphasis">
                           {showValues ? formatCurrency(formData.currentPayment) : '••••'}
                         </p>
                       </div>
                       <div className="text-center p-3 bg-muted rounded-lg">
                         <p className="text-sm text-primary mb-1">New Payment</p>
-                        <p className="text-lg font-semibold text-green-700">
+                        <p className="text-lg font-semibold text-success-emphasis">
                           {showValues ? formatCurrency(results.newTotalPayment) : '••••'}
                         </p>
                         <p className="text-xs text-foreground/70 mt-1">
@@ -243,13 +244,13 @@ const RefinanceCalculator: React.FC = () => {
                   <div className="space-y-4">
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
-                        <p className="text-sm text-yellow-600 mb-1">Break-Even Time</p>
-                        <p className="text-2xl font-bold text-yellow-700">
+                        <p className="text-sm text-warning-emphasis mb-1">Break-Even Time</p>
+                        <p className="text-2xl font-bold text-warning-emphasis">
                           {results.breakEvenMonths == null
                             ? 'N/A'
                             : `${results.breakEvenMonths.toFixed(1)} months`}
                         </p>
-                        <p className="text-sm text-yellow-600 mt-1">
+                        <p className="text-sm text-warning-emphasis mt-1">
                           Time to recoup closing costs from payment savings
                         </p>
                       </div>
@@ -274,7 +275,7 @@ const RefinanceCalculator: React.FC = () => {
                     <div className="bg-muted p-4 rounded-lg">
                       <div className="text-center">
                         <p className="text-sm text-primary mb-1">Net P&amp;I Payment Savings</p>
-                        <p className="text-2xl font-bold text-green-700">
+                        <p className="text-2xl font-bold text-success-emphasis">
                           {showValues ? formatCurrency(results.netPaymentSavingsOverNewTerm) : '••••'}
                         </p>
                         <p className="text-sm text-primary mt-1">
@@ -304,7 +305,7 @@ const RefinanceCalculator: React.FC = () => {
                         • Net P&amp;I payment savings: {showValues ? formatCurrency(results.netPaymentSavingsOverNewTerm) : '••••'}
                       </p>
                       {results.extendsTerm && (
-                        <p className="text-yellow-700">
+                        <p className="text-warning-emphasis">
                           • This refinance extends your remaining term (
                           {results.estimatedRemainingMonths != null
                             ? `${(results.estimatedRemainingMonths / 12).toFixed(1)} years left`
@@ -325,11 +326,11 @@ const RefinanceCalculator: React.FC = () => {
                         break-even within the remaining loan term
                       </p>
                     ) : results.monthlyPaymentSavings <= 0 ? (
-                      <p className="text-yellow-600 font-medium">
+                      <p className="text-warning-emphasis font-medium">
                         ⚠ Monthly payment does not decrease, weigh interest and term tradeoffs carefully
                       </p>
                     ) : (
-                      <p className="text-yellow-600 font-medium">
+                      <p className="text-warning-emphasis font-medium">
                         ⚠ Consider if you plan to stay long enough for break-even and interest savings to matter
                       </p>
                     )}

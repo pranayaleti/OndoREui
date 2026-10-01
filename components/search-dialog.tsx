@@ -16,6 +16,8 @@ import { search, SearchResult } from "@/lib/search-index"
 interface SearchDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  /** Called when focus is about to return after close. Call preventDefault() to move focus yourself. */
+  onCloseAutoFocus?: (event: Event) => void
 }
 
 const categoryIcons = {
@@ -32,7 +34,7 @@ const categoryLabels = {
   Service: 'Services',
 }
 
-export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
+export function SearchDialog({ open, onOpenChange, onCloseAutoFocus }: SearchDialogProps) {
   const router = useRouter()
   const [query, setQuery] = React.useState("")
   const [results, setResults] = React.useState<SearchResult[]>([])
@@ -71,9 +73,10 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   }, [results])
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange}>
+    <CommandDialog open={open} onOpenChange={onOpenChange} onCloseAutoFocus={onCloseAutoFocus}>
       <CommandInput
         placeholder="Search pages, calculators, blog posts..."
+        aria-label="Search the site"
         value={query}
         onValueChange={setQuery}
       />

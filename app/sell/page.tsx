@@ -74,7 +74,7 @@ const services = [
 
 export default function SellPage() {
   return (
-    <>
+    <main>
       <SEO
         title="Sell Your Utah Home | CMA, Listing & Negotiation"
         description="List with Ondo: CMA, photography, MLS syndication, and negotiation. Compensation is quoted in writing."
@@ -239,6 +239,6 @@ export default function SellPage() {
           serviceType: "Real Estate Sales",
         })}
       </Script>
-    </>
+    </main>
   )
 }

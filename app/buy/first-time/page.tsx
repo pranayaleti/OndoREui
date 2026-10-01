@@ -46,7 +46,7 @@ export default function FirstTimeBuyerPage() {
               <p className="text-lg text-foreground/70">
                 A 3.5% down payment is not cash to close. Earnest money, title, prepaids, and sometimes a second-lien
                 DPA still have to be sourced. Start with{" "}
-                <Link href="/learn/first-time" className="text-primary underline-offset-4 hover:underline">
+                <Link href="/learn/first-time" className="prose-link">
                   first-time cash and closing
                 </Link>
                 .
@@ -80,7 +80,7 @@ export default function FirstTimeBuyerPage() {
                       Down payment plus title, prepaids, and earnest money
                     </Link>
                     . Three cash lines:{" "}
-                    <Link href="/blog/earnest-money-vs-down-payment-vs-closing-costs" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/earnest-money-vs-down-payment-vs-closing-costs" className="prose-link">
                       earnest vs down vs closing costs
                     </Link>
                     .
@@ -99,7 +99,7 @@ export default function FirstTimeBuyerPage() {
                       How DPA and an FHA gift can sit on the same file
                     </Link>
                     . Signatures when a parent is the donor:{" "}
-                    <Link href="/blog/parent-gifting-down-payment-who-signs" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/parent-gifting-down-payment-who-signs" className="prose-link">
                       who signs what
                     </Link>
                     .
@@ -117,12 +117,12 @@ export default function FirstTimeBuyerPage() {
                     <li>• HUD policy can allow 3.5% down at 580+; many lender overlays sit higher</li>
                     <li>• Upfront and annual MIP — compare to conventional PMI on two Loan Estimates</li>
                     <li>• Primary residence; condos need{" "}
-                      <Link href="/blog/fha-condo-roster-project-approval" className="text-primary underline-offset-4 hover:underline">
+                      <Link href="/blog/fha-condo-roster-project-approval" className="prose-link">
                         FHA project approval
                       </Link>
                     </li>
                     <li>• See{" "}
-                      <Link href="/blog/fha-vs-conventional-loans-utah" className="text-primary underline-offset-4 hover:underline">
+                      <Link href="/blog/fha-vs-conventional-loans-utah" className="prose-link">
                         FHA vs conventional at a 640 FICO
                       </Link>
                     </li>

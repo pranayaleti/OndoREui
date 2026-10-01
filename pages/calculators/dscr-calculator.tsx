@@ -142,9 +142,9 @@ const DSCRCalculator: React.FC = () => {
   };
 
   const getDSCRColor = (dscr: number) => {
-    if (dscr >= 1.5) return 'text-green-600';
+    if (dscr >= 1.5) return 'text-success-emphasis';
     if (dscr >= 1.25) return 'text-primary';
-    if (dscr >= 1.0) return 'text-yellow-600';
+    if (dscr >= 1.0) return 'text-warning-emphasis';
     return 'text-destructive-emphasis';
   };
 
@@ -264,10 +264,11 @@ const DSCRCalculator: React.FC = () => {
 
               {/* Loan Term */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="loanTermYears" className="block text-sm font-medium text-foreground mb-2">
                   Loan Term (years)
                 </label>
                 <select
+                  id="loanTermYears"
                   value={formData.loanTerm}
                   onChange={(e) => handleInputChange('loanTerm', Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary input-no-spinner"
@@ -379,7 +380,7 @@ const DSCRCalculator: React.FC = () => {
                     ) : results.dscr >= 1.25 ? (
                       <p className="text-primary font-medium">✓ Good DSCR. Property should qualify for most lenders.</p>
                     ) : results.dscr >= 1.0 ? (
-                      <p className="text-yellow-600 font-medium">⚠ Marginal DSCR. May not meet lender requirements.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Marginal DSCR. May not meet lender requirements.</p>
                     ) : (
                       <p className="text-destructive-emphasis font-medium">⚠ Low DSCR. Property does not generate enough income to cover debt service.</p>
                     )}

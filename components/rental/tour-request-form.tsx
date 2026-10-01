@@ -71,17 +71,17 @@ export function TourRequestForm({ propertyId }: { propertyId: string }) {
       </div>
       <div>
         <Label htmlFor="tname">Name</Label>
-        <Input id="tname" className="mt-1" required value={name} onChange={(e) => setName(e.target.value)} />
+        <Input id="tname" className="mt-1" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
       <div>
         <Label htmlFor="temail">Email</Label>
-        <Input id="temail" type="email" className="mt-1" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input id="temail" type="email" className="mt-1" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
         <Label htmlFor="tphone">Phone (optional)</Label>
-        <Input id="tphone" type="tel" className="mt-1" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <Input id="tphone" type="tel" className="mt-1" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
       </div>
-      {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
+      {error ? <p role="alert" className="text-sm text-destructive-emphasis">{error}</p> : null}
       <Button type="submit" className="min-h-11" disabled={busy}>
         {busy ? "Sending…" : "Request tour"}
       </Button>

@@ -1,3 +1,4 @@
+import { isValidEmail } from "@/lib/security"
 import {
   buildLeadMessage,
   type ContactInquiryType,
@@ -80,4 +81,33 @@ export function buildConsultationLead(
       form.message,
     ),
   }
+}
+
+/** Keys under `consultationModal.errors` in the locale file. */
+export type ConsultationErrorCode =
+  | "nameRequired"
+  | "emailRequired"
+  | "emailInvalid"
+  | "serviceRequired"
+  | "messageRequired"
+
+export type ConsultationFieldErrors = Partial<
+  Record<"name" | "email" | "serviceType" | "message", ConsultationErrorCode>
+>
+
+/**
+ * What is missing or wrong in the required consultation / notary fields, keyed by field.
+ * Empty when the form can be sent. Phone and the other selects are optional.
+ */
+export function consultationFieldErrors(
+  form: Pick<ConsultationFormValues, "name" | "email" | "serviceType" | "message">,
+): ConsultationFieldErrors {
+  const errors: ConsultationFieldErrors = {}
+  if (!form.name.trim()) errors.name = "nameRequired"
+  const email = form.email.trim()
+  if (!email) errors.email = "emailRequired"
+  else if (!isValidEmail(email)) errors.email = "emailInvalid"
+  if (!form.serviceType.trim()) errors.serviceType = "serviceRequired"
+  if (!form.message.trim()) errors.message = "messageRequired"
+  return errors
 }

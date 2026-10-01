@@ -51,19 +51,20 @@ export default function InvitePageClient({ token }: { token: string }) {
 
   if (state === "loading") {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      <main className="min-h-screen flex flex-col items-center justify-center gap-4">
+        <h1 className="sr-only">Accept invitation</h1>
         <LoadingSpinner />
         <p className="text-muted-foreground text-sm">Validating your invitation...</p>
-      </div>
+      </main>
     )
   }
 
   if (state === "expired") {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <main className="min-h-screen flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
           <CardHeader>
-            <CardTitle>Invitation Expired</CardTitle>
+            <CardTitle role="heading" aria-level={1}>Invitation Expired</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground">
@@ -75,16 +76,16 @@ export default function InvitePageClient({ token }: { token: string }) {
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </main>
     )
   }
 
   if (state === "error") {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <main className="min-h-screen flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
           <CardHeader>
-            <CardTitle>Invalid Link</CardTitle>
+            <CardTitle role="heading" aria-level={1}>Invalid Link</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground">
@@ -96,7 +97,7 @@ export default function InvitePageClient({ token }: { token: string }) {
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </main>
     )
   }
 
@@ -106,7 +107,7 @@ export default function InvitePageClient({ token }: { token: string }) {
   const features = isOwner ? ownerFeatures : tenantFeatures
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <main className="min-h-screen flex items-center justify-center p-4">
       <Card className="max-w-lg w-full">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
@@ -126,7 +127,9 @@ export default function InvitePageClient({ token }: { token: string }) {
               />
             </svg>
           </div>
-          <CardTitle className="text-2xl">You&apos;re Invited!</CardTitle>
+          <CardTitle role="heading" aria-level={1} className="text-2xl">
+            You&apos;re Invited!
+          </CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-5">
@@ -189,6 +192,6 @@ export default function InvitePageClient({ token }: { token: string }) {
           </p>
         </CardContent>
       </Card>
-    </div>
+    </main>
   )
 }

@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { fireEvent, render, screen } from "@testing-library/react"
+import { afterEach, describe, expect, it, vi } from "vitest"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import { FeeAlignmentWidget } from "./fee-alignment-widget"
 import {
   DEFAULT_EXAMPLE_MONTHLY_RENT,
@@ -76,5 +76,28 @@ describe("FeeAlignmentWidget", () => {
     )
     expect(names).toHaveLength(4)
     expect(new Set(names).size).toBe(2)
+  })
+
+  describe("live announcements", () => {
+    afterEach(() => vi.useRealTimers())
+
+    it("keeps the ledger out of a live region and announces one debounced summary", () => {
+      vi.useFakeTimers()
+      const { container } = render(<FeeAlignmentWidget />)
+      expect(container.querySelector("dl[aria-live]")).toBeNull()
+      const status = screen.getByRole("status")
+      expect(status).toHaveTextContent("")
+
+      const slider = screen.getByRole("slider", { name: /monthly rent per unit/i })
+      fireEvent.change(slider, { target: { value: "2400" } })
+      fireEvent.change(slider, { target: { value: "2600" } })
+      expect(status).toHaveTextContent("")
+
+      act(() => {
+        vi.advanceTimersByTime(1000)
+      })
+      const expected = formatUsd0(buildFeeSnapshot(2600, 1).ondoMonthlyFee)
+      expect(status).toHaveTextContent(`Ondo fee per unit this month: ${expected}.`)
+    })
   })
 })

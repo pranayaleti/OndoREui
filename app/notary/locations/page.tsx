@@ -51,7 +51,7 @@ export default function NotaryLocationsPage() {
                 <li key={state.slug}>
                   <Link
                     href={notaryStatePath(state.slug)}
-                    className="text-primary underline-offset-4 hover:underline"
+                    className="text-primary underline underline-offset-4 hover:no-underline"
                   >
                     {state.name}
                   </Link>

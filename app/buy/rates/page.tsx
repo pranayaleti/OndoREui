@@ -111,7 +111,7 @@ export default function MortgageRatesPage() {
               {NEWS_AVERAGE_VS_QUOTE.methodology} Official survey:{" "}
               <a
                 href={NEWS_AVERAGE_VS_QUOTE.officialUrl}
-                className="text-primary underline-offset-4 hover:underline"
+                className="prose-link"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -177,7 +177,7 @@ export default function MortgageRatesPage() {
                   <p className="text-foreground/70">
                     A broader cost measure that includes most lender prepaid finance charges. Two files with the same
                     note rate can have different APRs. Compare APR plus cash to close, not APR alone. Deep guide:{" "}
-                    <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="prose-link">
                       APR vs rate on a Loan Estimate
                     </Link>
                     .
@@ -197,15 +197,15 @@ export default function MortgageRatesPage() {
               <h3 className="text-2xl font-bold mb-6">What moves a quote</h3>
               <ul className="space-y-3 text-foreground/70">
                 <li>• Credit, occupancy (primary vs second home vs investment), and loan-to-value</li>
-                <li>• Property type (condo and <Link href="/blog/manufactured-housing-adu-financing" className="text-primary underline-offset-4 hover:underline">manufactured or ADU</Link> overlays differ)</li>
-                <li>• Lock period and whether you are buying <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="text-primary underline-offset-4 hover:underline">discount points</Link> or taking a lender credit — or a <Link href="/blog/temporary-buydown-who-pays-year-three" className="text-primary underline-offset-4 hover:underline">temporary 2-1 / 3-2-1 buydown</Link>. How <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="text-primary underline-offset-4 hover:underline">APR vs rate on the Loan Estimate</Link> differ</li>
+                <li>• Property type (condo and <Link href="/blog/manufactured-housing-adu-financing" className="prose-link">manufactured or ADU</Link> overlays differ)</li>
+                <li>• Lock period and whether you are buying <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="prose-link">discount points</Link> or taking a lender credit, or a <Link href="/blog/temporary-buydown-who-pays-year-three" className="prose-link">temporary 2-1 / 3-2-1 buydown</Link>. How <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="prose-link">APR vs rate on the Loan Estimate</Link> differ</li>
                 <li>• Program (conventional, FHA, VA, USDA, jumbo) — jumbo starts at the{" "}
-                  <Link href="/blog/jumbo-vs-conforming-fhfa-county-limit" className="text-primary underline-offset-4 hover:underline">
+                  <Link href="/blog/jumbo-vs-conforming-fhfa-county-limit" className="prose-link">
                     FHFA county limit
                   </Link>
                 </li>
                 <li>• Whether the file is a purchase or a refinance (see{" "}
-                  <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="text-primary underline-offset-4 hover:underline">
+                  <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="prose-link">
                     break-even after costs
                   </Link>
                   )</li>
@@ -225,11 +225,11 @@ export default function MortgageRatesPage() {
                   <h4 className="text-lg font-semibold mb-2">Adjustable-Rate Mortgages (ARMs)</h4>
                   <p className="text-foreground/70">
                     Start with a fixed rate for an initial period (e.g., 5, 7, or 10 years), then adjust periodically. Caps limit how far the <em>note rate</em> can move — they are not a payment promise. Read{" "}
-                    <Link href="/blog/arm-caps-in-plain-english" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/arm-caps-in-plain-english" className="prose-link">
                       ARM caps in plain English
                     </Link>
                     . Product overview:{" "}
-                    <Link href="/buy/adjustable-rate" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/buy/adjustable-rate" className="prose-link">
                       adjustable-rate mortgages
                     </Link>
                     .
@@ -240,7 +240,7 @@ export default function MortgageRatesPage() {
                   <p className="text-foreground/70">
                     An interest-only period skips scheduled principal for a stated window. That is not an ARM teaser
                     and not a temporary buydown. Payment shock when amortization starts is the risk.{" "}
-                    <Link href="/blog/interest-only-mortgages-who-they-are-for" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/interest-only-mortgages-who-they-are-for" className="prose-link">
                       Interest-only: who it is for
                     </Link>
                     .
@@ -250,11 +250,11 @@ export default function MortgageRatesPage() {
                   <h4 className="text-lg font-semibold mb-2">Rate lock</h4>
                   <p className="text-foreground/70">
                     A lock holds a quoted rate for a stated window (often 30–60 days). It is not a promise that the market will not move after you lock, and it is not a commitment to lend. If rates fall while you are locked, you do not automatically get the lower rate — that is a written float-down, if it exists at all. Deep guides:{" "}
-                    <Link href="/blog/rate-lock-if-rates-drop" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">
                       what a lock does if rates drop
                     </Link>
                     {" "}and{" "}
-                    <Link href="/blog/rate-lock-extension-vs-floating" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/rate-lock-extension-vs-floating" className="prose-link">
                       lock extension vs floating
                     </Link>
                     .

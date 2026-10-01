@@ -139,7 +139,7 @@ const OnePercentRuleCalculator: React.FC = () => {
                         <p className="text-sm text-primary mb-1">
                           {results.meetsRule ? '✓ Meets 1% Rule' : '✗ Does Not Meet 1% Rule'}
                         </p>
-                        <p className={`text-3xl font-bold ${results.meetsRule ? 'text-green-600' : 'text-red-600'}`}>
+                        <p className={`text-3xl font-bold ${results.meetsRule ? 'text-success-emphasis' : 'text-destructive-emphasis'}`}>
                           {formatPercent(results.actualPercent)}
                         </p>
                         <p className="text-sm text-foreground/70 mt-1">
@@ -190,7 +190,7 @@ const OnePercentRuleCalculator: React.FC = () => {
                     {results.meetsRule ? (
                       <p className="text-primary font-medium">✓ Property meets the 1% rule! This is a good starting point for evaluation.</p>
                     ) : (
-                      <p className="text-yellow-600 font-medium">⚠ Property does not meet the 1% rule. Consider if other factors justify the investment.</p>
+                      <p className="text-warning-emphasis font-medium">⚠ Property does not meet the 1% rule. Consider if other factors justify the investment.</p>
                     )}
                     <p>• The 1% rule is a quick screening tool, not a definitive investment decision</p>
                     <p>• Properties meeting the rule typically have better cash flow potential</p>

@@ -384,7 +384,7 @@ export default function PrivacyPolicyPage() {
             </Card>
 
             <div className="text-center mt-12">
-              <h3 className="text-2xl font-bold mb-4">Questions About Our Privacy Policy?</h3>
+              <h2 className="text-2xl font-bold mb-4">Questions About Our Privacy Policy?</h2>
               <p className="text-foreground/70 mb-6">
                 If you have any questions about this Privacy Policy or our data practices, please don't hesitate to contact us.
               </p>
