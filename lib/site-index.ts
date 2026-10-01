@@ -13,6 +13,7 @@ import {
   SITE_PHONE,
   SITE_SOCIALS,
   SITE_URL,
+  nmlsIdentification,
 } from "@/lib/site"
 import { glossaryHref, sortedGlossaryTerms } from "@/lib/content/glossary"
 
@@ -140,7 +141,7 @@ const AGENT_GUIDANCE = [
 export const LLMS_DISCLOSURES_BLOCK = [
   "## Required disclosures",
   "",
-  "Loan information is provided by Ondo Real Estate (NMLS ID on file). This is not a commitment to lend, a loan approval, or an offer of credit. Rates, terms, and payments shown are estimates for illustration only, are not a quote, and are subject to credit approval, underwriting, and market conditions. Equal Housing Lender.",
+  `Loan information is provided by Ondo Real Estate (${nmlsIdentification()}). This is not a commitment to lend, a loan approval, or an offer of credit. Rates, terms, and payments shown are estimates for illustration only, are not a quote, and are subject to credit approval, underwriting, and market conditions. Equal Housing Lender.`,
   "",
   "Real estate services provided by Ondo Real Estate. Information is deemed reliable but is not guaranteed and should be independently verified. Equal Housing Opportunity.",
   "",
@@ -909,17 +910,17 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         {
           name: "FHA loans",
           href: "/loans/fha",
-          description: "3.5% down at 580+ FICO, credit-flexible financing for Utah buyers.",
+          description: "Minimum down payment and credit requirements depend on the program. Financing for Utah buyers who qualify.",
         },
         {
           name: "VA loans",
           href: "/loans/va",
-          description: "Zero down for eligible veterans and active-duty military in Utah.",
+          description: "Financing for eligible veterans and active-duty military in Utah. Down payment depends on eligibility.",
         },
         {
           name: "USDA loans",
           href: "/loans/usda",
-          description: "Zero down in eligible Utah rural areas including Cache Valley and Sanpete County.",
+          description: "Financing in eligible Utah rural areas including Cache Valley and Sanpete County. Down payment depends on eligibility.",
         },
         {
           name: "Jumbo loans",
@@ -1198,10 +1199,10 @@ export function getSiteIndexSections(): SiteIndexSection[] {
         { name: "General FAQs", href: "/faq/general-faqs", description: "Cross-cutting questions." },
         { name: "Buying & selling FAQs", href: "/faq/buying-selling-faqs", description: "Transaction and offer questions." },
         { name: "Loan FAQs", href: "/faq/loans-faqs", description: "Qualification, rates, and products." },
-        { name: "Loan payoff FAQs", href: "/faq/loan-payoffs-faqs", description: "Payoffs and subordination." },
+        { name: "Loan payoff FAQs", href: "/faq/loan-payoffs-faqs", description: "Who to ask for a mortgage payoff." },
         { name: "Escrow FAQs", href: "/faq/escrow-faqs", description: "Closing and escrow timeline." },
         { name: "Payment FAQs", href: "/faq/payments-faqs", description: "How and when to pay." },
-        { name: "Hardship FAQs", href: "/faq/hardship-faqs", description: "Options when finances are tight." },
+        { name: "Hardship FAQs", href: "/faq/hardship-faqs", description: "Where to get free help if you fall behind." },
         { name: "Disaster FAQs", href: "/faq/disaster-faqs", description: "Insurance and property damage." },
         { name: "Notary FAQs", href: "/faq/notary-faqs", description: "RON, I-9, and scheduling." },
         { name: "Owner FAQs", href: "/faq/owner-faqs", description: "Landlord and investor topics." },
@@ -1478,7 +1479,7 @@ export function buildLlmsFullTxtBody(): string {
     "Ondo helps Utah buyers from first conversation to closing. Services include buyer representation, agent-led MLS search (this website lists rentals, not a public for-sale feed), offer strategy, closing coordination, and in-house mortgage origination. Loan information is not a commitment to lend.",
     "",
     "### Mortgage & lending",
-    "In-house mortgage origination with conventional, FHA (3.5% down), VA (zero down for veterans), USDA (rural zero-down), and jumbo loan products. City- and ZIP-specific landing pages provide local rate context. Refinance analysis available.",
+    "In-house mortgage origination with conventional, FHA, VA, USDA, and jumbo loan products (minimum down payment depends on the program). City- and ZIP-specific landing pages provide local rate context. Refinance analysis available.",
     "",
     "### Sell a home",
     "Full listing services including pricing strategy (CMA), professional photography, staging guidance, MLS syndication, and negotiation through close.",

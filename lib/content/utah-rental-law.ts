@@ -36,6 +36,31 @@ export type UtahRentalLawTopic =
   | "habitability"
   | "disclosures"
   | "termination"
+  | "fair-housing"
+
+/**
+ * Classes protected by Utah Code § 57-21-5 (Utah Fair Housing Act). Source of income covers a
+ * renter who pays with rental assistance such as a Section 8 voucher. Blog posts render this list
+ * instead of retyping it, so it stays in step with the rule below.
+ */
+export const UTAH_FAIR_HOUSING_PROTECTED_CLASSES: readonly string[] = [
+  "race",
+  "color",
+  "religion",
+  "sex",
+  "national origin",
+  "familial status",
+  "source of income",
+  "disability",
+  "sexual orientation",
+  "gender identity",
+]
+
+/** The protected classes as a sentence fragment: "race, color, ..., and gender identity". */
+export function utahFairHousingClassesText(): string {
+  const classes = UTAH_FAIR_HOUSING_PROTECTED_CLASSES
+  return `${classes.slice(0, -1).join(", ")}, and ${classes[classes.length - 1]}`
+}
 
 export interface UtahRentalLawRule {
   /** Stable id, also used as the FAQ anchor. */
@@ -67,7 +92,7 @@ export const UTAH_RENTAL_LAW_RULES: readonly UtahRentalLawRule[] = [
     question: "What can a Utah landlord deduct from a security deposit?",
     answer:
       "Utah allows deductions for unpaid rent, cleaning costs, damage beyond normal wear and tear, and other losses caused by the tenant breaching the lease. Ordinary wear from living in the unit is not deductible, and every deduction has to appear on the written itemized statement.",
-    citation: "Utah Code § 57-17-2",
+    citation: "Utah Code § 57-17-3",
     audience: "both",
   },
   {
@@ -75,8 +100,8 @@ export const UTAH_RENTAL_LAW_RULES: readonly UtahRentalLawRule[] = [
     topic: "deposits",
     question: "What happens if a Utah landlord does not return the deposit on time?",
     answer:
-      "A landlord who fails to meet the statutory deadline and itemization requirement can be required to refund the full deposit plus an additional $100. Keeping dated proof of when the itemized statement was sent is the practical defense.",
-    citation: "Utah Code § 57-17-2",
+      "If a landlord misses the deadline or the itemization requirement, the renter can send a written demand. A landlord who still has not complied after a 5-business-day cure period can be required to refund the full deposit plus an additional $100. Keeping dated proof of when the itemized statement was sent is the practical defense.",
+    citation: "Utah Code § 57-17-5",
     audience: "both",
   },
   {
@@ -131,6 +156,17 @@ export const UTAH_RENTAL_LAW_RULES: readonly UtahRentalLawRule[] = [
     answer:
       "Utah landlords must give the landlord's or agent's name and address, provide a move-in condition checklist, and disclose any known methamphetamine contamination history. Federal law separately requires a lead-based paint disclosure for housing built before 1978.",
     citation: "Utah Code §§ 57-22-4, 57-27-201; 42 U.S.C. § 4852d",
+    audience: "both",
+  },
+  {
+    id: "fair-housing-protected-classes",
+    topic: "fair-housing",
+    question: "Who is protected by fair housing law when renting in Utah?",
+    answer:
+      "Utah landlords may not refuse to rent, set different terms, or advertise a preference based on " +
+      utahFairHousingClassesText() +
+      ". Source of income includes a renter who pays with rental assistance such as a Section 8 voucher, so a landlord cannot turn an applicant away for that reason. Assistance animals, including support animals, are reasonable accommodations under the Fair Housing Act, not pets. Apply the same written screening criteria to every applicant.",
+    citation: "Utah Code § 57-21-5; 42 U.S.C. § 3604",
     audience: "both",
   },
   {

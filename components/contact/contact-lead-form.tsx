@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { SITE_PHONE } from "@/lib/site"
+import { ContactNotice } from "@/components/contact-notice"
 import {
   CONTACT_INQUIRY_TYPES,
   isContactInquiryType,
@@ -527,6 +528,7 @@ export function ContactLeadForm({
               {...webmcpParamAttrs("Message or question for the team (optional)")}
             />
           </div>
+          <ContactNotice />
           <Button type="submit" disabled={isSubmitting} className="w-full">
             {isSubmitting ? (
               <>

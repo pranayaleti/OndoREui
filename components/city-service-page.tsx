@@ -22,6 +22,7 @@ import { SeasonalCallout } from "@/components/seasonal-callout"
 import { BreadcrumbNav } from "@/components/breadcrumb-nav"
 import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import { CityTrustChips } from "@/components/city-trust-chips"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { NeighborhoodHousingCards } from "@/components/neighborhood-housing-cards"
 import { OwnerProcessSection } from "@/components/owner-process-section"
 import { CityOwnerOpsSection } from "@/components/city-owner-ops-section"
@@ -202,9 +203,9 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
             )}
             {service === "loans" && (
               <>
-                Explore competitive mortgage programs for {city.name}: conventional, FHA,
-                VA, USDA, jumbo, and temporary buydowns. Get rate options and payment
-                scenarios aligned to your goals.
+                Explore mortgage programs for {city.name}: conventional, FHA, VA, USDA,
+                jumbo, and temporary buydowns. Ask for rate options and payment scenarios
+                based on your own situation.
               </>
             )}
           </p>
@@ -446,6 +447,9 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           </Link>
         </CardContent>
       </Card>
+
+      {/* Lending disclosure is a template property: every loans city/ZIP page carries it. */}
+      {service === "loans" && <LendingDisclaimer />}
     </div>
   )
 }

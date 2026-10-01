@@ -51,7 +51,7 @@ const tenantScreening: SubServiceDefinition = {
   ],
   howItWorks: [
     { step: "1", title: "Applicant Applies Online", desc: "Prospective tenants complete a standardized application through the Ondo portal. Consent for background and credit checks is collected digitally, ensuring compliance with the Fair Credit Reporting Act and Utah-specific disclosure requirements." },
-    { step: "2", title: "Automated Screening Reports", desc: "Our system runs credit, criminal, eviction, and income checks within minutes. Results are scored against your pre-set criteria: minimum FICO score, income multiple, eviction history tolerance, and criminal conviction guidelines that comply with HUD guidance." },
+    { step: "2", title: "Automated Screening Reports", desc: "Our system runs credit, criminal, eviction, and income checks within minutes. Results are scored against your pre-set criteria: minimum FICO score, income multiple, eviction history tolerance, and an individualized review of criminal history that follows HUD guidance." },
     { step: "3", title: "Owner Review & Decision", desc: "You review the full report in your owner dashboard. Our team flags any concerns and provides a placement recommendation based on comparable applicant data in your market. You always make the final decision." },
   ],
   localizedIntro: (city, data) =>
@@ -60,13 +60,13 @@ const tenantScreening: SubServiceDefinition = {
     `Screen against ${city}-specific rental comps, we know that ${fmtUsd(data.medianRent)}/month is the local benchmark and set income thresholds accordingly`,
     `${data.schoolDistrict} families applying for school-adjacent rentals get the same thorough screening as every other applicant, no shortcuts`,
     `Digital application process reaches the tech-savvy renter pool drawn to ${city} by employers like ${data.topEmployers[0]} and ${data.topEmployers[1] || "local businesses"}`,
-    `Consistent criteria documentation protects you from discrimination claims in ${city}'s growing rental market`,
+    `Consistent, written screening criteria support fair housing compliance in ${city}'s growing rental market`,
   ],
   baseFaqs: [
-    { q: "What does your tenant screening include?", a: "Every applicant receives a full tri-merge credit report, national criminal background check, sex offender registry search, nationwide eviction history search, employment and income verification, and previous landlord reference checks. We verify that reported income meets at least 3× the monthly rent and confirm employment stability. The entire process is Fair Housing compliant and follows HUD guidance on the use of criminal records in housing decisions." },
+    { q: "What does your tenant screening include?", a: "Every applicant receives a full tri-merge credit report, national criminal background check, sex offender registry search, nationwide eviction history search, employment and income verification, and previous landlord reference checks. We verify that reported income meets at least 3× the monthly rent and confirm employment stability. Criminal history is reviewed individually, considering the nature, severity, and recency of any record, in line with HUD guidance on the use of criminal records in housing decisions." },
     { q: "How long does screening take?", a: "Most screening reports are complete within 24 hours of the applicant submitting their application. Credit and criminal checks return within minutes; income and landlord verification may take 1–2 business days depending on employer and landlord responsiveness. We follow up proactively to avoid delays that could cost you a qualified applicant." },
-    { q: "What are your screening criteria?", a: "We work with each owner to establish customized screening criteria that comply with Fair Housing law. Common thresholds include a minimum credit score (typically 600–650), gross income of at least 3× monthly rent, no evictions in the past 5 years, and no felony convictions in the past 7 years. Criteria are applied consistently to every applicant and documented for your protection." },
-    { q: "How much does tenant screening cost?", a: "Screening costs are typically passed through to the applicant as an application fee, so there is no direct cost to you as the property owner. Application fees are set in accordance with Utah Code § 57-22-4 and cover the actual cost of obtaining screening reports. We handle all fee collection and disclosure requirements." },
+    { q: "What are your screening criteria?", a: "We work with each owner to establish customized screening criteria that comply with Fair Housing law. Common thresholds include a minimum credit score (typically 600–650), gross income of at least 3× monthly rent, and no recent evictions. We do not use a blanket rule for criminal history: any record is reviewed individually, based on its nature, severity, and how long ago it occurred. Criteria are applied consistently to every applicant and documented in writing." },
+    { q: "How much does tenant screening cost?", a: "Screening costs are typically passed through to the applicant as an application fee, so there is no direct cost to you as the property owner. Application fees are meant to cover the actual cost of obtaining screening reports. We handle all fee collection and disclosure requirements." },
     { q: "What if an applicant disputes their screening results?", a: "Under the Fair Credit Reporting Act, applicants have the right to dispute inaccurate information. We provide every denied applicant with an adverse action notice that includes the name and contact information of the reporting agency, their right to obtain a free copy of their report, and their right to dispute inaccurate information. This protects both you and the applicant." },
   ],
 }
@@ -169,7 +169,7 @@ const fhaLoans: SubServiceDefinition = {
   features: [
     { title: "Low Down Payment", description: "As little as 3.5% down: significantly less than the 20% required for many conventional loans", iconName: "Percent" },
     { title: "Flexible Credit", description: "Credit scores as low as 580 may qualify with 3.5% down; scores 500–579 may qualify with 10% down", iconName: "CreditCard" },
-    { title: "Competitive Rates", description: "FHA-insured loans often carry lower interest rates than comparable conventional mortgages", iconName: "TrendingDown" },
+    { title: "Rate Options", description: "Pricing depends on your credit, down payment, and market conditions. We compare FHA pricing with other programs for your situation", iconName: "TrendingDown" },
     { title: "Seller Contributions", description: "Sellers can contribute up to 6% of the sale price toward your closing costs", iconName: "Handshake" },
   ],
   howItWorks: [
@@ -181,7 +181,7 @@ const fhaLoans: SubServiceDefinition = {
     `An FHA loan makes homeownership accessible in ${city}, where the median home price is ${fmtUsd(data.medianHomePrice)}. With just 3.5% down, your minimum down payment would be approximately ${fmtUsd(Math.round(data.medianHomePrice * 0.035))}, compared to ${fmtUsd(Math.round(data.medianHomePrice * 0.2))} for a conventional 20% down payment. For first-time buyers in ${city}'s ${data.schoolDistrict} area, where the median household income is ${fmtUsd(data.medianHouseholdIncome)}, the lower down payment requirement means you can start building equity years sooner. FHA loans are especially popular with buyers near ${data.topEmployers[0]} and ${data.topEmployers[1] || "local employers"} who have steady income but haven't had time to save a large down payment.`,
   localizedBenefits: (city, data) => [
     `Down payment as low as ${fmtUsd(Math.round(data.medianHomePrice * 0.035))} for a median-priced ${city} home`,
-    `Monthly payment estimate: ${fmtUsd(Math.round(data.medianHomePrice * 0.965 * 0.006))} (principal + interest at current rates), compare to ${fmtUsd(data.medianRent)}/month rent`,
+    `Ask a loan officer for a written payment estimate on a median-priced ${city} home (${fmtUsd(data.medianHomePrice)}) and compare it with the ${fmtUsd(data.medianRent)}/month median rent`,
     `Gift funds accepted for down payment, family can help you buy in ${city}`,
     `FHA-approved condos and townhomes available in ${city} for lower price points`,
   ],
@@ -208,7 +208,7 @@ const conventionalLoans: SubServiceDefinition = {
     `Conventional mortgages in ${city}, Utah with as little as 3% down. Loan limits, credit tiers, and exactly when PMI drops off at 78% LTV.`,
   features: [
     { title: "No Upfront MIP", description: "Unlike FHA loans, conventional loans have no upfront mortgage insurance premium: reducing your closing costs", iconName: "BadgeDollarSign" },
-    { title: "PMI Cancellation", description: "Private mortgage insurance automatically drops off when you reach 78% loan-to-value: saving you hundreds per month", iconName: "ShieldOff" },
+    { title: "PMI Cancellation", description: "Private mortgage insurance automatically drops off when you reach 78% loan-to-value, which lowers your monthly cost once it is removed", iconName: "ShieldOff" },
     { title: "Flexible Terms", description: "Choose from 10, 15, 20, 25, or 30-year fixed-rate terms, or adjustable-rate options for shorter hold periods", iconName: "Settings" },
     { title: "Higher Loan Limits", description: "Conforming limits exceed FHA limits in most Utah counties, letting you finance more expensive properties", iconName: "ArrowUpCircle" },
   ],
@@ -329,7 +329,7 @@ const jumboLoans: SubServiceDefinition = {
     `Jumbo home loans in ${city}, UT for properties that exceed the current FHFA conforming limit for the county. This is not a quote.`,
   features: [
     { title: "Higher Loan Amounts", description: "Finance luxury and high-value properties that exceed conforming loan limits: no arbitrary ceiling on your home purchase", iconName: "Building" },
-    { title: "Competitive Rates", description: "Jumbo rates have narrowed significantly and are often comparable to conforming rates for well-qualified borrowers", iconName: "TrendingDown" },
+    { title: "Rate Options", description: "Jumbo pricing depends on your credit, reserves, down payment, and the lender. We compare options for your situation", iconName: "TrendingDown" },
     { title: "Flexible Structures", description: "Fixed-rate, adjustable-rate, and interest-only options available to match your financial strategy", iconName: "Settings" },
     { title: "Portfolio Lending", description: "Loans held in-house by the lender, allowing for more flexible underwriting guidelines on complex income situations", iconName: "Briefcase" },
   ],
@@ -384,7 +384,7 @@ const firstTimeBuyers: SubServiceDefinition = {
     `Buying your first home in ${city} is one of the biggest financial decisions you'll make, and the local market rewards buyers who are prepared. With a median home price of ${fmtUsd(data.medianHomePrice)} and homes averaging ${data.avgDaysOnMarket} days on market, ${city} moves at a pace that requires pre-approval, clear priorities, and an agent who knows the area. First-time buyers in ${city} often work near ${data.topEmployers[0]} or ${data.topEmployers[1] || "local employers"}, earning around the ${city} median household income of ${fmtUsd(data.medianHouseholdIncome)}. Utah Housing Corporation offers down payment assistance grants and second mortgages that can cover your 3.5% FHA or 3% conventional down payment, making homeownership possible sooner than you think.`,
   localizedBenefits: (city, data) => [
     `Utah Housing down payment assistance covers up to ${fmtUsd(Math.round(data.medianHomePrice * 0.06))} on a median-priced ${city} home`,
-    `Monthly mortgage payment of ~${fmtUsd(Math.round(data.medianHomePrice * 0.965 * 0.006))} may be comparable to ${city}'s median rent of ${fmtUsd(data.medianRent)}`,
+    `Ask a loan officer for a written payment estimate and compare it with ${city}'s median rent of ${fmtUsd(data.medianRent)}/month`,
     `${data.schoolDistrict} school quality supports long-term property value appreciation in ${city}`,
     `${city} homes average ${data.avgDaysOnMarket} days on market, we help you move quickly when the right home appears`,
   ],

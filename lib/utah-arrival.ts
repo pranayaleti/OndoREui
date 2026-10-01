@@ -1,6 +1,7 @@
 import type { ContactInquiryType } from "@/lib/leads-api"
 import { CITY_MARKET_AS_OF, type CityMarketData } from "@/lib/city-market-data"
 import { toCitySlug } from "@/lib/utah-cities"
+import { nmlsIdentification } from "@/lib/site"
 
 export const MAX_COMMUTE_ROWS = 12
 
@@ -8,7 +9,7 @@ export const TOUR_LEAD_DAYS_MIN = 45
 export const TOUR_LEAD_DAYS_MAX = 60
 
 export const ARRIVAL_LENDING_DISCLOSURE =
-  "Loan information is provided by Ondo Real Estate (NMLS ID on file). This is not a commitment to lend, a loan approval, or an offer of credit. Rates, terms, and payments shown are estimates for illustration only, are not a quote, and are subject to credit approval, underwriting, and market conditions. You are not required to use Ondo for financing to buy or sell with Ondo. Equal Housing Lender."
+  `Loan information is provided by Ondo Real Estate (${nmlsIdentification()}). This is not a commitment to lend, a loan approval, or an offer of credit. Rates, terms, and payments shown are estimates for illustration only, are not a quote, and are subject to credit approval, underwriting, and market conditions. You are not required to use Ondo for financing to buy or sell with Ondo. Equal Housing Lender.`
 
 export const ARRIVAL_REAL_ESTATE_DISCLOSURE =
   "Real estate services provided by Ondo Real Estate. Information is deemed reliable but is not guaranteed and should be independently verified. Equal Housing Opportunity."

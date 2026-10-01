@@ -38,7 +38,7 @@ export default function GeneralFAQPage() {
     },
     {
       question: "Are you licensed and insured?",
-      answer: "Yes, we are fully licensed property managers in Utah and carry comprehensive liability and errors & omissions insurance to protect our clients."
+      answer: "Property management services are provided in Utah under the principal broker's supervision by licensed real estate agents and brokers. Utah's separate property manager license becomes available January 1, 2027, and Ondo will hold that credential as required once the Division of Real Estate finalizes its rules. See our Licensing & Disclosures page for details."
     },
     {
       question: "How do you handle legal compliance?",

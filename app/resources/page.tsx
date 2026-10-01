@@ -132,7 +132,7 @@ const loanFAQs = [
   {
     question: "Should I fix my credit before I buy a home?",
     answer:
-      "Small improvements to credit can sometimes save you tens of thousands over the life of a loan. Before you wait a full year, have us or your lender model your current score vs. a slightly higher score. In some cases buying now with a refinance later makes more sense than waiting; in other cases, a short credit tune‑up is worth it.",
+      "Small credit changes can change pricing. We will not claim a dollar savings on this page. Before you wait a full year, ask a loan officer to model your current file versus a slightly stronger score. Buying now versus waiting is file-specific.",
   },
   {
     question: "What monthly payment should I target?",

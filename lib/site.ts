@@ -65,6 +65,34 @@ export const SITE_ADDRESS_COUNTRY = "US"
  */
 export const SITE_LOAN_OFFICER = { name: "Pranay Reddy Aleti", nmlsId: "2699085" } as const
 
+/**
+ * Licensing gate. Off by default: nothing here switches licensed copy on.
+ * Before flipping LICENSING_LIVE to true, the owner supplies SITE_COMPANY_NMLS_ID (the
+ * sponsoring company's NMLS ID, never invented) and counsel reviews the wording.
+ * lib/site.test.ts fails if the flag is on while the company ID is empty or the
+ * shipped disclosure still reads "on file".
+ */
+export const LICENSING_LIVE = false as boolean
+export const SITE_COMPANY_NMLS_ID = "" as string
+export const NMLS_CONSUMER_ACCESS_URL = "https://www.nmlsconsumeraccess.org/"
+
+/**
+ * The NMLS identification phrase used inside every lending disclosure. Until licensing
+ * is live it stays the platform-wide "NMLS ID on file"; once live it names the company
+ * and loan officer IDs and links NMLS Consumer Access.
+ */
+export function nmlsIdentification(
+  live: boolean = LICENSING_LIVE,
+  companyId: string = SITE_COMPANY_NMLS_ID,
+): string {
+  if (!live) return "NMLS ID on file"
+  const parts: string[] = []
+  if (companyId) parts.push(`Company NMLS ID ${companyId}`)
+  parts.push(`${SITE_LOAN_OFFICER.name}, NMLS ID ${SITE_LOAN_OFFICER.nmlsId}`)
+  parts.push(`verify at NMLS Consumer Access, ${NMLS_CONSUMER_ACCESS_URL}`)
+  return parts.join("; ")
+}
+
 /** 30-minute Calendly; override in env for staging or alternate event types */
 export const SITE_CALENDLY_URL =
   process.env["NEXT_PUBLIC_SITE_CALENDLY_URL"]?.trim() ||

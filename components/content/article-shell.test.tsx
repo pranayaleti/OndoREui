@@ -67,4 +67,29 @@ describe("ArticleShell", () => {
     renderShell(<p>Body with no headings.</p>)
     expect(screen.getByText("Body with no headings.")).toBeInTheDocument()
   })
+
+  it("shows the lending disclosure on lending posts", () => {
+    renderShell(<h2>Only heading</h2>)
+    expect(screen.getByText(/not a commitment to lend/i)).toBeInTheDocument()
+  })
+
+  it("shows the real-estate disclosure, not the credit one, on non-lending posts", () => {
+    renderShell(<h2>Only heading</h2>, { category: "Property Management" })
+    expect(screen.queryByText(/not a commitment to lend/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/real estate services provided by ondo real estate/i)).toBeInTheDocument()
+  })
+
+  it("adds a not-advice notice on investing posts", () => {
+    renderShell(<h2>Only heading</h2>, { category: "Strategy" })
+    expect(screen.getByText(/not investment, tax or legal advice/i)).toBeInTheDocument()
+  })
+
+  it("honors an explicit disclosure override", () => {
+    render(
+      <ArticleShell meta={{ ...meta, category: "Property Management", disclosure: "lending" }}>
+        <h2>Only heading</h2>
+      </ArticleShell>,
+    )
+    expect(screen.getByText(/not a commitment to lend/i)).toBeInTheDocument()
+  })
 })

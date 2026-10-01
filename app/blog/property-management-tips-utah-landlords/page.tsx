@@ -1,6 +1,7 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { utahFairHousingClassesText } from "@/lib/content/utah-rental-law"
 const slug = "/blog/property-management-tips-utah-landlords"
 const title = "Property Management Tips for Utah Landlords"
 const description = "Essential tips for managing rental properties in Utah's competitive market."
@@ -44,7 +45,7 @@ export default function PropertyManagementTipsUtahLandlords() {
             </p>
 
             <h2>Know Utah Landlord-Tenant Law</h2>
-            <p>Utah's Fit Premises Act (Utah Code § 57-22) requires landlords to maintain habitable conditions including adequate heating, plumbing, and structural integrity. Violations can allow tenants to withhold rent or terminate their lease. The state also requires a minimum 3-day notice for non-payment of rent before filing an eviction, and 15-day notice for lease violations. Security deposits must be returned within 30 days of move-out with an itemised deduction list.</p>
+            <p>Utah's Fit Premises Act (Utah Code § 57-22) requires landlords to maintain habitable conditions including adequate heating, plumbing, and structural integrity. Violations can give tenants statutory remedies under Utah Code § 57-22-6, such as repair-and-deduct, rent abatement, or ending the lease. The state also requires a minimum 3-day notice for non-payment of rent or for a lease violation before filing an eviction. Security deposits must be returned within 30 days of the end of the tenancy, or 15 days after the tenant gives a forwarding address, whichever is later, with an itemised deduction list.</p>
             <ul>
               <li>Use Utah-specific lease agreements that reference state code, generic templates from other states may be unenforceable</li>
               <li>Document all move-in and move-out conditions with timestamped photos</li>
@@ -52,7 +53,7 @@ export default function PropertyManagementTipsUtahLandlords() {
             </ul>
 
             <h2>Screen Tenants Systematically</h2>
-            <p>A poor tenant selection costs more than a month of vacancy. Run a full report: credit (aim for 650+), criminal background, prior eviction history, and income verification (3× monthly rent is a common minimum). Utah Fair Housing laws prohibit discrimination based on race, colour, national origin, sex, religion, disability, and familial status. Apply the same criteria to every applicant.</p>
+            <p>A poor tenant selection costs more than a month of vacancy. Run a full report: credit (aim for 650+), criminal background, prior eviction history, and income verification (3× monthly rent is a common minimum). Utah Code § 57-21-5 prohibits housing discrimination based on {utahFairHousingClassesText()}. Source of income includes tenants who pay with rental assistance such as a Section 8 voucher. Apply the same criteria to every applicant.</p>
             <ul>
               <li>Use a written rental application and keep records for at least 3 years</li>
               <li>Call previous landlords, not just the current one (who may be motivated to give a glowing reference to move a problem tenant)</li>

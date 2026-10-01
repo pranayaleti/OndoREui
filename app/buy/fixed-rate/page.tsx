@@ -9,6 +9,7 @@ import Link from "next/link"
 import { Shield, TrendingUp, Calculator, Lock } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/fixed-rate", {
   title: "Fixed-Rate Mortgage Guide | Utah Real Estate",
@@ -128,6 +129,7 @@ export default function FixedRatePage() {
               description="Our loan officers can help you understand fixed-rate mortgage options and find the best term for your situation."
               variant="card"
             />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

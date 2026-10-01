@@ -103,11 +103,30 @@ describe("PropertyListingDetailClient", () => {
     expect(screen.getAllByText(/listed monthly rent/i).length).toBeGreaterThan(0)
     expect(screen.getByRole("heading", { name: /^highlights$/i })).toBeInTheDocument()
     expect(screen.getByRole("heading", { name: /illustrative investor worksheet/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /^worksheet$/i })).toHaveAttribute("href", "#underwrite")
+    expect(screen.queryByRole("link", { name: /^worksheet$/i })).not.toBeInTheDocument()
+    expect(screen.getByText(/evaluating this as an investor\?/i)).toBeInTheDocument()
+    expect(screen.getByText(/evaluating this as an investor\?/i).closest("details")).not.toHaveAttribute("open")
+    expect(screen.queryByText(/equal housing lender|not a commitment to lend/i)).not.toBeInTheDocument()
     expect(screen.getByRole("heading", { name: /^ondo manages this$/i })).toBeInTheDocument()
     expect(screen.getByText(/leasing and maintenance/i)).toBeInTheDocument()
     expect(screen.queryByText(/set it and forget it|guaranteed income|high-yield|safe neighborhood|good schools/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/great for families/i)).not.toBeInTheDocument()
+  })
+
+  it("hides a description that names the desired occupant instead of publishing it", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+    fetchById.mockResolvedValue({
+      ...listing,
+      description: "Bright duplex. Perfect for young professionals, no kids.",
+    })
+    render(<PropertyListingDetailClient publicId={listing.publicId} />)
+
+    expect(await screen.findByRole("heading", { name: /avenues victorian duplex/i })).toBeInTheDocument()
+    expect(screen.queryByText(/young professionals/i)).not.toBeInTheDocument()
+    expect(screen.queryByRole("heading", { name: /^overview$/i })).not.toBeInTheDocument()
+    expect(document.querySelector('a[href="#listing-overview"]')).toBeNull()
+    expect(document.body.innerHTML).not.toMatch(/young professionals/i)
+    warn.mockRestore()
   })
 
   it("shows listed fees, move-in, and pet notes only when the payload has them", async () => {

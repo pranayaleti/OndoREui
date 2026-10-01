@@ -8,14 +8,15 @@ import { ArrowLeft, Building2 } from "lucide-react"
 import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { FIND_YOUR_SERVICER, HUD_COUNSELING_PHONE, NOT_A_SERVICER } from "@/lib/content/mortgage-referral"
 
 export const metadata: Metadata = {
   title: pageTitle("Loan Payoffs & Closings FAQs | Ondo Real Estate"),
-  description: "Find answers to questions about paying off your mortgage, getting payoff quotes, refinancing, and the payoff process.",
+  description: "Who to ask for a mortgage payoff quote, what happens after a payoff, and where to get free help. Your mortgage servicer issues payoffs, not Ondo.",
   alternates: { canonical: `${SITE_URL}/faq/loan-payoffs-faqs/` },
   openGraph: {
     title: pageTitleText("Loan Payoffs & Closings FAQs | Ondo Real Estate"),
-    description: "Find answers to questions about paying off your mortgage, getting payoff quotes, refinancing, and the payoff process.",
+    description: "Who to ask for a mortgage payoff quote, what happens after a payoff, and where to get free help. Your mortgage servicer issues payoffs, not Ondo.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -26,35 +27,35 @@ export default function LoanPayoffsFAQPage() {
   const faqs = [
     {
       question: "How do I get a payoff quote?",
-      answer: `Contact our loan servicing department by phone at ${SITE_PHONE}, email, or through your online account. We'll provide an official payoff statement with the exact amount and validity period.`
+      answer: `Ask your mortgage servicer. ${FIND_YOUR_SERVICER} ${NOT_A_SERVICER}`
     },
     {
       question: "How long is a payoff quote valid?",
-      answer: "Payoff quotes are typically valid for 10-15 business days. After this period, you'll need to request a new quote as interest accrues daily."
+      answer: "Your servicer sets this and states it on the payoff statement. Interest keeps accruing every day, so ask for the daily interest amount if your closing date might move."
     },
     {
       question: "Are there prepayment penalties?",
-      answer: "This depends on your specific loan terms. Some loans have prepayment penalties, especially in the first few years. We'll include any penalties in your payoff quote."
+      answer: "Your loan documents say. Check your note, or ask your servicer to confirm in writing whether a prepayment penalty applies before you pay off the loan."
     },
     {
-      question: "Can I make a partial payoff?",
-      answer: "Yes, you can make extra principal payments at any time. This reduces your total interest and can help pay off your loan faster. There's usually no penalty for making extra payments."
+      question: "Can I make extra payments toward principal?",
+      answer: "Many loans allow it. Ask your servicer how to mark an extra payment as principal only, and check your note for any prepayment terms."
     },
     {
       question: "What happens after I pay off my loan?",
-      answer: "We'll process the payoff, release the lien on your property, and send you a satisfaction of mortgage document. You'll also receive a final statement. The lien release is typically recorded with the county recorder's office."
+      answer: "Your servicer is responsible for releasing the lien. The release is recorded with the county recorder where the property is. Ask your servicer for the timeline, and keep your final statement and a copy of the recorded release."
     },
     {
       question: "Can I pay off my loan online?",
-      answer: "Yes, you can make payments through our online portal. For full payoffs, we recommend contacting us first to ensure you have the correct amount and to coordinate the payoff process."
-    },
-    {
-      question: "What information do I need to request a payoff quote?",
-      answer: "You'll need your loan number, property address, and the date you plan to pay off the loan. Having your account information ready will help speed up the process."
+      answer: "Use your servicer's website or the payment instructions on its payoff statement. Ondo Real Estate does not accept mortgage payments."
     },
     {
       question: "Can I refinance instead of paying off?",
-      answer: "Yes, refinancing is an option that may allow you to get better loan terms, lower your interest rate, or access equity. Contact us to discuss whether refinancing makes sense for your situation."
+      answer: "Refinancing replaces your loan with a new one. Compare offers from more than one lender and read the Loan Estimate for each. Housing counselors can help you weigh it for free."
+    },
+    {
+      question: "Where can I get free help with a payoff or a servicing problem?",
+      answer: `A HUD-approved housing counselor can help at no cost. Call ${HUD_COUNSELING_PHONE} or visit hud.gov. The Consumer Financial Protection Bureau (consumerfinance.gov) also takes complaints about mortgage servicers.`
     }
   ]
 
@@ -62,7 +63,7 @@ export default function LoanPayoffsFAQPage() {
     <div className="flex flex-col min-h-screen">
       <SEO
         title="Loan Payoffs & Closings FAQs | Ondo Real Estate"
-        description="Find answers to questions about paying off your mortgage, getting payoff quotes, refinancing, and the payoff process."
+        description="Who to ask for a mortgage payoff quote, what happens after a payoff, and where to get free help. Your mortgage servicer issues payoffs, not Ondo."
         pathname="/faq/loan-payoffs-faqs"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={[
@@ -76,7 +77,7 @@ export default function LoanPayoffsFAQPage() {
       />
       <PageBanner
         title="Loan Payoffs & Closings FAQs"
-        subtitle="Everything you need to know about paying off your mortgage"
+        subtitle="Your mortgage servicer handles payoffs. Here is who to ask and what to expect"
       />
 
       <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
@@ -118,7 +119,7 @@ export default function LoanPayoffsFAQPage() {
             </Accordion>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-300 mb-4">Need help with a payoff?</p>
+              <p className="text-gray-300 mb-4">Questions about a sale or purchase closing?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`}

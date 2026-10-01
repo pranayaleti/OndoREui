@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { CityServicePage } from "./city-service-page"
 import { findCityBySlug } from "@/lib/utah-cities"
+import { CITY_MARKET_DATA_DISCLOSURE } from "@/lib/city-market-data"
 
 vi.mock("@/lib/leads-api", async () => {
   const actual = await vi.importActual<typeof import("@/lib/leads-api")>("@/lib/leads-api")
@@ -106,6 +107,21 @@ describe("CityServicePage", () => {
     expect(screen.getByText("Spring in Lehi")).toBeInTheDocument()
     expect(screen.getByText("Summer in Lehi")).toBeInTheDocument()
     expect(screen.getByText("Fall in Lehi")).toBeInTheDocument()
+  })
+
+  it("carries the lending disclosure on loans pages and not on other services", () => {
+    const { unmount } = render(<CityServicePage city={lehi} service="loans" />)
+    expect(document.body.textContent).toMatch(/not a commitment to lend/i)
+    expect(document.body.textContent).toMatch(/equal housing lender/i)
+    expect(document.body.textContent).not.toMatch(/competitive mortgage/i)
+    unmount()
+    render(<CityServicePage city={lehi} service="property-management" />)
+    expect(document.body.textContent).not.toMatch(/not a commitment to lend/i)
+  })
+
+  it("shows the market snapshot with its as-of disclosure", () => {
+    render(<CityServicePage city={lehi} service="loans" />)
+    expect(document.body.textContent).toContain(CITY_MARKET_DATA_DISCLOSURE)
   })
 })
 

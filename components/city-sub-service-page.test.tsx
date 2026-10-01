@@ -57,4 +57,17 @@ describe("CitySubServicePage lead capture", () => {
     expect(screen.getAllByText(/24\/7 emergency line/i).length).toBeGreaterThanOrEqual(1)
     expect(document.body.textContent).not.toMatch(/NMLS\s*#\s*123456/i)
   })
+
+  it("carries the lending disclosure on every loans sub-service page and not on property management", () => {
+    const loanDefs = Object.values(subServiceDefinitions).filter((d) => d.parentService === "loans")
+    expect(loanDefs.length).toBeGreaterThan(0)
+    for (const def of loanDefs) {
+      const { unmount } = render(<CitySubServicePage city={lehi} subService={def} />)
+      expect(document.body.textContent, def.slug).toMatch(/not a commitment to lend/i)
+      expect(document.body.textContent, def.slug).toMatch(/equal housing lender/i)
+      unmount()
+    }
+    render(<CitySubServicePage city={lehi} subService={screening} />)
+    expect(document.body.textContent).not.toMatch(/not a commitment to lend/i)
+  })
 })

@@ -18,6 +18,7 @@ import { SITE_PHONE } from '@/lib/site';
 import { analyticsAttributes } from '@/lib/analytics';
 import { CalendlyLink } from '@/components/calendly-link';
 import { submitContactLead } from '@/lib/leads-api';
+import { ContactNotice } from '@/components/contact-notice';
 import { getAttributionPayloadForApi } from '@/lib/attribution';
 import { buildConsultationLead } from '@/lib/consultation-lead';
 import { useAntiSpam } from '@/lib/anti-spam';
@@ -491,8 +492,10 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             </div>
           </div>
 
+          <ContactNotice className="mt-6 text-xs text-muted-foreground" />
+
           {/* Submit Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
             <Button
               type="submit"
               disabled={isSubmitting}

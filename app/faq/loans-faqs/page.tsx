@@ -30,7 +30,7 @@ export default function LoansFAQPage() {
     {
       question: "How much do I need for a down payment?",
       answer:
-        "For many Utah buyers, conventional loans can start around 3% down, FHA around 3.5%, and some VA/USDA programs can be 0% down if you qualify. You'll still want extra funds for closing costs and reserves. Use our affordability and payment calculators, then we'll help you match your numbers to the right program on the Loans page.",
+        "The minimum down payment depends on the loan program and on whether you qualify. You'll still want extra funds for closing costs and reserves. Use our affordability and payment calculators, then we'll help you match your numbers to the right program on the Loans page.",
     },
     {
       question: "What is the difference between pre-qualification and pre-approval?",

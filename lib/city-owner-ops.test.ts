@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest"
 import { cityContentByName } from "./city-content"
 import { getCityOwnerOpsPatterns } from "./city-owner-ops"
+import { STEERING_COPY_RE } from "./fair-housing-steering"
 
 function stripHousingTypes(text: string): string {
   return text
@@ -8,9 +9,6 @@ function stripHousingTypes(text: string): string {
     .replace(/multi-family/gi, "MFH")
     .replace(/multifamily/gi, "MFH")
 }
-
-const STEERING =
-  /family-oriented|family-first|family-friendly|family-centric|family-focused|family-paced|family-lifestyle|young professionals?|empty nesters?|immigrant families|byu families|great for families|best for families|who is .+ best for|safe neighborhood|crime-free|quiet community|ideal for couples|working-class character|blue-collar workers|ethnically diverse|tenant quality|young families|military families|quality tenants/i
 
 const CRIME_CHARACTERIZATION =
   /elevated crime|higher crime|low crime|crime rates|crime statistics|crime concerns|crime perception|perfectly safe/i
@@ -32,7 +30,7 @@ describe("getCityOwnerOpsPatterns", () => {
       expect(ops, city).toHaveLength(4)
       for (const op of ops) {
         const text = `${op.title} ${op.body}`
-        expect(text, `${city}: ${op.title}`).not.toMatch(STEERING)
+        expect(text, `${city}: ${op.title}`).not.toMatch(STEERING_COPY_RE)
         expect(stripHousingTypes(text), `${city}: ${op.title}`).not.toMatch(
           /\bfamilies\b|\bkids\b|\bchildren\b|who should live/i,
         )

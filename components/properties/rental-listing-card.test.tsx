@@ -94,6 +94,21 @@ describe("RentalListingCard", () => {
     expect(screen.queryByText("Pets allowed")).not.toBeInTheDocument()
   })
 
+  it("shows a clean description snippet and hides one that names the desired occupant", () => {
+    const { rerender } = render(<RentalListingCard property={listing} />)
+    expect(screen.getByText("A Wasatch Front rental.")).toBeInTheDocument()
+
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+    rerender(
+      <RentalListingCard
+        property={{ ...listing, description: "Updated 3 bed. Perfect for young professionals and couples." }}
+      />,
+    )
+    expect(screen.queryByText(/young professionals/i)).not.toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /view details for cedar hollow/i })).toBeInTheDocument()
+    warn.mockRestore()
+  })
+
   it("notifies the parent when someone asks to tour so the leasing note can prefill", () => {
     const onRequestShowing = vi.fn()
     render(<RentalListingCard property={listing} onRequestShowing={onRequestShowing} />)

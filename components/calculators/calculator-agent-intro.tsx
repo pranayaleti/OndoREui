@@ -1,5 +1,6 @@
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { getCalculatorDetail } from "@/lib/agent-markdown"
+import Link from "next/link"
 import { SITE_URL } from "@/lib/site"
 
 interface CalculatorAgentIntroProps {
@@ -85,18 +86,25 @@ export function CalculatorAgentIntro({ slug }: CalculatorAgentIntroProps) {
           </div>
         </details>
 
-        <p className="mt-6 text-xs text-muted-foreground">
+        <p className="mt-6 text-sm text-muted-foreground">
           Rates, terms, and payments are illustrative estimates, not a quote or a commitment to lend. Not a substitute
-          for underwriting. Equal Housing Lender. See the{" "}
+          for underwriting. Equal Housing Lender. See our{" "}
+          <Link href="/licensing/" className="underline hover:text-foreground">
+            licensing and disclosures
+          </Link>{" "}
+          page.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          For AI agents:{" "}
           <a
             href={`${SITE_URL}/calculators/${slug}.md`}
             className="underline hover:text-foreground"
             rel="alternate"
             type="text/markdown"
           >
-            Markdown version
-          </a>{" "}
-          for the full disclosures.
+            Markdown version of this calculator
+          </a>
+          .
         </p>
       </div>
     </section>

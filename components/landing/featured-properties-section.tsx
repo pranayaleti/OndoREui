@@ -10,6 +10,7 @@ import { useFinancialVisibility } from "@/lib/financial-visibility"
 import { backendUrl } from "@/lib/backend"
 import { mapApiProperty } from "@/lib/mapProperty"
 import type { ApiProperty, Property } from "@/app/types/property"
+import { screenListingDescription } from "@/lib/fair-housing-steering"
 
 /**
  * Number of listings we show on the homepage. Keeping this small avoids the
@@ -133,9 +134,9 @@ export function FeaturedPropertiesSection() {
                       {showValues ? `$${property.price}/mo` : "••••"}
                     </span>
                   </div>
-                  {property.description && (
+                  {screenListingDescription(property.description) && (
                     <p className="text-sm text-foreground/70 dark:text-foreground/70 line-clamp-2">
-                      {property.description}
+                      {screenListingDescription(property.description)}
                     </p>
                   )}
                 </CardContent>

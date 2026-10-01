@@ -4,11 +4,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  NOTARY_AFTER_HOURS_USD,
   NOTARY_HOURS_LABEL,
   NOTARY_LOAN_RANGE,
   NOTARY_RON_ACT_USD,
-  NOTARY_SAME_DAY_USD,
 } from "@/lib/notary-fees";
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
@@ -155,15 +153,15 @@ export default function MobileNotaryUtahCountyGuide() {
                 maximum; platform included)
               </li>
               <li>
-                <strong>Same-day / on-demand:</strong> +${NOTARY_SAME_DAY_USD} when we can take the
-                request (best-effort, not a guarantee)
+                <strong>Same-day / on-demand:</strong> no scheduling surcharge on a remote act; offered
+                when we can take the request (best-effort, not a guarantee)
               </li>
               <li>
                 <strong>Loan signing packages:</strong> {NOTARY_LOAN_RANGE} when the file can close by RON
               </li>
               <li>
-                <strong>After-hours:</strong> +${NOTARY_AFTER_HOURS_USD} after 7 PM MT; hours are{" "}
-                {NOTARY_HOURS_LABEL}
+                <strong>Hours:</strong> {NOTARY_HOURS_LABEL}; evenings and weekends by appointment,
+                with no scheduling surcharge on a remote act
               </li>
             </ul>
             <p>
@@ -175,7 +173,7 @@ export default function MobileNotaryUtahCountyGuide() {
             </p>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">
-              <KeyLine title="Clarity" detail="RON fee is posted. Same-day and after-hours add-ons are quoted before we book." />
+              <KeyLine title="Clarity" detail="RON fee is posted and quoted before we book. No scheduling surcharge on a remote act." />
               <KeyLine title="No travel table" detail="We do not publish mile bands or dispatch a notary to your door." />
             </div>
 

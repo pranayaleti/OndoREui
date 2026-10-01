@@ -23,6 +23,9 @@ describe("LeasingChatWidget resume mode", () => {
     expect(await screen.findByText("Hello there")).toBeInTheDocument()
     expect(String(fetchMock.mock.calls[0]![0])).toContain(`/api/leasing-agent/sessions/${SESSION}`)
     expect(screen.getByLabelText(/your message to the leasing assistant/i)).toBeInTheDocument()
+    expect(screen.getByText(/not legal, tax or lending advice, or a rate quote/i)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /privacy policy/i })).toHaveAttribute("href", "/privacy-policy/")
+    expect(screen.queryByText(/take over anytime/i)).not.toBeInTheDocument()
   })
 
   it("offers contact options instead of the message box when the conversation is not found", async () => {

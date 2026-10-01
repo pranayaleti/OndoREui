@@ -21,6 +21,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { AssistantDisclosure } from '@/components/assistant-disclosure';
 import { MessageSquare, Send, X, Loader2, UserRound } from 'lucide-react';
 import {
   newConversationId,
@@ -182,7 +183,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
       <header className="flex items-center justify-between border-b border-neutral-200 bg-[#0B0B0B] px-4 py-3">
         <div className="min-w-0">
           <h2 className="truncate text-sm font-semibold text-white">Ask Ondo</h2>
-          <p className="text-xs text-neutral-400">Automated assistant, a person can take over anytime</p>
+          <p className="text-xs text-neutral-400">Automated assistant. The team follows up during office hours</p>
         </div>
         {!inline && (
           <button
@@ -305,6 +306,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
             <Send className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
+        <AssistantDisclosure />
       </div>
     </section>
   );

@@ -3,7 +3,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { RateWatchForm } from "@/components/lending/rate-watch-form"
-import { SITE_LOAN_OFFICER, SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_URL, pageTitle } from "@/lib/site"
+import { LoanOfficerLine } from "@/components/lending/loan-officer-line"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
@@ -24,9 +25,7 @@ export default function RateWatchPage() {
           Tell us your current rate and the rate that would make refinancing worth it. When rates get close, we&apos;ll
           reach out with real numbers. No credit check to join.
         </p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Loan officer: {SITE_LOAN_OFFICER.name}, NMLS #{SITE_LOAN_OFFICER.nmlsId}
-        </p>
+        <LoanOfficerLine />
         <p className="mt-3 text-sm text-muted-foreground">
           Want to see the math today?{" "}
           <Link href="/calculators/refinance/" className="font-medium text-primary underline-offset-4 hover:underline">

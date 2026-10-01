@@ -63,7 +63,7 @@ const prepSteps = [
   },
   {
     title: "Payment Ready",
-    detail: "Have payment method available for platform fees, notarizations, and any rush services.",
+    detail: "Have a payment method available. The remote notarial act is $25 per act and platform access is included.",
   },
 ];
 
@@ -172,11 +172,11 @@ E-seal + audit trail → download & share with title/lender`}
             <h2>Need Help or a Rush Appointment?</h2>
             <p>
               If you are new to Remote Online Notarization, we can walk through ID checks, platform
-              setup, and witness needs ahead of time. Same-day and after-hours blocks are available.
+              setup, and witness needs ahead of time. We try to fit same-day and after-hours requests when capacity allows.
             </p>
             <ul>
               <li>Call or text: {SITE_PHONE}</li>
-              <li>Email: {SITE_EMAILS.primary}</li>
+              <li>Email: {SITE_EMAILS.notary}</li>
               <li>
                 Book online: <Link href="/notary" className="text-primary underline">/notary</Link>
               </li>

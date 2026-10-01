@@ -16,6 +16,11 @@ import { cn } from "@/lib/utils"
 
 type ListingInvestorWorksheetProps = {
   listedMonthlyRent: number
+  /**
+   * Show the lending disclosure under the mortgage rate field. Rental listing pages turn it off:
+   * a renter is not looking at a loan offer, and the intro already says this is not one.
+   */
+  showLendingDisclosure?: boolean
 }
 
 type AssumptionFields = {
@@ -62,7 +67,10 @@ function formatPercent(value: number): string {
   return `${value.toFixed(2)}%`
 }
 
-export function ListingInvestorWorksheet({ listedMonthlyRent }: ListingInvestorWorksheetProps) {
+export function ListingInvestorWorksheet({
+  listedMonthlyRent,
+  showLendingDisclosure = true,
+}: ListingInvestorWorksheetProps) {
   const instanceId = useId().replace(/:/g, "")
   const [fields, setFields] = useState<AssumptionFields>(EMPTY_ASSUMPTIONS)
   const rateHelpId = `underwrite-rate-help-${instanceId}`
@@ -195,7 +203,7 @@ export function ListingInvestorWorksheet({ listedMonthlyRent }: ListingInvestorW
                 value={fields.mortgageRatePercent}
                 onChange={setField("mortgageRatePercent")}
                 className={cn("min-h-11", STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS)}
-                aria-describedby={`${rateHelpId} ${rateAprId}`}
+                aria-describedby={showLendingDisclosure ? `${rateHelpId} ${rateAprId}` : rateAprId}
               />
             </div>
             <div className="space-y-1.5">
@@ -275,9 +283,11 @@ export function ListingInvestorWorksheet({ listedMonthlyRent }: ListingInvestorW
             {LISTING_INVESTOR_LOAN_TERM_YEARS}-year fixed term assumption. Empty expense fields are
             treated as 0% — we do not fill market defaults.
           </p>
-          <p id={rateHelpId} className="text-xs leading-relaxed text-muted-foreground">
-            {ARRIVAL_LENDING_DISCLOSURE}
-          </p>
+          {showLendingDisclosure ? (
+            <p id={rateHelpId} className="text-xs leading-relaxed text-muted-foreground">
+              {ARRIVAL_LENDING_DISCLOSURE}
+            </p>
+          ) : null}
         </form>
 
         {illustration ? (

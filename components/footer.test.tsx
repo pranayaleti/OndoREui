@@ -49,4 +49,14 @@ describe("Footer", () => {
     render(<Footer />)
     expect(screen.getByRole("link", { name: /all ondo links/i })).toHaveAttribute("href", "/links/")
   })
+
+  it("labels the phone block plainly and shows no REALTOR or MLS marks or servicing label", () => {
+    const { container } = render(<Footer />)
+    const text = container.textContent ?? ""
+    expect(text).toContain("Call or visit Ondo")
+    expect(text).not.toMatch(/Loan Servicing Help Center/)
+    expect(text).not.toMatch(/REALTOR|Multiple Listing Service/)
+    // Licensing is off by default, so no lender strip yet.
+    expect(text).not.toMatch(/Equal Housing Lender/)
+  })
 })

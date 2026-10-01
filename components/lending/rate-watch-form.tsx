@@ -17,6 +17,7 @@ import {
   type ContactValues,
 } from "@/components/lead-contact-fields"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { withConsentRecord } from "@/lib/text-consent"
 import { parseOptionalAmount, rateWatchMessage } from "@/lib/lending-leads"
 
 export function RateWatchForm() {
@@ -47,14 +48,17 @@ export function RateWatchForm() {
       ...contactPayload(contact),
       source: "website",
       inquiryType: "other",
-      message: rateWatchMessage(
-        {
-          currentRate: parsedCurrentRate,
-          targetRate: parseOptionalAmount(targetRate),
-          balance: parseOptionalAmount(balance),
-          city,
-        },
-        contact.textConsent,
+      message: withConsentRecord(
+        rateWatchMessage(
+          {
+            currentRate: parsedCurrentRate,
+            targetRate: parseOptionalAmount(targetRate),
+            balance: parseOptionalAmount(balance),
+            city,
+          },
+          contact.textConsent,
+        ),
+        contact,
       ),
       attribution: getAttributionPayloadForApi(),
     })
@@ -118,7 +122,7 @@ export function RateWatchForm() {
         </div>
       </div>
 
-      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me when rates move." errors={errors} />
+      <LeadContactFields value={contact} onChange={setContact} topic="mortgage rate changes" errors={errors} />
 
       <LeadFormError message={error} />
       <button

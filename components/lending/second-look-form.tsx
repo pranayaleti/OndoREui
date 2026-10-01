@@ -17,6 +17,7 @@ import {
   type ContactValues,
 } from "@/components/lead-contact-fields"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { withConsentRecord } from "@/lib/text-consent"
 import { CREDIT_BANDS } from "@/lib/homebuyer-quiz"
 import {
   CASH_SOURCES,
@@ -86,7 +87,7 @@ export function SecondLookForm() {
       ...contactPayload(contact),
       source: "website",
       inquiryType: "buyer",
-      message: secondLookMessage(answers, contact.textConsent),
+      message: withConsentRecord(secondLookMessage(answers, contact.textConsent), contact),
       attribution: getAttributionPayloadForApi(),
     })
   }
@@ -99,7 +100,7 @@ export function SecondLookForm() {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-6">
-      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my loan." errors={errors} />
+      <LeadContactFields value={contact} onChange={setContact} topic="your loan" errors={errors} />
 
       <div>
         <label htmlFor={fieldId("closing")} className="text-sm font-medium">

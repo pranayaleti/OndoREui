@@ -8,14 +8,15 @@ import { ArrowLeft, AlertTriangle } from "lucide-react"
 import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { FIND_YOUR_SERVICER, HUD_COUNSELING_PHONE, NOT_A_SERVICER } from "@/lib/content/mortgage-referral"
 
 export const metadata: Metadata = {
   title: pageTitle("Disaster & Emergency Help FAQs | Ondo Real Estate"),
-  description: "Find answers to questions about disaster assistance, emergency help, mortgage forbearance, and what to do after a disaster.",
+  description: "What to do after a disaster: document damage, call your insurer and mortgage servicer, and apply for FEMA help. Ondo does not service mortgages.",
   alternates: { canonical: `${SITE_URL}/faq/disaster-faqs/` },
   openGraph: {
     title: pageTitleText("Disaster & Emergency Help FAQs | Ondo Real Estate"),
-    description: "Find answers to questions about disaster assistance, emergency help, mortgage forbearance, and what to do after a disaster.",
+    description: "What to do after a disaster: document damage, call your insurer and mortgage servicer, and apply for FEMA help. Ondo does not service mortgages.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -26,35 +27,31 @@ export default function DisasterFAQPage() {
   const faqs = [
     {
       question: "What should I do if my property is damaged in a disaster?",
-      answer: "First, ensure your safety and the safety of your family. Then, document all damage with photos and videos. Contact your insurance company immediately to file a claim. Also contact us at " + SITE_PHONE + " so we can help coordinate repairs and discuss payment assistance options."
+      answer: "First, make sure you and your family are safe. Then document all damage with photos and video and contact your insurance company to file a claim. If the property is one we manage, also contact us at " + SITE_PHONE + " so we can coordinate repairs."
     },
     {
       question: "Can I get help with mortgage payments after a disaster?",
-      answer: "Yes, we offer disaster-related mortgage assistance including forbearance (temporary payment pause), payment deferral, and loan modification options. Contact us as soon as possible to discuss your situation."
+      answer: `Call your mortgage servicer as soon as you can and ask about disaster relief. ${FIND_YOUR_SERVICER} ${NOT_A_SERVICER}`
     },
     {
       question: "What is mortgage forbearance?",
-      answer: "Forbearance allows you to temporarily pause or reduce your mortgage payments for a specific period (typically 3-12 months) while you recover from a disaster. You'll need to resume payments after the forbearance period ends."
+      answer: "Forbearance is an agreement with your servicer to pause or reduce your mortgage payments for a set time. The payments are still owed. Ask your servicer how and when they must be repaid before you agree."
     },
     {
       question: "How do I apply for disaster assistance?",
-      answer: "Contact us immediately at " + SITE_PHONE + " to discuss your situation. We'll help you understand your options and guide you through the application process. You may also be eligible for FEMA assistance if your area has been declared a disaster zone."
+      answer: "If your area has a federal disaster declaration, you can apply for FEMA assistance at disasterassistance.gov. The U.S. Small Business Administration also offers disaster loans, and Utah Emergency Management has state resources."
     },
     {
-      question: "What if I can't return to my property due to damage?",
-      answer: "If your property is uninhabitable, contact us immediately. We can help arrange temporary housing assistance and work with your insurance company. We may also be able to pause or modify your mortgage payments during this time."
-    },
-    {
-      question: "How long does disaster assistance last?",
-      answer: "Disaster assistance duration varies based on your situation. Forbearance typically lasts 3-12 months, but can be extended if needed. We'll work with you to find a solution that fits your recovery timeline."
+      question: "What if my rental home is not livable after a disaster?",
+      answer: `Contact your property manager or landlord and read your lease. If we manage the home, call ${SITE_PHONE}. If you have renters insurance, ask your insurer whether it covers temporary housing.`
     },
     {
       question: "What documentation do I need for disaster assistance?",
-      answer: "You'll need documentation of the disaster impact, such as photos of damage, insurance claim information, FEMA assistance letters (if applicable), and proof of displacement or income loss. We'll provide a complete list when you contact us."
+      answer: "Expect to need photos of the damage, your insurance claim information, any FEMA letters, and proof of where you live and of any lost income. Each program publishes its own list."
     },
     {
-      question: "Are there government programs that can help?",
-      answer: "Yes, FEMA provides disaster assistance for declared disaster areas. The SBA offers low-interest disaster loans. Utah Emergency Management also provides state-level resources. We can help you navigate these programs and coordinate with your mortgage assistance."
+      question: "Where can I get free help with my mortgage after a disaster?",
+      answer: `A HUD-approved housing counselor can help at no cost. Call ${HUD_COUNSELING_PHONE} or visit hud.gov.`
     }
   ]
 
@@ -62,7 +59,7 @@ export default function DisasterFAQPage() {
     <div className="flex flex-col min-h-screen">
       <SEO
         title="Disaster & Emergency Help FAQs | Ondo Real Estate"
-        description="Find answers to questions about disaster assistance, emergency help, mortgage forbearance, and what to do after a disaster."
+        description="What to do after a disaster: document damage, call your insurer and mortgage servicer, and apply for FEMA help. Ondo does not service mortgages."
         pathname="/faq/disaster-faqs"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={[
@@ -76,7 +73,7 @@ export default function DisasterFAQPage() {
       />
       <PageBanner
         title="Disaster & Emergency Help FAQs"
-        subtitle="24/7 support and assistance during emergencies and disasters"
+        subtitle="What to do after a disaster and who to call"
       />
 
       <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
@@ -95,8 +92,8 @@ export default function DisasterFAQPage() {
                 <AlertTriangle className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Emergency Support</h2>
-                <p className="text-gray-300 text-sm">24/7 assistance for disasters and emergencies</p>
+                <h2 className="text-2xl font-bold text-white">After a Disaster</h2>
+                <p className="text-gray-300 text-sm">Safety, insurance, servicer and FEMA</p>
               </div>
             </div>
 
@@ -109,7 +106,7 @@ export default function DisasterFAQPage() {
                     For life-threatening emergencies, call <strong className="text-white">911</strong> immediately.
                   </p>
                   <p className="text-gray-300 text-sm">
-                    For mortgage assistance during disasters, call us 24/7 at <strong className="text-white">{SITE_PHONE}</strong>
+                    For mortgage relief after a disaster, call your mortgage servicer. For a property we manage, call us at <strong className="text-white">{SITE_PHONE}</strong>
                   </p>
                 </div>
               </div>
@@ -139,7 +136,7 @@ export default function DisasterFAQPage() {
                   href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`}
                   className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-accent-1 to-accent-2 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                 >
-                  Call {SITE_PHONE} (24/7)
+                  Call {SITE_PHONE}
                 </Link>
                 <Link
                   href="/contact"

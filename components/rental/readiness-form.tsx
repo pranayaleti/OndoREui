@@ -133,14 +133,10 @@ export function ReadinessForm({
         />
         I have pets (not including assistance animals)
       </label>
-      <label className="flex min-h-11 items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={answers.hasAssistanceAnimal}
-          onChange={(e) => setAnswers((a) => ({ ...a, hasAssistanceAnimal: e.target.checked }))}
-        />
-        I may request an assistance animal accommodation
-      </label>
+      <p className="text-xs text-muted-foreground">
+        You do not need to tell us here about an assistance animal or any other accommodation. Ask at any point in the
+        application and we will handle it.
+      </p>
       <label className="flex min-h-11 items-center gap-2 text-sm">
         <input
           type="checkbox"
@@ -177,9 +173,14 @@ export function ReadinessForm({
               {note}
             </p>
           ))}
-          {result.outcome === "ready" && onReady ? (
-            <Button type="button" className="min-h-11 w-full" onClick={onReady}>
-              Start application
+          {onReady ? (
+            <Button
+              type="button"
+              variant={result.outcome === "ready" ? "default" : "outline"}
+              className="min-h-11 w-full"
+              onClick={onReady}
+            >
+              {result.outcome === "ready" ? "Start application" : "Apply anyway"}
             </Button>
           ) : null}
           <FairHousingNotice compact />

@@ -17,6 +17,8 @@ import { ArticleToc } from "@/components/content/article-toc"
 import { ArticleByline } from "@/components/content/article-byline"
 import { extractOutline } from "@/lib/content/article-outline"
 import { KeyTakeaways } from "@/components/content/key-takeaways"
+import { ARTICLE_ADVICE_NOTICE, articleDisclosureKind, type ArticleDisclosureKind } from "@/lib/content/article-disclosure"
+import { ARRIVAL_REAL_ESTATE_DISCLOSURE } from "@/lib/utah-arrival"
 
 const DEFAULT_AUTHOR = "Ondo Real Estate Editorial Team"
 
@@ -36,6 +38,8 @@ export type ArticleShellMeta = {
   /** Override the takeaways caption; legal-adjacent articles need their own. */
   takeawaysCaption?: string
   faqs?: readonly ContentFaqItem[]
+  /** Footer disclosure. Defaults from `category` (see lib/content/article-disclosure.ts). */
+  disclosure?: ArticleDisclosureKind
 }
 
 export function articleMetadata(meta: ArticleShellMeta): Metadata {
@@ -56,6 +60,16 @@ export function articleMetadata(meta: ArticleShellMeta): Metadata {
       description: meta.description,
     },
   })
+}
+
+function ArticleDisclosure({ kind }: { kind: ArticleDisclosureKind }) {
+  if (kind === "lending") return <LendingDisclaimer className="mt-8" />
+  return (
+    <p className="mt-8 text-xs leading-relaxed text-foreground/60">
+      {ARRIVAL_REAL_ESTATE_DISCLOSURE}
+      {kind === "advice" ? ` ${ARTICLE_ADVICE_NOTICE}` : ""}
+    </p>
+  )
 }
 
 type ArticleShellProps = {
@@ -135,7 +149,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
           </div>
           <RelatedContent path={meta.path} title="Keep going" />
           <NextStepCta path={meta.path} />
-          <LendingDisclaimer className="mt-8" />
+          <ArticleDisclosure kind={articleDisclosureKind(meta.category, meta.disclosure)} />
         </div>
       </article>
     </main>

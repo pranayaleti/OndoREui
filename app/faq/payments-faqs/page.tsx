@@ -8,14 +8,15 @@ import { ArrowLeft, DollarSign, AlertCircle } from "lucide-react"
 import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { FIND_YOUR_SERVICER, NOT_A_SERVICER } from "@/lib/content/mortgage-referral"
 
 export const metadata: Metadata = {
   title: pageTitle("Payments & Billing FAQs | Ondo Real Estate"),
-  description: "Find answers to payment questions about due dates, payment methods, auto-pay, late fees, and online payments.",
+  description: "Rent payment questions for tenants: due dates, payment methods, autopay and online payments. Check your lease for grace periods and late fees.",
   alternates: { canonical: `${SITE_URL}/faq/payments-faqs/` },
   openGraph: {
     title: pageTitleText("Payments & Billing FAQs | Ondo Real Estate"),
-    description: "Find answers to payment questions about due dates, payment methods, auto-pay, late fees, and online payments.",
+    description: "Rent payment questions for tenants: due dates, payment methods, autopay and online payments. Check your lease for grace periods and late fees.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -25,36 +26,36 @@ export const metadata: Metadata = {
 export default function PaymentsFAQPage() {
   const faqs = [
     {
-      question: "When is my payment due?",
-      answer: "Your payment is due on the 1st of each month. You have a 15-day grace period before any late fees are assessed."
+      question: "When is my rent due?",
+      answer: "Your lease states the due date. Any grace period and late fee are also set by your lease and by Utah law, so check your lease or ask us before you rely on a number."
     },
     {
-      question: "How can I change my payment due date?",
-      answer: "Contact our customer service team to discuss changing your payment due date. Some restrictions may apply."
+      question: "How can I change my rent due date?",
+      answer: "Contact our team to ask. Any change has to be agreed with us, and some restrictions may apply."
     },
     {
-      question: "What happens if I miss a payment?",
-      answer: "If you miss a payment, you may be charged a late fee after the grace period. Contact us immediately if you're having trouble making payments. We're here to help and may be able to work out a payment plan."
-    },
-    {
-      question: "Can I make extra payments?",
-      answer: "Yes! You can make extra payments at any time. These will be applied to your principal balance, helping you pay off your loan faster."
+      question: "What happens if I miss a rent payment?",
+      answer: "Your lease explains what applies. Contact us as early as you can if you are having trouble paying, so we can talk about it before it becomes a bigger problem."
     },
     {
       question: "How do I set up automatic payments?",
-      answer: "You can set up automatic payments through our online portal or by calling customer service. You can choose the payment amount and date. Auto-pay ensures you never miss a payment and helps you build a positive payment history."
+      answer: "If autopay is available for your home, you can set it up in your tenant portal or by contacting us. You choose the payment date and amount allowed by your lease."
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept checking accounts, savings accounts, and debit cards through our online portal. Credit card payments may have additional fees. You can also pay by phone or mail."
+      answer: "Your tenant portal lists the payment methods available for your home and any fees that apply."
     },
     {
       question: "How do I pay rent online?",
-      answer: "Log into your tenant portal and navigate to the payments section. You can make a one-time payment or set up recurring automatic payments. The portal accepts bank transfers and debit cards."
+      answer: "Log into your tenant portal and go to the payments section. You can make a one-time payment or set up recurring payments if they are available for your home."
     },
     {
       question: "Are there fees for online payments?",
-      answer: "Bank transfers (ACH) are typically free. Debit card payments may have a small processing fee. Credit card payments usually have higher fees. Check your portal for current fee information."
+      answer: "Your tenant portal shows the current fees for each payment method before you confirm a payment."
+    },
+    {
+      question: "I have a question about my mortgage payment. Who do I ask?",
+      answer: `Ask your mortgage servicer. ${FIND_YOUR_SERVICER} ${NOT_A_SERVICER}`
     }
   ]
 
@@ -62,7 +63,7 @@ export default function PaymentsFAQPage() {
     <div className="flex flex-col min-h-screen">
       <SEO
         title="Payments & Billing FAQs | Ondo Real Estate"
-        description="Find answers to payment questions about due dates, payment methods, auto-pay, late fees, and online payments."
+        description="Rent payment questions for tenants: due dates, payment methods, autopay and online payments. Check your lease for grace periods and late fees."
         pathname="/faq/payments-faqs"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={[
@@ -96,7 +97,7 @@ export default function PaymentsFAQPage() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-white">Payment Questions</h2>
-                <p className="text-gray-300 text-sm">Rent, autopay, due dates, fees, and online payments</p>
+                <p className="text-gray-300 text-sm">Rent, autopay, due dates and online payments</p>
               </div>
             </div>
 
@@ -106,10 +107,9 @@ export default function PaymentsFAQPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2 text-white">Important Payment Information</h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Payments are due on the 1st of each month</li>
-                    <li>• 15-day grace period before late fees</li>
-                    <li>• Late fees typically range from $25-$50</li>
-                    <li>• Contact us immediately if you're having payment difficulties</li>
+                    <li>• Your lease sets your rent due date, any grace period and any late fee</li>
+                    <li>• Your tenant portal shows payment methods and fees</li>
+                    <li>• Contact us early if you are having trouble paying rent</li>
                   </ul>
                 </div>
               </div>

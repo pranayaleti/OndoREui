@@ -43,7 +43,7 @@ export default function CostOfLivingDraper() {
             <h2>Housing: The Biggest Line Item</h2>
             <p>Draper&apos;s median home price sits around $620,000 in 2026, significantly above the Salt Lake County median of $510,000. Suncrest and South Mountain push well past $800K. Draper Peaks and townhome communities offer an entry point around $420K–$550K.</p>
             <p><strong>Renting:</strong> Expect to pay $1,900–$2,400/mo for a 3-bedroom single-family home. 2-bedroom townhomes run $1,600–$2,000/mo. Demand is high; quality listings under $2,000 move in days.</p>
-            <p><strong>Monthly mortgage (median price, 20% down, 30yr @ 6.75%):</strong> ~$3,210/mo, plus property taxes and insurance (~$500–$700/mo combined).</p>
+            <p><strong>Buying:</strong> Your monthly payment depends on your down payment, rate, loan program and credit, and rates change often. Property taxes and insurance add roughly $500–$700/mo on top. Run your own numbers with the <Link href="/calculators/mortgage-payment/">mortgage payment calculator</Link>; it is an estimate for illustration, not a quote.</p>
 
             <h2>Property Taxes</h2>
             <p>Utah&apos;s property tax rate is relatively low nationally, approximately 0.5–0.6% of assessed value for residential properties. On a $620,000 Draper home: roughly $3,100–$3,720/year, or $260–$310/month. This is well below California, Oregon, and many Midwest states.</p>

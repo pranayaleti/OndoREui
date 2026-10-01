@@ -61,4 +61,15 @@ describe("ListingInvestorWorksheet", () => {
     expect(screen.queryByRole("region", { name: /illustration results/i })).not.toBeInTheDocument()
     expect(screen.getByText(/\$2,000/)).toBeInTheDocument()
   })
+
+  it("can leave the lending disclosure out (rental listing pages) and keeps the field description valid", () => {
+    render(<ListingInvestorWorksheet listedMonthlyRent={2195} showLendingDisclosure={false} />)
+
+    expect(screen.queryByText(ARRIVAL_LENDING_DISCLOSURE)).not.toBeInTheDocument()
+    expect(screen.queryByText(/not a commitment to lend/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/not a loan offer/i)).toBeInTheDocument()
+    const describedBy = screen.getByLabelText(/^mortgage rate/i).getAttribute("aria-describedby")
+    expect(describedBy).toBeTruthy()
+    expect(describedBy!.split(" ").every((id) => document.getElementById(id))).toBe(true)
+  })
 })

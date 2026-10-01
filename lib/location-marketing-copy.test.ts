@@ -1,6 +1,7 @@
 import { readFileSync } from "fs"
 import { join } from "path"
 import { describe, it, expect } from "vitest"
+import { STEERING_COPY_RE } from "./fair-housing-steering"
 
 /** Location / neighborhood / compare marketing sources in this Fair Housing pass. */
 const LOCATION_COPY_FILES = [
@@ -26,9 +27,6 @@ function stripHousingTypes(text: string): string {
     .replace(/multifamily/gi, "MFH")
 }
 
-const STEERING =
-  /family-oriented|family-first|family-friendly|family-centric|family-focused|family-paced|family-lifestyle|young professionals?|empty nesters?|immigrant families|byu families|great for families|best for families|who is .+ best for|safe neighborhood|crime-free|quiet community|ideal for couples|working-class character|working-class value|blue-collar workers|ethnically diverse|tenant quality|young families|military families|family tenants|family housing|quality tenants|high-quality tenants/i
-
 const CRIME_CHARACTERIZATION =
   /elevated crime|higher crime|low crime|crime rates|crime statistics|crime concerns|crime perception|perfectly safe/i
 
@@ -50,7 +48,7 @@ describe("location marketing Fair Housing", () => {
 
   it("does not steer with familial-status, class, or “who lives here” copy", () => {
     for (const row of sources) {
-      expect(row.text, row.rel).not.toMatch(STEERING)
+      expect(row.text, row.rel).not.toMatch(STEERING_COPY_RE)
       const withoutHousing = stripHousingTypes(row.text)
       expect(withoutHousing, row.rel).not.toMatch(FAMILIAL_STEERING)
     }

@@ -26,6 +26,7 @@ import {
   SITE_NAME,
   SITE_PHONE,
   SITE_URL,
+  nmlsIdentification,
 } from "./site"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
@@ -422,7 +423,7 @@ const CALCULATOR_DETAILS: Record<string, CalculatorMarkdownDetail> = {
     notes: [
       "Suggested amounts are typical starting points, not local averages or exact bills.",
       "This is not a loan quote, credit decision, or financial advice.",
-      "Loan information is provided by Ondo Real Estate (NMLS ID on file).",
+      `Loan information is provided by Ondo Real Estate (${nmlsIdentification()}).`,
     ],
   },
 }

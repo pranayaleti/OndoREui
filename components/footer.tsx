@@ -12,6 +12,8 @@ import {
   SITE_ADDRESS_CITY,
   SITE_ADDRESS_REGION,
   SITE_ADDRESS_POSTAL_CODE,
+  LICENSING_LIVE,
+  nmlsIdentification,
 } from "@/lib/site"
 import { usePwaInstall } from "@/lib/pwa/install-context"
 import { usePathname } from "next/navigation"
@@ -252,7 +254,7 @@ const Footer = memo(() => {
             <div className="flex items-center gap-3">
               <Phone className="h-5 w-5 text-primary" aria-hidden="true" />
               <div>
-                <p className="text-sm font-medium">Loan Servicing Help Center</p>
+                <p className="text-sm font-medium">Call or visit Ondo</p>
                 <a
                   href={`tel:${SITE_PHONE.replace(/[^+\d]/g, "")}`}
                   className="text-foreground/70 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary rounded"
@@ -345,16 +347,14 @@ const Footer = memo(() => {
                 <EqualHousingIcon className="text-foreground/70" />
                 <span>Equal Housing Opportunity</span>
               </div>
-              <span className="h-4 w-px bg-muted" />
-              <div className="flex items-center gap-2">
-                <div className="h-4 w-4 rounded-sm border border-gray-500 flex items-center justify-center text-[8px] font-semibold">R</div>
-                <span>REALTOR</span>
-              </div>
-              <span className="h-4 w-px bg-muted" />
-              <div className="flex items-center gap-2">
-                <div className="rounded border border-gray-500 px-1 py-0.5 text-[8px] font-semibold tracking-wide">MLS</div>
-                <span>Multiple Listing Service</span>
-              </div>
+              {LICENSING_LIVE ? (
+                <>
+                  <span className="h-4 w-px bg-muted" />
+                  <span>Equal Housing Lender</span>
+                  <span className="h-4 w-px bg-muted" />
+                  <span>{nmlsIdentification()}</span>
+                </>
+              ) : null}
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ const faqItems = [
   {
     question: "Can I have pets in my rental?",
     answer:
-      "Pet policies vary by property. Properties that allow pets typically require an additional pet deposit and/or monthly pet rent. Breed and size restrictions may apply. Service animals are accommodated according to fair housing laws and are exempt from pet fees.",
+      "Pet policies vary by property. Properties that allow pets typically require an additional pet deposit and/or monthly pet rent. Breed and size restrictions may apply. Assistance animals that provide disability-related assistance are not pets, and we do not charge pet rent, pet deposits, or pet fees for them.",
   },
   {
     question: "What services do you offer property owners?",
@@ -151,7 +151,7 @@ const faqTiles: FAQTile[] = [
   {
     id: "loan-payoffs",
     name: "Loan Payoffs & Closings",
-    description: "Requesting payoff quotes, timing closings, and what to expect at payoff.",
+    description: "Who issues a mortgage payoff quote and what happens after a payoff. Starts with your servicer.",
     path: "/faq/loan-payoffs-faqs",
     icon: <Building2 className="h-7 w-7" />,
     audience: "Homeowners",
@@ -159,7 +159,7 @@ const faqTiles: FAQTile[] = [
   {
     id: "disaster",
     name: "Disaster & Emergency Help",
-    description: "What to do in an emergency and how our team supports you 24/7.",
+    description: "What to do after a disaster and who to call.",
     path: "/faq/disaster-faqs",
     icon: <AlertTriangle className="h-7 w-7" />,
     audience: "Tenants & owners",
@@ -167,7 +167,7 @@ const faqTiles: FAQTile[] = [
   {
     id: "hardship",
     name: "Hardship & Assistance Options",
-    description: "If you’re struggling with payments, explore relief options and next steps.",
+    description: "If you are behind on your mortgage, where to get free help and who to call first.",
     path: "/faq/hardship-faqs",
     icon: <CheckCircle className="h-7 w-7" />,
     audience: "Tenants & owners",

@@ -76,7 +76,7 @@ export default function ModernizingNotaryWorkflows() {
             <div className="not-prose my-6 grid gap-3 md:grid-cols-3">
               <KeyLine title="Single surface" detail="One dialog for RON: chosen by user intent." />
               <KeyLine title="State clarity" detail="Calendar first, then confirmation; no hidden extra steps." />
-              <KeyLine title="Ops handoff" detail="Email routing makes the right specialist respond instantly." />
+              <KeyLine title="Ops handoff" detail="Requests land in one notary inbox so the team can respond quickly." />
             </div>
 
             <h3>Technical Implementation</h3>
@@ -99,7 +99,7 @@ export default function ModernizingNotaryWorkflows() {
             </p>
             <ul>
               <li><strong>RON coverage</strong>: Nationwide video sessions, including Utah County cities such as Lehi, Provo, Orem, and American Fork.</li>
-              <li><strong>Posted fees</strong>: Remote notarial acts at the Utah RON maximum, with same-day and after-hours add-ons disclosed before booking.</li>
+              <li><strong>Posted fees</strong>: Remote notarial acts at the Utah RON maximum of $25, quoted before booking.</li>
             </ul>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">
@@ -109,13 +109,8 @@ export default function ModernizingNotaryWorkflows() {
 
             <h2>Beyond Closings: Estate Planning & Loan Signing</h2>
             <p>
-              Our system isn't just for buying homes. We configured the backend to route different request types to specialized agents:
+              Our system isn't just for buying homes. Loan signings, trusts and wills, and other document types by RON all go to one notary inbox, <code>{SITE_EMAILS.notary}</code>, so every notary request is answered in one place.
             </p>
-            <ul>
-              <li><code>{SITE_EMAILS.loanSigning}</code> for closings.</li>
-              <li><code>{SITE_EMAILS.estatePlanning}</code> for trusts and wills.</li>
-              <li><code>{SITE_EMAILS.i9Verification}</code> for employment verification.</li>
-            </ul>
 
             <h2>Conclusion</h2>
             <p>
@@ -132,14 +127,14 @@ export default function ModernizingNotaryWorkflows() {
               </div>
               <div>
                 <h4 className="font-bold text-lg">Q: Is RON legal in Utah?</h4>
-                <p>A: Yes, Utah is a leader in adopting digital notary standards, making it fully legal for real estate and legal documents.</p>
+                <p>A: Yes, Utah is a leader in adopting digital notary standards, and RON is available for many real estate and legal documents. Confirm that the receiving party accepts electronic notarization before you book.</p>
               </div>
             </div>
 
             <div className="mt-12 p-6 bg-muted rounded-lg">
               <h3 className="text-xl font-bold mb-4">Summary</h3>
               <p className="mb-0">
-                Ondo Real Estate integrates Remote Online Notary (RON) scheduling directly into its React-based platform. The <code>NotaryBooking</code> component simplifies the &quot;last mile&quot; of real estate transactions by allowing users to schedule certified remote sessions for loan signings, estate planning, and I-9 verification. The system uses a specialized routing logic to direct requests to the appropriate department and leverages <code>ConsultationModal</code> for a consistent UX across the application.
+                Ondo Real Estate integrates Remote Online Notary (RON) scheduling directly into its React-based platform. The <code>NotaryBooking</code> component simplifies the &quot;last mile&quot; of real estate transactions by allowing users to schedule remote sessions for loan signings and estate planning documents. Requests go to the notary inbox, and the component leverages <code>ConsultationModal</code> for a consistent UX across the application.
               </p>
             </div>
           

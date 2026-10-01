@@ -7,6 +7,7 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = {
   title: pageTitle("Refinance Guides & Insights | Ondo Real Estate"),
@@ -98,6 +99,7 @@ export default function RefinanceBlogPage() {
                 <Link href="/contact">Speak with an advisor</Link>
               </Button>
             </div>
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

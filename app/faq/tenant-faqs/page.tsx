@@ -43,7 +43,7 @@ export default function TenantFAQPage() {
     },
     {
       question: "Can I have pets in my rental?",
-      answer: "Pet policies vary by property. Properties that allow pets typically require an additional pet deposit and/or monthly pet rent. Breed and size restrictions may apply. Service animals are accommodated according to fair housing laws and are exempt from pet fees."
+      answer: "Pet policies vary by property. Properties that allow pets typically require an additional pet deposit and/or monthly pet rent. Breed and size restrictions may apply. Assistance animals that provide disability-related assistance are not pets, and we do not charge pet rent, pet deposits, or pet fees for them."
     },
     {
       question: "How do I pay rent?",

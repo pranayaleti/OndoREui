@@ -1,9 +1,10 @@
 // NOTE(i18n): server component, licensing disclosures are intentionally English-only.
 // Legal copy translation requires jurisdiction-specific counsel review; the en
 // page is authoritative until then. Reviewed by the license-compliance-guard
-// agent — do not add specific NMLS IDs or brokerage license numbers inline;
-// the platform-wide convention is "NMLS ID on file" (see public/index.md and
-// the calculator disclosures).
+// agent. Do not add NMLS IDs or brokerage license numbers inline. The NMLS wording
+// comes from nmlsIdentification() in lib/site.ts: "NMLS ID on file" until the owner
+// sets LICENSING_LIVE and SITE_COMPANY_NMLS_ID, then the real IDs and the NMLS
+// Consumer Access link. Fair Housing wording comes from FAIR_HOUSING_STATEMENT.
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Building2, Landmark, ScrollText, ShieldCheck } from "lucide-react"
@@ -12,7 +13,8 @@ import { Button } from "@/components/ui/button"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_NAME, SITE_EMAILS, SITE_PHONE, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, pageTitleText } from "@/lib/site"
+import { FAIR_HOUSING_STATEMENT } from "@/lib/rental-application"
+import { SITE_URL, SITE_NAME, SITE_EMAILS, SITE_PHONE, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, nmlsIdentification, pageTitleText } from "@/lib/site"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = pageTitleText(`Licensing & Disclosures | ${SITE_NAME}`)
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
 }
 
 export default function LicensingPage() {
-  const lastUpdated = "August 25, 2026"
+  const lastUpdated = "September 30, 2026"
 
   return (
     <main className="min-h-screen">
@@ -81,12 +83,7 @@ export default function LicensingPage() {
                     request and are also on file with the Utah Division of
                     Real Estate.
                   </p>
-                  <p>
-                    <strong>Equal Housing Opportunity.</strong> Ondo Real
-                    Estate supports the Fair Housing Act. We do not
-                    discriminate on the basis of race, color, religion, sex,
-                    handicap, familial status, or national origin.
-                  </p>
+                  <p>{FAIR_HOUSING_STATEMENT}</p>
                 </CardContent>
               </Card>
 
@@ -99,8 +96,8 @@ export default function LicensingPage() {
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-foreground/80">
                   <p>
-                    Loan information is provided by {SITE_NAME} (NMLS ID on
-                    file). Any calculators, estimates, or examples shown on
+                    Loan information is provided by {SITE_NAME} ({nmlsIdentification()}).
+                    Any calculators, estimates, or examples shown on
                     this site are <strong>not a commitment to lend</strong>, a
                     loan approval, or an offer of credit. Rates, terms, and
                     payments are estimates for illustration only, are not a

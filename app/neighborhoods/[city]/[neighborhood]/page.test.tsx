@@ -98,3 +98,13 @@ describe("neighborhood page, market context, map, and FAQ", () => {
     expect(screen.queryByText(/Who is Sugar House best for\?/i)).not.toBeInTheDocument()
   })
 })
+
+describe("neighborhood school copy", () => {
+  it("does not say a neighborhood is served by schools it only sits near", async () => {
+    const { container } = render(await Page({ params: Promise.resolve({ city: "draper", neighborhood: "suncrest" }) }))
+    const html = container.innerHTML
+    expect(html).not.toMatch(/is served by/)
+    expect(html).toContain("Which schools are near Suncrest?")
+    expect(html).toContain("not attendance zones")
+  })
+})

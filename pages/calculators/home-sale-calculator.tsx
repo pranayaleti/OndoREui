@@ -9,7 +9,8 @@ import { NumberField } from "@/components/calculators/number-field";
 interface HomeSaleData {
   homeValue: number;
   mortgageBalance: number;
-  realtorCommission: number;
+  listingAgentCommission: number;
+  buyerAgentCommission: number;
   closingCosts: number;
   repairs: number;
   movingCosts: number;
@@ -30,7 +31,9 @@ const HomeSaleCalculator: React.FC = () => {
   const [formData, setFormData] = useState<HomeSaleData>({
     homeValue: 400000,
     mortgageBalance: 250000,
-    realtorCommission: 6,
+    // Example values only. Commissions are negotiable and not set by law.
+    listingAgentCommission: 2.5,
+    buyerAgentCommission: 2.5,
     closingCosts: 8000,
     repairs: 5000,
     movingCosts: 2000,
@@ -42,13 +45,13 @@ const HomeSaleCalculator: React.FC = () => {
   const [results, setResults] = useState<HomeSaleResults | null>(null);
   const [hasCalculated, setHasCalculated] = useState(false);
   const calculateHomeSale = useCallback(() => {
-    const { homeValue, mortgageBalance, realtorCommission, closingCosts, repairs, movingCosts, capitalGainsTax } = formData;
+    const { homeValue, mortgageBalance, listingAgentCommission, buyerAgentCommission, closingCosts, repairs, movingCosts, capitalGainsTax } = formData;
     
-    // Calculate realtor commission
-    const realtorFee = (homeValue * realtorCommission) / 100;
+    // Calculate agent commissions (listing agent plus buyer agent, each negotiable)
+    const agentFees = (homeValue * (listingAgentCommission + buyerAgentCommission)) / 100;
     
     // Calculate total costs
-    const totalCosts = realtorFee + closingCosts + repairs + movingCosts + capitalGainsTax;
+    const totalCosts = agentFees + closingCosts + repairs + movingCosts + capitalGainsTax;
     
     // Calculate equity
     const equity = homeValue - mortgageBalance;
@@ -127,15 +130,27 @@ const HomeSaleCalculator: React.FC = () => {
                 onChange={(next) => handleInputChange('mortgageBalance', next)}
               />
 
-              {/* Realtor Commission */}
+              {/* Agent commissions */}
               <NumberField
-                id="realtorCommission"
-                label="Realtor Commission"
-                kind="currency"
+                id="listingAgentCommission"
+                label="Listing Agent Commission"
+                kind="percent"
                 step={0.1}
-                value={formData.realtorCommission}
-                onChange={(next) => handleInputChange('realtorCommission', next)}
+                value={formData.listingAgentCommission}
+                onChange={(next) => handleInputChange('listingAgentCommission', next)}
               />
+              <NumberField
+                id="buyerAgentCommission"
+                label="Buyer Agent Commission"
+                kind="percent"
+                step={0.1}
+                value={formData.buyerAgentCommission}
+                onChange={(next) => handleInputChange('buyerAgentCommission', next)}
+              />
+              <p className="text-sm text-foreground/70">
+                Example values only. Commissions are negotiable and not set by law. Enter the rates you have
+                agreed to.
+              </p>
 
               {/* Closing Costs */}
               <NumberField
@@ -228,8 +243,8 @@ const HomeSaleCalculator: React.FC = () => {
                   <h2 className="text-xl font-semibold text-foreground mb-4">Cost Breakdown</h2>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-foreground/70">Realtor Commission:</span>
-                      <span className="font-semibold">{formatCurrency((formData.homeValue * formData.realtorCommission) / 100)}</span>
+                      <span className="text-foreground/70">Agent Commissions:</span>
+                      <span className="font-semibold">{formatCurrency((formData.homeValue * (formData.listingAgentCommission + formData.buyerAgentCommission)) / 100)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-foreground/70">Closing Costs:</span>
@@ -290,7 +305,7 @@ const HomeSaleCalculator: React.FC = () => {
             <div>
               <h3 className="font-medium text-foreground mb-2">Common Sale Costs:</h3>
               <ul className="space-y-1 list-disc list-inside">
-                <li>Realtor commission (typically 5-6%)</li>
+                <li>Agent commissions (negotiable and not set by law)</li>
                 <li>Closing costs and transfer taxes</li>
                 <li>Repairs and staging costs</li>
                 <li>Moving and storage expenses</li>

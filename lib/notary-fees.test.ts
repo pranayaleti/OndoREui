@@ -1,12 +1,9 @@
 import { describe, expect, it } from "vitest"
 import {
-  NOTARY_EXAMPLE_AFTER_HOURS_RON_TOTAL,
   NOTARY_EXAMPLE_QUOTES,
-  NOTARY_EXAMPLE_SAME_DAY_RON_TOTAL,
   NOTARY_IN_PERSON_ACT_USD,
   NOTARY_PRICING_SUMMARY,
   NOTARY_RON_ACT_USD,
-  NOTARY_SAME_DAY_USD,
 } from "./notary-fees"
 
 describe("notary-fees", () => {
@@ -22,9 +19,14 @@ describe("notary-fees", () => {
     )
   })
 
-  it("quotes same-day and after-hours RON from the posted add-ons", () => {
-    expect(NOTARY_EXAMPLE_SAME_DAY_RON_TOTAL).toBe(NOTARY_RON_ACT_USD + NOTARY_SAME_DAY_USD)
-    expect(NOTARY_EXAMPLE_AFTER_HOURS_RON_TOTAL).toBe(NOTARY_RON_ACT_USD + 40)
+  it("never publishes a per-act total above the Utah remote cap", () => {
+    for (const quote of NOTARY_EXAMPLE_QUOTES) {
+      const total = Number(/Total \$(\d+)/.exec(quote.detail)?.[1])
+      const acts = Number(/(\d+) act/.exec(`${quote.title} ${quote.detail}`)?.[1] ?? 1)
+      expect(total / acts).toBeLessThanOrEqual(NOTARY_RON_ACT_USD)
+    }
+    const copy = [NOTARY_PRICING_SUMMARY, ...NOTARY_EXAMPLE_QUOTES.map((q) => `${q.title} ${q.detail}`)].join(" ")
+    expect(copy).not.toMatch(/same-day|after[- ]hours|weekend|\$50|\$65/i)
   })
 
   it("points pricing copy at the posted schedule", () => {

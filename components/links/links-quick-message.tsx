@@ -16,6 +16,7 @@ import {
   type ContactValues,
 } from "@/components/lead-contact-fields"
 import { getAttributionPayloadForApi, type MarketingAttribution } from "@/lib/attribution"
+import { withConsentRecord } from "@/lib/text-consent"
 import type { ContactInquiryType, ContactLeadSource } from "@/lib/leads-api"
 import { useRadioGroup } from "@/lib/use-radio-group"
 
@@ -75,14 +76,17 @@ export function LinksQuickMessage() {
       ...contactPayload(contact),
       source: leadSource(attribution),
       inquiryType: chosen.inquiryType,
-      message: [
-        "Quick message from /links",
-        `Need: ${chosen.label}`,
-        note.trim() ? `Note: ${note.trim()}` : null,
-        `OK to text: ${contact.textConsent ? "Yes" : "No"}`,
-      ]
-        .filter((line): line is string => line !== null)
-        .join("\n"),
+      message: withConsentRecord(
+        [
+          "Quick message from /links",
+          `Need: ${chosen.label}`,
+          note.trim() ? `Note: ${note.trim()}` : null,
+          `OK to text: ${contact.textConsent ? "Yes" : "No"}`,
+        ]
+          .filter((line): line is string => line !== null)
+          .join("\n"),
+        contact,
+      ),
       attribution,
     })
   }
@@ -157,7 +161,7 @@ export function LinksQuickMessage() {
           <FieldError id={needErrorId} message={needError} />
 
           <div className="mt-4">
-            <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me back." errors={errors} />
+            <LeadContactFields value={contact} onChange={setContact} topic="your message" errors={errors} />
           </div>
 
           <div className="mt-3">

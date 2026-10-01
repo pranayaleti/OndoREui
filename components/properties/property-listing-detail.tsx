@@ -19,6 +19,7 @@ import { ListingMetrics } from "@/components/properties/listing-metrics"
 import PropertyMap from "@/components/map/property-map"
 import { generateBreadcrumbJsonLd, generatePropertyJsonLd, generateRealEstateAgentJsonLd } from "@/lib/seo"
 import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL } from "@/lib/site"
+import { screenListingDescription } from "@/lib/fair-housing-steering"
 import { buildRenterSearchPrefill } from "@/lib/renter-search-prefill"
 import {
   availabilityBadge,
@@ -146,8 +147,10 @@ export function PropertyListingDetail({
     occupancy: property.occupancy,
     leaseTerms: property.leaseTerms,
   })
+  // Hide a description that names the desired occupant (Fair Housing steering) instead of publishing it.
+  const description = screenListingDescription(property.description)
   const descriptionSections = listingDescriptionSections({
-    description: property.description,
+    description,
     highlights,
     address: fullAddress,
     city: property.city,
@@ -177,7 +180,7 @@ export function PropertyListingDetail({
 
   const propertyJsonLd = generatePropertyJsonLd({
     name: property.title,
-    description: property.description ?? "",
+    description: description ?? "",
     address: {
       streetAddress: property.addressLine1 ?? "",
       addressLocality: property.city ?? "",
@@ -212,9 +215,8 @@ export function PropertyListingDetail({
   const navItems = [
     { href: "#listing-photos", label: "Photos", show: true },
     { href: "#listing-highlights", label: "Highlights", show: specRows.length > 0 },
-    { href: "#listing-overview", label: "Overview", show: Boolean(property.description) },
+    { href: "#listing-overview", label: "Overview", show: Boolean(description) },
     { href: "#listing-location", label: "Location", show: showMap || Boolean(fullAddress) },
-    { href: "#underwrite", label: "Worksheet", show: true },
     { href: "#listing-inquire", label: "Inquire", show: true },
   ].filter((item) => item.show)
 
@@ -444,7 +446,14 @@ export function PropertyListingDetail({
 
             <ListingOndoManages />
             <ListingMetrics rows={metricRows} />
-            <ListingInvestorWorksheet listedMonthlyRent={property.price} />
+            <details className="mb-8 rounded-xl border border-border bg-card">
+              <summary className="min-h-11 cursor-pointer px-5 py-3 font-medium">
+                Evaluating this as an investor?
+              </summary>
+              <div className="px-2 pb-2">
+                <ListingInvestorWorksheet listedMonthlyRent={property.price} showLendingDisclosure={false} />
+              </div>
+            </details>
             <ListingDocuments documents={documents} />
             <ListingMediaEmbed embeds={embeds} />
             <ListingAgentCard agents={agents} />

@@ -18,7 +18,14 @@ import {
   SITE_ADDRESS_OBJ,
   SITE_EMAILS,
   SITE_SOCIALS,
+  LICENSING_LIVE,
+  SITE_COMPANY_NMLS_ID,
+  SITE_LOAN_OFFICER,
+  NMLS_CONSUMER_ACCESS_URL,
+  nmlsIdentification,
 } from "./site"
+import { ARRIVAL_LENDING_DISCLOSURE } from "./utah-arrival"
+import { LLMS_DISCLOSURES_BLOCK } from "./site-index"
 
 describe("SITE_URL", () => {
   it("defaults to the www host that does not redirect", () => {
@@ -79,5 +86,27 @@ describe("SITE_PHONE_TEL", () => {
   it("keeps the digits and leading plus so tel: links dial", () => {
     expect(SITE_PHONE_TEL).toMatch(/^\+?\d{10,}$/)
     expect(SITE_PHONE_TEL.replace(/\D/g, "")).toBe(SITE_PHONE.replace(/\D/g, ""))
+  })
+})
+
+describe("NMLS identification gate", () => {
+  it("is off by default and keeps the platform-wide placeholder", () => {
+    expect(LICENSING_LIVE).toBe(false)
+    expect(nmlsIdentification()).toBe("NMLS ID on file")
+  })
+
+  it("names company and loan officer IDs and links NMLS Consumer Access once live", () => {
+    const text = nmlsIdentification(true, "123456")
+    expect(text).not.toMatch(/on file/i)
+    expect(text).toContain("Company NMLS ID 123456")
+    expect(text).toContain(`NMLS ID ${SITE_LOAN_OFFICER.nmlsId}`)
+    expect(text).toContain(NMLS_CONSUMER_ACCESS_URL)
+  })
+
+  it("never ships live with a missing company ID or an 'on file' disclosure", () => {
+    if (!LICENSING_LIVE) return
+    expect(SITE_COMPANY_NMLS_ID).toMatch(/^\d+$/)
+    expect(ARRIVAL_LENDING_DISCLOSURE).not.toMatch(/on file/i)
+    expect(LLMS_DISCLOSURES_BLOCK).not.toMatch(/on file/i)
   })
 })

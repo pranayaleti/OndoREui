@@ -1,22 +1,32 @@
 "use client"
 
 import { useId, useState } from "react"
+import Link from "next/link"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 import { analytics } from "@/lib/analytics"
 import { submitContactLead, type SubmitContactLeadPayload } from "@/lib/leads-api"
 import { isValidEmail } from "@/lib/security"
+import { textConsentText } from "@/lib/text-consent"
 
 /**
  * Name, email, phone and texting consent, shared by the homebuyer quiz follow-up,
  * the Loan Estimate second look and the refinance rate watch. Texting consent is its
  * own unchecked box so nobody is opted in to texts just by asking a question.
  */
-export type ContactValues = { name: string; email: string; phone: string; textConsent: boolean }
+export type ContactValues = {
+  name: string
+  email: string
+  phone: string
+  textConsent: boolean
+  /** The consent wording shown and when the box was checked, sent with the lead (lib/text-consent). */
+  consentText?: string
+  consentAt?: string
+}
 
 export const EMPTY_CONTACT: ContactValues = { name: "", email: "", phone: "", textConsent: false }
 
 /** What is wrong with the name and email, keyed by field. Empty when the contact is complete. */
-export type ContactErrors = { name?: string; email?: string }
+export type ContactErrors = { name?: string; email?: string; phone?: string }
 
 export function contactErrors(contact: ContactValues): ContactErrors {
   const errors: ContactErrors = {}
@@ -24,6 +34,7 @@ export function contactErrors(contact: ContactValues): ContactErrors {
   const email = contact.email.trim()
   if (email.length === 0) errors.email = "Enter your email."
   else if (!isValidEmail(email)) errors.email = "Enter a valid email, like name@example.com."
+  if (contact.textConsent && contact.phone.trim().length === 0) errors.phone = "Enter your phone number so we can text you."
   return errors
 }
 
@@ -76,16 +87,18 @@ export function focusFirstInvalid(form: HTMLFormElement | null) {
 export function LeadContactFields({
   value,
   onChange,
-  consentLabel,
+  topic,
   errors = {},
 }: {
   value: ContactValues
   onChange: (next: ContactValues) => void
-  consentLabel: string
+  /** What the texts and calls are about, in the consent sentence: "your loan", "rate changes". */
+  topic: string
   errors?: ContactErrors
 }) {
   const ids = { name: useId(), email: useId(), phone: useId(), consent: useId() }
   const set = (patch: Partial<ContactValues>) => onChange({ ...value, ...patch })
+  const consentText = textConsentText(topic)
 
   return (
     <div className="space-y-3">
@@ -129,18 +142,36 @@ export function LeadContactFields({
           onChange={(e) => set({ phone: e.target.value })}
           autoComplete="tel"
           className={leadInputClass}
+          {...(errors.phone
+            ? { "aria-invalid": true as const, "aria-describedby": `${ids.phone}-error` }
+            : {})}
         />
+        <FieldError id={`${ids.phone}-error`} message={errors.phone} />
       </div>
       <div className="flex items-start gap-2.5">
         <input
           id={ids.consent}
           type="checkbox"
           checked={value.textConsent}
-          onChange={(e) => set({ textConsent: e.target.checked })}
+          onChange={(e) =>
+            set(
+              e.target.checked
+                ? { textConsent: true, consentText, consentAt: new Date().toISOString() }
+                : { textConsent: false, consentText: undefined, consentAt: undefined },
+            )
+          }
           className="mt-1 h-4 w-4 shrink-0 accent-primary"
         />
         <label htmlFor={ids.consent} className="text-xs leading-relaxed text-muted-foreground">
-          {consentLabel} Message and data rates may apply. Reply STOP to opt out.
+          {consentText} See our{" "}
+          <Link href="/privacy-policy/" className="underline hover:text-foreground">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms-of-service/" className="underline hover:text-foreground">
+            Terms of Use
+          </Link>
+          .
         </label>
       </div>
     </div>

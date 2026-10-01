@@ -125,7 +125,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
               <li>Upload the final document set (purchase, refi, HELOC, assignment, or POA).</li>
               <li>Verify IDs and witnesses (if required) before the appointment.</li>
               <li>Conduct the live session with screen recording and electronic seal.</li>
-              <li>Deliver sealed PDFs plus audit trail; send scan-backs or courier if needed.</li>
+              <li>Deliver sealed PDFs plus the audit trail to you and your title company or lender.</li>
             </ol>
 
             <h3>Process Map</h3>
@@ -136,10 +136,10 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
         ↓
   E-seal + audit log
         ↓
-  Scan-back / courier on request`}
+  Sealed PDFs delivered electronically`}
             </pre>
 
-            <h2>Use Cases We Handle Daily</h2>
+            <h2>Closings We Notarize Remotely</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {closingUseCases.map((item) => (
                 <Card key={item.title} className="bg-muted border-border">
@@ -156,7 +156,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
               <li>Government ID check, credential analysis, and knowledge-based authentication</li>
               <li>Recorded video with time stamps, signer location disclosure, and audit log</li>
               <li>Tamper-evident seal and digital integrity checks on completed PDFs</li>
-              <li>Scan-backs and lender/title delivery the same day when requested</li>
+              <li>Electronic delivery of sealed PDFs to you and your lender or title company</li>
             </ul>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">
@@ -179,7 +179,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
             </p>
             <ul>
               <li>Call or text: {SITE_PHONE}</li>
-              <li>Email: {SITE_EMAILS.primary}</li>
+              <li>Email: {SITE_EMAILS.notary}</li>
               <li>
                 Start online: <Link href="/notary" className="text-primary underline">/notary</Link>
               </li>

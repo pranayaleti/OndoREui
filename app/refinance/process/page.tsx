@@ -8,6 +8,7 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = {
   title: pageTitle("Utah Refinance Process: Timeline & Documents"),
@@ -154,6 +155,7 @@ export default function RefinanceProcessPage() {
                 </Button>
               </div>
             </div>
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

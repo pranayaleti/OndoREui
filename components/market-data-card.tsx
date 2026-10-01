@@ -7,7 +7,7 @@ import {
   Building2,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import type { CityMarketData } from "@/lib/city-market-data"
+import { CITY_MARKET_DATA_DISCLOSURE, type CityMarketData } from "@/lib/city-market-data"
 
 function fmt(n: number): string {
   return n.toLocaleString("en-US")
@@ -73,6 +73,12 @@ export function MarketDataCard({ cityName, data, variant = "compact" }: MarketDa
             <p className="text-sm">{data.topEmployers.join(" · ")}</p>
           </div>
         )}
+
+        {/* Source and date travel with the numbers so no page can show them bare. */}
+        <p className="mt-4 text-xs text-muted-foreground">
+          {CITY_MARKET_DATA_DISCLOSURE} Population and annual growth are approximate and are not
+          tied to a named public source here. Check the U.S. Census Bureau for official figures.
+        </p>
       </CardContent>
     </Card>
   )

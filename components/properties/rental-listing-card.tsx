@@ -22,6 +22,7 @@ import {
   marketStatusBadgeClass,
 } from "@/lib/listing-presentation"
 import type { Property } from "@/app/types/property"
+import { screenListingDescription } from "@/lib/fair-housing-steering"
 
 type RentalListingCardProps = {
   property: Property
@@ -47,9 +48,9 @@ export function RentalListingCard({
     amenities: property.amenities,
     petPolicy: property.petPolicy,
   })
-  const snippet = property.description?.trim()
-    ? property.description.trim().slice(0, 90)
-    : null
+  // Never show a description that names the desired occupant (Fair Housing steering).
+  const description = screenListingDescription(property.description)
+  const snippet = description ? description.slice(0, 90) : null
 
   return (
     <Card
@@ -135,7 +136,7 @@ export function RentalListingCard({
         {snippet ? (
           <p className="mt-2 line-clamp-2 text-sm text-foreground/70">
             {snippet}
-            {property.description && property.description.trim().length > 90 ? "…" : null}
+            {description && description.length > 90 ? "…" : null}
           </p>
         ) : null}
         <div className="relative z-10 mt-4 flex flex-col gap-2">

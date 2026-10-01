@@ -9,6 +9,7 @@ import Link from "next/link"
 import { TrendingDown, Calendar, DollarSign, Target } from "lucide-react"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/15-year", {
   title: "15-Year Mortgage Guide | Utah Real Estate",
@@ -130,6 +131,7 @@ export default function FifteenYearPage() {
               description="Our loan officers can help you determine if you can comfortably afford a 15-year mortgage and show you the long-term savings."
               variant="card"
             />
+            <LendingDisclaimer className="mt-8" />
           </div>
         </div>
       </section>

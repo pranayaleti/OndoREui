@@ -65,11 +65,11 @@ export default function PropertyManagementGuideLehi() {
             <h2>Utah Landlord-Tenant Law Essentials</h2>
             <p>Key requirements every Lehi landlord must know:</p>
             <ul>
-              <li><strong>Security deposit limit:</strong> No statutory limit, but must be returned within 30 days of lease termination with itemized deductions.</li>
+              <li><strong>Security deposit limit:</strong> No statutory limit, but must be returned within 30 days of the end of the tenancy, or 15 days after the tenant gives a forwarding address, whichever is later, with itemized deductions.</li>
               <li><strong>Notice to enter:</strong> 24 hours minimum for non-emergency inspections.</li>
               <li><strong>Notice to vacate:</strong> 15 days for month-to-month tenancies; varies by lease term.</li>
-              <li><strong>Habitability:</strong> Landlord must maintain heat, plumbing, and structural integrity. Failure allows tenant to withhold rent after proper notice.</li>
-              <li><strong>Eviction process:</strong> File with Utah Third District Court. Unlawful detainer cases typically take 3–6 weeks from filing to judgment.</li>
+              <li><strong>Habitability:</strong> Landlord must maintain heat, plumbing, and structural integrity. After written notice, a tenant has the remedies in Utah Code § 57-22-6 (repair-and-deduct, rent abatement, or ending the lease).</li>
+              <li><strong>Eviction process:</strong> File in the court that covers the property; Lehi is in Utah County, which is the Fourth District. Unlawful detainer cases typically take 3–6 weeks from filing to judgment.</li>
             </ul>
             <p>Non-compliance with notice requirements is the #1 reason landlords lose eviction cases. A professional PM company tracks all notice timelines automatically.</p>
 

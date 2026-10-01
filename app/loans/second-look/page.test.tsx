@@ -15,4 +15,12 @@ describe("/loans/second-look", () => {
     render(<SecondLookPage />)
     expect(screen.getByText("Loan officer: Pranay Reddy Aleti, NMLS #2699085")).toBeInTheDocument()
   })
+
+  // "Most buyers can" was an unsupported legal generalization; the copy hedges and points to the contract.
+  it("hedges the switch-lenders claim and points to the purchase agreement", () => {
+    render(<SecondLookPage />)
+    expect(screen.queryByText(/most buyers/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/you may be able to switch lenders while under contract/i)).toBeInTheDocument()
+    expect(screen.getByText(/check your purchase agreement deadlines/i)).toBeInTheDocument()
+  })
 })

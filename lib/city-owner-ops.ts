@@ -1,4 +1,5 @@
 import { cityContentByName, type CityContent } from "./city-content"
+import { STEERING_COPY_RE } from "./fair-housing-steering"
 
 export type CityOwnerOp = {
   title: string
@@ -12,14 +13,11 @@ const VACANCY_RE =
 const HOA_RE = /HOA|CC&Rs?|community association/i
 const WINTER_RE = /winter|snow load|furnace|pipe insulation|no-heat|freezing/i
 
-const STEERING =
-  /family-oriented|family-first|family-friendly|family-centric|family-focused|family-paced|family-lifestyle|young professionals?|empty nesters?|immigrant families|byu families|great for families|best for families|who is .+ best for|safe neighborhood|crime-free|quiet community|ideal for couples|working-class character|blue-collar workers|ethnically diverse|tenant quality|young families|military families|quality tenants/i
-
 const CRIME_CHARACTERIZATION =
   /elevated crime|higher crime|low crime|crime rates|crime statistics|crime concerns|crime perception|perfectly safe/i
 
 function isUnsafe(text: string): boolean {
-  return STEERING.test(text) || CRIME_CHARACTERIZATION.test(text)
+  return STEERING_COPY_RE.test(text) || CRIME_CHARACTERIZATION.test(text)
 }
 
 function sentences(text: string): string[] {

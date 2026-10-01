@@ -169,7 +169,7 @@ export default async function Page({ params }: { params: Params }) {
           <section className="text-center py-8 rounded-xl bg-muted/50 px-6">
             <h2 className="text-xl font-bold mb-3">Find a Home in the {district.name}</h2>
             <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
-              School district is a top factor for families. Our agents know every neighborhood and school assignment boundary.
+              School assignment depends on the address. Confirm it with the district's own boundary tool on its official website before you decide.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {district.citiesServed.slice(0, 2).map((city) => (

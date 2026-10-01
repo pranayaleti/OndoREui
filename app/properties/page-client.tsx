@@ -46,6 +46,7 @@ import { backendUrl } from '@/lib/backend';
 import { caches, cacheKeys } from '@/lib/cache';
 import { registerBfcacheRestoreCallback } from '@/lib/bfcache-optimization';
 import { WebMCPPropertySearchTool } from '@/components/properties/webmcp-property-search-tool';
+import { screenListingDescription } from '@/lib/fair-housing-steering';
 
 // keep your SortOption union if not importing
 type LocalSortOption =
@@ -413,7 +414,7 @@ export default function PropertiesClient() {
 
     return generatePropertyJsonLd({
       name: p.title ?? 'Property',
-      description: p.description || 'Rental property listed by Ondo Real Estate.',
+      description: screenListingDescription(p.description) || 'Rental property listed by Ondo Real Estate.',
       address: {
         streetAddress,
         addressLocality,

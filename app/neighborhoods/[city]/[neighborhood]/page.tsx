@@ -79,8 +79,8 @@ function buildNeighborhoodFaqs(
   ]
   if (hood.nearbySchools && hood.nearbySchools.length > 0) {
     faqs.push({
-      question: `What schools serve ${hood.name}?`,
-      answer: `${hood.name} is served by ${hood.nearbySchools.join(", ")}${schoolDistrict ? ` in the ${schoolDistrict}` : ""}.`,
+      question: `Which schools are near ${hood.name}?`,
+      answer: `Schools near ${hood.name} include ${hood.nearbySchools.join(", ")}${schoolDistrict ? `, in the ${schoolDistrict} area` : ""}. This is a list of nearby schools, not attendance zones. Confirm the assigned school for any address with the district.`,
     })
   }
   return faqs

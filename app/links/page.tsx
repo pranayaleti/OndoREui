@@ -14,7 +14,7 @@ import {
   linksPageSocials,
   type LinksPageLink,
 } from "@/lib/links-page"
-import { SITE_CALENDLY_URL, SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_CALENDLY_URL, SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, nmlsIdentification, pageTitle } from "@/lib/site"
 
 const canonical = `${SITE_URL}/links/`
 const description =
@@ -229,7 +229,7 @@ export default function LinksPage() {
               <EqualHousingIcon className="h-4 w-4" />
               <span>Equal Housing Opportunity. Equal Housing Lender.</span>
             </p>
-            <p>{SITE_NAME}, Lehi, Utah. NMLS ID on file.</p>
+            <p>{SITE_NAME}, Lehi, Utah. {nmlsIdentification()}.</p>
             <p className="flex justify-center gap-4">
               <Link
                 href="/licensing/"

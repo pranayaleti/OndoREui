@@ -208,7 +208,7 @@ PDF + audit trail delivered`}
             </p>
             <ul>
               <li>Call or text: {SITE_PHONE}</li>
-              <li>Email: {SITE_EMAILS.primary}</li>
+              <li>Email: {SITE_EMAILS.notary}</li>
               <li>
                 Notary services: <Link href="/notary" className="text-primary underline">/notary</Link>
               </li>

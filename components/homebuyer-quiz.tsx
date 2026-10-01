@@ -18,6 +18,7 @@ import {
 import { CalendlyLink } from "@/components/calendly-link"
 import { analytics, analyticsAttributes } from "@/lib/analytics"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { withConsentRecord } from "@/lib/text-consent"
 import { formatCurrency } from "@/lib/cost-of-living"
 import {
   BUYER_STAGES,
@@ -423,7 +424,7 @@ function FollowUpForm({ answers, estimate }: { answers: QuizAnswers; estimate: Q
       ...contactPayload(contact),
       source: "website",
       inquiryType: "buyer",
-      message: leadMessageFor(answers, estimate, contact.textConsent),
+      message: withConsentRecord(leadMessageFor(answers, estimate, contact.textConsent), contact),
       attribution: getAttributionPayloadForApi(),
     })
   }
@@ -442,7 +443,7 @@ function FollowUpForm({ answers, estimate }: { answers: QuizAnswers; estimate: Q
         Want us to follow up?
       </h3>
       <p className="mb-4 mt-1 text-sm text-muted-foreground">We&apos;ll send homes in your range and answer your questions. No obligation.</p>
-      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my search." errors={errors} />
+      <LeadContactFields value={contact} onChange={setContact} topic="your home search" errors={errors} />
       <LeadFormError message={error} />
       <button type="submit" disabled={status === "sending"} className={`${primaryButton} mt-4 w-full`}>
         {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}

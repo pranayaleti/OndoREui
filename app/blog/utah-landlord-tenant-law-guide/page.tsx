@@ -1,6 +1,7 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { utahFairHousingClassesText } from "@/lib/content/utah-rental-law"
 const slug = "/blog/utah-landlord-tenant-law-guide"
 const title = "Utah Landlord-Tenant Law: What Every Property Owner Must Know"
 const description = "A practical guide to Utah rental laws in 2026, security deposits, eviction timelines, habitability standards, and Fair Housing requirements."
@@ -47,7 +48,7 @@ export default function UtahLandlordTenantLawGuide() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              Utah landlord-tenant law sits in the Utah Code under Title 57 (Real Property). Violations, even unintentional ones, can expose you to liability, voided lease clauses, or tenant remedies including rent withholding. Here is what every Utah property owner must know in 2026.
+              Utah landlord-tenant law sits in the Utah Code under Title 57 (Real Property). Violations, even unintentional ones, can expose you to liability, voided lease clauses, or tenant remedies such as rent abatement or repair-and-deduct. Here is what every Utah property owner must know in 2026.
             </p>
 
             <h2>The Utah Fit Premises Act (Utah Code § 57-22)</h2>
@@ -60,15 +61,15 @@ export default function UtahLandlordTenantLawGuide() {
               <li>Common areas kept clean and structurally safe</li>
               <li>No infestation of insects or rodents</li>
             </ul>
-            <p>If a landlord fails to address a habitability issue after written notice, a tenant may have the right to repair and deduct, withhold rent into an escrow account, or terminate the lease without penalty. Document every maintenance request and your response with timestamps, this is your best protection against disputes.</p>
+            <p>If a landlord fails to address a habitability issue after written notice, Utah Code § 57-22-6 gives the tenant specific remedies: end the lease, ask a court for rent abatement, or pay for the repair and deduct the cost (capped at two months' rent). Rent withholding is not one of them. Document every maintenance request and your response with timestamps, this is your best protection against disputes.</p>
 
             <h2>Security Deposits</h2>
             <p>Utah does not cap the amount a landlord can charge as a security deposit. However, the rules for returning it are strict:</p>
             <ul>
-              <li><strong>Return timeline:</strong> 30 days after the tenant vacates and returns the keys</li>
+              <li><strong>Return timeline:</strong> 30 days after the tenancy ends, or 15 days after the tenant gives a forwarding address, whichever is later (Utah Code § 57-17-3)</li>
               <li><strong>Itemized deductions:</strong> Any deductions must be accompanied by a written, itemized list explaining what was deducted and why</li>
               <li><strong>Normal wear and tear:</strong> Cannot be deducted, only damage beyond normal use qualifies</li>
-              <li><strong>Penalty for non-compliance:</strong> Tenants can sue for the deposit amount plus damages</li>
+              <li><strong>Penalty for non-compliance:</strong> After the tenant's written demand and a 5-business-day cure period, you can owe the deposit plus a $100 penalty (Utah Code § 57-17-5)</li>
             </ul>
             <p>Take dated photos at move-in and move-out. Use a written move-in inspection form signed by the tenant. This documentation is your defense if a deposit deduction is contested.</p>
 
@@ -88,18 +89,16 @@ export default function UtahLandlordTenantLawGuide() {
             <ul>
               <li>Owner or authorized agent name and address for receiving notices and process of service</li>
               <li>Disclosure of any known lead-based paint hazards (federal requirement for pre-1978 properties)</li>
-              <li>Mold disclosure if any mold condition is known</li>
               <li>Methamphetamine contamination history if applicable (Utah Code § 57-27)</li>
             </ul>
 
             <h2>Utah Fair Housing Requirements</h2>
             <p>Both federal Fair Housing Act (FHA) and the Utah Fair Housing Act prohibit discrimination based on:</p>
             <ul>
-              <li>Race, color, national origin</li>
-              <li>Sex, including gender identity and sexual orientation (per HUD guidance)</li>
-              <li>Religion</li>
-              <li>Disability (physical or mental), you must also allow reasonable accommodations</li>
-              <li>Familial status (families with children under 18)</li>
+              <li>{utahFairHousingClassesText()} (Utah Code § 57-21-5)</li>
+              <li>Source of income includes a tenant who pays with rental assistance such as a Section 8 voucher</li>
+              <li>Disability (physical or mental): you must also allow reasonable accommodations, including assistance animals, which are not pets under the Fair Housing Act</li>
+              <li>Familial status means families with children under 18</li>
             </ul>
             <p>Apply the same screening criteria, income ratio, credit threshold, eviction history, to every applicant in the same property. Keep records of every application decision for at least 3 years. A complaint to the Utah Antidiscrimination and Labor Division (UALD) or HUD can trigger an investigation even if your intent was not discriminatory.</p>
             <p>

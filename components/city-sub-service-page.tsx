@@ -17,6 +17,7 @@ import { LocalProofCTA } from "@/components/local-proof-cta"
 import ConsultationCTA from "@/components/ConsultationCTA"
 import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import { CityTrustChips } from "@/components/city-trust-chips"
+import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
@@ -475,6 +476,9 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
         </section>
 
         <ConsultationCTA variant="default" />
+
+        {/* Lending disclosure is a template property: every loans sub-service page carries it. */}
+        {subService.parentService === "loans" && <LendingDisclaimer />}
       </div>
     </main>
   )

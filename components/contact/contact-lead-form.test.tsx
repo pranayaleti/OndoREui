@@ -304,4 +304,11 @@ describe("ContactLeadForm", () => {
     expect(alert).toHaveTextContent("Validation failed")
     await waitFor(() => expect(alert.parentElement).toHaveFocus())
   })
+
+  it("tells people how their details are used and links Privacy and Terms", () => {
+    render(<ContactLeadForm />)
+    expect(screen.getByText(/will use your details to answer this request/i)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/")
+    expect(screen.getByRole("link", { name: "Terms of Use" })).toHaveAttribute("href", "/terms-of-service/")
+  })
 })

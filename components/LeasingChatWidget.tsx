@@ -19,6 +19,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { MessageSquare, Send, X, Loader2, CalendarCheck } from 'lucide-react';
 import Link from 'next/link';
+import { AssistantDisclosure } from '@/components/assistant-disclosure';
 import { backendUrl } from '@/lib/backend';
 import { SITE_PHONE, SITE_PHONE_TEL } from '@/lib/site';
 
@@ -247,7 +248,7 @@ export default function LeasingChatWidget({
           <h2 className="truncate text-sm font-semibold text-white">
             {propertyTitle ? `About ${propertyTitle}` : 'Leasing assistant'}
           </h2>
-          <p className="text-xs text-neutral-400">Automated assistant, a person can take over anytime</p>
+          <p className="text-xs text-neutral-400">Automated assistant. The team follows up during office hours</p>
         </div>
         {!inline && (
           <button
@@ -372,6 +373,7 @@ export default function LeasingChatWidget({
               <Send className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
+          <AssistantDisclosure />
         </div>
       )}
     </section>

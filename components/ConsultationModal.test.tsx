@@ -95,3 +95,12 @@ describe("ConsultationModal submit", () => {
     expect(screen.queryByText("consultationModal.successTitle")).not.toBeInTheDocument()
   })
 })
+
+describe("ConsultationModal contact notice", () => {
+  it("tells people how their details are used and links Privacy and Terms", () => {
+    render(<ConsultationModal isOpen onClose={() => {}} variant="notary" />)
+    expect(screen.getByText(/will use your details to answer this request/i)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/")
+    expect(screen.getByRole("link", { name: "Terms of Use" })).toHaveAttribute("href", "/terms-of-service/")
+  })
+})

@@ -70,6 +70,14 @@ describe("PublicAssistantWidget", () => {
     ).toBeInTheDocument()
   })
 
+  it("tells visitors it is an AI assistant, not advice or a rate quote, and links the privacy policy", () => {
+    openWidget()
+    expect(screen.getByText(/not legal, tax or lending advice, or a rate quote/i)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /privacy policy/i })).toHaveAttribute("href", "/privacy-policy/")
+    expect(screen.queryByText(/take over anytime/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/during office hours/i)).toBeInTheDocument()
+  })
+
   it("moves focus into the input when opened", async () => {
     openWidget()
     await waitFor(() =>

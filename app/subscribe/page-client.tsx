@@ -124,8 +124,8 @@ export default function SubscribePage() {
                   </div>
                   <CardTitle className="text-2xl">Subscribe to updates</CardTitle>
                   <CardDescription>
-                    Join thousands of investors and property owners getting Ondo&apos;s monthly
-                    insights. No spam, unsubscribe anytime.
+                    Get Ondo&apos;s Utah real estate insights for investors and property owners.
+                    No spam, unsubscribe anytime.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

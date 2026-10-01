@@ -1,5 +1,6 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
+import { utahFairHousingClassesText } from "@/lib/content/utah-rental-law"
 const slug = "/blog/ultimate-guide-becoming-utah-landlord-2026"
 const title = "The Ultimate Guide to Becoming a Utah Landlord (2026 Edition)"
 const description =
@@ -111,7 +112,7 @@ export default function UltimateUtahLandlordGuide2026() {
 
             <h2>6. Tenant Screening: The Utah Rules You Can't Skip</h2>
             <p>
-              Federal Fair Housing law is the floor. Utah adds source-of-income protections (you cannot reject Section 8 voucher holders for that reason alone in cities that have adopted local protection, and statewide treatment is evolving). Always apply the same written criteria to every applicant, document why each was accepted or rejected, and keep records for at least 4 years.
+              Federal Fair Housing law is the floor. Utah Code § 57-21-5 protects {utahFairHousingClassesText()}. Source of income includes a tenant who pays with rental assistance such as a Section 8 voucher, so you cannot reject an applicant for that reason anywhere in Utah. Always apply the same written criteria to every applicant, document why each was accepted or rejected, and keep records for at least 4 years.
             </p>
             <p>The screening stack that converts to fewer evictions:</p>
             <ul>
@@ -123,11 +124,11 @@ export default function UltimateUtahLandlordGuide2026() {
 
             <h2>7. The Lease: 9 Clauses Every Utah Lease Should Have</h2>
             <ul>
-              <li>Specific rent due date, late fee structure (Utah does not cap late fees; ours stay under 10% of monthly rent to keep them enforceable).</li>
-              <li>Security deposit amount, where it's held (interest-bearing not required in Utah), and itemized return timeline (Utah requires return within 30 days of move-out).</li>
+              <li>Specific rent due date, a written late fee structure (have a Utah attorney confirm the fee is enforceable before you use it).</li>
+              <li>Security deposit amount, where it's held (interest-bearing not required in Utah), and itemized return timeline (Utah requires return within 30 days of the end of the tenancy, or 15 days after the tenant gives a forwarding address, whichever is later).</li>
               <li>Utilities responsibility, split sewer/trash/water vs all-in clearly.</li>
               <li>Maintenance request process and 24-hour notice for entry (Utah default, but writing it in protects both sides).</li>
-              <li>Pet policy with monthly pet rent (not just a deposit) and a service-animal carve-out per ADA.</li>
+              <li>Pet policy with monthly pet rent (not just a deposit) and an assistance-animal clause. Service and support animals are reasonable accommodations under the Fair Housing Act, not pets, so pet rent and pet deposits do not apply to them.</li>
               <li>Smoking and short-term-rental prohibitions if applicable.</li>
               <li>Snow removal and yard care expectations (huge Utah dispute area).</li>
               <li>Renters insurance requirement (~$15/month for tenants, shifts liability cleanly).</li>

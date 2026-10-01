@@ -21,7 +21,8 @@ function enterCity(city: string) {
 function fillContactAndSend() {
   fireEvent.change(screen.getByLabelText(/^name/i), { target: { value: "Ada Lovelace" } })
   fireEvent.change(screen.getByLabelText(/^email/i), { target: { value: "ada@example.com" } })
-  fireEvent.click(screen.getByRole("checkbox", { name: /text me/i }))
+  fireEvent.change(screen.getByLabelText(/^phone/i), { target: { value: "801-555-0100" } })
+  fireEvent.click(screen.getByRole("checkbox", { name: /text and call you/i }))
   fireEvent.click(screen.getByRole("button", { name: /get my match/i }))
 }
 
@@ -61,6 +62,8 @@ describe("LeadQualifierWizard", () => {
     expect(payload.message).toContain("Units: 2 to 4")
     expect(payload.message).toContain("Urgency: now")
     expect(payload.message).toContain("OK to text: Yes")
+    expect(payload.message).toMatch(/Text consent given: \d{4}-\d{2}-\d{2}T/)
+    expect(payload.message).toContain("Consent is not a condition of any purchase or service")
   })
 
   it("offers a rental owner who is ready now a call right away", async () => {

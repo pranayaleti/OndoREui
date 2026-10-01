@@ -47,7 +47,7 @@ export default function TenantRightsChecklist() {
             <h2>Core rights (most places)</h2>
             <ul>
               <li><strong>Habitability:</strong> a safe, working home — heat, water, and essential repairs.</li>
-              <li><strong>Deposit protection:</strong> limits on amount, and a timeline for itemized return.</li>
+              <li><strong>Deposit protection:</strong> a timeline for itemized return and limits on what can be deducted. Check your state, since some cap the amount and Utah does not.</li>
               <li><strong>Entry notice:</strong> advance notice before a landlord enters, except emergencies.</li>
               <li><strong>Anti-retaliation &amp; fair housing:</strong> protection for asserting your rights.</li>
             </ul>

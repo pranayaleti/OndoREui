@@ -11,6 +11,7 @@ import { CheckCircle2, Gift, Loader2, Copy, Check, Sparkles } from "lucide-react
 import { useToast } from "@/hooks/use-toast"
 import { backendUrl } from "@/lib/backend"
 import { APP_PORTAL_URL } from "@/lib/site"
+import { ContactNotice } from "@/components/contact-notice"
 
 interface SweepstakesFormProps {
   initialReferralCode?: string
@@ -247,7 +248,7 @@ export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone *</Label>
+            <Label htmlFor="phone">Phone (optional)</Label>
             <Input
               id="phone"
               name="phone"
@@ -255,11 +256,8 @@ export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
               value={formData.phone}
               onChange={handleChange}
               placeholder="(555) 123-4567"
-              required
             />
-            <p className="text-xs text-foreground/70">
-              We'll use this to contact you if you win!
-            </p>
+            <ContactNotice />
           </div>
 
           {initialReferralCode && (

@@ -1,7 +1,5 @@
 import Link from "next/link"
 import {
-  NOTARY_AFTER_HOURS_START,
-  NOTARY_AFTER_HOURS_USD,
   NOTARY_CANCEL_NOTICE_HOURS,
   NOTARY_EXAMPLE_QUOTES,
   NOTARY_HOURS_LABEL,
@@ -12,8 +10,6 @@ import {
   NOTARY_LOAN_SELLER,
   NOTARY_NO_SHOW_USD,
   NOTARY_RON_ACT_USD,
-  NOTARY_SAME_DAY_USD,
-  NOTARY_WEEKEND_USD,
   NOTARY_WITNESS_USD,
 } from "@/lib/notary-fees"
 
@@ -74,17 +70,11 @@ export function NotaryFees() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
             <div>
-              <h3 className="text-2xl text-primary font-semibold mb-2">Convenience add-ons</h3>
-              <FeeRow
-                label="Same-day / on-demand"
-                note="When we can take the request. Not a same-day guarantee."
-                amount={`+$${NOTARY_SAME_DAY_USD}`}
-              />
-              <FeeRow
-                label={`After hours (after ${NOTARY_AFTER_HOURS_START})`}
-                amount={`+$${NOTARY_AFTER_HOURS_USD}`}
-              />
-              <FeeRow label="Weekend or holiday" amount={`+$${NOTARY_WEEKEND_USD}`} />
+              <h3 className="text-2xl text-primary font-semibold mb-2">Scheduling and witnesses</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                Same-day, after-hours and weekend sessions are best-effort when capacity allows. We
+                do not add a scheduling surcharge to a remote notarial act.
+              </p>
               <FeeRow
                 label="Witness coordination"
                 note="When we provide a remote witness. They must have valid ID."
@@ -110,8 +100,7 @@ export function NotaryFees() {
             <h3 className="text-xl font-semibold text-foreground mb-2">Wills, POA, and estate documents</h3>
             <p className="text-foreground/80 text-sm leading-relaxed">
               We notarize wills, powers of attorney, directives, and trust-related signatures by RON
-              at ${NOTARY_RON_ACT_USD} per remote notarial act, plus same-day or after-hours fees when
-              they apply. Confirm the receiving party accepts electronic notarization. ONDO Notary
+              at ${NOTARY_RON_ACT_USD} per remote notarial act. Confirm the receiving party accepts electronic notarization. ONDO Notary
               does not prepare legal documents or provide legal advice. Have documents drafted by an
               attorney before your session.
             </p>

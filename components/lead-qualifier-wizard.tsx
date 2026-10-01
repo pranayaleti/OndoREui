@@ -29,6 +29,7 @@ import {
 import { CalendlyLink } from "@/components/calendly-link"
 import { analytics, analyticsAttributes } from "@/lib/analytics"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { withConsentRecord } from "@/lib/text-consent"
 import type { ContactInquiryType } from "@/lib/leads-api"
 import { SITE_PHONE } from "@/lib/site"
 
@@ -169,7 +170,7 @@ export function LeadQualifierWizard() {
       ...contactPayload(contact),
       source: "website",
       inquiryType: chosen.inquiryType,
-      message,
+      message: withConsentRecord(message, contact),
       attribution: getAttributionPayloadForApi(),
     })
     if (sent) analytics.trackEvent("lead_classified", "lead_qualifier", classification)
@@ -308,7 +309,7 @@ export function LeadQualifierWizard() {
 
       {step === "contact" ? (
         <form ref={formRef} onSubmit={handleSubmit} className="mt-6" noValidate>
-          <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my match." errors={errors} />
+          <LeadContactFields value={contact} onChange={setContact} topic="your inquiry" errors={errors} />
           <LeadFormError message={error} />
           <button
             type="submit"
