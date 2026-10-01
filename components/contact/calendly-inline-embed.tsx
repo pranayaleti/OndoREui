@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Calendar, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CalendlyLink } from "@/components/calendly-link";
+import { calendlyUrlWithAttribution } from "@/lib/calendly-attribution";
 import { SITE_CALENDLY_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -45,6 +47,19 @@ export function calendlyIframeSrc(base: string): string {
 
 const IFRAME_SRC = calendlyIframeSrc(SITE_CALENDLY_URL);
 
+/**
+ * Plain URL for the server render; after mount, the same URL with the visitor's campaign so
+ * Calendly credits the booking. A visitor with no campaign keeps the plain URL, so their
+ * iframe never reloads.
+ */
+function useAttributedIframeSrc(): string {
+  const [src, setSrc] = useState(IFRAME_SRC);
+  useEffect(() => {
+    setSrc(calendlyIframeSrc(calendlyUrlWithAttribution("calendly_embed")));
+  }, []);
+  return src;
+}
+
 type CalendlyInlineEmbedProps = {
   variant?: CalendlyInlineVariant;
   className?: string;
@@ -68,6 +83,7 @@ export function CalendlyInlineEmbed({
   const shellRef = useRef<HTMLDivElement>(null);
   const pointerInShellRef = useRef(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const iframeSrc = useAttributedIframeSrc();
 
   useEffect(() => {
     const sync = () => {
@@ -203,7 +219,7 @@ export function CalendlyInlineEmbed({
         )}
         <iframe
           title="Schedule a 30-minute call with Ondo Real Estate"
-          src={IFRAME_SRC}
+          src={iframeSrc}
           className={iframeClass}
           loading="lazy"
           allow="camera; microphone; fullscreen; payment"
@@ -211,14 +227,9 @@ export function CalendlyInlineEmbed({
       </div>
       {showFallbackLink && (
         <p className="mt-2 text-xs text-muted-foreground">
-          <a
-            href={SITE_CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-foreground"
-          >
+          <CalendlyLink contentLabel="calendly_embed" className="underline hover:text-foreground">
             Open scheduling in a new tab
-          </a>{" "}
+          </CalendlyLink>{" "}
           if the calendar does not load.
         </p>
       )}

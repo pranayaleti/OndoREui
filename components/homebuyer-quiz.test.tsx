@@ -103,4 +103,28 @@ describe("HomebuyerQuiz", () => {
     fireEvent.click(screen.getByRole("button", { name: /back/i }))
     expect(screen.getByRole("radio", { name: "Making offers now" })).toHaveAttribute("aria-checked", "true")
   })
+
+  it("moves between answers with the arrow keys without choosing, and has one tab stop", () => {
+    render(<HomebuyerQuiz />)
+    const radios = screen.getAllByRole("radio")
+    expect(radios.filter((radio) => radio.tabIndex === 0)).toHaveLength(1)
+    radios[0]!.focus()
+    fireEvent.keyDown(radios[0]!, { key: "ArrowDown" })
+    expect(radios[1]).toHaveFocus()
+    // Arrow keys only move focus: the question has not advanced.
+    expect(screen.getByText(/question 1 of/i)).toBeInTheDocument()
+    fireEvent.keyDown(radios[1]!, { key: "End" })
+    expect(radios[radios.length - 1]).toHaveFocus()
+  })
+
+  it("keeps Send enabled on the follow-up form and says what is missing", () => {
+    render(<HomebuyerQuiz />)
+    answerAll()
+    const send = screen.getByRole("button", { name: /send my results/i })
+    expect(send).toBeEnabled()
+    fireEvent.click(send)
+    expect(screen.getByLabelText(/^email/i)).toHaveAccessibleDescription("Enter your email.")
+    expect(screen.getByLabelText(/^name/i)).toHaveAccessibleDescription("Enter your name.")
+    expect(submitContactLead).not.toHaveBeenCalled()
+  })
 })

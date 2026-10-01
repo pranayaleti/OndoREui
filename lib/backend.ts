@@ -41,3 +41,17 @@ export function backendUrl(pathname: string) {
   return `${base}${normalized}`
 }
 
+
+/**
+ * URL of a sibling Edge Function that is deployed next to `api` (for example
+ * `lead-qualify`). It is not a route inside `api`, so the base URL's trailing
+ * `/api` is swapped for the function name. With no base URL set it stays
+ * relative, like backendUrl().
+ */
+export function edgeFunctionUrl(name: string): string {
+  const base = BACKEND_BASE_URL.replace(/\/$/, "")
+  if (!base) return `/${name}`
+  return baseAlreadyIncludesApiSegment(base)
+    ? `${base.replace(/\/api$/, "")}/${name}`
+    : `${base}/${name}`
+}

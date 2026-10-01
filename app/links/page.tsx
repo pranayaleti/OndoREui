@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, ChevronRight, Mail, MessageSquare, Phone, UserPlus } from "lucide-react"
+import { CalendlyLink } from "@/components/calendly-link"
 import { LinksQuickMessage } from "@/components/links/links-quick-message"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
 import { analyticsAttributes } from "@/lib/analytics"
@@ -13,7 +14,7 @@ import {
   linksPageSocials,
   type LinksPageLink,
 } from "@/lib/links-page"
-import { SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_CALENDLY_URL, SITE_EMAILS, SITE_NAME, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
 
 const canonical = `${SITE_URL}/links/`
 const description =
@@ -64,6 +65,14 @@ function LinkLabel({ link }: { link: LinksPageLink }) {
 
 /** Site paths stay in this tab: AttributionCapture's sessionStorage (and the UTMs in it) does not follow a new tab. */
 function PageLink({ link, className }: { link: LinksPageLink; className: string }) {
+  // The booking button carries the bio's or QR code's campaign into Calendly.
+  if (link.href === SITE_CALENDLY_URL) {
+    return (
+      <CalendlyLink contentLabel="links_page" {...analyticsAttributes("links_click", "links_page", link.id)} className={className}>
+        <LinkLabel link={link} />
+      </CalendlyLink>
+    )
+  }
   if (isOffSite(link.href)) {
     return (
       <a href={link.href} target="_blank" rel="noopener noreferrer" {...analyticsAttributes("links_click", "links_page", link.id)} className={className}>

@@ -35,9 +35,12 @@ export function BrochureRequestForm() {
       email: trimmedEmail,
       phone: phone.trim() || undefined,
       source: "website",
-      message: "Requested investor brochure / overview from /brochure.",
+      // No investor inquiry type exists yet, so "other" with the details in the message.
+      inquiryType: "other",
+      message:
+        "Investor inquiry: asked for the investor overview on /brochure. No file is sent automatically, so someone needs to send it and follow up.",
       attribution: getAttributionPayloadForApi(),
-    })
+    }, { formName: "brochure_request" })
     setLoading(false)
     if ("error" in result) {
       setError(result.error || "Something went wrong. Please try again.")
@@ -54,7 +57,7 @@ export function BrochureRequestForm() {
             <CheckCircle className="mx-auto h-12 w-12 text-green-500" />
             <h3 className="text-xl font-bold">Request received</h3>
             <p className="text-sm text-foreground/70">
-              Thanks, we&apos;ll email the investor overview to <strong>{email}</strong> and follow
+              Thanks. Our team will send the investor overview to <strong>{email}</strong> and follow
               up if you have questions.
             </p>
             <Button asChild variant="outline">
@@ -68,9 +71,9 @@ export function BrochureRequestForm() {
             </div>
             <h3 className="text-xl font-bold text-center mb-2">Request the overview</h3>
             <p className="text-center text-sm text-foreground/60 mb-6">
-              Enter your details and we&apos;ll email you the investor overview.
+              Enter your details and our team will send you the investor overview.
             </p>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="first">First name</Label>
@@ -118,7 +121,11 @@ export function BrochureRequestForm() {
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && (
+                <p role="alert" className="text-sm text-destructive-emphasis">
+                  {error}
+                </p>
+              )}
               <Button type="submit" className="w-full" size="lg" disabled={loading}>
                 {loading ? (
                   <>
@@ -128,7 +135,7 @@ export function BrochureRequestForm() {
                 ) : (
                   <>
                     <Download className="mr-2 h-4 w-4" />
-                    Email me the overview
+                    Request the overview
                   </>
                 )}
               </Button>

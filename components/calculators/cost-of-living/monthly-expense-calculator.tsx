@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { COST_OF_LIVING_STORAGE_KEY } from "@/lib/cost-of-living-defaults"
+import { SecureStorage } from "@/lib/security"
 import { cn } from "@/lib/utils"
 import {
   calculateCostOfLiving,
@@ -92,7 +93,7 @@ export function MonthlyExpenseCalculator() {
   const [isLgUp, setIsLgUp] = useState<boolean | null>(null)
 
   useEffect(() => {
-    const stored = parseStoredState(window.localStorage.getItem(COST_OF_LIVING_STORAGE_KEY))
+    const stored = parseStoredState(SecureStorage.getItem(COST_OF_LIVING_STORAGE_KEY))
     if (stored) setState(stored)
     setHydrated(true)
   }, [])

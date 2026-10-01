@@ -42,6 +42,24 @@ export const CONTACT_AUDIENCE_OPTIONS: readonly ContactAudienceOption[] = [
     emphasis: "current resident",
     after: ".",
   },
+  {
+    value: "buyer",
+    before: "I want to ",
+    emphasis: "buy a home",
+    after: ".",
+  },
+  {
+    value: "seller",
+    before: "I want to ",
+    emphasis: "sell a home",
+    after: ".",
+  },
+  {
+    value: "other",
+    before: "I have a ",
+    emphasis: "home loan, notary or other",
+    after: " question.",
+  },
 ]
 
 export function contactAudienceLabel(option: ContactAudienceOption): string {

@@ -55,8 +55,8 @@ function fieldError(id: string, message: string | undefined) {
 
 export function ListingLeadForms({ title, address, propertyId }: ListingLeadFormsProps) {
   const instanceId = useId().replace(/:/g, "")
-  const infoSpam = useAntiSpam({ honeypotName: "company_url" })
-  const tourSpam = useAntiSpam({ honeypotName: "company_site" })
+  const infoSpam = useAntiSpam({ honeypotName: "fax_alt_info" })
+  const tourSpam = useAntiSpam({ honeypotName: "fax_alt_tour" })
 
   const [info, setInfo] = useState({
     name: "",
@@ -134,7 +134,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
       source: "website",
       inquiryType: "renter",
       attribution: getAttributionPayloadForApi(),
-    })
+    }, { formName: info.wantsTour ? "listing_tour_request" : "listing_inquiry" })
     if ("error" in result) {
       setInfoStatus("error")
       setInfoError(result.error)
@@ -179,7 +179,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
       source: "website",
       inquiryType: "renter",
       attribution: getAttributionPayloadForApi(),
-    })
+    }, { formName: "listing_tour_request" })
     if ("error" in result) {
       setTourStatus("error")
       setTourError(result.error)

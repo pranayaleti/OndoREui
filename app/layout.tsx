@@ -239,9 +239,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SiteChrome>
             {/* Floating WhatsApp CTA, env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
             <WhatsAppFloatButton />
-            {/* Site-wide public assistant. Bottom-left so it never overlaps the WhatsApp CTA or the
-                property-scoped LeasingChatWidget, both of which sit bottom-right. Hides itself on
-                /chat, where the leasing agent already owns the conversation. */}
+            {/* Site-wide public assistant. Bottom-left so it never overlaps the
+                WhatsApp CTA, which sits bottom-right. (LeasingChatWidget is only mounted on /chat for
+                emailed resume links; its floating launcher is not mounted on any listing page.) Hides
+                itself on /chat, where the leasing agent already owns the conversation. */}
             <PublicAssistantWidget />
             {/* Mobile-only sticky Call + Free rental analysis bar. Owns the bottom edge on
                 small screens; WhatsApp and assistant floats lift above it via their own CSS. */}

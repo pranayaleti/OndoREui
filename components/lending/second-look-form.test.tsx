@@ -36,9 +36,24 @@ describe("SecondLookForm", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(/reach out within one business day/i)
   })
 
-  it("waits for a closing date, since that sets how fast we need to move", () => {
+  it("asks for a closing date, since that sets how fast we need to move, instead of disabling Send", () => {
     render(<SecondLookForm />)
     fillContact()
-    expect(screen.getByRole("button", { name: /second look/i })).toBeDisabled()
+    const send = screen.getByRole("button", { name: /second look/i })
+    expect(send).toBeEnabled()
+    fireEvent.click(send)
+    const closing = screen.getByLabelText(/closing date/i)
+    expect(closing).toHaveAttribute("aria-invalid", "true")
+    expect(closing).toHaveAccessibleDescription("Choose your closing date.")
+    expect(submitContactLead).not.toHaveBeenCalled()
+  })
+
+  it("says what is wrong with a missing name and a bad email", () => {
+    render(<SecondLookForm />)
+    fireEvent.change(screen.getByLabelText(/^email/i), { target: { value: "review-test" } })
+    fireEvent.click(screen.getByRole("button", { name: /second look/i }))
+    expect(screen.getByLabelText(/^name/i)).toHaveAccessibleDescription("Enter your name.")
+    expect(screen.getByLabelText(/^email/i)).toHaveAccessibleDescription(/valid email/i)
+    expect(screen.getByLabelText(/^name/i)).toBeRequired()
   })
 })

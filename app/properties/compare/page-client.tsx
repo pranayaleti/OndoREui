@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
+import { LoadErrorRetry } from "@/components/load-error-retry"
 import { ListingCompareTable, listingsFromApi } from "@/components/properties/listing-compare-table"
 import type { ApiProperty } from "@/app/types/property"
-import { fetchPublicPropertyList } from "@/lib/public-property"
+import { fetchPublicPropertyListOrThrow } from "@/lib/public-property"
 import {
   LISTING_COMPARE_EVENT,
   readCompareIds,
@@ -16,6 +17,7 @@ export function ListingCompareClient() {
   const [listings, setListings] = useState<ApiProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [attempt, setAttempt] = useState(0)
 
   const syncIds = useCallback(() => {
     setIds(readCompareIds())
@@ -31,7 +33,7 @@ export function ListingCompareClient() {
     let cancelled = false
     setLoading(true)
     setError(null)
-    void fetchPublicPropertyList()
+    void fetchPublicPropertyListOrThrow()
       .then((rows) => {
         if (!cancelled) setListings(rows)
       })
@@ -44,7 +46,7 @@ export function ListingCompareClient() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [attempt])
 
   const selected = useMemo(() => {
     const byId = new Map(listings.map((row) => [row.publicId, row]))
@@ -65,14 +67,18 @@ export function ListingCompareClient() {
 
   if (error) {
     return (
-      <div role="alert" className="rounded-xl border border-border bg-card p-5">
-        <p className="font-semibold">{error}</p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          We are not filling this table with example homes.
-        </p>
-        <Link href="/properties" className="mt-4 inline-flex min-h-11 items-center text-sm font-medium underline">
-          Back to listings
-        </Link>
+      <div className="rounded-xl border border-border bg-card p-5">
+        <LoadErrorRetry
+          fullPage={false}
+          title="Live listings are temporarily unavailable"
+          message="Your saved homes are still on your list. We are not filling this table with example homes."
+          onRetry={() => setAttempt((n) => n + 1)}
+        />
+        <div className="mt-4 text-center">
+          <Link href="/properties" className="inline-flex min-h-11 items-center text-sm font-medium underline">
+            Back to listings
+          </Link>
+        </div>
       </div>
     )
   }

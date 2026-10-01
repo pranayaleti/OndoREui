@@ -73,15 +73,11 @@ export function RentalApplicationWizard({
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [feeMessage, setFeeMessage] = useState("")
 
-  const load = useCallback(async () => {
+  // Server-owned data only (bundle: documents, co-applicants, property, checklist).
+  // Local payload and step are the applicant's unsaved edits; a refresh must not wipe them.
+  const refresh = useCallback(async () => {
     const next = await getRentalApplication(applicationId, resumeToken)
     setBundle(next)
-    const stored = asPayload(next.application.wizardPayload)
-    setPayload(stored)
-    const current = WIZARD_STEPS.some((s) => s.id === next.application.currentStep)
-      ? (next.application.currentStep as WizardStepId)
-      : "applicant"
-    setStep(current)
     rememberRentalApplication({
       id: applicationId,
       resumeToken: resumeToken ?? "",
@@ -89,11 +85,22 @@ export function RentalApplicationWizard({
       propertyTitle: next.property?.title,
       updatedAt: new Date().toISOString(),
     })
+    return next
   }, [applicationId, resumeToken])
 
+  // Initial load: also seeds the local payload and step from the saved application.
+  const loadInitial = useCallback(async () => {
+    const next = await refresh()
+    setPayload(asPayload(next.application.wizardPayload))
+    const current = WIZARD_STEPS.some((s) => s.id === next.application.currentStep)
+      ? (next.application.currentStep as WizardStepId)
+      : "applicant"
+    setStep(current)
+  }, [refresh])
+
   useEffect(() => {
-    void load().catch((err: unknown) => setError(err instanceof Error ? err.message : "Could not load application"))
-  }, [load])
+    void loadInitial().catch((err: unknown) => setError(err instanceof Error ? err.message : "Could not load application"))
+  }, [loadInitial])
 
   useEffect(() => {
     const onPageHide = (event: Event) => {
@@ -106,7 +113,8 @@ export function RentalApplicationWizard({
     return () => window.removeEventListener("pagehide", onPageHide)
   }, [submitted, bundle?.property?.publicId, bundle?.property?.id])
 
-  const persist = async (nextStep: WizardStepId, nextPayload = payload) => {
+  /** Saves progress. Resolves true only when the server accepted the save. */
+  const persist = async (nextStep: WizardStepId, nextPayload = payload): Promise<boolean> => {
     setBusy(true)
     setError("")
     try {
@@ -119,8 +127,10 @@ export function RentalApplicationWizard({
       setBundle(saved)
       setPayload(asPayload(saved.application.wizardPayload))
       setStep(nextStep)
+      return true
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save")
+      return false
     } finally {
       setBusy(false)
     }
@@ -246,7 +256,7 @@ export function RentalApplicationWizard({
                     resumeToken,
                   })
                   setCoEmail("")
-                  await load()
+                  await refresh()
                 } catch (err) {
                   setError(err instanceof Error ? err.message : "Invite failed")
                 } finally {
@@ -358,7 +368,7 @@ export function RentalApplicationWizard({
                 label={item.label}
                 required={item.required}
                 current={current}
-                onUploaded={() => void load()}
+                onUploaded={() => void refresh()}
               />
             )
           })}
@@ -460,7 +470,7 @@ export function RentalApplicationWizard({
               onSuccess={() => {
                 setFeeMessage("Payment successful.")
                 setClientSecret(null)
-                void load()
+                void refresh()
               }}
             />
           ) : null}
@@ -472,12 +482,13 @@ export function RentalApplicationWizard({
               setBusy(true)
               setError("")
               try {
-                await persist("submit")
+                // Never submit answers the server has not stored (authorizations included).
+                if (!(await persist("submit"))) return
                 await submitRentalApplication(applicationId, resumeToken, applyToken)
                 analytics.trackEvent("rental_application_submitted", "rental_application", "submit")
                 trackRentalFunnel("application_completed", bundle?.property?.publicId || bundle?.property?.id)
                 trackRentalFunnel("application_submitted", bundle?.property?.publicId || bundle?.property?.id)
-                await load()
+                await refresh()
                 setSubmitted(true)
               } catch (err) {
                 setError(err instanceof Error ? err.message : "Submit failed")

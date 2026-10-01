@@ -7,7 +7,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { SITE_PHONE } from "@/lib/site"
-import { backendUrl } from "@/lib/backend"
+import { buildLeadMessage, submitContactLead } from "@/lib/leads-api"
+import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { splitPhoneForLead } from "@/lib/consultation-lead"
 import { CheckCircle, AlertCircle } from "lucide-react"
 
 interface InvestmentInquiryFormProps {
@@ -38,34 +40,27 @@ export function InvestmentInquiryForm({ investmentTitle }: InvestmentInquiryForm
     setSubmitStatus(null)
 
     try {
-      const nowIso = new Date().toISOString()
-      const fallbackPublicId = "5b3aba39-51f2-48b5-b3a0-db948cfde010"
-      const payload = {
-        ...formData,
-        name: `${formData.firstName} ${formData.lastName}`,
-        type: "contact_form",
-        source: "investment_inquiry",
-        leadType: "investment_inquiry",
-        subject: `Investment Inquiry: ${investmentTitle}`,
-        inquiryType: "Investment Consulting",
-        timestamp: nowIso,
-        publicId: fallbackPublicId,
-        tenantName: `${formData.firstName} ${formData.lastName}`,
-        tenantEmail: formData.email ?? "",
-        tenantPhone: formData.phone ?? "",
-        moveInDate: nowIso,
-        monthlyBudget: 1,
-        occupants: 1,
-        hasPets: false,
-      }
+      // POST /api/leads/contact. Investment inquiries have no type of their own
+      // yet, so they go in as "other" with the investment named in the message.
+      const { phone, note } = splitPhoneForLead(formData.phone)
+      const attribution = getAttributionPayloadForApi()
+      const result = await submitContactLead({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email.trim(),
+        ...(phone && { phone }),
+        source: "website",
+        inquiryType: "other",
+        message: buildLeadMessage(
+          [
+            ["Investment inquiry", investmentTitle],
+            ["Phone (as typed)", note],
+          ],
+          formData.message,
+        ),
+        ...(attribution && { attribution }),
+      }, { formName: "investment_inquiry" })
 
-      const response = await fetch(backendUrl("/api/leads/submit"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-
-      if (!response.ok) throw new Error("Failed to submit inquiry")
+      if ("error" in result) throw new Error(result.error)
 
       setSubmitStatus("success")
       setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" })

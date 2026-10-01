@@ -8,6 +8,7 @@ import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Loading from "@/components/loading"
 import { CALCULATOR_CATALOG } from "@/lib/calculator-catalog"
 import { CalculatorAgentIntro } from "@/components/calculators/calculator-agent-intro"
+import { CalculatorUsageTracker } from "@/components/calculators/calculator-usage-tracker"
 import { RelatedContent } from "@/components/content/related-content"
 import { CalculatorInputExplainer } from "@/components/content/calculator-input-explainer"
 import { GlossaryTermStrip } from "@/components/content/glossary-terms"
@@ -169,6 +170,7 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
         />
         {slug === "refinance" ? <BreakEvenTable table="stay-scenarios" /> : null}
       </div>
+      <CalculatorUsageTracker slug={slug} />
       <Component />
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <RelatedContent path={`/calculators/${slug}`} title="Related education" />

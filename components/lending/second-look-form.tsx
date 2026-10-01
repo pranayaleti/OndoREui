@@ -1,15 +1,18 @@
 "use client"
 
-import { useId, useState, type FormEvent } from "react"
+import { useId, useRef, useState, type FormEvent } from "react"
 import { Loader2 } from "lucide-react"
 import {
   EMPTY_CONTACT,
+  FieldError,
   LeadContactFields,
   LeadFormError,
   LeadSentNotice,
-  contactIsComplete,
+  contactErrors,
   contactPayload,
+  focusFirstInvalid,
   leadInputClass,
+  requiredFieldProps,
   useLeadSubmission,
   type ContactValues,
 } from "@/components/lead-contact-fields"
@@ -51,13 +54,22 @@ export function SecondLookForm() {
   const [newConstruction, setNewConstruction] = useState<SecondLookAnswers["newConstruction"]>("unsure")
   const [notes, setNotes] = useState("")
   const { status, error, send } = useLeadSubmission("loan_estimate_second_look")
+  const [submitted, setSubmitted] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
   const idPrefix = useId()
 
-  const canSend = contactIsComplete(contact) && /^\d{4}-\d{2}-\d{2}$/.test(closingDate)
+  const closingDateIsValid = /^\d{4}-\d{2}-\d{2}$/.test(closingDate)
+  // Errors show after the first submit and then follow the fields as they are fixed.
+  const errors = submitted ? contactErrors(contact) : {}
+  const closingError = submitted && !closingDateIsValid ? "Choose your closing date." : undefined
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!canSend) return
+    setSubmitted(true)
+    if (Object.keys(contactErrors(contact)).length > 0 || !closingDateIsValid) {
+      focusFirstInvalid(formRef.current)
+      return
+    }
     const answers: SecondLookAnswers = {
       closingDate,
       interestRate: parseOptionalAmount(numbers.interestRate),
@@ -86,8 +98,8 @@ export function SecondLookForm() {
   const fieldId = (key: string) => `${idPrefix}-${key}`
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
-      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my loan." />
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-6">
+      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my loan." errors={errors} />
 
       <div>
         <label htmlFor={fieldId("closing")} className="text-sm font-medium">
@@ -99,7 +111,9 @@ export function SecondLookForm() {
           value={closingDate}
           onChange={(e) => setClosingDate(e.target.value)}
           className={leadInputClass}
+          {...requiredFieldProps(fieldId("closing-error"), closingError)}
         />
+        <FieldError id={fieldId("closing-error")} message={closingError} />
       </div>
 
       <fieldset className="space-y-3">
@@ -189,7 +203,7 @@ export function SecondLookForm() {
       <LeadFormError message={error} />
       <button
         type="submit"
-        disabled={!canSend || status === "sending"}
+        disabled={status === "sending"}
         className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}

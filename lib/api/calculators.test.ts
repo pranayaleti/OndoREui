@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { analyzeCalculator } from './calculators';
+import { BACKEND_BASE_URL, backendUrl } from '@/lib/backend';
 
 describe('analyzeCalculator', () => {
   beforeEach(() => {
@@ -33,6 +34,20 @@ describe('analyzeCalculator', () => {
     );
     expect(result.dealScore).toBe(82);
     expect(result.scoreLabel).toBe('Strong Buy');
+  });
+
+  it('builds the URL from the backend base URL, never from NEXT_PUBLIC_BACKEND_URL or localhost', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ dealScore: 1, scoreLabel: 'Pass', marketContext: '', recommendations: [] }),
+    } as Response);
+
+    await analyzeCalculator({ calculatorType: 'roi', inputs: {}, results: {} });
+
+    const [url] = vi.mocked(fetch).mock.calls[0];
+    expect(url).toBe(backendUrl('/api/calculators/analyze'));
+    expect(String(url).startsWith(BACKEND_BASE_URL)).toBe(true);
+    expect(String(url)).not.toContain('undefined');
   });
 
   it('throws with server message when response is not ok', async () => {

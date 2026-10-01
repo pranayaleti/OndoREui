@@ -72,3 +72,36 @@ describe("backendUrl (localhost origin without /api path)", () => {
     )
   })
 })
+
+describe("edgeFunctionUrl", () => {
+  async function load(base: string) {
+    vi.stubEnv("NEXT_PUBLIC_BACKEND_BASE_URL", base)
+    vi.resetModules()
+    return (await import("./backend")).edgeFunctionUrl
+  }
+
+  afterAll(() => {
+    vi.unstubAllEnvs()
+    vi.resetModules()
+  })
+
+  it("swaps the trailing /api of the Supabase base for the function name", async () => {
+    const edgeFunctionUrl = await load(TEST_BASE)
+    expect(edgeFunctionUrl("lead-qualify")).toBe("https://example.supabase.co/functions/v1/lead-qualify")
+  })
+
+  it("tolerates a trailing slash on the base", async () => {
+    const edgeFunctionUrl = await load(`${TEST_BASE}/`)
+    expect(edgeFunctionUrl("lead-qualify")).toBe("https://example.supabase.co/functions/v1/lead-qualify")
+  })
+
+  it("appends the function to a base that has no /api segment", async () => {
+    const edgeFunctionUrl = await load("http://localhost:3030")
+    expect(edgeFunctionUrl("lead-qualify")).toBe("http://localhost:3030/lead-qualify")
+  })
+
+  it("stays relative when no base is set", async () => {
+    const edgeFunctionUrl = await load("")
+    expect(edgeFunctionUrl("lead-qualify")).toBe("/lead-qualify")
+  })
+})

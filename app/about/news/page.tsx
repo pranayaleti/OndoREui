@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, SITE_PHONE, pageTitle } from "@/lib/site"
+import { SITE_URL, SITE_EMAILS, SITE_PHONE, SITE_PHONE_TEL, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -254,7 +254,7 @@ export default function NewsPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href={`tel:${SITE_PHONE.replace(/[^+\\d]/g, "")}`}>
+                  <Link href={`tel:${SITE_PHONE_TEL}`}>
                     <Phone className="h-4 w-4 mr-2" />
                     {SITE_PHONE}
                   </Link>

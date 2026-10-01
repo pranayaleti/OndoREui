@@ -114,7 +114,7 @@ export function onPagehide(callback: () => void): () => void {
 
 /**
  * Cleanup function to ensure bfcache compatibility.
- * Clears tracked timers/intervals and closes open IndexedDB connections.
+ * Clears tracked timers/intervals.
  * Call from pagehide (or automatically via BfcacheProvider).
  */
 export function cleanupForBfcache() {
@@ -125,16 +125,9 @@ export function cleanupForBfcache() {
   trackedIntervals.forEach((id) => clearInterval(id))
   trackedIntervals.clear()
 
-  // Close all IndexedDB databases by requesting and immediately closing them.
-  // Real connections are managed by callers; this ensures no stale handles linger.
-  if (typeof indexedDB !== "undefined") {
-    try {
-      const req = indexedDB.open("ondo-pwa-db")
-      req.onsuccess = () => req.result.close()
-    } catch {
-      /* best-effort */
-    }
-  }
+  // IndexedDB needs nothing here: lib/pwa/offline-queue.ts opens a connection per call. Opening
+  // "ondo-pwa-db" on pagehide would create it empty (no object store) in browsers that never
+  // queued anything, and the offline queue would then fail on first use.
 }
 
 /**

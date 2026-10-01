@@ -41,6 +41,8 @@ export const DEMO_VIDEO_EMBED_URL = process.env["NEXT_PUBLIC_DEMO_VIDEO_EMBED_UR
  * Office hours are SITE_HOURS_LABEL (Mon–Fri 9–5 MT). 24/7 copy is the emergency *line*, not office hours.
  */
 export const SITE_PHONE = process.env['NEXT_PUBLIC_SITE_PHONE'] || "+1-408-538-0420"
+/** SITE_PHONE reduced to what a tel: link accepts (digits and a leading +). */
+export const SITE_PHONE_TEL = SITE_PHONE.replace(/[^+\d]/g, "")
 export const SITE_HOURS = "Mo-Fr 09:00-17:00"
 export const SITE_ADDRESS = "2701 N Thanksgiving Way, Lehi, UT 84043"
 

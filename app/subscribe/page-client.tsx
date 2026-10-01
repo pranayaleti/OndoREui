@@ -13,6 +13,7 @@ import { SITE_EMAILS } from "@/lib/site"
 import SEO from "@/components/seo"
 import { submitContactLead } from "@/lib/leads-api"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { useAntiSpam } from "@/lib/anti-spam"
 
 const topics = [
   {
@@ -42,6 +43,7 @@ export default function SubscribePage() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const { honeypotProps, gate } = useAntiSpam()
 
   function toggle(id: string) {
     setSelected((prev) =>
@@ -52,6 +54,12 @@ export default function SubscribePage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email) return
+    // A filled honeypot or an instant submit is a bot. Show success so it cannot probe the gate.
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt()
+      setSubmitted(true)
+      return
+    }
     setLoading(true)
     setError("")
     try {
@@ -61,7 +69,7 @@ export default function SubscribePage() {
         source: "website",
         message: `Newsletter subscribe. Topics: ${selected.join(", ") || "none selected"}.`,
         attribution: getAttributionPayloadForApi(),
-      })
+      }, { formName: "newsletter_subscribe" })
       if ("error" in result) {
         setError(result.error || "Something went wrong. Please try again.")
         return
@@ -122,6 +130,8 @@ export default function SubscribePage() {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
+                    <input {...honeypotProps} />
                     <div className="space-y-2">
                       <Label htmlFor="name">First name (optional)</Label>
                       <Input

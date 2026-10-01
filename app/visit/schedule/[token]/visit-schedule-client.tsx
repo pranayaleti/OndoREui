@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { PageLoading } from "@/components/loading-states"
+import { LoadErrorRetry } from "@/components/load-error-retry"
 import {
   bookSchedule,
   cancelSchedule,
   getSchedule,
   rescheduleSchedule,
   type SchedulePayload,
+  isLinkNotFoundError,
 } from "@/lib/api/site-visits"
 import { SCHEDULE_EXPORT_SHELL, tokenFromRouteParam } from "@/lib/visit-static-paths"
 
@@ -19,6 +21,7 @@ interface Props {
 type LoadState =
   | { status: "loading" }
   | { status: "missing" }
+  | { status: "error" }
   | { status: "ready"; schedule: SchedulePayload }
 
 function LinkNotFound() {
@@ -42,6 +45,7 @@ export function VisitScheduleClient({ token: tokenProp }: Props) {
   const params = useParams()
   const token = tokenFromRouteParam(tokenProp, params?.token)
   const [load, setLoad] = useState<LoadState>({ status: "loading" })
+  const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
     if (!token || token === SCHEDULE_EXPORT_SHELL) {
@@ -54,19 +58,28 @@ export function VisitScheduleClient({ token: tokenProp }: Props) {
       .then((schedule) => {
         if (!cancelled) setLoad({ status: "ready", schedule })
       })
-      .catch(() => {
-        if (!cancelled) setLoad({ status: "missing" })
+      .catch((error: unknown) => {
+        // Only a 404 means the link is dead. A timeout or 5xx should not tell a valid link it is invalid.
+        if (!cancelled) setLoad({ status: isLinkNotFoundError(error) ? "missing" : "error" })
       })
     return () => {
       cancelled = true
     }
-  }, [token])
+  }, [token, attempt])
 
   switch (load.status) {
     case "loading":
       return <PageLoading />
     case "missing":
       return <LinkNotFound />
+    case "error":
+      return (
+        <LoadErrorRetry
+          title="We could not load this page"
+          message="Your link is probably fine. Something went wrong on our end, so please try again."
+          onRetry={() => setAttempt((n) => n + 1)}
+        />
+      )
     case "ready":
       return <VisitScheduleForm schedule={load.schedule} token={token} />
     default: {

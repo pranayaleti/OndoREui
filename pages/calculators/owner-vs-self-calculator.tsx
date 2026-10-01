@@ -16,7 +16,7 @@
  * fast.
  */
 
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Calculator as CalcIcon, Info, Clock, DollarSign } from "lucide-react"
 import { NumberField as SharedNumberField } from "@/components/calculators/number-field";
@@ -154,26 +154,6 @@ const OwnerVsSelfCalculator: React.FC = () => {
       ondoAdvantage,
     }
   }, [inputs])
-
-  // Analytics: fire once when the user makes their first edit (engagement signal).
-  const [engaged, setEngaged] = useState(false)
-  useEffect(() => {
-    if (engaged) return
-    const isDefault = (Object.keys(DEFAULTS) as Array<keyof Inputs>).every(
-      (k) => inputs[k] === DEFAULTS[k]
-    )
-    if (!isDefault) {
-      setEngaged(true)
-      // Best-effort GA event without coupling to the analytics module's typing.
-      if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
-        ;(window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-          "event",
-          "use_calculator",
-          { event_category: "calculator_interaction", event_label: "owner_vs_self" }
-        )
-      }
-    }
-  }, [inputs, engaged])
 
   const ondoWins = results.ondoAdvantage >= 0
 

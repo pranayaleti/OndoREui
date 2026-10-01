@@ -5,7 +5,7 @@
  *   attributed automatically for that session, no extra code required for basic reports.
  * - **HubSpot** (if `NEXT_PUBLIC_HUBSPOT_PORTAL_ID` is set): tracks page views and forms
  *   with standard cookie-based attribution.
- * - **This module**: Persists first- and last-touch params in `sessionStorage` and sends them
+ * - **This module**: Persists first- and last-touch params in `localStorage` (90 days) and sends them
  *   with contact form submissions to the API, which stores JSON in Supabase `website_leads.attribution`.
  */
 
@@ -35,6 +35,21 @@ export type MarketingAttribution = {
   last: MarketingTouch | null
 }
 
+/** First touch is kept for 90 days, then a new visit starts a fresh record. */
+export const ATTRIBUTION_TTL_MS = 90 * 24 * 60 * 60 * 1000
+
+/**
+ * Field limits enforced by the Edge `marketingAttributionSchema` (.strict()). One value over
+ * its limit, or one unknown key, makes the API reject the whole lead, so every touch is cut
+ * down to these before it is stored or sent.
+ */
+const MAX_PARAM_LENGTH = 256
+const MAX_PATH_LENGTH = 1024
+const MAX_HREF_LENGTH = 2048
+const MAX_RECORDED_AT_LENGTH = 64
+
+const SEARCH_ENGINE_HOSTS = ["google.", "bing.", "duckduckgo.", "yahoo.", "ecosia.", "brave.", "baidu.", "yandex."]
+
 function hasAnyMarketingField(t: MarketingTouch): boolean {
   return (
     !!t.utm_source ||
@@ -46,6 +61,37 @@ function hasAnyMarketingField(t: MarketingTouch): boolean {
     !!t.fbclid ||
     !!t.msclkid
   )
+}
+
+function clip(value: unknown, max: number): string | undefined {
+  if (typeof value !== "string") return undefined
+  const trimmed = value.trim()
+  return trimmed ? trimmed.slice(0, max) : undefined
+}
+
+/** Keep only the keys the API accepts, each within its length limit. Returns null if unusable. */
+function sanitizeTouch(raw: unknown): MarketingTouch | null {
+  if (!raw || typeof raw !== "object") return null
+  const t = raw as Record<string, unknown>
+  const touch: MarketingTouch = {
+    path: clip(t["path"], MAX_PATH_LENGTH) ?? "/",
+    href: clip(t["href"], MAX_HREF_LENGTH) ?? "",
+    recorded_at: clip(t["recorded_at"], MAX_RECORDED_AT_LENGTH) ?? new Date().toISOString(),
+  }
+  for (const k of [...UTM_KEYS, ...CLICK_ID_KEYS]) {
+    const v = clip(t[k], MAX_PARAM_LENGTH)
+    if (v) touch[k] = v
+  }
+  return touch
+}
+
+function sanitizeAttribution(raw: unknown): MarketingAttribution | null {
+  if (!raw || typeof raw !== "object") return null
+  const a = raw as Record<string, unknown>
+  const first = sanitizeTouch(a["first"])
+  const last = sanitizeTouch(a["last"])
+  if (!first && !last) return null
+  return { first, last }
 }
 
 function parseTouchFromSearch(search: string, path: string, href: string): MarketingTouch | null {
@@ -64,20 +110,51 @@ function parseTouchFromSearch(search: string, path: string, href: string): Marke
     const v = params.get(k)?.trim()
     if (v) touch[k] = v
   }
-  return hasAnyMarketingField(touch) ? touch : null
+  return hasAnyMarketingField(touch) ? sanitizeTouch(touch) : null
 }
 
-export function readMarketingAttribution(): MarketingAttribution | null {
-  if (typeof window === "undefined") return null
+/**
+ * Touch for a visit with no campaign params: the landing page, plus the referring site when
+ * it is another host. The API schema has no referrer field, so a referrer is carried as
+ * utm_source (its hostname) and utm_medium ("organic" for search engines, else "referral").
+ */
+function parseTouchFromReferrer(referrer: string, currentHost: string, path: string, href: string): MarketingTouch {
+  const touch: MarketingTouch = { path, href, recorded_at: new Date().toISOString() }
   try {
-    const raw = sessionStorage.getItem(MARKETING_ATTRIBUTION_STORAGE_KEY)
+    const host = new URL(referrer).hostname.replace(/^www\./, "")
+    if (host && host !== currentHost.replace(/^www\./, "")) {
+      touch.utm_source = host
+      touch.utm_medium = SEARCH_ENGINE_HOSTS.some((engine) => host.includes(engine)) ? "organic" : "referral"
+    }
+  } catch {
+    // No referrer, or not a URL: this is a direct visit.
+  }
+  return sanitizeTouch(touch) as MarketingTouch
+}
+
+function isExpired(a: MarketingAttribution): boolean {
+  const recordedAt = Date.parse(a.first?.recorded_at ?? a.last?.recorded_at ?? "")
+  return Number.isFinite(recordedAt) && Date.now() - recordedAt > ATTRIBUTION_TTL_MS
+}
+
+function readFrom(storage: () => Storage): MarketingAttribution | null {
+  try {
+    const raw = storage().getItem(MARKETING_ATTRIBUTION_STORAGE_KEY)
     if (!raw) return null
-    const parsed = JSON.parse(raw) as MarketingAttribution
-    if (!parsed || typeof parsed !== "object") return null
-    return parsed
+    const parsed = sanitizeAttribution(JSON.parse(raw))
+    return parsed && !isExpired(parsed) ? parsed : null
   } catch {
     return null
   }
+}
+
+/**
+ * Stored in `localStorage` so every tab and later visit shares one record. Falls back to
+ * `sessionStorage` for records written before this moved.
+ */
+export function readMarketingAttribution(): MarketingAttribution | null {
+  if (typeof window === "undefined") return null
+  return readFrom(() => localStorage) ?? readFrom(() => sessionStorage)
 }
 
 /** Payload for `POST /api/leads/contact`, omit when nothing was captured. */
@@ -90,30 +167,43 @@ export function getAttributionPayloadForApi(): MarketingAttribution | undefined 
 
 /**
  * On each navigation (full page load), call once from the client.
- * - **first**: set once per browser tab session when any marketing param first appears.
+ * - **first**: set once (kept 90 days) from the first visit seen: campaign params when
+ *   present, otherwise the referrer and landing page.
  * - **last**: updated whenever the URL has marketing params.
  */
 export function captureMarketingAttributionFromWindow(): void {
   if (typeof window === "undefined") return
-  const touch = parseTouchFromSearch(
+  const campaignTouch = parseTouchFromSearch(
     window.location.search,
     window.location.pathname,
     window.location.href
   )
-  if (!touch) return
 
   const prev = readMarketingAttribution()
+  // Nothing new to learn: later page views without params must not rewrite the record.
+  if (!campaignTouch && prev) return
+
+  // A visit without campaign params records the landing page without its query string or hash:
+  // there is nothing to attribute there, and it can hold invite or application tokens.
+  const touch =
+    campaignTouch ??
+    parseTouchFromReferrer(
+      document.referrer,
+      window.location.hostname,
+      window.location.pathname,
+      `${window.location.origin}${window.location.pathname}`,
+    )
   const next: MarketingAttribution = {
     first: prev?.first ?? touch,
-    last: touch,
+    last: campaignTouch ?? prev?.last ?? touch,
   }
   try {
-    sessionStorage.setItem(MARKETING_ATTRIBUTION_STORAGE_KEY, JSON.stringify(next))
+    localStorage.setItem(MARKETING_ATTRIBUTION_STORAGE_KEY, JSON.stringify(next))
   } catch {
     // Storage full or disabled
   }
 
-  if (typeof window.gtag === "function") {
+  if (campaignTouch && typeof window.gtag === "function") {
     window.gtag("event", "marketing_params_captured", {
       utm_source: touch.utm_source,
       utm_medium: touch.utm_medium,

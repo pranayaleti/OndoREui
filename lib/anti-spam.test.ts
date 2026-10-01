@@ -65,5 +65,7 @@ describe("useAntiSpam", () => {
     expect(props.autoComplete).toBe("off")
     expect(props.style.position).toBe("absolute")
     expect(props.style.opacity).toBe(0)
+    // A name autofill does not recognise, so a real visitor's autofill cannot trip the honeypot.
+    expect(props.name).not.toMatch(/website|url|company|email|name|phone|address/i)
   })
 })

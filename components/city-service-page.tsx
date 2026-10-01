@@ -56,8 +56,11 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
     }
   }, [city.name, service])
 
+  // Buy-sell pages leave this unset so the visitor picks buyer or seller. Loan
+  // leads have no type of their own yet, so they go in as "other" and the
+  // prefilled message says what they asked about.
   const leadInquiryType: ContactInquiryType | undefined =
-    service === "property-management" ? "owner" : undefined
+    service === "property-management" ? "owner" : service === "loans" ? "other" : undefined
 
   const leadPrefill =
     service === "property-management"

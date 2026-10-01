@@ -1,0 +1,113 @@
+import { beforeEach, describe, expect, it, vi } from "vitest"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { RentalApplicationWizard } from "./rental-application-wizard"
+
+vi.mock("next/link", () => ({
+  default: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>,
+}))
+vi.mock("@/lib/analytics", () => ({ analytics: { trackEvent: vi.fn() } }))
+vi.mock("@/lib/rental-analytics", () => ({ trackRentalFunnel: vi.fn() }))
+vi.mock("@/components/stripe-payment-form", () => ({ StripePaymentForm: () => null }))
+
+vi.mock("@/lib/api/rental", () => ({
+  getRentalApplication: vi.fn(),
+  saveRentalProgress: vi.fn(),
+  submitRentalApplication: vi.fn(),
+  inviteCoApplicant: vi.fn(),
+  createRentalFeeIntent: vi.fn(),
+  uploadRentalDocument: vi.fn(),
+}))
+
+import {
+  getRentalApplication,
+  saveRentalProgress,
+  submitRentalApplication,
+  uploadRentalDocument,
+  type ApplicationBundle,
+} from "@/lib/api/rental"
+
+function makeBundle(currentStep: string, wizardPayload: Record<string, unknown> = {}): ApplicationBundle {
+  return {
+    application: {
+      id: "app-1",
+      propertyId: "prop-1",
+      firstName: "",
+      lastName: "",
+      email: "",
+      status: "draft",
+      statusLabel: "Draft",
+      currentStep,
+      completionPercent: 10,
+      applicantNextAction: null,
+      submittedAt: null,
+      createdAt: "2026-09-01T00:00:00Z",
+      updatedAt: "2026-09-01T00:00:00Z",
+      wizardPayload,
+    },
+    property: null,
+    requirements: {
+      applicationFees: { applicationFeeCents: 0, screeningFeeCents: 0, otherFees: [] },
+      securityDeposit: { monthsOfRent: null, amountCents: null },
+      categories: [],
+    },
+    coApplicants: [],
+    documents: [],
+    checklist: [{ type: "id", label: "Photo ID", required: true, status: "required", isComplete: false }],
+    events: [],
+    fullyComplete: false,
+    completedAdultApplicants: 0,
+    requiredAdults: 1,
+    nextAction: "",
+  } as unknown as ApplicationBundle
+}
+
+beforeEach(() => {
+  vi.mocked(getRentalApplication).mockReset()
+  vi.mocked(saveRentalProgress).mockReset()
+  vi.mocked(submitRentalApplication).mockReset()
+  vi.mocked(uploadRentalDocument).mockReset()
+})
+
+describe("RentalApplicationWizard", () => {
+  it("keeps unsaved edits when an upload refreshes the application", async () => {
+    // Initial load and the post-upload refresh both return a server copy with no carrier saved yet.
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("documents"))
+    vi.mocked(uploadRentalDocument).mockResolvedValue({})
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    const carrier = (await screen.findByLabelText(/insurance carrier/i)) as HTMLInputElement
+    fireEvent.change(carrier, { target: { value: "Acme Mutual" } })
+    expect(carrier.value).toBe("Acme Mutual")
+
+    const file = new File(["x"], "id.pdf", { type: "application/pdf" })
+    fireEvent.change(screen.getByLabelText(/photo id/i), { target: { files: [file] } })
+
+    await waitFor(() => expect(uploadRentalDocument).toHaveBeenCalledTimes(1))
+    await waitFor(() => expect(getRentalApplication).toHaveBeenCalledTimes(2))
+    expect((screen.getByLabelText(/insurance carrier/i) as HTMLInputElement).value).toBe("Acme Mutual")
+  })
+
+  it("does not submit when the final save fails", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("submit"))
+    vi.mocked(saveRentalProgress).mockRejectedValue(new Error("Could not save answers"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    fireEvent.click(await screen.findByRole("button", { name: /submit application/i }))
+
+    expect(await screen.findByText("Could not save answers")).toBeInTheDocument()
+    expect(submitRentalApplication).not.toHaveBeenCalled()
+    expect(screen.queryByText(/application received/i)).not.toBeInTheDocument()
+  })
+
+  it("submits after the final save succeeds", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("submit"))
+    vi.mocked(saveRentalProgress).mockResolvedValue(makeBundle("submit"))
+    vi.mocked(submitRentalApplication).mockResolvedValue({} as never)
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    fireEvent.click(await screen.findByRole("button", { name: /submit application/i }))
+
+    await waitFor(() => expect(submitRentalApplication).toHaveBeenCalledTimes(1))
+    expect(await screen.findByText(/application received/i)).toBeInTheDocument()
+  })
+})

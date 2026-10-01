@@ -6,6 +6,7 @@ import {
   APP_PORTAL_IS_EXTERNAL,
   APP_PORTAL_LOGIN_URL,
   SITE_PHONE,
+  SITE_PHONE_TEL,
   SITE_HOURS,
   SITE_HOURS_LABEL,
   SITE_ADDRESS,
@@ -71,5 +72,12 @@ describe("site", () => {
     SITE_SOCIALS.forEach((url) => {
       expect(url.startsWith("http")).toBe(true)
     })
+  })
+})
+
+describe("SITE_PHONE_TEL", () => {
+  it("keeps the digits and leading plus so tel: links dial", () => {
+    expect(SITE_PHONE_TEL).toMatch(/^\+?\d{10,}$/)
+    expect(SITE_PHONE_TEL.replace(/\D/g, "")).toBe(SITE_PHONE.replace(/\D/g, ""))
   })
 })

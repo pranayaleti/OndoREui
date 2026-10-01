@@ -1,4 +1,4 @@
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3000';
+import { backendUrl } from '@/lib/backend';
 
 export interface AIAnalysis {
   dealScore: number;
@@ -19,7 +19,7 @@ export async function analyzeCalculator(
   params: AnalyzeRequest,
   signal?: AbortSignal
 ): Promise<AIAnalysis> {
-  const res = await fetch(`${BACKEND_URL}/api/calculators/analyze`, {
+  const res = await fetch(backendUrl('/api/calculators/analyze'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(params),

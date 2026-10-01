@@ -5,7 +5,8 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { captureMarketingAttributionFromWindow } from "@/lib/attribution"
 
 /**
- * Persists UTMs / click ids from the URL into sessionStorage (first + last touch this tab).
+ * Persists UTMs / click ids from the URL (or the referrer and landing page when there are none)
+ * into localStorage as first + last touch, shared across tabs for 90 days.
  * Re-runs on client-side navigations when the query string changes.
  */
 export function AttributionCapture() {

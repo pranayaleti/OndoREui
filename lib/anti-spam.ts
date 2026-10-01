@@ -35,7 +35,7 @@ import { useMemo, useRef, useState } from "react"
 export interface AntiSpamConfig {
   /** Minimum time the form must be on screen before a submit is accepted. */
   minDwellMs?: number
-  /** Honeypot field name. Use something innocuous so bots target it. */
+  /** Honeypot field name. Use a name autofill does not recognise (not website, url, company). */
   honeypotName?: string
 }
 
@@ -57,7 +57,9 @@ export interface AntiSpamHandle {
 }
 
 const DEFAULT_MIN_DWELL_MS = 2_500
-const DEFAULT_HONEYPOT_NAME = "website"
+// Not "website", "url" or "company": browsers and password managers autofill fields named like
+// that, which would trip the honeypot for a real visitor.
+const DEFAULT_HONEYPOT_NAME = "fax_alt"
 
 /**
  * Hook returning a honeypot input prop bag and a submit-time gate.

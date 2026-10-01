@@ -488,15 +488,18 @@ export default function PropertiesClient() {
                 <h2 id="properties-section-heading" className="text-2xl font-bold tracking-tight md:text-3xl">
                   Available rentals
                 </h2>
-                <p
-                  className={loading ? 'mt-2 text-foreground' : 'mt-2 text-foreground/80'}
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  {loading
-                    ? 'Loading...'
-                    : `${properties.length} ${properties.length === 1 ? 'home' : 'homes'} on the market`}
-                </p>
+                {/* No count while a load error is showing: "0 homes" would read as "no rentals". */}
+                {!error && (
+                  <p
+                    className={loading ? 'mt-2 text-foreground' : 'mt-2 text-foreground/80'}
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    {loading
+                      ? 'Loading...'
+                      : `${properties.length} ${properties.length === 1 ? 'home' : 'homes'} on the market`}
+                  </p>
+                )}
               </div>
               <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row" role="group" aria-label="Property filters and sorting">
                 {mapProperties.length > 0 && (
@@ -610,7 +613,7 @@ export default function PropertiesClient() {
               >
                 <p className="font-semibold">Live listings are temporarily unavailable</p>
                 <p className="mt-2 text-sm text-foreground/80">
-                  {error} We are not showing example homes in their place.
+                  We could not load listings. Check your connection and try again. We are not showing example homes in their place.
                 </p>
                 <div className="mt-4 flex flex-wrap justify-center gap-2">
                   <Button
@@ -692,7 +695,6 @@ export default function PropertiesClient() {
             {!loading && (
               <div className="mt-10">
                 <RenterAvailabilityNote
-                  key={renterPrefill}
                   variant={error || properties.length === 0 ? 'empty' : 'browse'}
                   prefillMessage={renterPrefill}
                 />

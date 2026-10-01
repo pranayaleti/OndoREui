@@ -18,4 +18,10 @@ describe("/go/[placement]", () => {
     expect(document.querySelector('meta[http-equiv="refresh"]')).toHaveAttribute("content", `0;url=${target}`)
     expect(screen.getByRole("link", { name: /ondo real estate/i })).toHaveAttribute("href", target)
   })
+
+  it("redirects from an inline script so the hop does not wait for the page to load", async () => {
+    const { container } = render(await QrRedirectPage({ params: Promise.resolve({ placement: "card" }) }))
+    const target = "/links/?utm_source=business_card&utm_medium=qr&utm_campaign=links"
+    expect(container.querySelector("script")?.innerHTML).toBe(`window.location.replace(${JSON.stringify(target)})`)
+  })
 })

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { analyticsAttributes } from "@/lib/analytics"
+import { CalendlyLink } from "@/components/calendly-link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,8 +15,10 @@ import { Building, Mail, MapPin, Phone, Calendar, CheckCircle, AlertCircle, Mess
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE, SITE_EMAILS, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, SITE_HOURS_LABEL, SITE_CALENDLY_URL } from "@/lib/site"
-import { backendUrl } from "@/lib/backend"
+import { SITE_URL, SITE_PHONE, SITE_EMAILS, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, SITE_HOURS_LABEL } from "@/lib/site"
+import { buildLeadMessage, submitContactLead } from "@/lib/leads-api"
+import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { inquiryTypeForService, splitPhoneForLead } from "@/lib/consultation-lead"
 import ConsultationModal from "@/components/ConsultationModal"
 
 export default function ContactPage() {
@@ -64,37 +67,30 @@ export default function ContactPage() {
     setSubmitStatus(null);
     
     try {
-      const nowIso = new Date().toISOString();
-      const fallbackPublicId = '5b3aba39-51f2-48b5-b3a0-db948cfde010';
-      const payload = {
-        ...formData,
-        name: `${formData.firstName} ${formData.lastName}`,
-        type: 'contact_form',
-        source: 'contact_page',
-        leadType: 'general_inquiry',
-        timestamp: nowIso,
-        publicId: fallbackPublicId,
-        tenantName: `${formData.firstName} ${formData.lastName}`,
-        tenantEmail: formData.email ?? '',
-        tenantPhone: formData.phone ?? '',
-        moveInDate: nowIso,
-        monthlyBudget: 1,
-        occupants: 1,
-        hasPets: false,
-      };
+      // POST /api/leads/contact, same as every other lead form.
+      const { phone, note } = splitPhoneForLead(formData.phone);
+      const attribution = getAttributionPayloadForApi();
+      const result = await submitContactLead({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email.trim(),
+        ...(phone && { phone }),
+        source: 'website',
+        inquiryType: inquiryTypeForService(formData.inquiryType),
+        message: buildLeadMessage(
+          [
+            ['Type of inquiry', formData.inquiryType],
+            ['Subject', formData.subject],
+            ['Phone (as typed)', note],
+          ],
+          formData.message,
+        ),
+        ...(attribution && { attribution }),
+      }, { formName: 'contact_page' });
 
-      const response = await fetch(backendUrl('/api/leads/submit'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit contact form');
+      if ('error' in result) {
+        throw new Error(result.error);
       }
-      
+
       setSubmitStatus('success');
       setFormData({
         firstName: '',
@@ -243,15 +239,10 @@ export default function ContactPage() {
                   <div className="flex flex-col gap-3">
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Button asChild className="flex-1" size="lg">
-                        <a
-                          className="inline-flex items-center justify-center"
-                          href={SITE_CALENDLY_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <CalendlyLink className="inline-flex items-center justify-center" contentLabel="contact_page">
                           <Calendar className="h-5 w-5 mr-2 shrink-0" />
                           Book on Calendly
-                        </a>
+                        </CalendlyLink>
                       </Button>
                       <Button 
                         variant="outline" 

@@ -3,16 +3,19 @@
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Loader2, RotateCcw } from "lucide-react"
+import { ChoiceRadioGroup } from "@/components/choice-radio-group"
 import {
   EMPTY_CONTACT,
   LeadContactFields,
   LeadFormError,
   LeadSentNotice,
-  contactIsComplete,
+  contactErrors,
   contactPayload,
+  focusFirstInvalid,
   useLeadSubmission,
   type ContactValues,
 } from "@/components/lead-contact-fields"
+import { CalendlyLink } from "@/components/calendly-link"
 import { analytics, analyticsAttributes } from "@/lib/analytics"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { formatCurrency } from "@/lib/cost-of-living"
@@ -29,7 +32,7 @@ import {
   type QuizAnswers,
   type QuizEstimate,
 } from "@/lib/homebuyer-quiz"
-import { SITE_CALENDLY_URL, SITE_PHONE } from "@/lib/site"
+import { SITE_PHONE } from "@/lib/site"
 import { ARRIVAL_LENDING_DISCLOSURE, ARRIVAL_REAL_ESTATE_DISCLOSURE } from "@/lib/utah-arrival"
 
 type ChoiceKey = "stage" | "preApproved" | "area" | "veteran" | "credit"
@@ -228,26 +231,7 @@ export function HomebuyerQuiz() {
       ) : null}
 
       {step.kind === "choice" ? (
-        <div role="radiogroup" aria-labelledby={headingId} className="mt-6 grid gap-3">
-          {step.options.map((option) => {
-            const selected = answers[step.key] === option.value
-            return (
-              <button
-                key={String(option.value)}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                onClick={() => choose(option.value)}
-                className={`flex min-h-[3.5rem] items-center justify-between rounded-xl border px-4 py-3 text-left text-[0.95rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  selected ? "border-primary bg-primary/10" : "border-border bg-card hover:border-primary/60"
-                }`}
-              >
-                {option.label}
-                <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
-              </button>
-            )
-          })}
-        </div>
+        <ChoiceRadioGroup labelledBy={headingId} options={step.options} selected={answers[step.key]} onChoose={choose} />
       ) : (
         <form onSubmit={commitAmount} className="mt-6">
           <div className="flex items-center rounded-xl border border-border bg-background focus-within:ring-2 focus-within:ring-ring">
@@ -363,9 +347,9 @@ function QuizResult({
             switch (action) {
               case "book":
                 return (
-                  <a key={action} href={SITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={className} {...ctaTracking}>
+                  <CalendlyLink key={action} contentLabel="homebuyer_quiz" className={className} {...ctaTracking}>
                     Book a free call
-                  </a>
+                  </CalendlyLink>
                 )
               case "call":
                 return (
@@ -423,11 +407,18 @@ function QuizResult({
 function FollowUpForm({ answers, estimate }: { answers: QuizAnswers; estimate: QuizEstimate }) {
   const [contact, setContact] = useState<ContactValues>(EMPTY_CONTACT)
   const { status, error, send } = useLeadSubmission("homebuyer_quiz")
-  const canSend = contactIsComplete(contact)
+  const [submitted, setSubmitted] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  // Errors show after the first Send and then follow the fields as they are fixed.
+  const errors = submitted ? contactErrors(contact) : {}
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!canSend) return
+    setSubmitted(true)
+    if (Object.keys(contactErrors(contact)).length > 0) {
+      focusFirstInvalid(formRef.current)
+      return
+    }
     await send({
       ...contactPayload(contact),
       source: "website",
@@ -446,14 +437,14 @@ function FollowUpForm({ answers, estimate }: { answers: QuizAnswers; estimate: Q
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 rounded-2xl border border-border bg-card p-5" aria-labelledby="quiz-follow-up" noValidate>
+    <form ref={formRef} onSubmit={handleSubmit} className="mt-8 rounded-2xl border border-border bg-card p-5" aria-labelledby="quiz-follow-up" noValidate>
       <h3 id="quiz-follow-up" className="font-outfit text-lg font-semibold">
         Want us to follow up?
       </h3>
       <p className="mb-4 mt-1 text-sm text-muted-foreground">We&apos;ll send homes in your range and answer your questions. No obligation.</p>
-      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my search." />
+      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my search." errors={errors} />
       <LeadFormError message={error} />
-      <button type="submit" disabled={!canSend || status === "sending"} className={`${primaryButton} mt-4 w-full`}>
+      <button type="submit" disabled={status === "sending"} className={`${primaryButton} mt-4 w-full`}>
         {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
         Send my results
       </button>

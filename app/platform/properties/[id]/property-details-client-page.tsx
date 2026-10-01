@@ -10,8 +10,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { LazyImage } from "@/components/lazy-image"
 import { useOfflineStatus } from "@/hooks/use-offline-status"
 import { fetchPropertyById, getFavoritePropertyIds, toggleFavoriteProperty } from "@/lib/api/properties"
+import { requestErrorMessage } from "@/lib/api/http"
+import { analytics } from "@/lib/analytics"
 import { submitPropertyInquiry } from "@/lib/api/inquiries"
 import type { PropertySummary } from "@/lib/api/types"
+import { SITE_PHONE } from "@/lib/site"
 
 export function PropertyDetailsClientPage({ propertyId }: { propertyId: string }) {
   const [property, setProperty] = useState<PropertySummary | null>(null)
@@ -49,12 +52,24 @@ export function PropertyDetailsClientPage({ propertyId }: { propertyId: string }
         phone: formState.phone,
         message: formState.message,
       })
+      // One conversion per saved lead. A queued inquiry is not saved yet, so it does not count.
+      if (!result.queued) {
+        analytics.trackFormSubmission("property_inquiry", true)
+        analytics.trackLeadGeneration("property_inquiry", propertyId)
+      }
       setStatusMessage(
         result.queued
           ? "Inquiry saved offline. It will sync automatically when your connection is restored."
           : "Inquiry submitted successfully."
       )
       setFormState({ fullName: "", email: "", phone: "", message: "" })
+    } catch (error) {
+      analytics.trackFormSubmission("property_inquiry", false)
+      // Keep what they typed so they can fix it and send again.
+      setStatusMessage(
+        requestErrorMessage(error) ??
+          `We could not send your inquiry. Please try again, or call us at ${SITE_PHONE}.`
+      )
     } finally {
       setIsSubmitting(false)
     }

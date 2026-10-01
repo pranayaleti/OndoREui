@@ -26,7 +26,14 @@ describe("SiteChrome", () => {
     expect(screen.queryByRole("navigation", { name: "Site header" })).not.toBeInTheDocument()
   })
 
-  it.each(["/", "/socials/", "/linkshub/", "/properties/links/"])("keeps site chrome on %s", (pathname) => {
+  // QR short links only redirect to /links, so they ship no chrome either.
+  it.each(["/go", "/go/", "/go/card", "/go/card/"])("drops header, footer and floating widgets on %s", (pathname) => {
+    mockPathname = pathname
+    renderChrome()
+    expect(screen.queryByRole("navigation", { name: "Site header" })).not.toBeInTheDocument()
+  })
+
+  it.each(["/", "/socials/", "/linkshub/", "/properties/links/", "/going/", "/gold/"])("keeps site chrome on %s", (pathname) => {
     mockPathname = pathname
     renderChrome()
     expect(screen.getByRole("navigation", { name: "Site header" })).toBeInTheDocument()

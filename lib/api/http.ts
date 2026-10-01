@@ -19,6 +19,46 @@ export function getCsrfToken(): string | undefined {
   }
 }
 
+/** A non-2xx answer from the API: the HTTP status and the server's message, when it sent one. */
+export class ApiRequestError extends Error {
+  readonly status: number
+  readonly serverMessage: string | undefined
+
+  constructor(status: number, serverMessage?: string) {
+    super(`Request failed: ${status}`)
+    this.name = "ApiRequestError"
+    this.status = status
+    this.serverMessage = serverMessage
+  }
+}
+
+/**
+ * True for a status that retrying later can fix: server errors, a timeout (408) and rate
+ * limiting (429). Every other 4xx means the request itself is wrong and will fail again.
+ */
+export function isRetryableStatus(status: number): boolean {
+  return status >= 500 || status === 408 || status === 429
+}
+
+/**
+ * Whether a failed request is worth saving for later: a network failure or timeout (no
+ * response at all) or a retryable status. A rejected request (400, 404, 422...) is not.
+ */
+export function isRetryableRequestError(error: unknown): boolean {
+  return error instanceof ApiRequestError ? isRetryableStatus(error.status) : true
+}
+
+/** The server's own message for a failed request, or undefined when there is none to show. */
+export function requestErrorMessage(error: unknown): string | undefined {
+  return error instanceof ApiRequestError ? error.serverMessage : undefined
+}
+
+async function failedRequest(response: Response): Promise<ApiRequestError> {
+  const body = (await response.json().catch(() => null)) as { error?: unknown; message?: unknown } | null
+  const message = [body?.error, body?.message].find((value): value is string => typeof value === "string" && value !== "")
+  return new ApiRequestError(response.status, message)
+}
+
 function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = DEFAULT_TIMEOUT_MS): Promise<Response> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
@@ -75,7 +115,7 @@ export async function postJson<TResponse = unknown, TBody = unknown>(
     })
 
     if (!response.ok) {
-      throw new Error(`Request failed: ${response.status}`)
+      throw await failedRequest(response)
     }
 
     const contentType = response.headers.get("content-type") ?? ""

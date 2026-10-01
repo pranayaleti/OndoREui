@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { sendQualificationMessage } from "@/lib/api/qualification";
-import { backendUrl } from "@/lib/backend";
+import { qualifyErrorKind, sendQualificationMessage } from "@/lib/api/qualification";
+import { SITE_PHONE } from "@/lib/site";
 import { validateChatInput, sanitizeReply } from "@/lib/aiGuardrails";
 
 interface Message { role: "user" | "assistant"; text: string }
@@ -18,6 +18,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [expired, setExpired] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [greeted, setGreeted] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -53,30 +54,18 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
         setCompleted(true);
       }
       const safeReply = sanitizeReply(result.reply);
-      setMessages((prev) => {
-        const updated = [...prev, { role: "assistant" as const, text: safeReply }];
-        if (result.completed) {
-          // Fire-and-forget: extract lead data from full conversation and sync to HubSpot
-          // Use `updated` (committed prev + final assistant reply) to avoid stale-closure bug
-          fetch(backendUrl("/api/leads/capture-from-chat"), {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              messages: updated.map((m) => ({ role: m.role, text: m.text })),
-              leadType,
-            }),
-          }).catch(() => {
-            // Intentionally silent, lead capture failure must not affect the user experience
-          });
-        }
-        return updated;
-      });
+      setMessages((prev) => [...prev, { role: "assistant" as const, text: safeReply }]);
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Unknown error";
-      if (msg.includes("404") || msg.includes("expired")) {
-        setCompleted(true); // treat as done
+      // Only an explicit "already completed" or "expired" answer from the API ends
+      // the chat. Any other failure (network, wrong host, 5xx) shows an error so
+      // nobody is told "we'll be in touch" when nothing was recorded.
+      const kind = qualifyErrorKind(e);
+      if (kind === "completed") {
+        setCompleted(true);
+      } else if (kind === "expired") {
+        setExpired(true);
       } else {
-        setError("Something went wrong, please try again or reply to our email.");
+        setError(`Something went wrong. Please try again, reply to our email or call ${SITE_PHONE}.`);
       }
     } finally {
       setLoading(false);
@@ -84,7 +73,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
   }
 
   async function handleSend() {
-    if (!input.trim() || loading || completed) return;
+    if (!input.trim() || loading || completed || expired) return;
     const text = input.trim();
     setInput("");
     setMessages((prev) => [...prev, { role: "user", text }]);
@@ -94,7 +83,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {open && (
-        <div className="w-80 bg-card rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: 460 }}>
+        <div className="w-80 bg-card rounded-2xl shadow-2xl border border-border flex flex-col overflow-hidden" style={{ height: 460 }}>
           {/* Header */}
           <div className="bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
             <span className="text-sm font-semibold">Quick Questions</span>
@@ -108,7 +97,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
                 <div className={`max-w-[80%] text-sm px-3 py-2 rounded-2xl ${
                   m.role === "user"
                     ? "bg-indigo-600 text-white rounded-br-sm"
-                    : "bg-muted text-gray-800 rounded-bl-sm"
+                    : "bg-muted text-foreground rounded-bl-sm"
                 }`}>
                   {m.text}
                 </div>
@@ -116,27 +105,32 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
             ))}
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-muted text-gray-400 text-sm px-3 py-2 rounded-2xl rounded-bl-sm">
+                <div className="bg-muted text-muted-foreground text-sm px-3 py-2 rounded-2xl rounded-bl-sm">
                   <span className="animate-pulse">•••</span>
                 </div>
               </div>
             )}
             {completed && (
-              <div className="text-center text-sm text-gray-500 py-4">
+              <div role="status" className="text-center text-sm text-muted-foreground py-4">
                 Thanks! We&apos;ll be in touch within 24 hours.
               </div>
             )}
+            {expired && (
+              <div role="status" className="text-center text-sm text-muted-foreground py-4">
+                This link has expired. Reply to our email or call {SITE_PHONE} and we&apos;ll pick it up from there.
+              </div>
+            )}
             {error && (
-              <div className="text-center text-xs text-red-500 py-2">{error}</div>
+              <div role="alert" className="text-center text-xs text-destructive-emphasis py-2">{error}</div>
             )}
             <div ref={bottomRef} />
           </div>
 
           {/* Input */}
-          {!completed && (
+          {!completed && !expired && (
             <div className="border-t px-3 py-2 flex gap-2">
               <input
-                className="flex-1 text-sm outline-none"
+                className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
                 placeholder="Type your answer..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}

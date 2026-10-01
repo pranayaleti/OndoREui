@@ -1,22 +1,66 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { stripePromise } from "@/lib/stripe"
+import {
+  isStripeConfigured,
+  stripePromise,
+  stripeReturnClientSecret,
+  stripeReturnUrl,
+  withoutStripeReturnParams,
+} from "@/lib/stripe"
+import { SITE_PHONE, SITE_PHONE_TEL } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 
+/** Payment statuses that mean the payer is done: paid, being processed, or authorized. */
+const PAID_STATUSES = new Set(["succeeded", "processing", "requires_capture"])
+
 interface PaymentFormInnerProps {
+  clientSecret: string
   amount?: number
   onSuccess?: () => void
   onError?: (message: string) => void
   submitLabel?: string
 }
 
-function PaymentFormInner({ amount, onSuccess, onError, submitLabel }: PaymentFormInnerProps) {
+function PaymentFormInner({ clientSecret, amount, onSuccess, onError, submitLabel }: PaymentFormInnerProps) {
   const stripe = useStripe()
   const elements = useElements()
   const [isProcessing, setIsProcessing] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  // The latest callbacks, so the return-from-redirect check below runs once per payment intent.
+  const callbacks = useRef({ onSuccess, onError })
+  callbacks.current = { onSuccess, onError }
+
+  // After a redirect-based payment (3-D Secure, bank redirect) Stripe sends the payer back to this
+  // page with redirect_status in the URL. Ask Stripe for the real status of this payment intent
+  // (the URL can be edited) and report it, then drop the parameters so a refresh does not replay it.
+  useEffect(() => {
+    if (!stripe) return
+    const returnedSecret = stripeReturnClientSecret(window.location.search)
+    if (!returnedSecret || returnedSecret !== clientSecret) return
+    let cancelled = false
+    void stripe
+      .retrievePaymentIntent(clientSecret)
+      .then(({ paymentIntent }) => {
+        if (cancelled) return
+        window.history.replaceState(null, "", withoutStripeReturnParams(window.location.href))
+        const status = paymentIntent?.status
+        if (status && PAID_STATUSES.has(status)) {
+          callbacks.current.onSuccess?.()
+        } else if (status === "requires_payment_method") {
+          const msg = "Your payment did not go through. Please try again or use another payment method."
+          setErrorMessage(msg)
+          callbacks.current.onError?.(msg)
+        }
+      })
+      .catch(() => {
+        // Could not reach Stripe: the form stays usable and the server record decides.
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [stripe, clientSecret])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,7 +78,8 @@ function PaymentFormInner({ amount, onSuccess, onError, submitLabel }: PaymentFo
         return
       }
 
-      const confirmUrl = `${window.location.origin}${window.location.pathname}`
+      // Keep the page's own query (for example ?screeningId=) across a redirect.
+      const confirmUrl = stripeReturnUrl(window.location)
 
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
@@ -52,7 +97,7 @@ function PaymentFormInner({ amount, onSuccess, onError, submitLabel }: PaymentFo
       }
 
       const status = paymentIntent?.status
-      if (status === "succeeded" || status === "processing" || status === "requires_capture") {
+      if (status && PAID_STATUSES.has(status)) {
         onSuccess?.()
         return
       }
@@ -104,10 +149,14 @@ export function StripePaymentForm({
   onError,
   submitLabel,
 }: StripePaymentFormProps) {
-  if (!process.env["NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"]) {
+  if (!isStripeConfigured) {
     return (
-      <p role="alert" className="text-sm text-gray-500">
-        Stripe is not configured. Set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in your environment.
+      <p role="alert" className="text-sm text-muted-foreground">
+        Online payment is not available right now. Please call us at{" "}
+        <a href={`tel:${SITE_PHONE_TEL}`} className="font-medium underline">
+          {SITE_PHONE}
+        </a>{" "}
+        and we will take the payment with you.
       </p>
     )
   }
@@ -126,6 +175,7 @@ export function StripePaymentForm({
       }}
     >
       <PaymentFormInner
+        clientSecret={clientSecret}
         amount={amount}
         onSuccess={onSuccess}
         onError={onError}

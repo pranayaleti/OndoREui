@@ -66,14 +66,21 @@ export function listingRowsFromBody(body: unknown): ApiProperty[] {
   return listingRows(body)
 }
 
+/** Like fetchPublicPropertyList, but rejects when the list could not be loaded so callers can tell an outage from an empty market. */
+export async function fetchPublicPropertyListOrThrow(
+  fetchImpl: typeof fetch = fetch,
+): Promise<ApiProperty[]> {
+  const listRes = await fetchImpl(backendUrl("/api/properties/public"))
+  if (!listRes.ok) throw new Error(`Public listings request failed: ${listRes.status}`)
+  const body: unknown = await listRes.json()
+  return listingRows(body)
+}
+
 export async function fetchPublicPropertyList(
   fetchImpl: typeof fetch = fetch,
 ): Promise<ApiProperty[]> {
   try {
-    const listRes = await fetchImpl(backendUrl("/api/properties/public"))
-    if (!listRes.ok) return []
-    const body: unknown = await listRes.json()
-    return listingRows(body)
+    return await fetchPublicPropertyListOrThrow(fetchImpl)
   } catch {
     return []
   }

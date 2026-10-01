@@ -13,12 +13,27 @@ export interface SiteVisitPublic {
 
 const FETCH_TIMEOUT_MS = 15_000;
 
+/** A non-2xx answer from the site-visits API, carrying the status so callers can tell a dead link from an outage. */
+export class SiteVisitHttpError extends Error {
+  readonly status: number;
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "SiteVisitHttpError";
+    this.status = status;
+  }
+}
+
+/** True only when the API says the token matches nothing (404). Timeouts, network errors and 5xx are not "link invalid". */
+export function isLinkNotFoundError(error: unknown): boolean {
+  return error instanceof SiteVisitHttpError && error.status === 404;
+}
+
 export async function getVisitByToken(token: string): Promise<SiteVisitPublic> {
   const res = await fetch(backendUrl(`/api/site-visits/by-token/${encodeURIComponent(token)}`), {
     cache: "no-store",
     signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
-  if (!res.ok) throw new Error("Visit not found");
+  if (!res.ok) throw new SiteVisitHttpError("Visit not found", res.status);
   return res.json();
 }
 
@@ -45,7 +60,7 @@ export async function getSchedule(token: string): Promise<SchedulePayload> {
     cache: "no-store",
     signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
-  if (!res.ok) throw new Error("Schedule not found");
+  if (!res.ok) throw new SiteVisitHttpError("Schedule not found", res.status);
   return res.json();
 }
 

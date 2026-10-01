@@ -19,16 +19,16 @@ export const metadata: Metadata = {
 export default function ChatPage() {
   return (
     <main className="mx-auto flex min-h-[70vh] w-full max-w-2xl flex-col px-4 py-10">
-      <h1 className="mb-2 text-2xl font-bold tracking-tight text-neutral-900">
+      <h1 className="mb-2 text-2xl font-bold tracking-tight text-foreground">
         Your conversation
       </h1>
-      <p className="mb-6 text-sm text-neutral-600">
+      <p className="mb-6 text-sm text-foreground/70">
         Pick up where you left off. Ask anything about the home, or suggest a time to see it.
       </p>
 
       <Suspense
         fallback={
-          <div className="h-[560px] w-full animate-pulse rounded-xl border border-neutral-200 bg-neutral-50 motion-reduce:animate-none" />
+          <div className="h-[560px] w-full animate-pulse rounded-xl border border-border bg-muted motion-reduce:animate-none" />
         }
       >
         <ChatSessionClient />

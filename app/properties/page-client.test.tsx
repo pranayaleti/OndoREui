@@ -79,4 +79,19 @@ describe("PropertiesClient", () => {
     await waitFor(() => expect(screen.getByTestId("ask-leasing")).toHaveTextContent("empty"))
     expect(screen.getByRole("heading", { name: /how to rent with ondo/i })).toBeInTheDocument()
   })
+
+  it("shows a fixed friendly error and no '0 homes' count when listings fail to load", async () => {
+    global.fetch = vi.fn().mockRejectedValue(new Error("Failed to fetch")) as unknown as typeof fetch
+
+    render(<PropertiesClient />)
+
+    await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument())
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "We could not load listings. Check your connection and try again.",
+    )
+    expect(screen.queryByText(/failed to fetch/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/homes? on the market/i)).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: /try again/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /contact leasing/i })).toBeInTheDocument()
+  })
 })

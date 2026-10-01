@@ -1,15 +1,18 @@
 "use client"
 
-import { useId, useState, type FormEvent } from "react"
+import { useId, useRef, useState, type FormEvent } from "react"
 import { Loader2 } from "lucide-react"
 import {
   EMPTY_CONTACT,
+  FieldError,
   LeadContactFields,
   LeadFormError,
   LeadSentNotice,
-  contactIsComplete,
+  contactErrors,
   contactPayload,
+  focusFirstInvalid,
   leadInputClass,
+  requiredFieldProps,
   useLeadSubmission,
   type ContactValues,
 } from "@/components/lead-contact-fields"
@@ -23,14 +26,23 @@ export function RateWatchForm() {
   const [balance, setBalance] = useState("")
   const [city, setCity] = useState("")
   const { status, error, send } = useLeadSubmission("refinance_rate_watch")
+  const [submitted, setSubmitted] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
   const idPrefix = useId()
 
   const parsedCurrentRate = parseOptionalAmount(currentRate)
-  const canSend = contactIsComplete(contact) && parsedCurrentRate !== undefined && parsedCurrentRate > 0
+  const rateIsValid = parsedCurrentRate !== undefined && parsedCurrentRate > 0
+  // Errors show after the first submit and then follow the fields as they are fixed.
+  const errors = submitted ? contactErrors(contact) : {}
+  const rateError = submitted && !rateIsValid ? "Enter your current rate, like 7.25." : undefined
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!canSend || parsedCurrentRate === undefined) return
+    setSubmitted(true)
+    if (Object.keys(contactErrors(contact)).length > 0 || !rateIsValid) {
+      focusFirstInvalid(formRef.current)
+      return
+    }
     await send({
       ...contactPayload(contact),
       source: "website",
@@ -55,7 +67,7 @@ export function RateWatchForm() {
   const fieldId = (key: string) => `${idPrefix}-${key}`
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-6">
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
           <label htmlFor={fieldId("current")} className="text-sm font-medium">
@@ -68,7 +80,9 @@ export function RateWatchForm() {
             value={currentRate}
             onChange={(e) => setCurrentRate(e.target.value)}
             className={leadInputClass}
+            {...requiredFieldProps(fieldId("current-error"), rateError)}
           />
+          <FieldError id={fieldId("current-error")} message={rateError} />
         </div>
         <div>
           <label htmlFor={fieldId("target")} className="text-sm font-medium">
@@ -104,12 +118,12 @@ export function RateWatchForm() {
         </div>
       </div>
 
-      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me when rates move." />
+      <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me when rates move." errors={errors} />
 
       <LeadFormError message={error} />
       <button
         type="submit"
-        disabled={!canSend || status === "sending"}
+        disabled={status === "sending"}
         className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}

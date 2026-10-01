@@ -17,6 +17,8 @@
 
 import { useEffect, useId, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { SITE_PHONE } from "@/lib/site"
+import { useAntiSpam } from "@/lib/anti-spam"
 import { hasLeadBeenCaptured, markLeadCaptured, submitLead } from "@/lib/api/leads"
 
 interface LeadCaptureModalProps {
@@ -32,9 +34,12 @@ export function LeadCaptureModal({
 }: LeadCaptureModalProps) {
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [failed, setFailed] = useState(false)
   const [alreadyCaptured, setAlreadyCaptured] = useState(false)
   const [dismissed, setDismissed] = useState(false)
   const emailId = useId()
+  const { honeypotProps, gate } = useAntiSpam()
 
   useEffect(() => {
     if (hasLeadBeenCaptured()) {
@@ -44,15 +49,31 @@ export function LeadCaptureModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!email) return
+    if (!email || sending) return
 
-    markLeadCaptured(email)
-    await submitLead({
+    // A filled honeypot or an instant submit is a bot. Show success so it cannot probe the gate,
+    // and do not remember it as a captured lead.
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt()
+      setSubmitted(true)
+      return
+    }
+
+    setSending(true)
+    setFailed(false)
+    const saved = await submitLead({
       email,
       source: calculatorName,
       calculatorSlug,
     })
+    setSending(false)
 
+    // Only a saved lead counts: a failed send keeps the card so they can retry.
+    if (!saved) {
+      setFailed(true)
+      return
+    }
+    markLeadCaptured(email)
     setSubmitted(true)
   }
 
@@ -65,17 +86,19 @@ export function LeadCaptureModal({
     >
       {submitted ? (
         <p role="status" className="text-center font-medium text-primary">
-          Results saved. Check your inbox.
+          Thanks. We will follow up by email.
         </p>
       ) : (
         <>
           <h2 id={`${emailId}-heading`} className="text-lg font-semibold text-foreground">
-            Save your results
+            Want a follow-up?
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Email yourself these {calculatorName} numbers so you can pick up where you left off.
+            Leave your email and the Ondo team will follow up about your {calculatorName} numbers. We do not email the results.
           </p>
           <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row">
+            {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
+            <input {...honeypotProps} />
             <label htmlFor={emailId} className="sr-only">
               Email address
             </label>
@@ -89,8 +112,8 @@ export function LeadCaptureModal({
               className="w-full flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <div className="flex gap-2">
-              <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Email my results
+              <Button type="submit" disabled={sending} className="bg-primary text-primary-foreground hover:bg-primary/90">
+                {sending ? "Sending..." : "Send my email"}
               </Button>
               <Button
                 type="button"
@@ -102,6 +125,11 @@ export function LeadCaptureModal({
               </Button>
             </div>
           </form>
+          {failed && (
+            <p role="alert" className="mt-3 text-sm text-destructive-emphasis">
+              That did not go through. Please try again, or call us at {SITE_PHONE}.
+            </p>
+          )}
         </>
       )}
     </section>

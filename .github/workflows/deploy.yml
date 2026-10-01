@@ -82,6 +82,12 @@ jobs:
           NEXT_PUBLIC_META_PIXEL_ID: ${{ vars.NEXT_PUBLIC_META_PIXEL_ID }}
           NEXT_PUBLIC_TIKTOK_PIXEL_ID: ${{ vars.NEXT_PUBLIC_TIKTOK_PIXEL_ID }}
           NEXT_PUBLIC_LINKEDIN_PARTNER_ID: ${{ vars.NEXT_PUBLIC_LINKEDIN_PARTNER_ID }}
+          # Application and screening fee payments. The publishable key is public by design (it ships
+          # in page source), so it is a repository variable like the IDs above. Unset or a placeholder
+          # means the payment form shows a message with the office phone number instead of loading Stripe.
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          # Supabase project origin: CSP connect-src and preconnect hints. Unset leaves them off.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
 
       - name: Add CNAME, disable Jekyll, write build id
         env:

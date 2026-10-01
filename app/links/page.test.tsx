@@ -128,6 +128,22 @@ describe("/links page", () => {
     expect(booking).toHaveAttribute("rel", "noopener noreferrer")
   })
 
+  it("carries the bio's campaign into the Calendly booking link", () => {
+    window.history.replaceState({}, "", "/links/?utm_source=instagram&utm_medium=bio&utm_campaign=fall")
+    try {
+      render(<LinksPage />)
+      const booking = screen.getByRole("link", { name: /book a free 30-minute call/i })
+      const url = new URL(booking.getAttribute("href")!)
+      expect(url.origin + url.pathname).toBe("https://calendly.com/scheduleondo/30min")
+      expect(url.searchParams.get("utm_source")).toBe("instagram")
+      expect(url.searchParams.get("utm_medium")).toBe("bio")
+      expect(url.searchParams.get("utm_campaign")).toBe("fall")
+      expect(url.searchParams.get("utm_content")).toBe("links_page")
+    } finally {
+      window.history.replaceState({}, "", "/")
+    }
+  })
+
   // AttributionCapture keeps UTMs in sessionStorage, which a noopener tab does not inherit.
   it("keeps site links in the same tab so social attribution carries into lead forms", () => {
     render(<LinksPage />)

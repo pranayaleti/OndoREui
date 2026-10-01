@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useId } from "react"
+import { useState, useEffect, useId, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -33,14 +33,14 @@ import { CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 const CONTACT_TOOL_DESCRIPTION =
-  "Submit a contact or lead inquiry to Ondo Real Estate. Requires name and email; optional phone, message, and inquiryType (tenant_looking_to_rent, agent_referrals, owner_rental_services, vendor_maintenance, current_resident)."
+  "Submit a contact or lead inquiry to Ondo Real Estate. Requires name and email; optional phone, message, and inquiryType (tenant_looking_to_rent, agent_referrals, owner_rental_services, vendor_maintenance, current_resident, buyer, seller, other)."
 
 const DEFAULT_SOURCE: ContactLeadSource = "website"
 
 const WEBMCP_TOOL_NAME = "submit_contact_lead"
 
 const INQUIRY_TYPE_WEBMCP_DESCRIPTION =
-  "Which audience describes the visitor: tenant_looking_to_rent, agent_referrals, owner_rental_services, vendor_maintenance, or current_resident."
+  "Which audience describes the visitor: tenant_looking_to_rent, agent_referrals, owner_rental_services, vendor_maintenance, current_resident, buyer, seller, or other (home loan, notary or any other question)."
 
 /** @deprecated Use CONTACT_AUDIENCE_OPTIONS. Kept so existing imports keep compiling. */
 export const CONTACT_INQUIRY_OPTIONS = CONTACT_AUDIENCE_OPTIONS
@@ -133,6 +133,29 @@ export function ContactLeadForm({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [agentFormActive, setAgentFormActive] = useState(false)
   const { honeypotProps, gate } = useAntiSpam()
+  const statusRef = useRef<HTMLDivElement>(null)
+
+  // The result banner sits above the form, so on a phone it is off-screen after
+  // the Send button is tapped. Bring it into view and move focus to it.
+  useEffect(() => {
+    if (!submitStatus) return
+    const el = statusRef.current
+    if (!el) return
+    el.scrollIntoView?.({ block: "center" })
+    el.focus({ preventScroll: true })
+  }, [submitStatus])
+
+  // A changed prefill (e.g. the visitor picks a listing) updates the message only,
+  // and only while the visitor has not typed in it. Name, email and phone are never touched.
+  const messageEditedRef = useRef(false)
+  const lastPrefillRef = useRef(prefillMessage)
+
+  useEffect(() => {
+    if (lastPrefillRef.current === prefillMessage) return
+    lastPrefillRef.current = prefillMessage
+    if (messageEditedRef.current) return
+    setFormData((prev) => ({ ...prev, message: prefillMessage }))
+  }, [prefillMessage])
 
   useEffect(() => {
     const onActivated = (event: Event) => {
@@ -153,6 +176,7 @@ export function ContactLeadForm({
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target
+    if (name === "message") messageEditedRef.current = true
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
@@ -168,14 +192,6 @@ export function ContactLeadForm({
     const honeypotFilled = String(data.get(honeypotProps.name) ?? "").trim() !== ""
     const rawInquiry = String(data.get("inquiryType") ?? "").trim()
     const fromForm = isContactInquiryType(rawInquiry) ? rawInquiry : ""
-    console.log("[contact] submitContactLead", {
-      name,
-      email,
-      phone,
-      message,
-      source,
-      inquiryType: fromForm,
-    })
 
     // Audience is only required when the form actually shows the radios.
     // Persona-scoped embeds pass `defaultInquiryType` and don't render them.
@@ -196,7 +212,6 @@ export function ContactLeadForm({
       // faster than minDwell. Render success so bots can't probe the gate.
       // Agent fills can be instant, so skip the dwell check when Chrome
       // marks the submit as agentInvoked.
-      console.log("[contact] honeypotFilled", honeypotFilled, "agentInvoked", agentInvoked, "gate.isLikelyBot()", gate.isLikelyBot())
       if (honeypotFilled || (!agentInvoked && gate.isLikelyBot())) {
         gate.recordAttempt()
         setSubmitStatus("success")
@@ -205,15 +220,6 @@ export function ContactLeadForm({
       }
 
       const attribution = getAttributionPayloadForApi()
-      console.log("[contact] submitContactLead", {
-        name,
-        email,
-        phone,
-        message,
-        source,
-        inquiryType: effectiveInquiry,
-        attribution,
-      })
       const result = await submitContactLead({
         name,
         email,
@@ -222,7 +228,7 @@ export function ContactLeadForm({
         source,
         ...(effectiveInquiry && { inquiryType: effectiveInquiry }),
         ...(attribution && { attribution }),
-      })
+      }, { formName: "contact_form" })
 
       if ("error" in result) {
         setSubmitStatus("error")
@@ -231,6 +237,7 @@ export function ContactLeadForm({
       }
       setSubmitStatus("success")
       setFormData({ name: "", email: "", phone: "", message: "" })
+      messageEditedRef.current = false
       if (!defaultInquiryType) setInquiryType("")
       setAgentFormActive(false)
 
@@ -305,15 +312,6 @@ export function ContactLeadForm({
             return { content: [{ type: "text", text: JSON.stringify({ status: "cancelled" }) }] }
           }
           const attr = getAttributionPayloadForApi()
-          console.log("[contact] submitContactLead (agent)", {
-            name,
-            email,
-            phone,
-            message,
-            source: DEFAULT_SOURCE,
-            inquiryType: inquiryValue,
-            attribution: attr,
-          })
           const result = await submitContactLead({
             name,
             email,
@@ -322,7 +320,7 @@ export function ContactLeadForm({
             source: DEFAULT_SOURCE,
             ...(inquiryValue && { inquiryType: inquiryValue }),
             ...(attr && { attribution: attr }),
-          })
+          }, { formName: "contact_form_agent" })
           return {
             content: [
               {
@@ -362,26 +360,39 @@ export function ContactLeadForm({
         ) : null}
       </CardHeader>
       <CardContent>
-        {submitStatus === "success" && (
-          <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center">
-            <CheckCircle className="text-green-500 dark:text-green-400 mr-3 flex-shrink-0" />
-            <div>
-              <p className="text-green-700 dark:text-green-300 font-semibold">
-                {t('contactForm.successTitle')}
-              </p>
-              <p className="text-green-600 dark:text-green-400 text-sm">
-                {t('contactForm.successBody')}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {submitStatus === "error" && (
-          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center">
-            <AlertCircle className="text-red-500 dark:text-red-400 mr-3 flex-shrink-0" />
-            <p className="text-red-700 dark:text-red-300">
-              {errorMessage ?? t('contactForm.errorFallback', { phone: SITE_PHONE })}
-            </p>
+        {submitStatus && (
+          <div ref={statusRef} tabIndex={-1} className="mb-6 outline-none">
+            {submitStatus === "success" ? (
+              <div
+                role="status"
+                className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center"
+              >
+                <CheckCircle className="text-green-500 dark:text-green-400 mr-3 flex-shrink-0" aria-hidden="true" />
+                <div>
+                  <p className="text-green-700 dark:text-green-300 font-semibold">
+                    {t('contactForm.successTitle')}
+                  </p>
+                  <p className="text-green-600 dark:text-green-400 text-sm">
+                    {t('contactForm.successBody')}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div
+                role="alert"
+                className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center"
+              >
+                <AlertCircle className="text-red-500 dark:text-red-400 mr-3 flex-shrink-0" aria-hidden="true" />
+                <div>
+                  <p className="text-red-700 dark:text-red-300">
+                    {t('contactForm.errorFallback', { phone: SITE_PHONE })}
+                  </p>
+                  {errorMessage ? (
+                    <p className="text-red-600 dark:text-red-400 text-sm mt-1">{errorMessage}</p>
+                  ) : null}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

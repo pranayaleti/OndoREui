@@ -5,15 +5,37 @@ import type { PropertyFilters, PropertySummary } from "@/lib/api/types"
 const LAST_VIEWED_KEY = "ondo:last-viewed-properties"
 const FAVORITES_KEY = "ondo:favorites"
 
+// Favorites and last-viewed are user preferences, not cached network responses, so they must not
+// expire. They live in localStorage. IndexedDB only serves as a one-time migration source for lists
+// saved by earlier versions (which expired after 30 minutes) and as a fallback when localStorage is
+// unavailable (blocked site data, some private windows).
 async function readJsonList<T>(key: string): Promise<T[]> {
-  const cached = await cacheGet<T[]>(key)
-  return cached ?? []
+  try {
+    const raw = window.localStorage.getItem(key)
+    if (raw !== null) {
+      const parsed: unknown = JSON.parse(raw)
+      return Array.isArray(parsed) ? (parsed as T[]) : []
+    }
+  } catch {
+    return (await cacheGet<T[]>(key)) ?? []
+  }
+  const legacy = (await cacheGet<T[]>(key)) ?? []
+  if (legacy.length > 0) {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(legacy))
+    } catch {
+      // Keep serving the legacy copy from IndexedDB.
+    }
+  }
+  return legacy
 }
 
 async function writeJsonList<T>(key: string, value: T[]): Promise<void> {
-  // User preference lists use LONG TTL (30 min), they are small and mutation-driven,
-  // not network responses, so we keep them alive between page loads.
-  await cacheSet(key, value, TTL.LONG)
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value))
+  } catch {
+    await cacheSet(key, value, TTL.LONG)
+  }
 }
 
 function applyFilters(data: PropertySummary[], filters?: PropertyFilters): PropertySummary[] {

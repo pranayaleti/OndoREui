@@ -68,11 +68,39 @@ describe("LinksQuickMessage", () => {
     expect(submitContactLead.mock.calls[0]![0].message).toContain("Need: Home loan or refinance")
   })
 
-  it("waits for what they need, a name and a valid email before sending", () => {
+  it("keeps Send enabled and says what is missing: what they need, a name and a valid email", () => {
     render(<LinksQuickMessage />)
     fireEvent.click(screen.getByRole("button", { name: /send me a quick message/i }))
+    fireEvent.change(screen.getByLabelText(/^email/i), { target: { value: "review-test" } })
+    const send = screen.getByRole("button", { name: /^send$/i })
+    expect(send).toBeEnabled()
+    fireEvent.click(send)
+
+    expect(submitContactLead).not.toHaveBeenCalled()
+    expect(screen.getByRole("radiogroup")).toHaveAccessibleDescription("Choose what you need.")
+    expect(screen.getByLabelText(/^name/i)).toHaveAccessibleDescription("Enter your name.")
+    expect(screen.getByLabelText(/^email/i)).toHaveAccessibleDescription(/valid email/i)
+
+    // The messages follow the fields as they are fixed.
     fireEvent.change(screen.getByLabelText(/^name/i), { target: { value: "Grace" } })
-    fireEvent.change(screen.getByLabelText(/^email/i), { target: { value: "grace@example.com" } })
-    expect(screen.getByRole("button", { name: /^send$/i })).toBeDisabled()
+    expect(screen.getByLabelText(/^name/i)).not.toHaveAttribute("aria-invalid")
+  })
+
+  it("moves between needs with the arrow keys, selecting as it goes, with one tab stop", () => {
+    render(<LinksQuickMessage />)
+    fireEvent.click(screen.getByRole("button", { name: /send me a quick message/i }))
+    const radios = screen.getAllByRole("radio")
+    expect(radios.map((radio) => radio.tabIndex)).toEqual([0, -1, -1, -1, -1])
+
+    radios[0]!.focus()
+    fireEvent.keyDown(radios[0]!, { key: "ArrowRight" })
+    expect(radios[1]).toHaveFocus()
+    expect(radios[1]).toHaveAttribute("aria-checked", "true")
+    expect(radios.map((radio) => radio.tabIndex)).toEqual([-1, 0, -1, -1, -1])
+
+    fireEvent.keyDown(radios[1]!, { key: "ArrowLeft" })
+    fireEvent.keyDown(radios[0]!, { key: "ArrowLeft" })
+    expect(radios[4]).toHaveFocus()
+    expect(radios[4]).toHaveAttribute("aria-checked", "true")
   })
 })

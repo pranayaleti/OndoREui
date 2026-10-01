@@ -297,7 +297,6 @@ export function UtahArrivalDesk() {
           We reply in English. Portal access stays invite-only.
         </p>
         <ContactLeadForm
-          key={`${path}-${workplace}-${selectedCity}`}
           defaultInquiryType={arrivalPathInquiryType(path)}
           prefillMessage={prefill}
           source="website"

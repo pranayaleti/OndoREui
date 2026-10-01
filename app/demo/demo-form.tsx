@@ -4,42 +4,68 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { SITE_EMAILS } from "@/lib/site"
+import { postJson } from "@/lib/api/http"
+import { analytics } from "@/lib/analytics"
+import { useAntiSpam } from "@/lib/anti-spam"
+import { getAttributionPayloadForApi } from "@/lib/attribution"
+import { splitPhoneForLead } from "@/lib/consultation-lead"
+import { buildLeadMessage, type ContactInquiryType } from "@/lib/leads-api"
 
 type FormState = "idle" | "loading" | "success" | "error"
+
+const INQUIRY_TYPE_BY_ROLE: Record<string, ContactInquiryType> = {
+  Owner: "owner",
+  Tenant: "renter",
+}
 
 export function DemoForm() {
   const { t } = useTranslation()
   const [state, setState] = useState<FormState>("idle")
+  const { honeypotProps, gate } = useAntiSpam()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    // A filled honeypot or an instant submit is a bot. Show success so it cannot probe the gate.
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt()
+      setState("success")
+      return
+    }
     setState("loading")
     const fd = new FormData(e.currentTarget)
     const firstName = fd.get("firstName") as string
     const lastName = fd.get("lastName") as string
     const email = fd.get("email") as string
-    const phone = (fd.get("phone") as string) || undefined
+    const rawPhone = (fd.get("phone") as string) || ""
     const role = fd.get("role") as string
     const units = fd.get("units") as string
     const time = fd.get("time") as string
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/leads/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: `${firstName} ${lastName}`,
-            email,
-            phone,
-            source: "website-demo",
-            message: `Demo request - Role: ${role}, Units: ${units || "not specified"}, Preferred time: ${time || "not specified"}`,
-          }),
-        }
-      )
-      setState(res.ok ? "success" : "error")
+      // The API only accepts its fixed source list, so the demo request is
+      // identified in the message rather than by a custom source.
+      const { phone, note } = splitPhoneForLead(rawPhone)
+      const attribution = getAttributionPayloadForApi()
+      await postJson("/api/leads/contact", {
+        name: `${firstName} ${lastName}`.trim(),
+        email,
+        ...(phone && { phone }),
+        source: "website",
+        inquiryType: INQUIRY_TYPE_BY_ROLE[role] ?? "other",
+        message: buildLeadMessage([
+          ["Request", "Guided demo"],
+          ["Role", role],
+          ["Units", units || "not specified"],
+          ["Preferred time", time || "not specified"],
+          ["Phone (as typed)", note],
+        ]),
+        ...(attribution && { attribution }),
+      })
+      analytics.trackFormSubmission("demo_request", true)
+      analytics.trackLeadGeneration("demo_request")
+      setState("success")
     } catch {
+      analytics.trackFormSubmission("demo_request", false)
       setState("error")
     }
   }
@@ -56,6 +82,8 @@ export function DemoForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
+      <input {...honeypotProps} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1">
           <label htmlFor="firstName" className="text-sm font-medium text-foreground">{t("demo.form.firstNameLabel")}</label>

@@ -14,7 +14,7 @@ vi.mock("@/lib/anti-spam", () => ({
   useAntiSpam: () => ({
     honeypotProps: {
       type: "text",
-      name: "company_url",
+      name: "fax_alt_info",
       autoComplete: "off",
       tabIndex: -1,
       "aria-hidden": true,

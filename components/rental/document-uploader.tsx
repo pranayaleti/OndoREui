@@ -82,8 +82,7 @@ export function DocumentUploader({
       <input
         id={`upload-${documentType}`}
         type="file"
-        accept="application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,image/*"
-        capture="environment"
+        accept="application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif"
         className="mt-2 block w-full text-sm"
         disabled={busy}
         onChange={async (event) => {
@@ -94,7 +93,7 @@ export function DocumentUploader({
             event.target.value = ""
             return
           }
-          if (file.type && !ALLOWED_TYPES.has(file.type) && !file.type.startsWith("image/")) {
+          if (file.type && !ALLOWED_TYPES.has(file.type)) {
             setError("Use a PDF or photo (JPEG, PNG, WebP, HEIC) up to 10 MB.")
             event.target.value = ""
             return

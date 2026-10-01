@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar, Phone, Home, CheckCircle, MessageSquare } from 'lucide-react';
-import { SITE_PHONE, SITE_CALENDLY_URL } from '@/lib/site';
+import { SITE_PHONE } from '@/lib/site';
+import { analyticsAttributes } from '@/lib/analytics';
+import { CalendlyLink } from '@/components/calendly-link';
 import ConsultationModal from '@/components/ConsultationModal';
 
 interface ConsultationCTAProps {
@@ -24,15 +26,14 @@ const ConsultationCTA: React.FC<ConsultationCTAProps> = ({
 
   const calendlyButton = (
     <Button asChild className="flex-1" size="lg">
-      <a
+      <CalendlyLink
         className="inline-flex items-center justify-center"
-        href={SITE_CALENDLY_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        contentLabel="consultation_cta"
+        {...analyticsAttributes('calendly_click', 'consultation_cta', 'book')}
       >
         <Calendar className="h-5 w-5 mr-2 shrink-0" />
         Book on Calendly
-      </a>
+      </CalendlyLink>
     </Button>
   );
 

@@ -163,10 +163,10 @@ export default function FeedbackPage() {
                   name="phone"
                   type="tel"
                   inputMode="tel"
-                  pattern="^[0-9+()\-\\s]*$"
+                  pattern="^[0-9+\(\)\s\-]*$"
                   value={phone}
                   onChange={(event) =>
-                    setPhone(event.target.value.replace(/[^0-9+()\-\\s]/g, ""))
+                    setPhone(event.target.value.replace(/[^0-9+()\s-]/g, ""))
                   }
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none ring-offset-background placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   placeholder="Add your phone number if you prefer a call or text"

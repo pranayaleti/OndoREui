@@ -3,6 +3,7 @@ import type { ApiProperty } from "@/app/types/property"
 import {
   fetchPublicPropertyByPublicId,
   fetchPublicPropertyList,
+  fetchPublicPropertyListOrThrow,
   findPublicProperty,
   listingDetailPath,
   listingWorksheetPath,
@@ -151,6 +152,26 @@ describe("fetchPublicPropertyList", () => {
     const result = await fetchPublicPropertyList()
     expect(result).toHaveLength(1)
     expect(result[0]?.publicId).toBe(row.publicId)
+  })
+})
+
+describe("fetchPublicPropertyListOrThrow", () => {
+  it("rejects on a 503 so callers can tell an outage from an empty market", async () => {
+    global.fetch = vi.fn(async () => ({ ok: false, status: 503, json: async () => ({}) })) as unknown as typeof fetch
+    await expect(fetchPublicPropertyListOrThrow()).rejects.toThrow(/503/)
+    expect(await fetchPublicPropertyList()).toEqual([])
+  })
+
+  it("rejects on a network error", async () => {
+    global.fetch = vi.fn(async () => {
+      throw new TypeError("Failed to fetch")
+    }) as unknown as typeof fetch
+    await expect(fetchPublicPropertyListOrThrow()).rejects.toThrow()
+  })
+
+  it("resolves an empty list when the market really is empty", async () => {
+    global.fetch = vi.fn(async () => ({ ok: true, json: async () => ({ data: [] }) })) as unknown as typeof fetch
+    await expect(fetchPublicPropertyListOrThrow()).resolves.toEqual([])
   })
 })
 

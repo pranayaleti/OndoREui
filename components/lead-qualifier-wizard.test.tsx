@@ -90,4 +90,15 @@ describe("LeadQualifierWizard", () => {
     fireEvent.click(screen.getByRole("button", { name: /back/i }))
     expect(screen.getByRole("radio", { name: "Sell a home" })).toHaveAttribute("aria-checked", "true")
   })
+
+  it("moves between answers with the arrow keys without choosing", () => {
+    render(<LeadQualifierWizard />)
+    const radios = screen.getAllByRole("radio")
+    expect(radios.filter((radio) => radio.tabIndex === 0)).toHaveLength(1)
+    radios[0]!.focus()
+    fireEvent.keyDown(radios[0]!, { key: "ArrowRight" })
+    expect(radios[1]).toHaveFocus()
+    expect(screen.getAllByRole("radio")).toHaveLength(radios.length)
+    expect(radios[1]).toHaveAttribute("aria-checked", "false")
+  })
 })

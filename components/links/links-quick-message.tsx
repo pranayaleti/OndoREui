@@ -1,20 +1,23 @@
 "use client"
 
-import { useId, useState, type FormEvent } from "react"
+import { useId, useRef, useState, type FormEvent } from "react"
 import { ChevronDown, Loader2, MessageCircle } from "lucide-react"
 import {
   EMPTY_CONTACT,
+  FieldError,
   LeadContactFields,
   LeadFormError,
   LeadSentNotice,
-  contactIsComplete,
+  contactErrors,
   contactPayload,
+  focusFirstInvalid,
   leadInputClass,
   useLeadSubmission,
   type ContactValues,
 } from "@/components/lead-contact-fields"
 import { getAttributionPayloadForApi, type MarketingAttribution } from "@/lib/attribution"
 import type { ContactInquiryType, ContactLeadSource } from "@/lib/leads-api"
+import { useRadioGroup } from "@/lib/use-radio-group"
 
 /**
  * The /links lead form for visitors who won't book a call or browse: what they need,
@@ -42,17 +45,31 @@ export function LinksQuickMessage() {
   const [need, setNeed] = useState<string>()
   const [note, setNote] = useState("")
   const [contact, setContact] = useState<ContactValues>(EMPTY_CONTACT)
+  const [submitted, setSubmitted] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
   const { status, error, send } = useLeadSubmission("links_quick_message")
   const formId = useId()
   const needLabelId = useId()
   const noteId = useId()
+  const needErrorId = useId()
+  const { groupProps, itemProps } = useRadioGroup(
+    NEEDS.map((option) => option.value),
+    need,
+    setNeed,
+  )
 
   const chosen = NEEDS.find((option) => option.value === need)
-  const canSend = chosen !== undefined && contactIsComplete(contact)
+  // Errors show after the first Send and then follow the fields as they are fixed.
+  const errors = submitted ? contactErrors(contact) : {}
+  const needError = submitted && !chosen ? "Choose what you need." : undefined
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!chosen || !canSend) return
+    setSubmitted(true)
+    if (!chosen || Object.keys(contactErrors(contact)).length > 0) {
+      focusFirstInvalid(formRef.current)
+      return
+    }
     const attribution = getAttributionPayloadForApi()
     await send({
       ...contactPayload(contact),
@@ -100,6 +117,7 @@ export function LinksQuickMessage() {
       {open ? (
         <form
           id={formId}
+          ref={formRef}
           onSubmit={handleSubmit}
           noValidate
           className="mt-2 rounded-2xl border border-primary/70 bg-card p-4"
@@ -107,7 +125,16 @@ export function LinksQuickMessage() {
           <p id={needLabelId} className="text-sm font-medium">
             What do you need?
           </p>
-          <div role="radiogroup" aria-labelledby={needLabelId} className="mt-2 flex flex-wrap gap-2">
+          <div
+            role="radiogroup"
+            aria-labelledby={needLabelId}
+            aria-required="true"
+            aria-invalid={needError ? true : undefined}
+            aria-describedby={needError ? needErrorId : undefined}
+            tabIndex={-1}
+            className="mt-2 flex flex-wrap gap-2 focus:outline-none"
+            {...groupProps}
+          >
             {NEEDS.map((option) => {
               const selected = option.value === need
               return (
@@ -117,6 +144,7 @@ export function LinksQuickMessage() {
                   role="radio"
                   aria-checked={selected}
                   onClick={() => setNeed(option.value)}
+                  {...itemProps(option.value)}
                   className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${focusRing} ${
                     selected ? "border-primary bg-primary/15 text-foreground" : "border-border text-foreground/85 hover:border-primary/60"
                   }`}
@@ -126,9 +154,10 @@ export function LinksQuickMessage() {
               )
             })}
           </div>
+          <FieldError id={needErrorId} message={needError} />
 
           <div className="mt-4">
-            <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me back." />
+            <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me back." errors={errors} />
           </div>
 
           <div className="mt-3">
@@ -147,7 +176,7 @@ export function LinksQuickMessage() {
           <LeadFormError message={error} />
           <button
             type="submit"
-            disabled={!canSend || status === "sending"}
+            disabled={status === "sending"}
             className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 ${focusRing}`}
           >
             {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}

@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { backendUrl } from "@/lib/backend"
+import { buildAffiliatePayload } from "@/lib/affiliate-application"
 import SEO from "@/components/seo"
 import { generateFAQJsonLd } from "@/lib/seo"
 
@@ -73,11 +74,11 @@ export function AffiliateContent() {
       const res = await fetch(backendUrl("/api/referrals/affiliate/apply"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify(buildAffiliatePayload(values)),
       })
       if (!res.ok) {
-        const data: { error?: string } = await res.json().catch(() => ({}))
-        setServerError(data.error ?? t("affiliate.submitError"))
+        const data: { message?: string; error?: string } = await res.json().catch(() => ({}))
+        setServerError(data.message ?? data.error ?? t("affiliate.submitError"))
         return
       }
       setSubmitted(true)
@@ -213,10 +214,12 @@ export function AffiliateContent() {
                     type="text"
                     autoComplete="name"
                     className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-invalid={errors.name ? true : undefined}
+                    aria-describedby={errors.name ? "aff-name-error" : undefined}
                     {...register("name")}
                   />
                   {errors.name && (
-                    <p className="text-xs text-red-500">{t("affiliate.nameRequired")}</p>
+                    <p id="aff-name-error" role="alert" className="text-xs text-red-500">{t("affiliate.nameRequired")}</p>
                   )}
                 </div>
 
@@ -232,10 +235,12 @@ export function AffiliateContent() {
                     type="email"
                     autoComplete="email"
                     className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-invalid={errors.email ? true : undefined}
+                    aria-describedby={errors.email ? "aff-email-error" : undefined}
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p className="text-xs text-red-500">{t("affiliate.emailInvalid")}</p>
+                    <p id="aff-email-error" role="alert" className="text-xs text-red-500">{t("affiliate.emailInvalid")}</p>
                   )}
                 </div>
 
@@ -248,10 +253,13 @@ export function AffiliateContent() {
                   </label>
                   <input
                     id="aff-website"
-                    type="url"
+                    type="text"
+                    inputMode="url"
                     autoComplete="url"
+                    autoCapitalize="none"
+                    spellCheck={false}
                     className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-foreground/40 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    placeholder="https://"
+                    placeholder="yoursite.com or @yourhandle"
                     {...register("website")}
                   />
                 </div>
@@ -291,7 +299,7 @@ export function AffiliateContent() {
                 </div>
 
                 {serverError && (
-                  <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
+                  <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
                     {serverError}
                   </p>
                 )}

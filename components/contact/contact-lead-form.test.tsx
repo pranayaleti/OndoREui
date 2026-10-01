@@ -38,6 +38,7 @@ vi.mock("react-i18next", () => {
 })
 
 import { submitContactLead } from "@/lib/leads-api"
+import { SITE_PHONE } from "@/lib/site"
 
 /**
  * The anti-spam gate stores Date.now() at mount time (via useRef) and rejects
@@ -88,6 +89,29 @@ describe("ContactLeadForm", () => {
     expect(screen.getByLabelText(/message/i)).toHaveValue("I'm interested in Sugar House, Salt Lake City.")
   })
 
+  it("keeps name, email and phone when prefillMessage changes, and updates an untouched message", () => {
+    const { rerender } = render(<ContactLeadForm defaultInquiryType="renter" prefillMessage="First" />)
+    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: "Test Renter" } })
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: "r@example.com" } })
+    fireEvent.change(screen.getByLabelText(/phone/i), { target: { value: "8015550100" } })
+
+    rerender(<ContactLeadForm defaultInquiryType="renter" prefillMessage="Second" />)
+
+    expect(screen.getByLabelText(/name/i)).toHaveValue("Test Renter")
+    expect(screen.getByLabelText(/email/i)).toHaveValue("r@example.com")
+    expect(screen.getByLabelText(/phone/i)).toHaveValue("8015550100")
+    expect(screen.getByLabelText(/message/i)).toHaveValue("Second")
+  })
+
+  it("does not overwrite a message the visitor has edited when prefillMessage changes", () => {
+    const { rerender } = render(<ContactLeadForm defaultInquiryType="renter" prefillMessage="First" />)
+    fireEvent.change(screen.getByLabelText(/message/i), { target: { value: "My own words" } })
+
+    rerender(<ContactLeadForm defaultInquiryType="renter" prefillMessage="Second" />)
+
+    expect(screen.getByLabelText(/message/i)).toHaveValue("My own words")
+  })
+
   it("shows every audience option and requires one before submitting", async () => {
     render(<ContactLeadForm />)
     expect(screen.getByRole("heading", { name: /get the help you need/i })).toBeInTheDocument()
@@ -97,8 +121,10 @@ describe("ContactLeadForm", () => {
     expect(screen.getByLabelText(/rental property/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/vendor, offering maintenance/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/current resident/i)).toBeInTheDocument()
-    expect(screen.queryByLabelText(/I'm buying a home/i)).not.toBeInTheDocument()
-    expect(screen.queryByLabelText(/Something else/i)).not.toBeInTheDocument()
+    // Buyers, sellers and borrowers have their own way in.
+    expect(screen.getByLabelText(/buy a home/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/sell a home/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/home loan, notary or other question/i)).toBeInTheDocument()
 
     advancePastAntiSpamDwell()
     fillRequiredFields()
@@ -118,6 +144,7 @@ describe("ContactLeadForm", () => {
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
     expect(submitContactLead).toHaveBeenCalledWith(
       expect.objectContaining({ source: "website", inquiryType: "owner_rental_services" }),
+      { formName: "contact_form" },
     )
   })
 
@@ -129,7 +156,7 @@ describe("ContactLeadForm", () => {
     fireEvent.click(screen.getByRole("button", { name: /send/i }))
 
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
-    expect(submitContactLead).toHaveBeenCalledWith(expect.objectContaining({ source: "popup" }))
+    expect(submitContactLead).toHaveBeenCalledWith(expect.objectContaining({ source: "popup" }), { formName: "contact_form" })
   })
 
   it("hides the audience question when defaultInquiryType is set, and tags the submit with it", async () => {
@@ -143,6 +170,7 @@ describe("ContactLeadForm", () => {
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
     expect(submitContactLead).toHaveBeenCalledWith(
       expect.objectContaining({ inquiryType: "renter" }),
+      { formName: "contact_form" },
     )
   })
 
@@ -152,6 +180,9 @@ describe("ContactLeadForm", () => {
       [/real estate agent/i, "agent_referrals"],
       [/vendor, offering maintenance/i, "vendor_maintenance"],
       [/current resident/i, "current_resident"],
+      [/buy a home/i, "buyer"],
+      [/sell a home/i, "seller"],
+      [/home loan, notary or other question/i, "other"],
     ] as const
     for (const [label, inquiryType] of cases) {
       vi.mocked(submitContactLead).mockClear()
@@ -164,9 +195,15 @@ describe("ContactLeadForm", () => {
       await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
       expect(submitContactLead).toHaveBeenCalledWith(
         expect.objectContaining({ inquiryType }),
+        { formName: "contact_form" },
       )
       unmount()
     }
+  })
+
+  it("pre-selects a buyer from initialInquiryType (?audience=buyer)", () => {
+    render(<ContactLeadForm initialInquiryType="buyer" />)
+    expect(screen.getByLabelText(/buy a home/i)).toBeChecked()
   })
 
   it("pre-selects initialInquiryType without hiding the audience radios", async () => {
@@ -181,6 +218,7 @@ describe("ContactLeadForm", () => {
     await waitFor(() => expect(submitContactLead).toHaveBeenCalled())
     expect(submitContactLead).toHaveBeenCalledWith(
       expect.objectContaining({ inquiryType: "owner_rental_services" }),
+      { formName: "contact_form" },
     )
   })
 
@@ -240,5 +278,30 @@ describe("ContactLeadForm", () => {
     } finally {
       vi.useRealTimers()
     }
+  })
+  it("announces success in a status region and moves focus to it", async () => {
+    render(<ContactLeadForm />)
+    advancePastAntiSpamDwell()
+    fireEvent.click(screen.getByLabelText(/rental property/i))
+    fillRequiredFields()
+    fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
+    const status = await screen.findByRole("status")
+    expect(status).toHaveTextContent("Message sent!")
+    await waitFor(() => expect(status.parentElement).toHaveFocus())
+  })
+
+  it("announces a failure in an alert that always carries the phone number", async () => {
+    vi.mocked(submitContactLead).mockResolvedValueOnce({ error: "Validation failed" })
+    render(<ContactLeadForm />)
+    advancePastAntiSpamDwell()
+    fireEvent.click(screen.getByLabelText(/rental property/i))
+    fillRequiredFields()
+    fireEvent.click(screen.getByRole("button", { name: /send/i }))
+
+    const alert = await screen.findByRole("alert")
+    expect(alert).toHaveTextContent(SITE_PHONE)
+    expect(alert).toHaveTextContent("Validation failed")
+    await waitFor(() => expect(alert.parentElement).toHaveFocus())
   })
 })

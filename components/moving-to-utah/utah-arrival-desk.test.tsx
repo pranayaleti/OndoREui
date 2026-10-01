@@ -1,12 +1,19 @@
+import { useState } from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
 import { CITY_MARKET_AS_OF } from "@/lib/city-market-data"
 import { STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS } from "@/components/sticky-mobile-cta-bar"
 import { UtahArrivalDesk } from "./utah-arrival-desk"
 
+function MockTypedName() {
+  const [name, setName] = useState("")
+  return <input aria-label="Mock name" value={name} onChange={(e) => setName(e.target.value)} />
+}
+
 vi.mock("@/components/contact/contact-lead-form", () => ({
   ContactLeadForm: (props: { defaultInquiryType?: string; prefillMessage?: string }) => (
     <div data-testid="lead-form">
+      <MockTypedName />
       <p>{props.defaultInquiryType}</p>
       <p>{props.prefillMessage}</p>
     </div>
@@ -42,6 +49,16 @@ describe("UtahArrivalDesk", () => {
       "href",
       "/whats-my-home-worth/",
     )
+  })
+
+  it("keeps what the visitor typed in the lead form when path, workplace or city change", () => {
+    render(<UtahArrivalDesk />)
+    fireEvent.change(screen.getByLabelText("Mock name"), { target: { value: "Test Person" } })
+    fireEvent.click(screen.getByLabelText(/a home is staying behind/i))
+    fireEvent.click(screen.getByRole("button", { name: /hill afb/i }))
+    fireEvent.change(screen.getByLabelText(/type a workplace/i), { target: { value: "Hill" } })
+    expect(screen.getByLabelText("Mock name")).toHaveValue("Test Person")
+    expect(screen.getByTestId("lead-form")).toHaveTextContent("owner")
   })
 
   it("shows an empty state for a workplace we do not cover", () => {

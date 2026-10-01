@@ -14,8 +14,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { SITE_PHONE, SITE_CALENDLY_URL } from '@/lib/site';
-import { backendUrl } from '@/lib/backend';
+import { SITE_PHONE } from '@/lib/site';
+import { analyticsAttributes } from '@/lib/analytics';
+import { CalendlyLink } from '@/components/calendly-link';
+import { submitContactLead } from '@/lib/leads-api';
+import { getAttributionPayloadForApi } from '@/lib/attribution';
+import { buildConsultationLead } from '@/lib/consultation-lead';
 import { useAntiSpam } from '@/lib/anti-spam';
 
 interface ConsultationModalProps {
@@ -168,40 +172,18 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
     setSubmitStatus(null);
 
     try {
-      const nowIso = new Date().toISOString();
-      const fallbackPublicId = '5b3aba39-51f2-48b5-b3a0-db948cfde010';
-      const payload = {
-        ...formData,
-        type: 'consultation',
-        source: 'consultation_modal',
-        context: variant,
-        leadType: 'consultation',
-        timestamp: nowIso,
-        utm_source: 'consultation_modal',
-        utm_medium: 'website',
-        utm_campaign: variant === 'notary' ? 'notary_booking' : 'consultation_booking',
-        publicId: fallbackPublicId,
-        tenantName: formData.name ?? '',
-        tenantEmail: formData.email ?? '',
-        tenantPhone: formData.phone ?? '',
-        moveInDate: nowIso,
-        monthlyBudget: 1,
-        occupants: 1,
-        hasPets: false,
-      };
+      // Same endpoint as the contact form: POST /api/leads/contact. The details
+      // that have no field of their own travel in the message.
+      const attribution = getAttributionPayloadForApi();
+      const result = await submitContactLead({
+        ...buildConsultationLead(formData, variant),
+        ...(attribution && { attribution }),
+      }, { formName: variant === 'notary' ? 'notary_booking' : 'consultation_booking' });
 
-      const response = await fetch(backendUrl('/api/leads/submit'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit consultation request');
+      if ('error' in result) {
+        throw new Error(result.error);
       }
-      
+
       setSubmitStatus('success');
       setFormData({
         name: '',
@@ -265,10 +247,13 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
             {t('consultationModal.calendlyHint')}
           </p>
           <Button asChild variant="outline" size="sm" className="gap-2">
-            <a href={SITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+            <CalendlyLink
+              contentLabel="consultation_modal"
+              {...analyticsAttributes('calendly_click', 'consultation_modal', 'book')}
+            >
               <Calendar className="h-4 w-4 shrink-0" />
               {t('consultationModal.bookOnCalendly')}
-            </a>
+            </CalendlyLink>
           </Button>
         </div>
 
@@ -290,7 +275,7 @@ const ConsultationModal: React.FC<ConsultationModalProps> = memo(({ isOpen, onCl
           {submitStatus === 'error' && (
             <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center" role="alert">
               <AlertCircle className="text-red-500 dark:text-red-400 mr-3 flex-shrink-0" />
-              <p className="text-red-700 dark:text-red-300">{t('consultationModal.errorMessage')}</p>
+              <p className="text-red-700 dark:text-red-300">{t('consultationModal.errorMessage', { phone: SITE_PHONE })}</p>
             </div>
           )}
 

@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { analytics } from "@/lib/analytics"
+import { useAntiSpam } from "@/lib/anti-spam"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { submitContactLead } from "@/lib/leads-api"
 import { SecureStorage, isValidEmail } from "@/lib/security"
@@ -96,6 +97,7 @@ export function FirstVisitLeadPopup() {
   const [keepOpenOnSuccess, setKeepOpenOnSuccess] = useState(false)
   const [status, setStatus] = useState<PopupStatus>("idle")
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const { honeypotProps, gate } = useAntiSpam()
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const eligiblePath = useMemo(() => isEligiblePath(pathname), [pathname])
 
@@ -225,6 +227,14 @@ export function FirstVisitLeadPopup() {
       return
     }
 
+    // A filled honeypot or an instant submit is a bot. Show success so it cannot probe the gate;
+    // nothing is sent and the popup does not remember it as submitted.
+    if (gate.isLikelyBot()) {
+      gate.recordAttempt()
+      setStatus("success")
+      return
+    }
+
     setStatus("submitting")
     setErrorMessage(null)
 
@@ -297,6 +307,8 @@ export function FirstVisitLeadPopup() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot: visually hidden, not focusable. Bots fill it; humans don't. */}
+              <input {...honeypotProps} />
               {status === "error" && errorMessage ? (
                 <div
                   role="alert"

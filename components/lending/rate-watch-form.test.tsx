@@ -33,9 +33,13 @@ describe("RateWatchForm", () => {
     expect(payload.message).toContain("Target rate: 6.25%")
   })
 
-  it("needs the current rate to know when to call", () => {
+  it("needs the current rate to know when to call, and says so instead of disabling Send", () => {
     render(<RateWatchForm />)
     fillContact()
-    expect(screen.getByRole("button", { name: /add me/i })).toBeDisabled()
+    const send = screen.getByRole("button", { name: /add me/i })
+    expect(send).toBeEnabled()
+    fireEvent.click(send)
+    expect(screen.getByLabelText(/current interest rate/i)).toHaveAccessibleDescription(/enter your current rate/i)
+    expect(submitContactLead).not.toHaveBeenCalled()
   })
 })

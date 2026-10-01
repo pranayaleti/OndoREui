@@ -503,9 +503,9 @@
     "subtitleNotary": "Remote online notarization nationwide",
     "calendlyHint": "Prefer to pick a time yourself? Same calendar for general consultations, notary, loans, and other services.",
     "bookOnCalendly": "Book on Calendly (30 min)",
-    "successTitle": "Consultation Booked Successfully!",
-    "successBody": "We'll send you a calendar invite and confirmation email shortly.",
-    "errorMessage": "Something went wrong. Please try again or contact us directly.",
+    "successTitle": "Request received",
+    "successBody": "We'll follow up shortly to confirm a time.",
+    "errorMessage": "Something went wrong. Please try again or call us at {{phone}}.",
     "fields": {
       "name": "Full Name *",
       "email": "Email Address *",

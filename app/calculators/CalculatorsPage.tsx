@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { analyticsAttributes } from '@/lib/analytics'
 import { 
   Calculator as CalcIcon,
   Home as HomeIcon,
@@ -280,6 +281,7 @@ const CalculatorsPage: React.FC = () => {
               <Link
                 href={calculator.path}
                 className="block group h-full"
+                {...analyticsAttributes('calculator_tile_click', 'calculators_hub', calculator.id)}
               >
                 <div className="relative h-full rounded-2xl backdrop-blur-lg border border-white/10 bg-card/60 p-6 overflow-hidden transition-all duration-500 hover:border-accent-1/50 hover:bg-card/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(255,107,0,0.15)]">
                   {/* Animated Glow Border on Hover */}

@@ -18,7 +18,9 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { MessageSquare, Send, X, Loader2, CalendarCheck } from 'lucide-react';
+import Link from 'next/link';
 import { backendUrl } from '@/lib/backend';
+import { SITE_PHONE, SITE_PHONE_TEL } from '@/lib/site';
 
 interface ChatTurn {
   id: string;
@@ -57,6 +59,8 @@ export default function LeasingChatWidget({
   const [isSending, setIsSending] = useState(false);
   const [escalated, setEscalated] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** True when an emailed resume link could not be loaded. There is no property to start a new chat on, so we offer other ways to reach the team instead of the input. */
+  const [resumeFailed, setResumeFailed] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
@@ -89,9 +93,12 @@ export default function LeasingChatWidget({
 
     (async () => {
       try {
-        const res = await fetch(backendUrl(`/leasing-agent/sessions/${initialSessionId}`));
+        const res = await fetch(backendUrl(`/api/leasing-agent/sessions/${initialSessionId}`));
         if (!res.ok) {
-          if (!cancelled) setError('We could not find that conversation. Start a new one below.');
+          if (!cancelled) {
+            setError('We could not find that conversation.');
+            setResumeFailed(true);
+          }
           return;
         }
         const json = (await res.json()) as {
@@ -109,7 +116,10 @@ export default function LeasingChatWidget({
         setTurns(prior);
         if (json.data?.status === 'needs_human') setEscalated(true);
       } catch {
-        if (!cancelled) setError('We could not load that conversation.');
+        if (!cancelled) {
+          setError('We could not load that conversation.');
+          setResumeFailed(true);
+        }
       }
     })();
 
@@ -121,7 +131,7 @@ export default function LeasingChatWidget({
   /** Open a conversation on first send, so idle widget views cost nothing. */
   const ensureSession = useCallback(async (): Promise<string | null> => {
     if (sessionId) return sessionId;
-    const res = await fetch(backendUrl('/leasing-agent/start'), {
+    const res = await fetch(backendUrl('/api/leasing-agent/start'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ propertyId, source: 'web' }),
@@ -152,7 +162,7 @@ export default function LeasingChatWidget({
         return;
       }
 
-      const res = await fetch(backendUrl('/leasing-agent/chat'), {
+      const res = await fetch(backendUrl('/api/leasing-agent/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: id, message }),
@@ -303,39 +313,67 @@ export default function LeasingChatWidget({
         )}
       </div>
 
-      <div className="border-t border-neutral-200 p-3">
-        <div className="flex items-center gap-2">
-          <label htmlFor="leasing-chat-input" className="sr-only">
-            Your message to the leasing assistant
-          </label>
-          <input
-            id="leasing-chat-input"
-            ref={inputRef}
-            type="text"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={onKeyDown}
-            disabled={isSending || escalated}
-            maxLength={2000}
-            placeholder={escalated ? 'The team will be in touch' : 'Ask a question or suggest a time…'}
-            className="min-w-0 flex-1 rounded-lg border border-neutral-300 px-3 py-2 text-sm
-                       placeholder:text-neutral-400 focus-visible:outline focus-visible:outline-2
-                       focus-visible:outline-offset-1 focus-visible:outline-[#FF6A13]
-                       disabled:bg-neutral-100"
-          />
-          <button
-            type="button"
-            onClick={() => void send()}
-            disabled={isSending || escalated || !draft.trim()}
-            className="rounded-lg bg-[#0B0B0B] p-2 text-white transition hover:bg-[#1a1a1a]
-                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                       focus-visible:outline-[#FF6A13] disabled:opacity-40"
-            aria-label="Send message"
-          >
-            <Send className="h-4 w-4" aria-hidden="true" />
-          </button>
+      {resumeFailed ? (
+        <div className="border-t border-neutral-200 p-4 text-sm text-neutral-800">
+          <p className="font-medium">Reach the team directly</p>
+          <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-2 font-medium">
+            <li>
+              <a href={`tel:${SITE_PHONE_TEL}`} className="text-orange-700 underline underline-offset-4">
+                Call {SITE_PHONE}
+              </a>
+            </li>
+            <li>
+              <a href={`sms:${SITE_PHONE_TEL}`} className="text-orange-700 underline underline-offset-4">
+                Text us
+              </a>
+            </li>
+            <li>
+              <Link href="/properties/" prefetch={false} className="text-orange-700 underline underline-offset-4">
+                Browse listings
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact/" prefetch={false} className="text-orange-700 underline underline-offset-4">
+                Contact the team
+              </Link>
+            </li>
+          </ul>
         </div>
-      </div>
+      ) : (
+        <div className="border-t border-neutral-200 p-3">
+          <div className="flex items-center gap-2">
+            <label htmlFor="leasing-chat-input" className="sr-only">
+              Your message to the leasing assistant
+            </label>
+            <input
+              id="leasing-chat-input"
+              ref={inputRef}
+              type="text"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={onKeyDown}
+              disabled={isSending || escalated}
+              maxLength={2000}
+              placeholder={escalated ? 'The team will be in touch' : 'Ask a question or suggest a time…'}
+              className="min-w-0 flex-1 rounded-lg border border-neutral-300 px-3 py-2 text-sm
+                         placeholder:text-neutral-400 focus-visible:outline focus-visible:outline-2
+                         focus-visible:outline-offset-1 focus-visible:outline-[#FF6A13]
+                         disabled:bg-neutral-100"
+            />
+            <button
+              type="button"
+              onClick={() => void send()}
+              disabled={isSending || escalated || !draft.trim()}
+              className="rounded-lg bg-[#0B0B0B] p-2 text-white transition hover:bg-[#1a1a1a]
+                         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                         focus-visible:outline-[#FF6A13] disabled:opacity-40"
+              aria-label="Send message"
+            >
+              <Send className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

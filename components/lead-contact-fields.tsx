@@ -15,8 +15,20 @@ export type ContactValues = { name: string; email: string; phone: string; textCo
 
 export const EMPTY_CONTACT: ContactValues = { name: "", email: "", phone: "", textConsent: false }
 
+/** What is wrong with the name and email, keyed by field. Empty when the contact is complete. */
+export type ContactErrors = { name?: string; email?: string }
+
+export function contactErrors(contact: ContactValues): ContactErrors {
+  const errors: ContactErrors = {}
+  if (contact.name.trim().length === 0) errors.name = "Enter your name."
+  const email = contact.email.trim()
+  if (email.length === 0) errors.email = "Enter your email."
+  else if (!isValidEmail(email)) errors.email = "Enter a valid email, like name@example.com."
+  return errors
+}
+
 export function contactIsComplete(contact: ContactValues): boolean {
-  return contact.name.trim().length > 0 && isValidEmail(contact.email.trim())
+  return Object.keys(contactErrors(contact)).length === 0
 }
 
 export function contactPayload(contact: ContactValues): Pick<SubmitContactLeadPayload, "name" | "email" | "phone"> {
@@ -30,14 +42,47 @@ export function contactPayload(contact: ContactValues): Pick<SubmitContactLeadPa
 export const leadInputClass =
   "mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
 
+/** Inline message under a field. The field points at it with aria-describedby. */
+export function FieldError({ id, message }: { id: string; message: string | undefined }) {
+  if (!message) return null
+  return (
+    <p id={id} className="mt-1 text-sm text-destructive-emphasis">
+      {message}
+    </p>
+  )
+}
+
+/**
+ * Props that mark a field as required and, once it has an error, invalid and linked to its
+ * message. Forms use noValidate, so this is for assistive tech; the message is the visible part.
+ */
+export function requiredFieldProps(errorId: string, message: string | undefined) {
+  return {
+    required: true,
+    "aria-required": true as const,
+    "aria-invalid": message ? (true as const) : undefined,
+    "aria-describedby": message ? errorId : undefined,
+  }
+}
+
+/**
+ * After a failed submit, move focus to the first field marked invalid. Waits a tick so the
+ * error state has rendered.
+ */
+export function focusFirstInvalid(form: HTMLFormElement | null) {
+  setTimeout(() => form?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus(), 0)
+}
+
 export function LeadContactFields({
   value,
   onChange,
   consentLabel,
+  errors = {},
 }: {
   value: ContactValues
   onChange: (next: ContactValues) => void
   consentLabel: string
+  errors?: ContactErrors
 }) {
   const ids = { name: useId(), email: useId(), phone: useId(), consent: useId() }
   const set = (patch: Partial<ContactValues>) => onChange({ ...value, ...patch })
@@ -48,7 +93,15 @@ export function LeadContactFields({
         <label htmlFor={ids.name} className="text-sm font-medium">
           Name
         </label>
-        <input id={ids.name} value={value.name} onChange={(e) => set({ name: e.target.value })} autoComplete="name" className={leadInputClass} />
+        <input
+          id={ids.name}
+          value={value.name}
+          onChange={(e) => set({ name: e.target.value })}
+          autoComplete="name"
+          className={leadInputClass}
+          {...requiredFieldProps(`${ids.name}-error`, errors.name)}
+        />
+        <FieldError id={`${ids.name}-error`} message={errors.name} />
       </div>
       <div>
         <label htmlFor={ids.email} className="text-sm font-medium">
@@ -61,7 +114,9 @@ export function LeadContactFields({
           onChange={(e) => set({ email: e.target.value })}
           autoComplete="email"
           className={leadInputClass}
+          {...requiredFieldProps(`${ids.email}-error`, errors.email)}
         />
+        <FieldError id={`${ids.email}-error`} message={errors.email} />
       </div>
       <div>
         <label htmlFor={ids.phone} className="text-sm font-medium">

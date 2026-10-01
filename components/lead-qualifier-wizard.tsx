@@ -15,19 +15,22 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Loader2, Phone } from "lucide-react"
+import { ChoiceRadioGroup } from "@/components/choice-radio-group"
 import {
   EMPTY_CONTACT,
   LeadContactFields,
   LeadFormError,
-  contactIsComplete,
+  contactErrors,
   contactPayload,
+  focusFirstInvalid,
   useLeadSubmission,
   type ContactValues,
 } from "@/components/lead-contact-fields"
+import { CalendlyLink } from "@/components/calendly-link"
 import { analytics, analyticsAttributes } from "@/lib/analytics"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import type { ContactInquiryType } from "@/lib/leads-api"
-import { SITE_CALENDLY_URL, SITE_PHONE } from "@/lib/site"
+import { SITE_PHONE } from "@/lib/site"
 
 type Intent = "manage_rental" | "buy_home" | "sell_home" | "find_rental" | "invest" | "loan" | "notary" | "other"
 type Urgency = "now" | "30_days" | "90_days" | "exploring"
@@ -116,6 +119,10 @@ export function LeadQualifierWizard() {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const hasNavigated = useRef(false)
   const headingId = useId()
+  const [submitted, setSubmitted] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  // Errors show after the first Send and then follow the fields as they are fixed.
+  const errors = submitted ? contactErrors(contact) : {}
 
   const steps = stepsFor(intent)
   const step = steps[Math.min(stepIndex, steps.length - 1)]!
@@ -137,7 +144,12 @@ export function LeadQualifierWizard() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!intent || !urgency || !contactIsComplete(contact)) return
+    setSubmitted(true)
+    if (Object.keys(contactErrors(contact)).length > 0) {
+      focusFirstInvalid(formRef.current)
+      return
+    }
+    if (!intent || !urgency) return
     const chosen = INTENTS.find((option) => option.value === intent)!
     const classification = classify(intent, urgency)
     const message = [
@@ -181,16 +193,14 @@ export function LeadQualifierWizard() {
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
           {isHot ? (
             <>
-              <a
-                href={SITE_CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <CalendlyLink
+                contentLabel="get_matched"
                 className={primaryButton}
                 {...analyticsAttributes("quiz_cta_click", "get_matched", "book")}
               >
                 <Calendar className="h-4 w-4" aria-hidden="true" />
                 Book a 30-minute call
-              </a>
+              </CalendlyLink>
               <a href={`tel:${phoneDigits}`} className={secondaryButton} {...analyticsAttributes("quiz_cta_click", "get_matched", "call")}>
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 Call {SITE_PHONE}
@@ -234,7 +244,7 @@ export function LeadQualifierWizard() {
       </h2>
 
       {step === "intent" ? (
-        <Choices
+        <ChoiceRadioGroup
           labelledBy={headingId}
           options={INTENTS}
           selected={intent}
@@ -247,7 +257,7 @@ export function LeadQualifierWizard() {
       ) : null}
 
       {step === "units" ? (
-        <Choices
+        <ChoiceRadioGroup
           labelledBy={headingId}
           options={UNIT_OPTIONS.filter((option) => intent === "invest" || option !== "None yet").map((option) => ({
             value: option,
@@ -285,7 +295,7 @@ export function LeadQualifierWizard() {
       ) : null}
 
       {step === "urgency" ? (
-        <Choices
+        <ChoiceRadioGroup
           labelledBy={headingId}
           options={URGENCY_OPTIONS}
           selected={urgency}
@@ -297,12 +307,12 @@ export function LeadQualifierWizard() {
       ) : null}
 
       {step === "contact" ? (
-        <form onSubmit={handleSubmit} className="mt-6" noValidate>
-          <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my match." />
+        <form ref={formRef} onSubmit={handleSubmit} className="mt-6" noValidate>
+          <LeadContactFields value={contact} onChange={setContact} consentLabel="Text me about my match." errors={errors} />
           <LeadFormError message={error} />
           <button
             type="submit"
-            disabled={!contactIsComplete(contact) || status === "sending"}
+            disabled={status === "sending"}
             className={`${primaryButton} mt-5 w-full`}
           >
             {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
@@ -321,41 +331,6 @@ export function LeadQualifierWizard() {
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Back
       </button>
-    </div>
-  )
-}
-
-function Choices<T extends string>({
-  labelledBy,
-  options,
-  selected,
-  onChoose,
-}: {
-  labelledBy: string
-  options: readonly { value: T; label: string }[]
-  selected: T | undefined
-  onChoose: (value: T) => void
-}) {
-  return (
-    <div role="radiogroup" aria-labelledby={labelledBy} className="mt-6 grid gap-3">
-      {options.map((option) => {
-        const isSelected = selected === option.value
-        return (
-          <button
-            key={option.value}
-            type="button"
-            role="radio"
-            aria-checked={isSelected}
-            onClick={() => onChoose(option.value)}
-            className={`flex min-h-[3.5rem] items-center justify-between rounded-xl border px-4 py-3 text-left text-[0.95rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-              isSelected ? "border-primary bg-primary/10" : "border-border bg-card hover:border-primary/60"
-            }`}
-          >
-            {option.label}
-            <ArrowRight className="h-4 w-4 opacity-50" aria-hidden="true" />
-          </button>
-        )
-      })}
     </div>
   )
 }

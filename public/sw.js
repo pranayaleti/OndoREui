@@ -6,8 +6,12 @@ const API_CACHE = `ondo-api-${SW_VERSION}`
 const LAST_VIEWED_CACHE = `ondo-last-viewed-${SW_VERSION}`
 
 const DB_NAME = "ondo-pwa-db"
-const DB_VERSION = 1
+// Keep in sync with lib/pwa/offline-queue.ts. Version 2 upgrades browsers an older build left
+// with an empty version-1 database (no store); onupgradeneeded below creates the store.
+const DB_VERSION = 2
 const STORE_NAME = "syncQueue"
+// Replays that got a retryable answer before an item is dropped. Keep in sync with lib/pwa/offline-queue.ts.
+const MAX_SYNC_ATTEMPTS = 8
 
 // Page URLs keep their trailing slash: GitHub Pages answers "/platform" with a 301, and a cached
 // redirect cannot be served to a navigation (the page fails to load offline).
@@ -263,7 +267,16 @@ function openDb() {
       }
     }
 
-    request.onsuccess = () => resolve(request.result)
+    request.onsuccess = () => {
+      const db = request.result
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.close()
+        reject(new Error("Offline queue storage is unavailable"))
+        return
+      }
+      db.onversionchange = () => db.close()
+      resolve(db)
+    }
     request.onerror = () => reject(request.error || new Error("Failed to open IndexedDB"))
   })
 }
@@ -290,22 +303,56 @@ async function removeQueueItem(id) {
   })
 }
 
+async function putQueueItem(item) {
+  const db = await openDb()
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite")
+    tx.objectStore(STORE_NAME).put(item)
+    tx.oncomplete = () => resolve()
+    tx.onerror = () => reject(tx.error || new Error("Failed to update queue item"))
+  })
+}
+
+// The page sends its CSRF token as a header read from the ondo_csrf cookie. A worker cannot read
+// document.cookie, so use the Cookie Store API where it exists (Chromium, the same browsers that
+// run Background Sync).
+async function csrfHeaders() {
+  try {
+    const cookie = self.cookieStore ? await self.cookieStore.get("ondo_csrf") : null
+    return cookie && cookie.value ? { "x-csrf-token": cookie.value } : {}
+  } catch (_error) {
+    return {}
+  }
+}
+
 async function flushQueueByType(type) {
   const items = await getAllQueueItems()
   const filteredItems = items.filter((item) => item.type === type)
 
   for (const item of filteredItems) {
     try {
-      const endpoint = item.endpoint.startsWith("http")
-        ? item.endpoint
-        : `https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api${item.endpoint}`
+      // Items queued by this build carry the URL the page resolved with backendUrl(). Older
+      // items only have the endpoint: the base already ends in /api (the Edge Function), so a
+      // stored "/api/leads/contact" must lose its own /api prefix.
+      const endpoint = item.url
+        ? item.url
+        : item.endpoint.startsWith("http")
+          ? item.endpoint
+          : `https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api${item.endpoint.replace(/^\/api(?=\/|$)/, "")}`
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await csrfHeaders()) },
+        credentials: "include",
         body: JSON.stringify(item.payload),
       })
-      if (response.ok) {
+      if (response.ok || (response.status < 500 && response.status !== 408 && response.status !== 429)) {
+        // Saved, or rejected for good (a 4xx the same request will hit again): leave the queue.
         await removeQueueItem(item.id)
+      } else {
+        // A server error, timeout or rate limit stays for the next sync, up to a cap.
+        const attempts = (item.attempts || 0) + 1
+        if (attempts >= MAX_SYNC_ATTEMPTS) await removeQueueItem(item.id)
+        else await putQueueItem({ ...item, attempts })
       }
     } catch (_error) {
       break
