@@ -45,7 +45,7 @@ export default function USDALoanPage() {
           { name: "USDA Loans", url: `${SITE_URL}/loans/usda` },
         ])}
       />
-      <PageBanner title="USDA Rural Loans" subtitle="Zero down payment financing for eligible rural and suburban Utah communities" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="USDA Rural Loans" subtitle="Zero down payment financing for eligible rural and suburban Utah communities" backgroundImage="/modern-office-building.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

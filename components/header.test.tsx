@@ -10,8 +10,28 @@ vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }))
 vi.mock("next/image", () => ({
-  // eslint-disable-next-line @next/next/no-img-element
-  default: ({ alt }: { alt: string }) => <img alt={alt} />,
+  default: ({
+    alt,
+    src,
+    priority,
+    loading,
+    fetchPriority,
+  }: {
+    alt: string
+    src: string
+    priority?: boolean
+    loading?: string
+    fetchPriority?: string
+  }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      alt={alt}
+      src={src}
+      data-priority={priority ? "true" : undefined}
+      data-loading={loading}
+      data-fetchpriority={fetchPriority}
+    />
+  ),
 }))
 vi.mock("@/components/mode-toggle", () => ({ ModeToggle: () => <button type="button">Theme</button> }))
 vi.mock("@/components/navigation", () => ({
@@ -146,5 +166,23 @@ describe("Header layout classes", () => {
     expect(toggle.className).toContain("min-h-11")
     expect(toggle.className).toContain("min-w-11")
     expect(toggle.parentElement?.className).toContain("ml-auto")
+  })
+})
+
+describe("Header logo", () => {
+  it("uses the small WebP wordmarks, never the 77KB PNGs", () => {
+    const { container } = render(<Header />)
+    const srcs = Array.from(container.querySelectorAll("img")).map((img) => img.getAttribute("src"))
+    expect(srcs).toEqual(["/logo-light-2x.webp", "/logo-dark-2x.webp"])
+  })
+
+  it("preloads only the default (dark) wordmark and loads the hidden light one at low priority", () => {
+    const { container } = render(<Header />)
+    const light = container.querySelector('img[src="/logo-light-2x.webp"]')!
+    const dark = container.querySelector('img[src="/logo-dark-2x.webp"]')!
+    expect(dark).toHaveAttribute("data-priority", "true")
+    expect(light).not.toHaveAttribute("data-priority")
+    expect(light).toHaveAttribute("data-loading", "eager")
+    expect(light).toHaveAttribute("data-fetchpriority", "low")
   })
 })

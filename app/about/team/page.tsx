@@ -33,7 +33,7 @@ export default function TeamPage() {
       <PageBanner
         title="Our Team"
         subtitle="Who runs Ondo Real Estate"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-muted dark:bg-gradient-to-b dark:from-background dark:to-card">

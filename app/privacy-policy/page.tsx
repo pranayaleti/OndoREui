@@ -149,7 +149,7 @@ export default function PrivacyPolicyPage() {
       <PageBanner
         title="Privacy Policy"
         subtitle="Your privacy and data protection are our top priorities"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-background">

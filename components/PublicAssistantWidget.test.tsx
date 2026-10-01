@@ -39,9 +39,11 @@ const okReply = (
     },
   })
 
-function openWidget() {
+// The chat panel is a lazily loaded chunk, so opening resolves once it has mounted.
+async function openWidget() {
   render(<PublicAssistantWidget />)
   fireEvent.click(screen.getByRole("button", { name: /open the ondo assistant/i }))
+  await screen.findByRole("region", { name: /ondo assistant/i })
 }
 
 function type(value: string) {
@@ -70,8 +72,8 @@ describe("PublicAssistantWidget", () => {
     ).toBeInTheDocument()
   })
 
-  it("tells visitors it is an AI assistant, not advice or a rate quote, and links the privacy policy", () => {
-    openWidget()
+  it("tells visitors it is an AI assistant, not advice or a rate quote, and links the privacy policy", async () => {
+    await openWidget()
     expect(screen.getByText(/not legal, tax or lending advice, or a rate quote/i)).toBeInTheDocument()
     expect(screen.getByRole("link", { name: /privacy policy/i })).toHaveAttribute("href", "/privacy-policy/")
     expect(screen.queryByText(/take over anytime/i)).not.toBeInTheDocument()
@@ -79,14 +81,14 @@ describe("PublicAssistantWidget", () => {
   })
 
   it("moves focus into the input when opened", async () => {
-    openWidget()
+    await openWidget()
     await waitFor(() =>
       expect(screen.getByLabelText(/your message to the ondo assistant/i)).toHaveFocus(),
     )
   })
 
   it("returns focus to the launcher when the panel is closed with the close button", async () => {
-    openWidget()
+    await openWidget()
     fireEvent.click(screen.getByRole("button", { name: /close the ondo assistant/i }))
     await waitFor(() =>
       expect(screen.getByRole("button", { name: /open the ondo assistant/i })).toHaveFocus(),
@@ -94,15 +96,29 @@ describe("PublicAssistantWidget", () => {
   })
 
   it("returns focus to the launcher when the panel is closed with Escape", async () => {
-    openWidget()
+    await openWidget()
     fireEvent.keyDown(window, { key: "Escape" })
     await waitFor(() =>
       expect(screen.getByRole("button", { name: /open the ondo assistant/i })).toHaveFocus(),
     )
   })
 
-  it("exposes the transcript as a live region so replies are announced", () => {
-    openWidget()
+  it("keeps the conversation when the panel is closed and reopened", async () => {
+    await openWidget()
+    type("Do you cover Provo?")
+    submit()
+    expect(await screen.findByText(/8% of collected rent/i)).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole("button", { name: /close the ondo assistant/i }))
+    expect(screen.queryByRole("region", { name: /ondo assistant/i })).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole("button", { name: /open the ondo assistant/i }))
+    expect(screen.getByText("Do you cover Provo?")).toBeInTheDocument()
+    expect(screen.getByText(/8% of collected rent/i)).toBeInTheDocument()
+  })
+
+  it("exposes the transcript as a live region so replies are announced", async () => {
+    await openWidget()
     expect(screen.getByRole("log", { name: /conversation transcript/i })).toHaveAttribute(
       "aria-live",
       "polite",
@@ -110,7 +126,7 @@ describe("PublicAssistantWidget", () => {
   })
 
   it("sends a suggested question without the visitor typing", async () => {
-    openWidget()
+    await openWidget()
     fireEvent.click(screen.getByRole("button", { name: /what do you charge to manage a rental\?/i }))
 
     await waitFor(() => expect(mockSend).toHaveBeenCalledTimes(1))
@@ -122,7 +138,7 @@ describe("PublicAssistantWidget", () => {
 
   it("passes the current path so leads can be attributed to the page that produced them", async () => {
     mockPathname = "/locations/provo/"
-    openWidget()
+    await openWidget()
     type("Do you cover Provo?")
     submit()
 
@@ -132,7 +148,7 @@ describe("PublicAssistantWidget", () => {
 
   it("tells the visitor a person is taking over, and stops accepting messages", async () => {
     mockSend.mockResolvedValue(okReply({ reply: null, escalated: true }))
-    openWidget()
+    await openWidget()
     type("I want to dispute a fee")
     submit()
 
@@ -142,7 +158,7 @@ describe("PublicAssistantWidget", () => {
 
   it("confirms when contact details were saved", async () => {
     mockSend.mockResolvedValue(okReply({ reply: "Got it.", leadCaptured: true }))
-    openWidget()
+    await openWidget()
     type("I'm Dana, dana@example.com")
     submit()
 
@@ -155,7 +171,7 @@ describe("PublicAssistantWidget", () => {
       rateLimited: true,
       error: "That was a lot of messages at once, give it a moment and try again.",
     })
-    openWidget()
+    await openWidget()
     type("hello")
     submit()
 
@@ -168,15 +184,15 @@ describe("PublicAssistantWidget", () => {
     expect(container).toBeEmptyDOMElement()
   })
 
-  it("cannot send an empty or whitespace-only message", () => {
-    openWidget()
+  it("cannot send an empty or whitespace-only message", async () => {
+    await openWidget()
     type("   ")
     expect(screen.getByRole("button", { name: /send message/i })).toBeDisabled()
     expect(mockSend).not.toHaveBeenCalled()
   })
 
   it("trims the transcript it sends so a long session degrades instead of erroring", async () => {
-    openWidget()
+    await openWidget()
     // 20 turns in: the server rejects more than 20 messages, so the client must cap first.
     for (let i = 0; i < 12; i++) {
       type(`question ${i}`)
@@ -206,8 +222,8 @@ describe("PublicAssistantWidget", () => {
     expect(launcher.querySelector("span.sr-only")?.textContent).toBe("Ask Ondo")
   })
 
-  it("caps the panel to the viewport so the close button stays reachable on short screens", () => {
-    openWidget()
+  it("caps the panel to the viewport so the close button stays reachable on short screens", async () => {
+    await openWidget()
     const panel = screen.getByRole("region", { name: /ondo assistant/i })
     expect(panel.className).toMatch(/max-h-\[calc\(100dvh-/)
     expect(screen.getByRole("button", { name: /close the ondo assistant/i })).toBeInTheDocument()

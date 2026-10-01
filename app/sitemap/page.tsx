@@ -48,9 +48,14 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   "legal-trust": Scale,
 }
 
+// Off-screen sections skip layout and paint until scrolled near (CSS only, links stay in the HTML).
+const SECTION_RENDER_HINT = "scroll-mt-24 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
+
 export default function SitemapPage() {
   const siteSections = getSiteIndexSections()
-  const itemList = getFlatSiteIndexForJsonLd()
+  // Name and URL only: schema.org ListItem descriptions are not used for rich results, and
+  // with ~1,000 links they were most of the page's JSON-LD weight.
+  const itemList = getFlatSiteIndexForJsonLd().map(({ name, url }) => ({ name, url }))
   const structuredData = [
     generateBreadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
@@ -107,7 +112,7 @@ export default function SitemapPage() {
             {siteSections.map((section) => {
               const Icon = SECTION_ICONS[section.id] ?? Building2
               return (
-                <section key={section.id} id={section.id} className="scroll-mt-24">
+                <section key={section.id} id={section.id} className={SECTION_RENDER_HINT}>
                   <Card className="h-full transition-shadow hover:shadow-lg">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-3 text-lg">

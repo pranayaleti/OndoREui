@@ -105,7 +105,7 @@ export default function LoansPage() {
           <PageBanner
         title="Utah Home Loans & Mortgages"
         subtitle="Compare conventional, FHA, VA, and USDA education. Then talk with a loan officer. This is not a credit decision."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
         primaryCta={{
           label: "Talk with a loan officer",
           href: "/qualify/",

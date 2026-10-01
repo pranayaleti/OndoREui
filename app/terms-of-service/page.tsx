@@ -99,7 +99,7 @@ export default function TermsOfServicePage() {
       <PageBanner
         title="Terms of Service"
         subtitle="Understanding your rights and responsibilities when using our services"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-background">

@@ -56,7 +56,7 @@ export default function FirstTimeLearnPage() {
       <PageBanner
         title="First-time buyers: cash, assistance, closing"
         subtitle="Down payment is one line. Utah files still have earnest money, title, prepaids, and sometimes a second-lien DPA."
-        backgroundImage="/suburban-house-garden.png"
+        backgroundImage="/suburban-house-garden.webp"
       />
       <article className="bg-background py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6">

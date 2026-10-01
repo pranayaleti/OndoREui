@@ -15,8 +15,7 @@ import Footer from "@/components/footer"
 import ErrorBoundary from "@/components/error-boundary"
 import { CachePurge } from "@/components/cache-purge"
 import { AttributionCapture } from "@/components/attribution-capture"
-import { FirstVisitLeadPopup } from "@/components/first-visit-lead-popup"
-import ServiceWorkerRegistrar from "@/components/sw-register"
+import { DeferredFirstVisitLeadPopup } from "@/components/deferred-first-visit-lead-popup"
 import { TrackingTags, GeoGatedGoogleTagManagerNoscript } from "@/components/analytics/tracking-tags"
 import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 import PublicAssistantWidget from "@/components/PublicAssistantWidget"
@@ -212,7 +211,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <RootProvidersClient>
-          <ServiceWorkerRegistrar />
           <Suspense fallback={null}>
             <AttributionCapture />
           </Suspense>
@@ -221,7 +219,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CachePurge />
           {/* SiteChrome drops everything it wraps on standalone routes (/links), see lib/standalone-routes.ts. */}
           <SiteChrome>
-            <FirstVisitLeadPopup />
+            <DeferredFirstVisitLeadPopup />
           </SiteChrome>
           <StickyBarOffset>
             <SiteChrome>

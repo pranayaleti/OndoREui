@@ -52,7 +52,6 @@ const nextConfig = {
       'date-fns',
       'lodash',
     ],
-    optimizeCss: true,
     scrollRestoration: true,
   },
   compiler: {

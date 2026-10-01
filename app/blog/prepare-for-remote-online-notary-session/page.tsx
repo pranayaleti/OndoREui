@@ -97,7 +97,7 @@ export default function PrepareForRemoteOnlineNotarySession() {
       <PageBanner
         title="Checklist: Prepare for Your Remote Online Notary Session"
         subtitle="Pass ID verification, avoid reschedules, and get sealed PDFs right after your RON."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <article className="bg-background py-12">

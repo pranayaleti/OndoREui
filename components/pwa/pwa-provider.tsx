@@ -23,6 +23,16 @@ async function registerServiceWorker(): Promise<void> {
     return
   }
 
+  // A production build served from localhost (local preview) would otherwise cache-first its own
+  // stale /_next/static chunks between rebuilds, the same trap as dev above.
+  if (window.location.hostname === "localhost") return
+
+  // Registration is not needed to render the page: wait for load so the download and install
+  // do not compete with the page's own resources.
+  if (document.readyState !== "complete") {
+    await new Promise<void>((resolve) => window.addEventListener("load", () => resolve(), { once: true }))
+  }
+
   try {
     await navigator.serviceWorker.register("/sw.js", {
       scope: "/",

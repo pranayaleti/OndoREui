@@ -54,7 +54,7 @@ export default function NeighborhoodsHubPage() {
         <PageBanner
           title="Neighborhood guides"
           subtitle="Housing, parks, and how the streets connect — not a profile of residents."
-          backgroundImage="/suburban-house-garden.png"
+          backgroundImage="/suburban-house-garden.webp"
         />
         <div className="container mx-auto max-w-6xl space-y-12 px-4 py-12">
           <BreadcrumbNav items={[{ label: "Neighborhoods" }]} />

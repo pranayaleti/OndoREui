@@ -45,6 +45,15 @@ function BannerCtaLink({ cta, slot }: { cta: PageBannerCta; slot: "primary" | "s
   )
 }
 
+/**
+ * Every banner photo ships as a ~50-130KB WebP next to a ~1MB PNG original. Content metadata still names
+ * the PNG for Open Graph, so map it here and keep the PNG out of the LCP request.
+ */
+export function bannerImageSrc(src?: string): string {
+  if (!src) return "/modern-apartment-balcony.webp"
+  return src.replace(/\.png$/i, ".webp")
+}
+
 export function PageBanner({ title, subtitle, backgroundImage, primaryCta, secondaryCta }: PageBannerProps) {
   const hasCtas = Boolean(primaryCta || secondaryCta)
   return (
@@ -53,7 +62,7 @@ export function PageBanner({ title, subtitle, backgroundImage, primaryCta, secon
       {/* Decorative photo: the heading and subtitle already say what the page is about. */}
       <div className="absolute inset-0">
         <Image
-          src={backgroundImage || "/modern-apartment-balcony.webp"}
+          src={bannerImageSrc(backgroundImage)}
           alt=""
           fill
           className="object-cover"

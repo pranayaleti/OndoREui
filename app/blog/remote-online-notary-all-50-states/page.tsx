@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
-import NOTARY_SERVICE_AREAS from "@/lib/notary-service-areas";
+import { NOTARY_RON_STATES } from "@/lib/notary-ron-states";
 import Link from "next/link";
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -36,7 +36,7 @@ const published = "2025-01-10";
 const modified = "2025-01-10";
 const slug = "/blog/remote-online-notary-all-50-states";
 
-const topStates = NOTARY_SERVICE_AREAS.states.slice(0, 10);
+const topStates = NOTARY_RON_STATES.slice(0, 10);
 const keywords = [
   "remote online notary",
   "online notary in all 50 states",
@@ -78,7 +78,7 @@ export default function RemoteOnlineNotaryAllStatesPage() {
       <PageBanner
         title="Remote Online Notary in All 50 States"
         subtitle="Nationwide RON coverage with secure ID checks, audit trails, and lender-ready documents."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <article className="bg-background py-12">
@@ -162,7 +162,7 @@ export default function RemoteOnlineNotaryAllStatesPage() {
 
             <h2>State-by-State Coverage Highlights</h2>
             <p className="mb-4">
-              We service every state. Here are the most requested locations for online notarization:
+              We serve every state and Washington, D.C. Here are the first ten, in alphabetical order:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
               {topStates.map((state) => (

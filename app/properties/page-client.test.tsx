@@ -109,4 +109,20 @@ describe("PropertiesClient", () => {
     expect(hero).not.toContainElement(explainer)
     expect(results.compareDocumentPosition(explainer) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
+
+  it("requests listings without a Content-Type header so the browser skips the CORS preflight", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ data: [] }),
+    })
+    global.fetch = fetchMock as unknown as typeof fetch
+
+    render(<PropertiesClient />)
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled())
+    const init = fetchMock.mock.calls[0]?.[1] as RequestInit
+    const headers = new Headers(init.headers)
+    expect(headers.get("accept")).toBe("application/json")
+    expect(headers.has("content-type")).toBe(false)
+  })
 })

@@ -82,7 +82,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
       <PageBanner
         title="Remote Online Notary for Real Estate Closings"
         subtitle="Lender- and title-ready RON for purchases, refinances, and investor deals."
-        backgroundImage="/modern-townhouse-garage.png"
+        backgroundImage="/modern-townhouse-garage.webp"
       />
 
       <article className="bg-background py-12">

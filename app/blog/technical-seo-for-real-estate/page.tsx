@@ -75,7 +75,7 @@ export default function TechnicalSEOForRealEstate() {
       <PageBanner
         title={title}
         subtitle="Dominating local search with Next.js SEO primitives."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <article className="bg-background py-12">

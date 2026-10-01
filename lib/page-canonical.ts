@@ -3,7 +3,7 @@ import { CALCULATOR_SLUGS } from "@/lib/calculator-catalog"
 import { htmlPathToMarkdownPath } from "@/lib/html-to-agent-markdown"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { SITE_NAME } from "@/lib/site"
-import { toAbsoluteSiteUrl } from "@/lib/site-index"
+import { toAbsoluteSiteUrl } from "@/lib/url"
 
 /**
  * Default social preview image, mirroring the root layout and `buildPageMetadata`.

@@ -75,7 +75,7 @@ export default function EngineeringInvestmentCalculators() {
       <PageBanner
         title={title}
         subtitle="Precision financial modeling with React and TypeScript."
-        backgroundImage="/modern-townhouse-garage.png"
+        backgroundImage="/modern-townhouse-garage.webp"
       />
 
       <article className="bg-background py-12">

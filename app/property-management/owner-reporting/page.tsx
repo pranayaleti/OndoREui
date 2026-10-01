@@ -39,7 +39,7 @@ export default function OwnerReportingPage() {
           { name: "Owner Reporting", url: `${SITE_URL}/property-management/owner-reporting` },
         ])}
       />
-      <PageBanner title="Owner Reporting" subtitle="Complete financial visibility for your Utah rental portfolio: real-time, no spreadsheets" backgroundImage="/property-manager-meeting.png" />
+      <PageBanner title="Owner Reporting" subtitle="Complete financial visibility for your Utah rental portfolio: real-time, no spreadsheets" backgroundImage="/property-manager-meeting.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

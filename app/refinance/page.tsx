@@ -37,7 +37,7 @@ export default function RefinanceHubPage() {
       <PageBanner
         title="Mortgage Refinance"
         subtitle="Lower your rate, change your term, or tap your equity"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
         primaryCta={{
           label: "Talk with a loan officer",
           href: "/qualify/",

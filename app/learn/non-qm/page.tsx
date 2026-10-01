@@ -80,7 +80,7 @@ export default function NonQmLearnPage() {
       <PageBanner
         title="Non-QM: bank-statement, DSCR, asset-depletion"
         subtitle="Different stacks when agency income calc does not match documentable cash flow. Not a secret cheaper conventional loan."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
       <article className="bg-background py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6">

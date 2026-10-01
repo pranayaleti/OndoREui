@@ -129,7 +129,7 @@ export default function PropertyManagementPage() {
       <PageBanner
         title="Property management built for Utah owners"
         subtitle="Leasing, screening, rent, maintenance, and reporting: with brokerage, loans, and notary when you need them in the same relationship."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
         primaryCta={{
           label: "Get a free home estimate",
           href: "/whats-my-home-worth/",

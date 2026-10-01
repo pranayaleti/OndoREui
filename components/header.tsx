@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import dynamic from "next/dynamic"
 import { useState, useEffect, useRef, useCallback, memo } from "react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
@@ -13,12 +14,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Menu, X, Search, ChevronDown, Phone } from "lucide-react"
 import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
-import { SearchDialog } from "@/components/search-dialog"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL, SITE_NAME, SITE_PHONE } from "@/lib/site"
 import { analyticsAttributes } from "@/lib/analytics"
 import { useTranslation } from "react-i18next"
+
+// The dialog pulls in cmdk and the whole search index, and most visitors never open it: load it
+// on the first open instead of with every page.
+const SearchDialog = dynamic(() => import("@/components/search-dialog").then((m) => m.SearchDialog), {
+  ssr: false,
+})
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -29,6 +35,8 @@ const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  // Stays true after the first open so closing keeps the dialog mounted (focus return, no reload).
+  const [hasOpenedSearch, setHasOpenedSearch] = useState(false)
   const menuRef = useRef<HTMLElement>(null)
   const menuToggleRef = useRef<HTMLButtonElement>(null)
   const menuSearchRef = useRef<HTMLButtonElement>(null)
@@ -72,6 +80,10 @@ const Header = memo(() => {
   useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (isSearchOpen) setHasOpenedSearch(true)
+  }, [isSearchOpen])
 
   // Keyboard shortcut for search (Cmd/Ctrl + K)
   useEffect(() => {
@@ -222,26 +234,28 @@ const Header = memo(() => {
             aria-label={`${SITE_NAME} home`}
             className="flex items-center hover:opacity-80 transition-opacity"
           >
-            {/* Light theme: ink wordmark. Dark theme: white wordmark. */}
+            {/* Light theme: ink wordmark. Dark theme: white wordmark. Both are ~8KB WebP at 2x of the
+                123x48 display size (the 656x256 PNGs were ~77KB each). Dark is the default theme, so only
+                it is preloaded; the light variant loads eagerly at low priority so a stored light
+                theme never waits on it, without adding a second preload to every page. */}
             <Image
-              src="/logo-light.png"
+              src="/logo-light-2x.webp"
               alt="Ondo Real Estate"
-              width={656}
-              height={256}
+              width={246}
+              height={96}
               className="h-10 w-auto md:h-12 dark:hidden"
-              priority
-              quality={90}
+              loading="eager"
+              fetchPriority="low"
               sizes="(max-width: 768px) 103px, 123px"
             />
             <Image
-              src="/logo-dark.png"
+              src="/logo-dark-2x.webp"
               alt=""
               aria-hidden="true"
-              width={656}
-              height={256}
+              width={246}
+              height={96}
               className="hidden h-10 w-auto md:h-12 dark:block"
               priority
-              quality={90}
               sizes="(max-width: 768px) 103px, 123px"
             />
           </Link>
@@ -437,7 +451,9 @@ const Header = memo(() => {
           </div>
         </nav>
       )}
-      <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} onCloseAutoFocus={handleSearchCloseAutoFocus} />
+      {hasOpenedSearch && (
+        <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} onCloseAutoFocus={handleSearchCloseAutoFocus} />
+      )}
       <ScrollProgress />
     </header>
   )

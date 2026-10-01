@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
@@ -21,8 +21,9 @@ interface LazyImageProps {
 }
 
 /**
- * Lazy-loaded image component with Intersection Observer
- * Only loads images when they're about to enter the viewport
+ * next/image with a loading pulse and an error fallback.
+ * The <img> is in the static HTML (crawlers see it) and the browser lazy-loads it natively;
+ * pass `priority` for images in the first viewport.
  */
 export function LazyImage({
   src,
@@ -40,44 +41,8 @@ export function LazyImage({
   onError,
   ...props
 }: LazyImageProps) {
-  const [isInView, setIsInView] = useState(priority)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const imgRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (priority || isInView) return
-
-    // Check if IntersectionObserver is supported
-    if (!('IntersectionObserver' in window)) {
-      setIsInView(true)
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true)
-            observer.disconnect()
-          }
-        })
-      },
-      {
-        rootMargin: '50px', // Start loading 50px before entering viewport
-        threshold: 0.01,
-      }
-    )
-
-    const currentRef = imgRef.current
-    if (currentRef) {
-      observer.observe(currentRef)
-    }
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [priority, isInView])
 
   const handleLoad = () => {
     setIsLoading(false)
@@ -111,7 +76,7 @@ export function LazyImage({
     // With `fill`, the parent supplies the box: this wrapper covers it and `className` (object-cover,
     // hover scale, rounding) goes on the image. Otherwise the wrapper is a zero-height, relative
     // div and a fill image has nothing to fill.
-    <div ref={imgRef} className={fill ? "absolute inset-0" : cn("relative", className)}>
+    <div className={fill ? "absolute inset-0" : cn("relative", className)}>
       {isLoading && (
         <div
           className="absolute inset-0 bg-muted animate-pulse rounded"
@@ -119,35 +84,27 @@ export function LazyImage({
           aria-hidden="true"
         />
       )}
-      {isInView ? (
-        <Image
-          src={src}
-          alt={alt}
-          width={fill ? undefined : width}
-          height={fill ? undefined : height}
-          fill={fill}
-          className={cn(
-            "transition-opacity duration-300",
-            isLoading ? "opacity-0" : "opacity-100",
-            fill && className
-          )}
-          priority={priority}
-          quality={quality}
-          sizes={sizes}
-          placeholder={placeholder}
-          blurDataURL={blurDataURL || defaultBlurDataURL}
-          onLoad={handleLoad}
-          onError={handleError}
-          loading={priority ? undefined : "lazy"}
-          {...props}
-        />
-      ) : (
-        <div
-          className="bg-muted animate-pulse"
-          style={fill ? { width: '100%', height: '100%' } : { width, height }}
-          aria-hidden="true"
-        />
-      )}
+      <Image
+        src={src}
+        alt={alt}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
+        fill={fill}
+        className={cn(
+          "transition-opacity duration-300",
+          isLoading ? "opacity-0" : "opacity-100",
+          fill && className
+        )}
+        priority={priority}
+        quality={quality}
+        sizes={sizes}
+        placeholder={placeholder}
+        blurDataURL={blurDataURL || defaultBlurDataURL}
+        onLoad={handleLoad}
+        onError={handleError}
+        loading={priority ? undefined : "lazy"}
+        {...props}
+      />
     </div>
   )
 }

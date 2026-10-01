@@ -44,7 +44,7 @@ export default function JumboLoanPage() {
           { name: "Jumbo Loans", url: `${SITE_URL}/loans/jumbo` },
         ])}
       />
-      <PageBanner title="Jumbo Loans" subtitle="Financing for Utah's premium and high-value properties" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="Jumbo Loans" subtitle="Financing for Utah's premium and high-value properties" backgroundImage="/modern-office-building.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

@@ -69,7 +69,11 @@ export default function LocationsPage() {
 
           {/* City grid by county */}
           {countyGroups.map((group) => (
-            <section key={group.county}>
+            <section
+              key={group.county}
+              // Off-screen county blocks skip layout and paint until scrolled near (CSS only).
+              className="[content-visibility:auto] [contain-intrinsic-size:auto_500px]"
+            >
               <h2 className="text-2xl font-bold mb-4">
                 {group.county} County
               </h2>

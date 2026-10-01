@@ -102,7 +102,7 @@ export default function BuyPage() {
       <PageBanner
         title="Buy a home in Utah"
         subtitle="Shop with an agent, run the loan numbers, and compare rent vs own. For-sale search is agent-led — this site lists rentals we manage."
-        backgroundImage="/suburban-house-garden.png"
+        backgroundImage="/suburban-house-garden.webp"
         primaryCta={{
           label: "See what you can afford",
           href: "/buy/quiz/",

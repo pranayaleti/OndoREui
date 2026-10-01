@@ -34,7 +34,7 @@ export default function HelocPage() {
           { name: "HELOC / HELOAN", url: `${SITE_URL}/loans/heloc` },
         ])}
       />
-      <PageBanner title="HELOC & Home Equity Loans" subtitle="Borrow against your equity — line of credit or lump sum" backgroundImage="/modern-townhouse-garage.png" />
+      <PageBanner title="HELOC & Home Equity Loans" subtitle="Borrow against your equity as a line of credit or a lump sum" backgroundImage="/modern-townhouse-garage.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

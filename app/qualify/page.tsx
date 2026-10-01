@@ -81,7 +81,7 @@ export default function QualifyPage() {
       <PageBanner
         title="Start a mortgage conversation"
         subtitle="Here is what we will ask — and what a conversation will not promise."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
       <Suspense fallback={null}>
         <QualifyTokenChat />

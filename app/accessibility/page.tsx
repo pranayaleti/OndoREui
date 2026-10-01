@@ -83,7 +83,7 @@ export default function AccessibilityPage() {
       <PageBanner
         title="Accessibility Statement"
         subtitle="Committed to making our website accessible to everyone"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-background">

@@ -171,10 +171,8 @@ export default function PropertiesClient() {
         const rawArray = await fetchAllPublicListingRows(fetch, {
           signal: controller.signal,
           cache: 'no-store',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
+          // No Content-Type on a GET: application/json is not CORS-safelisted and would force a preflight.
+          headers: { Accept: 'application/json' },
         });
 
         const mapped: Property[] = mapApiProperties(rawArray);
@@ -207,7 +205,7 @@ export default function PropertiesClient() {
     const handleRestore = () => {
       fetchAllPublicListingRows(fetch, {
         cache: 'no-store',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        headers: { Accept: 'application/json' },
       })
         .then((rawArray) => {
           const mapped: Property[] = mapApiProperties(rawArray);

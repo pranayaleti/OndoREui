@@ -2,7 +2,7 @@
 
 import { useId } from "react"
 import Link from "next/link"
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { LICENSING_HREF } from "@/lib/social-proof-stats"
 import {
@@ -15,24 +15,15 @@ import {
   formatPercent,
   type CostOfLivingResult,
   type CostOfLivingState,
-  type ExpenseCategoryId,
   exploreHomesHref,
 } from "@/lib/cost-of-living"
+import { SLICE_COLORS } from "./slice-colors"
 
-const SLICE_COLORS: Record<ExpenseCategoryId, string> = {
-  housing: "hsl(var(--primary))",
-  transportation: "hsl(var(--color-category-1))",
-  food: "hsl(var(--color-category-3))",
-  utilities: "hsl(var(--color-category-4))",
-  insurance: "hsl(var(--color-category-2))",
-  healthcare: "hsl(var(--muted-foreground))",
-  personal: "hsl(var(--secondary-foreground))",
-  childcare: "hsl(var(--accent))",
-  pets: "hsl(var(--color-category-4))",
-  debt: "hsl(var(--destructive))",
-  lifestyle: "hsl(var(--color-category-2))",
-  other: "hsl(var(--border))",
-}
+// recharts is ~100KB gzipped and only the results step draws a chart: keep it out of the calculator chunk.
+const SummaryPieChart = dynamic(() => import("./summary-pie-chart").then((m) => m.SummaryPieChart), {
+  ssr: false,
+  loading: () => null,
+})
 
 type SummaryPanelProps = {
   result: CostOfLivingResult
@@ -70,27 +61,7 @@ export function SummaryPanel({ result, state, compact = false, onAdjust, showCta
 
       {!compact && result.slices.length > 0 ? (
         <div className="mt-5 h-48" aria-hidden={false}>
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={result.slices}
-                dataKey="amount"
-                nameKey="label"
-                cx="50%"
-                cy="50%"
-                innerRadius={48}
-                outerRadius={72}
-                paddingAngle={1}
-              >
-                {result.slices.map((slice) => (
-                  <Cell key={slice.id} fill={SLICE_COLORS[slice.id]} />
-                ))}
-              </Pie>
-              <Tooltip
-                formatter={(value) => formatCurrency(typeof value === "number" ? value : 0)}
-              />
-            </PieChart>
-          </ResponsiveContainer>
+          <SummaryPieChart slices={result.slices} />
         </div>
       ) : null}
 

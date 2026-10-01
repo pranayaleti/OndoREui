@@ -1,7 +1,4 @@
-"use client"
-
 import Link from "next/link"
-import { useMemo } from "react"
 import { SITE_PHONE } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
@@ -48,7 +45,7 @@ function estimateMonthlyPayment(price: number, downPct: number, rate: number, ye
 export function CityPricingGuide({ city }: CityPricingGuideProps) {
   const citySlug = toCitySlug(city.name)
   const market = cityMarketData[city.name]
-  const nearbyCities = useMemo(() => getNearbyCities(city.name, 4), [city.name])
+  const nearbyCities = getNearbyCities(city.name, 4)
 
   // Ondo's published fees, from the same constants /pricing/ uses. The example is
   // the Starter rate on this city's median rent (1 unit), not a quote.

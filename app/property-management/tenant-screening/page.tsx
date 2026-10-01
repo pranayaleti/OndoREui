@@ -39,7 +39,7 @@ export default function TenantScreeningPage() {
           { name: "Tenant Screening", url: `${SITE_URL}/property-management/tenant-screening` },
         ])}
       />
-      <PageBanner title="Tenant Screening" subtitle="Protect your investment with thorough, Fair Housing-compliant tenant verification" backgroundImage="/property-manager-meeting.png" />
+      <PageBanner title="Tenant Screening" subtitle="Protect your investment with thorough, Fair Housing-compliant tenant verification" backgroundImage="/property-manager-meeting.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

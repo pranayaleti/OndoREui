@@ -1,5 +1,3 @@
-"use client"
-
 import { getTestimonialsForCity } from "@/lib/testimonials"
 import { TestimonialCard } from "@/components/testimonials/testimonial-card"
 

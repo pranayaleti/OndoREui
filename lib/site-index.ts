@@ -16,6 +16,10 @@ import {
   nmlsIdentification,
 } from "@/lib/site"
 import { glossaryHref, sortedGlossaryTerms } from "@/lib/content/glossary"
+import { toAbsoluteSiteUrl, toSitePath } from "@/lib/url"
+
+// Re-exported so existing importers keep working; the implementations live in the leaf lib/url.ts.
+export { toAbsoluteSiteUrl, toSitePath }
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 const discoveryConfig = agentDiscoveryConfig as {
@@ -24,7 +28,6 @@ const discoveryConfig = agentDiscoveryConfig as {
   aiCrawlerAgents: string[]
 }
 
-const FILE_PATH = /\.[a-z0-9]{2,8}$/i
 export const ROBOTS_DISALLOW = [...discoveryConfig.privateRoutePrefixes, ...discoveryConfig.extraDisallow]
 export const AI_CRAWLER_AGENTS = discoveryConfig.aiCrawlerAgents
 
@@ -151,21 +154,6 @@ export const LLMS_DISCLOSURES_BLOCK = [
   "",
   "Licensed activity: real estate brokerage and mortgage origination are marketed for Utah. Remote online notarization (RON) is offered nationwide. Confirm current licensure with Ondo before relying on a service in a given state.",
 ].join("\n")
-
-/** Canonical path with trailing slash (matches `trailingSlash: true`), except for static file paths like `/sitemap.xml`. */
-export function toSitePath(href: string): string {
-  if (href === "/") return "/"
-  const trimmed = href.replace(/\/+$/, "") || "/"
-  if (trimmed !== "/" && FILE_PATH.test(trimmed)) return trimmed.startsWith("/") ? trimmed : `/${trimmed}`
-  if (trimmed === "/") return "/"
-  return `${trimmed}/`
-}
-
-export function toAbsoluteSiteUrl(href: string): string {
-  const path = toSitePath(href)
-  if (path === "/") return `${baseSiteUrl}/`
-  return `${baseSiteUrl}${path}`
-}
 
 export type SiteIndexLink = {
   name: string

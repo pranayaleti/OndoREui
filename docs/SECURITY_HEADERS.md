@@ -54,4 +54,8 @@ The meta CSP still allows inline scripts, so it does not stop an injected inline
 
 ## Caching
 
-`public/_headers` also holds cache rules. They are inert on GitHub Pages too. The live cache behaviour comes from Cloudflare Cache Rules (`scripts/cloudflare-cache-html-rule.json`). A rule for `/_next/static/` (long edge and browser TTL) is a separate follow-up.
+`public/_headers` also holds cache rules. They are inert on GitHub Pages too. The live cache behaviour comes from Cloudflare Cache Rules (`scripts/cloudflare-cache-html-rule.json`). A rule for `/_next/static/` is a separate follow-up that has to be created in the Cloudflare dashboard: GitHub Pages sends `max-age=14400` (4 hours) for every file, so returning visitors revalidate each hashed chunk after 4 hours.
+
+Recommended Cache Rule, hashed files only: when the URI path starts with `/_next/static/`, cache eligible, Edge TTL 1 year (ignore origin), Browser TTL 1 year (override origin). Files under `/_next/static/` have content hashes in their names, so a year is safe.
+
+Do not give the same year-long TTL to `public/*.png`, `*.webp`, `*.svg` or `/_optimized/`. Their names are stable (`logo-light.png`, `Linktree-640w.webp`), so a replaced image would stay stale in returning browsers. Use a Browser TTL of 1 day to 1 week for those, and keep HTML short-lived.

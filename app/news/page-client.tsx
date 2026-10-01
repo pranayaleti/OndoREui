@@ -28,7 +28,7 @@ export default function NewsPage() {
       <PageBanner
         title="Real Estate News Sources"
         subtitle="The outside news and data sources we follow, linked in one place"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-background">

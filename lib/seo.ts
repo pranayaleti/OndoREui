@@ -14,7 +14,7 @@ import {
   SITE_CALENDLY_URL,
 } from "./site"
 import { getTestimonialKind, testimonials } from "./testimonials"
-import { toAbsoluteSiteUrl } from "./site-index"
+import { toAbsoluteSiteUrl } from "./url"
 import { htmlPathToMarkdownPath } from "./html-to-agent-markdown"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")

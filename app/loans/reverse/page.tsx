@@ -34,7 +34,7 @@ export default function ReverseMortgagePage() {
           { name: "Reverse Mortgage", url: `${SITE_URL}/loans/reverse` },
         ])}
       />
-      <PageBanner title="Reverse Mortgage" subtitle="How it works, what it costs, and what you still owe, for homeowners 62+" backgroundImage="/suburban-house-garden.png" />
+      <PageBanner title="Reverse Mortgage" subtitle="How it works, what it costs, and what you still owe, for homeowners 62+" backgroundImage="/suburban-house-garden.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

@@ -75,7 +75,7 @@ export default function BuildingHighPerformanceRealEstatePlatform() {
       <PageBanner
         title={title}
         subtitle="A technical deep dive into the architecture of Ondo Real Estate."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <article className="bg-background py-12">

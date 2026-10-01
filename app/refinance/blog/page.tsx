@@ -31,7 +31,7 @@ export default function RefinanceBlogPage() {
           { name: "Guides", url: `${SITE_URL}/refinance/blog` },
         ])}
       />
-      <PageBanner title="Refinance Guides" subtitle="Articles and math to time your refinance right" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="Refinance Guides" subtitle="Articles and math to time your refinance right" backgroundImage="/modern-office-building.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

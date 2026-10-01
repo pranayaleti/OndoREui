@@ -1,8 +1,4 @@
-"use client"
-
 import Link from "next/link"
-import { useMemo } from "react"
-import Script from "next/script"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -30,7 +26,7 @@ import {
   Mountain,
   Building2,
 } from "lucide-react"
-import { safeJsonLd } from "@/components/json-ld"
+import { JsonLd } from "@/components/json-ld"
 import { formatCompactUsd } from "@/lib/format-compact"
 
 type CityGuidePageProps = {
@@ -41,7 +37,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
   const citySlug = toCitySlug(city.name)
   const content = cityContentByName[city.name]
   const market = cityMarketData[city.name]
-  const nearbyCities = useMemo(() => getNearbyCities(city.name, 6), [city.name])
+  const nearbyCities = getNearbyCities(city.name, 6)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -58,18 +54,8 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
 
   return (
     <main>
-      <Script
-        id="city-guide-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-      />
-      {faqJsonLd && (
-        <Script
-          id="city-guide-faq-jsonld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
-        />
-      )}
+      <JsonLd id="city-guide-jsonld" data={jsonLd} />
+      {faqJsonLd && <JsonLd id="city-guide-faq-jsonld" data={faqJsonLd} />}
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-primary/5 to-background py-16 md:py-24">

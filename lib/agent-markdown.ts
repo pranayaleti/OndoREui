@@ -14,7 +14,8 @@
 import { CALCULATOR_CATALOG } from "./calculator-catalog"
 import { DEFAULT_MORTGAGE_RATE, calculateMonthlyPI } from "./mortgage-utils"
 import { calculateCostOfLiving, createDefaultState, formatCurrency as formatColCurrency } from "./cost-of-living"
-import { LLMS_DISCLOSURES_BLOCK, toAbsoluteSiteUrl } from "./site-index"
+import { LLMS_DISCLOSURES_BLOCK } from "./site-index"
+import { toAbsoluteSiteUrl } from "./url"
 import { backendUrl } from "./backend"
 import {
   APP_PORTAL_LOGIN_URL,

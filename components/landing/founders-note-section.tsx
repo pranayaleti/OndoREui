@@ -15,7 +15,6 @@ export function FoundersNoteSection() {
                 fill
                 className="rounded-full object-cover"
                 quality={90}
-                priority
                 sizes="(max-width: 768px) 240px, 320px"
               />
             </div>

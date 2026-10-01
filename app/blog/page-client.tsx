@@ -1328,7 +1328,7 @@ export default function BlogPage() {
       <PageBanner
         title="Real Estate Blog"
         subtitle="Expert insights, market updates, and helpful tips for Utah real estate"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-background">

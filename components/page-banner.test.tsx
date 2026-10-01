@@ -20,6 +20,17 @@ describe("PageBanner", () => {
     expect(img).not.toHaveAttribute("title")
   })
 
+  it("serves the WebP twin when a page names a PNG banner, and leaves other sources alone", () => {
+    const { container, rerender } = render(
+      <PageBanner title="T" subtitle="S" backgroundImage="/modern-office-building.png" />
+    )
+    expect(container.querySelector("img")!.getAttribute("src")).toContain("modern-office-building.webp")
+    rerender(<PageBanner title="T" subtitle="S" backgroundImage="/hero.webp" />)
+    expect(container.querySelector("img")!.getAttribute("src")).toContain("hero.webp")
+    rerender(<PageBanner title="T" subtitle="S" />)
+    expect(container.querySelector("img")!.getAttribute("src")).toContain("modern-apartment-balcony.webp")
+  })
+
   it("renders no buttons when no call to action is given", () => {
     render(<PageBanner title="Sell your home" subtitle="A plain plan" />)
     expect(screen.queryByRole("link")).toBeNull()

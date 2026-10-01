@@ -39,7 +39,7 @@ export default function MaintenanceCoordinationPage() {
           { name: "Maintenance Coordination", url: `${SITE_URL}/property-management/maintenance-coordination` },
         ])}
       />
-      <PageBanner title="Maintenance Coordination" subtitle="Fast, transparent maintenance handling: tenants stay happy, your asset stays protected" backgroundImage="/property-manager-meeting.png" />
+      <PageBanner title="Maintenance Coordination" subtitle="Fast, transparent maintenance handling: tenants stay happy, your asset stays protected" backgroundImage="/property-manager-meeting.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

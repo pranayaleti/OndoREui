@@ -65,7 +65,7 @@ export default function BuySellHubPage() {
         <PageBanner
           title="Buy or sell a home along the Wasatch Front"
           subtitle="City pages for local context. Statewide Buy and Sell pages for the full process. No invented sale-price or days-on-market promises."
-          backgroundImage="/modern-apartment-balcony.png"
+          backgroundImage="/modern-apartment-balcony.webp"
         />
         <div className="container mx-auto max-w-6xl space-y-12 px-4 py-12">
           <BreadcrumbNav items={[{ label: "Buy & sell" }]} />

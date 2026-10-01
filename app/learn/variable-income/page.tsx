@@ -61,7 +61,7 @@ export default function VariableIncomePillarPage() {
       <PageBanner
         title="Variable income mortgages"
         subtitle="Overtime, 1099, commission, and self-employed files are underwritten on a pattern, not last week's deposit."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
       <article className="bg-background py-12">
         <div className="container mx-auto max-w-5xl px-4 md:px-6">

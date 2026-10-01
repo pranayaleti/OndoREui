@@ -104,7 +104,7 @@ export default function CaseStudiesPage() {
       <PageBanner
         title="Case Studies"
         subtitle="Illustrative scenarios for Utah property owners, first-time buyers, and investors"
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
 
       <section className="py-16 bg-background">

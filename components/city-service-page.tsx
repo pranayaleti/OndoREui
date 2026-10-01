@@ -1,8 +1,4 @@
-"use client"
-
 import Link from "next/link"
-import { useMemo } from "react"
-import Script from "next/script"
 import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_HOURS, SITE_SOCIALS } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
@@ -29,7 +25,7 @@ import { CityOwnerOpsSection } from "@/components/city-owner-ops-section"
 import { getSubServicesForParent } from "@/lib/sub-service-content"
 import { School, TreePine } from "lucide-react"
 import type { ContactInquiryType } from "@/lib/leads-api"
-import { safeJsonLd } from "@/components/json-ld"
+import { JsonLd } from "@/components/json-ld"
 
 type CityServicePageProps = {
   city: UtahCity
@@ -40,10 +36,10 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
   const citySlug = toCitySlug(city.name)
   const marketData = cityMarketData[city.name]
   const cityContent = cityContentByName[city.name]
-  const subServices = useMemo(() => getSubServicesForParent(service), [service])
-  const nearbyCities = useMemo(() => getNearbyCities(city.name, 6), [city.name])
+  const subServices = getSubServicesForParent(service)
+  const nearbyCities = getNearbyCities(city.name, 6)
 
-  const headline = useMemo(() => {
+  const headline = (() => {
     switch (service) {
       case "property-management":
         return `Property Management in ${city.name}, Utah`
@@ -56,7 +52,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         return _exhaustive
       }
     }
-  }, [city.name, service])
+  })()
 
   // Buy-sell pages leave this unset so the visitor picks buyer or seller. Loan
   // leads have no type of their own yet, so they go in as "other" and the
@@ -71,18 +67,18 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         ? `I'm interested in buying or selling in ${city.name}.`
         : `I'd like home loan information for ${city.name}.`
 
-  const faqHref = useMemo(() => {
+  const faqHref = (() => {
     if (service === "property-management") return "/faq/owner-faqs"
     if (service === "buy-sell") return "/faq/buying-selling-faqs"
     return "/faq/loans-faqs"
-  }, [service])
+  })()
 
   const businessJsonLd = {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness", "RealEstateAgent"],
     name: SITE_NAME,
     areaServed: city.name + ", UT",
-    url: typeof window === "undefined" ? SITE_URL : window.location.href,
+    url: SITE_URL,
     telephone: SITE_PHONE,
     openingHours: SITE_HOURS,
     address: {
@@ -160,9 +156,9 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
 
   return (
     <main className="container mx-auto px-4 py-10 space-y-10">
-      <Script id="city-business-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(businessJsonLd) }} />
-      <Script id="city-service-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }} />
-      <Script id="city-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }} />
+      <JsonLd id="city-business-jsonld" data={businessJsonLd} />
+      <JsonLd id="city-service-jsonld" data={serviceJsonLd} />
+      <JsonLd id="city-faq-jsonld" data={faqJsonLd} />
 
       <BreadcrumbNav items={[
         { label: serviceLabel, href: `/${serviceBasePath}/` },

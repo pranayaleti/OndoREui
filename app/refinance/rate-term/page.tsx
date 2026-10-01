@@ -34,7 +34,7 @@ export default function RateTermRefinancePage() {
           { name: "Rate-and-Term", url: `${SITE_URL}/refinance/rate-term` },
         ])}
       />
-      <PageBanner title="Rate-and-Term Refinance" subtitle="Lower your rate or shorten your term — no cash out" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="Rate-and-Term Refinance" subtitle="Lower your rate or shorten your term, with no cash out" backgroundImage="/modern-office-building.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

@@ -33,7 +33,7 @@ export default function LearnHubPage() {
       <PageBanner
         title="Mortgage learning hub"
         subtitle="Answer the borrower question first. Then pick a program, a calculator, or a conversation."
-        backgroundImage="/modern-office-building.png"
+        backgroundImage="/modern-office-building.webp"
       />
       <section className="bg-background py-16">
         <div className="container mx-auto max-w-5xl px-4">

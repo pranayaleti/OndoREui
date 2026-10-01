@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest"
-import { render } from "@testing-library/react"
+import { describe, it, expect, vi } from "vitest"
+import { render, fireEvent, screen } from "@testing-library/react"
 import { LazyImage } from "./lazy-image"
 
 describe("LazyImage", () => {
@@ -21,5 +21,36 @@ describe("LazyImage", () => {
     )
     expect(container.firstElementChild).toHaveClass("relative", "h-40", "w-full")
     expect(container.querySelector("img")).not.toHaveClass("h-40")
+  })
+
+  it("renders the <img> in the initial markup and lazy-loads it natively", () => {
+    const { container } = render(<LazyImage src="/a.webp" alt="A" width={480} height={280} />)
+    const img = container.querySelector("img")
+    expect(img).not.toBeNull()
+    expect(img).toHaveAttribute("loading", "lazy")
+  })
+
+  it("does not set native lazy loading on a priority image", () => {
+    const { container } = render(<LazyImage src="/a.webp" alt="A" width={480} height={280} priority />)
+    expect(container.querySelector("img")).not.toHaveAttribute("loading", "lazy")
+  })
+
+  it("does not wait for an IntersectionObserver", () => {
+    const original = globalThis.IntersectionObserver
+    const spy = vi.fn()
+    globalThis.IntersectionObserver = spy as unknown as typeof IntersectionObserver
+    try {
+      const { container } = render(<LazyImage src="/a.webp" alt="A" width={480} height={280} />)
+      expect(container.querySelector("img")).not.toBeNull()
+      expect(spy).not.toHaveBeenCalled()
+    } finally {
+      globalThis.IntersectionObserver = original
+    }
+  })
+
+  it("shows the fallback when the image fails", () => {
+    const { container } = render(<LazyImage src="/a.webp" alt="A" width={480} height={280} />)
+    fireEvent.error(container.querySelector("img")!)
+    expect(screen.getByText("Image unavailable")).toBeInTheDocument()
   })
 })

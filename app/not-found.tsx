@@ -8,8 +8,7 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { FileQuestion, Home, Search, Calculator, Users, Building, ArrowLeft, MapPin, Phone } from "lucide-react"
-import { SITE_URL, SITE_PHONE, SITE_EMAILS, APP_PORTAL_IS_EXTERNAL, APP_PORTAL_LOGIN_URL } from "@/lib/site"
-import SEO from "@/components/seo"
+import { SITE_PHONE, SITE_EMAILS, APP_PORTAL_IS_EXTERNAL, APP_PORTAL_LOGIN_URL } from "@/lib/site"
 import { publicIdFromPathname } from "@/lib/public-property"
 import {
   rentalClientRouteFromPathname,
@@ -119,13 +118,6 @@ export default function NotFound() {
 
   return (
     <main className="min-h-screen bg-background text-foreground p-4">
-      <SEO
-        title="404 - Page Not Found | Ondo Real Estate"
-        description="The page you're looking for doesn't exist. Explore our popular pages and find what you need."
-        pathname="/404"
-        image={`${SITE_URL}/modern-apartment-balcony.webp`}
-      />
-      
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12 pt-16">

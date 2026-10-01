@@ -8,19 +8,21 @@
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache images for 1 year
+# Images in public/ and public/_optimized/ keep stable file names (logo-light.png, Linktree-640w.webp),
+# so they are not content-hashed: a replaced image must reach returning visitors within a week, not a year.
+# Only /_next/static/ above is hashed and safe to mark immutable.
 /*.png
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800
 /*.jpg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800
 /*.jpeg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800
 /*.webp
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800
 /*.avif
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800
 /*.svg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800
 
 # Cache fonts for 1 year
 /*.woff

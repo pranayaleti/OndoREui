@@ -96,7 +96,7 @@ export default function SellPage() {
       <PageBanner
         title="Sell your Utah home"
         subtitle="A CMA, a listing plan, and an agent through close — without invented sale-price or speed claims."
-        backgroundImage="/modern-apartment-balcony.png"
+        backgroundImage="/modern-apartment-balcony.webp"
         primaryCta={{
           label: "Get my home value",
           href: "/whats-my-home-worth/",

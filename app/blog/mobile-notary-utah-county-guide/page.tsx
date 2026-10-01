@@ -93,7 +93,7 @@ export default function MobileNotaryUtahCountyGuide() {
       <PageBanner
         title="Notary in Utah County"
         subtitle="Remote Online Notarization (RON) from Lehi, Provo, Orem, and beyond: no travel appointment required."
-        backgroundImage="/modern-apartment-balcony.png"
+        backgroundImage="/modern-apartment-balcony.webp"
       />
 
       <article className="bg-background py-12">

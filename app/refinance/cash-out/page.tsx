@@ -34,7 +34,7 @@ export default function CashOutRefinancePage() {
           { name: "Cash-Out", url: `${SITE_URL}/refinance/cash-out` },
         ])}
       />
-      <PageBanner title="Cash-Out Refinance" subtitle="Turn home equity into cash — at mortgage rates" backgroundImage="/modern-townhouse-garage.png" />
+      <PageBanner title="Cash-Out Refinance" subtitle="Turn home equity into cash at mortgage rates" backgroundImage="/modern-townhouse-garage.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

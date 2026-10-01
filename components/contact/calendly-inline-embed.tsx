@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Calendar, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CalendlyLink } from "@/components/calendly-link";
+import { analyticsAttributes } from "@/lib/analytics";
 import { calendlyUrlWithAttribution } from "@/lib/calendly-attribution";
 import { SITE_CALENDLY_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -60,6 +61,27 @@ function useAttributedIframeSrc(): string {
   return src;
 }
 
+/** Hashes that mean the visitor came here to book, so the scheduler loads without a click. */
+const AUTO_LOAD_HASHES = new Set(["#book-a-call", "#book"]);
+
+/**
+ * The Calendly iframe pulls about 3MB of scripts (Calendly plus Stripe fraud checks), so it
+ * loads only when the visitor asks for it: a click, or arriving on a booking anchor such as
+ * the footer's "Book a free call" link to /contact/#book-a-call.
+ */
+function useSchedulerRequested(): [boolean, () => void] {
+  const [requested, setRequested] = useState(false);
+  useEffect(() => {
+    const checkHash = () => {
+      if (AUTO_LOAD_HASHES.has(window.location.hash)) setRequested(true);
+    };
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => window.removeEventListener("hashchange", checkHash);
+  }, []);
+  return [requested, () => setRequested(true)];
+}
+
 type CalendlyInlineEmbedProps = {
   variant?: CalendlyInlineVariant;
   className?: string;
@@ -84,6 +106,7 @@ export function CalendlyInlineEmbed({
   const pointerInShellRef = useRef(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const iframeSrc = useAttributedIframeSrc();
+  const [schedulerRequested, requestScheduler] = useSchedulerRequested();
 
   useEffect(() => {
     const sync = () => {
@@ -113,7 +136,7 @@ export function CalendlyInlineEmbed({
   }, []);
 
   useEffect(() => {
-    if (!showFullscreenToggle) return;
+    if (!showFullscreenToggle || !schedulerRequested) return;
     const onKeyDown = (e: KeyboardEvent) => {
       const shell = shellRef.current;
       if (!shell) return;
@@ -147,7 +170,7 @@ export function CalendlyInlineEmbed({
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [showFullscreenToggle, toggleFullscreen]);
+  }, [showFullscreenToggle, schedulerRequested, toggleFullscreen]);
 
   const iframeSizeWhenInline =
     variant === "compact"
@@ -184,7 +207,7 @@ export function CalendlyInlineEmbed({
             : wrapMin
         )}
       >
-        {showFullscreenToggle && (
+        {showFullscreenToggle && schedulerRequested && (
           <div className="absolute right-2 top-2 z-10">
             <Button
               type="button"
@@ -215,13 +238,33 @@ export function CalendlyInlineEmbed({
             </Button>
           </div>
         )}
-        <iframe
-          title="Schedule a 30-minute call with Ondo Real Estate"
-          src={iframeSrc}
-          className={iframeClass}
-          loading="lazy"
-          allow="fullscreen; payment"
-        />
+        {schedulerRequested ? (
+          <iframe
+            title="Schedule a 30-minute call with Ondo Real Estate"
+            src={iframeSrc}
+            className={iframeClass}
+            allow="fullscreen; payment"
+          />
+        ) : (
+          <div
+            className={cn(
+              "flex flex-col items-center justify-center gap-3 px-6 py-10 text-center",
+              iframeSizeWhenInline
+            )}
+          >
+            <Calendar className="h-8 w-8 text-primary" aria-hidden />
+            <p className="max-w-xs text-sm text-muted-foreground">
+              Choose a time that works for you. The calendar loads when you ask for it.
+            </p>
+            <Button
+              type="button"
+              onClick={requestScheduler}
+              {...analyticsAttributes("book_call_click", "calendly_embed", "load_scheduler")}
+            >
+              Pick a time
+            </Button>
+          </div>
+        )}
       </div>
       {showFallbackLink && (
         <p className="mt-2 text-xs text-muted-foreground">

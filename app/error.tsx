@@ -5,8 +5,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle } from "lucide-react"
-import { SITE_URL } from "@/lib/site"
-import SEO from "@/components/seo"
 
 export default function Error({
   error,
@@ -22,12 +20,6 @@ export default function Error({
 
   return (
     <main className="flex items-center justify-center min-h-screen p-4 bg-background dark:bg-transparent">
-      <SEO
-        title="Error | Ondo Real Estate"
-        description="An unexpected error occurred. Please try again or return home."
-        pathname="/error"
-        image={`${SITE_URL}/modern-apartment-balcony.webp`}
-      />
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">

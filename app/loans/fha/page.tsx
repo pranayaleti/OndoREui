@@ -44,7 +44,7 @@ export default function FHALoanPage() {
           { name: "FHA Loans", url: `${SITE_URL}/loans/fha` },
         ])}
       />
-      <PageBanner title="FHA Loans" subtitle="Government-backed financing with low down payments and flexible credit requirements" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="FHA Loans" subtitle="Government-backed financing with low down payments and flexible credit requirements" backgroundImage="/modern-office-building.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

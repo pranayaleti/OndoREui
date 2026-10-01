@@ -46,7 +46,7 @@ export default function TemplatesPage() {
       <PageBanner
         title="Templates & Resources"
         subtitle="Utah-oriented landlord forms, addendums, and disclosures, plus a seller listing-prep checklist. Samples are for reference only. Request the file — we email it. Not legal advice."
-        backgroundImage="/modern-apartment-balcony.png"
+        backgroundImage="/modern-apartment-balcony.webp"
       />
 
       <section className="bg-background py-16">

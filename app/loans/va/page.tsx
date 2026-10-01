@@ -45,7 +45,7 @@ export default function VALoanPage() {
           { name: "VA Loans", url: `${SITE_URL}/loans/va/` },
         ])}
       />
-      <PageBanner title="VA Home Loans" subtitle="Earned benefits for veterans and active-duty service members: zero down, no PMI" backgroundImage="/modern-office-building.png" />
+      <PageBanner title="VA Home Loans" subtitle="Earned benefits for veterans and active-duty service members: zero down, no PMI" backgroundImage="/modern-office-building.webp" />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
