@@ -7,8 +7,17 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PageBanner } from "@/components/page-banner"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { SITE_NAME, SITE_PHONE_TEL, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import ConsultationCTA from "@/components/ConsultationCTA"
+import {
+  GROWTH_MGMT_RATE,
+  GROWTH_MIN_UNITS,
+  LEASING_FEE_RATE,
+  PORTFOLIO_MIN_UNITS,
+  STARTER_MAX_UNITS,
+  STARTER_MGMT_RATE,
+} from "@/lib/fee-comparison"
+import { analyticsAttributes } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: pageTitle("Utah Property Management: Fees, Leasing & Screening"),
@@ -64,6 +73,36 @@ const pillars = [
   },
 ]
 
+const percent = (rate: number) => `${Math.round(rate * 100)}%`
+
+// Same published figures as /pricing/ (lib/fee-comparison.ts), so the two pages cannot drift.
+const feeSummary = [
+  {
+    name: "Starter",
+    units: `1\u2013${STARTER_MAX_UNITS} units`,
+    price: percent(STARTER_MGMT_RATE),
+    note: "of collected rent",
+  },
+  {
+    name: "Growth",
+    units: `${GROWTH_MIN_UNITS}\u2013${PORTFOLIO_MIN_UNITS - 1} units`,
+    price: percent(GROWTH_MGMT_RATE),
+    note: "of collected rent",
+  },
+  {
+    name: "Portfolio",
+    units: `${PORTFOLIO_MIN_UNITS}+ units`,
+    price: "Custom",
+    note: "quoted for your portfolio",
+  },
+]
+
+const serviceLinks = [
+  { href: "/property-management/tenant-screening/", label: "Tenant screening", hint: "Fair Housing-compliant verification before you hand over keys." },
+  { href: "/property-management/maintenance-coordination/", label: "Maintenance coordination", hint: "Requests, vendors, and follow-through in one place." },
+  { href: "/property-management/owner-reporting/", label: "Owner reporting", hint: "Statements and visibility into rent, expenses, and vacancy." },
+]
+
 export default function PropertyManagementPage() {
   return (
     <main>
@@ -91,6 +130,18 @@ export default function PropertyManagementPage() {
         title="Property management built for Utah owners"
         subtitle="Leasing, screening, rent, maintenance, and reporting: with brokerage, loans, and notary when you need them in the same relationship."
         backgroundImage="/modern-office-building.png"
+        primaryCta={{
+          label: "Get a free home estimate",
+          href: "/whats-my-home-worth/",
+          event: "page_banner_rental_analysis",
+          analyticsLabel: "property-management",
+        }}
+        secondaryCta={{
+          label: "Call us",
+          href: `tel:${SITE_PHONE_TEL}`,
+          event: "page_banner_call",
+          analyticsLabel: "property-management",
+        }}
       />
 
       <div className="container mx-auto px-4 py-12 md:py-16">
@@ -115,6 +166,55 @@ export default function PropertyManagementPage() {
             </Card>
           ))}
         </div>
+
+        <section className="max-w-5xl mx-auto mb-16" aria-labelledby="pm-fees-heading">
+          <h2 id="pm-fees-heading" className="text-2xl md:text-3xl font-bold text-center mb-3">
+            What management costs
+          </h2>
+          <p className="text-center text-foreground/70 mb-8 max-w-2xl mx-auto">
+            A percentage of the rent we collect, charged only when your tenants pay. We also charge a one-time leasing fee of{" "}
+            {percent(LEASING_FEE_RATE)} of the first month&rsquo;s rent when we place a new tenant.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
+            {feeSummary.map((tier) => (
+              <div key={tier.name} className="rounded-lg border border-border bg-card p-5 text-center">
+                <p className="font-semibold text-foreground">{tier.name}</p>
+                <p className="text-sm text-foreground/70">{tier.units}</p>
+                <p className="mt-3 text-3xl font-bold text-foreground">{tier.price}</p>
+                <p className="text-sm text-foreground/70">{tier.note}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-center">
+            <Link
+              href="/pricing/"
+              className="font-medium text-primary hover:underline"
+              {...analyticsAttributes("pm_hub_pricing_click", "property_management", "see-full-pricing")}
+            >
+              See full pricing and what is included
+            </Link>
+          </p>
+        </section>
+
+        <section className="max-w-5xl mx-auto mb-16" aria-labelledby="pm-services-heading">
+          <h2 id="pm-services-heading" className="text-2xl md:text-3xl font-bold text-center mb-8">
+            Management services in detail
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {serviceLinks.map((service) => (
+              <li key={service.href}>
+                <Link
+                  href={service.href}
+                  className="flex h-full flex-col rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  {...analyticsAttributes("pm_hub_service_click", "property_management", service.label.toLowerCase().replace(/\s+/g, "-"))}
+                >
+                  <span className="font-semibold text-primary">{service.label}</span>
+                  <span className="mt-2 text-sm text-foreground/70">{service.hint}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         {/* Platform features, AI & automation */}
         <section className="max-w-5xl mx-auto mb-16">

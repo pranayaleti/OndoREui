@@ -27,6 +27,7 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen">
       <HeroSection />
       <JourneyCardsSection />
+      <FeaturedPropertiesSection />
       <UtahArrivalStrip />
       <SocialProofBar />
       <HowItWorksSection />
@@ -38,7 +39,6 @@ export default function LandingPage() {
       <FeeAlignmentWidget />
       <RentSnapshotSection />
       <SelfManagingSection />
-      <FeaturedPropertiesSection />
       <BrowseByTypeSection />
       <TestimonialsSection />
       <ServiceAreaSection />

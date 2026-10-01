@@ -92,4 +92,11 @@ describe("ArticleShell", () => {
     )
     expect(screen.getByText(/not a commitment to lend/i)).toBeInTheDocument()
   })
+
+  it("styles the body with the theme tokens, not a forced inverted palette", () => {
+    const { container } = renderShell(<h2>What it is</h2>)
+    const body = container.querySelector(".prose")
+    expect(body).toBeInTheDocument()
+    expect(body?.className).not.toContain("prose-invert")
+  })
 })

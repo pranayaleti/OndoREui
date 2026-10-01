@@ -23,7 +23,7 @@ export function PropertyOwnerSection() {
             <OwnerServicesTabs />
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild>
-                <Link href="/whats-my-home-worth">Free rental analysis</Link>
+                <Link href="/whats-my-home-worth">Free home estimate</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/property-management">Property management services</Link>

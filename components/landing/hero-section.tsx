@@ -2,6 +2,16 @@ import Image from "next/image"
 import Link from "next/link"
 import { Building, Calculator, Calendar } from "lucide-react"
 import { HeroZipServiceSelectorLazy } from "@/components/landing/hero-zip-service-selector-lazy"
+import { analyticsAttributes } from "@/lib/analytics"
+
+/** Audience chooser under the hero buttons: one link per segment page. */
+const AUDIENCE_LINKS = [
+  { href: "/properties", label: "Rent", id: "rent" },
+  { href: "/buy", label: "Buy", id: "buy" },
+  { href: "/sell", label: "Sell", id: "sell" },
+  { href: "/property-management", label: "Manage my property", id: "manage" },
+  { href: "/loans", label: "Loans", id: "loans" },
+] as const
 
 export function HeroSection() {
   return (
@@ -33,7 +43,7 @@ export function HeroSection() {
         {/*
           Trio of equal-weight CTAs mirroring what high-converting local PM
           sites use above the fold: browse rentals (renter intent), book a
-          call (owner intent), free rental report (owner + investor intent).
+          call (owner intent), free home estimate (owner + investor intent).
           Sits directly under the ZIP widget so PM shoppers who aren't ready
           to type a ZIP still have three obvious next steps.
         */}
@@ -61,8 +71,25 @@ export function HeroSection() {
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-transparent px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors"
           >
             <Calculator className="h-4 w-4" aria-hidden="true" />
-            Free rental report
+            Free home estimate
           </Link>
+        </div>
+        <div
+          role="group"
+          aria-label="What do you need?"
+          className="mt-8 flex flex-wrap items-center justify-center gap-2"
+        >
+          <span className="text-sm font-medium text-foreground/70">What do you need?</span>
+          {AUDIENCE_LINKS.map(({ href, label, id }) => (
+            <Link
+              key={id}
+              href={href}
+              className="inline-flex min-h-11 items-center rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground hover:border-primary hover:text-primary transition-colors"
+              {...analyticsAttributes("hero_audience_click", "home_hero", id)}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
         <p className="mt-6 text-sm text-foreground/50">
           Trusted by property owners from North Ogden to Nephi{" "}

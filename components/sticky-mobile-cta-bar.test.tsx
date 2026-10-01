@@ -1,11 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { render, screen } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 
 let mockPathname = "/"
 vi.mock("next/navigation", () => ({
   usePathname: () => mockPathname,
 }))
 
+import { analytics } from "@/lib/analytics"
 import { StickyMobileCtaBar } from "./sticky-mobile-cta-bar"
 
 describe("StickyMobileCtaBar", () => {
@@ -13,11 +14,61 @@ describe("StickyMobileCtaBar", () => {
     mockPathname = "/"
   })
 
-  it("renders Call and Free rental analysis on marketing pages", () => {
+  it("renders Call and the owner offer on the homepage", () => {
     const { container } = render(<StickyMobileCtaBar />)
     expect(container.firstChild).not.toBeNull()
     expect(screen.getByRole("link", { name: /call ondo re/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /free rental analysis/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /free home estimate/i }).getAttribute("href")).toMatch(
+      /^\/whats-my-home-worth\/?$/,
+    )
+  })
+
+  it.each(["/property-management/", "/pricing/", "/solutions/landlords/"])(
+    "keeps the rental analysis on landlord page %s",
+    (pathname) => {
+      mockPathname = pathname
+      render(<StickyMobileCtaBar />)
+      expect(screen.getByRole("link", { name: /free home estimate/i })).toBeInTheDocument()
+    },
+  )
+
+  it.each([
+    ["/buy/", /start the buyer quiz/i, "/buy/quiz"],
+    ["/buy/first-time/", /start the buyer quiz/i, "/buy/quiz"],
+    ["/sell/", /what's my home worth/i, "/whats-my-home-worth"],
+    ["/loans/", /talk with a loan officer/i, "/qualify"],
+    ["/refinance/cash-out/", /talk with a loan officer/i, "/qualify"],
+    ["/properties/", /book a call/i, "/contact"],
+    ["/about/", /what's my home worth/i, "/whats-my-home-worth"],
+  ])("shows an audience-fit second button on %s, not the landlord offer", (pathname, name, href) => {
+    mockPathname = pathname
+    render(<StickyMobileCtaBar />)
+    expect(screen.getByRole("link", { name }).getAttribute("href")?.replace(/\/$/, "")).toBe(href)
+    expect(screen.queryByRole("link", { name: /free home estimate/i })).not.toBeInTheDocument()
+  })
+
+  it("tracks the route-specific event name on click", () => {
+    const trackEvent = vi.spyOn(analytics, "trackEvent").mockImplementation(() => undefined)
+    mockPathname = "/loans/"
+    render(<StickyMobileCtaBar />)
+    fireEvent.click(screen.getByRole("link", { name: /talk with a loan officer/i }))
+    expect(trackEvent).toHaveBeenCalledWith("mobile_cta_loan_inquiry", "engagement", "sticky_mobile_bar")
+    trackEvent.mockRestore()
+  })
+
+  it("keeps the rental analysis event name for the rental analysis button", () => {
+    const trackEvent = vi.spyOn(analytics, "trackEvent").mockImplementation(() => undefined)
+    mockPathname = "/pricing/"
+    render(<StickyMobileCtaBar />)
+    fireEvent.click(screen.getByRole("link", { name: /free home estimate/i }))
+    expect(trackEvent).toHaveBeenCalledWith("mobile_cta_rental_analysis", "engagement", "sticky_mobile_bar")
+    trackEvent.mockRestore()
+  })
+
+  it("hides itself on the loan inquiry form so the CTA never points at the page it is on", () => {
+    mockPathname = "/qualify/"
+    const { container } = render(<StickyMobileCtaBar />)
+    expect(container.firstChild).toBeNull()
   })
 
   it("hides itself on portal/auth routes", () => {
@@ -54,9 +105,7 @@ describe("StickyMobileCtaBar", () => {
     mockPathname = "/whats-my-home-worth"
     render(<StickyMobileCtaBar />)
     expect(screen.getByRole("link", { name: /call ondo re/i })).toBeInTheDocument()
-    expect(
-      screen.queryByRole("link", { name: /free rental analysis/i }),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByRole("link", { name: /home worth|home estimate/i })).not.toBeInTheDocument()
   })
 
   it("uses a tel: href for the Call button", () => {
@@ -70,12 +119,13 @@ describe("StickyMobileCtaBar", () => {
     render(<StickyMobileCtaBar />)
     const showing = screen.getByRole("link", { name: /request a showing/i })
     expect(showing).toHaveAttribute("href", "#listing-inquire")
-    expect(screen.queryByRole("link", { name: /free rental analysis/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole("link", { name: /free home estimate/i })).not.toBeInTheDocument()
   })
 
-  it("keeps rental analysis on the listings browse page", () => {
+  it("does not offer a landlord analysis on the listings browse page", () => {
     mockPathname = "/properties"
     render(<StickyMobileCtaBar />)
-    expect(screen.getByRole("link", { name: /free rental analysis/i })).toBeInTheDocument()
+    expect(screen.queryByRole("link", { name: /free home estimate/i })).not.toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /book a call/i })).toBeInTheDocument()
   })
 })

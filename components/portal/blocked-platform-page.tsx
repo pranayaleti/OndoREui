@@ -1,27 +1,12 @@
-import type { Metadata } from "next"
 import { ProtectedPortalNotice } from "@/components/portal/protected-portal-notice"
+import { portalGateMetadata } from "@/components/portal/portal-gate"
 
-export const metadata: Metadata = {
-  title: "Secure platform access | Ondo Real Estate",
-  description: "Platform prototypes are not exposed on the public Ondo Real Estate site.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-  alternates: {
-    canonical: "/auth",
-  },
-}
+export const PLATFORM_GATE_TITLE = "See the Ondo platform in the demo hub"
+export const PLATFORM_GATE_DESCRIPTION =
+  "The live owner and tenant portals are behind sign in. To see what the platform does first, open the demo hub, where you can also ask us for a walkthrough."
+
+export const metadata = portalGateMetadata("Platform demo and sign in", PLATFORM_GATE_DESCRIPTION)
 
 export default function BlockedPlatformPage() {
-  return (
-    <ProtectedPortalNotice
-      title="Platform demos are no longer exposed on the public site"
-      description="Prototype platform routes are gated so the marketing site only shows real, supported product entry points."
-    />
-  )
+  return <ProtectedPortalNotice title={PLATFORM_GATE_TITLE} description={PLATFORM_GATE_DESCRIPTION} showDemoLink />
 }

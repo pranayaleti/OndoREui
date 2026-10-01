@@ -27,7 +27,7 @@ export function CTASection() {
           <Button asChild size="lg">
             <Link href="/whats-my-home-worth" className="inline-flex items-center gap-2">
               <Calculator className="h-4 w-4" aria-hidden="true" />
-              Free rental analysis
+              Free home estimate
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">

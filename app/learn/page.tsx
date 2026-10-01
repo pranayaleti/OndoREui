@@ -42,7 +42,7 @@ export default function LearnHubPage() {
             This hub is for people who need a clear map, not another rate headline. Ondo originates mortgages in
             licensed states. Pages here are education. They are not approval, a lock, or advice for your file.
           </p>
-          <p className="mb-10 text-sm text-foreground/70">
+          <p className="mb-10 max-w-3xl text-sm text-foreground/70">
             Start with{" "}
             <Link href="/learn/variable-income" className="prose-link">
               variable income
@@ -70,6 +70,18 @@ export default function LearnHubPage() {
             ,{" "}
             <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="prose-link">
               Utah tax calendar vs first escrow analysis
+            </Link>
+            ,{" "}
+            <Link href="/blog/escrow-shortage-after-first-year" className="prose-link">
+              escrow shortage after the first year
+            </Link>
+            ,{" "}
+            <Link href="/blog/impounds-vs-waiving-escrow" className="prose-link">
+              impounds vs waiving escrow
+            </Link>
+            ,{" "}
+            <Link href="/blog/hill-afb-va-coe-occupancy" className="prose-link">
+              Hill AFB VA: COE and occupancy
             </Link>
             , the{" "}
             <Link href="/loans" className="prose-link">

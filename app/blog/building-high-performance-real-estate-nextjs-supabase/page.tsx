@@ -104,7 +104,7 @@ export default function BuildingHighPerformanceRealEstatePlatform() {
             <CardSpot title="Proof Point" body="Lazy-loaded UI (LandingPage) + Supabase-backed data fetches." />
           </div>
 
-          <div className="prose prose-lg prose-invert max-w-none">
+          <div className="prose prose-lg max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
               In the competitive proptech landscape, speed and reliability are not just &quot;nice-to-haves&quot;, they are conversion drivers. At <strong>Ondo Real Estate</strong>, we rebuilt our core infrastructure using <strong>Next.js 15</strong> and <strong>Supabase</strong> to deliver a seamless experience for buyers, sellers, and property owners.
             </p>

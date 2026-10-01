@@ -14,7 +14,7 @@ describe("SelfManagingSection", () => {
   it("wires the two primary CTAs to the real analysis and Calendly targets", () => {
     render(<SelfManagingSection />)
     // Accept optional trailing slash; Next.js trailingSlash config may add one.
-    expect(hrefOf(/Get my free rental analysis/i)).toBe("/whats-my-home-worth")
+    expect(hrefOf(/Get my free home estimate/i)).toBe("/whats-my-home-worth")
     expect(hrefOf(/Book a call/i)).toBe("/contact#book-a-call")
     expect(hrefOf(/self-manage vs Ondo calculator/i)).toBe("/calculators/owner-vs-self")
   })

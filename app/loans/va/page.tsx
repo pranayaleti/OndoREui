@@ -164,7 +164,7 @@ export default function VALoanPage() {
 
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-6">Ask about VA eligibility</h3>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/blog/hill-afb-va-coe-occupancy">Hill AFB COE + occupancy</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/loans">Compare all loan types</Link></Button>

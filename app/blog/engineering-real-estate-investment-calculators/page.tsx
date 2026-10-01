@@ -104,7 +104,7 @@ export default function EngineeringInvestmentCalculators() {
             <CardSpot title="How it works" body="React + TypeScript state, amortization loop, and Recharts for clarity." />
           </div>
 
-          <div className="prose prose-lg prose-invert max-w-none">
+          <div className="prose prose-lg max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
               Real estate investing isn't about guessing; it's about math. At Ondo Real Estate, we didn't just embed a widget, we engineered a comprehensive <strong>ROI Calculator</strong> from scratch.
             </p>

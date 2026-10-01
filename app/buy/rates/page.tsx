@@ -276,7 +276,7 @@ export default function MortgageRatesPage() {
 
             <div className="text-center mb-12">
               <h3 className="text-2xl font-bold mb-6">Ask about current pricing</h3>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg">
                   <Link href="/calculators/mortgage-payment">Calculate Payment</Link>
                 </Button>

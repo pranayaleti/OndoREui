@@ -111,7 +111,7 @@ export function ListingGallery({ title, photos }: ListingGalleryProps) {
         </p>
       </div>
 
-      <div className="hidden gap-2 md:grid md:grid-cols-2">
+      <div className={`hidden gap-2 md:grid ${total === 1 ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
         <button
           type="button"
           className="relative overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"

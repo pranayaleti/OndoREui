@@ -7,6 +7,7 @@ type NextStep = {
 }
 
 const BUY_NEXT_STEPS: readonly NextStep[] = [
+  { href: "/buy/quiz/", label: "See what you can afford", hint: "Eight quick questions and a price range right away. No email required." },
   { href: "/loans", label: "Home loans", hint: "Conventional, FHA, VA, USDA — not a credit decision on this page." },
   { href: "/calculators", label: "Calculators", hint: "Payment, affordability, buying power, and more." },
   { href: "/calculators/rent-vs-own", label: "Rent vs own", hint: "Compare long-term cost and equity with your numbers." },

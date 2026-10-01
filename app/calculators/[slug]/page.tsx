@@ -156,6 +156,10 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={structuredData}
       />
+      <CalculatorUsageTracker slug={slug} />
+      {/* The tool leads so its H1 and first input sit at the top of the page (no scroll past
+          the intro on mobile). The explainer content below stays in the static HTML. */}
+      <Component />
       {/* Server-rendered so AI agents and no-JS clients see the formula and worked
           example before the interactive widget hydrates. Progressive enhancement:
           the client `<Component />` below re-computes with user input. */}
@@ -170,8 +174,6 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
         />
         {slug === "refinance" ? <BreakEvenTable table="stay-scenarios" /> : null}
       </div>
-      <CalculatorUsageTracker slug={slug} />
-      <Component />
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <RelatedContent path={`/calculators/${slug}`} title="Related education" />
       </div>

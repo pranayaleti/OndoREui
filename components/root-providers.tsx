@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeColorSync } from "@/components/theme-color-sync"
 import { Toaster } from "@/components/ui/toaster"
 import { BfcacheProvider } from "@/components/bfcache-provider"
 import { I18nProvider } from "@/components/i18n-provider"
@@ -11,10 +12,11 @@ import { WebVitalsReporter } from "@/components/web-vitals-reporter"
 
 export function RootProviders({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <I18nProvider>
         <PwaProvider>
           <BfcacheProvider>
+            <ThemeColorSync />
             {children}
             <WebVitalsReporter />
             <Toaster />

@@ -11,12 +11,15 @@ import { cn } from "@/lib/utils"
 type ListingFavoriteButtonProps = {
   publicId: string
   compact?: boolean
+  /** Keep the text label for screen readers but show only the icon below the sm breakpoint. */
+  iconOnlyOnMobile?: boolean
   className?: string
 }
 
 export function ListingFavoriteButton({
   publicId,
   compact = false,
+  iconOnlyOnMobile = false,
   className,
 }: ListingFavoriteButtonProps) {
   const { toast } = useToast()
@@ -60,13 +63,13 @@ export function ListingFavoriteButton({
         type="button"
         variant="outline"
         size={compact ? "icon" : "default"}
-        className={cn(compact ? "min-h-11 min-w-11" : "min-h-11", className)}
+        className={cn(compact ? "min-h-11 min-w-11" : "min-h-11", iconOnlyOnMobile && "max-sm:min-w-11 max-sm:px-0", className)}
         aria-pressed={saved}
         aria-label={compact ? (saved ? "Remove from saved listings" : "Save listing") : undefined}
         onClick={() => void onToggleSave()}
       >
         <Heart className={cn("h-4 w-4", saved && "fill-current")} aria-hidden="true" />
-        {compact ? null : saved ? "Saved" : "Save"}
+        {compact ? null : <span className={cn(iconOnlyOnMobile && "max-sm:sr-only")}>{saved ? "Saved" : "Save"}</span>}
       </Button>
     </>
   )

@@ -253,7 +253,7 @@ export default function LeasingChatWidget({
       className={
         inline
           ? 'flex h-[560px] w-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white'
-          : 'fixed bottom-6 right-6 z-50 flex h-[560px] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl'
+          : 'fixed bottom-6 right-6 z-50 flex h-[560px] max-h-[calc(100dvh-3.5rem)] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl'
       }
       aria-label="Leasing assistant"
     >

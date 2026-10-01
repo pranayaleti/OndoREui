@@ -103,6 +103,18 @@ export default function BuyPage() {
         title="Buy a home in Utah"
         subtitle="Shop with an agent, run the loan numbers, and compare rent vs own. For-sale search is agent-led — this site lists rentals we manage."
         backgroundImage="/suburban-house-garden.png"
+        primaryCta={{
+          label: "See what you can afford",
+          href: "/buy/quiz/",
+          event: "page_banner_buyer_quiz",
+          analyticsLabel: "buy",
+        }}
+        secondaryCta={{
+          label: "Work with an agent",
+          href: "/get-matched/",
+          event: "page_banner_get_matched",
+          analyticsLabel: "buy",
+        }}
       />
 
       <BuyLendingStrip />

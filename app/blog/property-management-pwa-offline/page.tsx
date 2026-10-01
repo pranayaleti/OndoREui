@@ -62,7 +62,7 @@ export default function PropertyManagementPwaOffline() {
             <p>A service worker caches the app shell and data; an offline queue (backed by IndexedDB) holds writes and replays them on reconnect via background sync — so the app feels instant and never blocks your work.</p>
 
             <h2>Takeaway</h2>
-            <p>Field work is offline work. A PWA makes property management installable, fast, and resilient — see the <Link href="/platform">platform</Link> for how Ondo builds it in.</p>
+            <p>Field work is offline work. A PWA makes property management installable, fast, and resilient. See the <Link href="/demo/">platform demo</Link> for how Ondo builds it in.</p>
           
     </ArticleShell>
   )

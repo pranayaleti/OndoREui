@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { toCanonicalPageUrl } from "@/lib/page-canonical"
-import { pageTitle } from "@/lib/site"
+import { APP_PORTAL_LOGIN_URL, pageTitle } from "@/lib/site"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/solutions/landlords") },
@@ -58,7 +58,7 @@ export default function LandlordsPage() {
             <h2 className="text-2xl font-bold text-foreground mb-3">Your owner portal, ready now</h2>
             <p className="text-foreground/70 mb-6">Log in to see your properties, tenants, and financials in real time.</p>
             <Button asChild>
-              <Link href="/owner">Go to Owner Portal</Link>
+              <Link href={APP_PORTAL_LOGIN_URL}>Go to Owner Portal</Link>
             </Button>
           </div>
         </div>
@@ -67,9 +67,14 @@ export default function LandlordsPage() {
       {/* CTA */}
       <section className="py-16 bg-background text-center">
         <div className="container mx-auto px-4">
-          <Button asChild size="lg">
-            <Link href="/contact">Get Started</Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg">
+              <Link href="/contact">Get Started</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/pricing/">See pricing</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </main>

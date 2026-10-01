@@ -92,4 +92,63 @@ describe("ListingLeadForms", () => {
     expect(payload?.message).not.toMatch(/high-yield|loan offer|you qualify|cap rate/i)
     expect(screen.queryByText(/high-yield|set it and forget it/i)).not.toBeInTheDocument()
   })
+
+  function openTourTab() {
+    fireEvent.mouseDown(screen.getByRole("tab", { name: /schedule a tour/i }), { button: 0, ctrlKey: false })
+  }
+
+  it("sends the tour tab through the lead API with the property id, attribution and only name and email required", async () => {
+    submit.mockResolvedValue({ success: true, message: "ok", leadId: "lead-2" })
+    render(<ListingLeadForms title="Cedar Hollow" address="1 Main St, Lehi, UT" propertyId="prop-1" />)
+    openTourTab()
+
+    fireEvent.change(await screen.findByLabelText(/^name$/i), { target: { value: "Alex Rivera" } })
+    fireEvent.change(screen.getByLabelText(/^email$/i), { target: { value: "alex@example.com" } })
+    fireEvent.change(screen.getByLabelText(/preferred date/i), { target: { value: "2026-10-05" } })
+    fireEvent.change(screen.getByLabelText(/preferred time/i), { target: { value: "2:00 PM" } })
+    fireEvent.click(screen.getByRole("button", { name: /^schedule a tour$/i }))
+
+    await waitFor(() => expect(submit).toHaveBeenCalled())
+    const [payload, options] = submit.mock.calls[0] ?? []
+    expect(options).toEqual({ formName: "listing_tour_request" })
+    expect(payload).toMatchObject({
+      name: "Alex Rivera",
+      email: "alex@example.com",
+      propertyId: "prop-1",
+      inquiryType: "renter",
+      source: "website",
+    })
+    expect(payload).toHaveProperty("attribution")
+    expect(payload).not.toHaveProperty("phone")
+    expect(payload?.message).toMatch(/Preferred date: 2026-10-05/)
+    expect(payload?.message).toMatch(/Preferred time: 2:00 PM/)
+    expect(await screen.findByRole("status")).toHaveTextContent(/tour request sent/i)
+  })
+
+  it("accepts a tour request with no phone and no preferred time", async () => {
+    submit.mockResolvedValue({ success: true, message: "ok", leadId: "lead-3" })
+    render(<ListingLeadForms title="Cedar Hollow" address="1 Main St" propertyId="prop-1" />)
+    openTourTab()
+    fireEvent.change(await screen.findByLabelText(/^name$/i), { target: { value: "Alex Rivera" } })
+    fireEvent.change(screen.getByLabelText(/^email$/i), { target: { value: "alex@example.com" } })
+    fireEvent.click(screen.getByRole("button", { name: /^schedule a tour$/i }))
+    await waitFor(() => expect(submit).toHaveBeenCalled())
+    expect(submit.mock.calls[0]?.[0]?.message).not.toMatch(/Preferred (date|time)/)
+  })
+
+  it("asks for a time when only a date is chosen and shows a failed send", async () => {
+    submit.mockResolvedValue({ error: "Tour service is down" } as never)
+    render(<ListingLeadForms title="Cedar Hollow" address="1 Main St" propertyId="prop-1" />)
+    openTourTab()
+    fireEvent.change(await screen.findByLabelText(/^name$/i), { target: { value: "Alex Rivera" } })
+    fireEvent.change(screen.getByLabelText(/^email$/i), { target: { value: "alex@example.com" } })
+    fireEvent.change(screen.getByLabelText(/preferred date/i), { target: { value: "2026-10-05" } })
+    fireEvent.click(screen.getByRole("button", { name: /^schedule a tour$/i }))
+    expect(await screen.findByText(/choose a time, or clear the date/i)).toBeInTheDocument()
+    expect(submit).not.toHaveBeenCalled()
+
+    fireEvent.change(screen.getByLabelText(/preferred time/i), { target: { value: "9:00 AM" } })
+    fireEvent.click(screen.getByRole("button", { name: /^schedule a tour$/i }))
+    expect(await screen.findByText("Tour service is down")).toBeInTheDocument()
+  })
 })

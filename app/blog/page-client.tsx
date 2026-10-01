@@ -3,14 +3,38 @@
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { analyticsAttributes } from "@/lib/analytics"
 import { SITE_URL } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
-import { useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { Calendar, User, ArrowRight, MapPin } from "lucide-react"
+
+// Blog readers who want email updates go to the dedicated /subscribe/ page (not the contact form).
+const SUBSCRIBE_HREF = "/subscribe/?utm_source=blog&utm_medium=referral&utm_campaign=blog_index"
+
+function SubscribeCard({ className }: { className?: string }) {
+  return (
+    <Card className={className}>
+      <CardHeader>
+        <CardTitle>Stay Updated</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-foreground/70 mb-4">
+          Get the latest real estate insights delivered to your inbox.
+        </p>
+        <Button asChild className="w-full">
+          <Link href={SUBSCRIBE_HREF} {...analyticsAttributes("subscribe_click", "blog_index", "newsletter")}>
+            Subscribe to Newsletter
+          </Link>
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
 
 export default function BlogPage() {
   const featuredPost = {
@@ -1174,7 +1198,7 @@ export default function BlogPage() {
       author: "Ondo Real Estate",
       date: "November 28, 2024",
       readTime: "4 min read",
-      category: "Mortgage",
+      category: "Mortgages",
       image: "/modern-townhouse-garage.png",
       slug: "mortgage-rate-trends-2025"
     },
@@ -1236,6 +1260,46 @@ export default function BlogPage() {
     })
     return ["All", ...Array.from(all).sort()]
   }, [blogPosts])
+
+  // Persist the filters in the URL (?category=Credit&city=Lehi) so a filtered list can be shared
+  // and survives a reload. Read after mount so the static HTML stays the unfiltered list.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const category = params.get("category")
+      const city = params.get("city")
+      if (category && categories.some((c) => c.name === category)) setActiveCategory(category)
+      if (city && citiesWithPosts.includes(city)) setActiveCity(city)
+    } catch {
+      // Filters are a convenience; ignore an unreadable URL.
+    }
+  }, [categories, citiesWithPosts])
+
+  const syncUrl = useCallback((category: string, city: string) => {
+    try {
+      const params = new URLSearchParams()
+      if (category !== "All") params.set("category", category)
+      if (city !== "All") params.set("city", city)
+      const query = params.toString()
+      window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`)
+    } catch {
+      // History API unavailable; the filter still works in memory.
+    }
+  }, [])
+
+  const selectCategory = (name: string) => {
+    setActiveCategory(name)
+    syncUrl(name, activeCity)
+  }
+  const selectCity = (name: string) => {
+    setActiveCity(name)
+    syncUrl(activeCategory, name)
+  }
+  const clearFilters = () => {
+    setActiveCategory("All")
+    setActiveCity("All")
+    syncUrl("All", "All")
+  }
 
   const filteredPosts = useMemo(() => {
     return blogPosts.filter((post) => {
@@ -1356,16 +1420,28 @@ export default function BlogPage() {
                     </div>
                   ))}
                 </div>
+                <p role="status" aria-live="polite" className="sr-only">
+                  {filteredPosts.length === 1 ? "1 article shown" : `${filteredPosts.length} articles shown`}
+                </p>
+                {filteredPosts.length === 0 && (
+                  <div className="rounded-lg border border-border p-6 text-center">
+                    <p className="mb-4 text-foreground/80">No articles match that category and city together.</p>
+                    <Button variant="outline" onClick={clearFilters}>
+                      Clear filters
+                    </Button>
+                  </div>
+                )}
+                <SubscribeCard className="mt-8 lg:hidden" />
               </div>
 
-              {/* Sidebar */}
-              <div className="lg:col-span-1">
+              {/* Sidebar: filters sit above the list on mobile (order-first), beside it on desktop */}
+              <div className="order-first lg:order-none lg:col-span-1">
                 <Card className="mb-8">
                   <CardHeader>
                     <CardTitle>Categories</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
                       {categories.map((category) => {
                         const isActive = category.name === activeCategory
                         return (
@@ -1373,8 +1449,8 @@ export default function BlogPage() {
                             key={category.name}
                             variant={isActive ? "secondary" : "outline"}
                             size="sm"
-                            className="gap-2"
-                            onClick={() => setActiveCategory(category.name)}
+                            className="shrink-0 gap-2"
+                            onClick={() => selectCategory(category.name)}
                             aria-pressed={isActive}
                           >
                             <span className="text-sm">{category.name}</span>
@@ -1398,7 +1474,7 @@ export default function BlogPage() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
                         {citiesWithPosts.map((city) => {
                           const isActive = city === activeCity
                           return (
@@ -1406,7 +1482,8 @@ export default function BlogPage() {
                               key={city}
                               variant={isActive ? "secondary" : "outline"}
                               size="sm"
-                              onClick={() => setActiveCity(city)}
+                              className="shrink-0"
+                              onClick={() => selectCity(city)}
                               aria-pressed={isActive}
                             >
                               {city}
@@ -1418,19 +1495,7 @@ export default function BlogPage() {
                   </Card>
                 )}
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Stay Updated</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-foreground/70 mb-4">
-                      Get the latest real estate insights delivered to your inbox.
-                    </p>
-                    <Button asChild className="w-full">
-                      <Link href="/contact">Subscribe to Newsletter</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
+                <SubscribeCard className="hidden lg:block" />
               </div>
             </div>
           </div>

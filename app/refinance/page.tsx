@@ -34,7 +34,23 @@ export default function RefinanceHubPage() {
           { name: "Refinance", url: `${SITE_URL}/refinance` },
         ])}
       />
-      <PageBanner title="Mortgage Refinance" subtitle="Lower your rate, change your term, or tap your equity" backgroundImage="/modern-office-building.png" />
+      <PageBanner
+        title="Mortgage Refinance"
+        subtitle="Lower your rate, change your term, or tap your equity"
+        backgroundImage="/modern-office-building.png"
+        primaryCta={{
+          label: "Talk with a loan officer",
+          href: "/qualify/",
+          event: "page_banner_loan_inquiry",
+          analyticsLabel: "refinance",
+        }}
+        secondaryCta={{
+          label: "Refinance calculator",
+          href: "/calculators/refinance/",
+          event: "page_banner_calculators",
+          analyticsLabel: "refinance",
+        }}
+      />
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">

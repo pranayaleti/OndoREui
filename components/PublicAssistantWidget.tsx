@@ -21,6 +21,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useStickyBarVisible } from '@/lib/sticky-cta';
 import { AssistantDisclosure } from '@/components/assistant-disclosure';
 import { MessageSquare, Send, X, Loader2, UserRound } from 'lucide-react';
 import {
@@ -48,7 +49,21 @@ const SUGGESTIONS = [
  * Routes that already run their own assistant. Two chat launchers in one corner is a bug the
  * visitor experiences as clutter and the team experiences as split conversation history.
  */
-const HIDDEN_PATH_PREFIXES = ['/chat'] as const;
+const HIDDEN_PATH_PREFIXES = [
+  '/chat',
+  // Quiz and estimator screens are short, form-first pages: the launcher would sit on top of the
+  // answer options and the fields the visitor is there to fill in.
+  '/get-matched',
+  '/buy/quiz',
+  '/whats-my-home-worth',
+] as const;
+
+/**
+ * While the mobile navigation drawer is open (the Header renders #mobile-menu only then) the
+ * launcher and panel step aside instead of floating above the menu. md:hidden on the drawer
+ * means this only applies below the md breakpoint.
+ */
+const HIDE_WHILE_NAV_OPEN = 'max-md:[body:has(#mobile-menu)_&]:hidden';
 
 /** Server caps the transcript at 20; stay under it so a long session degrades rather than 400s. */
 const MAX_TURNS_SENT = 18;
@@ -74,6 +89,17 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
   const transcriptRef = useRef<HTMLDivElement>(null);
   /** Set when the visitor closes the panel, so focus goes back to the launcher once it mounts. */
   const restoreFocusRef = useRef(false);
+
+  // Sit above the mobile sticky CTA bar only on routes where that bar renders.
+  const stickyBarVisible = useStickyBarVisible();
+  const bottomClass = stickyBarVisible
+    ? 'bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:bottom-6'
+    : 'bottom-6';
+  // Cap the panel to the visible viewport (dvh follows the browser bars) so the header and its
+  // close button never end up above the top edge on short or landscape screens.
+  const panelMaxHeightClass = stickyBarVisible
+    ? 'max-h-[calc(100dvh-6.5rem-env(safe-area-inset-bottom,0px))] md:max-h-[calc(100dvh-3.5rem)]'
+    : 'max-h-[calc(100dvh-3.5rem)]';
 
   const hidden = useMemo(
     () => HIDDEN_PATH_PREFIXES.some((p) => (pathname ?? '').startsWith(p)),
@@ -169,14 +195,14 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
         ref={launcherRef}
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] left-6 z-50 flex items-center gap-2 rounded-full bg-[#0B0B0B] px-5 py-3
+        className={`fixed ${bottomClass} left-4 z-50 flex h-11 w-11 items-center justify-center gap-2 rounded-full bg-[#0B0B0B]
                    text-sm font-semibold text-white shadow-lg transition hover:bg-[#1a1a1a]
                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                   focus-visible:outline-[#FF6A13] md:bottom-6"
+                   focus-visible:outline-[#FF6A13] md:left-6 md:h-auto md:w-auto md:px-5 md:py-3 ${HIDE_WHILE_NAV_OPEN}`}
         aria-label="Open the Ondo assistant to ask about property management, renting, buying, or loans"
       >
         <MessageSquare className="h-4 w-4" aria-hidden="true" />
-        Ask Ondo
+        <span className="sr-only md:not-sr-only">Ask Ondo</span>
       </button>
     );
   }
@@ -186,7 +212,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
       className={
         inline
           ? 'flex h-[560px] w-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white'
-          : 'fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] left-6 z-50 flex h-[560px] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl md:bottom-6'
+          : `fixed ${bottomClass} left-4 z-50 flex h-[560px] ${panelMaxHeightClass} w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl md:left-6 ${HIDE_WHILE_NAV_OPEN}`
       }
       aria-label="Ondo assistant"
     >

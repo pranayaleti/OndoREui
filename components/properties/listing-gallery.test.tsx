@@ -25,4 +25,16 @@ describe("ListingGallery", () => {
     fireEvent.click(screen.getByRole("button", { name: /close photos/i }))
     expect(screen.queryByRole("button", { name: /next photo/i })).not.toBeInTheDocument()
   })
+
+  it("uses a single desktop column when the listing has one photo", () => {
+    const { container } = render(<ListingGallery title="Cedar Hollow" photos={[photos[0]]} />)
+    const desktop = container.querySelector(".md\\:grid")
+    expect(desktop?.className).toContain("md:grid-cols-1")
+    expect(desktop?.className).not.toContain("md:grid-cols-2")
+  })
+
+  it("keeps two desktop columns when there are thumbnails", () => {
+    const { container } = render(<ListingGallery title="Cedar Hollow" photos={photos} />)
+    expect(container.querySelector(".md\\:grid")?.className).toContain("md:grid-cols-2")
+  })
 })

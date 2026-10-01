@@ -313,8 +313,8 @@ export default async function Page({ params }: { params: Params }) {
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href={`/calculators/home-sale/`}>
-                    {hood.name} home cost calculator
+                  <Link href="/calculators/mortgage-payment/">
+                    {hood.name} mortgage payment calculator
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

@@ -104,7 +104,7 @@ export default function TermsOfServicePage() {
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-lg text-foreground/70 mb-4">
                 Last updated: <strong>{lastUpdated}</strong>

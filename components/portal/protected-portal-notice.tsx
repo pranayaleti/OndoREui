@@ -6,9 +6,12 @@ import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
 export function ProtectedPortalNotice({
   title,
   description,
+  showDemoLink = false,
 }: {
   title: string
   description: string
+  /** Adds an "Open the demo hub" button (/demo/), for visitors who came to look at the platform. */
+  showDemoLink?: boolean
 }) {
   return (
     <main className="container flex min-h-[60vh] items-center justify-center py-12">
@@ -19,7 +22,12 @@ export function ProtectedPortalNotice({
         <h1 className="text-2xl font-semibold">{title}</h1>
         <p className="mt-3 text-sm leading-6 text-foreground/70">{description}</p>
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <Button asChild>
+          {showDemoLink ? (
+            <Button asChild>
+              <Link href="/demo/">Open the demo hub</Link>
+            </Button>
+          ) : null}
+          <Button asChild variant={showDemoLink ? "outline" : "default"}>
             <Link href={APP_PORTAL_LOGIN_URL}>Go to Property Management Portal</Link>
           </Button>
           <Button asChild variant="outline">

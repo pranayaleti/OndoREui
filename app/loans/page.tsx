@@ -106,6 +106,18 @@ export default function LoansPage() {
         title="Utah Home Loans & Mortgages"
         subtitle="Compare conventional, FHA, VA, and USDA education. Then talk with a loan officer. This is not a credit decision."
         backgroundImage="/modern-office-building.png"
+        primaryCta={{
+          label: "Talk with a loan officer",
+          href: "/qualify/",
+          event: "page_banner_loan_inquiry",
+          analyticsLabel: "loans",
+        }}
+        secondaryCta={{
+          label: "Calculate payment",
+          href: "/calculators/mortgage-payment/",
+          event: "page_banner_calculators",
+          analyticsLabel: "loans",
+        }}
       />
 
       <section className="py-16 bg-background">

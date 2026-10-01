@@ -86,6 +86,7 @@ export default function TenantScreeningPage() {
               <h3 className="text-2xl font-bold mb-6">Start Screening Smarter</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg"><Link href="/property-management">Full PM Services</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/pricing/">See pricing</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href={APP_PORTAL_URL}>Owner Portal</Link></Button>
               </div>
             </div>

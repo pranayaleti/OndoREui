@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import { JourneyCardsSection } from "./journey-cards-section"
 
 describe("JourneyCardsSection", () => {
-  it("links to property management, rental analysis, and rentals", () => {
+  it("links to property management, the home estimate, and rentals", () => {
     render(<JourneyCardsSection />)
     const links = screen.getAllByRole("link")
     const hrefs = links.map((l) => l.getAttribute("href"))

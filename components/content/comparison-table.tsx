@@ -1,3 +1,4 @@
+import { useId } from "react"
 import Link from "next/link"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 
@@ -23,67 +24,83 @@ export function ComparisonTable({
   highlightId,
   footnote,
 }: ComparisonTableProps) {
+  const captionId = useId()
   if (columns.length === 0 || rows.length === 0) return null
 
   return (
-    <div
-      className="not-prose my-8 overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      // Keyboard users must be able to focus this overflow region to scroll the table.
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable region, not a fake control
-      tabIndex={0}
-      role="region"
-      aria-label={caption}
-    >
-      <table className="w-full min-w-[40rem] border-collapse text-left">
-        <caption className="mb-3 text-left text-sm text-foreground/70">{caption}</caption>
-        <thead>
-          <tr className="border-b-2 border-border">
-            <th scope="col" className="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-foreground/70">
-              Question
-            </th>
-            {columns.map((column) => (
+    <div className="not-prose my-8">
+      {/* Caption and swipe hint sit outside the scroll region so a phone never clips them. */}
+      <p id={captionId} className="mb-3 text-sm text-foreground/70">
+        {caption}
+      </p>
+      <p className="mb-2 text-xs text-foreground/70 md:hidden">Swipe sideways to compare every column.</p>
+      <div
+        className="overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        // Keyboard users must be able to focus this overflow region to scroll the table.
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable region, not a fake control
+        tabIndex={0}
+        role="region"
+        aria-labelledby={captionId}
+      >
+        <table
+          aria-labelledby={captionId}
+          className="w-full min-w-[30rem] border-collapse text-left md:min-w-[40rem]"
+        >
+          <thead>
+            <tr className="border-b-2 border-border">
               <th
-                key={column.id}
                 scope="col"
-                className={
-                  column.id === highlightId
-                    ? "bg-primary/10 px-3 py-3 text-sm font-bold text-orange-700 dark:text-primary"
-                    : "px-3 py-3 text-sm font-bold text-foreground"
-                }
+                className="sticky left-0 z-10 w-28 bg-background py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-foreground/70 md:w-auto"
               >
-                {column.href ? (
-                  <Link href={column.href} className="underline underline-offset-4 hover:underline">
-                    {column.heading}
-                  </Link>
-                ) : (
-                  column.heading
-                )}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.id} className="border-b border-border/60">
-              <th scope="row" className="py-3 pr-4 align-top text-sm font-medium text-foreground">
-                {row.criterion}
+                Question
               </th>
               {columns.map((column) => (
-                <td
+                <th
                   key={column.id}
+                  scope="col"
                   className={
                     column.id === highlightId
-                      ? "bg-primary/5 px-3 py-3 align-top text-sm text-foreground"
-                      : "px-3 py-3 align-top text-sm text-foreground/80"
+                      ? "bg-primary/10 px-3 py-3 text-sm font-bold text-orange-700 dark:text-primary"
+                      : "px-3 py-3 text-sm font-bold text-foreground"
                   }
                 >
-                  {row.cells[column.id]}
-                </td>
+                  {column.href ? (
+                    <Link href={column.href} className="underline underline-offset-4 hover:underline">
+                      {column.heading}
+                    </Link>
+                  ) : (
+                    column.heading
+                  )}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.id} className="border-b border-border/60">
+                <th
+                  scope="row"
+                  className="sticky left-0 z-10 w-28 bg-background py-3 pr-4 align-top text-sm font-medium text-foreground md:w-auto"
+                >
+                  {row.criterion}
+                </th>
+                {columns.map((column) => (
+                  <td
+                    key={column.id}
+                    className={
+                      column.id === highlightId
+                        ? "bg-primary/5 px-3 py-3 align-top text-sm text-foreground"
+                        : "px-3 py-3 align-top text-sm text-foreground/80"
+                    }
+                  >
+                    {row.cells[column.id]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {footnote ? <p className="mt-3 text-xs text-foreground/70">{footnote}</p> : null}
     </div>
   )

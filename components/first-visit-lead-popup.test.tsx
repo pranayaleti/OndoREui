@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, it, expect, vi } from "vitest"
-import { fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/buy/" }))
 vi.mock("react-i18next", () => ({
@@ -7,7 +7,7 @@ vi.mock("react-i18next", () => ({
   Trans: ({ i18nKey }: { i18nKey: string }) => <span>{i18nKey}</span>,
 }))
 
-import { FirstVisitLeadPopup, isEligiblePath } from "./first-visit-lead-popup"
+import { FirstVisitLeadPopup, isEligiblePath, isTypingInField } from "./first-visit-lead-popup"
 
 describe("first-visit popup eligibility", () => {
   // A modal asking for an email would interrupt someone who is mid-form.
@@ -18,7 +18,26 @@ describe("first-visit popup eligibility", () => {
     },
   )
 
-  it.each(["/", "/buy/", "/sell/"])("can greet first-time visitors on %s", (pathname) => {
+  it.each([
+    "/whats-my-home-worth/",
+    "/subscribe/",
+    "/brochure/",
+    "/sweepstakes/",
+    "/affiliate/",
+    "/feedback/",
+    "/links/",
+    "/resources/templates/",
+    "/sell/",
+    "/chat/",
+    "/dashboard/leads/",
+    "/properties/abc123/",
+    "/visit/schedule/",
+    "/tenantOnboarding/some-token/",
+  ])("stays out of other form pages like %s", (pathname) => {
+    expect(isEligiblePath(pathname)).toBe(false)
+  })
+
+  it.each(["/", "/buy/", "/blog/", "/learn/"])("can greet first-time visitors on %s", (pathname) => {
     expect(isEligiblePath(pathname)).toBe(true)
   })
 })
@@ -73,5 +92,65 @@ describe("first-visit popup validation", () => {
 
     fireEvent.change(email, { target: { value: "jane@example.com" } })
     expect(email).not.toHaveAttribute("aria-invalid")
+  })
+})
+
+describe("first-visit popup does not interrupt typing", () => {
+  beforeEach(() => {
+    try {
+      window.localStorage.clear()
+    } catch {
+      // storage is optional
+    }
+    vi.useFakeTimers()
+    vi.spyOn(document.documentElement, "scrollHeight", "get").mockReturnValue(100000)
+    vi.stubGlobal("fetch", vi.fn())
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+    vi.restoreAllMocks()
+    vi.unstubAllGlobals()
+  })
+
+  it("detects a focused text field", () => {
+    const input = document.createElement("input")
+    input.type = "text"
+    document.body.appendChild(input)
+    expect(isTypingInField()).toBe(false)
+    input.focus()
+    expect(isTypingInField()).toBe(true)
+    const button = document.createElement("button")
+    document.body.appendChild(button)
+    button.focus()
+    expect(isTypingInField()).toBe(false)
+    input.remove()
+    button.remove()
+  })
+
+  it("re-arms the timer while a field is focused, then opens once the visitor stops typing", () => {
+    const outside = document.createElement("input")
+    outside.type = "email"
+    document.body.appendChild(outside)
+    outside.focus()
+
+    render(<FirstVisitLeadPopup />)
+    act(() => {
+      vi.advanceTimersByTime(25_000)
+    })
+    expect(screen.queryByRole("dialog")).toBeNull()
+
+    // Still typing at the next check.
+    act(() => {
+      vi.advanceTimersByTime(10_000)
+    })
+    expect(screen.queryByRole("dialog")).toBeNull()
+
+    outside.blur()
+    act(() => {
+      vi.advanceTimersByTime(10_000)
+    })
+    expect(screen.getByRole("dialog")).toBeInTheDocument()
+    outside.remove()
   })
 })

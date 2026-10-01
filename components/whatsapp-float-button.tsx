@@ -22,6 +22,7 @@ import { useEffect, useState } from "react"
 import { X } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { analytics } from "@/lib/analytics"
+import { useStickyBarVisible } from "@/lib/sticky-cta"
 
 const DISMISS_KEY = "ondo:whatsapp-float:dismissed:v1"
 
@@ -56,6 +57,8 @@ export function WhatsAppFloatButton({ prefilledMessage }: Props = {}) {
   const number = process.env["NEXT_PUBLIC_WHATSAPP_NUMBER"]?.replace(/\D/g, "") ?? ""
   const [dismissed, setDismissed] = useState(false)
   const [mounted, setMounted] = useState(false)
+  // Lift above the mobile sticky CTA bar only where that bar is rendered.
+  const stickyBarVisible = useStickyBarVisible()
 
   useEffect(() => {
     setMounted(true)
@@ -94,10 +97,9 @@ export function WhatsAppFloatButton({ prefilledMessage }: Props = {}) {
 
   return (
     <div
-      className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] right-5 z-40 flex items-center gap-2 group print:hidden md:bottom-5"
-      style={{
-        // Lifted above the mobile sticky CTA bar; desktop uses the original bottom-5.
-      }}
+      className={`fixed right-5 z-40 flex items-center gap-2 group print:hidden md:bottom-5 ${
+        stickyBarVisible ? "bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))]" : "bottom-5"
+      }`}
     >
       <button
         type="button"

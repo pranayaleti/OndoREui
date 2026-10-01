@@ -5,11 +5,14 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { accessibility } from "@/lib/accessibility"
 import { ListingFavoriteButton } from "@/components/properties/listing-favorite-button"
+import { cn } from "@/lib/utils"
 import { useState } from "react"
 
 type ListingSaveShareProps = {
   publicId: string
   title: string
+  /** Icon-only buttons below the sm breakpoint so Save, Share and Compare fit in one row. */
+  iconOnlyOnMobile?: boolean
 }
 
 async function shareListing(title: string, url: string): Promise<"shared" | "copied" | "cancelled"> {
@@ -30,7 +33,7 @@ async function shareListing(title: string, url: string): Promise<"shared" | "cop
   throw new Error("Share is not available in this browser")
 }
 
-export function ListingSaveShare({ publicId, title }: ListingSaveShareProps) {
+export function ListingSaveShare({ publicId, title, iconOnlyOnMobile = false }: ListingSaveShareProps) {
   const { toast } = useToast()
   const [status, setStatus] = useState("")
 
@@ -57,10 +60,15 @@ export function ListingSaveShare({ publicId, title }: ListingSaveShareProps) {
       <p className="sr-only" aria-live="polite">
         {status}
       </p>
-      <ListingFavoriteButton publicId={publicId} />
-      <Button type="button" variant="outline" className="min-h-11" onClick={() => void onShare()}>
+      <ListingFavoriteButton publicId={publicId} iconOnlyOnMobile={iconOnlyOnMobile} />
+      <Button
+        type="button"
+        variant="outline"
+        className={cn("min-h-11", iconOnlyOnMobile && "max-sm:min-w-11 max-sm:px-0")}
+        onClick={() => void onShare()}
+      >
         <Share2 className="h-4 w-4" aria-hidden="true" />
-        Share
+        <span className={cn(iconOnlyOnMobile && "max-sm:sr-only")}>Share</span>
       </Button>
     </div>
   )

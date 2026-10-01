@@ -262,7 +262,7 @@ export function PropertyFilter({
 
   if (variant === "sidebar") {
     return (
-      <aside className="rounded-xl border border-border bg-card p-4" aria-label="Filter listings">
+      <section className="rounded-xl border border-border bg-card p-4" aria-label="Filter listings">
         <h2 className="mb-4 text-sm font-semibold">Filters</h2>
         <FilterFields
           idPrefix="sidebar"
@@ -279,7 +279,7 @@ export function PropertyFilter({
             Reset
           </Button>
         </div>
-      </aside>
+      </section>
     )
   }
 
@@ -296,7 +296,7 @@ export function PropertyFilter({
       </Button>
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent side="right" className="z-[9999] w-[400px] p-0 sm:max-w-none">
+        <SheetContent side="right" className="w-[400px] p-0 sm:max-w-none">
           <div className="flex h-full flex-col">
             <div className="border-b p-6">
               <SheetHeader className="mb-2">

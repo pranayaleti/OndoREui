@@ -208,7 +208,7 @@ export default function ResourcesPage() {
           {/* Audience paths */}
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">Start with the Path That Fits You</h2>
-            <p className="text-foreground/70 mb-8">
+            <p className="text-foreground/70 mb-8 max-w-3xl">
               Whether you are buying, selling, investing, managing rentals, or just learning, this page connects you to
               the most useful tools and deep-dive content across the site.
             </p>
@@ -402,7 +402,7 @@ export default function ResourcesPage() {
           {/* Calculators & tools */}
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Interactive Tools & Calculators</h2>
-            <p className="text-foreground/70 mb-6">
+            <p className="text-foreground/70 mb-6 max-w-3xl">
               Use these calculators to sanity-check deals, payments, and investment performance before you sign anything.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -475,7 +475,7 @@ export default function ResourcesPage() {
           {/* FAQ Cards linking to dedicated FAQ pages */}
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
-            <p className="text-foreground/70 mb-6">
+            <p className="text-foreground/70 mb-6 max-w-3xl">
               Find detailed answers to common questions about loans, notary services, buying, selling, and more.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -20,6 +20,14 @@ const config = {
       },
     },
     extend: {
+      // One overlay scale. Keep in sync with OVERLAY_Z_LAYERS in lib/utils.ts (tailwind-merge needs the names).
+      // Page chrome (sticky header, chat launchers, sticky bars) stays at z-50 and below.
+      zIndex: {
+        overlay: "60", // dialog, sheet, drawer backdrops
+        modal: "70", // dialog, alert dialog, sheet, drawer panels
+        popover: "80", // select, dropdown, popover, tooltip: must open above a modal
+        toast: "90", // always on top so form feedback is never hidden
+      },
       fontFamily: {
         sans: ['var(--font-family-base)'],
         outfit: ['Outfit', 'sans-serif'],

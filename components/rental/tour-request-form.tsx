@@ -51,7 +51,7 @@ export function TourRequestForm({ propertyId }: { propertyId: string }) {
         }
       }}
     >
-      <h3 className="font-semibold">Schedule a tour</h3>
+      <h3 className="font-semibold">Video or in-person tour</h3>
       <p className="text-sm text-muted-foreground">
         Choose in person or video and a preferred time. We route this to leasing — we do not auto-book a calendar.
       </p>

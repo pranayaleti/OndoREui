@@ -94,4 +94,19 @@ describe("PropertiesClient", () => {
     expect(screen.getByRole("button", { name: /try again/i })).toBeInTheDocument()
     expect(screen.getByRole("link", { name: /contact leasing/i })).toBeInTheDocument()
   })
+
+  it("keeps the renter explainer out of the hero so the first listings sit in the first screen", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ data: [] }),
+    }) as unknown as typeof fetch
+
+    render(<PropertiesClient />)
+
+    const hero = screen.getByRole("heading", { name: /utah rentals on the map/i }).closest("section")
+    const explainer = screen.getByRole("heading", { name: /how to rent with ondo/i })
+    const results = screen.getByRole("heading", { name: /available rentals/i })
+    expect(hero).not.toContainElement(explainer)
+    expect(results.compareDocumentPosition(explainer) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
 })

@@ -27,4 +27,13 @@ describe("HeroSection landmarks", () => {
     expect(group.querySelectorAll("a")).toHaveLength(3)
     expect(container.querySelector("img")?.getAttribute("alt")).toBe("")
   })
+
+  it("uses one label for the home estimate and offers a chooser for every segment", () => {
+    render(<HeroSection />)
+    expect(screen.getByRole("link", { name: "Free home estimate" })).toHaveAttribute("href", expect.stringMatching(/^\/whats-my-home-worth\/?$/))
+    expect(screen.queryByText(/rental report/i)).toBeNull()
+    const chooser = screen.getByRole("group", { name: "What do you need?" })
+    const hrefs = Array.from(chooser.querySelectorAll("a")).map((a) => (a.getAttribute("href") ?? "").replace(/\/$/, ""))
+    expect(hrefs).toEqual(["/properties", "/buy", "/sell", "/property-management", "/loans"])
+  })
 })

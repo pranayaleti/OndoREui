@@ -9,7 +9,7 @@ export function TestSheet() {
       <SheetTrigger asChild>
         <Button variant="outline">Test Sheet</Button>
       </SheetTrigger>
-      <SheetContent className="w-full max-w-md" style={{ zIndex: 100 }}>
+      <SheetContent className="w-full max-w-md">
         <SheetHeader>
           <SheetTitle>Test Sheet</SheetTitle>
           <SheetDescription>This is a test sheet to verify functionality</SheetDescription>

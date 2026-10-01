@@ -187,4 +187,39 @@ describe("PublicAssistantWidget", () => {
     const lastPayload = mockSend.mock.calls[mockSend.mock.calls.length - 1][0].messages
     expect(lastPayload.length).toBeLessThanOrEqual(18)
   })
+
+  it.each(["/get-matched/", "/buy/quiz/", "/whats-my-home-worth/", "/chat/"])(
+    "does not render on %s, where it would cover the form options",
+    (pathname) => {
+      mockPathname = pathname
+      render(<PublicAssistantWidget />)
+      expect(screen.queryByRole("button", { name: /open the ondo assistant/i })).not.toBeInTheDocument()
+    },
+  )
+
+  it("is a compact 44px icon button on mobile and steps aside while the nav drawer is open", () => {
+    render(<PublicAssistantWidget />)
+    const launcher = screen.getByRole("button", { name: /open the ondo assistant/i })
+    expect(launcher.className).toContain("h-11")
+    expect(launcher.className).toContain("w-11")
+    expect(launcher.className).toContain("max-md:[body:has(#mobile-menu)_&]:hidden")
+    expect(launcher.querySelector("span.sr-only")?.textContent).toBe("Ask Ondo")
+  })
+
+  it("caps the panel to the viewport so the close button stays reachable on short screens", () => {
+    openWidget()
+    const panel = screen.getByRole("region", { name: /ondo assistant/i })
+    expect(panel.className).toMatch(/max-h-\[calc\(100dvh-/)
+    expect(screen.getByRole("button", { name: /close the ondo assistant/i })).toBeInTheDocument()
+  })
+
+  it("only lifts above the sticky bar on routes where the bar renders", () => {
+    mockPathname = "/property-management/"
+    const { unmount } = render(<PublicAssistantWidget />)
+    expect(screen.getByRole("button", { name: /open the ondo assistant/i }).className).toContain("bottom-[calc(4.5rem")
+    unmount()
+    mockPathname = "/notary/"
+    render(<PublicAssistantWidget />)
+    expect(screen.getByRole("button", { name: /open the ondo assistant/i }).className).not.toContain("4.5rem")
+  })
 })

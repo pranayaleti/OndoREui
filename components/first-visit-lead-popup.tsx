@@ -25,6 +25,8 @@ import { FieldError, focusFirstInvalid, requiredFieldProps } from "@/components/
 const POPUP_STATE_KEY = "ondo:first-visit-lead-popup:v1"
 const POPUP_TIMER_MS = 25_000
 const POPUP_SCROLL_RATIO = 0.6
+// When the visitor is typing in a form, wait and try again instead of interrupting.
+const POPUP_REARM_MS = 10_000
 
 const EXCLUDED_EXACT_PATHS = new Set([
   "/contact",
@@ -39,6 +41,16 @@ const EXCLUDED_EXACT_PATHS = new Set([
   "/verify",
   "/unsubscribe",
   "/privacy-policy",
+  "/whats-my-home-worth",
+  "/subscribe",
+  "/brochure",
+  "/sweepstakes",
+  "/affiliate",
+  "/feedback",
+  "/links",
+  "/resources/templates",
+  // Has its own inline listing-packet lead form.
+  "/sell",
 ])
 
 const EXCLUDED_PREFIXES = [
@@ -50,6 +62,11 @@ const EXCLUDED_PREFIXES = [
   "/platform",
   "/auth",
   "/login",
+  "/properties",
+  "/visit",
+  "/tenantOnboarding",
+  "/dashboard",
+  "/chat",
 ]
 
 type PopupStatus = "idle" | "submitting" | "success" | "error"
@@ -68,6 +85,19 @@ export function isEligiblePath(pathname: string): boolean {
   return !EXCLUDED_PREFIXES.some(
     (prefix) => normalized === prefix || normalized.startsWith(`${prefix}/`)
   )
+}
+
+/** True when the visitor is typing in a field, so a modal would steal focus mid-form. */
+export function isTypingInField(doc: Document = document): boolean {
+  const el = doc.activeElement
+  if (!el || el === doc.body) return false
+  const tag = el.tagName
+  if (tag === "TEXTAREA" || tag === "SELECT") return true
+  if (tag === "INPUT") {
+    const type = (el as HTMLInputElement).type
+    return !["button", "submit", "reset", "checkbox", "radio", "image", "file"].includes(type)
+  }
+  return (el as HTMLElement).isContentEditable === true
 }
 
 function hasStoredDecision(): boolean {
@@ -141,6 +171,13 @@ export function FirstVisitLeadPopup() {
     const trigger = () => {
       if (cleanedUp || hasStoredDecision()) {
         cleanup()
+        return
+      }
+
+      // Never interrupt someone mid-form: try again later instead of opening.
+      if (isTypingInField()) {
+        if (timerId) clearTimeout(timerId)
+        timerId = setTimeout(trigger, POPUP_REARM_MS)
         return
       }
 

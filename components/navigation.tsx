@@ -139,6 +139,21 @@ export const overflowNavigationItems: NavigationItem[] = allNavigationItems.filt
   item => !primaryNavigationItems.some(primary => primary.href === item.href)
 )
 
+/**
+ * Active on an exact match or when the current path sits under `href` on a segment
+ * boundary, so "/buy" does not light up for "/buying-guide" and "/property-management"
+ * does not light up for "/property-management-software". Trailing slashes are ignored
+ * on both sides (the site uses trailingSlash: true).
+ */
+export function isNavItemActive(pathname: string | null | undefined, href: string): boolean {
+  if (!pathname) return false
+  const strip = (value: string) => (value.length > 1 ? value.replace(/\/+$/, "") : value)
+  const path = strip(pathname)
+  const target = strip(href)
+  if (target === "/") return path === "/"
+  return path === target || path.startsWith(`${target}/`)
+}
+
 interface NavigationProps {
   className?: string
   onLinkClick?: () => void
@@ -154,11 +169,7 @@ export const Navigation = memo(function Navigation({
   const pathname = usePathname()
 
   const isActive = useCallback((href: string) => {
-    if (!pathname) return false
-    if (href === "/") {
-      return pathname === "/"
-    }
-    return pathname.startsWith(href)
+    return isNavItemActive(pathname, href)
   }, [pathname])
 
   const linkClass = (item: NavigationItem) =>

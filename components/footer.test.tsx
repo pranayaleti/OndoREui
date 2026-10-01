@@ -15,7 +15,7 @@ vi.mock("@/lib/site", async (importOriginal) => ({
 import Footer from "./footer"
 
 beforeAll(() => {
-  // jsdom has no IntersectionObserver; the footer lazy-mounts its Calendly embed with one.
+  // jsdom has no IntersectionObserver; kept so any lazy child in the footer tree can mount.
   vi.stubGlobal(
     "IntersectionObserver",
     class {
@@ -43,6 +43,15 @@ describe("Footer", () => {
     expect(instagram).toHaveAttribute("data-analytics-event", "social_click")
     expect(instagram).toHaveAttribute("data-analytics-category", "footer")
     expect(instagram).toHaveAttribute("data-analytics-label", "instagram")
+  })
+
+  it("offers a Book a free call link to /contact/ instead of an inline Calendly embed", () => {
+    const { container } = render(<Footer />)
+    const book = screen.getByRole("link", { name: "Book a free call" })
+    expect(book).toHaveAttribute("href", "/contact/#book-a-call")
+    expect(book).toHaveAttribute("data-analytics-event", "book_call_click")
+    expect(container.querySelector("iframe")).toBeNull()
+    expect(container.querySelector(".calendly-inline-widget")).toBeNull()
   })
 
   it("sends the all-links QR to /links/ on our own domain", () => {

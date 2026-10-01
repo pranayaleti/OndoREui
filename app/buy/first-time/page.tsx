@@ -139,25 +139,25 @@ export default function FirstTimeBuyerPage() {
                 </div>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/buy/first-time/grants">See housing grants &amp; down payment assistance →</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/should-i-wait-for-20-percent-down">Should I wait for 20% down?</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/how-long-first-purchase-takes">How long a first purchase takes</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/first-time-buyer-file-mistakes">File mistakes, not listicles</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/utah-repc-deadline-and-your-loan">Utah REPC deadlines</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">Townhome vs condo HOA docs</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link>
                 </Button>
               </div>
@@ -165,7 +165,7 @@ export default function FirstTimeBuyerPage() {
 
             <div className="text-center mb-12">
               <h3 className="text-2xl font-bold mb-6">Ready to Get Started?</h3>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg">
                   <Link href="/calculators/affordability">Calculate What You Can Afford</Link>
                 </Button>

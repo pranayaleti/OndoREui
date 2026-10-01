@@ -30,6 +30,8 @@ type CommandDialogProps = DialogProps & {
   description?: string
   /** Forwarded to the dialog content so callers can choose where focus returns on close. */
   onCloseAutoFocus?: (event: Event) => void
+  /** Set false when the caller already filters and ranks results; cmdk then skips its own filtering. */
+  shouldFilter?: boolean
 }
 
 const CommandDialog = ({
@@ -37,6 +39,7 @@ const CommandDialog = ({
   title = "Search the site",
   description = "Type to search. Use the arrow keys to move through results and Enter to open one.",
   onCloseAutoFocus,
+  shouldFilter,
   ...props
 }: CommandDialogProps) => {
   return (
@@ -44,7 +47,7 @@ const CommandDialog = ({
       <DialogContent className="overflow-hidden p-0 shadow-lg" onCloseAutoFocus={onCloseAutoFocus}>
         <DialogTitle className="sr-only">{title}</DialogTitle>
         <DialogDescription className="sr-only">{description}</DialogDescription>
-        <Command label={title} className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-foreground/70 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+        <Command label={title} shouldFilter={shouldFilter} className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-foreground/70 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {children}
         </Command>
       </DialogContent>

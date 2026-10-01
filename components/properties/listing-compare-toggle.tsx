@@ -17,6 +17,8 @@ type ListingCompareToggleProps = {
   publicId: string
   title?: string
   compact?: boolean
+  /** Keep the text label for screen readers but show only the icon below the sm breakpoint. */
+  iconOnlyOnMobile?: boolean
   className?: string
 }
 
@@ -24,6 +26,7 @@ export function ListingCompareToggle({
   publicId,
   title,
   compact = false,
+  iconOnlyOnMobile = false,
   className,
 }: ListingCompareToggleProps) {
   const { toast } = useToast()
@@ -68,7 +71,7 @@ export function ListingCompareToggle({
         type="button"
         variant={selected ? "secondary" : "outline"}
         size={compact ? "icon" : "default"}
-        className={cn(compact ? "min-h-11 min-w-11" : "min-h-11", className)}
+        className={cn(compact ? "min-h-11 min-w-11" : "min-h-11", iconOnlyOnMobile && "max-sm:min-w-11 max-sm:px-0", className)}
         aria-pressed={selected}
         aria-label={
           compact
@@ -80,7 +83,7 @@ export function ListingCompareToggle({
         onClick={onToggle}
       >
         <Columns2 className="h-4 w-4" aria-hidden="true" />
-        {compact ? null : selected ? "In compare" : "Compare"}
+        {compact ? null : <span className={cn(iconOnlyOnMobile && "max-sm:sr-only")}>{selected ? "In compare" : "Compare"}</span>}
       </Button>
     </>
   )

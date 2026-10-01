@@ -176,8 +176,8 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           <CityTrustChips />
         </CardHeader>
         <CardContent className="space-y-6">
-          {cityContent?.overview && <p>{cityContent.overview}</p>}
-          <p>
+          {cityContent?.overview && <p className="max-w-3xl">{cityContent.overview}</p>}
+          <p className="max-w-3xl">
             {service === "property-management" && (
               <>
                 Our full-service property management in {city.name}, Utah covers marketing,
@@ -228,7 +228,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
             <CardTitle>What Living in {city.name} Feels Like</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <p>{cityContent.lifestyleDescription}</p>
+            <p className="max-w-3xl">{cityContent.lifestyleDescription}</p>
             {marketData?.localLandmarks.length ? (
               <p className="text-sm text-muted-foreground">
                 Notable local spots: {marketData.localLandmarks.join(", ")}.
@@ -420,7 +420,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
             {faqList.map((item) => (
               <details key={item.q} className="group cursor-pointer rounded-lg border p-4">
                 <summary className="font-medium text-foreground group-open:mb-2">{item.q}</summary>
-                <p className="text-sm text-foreground/70">{item.a}</p>
+                <p className="max-w-3xl text-sm text-foreground/70">{item.a}</p>
               </details>
             ))}
           </div>
@@ -439,7 +439,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           <CardTitle>Have more questions?</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p>
+          <p className="max-w-3xl">
             For detailed FAQs on buying, selling, property management, payments, Notary, and more, visit our centralized Help Center.
           </p>
           <Button asChild size="lg">

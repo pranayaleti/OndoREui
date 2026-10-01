@@ -14,6 +14,7 @@ import {
 import { Menu, X, Search, ChevronDown, Phone } from "lucide-react"
 import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
 import { SearchDialog } from "@/components/search-dialog"
+import { ScrollProgress } from "@/components/scroll-progress"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL, SITE_NAME, SITE_PHONE } from "@/lib/site"
 import { analyticsAttributes } from "@/lib/analytics"
@@ -253,20 +254,24 @@ const Header = memo(() => {
             seven pinned items are wider than the space between the logo and the
             right-hand controls, so visible overflow makes them collide. The
             mega-menu panels escape this scroll container via a portal instead.
+            Centering uses mx-auto on the w-max list rather than justify-center:
+            auto margins centre when there is room and collapse to start-aligned
+            scrolling when there is not, while justify-center clips the first
+            items (Buy, Sell) behind the logo.
           */}
           <nav
-            className="flex justify-center w-full min-w-0 overflow-x-auto scrollbar-hide"
+            className="flex w-full min-w-0 overflow-x-auto scrollbar-hide"
             aria-label="Primary navigation"
           >
             <Navigation
-              className="w-max flex gap-0.5 justify-center flex-shrink-0"
+              className="w-max mx-auto flex gap-0.5 flex-shrink-0"
               items={primaryNavigationItems}
             />
           </nav>
         </div>
 
         {/* Right-side controls */}
-        <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
+        <div className="ml-auto flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
           {/* Phone CTA, icon-only on mobile, full number on desktop */}
           <a
             href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
@@ -302,7 +307,7 @@ const Header = memo(() => {
                   <span className="hidden lg:inline">{t("nav.more")}</span>
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" sideOffset={6} className="w-64 py-2 z-[100]">
+              <DropdownMenuContent align="end" sideOffset={6} className="w-64 py-2">
                 <div className="px-3 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {t("nav.explore")}
                 </div>
@@ -336,7 +341,7 @@ const Header = memo(() => {
                   <ChevronDown className="ml-1 h-4 w-4" aria-hidden />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" sideOffset={6} className="w-48 py-2 z-[100]">
+              <DropdownMenuContent align="end" sideOffset={6} className="w-48 py-2">
                 <DropdownMenuItem asChild>
                   <Link
                     href={APP_PORTAL_LOGIN_URL}
@@ -359,7 +364,7 @@ const Header = memo(() => {
           {/* Mobile hamburger */}
           <button
             ref={menuToggleRef}
-            className="flex md:hidden p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
+            className="flex md:hidden min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
@@ -433,6 +438,7 @@ const Header = memo(() => {
         </nav>
       )}
       <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} onCloseAutoFocus={handleSearchCloseAutoFocus} />
+      <ScrollProgress />
     </header>
   )
 })

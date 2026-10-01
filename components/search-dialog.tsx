@@ -72,8 +72,9 @@ export function SearchDialog({ open, onOpenChange, onCloseAutoFocus }: SearchDia
     return groups
   }, [results])
 
+  // search() already filters and ranks (titles, descriptions, keywords), so cmdk must not filter a second time.
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} onCloseAutoFocus={onCloseAutoFocus}>
+    <CommandDialog open={open} onOpenChange={onOpenChange} onCloseAutoFocus={onCloseAutoFocus} shouldFilter={false}>
       <CommandInput
         placeholder="Search pages, calculators, blog posts..."
         aria-label="Search the site"

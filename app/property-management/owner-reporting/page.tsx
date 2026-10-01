@@ -76,6 +76,7 @@ export default function OwnerReportingPage() {
             <div className="text-center">
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg"><Link href="/property-management">Full PM Services</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/pricing/">See pricing</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href={APP_PORTAL_URL}>Owner Portal</Link></Button>
               </div>
             </div>

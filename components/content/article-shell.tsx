@@ -141,7 +141,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
                 items={outline}
                 className="mb-8 rounded-lg border border-border bg-muted/30 p-4 lg:hidden"
               />
-              <div className="prose prose-lg prose-invert max-w-none">{nodes}</div>
+              <div className="prose prose-lg max-w-none">{nodes}</div>
               {meta.faqs?.length ? <ContentFaq items={meta.faqs} /> : null}
             </div>
             {/* Sticky rail on desktop only; the mobile copy above sits inline. */}

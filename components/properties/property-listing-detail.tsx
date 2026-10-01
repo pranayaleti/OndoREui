@@ -268,26 +268,11 @@ export function PropertyListingDetail({
             <h1 className="font-outfit text-3xl font-bold tracking-tight md:text-4xl">{property.title}</h1>
             <p className="mt-1 text-muted-foreground">{fullAddress}</p>
           </div>
-          <div className="flex flex-col items-stretch gap-2 sm:items-end">
-            <ListingSaveShare publicId={publicId} title={property.title} />
-            <ListingCompareToggle publicId={publicId} title={property.title} />
+          <div className="flex items-center gap-2 sm:justify-end">
+            <ListingSaveShare publicId={publicId} title={property.title} iconOnlyOnMobile />
+            <ListingCompareToggle publicId={publicId} title={property.title} iconOnlyOnMobile />
           </div>
         </header>
-
-        <nav
-          aria-label="Listing sections"
-          className="mb-4 flex gap-2 overflow-x-auto border-b border-border pb-2 text-sm"
-        >
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="inline-flex min-h-11 shrink-0 items-center rounded-md px-3 font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
 
         <div id="listing-photos">
           {property.photos?.length ? (
@@ -348,6 +333,22 @@ export function PropertyListingDetail({
             </dl>
           </div>
         </div>
+
+        {/* Section nav sits below the gallery so the photos are the first thing under the title. */}
+        <nav
+          aria-label="Listing sections"
+          className="mb-6 flex gap-2 overflow-x-auto border-b border-border pb-2 text-sm"
+        >
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="inline-flex min-h-11 shrink-0 items-center rounded-md px-3 font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
           <div className="lg:col-start-2 lg:row-start-1">

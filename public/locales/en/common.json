@@ -67,14 +67,14 @@
     "propertyManagementDesc": "Full-service management for Utah rentals",
     "ownerFaqs": "Owner FAQs",
     "ownerFaqsDesc": "Answers on fees, payouts and turnovers",
-    "freeRentalAnalysis": "Free rental analysis",
-    "freeRentalAnalysisDesc": "See what your home could rent for today",
+    "freeRentalAnalysis": "Free home estimate",
+    "freeRentalAnalysisDesc": "See what your home could rent or sell for today",
     "availableRentals": "Available rentals",
     "compareUtahPms": "Compare Utah PMs",
     "compareUtahPmsDesc": "How Ondo stacks up against local managers"
   },
   "utilityBar": {
-    "freeRentalAnalysis": "Free rental analysis",
+    "freeRentalAnalysis": "Free home estimate",
     "availableRentals": "Available rentals",
     "ownerLogin": "Owner login",
     "residentLogin": "Resident login"

@@ -8,7 +8,18 @@ const links = [
   { href: "/investments/commercial-real-estate", label: "Commercial" },
   { href: "/investments/fractional", label: "Fractional" },
   { href: "/investments/opportunities", label: "Sample deals" },
+  { href: "/investments/opportunity-zones", label: "Opportunity Zones" },
 ]
+
+/** trailingSlash is on, so usePathname() returns "/investments/"; compare without it. */
+function stripTrailingSlash(path: string) {
+  return path.length > 1 ? path.replace(/\/+$/, "") : path
+}
+
+export function isInvestmentsLinkActive(href: string, pathname: string) {
+  const current = stripTrailingSlash(pathname)
+  return href === "/investments" ? current === href : current === href || current.startsWith(`${href}/`)
+}
 
 export function InvestmentsSubNav() {
   const pathname = usePathname() ?? ""
@@ -16,20 +27,16 @@ export function InvestmentsSubNav() {
   return (
     <nav
       aria-label="Investment section navigation"
-      className="border-b border-border/50 bg-background/80 backdrop-blur-sm sticky top-0 z-10"
+      className="border-b border-border/50 bg-background"
     >
       <div className="container mx-auto px-4">
         <ul className="flex flex-wrap gap-1 py-3">
           {links.map((link) => {
-            const isActive =
-              link.href === "/investments"
-                ? pathname === "/investments"
-                : pathname.startsWith(link.href)
+            const isActive = isInvestmentsLinkActive(link.href, pathname)
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  prefetch
                   className={`inline-block px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                     isActive
                       ? "bg-primary text-primary-foreground"

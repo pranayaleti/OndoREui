@@ -5,7 +5,7 @@ import { Calculator, Calendar } from "lucide-react"
  * "Self-managing your rental?" pitch — modeled on the highest-converting
  * section local PM competitors run (Keyrenter et al.), but rewritten in
  * Ondo's voice and pointing to real Ondo assets: the owner-vs-self
- * calculator, the free rental analysis, and the Calendly on /contact.
+ * calculator, the free home estimate, and the Calendly on /contact.
  *
  * Copy avoids superlatives and any implied guarantee (no "we'll fill your
  * vacancy in 30 days"). Every pain point below maps to a service already
@@ -68,7 +68,7 @@ export function SelfManagingSection() {
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
               >
                 <Calculator className="h-4 w-4" aria-hidden="true" />
-                Get my free rental analysis
+                Get my free home estimate
               </Link>
               <Link
                 href="/contact#book-a-call"

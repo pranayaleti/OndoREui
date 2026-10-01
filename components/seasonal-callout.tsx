@@ -1,9 +1,12 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Snowflake, Sun, Leaf, Flower2, type LucideIcon } from "lucide-react"
 
 type Season = "winter" | "spring" | "summer" | "fall"
 
-function getSeason(): Season {
-  const month = new Date().getMonth() // 0-indexed
+export function getSeason(date: Date = new Date()): Season {
+  const month = date.getMonth() // 0-indexed
   if (month >= 2 && month <= 4) return "spring"
   if (month >= 5 && month <= 7) return "summer"
   if (month >= 8 && month <= 10) return "fall"
@@ -25,7 +28,7 @@ const seasonConfig: Record<Season, {
     bg: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800",
     label: "Winter",
     ownerTip: (cityName) =>
-      `Schedule furnace inspections and pipe insulation checks in ${cityName} before freezing temperatures. Utah winters can drop to single digits — protect your asset.`,
+      `Schedule furnace inspections and pipe insulation checks in ${cityName} before freezing temperatures. Utah winters can drop to single digits, so protect your asset.`,
     tenantTip: (cityName) =>
       `Report drafty windows or thermostat issues early in ${cityName}. Your landlord is responsible for maintaining heat; submit a maintenance request in the portal.`,
     investorTip: (cityName) =>
@@ -62,7 +65,7 @@ const seasonConfig: Record<Season, {
     tenantTip: (cityName) =>
       `Fall is a useful time to negotiate lease terms in ${cityName}. Landlords are motivated to avoid winter vacancies and may offer concessions to renters who commit early.`,
     investorTip: (cityName) =>
-      `Fall brings motivated sellers around ${cityName}. Properties that didn't sell in spring/summer often see price reductions — opportunity for patient buyers.`,
+      `Fall brings motivated sellers around ${cityName}. Properties that didn't sell in spring/summer often see price reductions, which is an opportunity for patient buyers.`,
   },
 }
 
@@ -72,7 +75,13 @@ type SeasonalCalloutProps = {
 }
 
 export function SeasonalCallout({ cityName, audience = "owner" }: SeasonalCalloutProps) {
-  const current = getSeason()
+  // The static export is built once, so the season is resolved in the browser after mount.
+  // Server and first client render match (no highlight), which avoids a hydration mismatch
+  // and a stale badge in the indexed HTML.
+  const [current, setCurrent] = useState<Season | null>(null)
+  useEffect(() => {
+    setCurrent(getSeason())
+  }, [])
 
   return (
     <section aria-label={`Four-season guide for ${cityName}`}>

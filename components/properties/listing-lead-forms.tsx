@@ -99,9 +99,13 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
     const next: Record<string, string> = {}
     if (tour.name.trim().length < 2) next.name = "Enter your name."
     if (!emailValidation.safeParse(tour.email.trim()).success) next.email = "Enter a valid email."
-    if (!phoneValidation.safeParse(tour.phone.trim()).success) next.phone = "Enter a phone number."
-    if (!tour.date) next.date = "Choose a date."
-    if (!tour.time) next.time = "Choose a time."
+    // Same required fields as the apply panel's tour form: name and email. Phone and the
+    // preferred time are optional, but a date needs a time and the other way round.
+    if (tour.phone.trim() && !phoneValidation.safeParse(tour.phone.trim()).success) {
+      next.phone = "Enter a valid phone number."
+    }
+    if (tour.date && !tour.time) next.time = "Choose a time, or clear the date."
+    if (tour.time && !tour.date) next.date = "Choose a date, or clear the time."
     setTourErrors(next)
     return Object.keys(next).length === 0
   }
@@ -164,10 +168,12 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
       setTourStatus("success")
       return
     }
+    // Tours go through the general lead API like every other lead form, so the request keeps its
+    // UTM/click attribution and the property id. (The rental tour endpoint takes no attribution yet.)
     const result = await submitContactLead({
       name: tour.name.trim(),
       email: tour.email.trim(),
-      phone: tour.phone.trim(),
+      ...(tour.phone.trim() && { phone: tour.phone.trim() }),
       message: buildListingInquiryMessage({
         intent: "tour",
         title,
@@ -360,7 +366,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
                 {fieldError(`tour-email-${instanceId}-error`, tourErrors.email)}
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor={`tour-phone-${instanceId}`}>Phone</Label>
+                <Label htmlFor={`tour-phone-${instanceId}`}>Phone (optional)</Label>
                 <Input
                   id={`tour-phone-${instanceId}`}
                   name="phone"
@@ -375,7 +381,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <Label htmlFor={`tour-date-${instanceId}`}>Date</Label>
+                  <Label htmlFor={`tour-date-${instanceId}`}>Preferred date</Label>
                   <Input
                     id={`tour-date-${instanceId}`}
                     name="date"
@@ -389,7 +395,7 @@ export function ListingLeadForms({ title, address, propertyId }: ListingLeadForm
                   {fieldError(`tour-date-${instanceId}-error`, tourErrors.date)}
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor={`tour-time-${instanceId}`}>Time</Label>
+                  <Label htmlFor={`tour-time-${instanceId}`}>Preferred time</Label>
                   <select
                     id={`tour-time-${instanceId}`}
                     name="time"

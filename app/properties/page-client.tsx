@@ -461,9 +461,6 @@ export default function PropertiesClient() {
               <PropertySearch onSearch={handleSearch} />
             </Suspense>
           </div>
-          <div className="mt-6 max-w-4xl">
-            <RenterPath />
-          </div>
         </div>
       </section>
 
@@ -687,6 +684,11 @@ export default function PropertiesClient() {
                 />
               </div>
             )}
+
+            {/* Below the results: the first screen is the search and the first homes, not a process explainer. */}
+            <div className="mt-10 max-w-4xl">
+              <RenterPath />
+            </div>
               </div>
             </div>
           </div>

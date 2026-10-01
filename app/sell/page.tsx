@@ -97,6 +97,18 @@ export default function SellPage() {
         title="Sell your Utah home"
         subtitle="A CMA, a listing plan, and an agent through close — without invented sale-price or speed claims."
         backgroundImage="/modern-apartment-balcony.png"
+        primaryCta={{
+          label: "Get my home value",
+          href: "/whats-my-home-worth/",
+          event: "page_banner_home_value",
+          analyticsLabel: "sell",
+        }}
+        secondaryCta={{
+          label: "Request listing packet",
+          href: "#listing-packet-heading",
+          event: "page_banner_listing_packet",
+          analyticsLabel: "sell",
+        }}
       />
 
       <BuySellHowItWorksSection audience="seller" />

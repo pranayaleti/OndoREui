@@ -135,20 +135,23 @@ export default function FHALoanPage() {
 
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-6">Compare FHA with conventional</h3>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg"><Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional guide</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">Hazard vs HO-3 vs HO-6</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/fha-condo-roster-project-approval">FHA condo roster</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">Townhome vs condo HOA docs</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/should-i-wait-for-20-percent-down">Wait for 20% vs buy sooner</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">MIP vs PMI exit</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/house-hacking-duplex-with-fha">FHA duplex house-hack</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA + FHA gift</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/manufactured-housing-adu-financing">Manufactured / ADU</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/refinancing-condo-aging-hoa">Condo aging HOA</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
               </div>
+              <h4 className="text-lg font-semibold mt-8 mb-3">More FHA guides</h4>
+              <ul className="grid gap-2 text-foreground/70 sm:grid-cols-2 text-left max-w-3xl mx-auto">
+                  <li><Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance" className="text-primary hover:underline">Hazard vs HO-3 vs HO-6</Link></li>
+                  <li><Link href="/blog/fha-condo-roster-project-approval" className="text-primary hover:underline">FHA condo roster</Link></li>
+                  <li><Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="text-primary hover:underline">Townhome vs condo HOA docs</Link></li>
+                  <li><Link href="/blog/should-i-wait-for-20-percent-down" className="text-primary hover:underline">Wait for 20% vs buy sooner</Link></li>
+                  <li><Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="text-primary hover:underline">MIP vs PMI exit</Link></li>
+                  <li><Link href="/blog/house-hacking-duplex-with-fha" className="text-primary hover:underline">FHA duplex house-hack</Link></li>
+                  <li><Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary hover:underline">USDA vs VA vs FHA</Link></li>
+                  <li><Link href="/blog/dpa-stacked-with-fha-gift-funds" className="text-primary hover:underline">DPA + FHA gift</Link></li>
+                  <li><Link href="/blog/manufactured-housing-adu-financing" className="text-primary hover:underline">Manufactured / ADU</Link></li>
+                  <li><Link href="/blog/refinancing-condo-aging-hoa" className="text-primary hover:underline">Condo aging HOA</Link></li>
+              </ul>
             </div>
             <RelatedContent path="/loans/fha" />
             <IsThisRightForMe table="purchase" programs={["fha", "conventional", "va"]} highlight="fha" />

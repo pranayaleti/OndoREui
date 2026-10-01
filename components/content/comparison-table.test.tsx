@@ -46,4 +46,31 @@ describe("ComparisonTable", () => {
     )
     expect(container).toBeEmptyDOMElement()
   })
+
+  it("keeps the caption and footnote outside the horizontal scroll region and labels the table with it", () => {
+    render(
+      <ComparisonTable
+        caption="Cap types"
+        footnote="Sample footnote"
+        columns={[{ id: "initial", heading: "Initial cap" }]}
+        rows={[{ id: "meaning", criterion: "What it limits", cells: { initial: "First change" } }]}
+      />,
+    )
+    const region = screen.getByRole("region", { name: "Cap types" })
+    expect(region).not.toContainElement(screen.getByText("Cap types"))
+    expect(region).not.toContainElement(screen.getByText("Sample footnote"))
+    expect(screen.getByRole("table", { name: "Cap types" })).toBeInTheDocument()
+  })
+
+  it("pins the criterion column and tells phone readers the table scrolls sideways", () => {
+    render(
+      <ComparisonTable
+        caption="Cap types"
+        columns={[{ id: "initial", heading: "Initial cap" }]}
+        rows={[{ id: "meaning", criterion: "What it limits", cells: { initial: "First change" } }]}
+      />,
+    )
+    expect(screen.getByRole("rowheader", { name: "What it limits" }).className).toMatch(/sticky/)
+    expect(screen.getByText(/swipe sideways/i)).toBeInTheDocument()
+  })
 })

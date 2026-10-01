@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { memo, useEffect, useRef, useState } from "react"
+import { memo, useState } from "react"
 import {
   SITE_SOCIAL_LINKS,
   SITE_ADDRESS,
@@ -29,38 +29,10 @@ import {
   HelpCircle,
   TrendingUp,
   Calendar,
+  BookOpen,
 } from "lucide-react"
-import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
 import { analyticsAttributes } from "@/lib/analytics"
-
-/** Lazy-mount wrapper: children only render once the sentinel scrolls into view. */
-function LazySection({ children, fallbackHeight = "200px" }: { children: React.ReactNode; fallbackHeight?: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: "200px" }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  return (
-    <div ref={ref}>
-      {visible ? children : <div style={{ minHeight: fallbackHeight }} />}
-    </div>
-  )
-}
 
 /** Collapsible footer nav section for mobile, expands on tap, always open on md+. */
 function FooterNavSection({ label, icon, href, children }: { label: string; icon: React.ReactNode; href: string; children: React.ReactNode }) {
@@ -109,8 +81,8 @@ const Footer = memo(() => {
   const isNotaryRoute = path === "/notary" || path.startsWith("/notary/")
   const isContactRoute = path === "/contact" || path === "/contact/"
   const isFeedbackRoute = path === "/feedback" || path === "/feedback/" || path.startsWith("/feedback/")
-  /** Pages that already include a full or dedicated inline Calendly */
-  const showFooterCalendly = path !== "/" && !isContactRoute && !isNotaryRoute
+  /** Pages that already include a full or dedicated inline Calendly, so the footer skips its booking link */
+  const showFooterBooking = path !== "/" && !isContactRoute && !isNotaryRoute
 
   // Only render socials marked `live` in lib/site.ts. Dead accounts in the
   // footer hurt trust and confuse Google's sameAs crawl. Flip `live: true`
@@ -144,29 +116,29 @@ const Footer = memo(() => {
         </div>
       )}
 
-      {showFooterCalendly && (
-        <LazySection fallbackHeight="520px">
-          <div className="border-b border-border bg-muted/20">
-            <div className="container mx-auto max-w-3xl px-4 py-10">
-              <div className="mb-4 flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-center sm:gap-3">
-                <Calendar className="h-5 w-5 shrink-0 text-primary" aria-hidden />
-                <h2 className="text-lg font-semibold text-foreground">Book a 30-minute call</h2>
-              </div>
-              <CalendlyInlineEmbed
-                variant="compact"
-                heading={null}
-                showFallbackLink
-                className="mt-0"
-              />
+      {showFooterBooking && (
+        <div className="border-b border-border bg-muted/20">
+          <div className="container mx-auto flex max-w-3xl flex-col items-center gap-3 px-4 py-8 text-center sm:flex-row sm:justify-between sm:text-left">
+            <div className="flex items-center gap-3">
+              <Calendar className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+              <h2 className="text-lg font-semibold text-foreground">Book a 30-minute call</h2>
             </div>
+            {/* A link, not an inline Calendly embed: the scheduler loads only on /contact/ when someone asks for it. */}
+            <Link
+              href="/contact/#book-a-call"
+              className="inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              {...analyticsAttributes("book_call_click", "footer", "book-a-call")}
+            >
+              Book a free call
+            </Link>
           </div>
-        </LazySection>
+        </div>
       )}
 
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-12" aria-label="Ondo Real Estate footer navigation">
         <h2 className="sr-only">Site links</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           {/* Buying a Home */}
           <FooterNavSection label="Buying a Home" icon={<Home className="h-5 w-5" />} href="/buy">
@@ -211,33 +183,35 @@ const Footer = memo(() => {
             <li><Link href="/calculators/home-sale" className="text-foreground/70 hover:text-foreground">Home sale calculator</Link></li>
             <li><Link href="/calculators/buying-power" className="text-foreground/70 hover:text-foreground">Buying power calculator</Link></li>
             <li><Link href="/calculators/cost-of-living" className="text-foreground/70 hover:text-foreground">Cost of living calculator</Link></li>
-            <li><Link href="/glossary" className="text-foreground/70 hover:text-foreground">Real estate glossary</Link></li>
           </FooterNavSection>
 
-          {/* About Us */}
-          <FooterNavSection label="About Us" icon={<Users className="h-5 w-5" />} href="/about">
+          {/* Company */}
+          <FooterNavSection label="Company" icon={<Users className="h-5 w-5" />} href="/about">
             <li><Link href="/moving-to-utah/" className="text-foreground/70 hover:text-foreground">New to Utah</Link></li>
-            <li><Link href="/socials" className="text-foreground/70 hover:text-foreground">Socials</Link></li>
+            <li><Link href="/qualify" className="text-foreground/70 hover:text-foreground">Start a mortgage conversation</Link></li>
             <li><Link href="/events" className="text-foreground/70 hover:text-foreground">Events</Link></li>
+            <li><Link href="/socials" className="text-foreground/70 hover:text-foreground">Socials</Link></li>
+            <li><Link href="/news" className="text-foreground/70 hover:text-foreground">Industry news</Link></li>
+            <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
+          </FooterNavSection>
+
+          {/* Learn */}
+          <FooterNavSection label="Learn" icon={<BookOpen className="h-5 w-5" />} href="/learn">
             <li><Link href="/learn" className="text-foreground/70 hover:text-foreground">Mortgage learning hub</Link></li>
             <li><Link href="/learn/variable-income" className="text-foreground/70 hover:text-foreground">Variable income mortgages</Link></li>
             <li><Link href="/learn/first-time" className="text-foreground/70 hover:text-foreground">First-time buyer cash and closing</Link></li>
+            <li><Link href="/learn/non-qm" className="text-foreground/70 hover:text-foreground">Non-QM, bank-statement, DSCR</Link></li>
+            <li><Link href="/learn/investment" className="text-foreground/70 hover:text-foreground">Investment occupancy and DSCR</Link></li>
+            <li><Link href="/academy" className="text-foreground/70 hover:text-foreground">Academy</Link></li>
+            <li><Link href="/glossary" className="text-foreground/70 hover:text-foreground">Real estate glossary</Link></li>
+          </FooterNavSection>
+
+          {/* Areas */}
+          <FooterNavSection label="Areas" icon={<MapPin className="h-5 w-5" />} href="/locations">
             <li><Link href="/locations" className="text-foreground/70 hover:text-foreground">Service areas</Link></li>
             <li><Link href="/market-reports" className="text-foreground/70 hover:text-foreground">City market reports</Link></li>
             <li><Link href="/neighborhoods" className="text-foreground/70 hover:text-foreground">Neighborhood guides</Link></li>
             <li><Link href="/schools" className="text-foreground/70 hover:text-foreground">School district guides</Link></li>
-            <li><Link href="/learn/non-qm" className="text-foreground/70 hover:text-foreground">Non-QM, bank-statement, DSCR</Link></li>
-            <li><Link href="/learn/investment" className="text-foreground/70 hover:text-foreground">Investment occupancy and DSCR</Link></li>
-            <li><Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="text-foreground/70 hover:text-foreground">Utah tax calendar vs escrow</Link></li>
-            <li><Link href="/blog/escrow-shortage-after-first-year" className="text-foreground/70 hover:text-foreground">Escrow shortage after first year</Link></li>
-            <li><Link href="/blog/impounds-vs-waiving-escrow" className="text-foreground/70 hover:text-foreground">Impounds vs waiving escrow</Link></li>
-            <li><Link href="/blog/week-after-mortgage-funding" className="text-foreground/70 hover:text-foreground">The week after funding</Link></li>
-            <li><Link href="/blog/how-long-first-purchase-takes" className="text-foreground/70 hover:text-foreground">How long a first purchase takes</Link></li>
-            <li><Link href="/blog/hill-afb-va-coe-occupancy" className="text-foreground/70 hover:text-foreground">Hill AFB VA: COE and occupancy</Link></li>
-            <li><Link href="/qualify" className="text-foreground/70 hover:text-foreground">Start a mortgage conversation</Link></li>
-            <li><Link href="/academy" className="text-foreground/70 hover:text-foreground">Academy</Link></li>
-            <li><Link href="/news" className="text-foreground/70 hover:text-foreground">Industry news</Link></li>
-            <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
           </FooterNavSection>
 
           {/* Help Center */}

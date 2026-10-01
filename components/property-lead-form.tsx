@@ -238,7 +238,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[500px] p-0" style={{ zIndex: 9999 }}>
+      <DialogContent className="sm:max-w-[500px] p-0">
         <div className="relative">
           <button
             onClick={handleClose}

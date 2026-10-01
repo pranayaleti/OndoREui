@@ -148,7 +148,7 @@ export default function AdjustableRatePage() {
 
             <div className="text-center mb-12">
               <h3 className="text-2xl font-bold mb-6">Is an ARM Right for You?</h3>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg">
                   <Link href="/calculators/mortgage-payment">Compare Loan Options</Link>
                 </Button>

@@ -15,8 +15,8 @@ vi.mock("next/image", () => ({
 }))
 vi.mock("@/components/mode-toggle", () => ({ ModeToggle: () => <button type="button">Theme</button> }))
 vi.mock("@/components/navigation", () => ({
-  Navigation: ({ items }: { items: Array<{ href: string }> }) => (
-    <nav aria-label="Site links">
+  Navigation: ({ items, className }: { items: Array<{ href: string }>; className?: string }) => (
+    <nav aria-label="Site links" className={className}>
       {items.slice(0, 1).map((i) => (
         <a key={i.href} href={i.href}>
           link
@@ -125,5 +125,26 @@ describe("Header search focus return", () => {
       fireEvent.keyDown(window, { key: "k", ctrlKey: true })
     })
     expect(await screen.findByRole("dialog")).toBeInTheDocument()
+  })
+})
+
+describe("Header layout classes", () => {
+  it("centres the primary nav with mx-auto, not justify-center, so Buy and Sell never clip behind the logo", () => {
+    render(<Header />)
+    const scroller = screen.getByRole("navigation", { name: "Primary navigation" })
+    expect(scroller.className).toContain("overflow-x-auto")
+    expect(scroller.className).not.toContain("justify-center")
+    const list = screen.getByRole("navigation", { name: "Site links" })
+    expect(list.className).toContain("w-max")
+    expect(list.className).toContain("mx-auto")
+    expect(list.className).not.toContain("justify-center")
+  })
+
+  it("right-aligns the controls and gives the hamburger a 44px target", () => {
+    render(<Header />)
+    const toggle = screen.getByRole("button", { name: "Open navigation menu" })
+    expect(toggle.className).toContain("min-h-11")
+    expect(toggle.className).toContain("min-w-11")
+    expect(toggle.parentElement?.className).toContain("ml-auto")
   })
 })

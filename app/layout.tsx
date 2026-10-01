@@ -12,7 +12,6 @@ import { getSiteGeoMetaOther } from "@/lib/seo"
 import { DEFAULT_LOCALE } from "@/lib/locales"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { ScrollProgress } from "@/components/scroll-progress"
 import ErrorBoundary from "@/components/error-boundary"
 import { CachePurge } from "@/components/cache-purge"
 import { AttributionCapture } from "@/components/attribution-capture"
@@ -23,6 +22,7 @@ import { WhatsAppFloatButton } from "@/components/whatsapp-float-button"
 import PublicAssistantWidget from "@/components/PublicAssistantWidget"
 import { StickyMobileCtaBar } from "@/components/sticky-mobile-cta-bar"
 import { SiteChrome } from "@/components/site-chrome"
+import { StickyBarOffset } from "@/components/sticky-bar-offset"
 import { ClickTracker } from "@/components/analytics/click-tracker"
 // Vercel Analytics is disabled for static exports (GitHub Pages)
 // It only works on Vercel's platform, not with static site generation
@@ -184,8 +184,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="alternate" type="text/markdown" title="Markdown sitemap" href={`${SITE_URL.replace(/\/$/, "")}/sitemap.md`} />
         {/* RFC 8288 discovery link so agents can find /llms.txt from the HTML shell. */}
         <link rel="describedby" type="text/plain" href={`${SITE_URL.replace(/\/$/, "")}/llms.txt`} />
-        <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        {/* Dark is the default theme; ThemeColorSync updates this when the visitor picks light or System. */}
+        <meta name="theme-color" content="#0b1220" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -222,9 +222,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* SiteChrome drops everything it wraps on standalone routes (/links), see lib/standalone-routes.ts. */}
           <SiteChrome>
             <FirstVisitLeadPopup />
-            <ScrollProgress />
           </SiteChrome>
-          <div className="min-h-screen flex flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
+          <StickyBarOffset>
             <SiteChrome>
               <Header />
             </SiteChrome>
@@ -235,7 +234,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SiteChrome>
               <Footer />
             </SiteChrome>
-          </div>
+          </StickyBarOffset>
           <SiteChrome>
             {/* Floating WhatsApp CTA, env-driven, dismissible. No-op without NEXT_PUBLIC_WHATSAPP_NUMBER. */}
             <WhatsAppFloatButton />
@@ -244,7 +243,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 emailed resume links; its floating launcher is not mounted on any listing page.) Hides
                 itself on /chat, where the leasing agent already owns the conversation. */}
             <PublicAssistantWidget />
-            {/* Mobile-only sticky Call + Free rental analysis bar. Owns the bottom edge on
+            {/* Mobile-only sticky Call + route-aware CTA bar (lib/sticky-cta.ts). Owns the bottom edge on
                 small screens; WhatsApp and assistant floats lift above it via their own CSS. */}
             <StickyMobileCtaBar />
           </SiteChrome>

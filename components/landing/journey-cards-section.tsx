@@ -22,7 +22,7 @@ const cards: JourneyCard[] = [
   },
   {
     href: "/whats-my-home-worth",
-    eyebrow: "Free rental analysis",
+    eyebrow: "Free home estimate",
     title: "What could your home earn?",
     description:
       "Instant rent and sale estimate for any Wasatch Front city. No signup to see your number.",

@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SEO from "@/components/seo";
-import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site";
+import { SITE_URL, SITE_PHONE, SITE_PHONE_TEL, SITE_EMAILS } from "@/lib/site";
+import { analyticsAttributes } from "@/lib/analytics";
 import { generateBreadcrumbJsonLd, generateLocalBusinessJsonLd } from "@/lib/seo";
 import {
   CheckCircle,
@@ -453,7 +454,24 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
                 <Phone className="w-6 h-6 text-primary" />
                 <div>
                   <h3 className="text-foreground font-semibold">Phone</h3>
-                  <p className="text-foreground/80">{SITE_PHONE} <br /> Text or call for urgent requests.</p>
+                  <p className="text-foreground/80">
+                    <a
+                      href={`tel:${SITE_PHONE_TEL}`}
+                      className="text-primary hover:underline"
+                      {...analyticsAttributes("notary_contact_click", "notary_contact", "call")}
+                    >
+                      {SITE_PHONE}
+                    </a>
+                    <br />
+                    Text or call for urgent requests.{" "}
+                    <a
+                      href={`sms:${SITE_PHONE_TEL}`}
+                      className="text-primary hover:underline"
+                      {...analyticsAttributes("notary_contact_click", "notary_contact", "text")}
+                    >
+                      Text us
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -461,7 +479,15 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
                 <Mail className="w-6 h-6 text-primary" />
                 <div>
                   <h3 className="text-foreground font-semibold">Email</h3>
-                  <p className="text-foreground/80">{SITE_EMAILS.notary}</p>
+                  <p className="text-foreground/80">
+                    <a
+                      href={`mailto:${SITE_EMAILS.notary}`}
+                      className="text-primary hover:underline"
+                      {...analyticsAttributes("notary_contact_click", "notary_contact", "email")}
+                    >
+                      {SITE_EMAILS.notary}
+                    </a>
+                  </p>
                 </div>
               </div>
 
