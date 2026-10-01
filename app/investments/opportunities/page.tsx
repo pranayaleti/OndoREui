@@ -57,7 +57,7 @@ export default async function OpportunitiesPage() {
         <div className="container mx-auto px-4 py-3">
           <p className="text-sm text-foreground/70 text-center max-w-3xl mx-auto">
             {SAMPLE_DEAL_NOTICE}{" "}
-            <Link href="/contact/" className="text-primary hover:underline">
+            <Link href="/contact/" className="text-primary underline underline-offset-4">
               Contact us
             </Link>{" "}
             if you want to be told if that changes.

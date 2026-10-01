@@ -190,9 +190,9 @@ export default async function Page({ params }: { params: Params }) {
                                 <span className="sr-only">Tie</span>
                               </>
                             ) : row.winner === "a" ? (
-                              <span className="text-xs font-semibold text-green-600">{a.name}</span>
+                              <span className="text-xs font-semibold text-green-700 dark:text-green-500">{a.name}</span>
                             ) : (
-                              <span className="text-xs font-semibold text-green-600">{b.name}</span>
+                              <span className="text-xs font-semibold text-green-700 dark:text-green-500">{b.name}</span>
                             )}
                           </div>
                         </td>

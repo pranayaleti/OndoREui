@@ -79,7 +79,7 @@ export default function UnsubscribePage() {
                 <p className="text-center text-xs text-foreground/60">
                   You will still receive messages about an account or service you have with us
                   (for example rent receipts and maintenance updates). Changed your mind?{" "}
-                  <Link href="/subscribe" className="text-primary hover:underline">
+                  <Link href="/subscribe" className="text-primary underline underline-offset-4">
                     Subscribe here
                   </Link>
                   .

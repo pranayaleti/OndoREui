@@ -318,7 +318,7 @@ export default function FoundersLetterPage() {
             <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-background font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
               <Code className="h-8 w-8" aria-hidden="true" />
             </div>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-background px-3 py-1 rounded-full text-sm font-bold">
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
               2013
             </div>
           </div>
@@ -346,7 +346,7 @@ export default function FoundersLetterPage() {
             <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-background font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
               <Home className="h-8 w-8" aria-hidden="true" />
             </div>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-background px-3 py-1 rounded-full text-sm font-bold">
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
               2019
             </div>
           </div>
@@ -374,7 +374,7 @@ export default function FoundersLetterPage() {
             <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-background font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
               <Zap className="h-8 w-8" aria-hidden="true" />
             </div>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-background px-3 py-1 rounded-full text-sm font-bold">
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
               2022
             </div>
           </div>
@@ -402,7 +402,7 @@ export default function FoundersLetterPage() {
             <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-background font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
               <Target className="h-8 w-8" aria-hidden="true" />
             </div>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-background px-3 py-1 rounded-full text-sm font-bold">
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
               2025+
             </div>
           </div>

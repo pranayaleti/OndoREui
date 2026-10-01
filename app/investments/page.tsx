@@ -148,7 +148,7 @@ export default function InvestmentsPage() {
                 commercial and fractional real estate investing works, so you can decide whether it
                 fits your plan. Ondo has no investment open to investors on this site today, and the
                 deal pages here are samples. If you want to be told if that changes,{" "}
-                <Link href="/contact/" className="text-primary hover:underline">
+                <Link href="/contact/" className="text-primary underline underline-offset-4">
                   get in touch
                 </Link>
                 .

@@ -392,3 +392,11 @@ form.tool-form-active button[type="submit"] {
     scroll-behavior: auto;
   }
 }
+
+/* Light theme: foreground text at 50-55% opacity lands at 3.5-4.3:1 on white and tinted cards,
+   below the WCAG AA 4.5:1 minimum for body text. Keep the muted look but at a passing strength
+   (about 6:1). The dark theme already passes at these opacities. */
+html.light .text-foreground\/50,
+html.light .text-foreground\/55 {
+  color: hsl(var(--foreground) / 0.68);
+}

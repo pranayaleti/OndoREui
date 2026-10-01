@@ -326,8 +326,8 @@ const RetirementCalculator: React.FC = () => {
 
                   {/* Monthly Budget */}
                   <div className="bg-muted p-4 rounded-lg mb-6">
-                    <h3 className="text-lg font-medium text-indigo-900 mb-2">Monthly Retirement Budget</h3>
-                    <p className="text-2xl font-bold text-indigo-900">{formatCurrency(results.monthlyRetirementBudget)}</p>
+                    <h3 className="text-lg font-medium text-indigo-900 dark:text-indigo-200 mb-2">Monthly Retirement Budget</h3>
+                    <p className="text-2xl font-bold text-indigo-900 dark:text-indigo-200">{formatCurrency(results.monthlyRetirementBudget)}</p>
                   </div>
 
                   {/* Year-by-Year Projection */}

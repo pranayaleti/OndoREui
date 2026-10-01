@@ -3,6 +3,26 @@ import AxeBuilder from "@axe-core/playwright"
 import type { Result } from "axe-core"
 import { CALCULATOR_CATALOG } from "../lib/calculator-catalog"
 
+// CI builds this suite against the production API, so a form submit here would create a real lead
+// (one test run on Sep 30, 2026 did). Every request that would change data on another host is
+// answered with a 500 instead, and analytics hosts are blocked so test runs never count as visits.
+// Service workers are off because the site's worker would answer requests these routes never see.
+test.use({ serviceWorkers: "block" })
+test.beforeEach(async ({ page }) => {
+  await page.route("**/*", (route) => {
+    const request = route.request()
+    const url = new URL(request.url())
+    const local = url.hostname === "localhost" || url.hostname === "127.0.0.1"
+    if (/(^|\.)(hs-scripts|hs-analytics|hs-banner|hscollectedforms|hubspot|hubapi|google-analytics|googletagmanager|doubleclick|facebook|tiktok|licdn|linkedin)\./.test(url.hostname)) {
+      return route.abort()
+    }
+    if (!local && request.method() !== "GET" && request.method() !== "HEAD" && request.method() !== "OPTIONS") {
+      return route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ error: "Blocked in tests" }) })
+    }
+    return route.continue()
+  })
+})
+
 /**
  * Public routes that should never produce serious/critical axe violations.
  *
@@ -144,8 +164,15 @@ test.describe("Accessibility — error states", () => {
     await page.goto("/demo/", { waitUntil: "domcontentloaded" })
     await page.locator("main, #main-content, [role='main']").first().waitFor({ state: "visible", timeout: 15_000 })
 
-    // There is no backend behind the static export, so a valid submit fails and
-    // renders the error banner — which is the state we want to scan.
+    // Force the lead request to fail (the local mock backend would accept it), so a valid
+    // submit renders the error banner, which is the state we want to scan.
+    await page.route("**/api/leads/**", (route) =>
+      route.request().method() === "GET"
+        ? route.continue()
+        : route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ error: "Test failure" }) }),
+    )
+    // lib/anti-spam.ts treats a submit within 2.5 s of load as a bot and shows a fake success.
+    await page.waitForTimeout(3_000)
     await page.fill("#firstName", "Ada")
     await page.fill("#lastName", "Lovelace")
     await page.fill("#email", "ada@example.com")
