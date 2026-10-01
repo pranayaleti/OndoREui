@@ -68,4 +68,42 @@ describe("CoApplicantClient", () => {
     screen.getAllByRole("checkbox").forEach((box) => fireEvent.click(box))
     expect(submit).toBeDisabled()
   })
+
+  it("keeps the form and shows the error when saving fails, without claiming it was saved", async () => {
+    getCoApplicantInvite.mockResolvedValue(validInvite)
+    saveCoApplicantProgress.mockRejectedValue(new Error("Could not save"))
+    render(<CoApplicantClient token="tok" />)
+    const submit = await screen.findByRole("button", { name: /save my application/i })
+    fireEvent.change(screen.getByLabelText(/phone/i), { target: { value: "801-555-0100" } })
+    screen.getAllByRole("checkbox").forEach((box) => fireEvent.click(box))
+    fireEvent.click(submit)
+    expect(await screen.findByText("Could not save")).toBeInTheDocument()
+    expect(screen.queryByText(/your portion is saved/i)).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: /save my application/i })).toBeEnabled()
+  })
+
+  it("treats a missing token as an invalid invite without calling the API", async () => {
+    render(<CoApplicantClient />)
+    expect(await screen.findByRole("alert")).toHaveTextContent(/not valid/i)
+    expect(getCoApplicantInvite).not.toHaveBeenCalled()
+  })
+
+  it("does not look up the static-export placeholder token", () => {
+    render(<CoApplicantClient token="_" />)
+    expect(getCoApplicantInvite).not.toHaveBeenCalled()
+    expect(screen.getByRole("status")).toHaveTextContent(/checking your invite/i)
+  })
+
+  it("starts from a phone number the invite already holds and keeps the saved answers", async () => {
+    getCoApplicantInvite.mockResolvedValue({
+      coApplicant: { ...validInvite.coApplicant, wizardPayload: { applicant: { phone: "801-555-0111", firstName: "A" }, other: 1 } },
+    })
+    render(<CoApplicantClient token="tok" />)
+    const phone = (await screen.findByLabelText(/phone/i)) as HTMLInputElement
+    expect(phone.value).toBe("801-555-0111")
+    screen.getAllByRole("checkbox").forEach((box) => fireEvent.click(box))
+    fireEvent.click(screen.getByRole("button", { name: /save my application/i }))
+    await waitFor(() => expect(saveCoApplicantProgress).toHaveBeenCalledTimes(1))
+    expect(saveCoApplicantProgress.mock.calls[0]![1]).toMatchObject({ other: 1, applicant: { phone: "801-555-0111", firstName: "A" } })
+  })
 })

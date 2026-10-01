@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test"
 import AxeBuilder from "@axe-core/playwright"
 import type { Result } from "axe-core"
+import { CALCULATOR_CATALOG } from "../lib/calculator-catalog"
 
 /**
  * Public routes that should never produce serious/critical axe violations.
@@ -38,8 +39,8 @@ const routes = [
   // associated <label> went unnoticed. Cover the index plus two tools: the most
   // complex form and a small one.
   "/calculators/",
-  "/calculators/mortgage-payment/",
-  "/calculators/cap-rate/",
+  // One URL per calculator: they duplicate form markup, so one regression repeats across all of them.
+  ...Object.keys(CALCULATOR_CATALOG).map((slug) => `/calculators/${slug}/`),
   // Glossary: index carries the search/filter UI, the term page the article layout.
   "/glossary/",
   "/glossary/escrow-account/",
@@ -48,7 +49,21 @@ const routes = [
   // Representative generated dynamic pages with real static params
   "/compare/draper-vs-lehi/",
   "/neighborhoods/draper/suncrest/",
+  // One URL per remaining route template: blog post, city service page, loan product,
+  // notary page, investments, pricing and the lead-capture pages.
+  "/blog/appraisal-comes-in-low/",
+  "/property-management/draper/",
+  "/loans/va/",
+  "/notary/on-demand/",
+  "/investments/opportunities/",
+  "/pricing/",
+  "/subscribe/",
+  "/unsubscribe/",
+  "/sweepstakes/",
 ]
+
+/** Both themes ship (the light theme and the System option stay), so every scan runs in each. */
+const THEMES = ["light", "dark"] as const
 
 /**
  * Wait for a live region that actually carries text.
@@ -145,13 +160,27 @@ test.describe("Accessibility — error states", () => {
   })
 })
 
-test.describe("Accessibility smoke tests", () => {
+for (const theme of THEMES) {
+test.describe(`Accessibility smoke tests (${theme} theme)`, () => {
+  test.beforeEach(async ({ page }) => {
+    // next-themes reads its choice from localStorage["theme"] before first paint.
+    await page.addInitScript((value) => {
+      try {
+        window.localStorage.setItem("theme", value)
+      } catch {
+        // Storage blocked: the page falls back to its default theme.
+      }
+    }, theme)
+  })
+
   for (const route of routes) {
     test(`page ${route} has no serious accessibility violations`, async ({ page }) => {
       await page.goto(route, { waitUntil: "domcontentloaded" })
       // Wait for a stable landmark before axe so Fast Refresh flakes less
       // or client hydration triggers a secondary navigation.
       await page.locator("main, #main-content, [role='main']").first().waitFor({ state: "visible", timeout: 15_000 })
+      // Prove the scan runs in the theme under test, not whichever one the page defaulted to.
+      await expect(page.locator("html")).toHaveClass(new RegExp(`\\b${theme}\\b`))
       if (route === "/properties") {
         await page
           .waitForResponse((response) => response.url().includes("/api/properties/public"), {
@@ -199,10 +228,11 @@ test.describe("Accessibility smoke tests", () => {
         )
       }
 
-      expect.soft(seriousViolations, `Serious/critical a11y violations on ${route}`).toEqual([])
+      expect.soft(seriousViolations, `Serious/critical a11y violations on ${route} (${theme} theme)`).toEqual([])
     })
   }
 })
+}
 
 
 /**

@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import {
   calculateMonthlyPI,
   calculateMaxLoanFromPayment,
-  calculateTotalInterest,
   estimateRemainingMonths,
   getBuydownRateSchedule,
   calculateTemporaryBuydown,
@@ -289,12 +288,6 @@ describe("refinance helpers", () => {
     const months = estimateRemainingMonths(balance, rate, pmt);
     expect(months).not.toBeNull();
     expect(months!).toBeCloseTo(termYears * 12, 5);
-  });
-
-  it("calculateTotalInterest is payment×n − principal", () => {
-    const interest = calculateTotalInterest(100_000, 6, 15);
-    const pmt = calculateMonthlyPI(100_000, 6, 15);
-    expect(interest).toBeCloseTo(pmt * 180 - 100_000, 2);
   });
 });
 

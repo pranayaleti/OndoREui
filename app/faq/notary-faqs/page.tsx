@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing.",
   alternates: { canonical: `${SITE_URL}/faq/notary-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Notary & Closings FAQs | Ondo Real Estate"),
     description: "Get answers to common questions about Remote Online Notarization (RON) and what to expect during a document signing.",
     images: DEFAULT_OG_IMAGES,

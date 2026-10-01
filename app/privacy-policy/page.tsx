@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Learn how Ondo Real Estate protects your personal information and privacy. Read our comprehensive privacy policy.",
   alternates: { canonical: `${SITE_URL}/privacy-policy/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Privacy Policy | Ondo Real Estate"),
     description: "Learn how Ondo Real Estate protects your personal information and privacy. Read our comprehensive privacy policy.",
     images: DEFAULT_OG_IMAGES,

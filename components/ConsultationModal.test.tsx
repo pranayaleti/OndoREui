@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
+import { useState } from "react"
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react"
 import ConsultationModal from "./ConsultationModal"
 import { backendUrl } from "@/lib/backend"
@@ -148,6 +149,29 @@ describe("ConsultationModal dialog semantics", () => {
     expect(onClose).toHaveBeenCalledTimes(1)
     fireEvent.click(screen.getByRole("button", { name: "consultationModal.cancel" }))
     expect(onClose).toHaveBeenCalledTimes(2)
+  })
+
+  it("returns focus to the button that opened it after Escape", async () => {
+    function Harness() {
+      const [open, setOpen] = useState(false)
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>Open consultation</button>
+          <ConsultationModal isOpen={open} onClose={() => setOpen(false)} />
+        </>
+      )
+    }
+    render(<Harness />)
+    const opener = screen.getByRole("button", { name: "Open consultation" })
+    opener.focus()
+    fireEvent.click(opener)
+    const dialog = screen.getByRole("dialog")
+    expect(dialog).toContainElement(document.activeElement as HTMLElement)
+
+    fireEvent.keyDown(dialog, { key: "Escape" })
+
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument())
+    await waitFor(() => expect(opener).toHaveFocus())
   })
 
   it("gives every select an accessible name from its label", () => {

@@ -7,7 +7,7 @@ describe("PageBanner", () => {
     const { container } = render(<PageBanner title="Sell your home" subtitle="A plain plan" backgroundImage="/hero.webp" />)
     expect(screen.getByRole("heading", { level: 1, name: "Sell your home" })).toHaveClass("text-white")
     expect(screen.getByText("A plain plan")).toHaveClass("text-white")
-    expect(container.querySelector(".bg-black\\/60")).not.toBeNull()
+    expect(container.querySelector(".bg-scrim\\/60")).not.toBeNull()
     // No theme tokens behind the text: the scrim cannot turn light when the page theme does.
     expect(container.innerHTML).not.toMatch(/from-background|to-foreground|text-foreground/)
   })
@@ -60,5 +60,25 @@ describe("PageBanner", () => {
   it("supports a tel: link as a call to action", () => {
     render(<PageBanner title="T" subtitle="S" primaryCta={{ label: "Call us", href: "tel:+14085380420" }} />)
     expect(screen.getByRole("link", { name: "Call us" })).toHaveAttribute("href", "tel:+14085380420")
+  })
+
+  it("defaults to a centered banner at the standard height", () => {
+    const { container } = render(<PageBanner title="T" subtitle="S" />)
+    expect(container.querySelector("section")).toHaveClass("min-h-[300px]")
+    expect(container.querySelector(".container")).toHaveClass("text-center")
+  })
+
+  it("supports left alignment and the tall size", () => {
+    const { container } = render(<PageBanner title="T" subtitle="S" align="left" size="tall" primaryCta={{ label: "Go", href: "/x/" }} />)
+    expect(container.querySelector("section")).toHaveClass("md:min-h-[420px]")
+    expect(container.querySelector(".container")).toHaveClass("text-left")
+    expect(screen.getByRole("link", { name: "Go" }).parentElement).toHaveClass("items-start")
+  })
+
+  it("drops the photo but keeps the scrim and white text in the plain variant", () => {
+    const { container } = render(<PageBanner title="T" subtitle="S" plain />)
+    expect(container.querySelector("img")).toBeNull()
+    expect(container.querySelector(".bg-scrim\\/60")).not.toBeNull()
+    expect(screen.getByRole("heading", { level: 1 })).toHaveClass("text-white")
   })
 })

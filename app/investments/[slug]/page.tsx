@@ -11,8 +11,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { MOCK_OPPORTUNITIES, SAMPLE_DEAL_LABEL, SAMPLE_DEAL_NOTICE } from "@/lib/investments-data"
-// API functions available for runtime use in client components
-// import { getOpportunities, getOpportunityBySlug } from "@/lib/investments-api"
 import {
   MapPin,
   DollarSign,

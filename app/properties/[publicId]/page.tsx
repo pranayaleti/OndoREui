@@ -8,7 +8,7 @@ import { PropertyListingDetailClient } from "@/components/properties/property-li
 import { PropertyListingDetail } from "@/components/properties/property-listing-detail"
 import {
   PROPERTY_DETAIL_PLACEHOLDER_ID,
-  fetchAllPublicListingRows,
+  fetchPublicListingRowsForBuild,
   fetchPublicPropertyByPublicId,
   fetchPublicPropertyList,
   publicIdsFromListBody,
@@ -31,11 +31,17 @@ interface PageProps {
  */
 export async function generateStaticParams(): Promise<Array<{ publicId: string }>> {
   try {
-    const params = publicIdsFromListBody(await fetchAllPublicListingRows()).map((publicId) => ({ publicId }))
+    const params = publicIdsFromListBody(await fetchPublicListingRowsForBuild()).map((publicId) => ({ publicId }))
     return params.length > 0 ? params : [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
   } catch (error) {
+    const reason = error instanceof Error ? error.message : "unknown"
+    // The production deploy sets ONDO_REQUIRE_LISTINGS so an API outage fails the build
+    // instead of publishing a site with no listing pages. Local and CI builds fall back.
+    if (process.env.ONDO_REQUIRE_LISTINGS === "1") {
+      throw new Error(`[properties/[publicId]] generateStaticParams: listings API unavailable after retries (${reason})`)
+    }
     console.warn(
-      `[properties/[publicId]] generateStaticParams: backend unavailable (${error instanceof Error ? error.message : "unknown"}); emitting placeholder`
+      `[properties/[publicId]] generateStaticParams: backend unavailable (${reason}); emitting placeholder`
     )
     return [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
   }

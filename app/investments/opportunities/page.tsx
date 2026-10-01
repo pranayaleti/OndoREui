@@ -10,8 +10,6 @@ import { RiskDisclosure } from "@/components/investments/risk-disclosure"
 import { WebMCPOpportunitiesTool } from "@/components/investments/webmcp-opportunities-tool"
 import { MOCK_OPPORTUNITIES, SAMPLE_DEAL_NOTICE } from "@/lib/investments-data"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-// API functions available for runtime use in client components
-// import { getOpportunities } from "@/lib/investments-api"
 
 const DESCRIPTION =
   "Sample investment deal pages that show how Ondo could present a commercial or fractional offering in Utah. The deals are illustrations, not live offerings."

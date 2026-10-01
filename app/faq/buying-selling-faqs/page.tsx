@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Get answers to common questions about buying homes, selling properties, renting vs buying, home valuations, and the Utah real estate market.",
   alternates: { canonical: `${SITE_URL}/faq/buying-selling-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Buying & Selling FAQs | Ondo Real Estate"),
     description: "Get answers to common questions about buying homes, selling properties, renting vs buying, home valuations, and the Utah real estate market.",
     images: DEFAULT_OG_IMAGES,

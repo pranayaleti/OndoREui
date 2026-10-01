@@ -16,7 +16,7 @@ export interface InvitationValidationResponse {
 export async function validateInviteToken(token: string): Promise<InvitationDetails | null> {
   try {
     const res = await networkFirstGet<InvitationValidationResponse>(
-      `/api/auth/invitation/${token}`,
+      `/api/auth/invitation/${encodeURIComponent(token)}`,
       `invite-${token}`
     )
     return res?.invitation ?? null

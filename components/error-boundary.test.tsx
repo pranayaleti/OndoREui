@@ -3,6 +3,9 @@ import { describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
 import ErrorBoundary from "./error-boundary"
 
+let mockPathname: string | null = "/a/"
+vi.mock("next/navigation", () => ({ usePathname: () => mockPathname }))
+
 const Throw = () => {
   throw new Error("test error")
 }
@@ -85,5 +88,29 @@ describe("ErrorBoundary", () => {
     )
     fireEvent.click(screen.getByText(/Try Again/))
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument()
+  })
+  it("clears the error UI when the pathname changes", () => {
+    mockPathname = "/a/"
+    let shouldThrow = true
+    const Maybe = () => {
+      if (shouldThrow) throw new Error("page a broke")
+      return <span>Page B</span>
+    }
+    const { rerender } = render(
+      <ErrorBoundary>
+        <Maybe />
+      </ErrorBoundary>
+    )
+    expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument()
+
+    shouldThrow = false
+    mockPathname = "/b/"
+    rerender(
+      <ErrorBoundary>
+        <Maybe />
+      </ErrorBoundary>
+    )
+    expect(screen.getByText("Page B")).toBeInTheDocument()
+    expect(screen.queryByText(/Something went wrong/i)).not.toBeInTheDocument()
   })
 })

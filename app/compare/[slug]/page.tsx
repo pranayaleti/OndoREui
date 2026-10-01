@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = pageTitleText(`${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`)
   const description = `Compare ${a.name} and ${b.name} side-by-side: home prices, rent, schools, commute, growth rate, and lifestyle.`
   const canonical = `${SITE_URL}/compare/${slug}/`
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
 

@@ -25,6 +25,11 @@ export const TYPICAL_UTAH_PM_RATE_LOW = 0.08
 export const TYPICAL_UTAH_PM_RATE_HIGH = 0.12
 export const TYPICAL_UTAH_PM_RANGE_LABEL = "8–12%"
 export const LEASING_FEE_RATE = 0.5
+/**
+ * Competitor figures (the 8-12% band and the flat monthly fee) are third-party
+ * advertised prices with no source recorded in this repo. Re-verify them, note
+ * the source here, and bump FEE_COMPARISON_AS_OF each time they are reviewed.
+ */
 export const ADVERTISED_FLAT_MONTHLY = 159
 export const FEE_COMPARISON_AS_OF = "Aug 2026"
 
@@ -106,19 +111,4 @@ export function formatUsd0(n: number): string {
     currency: "USD",
     maximumFractionDigits: 0,
   })
-}
-
-export function bandLabel(band: ManagementBand): string {
-  switch (band) {
-    case "starter":
-      return "Starter · 10% of collected rent"
-    case "growth":
-      return "Growth · 8% of collected rent"
-    case "portfolio":
-      return "Portfolio · custom (illustrated at 8%)"
-    default: {
-      const _exhaustive: never = band
-      return _exhaustive
-    }
-  }
 }

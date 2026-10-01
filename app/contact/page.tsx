@@ -21,6 +21,7 @@ export const metadata = {
     types: { "text/markdown": `${SITE_URL}/contact.md` },
   },
   openGraph: {
+    type: "website",
     title: pageTitleText("Contact Ondo Real Estate: Utah Agents & Lenders"),
     description: "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. Most messages get a same-day reply.",
     url: `${SITE_URL}/contact`,

@@ -1,6 +1,6 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { pageTitleText } from "@/lib/site"
 import Link from "next/link"
 const slug = "/blog/how-ondo-re-uses-technology-property-management"
 const title = pageTitleText("How Ondo RE Uses Technology to Manage Utah Rental Properties")

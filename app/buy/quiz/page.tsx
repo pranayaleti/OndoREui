@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: pageTitle(title),
   description,
   alternates: { canonical },
-  openGraph: { title: pageTitleText(title), description, url: canonical, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText(title), description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText(title), description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 

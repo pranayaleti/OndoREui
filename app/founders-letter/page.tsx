@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description: "A personal letter from the founder of Ondo Real Estate on our mission, values, and the future of property management.",
   alternates: { canonical: `${SITE_URL}/founders-letter/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Founder's Letter | Ondo Real Estate"),
     description: "A personal letter from the founder of Ondo Real Estate on our mission, values, and the future of property management.",
     url: `${SITE_URL}/founders-letter/`,

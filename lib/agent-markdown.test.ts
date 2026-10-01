@@ -6,6 +6,7 @@ import {
   buildPropertiesMarkdown,
   getCalculatorDetail,
   getCalculatorMarkdownSlugs,
+  isLocalSiteUrl,
 } from "./agent-markdown"
 import { CALCULATOR_CATALOG } from "./calculator-catalog"
 import { LLMS_DISCLOSURES_BLOCK } from "./site-index"
@@ -91,5 +92,17 @@ describe("calculator Markdown twins", () => {
 
   it("throws on unknown slug so the generator fails loudly", () => {
     expect(() => buildCalculatorMarkdown("not-a-real-slug")).toThrow(/unknown calculator slug/i)
+  })
+})
+
+describe("isLocalSiteUrl", () => {
+  it("flags localhost and unparseable URLs", () => {
+    expect(isLocalSiteUrl("http://localhost:3000")).toBe(true)
+    expect(isLocalSiteUrl("http://127.0.0.1:3000")).toBe(true)
+    expect(isLocalSiteUrl("")).toBe(true)
+  })
+
+  it("accepts the production origin", () => {
+    expect(isLocalSiteUrl("https://www.ondorealestate.com")).toBe(false)
   })
 })

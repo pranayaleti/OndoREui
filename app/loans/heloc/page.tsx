@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: pageTitle("HELOC & Home Equity Loans in Utah | Ondo Real Estate"),
   description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.",
   alternates: { canonical: `${SITE_URL}/loans/heloc/` },
-  openGraph: { title: pageTitleText("HELOC & Home Equity Loans in Utah | Ondo Real Estate"), description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.", url: `${SITE_URL}/loans/heloc/`, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("HELOC & Home Equity Loans in Utah | Ondo Real Estate"), description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.", url: `${SITE_URL}/loans/heloc/`, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("HELOC & Home Equity Loans in Utah | Ondo Real Estate"), description: "HELOCs and home equity loans (HELOAN) let Utah homeowners borrow against equity. Learn the difference, rates, and when each fits.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

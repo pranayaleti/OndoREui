@@ -128,6 +128,40 @@ export async function fetchAllPublicListingRows(
   return rows
 }
 
+export interface BuildFetchOptions {
+  /** Total attempts including the first. Default 3. */
+  attempts?: number
+  /** Per-request timeout. Default 15 seconds. */
+  timeoutMs?: number
+  /** Base wait before a retry, doubled each time. Default 2 seconds. */
+  retryDelayMs?: number
+}
+
+/**
+ * `fetchAllPublicListingRows` for the static export: each request has a timeout and the whole
+ * list is retried, so one slow cold start or blip does not publish a site with no listing pages.
+ * Rejects with the last error once every attempt has failed.
+ */
+export async function fetchPublicListingRowsForBuild(
+  fetchImpl: typeof fetch = fetch,
+  { attempts = 3, timeoutMs = 15_000, retryDelayMs = 2_000 }: BuildFetchOptions = {},
+): Promise<unknown[]> {
+  const withTimeout: typeof fetch = (input, init) =>
+    fetchImpl(input, { ...init, signal: AbortSignal.timeout(timeoutMs) })
+  let lastError: unknown
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await fetchAllPublicListingRows(withTimeout)
+    } catch (error) {
+      lastError = error
+      if (attempt < attempts) {
+        await new Promise((resolve) => setTimeout(resolve, retryDelayMs * 2 ** (attempt - 1)))
+      }
+    }
+  }
+  throw lastError
+}
+
 /** Like fetchPublicPropertyList, but rejects when the list could not be loaded so callers can tell an outage from an empty market. */
 export async function fetchPublicPropertyListOrThrow(
   fetchImpl: typeof fetch = fetch,

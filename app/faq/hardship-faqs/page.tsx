@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "What to do if you are behind on your mortgage or rent: call your servicer, get free HUD housing counseling, and avoid scams. Ondo does not service mortgages.",
   alternates: { canonical: `${SITE_URL}/faq/hardship-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Hardship & Assistance Options FAQs | Ondo Real Estate"),
     description: "What to do if you are behind on your mortgage or rent: call your servicer, get free HUD housing counseling, and avoid scams. Ondo does not service mortgages.",
     images: DEFAULT_OG_IMAGES,

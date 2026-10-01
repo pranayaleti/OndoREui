@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     "Utah down payment assistance through Utah Housing Corporation, plus the national grant and loan programs Utah buyers can pair with it. Eligibility is set by the agency and the lender, not this page.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Down Payment Assistance & Homebuyer Grants | Ondo Real Estate"),
     description:
       "Utah Housing Corporation down payment assistance and the national grant and loan programs Utah buyers can pair with it, with official links.",

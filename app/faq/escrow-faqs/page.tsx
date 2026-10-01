@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Find answers to questions about escrow accounts, property taxes, homeowners insurance, and how escrow works.",
   alternates: { canonical: `${SITE_URL}/faq/escrow-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Escrow, Taxes & Insurance FAQs | Ondo Real Estate"),
     description: "Find answers to questions about escrow accounts, property taxes, homeowners insurance, and how escrow works.",
     images: DEFAULT_OG_IMAGES,

@@ -1,6 +1,6 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { ComparisonTable } from "@/components/content/comparison-table"
-import { ESCROW_CUSHION, LENDING_FACTS_AS_OF, UTAH_CLOSING_NOTES, UTAH_TAX_CALENDAR } from "@/lib/content"
+import { LENDING_FACTS_AS_OF, UTAH_CLOSING_NOTES, UTAH_TAX_CALENDAR } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 

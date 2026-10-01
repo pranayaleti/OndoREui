@@ -68,7 +68,7 @@ export async function bookSchedule(
   token: string,
   slotId: string,
 ): Promise<{ id: string; scheduledAt: string; propertyTitle: string }> {
-  const res = await fetch(backendUrl(`/api/site-visits/schedule/${token}`), {
+  const res = await fetch(backendUrl(`/api/site-visits/schedule/${encodeURIComponent(token)}`), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ slotId }),
@@ -82,7 +82,7 @@ export async function rescheduleSchedule(
   token: string,
   slotId: string,
 ): Promise<{ id: string; scheduledAt: string }> {
-  const res = await fetch(backendUrl(`/api/site-visits/schedule/${token}/reschedule`), {
+  const res = await fetch(backendUrl(`/api/site-visits/schedule/${encodeURIComponent(token)}/reschedule`), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ slotId }),
@@ -93,7 +93,7 @@ export async function rescheduleSchedule(
 }
 
 export async function cancelSchedule(token: string): Promise<{ id: string; status: string }> {
-  const res = await fetch(backendUrl(`/api/site-visits/schedule/${token}/cancel`), {
+  const res = await fetch(backendUrl(`/api/site-visits/schedule/${encodeURIComponent(token)}/cancel`), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });
@@ -107,7 +107,7 @@ export async function confirmVisit(
   token: string,
   slotIndex: number,
 ): Promise<{ scheduledAt: string; propertyTitle: string }> {
-  const res = await fetch(backendUrl(`/api/site-visits/${visitId}/confirm?token=${token}`), {
+  const res = await fetch(backendUrl(`/api/site-visits/${encodeURIComponent(visitId)}/confirm?token=${encodeURIComponent(token)}`), {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ slotIndex }),

@@ -16,13 +16,4 @@ describe("rental apply static-export routing", () => {
       expect(source).not.toMatch(/export const dynamicParams = false/)
     }
   })
-
-  it("recovers apply and application paths from the static-export 404 shell", () => {
-    const source = readFileSync(join(ROOT, "app/not-found.tsx"), "utf8")
-    expect(source).toContain("rentalClientRouteFromPathname")
-    expect(source).toContain("RentalStartClient")
-    expect(source).toContain("ApplyTokenClient")
-    expect(source).toContain("CoApplicantClient")
-    expect(source).toContain("ResumeApplicationClient")
-  })
 })

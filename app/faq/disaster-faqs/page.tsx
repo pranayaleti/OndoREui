@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "What to do after a disaster: document damage, call your insurer and mortgage servicer, and apply for FEMA help. Ondo does not service mortgages.",
   alternates: { canonical: `${SITE_URL}/faq/disaster-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Disaster & Emergency Help FAQs | Ondo Real Estate"),
     description: "What to do after a disaster: document damage, call your insurer and mortgage servicer, and apply for FEMA help. Ondo does not service mortgages.",
     images: DEFAULT_OG_IMAGES,

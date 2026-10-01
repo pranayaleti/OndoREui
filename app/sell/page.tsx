@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/sell/`,
   },
   openGraph: {
+    type: "website",
     title: "Sell Your Utah Home | CMA, Listing & Negotiation",
     description:
       "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",

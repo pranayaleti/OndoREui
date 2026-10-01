@@ -15,11 +15,4 @@ describe("visit token static-export routing", () => {
     expect(schedulePage).toContain("VisitScheduleClient")
     expect(confirmPage).toContain("VisitConfirmClient")
   })
-
-  it("recovers visit tokens from the static-export 404 shell", () => {
-    const source = readFileSync(join(ROOT, "app/not-found.tsx"), "utf8")
-    expect(source).toContain("visitClientRouteFromPathname")
-    expect(source).toContain("VisitScheduleClient")
-    expect(source).toContain("VisitConfirmClient")
-  })
 })

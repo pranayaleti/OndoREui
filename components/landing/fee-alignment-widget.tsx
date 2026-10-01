@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS } from "@/components/sticky-mobile-cta-bar"
 import {
+  ADVERTISED_FLAT_MONTHLY,
   DEFAULT_EXAMPLE_MONTHLY_RENT,
   FEE_COMPARISON_AS_OF,
   GROWTH_MGMT_RATE,
@@ -44,6 +45,7 @@ export function FeeAlignmentWidget() {
   const units = unitsForMode(mode)
   const snap = buildFeeSnapshot(rent, units)
   const crossover = formatUsd0(flatFeeCrossoverRent(GROWTH_MGMT_RATE))
+  const growthRatePercent = Math.round(GROWTH_MGMT_RATE * 100)
 
   // Screen readers hear one summary after the person pauses, not every slider tick.
   const summary = `Ondo fee per unit this month: ${formatUsd0(snap.ondoMonthlyFee)}.`
@@ -202,8 +204,8 @@ export function FeeAlignmentWidget() {
               <p className="mt-4 text-xs leading-relaxed text-foreground/50">
                 Illustrative, not a quote. Figures are per unit. Management is a
                 percentage of collected rent; leasing is billed only when we place
-                a new tenant. Some Utah shops advertise a flat ~$159/mo as of{" "}
-                {FEE_COMPARISON_AS_OF} regardless of rent; at 8% that crosses
+                a new tenant. Some Utah shops advertise a flat ~{formatUsd0(ADVERTISED_FLAT_MONTHLY)}/mo as of{" "}
+                {FEE_COMPARISON_AS_OF} regardless of rent; at {growthRatePercent}% that crosses
                 around {crossover}. Verify current pricing with any provider.
               </p>
             </div>

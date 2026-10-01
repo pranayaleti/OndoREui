@@ -15,7 +15,9 @@ import {
   buildHomepageMarkdown,
   buildPropertiesMarkdown,
   getCalculatorMarkdownSlugs,
+  isLocalSiteUrl,
 } from "../lib/agent-markdown"
+import { SITE_URL } from "../lib/site"
 
 const PUBLIC_DIR = resolve(process.cwd(), "public")
 
@@ -24,6 +26,18 @@ function write(relPath: string, body: string) {
   mkdirSync(dirname(abs), { recursive: true })
   writeFileSync(abs, body, "utf8")
   console.log(`  wrote public/${relPath} (${body.length} bytes)`)
+}
+
+// The twins are tracked in git. Writing them against a localhost NEXT_PUBLIC_SITE_URL leaks
+// localhost links into public/*.md, so CI fails and a local build leaves the tracked files alone.
+if (isLocalSiteUrl(SITE_URL)) {
+  const message = `NEXT_PUBLIC_SITE_URL is ${SITE_URL}; refusing to write Markdown twins with local URLs.`
+  if (process.env["CI"]) {
+    console.error(message)
+    process.exit(1)
+  }
+  console.warn(`${message} Skipping; unset it or use https://www.ondorealestate.com to regenerate.`)
+  process.exit(0)
 }
 
 console.log("Generating first-party Markdown twins…")

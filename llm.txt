@@ -1,11 +1,5 @@
-OndoREui — Ondo Real Estate Consumer-Facing UI
+OndoREui: Ondo Real Estate consumer-facing UI
 
-Purpose: Next.js 15 consumer site — public pages, property search, mortgage calculators, user dashboards. Design tokens for styling; prefer server components.
+Next.js 15 App Router static export (GitHub Pages behind Cloudflare), TypeScript, Tailwind CSS with design tokens.
 
-Stack: Next.js 15 App Router, TypeScript, Tailwind CSS with design tokens (src/styles/design-tokens.json, _design-tokens.css), Supabase JS client. Testing: Vitest, React Testing Library, axe (npm run test:a11y). Bundle: npm run analyze:bundle.
-
-Run: npm run dev (:3000). npm run dev:clean if 404s for layout.css/main-app.js. npm run build, npm run start, npm run lint, npm run sitemap.
-
-Structure: app/ (routes), app/auth/. pages/calculators/ (legacy). components/ (search, dashboard, calculators). lib/: auth-context.tsx, session-utils.ts, seo.ts, site.ts, analytics.ts, supabase-analytics.ts, mortgage-utils.ts, accessibility.ts, performance.ts, types.ts. src/styles/ for design tokens.
-
-Rules: Design tokens over hard-coded colors. Server components by default; client only for interactivity. Reuse from lib/ and components/. Auth via useAuth() and session-utils. SEO via seo.ts/site.ts. Analytics via analytics.ts/supabase-analytics.ts. Calculators: math in mortgage-utils.ts; new calculators in pages/calculators/. TypeScript strict. Supabase env: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY. WebMCP: docs/WEBMCP.md.
+All rules for working in this repo are in AGENTS.md (the single source of truth). Read it first. Quick commands: npm run dev (:3000), npm run lint, npm run test:run, npm run check:links. Env variables: .env.example.

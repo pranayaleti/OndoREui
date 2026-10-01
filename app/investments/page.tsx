@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     "How commercial real estate and fractional ownership work in Utah, plus Opportunity Zones and what to ask first. Sample deals only, no live offering.",
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Commercial & Fractional Real Estate Investing"),
     description:
       "How commercial real estate and fractional ownership work in Utah, plus Opportunity Zones and what to ask first. Sample deals only, no live offering.",

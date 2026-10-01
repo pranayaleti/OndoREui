@@ -71,6 +71,8 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Photo scrim for banners and heroes. Black in both themes so white text on it keeps 4.5:1; use bg-scrim/60.
+        scrim: "hsl(0 0% 0% / <alpha-value>)",
         "accent-1": "rgb(var(--color-accent-1) / <alpha-value>)",
         "accent-2": "rgb(var(--color-accent-2) / <alpha-value>)",
       },

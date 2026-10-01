@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: pageTitle("Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate"),
   description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county. Look up this year’s table. This is not a quote.",
   alternates: { canonical: `${SITE_URL}/loans/jumbo/` },
-  openGraph: { title: pageTitleText("Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate"), description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county.", images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate"), description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county.", images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Jumbo Loans in Utah | Ondo Real Estate"), description: "Jumbo loans for high-value properties in Park City, Draper, and across Utah.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

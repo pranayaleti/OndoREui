@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Get answers to general questions about Ondo Real Estate property management services, areas we serve, and how to get started.",
   alternates: { canonical: `${SITE_URL}/faq/general-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("General FAQs | Ondo Real Estate"),
     description: "Get answers to general questions about Ondo Real Estate property management services, areas we serve, and how to get started.",
     images: DEFAULT_OG_IMAGES,

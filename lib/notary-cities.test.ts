@@ -59,3 +59,38 @@ describe("notary-cities", () => {
     expect(new Set(keys).size).toBe(keys.length)
   })
 })
+
+describe("notary-cities nearby links", () => {
+  const find = (stateSlug: string, slug: string) =>
+    NOTARY_CITIES.find((c) => c.stateSlug === stateSlug && c.slug === slug)
+
+  it("only links to other cities in the same state, never itself or twice", () => {
+    for (const city of NOTARY_CITIES) {
+      const nearby = city.nearbyCitySlugs ?? []
+      expect(new Set(nearby).size).toBe(nearby.length)
+      expect(nearby).not.toContain(city.slug)
+      for (const slug of nearby) {
+        expect(find(city.stateSlug, slug), `${city.stateSlug}/${city.slug} -> ${slug}`).toBeDefined()
+      }
+    }
+  })
+
+  // Only Utah cities carry coordinates, so only Utah can be checked for real distance.
+  // The ceiling is the width of the Wasatch Front list (Nephi to North Ogden is about 111 miles).
+  it("keeps Utah nearby links within the Wasatch Front, by great-circle distance", () => {
+    const miles = (a: { lat: number; lng: number }, b: { lat: number; lng: number }) => {
+      const rad = (d: number) => (d * Math.PI) / 180
+      const h =
+        Math.sin(rad(b.lat - a.lat) / 2) ** 2 +
+        Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lng - a.lng) / 2) ** 2
+      return 2 * 3958.8 * Math.asin(Math.sqrt(h))
+    }
+    for (const city of getNotaryCitiesByStateSlug("utah")) {
+      expect(city.lat, `${city.name} has coordinates`).toBeDefined()
+      for (const slug of city.nearbyCitySlugs ?? []) {
+        const other = find("utah", slug)!
+        expect(miles({ lat: city.lat!, lng: city.lng! }, { lat: other.lat!, lng: other.lng! })).toBeLessThan(120)
+      }
+    }
+  })
+})

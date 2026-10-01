@@ -114,6 +114,27 @@ describe("extractOutline", () => {
     expect(wordCount).toBe(13)
   })
 
+  it("lists StepList titles as h3 entries and stamps the same ids on the rendered headings", () => {
+    const { outline, nodes } = extractOutline(
+      <>
+        <h2>The steps</h2>
+        <StepList steps={[{ title: "Call the lender", body: "Ask." }, { title: "Call the lender", body: "Again." }]} />
+        <h2>After</h2>
+      </>,
+    )
+    expect(outline).toEqual([
+      { id: "the-steps", text: "The steps", level: 2 },
+      { id: "call-the-lender", text: "Call the lender", level: 3 },
+      { id: "call-the-lender-2", text: "Call the lender", level: 3 },
+      { id: "after", text: "After", level: 2 },
+    ])
+    const { container } = render(<>{nodes}</>)
+    const ids = Array.from(container.querySelectorAll("h3")).map((h) => h.id)
+    expect(ids).toEqual(["call-the-lender", "call-the-lender-2"])
+    // Every outline entry points at an element that exists.
+    for (const entry of outline) expect(container.querySelector(`#${entry.id}`)).not.toBeNull()
+  })
+
   it("returns an empty outline when there are no headings", () => {
     const { outline, nodes } = extractOutline(<p>Just a paragraph</p>)
     expect(outline).toEqual([])

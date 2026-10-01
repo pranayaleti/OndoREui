@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/compare-utah-property-managers/` },
-  openGraph: { title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/`, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/`, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: ogTitle, description, images: [DEFAULT_OG_IMAGE_URL] },
   robots: { index: true, follow: true },
 }

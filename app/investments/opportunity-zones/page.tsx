@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     "How Qualified Opportunity Zones work, capital-gains deferral, the long-term hold exclusion, designated tracts nationwide, and who the strategy fits.",
   alternates: { canonical: `${SITE_URL}/investments/opportunity-zones/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Opportunity Zone Investing: How It Works | Ondo Real Estate"),
     description:
       "Understand Qualified Opportunity Zone tax benefits and how designated tracts across the U.S. fit a long-term real estate strategy.",

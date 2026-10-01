@@ -3,6 +3,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs"
 import { join, relative } from "node:path"
 import { pageTitleText } from "@/lib/site"
 import { HOME_PAGE_TITLE } from "@/lib/home-metadata"
+import { metadata as pricingMetadata } from "@/app/pricing/page"
+import { metadata as compareMetadata } from "@/app/compare-utah-property-managers/page"
 
 const ROOT = join(__dirname, "..", "..")
 const APP = join(ROOT, "app")
@@ -28,6 +30,28 @@ function pageFiles(dir: string): string[] {
  */
 const ABSOLUTE_FORM = /title:\s*(?:pageTitle\(|\{\s*absolute:)/
 
+/**
+ * The page title line(s) of each metadata declaration (`export const metadata`
+ * or a `generateMetadata` function): within that declaration, the `title:` lines
+ * at the shallowest indentation. That skips `openGraph.title`, a title passed to a
+ * helper that is overridden below it, and any `title:` elsewhere in the file (a
+ * card, a JSON-LD name), and checks both exports when a file has both.
+ */
+function metadataTitleLines(source: string): string[] {
+  const anchors = [...source.matchAll(/export const metadata\b|function generateMetadata\b|const generateMetadata\b/g)]
+  const lines: string[] = []
+  for (const anchor of anchors) {
+    const rest = source.slice(anchor.index)
+    const end = rest.search(/\n[}\]]/)
+    const region = end === -1 ? rest : rest.slice(0, end)
+    const titles = [...region.matchAll(/^(\s*)title:\s*.+$/gm)].map((m) => ({ indent: m[1]!.length, line: m[0].trim() }))
+    if (titles.length === 0) continue
+    const shallowest = Math.min(...titles.map((t) => t.indent))
+    lines.push(...titles.filter((t) => t.indent === shallowest).map((t) => t.line))
+  }
+  return lines
+}
+
 describe("metadata titles are never doubled by the layout title template", () => {
   const files = pageFiles(APP).filter((f) => relative(ROOT, f) !== "app/layout.tsx")
 
@@ -39,13 +63,13 @@ describe("metadata titles are never doubled by the layout title template", () =>
     "%s keeps any brand-suffixed metadata title absolute",
     (relPath) => {
       const source = readFileSync(join(ROOT, relPath), "utf8")
-      const metaTitle = source.match(/^\s{0,4}title:\s*.+$/m)?.[0]
-      if (!metaTitle) return
-      const carriesBrand = /Ondo|SITE_NAME|SITE_BRAND_SHORT|HOME_PAGE_TITLE|pageTitle/.test(metaTitle)
-      if (!carriesBrand) return
-      expect(metaTitle, `${relPath}: wrap this in pageTitle() so the brand is added once`).toMatch(
-        ABSOLUTE_FORM,
-      )
+      for (const metaTitle of metadataTitleLines(source)) {
+        const carriesBrand = /Ondo|SITE_NAME|SITE_BRAND_SHORT|HOME_PAGE_TITLE|pageTitle/.test(metaTitle)
+        if (!carriesBrand) continue
+        expect(metaTitle, `${relPath}: wrap this in pageTitle() so the brand is added once`).toMatch(
+          ABSOLUTE_FORM,
+        )
+      }
     },
   )
 
@@ -68,10 +92,9 @@ describe("metadata titles are never doubled by the layout title template", () =>
   })
 
   it("pricing and compare document titles let the layout template add Ondo RE once", () => {
-    const pricing = readFileSync(join(ROOT, "app/pricing/page.tsx"), "utf8")
-    expect(pricing).toMatch(/export const metadata: Metadata = \{\s*title:\s*"Pricing"/)
-
-    const compare = readFileSync(join(ROOT, "app/compare-utah-property-managers/page.tsx"), "utf8")
-    expect(compare).toMatch(/const title = "Utah Property Management Companies Compared \(2026\)"/)
+    for (const metadata of [pricingMetadata, compareMetadata]) {
+      expect(typeof metadata.title).toBe("string")
+      expect(metadata.title as string).not.toMatch(/Ondo/)
+    }
   })
 })

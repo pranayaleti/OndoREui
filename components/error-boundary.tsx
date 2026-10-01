@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertTriangle, RefreshCw } from 'lucide-react'
@@ -15,9 +16,11 @@ interface ErrorBoundaryState {
 interface ErrorBoundaryProps {
   children: React.ReactNode
   fallback?: React.ComponentType<{ error?: Error; resetError: () => void }>
+  /** When this value changes while an error is showing, the boundary clears itself (e.g. the pathname). */
+  resetKey?: string | null
 }
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundaryInner extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props)
     this.state = { hasError: false }
@@ -51,6 +54,12 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       error,
       errorInfo,
     })
+  }
+
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    if (this.state.hasError && prevProps.resetKey !== this.props.resetKey) {
+      this.resetError()
+    }
   }
 
   resetError = () => {
@@ -109,4 +118,11 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 }
 
-export default ErrorBoundary
+/**
+ * Resets on navigation, so a render error on one page does not strand the visitor on the
+ * error UI after the URL changes.
+ */
+export default function ErrorBoundary(props: Omit<ErrorBoundaryProps, 'resetKey'>) {
+  const pathname = usePathname()
+  return <ErrorBoundaryInner {...props} resetKey={pathname} />
+}

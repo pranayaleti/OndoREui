@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description: "Conventional mortgages in Utah with as little as 3% down. See typical credit and DTI ranges, down payment options, and how PMI can be removed with equity.",
   alternates: { canonical: `${SITE_URL}/loans/conventional/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Conventional Loans in Utah: 3% Down, Credit & PMI"),
     description: "Conventional mortgages in Utah with as little as 3% down. See typical credit and DTI ranges, down payment options, and how PMI can be removed with equity.",
     images: DEFAULT_OG_IMAGES,

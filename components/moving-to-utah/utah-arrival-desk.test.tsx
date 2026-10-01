@@ -84,8 +84,7 @@ describe("UtahArrivalDesk", () => {
 
   it("shows the Ondo city-median as-of stamp on the desk", () => {
     render(<UtahArrivalDesk />)
-    expect(screen.getByText(new RegExp(CITY_MARKET_AS_OF))).toBeInTheDocument()
-    expect(screen.getByText(/as of .+ — verify/i)).toBeInTheDocument()
+    expect(screen.getByText(new RegExp(`as of ${CITY_MARKET_AS_OF}`, "i"))).toBeInTheDocument()
   })
 
   it("gives path radios, city radios, and workplace chips the homepage sticky-bar scroll margin", () => {

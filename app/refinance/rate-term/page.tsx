@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: pageTitle("Rate-and-Term Refinance in Utah | Ondo Real Estate"),
   description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.",
   alternates: { canonical: `${SITE_URL}/refinance/rate-term/` },
-  openGraph: { title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", url: `${SITE_URL}/refinance/rate-term/`, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", url: `${SITE_URL}/refinance/rate-term/`, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle } from "lucide-react"
+import { captureException } from "@/lib/sentry"
 
 export default function Error({
   error,
@@ -14,8 +15,15 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error)
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "exception", {
+        description: error.message,
+        fatal: true,
+      })
+    }
+    // No-op when NEXT_PUBLIC_SENTRY_DSN is unset.
+    captureException(error, { digest: error.digest ?? null })
   }, [error])
 
   return (
@@ -31,16 +39,16 @@ export default function Error({
           <CardDescription>We apologize for the inconvenience. An unexpected error has occurred.</CardDescription>
         </CardHeader>
         <CardContent className="text-foreground/70 text-center">
-          <p>Error code: {error.digest}</p>
-          <p className="mt-2">Please try again or contact support if the problem persists.</p>
+          {error.digest && <p>Error code: {error.digest}</p>}
+          <p className={error.digest ? "mt-2" : undefined}>Please try again or contact support if the problem persists.</p>
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 justify-center">
           <Button variant="outline" onClick={reset}>
             Try Again
           </Button>
-          <Link href="/">
-            <Button>Return to Home</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/">Return to Home</Link>
+          </Button>
         </CardFooter>
       </Card>
     </main>

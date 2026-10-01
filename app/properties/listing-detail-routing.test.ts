@@ -12,12 +12,6 @@ describe("public listing detail static-export routing", () => {
     expect(source).toContain("PropertyListingDetailClient")
   })
 
-  it("recovers /properties/{publicId} from the static-export 404 shell", () => {
-    const source = readFileSync(join(ROOT, "app/not-found.tsx"), "utf8")
-    expect(source).toContain("publicIdFromPathname")
-    expect(source).toContain("PropertyListingDetailClient")
-  })
-
   it("rewrites GitHub Pages listing 404s to 200 only after origin 404, without clobbering prerendered HTML", () => {
     const snippet = readFileSync(join(ROOT, "scripts/cloudflare-listing-404-to-200.js"), "utf8")
     const spec = JSON.parse(

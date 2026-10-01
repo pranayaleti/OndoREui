@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical,
     languages: buildMetadataLanguages("/affiliate"),
   },
-  openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

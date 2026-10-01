@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, calculateMonthlyPI, clampCreditScore, getProgramMI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { LoanProgram, applyFinancedUpfrontToLoan, calculateMonthlyPI, clampCreditScore, getProgramMI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field"
 import { ARM_CAPS, DTI_HOA } from "@/lib/content/lending-facts"
@@ -110,7 +110,7 @@ const MortgagePaymentCalculator: React.FC = () => {
     // Program MI and upfront fees
     const credit = clampCreditScore(formData.creditScore);
     const { monthlyMI, upfrontFee, description: _miDesc } = getProgramMI(program, loanAmount, homePrice, credit, loanTerm, downPayment);
-    const financedLoanAmount = formData.financeUpfront ? loanAmount + upfrontFee : loanAmount;
+    const financedLoanAmount = applyFinancedUpfrontToLoan(loanAmount, upfrontFee, formData.financeUpfront);
 
     // P&I computed on the actual financed amount (includes rolled-in upfront fee)
     const monthlyPayment = calculateMonthlyPI(financedLoanAmount, formData.interestRate, formData.loanTerm);

@@ -8,16 +8,23 @@ import {
 } from "./templates"
 
 describe("uniqueTemplateStates", () => {
-  it("lists Utah first, then other states alphabetically", () => {
-    expect(uniqueTemplateStates(RESOURCE_TEMPLATES)[0]).toBe("UT")
-    expect(uniqueTemplateStates(RESOURCE_TEMPLATES)).toContain("NV")
-    expect(uniqueTemplateStates(RESOURCE_TEMPLATES)).toEqual(
-      [...uniqueTemplateStates(RESOURCE_TEMPLATES)].sort((a, b) => {
-        if (a === "UT") return -1
-        if (b === "UT") return 1
-        return a.localeCompare(b)
-      }),
-    )
+  const withStates = (...states: string[]) =>
+    states.map((state) => ({ ...RESOURCE_TEMPLATES[0]!, state }))
+
+  it("lists Utah first, then other states alphabetically, once each", () => {
+    expect(uniqueTemplateStates(withStates("NV", "AZ", "UT", "NV", "CO", "UT"))).toEqual([
+      "UT",
+      "AZ",
+      "CO",
+      "NV",
+    ])
+  })
+
+  it("puts Utah first in the real catalog and includes Nevada", () => {
+    const states = uniqueTemplateStates(RESOURCE_TEMPLATES)
+    expect(states[0]).toBe("UT")
+    expect(states).toContain("NV")
+    expect(new Set(states).size).toBe(states.length)
   })
 })
 

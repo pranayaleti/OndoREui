@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/calculators/`,
   },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Real Estate Calculators: Mortgage & Closing Cost"),
     description:
       "Free Utah calculators for buyers, sellers and landlords: mortgage payment, closing costs, net sale proceeds and refinance break-even.",

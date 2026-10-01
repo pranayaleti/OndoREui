@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Who to ask for a mortgage payoff quote, what happens after a payoff, and where to get free help. Your mortgage servicer issues payoffs, not Ondo.",
   alternates: { canonical: `${SITE_URL}/faq/loan-payoffs-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Loan Payoffs & Closings FAQs | Ondo Real Estate"),
     description: "Who to ask for a mortgage payoff quote, what happens after a payoff, and where to get free help. Your mortgage servicer issues payoffs, not Ondo.",
     images: DEFAULT_OG_IMAGES,

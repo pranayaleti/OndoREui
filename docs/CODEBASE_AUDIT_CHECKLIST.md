@@ -3,6 +3,8 @@
 **Audit date:** February 2025  
 **Scope:** Full codebase (app router, components, lib, pages/calculators, API usage, auth, SEO, performance, types, tests).
 
+> **Historical snapshot.** This audit predates several decisions and is not maintained. Current rules are in `AGENTS.md`. Known differences: auth was removed from this app (`/auth` and `/login` redirect to the Dashboard portal, there is no `lib/auth-context.tsx`), speculation rules and `rel="prefetch"` were removed because GitHub Pages answers prefetch requests with a 503, and no coverage threshold is enforced (see `docs/TESTING.md`).
+
 ---
 
 ## 1. Executive Overview
@@ -45,7 +47,7 @@
 
 | Item | Status | Notes |
 |------|--------|--------|
-| Auth context | ✅ | `lib/auth-context.tsx` (login, logout, token verify, refresh) |
+| Auth context | Removed | `lib/auth-context.tsx` no longer exists; `/auth` redirects to the Dashboard portal |
 | Token storage | ✅ | SecureStorage (lib/security), keys in context |
 | Token verification | ✅ | Calls backend `GET /api/auth/me` with `Authorization: Bearer <token>` |
 | Blacklist on login | ✅ | `checkUserBlacklist` before storing session |
@@ -84,8 +86,8 @@
 
 | Item | Status | Notes |
 |------|--------|--------|
-| Speculation rules | ✅ | lib/speculation-rules.ts; eager/moderate/conservative; same-origin only |
-| Prefetch fallback | ✅ | link rel="prefetch" for buy, sell, contact in layout |
+| Speculation rules | Removed | GitHub Pages returns an empty 503 for `Sec-Purpose: prefetch`; do not re-add (see app/layout.tsx) |
+| Prefetch fallback | Removed | Same reason; no `rel="prefetch"` links |
 | bfcache | ✅ | BfcacheProvider, lib/bfcache-optimization.ts; pagehide/pageshow, no beforeunload for non-essential |
 | removeConsole (prod) | ✅ | next.config compiler.removeConsole in production |
 | Bundle optimization | ✅ | optimizePackageImports (lucide, MUI, recharts, etc.), modularizeImports for lucide |
@@ -129,7 +131,7 @@
 | Item | Status | Notes |
 |------|--------|--------|
 | Unit tests | ✅ | Vitest + RTL; 186 tests across lib, components (see `docs/TESTING.md`) |
-| Coverage | ✅ | 90% lines/statements, 70% branches on covered modules |
+| Coverage | Report only | `npm run test:coverage`; no threshold is enforced (see `docs/TESTING.md`) |
 | E2E | ✅ | Playwright in devDependencies |
 | Lint | ✅ | next lint, eslint-config-next |
 
@@ -195,12 +197,12 @@
 | Purpose | File(s) |
 |--------|---------|
 | Backend base URL | `lib/backend.ts` |
-| Auth (client) | `lib/auth-context.tsx` |
+| Auth (client) | None; `app/auth/page.tsx` redirects to the portal |
 | Blacklist checks | `lib/blacklist.ts` |
 | Lead submit (backend) | Backend server; client: property-lead-form, dashboard/lead-form, contact, ConsultationModal/Widget |
 | Properties public | Backend server; client: app/properties/page.tsx uses `backendUrl('/api/properties/public')` |
 | SEO / metadata | `lib/seo.ts`, `lib/site.ts`, `components/seo.tsx` |
-| Speculation / prefetch | `lib/speculation-rules.ts`, app/layout.tsx |
+| Speculation / prefetch | Removed (see note at top); app/layout.tsx explains why |
 | Design tokens | `src/styles/_design-tokens.css`, `app/globals.css` |
 | Types | `lib/types.ts`, `app/types/property.ts` |
 | Validations | `lib/validations.ts` |

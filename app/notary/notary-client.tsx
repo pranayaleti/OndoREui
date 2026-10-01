@@ -534,7 +534,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
       </section>
 
       {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-primary text-primary-foreground py-3 px-4 flex justify-between items-center shadow-lg">
+      <div data-fixed-bottom-bar className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-primary text-primary-foreground py-3 px-4 flex justify-between items-center shadow-lg">
         <span className="font-medium text-lg">Need ONDO Notary?</span>
         <Button
           size="sm"

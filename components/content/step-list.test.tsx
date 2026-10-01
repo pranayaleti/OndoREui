@@ -26,9 +26,16 @@ describe("StepList", () => {
     expect(screen.getByText("2")).toBeInTheDocument()
   })
 
-  it("gives each step a heading that links into the outline", () => {
+  it("renders each step title as an h3 and uses the ids it is given", () => {
+    const { container } = render(<StepList steps={steps} headingIds={["a", "b"]} />)
+    const headings = Array.from(container.querySelectorAll("h3"))
+    expect(headings.map((h) => h.textContent)).toEqual(steps.map((s) => s.title))
+    expect(headings.map((h) => h.id)).toEqual(["a", "b"])
+  })
+
+  it("leaves the headings without an id outside an article", () => {
     const { container } = render(<StepList steps={steps} />)
-    expect(container.querySelectorAll("h3")).toHaveLength(2)
+    expect(container.querySelector("h3")).not.toHaveAttribute("id")
   })
 
   it("renders nothing when there are no steps", () => {

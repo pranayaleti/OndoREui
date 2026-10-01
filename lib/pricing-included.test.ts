@@ -29,7 +29,7 @@ describe("PRICING_INCLUDED_ROWS", () => {
     expect(blob).not.toMatch(/lease in 30/i)
   })
 
-  it("states there is no setup fee, matching the published pricing FAQ", () => {
+  it("states there is no setup fee (agreement with the pricing page FAQ is checked in app/pricing/pricing-parity.test.tsx)", () => {
     const setup = PRICING_INCLUDED_ROWS.find((r) => /setup/i.test(r.item))
     expect(setup?.ondo).toMatch(/none/i)
     expect(setup?.ondo).not.toMatch(/waived for first/i)

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description: "How a Utah mortgage refinance works, step by step: evaluate your loan, talk through your options, choose a program, apply, underwriting and closing.",
   alternates: { canonical: `${SITE_URL}/refinance/process/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Refinance Process: Steps From Start to Closing"),
     description: "How a Utah mortgage refinance works, step by step: evaluate your loan, talk through your options, choose a program, apply, underwriting and closing.",
     images: DEFAULT_OG_IMAGES,

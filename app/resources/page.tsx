@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
   alternates: { canonical: `${SITE_URL}/resources/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Real Estate Resources: Guides, Calculators & Glossary"),
     description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
     images: DEFAULT_OG_IMAGES,

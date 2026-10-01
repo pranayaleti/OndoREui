@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     "Learn how fractional ownership of commercial real estate works: LLC/SPV structures, distributions, exits and the risks to weigh before you invest.",
   alternates: { canonical: `${SITE_URL}/investments/fractional/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Fractional Real Estate Ownership | Ondo Real Estate"),
     description:
       "Learn how fractional ownership of commercial real estate works: the structure, distributions, exit strategies and risks.",

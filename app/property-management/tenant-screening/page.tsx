@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: pageTitle("Utah Tenant Screening: Credit, Criminal & Eviction"),
   description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.",
   alternates: { canonical: `${SITE_URL}/property-management/tenant-screening/` },
-  openGraph: { title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

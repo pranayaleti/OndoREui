@@ -20,9 +20,14 @@ export const metadata: Metadata = {
   title: pageTitle("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"),
   description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.",
   alternates: { canonical: `${SITE_URL}/loans/va/` },
-  openGraph: { title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: [DEFAULT_OG_IMAGE_URL] },
 }
+
+// Illustration only: derived from the published first-use rate so the dollar figure follows the constants.
+const EXAMPLE_FUNDING_FEE = Math.round(
+  (EXAMPLE_PURCHASE_PRICE_UTAH * parseFloat(VA_FUNDING_FEE.firstUseLessThan5PercentDown)) / 100
+)
 
 const benefits = [
   { title: "Zero down when eligible", description: VA_FUNDING_FEE.downPaymentNote, icon: <DollarSign className="h-6 w-6" /> },
@@ -126,7 +131,7 @@ export default function VALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Down payment: $0 when remaining entitlement and occupancy rules are met</li>
                     <li>• Monthly PMI: none on a VA purchase</li>
-                    <li>• Funding fee: first-use, less than 5% down is {VA_FUNDING_FEE.firstUseLessThan5PercentDown} of the loan amount on the published schedule as of {LENDING_FACTS_AS_OF}. Example: {VA_FUNDING_FEE.firstUseLessThan5PercentDown} of ${EXAMPLE_PURCHASE_PRICE_UTAH.toLocaleString("en-US")} = $9,675 if that schedule still applies. Confirm before quoting. Can often be financed.</li>
+                    <li>• Funding fee: first-use, less than 5% down is {VA_FUNDING_FEE.firstUseLessThan5PercentDown} of the loan amount on the published schedule as of {LENDING_FACTS_AS_OF}. Example: {VA_FUNDING_FEE.firstUseLessThan5PercentDown} of ${EXAMPLE_PURCHASE_PRICE_UTAH.toLocaleString("en-US")} = ${EXAMPLE_FUNDING_FEE.toLocaleString("en-US")} if that schedule still applies. Confirm before quoting. Can often be financed.</li>
                     <li>• Cash to close: closing costs, prepaids, and any allowed seller concessions still apply. We do not publish a cash-to-close range here.</li>
                   </ul>
                 </div>

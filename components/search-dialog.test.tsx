@@ -1,5 +1,6 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest"
-import { cleanup, fireEvent, render, screen } from "@testing-library/react"
+import { useState } from "react"
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { SearchDialog } from "./search-dialog"
 import { search } from "@/lib/search-index"
 
@@ -35,5 +36,52 @@ describe("SearchDialog", () => {
     render(<SearchDialog open onOpenChange={vi.fn()} />)
     fireEvent.change(screen.getByRole("combobox"), { target: { value: "zzzqqqxxx" } })
     expect(screen.getByText(/No results found/)).toBeInTheDocument()
+  })
+
+  it("is a named dialog, closes on Escape and returns focus to the button that opened it", async () => {
+    function Harness() {
+      const [open, setOpen] = useState(false)
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>Open search</button>
+          <SearchDialog open={open} onOpenChange={setOpen} />
+        </>
+      )
+    }
+    render(<Harness />)
+    const opener = screen.getByRole("button", { name: "Open search" })
+    opener.focus()
+    fireEvent.click(opener)
+
+    const dialog = screen.getByRole("dialog")
+    expect(dialog).toHaveAccessibleName()
+    expect(dialog).toContainElement(document.activeElement as HTMLElement)
+
+    fireEvent.keyDown(dialog, { key: "Escape" })
+
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument())
+    await waitFor(() => expect(opener).toHaveFocus())
+  })
+
+  it("lets the caller take over focus return, as the header does", async () => {
+    const onCloseAutoFocus = vi.fn((event: Event) => event.preventDefault())
+    function Harness() {
+      const [open, setOpen] = useState(false)
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>Open search</button>
+          <SearchDialog open={open} onOpenChange={setOpen} onCloseAutoFocus={onCloseAutoFocus} />
+        </>
+      )
+    }
+    render(<Harness />)
+    const opener = screen.getByRole("button", { name: "Open search" })
+    opener.focus()
+    fireEvent.click(opener)
+
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "Escape" })
+
+    await waitFor(() => expect(onCloseAutoFocus).toHaveBeenCalledTimes(1))
+    expect(opener).not.toHaveFocus()
   })
 })

@@ -91,13 +91,6 @@ const BuyingPowerCalculator: React.FC = () => {
 
   const dtiLimits = describeProgramDti(formData.program);
 
-  const getCreditScoreColor = (score: number) => {
-    if (score >= 750) return 'text-primary';
-    if (score >= 700) return 'text-primary';
-    if (score >= 650) return 'text-warning-emphasis';
-    return 'text-destructive-emphasis';
-  };
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}

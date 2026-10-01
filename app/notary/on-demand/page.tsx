@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     "On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows, remote online (RON) nationwide.",
   alternates: { canonical: `${SITE_URL}/notary/on-demand/` },
   openGraph: {
+    type: "website",
     title: pageTitleText(TITLE),
     description:
       "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide.",

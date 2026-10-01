@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: pageTitle("Owner Reporting | Property Management Utah | Ondo Real Estate"),
   description: "Real-time owner reporting for Utah rental properties: monthly statements, NOI tracking, maintenance history, and document vault, all in one dashboard.",
   alternates: { canonical: `${SITE_URL}/property-management/owner-reporting/` },
-  openGraph: { title: pageTitleText("Owner Reporting | Ondo Real Estate"), description: "Monthly statements, NOI tracking, and document vault for Utah rental owners.", images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Owner Reporting | Ondo Real Estate"), description: "Monthly statements, NOI tracking, and document vault for Utah rental owners.", images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Owner Reporting | Ondo"), description: "Real-time financial and maintenance reporting for Utah rental owners.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

@@ -2,8 +2,12 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import { act, fireEvent, render, screen } from "@testing-library/react"
 import { FeeAlignmentWidget } from "./fee-alignment-widget"
 import {
+  ADVERTISED_FLAT_MONTHLY,
   DEFAULT_EXAMPLE_MONTHLY_RENT,
+  FEE_COMPARISON_AS_OF,
+  GROWTH_MGMT_RATE,
   buildFeeSnapshot,
+  flatFeeCrossoverRent,
   formatUsd0,
 } from "@/lib/fee-comparison"
 
@@ -45,10 +49,10 @@ describe("FeeAlignmentWidget", () => {
     expect(text).not.toMatch(/see what you keep/i)
     expect(text).not.toMatch(/no bots/i)
     expect(text).not.toMatch(/guarantee/i)
-    expect(screen.getByRole("heading", { level: 2 }).textContent).not.toMatch(/\$159/)
+    expect(screen.getByRole("heading", { level: 2 }).textContent).not.toContain(formatUsd0(ADVERTISED_FLAT_MONTHLY))
     expect(screen.getByText(/illustrative, not a quote/i)).toBeInTheDocument()
     expect(screen.getByText(/8–12%/)).toBeInTheDocument()
-    expect(screen.getByText(/Aug 2026/)).toBeInTheDocument()
+    expect(screen.getByText(new RegExp(FEE_COMPARISON_AS_OF))).toBeInTheDocument()
   })
 
   it("offers a time-value toggle that points at the full owner-vs-self calculator", () => {
@@ -60,8 +64,9 @@ describe("FeeAlignmentWidget", () => {
 
   it("mentions a quiet advertised-flat footnote without making it the brand", () => {
     render(<FeeAlignmentWidget />)
-    expect(screen.getByText(/\$159/)).toBeInTheDocument()
-    expect(screen.getByText(/\$1,988/)).toBeInTheDocument()
+    const note = screen.getByText(/Some Utah shops advertise/)
+    expect(note.textContent).toContain(`${formatUsd0(ADVERTISED_FLAT_MONTHLY)}/mo as of ${FEE_COMPARISON_AS_OF}`)
+    expect(note.textContent).toContain(formatUsd0(flatFeeCrossoverRent(GROWTH_MGMT_RATE)))
   })
 
   it("does not share one radio name across two mounted ledgers", () => {

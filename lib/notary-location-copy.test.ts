@@ -140,4 +140,18 @@ describe("notary-location-copy", () => {
       ).toBeGreaterThanOrEqual(2)
     }
   })
+
+  it("names nearby communities by their real city name, in the same state, for every city", () => {
+    for (const city of NOTARY_CITIES) {
+      const state = getRonStateBySlug(city.stateSlug)!
+      const intro = buildCityRonIntro(city, state)
+      const slugs = (city.nearbyCitySlugs ?? []).slice(0, 3)
+      if (slugs.length === 0) {
+        expect(intro).not.toContain("Nearby communities")
+        continue
+      }
+      const expected = slugs.map((slug) => getNotaryCity(city.stateSlug, slug)!.name).join(", ")
+      expect(intro, `${city.stateSlug}/${city.slug}`).toContain(`Nearby communities we also serve online include ${expected}.`)
+    }
+  })
 })

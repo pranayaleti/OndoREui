@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/loans/`,
   },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Home Loans: FHA, VA, USDA, Conventional & Jumbo"),
     description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
     url: `${SITE_URL}/loans/`,

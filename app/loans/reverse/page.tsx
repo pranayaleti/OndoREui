@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: pageTitle("Reverse Mortgages in Utah | Ondo Real Estate"),
   description,
   alternates: { canonical: `${SITE_URL}/loans/reverse/` },
-  openGraph: { title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, url: `${SITE_URL}/loans/reverse/`, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, url: `${SITE_URL}/loans/reverse/`, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, images: [DEFAULT_OG_IMAGE_URL] },
 }
 

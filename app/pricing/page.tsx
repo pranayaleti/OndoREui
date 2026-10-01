@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     "Transparent property management pricing for Utah property owners. No hidden fees, just percentage-based plans that scale with your portfolio.",
   alternates: { canonical: `${SITE_URL}/pricing/` },
   openGraph: {
+    type: "website",
     title: pageTitleText(`Pricing | ${SITE_BRAND_SHORT}`),
     description:
       "Property management pricing Utah, percentage-based plans for portfolios of every size. Tenant screening, rent collection, maintenance, and more.",

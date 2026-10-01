@@ -3,6 +3,7 @@ import type { ApiProperty } from "@/app/types/property"
 import {
   checkListingAvailability,
   fetchAllPublicListingRows,
+  fetchPublicListingRowsForBuild,
   fetchPublicPropertyByPublicId,
   fetchPublicPropertyList,
   PublicListingsHttpError,
@@ -305,5 +306,42 @@ describe("sale rows are not shown as rentals", () => {
     expect(findPublicProperty(body, "lease-1")?.publicId).toBe("lease-1")
     global.fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => body }) as unknown as typeof fetch
     expect((await fetchPublicPropertyListOrThrow()).map((r) => r.publicId)).toEqual(["lease-1", "legacy-1"])
+  })
+})
+
+describe("fetchPublicListingRowsForBuild", () => {
+  const okPage = { ok: true, json: async () => ({ data: [listing()], pagination: { hasMore: false } }) } as Response
+
+  it("returns the rows on the first success without retrying", async () => {
+    const fetchImpl = vi.fn(async () => okPage) as unknown as typeof fetch
+    const rows = await fetchPublicListingRowsForBuild(fetchImpl, { retryDelayMs: 0 })
+    expect(rows).toHaveLength(1)
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it("retries after a failure and recovers", async () => {
+    const fetchImpl = vi
+      .fn()
+      .mockRejectedValueOnce(new Error("socket hang up"))
+      .mockResolvedValueOnce({ ok: false, status: 503 } as Response)
+      .mockResolvedValue(okPage) as unknown as typeof fetch
+    const rows = await fetchPublicListingRowsForBuild(fetchImpl, { attempts: 3, retryDelayMs: 0 })
+    expect(rows).toHaveLength(1)
+    expect(fetchImpl).toHaveBeenCalledTimes(3)
+  })
+
+  it("rejects with the last error once every attempt has failed", async () => {
+    const fetchImpl = vi.fn(async () => ({ ok: false, status: 502 }) as Response) as unknown as typeof fetch
+    await expect(
+      fetchPublicListingRowsForBuild(fetchImpl, { attempts: 3, retryDelayMs: 0 }),
+    ).rejects.toBeInstanceOf(PublicListingsHttpError)
+    expect(fetchImpl).toHaveBeenCalledTimes(3)
+  })
+
+  it("gives every request an abort signal", async () => {
+    const fetchImpl = vi.fn(async () => okPage) as unknown as typeof fetch
+    await fetchPublicListingRowsForBuild(fetchImpl, { retryDelayMs: 0 })
+    const init = (fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1] as RequestInit
+    expect(init.signal).toBeInstanceOf(AbortSignal)
   })
 })

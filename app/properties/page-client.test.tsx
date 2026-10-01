@@ -13,6 +13,7 @@ vi.mock("next/dynamic", () => ({
 }))
 
 vi.mock("next/image", () => ({
+  // eslint-disable-next-line @next/next/no-img-element -- test double for next/image
   default: (props: { alt: string }) => <img alt={props.alt} />,
 }))
 
@@ -79,7 +80,25 @@ function listing(publicId: string, title: string): ApiProperty {
 
 afterEach(() => {
   global.fetch = originalFetch
+  window.history.replaceState(null, "", "/")
 })
+
+/** A body shaped like the live Edge API: `{ data, pagination }`, not a bare array. */
+function liveBody(rows: ApiProperty[], hasMore = false) {
+  return {
+    data: rows,
+    pagination: { page: 1, limit: 20, total: rows.length, hasMore },
+  }
+}
+
+function respondWith(...bodies: unknown[]) {
+  const fetchMock = vi.fn()
+  for (const body of bodies) {
+    fetchMock.mockResolvedValueOnce({ ok: true, json: async () => body })
+  }
+  global.fetch = fetchMock as unknown as typeof fetch
+  return fetchMock
+}
 
 describe("PropertiesClient", () => {
   it("renders the map-first hero and the leasing note after a successful empty fetch", async () => {
@@ -166,5 +185,51 @@ describe("PropertiesClient", () => {
     expect(screen.getByText("Provo Condo")).toBeInTheDocument()
     expect(screen.getByText("2 homes on the market")).toBeInTheDocument()
     expect(screen.queryByText("Loading...")).not.toBeInTheDocument()
+  })
+  it("renders every listing from a { data, pagination } body", async () => {
+    respondWith(liveBody([listing("p1", "Lehi Townhome"), listing("p2", "Provo Condo")]))
+
+    render(<PropertiesClient />)
+
+    expect(await screen.findByText("Lehi Townhome")).toBeInTheDocument()
+    expect(screen.getByText("Provo Condo")).toBeInTheDocument()
+    expect(screen.getByText("2 homes on the market")).toBeInTheDocument()
+  })
+
+  it("follows pagination.hasMore so listings past the first page are not dropped", async () => {
+    const fetchMock = respondWith(
+      liveBody([listing("p1", "Lehi Townhome")], true),
+      liveBody([listing("p2", "Provo Condo")], false),
+    )
+
+    render(<PropertiesClient />)
+
+    expect(await screen.findByText("Provo Condo")).toBeInTheDocument()
+    expect(screen.getByText("Lehi Townhome")).toBeInTheDocument()
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+    expect(String(fetchMock.mock.calls[1]?.[0])).toContain("page=2")
+  })
+
+  it("applies the ?type= deep link to the live listings", async () => {
+    window.history.replaceState(null, "", "/properties/?type=house")
+    const house = { ...listing("p1", "Lehi House"), type: "Single Family" } as unknown as ApiProperty
+    const condo = { ...listing("p2", "Provo Condo"), type: "Condo" } as unknown as ApiProperty
+    respondWith(liveBody([house, condo]))
+
+    render(<PropertiesClient />)
+
+    expect(await screen.findByText("Lehi House")).toBeInTheDocument()
+    await waitFor(() => expect(screen.queryByText("Provo Condo")).not.toBeInTheDocument())
+    expect(screen.getByText("1 home on the market")).toBeInTheDocument()
+  })
+
+  it("applies the ?city= deep link and shows no homes when nothing matches", async () => {
+    window.history.replaceState(null, "", "/properties/?city=Ogden")
+    respondWith(liveBody([listing("p1", "Lehi Townhome")]))
+
+    render(<PropertiesClient />)
+
+    await waitFor(() => expect(screen.queryByText("Lehi Townhome")).not.toBeInTheDocument())
+    expect(screen.getByText("0 homes on the market")).toBeInTheDocument()
   })
 })

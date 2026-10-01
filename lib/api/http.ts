@@ -59,14 +59,27 @@ async function failedRequest(response: Response): Promise<ApiRequestError> {
   return new ApiRequestError(response.status, message)
 }
 
+/**
+ * Combines header sets into a plain object. Accepts every HeadersInit form (object, tuple array,
+ * Headers), so a caller's headers are kept instead of being dropped by an object spread. Later
+ * sets win; names are matched case-insensitively and come out lower-cased.
+ */
+export function mergeHeaders(...sets: Array<HeadersInit | undefined>): Record<string, string> {
+  const merged: Record<string, string> = {}
+  for (const set of sets) {
+    new Headers(set).forEach((value, name) => {
+      merged[name] = value
+    })
+  }
+  return merged
+}
+
 function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = DEFAULT_TIMEOUT_MS): Promise<Response> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
   const method = (init.method ?? "GET").toUpperCase()
   const csrf = CSRF_METHODS.has(method) ? getCsrfToken() : undefined
-  const headers = csrf
-    ? { ...(init.headers as Record<string, string> | undefined), "x-csrf-token": csrf }
-    : init.headers
+  const headers = csrf ? mergeHeaders(init.headers, { "x-csrf-token": csrf }) : init.headers
   return fetch(url, { ...init, headers, signal: controller.signal, credentials: "include" }).finally(() => clearTimeout(timer))
 }
 
@@ -87,7 +100,7 @@ export async function networkFirstGet<T>(path: string, cacheKey: string): Promis
   try {
     const response = await fetchWithTimeout(backendUrl(path), { method: "GET", cache: "no-store" })
     if (!response.ok) {
-      throw new Error(`Request failed: ${response.status}`)
+      throw await failedRequest(response)
     }
     const data = (await response.json()) as T
     await writeToCache(cacheKey, data)
@@ -107,11 +120,9 @@ export async function postJson<TResponse = unknown, TBody = unknown>(
   try {
     const response = await fetchWithTimeout(backendUrl(path), {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(body),
       ...options?.init,
+      headers: mergeHeaders({ "Content-Type": "application/json" }, options?.init?.headers),
     })
 
     if (!response.ok) {
@@ -141,11 +152,11 @@ export async function putJson<TResponse = unknown, TBody = unknown>(
 ): Promise<TResponse> {
   const response = await fetchWithTimeout(backendUrl(path), {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
     ...options?.init,
+    headers: mergeHeaders({ "Content-Type": "application/json" }, options?.init?.headers),
   })
-  if (!response.ok) throw new Error(`Request failed: ${response.status}`)
+  if (!response.ok) throw await failedRequest(response)
   const contentType = response.headers.get("content-type") ?? ""
   if (contentType.includes("application/json")) return (await response.json()) as TResponse
   return {} as TResponse
@@ -157,10 +168,10 @@ export async function deleteJson<TResponse = unknown>(
 ): Promise<TResponse> {
   const response = await fetchWithTimeout(backendUrl(path), {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
     ...options,
+    headers: mergeHeaders({ "Content-Type": "application/json" }, options?.headers),
   })
-  if (!response.ok) throw new Error(`Request failed: ${response.status}`)
+  if (!response.ok) throw await failedRequest(response)
   const contentType = response.headers.get("content-type") ?? ""
   if (contentType.includes("application/json")) return (await response.json()) as TResponse
   return {} as TResponse

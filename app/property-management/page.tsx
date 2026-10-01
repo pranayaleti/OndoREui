@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/property-management/`,
   },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Property Management: Fees, Leasing & Screening"),
     description:
       "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",

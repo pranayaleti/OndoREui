@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
   alternates: { canonical: `${SITE_URL}/faq/loans-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Loans & Financing FAQs | Ondo Real Estate"),
     description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
     images: DEFAULT_OG_IMAGES,

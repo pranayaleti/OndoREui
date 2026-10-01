@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description: "Utah's resilient economy, tech growth, and quality of life create strong real estate investment opportunities across the Wasatch Front.",
   alternates: { canonical: `${SITE_URL}/why-utah/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Why Invest in Utah Real Estate | Ondo Real Estate"),
     description: "Utah's resilient economy, tech growth, and quality of life create strong real estate investment opportunities across the Wasatch Front.",
     url: `${SITE_URL}/why-utah/`,

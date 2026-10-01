@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: pageTitle("Mortgage Refinance in Utah | Ondo Real Estate"),
   description: "Refinance your Utah mortgage to lower your rate, change your term, or tap equity. Compare rate-and-term vs cash-out refinancing and the process.",
   alternates: { canonical: `${SITE_URL}/refinance/` },
-  openGraph: { title: pageTitleText("Mortgage Refinance in Utah | Ondo Real Estate"), description: "Refinance your Utah mortgage to lower your rate, change your term, or tap equity. Compare rate-and-term vs cash-out refinancing and the process.", url: `${SITE_URL}/refinance/`, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Mortgage Refinance in Utah | Ondo Real Estate"), description: "Refinance your Utah mortgage to lower your rate, change your term, or tap equity. Compare rate-and-term vs cash-out refinancing and the process.", url: `${SITE_URL}/refinance/`, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Mortgage Refinance in Utah | Ondo Real Estate"), description: "Refinance your Utah mortgage to lower your rate, change your term, or tap equity. Compare rate-and-term vs cash-out refinancing and the process.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

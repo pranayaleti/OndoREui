@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/buy/`,
   },
   openGraph: {
+    type: "website",
     title: "Buy a Home in Utah | Agent-Led Search & Lending",
     description:
       "Shop with an Ondo agent, run the numbers on /loans and calculators, and browse rentals we actually list on this site.",

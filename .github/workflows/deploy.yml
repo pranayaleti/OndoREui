@@ -36,6 +36,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
@@ -49,7 +50,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          # CI/deploy use Node 24 (GitHub Actions). .nvmrc 20.19.0 is the local floor matching engines >=20.19.0.
+          # CI/deploy use Node 24 and .nvmrc matches it. engines (>=20.19.0) is the supported floor.
           node-version: '24'
           cache: 'npm'
 
@@ -76,6 +77,9 @@ jobs:
           NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
           NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
           NEXT_PUBLIC_SITE_URL: https://www.ondorealestate.com
+          # Fail the build when the listings API cannot be reached (after retries) instead of
+          # falling back to a placeholder, so an outage cannot publish a site with no listings.
+          ONDO_REQUIRE_LISTINGS: "1"
           # Analytics and ad-pixel IDs. They are public by design (they ship in page source), so they
           # live as repository variables: Settings > Secrets and variables > Actions > Variables.
           # Unset means that tag stays off. Without these the site shipped with no analytics at all.
@@ -94,6 +98,25 @@ jobs:
           NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           # Supabase project origin: CSP connect-src and preconnect hints. Unset leaves them off.
           NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          # Error reporting is deliberately off. To turn it on, add a repository variable
+          # NEXT_PUBLIC_SENTRY_DSN (public by design), set it here, and update the privacy policy
+          # first: the SDK sends error details and page URLs to Sentry. Unset means the SDK is never loaded
+          # (lib/sentry.ts). Production keeps console.error/warn (next.config.mjs removeConsole).
+          # NEXT_PUBLIC_SENTRY_DSN: ${{ vars.NEXT_PUBLIC_SENTRY_DSN }}
+
+      - name: Guard against a degraded export
+        # Belt and braces for ONDO_REQUIRE_LISTINGS: the export must contain listing pages and
+        # listing sitemap URLs. Zero live listings is legitimate: set the repository variable
+        # ONDO_MIN_LISTINGS to 0 (Settings > Secrets and variables > Actions > Variables) to skip it.
+        run: node scripts/check-listing-export.mjs out
+        env:
+          ONDO_MIN_LISTINGS: ${{ vars.ONDO_MIN_LISTINGS || '1' }}
+
+      - name: Broken link check on the deploy build
+        # CI checks its own build; this checks the exact artifact that is about to be published.
+        run: npm run check:links
+        env:
+          NEXT_PUBLIC_SITE_URL: https://www.ondorealestate.com
 
       - name: Add CNAME, disable Jekyll, write build id
         env:

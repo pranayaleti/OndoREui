@@ -20,10 +20,18 @@ const opportunity: InvestmentOpportunity = {
 }
 
 describe("InvestmentCard show/hide values toggle", () => {
-  it("meets the 44px minimum tap target", () => {
+  beforeEach(() => window.localStorage.clear())
+
+  it("hides the amounts when toggled and shows them again on a second click", () => {
     render(<InvestmentCard opportunity={opportunity} />)
-    const toggle = screen.getByRole("button", { name: /hide investment amounts|show investment amounts/i })
-    expect(toggle.className).toMatch(/min-h-11/)
+    expect(screen.getByText(/\$10,000 min/)).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole("button", { name: /hide investment amounts/i }))
+    expect(screen.queryByText(/\$10,000 min/)).not.toBeInTheDocument()
+    expect(screen.getAllByText("••••").length).toBeGreaterThan(0)
+
+    fireEvent.click(screen.getByRole("button", { name: /show investment amounts/i }))
+    expect(screen.getByText(/\$10,000 min/)).toBeInTheDocument()
   })
 })
 

@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     "New to real estate investing? Ondo Real Estate guides first-time investors through passive income, multifamily properties, and long-term wealth-building in Utah.",
   alternates: { canonical: `${SITE_URL}/new-investors/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("New Investors | Get Started with Ondo Real Estate"),
     description:
       "New to real estate investing? Learn how Ondo Real Estate can help you build passive income through professionally managed properties in Utah.",

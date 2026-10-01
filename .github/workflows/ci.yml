@@ -7,9 +7,17 @@ on:
   pull_request:
   workflow_dispatch:
 
+# A newer push to the same ref supersedes the older run. workflow_dispatch runs on the same ref
+# share the group, which is fine: the newest run is the one that matters.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    # A hung step would otherwise run for the 6-hour default. A normal run takes well under 15 minutes.
+    timeout-minutes: 30
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
@@ -19,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          # CI uses Node 24 (GitHub Actions). .nvmrc 20.19.0 is the local floor matching engines >=20.19.0.
+          # CI uses Node 24 and .nvmrc matches it. engines (>=20.19.0) is the supported floor.
           node-version: "24"
           cache: "npm"
 
@@ -42,7 +50,8 @@ jobs:
         run: npx tsc --noEmit
 
       - name: Lint
-        run: npm run lint
+        # Warnings fail the build so unused imports and dead helpers do not accumulate.
+        run: npm run lint -- --max-warnings=0
 
       - name: Unit tests
         run: npm run test:run
@@ -55,7 +64,27 @@ jobs:
         # so new 404s fail here instead of shipping. Old and guessed URLs live in public/_redirects.
         run: npm run check:links
 
+      - name: SEO metadata check
+        # Reads out/**/index.html and the sitemaps: og:url must match the canonical, canonical and
+        # JSON-LD urls end in a slash, indexable pages have a title, description and og:type, and
+        # sitemap entries are exported HTML pages. Length and inbound-link counts only warn.
+        run: npm run check:seo
+
+      - name: Performance budget
+        # Gzip JS ceilings for the shared base and for /, /buy/, a city page and a calculator, plus a
+        # check that recharts, leaflet, Sentry and the glossary data stay out of the shared base.
+        # Ceilings live in BUDGETS in scripts/analyze-bundle.mjs, a few percent above today's sizes.
+        run: node scripts/analyze-bundle.mjs --check
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          # Keyed on the lockfile: it pins the Playwright version, and each version needs its own browser build.
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install Playwright browsers
+        # A cache hit skips the browser download; --with-deps still installs the system libraries.
         run: npx playwright install --with-deps chromium
 
       - name: Accessibility (axe) suite
@@ -71,6 +100,14 @@ jobs:
         # /links is what every social bio and printed QR code opens: no payment scripts, a
         # script budget, the booking button on the first screen, and working /go/ short links.
         run: npm run test:links
+        env:
+          NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
+          NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
+
+      - name: Unsolicited popup guard
+        # tests/verify-popups.spec.ts: no dialog, notification-permission prompt or stacked fixed
+        # bottom bars on /, the calculators and /notary. It was never wired into CI.
+        run: npm run test:popups
         env:
           NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
           NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api

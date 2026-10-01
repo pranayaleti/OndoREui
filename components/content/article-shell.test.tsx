@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 import { ArticleShell, articleMetadata } from "./article-shell"
+import { StepList } from "./step-list"
 
 const meta = {
   path: "/blog/example-post",
@@ -35,6 +36,19 @@ describe("ArticleShell", () => {
     )
     const links = screen.getAllByRole("link", { name: "Who qualifies" })
     expect(links[0]).toHaveAttribute("href", "#who-qualifies")
+  })
+
+  it("links StepList steps in the table of contents, and every link has a target", () => {
+    const { container } = renderShell(
+      <>
+        <h2>How to do it</h2>
+        <StepList steps={[{ title: "Call the lender", body: "Ask." }, { title: "Send the file", body: "Upload." }]} />
+      </>,
+    )
+    const toc = screen.getAllByRole("navigation", { name: "On this page" })[0]!
+    const hrefs = Array.from(toc.querySelectorAll("a")).map((a) => a.getAttribute("href")!)
+    expect(hrefs).toEqual(["#how-to-do-it", "#call-the-lender", "#send-the-file"])
+    for (const href of hrefs) expect(container.querySelector(href)).not.toBeNull()
   })
 
   it("shows a byline with a default author and a reading time", () => {

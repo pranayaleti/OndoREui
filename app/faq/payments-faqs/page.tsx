@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Rent payment questions for tenants: due dates, payment methods, autopay and online payments. Check your lease for grace periods and late fees.",
   alternates: { canonical: `${SITE_URL}/faq/payments-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Payments & Billing FAQs | Ondo Real Estate"),
     description: "Rent payment questions for tenants: due dates, payment methods, autopay and online payments. Check your lease for grace periods and late fees.",
     images: DEFAULT_OG_IMAGES,

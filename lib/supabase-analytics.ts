@@ -1,3 +1,9 @@
+/**
+ * UNUSED: nothing imports this module, so do not follow older docs that pointed here. Use
+ * lib/analytics.ts. It would also not work as written: supabase-js `.from('analytics.x')` does not
+ * reach a non-public schema (that needs `.schema('analytics').from('x')`). Kept only until the
+ * owner approves deleting it.
+ */
 import { createClient } from '@supabase/supabase-js'
 import config from './config'
 

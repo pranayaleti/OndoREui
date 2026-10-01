@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "Compare 55 Utah cities on median home price, rent, commute time and schools. Find the Wasatch Front town that fits your budget and drive.",
   alternates: { canonical: `${SITE_URL}/locations/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah City Guides: Cost of Living & Home Prices"),
     description:
       "Compare 55 Utah cities on median home price, rent, commute time and schools. Find the Wasatch Front town that fits your budget and drive.",

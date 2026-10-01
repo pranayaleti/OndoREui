@@ -1,6 +1,4 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
-import SEO from "@/components/seo";
-import { SITE_URL } from "@/lib/site";
 const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/modernizing-notary-workflows-integration";

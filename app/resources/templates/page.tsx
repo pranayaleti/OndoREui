@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "Browse Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet for other states. We email the file after you request it — not an instant download.",
   alternates: { canonical: `${SITE_URL}/resources/templates/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Landlord Templates, Addendums & Disclosures | Ondo Real Estate"),
     description:
       "Request Utah-oriented lease, addendum, and disclosure packets, plus a federal lead-paint disclosure. Files are emailed after you request them.",

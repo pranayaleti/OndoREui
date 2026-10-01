@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: pageTitle("Utah Rental Maintenance Coordination, 24/7"),
   description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.",
   alternates: { canonical: `${SITE_URL}/property-management/maintenance-coordination/` },
-  openGraph: { title: pageTitleText("Utah Rental Maintenance Coordination, 24/7"), description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Utah Rental Maintenance Coordination, 24/7"), description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Utah Rental Maintenance Coordination, 24/7"), description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

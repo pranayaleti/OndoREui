@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     "Commercial real estate in Utah: retail, office, industrial and Opportunity Zone deals, with underwriting and asset management handled for you.",
   alternates: { canonical: `${SITE_URL}/investments/commercial-real-estate/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Utah Commercial Real Estate Investment Opportunities"),
     description:
       "Commercial real estate in Utah: retail, office, industrial and Opportunity Zone deals, with underwriting and asset management handled for you.",

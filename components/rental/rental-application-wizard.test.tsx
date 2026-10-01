@@ -168,4 +168,40 @@ describe("RentalApplicationWizard", () => {
     fireEvent.click(await screen.findByRole("button", { name: /save and continue/i }))
     expect(await screen.findByRole("alert")).toHaveTextContent("Could not save answers")
   })
+
+  it("does not report the application received when the submit call fails after a good save", async () => {
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("submit"))
+    vi.mocked(saveRentalProgress).mockResolvedValue(makeBundle("submit"))
+    vi.mocked(submitRentalApplication).mockRejectedValue(new Error("Application is missing a required document"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    fireEvent.click(await screen.findByRole("button", { name: /submit application/i }))
+
+    expect(await screen.findByText("Application is missing a required document")).toBeInTheDocument()
+    expect(screen.queryByText(/application received/i)).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: /submit application/i })).toBeEnabled()
+  })
+
+  it("still loads and saves when the browser blocks localStorage", async () => {
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new DOMException("blocked", "SecurityError")
+    })
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+      throw new DOMException("blocked", "SecurityError")
+    })
+    vi.mocked(getRentalApplication).mockResolvedValue(makeBundle("documents"))
+    vi.mocked(saveRentalProgress).mockResolvedValue(makeBundle("authorization"))
+
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    fireEvent.click(await screen.findByRole("button", { name: /save and continue/i }))
+    await waitFor(() => expect(saveRentalProgress).toHaveBeenCalledTimes(1))
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument()
+    vi.restoreAllMocks()
+  })
+
+  it("shows a load error instead of a blank wizard when the application cannot be fetched", async () => {
+    vi.mocked(getRentalApplication).mockRejectedValue(new Error("Application not found"))
+    render(<RentalApplicationWizard applicationId="app-1" />)
+    expect(await screen.findByText("Application not found")).toBeInTheDocument()
+  })
 })

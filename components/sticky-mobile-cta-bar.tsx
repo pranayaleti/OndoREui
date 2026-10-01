@@ -41,6 +41,7 @@ export function StickyMobileCtaBar() {
 
   return (
     <div
+      data-fixed-bottom-bar
       className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur-md md:hidden print:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       role="region"

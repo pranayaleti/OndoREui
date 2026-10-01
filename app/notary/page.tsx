@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: "Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments.",
   alternates: { canonical: `${SITE_URL}/notary/` },
   openGraph: {
+    type: "website",
     title: pageTitleText(TITLE),
     description: "Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments.",
     url: `${SITE_URL}/notary/`,

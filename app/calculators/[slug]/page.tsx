@@ -111,6 +111,7 @@ export async function generateMetadata({
       types: { "text/markdown": `${SITE_URL}/calculators/${slug}.md` },
     },
     openGraph: {
+      type: "website",
       title: pageTitleText(seoTitle),
       description: seoDescription,
       url: canonical,

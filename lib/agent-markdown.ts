@@ -32,6 +32,19 @@ import {
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 
+/**
+ * True when a site URL points at the local machine. The generated twins are committed under
+ * `public/`, so building them against localhost would write localhost links into tracked files.
+ */
+export function isLocalSiteUrl(url: string): boolean {
+  try {
+    const { hostname } = new URL(url)
+    return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]" || hostname.endsWith(".localhost")
+  } catch {
+    return true
+  }
+}
+
 /** Public listings JSON the property search tool reads. */
 const PROPERTIES_DATA_FEED_URL = backendUrl("/api/properties/public")
 /** docs/ is not part of the static export, so the notes are linked where they are published. */

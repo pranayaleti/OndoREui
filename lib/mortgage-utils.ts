@@ -24,14 +24,6 @@ export function calculateMaxLoanFromPayment(
   return monthlyPayment * (1 - Math.pow(1 + monthlyRate, -totalPayments)) / monthlyRate
 }
 
-/** Total interest paid over a fully amortizing fixed-rate term. */
-export function calculateTotalInterest(principal: number, annualRatePercent: number, termYears: number): number {
-  if (!Number.isFinite(principal) || principal <= 0 || termYears <= 0) return 0
-  const payment = calculateMonthlyPI(principal, annualRatePercent, termYears)
-  if (!Number.isFinite(payment)) return 0
-  return Math.max(0, payment * termYears * 12 - principal)
-}
-
 /**
  * Estimate remaining months on an amortizing loan from balance, rate, and P&I payment.
  * Returns null when inputs cannot support a finite remaining term.

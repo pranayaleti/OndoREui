@@ -2,6 +2,9 @@ import { useState, useCallback, useRef } from 'react';
 import { analyzeCalculator, AIAnalysis, AnalyzeRequest } from '../lib/api/calculators';
 import { validateChatInput } from '../lib/aiGuardrails';
 
+// TODO: not wired into any calculator yet. It is planned work, see
+// docs/superpowers/plans/2026-03-13-ai-calculator-enhancement.md. It stays until that plan ships
+// or the owner drops it (then delete this file and its test).
 interface UseCalculatorAIResult {
   data: AIAnalysis | null;
   loading: boolean;

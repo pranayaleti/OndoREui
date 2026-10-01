@@ -64,6 +64,20 @@ function articleTextOf(element: ReactElement): string {
   return (articleText as (props: unknown) => string)(element.props)
 }
 
+/**
+ * Components that render their own headings from props (a step list) expose
+ * `articleHeadings(props)`, the heading texts in render order. `extractOutline` gives each one a
+ * unique id, adds it to the outline as an h3, and hands the ids back to the component as the
+ * `headingIds` prop so the rendered ids match the table of contents links.
+ */
+function articleHeadingsOf(element: ReactElement): string[] {
+  const type: unknown = element.type
+  if (typeof type !== "function") return []
+  const articleHeadings = (type as { articleHeadings?: unknown }).articleHeadings
+  if (typeof articleHeadings !== "function") return []
+  return (articleHeadings as (props: unknown) => string[])(element.props)
+}
+
 function levelOf(type: ReactElement["type"]): OutlineLevel | null {
   if (type === "h2") return 2
   if (type === "h3") return 3
@@ -97,6 +111,16 @@ export function extractOutline(children: ReactNode): ArticleOutline {
     const element = node as ReactElement<ElementProps>
     const level = levelOf(element.type)
     wordCount += countWords(articleTextOf(element))
+
+    const headings = articleHeadingsOf(element)
+    if (headings.length > 0) {
+      const headingIds = headings.map((text) => {
+        const id = uniqueId(slugifyHeading(text))
+        outline.push({ id, text, level: 3 })
+        return id
+      })
+      return cloneElement(element as ReactElement<Record<string, unknown>>, { headingIds })
+    }
 
     if (level) {
       const text = textOf(element.props.children)

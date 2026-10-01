@@ -1,13 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 const agentDiscoveryConfig = require('./lib/agent-discovery-config.json')
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'it', 'te', 'hi', 'ta', 'kn']
-const BCP47_BY_LOCALE = {
-  en: 'en-US', es: 'es-ES', fr: 'fr-FR', it: 'it-IT',
-  te: 'te-IN', hi: 'hi-IN', ta: 'ta-IN', kn: 'kn-IN',
-}
-// Flip NEXT_PUBLIC_I18N_ROUTED=1 once per-locale URL paths ship (e.g. /es/about).
-const LOCALE_ROUTING_ENABLED = process.env.NEXT_PUBLIC_I18N_ROUTED === '1'
+// The site is English only: hreflang is x-default plus en-US (same as lib/i18n-alternates.ts).
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports -- CommonJS config, like the requires above
 const { getRouteLastmod } = require('./lib/sitemap-lastmod.cjs')
@@ -84,18 +78,7 @@ function buildAlternateRefs(path, siteUrl) {
   const canonical = p === '/' ? `${base}/` : fileLike ? `${base}${p}` : `${base}${p}/`
   // next-sitemap appends `loc` onto href unless hrefIsAbsolute is set.
   const abs = (href, hreflang) => ({ href, hreflang, hrefIsAbsolute: true })
-  if (!LOCALE_ROUTING_ENABLED) {
-    return [abs(canonical, 'x-default'), abs(canonical, BCP47_BY_LOCALE.en)]
-  }
-  return [
-    abs(canonical, 'x-default'),
-    ...SUPPORTED_LOCALES.map((loc) =>
-      abs(
-        loc === 'en' ? canonical : `${base}/${loc}${p === '/' ? '' : p}${fileLike ? '' : '/'}`,
-        BCP47_BY_LOCALE[loc],
-      ),
-    ),
-  ]
+  return [abs(canonical, 'x-default'), abs(canonical, 'en-US')]
 }
 
 /** Public pages that exist but must not be indexed (noindex metadata or redirect-only). */

@@ -42,3 +42,12 @@ next-env.d.ts
 
 # IndexNow submit state (restored in CI via actions/cache)
 .indexnow-cache/
+
+# Generated Next.js route-type stubs (contain absolute local paths, excluded from tsc)
+/types/app/
+
+# Coverage output and local tooling state
+/coverage/
+.superpowers/
+supabase/.temp/
+supabase/.branches/

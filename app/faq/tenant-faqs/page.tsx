@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Find answers to common tenant questions about applications, leases, payments, maintenance, and renting with Ondo Real Estate.",
   alternates: { canonical: `${SITE_URL}/faq/tenant-faqs/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Tenant FAQs | Ondo Real Estate"),
     description: "Find answers to common tenant questions about applications, leases, payments, maintenance, and renting with Ondo Real Estate.",
     images: DEFAULT_OG_IMAGES,

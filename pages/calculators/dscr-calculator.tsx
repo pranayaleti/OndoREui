@@ -3,35 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { calculateMonthlyPI } from '@/lib/mortgage-utils';
+import { calculateDscr, type DscrInput, type DscrResult } from '@/lib/calculators/dscr';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
-import { propertyManagementFee } from "@/lib/rental-expenses";
 
-interface DSCRData {
-  monthlyRent: number;
-  annualRent: number;
-  propertyTax: number;
-  insurance: number;
-  maintenance: number;
-  propertyManagement: number;
-  vacancyRate: number;
-  otherExpenses: number;
-  loanAmount: number;
-  interestRate: number;
-  loanTerm: number;
-  requiredDSCR: number;
-}
-
-interface DSCRResults {
-  annualRentalIncome: number;
-  annualOperatingExpenses: number;
-  netOperatingIncome: number;
-  annualDebtService: number;
-  dscr: number;
-  maxLoanAmount: number;
-  maxPurchasePrice: number;
-}
+type DSCRData = DscrInput;
+type DSCRResults = DscrResult;
 
 const DSCRCalculator: React.FC = () => {
   const [formData, setFormData] = useState<DSCRData>({
@@ -53,74 +30,7 @@ const DSCRCalculator: React.FC = () => {
   const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateDSCR = React.useCallback(() => {
-    const {
-      monthlyRent,
-      annualRent,
-      propertyTax,
-      insurance,
-      maintenance,
-      propertyManagement,
-      vacancyRate,
-      otherExpenses,
-      loanAmount,
-      interestRate,
-      loanTerm,
-      requiredDSCR
-    } = formData;
-
-    // Use annual rent if provided, otherwise calculate from monthly
-    const effectiveAnnualRent = annualRent > 0 ? annualRent : monthlyRent * 12;
-    
-    // Calculate vacancy loss
-    const vacancyLoss = effectiveAnnualRent * (vacancyRate / 100);
-    const annualRentalIncome = effectiveAnnualRent - vacancyLoss;
-
-    // Calculate property management
-    const managementFee = propertyManagementFee(effectiveAnnualRent, propertyManagement);
-
-    // Calculate annual operating expenses
-    const annualOperatingExpenses = propertyTax + insurance + maintenance + managementFee + otherExpenses;
-
-    // Calculate Net Operating Income (NOI)
-    const netOperatingIncome = annualRentalIncome - annualOperatingExpenses;
-
-    // Calculate annual debt service
-    const monthlyPayment = calculateMonthlyPI(loanAmount, interestRate, loanTerm);
-    const annualDebtService = monthlyPayment * 12;
-
-    // Calculate DSCR
-    const dscr = annualDebtService > 0 ? netOperatingIncome / annualDebtService : 0;
-
-    // Calculate maximum loan amount based on required DSCR
-    const maxNOI = netOperatingIncome;
-    const maxAnnualDebtService = maxNOI / requiredDSCR;
-    
-    // Reverse calculate max loan amount
-    const monthlyRate = interestRate / 100 / 12;
-    const totalPayments = loanTerm * 12;
-    const maxMonthlyPayment = maxAnnualDebtService / 12;
-    
-    let maxLoanAmount = 0;
-    if (monthlyRate > 0) {
-      maxLoanAmount = maxMonthlyPayment * 
-        (Math.pow(1 + monthlyRate, totalPayments) - 1) / 
-        (monthlyRate * Math.pow(1 + monthlyRate, totalPayments));
-    } else {
-      maxLoanAmount = maxMonthlyPayment * totalPayments;
-    }
-
-    // Estimate max purchase price (assuming 75% LTV)
-    const maxPurchasePrice = maxLoanAmount / 0.75;
-
-    setResults({
-      annualRentalIncome,
-      annualOperatingExpenses,
-      netOperatingIncome,
-      annualDebtService,
-      dscr,
-      maxLoanAmount,
-      maxPurchasePrice
-    });
+    setResults(calculateDscr(formData));
     setHasCalculated(true);
   }, [formData]);
 

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "Ondo social profiles, the Ondo links page, and the real estate news sources we follow. Every Ondo link lives at ondorealestate.com/links.",
   alternates: { canonical: `${SITE_URL}/socials/` },
   openGraph: {
+    type: "website",
     title: pageTitleText("Socials & Updates | Ondo Real Estate"),
     description:
       "Live Ondo profile links and the real estate news sources we follow for Utah buyers, owners, and investors.",

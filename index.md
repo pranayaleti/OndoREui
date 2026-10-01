@@ -52,8 +52,8 @@ OndoREui is the public-facing Next.js site for Ondo Real Estate. It serves:
 - **Maps**: Leaflet (property search map)
 - **Testing**: Vitest, React Testing Library, axe (accessibility)
 - **SEO**: `lib/seo.ts`, `lib/site.ts`, JSON-LD structured data, `next-sitemap`
-- **Analytics**: `lib/analytics.ts`, `lib/supabase-analytics.ts`
-- **i18n**: 8 locales — en, es, fr, it, te, hi, ta, kn (locale files in `public/locales/`)
+- **Analytics**: `lib/analytics.ts`
+- **i18n**: English only (`public/locales/en/common.json`)
 - **AI discovery**: `/llms.txt`, `/llms-full.txt`, `/llms.json` (dynamic Next.js routes)
 
 ## AEO / SEO Assets

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: pageTitle("Refinance Guides & Insights | Ondo Real Estate"),
   description: "Refinance guides and mortgage insights: when to refinance, rate-and-term vs cash-out, pay-down strategies, and rate trends.",
   alternates: { canonical: `${SITE_URL}/refinance/blog/` },
-  openGraph: { title: pageTitleText("Refinance Guides & Insights | Ondo Real Estate"), description: "Refinance guides and mortgage insights: when to refinance, rate-and-term vs cash-out, pay-down strategies, and rate trends.", url: `${SITE_URL}/refinance/blog/`, images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("Refinance Guides & Insights | Ondo Real Estate"), description: "Refinance guides and mortgage insights: when to refinance, rate-and-term vs cash-out, pay-down strategies, and rate trends.", url: `${SITE_URL}/refinance/blog/`, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("Refinance Guides & Insights | Ondo Real Estate"), description: "Refinance guides and mortgage insights: when to refinance, rate-and-term vs cash-out, pay-down strategies, and rate trends.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 

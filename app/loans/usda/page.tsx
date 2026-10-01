@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.",
   alternates: { canonical: `${SITE_URL}/loans/usda/` },
-  openGraph: { title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: DEFAULT_OG_IMAGES },
+  openGraph: { type: "website", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
