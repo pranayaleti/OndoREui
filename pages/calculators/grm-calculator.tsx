@@ -135,7 +135,7 @@ const GRMCalculator: React.FC = () => {
                 <NumberField
                   id="targetGRM"
                   label="Target GRM (for comparison)"
-                  kind="percent"
+                  kind="ratio"
                   min={0}
                   value={targetGRM}
                   onChange={(next) => setTargetGRM(next)}

@@ -372,8 +372,43 @@ export function getProgramDTI(program: LoanProgram): { frontPercent: number; bac
   }
 }
 
+const PROGRAM_LABELS: Record<LoanProgram, string> = {
+  conventional: 'Conventional',
+  fha: 'FHA',
+  va: 'VA',
+  usda: 'USDA',
+}
+
+/** Display copy for the selected program's DTI limits, built from getProgramDTI so it never drifts from the math. */
+export function describeProgramDti(program: LoanProgram): {
+  programLabel: string
+  frontPercent: number
+  backPercent: number
+  /** e.g. "≤28%", or a note when the program has no front-end limit (VA). */
+  frontTarget: string
+  backTarget: string
+} {
+  const { frontPercent, backPercent } = getProgramDTI(program)
+  return {
+    programLabel: PROGRAM_LABELS[program] ?? PROGRAM_LABELS.conventional,
+    frontPercent,
+    backPercent,
+    frontTarget: frontPercent > 0 ? `≤${frontPercent}%` : 'no fixed limit',
+    backTarget: `≤${backPercent}%`,
+  }
+}
+
+/** Traffic-light tone for a ratio against its program limit: within, up to 5 points over, or beyond. */
+export function dtiTone(ratio: number, limitPercent: number): 'good' | 'caution' | 'over' {
+  if (limitPercent <= 0) return 'good'
+  if (ratio <= limitPercent + 0.05) return 'good'
+  if (ratio <= limitPercent + 5) return 'caution'
+  return 'over'
+}
+
 export function estimateConventionalPmiAnnualFactor(ltv: number, creditScore: number): number {
-  if (ltv < 0.80) return 0
+  // No PMI at or below 80% LTV (20% down or more)
+  if (ltv <= 0.80 + 1e-9) return 0
   // Rough market-average PMI tiers by credit; conservative assumptions
   if (creditScore >= 760) return ltv > 0.90 ? 0.004 : 0.003
   if (creditScore >= 740) return ltv > 0.90 ? 0.005 : 0.004
@@ -396,14 +431,16 @@ export function getProgramMI(
     case 'conventional': {
       const annual = estimateConventionalPmiAnnualFactor(ltv, creditScore)
       const monthlyMI = annual > 0 ? (baseLoan * annual) / 12 : 0
-      return { monthlyMI, upfrontFee: 0, description: annual > 0 ? 'Conventional PMI' : 'No PMI (LTV < 80%)' }
+      return { monthlyMI, upfrontFee: 0, description: annual > 0 ? 'Conventional PMI' : 'No PMI (20% down or more)' }
     }
     case 'fha': {
-      // FHA UFMIP ~1.75% upfront; annual MIP commonly 0.55% (>95% LTV) or 0.50% (<=95%) for 30y
+      // FHA UFMIP 1.75% upfront. Annual MIP per HUD ML 2023-05 (base loan up to $726,200):
+      // terms of 15 years or less: 0.40% above 90% LTV, 0.15% at or below 90%.
+      // terms over 15 years: 0.55% above 95% LTV, 0.50% at or below 95%.
       const upfrontFee = baseLoan * 0.0175
-      const annualMip = loanTermYears >= 30
-        ? (ltv > 0.95 ? 0.0055 : 0.0050)
-        : (ltv > 0.95 ? 0.0050 : 0.0045)
+      const annualMip = loanTermYears <= 15
+        ? (ltv > 0.90 ? 0.0040 : 0.0015)
+        : (ltv > 0.95 ? 0.0055 : 0.0050)
       const monthlyMI = (baseLoan * annualMip) / 12
       return { monthlyMI, upfrontFee, description: 'FHA MIP' }
     }

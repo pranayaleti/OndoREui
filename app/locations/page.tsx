@@ -15,6 +15,7 @@ import { cityMarketData } from "@/lib/city-market-data"
 import { Home, MapPin } from "lucide-react"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { formatCompactNumber, formatCompactUsd } from "@/lib/format-compact"
 
 export const metadata: Metadata = {
   title: pageTitle("Utah City Guides: Cost of Living & Home Prices"),
@@ -29,12 +30,6 @@ export const metadata: Metadata = {
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
-
-function fmt(n: number): string {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M"
-  if (n >= 1_000) return (n / 1_000).toFixed(0) + "K"
-  return n.toLocaleString("en-US")
 }
 
 export default function LocationsPage() {
@@ -97,15 +92,15 @@ export default function LocationsPage() {
                           <div className="grid grid-cols-3 gap-2 text-center">
                             <div>
                               <p className="text-xs text-muted-foreground">Population</p>
-                              <p className="text-sm font-semibold">{fmt(data.population)}</p>
+                              <p className="text-sm font-semibold">{formatCompactNumber(data.population)}</p>
                             </div>
                             <div>
                               <p className="text-xs text-muted-foreground">Median Price</p>
-                              <p className="text-sm font-semibold">${fmt(data.medianHomePrice)}</p>
+                              <p className="text-sm font-semibold">{formatCompactUsd(data.medianHomePrice)}</p>
                             </div>
                             <div>
                               <p className="text-xs text-muted-foreground">Median Rent</p>
-                              <p className="text-sm font-semibold">${fmt(data.medianRent)}/mo</p>
+                              <p className="text-sm font-semibold">{formatCompactUsd(data.medianRent)}/mo</p>
                             </div>
                           </div>
                         )}

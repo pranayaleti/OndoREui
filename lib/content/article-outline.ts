@@ -37,19 +37,31 @@ export function slugifyHeading(text: string): string {
 
 type ElementProps = { children?: ReactNode; id?: string }
 
-function countWords(text: string): number {
+export function countWords(text: string): number {
   const trimmed = text.trim()
   return trimmed ? trimmed.split(/\s+/).length : 0
 }
 
 /** Flattens an already-rendered subtree to its text. Interpolated values have
  *  resolved to strings by the time the shell receives them, so this is exact. */
-function textOf(node: ReactNode): string {
+export function textOf(node: ReactNode): string {
   if (typeof node === "string") return node
   if (typeof node === "number") return String(node)
   if (Array.isArray(node)) return node.map(textOf).join("")
   if (isValidElement(node)) return textOf((node.props as ElementProps).children)
   return ""
+}
+
+/**
+ * Components that render text from props rather than children (tables, step lists, pros and cons)
+ * expose `articleText(props)` so the word count, and with it the reading time, includes that text.
+ */
+function articleTextOf(element: ReactElement): string {
+  const type: unknown = element.type
+  if (typeof type !== "function") return ""
+  const articleText = (type as { articleText?: unknown }).articleText
+  if (typeof articleText !== "function") return ""
+  return (articleText as (props: unknown) => string)(element.props)
 }
 
 function levelOf(type: ReactElement["type"]): OutlineLevel | null {
@@ -84,6 +96,7 @@ export function extractOutline(children: ReactNode): ArticleOutline {
 
     const element = node as ReactElement<ElementProps>
     const level = levelOf(element.type)
+    wordCount += countWords(articleTextOf(element))
 
     if (level) {
       const text = textOf(element.props.children)

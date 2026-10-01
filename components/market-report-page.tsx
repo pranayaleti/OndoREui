@@ -24,14 +24,9 @@ import {
   Clock,
   Building2,
 } from "lucide-react"
+import { formatCompactUsd } from "@/lib/format-compact"
 
 type MarketReportPageProps = { city: UtahCity }
-
-function fmtUsd(n: number): string {
-  if (n >= 1_000_000) return "$" + (n / 1_000_000).toFixed(1) + "M"
-  if (n >= 1_000) return "$" + (n / 1_000).toFixed(0) + "K"
-  return "$" + n.toLocaleString("en-US")
-}
 
 function StatCard({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
   return (
@@ -93,8 +88,8 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
         <section>
           <h2 className="text-2xl font-bold mb-6">Key Market Metrics</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCard icon={Home} label="Median Home Price" value={fmtUsd(market.medianHomePrice)} />
-            <StatCard icon={DollarSign} label="Median Rent" value={`${fmtUsd(market.medianRent)}/mo`} />
+            <StatCard icon={Home} label="Median Home Price" value={formatCompactUsd(market.medianHomePrice)} />
+            <StatCard icon={DollarSign} label="Median Rent" value={`${formatCompactUsd(market.medianRent)}/mo`} />
             <StatCard icon={Users} label="Population" value={market.population.toLocaleString()} />
             <StatCard icon={TrendingUp} label="Growth Rate" value={market.growthRate} />
           </div>
@@ -110,7 +105,7 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
             </div>
             <div className="rounded-lg border p-4">
               <p className="text-sm text-foreground/60">Median Household Income</p>
-              <p className="text-xl font-bold mt-1">{fmtUsd(market.medianHouseholdIncome)}</p>
+              <p className="text-xl font-bold mt-1">{formatCompactUsd(market.medianHouseholdIncome)}</p>
             </div>
             <div className="rounded-lg border p-4">
               <p className="text-sm text-foreground/60">Owner-Occupied Homes</p>
@@ -193,8 +188,8 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
                 <tbody>
                   <tr className="border-b bg-primary/5 font-semibold">
                     <td className="py-2 pr-4">{city.name}</td>
-                    <td className="py-2 px-3 text-right">{fmtUsd(market.medianHomePrice)}</td>
-                    <td className="py-2 px-3 text-right">{fmtUsd(market.medianRent)}</td>
+                    <td className="py-2 px-3 text-right">{formatCompactUsd(market.medianHomePrice)}</td>
+                    <td className="py-2 px-3 text-right">{formatCompactUsd(market.medianRent)}</td>
                     <td className="py-2 px-3 text-right">{market.population.toLocaleString()}</td>
                     <td className="py-2 px-3 text-right">{market.growthRate}</td>
                     <td className="py-2 pl-3 text-right">{market.avgDaysOnMarket}</td>
@@ -207,8 +202,8 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
                         <td className="py-2 pr-4">
                           <Link href={`/market-reports/${toCitySlug(nc.name)}/`} className="text-primary hover:underline">{nc.name}</Link>
                         </td>
-                        <td className="py-2 px-3 text-right">{fmtUsd(d.medianHomePrice)}</td>
-                        <td className="py-2 px-3 text-right">{fmtUsd(d.medianRent)}</td>
+                        <td className="py-2 px-3 text-right">{formatCompactUsd(d.medianHomePrice)}</td>
+                        <td className="py-2 px-3 text-right">{formatCompactUsd(d.medianRent)}</td>
                         <td className="py-2 px-3 text-right">{d.population.toLocaleString()}</td>
                         <td className="py-2 px-3 text-right">{d.growthRate}</td>
                         <td className="py-2 pl-3 text-right">{d.avgDaysOnMarket}</td>

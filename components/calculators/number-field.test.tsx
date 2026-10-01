@@ -13,6 +13,8 @@ function Harness({
   kind?: NumberFieldKind
   min?: number
   max?: number
+  step?: number
+  decimals?: number
   defaultValue?: number
   onChangeSpy?: (n: number) => void
 }) {
@@ -236,5 +238,80 @@ describe("NumberField — accessibility", () => {
         expect(button).toHaveAttribute("tabIndex", "-1")
       }
     }
+  })
+})
+
+describe("NumberField: precision follows the step, not just the kind", () => {
+  it("keeps a 1.25 DSCR instead of rounding it to 1", () => {
+    const spy = vi.fn()
+    render(<Harness initial={1.2} kind="ratio" onChangeSpy={spy} />)
+    const input = field()
+    fireEvent.focus(input)
+    fireEvent.change(input, { target: { value: "1.25" } })
+    fireEvent.blur(input)
+    expect(spy).toHaveBeenLastCalledWith(1.25)
+    expect(input.value).toBe("1.25")
+  })
+
+  it("steps a ratio by 0.05 instead of sticking", () => {
+    render(<Harness initial={1.25} kind="ratio" />)
+    const input = field()
+    fireEvent.keyDown(input, { key: "ArrowUp" })
+    expect(input.value).toBe("1.3")
+    fireEvent.keyDown(input, { key: "ArrowUp" })
+    expect(input.value).toBe("1.35")
+  })
+
+  it("keeps 2.5 on a percent field with a 0.1 step", () => {
+    const spy = vi.fn()
+    render(<Harness initial={6} kind="percent" step={0.1} onChangeSpy={spy} />)
+    const input = field()
+    fireEvent.focus(input)
+    fireEvent.change(input, { target: { value: "2.5" } })
+    fireEvent.blur(input)
+    expect(spy).toHaveBeenLastCalledWith(2.5)
+    expect(input.value).toBe("2.5")
+  })
+
+  it("walks discount points by an eighth (step 0.125) without collapsing to 0.1", () => {
+    render(<Harness initial={0} kind="percent" step={0.125} />)
+    const input = field()
+    fireEvent.keyDown(input, { key: "ArrowUp" })
+    expect(input.value).toBe("0.125")
+    fireEvent.keyDown(input, { key: "ArrowUp" })
+    expect(input.value).toBe("0.25")
+  })
+
+  it("honours an explicit decimals prop", () => {
+    const spy = vi.fn()
+    render(<Harness initial={1} kind="percent" decimals={2} onChangeSpy={spy} />)
+    const input = field()
+    fireEvent.focus(input)
+    fireEvent.change(input, { target: { value: "0.15" } })
+    fireEvent.blur(input)
+    expect(spy).toHaveBeenLastCalledWith(0.15)
+  })
+})
+
+describe("NumberField: units are not money", () => {
+  it("shows no $ prefix on a ratio, years or days field", () => {
+    for (const kind of ["ratio", "years", "days"] as const) {
+      const { container, unmount } = render(<Harness initial={5} kind={kind} />)
+      expect(container.textContent).not.toContain("$")
+      unmount()
+    }
+  })
+
+  it("labels a ratio with x and days with days", () => {
+    const { container, unmount } = render(<Harness initial={1.25} kind="ratio" />)
+    expect(container.textContent).toContain("x")
+    unmount()
+    const days = render(<Harness initial={15} kind="days" />)
+    expect(days.container.textContent).toContain("days")
+  })
+
+  it("still prefixes currency with $", () => {
+    const { container } = render(<Harness initial={500} kind="currency" />)
+    expect(container.textContent).toContain("$")
   })
 })

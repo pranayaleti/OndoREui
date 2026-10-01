@@ -53,6 +53,7 @@ export function WebMCPMortgageTool() {
             !Number.isFinite(annualRatePercent) ||
             !Number.isFinite(termYears) ||
             principal < 0 ||
+            annualRatePercent < 0 ||
             termYears <= 0
           ) {
             return {
@@ -60,7 +61,7 @@ export function WebMCPMortgageTool() {
                 {
                   type: "text",
                   text: JSON.stringify({
-                    error: "principal (>=0), annualRatePercent, and termYears (>0) must be valid numbers",
+                    error: "principal (>=0), annualRatePercent (>=0), and termYears (>0) must be valid numbers",
                   }),
                 },
               ],

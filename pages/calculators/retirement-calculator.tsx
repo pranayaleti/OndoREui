@@ -5,57 +5,10 @@ import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Home, Landmark, PiggyBank } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
-
-interface RetirementData {
-  // Personal Information
-  currentAge: number;
-  retirementAge: number;
-  lifeExpectancy: number;
-  
-  // Current Financial Status
-  currentSavings: number;
-  currentIncome: number;
-  currentExpenses: number;
-  
-  // Real Estate Investments
-  currentRealEstateValue: number;
-  realEstateIncome: number;
-  realEstateExpenses: number;
-  realEstateAppreciation: number;
-  
-  // Investment Strategy
-  monthlyContribution: number;
-  investmentReturn: number;
-  inflationRate: number;
-  
-  // Retirement Goals
-  desiredRetirementIncome: number;
-  socialSecurityIncome: number;
-  otherIncome: number;
-}
-
-interface RetirementResults {
-  totalRetirementSavings: number;
-  realEstateValueAtRetirement: number;
-  totalRetirementAssets: number;
-  annualRetirementIncome: number;
-  retirementIncomeGap: number;
-  yearsOfRetirement: number;
-  monthlyRetirementBudget: number;
-  retirementReadiness: string;
-  recommendations: string[];
-  yearByYearProjection: Array<{
-    age: number;
-    year: number;
-    savings: number;
-    realEstateValue: number;
-    totalAssets: number;
-    projectedIncome: number;
-  }>;
-}
+import { calculateRetirement, type RetirementInputs, type RetirementResults } from "@/lib/retirement";
 
 const RetirementCalculator: React.FC = () => {
-  const [formData, setFormData] = useState<RetirementData>({
+  const [formData, setFormData] = useState<RetirementInputs>({
     currentAge: 35,
     retirementAge: 65,
     lifeExpectancy: 85,
@@ -77,138 +30,16 @@ const RetirementCalculator: React.FC = () => {
   const [results, setResults] = useState<RetirementResults | null>(null);
   const [hasCalculated, setHasCalculated] = useState(false);
   useEffect(() => {
-    calculateRetirement();
+    runCalculation();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
-  const calculateRetirement = () => {
-    const {
-      currentAge,
-      retirementAge,
-      lifeExpectancy,
-      currentSavings,
-      currentRealEstateValue,
-      realEstateIncome,
-      realEstateExpenses,
-      realEstateAppreciation,
-      monthlyContribution,
-      investmentReturn,
-      inflationRate,
-      desiredRetirementIncome,
-      socialSecurityIncome,
-      otherIncome
-    } = formData;
-
-    const yearsToRetirement = Math.max(0, retirementAge - currentAge);
-    const yearsOfRetirement = Math.max(0, lifeExpectancy - retirementAge);
-
-    const netRealEstateIncome = Math.max(0, realEstateIncome - realEstateExpenses);
-
-    const futureValueOfSavings = currentSavings * Math.pow(1 + investmentReturn / 100, yearsToRetirement);
-
-    const monthlyRate = investmentReturn / 100 / 12;
-    const totalMonths = yearsToRetirement * 12;
-    const futureValueOfContributions = monthlyRate > 0
-      ? monthlyContribution * (Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate
-      : monthlyContribution * totalMonths;
-
-    // Net rental income reinvested annually (FV of annuity)
-    const annualReturn = investmentReturn / 100;
-    const futureValueOfRentalIncome = annualReturn > 0
-      ? netRealEstateIncome * ((Math.pow(1 + annualReturn, yearsToRetirement) - 1) / annualReturn)
-      : netRealEstateIncome * yearsToRetirement;
-
-    const totalRetirementSavings = futureValueOfSavings + futureValueOfContributions + futureValueOfRentalIncome;
-
-    const realEstateValueAtRetirement = currentRealEstateValue * 
-      Math.pow(1 + realEstateAppreciation / 100, yearsToRetirement);
-
-    const totalRetirementAssets = totalRetirementSavings + realEstateValueAtRetirement;
-
-    const retirementIncomeFromAssets = totalRetirementAssets * 0.04;
-
-    const annualRetirementIncome = retirementIncomeFromAssets + socialSecurityIncome + otherIncome;
-
-    // Inflate desired income to future dollars for an apples-to-apples comparison
-    const inflatedDesiredIncome = desiredRetirementIncome * Math.pow(1 + inflationRate / 100, yearsToRetirement);
-    const retirementIncomeGap = inflatedDesiredIncome - annualRetirementIncome;
-
-    // Calculate monthly retirement budget
-    const monthlyRetirementBudget = annualRetirementIncome / 12;
-
-    // Determine retirement readiness
-    let retirementReadiness = '';
-    let recommendations: string[] = [];
-
-    if (annualRetirementIncome >= inflatedDesiredIncome) {
-      retirementReadiness = 'On Track';
-      recommendations = [
-        'You\'re on track for retirement! Consider increasing real estate investments for additional income.',
-        'Review your investment allocation to ensure optimal returns.',
-        'Consider early retirement options if desired.'
-      ];
-    } else if (annualRetirementIncome >= inflatedDesiredIncome * 0.8) {
-      retirementReadiness = 'Close to Target';
-      recommendations = [
-        'You\'re close to your retirement goal. Consider increasing monthly contributions.',
-        'Explore additional real estate investment opportunities.',
-        'Review your retirement age - working a few more years could help.'
-      ];
-    } else {
-      retirementReadiness = 'Needs Attention';
-      recommendations = [
-        'Increase your monthly savings contributions significantly.',
-        'Consider investing in additional real estate properties for rental income.',
-        'Review your retirement age - you may need to work longer.',
-        'Explore ways to reduce retirement expenses or increase income sources.'
-      ];
-    }
-
-    // Generate year-by-year projection
-    const yearByYearProjection = [];
-    let currentSavingsAmount = currentSavings;
-    let currentRealEstateValueAmount = currentRealEstateValue;
-
-    for (let year = 1; year <= yearsToRetirement; year++) {
-      const age = currentAge + year;
-      
-      // Monthly compounding for savings + contributions + net rental income
-      for (let m = 0; m < 12; m++) {
-        currentSavingsAmount = currentSavingsAmount * (1 + monthlyRate) + monthlyContribution;
-      }
-      currentSavingsAmount += netRealEstateIncome;
-      
-      currentRealEstateValueAmount = currentRealEstateValueAmount * (1 + realEstateAppreciation / 100);
-      
-      const totalAssets = currentSavingsAmount + currentRealEstateValueAmount;
-      const projectedIncome = totalAssets * 0.04;
-
-      yearByYearProjection.push({
-        age,
-        year,
-        savings: currentSavingsAmount,
-        realEstateValue: currentRealEstateValueAmount,
-        totalAssets: totalAssets,
-        projectedIncome: projectedIncome
-      });
-    }
-
-    setResults({
-      totalRetirementSavings,
-      realEstateValueAtRetirement,
-      totalRetirementAssets,
-      annualRetirementIncome,
-      retirementIncomeGap,
-      yearsOfRetirement,
-      monthlyRetirementBudget,
-      retirementReadiness,
-      recommendations,
-      yearByYearProjection
-    });
+  const runCalculation = () => {
+    setResults(calculateRetirement(formData));
     setHasCalculated(true);
   };
 
-  const handleInputChange = (field: keyof RetirementData, value: number) => {
+  const handleInputChange = (field: keyof RetirementInputs, value: number) => {
     setFormData({ ...formData, [field]: value });
   };
 
@@ -220,6 +51,8 @@ const RetirementCalculator: React.FC = () => {
       maximumFractionDigits: 0
     }).format(amount);
   };
+
+  const isSurplus = results ? results.retirementIncomeGap <= 0 : false;
 
   return (
     <div className="min-h-screen bg-background">
@@ -249,25 +82,28 @@ const RetirementCalculator: React.FC = () => {
                   <TrendingUp className="h-5 w-5 mr-2 text-primary" />
                   Personal Information
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="currentAge"
                     label="Current Age"
-                    kind="currency"
+                    kind="years"
+                    min={0} max={120}
                     value={formData.currentAge}
                     onChange={(next) => handleInputChange('currentAge', next)}
                   />
                   <NumberField
                     id="retirementAge"
                     label="Retirement Age"
-                    kind="currency"
+                    kind="years"
+                    min={0} max={120}
                     value={formData.retirementAge}
                     onChange={(next) => handleInputChange('retirementAge', next)}
                   />
                   <NumberField
                     id="lifeExpectancy"
                     label="Life Expectancy"
-                    kind="currency"
+                    kind="years"
+                    min={0} max={120}
                     value={formData.lifeExpectancy}
                     onChange={(next) => handleInputChange('lifeExpectancy', next)}
                   />
@@ -280,7 +116,7 @@ const RetirementCalculator: React.FC = () => {
                   <Landmark className="h-5 w-5 mr-2 text-primary" />
                   Current Financial Status
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="currentSavings"
                     label="Current Savings"
@@ -311,7 +147,7 @@ const RetirementCalculator: React.FC = () => {
                   <Home className="h-5 w-5 mr-2 text-primary" />
                   Real Estate Investments
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="currentRealEstateValue"
                     label="Current Real Estate Value"
@@ -336,7 +172,7 @@ const RetirementCalculator: React.FC = () => {
                   <NumberField
                     id="realEstateAppreciation"
                     label="Real Estate Appreciation"
-                    kind="currency"
+                    kind="rate"
                     step={0.1}
                     value={formData.realEstateAppreciation}
                     onChange={(next) => handleInputChange('realEstateAppreciation', next)}
@@ -350,18 +186,18 @@ const RetirementCalculator: React.FC = () => {
                   <PiggyBank className="h-5 w-5 mr-2 text-purple-600" />
                   Investment Strategy
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="monthlyContribution"
                     label="Monthly Contribution"
-                    kind="years"
+                    kind="currency"
                     value={formData.monthlyContribution}
                     onChange={(next) => handleInputChange('monthlyContribution', next)}
                   />
                   <NumberField
                     id="investmentReturn"
                     label="Investment Return"
-                    kind="currency"
+                    kind="rate"
                     step={0.1}
                     value={formData.investmentReturn}
                     onChange={(next) => handleInputChange('investmentReturn', next)}
@@ -370,6 +206,7 @@ const RetirementCalculator: React.FC = () => {
                     id="inflationRate"
                     label="Inflation Rate"
                     kind="rate"
+                    step={0.1}
                     value={formData.inflationRate}
                     onChange={(next) => handleInputChange('inflationRate', next)}
                   />
@@ -382,7 +219,7 @@ const RetirementCalculator: React.FC = () => {
                   <TrendingUp className="h-5 w-5 mr-2 text-indigo-600" />
                   Retirement Goals
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="desiredRetirementIncome"
                     label="Desired Retirement Income"
@@ -441,8 +278,12 @@ const RetirementCalculator: React.FC = () => {
                       <p className="text-xl font-bold text-foreground">{formatCurrency(results.annualRetirementIncome)}</p>
                     </div>
                     <div className="bg-muted p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-red-900 mb-2">Income Gap</h3>
-                      <p className="text-xl font-bold text-red-900">{formatCurrency(results.retirementIncomeGap)}</p>
+                      <h3 className={`text-sm font-medium mb-2 ${isSurplus ? 'text-green-900' : 'text-red-900'}`}>
+                        {isSurplus ? 'Income Surplus' : 'Income Gap'}
+                      </h3>
+                      <p className={`text-xl font-bold ${isSurplus ? 'text-green-900' : 'text-red-900'}`}>
+                        {formatCurrency(Math.abs(results.retirementIncomeGap))}
+                      </p>
                     </div>
                   </div>
 
@@ -461,6 +302,27 @@ const RetirementCalculator: React.FC = () => {
                       ))}
                     </ul>
                   </div>
+
+                  {/* Inputs that shape the plan */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div className="bg-muted p-4 rounded-lg">
+                      <h3 className="text-sm font-medium text-foreground mb-2">Annual Savings Capacity</h3>
+                      <p className="text-xl font-bold text-foreground">{formatCurrency(results.annualSavingsCapacity)}</p>
+                      <p className="text-xs text-foreground/70 mt-1">Income minus expenses today</p>
+                    </div>
+                    <div className="bg-muted p-4 rounded-lg">
+                      <h3 className="text-sm font-medium text-foreground mb-2">Years in Retirement</h3>
+                      <p className="text-xl font-bold text-foreground">{results.yearsOfRetirement}</p>
+                      <p className="text-xs text-foreground/70 mt-1">Retirement age to life expectancy</p>
+                    </div>
+                  </div>
+                  {results.notes.length > 0 && (
+                    <ul className="list-disc list-inside space-y-1 mb-6" aria-label="Notes on your inputs">
+                      {results.notes.map((note) => (
+                        <li key={note} className="text-sm text-foreground">{note}</li>
+                      ))}
+                    </ul>
+                  )}
 
                   {/* Monthly Budget */}
                   <div className="bg-muted p-4 rounded-lg mb-6">

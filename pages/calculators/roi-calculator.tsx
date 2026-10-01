@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
+import { propertyManagementFee } from "@/lib/rental-expenses";
 
 interface ROIData {
   purchasePrice: number;
@@ -95,9 +96,7 @@ const ROICalculator: React.FC = () => {
     const annualRentalIncome = effectiveAnnualRent - vacancyLoss;
 
     // Calculate property management
-    const managementFee = propertyManagement > 0 && propertyManagement < 1
-      ? effectiveAnnualRent * propertyManagement
-      : propertyManagement;
+    const managementFee = propertyManagementFee(effectiveAnnualRent, propertyManagement);
 
     // Calculate annual operating expenses
     const annualOperatingExpenses = propertyTax + insurance + maintenance + managementFee + otherExpenses;
@@ -330,7 +329,7 @@ const ROICalculator: React.FC = () => {
               <NumberField
                 id="holdingPeriod"
                 label="Holding Period"
-                kind="currency"
+                kind="years"
                 value={formData.holdingPeriod}
                 onChange={(next) => handleInputChange('holdingPeriod', next)}
               />

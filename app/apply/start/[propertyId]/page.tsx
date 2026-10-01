@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
 import { RentalStartClient } from "@/components/rental/rental-start-client"
-import { backendUrl } from "@/lib/backend"
-import { publicIdsFromListBody } from "@/lib/public-property"
+import { fetchAllPublicListingRows, publicIdsFromListBody } from "@/lib/public-property"
 import { RENTAL_STATIC_PLACEHOLDER } from "@/lib/rental-static-paths"
 
 export const metadata: Metadata = {
@@ -16,9 +15,7 @@ export const metadata: Metadata = {
  */
 export async function generateStaticParams(): Promise<Array<{ propertyId: string }>> {
   try {
-    const res = await fetch(backendUrl("/api/properties/public"))
-    if (!res.ok) return [{ propertyId: RENTAL_STATIC_PLACEHOLDER }]
-    const params = publicIdsFromListBody(await res.json()).map((propertyId) => ({ propertyId }))
+    const params = publicIdsFromListBody(await fetchAllPublicListingRows()).map((propertyId) => ({ propertyId }))
     return params.length > 0 ? params : [{ propertyId: RENTAL_STATIC_PLACEHOLDER }]
   } catch {
     return [{ propertyId: RENTAL_STATIC_PLACEHOLDER }]

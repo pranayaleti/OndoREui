@@ -1,8 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 import type { ApiProperty } from "@/app/types/property"
 import {
+  checkListingAvailability,
+  fetchAllPublicListingRows,
   fetchPublicPropertyByPublicId,
   fetchPublicPropertyList,
+  PublicListingsHttpError,
   fetchPublicPropertyListOrThrow,
   findPublicProperty,
   listingDetailPath,
@@ -121,7 +124,7 @@ describe("fetchPublicPropertyByPublicId", () => {
       if (url.includes(`/api/properties/public/${row.publicId}`)) {
         return { ok: false, status: 404, json: async () => ({ message: "Property not found" }) } as Response
       }
-      if (url.endsWith("/api/properties/public")) {
+      if (url.includes("/api/properties/public?")) {
         return { ok: true, json: async () => ({ data: [row] }) } as Response
       }
       throw new Error(`unexpected url ${url}`)
@@ -186,5 +189,121 @@ describe("publicIdsFromListBody", () => {
         ],
       }),
     ).toEqual(["c2e653bf-1b6a-4f0c-9654-82a4896cb137", "slug-home", "internal-only"])
+  })
+})
+
+describe("fetchAllPublicListingRows", () => {
+  function pagedFetch(pages: unknown[]) {
+    return vi.fn(async (input: RequestInfo | URL) => {
+      const page = Number(new URL(String(input)).searchParams.get("page") ?? "1")
+      return { ok: true, json: async () => pages[page - 1] ?? { data: [], pagination: { hasMore: false } } } as Response
+    }) as unknown as typeof fetch
+  }
+
+  it("asks for the maximum page size so the default 20-row cap does not apply", async () => {
+    const fetchImpl = pagedFetch([{ data: [listing()], pagination: { page: 1, limit: 100, total: 1, hasMore: false } }])
+    await fetchAllPublicListingRows(fetchImpl)
+    const url = new URL(String((fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[0]))
+    expect(url.searchParams.get("limit")).toBe("100")
+    expect(url.searchParams.get("page")).toBe("1")
+  })
+
+  it("follows hasMore until the last page and keeps every row", async () => {
+    const a = listing({ publicId: "a", id: "ia" })
+    const b = listing({ publicId: "b", id: "ib" })
+    const c = listing({ publicId: "c", id: "ic" })
+    const fetchImpl = pagedFetch([
+      { data: [a, b], pagination: { hasMore: true } },
+      { data: [c], pagination: { hasMore: false } },
+    ])
+    const rows = await fetchAllPublicListingRows(fetchImpl)
+    expect(rows.map((r) => (r as ApiProperty).publicId)).toEqual(["a", "b", "c"])
+    expect(fetchImpl).toHaveBeenCalledTimes(2)
+  })
+
+  it("stops after one request for a plain array or an envelope without pagination", async () => {
+    const fetchArray = pagedFetch([[listing()]])
+    expect(await fetchAllPublicListingRows(fetchArray)).toHaveLength(1)
+    expect(fetchArray).toHaveBeenCalledTimes(1)
+    const fetchEnvelope = pagedFetch([{ data: [listing()] }])
+    expect(await fetchAllPublicListingRows(fetchEnvelope)).toHaveLength(1)
+    expect(fetchEnvelope).toHaveBeenCalledTimes(1)
+  })
+
+  it("does not loop forever when hasMore stays true on empty pages", async () => {
+    const fetchImpl = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ data: [], pagination: { hasMore: true } }),
+    })) as unknown as typeof fetch
+    await fetchAllPublicListingRows(fetchImpl)
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it("rejects with the HTTP status so callers can pick a message", async () => {
+    const fetchImpl = vi.fn(async () => ({ ok: false, status: 429, json: async () => ({}) })) as unknown as typeof fetch
+    const err = await fetchAllPublicListingRows(fetchImpl).catch((e: unknown) => e)
+    expect(err).toBeInstanceOf(PublicListingsHttpError)
+    expect((err as PublicListingsHttpError).status).toBe(429)
+  })
+
+  it("rejects when the body is not a list", async () => {
+    const fetchImpl = vi.fn(async () => ({ ok: true, json: async () => ({ message: "nope" }) })) as unknown as typeof fetch
+    await expect(fetchAllPublicListingRows(fetchImpl)).rejects.toThrow(/Invalid response/)
+  })
+})
+
+describe("checkListingAvailability", () => {
+  const row = listing()
+
+  function route(byId: { ok: boolean; status: number } | Error, list: unknown | Error) {
+    return vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input)
+      const isList = url.includes("/api/properties/public?")
+      const result = isList ? list : byId
+      if (result instanceof Error) throw result
+      if (isList) return { ok: true, json: async () => result } as Response
+      return { ...(result as object), json: async () => ({}) } as Response
+    }) as unknown as typeof fetch
+  }
+
+  it("is available when the by-id endpoint answers", async () => {
+    const fetchImpl = route({ ok: true, status: 200 }, { data: [] })
+    expect(await checkListingAvailability(row.publicId!, fetchImpl)).toBe("available")
+  })
+
+  it("is unavailable only when by-id 404s and the list loads without the listing", async () => {
+    const fetchImpl = route({ ok: false, status: 404 }, { data: [] })
+    expect(await checkListingAvailability(row.publicId!, fetchImpl)).toBe("unavailable")
+  })
+
+  it("stays available when by-id 404s on an older Edge but the list still has the listing", async () => {
+    const fetchImpl = route({ ok: false, status: 404 }, { data: [row] })
+    expect(await checkListingAvailability(row.publicId!, fetchImpl)).toBe("available")
+  })
+
+  it("is unknown on a 5xx, a network error, or a list that fails to load", async () => {
+    expect(await checkListingAvailability(row.publicId!, route({ ok: false, status: 503 }, { data: [] }))).toBe("unknown")
+    expect(await checkListingAvailability(row.publicId!, route(new TypeError("offline"), { data: [] }))).toBe("unknown")
+    expect(await checkListingAvailability(row.publicId!, route({ ok: false, status: 404 }, new TypeError("offline")))).toBe("unknown")
+  })
+
+  it("does not check the export placeholder id", async () => {
+    const spy = vi.fn()
+    expect(await checkListingAvailability("_placeholder", spy as unknown as typeof fetch)).toBe("unknown")
+    expect(spy).not.toHaveBeenCalled()
+  })
+})
+
+describe("sale rows are not shown as rentals", () => {
+  it("drops sale rows from the list, the lookup and the static params", async () => {
+    const sale = listing({ publicId: "sale-1", listingKind: "sale" })
+    const lease = listing({ publicId: "lease-1", listingKind: "lease" })
+    const legacy = listing({ publicId: "legacy-1", listingKind: null })
+    const body = { data: [sale, lease, legacy] }
+    expect(publicIdsFromListBody(body)).toEqual(["lease-1", "legacy-1"])
+    expect(findPublicProperty(body, "sale-1")).toBeNull()
+    expect(findPublicProperty(body, "lease-1")?.publicId).toBe("lease-1")
+    global.fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => body }) as unknown as typeof fetch
+    expect((await fetchPublicPropertyListOrThrow()).map((r) => r.publicId)).toEqual(["lease-1", "legacy-1"])
   })
 })

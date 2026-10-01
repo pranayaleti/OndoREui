@@ -34,7 +34,7 @@ export function BuyLendingStrip() {
     const p = Number(principal)
     const r = Number(rate)
     const y = Number(term)
-    if (!Number.isFinite(p) || !Number.isFinite(r) || !Number.isFinite(y) || p < 0 || y <= 0) {
+    if (!Number.isFinite(p) || !Number.isFinite(r) || !Number.isFinite(y) || p < 0 || r < 0 || y <= 0) {
       return null
     }
     return Math.round(calculateMonthlyPI(p, r, y))

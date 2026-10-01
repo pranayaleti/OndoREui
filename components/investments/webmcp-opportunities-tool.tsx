@@ -1,13 +1,29 @@
 "use client"
 
 import { useEffect } from "react"
-import { fetchOpportunitiesClient, fetchOpportunityBySlugClient } from "@/lib/investments-api"
-import { SAMPLE_DEAL_NOTICE } from "@/lib/investments-data"
+import { MOCK_OPPORTUNITIES, SAMPLE_DEAL_NOTICE, type InvestmentOpportunity } from "@/lib/investments-data"
 
 const TOOL_LIST = "list_investment_opportunities"
 const TOOL_GET = "get_investment_opportunity"
 
 type ModelContext = { registerTool: (t: unknown) => void; unregisterTool: (name: string) => void }
+
+type OpportunityStatus = InvestmentOpportunity["status"]
+const STATUSES: OpportunityStatus[] = ["open", "coming-soon", "fully-funded"]
+
+/**
+ * The tools read the same sample records the /investments/opportunities page renders.
+ * There is no live investments API in production, so nothing here depends on the network.
+ */
+export function listSampleOpportunities(status?: string): InvestmentOpportunity[] {
+  return status && (STATUSES as string[]).includes(status)
+    ? MOCK_OPPORTUNITIES.filter((o) => o.status === status)
+    : MOCK_OPPORTUNITIES
+}
+
+export function findSampleOpportunity(slug: string): InvestmentOpportunity | undefined {
+  return MOCK_OPPORTUNITIES.find((o) => o.slug === slug)
+}
 
 /**
  * Registers read-only WebMCP tools for the sample investment deal cards: list (with optional status filter) and get by slug.
@@ -49,12 +65,7 @@ export function WebMCPOpportunitiesTool() {
         },
         annotations: { readOnlyHint: true, untrustedContentHint: true },
         async execute(input: { status?: string }) {
-          const opportunities = await fetchOpportunitiesClient()
-          const status = input?.status as "open" | "coming-soon" | "fully-funded" | undefined
-          const filtered =
-            status && ["open", "coming-soon", "fully-funded"].includes(status)
-              ? opportunities.filter((o) => o.status === status)
-              : opportunities
+          const filtered = listSampleOpportunities(input?.status)
           const summary = filtered.map((o) => ({
             slug: o.slug,
             title: o.title,
@@ -104,7 +115,7 @@ export function WebMCPOpportunitiesTool() {
               content: [{ type: "text", text: JSON.stringify({ error: "slug is required" }) }],
             }
           }
-          const opportunity = await fetchOpportunityBySlugClient(slug)
+          const opportunity = findSampleOpportunity(slug)
           if (!opportunity) {
             return {
               content: [{ type: "text", text: JSON.stringify({ error: "Opportunity not found", slug }) }],

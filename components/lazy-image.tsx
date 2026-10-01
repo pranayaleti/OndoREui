@@ -97,6 +97,7 @@ export function LazyImage({
       <div
         className={cn(
           "flex items-center justify-center bg-muted text-gray-400",
+          fill && "absolute inset-0",
           className
         )}
         style={fill ? undefined : { width, height }}
@@ -107,7 +108,10 @@ export function LazyImage({
   }
 
   return (
-    <div ref={imgRef} className={cn("relative", className)}>
+    // With `fill`, the parent supplies the box: this wrapper covers it and `className` (object-cover,
+    // hover scale, rounding) goes on the image. Otherwise the wrapper is a zero-height, relative
+    // div and a fill image has nothing to fill.
+    <div ref={imgRef} className={fill ? "absolute inset-0" : cn("relative", className)}>
       {isLoading && (
         <div
           className="absolute inset-0 bg-muted animate-pulse rounded"
@@ -124,7 +128,8 @@ export function LazyImage({
           fill={fill}
           className={cn(
             "transition-opacity duration-300",
-            isLoading ? "opacity-0" : "opacity-100"
+            isLoading ? "opacity-0" : "opacity-100",
+            fill && className
           )}
           priority={priority}
           quality={quality}

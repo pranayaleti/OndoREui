@@ -1,4 +1,4 @@
-import { ComparisonTable } from "@/components/content/comparison-table"
+import { ComparisonTable, type ComparisonTableProps } from "@/components/content/comparison-table"
 import {
   BREAK_EVEN_TABLE_IDS,
   REFI_BREAK_EVEN_COPY,
@@ -24,18 +24,24 @@ const DEFAULT_FOOTNOTES: Record<BreakEvenTableId, string> = {
     "A recast does not buy a lower rate. A refinance does not recast the old note. Confirm the servicer and compare two Loan Estimates.",
 }
 
-export function BreakEvenTable({
+function resolveTableProps({
   table = "stay-scenarios",
   caption,
   footnote,
-}: BreakEvenTableProps) {
+}: BreakEvenTableProps): ComparisonTableProps {
   const resolved: BreakEvenTableId = BREAK_EVEN_TABLE_IDS.includes(table) ? table : "stay-scenarios"
-  return (
-    <ComparisonTable
-      caption={caption ?? DEFAULT_CAPTIONS[resolved]}
-      columns={breakEvenColumns(resolved)}
-      rows={breakEvenRows(resolved)}
-      footnote={footnote ?? DEFAULT_FOOTNOTES[resolved]}
-    />
-  )
+  return {
+    caption: caption ?? DEFAULT_CAPTIONS[resolved],
+    columns: breakEvenColumns(resolved),
+    rows: breakEvenRows(resolved),
+    footnote: footnote ?? DEFAULT_FOOTNOTES[resolved],
+  }
 }
+
+export function BreakEvenTable(props: BreakEvenTableProps) {
+  return <ComparisonTable {...resolveTableProps(props)} />
+}
+
+/** Text this table renders, for the article word count (see lib/content/article-outline.ts). */
+BreakEvenTable.articleText = (props: BreakEvenTableProps): string =>
+  ComparisonTable.articleText(resolveTableProps(props))

@@ -64,3 +64,7 @@ export function ProsCons({
     </div>
   )
 }
+
+/** Text this block renders, for the article word count (see lib/content/article-outline.ts). */
+ProsCons.articleText = ({ pros, cons, prosHeading = "Pros", consHeading = "Cons" }: ProsConsProps): string =>
+  [...(pros.length ? [prosHeading, ...pros] : []), ...(cons.length ? [consHeading, ...cons] : [])].join(" ")

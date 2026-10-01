@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
+import { propertyManagementFee } from "@/lib/rental-expenses";
 
 interface DSCRData {
   monthlyRent: number;
@@ -75,9 +76,7 @@ const DSCRCalculator: React.FC = () => {
     const annualRentalIncome = effectiveAnnualRent - vacancyLoss;
 
     // Calculate property management
-    const managementFee = propertyManagement > 0 && propertyManagement < 1
-      ? effectiveAnnualRent * propertyManagement
-      : propertyManagement;
+    const managementFee = propertyManagementFee(effectiveAnnualRent, propertyManagement);
 
     // Calculate annual operating expenses
     const annualOperatingExpenses = propertyTax + insurance + maintenance + managementFee + otherExpenses;
@@ -219,9 +218,10 @@ const DSCRCalculator: React.FC = () => {
               {/* Property Management */}
               <NumberField
                 id="propertyManagement"
-                label="Property Management (annual $ or % as decimal)"
+                label="Property Management (% of gross rent)"
                 kind="percent"
-                step={0.01}
+                min={0}
+                max={100}
                 value={formData.propertyManagement}
                 onChange={(next) => handleInputChange('propertyManagement', next)}
               />
@@ -282,7 +282,7 @@ const DSCRCalculator: React.FC = () => {
               <NumberField
                 id="requiredDSCR"
                 label="Required DSCR (for max loan calculation)"
-                kind="currency"
+                kind="ratio"
                 step={0.05}
                 value={formData.requiredDSCR}
                 onChange={(next) => handleInputChange('requiredDSCR', next)}

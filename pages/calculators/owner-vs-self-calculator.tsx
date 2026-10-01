@@ -84,7 +84,7 @@ function NumberField({
     <SharedNumberField
       id={id}
       label={label}
-      kind={suffix === "%" ? "percent" : prefix === "$" ? "currency" : "count"}
+      kind={suffix?.startsWith("%") ? "percent" : prefix === "$" ? "currency" : "count"}
       min={min}
       step={step}
       value={Number.isFinite(value) ? value : 0}
@@ -197,7 +197,7 @@ const OwnerVsSelfCalculator: React.FC = () => {
               <div className="space-y-4">
                 <NumberField label="Monthly rent" value={inputs.monthlyRent} onChange={(v) => set("monthlyRent", v)} prefix="$" />
                 <NumberField label="Vacancy" value={inputs.vacancyPct} onChange={(v) => set("vacancyPct", v)} suffix="%" hint="Utah average is ~5%." />
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
                   <NumberField label="Annual property tax" value={inputs.propertyTax} onChange={(v) => set("propertyTax", v)} prefix="$" />
                   <NumberField label="Annual insurance" value={inputs.insurance} onChange={(v) => set("insurance", v)} prefix="$" />
                 </div>

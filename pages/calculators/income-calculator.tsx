@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { LoanProgram, describeProgramDti, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
 
@@ -110,6 +110,8 @@ const IncomeCalculator: React.FC = () => {
       maximumFractionDigits: 0
     }).format(amount);
   };
+
+  const dtiLimits = describeProgramDti(formData.program);
 
   const formatPercent = (value: number) => {
     return `${value.toFixed(1)}%`;
@@ -294,8 +296,8 @@ const IncomeCalculator: React.FC = () => {
                     
                     <div className="mt-4 p-3 bg-muted rounded-lg">
                       <p className="text-sm text-foreground/70">
-                        <strong>Front-End:</strong> Housing expenses ÷ Gross monthly income (target: ≤28%)<br/>
-                        <strong>Back-End:</strong> Total debt payments ÷ Gross monthly income (target: ≤36%)
+                        <strong>Front-End:</strong> Housing expenses ÷ Gross monthly income (target: {dtiLimits.frontTarget} for {dtiLimits.programLabel} loans)<br/>
+                        <strong>Back-End:</strong> Total debt payments ÷ Gross monthly income (target: {dtiLimits.backTarget} for {dtiLimits.programLabel} loans)
                       </p>
                     </div>
                   </div>
@@ -305,7 +307,7 @@ const IncomeCalculator: React.FC = () => {
                 <div className="bg-card rounded-lg shadow-lg p-6 border border-border">
                   <h2 className="text-xl font-semibold text-foreground mb-4">Recommendations</h2>
                   <div className="space-y-3 text-sm text-foreground/70">
-                    <p>• This calculation uses conservative 28/36 debt-to-income ratios</p>
+                    <p>• This calculation uses the debt-to-income limits for the loan program you select ({dtiLimits.programLabel})</p>
                     <p>• Consider additional expenses like maintenance and utilities</p>
                     <p>• Factor in emergency savings and other financial goals</p>
                     <p>• Consult with a mortgage professional for personalized advice</p>
@@ -324,7 +326,7 @@ const IncomeCalculator: React.FC = () => {
               <h3 className="font-medium text-foreground mb-2">How It Works:</h3>
               <ul className="space-y-1 list-disc list-inside">
                 <li>Calculates required income for a specific mortgage</li>
-                <li>Uses standard 28% front-end ratio</li>
+                <li>Uses the front-end and back-end ratios for the loan program you select</li>
                 <li>Considers property taxes and insurance</li>
                 <li>Accounts for existing monthly debt</li>
                 <li>Provides debt-to-income ratio analysis</li>

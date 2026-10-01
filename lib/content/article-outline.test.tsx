@@ -1,6 +1,10 @@
 import { render } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 import { extractOutline, readingTimeMinutes } from "./article-outline"
+import { ComparisonTable } from "@/components/content/comparison-table"
+import { BreakEvenTable } from "@/components/content/break-even-table"
+import { StepList } from "@/components/content/step-list"
+import { ProsCons } from "@/components/content/pros-cons"
 
 describe("extractOutline", () => {
   it("collects an h2 heading with its slugified id", () => {
@@ -79,6 +83,35 @@ describe("extractOutline", () => {
       </>,
     )
     expect(wordCount).toBe(5)
+  })
+
+  it("counts text passed through ComparisonTable props", () => {
+    const { wordCount } = extractOutline(
+      <ComparisonTable
+        caption="Two words"
+        columns={[{ id: "a", heading: "Alpha" }]}
+        rows={[{ id: "r", criterion: "Credit score", cells: { a: "Five words in this cell" } }]}
+        footnote="Foot note"
+      />,
+    )
+    // caption 2 + "Question" 1 + heading 1 + criterion 2 + cell 5 + footnote 2
+    expect(wordCount).toBe(13)
+  })
+
+  it("counts BreakEvenTable text, which comes from library data", () => {
+    const { wordCount } = extractOutline(<BreakEvenTable />)
+    expect(wordCount).toBeGreaterThan(40)
+  })
+
+  it("counts StepList titles and bodies and ProsCons items", () => {
+    const { wordCount } = extractOutline(
+      <>
+        <StepList steps={[{ title: "First step", body: <>Do the <strong>thing</strong> now</> }]} />
+        <ProsCons pros={["Lower rate"]} cons={["Closing costs", "Time"]} />
+      </>,
+    )
+    // steps: 2 + 4 ; pros/cons: "Pros" 1 + 2 + "Cons" 1 + 2 + 1
+    expect(wordCount).toBe(13)
   })
 
   it("returns an empty outline when there are no headings", () => {

@@ -6,6 +6,8 @@ import { PageLoading } from "@/components/loading-states"
 import { LoadErrorRetry } from "@/components/load-error-retry"
 import { confirmVisit, getVisitByToken, isLinkNotFoundError, type SiteVisitPublic } from "@/lib/api/site-visits"
 import { CONFIRM_EXPORT_SHELL, tokenFromRouteParam } from "@/lib/visit-static-paths"
+import { buildGoogleCalendarUrl, formatVisitWhen } from "@/lib/visit-time"
+import { SITE_EMAILS, SITE_PHONE, SITE_PHONE_TEL } from "@/lib/site"
 
 interface Props {
   token?: string
@@ -25,8 +27,8 @@ function LinkNotFound() {
         <p className="text-muted-foreground">This confirmation link is invalid or has already been used.</p>
         <p className="mt-4 text-sm text-muted-foreground">
           Contact us at{" "}
-          <a href="mailto:hello@ondorealestate.com" className="underline">
-            hello@ondorealestate.com
+          <a href={`mailto:${SITE_EMAILS.primary}`} className="underline">
+            {SITE_EMAILS.primary}
           </a>
         </p>
       </div>
@@ -90,15 +92,32 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
   const [error, setError] = useState<string | null>(null)
 
   if (visit.status !== "proposed" && !confirmedAt) {
+    if (visit.status === "confirmed") {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-background p-6">
+          <div className="max-w-md text-center">
+            <h1 className="mb-2 text-2xl font-bold text-foreground">Visit already confirmed</h1>
+            {visit.scheduledAt ? (
+              <p className="text-muted-foreground">Your visit is scheduled for {formatVisitWhen(visit.scheduledAt)}</p>
+            ) : null}
+          </div>
+        </div>
+      )
+    }
+    // Cancelled, expired or any other state: never tell the lead the visit is confirmed.
     return (
       <div className="flex min-h-screen items-center justify-center bg-background p-6">
         <div className="max-w-md text-center">
-          <h1 className="mb-2 text-2xl font-bold text-foreground">Visit already confirmed</h1>
-          {visit.scheduledAt ? (
-            <p className="text-muted-foreground">
-              Your visit is scheduled for {new Date(visit.scheduledAt).toLocaleString("en-US")}
-            </p>
-          ) : null}
+          <h1 className="mb-2 text-2xl font-bold text-foreground">
+            {visit.status === "cancelled" ? "This visit was cancelled" : "This visit link is no longer active"}
+          </h1>
+          <p className="text-muted-foreground">
+            To book a new time, <a href="/contact/" className="underline">contact us</a> or call{" "}
+            <a href={`tel:${SITE_PHONE_TEL}`} className="underline">
+              {SITE_PHONE}
+            </a>
+            .
+          </p>
         </div>
       </div>
     )
@@ -120,9 +139,12 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
   }
 
   if (confirmedAt) {
-    const calUrl = `https://calendar.google.com/calendar/r/eventedit?text=Property+Viewing&dates=${
-      confirmedAt.replace(/[-:]/g, "").replace(".000Z", "Z")
-    }/${confirmedAt.replace(/[-:]/g, "").replace(".000Z", "Z")}&details=Property+viewing+with+OnDo`
+    const address = visit.properties ? `${visit.properties.addressLine1}, ${visit.properties.city}` : undefined
+    const calUrl = buildGoogleCalendarUrl({
+      startIso: confirmedAt,
+      title: propertyTitle || visit.properties?.title,
+      address,
+    })
 
     return (
       <div className="flex min-h-screen items-center justify-center bg-background p-6">
@@ -131,7 +153,7 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
           <h1 className="mb-2 text-2xl font-bold text-foreground">Visit Confirmed!</h1>
           <p className="mb-6 text-muted-foreground">
             Your visit is booked for{" "}
-            {new Date(confirmedAt).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" })}
+            {formatVisitWhen(confirmedAt)}
           </p>
           {(propertyTitle || visit.properties) && (
             <p className="mb-6 text-sm text-muted-foreground">
@@ -174,7 +196,7 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
               }`}
             >
               <span className="font-medium text-foreground">
-                {new Date(slot).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" })}
+                {formatVisitWhen(slot)}
               </span>
             </button>
           ))}

@@ -31,15 +31,10 @@ import {
   Building2,
 } from "lucide-react"
 import { safeJsonLd } from "@/components/json-ld"
+import { formatCompactUsd } from "@/lib/format-compact"
 
 type CityGuidePageProps = {
   city: UtahCity
-}
-
-function fmtUsd(n: number): string {
-  if (n >= 1_000_000) return "$" + (n / 1_000_000).toFixed(1) + "M"
-  if (n >= 1_000) return "$" + (n / 1_000).toFixed(0) + "K"
-  return "$" + n.toLocaleString("en-US")
 }
 
 export function CityGuidePage({ city }: CityGuidePageProps) {
@@ -127,14 +122,14 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
               <Card>
                 <CardContent className="pt-6 text-center">
                   <Home className="h-5 w-5 text-primary mx-auto mb-2" />
-                  <p className="text-2xl font-bold">{fmtUsd(market.medianHomePrice)}</p>
+                  <p className="text-2xl font-bold">{formatCompactUsd(market.medianHomePrice)}</p>
                   <p className="text-sm text-foreground/60">Median Home Price</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6 text-center">
                   <DollarSign className="h-5 w-5 text-primary mx-auto mb-2" />
-                  <p className="text-2xl font-bold">{fmtUsd(market.medianRent)}/mo</p>
+                  <p className="text-2xl font-bold">{formatCompactUsd(market.medianRent)}/mo</p>
                   <p className="text-sm text-foreground/60">Median Rent</p>
                 </CardContent>
               </Card>
@@ -160,7 +155,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
               </div>
               <div className="rounded-lg border p-4">
                 <p className="text-sm text-foreground/60">Median Household Income</p>
-                <p className="text-lg font-semibold">{fmtUsd(market.medianHouseholdIncome)}</p>
+                <p className="text-lg font-semibold">{formatCompactUsd(market.medianHouseholdIncome)}</p>
               </div>
               <div className="rounded-lg border p-4">
                 <p className="text-sm text-foreground/60">Owner-Occupied</p>

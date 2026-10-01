@@ -8,12 +8,12 @@ import { PropertyListingDetailClient } from "@/components/properties/property-li
 import { PropertyListingDetail } from "@/components/properties/property-listing-detail"
 import {
   PROPERTY_DETAIL_PLACEHOLDER_ID,
+  fetchAllPublicListingRows,
   fetchPublicPropertyByPublicId,
   fetchPublicPropertyList,
   publicIdsFromListBody,
 } from "@/lib/public-property"
 import { pickRelatedListings } from "@/lib/listing-presentation"
-import { backendUrl } from "@/lib/backend"
 import { screenListingDescription } from "@/lib/fair-housing-steering"
 
 interface PageProps {
@@ -31,18 +31,11 @@ interface PageProps {
  */
 export async function generateStaticParams(): Promise<Array<{ publicId: string }>> {
   try {
-    const res = await fetch(backendUrl("/api/properties/public"))
-    if (!res.ok) {
-      console.warn(
-        `[properties/[publicId]] generateStaticParams: backend returned ${res.status}; emitting placeholder`
-      )
-      return [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
-    }
-    const params = publicIdsFromListBody(await res.json()).map((publicId) => ({ publicId }))
+    const params = publicIdsFromListBody(await fetchAllPublicListingRows()).map((publicId) => ({ publicId }))
     return params.length > 0 ? params : [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
-  } catch {
+  } catch (error) {
     console.warn(
-      "[properties/[publicId]] generateStaticParams: backend unreachable; emitting placeholder"
+      `[properties/[publicId]] generateStaticParams: backend unavailable (${error instanceof Error ? error.message : "unknown"}); emitting placeholder`
     )
     return [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
   }

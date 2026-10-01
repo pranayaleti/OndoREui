@@ -13,6 +13,10 @@ import { ListingAgentCard } from "@/components/properties/listing-agent-card"
 import { ListingRelated } from "@/components/properties/listing-related"
 import { RentalApplyPanel } from "@/components/rental/rental-apply-panel"
 import { RentalApplyHashLink, RentalPropertyViewTracker } from "@/components/rental/rental-listing-funnel"
+import {
+  ListingAvailabilityProvider,
+  ListingUnavailableNotice,
+} from "@/components/properties/listing-availability"
 import { ListingMediaEmbed } from "@/components/properties/listing-media-embed"
 import { ListingDocuments } from "@/components/properties/listing-documents"
 import { ListingMetrics } from "@/components/properties/listing-metrics"
@@ -91,6 +95,7 @@ export function PropertyListingDetail({
     type: property.type,
     sqft: property.sqft,
     leaseTerms: property.leaseTerms,
+    petPolicy: property.petPolicy,
   })
   const petNotes = petNotesFromAmenities(property.amenities)
   const petPolicyRows = listingPetPolicyRows(property.petPolicy)
@@ -222,6 +227,7 @@ export function PropertyListingDetail({
 
   return (
     <main className="bg-background">
+      <ListingAvailabilityProvider publicId={publicId}>
       <RentalPropertyViewTracker propertyRef={publicId} />
       {propertyJsonLd ? (
         <script
@@ -239,6 +245,7 @@ export function PropertyListingDetail({
       />
 
       <div className="container mx-auto max-w-6xl px-4 pt-6 pb-24 md:pb-6">
+        <ListingUnavailableNotice />
         <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
           <Link href="/properties" className="hover:underline">
             Properties
@@ -533,6 +540,7 @@ export function PropertyListingDetail({
           })}
         />
       </div>
+      </ListingAvailabilityProvider>
     </main>
   )
 }

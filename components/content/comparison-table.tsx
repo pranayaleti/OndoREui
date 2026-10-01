@@ -9,6 +9,13 @@ export type ComparisonTableProps = {
   footnote?: string
 }
 
+/** Text this table renders, for the article word count (see lib/content/article-outline.ts). */
+function comparisonTableText({ caption, columns, rows, footnote }: ComparisonTableProps): string {
+  if (columns.length === 0 || rows.length === 0) return ""
+  const cells = rows.flatMap((row) => [row.criterion, ...columns.map((column) => row.cells[column.id] ?? "")])
+  return [caption, "Question", ...columns.map((column) => column.heading), ...cells, footnote ?? ""].join(" ")
+}
+
 export function ComparisonTable({
   caption,
   columns,
@@ -81,3 +88,5 @@ export function ComparisonTable({
     </div>
   )
 }
+
+ComparisonTable.articleText = comparisonTableText

@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest"
 import { render, screen, waitFor, fireEvent } from "@testing-library/react"
+import L from "leaflet"
 import PropertyMap, {
   syncLeafletSizeAfterContainerResize,
   buildListingPopupHtml,
@@ -161,5 +162,48 @@ describe("prepareLeafletHost", () => {
     node._leaflet_id = 17
     prepareLeafletHost(node)
     expect(node._leaflet_id).toBeUndefined()
+  })
+})
+
+describe("PropertyMap keeps the visitor's view across parent re-renders", () => {
+  const listing = (id: string, lat: number) => ({
+    id, title: id, price: 2000, bedrooms: 2, bathrooms: 1, lat, lng: -111.89,
+  })
+
+  it("fits bounds once for the same listings, even with fresh arrays and a selection change", async () => {
+    const fit = vi.spyOn(L.Map.prototype, "fitBounds")
+    const setView = vi.spyOn(L.Map.prototype, "setView")
+    fit.mockClear()
+    setView.mockClear()
+    const { rerender } = render(<PropertyMap properties={[listing("a", 40.7), listing("b", 40.8)]} />)
+    await waitFor(() => expect(document.querySelectorAll(".ondo-price-pin")).toHaveLength(2))
+    expect(fit).toHaveBeenCalledTimes(1)
+
+    // New array and object identities, same listings, plus a selection.
+    rerender(
+      <PropertyMap properties={[listing("a", 40.7), listing("b", 40.8)]} selectedPropertyId="a" />,
+    )
+    await waitFor(() =>
+      expect(document.querySelectorAll(".ondo-price-pin--selected")).toHaveLength(1),
+    )
+    expect(fit).toHaveBeenCalledTimes(1)
+    // fitBounds itself calls setView once; no further view resets happened.
+    expect(setView).toHaveBeenCalledTimes(1)
+
+    // A different set of listings does re-fit.
+    rerender(<PropertyMap properties={[listing("a", 40.7), listing("c", 40.9)]} />)
+    await waitFor(() => expect(fit).toHaveBeenCalledTimes(2))
+    fit.mockRestore()
+    setView.mockRestore()
+  })
+
+  it("does not reset the view when an omitted center prop is re-evaluated", async () => {
+    const setView = vi.spyOn(L.Map.prototype, "setView")
+    setView.mockClear()
+    const { rerender } = render(<PropertyMap properties={[]} />)
+    await waitFor(() => expect(setView).toHaveBeenCalledTimes(1))
+    rerender(<PropertyMap properties={[]} className="x" />)
+    expect(setView).toHaveBeenCalledTimes(1)
+    setView.mockRestore()
   })
 })

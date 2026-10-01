@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import Link from "next/link"
 import { trackRentalFunnel } from "@/lib/rental-analytics"
+import { useListingUnavailable } from "@/components/properties/listing-availability"
 
 export function RentalPropertyViewTracker({ propertyRef }: { propertyRef: string }) {
   useEffect(() => {
@@ -38,6 +39,8 @@ export function RentalApplyHashLink({
   className?: string
   children: React.ReactNode
 }) {
+  // Rented or withdrawn since the page was built: no apply link.
+  if (useListingUnavailable()) return null
   return (
     <a href="#listing-apply" className={className} onClick={() => trackRentalFunnel("apply_click", propertyRef)}>
       {children}

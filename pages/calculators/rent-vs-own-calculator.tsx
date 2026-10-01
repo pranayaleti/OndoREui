@@ -3,60 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Home, Building2, Eye, EyeOff } from 'lucide-react';
-import { LoanProgram, getProgramMI, clampCreditScore, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { LoanProgram, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { calculateRentVsOwn, type RentVsOwnInputs, type RentVsOwnResults } from '@/lib/rent-vs-own';
 import { useFinancialVisibility } from '@/lib/financial-visibility';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
 
-interface RentVsOwnData {
-  // Rent scenario
-  monthlyRent: number;
-  rentIncrease: number;
-  securityDeposit: number;
-  rentersInsurance: number;
-  
-  // Buy scenario
-  homePrice: number;
-  downPayment: number;
-  interestRate: number;
-  loanTerm: number;
-  propertyTax: number;
-  homeownersInsurance: number;
-  pmi: number;
-  maintenance: number;
-  hoa: number;
-  program: LoanProgram;
-  creditScore: number;
-  
-  // Analysis period
-  analysisYears: number;
-  
-  // Investment assumptions
-  investmentReturn: number;
-  homeAppreciation: number;
-}
-
-interface RentVsOwnResults {
-  rentTotalCost: number;
-  buyTotalCost: number;
-  buyTotalCostWithInvestment: number;
-  breakEvenYears: number;
-  monthlyRentEquivalent: number;
-  annualComparison: Array<{
-    year: number;
-    rentCost: number;
-    buyCost: number;
-    principalPaid: number;
-    equity: number;
-    buyWithInvestment: number;
-    difference: number;
-  }>;
-  recommendation: string;
-  explanation: string;
-}
-
 const RentVsOwnCalculator: React.FC = () => {
-  const [formData, setFormData] = useState<RentVsOwnData>({
+  const [formData, setFormData] = useState<RentVsOwnInputs>({
     monthlyRent: 2000,
     rentIncrease: 3,
     securityDeposit: 2000,
@@ -67,14 +21,15 @@ const RentVsOwnCalculator: React.FC = () => {
     loanTerm: 30,
     propertyTax: 4000,
     homeownersInsurance: 1200,
-    pmi: 0,
     maintenance: 3000,
     hoa: 0,
     program: 'conventional',
     creditScore: 740,
     analysisYears: 10,
     investmentReturn: 7,
-    homeAppreciation: 3
+    homeAppreciation: 3,
+    buyingCostPct: 3,
+    sellingCostPct: 6
   });
 
   const [results, setResults] = useState<RentVsOwnResults | null>(null);
@@ -82,139 +37,16 @@ const RentVsOwnCalculator: React.FC = () => {
   const { showValues, toggle } = useFinancialVisibility();
 
   useEffect(() => {
-    calculateRentVsOwn();
+    calculateResults();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
-  const calculateRentVsOwn = () => {
-    const {
-      monthlyRent,
-      rentIncrease,
-      securityDeposit,
-      rentersInsurance,
-      homePrice,
-      downPayment,
-      interestRate,
-      loanTerm,
-      propertyTax,
-      homeownersInsurance,
-      maintenance,
-      hoa,
-      analysisYears,
-      investmentReturn,
-      homeAppreciation
-    } = formData;
-
-    // Calculate loan details
-    const loanAmount = homePrice - downPayment;
-    const monthlyRate = interestRate / 100 / 12;
-    const monthlyPayment = calculateMonthlyPI(loanAmount, interestRate, loanTerm);
-
-    // Calculate monthly costs for buying
-    const monthlyTax = propertyTax / 12;
-    const monthlyInsurance = homeownersInsurance / 12;
-    const monthlyMaintenance = maintenance / 12;
-    const monthlyHoa = hoa / 12;
-    // Program MI overrides simple PMI when applicable
-    const credit = clampCreditScore(formData.creditScore);
-    const programMI = getProgramMI(formData.program, loanAmount, homePrice, credit, loanTerm, downPayment).monthlyMI;
-    const totalMonthlyBuy = monthlyPayment + monthlyTax + monthlyInsurance + programMI + monthlyMaintenance + monthlyHoa;
-
-    // Calculate annual comparison
-    const annualComparison = [];
-    let rentTotalCost = 0;
-    let buyTotalCost = 0;
-    let currentRent = monthlyRent;
-    let currentHomeValue = homePrice;
-    let remainingLoan = loanAmount;
-
-    for (let year = 1; year <= analysisYears; year++) {
-      // Rent costs
-      const annualRentCost = currentRent * 12 + (year === 1 ? securityDeposit : 0) + rentersInsurance;
-      rentTotalCost += annualRentCost;
-      currentRent *= (1 + rentIncrease / 100);
-
-      // Buy costs
-      const annualBuyCost = totalMonthlyBuy * 12;
-      buyTotalCost += annualBuyCost;
-
-      // Home appreciation
-      currentHomeValue *= (1 + homeAppreciation / 100);
-
-      // Equity accumulation (approximate principal paid this year)
-      let principalPaidThisYear = 0;
-      for (let m = 0; m < 12; m++) {
-        const interestPortion = remainingLoan * monthlyRate;
-        const principalPortion = monthlyPayment - interestPortion;
-        remainingLoan = Math.max(0, remainingLoan - principalPortion);
-        principalPaidThisYear += principalPortion;
-      }
-      const equity = Math.max(0, currentHomeValue - remainingLoan);
-
-      // Investment opportunity cost (what down payment + monthly difference could earn)
-      const monthlyDifference = totalMonthlyBuy - currentRent;
-      const investmentOpportunity = downPayment * Math.pow(1 + investmentReturn / 100, year) + 
-        monthlyDifference * 12 * Math.pow(1 + investmentReturn / 100, year - 0.5);
-
-      annualComparison.push({
-        year,
-        rentCost: annualRentCost,
-        buyCost: annualBuyCost,
-        principalPaid: principalPaidThisYear,
-        equity,
-        buyWithInvestment: annualBuyCost + investmentOpportunity,
-        difference: annualBuyCost - annualRentCost
-      });
-    }
-
-    // Break-even: year when net cost of buying (costs minus equity) drops below renting
-    let breakEvenYears = 0;
-    let cumulativeRent = 0;
-    let cumulativeBuy = 0;
-    
-    for (let year = 1; year <= analysisYears; year++) {
-      cumulativeRent += annualComparison[year - 1].rentCost;
-      cumulativeBuy += annualComparison[year - 1].buyCost;
-      const equityBuilt = annualComparison[year - 1].equity - downPayment;
-      
-      if ((cumulativeBuy - equityBuilt) <= cumulativeRent) {
-        breakEvenYears = year;
-        break;
-      }
-    }
-
-    // Calculate monthly rent equivalent (what rent would need to be to match buying)
-    const monthlyRentEquivalent = totalMonthlyBuy;
-
-    // Determine recommendation
-    let recommendation = '';
-    let explanation = '';
-
-    if (breakEvenYears <= 3) {
-      recommendation = 'Buying is likely the better choice';
-      explanation = 'You\'ll break even within 3 years, making buying financially advantageous.';
-    } else if (breakEvenYears <= 7) {
-      recommendation = 'Buying could be beneficial';
-      explanation = 'Moderate break-even time suggests buying may be worthwhile if you plan to stay long-term.';
-    } else {
-      recommendation = 'Renting may be more cost-effective';
-      explanation = 'Long break-even time suggests renting could be cheaper in the short to medium term.';
-    }
-
-    setResults({
-      rentTotalCost,
-      buyTotalCost,
-      buyTotalCostWithInvestment: buyTotalCost + (downPayment * Math.pow(1 + investmentReturn / 100, analysisYears)),
-      breakEvenYears,
-      monthlyRentEquivalent,
-      annualComparison,
-      recommendation,
-      explanation
-    });
+  const calculateResults = () => {
+    setResults(calculateRentVsOwn(formData));
     setHasCalculated(true);
   };
 
-  const handleInputChange = (field: keyof RentVsOwnData, value: number | string) => {
+  const handleInputChange = (field: keyof RentVsOwnInputs, value: number | string) => {
     setFormData({ ...formData, [field]: value });
   };
 
@@ -268,18 +100,18 @@ const RentVsOwnCalculator: React.FC = () => {
                   <Building2 className="h-5 w-5 mr-2 text-primary" />
                   Rent Scenario
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="monthlyRent"
                     label="Monthly Rent"
-                    kind="years"
+                    kind="currency"
                     value={formData.monthlyRent}
                     onChange={(next) => handleInputChange('monthlyRent', next)}
                   />
                   <NumberField
                     id="rentIncrease"
                     label="Annual Rent Increase"
-                    kind="currency"
+                    kind="rate"
                     step={0.1}
                     value={formData.rentIncrease}
                     onChange={(next) => handleInputChange('rentIncrease', next)}
@@ -307,7 +139,7 @@ const RentVsOwnCalculator: React.FC = () => {
                   <Home className="h-5 w-5 mr-2 text-primary" />
                   Buy Scenario
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="homePrice"
                     label="Home Price"
@@ -397,18 +229,20 @@ const RentVsOwnCalculator: React.FC = () => {
                   <TrendingUp className="h-5 w-5 mr-2 text-purple-600" />
                   Analysis Settings
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <NumberField
                     id="analysisYears"
                     label="Analysis Period"
-                    kind="currency"
+                    kind="years"
+                    min={1}
+                    max={60}
                     value={formData.analysisYears}
                     onChange={(next) => handleInputChange('analysisYears', next)}
                   />
                   <NumberField
                     id="investmentReturn"
                     label="Investment Return"
-                    kind="currency"
+                    kind="rate"
                     step={0.1}
                     value={formData.investmentReturn}
                     onChange={(next) => handleInputChange('investmentReturn', next)}
@@ -416,10 +250,32 @@ const RentVsOwnCalculator: React.FC = () => {
                   <NumberField
                     id="homeAppreciation"
                     label="Home Appreciation"
-                    kind="currency"
+                    kind="rate"
                     step={0.1}
                     value={formData.homeAppreciation}
                     onChange={(next) => handleInputChange('homeAppreciation', next)}
+                  />
+                  <NumberField
+                    id="buyingCostPct"
+                    label="Buying Costs"
+                    kind="rate"
+                    step={0.1}
+                    min={0}
+                    max={20}
+                    hint="Closing costs, percent of price"
+                    value={formData.buyingCostPct}
+                    onChange={(next) => handleInputChange('buyingCostPct', next)}
+                  />
+                  <NumberField
+                    id="sellingCostPct"
+                    label="Selling Costs"
+                    kind="rate"
+                    step={0.1}
+                    min={0}
+                    max={20}
+                    hint="Agent and closing costs when you sell"
+                    value={formData.sellingCostPct}
+                    onChange={(next) => handleInputChange('sellingCostPct', next)}
                   />
                 </div>
               </div>
@@ -453,7 +309,21 @@ const RentVsOwnCalculator: React.FC = () => {
                   <div className="bg-muted p-4 rounded-lg mb-6">
                     <h3 className="text-lg font-medium text-yellow-900 mb-2">Break-even Analysis</h3>
                     <p className="text-sm text-yellow-800 mb-2">
-                      <strong>Break-even point:</strong> {results.breakEvenYears} years
+                      <strong>Break-even point:</strong>{" "}
+                      {results.breakEvenYears === null
+                        ? `Does not break even within ${results.analysisYears} ${results.analysisYears === 1 ? 'year' : 'years'}`
+                        : `${results.breakEvenYears} ${results.breakEvenYears === 1 ? 'year' : 'years'}`}
+                    </p>
+                    <p className="text-sm text-yellow-800 mb-2">
+                      <strong>Net cost of renting:</strong>{" "}
+                      {showValues ? formatCurrency(results.netRentCost) : '••••'}
+                    </p>
+                    <p className="text-sm text-yellow-800 mb-2">
+                      <strong>Net cost of buying:</strong>{" "}
+                      {showValues ? formatCurrency(results.netBuyCost) : '••••'}
+                    </p>
+                    <p className="text-xs text-yellow-800 mb-2">
+                      Net cost of buying counts buying and selling costs and the return your down payment could have earned, minus the equity you keep. Net cost of renting counts the return your deposit could have earned, since the deposit comes back.
                     </p>
                     <p className="text-sm text-yellow-800">
                       <strong>Monthly rent equivalent:</strong>{" "}

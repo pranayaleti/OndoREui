@@ -29,6 +29,12 @@ interface PropertyMapProps {
   className?: string;
 }
 
+/** Module constant so an omitted `center` prop is the same array on every render. */
+const DEFAULT_CENTER: [number, number] = [40.7608, -111.891];
+
+/** A rendered pin, tracked so a selection change can swap its icon without rebuilding. */
+type MarkerEntry = { id: string; price: number | undefined; marker: LeafletMarker };
+
 type LeafletHostElement = HTMLDivElement & { _leaflet_id?: number };
 
 function formatPrice(price: number): string {
@@ -100,9 +106,19 @@ export function buildListingPopupHtml(
   return `<div style="min-width:200px;padding:4px">${image}<h3 style="margin:0 0 4px;font-size:14px;font-weight:600">${title}</h3>${priceLine}${factsLine}${action}${worksheet}</div>`;
 }
 
+function priceIcon(L: typeof import("leaflet"), price: number, selected: boolean) {
+  return L.divIcon({
+    className: "custom-map-marker",
+    html: `<div class="custom-map-marker-pin ondo-price-pin${selected ? " ondo-price-pin--selected" : ""}">${escapeMapPopupText(formatPrice(price))}</div>`,
+    iconSize: [72, 28],
+    iconAnchor: [36, 28],
+    popupAnchor: [0, -28],
+  });
+}
+
 export default function PropertyMap({
   properties,
-  center = [40.7608, -111.891],
+  center = DEFAULT_CENTER,
   zoom = 11,
   onPropertyClick,
   selectedPropertyId = null,
@@ -113,7 +129,10 @@ export default function PropertyMap({
   const [mapError, setMapError] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<LeafletMap | null>(null);
-  const markersRef = useRef<LeafletMarker[]>([]);
+  const markersRef = useRef<MarkerEntry[]>([]);
+  // Bounds are fitted only when the set of listings changes, so a parent re-render
+  // (highlight, filter typing) never throws away the visitor's pan and zoom.
+  const fittedIdsKeyRef = useRef<string | null>(null);
   const onPropertyClickRef = useRef(onPropertyClick);
   const [mapReadyToken, setMapReadyToken] = useState(0);
   onPropertyClickRef.current = onPropertyClick;
@@ -152,6 +171,7 @@ export default function PropertyMap({
     }).addTo(map);
 
     mapInstanceRef.current = map;
+    fittedIdsKeyRef.current = null;
     setMapReadyToken((n) => n + 1);
     requestAnimationFrame(() => {
       syncLeafletSizeAfterContainerResize(map);
@@ -194,12 +214,38 @@ export default function PropertyMap({
     };
   }, [isClient, L]);
 
+  // Rebuild markers when what they show changes, not on every render of the parent.
+  const markersKey = useMemo(
+    () =>
+      JSON.stringify(
+        validProperties.map((p) => [
+          p.id,
+          p.lat,
+          p.lng,
+          p.title,
+          p.price,
+          p.bedrooms,
+          p.bathrooms,
+          p.type,
+          p.image,
+        ]),
+      ),
+    [validProperties],
+  );
+  const idsKey = useMemo(() => validProperties.map((p) => p.id).sort().join("\u0000"), [validProperties]);
+  const validPropertiesRef = useRef(validProperties);
+  validPropertiesRef.current = validProperties;
+  const selectedPropertyIdRef = useRef(selectedPropertyId);
+  selectedPropertyIdRef.current = selectedPropertyId;
+  const centerLat = center[0];
+  const centerLng = center[1];
+
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!L || !map || mapReadyToken === 0) return;
 
-    for (const marker of markersRef.current) {
-      marker.remove();
+    for (const entry of markersRef.current) {
+      entry.marker.remove();
     }
     markersRef.current = [];
 
@@ -211,17 +257,10 @@ export default function PropertyMap({
       popupAnchor: [0, -32],
     });
 
-    const latLngs = validProperties.map((property) => {
-      const selected = property.id === selectedPropertyId;
+    const latLngs = validPropertiesRef.current.map((property) => {
       const icon =
         property.price !== undefined
-          ? L.divIcon({
-              className: "custom-map-marker",
-              html: `<div class="custom-map-marker-pin ondo-price-pin${selected ? " ondo-price-pin--selected" : ""}">${escapeMapPopupText(formatPrice(property.price))}</div>`,
-              iconSize: [72, 28],
-              iconAnchor: [36, 28],
-              popupAnchor: [0, -28],
-            })
+          ? priceIcon(L, property.price, property.id === selectedPropertyIdRef.current)
           : locationIcon;
 
       const marker = L.marker([property.lat, property.lng], { icon })
@@ -231,16 +270,27 @@ export default function PropertyMap({
         .on("click", () => onPropertyClickRef.current?.(property.id))
         .addTo(map);
 
-      markersRef.current.push(marker);
+      markersRef.current.push({ id: property.id, price: property.price, marker });
       return L.latLng(property.lat, property.lng);
     });
 
+    if (fittedIdsKeyRef.current === idsKey) return;
+    fittedIdsKeyRef.current = idsKey;
     if (latLngs.length > 0) {
       map.fitBounds(L.latLngBounds(latLngs).pad(0.1));
     } else {
-      map.setView(center, zoom);
+      map.setView([centerLat, centerLng], zoom);
     }
-  }, [L, validProperties, selectedPropertyId, center, zoom, mapReadyToken]);
+  }, [L, markersKey, idsKey, centerLat, centerLng, zoom, mapReadyToken]);
+
+  // Selection only swaps pin icons; it never moves the map.
+  useEffect(() => {
+    if (!L) return;
+    for (const entry of markersRef.current) {
+      if (entry.price === undefined) continue;
+      entry.marker.setIcon(priceIcon(L, entry.price, entry.id === selectedPropertyId));
+    }
+  }, [L, selectedPropertyId, markersKey, mapReadyToken]);
 
   if (!isClient || !L) {
     return (

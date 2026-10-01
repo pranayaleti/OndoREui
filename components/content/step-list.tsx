@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
+import { textOf } from "@/lib/content/article-outline"
 
 export type Step = {
   title: string
@@ -36,3 +37,7 @@ export function StepList({ steps, className }: StepListProps) {
     </ol>
   )
 }
+
+/** Text this list renders, for the article word count (see lib/content/article-outline.ts). */
+StepList.articleText = ({ steps }: StepListProps): string =>
+  steps.map((step) => `${step.title} ${textOf(step.body)}`).join(" ")

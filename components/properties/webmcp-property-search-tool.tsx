@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { backendUrl } from "@/lib/backend"
-import { mapApiProperty } from "@/lib/mapProperty"
+import { mapApiProperties } from "@/lib/mapProperty"
 import type { ApiProperty, Property } from "@/app/types/property"
 
 const TOOL_LIST = "search_available_properties"
@@ -99,7 +99,7 @@ export function WebMCPPropertySearchTool() {
             }
           }
 
-          const properties: Property[] = rawArray.map(mapApiProperty)
+          const properties: Property[] = mapApiProperties(rawArray)
           const q = input.query?.toLowerCase().trim()
           const cityFilter = input.city?.toLowerCase().trim()
           const filtered = properties.filter((p) => {

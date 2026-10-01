@@ -84,6 +84,16 @@ export function findCityByZip(zip: string): UtahCity | undefined {
   return utahCitiesFromNorthOgdenToNephi.find((c) => c.zips.includes(digits))
 }
 
+/**
+ * Every city that includes the ZIP. Several ZIPs span cities (84015 covers
+ * Clinton, West Point, Sunset and Clearfield; 84070 covers Midvale and Sandy),
+ * so callers that route to a city page must let the visitor choose.
+ */
+export function findCitiesByZip(zip: string): UtahCity[] {
+  const digits = zip.trim()
+  return utahCitiesFromNorthOgdenToNephi.filter((c) => c.zips.includes(digits))
+}
+
 export const allCitySlugs = utahCitiesFromNorthOgdenToNephi.map((c) => toCitySlug(c.name))
 /**
  * Unique ZIPs across all cities. Several ZIPs span multiple cities (84015 covers

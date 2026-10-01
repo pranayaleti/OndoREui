@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, getProgramDTI, getProgramMI, clampCreditScore, calculateMonthlyPI, calculateMaxLoanFromPayment, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { LoanProgram, DEFAULT_MORTGAGE_RATE, describeProgramDti, dtiTone } from '@/lib/mortgage-utils';
+import { estimateAffordability } from '@/lib/affordability';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
 
@@ -44,73 +45,25 @@ const BuyingPowerCalculator: React.FC = () => {
   const [hasCalculated, setHasCalculated] = useState(false);
 
   const calculateBuyingPower = React.useCallback(() => {
-    const { annualIncome, monthlyDebts, downPayment, interestRate, loanTerm, propertyTaxRate, insuranceRate } = formData;
+    // Same model as /calculators/affordability, so the two pages cannot disagree.
+    const estimate = estimateAffordability({
+      annualIncome: formData.annualIncome,
+      monthlyDebts: formData.monthlyDebts,
+      downPayment: formData.downPayment,
+      interestRate: formData.interestRate,
+      termYears: formData.loanTerm,
+      propertyTaxRatePercent: formData.propertyTaxRate,
+      insuranceRatePercent: formData.insuranceRate,
+      program: formData.program,
+      creditScore: formData.creditScore,
+    });
 
-    const monthlyIncome = annualIncome / 12;
-
-    // Calculate maximum monthly payment using program DTI
-    const dti = getProgramDTI(formData.program);
-    const frontRatio = dti.frontPercent > 0 ? (dti.frontPercent / 100) : 0;
-    const backRatio = dti.backPercent / 100;
-    const maxFrontEndPayment = frontRatio > 0 ? monthlyIncome * frontRatio : Number.POSITIVE_INFINITY;
-    const maxBackEndPayment = (monthlyIncome * backRatio) - monthlyDebts;
-
-    // Use the lower of the two ratios
-    const maxMonthlyPayment = Math.min(maxFrontEndPayment, maxBackEndPayment);
-
-    const maxLoanAmount = calculateMaxLoanFromPayment(maxMonthlyPayment, interestRate, loanTerm);
-
-    // Calculate property tax and insurance based on home price
-    const maxHomePrice = maxLoanAmount + downPayment;
-    let adjustedMaxHomePrice = maxHomePrice;
-
-    // Iterate to find the correct home price that fits within the payment constraints
-    for (let i = 0; i < 10; i++) {
-      const monthlyTax = (adjustedMaxHomePrice * propertyTaxRate / 100) / 12;
-      const monthlyInsurance = (adjustedMaxHomePrice * insuranceRate / 100) / 12;
-      const estLoan = adjustedMaxHomePrice - downPayment;
-      const credit = clampCreditScore(formData.creditScore);
-      const mi = getProgramMI(formData.program, estLoan, adjustedMaxHomePrice, credit, loanTerm, downPayment).monthlyMI;
-      const availableForPandI = maxMonthlyPayment - monthlyTax - monthlyInsurance - mi;
-
-      if (availableForPandI > 0) {
-        const newMaxLoanAmount = calculateMaxLoanFromPayment(availableForPandI, interestRate, loanTerm);
-        const newMaxHomePrice = newMaxLoanAmount + downPayment;
-
-        if (Math.abs(newMaxHomePrice - adjustedMaxHomePrice) < 100) {
-          break;
-        }
-        adjustedMaxHomePrice = newMaxHomePrice;
-      } else {
-        adjustedMaxHomePrice *= 0.95;
-      }
-    }
-    
-    // Calculate final results
-    const finalMaxHomePrice = Math.min(maxHomePrice, adjustedMaxHomePrice);
-    const finalMaxLoanAmount = finalMaxHomePrice - downPayment;
-    
-    // Calculate actual monthly payment
-    const monthlyTax = (finalMaxHomePrice * propertyTaxRate / 100) / 12;
-    const monthlyInsurance = (finalMaxHomePrice * insuranceRate / 100) / 12;
-    const monthlyPandI = calculateMonthlyPI(finalMaxLoanAmount, interestRate, loanTerm);
-    const credit = clampCreditScore(formData.creditScore);
-    const monthlyMI = getProgramMI(formData.program, finalMaxLoanAmount, finalMaxHomePrice, credit, loanTerm, downPayment).monthlyMI;
-    
-    const totalMonthlyPayment = monthlyPandI + monthlyTax + monthlyInsurance + monthlyMI;
-    
-    // Calculate debt-to-income ratio
-    const debtToIncomeRatio = ((monthlyDebts + totalMonthlyPayment) / monthlyIncome) * 100;
-    
-    // Recommended home price (conservative estimate)
-    const recommendedHomePrice = finalMaxHomePrice * 0.9;
-    
     setResults({
-      maxHomePrice: finalMaxHomePrice,
-      maxLoanAmount: finalMaxLoanAmount,
-      monthlyPayment: totalMonthlyPayment,
-      debtToIncomeRatio,
-      recommendedHomePrice
+      maxHomePrice: estimate.maxHomePrice,
+      maxLoanAmount: estimate.maxLoanAmount,
+      monthlyPayment: estimate.monthlyPayment.total,
+      debtToIncomeRatio: estimate.backEndRatio,
+      recommendedHomePrice: estimate.recommendedHomePrice,
     });
     setHasCalculated(true);
   }, [formData]);
@@ -135,6 +88,8 @@ const BuyingPowerCalculator: React.FC = () => {
   const formatPercent = (value: number) => {
     return `${value.toFixed(1)}%`;
   };
+
+  const dtiLimits = describeProgramDti(formData.program);
 
   const getCreditScoreColor = (score: number) => {
     if (score >= 750) return 'text-primary';
@@ -297,14 +252,14 @@ const BuyingPowerCalculator: React.FC = () => {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span className="text-foreground/70">Total Debt Ratio:</span>
-                      <span className={`font-semibold ${results.debtToIncomeRatio <= 36 ? 'text-primary' : 'text-destructive-emphasis'}`}>
+                      <span className={`font-semibold ${dtiTone(results.debtToIncomeRatio, dtiLimits.backPercent) === 'good' ? 'text-primary' : 'text-destructive-emphasis'}`}>
                         {formatPercent(results.debtToIncomeRatio)}
                       </span>
                     </div>
                     
                     <div className="mt-4 p-3 bg-muted rounded-lg">
                       <p className="text-sm text-foreground/70">
-                        <strong>Target:</strong> ≤36% for conventional loans<br/>
+                        <strong>Target:</strong> {dtiLimits.backTarget} for {dtiLimits.programLabel} loans<br/>
                         <strong>Current:</strong> {formatPercent(results.debtToIncomeRatio)}
                       </p>
                     </div>
@@ -344,7 +299,7 @@ const BuyingPowerCalculator: React.FC = () => {
             <div>
               <h3 className="font-medium text-foreground mb-2">How It Works:</h3>
               <ul className="space-y-1 list-disc list-inside">
-                <li>Uses standard 28/36 debt-to-income ratios</li>
+                <li>Uses the debt-to-income limits for the loan program you select</li>
                 <li>Considers your credit score impact on rates</li>
                 <li>Accounts for property taxes and insurance</li>
                 <li>Provides conservative recommendations</li>

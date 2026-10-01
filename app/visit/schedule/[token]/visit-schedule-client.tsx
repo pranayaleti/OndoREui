@@ -13,6 +13,8 @@ import {
   isLinkNotFoundError,
 } from "@/lib/api/site-visits"
 import { SCHEDULE_EXPORT_SHELL, tokenFromRouteParam } from "@/lib/visit-static-paths"
+import { formatVisitWhen } from "@/lib/visit-time"
+import { SITE_EMAILS } from "@/lib/site"
 
 interface Props {
   token?: string
@@ -32,8 +34,8 @@ function LinkNotFound() {
         <p className="text-muted-foreground">This schedule link is invalid or is no longer available.</p>
         <p className="mt-4 text-sm text-muted-foreground">
           Contact us at{" "}
-          <a href="mailto:hello@ondorealestate.com" className="underline">
-            hello@ondorealestate.com
+          <a href={`mailto:${SITE_EMAILS.primary}`} className="underline">
+            {SITE_EMAILS.primary}
           </a>
         </p>
       </div>
@@ -87,10 +89,6 @@ export function VisitScheduleClient({ token: tokenProp }: Props) {
       return _exhaustive
     }
   }
-}
-
-function formatWhen(iso: string): string {
-  return new Date(iso).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" })
 }
 
 function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; token: string }) {
@@ -157,7 +155,7 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
         </p>
         {existing?.status === "confirmed" && existing.scheduledAt ? (
           <div className="mb-6 rounded-xl border border-border bg-muted p-3 text-sm text-foreground">
-            <p>Your showing is confirmed for {formatWhen(existing.scheduledAt)}.</p>
+            <p>Your showing is confirmed for {formatVisitWhen(existing.scheduledAt)}.</p>
             <button
               type="button"
               onClick={() => void cancel()}
@@ -183,7 +181,7 @@ function VisitScheduleForm({ schedule, token }: { schedule: SchedulePayload; tok
                     : "border-border hover:border-muted-foreground/40"
                 }`}
               >
-                <span className="font-medium text-foreground">{formatWhen(slot.startsAt)}</span>
+                <span className="font-medium text-foreground">{formatVisitWhen(slot.startsAt)}</span>
               </button>
             ))
           )}

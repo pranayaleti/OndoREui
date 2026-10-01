@@ -12,6 +12,8 @@ import {
   applyFinancedUpfrontToLoan,
   getProgramDTI,
   getProgramMI,
+  describeProgramDti,
+  dtiTone,
   clampCreditScore,
   DEFAULT_MORTGAGE_RATE,
   type LoanProgram,
@@ -341,6 +343,33 @@ describe("getProgramMI", () => {
     expect(mi.description).toContain("No PMI");
   });
 
+  it("charges no PMI at exactly 20% down and PMI just below it", () => {
+    const at = getProgramMI("conventional", 240_000, 300_000, 740, 30, 60_000);
+    expect(at.monthlyMI).toBe(0);
+    const below = getProgramMI("conventional", 241_500, 300_000, 740, 30, 58_500);
+    expect(below.monthlyMI).toBeGreaterThan(0);
+    expect(below.description).toBe("Conventional PMI");
+  });
+
+  it.each<[number, number, number]>([
+    // term in years, down payment on a $400k price, expected annual MIP rate
+    [30, 10_000, 0.0055], // 97.5% LTV
+    [30, 20_000, 0.005], // exactly 95% LTV
+    [30, 40_000, 0.005],
+    [25, 40_000, 0.005],
+    [20, 40_000, 0.005],
+    [15, 20_000, 0.004], // 95% LTV
+    [15, 38_000, 0.004], // 90.5% LTV
+    [15, 40_000, 0.0015], // exactly 90% LTV
+    [15, 50_000, 0.0015],
+    [10, 80_000, 0.0015],
+  ])("prices FHA MIP per HUD ML 2023-05 for %i-year term with %i down", (term, down, rate) => {
+    const price = 400_000;
+    const loan = price - down;
+    const mi = getProgramMI("fha", loan, price, 720, term, down);
+    expect(mi.monthlyMI).toBeCloseTo((loan * rate) / 12, 6);
+  });
+
   it("charges FHA upfront and monthly MIP", () => {
     const mi = getProgramMI("fha", 300_000, 320_000, 720, 30, 20_000);
     expect(mi.upfrontFee).toBeCloseTo(300_000 * 0.0175, 2);
@@ -366,5 +395,24 @@ describe("clampCreditScore", () => {
 
   it("rounds fractional scores", () => {
     expect(clampCreditScore(742.7)).toBe(743);
+  });
+});
+
+describe("describeProgramDti", () => {
+  it("builds the labels from getProgramDTI for every program", () => {
+    expect(describeProgramDti("conventional")).toMatchObject({ programLabel: "Conventional", frontTarget: "≤28%", backTarget: "≤36%" });
+    expect(describeProgramDti("fha")).toMatchObject({ programLabel: "FHA", frontTarget: "≤31%", backTarget: "≤43%" });
+    expect(describeProgramDti("va")).toMatchObject({ programLabel: "VA", frontTarget: "no fixed limit", backTarget: "≤41%" });
+    expect(describeProgramDti("usda")).toMatchObject({ programLabel: "USDA", frontTarget: "≤29%", backTarget: "≤41%" });
+  });
+});
+
+describe("dtiTone", () => {
+  it("is good within the limit, caution up to 5 points over, and over beyond that", () => {
+    expect(dtiTone(36, 36)).toBe("good");
+    expect(dtiTone(36.01, 36)).toBe("good");
+    expect(dtiTone(40, 36)).toBe("caution");
+    expect(dtiTone(41.5, 36)).toBe("over");
+    expect(dtiTone(90, 0)).toBe("good");
   });
 });

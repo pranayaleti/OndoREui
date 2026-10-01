@@ -12,6 +12,7 @@ import { PetInformation } from "@/components/rental/pet-information"
 import { TourRequestForm } from "@/components/rental/tour-request-form"
 import { RentalContactForm } from "@/components/rental/rental-contact-form"
 import { RentalApplyNowLink } from "@/components/rental/rental-listing-funnel"
+import { useListingUnavailable } from "@/components/properties/listing-availability"
 import { STICKY_HEADER_SCROLL_MARGIN_CLASS } from "@/lib/scroll-margins"
 
 const PANEL_CLASS = `mb-8 ${STICKY_HEADER_SCROLL_MARGIN_CLASS} space-y-5 rounded-xl border border-border bg-card p-5`
@@ -26,6 +27,7 @@ export function RentalApplyPanel({
   const [profile, setProfile] = useState<RentalPublicProfile | null>(null)
   const [showReadiness, setShowReadiness] = useState(false)
   const [loadError, setLoadError] = useState("")
+  const listingUnavailable = useListingUnavailable()
 
   useEffect(() => {
     let cancelled = false
@@ -43,6 +45,9 @@ export function RentalApplyPanel({
 
   const stored = readStoredApplications().find((row) => row.propertyId === propertyId || row.propertyId === publicId)
   const applyHref = profile?.applyPath ?? `/apply/start/${publicId}`
+
+  // Rented or withdrawn since the page was built: the notice at the top explains.
+  if (listingUnavailable) return null
 
   if (loadError && !profile) {
     return (

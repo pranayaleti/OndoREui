@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { calculateMonthlyPI } from '@/lib/mortgage-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
+import { propertyManagementFee } from "@/lib/rental-expenses";
 
 interface CashOnCashData {
   purchasePrice: number;
@@ -86,10 +87,8 @@ const CashOnCashCalculator: React.FC = () => {
     const vacancyLoss = effectiveAnnualRent * (vacancyRate / 100);
     const annualRentalIncome = effectiveAnnualRent - vacancyLoss;
 
-    // Calculate property management (if percentage, calculate from gross rent)
-    const managementFee = propertyManagement > 0 && propertyManagement < 1
-      ? effectiveAnnualRent * propertyManagement
-      : propertyManagement;
+    // Property management is a percent of gross rent
+    const managementFee = propertyManagementFee(effectiveAnnualRent, propertyManagement);
 
     // Calculate annual operating expenses
     const annualOperatingExpenses = propertyTax + insurance + maintenance + managementFee + otherExpenses;
@@ -296,9 +295,10 @@ const CashOnCashCalculator: React.FC = () => {
               {/* Property Management */}
               <NumberField
                 id="propertyManagement"
-                label="Property Management (annual $ or % as decimal, e.g., 0.10 for 10%)"
+                label="Property Management (% of gross rent)"
                 kind="percent"
-                step={0.01}
+                min={0}
+                max={100}
                 value={formData.propertyManagement}
                 onChange={(next) => handleInputChange('propertyManagement', next)}
               />

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
+import { propertyManagementFee } from "@/lib/rental-expenses";
 
 interface CapRateData {
   purchasePrice: number;
@@ -63,10 +64,8 @@ const CapRateCalculator: React.FC = () => {
     const vacancyLoss = effectiveAnnualRent * (vacancyRate / 100);
     const annualRentalIncome = effectiveAnnualRent - vacancyLoss;
 
-    // Calculate property management (if percentage, calculate from gross rent)
-    const managementFee = propertyManagement > 0 && propertyManagement < 1
-      ? effectiveAnnualRent * propertyManagement
-      : propertyManagement;
+    // Property management is a percent of gross rent
+    const managementFee = propertyManagementFee(effectiveAnnualRent, propertyManagement);
 
     // Calculate annual operating expenses
     const annualOperatingExpenses = propertyTax + insurance + maintenance + managementFee + otherExpenses;
@@ -197,9 +196,10 @@ const CapRateCalculator: React.FC = () => {
               {/* Property Management */}
               <NumberField
                 id="propertyManagement"
-                label="Property Management (annual $ or % as decimal, e.g., 0.10 for 10%)"
+                label="Property Management (% of gross rent)"
                 kind="percent"
-                step={0.01}
+                min={0}
+                max={100}
                 value={formData.propertyManagement}
                 onChange={(next) => handleInputChange('propertyManagement', next)}
               />
@@ -223,19 +223,14 @@ const CapRateCalculator: React.FC = () => {
               />
 
               {/* Target Cap Rate */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Target Cap Rate (%) - for value calculation
-                </label>
-                <NumberField
-                  id="targetCapRate"
-                  label="Target Cap Rate — for value calculation"
-                  kind="percent"
-                  min={0}
-                  value={targetCapRate}
-                  onChange={(next) => setTargetCapRate(next)}
-                />
-              </div>
+              <NumberField
+                id="targetCapRate"
+                label="Target Cap Rate (for value calculation)"
+                kind="percent"
+                min={0}
+                value={targetCapRate}
+                onChange={(next) => setTargetCapRate(next)}
+              />
             </div>
           </div>
 

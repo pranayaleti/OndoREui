@@ -23,7 +23,7 @@ import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Calculator, Loader2, CheckCircle2, AlertCircle, ArrowRight, Home, DollarSign, MapPin } from "lucide-react"
 import { cityMarketData } from "@/lib/city-market-data"
-import { estimateHomeValue } from "@/lib/home-value-estimate"
+import { BASELINE_SQFT, MAX_SQFT, MIN_SQFT, estimateHomeValue } from "@/lib/home-value-estimate"
 import { submitContactLead } from "@/lib/leads-api"
 import { getAttributionPayloadForApi } from "@/lib/attribution"
 import { isValidEmail } from "@/lib/security"
@@ -37,7 +37,10 @@ const cities = Object.keys(cityMarketData).sort()
 export function HomeValueEstimator() {
   const [city, setCity] = useState("")
   const [bedrooms, setBedrooms] = useState(3)
-  const [sqft, setSqft] = useState(1800)
+  // `sqft` is the last valid, clamped value used for the estimate; `sqftText` is what the visitor is typing.
+  const [sqft, setSqft] = useState(BASELINE_SQFT)
+  const [sqftText, setSqftText] = useState(String(BASELINE_SQFT))
+  const [intent, setIntent] = useState<"sell" | "rent">("sell")
   const [hasCalculated, setHasCalculated] = useState(false)
 
   // Email capture (after estimate is shown)
@@ -50,6 +53,13 @@ export function HomeValueEstimator() {
     if (!city) return null
     return estimateHomeValue(city, bedrooms, sqft)
   }, [city, bedrooms, sqft])
+
+  const handleSqftChange = (value: string) => {
+    setSqftText(value)
+    const parsed = parseInt(value, 10)
+    // A cleared or too-small field keeps the last valid size instead of pricing the home at ~0.
+    if (Number.isFinite(parsed) && parsed >= MIN_SQFT) setSqft(Math.min(parsed, MAX_SQFT))
+  }
 
   const handleCalculate = () => {
     if (!city) return
@@ -73,6 +83,7 @@ export function HomeValueEstimator() {
       "Home Value Estimator request",
       `City: ${city}`,
       `Bedrooms: ${bedrooms}`,
+      `Looking to: ${intent === "rent" ? "rent out the property" : "sell the property"}`,
       `Square feet: ${sqft}`,
       estimate ? `Estimated rent: ${fmtUSD(estimate.rentLow)}–${fmtUSD(estimate.rentHigh)}/mo` : null,
       estimate ? `Estimated sale price: ${fmtUSD(estimate.saleLow)}–${fmtUSD(estimate.saleHigh)}` : null,
@@ -82,7 +93,7 @@ export function HomeValueEstimator() {
       name: friendlyName,
       email: trimmedEmail,
       source: "website",
-      inquiryType: "seller",
+      inquiryType: intent === "rent" ? "owner" : "seller",
       message: messageParts.join("\n"),
       attribution: getAttributionPayloadForApi(),
     })
@@ -125,14 +136,15 @@ export function HomeValueEstimator() {
             </div>
           </label>
 
-          <label className="block mb-4">
-            <span className="text-sm font-medium text-foreground/90">Bedrooms</span>
+          <div className="mb-4" role="group" aria-labelledby="hve-bedrooms-label">
+            <span id="hve-bedrooms-label" className="text-sm font-medium text-foreground/90">Bedrooms</span>
             <div className="mt-1.5 grid grid-cols-5 gap-2">
               {[1, 2, 3, 4, 5].map((n) => (
                 <button
                   key={n}
                   type="button"
                   onClick={() => setBedrooms(n)}
+                  aria-pressed={bedrooms === n}
                   className={`py-2.5 rounded-md border-2 text-sm font-medium transition-colors ${
                     bedrooms === n
                       ? "border-primary bg-primary/5 text-primary"
@@ -143,21 +155,48 @@ export function HomeValueEstimator() {
                 </button>
               ))}
             </div>
-          </label>
+          </div>
+
+          <div className="mb-4" role="group" aria-labelledby="hve-intent-label">
+            <span id="hve-intent-label" className="text-sm font-medium text-foreground/90">I am thinking about</span>
+            <div className="mt-1.5 grid grid-cols-2 gap-2">
+              {([
+                ["sell", "Selling"],
+                ["rent", "Renting it out"],
+              ] as const).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setIntent(value)}
+                  aria-pressed={intent === value}
+                  className={`py-2.5 rounded-md border-2 text-sm font-medium transition-colors ${
+                    intent === value
+                      ? "border-primary bg-primary/5 text-primary"
+                      : "border-border bg-card hover:border-primary/40 text-foreground/70"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <label className="block mb-6">
             <span className="text-sm font-medium text-foreground/90">Square feet</span>
             <input
               type="number"
               inputMode="numeric"
-              min={400}
-              max={10000}
+              min={MIN_SQFT}
+              max={MAX_SQFT}
               step={50}
-              value={sqft}
-              onChange={(e) => setSqft(parseInt(e.target.value, 10) || 0)}
+              value={sqftText}
+              onChange={(e) => handleSqftChange(e.target.value)}
+              onBlur={() => setSqftText(String(sqft))}
               className="mt-1.5 w-full rounded-md border border-border bg-background py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            <span className="block text-xs text-foreground/50 mt-1">Roughly, exact number not required.</span>
+            <span className="block text-xs text-foreground/50 mt-1">
+              Roughly, exact number not required. We use {MIN_SQFT.toLocaleString("en-US")} to {MAX_SQFT.toLocaleString("en-US")} sq ft.
+            </span>
           </label>
 
           <button
@@ -200,8 +239,8 @@ export function HomeValueEstimator() {
 
               <p className="text-xs text-foreground/50 leading-relaxed">
                 Range based on median {city} market data plus bedroom and square-foot adjustments.
-                Actual value depends on condition, amenities, finishes, and current market timing , 
-                we'll send a free walk-through valuation below.
+                Actual value depends on condition, amenities, finishes, and current market timing.
+                Request a free walk-through valuation below.
               </p>
 
               {/* Email capture */}
@@ -209,8 +248,8 @@ export function HomeValueEstimator() {
                 {status === "success" ? (
                   <div className="text-center py-4">
                     <CheckCircle2 className="h-8 w-8 text-primary mx-auto mb-2" aria-hidden="true" />
-                    <p className="font-semibold text-foreground">Check your inbox.</p>
-                    <p className="text-sm text-foreground/60 mt-1">A detailed report is on its way within 1 business day.</p>
+                    <p className="font-semibold text-foreground">Thanks, we got your request.</p>
+                    <p className="text-sm text-foreground/60 mt-1">We will follow up within 1 business day.</p>
                     <div className="mt-4 flex flex-col sm:flex-row gap-2 justify-center">
                       <Link
                         href="/calculators/owner-vs-self"

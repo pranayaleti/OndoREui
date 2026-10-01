@@ -15,7 +15,7 @@ import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { ContentFaq, type ContentFaqItem } from "@/components/content/content-faq"
 import { ArticleToc } from "@/components/content/article-toc"
 import { ArticleByline } from "@/components/content/article-byline"
-import { extractOutline } from "@/lib/content/article-outline"
+import { countWords, extractOutline } from "@/lib/content/article-outline"
 import { KeyTakeaways } from "@/components/content/key-takeaways"
 import { ARTICLE_ADVICE_NOTICE, articleDisclosureKind, type ArticleDisclosureKind } from "@/lib/content/article-disclosure"
 import { ARRIVAL_REAL_ESTATE_DISCLOSURE } from "@/lib/utah-arrival"
@@ -80,7 +80,9 @@ type ArticleShellProps = {
 export function ArticleShell({ meta, children }: ArticleShellProps) {
   const image = meta.image ?? "/modern-office-building.png"
   // Walk the body once: stamps heading ids, collects the outline, counts words.
-  const { nodes, outline, wordCount } = extractOutline(children)
+  const { nodes, outline, wordCount: bodyWordCount } = extractOutline(children)
+  // Takeaways render outside the children, so count them separately.
+  const wordCount = bodyWordCount + countWords((meta.takeaways ?? []).join(" "))
   const jsonLd: object[] = [
     generateBreadcrumbJsonLd([
       { name: "Home", url: SITE_URL },

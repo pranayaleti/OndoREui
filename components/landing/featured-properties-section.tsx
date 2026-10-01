@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button"
 import { LazyImage } from "@/components/lazy-image"
 import { useFinancialVisibility } from "@/lib/financial-visibility"
 import { backendUrl } from "@/lib/backend"
-import { mapApiProperty } from "@/lib/mapProperty"
-import type { ApiProperty, Property } from "@/app/types/property"
+import { mapApiProperties } from "@/lib/mapProperty"
+import type { Property } from "@/app/types/property"
 import { screenListingDescription } from "@/lib/fair-housing-steering"
 
 /**
@@ -30,9 +30,7 @@ async function fetchFeaturedProperties(signal: AbortSignal): Promise<Property[]>
     ? json
     : (json as { data?: unknown } | null)?.data
   if (!Array.isArray(rawArray)) throw new Error("Unexpected response shape")
-  return rawArray
-    .slice(0, FEATURED_LIMIT)
-    .map((p) => mapApiProperty(p as ApiProperty))
+  return mapApiProperties(rawArray).slice(0, FEATURED_LIMIT)
 }
 
 type LoadState =

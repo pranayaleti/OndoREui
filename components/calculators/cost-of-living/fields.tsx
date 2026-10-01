@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useState } from "react"
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react"
 import { Minus, Plus } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,6 +14,23 @@ function parseNumeric(raw: string): number {
   if (cleaned === "" || cleaned === ".") return 0
   const n = Number(cleaned)
   return sanitizeAmount(n)
+}
+
+/**
+ * Selecting inside onFocus does not survive: the draft swaps the displayed "450,000" for
+ * "450000" on the next render and drops the selection, so typing appends instead of
+ * replacing. Select once, in the layout effect that runs after the draft is installed.
+ */
+function useSelectOnFocus(focused: boolean, draft: string) {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const pendingRef = useRef(false)
+  useLayoutEffect(() => {
+    if (pendingRef.current && focused) {
+      pendingRef.current = false
+      inputRef.current?.select()
+    }
+  }, [focused, draft])
+  return { inputRef, requestSelect: () => { pendingRef.current = true } }
 }
 
 function formatGrouped(value: number): string {
@@ -46,6 +63,7 @@ export function CurrencyInput({
   const hintId = `${inputId}-hint`
   const [focused, setFocused] = useState(false)
   const [draft, setDraft] = useState(formatGrouped(value))
+  const { inputRef, requestSelect } = useSelectOnFocus(focused, draft)
 
   useEffect(() => {
     if (!focused) setDraft(formatGrouped(value))
@@ -60,15 +78,16 @@ export function CurrencyInput({
         </span>
         <Input
           id={inputId}
+          ref={inputRef}
           inputMode="decimal"
           autoComplete="off"
           disabled={disabled}
           value={focused ? draft : formatGrouped(value)}
           aria-describedby={cn(hint ? hintId : undefined, describedBy)}
-          onFocus={(event) => {
+          onFocus={() => {
+            requestSelect()
             setFocused(true)
             setDraft(value === 0 ? "" : String(value))
-            event.target.select()
           }}
           onBlur={() => {
             setFocused(false)
@@ -111,6 +130,7 @@ export function PercentInput({ id, label, value, onChange, hint, min = 0, max = 
   const hintId = `${inputId}-hint`
   const [focused, setFocused] = useState(false)
   const [draft, setDraft] = useState(String(value))
+  const { inputRef, requestSelect } = useSelectOnFocus(focused, draft)
 
   useEffect(() => {
     if (!focused) setDraft(String(value))
@@ -127,14 +147,15 @@ export function PercentInput({ id, label, value, onChange, hint, min = 0, max = 
       <div className="relative">
         <Input
           id={inputId}
+          ref={inputRef}
           inputMode="decimal"
           autoComplete="off"
           value={focused ? draft : String(value)}
           aria-describedby={hint ? hintId : undefined}
-          onFocus={(event) => {
+          onFocus={() => {
+            requestSelect()
             setFocused(true)
             setDraft(String(value))
-            event.target.select()
           }}
           onBlur={() => {
             setFocused(false)

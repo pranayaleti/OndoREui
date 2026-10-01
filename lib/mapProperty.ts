@@ -1,9 +1,17 @@
 import type { ApiProperty, Property } from '@/app/types/property';
+import { isSaleListingRow } from '@/lib/public-property';
 
 const fullName = (c?: {
   firstName?: string | null;
   lastName?: string | null;
 }) => [c?.firstName, c?.lastName].filter(Boolean).join(' ').trim();
+
+/** Maps public API rows to Property, skipping sale rows (the site shows rentals only). */
+export function mapApiProperties(rows: unknown[]): Property[] {
+  return rows
+    .filter((row) => !isSaleListingRow(row))
+    .map((row) => mapApiProperty(row as ApiProperty));
+}
 
 export function mapApiProperty(p: ApiProperty): Property {
   const images = (p.photos ?? [])

@@ -80,10 +80,27 @@ const AMENITY_LABELS: Record<string, string> = {
   "central-air": "Air Conditioning",
 }
 
+// Word-bounded so "dishwasher" is not laundry and "cathedral ceilings" is not a cat.
+const PET_PATTERN = /\b(pets?|dogs?|cats?)\b/
+const LAUNDRY_PATTERN = /\b(laundry|washers?|dryers?)\b/
+// Listing text that rules pets out ("No pets", "Pet-free", "Pets not allowed").
+const PET_NEGATION_PATTERN =
+  /\bno (pets?|dogs?|cats?|animals?)\b|\bpet ?free\b|\b(pets?|dogs?|cats?) (are |is )?(not|never|prohibited|banned)\b/
+// "No laundry", "Without parking": a negated amenity is not a highlight.
+const GENERIC_NEGATION_PATTERN = /^(no|without)\b/
+
+function isPetAmenityKey(key: string): boolean {
+  return PET_PATTERN.test(key)
+}
+
+function isNegatedPetKey(key: string): boolean {
+  return PET_NEGATION_PATTERN.test(key)
+}
+
 const HIGHLIGHT_RULES: { id: string; pattern: RegExp; label: string }[] = [
-  { id: "laundry", pattern: /laundry|washer|dryer/, label: "Laundry" },
+  { id: "laundry", pattern: LAUNDRY_PATTERN, label: "Laundry" },
   { id: "parking", pattern: /parking|garage|carport|driveway/, label: "Parking" },
-  { id: "pets", pattern: /\bpet|\bdog|\bcat/, label: "Pets allowed" },
+  { id: "pets", pattern: PET_PATTERN, label: "Pets allowed" },
   { id: "ac", pattern: /air.?condition|central.?air|\bac\b/, label: "Air conditioning" },
   { id: "dishwasher", pattern: /dishwasher/, label: "Dishwasher" },
   { id: "outdoor", pattern: /yard|garden|backyard|patio|balcony|terrace/, label: "Outdoor space" },
@@ -143,11 +160,12 @@ function amenityKey(raw: string): string {
 
 function classifyAmenity(raw: string): AmenityGroupId {
   const key = amenityKey(raw)
-  if (/\bpet|\bdog|\bcat/.test(key)) return "pets"
+  if (isPetAmenityKey(key)) return "pets"
   if (/parking|garage|carport|driveway/.test(key)) return "parking"
   if (/yard|garden|backyard|patio|balcony|terrace|pool/.test(key)) return "outdoor"
   if (
-    /laundry|washer|dryer|dishwasher|microwave|refrigerator|fireplace|heating|air condition|central air|\bac\b|hardwood|furnished/.test(
+    LAUNDRY_PATTERN.test(key) ||
+    /dishwasher|microwave|refrigerator|fireplace|heating|air condition|central air|\bac\b|hardwood|furnished/.test(
       key,
     )
   ) {
@@ -207,12 +225,19 @@ export function listingHighlights(input: {
   type?: string | null
   sqft?: number
   leaseTerms?: string | null
+  petPolicy?: PublicPetPolicy | null
 }): ListingHighlight[] {
   const keys = (input.amenities ?? []).map(amenityKey)
   const highlights: ListingHighlight[] = []
 
   for (const rule of HIGHLIGHT_RULES) {
-    if (keys.some((key) => rule.pattern.test(key))) {
+    if (rule.id === "pets") {
+      if (petsAllowedFromListing({ amenities: input.amenities, petPolicy: input.petPolicy })) {
+        highlights.push({ id: rule.id, label: rule.label })
+      }
+      continue
+    }
+    if (keys.some((key) => !GENERIC_NEGATION_PATTERN.test(key) && rule.pattern.test(key))) {
       highlights.push({ id: rule.id, label: rule.label })
     }
   }
@@ -225,7 +250,16 @@ export function petsAllowedFromListing(input: {
   petPolicy?: PublicPetPolicy | null
 }): boolean {
   if (input.petPolicy) return input.petPolicy.petsAllowed
-  return petNotesFromAmenities(input.amenities).length > 0
+  return (input.amenities ?? []).some((raw) => {
+    const key = amenityKey(raw)
+    return isPetAmenityKey(key) && !isNegatedPetKey(key)
+  })
+}
+
+/** True when the listing text rules pets out and nothing in it says pets are allowed. */
+function petsRuledOutByAmenities(amenities: string[] | null | undefined): boolean {
+  const keys = (amenities ?? []).map(amenityKey).filter(isPetAmenityKey)
+  return keys.some(isNegatedPetKey) && keys.every(isNegatedPetKey)
 }
 
 /** Scan chips for browse cards. Amenity-derived only, plus pets when the listing says so. */
@@ -358,14 +392,18 @@ export function listingCompareFieldValue(input: {
     case "availability":
       return availabilityBadge(input.availability).label
     case "amenities": {
-      const labels = listingHighlights({ amenities: input.amenities }).map((h) => h.label)
+      const labels = listingHighlights({
+        amenities: input.amenities,
+        petPolicy: input.petPolicy,
+      }).map((h) => h.label)
       return labels.length > 0 ? labels.join(", ") : "Not listed"
     }
     case "pets":
       if (input.petPolicy) {
         return input.petPolicy.petsAllowed ? "Pets allowed" : "Not allowed"
       }
-      return petsAllowedFromListing(input) ? "Pets allowed" : "Ask leasing"
+      if (petsAllowedFromListing(input)) return "Pets allowed"
+      return petsRuledOutByAmenities(input.amenities) ? "Not allowed" : "Ask leasing"
     default: {
       const _exhaustive: never = input.id
       return _exhaustive
@@ -394,7 +432,7 @@ export function petNotesFromAmenities(
   amenities: string[] | null | undefined,
 ): { raw: string; label: string }[] {
   return (amenities ?? [])
-    .filter((raw) => /\bpet|\bdog|\bcat/.test(amenityKey(raw)))
+    .filter((raw) => isPetAmenityKey(amenityKey(raw)))
     .map((raw) => ({ raw, label: formatAmenityLabel(raw) }))
 }
 

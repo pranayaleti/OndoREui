@@ -23,3 +23,43 @@ describe("estimateHomeValue", () => {
     expect(ESTIMATE_DATA_DISCLOSURE).toMatch(/Not an MLS pull, appraisal, BPO, or CMA/i)
   })
 })
+
+describe("estimateHomeValue size handling", () => {
+  const lehi = cityMarketData["Lehi"]
+
+  it("keeps ordinary larger homes within about 1.5x the city median, not 1.7-2.4x", () => {
+    const fourBed = estimateHomeValue("Lehi", 4, 2800)!
+    expect(fourBed.saleBase).toBeGreaterThan(lehi.medianHomePrice)
+    expect(fourBed.saleBase).toBeLessThan(lehi.medianHomePrice * 1.5)
+    expect(fourBed.rentBase).toBeLessThan(lehi.medianRent * 1.5)
+
+    const fiveBed = estimateHomeValue("Lehi", 5, 3500)!
+    expect(fiveBed.saleBase).toBeLessThan(lehi.medianHomePrice * 1.8)
+  })
+
+  it("keeps small homes above half the city median", () => {
+    const small = estimateHomeValue("Lehi", 1, 600)!
+    expect(small.saleBase).toBeGreaterThanOrEqual(Math.round(lehi.medianHomePrice * 0.6 * 0.95) - 1)
+    expect(small.saleBase).toBeLessThan(lehi.medianHomePrice)
+  })
+
+  it("grows with square footage and bedrooms", () => {
+    const base = estimateHomeValue("Lehi", 3, 1800)!.saleBase
+    expect(estimateHomeValue("Lehi", 3, 2400)!.saleBase).toBeGreaterThan(base)
+    expect(estimateHomeValue("Lehi", 4, 1800)!.saleBase).toBeGreaterThan(base)
+  })
+
+  it("caps absurd square footage instead of extrapolating", () => {
+    const huge = estimateHomeValue("Lehi", 3, 6000)!
+    const capped = estimateHomeValue("Lehi", 3, 10_000)!
+    expect(huge.saleBase).toBeLessThanOrEqual(Math.round(lehi.medianHomePrice * 1.8))
+    expect(capped.saleBase).toBe(estimateHomeValue("Lehi", 3, 50_000)!.saleBase)
+  })
+
+  it("returns null below the minimum square footage or for bad input", () => {
+    expect(estimateHomeValue("Lehi", 3, 0)).toBeNull()
+    expect(estimateHomeValue("Lehi", 3, 399)).toBeNull()
+    expect(estimateHomeValue("Lehi", 3, Number.NaN)).toBeNull()
+    expect(estimateHomeValue("Lehi", 3, 400)).not.toBeNull()
+  })
+})

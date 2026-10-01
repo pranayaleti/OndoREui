@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
+import { propertyManagementFee } from "@/lib/rental-expenses";
 
 interface FiftyPercentRuleData {
   monthlyRent: number;
@@ -63,9 +64,7 @@ const FiftyPercentRuleCalculator: React.FC = () => {
 
     // Calculate actual operating expenses
     const vacancyLoss = effectiveAnnualRent * (vacancyRate / 100);
-    const managementFee = propertyManagement > 0 && propertyManagement < 1
-      ? effectiveAnnualRent * propertyManagement
-      : propertyManagement;
+    const managementFee = propertyManagementFee(effectiveAnnualRent, propertyManagement);
     
     const actualOperatingExpenses = propertyTax + insurance + maintenance + managementFee + otherExpenses + vacancyLoss;
     const actualNOI = effectiveAnnualRent - actualOperatingExpenses;
@@ -184,9 +183,10 @@ const FiftyPercentRuleCalculator: React.FC = () => {
               {/* Property Management */}
               <NumberField
                 id="propertyManagement"
-                label="Property Management (annual $ or % as decimal)"
+                label="Property Management (% of gross rent)"
                 kind="percent"
-                step={0.01}
+                min={0}
+                max={100}
                 value={formData.propertyManagement}
                 onChange={(next) => handleInputChange('propertyManagement', next)}
               />

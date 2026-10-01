@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Filter } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { PROPERTY_TYPE_FILTER_OPTIONS } from "@/lib/property-type-filter"
+import { RENT_SLIDER_MAX, RENT_SLIDER_MIN } from "@/lib/rent-filter"
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 
 export interface PropertyFilters {
@@ -83,8 +85,8 @@ function FilterFields({
       <div className="space-y-4">
         <h3 className="text-sm font-medium">Monthly rent</h3>
         <Slider
-          min={500}
-          max={5000}
+          min={RENT_SLIDER_MIN}
+          max={RENT_SLIDER_MAX}
           step={100}
           value={[priceDisplay[0], priceDisplay[1]]}
           onValueChange={onPriceChange}
@@ -93,7 +95,10 @@ function FilterFields({
         />
         <div className="flex items-center justify-between text-sm">
           <div className="rounded-md border px-3 py-1.5">${priceDisplay[0].toLocaleString("en-US")}</div>
-          <div className="rounded-md border px-3 py-1.5">${priceDisplay[1].toLocaleString("en-US")}</div>
+          <div className="rounded-md border px-3 py-1.5">
+            ${priceDisplay[1].toLocaleString("en-US")}
+            {priceDisplay[1] >= RENT_SLIDER_MAX ? "+" : ""}
+          </div>
         </div>
       </div>
 
@@ -120,11 +125,11 @@ function FilterFields({
           className={selectClass}
         >
           <option value="any">Any</option>
-          <option value="apartment">Apartment</option>
-          <option value="house">House</option>
-          <option value="townhouse">Townhouse</option>
-          <option value="condo">Condo</option>
-          <option value="studio">Studio</option>
+          {PROPERTY_TYPE_FILTER_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
 

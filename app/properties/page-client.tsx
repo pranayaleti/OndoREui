@@ -14,7 +14,9 @@ import { ListingCompareBar } from '@/components/properties/listing-compare-bar';
 import { RenterAvailabilityNote } from '@/components/properties/renter-availability-note';
 import { RenterPath } from '@/components/properties/renter-path';
 import { buildRenterSearchPrefill, DEFAULT_RENT_FILTER_RANGE } from '@/lib/renter-search-prefill';
-import { listingDetailPath } from '@/lib/public-property';
+import { fetchAllPublicListingRows, listingDetailPath, PublicListingsHttpError } from '@/lib/public-property';
+import { matchesPropertyTypeFilter, normalizePropertyType } from '@/lib/property-type-filter';
+import { matchesRentRange } from '@/lib/rent-filter';
 import { availabilityBadge } from '@/lib/listing-presentation';
 import { cn } from '@/lib/utils';
 
@@ -41,8 +43,7 @@ import SEO from '@/components/seo';
 import { generateBreadcrumbJsonLd, generatePropertyJsonLd } from '@/lib/seo';
 import { SITE_URL } from '@/lib/site';
 import type { Property } from '@/app/types/property';
-import { mapApiProperty } from '@/lib/mapProperty';
-import { backendUrl } from '@/lib/backend';
+import { mapApiProperties } from '@/lib/mapProperty';
 import { caches, cacheKeys } from '@/lib/cache';
 import { registerBfcacheRestoreCallback } from '@/lib/bfcache-optimization';
 import { WebMCPPropertySearchTool } from '@/components/properties/webmcp-property-search-tool';
@@ -93,6 +94,16 @@ function sortOptionLabel(sortBy: LocalSortOption): string {
   }
 }
 
+function listingsErrorMessage(e: unknown): string {
+  if (e instanceof PublicListingsHttpError) {
+    if (e.status === 429) return 'Too many requests. Please try again in a moment.';
+    if (e.status >= 500) return 'Server error. Please try again later.';
+    if (e.status === 404) return 'Property data not found. Please contact support.';
+    return `Failed to load properties (${e.status}). Please try again.`;
+  }
+  return e instanceof Error ? e.message : 'An unexpected error occurred while loading properties';
+}
+
 export default function PropertiesClient() {
   const router = useRouter();
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
@@ -122,7 +133,7 @@ export default function PropertiesClient() {
     const maxPriceRaw = params.get('maxPrice')?.trim() ?? params.get('maxRent')?.trim()
     if (q) setSearchQuery(q)
     if (type) {
-      setFilters((prev) => ({ ...prev, propertyType: type }))
+      setFilters((prev) => ({ ...prev, propertyType: normalizePropertyType(type) }))
     }
     if (city) {
       setFilters((prev) => ({ ...prev, location: city }))
@@ -156,7 +167,8 @@ export default function PropertiesClient() {
 
         setLoading(true);
         setError(null);
-        const res = await fetch(backendUrl('/api/properties/public'), {
+        // Follows pagination: the API returns only 20 rows per request by default.
+        const rawArray = await fetchAllPublicListingRows(fetch, {
           signal: controller.signal,
           cache: 'no-store',
           headers: {
@@ -165,27 +177,7 @@ export default function PropertiesClient() {
           },
         });
 
-        if (!res.ok) {
-          if (res.status === 429) {
-            throw new Error('Too many requests. Please try again in a moment.');
-          } else if (res.status >= 500) {
-            throw new Error('Server error. Please try again later.');
-          } else if (res.status === 404) {
-            throw new Error('Property data not found. Please contact support.');
-          } else {
-            throw new Error(`Failed to load properties (${res.status}). Please try again.`);
-          }
-        }
-
-        const json = await res.json();
-        // Backend returns a paginated envelope: { data: [...], pagination: {...} }
-        // Support both the envelope and a legacy plain array shape
-        const rawArray: unknown = Array.isArray(json) ? json : (json?.data ?? null);
-        if (!Array.isArray(rawArray)) {
-          throw new Error('Invalid response format. Please try again.');
-        }
-
-        const mapped: Property[] = rawArray.map(mapApiProperty);
+        const mapped: Property[] = mapApiProperties(rawArray);
         caches.properties.set(propertiesCacheKey, mapped, PROPERTIES_CACHE_TTL);
         setAllApiProperties(mapped);
         setRetryCount(0);
@@ -194,7 +186,7 @@ export default function PropertiesClient() {
           return;
         }
 
-        const errorMessage = e instanceof Error ? e.message : 'An unexpected error occurred while loading properties';
+        const errorMessage = listingsErrorMessage(e);
 
         if (process.env['NODE_ENV'] === 'development') {
           console.error('Property fetch error:', e);
@@ -213,15 +205,12 @@ export default function PropertiesClient() {
   // Revalidate on bfcache restore so returning users see fresh data without full loading state
   useEffect(() => {
     const handleRestore = () => {
-      fetch(backendUrl('/api/properties/public'), {
+      fetchAllPublicListingRows(fetch, {
         cache: 'no-store',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       })
-        .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
-        .then((json: unknown) => {
-          const rawArray = Array.isArray(json) ? json : (json as Record<string, unknown>)?.data;
-          if (!Array.isArray(rawArray)) return;
-          const mapped: Property[] = rawArray.map(mapApiProperty);
+        .then((rawArray) => {
+          const mapped: Property[] = mapApiProperties(rawArray);
           caches.properties.set(propertiesCacheKey, mapped, PROPERTIES_CACHE_TTL);
           setAllApiProperties(mapped);
           setError(null);
@@ -238,10 +227,7 @@ export default function PropertiesClient() {
   useEffect(() => {
     let filtered = [...allApiProperties];
 
-    filtered = filtered.filter(
-      (p) =>
-        p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
-    );
+    filtered = filtered.filter((p) => matchesRentRange(p.price, filters.priceRange));
 
     // bedrooms
     if (filters.bedrooms !== 'any') {
@@ -267,7 +253,7 @@ export default function PropertiesClient() {
 
     // property type
     if (filters.propertyType !== 'any') {
-      filtered = filtered.filter((p) => p.type === filters.propertyType);
+      filtered = filtered.filter((p) => matchesPropertyTypeFilter(p.type, filters.propertyType));
     }
 
     // amenities (API provides snake_case; keep exact match)

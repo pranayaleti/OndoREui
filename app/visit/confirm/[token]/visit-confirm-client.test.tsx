@@ -43,3 +43,29 @@ describe("VisitConfirmClient load failures", () => {
     expect(await screen.findByText("Choose a time")).toBeInTheDocument()
   })
 })
+
+describe("VisitConfirmClient status handling", () => {
+  beforeEach(() => vi.restoreAllMocks())
+
+  it("tells a lead with a cancelled visit it was cancelled, not confirmed", async () => {
+    mockFetchSequence({ status: 200, body: { ...visit, status: "cancelled", scheduledAt: "2026-10-02T16:00:00.000Z" } })
+    render(<VisitConfirmClient token="abc" />)
+    expect(await screen.findByText("This visit was cancelled")).toBeInTheDocument()
+    expect(screen.queryByText(/already confirmed/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/is scheduled for/i)).not.toBeInTheDocument()
+  })
+
+  it("shows the time with a zone label for a confirmed visit", async () => {
+    mockFetchSequence({ status: 200, body: { ...visit, status: "confirmed", scheduledAt: "2026-10-02T16:00:00.000Z" } })
+    render(<VisitConfirmClient token="abc" />)
+    expect(await screen.findByText("Visit already confirmed")).toBeInTheDocument()
+    expect(screen.getByText(/is scheduled for .*\b[A-Z]{3,4}\b/)).toBeInTheDocument()
+  })
+
+  it("uses the site contact email on a dead link", async () => {
+    mockFetchSequence({ status: 404 })
+    render(<VisitConfirmClient token="abc" />)
+    const link = await screen.findByRole("link", { name: "info@ondorealestate.com" })
+    expect(link).toHaveAttribute("href", "mailto:info@ondorealestate.com")
+  })
+})

@@ -310,3 +310,83 @@ describe("listingAgents", () => {
     expect(agent.name).toBe("Sam Lee")
   })
 })
+
+describe("amenity matching uses whole words and respects negation", () => {
+  const labels = (amenities: string[], petPolicy?: Parameters<typeof listingHighlights>[0]["petPolicy"]) =>
+    listingHighlights({ amenities, petPolicy }).map((h) => h.label)
+  const noPets = {
+    petsAllowed: false,
+    allowedSpecies: [],
+    maxPets: null,
+    maxWeightLbs: null,
+    monthlyPetRentCents: null,
+    petDepositCents: null,
+  }
+  const yesPets = { ...noPets, petsAllowed: true }
+
+  it("does not read a dishwasher as laundry", () => {
+    expect(labels(["Dishwasher"])).toEqual(["Dishwasher"])
+    expect(groupAmenities(["Dishwasher"])[0].id).toBe("interior")
+    expect(labels(["Washer/Dryer"])).toEqual(["Laundry"])
+    expect(labels(["washer_dryer"])).toEqual(["Laundry"])
+    expect(labels(["In-unit laundry"])).toEqual(["Laundry"])
+    expect(labels(["No laundry"])).toEqual([])
+  })
+
+  it("does not read cathedral ceilings or a category as a pet", () => {
+    expect(labels(["Cathedral ceilings"])).toEqual([])
+    expect(labels(["Catering kitchen"])).toEqual([])
+    expect(groupAmenities(["Cathedral ceilings"]).map((g) => g.id)).toEqual(["other"])
+    expect(petNotesFromAmenities(["Cathedral ceilings"])).toEqual([])
+    expect(listingCardChips({ amenities: ["Cathedral ceilings"] })).toEqual([])
+  })
+
+  it("never advertises pets when the listing rules them out", () => {
+    for (const text of ["No pets", "No pets allowed", "Pet-free building", "Pets not allowed", "no_pets"]) {
+      expect(labels([text]), text).toEqual([])
+      expect(listingCardChips({ amenities: [text] }), text).toEqual([])
+      expect(
+        listingCompareFieldValue({
+          id: "pets", price: 1, bedrooms: 1, bathrooms: 1, sqft: 1, amenities: [text],
+        }),
+        text,
+      ).toBe("Not allowed")
+    }
+    // Still shown as a pet note so the renter sees the rule.
+    expect(petNotesFromAmenities(["No pets"]).map((n) => n.label)).toEqual(["No pets"])
+    expect(groupAmenities(["No pets"])[0].id).toBe("pets")
+  })
+
+  it("keeps matching real pet amenities, including qualified ones", () => {
+    expect(labels(["Pets allowed (cats only)"])).toEqual(["Pets allowed"])
+    expect(labels(["Dog friendly"])).toEqual(["Pets allowed"])
+    expect(labels(["Pet-friendly"])).toEqual(["Pets allowed"])
+    expect(labels(["pet_friendly"])).toEqual(["Pets allowed"])
+    expect(listingCardChips({ amenities: ["Cats ok"] }).map((c) => c.label)).toEqual(["Pets allowed"])
+  })
+
+  it("prefers the structured pet policy over amenity text", () => {
+    expect(labels(["Pet friendly"], noPets)).toEqual([])
+    expect(labels(["Cathedral ceilings"], yesPets)).toEqual(["Pets allowed"])
+    expect(
+      listingCompareFieldValue({
+        id: "pets", price: 1, bedrooms: 1, bathrooms: 1, sqft: 1,
+        amenities: ["No pets"], petPolicy: yesPets,
+      }),
+    ).toBe("Pets allowed")
+    expect(
+      listingCompareFieldValue({
+        id: "amenities", price: 1, bedrooms: 1, bathrooms: 1, sqft: 1,
+        amenities: ["Pet friendly", "Parking"], petPolicy: noPets,
+      }),
+    ).toBe("Parking")
+  })
+
+  it("asks leasing when the listing says nothing about pets", () => {
+    expect(
+      listingCompareFieldValue({
+        id: "pets", price: 1, bedrooms: 1, bathrooms: 1, sqft: 1, amenities: ["Parking"],
+      }),
+    ).toBe("Ask leasing")
+  })
+})

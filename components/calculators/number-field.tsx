@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { Minus, Plus, RotateCcw, X } from "lucide-react"
 
 /**
@@ -47,7 +47,16 @@ import { Minus, Plus, RotateCcw, X } from "lucide-react"
  * readability without any of that risk.
  */
 
-export type NumberFieldKind = "currency" | "rate" | "percent" | "years" | "count"
+export type NumberFieldKind =
+  | "currency"
+  | "rate"
+  | "percent"
+  | "years"
+  | "count"
+  /** A multiple such as DSCR 1.25x or a GRM of 12x: two decimals, "x" suffix, no "$" or "%". */
+  | "ratio"
+  /** A whole number of days, "days" suffix. */
+  | "days"
 
 type KindSpec = {
   /** Decimal places when formatting at rest. */
@@ -69,6 +78,18 @@ const KIND_SPECS: Record<NumberFieldKind, KindSpec> = {
   percent: { decimals: 1, step: 0.5, inputMode: "decimal", group: false, suffix: "%" },
   years: { decimals: 0, step: 1, inputMode: "numeric", group: false },
   count: { decimals: 0, step: 10, inputMode: "numeric", group: true },
+  ratio: { decimals: 2, step: 0.05, inputMode: "decimal", group: false, suffix: "x" },
+  days: { decimals: 0, step: 1, inputMode: "numeric", group: false, suffix: "days" },
+}
+
+/** Decimal places needed to represent `step` exactly (0.125 -> 3, 100 -> 0). */
+function stepDecimals(step: number): number {
+  if (!Number.isFinite(step) || step <= 0) return 0
+  const text = String(step)
+  const exponent = /e-(\d+)$/.exec(text)
+  if (exponent) return Math.min(6, Number(exponent[1]))
+  const dot = text.indexOf(".")
+  return dot === -1 ? 0 : Math.min(6, text.length - dot - 1)
 }
 
 export type NumberFieldProps = {
@@ -80,8 +101,10 @@ export type NumberFieldProps = {
   kind?: NumberFieldKind
   min?: number
   max?: number
-  /** Override the kind's arrow-key increment. */
+  /** Override the kind's arrow-key increment. Precision follows it: step 0.125 keeps 3 decimals. */
   step?: number
+  /** Override how many decimal places are kept, shown and committed. Defaults to the kind's, or the step's if finer. */
+  decimals?: number
   /** Helper text under the field. */
   hint?: string
   /**
@@ -156,14 +179,19 @@ export function NumberField({
   min,
   max,
   step,
+  decimals,
   hint,
   defaultValue,
   defaultBadge = "Est.",
   disabled = false,
   className = "",
 }: NumberFieldProps) {
-  const spec = KIND_SPECS[kind]
-  const increment = step ?? spec.step
+  const kindSpec = KIND_SPECS[kind]
+  const increment = step ?? kindSpec.step
+  // Round, display and nudge at the precision of the finest thing the field accepts,
+  // so a 0.125 step or a 1.25 DSCR is never snapped to the kind's coarser default.
+  const precision = decimals ?? Math.max(kindSpec.decimals, stepDecimals(increment))
+  const spec = useMemo<KindSpec>(() => ({ ...kindSpec, decimals: precision }), [kindSpec, precision])
   const allowNegative = typeof min === "number" && min < 0
 
   const [draft, setDraft] = useState<string | null>(null)
@@ -347,7 +375,7 @@ export function NumberField({
               if (draft !== null) commit(draft)
             }}
             onKeyDown={handleKeyDown}
-            className="w-full bg-transparent px-2 py-3 text-base text-foreground outline-none placeholder:text-foreground/35"
+            className="w-full min-w-[7ch] bg-transparent px-2 py-3 text-base text-foreground outline-none placeholder:text-foreground/35"
           />
           {spec.suffix ? (
             <span aria-hidden="true" className="pr-1 text-foreground/60">

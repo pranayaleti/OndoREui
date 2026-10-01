@@ -10,3 +10,11 @@ describe("ExploreMapClient listing navigation", () => {
     expect(SOURCE).not.toContain("`/buy/${id}`")
   })
 })
+
+describe("ExploreMapClient source", () => {
+  it("refetches listings on the client and does not read the old summary fields", () => {
+    expect(SOURCE).toContain("fetchPublicPropertyListOrThrow")
+    expect(SOURCE).not.toContain("p.propertyType")
+    expect(SOURCE).not.toContain("p.location")
+  })
+})

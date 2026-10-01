@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { LoanProgram, DEFAULT_MORTGAGE_RATE, describeProgramDti, dtiTone } from '@/lib/mortgage-utils';
 import { estimateAffordability } from '@/lib/affordability';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
@@ -93,12 +93,11 @@ const AffordabilityCalculator: React.FC = () => {
     return `${value.toFixed(1)}%`;
   };
 
+  const dtiLimits = describeProgramDti(formData.program);
+
   const getRatioStatus = (ratio: number, type: 'front' | 'back') => {
-    if (type === 'front') {
-      return ratio <= 28 ? 'text-primary' : ratio <= 31 ? 'text-yellow-600' : 'text-destructive-emphasis';
-    } else {
-      return ratio <= 36 ? 'text-primary' : ratio <= 43 ? 'text-yellow-600' : 'text-destructive-emphasis';
-    }
+    const tone = dtiTone(ratio, type === 'front' ? dtiLimits.frontPercent : dtiLimits.backPercent);
+    return tone === 'good' ? 'text-primary' : tone === 'caution' ? 'text-yellow-600' : 'text-destructive-emphasis';
   };
 
   return (
@@ -291,8 +290,8 @@ const AffordabilityCalculator: React.FC = () => {
 
                     <div className="mt-4 p-3 bg-muted rounded-lg">
                       <p className="text-sm text-foreground/70">
-                        <strong>Front-End:</strong> Housing expenses ÷ Gross monthly income (target: ≤28%)<br/>
-                        <strong>Back-End:</strong> Total debt payments ÷ Gross monthly income (target: ≤36%)
+                        <strong>Front-End:</strong> Housing expenses ÷ Gross monthly income (target: {dtiLimits.frontTarget} for {dtiLimits.programLabel} loans)<br/>
+                        <strong>Back-End:</strong> Total debt payments ÷ Gross monthly income (target: {dtiLimits.backTarget} for {dtiLimits.programLabel} loans)
                       </p>
                     </div>
                   </div>
@@ -331,7 +330,7 @@ const AffordabilityCalculator: React.FC = () => {
             <div>
               <h3 className="font-medium text-foreground mb-2">How It Works:</h3>
               <ul className="space-y-1 list-disc list-inside">
-                <li>Uses standard 28/36 debt-to-income ratios</li>
+                <li>Uses the debt-to-income limits for the loan program you select</li>
                 <li>Calculates maximum affordable home price</li>
                 <li>Considers property taxes and insurance</li>
                 <li>Accounts for existing monthly debt</li>

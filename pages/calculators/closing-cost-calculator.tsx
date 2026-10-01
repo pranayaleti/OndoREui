@@ -3,42 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { LoanProgram, getProgramMI, calculateMonthlyPI, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { LoanProgram, DEFAULT_MORTGAGE_RATE } from '@/lib/mortgage-utils';
+import { calculateClosingCosts, type ClosingCostInput, type ClosingCostResults } from '@/lib/closing-cost-utils';
 import { LeadCaptureModal } from "@/components/calculators/lead-capture-modal"
 import { NumberField } from "@/components/calculators/number-field";
 
-interface ClosingCostData {
-  homePrice: number;
-  loanAmount: number;
-  downPayment: number;
-  interestRate?: number;
-  loanTerm?: number;
-  propertyTax: number;
-  insurance: number;
-  titleInsurance: number;
-  appraisal: number;
-  inspection: number;
-  originationFee: number;
-  discountPoints: number;
-  prepaidInterest: number;
-  escrowReserves: number;
-  program?: LoanProgram;
-}
-
-interface ClosingCostResults {
-  totalClosingCosts: number;
-  outOfPocket: number;
-  lenderCosts: number;
-  thirdPartyCosts: number;
-  prepaidCosts: number;
-  monthlyPayment: number;
-  /** Months of first-month principal needed to equal total closing costs (rough equity payback, not true break-even). */
-  equityPaybackMonths: number;
-  monthlyPI?: number;
-}
-
 const ClosingCostCalculator: React.FC = () => {
-  const [formData, setFormData] = useState<ClosingCostData>({
+  const [formData, setFormData] = useState<ClosingCostInput>({
     homePrice: 300000,
     loanAmount: 240000,
     downPayment: 60000,
@@ -46,80 +17,31 @@ const ClosingCostCalculator: React.FC = () => {
     loanTerm: 30,
     propertyTax: 3000,
     insurance: 1200,
-    titleInsurance: 1000,
-    appraisal: 500,
-    inspection: 400,
-    originationFee: 1200,
+    titleInsurance: 2000,
+    appraisal: 600,
+    inspection: 450,
+    originationFee: 2400,
     discountPoints: 0,
-    prepaidInterest: 0,
+    prepaidInterest: 15,
     escrowReserves: 0,
-    program: 'conventional'
+    program: 'conventional',
+    financeUpfrontFee: true
   });
 
   const [results, setResults] = useState<ClosingCostResults | null>(null);
   const [hasCalculated, setHasCalculated] = useState(false);
 
   useEffect(() => {
-    calculateClosingCosts();
+    runCalculation();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
-  const calculateClosingCosts = () => {
-    const {
-      homePrice, loanAmount, downPayment, propertyTax, insurance, titleInsurance,
-      appraisal, inspection, originationFee, discountPoints, prepaidInterest, escrowReserves
-    } = formData;
-
-    // Calculate monthly property tax and insurance
-    const monthlyTax = propertyTax / 12;
-    const monthlyInsurance = insurance / 12;
-
-    // Calculate lender costs plus program-specific upfront fees
-    const baseLender = originationFee + (discountPoints * loanAmount / 100);
-    const upfrontFee = getProgramMI(formData.program || 'conventional', loanAmount, homePrice, 740, formData.loanTerm || 30, downPayment).upfrontFee;
-    const lenderCosts = baseLender + upfrontFee;
-
-    // Calculate third-party costs
-    const thirdPartyCosts = titleInsurance + appraisal + inspection;
-
-    // Convert prepaid interest from days to dollars
-    const dailyInterest = formData.interestRate
-      ? (loanAmount * (formData.interestRate / 100)) / 365
-      : 0;
-    const prepaidInterestDollars = dailyInterest * prepaidInterest;
-
-    const prepaidCosts = prepaidInterestDollars + escrowReserves + (monthlyTax * 2) + (monthlyInsurance * 2);
-
-    const totalClosingCosts = lenderCosts + thirdPartyCosts + prepaidCosts;
-    const outOfPocket = downPayment + totalClosingCosts;
-
-    let monthlyPI = 0;
-    if (formData.interestRate != null && formData.loanTerm) {
-      monthlyPI = calculateMonthlyPI(loanAmount, formData.interestRate, formData.loanTerm);
-    }
-    const monthlyPayment = monthlyTax + monthlyInsurance + (monthlyPI || (loanAmount * 0.005));
-
-    // First-month principal = P&I payment minus first month's interest
-    const firstMonthInterest = formData.interestRate
-      ? loanAmount * ((formData.interestRate / 100) / 12)
-      : 0;
-    const firstMonthPrincipal = monthlyPI > 0 ? monthlyPI - firstMonthInterest : 0;
-    const equityPaybackMonths = firstMonthPrincipal > 0 ? (totalClosingCosts / firstMonthPrincipal) : 0;
-
-    setResults({
-      totalClosingCosts,
-      outOfPocket,
-      lenderCosts,
-      thirdPartyCosts,
-      prepaidCosts,
-      monthlyPayment,
-      equityPaybackMonths,
-      monthlyPI: monthlyPI || undefined
-    });
+  const runCalculation = () => {
+    setResults(calculateClosingCosts(formData));
     setHasCalculated(true);
   };
 
-  const handleInputChange = (field: keyof ClosingCostData, value: number | string) => {
+  const handleInputChange = (field: keyof ClosingCostInput, value: number | string | boolean) => {
     const newData = { ...formData, [field]: value };
     
     // Auto-calculate loan amount if home price or down payment changes
@@ -246,6 +168,25 @@ const ClosingCostCalculator: React.FC = () => {
                 </select>
               </div>
 
+              {/* Financed upfront fee (FHA, VA, USDA) */}
+              {formData.program && formData.program !== 'conventional' && (
+                <div className="flex items-start gap-3">
+                  <input
+                    id="financeUpfrontFee"
+                    type="checkbox"
+                    checked={formData.financeUpfrontFee ?? true}
+                    onChange={(e) => handleInputChange('financeUpfrontFee', e.target.checked)}
+                    className="mt-1 h-4 w-4"
+                  />
+                  <label htmlFor="financeUpfrontFee" className="text-sm text-foreground">
+                    Finance the upfront fee into the loan
+                    <span className="block text-xs text-foreground/70">
+                      FHA, VA and USDA upfront fees are usually added to the loan balance instead of paid in cash at closing.
+                    </span>
+                  </label>
+                </div>
+              )}
+
               {/* Title Insurance */}
               <NumberField
                 id="titleInsurance"
@@ -296,7 +237,7 @@ const ClosingCostCalculator: React.FC = () => {
               <NumberField
                 id="prepaidInterest"
                 label="Prepaid Interest (days)"
-                kind="currency"
+                kind="days"
                 value={formData.prepaidInterest}
                 onChange={(next) => handleInputChange('prepaidInterest', next)}
               />
@@ -352,6 +293,12 @@ const ClosingCostCalculator: React.FC = () => {
                       <span className="text-foreground/70">Prepaid Costs:</span>
                       <span className="font-semibold">{formatCurrency(results.prepaidCosts)}</span>
                     </div>
+                    {results.financedUpfrontFee > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-foreground/70">Upfront fee added to the loan (not paid at closing):</span>
+                        <span className="font-semibold">{formatCurrency(results.financedUpfrontFee)}</span>
+                      </div>
+                    )}
                     <hr className="my-3" />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total:</span>
@@ -377,7 +324,7 @@ const ClosingCostCalculator: React.FC = () => {
                     </div>
                     
                     <div className="space-y-2 text-sm text-foreground/70">
-                      <p>• Closing costs typically range from 2-5% of home price</p>
+                      <p>• Closing costs typically range from 2-5% of home price. Yours: {results.closingCostPercentOfPrice.toFixed(1)}%</p>
                       {results.monthlyPI && (
                         <p>• Estimated P&I payment: {formatCurrency(results.monthlyPI)}</p>
                       )}

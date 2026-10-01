@@ -18,6 +18,7 @@ import {
   SITE_PHONE,
 } from "@/lib/site"
 import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
+import { formatCompactUsd } from "@/lib/format-compact"
 
 type ServiceType = "property-management" | "buy-sell" | "loans"
 
@@ -26,12 +27,6 @@ type LocalProofCTAProps = {
   service: ServiceType
   marketData?: CityMarketData
   focusName?: string
-}
-
-function fmtUsd(n: number): string {
-  if (n >= 1_000_000) return "$" + (n / 1_000_000).toFixed(1) + "M"
-  if (n >= 1_000) return "$" + (n / 1_000).toFixed(0) + "K"
-  return "$" + n.toLocaleString("en-US")
 }
 
 function getServiceCopy(
@@ -55,7 +50,7 @@ function getServiceCopy(
         ? `${focusName} with local context for ${city.name} owners`
         : `A local property management partner for ${city.name}`,
       description: marketData
-        ? `From ${fmtUsd(marketData.medianRent)}/mo rentals to maintenance and owner reporting, Ondo helps ${city.name} owners make faster decisions with local market context and clear communication.`
+        ? `From ${formatCompactUsd(marketData.medianRent)}/mo rentals to maintenance and owner reporting, Ondo helps ${city.name} owners make faster decisions with local market context and clear communication.`
         : `Ondo helps ${city.name} owners reduce vacancy, coordinate operations, and keep visibility across every property decision.`,
       primaryHref: "/contact",
       primaryLabel: "Get a Free Rental Analysis",
@@ -78,7 +73,7 @@ function getServiceCopy(
         ? `${focusName} backed by ${city.name} market context`
         : `A local guide for buying and selling in ${city.name}`,
       description: marketData
-        ? `Ondo pairs neighborhood-level pricing, prep, and negotiation support with the realities of a ${fmtUsd(marketData.medianHomePrice)} median home market in ${city.name}.`
+        ? `Ondo pairs neighborhood-level pricing, prep, and negotiation support with the realities of a ${formatCompactUsd(marketData.medianHomePrice)} median home market in ${city.name}.`
         : `Ondo combines local pricing strategy, property prep, and contract-to-close support for buyers and sellers in ${city.name}.`,
       primaryHref: "/contact",
       primaryLabel: "Talk to a Local Agent",
@@ -100,7 +95,7 @@ function getServiceCopy(
       ? `${focusName} for ${city.name} buyers`
       : `Mortgage guidance built around ${city.name}`,
     description: marketData
-      ? `Compare loan options against ${city.name}'s ${fmtUsd(marketData.medianHomePrice)} median price point before you shop, refinance, or lock a rate.`
+      ? `Compare loan options against ${city.name}'s ${formatCompactUsd(marketData.medianHomePrice)} median price point before you shop, refinance, or lock a rate.`
       : `Compare mortgage options with a Utah team that can help you weigh payment, cash-to-close, and long-term fit.`,
     primaryHref: "/qualify",
     primaryLabel: "Get Pre-Qualified",

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   allCitySlugs,
+  findCitiesByZip,
   groupUtahCitiesByCounty,
   toCitySlug,
   utahCitiesFromNorthOgdenToNephi,
@@ -25,5 +26,17 @@ describe("toCitySlug", () => {
     expect(toCitySlug("Taylorsville")).toBe("taylorsville")
     expect(allCitySlugs).toContain("west-valley-city")
     expect(allCitySlugs).toContain("lehi")
+  })
+})
+
+describe("findCitiesByZip", () => {
+  it("returns every city that shares a ZIP", () => {
+    expect(findCitiesByZip("84015").map((c) => c.name)).toEqual(["Clinton", "West Point", "Sunset", "Clearfield"])
+    expect(findCitiesByZip("84070").map((c) => c.name)).toEqual(["Midvale", "Sandy"])
+  })
+
+  it("returns one city for a unique ZIP and none for an unknown ZIP", () => {
+    expect(findCitiesByZip("84043").map((c) => c.name)).toEqual(["Lehi"])
+    expect(findCitiesByZip("90210")).toEqual([])
   })
 })

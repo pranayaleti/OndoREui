@@ -37,7 +37,7 @@ export default function RentingVsBuyingSLC() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              Salt Lake City&apos;s housing market has cooled from its 2021–2022 peak, but home prices remain elevated. With mortgage rates still above 6%, many households are genuinely uncertain: is it smarter to rent or buy right now? Here&apos;s the honest breakdown.
+              Salt Lake City&apos;s housing market has cooled from its 2021–2022 peak, but home prices remain elevated. With mortgage rates still above 6%, many households are uncertain: is it smarter to rent or buy right now? Here&apos;s the honest breakdown.
             </p>
 
             <h2>The Numbers: Rent vs. Buy in SLC Today</h2>
@@ -55,7 +55,7 @@ export default function RentingVsBuyingSLC() {
             <h2>When Buying Makes Sense</h2>
             <p>The buy argument improves dramatically over time due to three forces:</p>
             <ol>
-              <li><strong>Equity build:</strong> $2,650/mo mortgage includes ~$850 in principal paydown in year 1, growing each year.</li>
+              <li><strong>Equity build:</strong> $2,650/mo mortgage includes about $350 in principal paydown in month one (about $4,300 over year 1), growing each year.</li>
               <li><strong>Appreciation:</strong> SLC has averaged 4–6% annual appreciation over 10-year periods. At 4%: your $510K home is worth $755K in 10 years.</li>
               <li><strong>Rent inflation:</strong> SLC rents have risen 30%+ since 2020. Locking in a fixed mortgage protects against future rent increases.</li>
             </ol>
