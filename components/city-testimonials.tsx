@@ -14,7 +14,7 @@ export function CityTestimonials({ cityName, limit = 3 }: CityTestimonialsProps)
     <section>
       <h2 className="mb-2 text-2xl font-bold">Example stories from {cityName}</h2>
       <p className="mb-6 text-sm text-foreground/60">
-        Illustrative composites — not imported platform reviews.
+        Illustrative composites, not imported platform reviews.
       </p>
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (

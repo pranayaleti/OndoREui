@@ -1,8 +1,9 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { CITY_MARKET_AS_OF, cityMarketData } from "@/lib/city-market-data"
 const slug = "/blog/best-neighborhoods-invest-utah-real-estate"
-const title = "Best Neighborhoods to Invest in Utah Real Estate (Wasatch Front)"
+const title = "Best Neighborhoods to Invest in Utah Real Estate"
 const description = "A data-driven look at the top Utah neighborhoods for real estate investment in 2026, cash flow, appreciation, and rental demand by submarket."
 const published = "2026-03-23"
 const modified = "2026-03-23"
@@ -58,7 +59,7 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             </ul>
 
             <h2>Draper / South Jordan: Silicon Slopes Premium</h2>
-            <p>Draper consistently ranks as one of Utah's highest-demand rental markets. Proximity to the Silicon Slopes tech corridor, Adobe, Workday, Domo, and dozens of high-growth startups, attracts high-income renters who can afford quality homes but are delaying purchase. Single-family 3–4BR rentals in Draper command $2,800–$3,800/month.</p>
+            <p>Draper consistently ranks as one of Utah's highest-demand rental markets. Proximity to the Silicon Slopes tech corridor, Adobe, Workday, Domo, and dozens of high-growth startups, attracts high-income renters who can afford quality homes but are delaying purchase. Single-family 3–4BR rentals in Draper rent for more than the city-wide median rent of ${cityMarketData["Draper"].medianRent.toLocaleString("en-US")}/month (Ondo city median as of {CITY_MARKET_AS_OF}), so get a rental analysis for the specific home.</p>
             <ul>
               <li><strong>Investor profile:</strong> Appreciation-focused investors with higher acquisition budgets</li>
               <li><strong>Price range:</strong> $550,000–$800,000+ for rentable SFR</li>
@@ -103,7 +104,7 @@ export default function BestNeighborhoodsInvestUtahRealEstate() {
             </ul>
 
             <h2>Lehi: Silicon Slopes Ground Zero</h2>
-            <p>Lehi is Utah's fastest-growing city and home to the highest concentration of tech employer headquarters along the Wasatch Front. Demand for rental properties remains extraordinary. However, significant new multifamily construction has introduced more competition in the apartment segment. Single-family rentals remain tight.</p>
+            <p>Lehi is one of Utah's fastest-growing cities and home to the highest concentration of tech employer headquarters along the Wasatch Front. Demand for rental properties remains extraordinary. However, significant new multifamily construction has introduced more competition in the apartment segment. Single-family rentals remain tight.</p>
             <ul>
               <li><strong>Investor profile:</strong> Long-horizon investors willing to pay for growth</li>
               <li><strong>Price range:</strong> $500,000–$750,000+</li>

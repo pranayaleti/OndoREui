@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import Link from "next/link"
 const slug = "/blog/tenant-rights-checklist"
 const title = "Tenant Rights Checklist: What Every Renter Should Know"
-const description = "A practical checklist of core renter protections — deposits, repairs, entry notice, and how to document issues."
+const description = "A practical checklist of core renter protections: deposits, repairs, entry notice, and how to document issues."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"

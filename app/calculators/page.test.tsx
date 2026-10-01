@@ -6,6 +6,7 @@ vi.mock("@/components/content/glossary-terms", () => ({
 }))
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }), usePathname: () => "/calculators/" }))
 
+import { CALCULATOR_SLUGS } from "@/lib/calculator-catalog"
 import CalculatorsIndexPage from "./page"
 
 describe("/calculators hub", () => {
@@ -18,5 +19,14 @@ describe("/calculators hub", () => {
     levels.forEach((level, i) => {
       if (i > 0) expect(level - levels[i - 1]!).toBeLessThanOrEqual(1)
     })
+  })
+
+  it("has one tile per catalog calculator", () => {
+    render(<CalculatorsIndexPage />)
+    const slugs = screen
+      .getAllByRole("link")
+      .map((a) => /^\/calculators\/([^/]+)\/?$/.exec(a.getAttribute("href") ?? "")?.[1])
+      .filter((slug): slug is string => Boolean(slug))
+    expect([...new Set(slugs)].sort()).toEqual([...CALCULATOR_SLUGS].sort())
   })
 })

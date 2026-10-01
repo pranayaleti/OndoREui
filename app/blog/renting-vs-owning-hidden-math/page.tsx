@@ -1,7 +1,10 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const slug = "/blog/renting-vs-owning-hidden-math"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/renting-vs-buying-salt-lake-city", title: "Renting vs. Buying in Salt Lake City (2026 Analysis)" }
 const title = "The Hidden Math Behind Renting vs Owning"
-const description = "A developer-landlord breaks down opportunity cost, inflation-adjusted rent, and equity velocity so you can compare renting vs owning with real numbers."
+const description = "Opportunity cost, inflation-adjusted rent, and equity velocity, so you can compare renting vs owning with real numbers."
 const published = "2025-12-10"
 const modified = "2025-12-10"
 const author = "ONDO Team"
@@ -16,6 +19,7 @@ const keywords = [
 
 export const metadata = articleMetadata({
   path: slug,
+  mergedInto,
   title,
   description,
   published,
@@ -30,6 +34,7 @@ export default function RentingVsOwningHiddenMath() {
     <ArticleShell
       meta={{
         path: slug,
+        mergedInto,
         title,
         description,
         published,
@@ -41,7 +46,7 @@ export default function RentingVsOwningHiddenMath() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              As both a full-stack developer and landlord, I model rent-vs-own the way I model systems: identify inputs, define flows, stress-test failure modes. Here is the practical math I use for clients along the Wasatch Front.
+              Rent versus own is a modeling problem: identify the inputs, define the cash flows, and stress-test the weak spots. Here is the practical math for the Wasatch Front.
             </p>
 
             <h2>Core Definitions</h2>
@@ -77,16 +82,9 @@ export default function RentingVsOwningHiddenMath() {
 
             <h2>Utah-Specific Considerations</h2>
             <ul>
-              <li>Property taxes can reset post-sale; underwrite a jump year 1.</li>
+              <li>Property taxes follow market value every year; check the county rate and plan for annual increases.</li>
               <li>Snow + sun swings: roof/HVAC lifecycle can be shorter; pad maintenance.</li>
               <li>Transit/schools drive rent deltas more than year-built; compare by corridor.</li>
-            </ul>
-
-            <h2>Developer’s Angle</h2>
-            <ul>
-              <li>Model in a spreadsheet with explicit scenarios; do not bury assumptions.</li>
-              <li>Create a simple dashboard: monthly carry vs invest-alt-path; project 5/10-year outcomes.</li>
-              <li>Use sensitivity toggles (vacancy for house hacking; refi timing; PMI drop-off).</li>
             </ul>
 
             <h2>Decision Rule</h2>

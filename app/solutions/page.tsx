@@ -5,14 +5,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
-import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { pageTitle } from "@/lib/site"
 
-export const metadata: Metadata = {
-  alternates: { canonical: toCanonicalPageUrl("/solutions") },
+export const metadata: Metadata = pageCanonicalMetadata("/solutions/", {
   title: pageTitle("Solutions | Ondo Real Estate"),
   description: "One platform built for investors, landlords, property managers, and tenants across Utah.",
-}
+})
 
 const audiences = [
   {

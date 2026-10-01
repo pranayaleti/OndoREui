@@ -78,7 +78,7 @@ const PURCHASE_ROWS: readonly ComparisonRow[] = [
     id: "occupancy",
     criterion: "Occupancy",
     cells: {
-      conventional: "Primary, second home, and investment — each with different pricing and overlays.",
+      conventional: "Primary, second home, and investment, each with different pricing and overlays.",
       fha: FHA_SNAPSHOT.occupancy,
       va: "Primary residence. Remaining-entitlement cases still have an occupancy test.",
       usda: USDA_SNAPSHOT.occupancy,
@@ -119,7 +119,7 @@ const PURCHASE_ROWS: readonly ComparisonRow[] = [
     cells: {
       conventional: "FHFA conforming limit for the property county. Look up this year’s table.",
       fha: "HUD FHA county limit. Different table from FHFA. Look up the property county.",
-      va: "County limits matter when entitlement is partial. Full entitlement files follow current VA/FHFA interaction — confirm, do not memorize a number.",
+      va: "County limits matter when entitlement is partial. Full entitlement files follow current VA/FHFA interaction. Confirm, do not memorize a number.",
       usda: "Area loan limits exist. The map and income tests usually bind first.",
       jumbo: "Any amount above the FHFA conforming limit for that county. Not a single Utah-wide number.",
       refinance: "The new loan must fit the program you refinance into (conforming, FHA, VA, jumbo).",

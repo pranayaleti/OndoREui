@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/video-library") },
   title: pageTitle("Learn Ondo | Guides, Academy & Calculators"),
   description:
-    "Learning paths for owners, tenants, buyers, and investors: academy, written guides, calculators, and a live walkthrough. We do not host a placeholder video grid.",
+    "Learning paths for owners, tenants, buyers, and investors: academy, written guides, calculators, and a live walkthrough.",
 }
 
 const paths = [
@@ -64,7 +64,7 @@ export default function VideoLibraryPage() {
     <main className="min-h-screen">
       <SEO
         title="Learn Ondo | Guides, Academy & Calculators"
-        description="Learning paths for owners, tenants, buyers, and investors. Written guides and a live walkthrough — not a coming-soon video wall."
+        description="Learning paths for owners, tenants, buyers, and investors. Written guides and a live walkthrough."
         pathname="/video-library"
         image={`${SITE_URL}/modern-office-building.webp`}
       />
@@ -77,8 +77,7 @@ export default function VideoLibraryPage() {
       <section className="bg-background py-16">
         <div className="container mx-auto max-w-6xl px-4">
           <p className="mx-auto mb-10 max-w-2xl text-center text-foreground/70">
-            We are not posting untitled “coming soon” clips with invented runtimes. These links go to pages that
-            already ship: training, articles, math tools, and a demo you can actually open.
+            These links go to live pages: training, articles, math tools, and a demo you can open.
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {paths.map(({ icon: Icon, title, description, href, label }) => (

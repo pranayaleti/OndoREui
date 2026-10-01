@@ -14,11 +14,13 @@ const path = "/blog/usda-vs-va-vs-fha-veteran-rural"
 const faqs = [
   {
     question: "Should a veteran always pick VA over USDA in a rural tract?",
-    answer: RURAL_VETERAN_COMPARE.notAPick,
+    answer:
+      "No. VA is often the first conversation when remaining entitlement, occupancy and residual income fit, but USDA’s map and income limit, and the rest of the file, decide what works. If two programs fit, compare two Loan Estimates.",
   },
   {
     question: "Does a rural city name mean USDA is available?",
-    answer: USDA_SNAPSHOT.mapNote,
+    answer:
+      "No. USDA eligibility is checked by property address on its published map tool, not by city name. Run the address before you write an offer.",
   },
 ]
 
@@ -60,13 +62,13 @@ export default function UsdaVaFhaRuralPage() {
       <ul>
         <li>
           <strong>VA.</strong> {RURAL_VETERAN_COMPARE.vaFirst} Funding fee (first use, less than 5% down snapshot):{" "}
-          {VA_FUNDING_FEE.firstUseLessThan5PercentDown}. {VA_FUNDING_FEE.exemptionNote}{" "}
+          {VA_FUNDING_FEE.firstUseLessThan5PercentDown}.{" "}
           <Link href="/loans/va">VA loans</Link>.{" "}
           <Link href="/blog/va-funding-fee-finance-vs-pay-cash">Finance vs pay the funding fee</Link>.
         </li>
         <li>
           <strong>USDA.</strong> {RURAL_VETERAN_COMPARE.usdaMap} Upfront guarantee fee snapshot:{" "}
-          {USDA_SNAPSHOT.upfrontGuaranteeFee}; annual {USDA_SNAPSHOT.annualFee}. {USDA_SNAPSHOT.feeNote}{" "}
+          {USDA_SNAPSHOT.upfrontGuaranteeFee}; annual {USDA_SNAPSHOT.annualFee}.{" "}
           <Link href="/loans/usda">USDA loans</Link>.{" "}
           <Link href="/blog/usda-map-income-limit-eligibility">Map and income how-to</Link>.
         </li>
@@ -84,6 +86,7 @@ export default function UsdaVaFhaRuralPage() {
         highlight="va"
         heading="Typical overlays — not a recommendation"
         intro="Use this as a map of occupancy, down payment, and fee snapshots. A loan officer still applies the guide in force. Fee percents are dated; confirm before anyone prices a file."
+        footnote=""
       />
 
       <h2>Scenarios (file facts, not advice)</h2>
@@ -101,7 +104,6 @@ export default function UsdaVaFhaRuralPage() {
           remaining low-down primary path. MIP is not a VA funding fee and not a USDA guarantee fee.
         </li>
       </ul>
-      <p>{VA_FUNDING_FEE.downPaymentNote}</p>
       <p>{USDA_SNAPSHOT.incomeNote}</p>
 
       <h2>What happens next</h2>

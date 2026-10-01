@@ -9,26 +9,11 @@ const BCP47_BY_LOCALE = {
 // Flip NEXT_PUBLIC_I18N_ROUTED=1 once per-locale URL paths ship (e.g. /es/about).
 const LOCALE_ROUTING_ENABLED = process.env.NEXT_PUBLIC_I18N_ROUTED === '1'
 
-// Static lastmod dates by path prefix (no trailing slash; paths normalized in getLastmod).
-const SECTION_LASTMOD = {
-  '/blog': '2026-03-07',
-  '/glossary': '2026-09-07',
-  '/buy': '2026-03-07',
-  '/sell': '2026-03-07',
-  '/loans': '2026-03-07',
-  '/investments': '2026-03-07',
-  '/calculators': '2026-03-07',
-  '/notary': '2026-03-07',
-  '/faq': '2026-03-07',
-  '/resources': '2026-03-07',
-  '/about': '2026-03-07',
-  '/contact': '2026-03-07',
-  '/property-management': '2026-04-05',
-  '/buy-sell': '2026-04-05',
-  '/locations': '2026-04-05',
-}
+// eslint-disable-next-line @typescript-eslint/no-require-imports -- CommonJS config, like the requires above
+const { getRouteLastmod } = require('./lib/sitemap-lastmod.cjs')
 
-const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString().split('T')[0]
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const APP_DIR = require('path').join(__dirname, 'app')
 const PRIVATE_ROUTE_PREFIXES = agentDiscoveryConfig.privateRoutePrefixes
 const ROBOTS_DISALLOW = [...PRIVATE_ROUTE_PREFIXES, ...agentDiscoveryConfig.extraDisallow]
 const AI_CRAWLER_AGENTS = agentDiscoveryConfig.aiCrawlerAgents
@@ -52,14 +37,6 @@ function normalizeSitemapPath(path) {
   return path.replace(/\/+$/, '') || '/'
 }
 
-function getLastmod(path) {
-  const p = normalizeSitemapPath(path)
-  for (const [prefix, date] of Object.entries(SECTION_LASTMOD)) {
-    if (p === prefix || p.startsWith(`${prefix}/`)) return date
-  }
-  return BUILD_DATE
-}
-
 // Priority tiers:
 //  1.0 — homepage
 //  0.9 — primary service pages (buy, sell, loans, contact, properties index)
@@ -73,8 +50,7 @@ function getPriority(path) {
   const tier9 = ['/buy', '/sell', '/loans', '/contact', '/properties']
   if (tier9.includes(p)) return 0.9
   // Individual listing detail pages get tier 8 — they're crawl-worthy but
-  // less important than the index. Each listing also benefits from a fresh
-  // BUILD_DATE lastmod (the listing data is regenerated each build).
+  // less important than the index.
   if (/^\/properties\/[^/]+$/.test(p)) return 0.8
   const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools', '/glossary']
   if (tier8.some((x) => p === x)) return 0.8
@@ -127,6 +103,8 @@ const SITEMAP_NOINDEX_PATHS = [
   '/search',
   '/chat',
   '/properties/compare',
+  // Invite landing page that only makes sense with a ?ref= code (noindex).
+  '/referral',
   // Placeholder pages whose original content could not be verified (noindex).
   '/about/history',
   '/about/news',
@@ -139,6 +117,15 @@ const SITEMAP_NOINDEX_PATHS = [
   // Investment wording is pending counsel review (noindex).
   '/strategy',
   '/brochure',
+  // Internal engineering write-ups (noindex): not consumer search content.
+  '/blog/technical-seo-for-real-estate',
+  '/blog/modernizing-notary-workflows-integration',
+  // Duplicates folded into a stronger post (noindex,follow, canonical to the kept post).
+  '/blog/utah-repc-deadlines',
+  '/blog/utah-county-conforming-loan-limit-lookup',
+  '/blog/rent-vs-own-calculator-guide',
+  '/blog/renting-vs-owning-hidden-math',
+  '/blog/utah-rent-vs-buy-wasatch-front',
 ]
 
 /**
@@ -164,6 +151,11 @@ function isExcludedPath(path) {
   }
   // Pages Router leftovers — same calculators live at /calculators/{slug}/.
   if (/^\/calculators\/[^/]+-calculator$/.test(p)) {
+    return true
+  }
+  // ZIP pages render their primary city's service page and canonicalize to it
+  // (lib/zip-pages.ts), so only the canonical city page belongs in the sitemap.
+  if (/^\/(property-management|buy-sell|loans)\/zip\/\d{5}$/.test(p)) {
     return true
   }
   // /neighborhoods/{city}/ only redirects to the hub's city section (the neighborhood pages sit one level down).
@@ -296,9 +288,14 @@ module.exports = {
     '/visit/*',
     '/verify',
     '/unsubscribe',
+    // Invite landing page that only makes sense with a ?ref= code; noindex, so it must not be submitted.
+    '/referral',
+    '/referral/',
   ],
   transform: async (config, path) => {
-    if (isExcludedPath(path)) {
+    // robots.txt, llms.txt, index.md and the like are files, not pages. They are
+    // advertised in the robots.txt comment block instead.
+    if (isFileLikeSitemapPath(path) || isExcludedPath(path)) {
       return null
     }
 
@@ -306,17 +303,10 @@ module.exports = {
       loc: path,
       changefreq: 'weekly',
       priority: getPriority(path),
-      lastmod: getLastmod(path),
       alternateRefs: buildAlternateRefs(path, config.siteUrl),
     }
-    if (isFileLikeSitemapPath(path)) {
-      return { ...base, trailingSlash: false }
-    }
-    return base
-  },
-  additionalPaths: async (config) => {
-    const paths = AGENT_DISCOVERY_PATHS
-    const entries = await Promise.all(paths.map((p) => config.transform(config, p)))
-    return entries.filter(Boolean)
+    // lastmod comes from the page's own `modified`/`published` constant; no date, no lastmod.
+    const lastmod = getRouteLastmod(path, APP_DIR)
+    return lastmod ? { ...base, lastmod } : base
   },
 }

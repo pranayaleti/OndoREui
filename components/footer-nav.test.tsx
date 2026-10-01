@@ -29,7 +29,7 @@ describe("Footer navigation columns", () => {
 
   it("keeps every column short enough to scan", () => {
     render(<Footer />)
-    for (const name of ["Buying a Home", "Refinance", "Mortgage Loans", "Calculators", "Company", "Learn", "Areas", "Help Center"]) {
+    for (const name of ["Buying a Home", "Refinance", "Mortgage Loans", "Calculators", "Company", "Learn", "Areas", "Help Center", "Owners & Investors"]) {
       const links = within(screen.getByRole("navigation", { name })).getAllByRole("listitem")
       expect(links.length, name).toBeLessThanOrEqual(MAX_LINKS_PER_COLUMN)
     }
@@ -44,5 +44,33 @@ describe("Footer navigation columns", () => {
     for (const href of ["/locations", "/market-reports", "/neighborhoods", "/schools"]) {
       expect(areas.getAllByRole("link").some((a) => a.getAttribute("href")?.replace(/\/$/, "") === href), href).toBe(true)
     }
+  })
+
+  it("links the owner, solutions and platform hubs that the hover-only header menus hide from crawlers", () => {
+    render(<Footer />)
+    const owners = within(screen.getByRole("navigation", { name: "Owners & Investors" }))
+    const hrefs = owners.getAllByRole("link").map((a) => a.getAttribute("href")?.replace(/\/$/, ""))
+    for (const href of [
+      "/property-management",
+      "/pricing",
+      "/compare-utah-property-managers",
+      "/compare",
+      "/solutions",
+      "/solutions/landlords",
+      "/solutions/investors",
+      "/solutions/property-managers",
+      "/solutions/tenants",
+    ]) {
+      expect(hrefs, href).toContain(href)
+    }
+    const learn = within(screen.getByRole("navigation", { name: "Learn" }))
+    for (const href of ["/tour", "/why-utah"]) {
+      expect(learn.getAllByRole("link").some((a) => a.getAttribute("href")?.replace(/\/$/, "") === href), href).toBe(true)
+    }
+  })
+
+  it("does not link the sweepstakes page", () => {
+    render(<Footer />)
+    expect(screen.queryByRole("link", { name: /sweepstakes/i })).not.toBeInTheDocument()
   })
 })

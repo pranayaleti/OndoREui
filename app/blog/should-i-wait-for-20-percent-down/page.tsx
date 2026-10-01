@@ -73,7 +73,7 @@ export const metadata = articleMetadata({
   path,
   title: "Should I Wait for 20% Down?",
   description:
-    "Waiting for 20% can avoid conventional PMI. Buying sooner with PMI is a cash-and-timeline trade — not how MIP vs PMI later ends.",
+    "Waiting for 20% can avoid conventional PMI. Buying sooner with PMI is a cash-and-timeline trade-off.",
   published: "2026-08-29",
   category: "First-Time Buyers",
   keywords: ["should I wait for 20% down", "PMI vs 20 percent down", "buy now or save down payment"],
@@ -87,7 +87,7 @@ export default function WaitFor20DownPage() {
         path,
         title: "Should I Wait for 20% Down?",
         description:
-          "Waiting for 20% can avoid conventional PMI. Buying sooner with PMI is a cash-and-timeline trade — not how MIP vs PMI later ends.",
+          "Waiting for 20% can avoid conventional PMI. Buying sooner with PMI is a cash-and-timeline trade-off.",
         published: "2026-08-29",
         category: "First-Time Buyers",
         bannerSubtitle: "PMI is a payment line. Rent while you save is also a payment line. Neither is a character test.",

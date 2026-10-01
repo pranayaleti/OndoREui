@@ -9,11 +9,13 @@ const path = "/blog/utah-property-tax-calendar-first-escrow-analysis"
 const faqs = [
   {
     question: "When are Utah property taxes typically due?",
-    answer: UTAH_TAX_CALENDAR.dueDate,
+    answer:
+      "Typically November 30. If that date falls on a weekend or holiday, the next business day usually applies. Confirm with the county treasurer for the property.",
   },
   {
     question: "Why was my first escrow analysis higher than the Loan Estimate?",
-    answer: UTAH_TAX_CALENDAR.escrowMismatch,
+    answer:
+      "Your escrow year is not the county tax year. Closing collected an estimate of the months until the next November tax payment plus a cushion, and the first analysis uses the actual tax and insurance bills.",
   },
 ]
 
@@ -27,7 +29,7 @@ const rows: readonly ComparisonRow[] = [
     id: "bill",
     criterion: "How often the bill hits",
     cells: {
-      county: UTAH_TAX_CALENDAR.annualBill,
+      county: "Once a year, with notice dates that differ by county.",
       escrow: "The servicer collects monthly, then disburses when the tax and insurance bills are due.",
     },
   },
@@ -35,8 +37,8 @@ const rows: readonly ComparisonRow[] = [
     id: "clock",
     criterion: "Whose calendar",
     cells: {
-      county: UTAH_TAX_CALENDAR.dueDate,
-      escrow: UTAH_TAX_CALENDAR.escrowMismatch,
+      county: "Typically November 30, or the next business day.",
+      escrow: "Starts at your closing date, so the monthly collection and the annual bill do not line up.",
     },
   },
 ]

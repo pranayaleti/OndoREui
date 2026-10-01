@@ -70,7 +70,7 @@ export const DTI_HOA = {
   asOf: LENDING_FACTS_AS_OF,
   source: "Agency DTI definitions (PITI plus applicable HOA) plus typical condo overlays",
   frontEnd:
-    "HOA dues that are required for the subject property are housing expense. They sit in front-end DTI with principal, interest, taxes, and insurance — not in the “other debts” box of an affordability toy.",
+    "HOA dues that are required for the subject property are housing expense. They sit in front-end DTI with principal, interest, taxes, and insurance, not in the “other debts” box of an affordability toy.",
   backEnd:
     "Back-end DTI still includes that housing payment plus counted installment, revolving, and other debts. A condo with a modest PITI and a large HOA can fail DTI even when the note payment looks comfortable.",
   specialAssessment:
@@ -189,7 +189,7 @@ export const PARENT_GIFTING = {
 export const STUDENT_LOAN_DTI = {
   asOf: LENDING_FACTS_AS_OF,
   source:
-    "Fannie Mae Selling Guide B3-6-05 (student loans), Freddie Mac, HUD 4000.1, and VA Lender's Handbook — confirm the guide in force for the product",
+    "Fannie Mae Selling Guide B3-6-05 (student loans), Freddie Mac, HUD 4000.1, and VA Lender's Handbook: confirm the guide in force for the product",
   creditReportPayment:
     "If a monthly student loan payment greater than $0 appears on the credit report, many files use that amount unless documentation shows a different current payment.",
   fannieZero:
@@ -197,7 +197,7 @@ export const STUDENT_LOAN_DTI = {
   freddieFha:
     "Freddie Mac and FHA typically calculate a payment from the outstanding balance (commonly 0.5%) when the reported payment is $0, deferred, or not amortizing. A credit-report $0 is not automatically a $0 DTI line.",
   saveNote:
-    "Federal IDR plans, including SAVE, have been in legal and servicing flux. A SAVE or forbearance $0 on a student-aid dashboard is not the same as a documented IDR payment an investor will accept. Confirm current repayment status with the servicer and the investor calculation — not a 2024 blog post.",
+    "Federal IDR plans, including SAVE, have been in legal and servicing flux. A SAVE or forbearance $0 on a student-aid dashboard is not the same as a documented IDR payment an investor will accept. Confirm current repayment status with the servicer and the investor calculation, not a 2024 blog post.",
   vaNote:
     "VA uses its own student-loan treatment (often a percentage of balance when no payment is reporting). Do not import a conventional percent onto a VA file. Confirm the current VA Lender's Handbook. This page does not quote residual-income dollars.",
 } as const
@@ -230,7 +230,7 @@ export const FHA_CONDO_ROSTER = {
 
 export const MORTGAGE_INSURANCE_EXIT = {
   asOf: LENDING_FACTS_AS_OF,
-  source: "HUD MIP duration (case numbers on or after June 3, 2013) and Homeowners Protection Act PMI cancellation — confirm current rules and your note",
+  source: "HUD MIP duration (case numbers on or after June 3, 2013) and Homeowners Protection Act PMI cancellation: confirm current rules and your note",
   fhaPost2013:
     "For FHA case numbers assigned on or after June 3, 2013, annual MIP generally lasts 11 years when original LTV is 90% or less (10% or more down), or for the remaining loan term (up to 30 years) when original LTV is above 90%. Later equity from payments or appreciation does not cancel annual MIP the way conventional PMI often can.",
   conventionalHpa:
@@ -243,7 +243,7 @@ export const MORTGAGE_INSURANCE_EXIT = {
 
 export const WAIT_FOR_20_DOWN = {
   asOf: LENDING_FACTS_AS_OF,
-  source: "Conventional PMI vs FHA MIP duration, plus cash-to-close vs rent-while-saving — not a rate quote",
+  source: "Conventional PMI vs FHA MIP duration, plus cash-to-close vs rent-while-saving, not a rate quote",
   tradeoff:
     "Waiting until you can put 20% down can avoid conventional PMI. It also delays the purchase: you keep paying rent (or staying put), and the price and insurance lines can move while you save. Buying sooner with PMI is a cash-and-timeline trade, not a moral failing.",
   lowDownExists:
@@ -256,9 +256,9 @@ export const WAIT_FOR_20_DOWN = {
 
 export const PMI_REMOVAL = {
   asOf: LENDING_FACTS_AS_OF,
-  source: "Homeowners Protection Act (original value) plus typical investor/servicer current-value cancellation — confirm the note and servicer",
+  source: "Homeowners Protection Act (original value) plus typical investor/servicer current-value cancellation: confirm the note and servicer",
   originalValue:
-    "For many borrower-paid conventional loans, you can request PMI cancellation at 80% of the original property value and the servicer typically must terminate automatically at 78% of original value if the loan is current. Those tests use original value and scheduled amortization — not today’s Zillow number.",
+    "For many borrower-paid conventional loans, you can request PMI cancellation at 80% of the original property value and the servicer typically must terminate automatically at 78% of original value if the loan is current. Those tests use original value and scheduled amortization, not today’s Zillow number.",
   newAppraisal:
     "A cancellation based on a new appraisal of current value is an investor/servicer path, not the HPA original-value clock. It usually needs seasoning, a current LTV test that can be tighter than 80% of original value, and a paid appraisal. It can be declined. It is not available on every product (lender-paid PMI is a common exception).",
   notWaitFor20:
@@ -273,7 +273,7 @@ export const DISCOUNT_POINTS = {
   definition:
     "One discount point is typically 1% of the loan amount paid at closing to lower the note rate for the life of that loan (or until you refinance or sell). It is prepaid interest, not a fee that “gets you approved.”",
   breakeven:
-    "Break-even months ≈ point cost ÷ the monthly principal-and-interest savings versus the same loan with fewer or no points. If you sell, refinance, or recast before that month, the points can lose. Origination and lender credits are a different LE line — do not mix them into “points” casually.",
+    "Break-even months ≈ point cost ÷ the monthly principal-and-interest savings versus the same loan with fewer or no points. If you sell, refinance, or recast before that month, the points can lose. Origination and lender credits are a different LE line: do not mix them into “points” casually.",
   notTempBuydown:
     "Discount points change the note rate for the whole term. A temporary buydown (2-1 / 3-2-1) only subsidizes the payment for the first years; the note rate is still the note rate. Those are different products.",
   notBestRate:
@@ -286,11 +286,11 @@ export const TEMPORARY_BUYDOWN = {
   twoOne:
     "A 2-1 buydown typically means year 1 is about 2 percentage points below the note rate, year 2 about 1 point below, then the full note payment. The note rate does not change; a subsidy account covers the difference.",
   threeTwoOne:
-    "A 3-2-1 buydown typically tapers over three years (about 3, then 2, then 1 point below the note) before the full note payment. Year 4 is not a surprise rate hike on the note — it is the payment you already agreed to.",
+    "A 3-2-1 buydown typically tapers over three years (about 3, then 2, then 1 point below the note) before the full note payment. Year 4 is not a surprise rate hike on the note. It is the payment you already agreed to.",
   whoPays:
     "The subsidy can be funded by a seller, a builder, the borrower, or sometimes a lender credit. Who pays is a contract and LE question, not a slogan. A “free” buydown is often in the price or in other credits.",
   yearThree:
-    "When the subsidy ends, you pay the full note payment plus taxes, insurance, and HOA. Plan for that payment, not only year-one principal and interest. If you expect to refinance before then, still run break-even after costs — a buydown is not a free refinance option.",
+    "When the subsidy ends, you pay the full note payment plus taxes, insurance, and HOA. Plan for that payment, not only year-one principal and interest. If you expect to refinance before then, still run break-even after costs. A buydown is not a free refinance option.",
   notDiscountPoints:
     "This is not buying discount points. Points lower the note for the life of the loan. A temporary buydown is a payment subsidy with an end date.",
 } as const
@@ -312,7 +312,7 @@ export const PREAPPROVAL_STAGES = {
   preApproval:
     "A pre-approval letter is a snapshot after a credit pull and a review of the documents you sent then. It is for shopping and offers. It is not a commitment to lend, not a lock, and not a property approval.",
   aus:
-    "AUS (automated underwriting system) findings — commonly Fannie Mae Desktop Underwriter or Freddie Mac Loan Product Advisor — are an eligibility engine result for a specific program, LTV, and credit file. Approve/Eligible (or the Freddie equivalent) is not CTC. Ineligible findings are not a lifetime ban.",
+    "AUS (automated underwriting system) findings, commonly Fannie Mae Desktop Underwriter or Freddie Mac Loan Product Advisor, are an eligibility engine result for a specific program, LTV, and credit file. Approve/Eligible (or the Freddie equivalent) is not CTC. Ineligible findings are not a lifetime ban.",
   ctc:
     "Clear to close means the underwriter has signed off that conditions are satisfied for this property and this file as of that date. Title, insurance binder, and a final CD still have to match. CTC is not a promise that the market or your job cannot change before funding.",
   notTheSame:
@@ -325,9 +325,9 @@ export const SPOUSE_INCOME_OFFSET = {
   jointApplication:
     "If both people apply, both incomes can be in the qualifying average and both credit files and counted debts are in the DTI. A W-2 that is steadier than a 1099 can support the file when both applicants are borrowers. That is a joint application, not a hidden extra paycheck.",
   nonBorrowing:
-    "A spouse who is not on the note is usually not a source of qualifying income. Their W-2 does not automatically “offset” 1099 volatility on the borrower’s file. Adding them as a co-borrower is a credit, occupancy, and title decision — not a paperwork trick.",
+    "A spouse who is not on the note is usually not a source of qualifying income. Their W-2 does not automatically “offset” 1099 volatility on the borrower’s file. Adding them as a co-borrower is a credit, occupancy, and title decision, not a paperwork trick.",
   utahNotCommunityProperty:
-    "Utah is not a community-property state. Community-property income and debt rules that apply in some other licensed states are not Utah’s default. This site does not publish doorway pages that swap Utah copy onto Texas or Arizona homestead or community-property law.",
+    "Utah is not a community-property state. Community-property income and debt rules that apply in some other states are not Utah’s default, so a file in another state needs that state’s rules.",
   fairHousing:
     "Marital status is not a credit score. These pages describe how income and applications are documented. They do not prefer married applicants, require a spouse, or treat unmarried co-borrowers as a different class of people. Anyone who applies is underwritten on the file.",
 } as const
@@ -400,9 +400,9 @@ export const DSCR_VS_FULL_DOC = {
   asOf: LENDING_FACTS_AS_OF,
   source: "Non-QM DSCR overlays vs agency investment-property income calc (Schedule E / proposed rent). Not a quote.",
   dscr:
-    "A DSCR (debt-service coverage) file typically qualifies on the property’s rent versus the proposed PITIA, not on the borrower’s personal DTI. Occupancy is usually investment. Personal tax returns can still be in the file for identity, assets, or other tests — they are not the qualifying income engine.",
+    "A DSCR (debt-service coverage) file typically qualifies on the property’s rent versus the proposed PITIA, not on the borrower’s personal DTI. Occupancy is usually investment. Personal tax returns can still be in the file for identity, assets, or other tests. They are not the qualifying income engine.",
   fullDoc:
-    "A full-doc rental purchase usually underwrites the borrower: W-2 / returns, DTI, and rental income from Schedule E (properties already owned) or a tighter proposed-rent worksheet (the house in this purchase). Pricing is often closer to agency investment overlays when the file fits — it is not automatically cheaper, and it is not DSCR.",
+    "A full-doc rental purchase usually underwrites the borrower: W-2 / returns, DTI, and rental income from Schedule E (properties already owned) or a tighter proposed-rent worksheet (the house in this purchase). Pricing is often closer to agency investment overlays when the file fits. It is not automatically cheaper, and it is not DSCR.",
   occupancy:
     "Calling a rental a second home or a primary to get a cheaper occupancy price is occupancy misrepresentation. Occupancy has to match how you will actually use the property. See second home vs investment occupancy.",
   notAQuote:
@@ -415,7 +415,7 @@ export const BUSINESS_PERSONAL_COMINGLING = {
   problem:
     "Business deposits in a personal account, or personal spending from a business account, make it hard to source assets and to average deposits. Underwriters cannot tell what is income, what is a transfer, and what is a one-off. That stall is common on 1099, K-1, and bank-statement files.",
   seasoning:
-    "Purchase files typically include about 60 days of statements. Co-mingled large deposits in that window still have to be sourced. Moving money between business and personal the week of application without a paper trail is a frequent condition fail — not a seasoning trick.",
+    "Purchase files typically include about 60 days of statements. Co-mingled large deposits in that window still have to be sourced. Moving money between business and personal the week of application without a paper trail is a frequent condition fail, not a seasoning trick.",
   bankStatement:
     "Bank-statement programs that qualify from deposits usually want a business account (or a clearly labeled business pattern). A personal account stuffed with business wires, cash, and transfers is often unusable or heavily haircut. Co-mingling is not a substitute for two years of returns, and it is not a shortcut around a brand-new 1099 job.",
 } as const
@@ -431,7 +431,7 @@ export const UTAH_REPC = {
   dueDiligence:
     "If the Due Diligence Condition is checked, the buyer may cancel in writing by the Due Diligence Deadline if the results are unacceptable in the buyer’s sole discretion, and earnest money is typically released to the buyer. Missing that written notice generally waives the due-diligence condition.",
   financingAppraisal:
-    "Appraisal and financing are separate conditions that share a Financing & Appraisal Deadline. An appraisal cancel typically needs a written notice of appraised value below price. A financing cancel before that deadline is available if the buyer is not satisfied with loan terms — and the form often releases a filled-in portion of earnest money to the seller. After that deadline, if loan proceeds are not delivered as the contract requires, cancellation can send the remaining earnest money to the seller as liquidated damages.",
+    "Appraisal and financing are separate conditions that share a Financing & Appraisal Deadline. An appraisal cancel typically needs a written notice of appraised value below price. A financing cancel before that deadline is available if the buyer is not satisfied with loan terms, and the form often releases a filled-in portion of earnest money to the seller. After that deadline, if loan proceeds are not delivered as the contract requires, cancellation can send the remaining earnest money to the seller as liquidated damages.",
   lenderNotAParty:
     "The REPC says performance dates are not binding on lenders, title companies, or appraisers who are not parties, except as they separately agree. A pre-approval letter, AUS findings, or a hoped-for clear-to-close is not a REPC deadline. Written notice under the contract is what preserves a cancel right.",
   notLegalAdvice:
@@ -444,11 +444,11 @@ export const OCCUPANCY_TYPES = {
   primary:
     "Primary residence means you intend to occupy the property as your principal home (FHA, VA, and USDA purchase occupancy is this category, with limited exceptions).",
   secondHome:
-    "A second home is typically for the borrower’s exclusive use for some portion of the year — a vacation or seasonal home, not a unit you treat as a rental business. Exclusive-use and occupancy overlays apply. It is not “investment occupancy with a cheaper label.”",
+    "A second home is typically for the borrower’s exclusive use for some portion of the year, a vacation or seasonal home, not a unit you treat as a rental business. Exclusive-use and occupancy overlays apply. It is not “investment occupancy with a cheaper label.”",
   investment:
     "Investment occupancy means you will not occupy the property as a primary or second home. Pricing, down payment, and documentation are different. Renting it is the point of the occupancy type.",
   fraud:
-    "Stating the wrong occupancy to get a cheaper rate or a program that does not allow that use is occupancy fraud — a federal crime, not a paperwork preference. These pages do not coach anyone to “live there 14 days” or to list a rental as a second home.",
+    "Stating the wrong occupancy to get a cheaper rate or a program that does not allow that use is occupancy fraud, a federal crime, not a paperwork preference. These pages do not coach anyone to “live there 14 days” or to list a rental as a second home.",
   fairHousing:
     "Occupancy is about how the applicant will use the property. It is not a statement about who should live in a neighborhood. Protected-class steering has no place on these pages.",
 } as const
@@ -457,7 +457,7 @@ export const CASH_OUT_TO_RENTAL = {
   asOf: LENDING_FACTS_AS_OF,
   source: "Conventional cash-out LTV overlays plus occupancy on the subject and on the next purchase. Not tax advice.",
   occupancyTrap:
-    "Cash-out on a house you occupy as a primary is underwritten as owner-occupied cash-out. If you then buy a rental with the proceeds, that second loan is an investment purchase. Do not recast the first house as a rental occupancy after the fact without telling the lender — occupancy on each note has to match use.",
+    "Cash-out on a house you occupy as a primary is underwritten as owner-occupied cash-out. If you then buy a rental with the proceeds, that second loan is an investment purchase. Do not recast the first house as a rental occupancy after the fact without telling the lender: occupancy on each note has to match use.",
   ltvTrap:
     "Cash-out LTV is often tighter than rate-and-term (a common conventional overlay sits near 80% of value, not a statute). Investment purchase LTV on the rental is a separate overlay, often with more down payment than a primary. Two LTVs, two occupancy types.",
   vsHeloc:
@@ -482,7 +482,7 @@ export const ALTERNATIVE_CREDIT = {
   asOf: LENDING_FACTS_AS_OF,
   source: "Fannie Mae Selling Guide B3-5.4 (nontraditional credit) and HUD 4000.1 non-traditional credit. Confirm the guide in force.",
   who:
-    "Alternative / nontraditional credit is for people with no usable traditional score or a thin traditional file — rent, utilities, insurance, and similar documented payments — not for people who have traditional credit that is simply weak. Derogatory traditional credit is a different conversation from “I never used credit cards.”",
+    "Alternative / nontraditional credit is for people with no usable traditional score or a thin traditional file (rent, utilities, insurance, and similar documented payments), not for people who have traditional credit that is simply weak. Derogatory traditional credit is a different conversation from “I never used credit cards.”",
   fannie:
     "Fannie Mae: lenders first check all three repositories. When a borrower has no score, a documented nontraditional history is typically required (often including housing payments on DU files). References usually cover about the most recent 12 months. Overlays and DU messages still apply. This is not a published right to skip credit.",
   fha:
@@ -495,7 +495,7 @@ export const FHA_HOUSE_HACK = {
   asOf: LENDING_FACTS_AS_OF,
   source: "HUD Handbook 4000.1 1–4 unit principal-residence and self-sufficiency rules. Confirm current handbook and county limits.",
   occupancy:
-    "FHA 1–4 unit purchases are principal-residence occupancy: a borrower occupies one unit as a home. Treating the duplex as a pure investment while using FHA is not an allowed occupancy type. Move-in timing is a program rule (often within 60 days of closing — confirm the handbook in force), not a slogan.",
+    "FHA 1–4 unit purchases are principal-residence occupancy: a borrower occupies one unit as a home. Treating the duplex as a pure investment while using FHA is not an allowed occupancy type. Move-in timing is a program rule (often within 60 days of closing: confirm the handbook in force), not a slogan.",
   duplexVs34:
     "HUD’s self-sufficiency test applies to three- and four-unit properties, not to a typical two-unit (duplex). A duplex can still use a rental-income worksheet on the unit you will not occupy. “No self-sufficiency test” is not “no underwriting.”",
   limits:
@@ -516,7 +516,7 @@ export const RELOCATION_SEASONING = {
   not1099:
     "A brand-new 1099 or self-employed start is not this offer-letter path. See just-went-1099 and two-year vs one-year overlays.",
   utahNote:
-    "Utah-specific pieces are the closing venue (title company, deed of trust) and the REPC deadlines, which still run even if the first paycheck has not hit. Utah is not a community-property state. Commute and city context live on the moving-to-Utah page; this page is seasoning, not a second doorway city mill.",
+    "Utah-specific pieces are the closing venue (title company, deed of trust) and the REPC deadlines, which still run even if the first paycheck has not hit. Utah is not a community-property state. Commute and city context are on the moving-to-Utah page; this page covers job seasoning only.",
 } as const
 
 export const APR_VS_RATE = {
@@ -538,9 +538,9 @@ export const VA_ENTITLEMENT_RESTORATION = {
   afterSale:
     "When the prior VA loan is paid in full and the property is disposed of under current VA rules, used entitlement is typically restored so it can be used again on a later purchase. Restoration is a VA process reflected on an updated Certificate of Eligibility. It is not automatic the day the listing goes live.",
   notRemaining:
-    "Keeping the first VA loan and buying another home is remaining entitlement plus occupancy — a different file from selling, paying off, and restoring. Do not use this page as a second-VA-loan answer.",
+    "Keeping the first VA loan and buying another home is remaining entitlement plus occupancy, a different file from selling, paying off, and restoring. Do not use this page as a second-VA-loan answer.",
   oneTime:
-    "VA also describes limited restoration without disposing of the property when the prior loan is paid in full (often called one-time restoration). Whether that path is still available on a given COE, and occupancy on any later purchase, must be confirmed against current VA rules — not assumed from a blog.",
+    "VA also describes limited restoration without disposing of the property when the prior loan is paid in full (often called one-time restoration). Whether that path is still available on a given COE, and occupancy on any later purchase, must be confirmed against current VA rules, not assumed from a blog.",
   substitution:
     "If a VA-eligible buyer assumes the loan and substitutes their entitlement, the seller’s used entitlement can sometimes be restored without a cash payoff of the loan. Assumption, substitution, and release of liability are VA and lender processes, not a listing-agent slogan.",
   fundingFee:
@@ -618,7 +618,7 @@ export const EARNEST_VS_DOWN_VS_CLOSING = {
   down:
     "Down payment is the equity you bring at purchase (price minus loan amount). Program minimums and gift/DPA rules apply to this line.",
   closing:
-    "Closing costs are origination, title/escrow, recording, and similar fees. Prepaids (taxes, insurance, prepaid interest) sit next to them on cash to close. Seller concessions can offset some costs within program caps — not the whole stack.",
+    "Closing costs are origination, title/escrow, recording, and similar fees. Prepaids (taxes, insurance, prepaid interest) sit next to them on cash to close. Seller concessions can offset some costs within program caps, not the whole stack.",
   timing:
     "Cash timing differs: earnest money first, then remaining down payment and costs at closing, minus the earnest credit. Reserves, if required, stay in your accounts after closing.",
 } as const
@@ -629,7 +629,7 @@ export const TOWNHOME_VS_CONDO = {
   legal:
     "Lenders underwrite the legal regime, not the listing photo. A “townhome” can be a fee-simple planned-unit development (you typically own the land under the unit) or a condominium (you own the unit plus an interest in common elements). The recorded plat and CC&Rs decide. Do not treat every townhome as a condo.",
   condoDocs:
-    "Condo files typically need an HOA questionnaire, budget, insurance (walls-in vs master), litigation, occupancy mix, and — for FHA — current project approval on HUD’s list or single-unit approval.",
+    "Condo files typically need an HOA questionnaire, budget, insurance (walls-in vs master), litigation, occupancy mix, and, for FHA, current project approval on HUD’s list or single-unit approval.",
   pudDocs:
     "PUD / fee-simple townhomes still produce CC&Rs and often an HOA questionnaire. FHA condo-roster and concentration tests usually do not apply the same way as a condo regime. Overlays still exist.",
   hoaDti:
@@ -644,7 +644,7 @@ export const RESERVES_PITIA = {
   what:
     "Reserves are liquid assets remaining after cash to close, measured as months of PITIA (principal, interest, taxes, insurance, and association dues when they apply).",
   counted:
-    "Checking, savings, and many vested brokerage and retirement accounts can count, often with haircuts on retirement. The cash that pays earnest money, down payment, and closing costs is not also reserves. Gift funds are often limited or excluded as reserves — confirm the program.",
+    "Checking, savings, and many vested brokerage and retirement accounts can count, often with haircuts on retirement. The cash that pays earnest money, down payment, and closing costs is not also reserves. Gift funds are often limited or excluded as reserves: confirm the program.",
   howMany:
     "Required months depend on occupancy, program, unit count, and overlays. A primary 1-unit file may need few or no months; investment and 2–4 unit files commonly need more. Relocation / future-employment paths can add reserve tests. This page does not publish a single required number.",
   notCashToClose:
@@ -715,7 +715,7 @@ export const UTAH_TAX_CALENDAR = {
   source:
     "Utah Code property-tax due date (typically November 30) plus county treasurer billing practice. Confirm the county treasurer for the property. Not tax or legal advice.",
   dueDate:
-    "Utah property taxes are typically due November 30. If that date falls on a weekend or holiday, the next business day is commonly treated as the due date. Unpaid amounts generally become delinquent the following day. Confirm the county treasurer — this is not a penalty calculator.",
+    "Utah property taxes are typically due November 30. If that date falls on a weekend or holiday, the next business day is commonly treated as the due date. Unpaid amounts generally become delinquent the following day. Confirm the county treasurer. This is not a penalty calculator.",
   annualBill:
     "Utah counties typically bill once a year, not on a spring-and-fall split used in some other states. Valuation notices and tax notices are separate mailings (often mid-year valuation, then a fall tax notice). Dates differ by county.",
   escrowMismatch:
@@ -729,7 +729,7 @@ export const ESCROW_CUSHION = {
   source:
     "RESPA / Regulation X aggregate escrow analysis (12 CFR 1024.17). Confirm current CFPB text. Servicer contracts can require less, not more than the published maximum.",
   maxCushion:
-    "Federal aggregate accounting generally lets a servicer require a cushion of no more than 1/6 of estimated annual disbursements — often described as about two months of taxes and insurance. That is a ceiling, not a requirement that every servicer use two months.",
+    "Federal aggregate accounting generally lets a servicer require a cushion of no more than 1/6 of estimated annual disbursements, often described as about two months of taxes and insurance. That is a ceiling, not a requirement that every servicer use two months.",
   whyItMoves:
     "The cushion and the monthly escrow portion change when the servicer’s annual analysis uses a new tax bill, a new insurance premium, or a shortage/surplus from the prior year. A first analysis after origination is the usual surprise because the closing estimate was a projection.",
   notUniversal:
@@ -758,11 +758,11 @@ export const HELOC_SEASONING = {
   source:
     "Typical HELOC and cash-out ownership/occupancy overlays plus Fannie delayed-financing exception (cash purchase, then cash-out). Confirm the investor. Not a waiting-period statute.",
   yearTwo:
-    "Many HELOC and cash-out overlays want a documented period of ownership and occupancy — commonly six to twelve months, sometimes described as ‘after year one’ or into year two. That is an overlay conversation, not a federal waiting period you can calendar as a right.",
+    "Many HELOC and cash-out overlays want a documented period of ownership and occupancy, commonly six to twelve months, sometimes described as ‘after year one’ or into year two. That is an overlay conversation, not a federal waiting period you can calendar as a right.",
   justClosed:
     "If you just closed a purchase, tapping equity immediately is often limited: cash-out LTV, HELOC combined LTV, occupancy, and whether the first-lien investor even allows a second. ‘I just got the keys’ is not a product.",
   delayedFinancing:
-    "A cash purchase followed by a cash-out within a published window is a delayed-financing exception on some conventional files — a different fact pattern from seasoning a financed purchase for a HELOC.",
+    "A cash purchase followed by a cash-out within a published window is a delayed-financing exception on some conventional files, a different fact pattern from seasoning a financed purchase for a HELOC.",
   notAFederalWait:
     "There is not a federal waiting period that says every homeowner must wait two years. Investor overlays, title seasoning, and occupancy drive the file. This is not tax advice.",
   vsStructure:
@@ -786,7 +786,7 @@ export const BIWEEKLY_VS_REFI = {
   asOf: LENDING_FACTS_AS_OF,
   source: "Amortization arithmetic (26 half-payments = 13 full payments) vs refinance break-even including costs. Not a savings quote.",
   biweekly:
-    "A true biweekly schedule is half the monthly principal-and-interest every two weeks. That is 26 half-payments, or 13 full payments in a year — one extra compared with 12 monthly payments. Confirm the servicer actually applies it to principal and does not merely split the same 12 payments.",
+    "A true biweekly schedule is half the monthly principal-and-interest every two weeks. That is 26 half-payments, or 13 full payments in a year, one extra compared with 12 monthly payments. Confirm the servicer actually applies it to principal and does not merely split the same 12 payments.",
   extraPrincipal:
     "The same extra dollars sent as additional principal on a monthly loan often match the amortization effect of biweekly, without a third-party biweekly vendor. Ask the servicer how extra principal is applied.",
   vsRefi:
@@ -801,7 +801,7 @@ export const FIRST_RENTAL_OCCUPANCY = {
   stayPut:
     "If you will keep living in your current home and the new house will be rented, the new loan is typically investment occupancy. The existing loan stays a primary as long as you still occupy that house as your principal residence.",
   moveIn:
-    "If you will move into the new house and rent the old one, the new purchase is typically a primary. The old loan’s occupancy changes when you no longer live there — tell the servicer; do not leave the file labeled as if you still occupy it.",
+    "If you will move into the new house and rent the old one, the new purchase is typically a primary. The old loan’s occupancy changes when you no longer live there, so tell the servicer and do not leave the file labeled as if you still occupy it.",
   notHouseHack:
     "This is not a duplex house-hack. A house-hack is buying a 2–4 unit and occupying one unit. First-rental occupancy is buying a separate property while you already have a home you occupy.",
   notSecondHome:
@@ -821,7 +821,7 @@ export const ITIN_DOCUMENTATION = {
   agencyVsNonQm:
     "Many agency conventional and FHA files expect a valid Social Security number for the credit report and automated underwriting, plus evidence of lawful presence when the borrower is not a U.S. citizen. An ITIN-only file is typically a Non-QM or portfolio overlay conversation, not a published Fannie, Freddie, or HUD product you can assume.",
   docs:
-    "Lenders typically collect identity, tax, and status documents as categories: government-issued ID, an SSN card or IRS ITIN letter, tax returns, and — when the file needs it — visa, employment-authorization, or permanent-resident documentation. Which category applies is a file fact.",
+    "Lenders typically collect identity, tax, and status documents as categories: government-issued ID, an SSN card or IRS ITIN letter, tax returns, and, when the file needs it, visa, employment-authorization, or permanent-resident documentation. Which category applies is a file fact.",
   visaExamples:
     "Visa and authorization categories (for example H-1B, L-1, or an employment-authorization document) appear in files as documentation labels. Overlay lists change. Do not treat a blog list as the current investor chart or as a ranking of who is preferred.",
   noEasier:
@@ -837,7 +837,7 @@ export const NEWS_AVERAGE_VS_QUOTE = {
   officialUrl: "https://www.freddiemac.com/pmms",
   what: "The 30-year figure on the news is usually a national survey average of 30-year fixed quotes, not your Loan Estimate. In the U.S. that series is commonly Freddie Mac’s Primary Mortgage Market Survey (PMMS).",
   typicalFile:
-    "PMMS is built around conventional, conforming, fully amortizing purchase applications — typically described as about 20% down (80% LTV) and excellent credit. It is not FHA, VA, USDA, jumbo, investment occupancy, or a thin-credit file.",
+    "PMMS is built around conventional, conforming, fully amortizing purchase applications, typically described as about 20% down (80% LTV) and excellent credit. It is not FHA, VA, USDA, jumbo, investment occupancy, or a thin-credit file.",
   methodology:
     "Since November 2022 Freddie Mac has described PMMS as coming from Loan Product Advisor applications that meet those filters, not from calling a small lender panel. Confirm the current published methodology. This site does not republish this week’s percent.",
   notYourQuote:
@@ -880,9 +880,9 @@ export const ESCROW_SHORTAGE = {
 export const HILL_AFB_VA = {
   asOf: LENDING_FACTS_AS_OF,
   source:
-    "VA occupancy and Certificate of Eligibility (confirm current VA Lender's Handbook and va.gov). Hill AFB is in Davis County, Utah. Not a mill doorway.",
+    "VA occupancy and Certificate of Eligibility (confirm current VA Lender's Handbook and va.gov). Hill AFB is in Davis County, Utah.",
   where:
-    "Hill Air Force Base is in Davis County, Utah, west of I-15 between Ogden and Salt Lake City, adjacent to Clearfield and Layton. This page is COE and occupancy education, not a /hill-afb-mortgage mill.",
+    "Hill Air Force Base is in Davis County, Utah, west of I-15 between Ogden and Salt Lake City, adjacent to Clearfield and Layton. This page covers COE and occupancy only.",
   commute:
     "Off-base purchases commonly sit along the I-15 / FrontRunner corridor (Clearfield, Layton, Roy, Clinton, Syracuse, Ogden, Kaysville). Commute and housing type are geography. These pages do not describe who should live in a neighborhood.",
   baseHousingVsPurchase:
@@ -891,7 +891,7 @@ export const HILL_AFB_VA = {
   bahLookupUrl: "https://www.travel.dod.mil/Allowances/Basic-Allowance-for-Housing/BAH-Rate-Lookup/",
   coe: "A Certificate of Eligibility shows remaining entitlement and is required to close a VA loan. Most lenders pull it from VA systems. Occupancy of the new property is a separate certification from the COE.",
   occupancy:
-    "VA purchase occupancy is intent to occupy the subject as your principal home (timing is a program rule — confirm the handbook in force). PCS orders, unaccompanied tours, and keeping on-base housing are occupancy facts. Do not misstate occupancy to use VA on a rental.",
+    "VA purchase occupancy is intent to occupy the subject as your principal home (timing is a program rule: confirm the handbook in force). PCS orders, unaccompanied tours, and keeping on-base housing are occupancy facts. Do not misstate occupancy to use VA on a rental.",
   notRestoration:
     "This is not selling-and-restoring entitlement, and not a remaining-entitlement second VA loan by itself. Those are separate guides.",
 } as const
@@ -900,7 +900,7 @@ export const DELAYED_FINANCING = {
   asOf: LENDING_FACTS_AS_OF,
   source:
     "Fannie Mae Selling Guide B2-1.3-03 cash-out refinance delayed financing exception (confirm the guide in force). Freddie Mac publishes a related exception. Lender overlays can be tighter. Not a statute.",
-  what: "Delayed financing is a cash-out refinance after you bought the same house with cash (no mortgage on that purchase), usually within a published window measured from purchase date to the new loan’s disbursement. Fannie Mae’s commonly cited window is six months. Confirm the current guide — it is not a federal waiting-period statute.",
+  what: "Delayed financing is a cash-out refinance after you bought the same house with cash (no mortgage on that purchase), usually within a published window measured from purchase date to the new loan’s disbursement. Fannie Mae’s commonly cited window is six months. Confirm the current guide. It is not a federal waiting-period statute.",
   vsSeasoning:
     "This is not HELOC-after-year-two seasoning on a financed purchase. If you already have a mortgage on the house, delayed financing is the wrong page.",
   docs: "Typical agency asks: an arm’s-length purchase, a settlement statement (or allowed substitute) showing no mortgage financing, title with no existing liens on the subject, and a paper trail of the cash used to buy.",
@@ -922,7 +922,7 @@ export const COSIGN_VS_COBORROWER = {
   cosign:
     "“Cosign” in auto-loan language often means someone liable on the note who is not using the car. Mortgage files rarely use a silent cosigner. If someone is on the note, they are underwritten as a borrower (occupant or non-occupant).",
   title:
-    "The deed (title) is who owns the property. The note is who owes the lender. They can differ, and that difference is an overlay problem — especially a parent on title who is not on the loan on a primary-residence file.",
+    "The deed (title) is who owns the property. The note is who owes the lender. They can differ, and that difference is an overlay problem, especially a parent on title who is not on the loan on a primary-residence file.",
   nonOccupant:
     "A non-occupant co-borrower is on the note but will not occupy. Agency rules differ (FHA vs conventional). Occupancy of the occupying borrower still has to be true. This is not a way to label a rental as a primary.",
   giftVsHelp:
@@ -933,7 +933,7 @@ export const COSIGN_VS_COBORROWER = {
 
 export const FTHB_FILE_MISTAKES = {
   asOf: LENDING_FACTS_AS_OF,
-  source: "Typical purchase underwrite condition fails (new debt, job change, large deposits, occupancy). Not a generic homebuying-mistakes listicle.",
+  source: "Typical purchase underwrite condition fails (new debt, job change, large deposits, occupancy).",
   whatThisIs:
     "The mistakes that actually stall a first-purchase file are underwriting facts: new installment debt, a job or hours change, an unsourced large deposit, or occupancy that does not match how you will live. They are not “forgot to get inspections” lifestyle tips.",
   newDebt:
@@ -942,11 +942,11 @@ export const FTHB_FILE_MISTAKES = {
     "A job change, unpaid leave, or commission-only switch after pre-approval can break the income average the letter used.",
   largeDeposit: "Purchase files typically include about 60 days of statements. Large deposits need a paper trail.",
   occupancy:
-    "Stating primary when you will not occupy — or a second home when you will rent — is occupancy misrepresentation.",
+    "Stating primary when you will not occupy, or a second home when you will rent, is occupancy misrepresentation.",
   closingCard:
     "Closing a revolving account before you apply can raise utilization by shrinking available credit. See closing a credit card.",
   notLifestyle:
-    "This page does not clone generic “homebuying mistakes” listicles (inspections, overbidding, skipping an agent). Those are not file conditions.",
+    "This page covers underwriting file conditions. General homebuying advice such as inspections, overbidding, or skipping an agent is not part of it.",
 } as const
 
 export const PURCHASE_TIMELINE = {
@@ -957,7 +957,7 @@ export const PURCHASE_TIMELINE = {
   preapproval:
     "If documents are complete, a pre-approval snapshot is often issued in a few business days. It is not CTC.",
   contractToUw:
-    "After acceptance, the financing and appraisal clock on the Utah REPC is often a few weeks — read your dates. Appraisal is commonly one to two weeks after it is ordered when the panel is not backed up.",
+    "After acceptance, the financing and appraisal clock on the Utah REPC is often a few weeks: read your dates. Appraisal is commonly one to two weeks after it is ordered when the panel is not backed up.",
   uwToCtc: "Underwriting conditions can clear in days or take a few weeks. AUS findings are not CTC.",
   ctcToClose:
     "Clear-to-close to funding often needs a few days for the Closing Disclosure waiting period, title figures, and insurance binder. Utah closings typically fund at a title company.",
@@ -986,7 +986,7 @@ export const HAZARD_HO3_HO6 = {
   hazard:
     "In a mortgage file, “hazard insurance” usually means the dwelling coverage the lender requires so a fire or similar loss can rebuild the collateral. It is a lender condition, not a shopping slogan.",
   ho3: "HO-3 is the common homeowners form for a house you own (often a fee-simple dwelling). It typically covers the dwelling, other structures, personal property, and liability, subject to the policy. Many detached-house files bind an HO-3.",
-  ho6: "HO-6 is the common unit-owners (“walls-in”) form for a condominium. The association’s master policy usually covers the building and common elements; the HO-6 covers the interior, personal property, loss assessment, and improvements — confirm the master walls-in vs walls-out.",
+  ho6: "HO-6 is the common unit-owners (“walls-in”) form for a condominium. The association’s master policy usually covers the building and common elements; the HO-6 covers the interior, personal property, loss assessment, and improvements: confirm the master walls-in vs walls-out.",
   condo:
     "Condo and many HOA files need evidence of the master policy and a unit-owners policy (often HO-6). A townhome that is legally a condo uses this stack. A fee-simple PUD townhome may bind an HO-3. The plat decides, not the listing photo.",
   lender:
@@ -1006,9 +1006,9 @@ export const AUTHORIZED_USER_TRADELINES = {
   whatItDoesNot:
     "An AU tradeline does not make you a co-borrower, does not put you on the note, and does not automatically satisfy a minimum-tradeline overlay. It is not a substitute for documented alternative credit (rent, utilities) when the traditional file is thin.",
   overlays:
-    "Investors and AUS findings often want tradelines the borrower is obligated on. Spousal or parent AU cards are a common conversation — and a common overlay haircut. Confirm the guide in force; this page does not quote a FICO delta.",
+    "Investors and AUS findings often want tradelines the borrower is obligated on. Spousal or parent AU cards are a common conversation, and a common overlay haircut. Confirm the guide in force; this page does not quote a FICO delta.",
   notPiggyback:
-    "This page does not teach adding yourself to someone else’s card to inflate a score, buying “seasoned tradelines,” or any piggyback scheme. Misrepresenting whose debt you pay can be fraud. Ask a loan officer what the tri-merge actually counted — do not manufacture credit history.",
+    "This page does not teach adding yourself to someone else’s card to inflate a score, buying “seasoned tradelines,” or any piggyback scheme. Misrepresenting whose debt you pay can be fraud. Ask a loan officer what the tri-merge actually counted: do not manufacture credit history.",
   vsCosign:
     "A co-borrower is on the note. A silent auto-loan “cosigner” is not how most mortgage files work. AU is a revolving tradeline, not occupancy or title. See cosign vs co-borrower and what a tri-merge shows.",
   fairHousing:
@@ -1046,11 +1046,11 @@ export const MANUFACTURED_AND_ADU = {
   landHome:
     "Land-home (real property) financing is a different stack from chattel / personal-property loans on a home that is not real estate. Cash to close, appraisal, and title differ. This site does not originate a chattel product you can assume from a blog.",
   adu:
-    "An ADU is a second dwelling on the same parcel — basement, garage, or detached — subject to zoning and the recorded use. Occupancy of the main house vs renting the ADU changes income calc and, sometimes, unit count. Proposed ADU rent is not Schedule E history on a house you do not own yet.",
+    "An ADU is a second dwelling on the same parcel (basement, garage, or detached), subject to zoning and the recorded use. Occupancy of the main house vs renting the ADU changes income calc and, sometimes, unit count. Proposed ADU rent is not Schedule E history on a house you do not own yet.",
   aduIncome:
     "ADU rental income, if allowed, is typically a worksheet overlay (lease, market rent, or tax-return history), not a listing screenshot. Treating an ADU rental as a duplex house-hack is only accurate when the legal unit count and occupancy match. See house-hacking a duplex with FHA when the building is actually 2–4 units you will occupy.",
   notAQuote:
-    "Property-type overlays change. This page is a map of questions — foundation, title, zoning, occupancy — not a promise that a manufactured home or ADU will finance on a given program.",
+    "Property-type overlays change. This page is a map of questions (foundation, title, zoning, occupancy), not a promise that a manufactured home or ADU will finance on a given program.",
 } as const
 
 export const RECAST_VS_REFI = {
@@ -1058,7 +1058,7 @@ export const RECAST_VS_REFI = {
   source:
     "Typical servicer recast (re-amortization after a principal curtailment) vs refinance break-even including costs. Confirm the note and servicer. Not a savings quote.",
   recast:
-    "A recast (re-amortization) is a servicing request after a lump-sum principal payment: the servicer recalculates the monthly principal-and-interest at the same note rate over the remaining term. The rate does not change. A recast fee is often a few hundred dollars — overlay, not a statute.",
+    "A recast (re-amortization) is a servicing request after a lump-sum principal payment: the servicer recalculates the monthly principal-and-interest at the same note rate over the remaining term. The rate does not change. A recast fee is often a few hundred dollars, and that is a servicer overlay, not a statute.",
   refinance:
     "A refinance replaces the note. Rate, term, and costs change. Break-even months ≈ cash costs (including points and origination, minus credits) ÷ monthly P&I savings. A lower rate can still lose if you move first.",
   feeVsCosts:
@@ -1066,7 +1066,7 @@ export const RECAST_VS_REFI = {
   whoAllows:
     "Not every investor or servicer recasts. ARMs, FHA, VA, and some conventional notes are commonly limited or excluded. Ask the servicer in writing. This page does not invent a recast right.",
   vsBiweekly:
-    "Extra principal or biweekly drafts pay the current note down without a recast. The payment often stays the same until you request a recast. See biweekly vs refinance. Matrix “recast after a lump sum” as a standalone how-to is a different page when written.",
+    "Extra principal or biweekly drafts pay the current note down without a recast. The payment often stays the same until you request a recast. See biweekly vs refinance.",
   notAQuote:
     "This page does not quote a recast fee, a rate, or interest saved. Illustrate. Not a recommendation to recast or refinance.",
 } as const
@@ -1076,17 +1076,17 @@ export const CONDO_AGING_HOA = {
   source:
     "Fannie Mae / Freddie Mac condo project eligibility plus HUD condominium approval. Confirm the current selling guide and HOA questionnaire. Not insurance or legal advice.",
   what:
-    "Refinancing a condo is a unit file and a project file. An aging association — thin reserves, deferred maintenance, special assessments, litigation, or insurance gaps — can stall or ineligible the project even when your credit and DTI are fine.",
+    "Refinancing a condo is a unit file and a project file. An aging association (thin reserves, deferred maintenance, special assessments, litigation, or insurance gaps) can stall the project or make it ineligible even when your credit and DTI are fine.",
   reserves:
     "Project reserve studies and budgeted reserves are typical questionnaire lines. A chronically underfunded HOA is a project-risk overlay, not a paint color. Special assessments can sit in DTI and in project eligibility.",
   litigation:
     "Pending litigation (construction defects, directors, or insurance claims) is a common ineligible or exception path. The HOA questionnaire and attorney letters matter. This is not a promise that every lawsuit kills every loan.",
   insurance:
-    "Master policy, fidelity, and walls-in vs walls-out still apply on a refinance. An aging building with a non-renewed master or a huge deductible is a project issue. See hazard vs HO-3 vs HO-6 — not insurance advice.",
+    "Master policy, fidelity, and walls-in vs walls-out still apply on a refinance. An aging building with a non-renewed master or a huge deductible is a project issue. See hazard vs HO-3 vs HO-6, not insurance advice.",
   fannieProject:
-    "Conventional condo project review (limited vs full, and any Fannie Project Eligibility Review Service path) is dated overlay language. Do not memorize a review type from a blog. FHA files still need current HUD project approval or single-unit approval — see the FHA condo roster. They are different lists.",
+    "Conventional condo project review (limited vs full, and any Fannie Project Eligibility Review Service path) is dated overlay language. Do not memorize a review type from a blog. FHA files still need current HUD project approval or single-unit approval: see the FHA condo roster. They are different lists.",
   notRosterClone:
-    "This page is aging-HOA project risk on a refinance. It is not the FHA roster how-to and not the townhome-vs-condo docs list, though those still apply.",
+    "This page covers aging-HOA project risk on a refinance. The FHA roster and the townhome-vs-condo document list are separate topics, though they still apply.",
   notAPromise:
     "A well-run older building can still finance. A new building with no reserves can fail. Age is a clue, not a credit decision.",
 } as const
@@ -1098,13 +1098,13 @@ export const TITLE_OWNER_VS_LENDER = {
   lender:
     "A lender’s title policy protects the lender’s lien against covered title defects, up to the loan amount, subject to the policy. Most purchase and refinance mortgages require it. It does not protect your equity.",
   owner:
-    "An owner’s title policy protects the owner’s title and equity against covered defects, up to the policy amount, subject to the policy. It is typically optional as a matter of contract — and often issued simultaneously with the lender’s policy. Optional is not the same as “you should skip it.”",
+    "An owner’s title policy protects the owner’s title and equity against covered defects, up to the policy amount, subject to the policy. It is typically optional as a matter of contract, and often issued simultaneously with the lender’s policy. Optional is not the same as “you should skip it.”",
   simultaneous:
     "When both policies are issued in the same transaction, the owner’s premium is often a simultaneous-issue rate, not two full standalone premiums. Title companies quote this. This page does not publish a Utah tariff.",
   utah:
     "Utah residential closings typically sit at a title company, with a deed of trust recorded at the county. Owner’s and lender’s premiums still vary by company. See Utah closing costs. Not legal advice.",
   refinance:
-    "A refinance usually needs a new lender’s policy (or a substitution/endorsement path the title company offers). An existing owner’s policy from the purchase may still protect the owner, subject to its date and exclusions — ask the title company, not this page.",
+    "A refinance usually needs a new lender’s policy (or a substitution/endorsement path the title company offers). An existing owner’s policy from the purchase may still protect the owner, subject to its date and exclusions: ask the title company, not this page.",
   notLegalAdvice:
     "Title insurance is a contract with exclusions (survey, zoning, later work). This is not a review of your commitment, not a claim, and not legal advice. Read the commitment with the title company.",
 } as const
@@ -1114,7 +1114,7 @@ export const WEEK_AFTER_FUNDING = {
   source:
     "Typical post-closing timeline after a Utah title-company funding. Ranges, not promises. Not legal advice.",
   whatHappens:
-    "After funding, the deed and deed of trust are sent for county recording. You usually already have keys at a Utah purchase funding. The first payment date is on the note and Closing Disclosure — it is often the first of the month after the first full month, because odd-days interest was prepaid at closing.",
+    "After funding, the deed and deed of trust are sent for county recording. You usually already have keys at a Utah purchase funding. The first payment date is on the note and Closing Disclosure. It is often the first of the month after the first full month, because odd-days interest was prepaid at closing.",
   firstPayment:
     "Do not wait for a statement to learn the first due date. The CD and note state it. A statement can arrive later, especially if servicing transfers.",
   servicing:
@@ -1136,7 +1136,7 @@ export const FIRST_STATEMENT_VS_NOTE = {
   escrow:
     "The monthly escrow line is an estimate until the first analysis. Utah’s once-a-year tax bill makes that first analysis noisy. See the tax calendar, cushion, and shortage guides. A higher total payment than the note P&I is expected when escrow is on.",
   notARateChange:
-    "A first statement that does not match the note-rate P&I you memorized is usually escrow, odd days, or PMI/MIP — not the lender changing the note. If the P&I line itself is wrong, call the servicer with the note in hand.",
+    "A first statement that does not match the note-rate P&I you memorized is usually escrow, odd days, or PMI/MIP, not the lender changing the note. If the P&I line itself is wrong, call the servicer with the note in hand.",
   notAdvice:
     "This page does not quote your first payment. Read the CD and the first statement together. Not tax advice.",
 } as const
@@ -1152,7 +1152,7 @@ export const ESCROW_WAIVER = {
   government:
     "FHA, VA, and USDA files commonly require escrow for taxes and insurance. Do not assume a government loan can waive impounds because a conventional friend did.",
   tradeoff:
-    "Waiving escrow lowers the monthly draft and raises cash you must have when the tax and insurance bills arrive (Utah typically November for taxes). Keeping escrow raises the monthly payment and spreads those bills. Cash-to-close at origination also changes because an escrow cushion may be collected — see how the cushion is set.",
+    "Waiving escrow lowers the monthly draft and raises cash you must have when the tax and insurance bills arrive (Utah typically November for taxes). Keeping escrow raises the monthly payment and spreads those bills. Cash-to-close at origination also changes because an escrow cushion may be collected: see how the cushion is set.",
   notAPromise:
     "This page does not promise you can waive escrow, quote a waiver fee, or tell you which option is cheaper. Shortage and surplus still happen on impounded loans. See escrow shortage after the first year.",
 } as const
@@ -1164,7 +1164,7 @@ export const LOAN_ASSUMPTION = {
   whatItIs:
     "An assumption transfers the existing loan to the buyer on its existing terms, rather than the buyer taking out a new loan. The rate, remaining term, and balance travel with the loan. Whether a given loan may be assumed is set by the note and the program, not by agreement between buyer and seller.",
   whichLoansTypical:
-    "FHA and VA loans are generally assumable with agency and servicer approval. USDA loans can also be assumed, but the assuming buyer must meet USDA's own eligibility, including household income limits and property location, and some USDA loans are assumed on new rates and terms rather than the existing ones. Conventional loans usually contain a due-on-sale clause that lets the lender call the balance due on transfer, so they are typically not assumable — though federal law limits when that clause may be enforced, including on certain transfers between spouses and transfers resulting from a divorce decree or property settlement.",
+    "FHA and VA loans are generally assumable with agency and servicer approval. USDA loans can also be assumed, but the assuming buyer must meet USDA's own eligibility, including household income limits and property location, and some USDA loans are assumed on new rates and terms rather than the existing ones. Conventional loans usually contain a due-on-sale clause that lets the lender call the balance due on transfer, so they are typically not assumable, though federal law limits when that clause may be enforced, including on certain transfers between spouses and transfers resulting from a divorce decree or property settlement.",
   creditStillApplies:
     "An assumption is not a way around underwriting. The servicer typically reviews the buyer's credit, income, and debts to program standards, and can decline. An approved assumption is a decision on that buyer's file, not a formality.",
   theEquityGap:
@@ -1214,7 +1214,7 @@ export const APPRAISAL_GAP = {
   reconsideration:
     "A reconsideration of value is a documented request based on relevant comparable sales the appraiser did not use. It is not an appeal of the outcome and it is not a renegotiation tool; many requests do not change the value.",
   utahDeadline:
-    "In Utah the appraisal condition shares the Financing & Appraisal Deadline, and cancelling on value typically requires written notice by that deadline. Missing the notice can put earnest money at risk even when the appraisal genuinely came in low.",
+    "In Utah the appraisal condition shares the Financing & Appraisal Deadline, and cancelling on value typically requires written notice by that deadline. Missing the notice can put earnest money at risk even when the appraisal came in low.",
   notAPromise:
     "This page does not predict appraised value, promise a reconsideration will succeed, or tell you whether your earnest money is refundable. Read the contract you signed with your agent.",
 } as const
@@ -1240,15 +1240,15 @@ export const CREDIT_BEFORE_MORTGAGE = {
 export const DIVORCE_AND_MORTGAGE = {
   asOf: LENDING_FACTS_AS_OF,
   source:
-    "Agency policy on obligations, assumptions, and equity buyouts, plus general Utah practice. Education only — not legal advice and not a substitute for a family-law attorney.",
+    "Agency policy on obligations, assumptions, and equity buyouts, plus general Utah practice. Education only, not legal advice and not a substitute for a family-law attorney.",
   decreeDoesNotBind:
     "A divorce decree allocates responsibility between the parties. It does not remove either borrower from the note. The lender was not a party to the decree, and a missed payment can still reach both credit reports.",
   threePaths:
     "The usual ways to separate a mortgage are refinancing into one borrower's name, assuming the loan where the program and servicer allow it, or selling. Which are available depends on the loan, the equity, and whether one party qualifies alone.",
   qualifyingAlone:
-    "Refinancing or assuming means qualifying on one income. A creditor cannot discount support income just because of where it comes from, but it can require documentation that the payments have been received and will continue — an underwriting question rather than a settled fact.",
+    "Refinancing or assuming means qualifying on one income. A creditor cannot discount support income just because of where it comes from, but it can require documentation that the payments have been received and will continue, an underwriting question rather than a settled fact.",
   equityBuyout:
-    "A refinance that buys out a co-owner's interest is often treated as a limited cash-out rather than a cash-out under agency policy — but only when specific conditions are met, including a minimum period of joint ownership before the new loan disburses, a signed written agreement between the parties stating the terms and where the proceeds go, and the remaining borrower taking none of the proceeds in cash. Confirm the current policy and each condition against your file; do not assume the favourable treatment applies.",
+    "A refinance that buys out a co-owner's interest is often treated as a limited cash-out rather than a cash-out under agency policy, but only when specific conditions are met, including a minimum period of joint ownership before the new loan disburses, a signed written agreement between the parties stating the terms and where the proceeds go, and the remaining borrower taking none of the proceeds in cash. Confirm the current policy and each condition against your file; do not assume the favorable treatment applies.",
   notAPromise:
     "This page does not tell you what your decree requires, whether you will qualify alone, or what your equity is. Talk to a family-law attorney about the decree and a loan officer about the file.",
 } as const

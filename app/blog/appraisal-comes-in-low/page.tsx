@@ -34,7 +34,7 @@ export const metadata = articleMetadata({
   path,
   title: "When the Appraisal Comes In Low",
   description:
-    "Lenders size the loan from the lower of price or appraised value. That turns an appraisal gap into cash, a renegotiation, or a cancellation — on a deadline.",
+    "Lenders size the loan from the lower of price or appraised value. That turns an appraisal gap into cash, a renegotiation, or a cancellation, and all of it runs on a deadline.",
   published: "2026-09-17",
   category: "First-Time Buyers",
   keywords: ["appraisal came in low", "appraisal gap", "reconsideration of value"],
@@ -48,7 +48,7 @@ export default function AppraisalLowPage() {
         path,
         title: "When the Appraisal Comes In Low",
         description:
-          "Lenders size the loan from the lower of price or appraised value. That turns an appraisal gap into cash, a renegotiation, or a cancellation — on a deadline.",
+          "Lenders size the loan from the lower of price or appraised value. That turns an appraisal gap into cash, a renegotiation, or a cancellation, and all of it runs on a deadline.",
         published: "2026-09-17",
         category: "First-Time Buyers",
         bannerSubtitle: "The loan is sized from the lower of price or value. Everything else follows from that.",
@@ -99,7 +99,7 @@ export default function AppraisalLowPage() {
             body: (
               <>
                 Available only if that right still exists and the required written notice is given in time. See{" "}
-                <Link href="/blog/utah-repc-deadlines">Utah REPC deadlines</Link>.
+                <Link href="/blog/utah-repc-deadline-and-your-loan">Utah REPC deadlines</Link>.
               </>
             ),
           },
@@ -111,7 +111,7 @@ export default function AppraisalLowPage() {
       </ArticleCallout>
 
       <ArticleCallout variant="note" title="One more reason to file">
-        If anything in the report describes you, the neighbourhood's residents, or a protected characteristic rather
+        If anything in the report describes you, the neighborhood's residents, or a protected characteristic rather
         than the property itself, say so explicitly in the request. A reconsideration of value is the channel for
         raising an appraisal-bias concern, and a complaint can also be filed with HUD or the CFPB.
       </ArticleCallout>

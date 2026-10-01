@@ -31,7 +31,7 @@ const taxBenefits = [
     icon: "Clock",
     title: "Capital-gains deferral",
     description:
-      "Reinvest an eligible capital gain into a Qualified Opportunity Fund within 180 days and defer tax on that gain until the fund is sold or the statutory recognition date.",
+      "Reinvest an eligible capital gain into a Qualified Opportunity Fund within 180 days and defer tax on that gain. For investments made under the current rules, the deferral ends no later than December 31, 2026. For investments made after 2026, deferral runs until the earlier of a sale of the investment or five years.",
   },
   {
     icon: "TrendingUp",
@@ -52,7 +52,7 @@ const zonePoints = [
     icon: "MapPin",
     title: "Thousands of tracts nationwide",
     description:
-      "There are roughly 8,700 designated Qualified Opportunity Zone tracts across all 50 states, D.C., and U.S. territories, spanning both urban and rural communities.",
+      "Roughly 8,700 tracts were designated across all 50 states, D.C., and U.S. territories, spanning urban and rural communities. Those 2018 designations run out at the end of 2026, and a new round of designations takes effect January 1, 2027.",
   },
   {
     icon: "Landmark",
@@ -110,7 +110,8 @@ export default function OpportunityZonesPage() {
               </h2>
               <p className="text-lg text-foreground/70 dark:text-foreground/70 max-w-3xl mx-auto">
                 Opportunity Zones are census tracts designated under the 2017 Tax Cuts and Jobs Act to
-                encourage long-term investment in designated communities. Investors reinvest eligible
+                encourage long-term investment in designated communities. The July 2025 federal reconciliation
+                law made the program permanent, with new rounds of zone designations starting January 1, 2027. Investors reinvest eligible
                 capital gains into a Qualified Opportunity Fund (QOF), which in turn invests in real
                 estate or businesses within the zone, in exchange for meaningful tax benefits.
               </p>
@@ -153,7 +154,8 @@ export default function OpportunityZonesPage() {
                 })}
               </div>
               <p className="text-center text-xs text-foreground/60 mt-6 max-w-3xl mx-auto">
-                Opportunity Zone rules and deadlines have changed over time and continue to evolve.
+                Rules summarized as of October 2026, from Treasury and IRS guidance. Opportunity Zone rules and
+                deadlines have changed over time and continue to evolve.
                 Benefits depend on your specific situation. This is educational information, not tax or
                 legal advice, consult a qualified professional.
               </p>

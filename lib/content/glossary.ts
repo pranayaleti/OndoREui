@@ -93,7 +93,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "The yearly cost of a loan expressed as a percentage, including the interest rate plus most lender fees.",
     definition: [
-      "APR bundles the note rate together with most of the lender’s cost of doing the loan — origination, discount points, and certain other charges — and re-expresses the whole thing as a single annual percentage. It exists so two offers with different fee structures can be compared on one number.",
+      "APR bundles the note rate together with most of the lender’s cost of doing the loan (origination, discount points, and certain other charges) and re-expresses the whole thing as a single annual percentage. It exists so two offers with different fee structures can be compared on one number.",
       "APR is almost always higher than the note rate, because the note rate alone ignores fees. The note rate is what actually determines your monthly principal and interest; APR is a comparison tool, not the number your payment is calculated from.",
     ],
     whyItMatters:
@@ -127,7 +127,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A mortgage whose interest rate is fixed for an initial period and then adjusts on a set schedule against an index.",
     definition: [
-      "An ARM is quoted as two numbers — an initial fixed period and an adjustment frequency after it. Once the fixed period ends, the rate resets periodically to an index plus a margin, within limits set by the note’s caps.",
+      "An ARM is quoted as two numbers: an initial fixed period and an adjustment frequency after it. Once the fixed period ends, the rate resets periodically to an index plus a margin, within limits set by the note’s caps.",
       "The caps are the part worth reading closely: there is normally a limit on the first adjustment, a limit on each later adjustment, and a lifetime ceiling. Those three numbers, not the teaser rate, define your actual worst case.",
     ],
     whyItMatters:
@@ -142,7 +142,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     aliases: ["settlement costs", "cash to close"],
     category: "mortgage",
     short:
-      "The lender, title, and third-party fees due at closing — separate from your down payment.",
+      "The lender, title, and third-party fees due at closing: separate from your down payment.",
     definition: [
       "Closing costs cover the work of originating the loan and transferring title: origination and underwriting charges, appraisal, credit report, title search and title insurance, recording fees, and the settlement agent’s fee.",
       "They are distinct from both the down payment and prepaids. Down payment is equity you are putting into the property; prepaids are your own future taxes and insurance funded in advance. All three land on the same wire, which is why the total surprises people.",
@@ -167,7 +167,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "The limit is set by county and is republished periodically, so a loan that is conforming in one county may be a jumbo one county over. Look up the current figure for the specific county rather than assuming a national number.",
     ],
     seeAlso: ["jumbo-loan", "conventional-loan", "loan-to-value"],
-    related: [{ label: "Looking up your county loan limit", href: "/blog/utah-county-conforming-loan-limit-lookup/" }],
+    related: [{ label: "Looking up your county loan limit", href: "/blog/jumbo-vs-conforming-fhfa-county-limit/" }],
     lending: true,
   },
   {
@@ -177,7 +177,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A mortgage not insured or guaranteed by a government program such as FHA, VA, or USDA.",
     definition: [
-      "Conventional loans follow agency guidelines rather than a government insurance program. They tend to reward stronger credit and more equity, and they allow mortgage insurance to be removed once the loan reaches the program’s equity threshold — which government-insured loans do not always permit.",
+      "Conventional loans follow agency guidelines rather than a government insurance program. They tend to reward stronger credit and more equity, and they allow mortgage insurance to be removed once the loan reaches the program’s equity threshold, which government-insured loans do not always permit.",
       "Lenders layer their own overlays on top of agency guidelines, so two lenders can reach different answers on the same file.",
     ],
     seeAlso: ["fha-loan", "va-loan", "usda-loan", "pmi", "conforming-loan"],
@@ -192,11 +192,11 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "The share of your gross monthly income taken up by monthly debt payments, including the proposed housing payment.",
     definition: [
-      "Underwriters usually look at two ratios. The front-end ratio counts only the housing payment. The back-end ratio counts the housing payment plus the other monthly obligations reporting on your credit — car loans, minimum card payments, student loans, and support obligations.",
+      "Underwriters usually look at two ratios. The front-end ratio counts only the housing payment. The back-end ratio counts the housing payment plus the other monthly obligations reporting on your credit: car loans, minimum card payments, student loans, and support obligations.",
       "What counts is narrower than most people expect. It is monthly obligations on the credit report, not your whole budget: groceries, utilities, and childcare generally do not appear, while a car payment you intend to pay off soon still does.",
     ],
     whyItMatters:
-      "DTI is usually the constraint that decides how much home you qualify for — more often than the down payment. Published maximums are not a promise that a high-DTI file will be approved.",
+      "DTI is usually the constraint that decides how much home you qualify for, more often than the down payment. Published maximums are not a promise that a high-DTI file will be approved.",
     seeAlso: ["pre-approval", "underwriting", "piti", "hoa"],
     calculators: ["affordability", "income", "buying-power"],
     related: [{ label: "DTI, front-end and back-end, with HOA", href: "/blog/dti-frontend-backend-with-hoa/" }],
@@ -247,7 +247,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "An account your servicer uses to collect and pay your property taxes and homeowners insurance alongside the mortgage payment.",
     definition: [
       "Rather than paying taxes and insurance in lump sums, you pay one twelfth each month with the mortgage. The servicer holds the money and pays the bills when they come due, then re-analyzes the account periodically and adjusts the monthly figure.",
-      "Because taxes and insurance premiums change, the escrow portion of your payment changes too — which is why a payment can rise even on a fixed-rate loan. A shortage after the first year is common when the initial estimate was based on pre-sale figures.",
+      "Because taxes and insurance premiums change, the escrow portion of your payment changes too, which is why a payment can rise even on a fixed-rate loan. A shortage after the first year is common when the initial estimate was based on pre-sale figures.",
     ],
     whyItMatters:
       "The escrow account is why “fixed rate” does not mean “fixed payment.” Only principal and interest are fixed.",
@@ -266,7 +266,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A government-insured mortgage designed to widen access to financing, with lower down payment and credit thresholds than most conventional loans.",
     definition: [
-      "FHA loans are insured by the Federal Housing Administration, which lets lenders accept lower down payments and lower credit scores than a typical conventional file. In exchange, the borrower pays mortgage insurance — an upfront premium that is often financed, plus an annual premium collected monthly.",
+      "FHA loans are insured by the Federal Housing Administration, which lets lenders accept lower down payments and lower credit scores than a typical conventional file. In exchange, the borrower pays mortgage insurance, an upfront premium that is often financed, plus an annual premium collected monthly.",
       "Most lenders apply overlays stricter than HUD’s published floor, so a published minimum is not a guarantee a file will be originated. FHA loans are generally for a primary residence, with limited exceptions.",
     ],
     seeAlso: ["mip", "conventional-loan", "down-payment", "house-hacking"],
@@ -304,7 +304,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "A revolving credit line secured by your home equity, drawn and repaid like a credit card during a draw period.",
     definition: [
       "A HELOC gives you a limit you can draw against during a draw period, typically paying interest only on what is drawn, followed by a repayment period when the balance amortizes. The rate is usually variable.",
-      "Because it is secured by the home, a HELOC prices better than unsecured credit — and carries the corresponding risk. Lenders commonly require seasoning and a maximum combined loan-to-value across all liens.",
+      "Because it is secured by the home, a HELOC prices better than unsecured credit, and carries the corresponding risk. Lenders commonly require seasoning and a maximum combined loan-to-value across all liens.",
     ],
     seeAlso: ["cash-out-refinance", "equity", "loan-to-value", "lien"],
     related: [
@@ -319,7 +319,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     aliases: ["note rate", "mortgage rate"],
     category: "mortgage",
     short:
-      "The percentage charged on your loan balance — the number your principal and interest payment is calculated from.",
+      "The percentage charged on your loan balance, the number your principal and interest payment is calculated from.",
     definition: [
       "The note rate is what the promissory note obligates you to pay on the outstanding balance. It drives the principal and interest portion of the payment; it does not include fees, which is what separates it from APR.",
       "A rate you see quoted in the news is an average across many files with assumptions attached. Your rate depends on credit, loan-to-value, occupancy, property type, program, and the day you lock.",
@@ -355,7 +355,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A standardized three-page disclosure showing a loan’s rate, payment, and closing costs in a fixed format.",
     definition: [
-      "Lenders must provide a Loan Estimate shortly after an application, and the format is identical across lenders — which makes it the only reliable way to compare two offers line by line.",
+      "Lenders must provide a Loan Estimate shortly after an application, and the format is identical across lenders, which makes it the only reliable way to compare two offers line by line.",
       "Compare the rate, the APR, the total closing costs, and the cash to close together. A quote delivered as a text message or a screenshot is not a Loan Estimate and is not comparable.",
     ],
     whyItMatters:
@@ -370,7 +370,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     aliases: ["ltv", "loan to value", "cltv", "combined loan to value"],
     category: "mortgage",
     short:
-      "The loan amount as a percentage of the property’s value — the main measure of how much equity cushions the loan.",
+      "The loan amount as a percentage of the property’s value, the main measure of how much equity cushions the loan.",
     definition: [
       "LTV is the loan divided by the lesser of purchase price or appraised value. A lower LTV means more equity, which generally improves pricing and can remove the need for mortgage insurance.",
       "Combined LTV (CLTV) adds every lien on the property, which is the figure that matters when a second mortgage or HELOC sits behind the first.",
@@ -391,7 +391,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "MIP and conventional PMI end differently. PMI can generally be removed once the loan reaches the program’s equity threshold; on many FHA loans the annual premium stays for the life of the loan unless the borrower refinances out of FHA entirely.",
     ],
     whyItMatters:
-      "That difference in how the insurance ends is often the deciding factor between FHA and conventional — not the rate.",
+      "That difference in how the insurance ends is often the deciding factor between FHA and conventional, not the rate.",
     seeAlso: ["pmi", "fha-loan", "conventional-loan", "refinance"],
     related: [{ label: "How mortgage insurance actually ends", href: "/blog/mip-vs-pmi-how-mortgage-insurance-ends/" }],
     lending: true,
@@ -405,7 +405,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "Insurance on a conventional loan that protects the lender when the borrower has less than the program’s required equity.",
     definition: [
       "PMI is typically required on a conventional loan above the program’s loan-to-value threshold. It is priced from credit and LTV, collected monthly, and protects the lender rather than the borrower.",
-      "Unlike FHA’s annual MIP, PMI can usually be removed — either automatically as the balance amortizes down, or on request once the equity threshold is met under the program’s rules, sometimes supported by a new appraisal.",
+      "Unlike FHA’s annual MIP, PMI can usually be removed, either automatically as the balance amortizes down, or on request once the equity threshold is met under the program’s rules, sometimes supported by a new appraisal.",
     ],
     seeAlso: ["mip", "loan-to-value", "down-payment", "conventional-loan"],
     calculators: ["mortgage-payment", "affordability"],
@@ -418,7 +418,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     aliases: ["principal interest taxes insurance", "pitia"],
     category: "mortgage",
     short:
-      "Principal, Interest, Taxes and Insurance — the four parts of a typical monthly mortgage payment.",
+      "Principal, Interest, Taxes and Insurance, the four parts of a typical monthly mortgage payment.",
     definition: [
       "Principal and interest repay the loan. Taxes and insurance are collected into an escrow account and paid on your behalf. Underwriters often work with PITIA, which adds association dues where they apply.",
       "Quoting only principal and interest understates a real payment substantially, because taxes, insurance, and any association dues are due whether or not they are escrowed.",
@@ -433,10 +433,10 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     aliases: ["preapproval", "pre approval"],
     category: "mortgage",
     short:
-      "A lender’s conditional commitment to lend after reviewing your credit, income, and assets — stronger than a pre-qualification.",
+      "A lender’s conditional commitment to lend after reviewing your credit, income, and assets: stronger than a pre-qualification.",
     definition: [
       "A pre-approval follows an application and a review of actual documentation, and normally includes an automated underwriting decision. It is what a listing agent expects to see attached to an offer.",
-      "It is still conditional. Final approval depends on the appraisal, title, and a re-verification of your credit and employment before closing — which is why new debt during underwriting can undo one.",
+      "It is still conditional. Final approval depends on the appraisal, title, and a re-verification of your credit and employment before closing, which is why new debt during underwriting can undo one.",
     ],
     whyItMatters:
       "Pre-approval, automated underwriting findings, and clear-to-close are three different milestones. Knowing which one you have tells you how firm your position really is.",
@@ -486,7 +486,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short: "The amount borrowed and still owed, separate from the interest charged on it.",
     definition: [
       "Principal is the balance itself. Each payment reduces it a little, and interest for the next period is charged on whatever remains.",
-      "An extra payment applied directly to principal removes all the future interest that balance would have generated — which is why extra principal early in the schedule is worth far more than the same amount later.",
+      "An extra payment applied directly to principal removes all the future interest that balance would have generated, which is why extra principal early in the schedule is worth far more than the same amount later.",
     ],
     seeAlso: ["amortization", "interest-rate", "recast", "equity"],
     calculators: ["mortgage-payment"],
@@ -502,7 +502,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "A lender’s commitment to hold a quoted interest rate for a set number of days while your loan is processed.",
     definition: [
       "Locking protects you from rate movement between application and closing, for a defined period. Letting the rate float leaves you exposed to the market in both directions.",
-      "If a lock expires before closing, an extension usually has a cost. If rates fall meaningfully after you lock, whether you can capture that depends on the lender’s written float-down policy — which is a specific product feature, not a courtesy.",
+      "If a lock expires before closing, an extension usually has a cost. If rates fall meaningfully after you lock, whether you can capture that depends on the lender’s written float-down policy, which is a specific product feature, not a courtesy.",
     ],
     seeAlso: ["interest-rate", "discount-points", "underwriting"],
     related: [
@@ -556,7 +556,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "Refinancing for more than you owe and taking the difference in cash, converting equity into spendable funds.",
     definition: [
       "The new loan pays off the existing one and returns the difference at closing. Because it raises the loan-to-value, a cash-out is usually priced above a rate-and-term refinance and has tighter limits.",
-      "It replaces your entire first mortgage, so it is rarely the right tool when your existing rate is well below the market — a second lien or a HELOC may cost less overall even at a higher rate on the smaller balance.",
+      "It replaces your entire first mortgage, so it is rarely the right tool when your existing rate is well below the market. A second lien or a HELOC may cost less overall even at a higher rate on the smaller balance.",
     ],
     seeAlso: ["refinance", "heloc", "equity", "loan-to-value"],
     calculators: ["refinance"],
@@ -574,7 +574,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A reduced-documentation refinance available on some government-backed loans when the result benefits the borrower.",
     definition: [
-      "FHA and VA both offer streamlined paths that can waive parts of the usual documentation — sometimes income verification or the appraisal — when refinancing an existing loan of the same type.",
+      "FHA and VA both offer streamlined paths that can waive parts of the usual documentation (sometimes income verification or the appraisal) when refinancing an existing loan of the same type.",
       "Streamlines generally do not allow cash out beyond a small limit, and eligibility depends on payment history and on the refinance producing a genuine benefit under the program’s test.",
     ],
     seeAlso: ["refinance", "fha-loan", "va-loan"],
@@ -589,7 +589,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A prepaid subsidy that reduces the payment for the first year or two, after which the payment rises to the note rate.",
     definition: [
-      "In a 2-1 buydown, the payment is calculated at a rate two points lower in year one and one point lower in year two, then at the note rate thereafter. The subsidy is funded upfront — commonly by a seller or builder — and held in an escrow that releases each month.",
+      "In a 2-1 buydown, the payment is calculated at a rate two points lower in year one and one point lower in year two, then at the note rate thereafter. The subsidy is funded upfront (commonly by a seller or builder) and held in an escrow that releases each month.",
       "Nothing about the note changes. The rate on your loan is the full rate from day one, and underwriting generally qualifies you at that rate, not the discounted one.",
     ],
     whyItMatters:
@@ -626,7 +626,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "A government-backed loan for eligible rural and suburban areas that can allow no down payment for qualifying borrowers.",
     definition: [
       "USDA financing is limited by two tests: the property must sit within an eligible area on the published map, and household income must fall under the limit for that county and household size.",
-      "Eligible areas include more suburban edges than the word “rural” suggests, so the map is worth checking before ruling it out. Both tests must pass — a qualifying borrower in an ineligible location does not qualify.",
+      "Eligible areas include more suburban edges than the word “rural” suggests, so the map is worth checking before ruling it out. Both tests must pass: a qualifying borrower in an ineligible location does not qualify.",
     ],
     seeAlso: ["va-loan", "fha-loan", "down-payment"],
     related: [
@@ -644,7 +644,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "A mortgage guaranteed by the Department of Veterans Affairs for eligible service members, veterans, and some surviving spouses.",
     definition: [
       "VA loans can allow financing with no down payment and do not carry monthly mortgage insurance. Most borrowers instead pay a one-time funding fee, which can usually be financed and is commonly waived for veterans with a qualifying service-connected disability rating.",
-      "Eligibility runs through a Certificate of Eligibility and available entitlement, and the loan carries an occupancy requirement. Zero down is a feature of remaining entitlement and a qualifying file — not automatic for every veteran.",
+      "Eligibility runs through a Certificate of Eligibility and available entitlement, and the loan carries an occupancy requirement. Zero down is a feature of remaining entitlement and a qualifying file, not automatic for every veteran.",
     ],
     seeAlso: ["usda-loan", "fha-loan", "down-payment", "occupancy"],
     related: [
@@ -677,7 +677,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "A mortgage outside the Qualified Mortgage rules, using alternative documentation such as bank statements or asset depletion.",
     definition: [
-      "Non-QM covers files that do not fit standard agency documentation — self-employed borrowers whose returns understate income, investors, and asset-rich borrowers with modest taxable income. Bank statement, asset depletion, and DSCR programs all sit here.",
+      "Non-QM covers files that do not fit standard agency documentation: self-employed borrowers whose returns understate income, investors, and asset-rich borrowers with modest taxable income. Bank statement, asset depletion, and DSCR programs all sit here.",
       "Non-QM is not subprime. It is different documentation, generally at a higher rate, with real underwriting behind it.",
     ],
     seeAlso: ["dscr-loan", "underwriting", "self-employed-income"],
@@ -695,7 +695,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     short:
       "The lender’s charge for processing and underwriting the loan, shown in the closing cost section of the Loan Estimate.",
     definition: [
-      "Origination covers the lender’s own work on the file. It appears alongside — and separately from — discount points, which buy down the rate rather than paying for processing.",
+      "Origination covers the lender’s own work on the file. It appears alongside, and separately from, discount points, which buy down the rate rather than paying for processing.",
       "Because origination is a lender charge rather than a third-party cost, it is one of the more negotiable lines, and it is folded into APR.",
     ],
     seeAlso: ["apr", "closing-costs", "discount-points", "loan-estimate"],
@@ -772,7 +772,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
     short:
       "The shortfall when a property appraises below the contract price, which the buyer generally must cover in cash.",
     definition: [
-      "Lending is based on the lesser of price or appraised value, so a low appraisal does not reduce what you owe the seller — it reduces what the lender will finance. The difference has to come from somewhere.",
+      "Lending is based on the lesser of price or appraised value, so a low appraisal does not reduce what you owe the seller. It reduces what the lender will finance. The difference has to come from somewhere.",
       "The usual outcomes are renegotiating the price, covering the gap in cash, disputing the appraisal with better comparables, or exercising an appraisal contingency to exit.",
     ],
     seeAlso: ["appraisal", "contingency", "earnest-money", "down-payment"],
@@ -787,7 +787,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
       "A condition in the purchase contract that must be satisfied, or the buyer can withdraw without losing earnest money.",
     definition: [
       "Common contingencies cover financing, appraisal, inspection, and sometimes the sale of the buyer’s current home. Each carries a deadline, and each is a defined exit if the condition is not met.",
-      "Waiving contingencies makes an offer more competitive and moves risk onto the buyer. A waived inspection contingency does not mean skipping the inspection — it means giving up the contractual right to renegotiate or walk based on what it finds.",
+      "Waiving contingencies makes an offer more competitive and moves risk onto the buyer. A waived inspection contingency does not mean skipping the inspection. It means giving up the contractual right to renegotiate or walk based on what it finds.",
     ],
     whyItMatters:
       "Contingency deadlines are the real clock in a transaction. Missing one can convert a refundable deposit into a non-refundable one.",
@@ -853,7 +853,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
     short:
       "A buyer-ordered evaluation of a property’s condition and systems, used to decide whether and how to proceed.",
     definition: [
-      "An inspector examines accessible structure and systems — roof, foundation, electrical, plumbing, HVAC — and reports condition and likely remaining life. Specialists may be brought in for sewer lines, radon, or structural questions.",
+      "An inspector examines accessible structure and systems (roof, foundation, electrical, plumbing, HVAC) and reports condition and likely remaining life. Specialists may be brought in for sewer lines, radon, or structural questions.",
       "The report is information, not a repair list the seller owes you. What happens next is negotiation, and how much leverage you have depends on your contingencies.",
     ],
     seeAlso: ["due-diligence", "contingency", "appraisal", "sellers-disclosure"],
@@ -866,7 +866,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
     short:
       "Utah’s standard residential purchase contract, which sets the deadlines the whole transaction runs on.",
     definition: [
-      "The REPC is the state-approved form used for most Utah residential purchases. It defines the price and terms and, critically, a set of dated deadlines — due diligence, financing and appraisal, and settlement.",
+      "The REPC is the state-approved form used for most Utah residential purchases. It defines the price and terms and, critically, a set of dated deadlines: due diligence, financing and appraisal, and settlement.",
       "Those deadlines drive the loan process. A financing deadline that arrives before underwriting has cleared conditions is a problem worth anticipating at the offer stage, not discovering the week it lands.",
     ],
     whyItMatters:
@@ -882,7 +882,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
     short:
       "Money the seller contributes toward the buyer’s closing costs, capped by the loan program.",
     definition: [
-      "A concession is a credit toward allowable buyer costs — closing costs, prepaids, or funding a temporary buydown. It is often more useful than an equivalent price reduction, because it reduces cash needed at closing rather than trimming a monthly payment slightly.",
+      "A concession is a credit toward allowable buyer costs: closing costs, prepaids, or funding a temporary buydown. It is often more useful than an equivalent price reduction, because it reduces cash needed at closing rather than trimming a monthly payment slightly.",
       "Every program caps concessions, and the cap varies with occupancy and down payment. A credit above the cap is not simply refunded to the buyer.",
     ],
     seeAlso: ["closing-costs", "temporary-buydown", "prepaids"],
@@ -897,7 +897,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
       "A last inspection shortly before closing to confirm the property’s condition and that agreed repairs were done.",
     definition: [
       "The walkthrough verifies the home is in the condition the contract requires: agreed repairs completed, included items still present, and no new damage from moving out.",
-      "It is not a renegotiation opportunity in the general sense — it exists to confirm the agreed state. Problems found here are handled before funding, which is why it happens close to, but not on, closing day.",
+      "It is not a renegotiation opportunity in the general sense. It exists to confirm the agreed state. Problems found here are handled before funding, which is why it happens close to, but not on, closing day.",
     ],
     seeAlso: ["settlement", "home-inspection", "contingency"],
   },
@@ -953,7 +953,7 @@ const SELLING_TERMS: readonly GlossaryTerm[] = [
       "What a seller actually receives after loan payoff, commissions, and closing costs are deducted from the sale price.",
     definition: [
       "Sale price is the headline; net proceeds is the number that reaches you. Subtract the mortgage payoff, brokerage compensation, seller-side closing costs, any agreed concessions, and prorated taxes.",
-      "Payoff is not the same as your last statement balance — it includes interest through the payoff date and any fees.",
+      "Payoff is not the same as your last statement balance. It includes interest through the payoff date and any fees.",
     ],
     seeAlso: ["closing-costs", "seller-concessions", "equity", "settlement"],
     calculators: ["home-sale"],
@@ -1003,7 +1003,7 @@ const SELLING_TERMS: readonly GlossaryTerm[] = [
     short:
       "The seller’s written statement of known material facts and defects about the property.",
     definition: [
-      "Sellers disclose known material conditions — past leaks, system repairs, boundary issues, and similar facts that would matter to a buyer. It reports what the seller knows; it is not an inspection.",
+      "Sellers disclose known material conditions: past leaks, system repairs, boundary issues, and similar facts that would matter to a buyer. It reports what the seller knows; it is not an inspection.",
       "Disclosing is generally the safer course. Known problems that surface later are considerably more expensive than problems disclosed upfront.",
     ],
     seeAlso: ["home-inspection", "due-diligence"],
@@ -1017,7 +1017,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["capitalization rate", "cap"],
     category: "investing",
     short:
-      "Net operating income divided by property value — the unlevered yield used to compare properties.",
+      "Net operating income divided by property value, the unlevered yield used to compare properties.",
     definition: [
       "Cap rate expresses what a property earns relative to its price, before any financing. Because it ignores the loan, it compares the asset itself rather than a particular buyer’s deal structure.",
       "It is only as good as the NOI behind it. An NOI that omits vacancy, management, or capital reserves produces a cap rate that flatters the property.",
@@ -1035,7 +1035,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "Annual pre-tax cash flow divided by the cash you actually invested, measuring return on money out of pocket.",
     definition: [
-      "Cash-on-cash divides the year’s cash flow after debt service by total cash invested — down payment, closing costs, and upfront work. Unlike cap rate, it accounts for leverage.",
+      "Cash-on-cash divides the year’s cash flow after debt service by total cash invested: down payment, closing costs, and upfront work. Unlike cap rate, it accounts for leverage.",
       "It measures only cash flow. It ignores principal paydown, appreciation, and tax treatment, so it understates total return on a leveraged hold.",
     ],
     seeAlso: ["cap-rate", "cash-flow", "roi", "leverage"],
@@ -1063,7 +1063,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "Income after operating expenses but before debt service, taxes on income, and capital expenditures.",
     definition: [
-      "NOI takes gross rental income, subtracts vacancy and operating expenses — management, maintenance, insurance, property taxes, utilities the owner pays — and stops there. Financing is deliberately excluded so the property can be judged independently of the buyer’s loan.",
+      "NOI takes gross rental income, subtracts vacancy and operating expenses (management, maintenance, insurance, property taxes, utilities the owner pays) and stops there. Financing is deliberately excluded so the property can be judged independently of the buyer’s loan.",
       "Because the mortgage is excluded, NOI is not cash flow. Two investors with identical NOI can have very different cash flow depending on how they financed the purchase.",
     ],
     seeAlso: ["cap-rate", "cash-flow", "operating-expenses", "dscr"],
@@ -1075,7 +1075,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["gross rent multiplier"],
     category: "investing",
     short:
-      "Property price divided by annual gross rent — a fast screening ratio that ignores expenses.",
+      "Property price divided by annual gross rent, a fast screening ratio that ignores expenses.",
     definition: [
       "GRM is a first-pass filter for comparing similar properties in one market. A lower number means less price paid per dollar of rent.",
       "It says nothing about expenses, so two properties with identical GRMs can perform very differently once taxes, insurance, and maintenance are counted. Screen with GRM, decide with NOI.",
@@ -1089,7 +1089,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["debt service coverage ratio"],
     category: "investing",
     short:
-      "Net operating income divided by annual debt service — how many times the property covers its own loan payment.",
+      "Net operating income divided by annual debt service: how many times the property covers its own loan payment.",
     definition: [
       "A DSCR of 1.0 means the property exactly covers its debt service, with nothing spare. Lenders on investment loans generally want a cushion above that.",
       "The ratio is only as reliable as the NOI feeding it, so vacancy and management assumptions matter as much as the rent figure.",
@@ -1161,7 +1161,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "An increase in a property’s value over time, from market movement or from improvements made to it.",
     definition: [
-      "Market appreciation comes from conditions outside your control. Forced appreciation comes from work you do — renovation, better management, raising below-market rents.",
+      "Market appreciation comes from conditions outside your control. Forced appreciation comes from work you do: renovation, better management, raising below-market rents.",
       "Appreciation is unrealized until you sell or borrow against it, and it is not guaranteed. Treating projected appreciation as the reason a deal works turns an investment into a bet on the market.",
     ],
     calculators: ["rent-vs-own", "retirement", "cagr"],
@@ -1174,7 +1174,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "A tax deduction that lets an owner write off the cost of a rental building over a set recovery period.",
     definition: [
-      "Depreciation spreads the building’s cost — not the land’s — across a recovery period defined in the tax code, producing a paper expense that reduces taxable rental income without a cash outlay.",
+      "Depreciation spreads the building’s cost, not the land’s, across a recovery period defined in the tax code, producing a paper expense that reduces taxable rental income without a cash outlay.",
       "It is generally recaptured when the property is sold. Depreciation is also commonly added back when a lender calculates qualifying income from rentals, because it did not actually cost you cash.",
     ],
     whyItMatters:
@@ -1194,7 +1194,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "The deadlines are unforgiving and the proceeds generally cannot touch your hands. It defers tax rather than eliminating it.",
     ],
     whyItMatters:
-      "The structure has to be in place before you close the sale. This is specialist territory — involve a qualified intermediary and a tax advisor early.",
+      "The structure has to be in place before you close the sale. This is specialist territory: involve a qualified intermediary and a tax advisor early.",
     seeAlso: ["depreciation", "appreciation", "opportunity-zone"],
     related: [{ label: "Investment services", href: "/investments/" }],
   },
@@ -1219,7 +1219,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "The share of time or units sitting empty, budgeted as a reduction to expected rental income.",
     definition: [
       "Vacancy covers turnover between tenants and time on market. Projections that assume full occupancy every month overstate income, because turnover is a normal cost of owning rentals.",
-      "Days vacant are usually more expensive than a modest rent concession to retain a good tenant — an empty unit earns nothing while every fixed cost continues.",
+      "Days vacant are usually more expensive than a modest rent concession to retain a good tenant, because an empty unit earns nothing while every fixed cost continues.",
     ],
     seeAlso: ["cash-flow", "noi", "turnover", "operating-expenses"],
     related: [{ label: "Vacancy risk playbook", href: "/blog/vacancy-risk-playbook/" }],
@@ -1230,10 +1230,10 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["opex"],
     category: "investing",
     short:
-      "The recurring costs of running a property — taxes, insurance, management, maintenance, and owner-paid utilities.",
+      "The recurring costs of running a property: taxes, insurance, management, maintenance, and owner-paid utilities.",
     definition: [
       "Operating expenses are the ongoing costs of keeping a property rented. They exclude the mortgage, which is debt service, and exclude capital expenditures, which are large infrequent replacements.",
-      "Understating them is the most common flaw in a rental projection. Management and maintenance are real costs even when you do the work yourself — you are paying with time.",
+      "Understating them is the most common flaw in a rental projection. Management and maintenance are real costs even when you do the work yourself. You are paying with time.",
     ],
     seeAlso: ["noi", "capex", "cash-flow", "fifty-percent-rule"],
     calculators: ["owner-vs-self", "cap-rate"],
@@ -1244,7 +1244,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["capital expenditures", "capital reserve"],
     category: "investing",
     short:
-      "Large, infrequent replacements — roof, HVAC, water heater — budgeted monthly even though they are paid rarely.",
+      "Large, infrequent replacements (roof, HVAC, water heater), budgeted monthly even though they are paid rarely.",
     definition: [
       "CapEx covers components with a long life and a large replacement cost. They are not monthly expenses, but they are entirely predictable in aggregate, which is why owners reserve for them monthly.",
       "A property with no CapEx reserve is not more profitable; it is deferring a known bill. The roof’s age tells you roughly when it arrives.",
@@ -1273,7 +1273,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Using borrowed money to control a larger asset, amplifying both returns and losses.",
     definition: [
       "A mortgage lets a modest down payment control a much larger asset, so appreciation and cash flow are earned on the full value while only part of the capital is yours. That is why cash-on-cash returns on financed property can exceed unlevered yield.",
-      "The amplification runs both directions. Leverage magnifies a downturn, and debt service continues through vacancy — which is what turns a difficult month into a serious problem.",
+      "The amplification runs both directions. Leverage magnifies a downturn, and debt service continues through vacancy, which is what turns a difficult month into a serious problem.",
     ],
     seeAlso: ["cash-on-cash-return", "cap-rate", "dscr", "equity"],
   },
@@ -1284,7 +1284,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "Living in one unit of a property while renting the others, using owner-occupied financing to buy an income property.",
     definition: [
-      "Buying a small multi-unit property as your primary residence can allow owner-occupied financing terms on a property that also produces rent — generally better terms than an investment loan.",
+      "Buying a small multi-unit property as your primary residence can allow owner-occupied financing terms on a property that also produces rent: generally better terms than an investment loan.",
       "Occupancy requirements are real obligations, and some programs allow a portion of projected rent to help you qualify. The rules are program-specific.",
     ],
     seeAlso: ["fha-loan", "occupancy", "cash-flow", "dscr-loan"],
@@ -1297,7 +1297,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["primary residence", "second home", "investment property"],
     category: "investing",
     short:
-      "How you will use a property — primary residence, second home, or investment — which drives pricing and program eligibility.",
+      "How you will use a property (primary residence, second home, or investment), which drives pricing and program eligibility.",
     definition: [
       "Occupancy is a core underwriting factor. Primary residences generally receive the best pricing and lowest down payments; second homes sit in between; investment properties carry the highest requirements.",
       "Occupancy is certified at closing, and misrepresenting it on a loan application is a serious matter, not a technicality.",
@@ -1315,7 +1315,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["rental agreement", "lease"],
     category: "renting",
     short:
-      "The contract setting the terms of a tenancy — rent, duration, responsibilities, and how it ends.",
+      "The contract setting the terms of a tenancy: rent, duration, responsibilities, and how it ends.",
     definition: [
       "A lease fixes rent and term and allocates responsibility for utilities, maintenance, and property care. A fixed-term lease runs to a date; a month-to-month renews continuously until proper notice is given.",
       "The provisions that matter most are usually the least dramatic: notice requirements, renewal mechanics, and who handles which repairs.",
@@ -1343,7 +1343,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     term: "Tenant screening",
     category: "renting",
     short:
-      "Evaluating applicants against consistent, lawful criteria — income, rental history, credit, and background.",
+      "Evaluating applicants against consistent, lawful criteria: income, rental history, credit, and background.",
     definition: [
       "Screening typically verifies income against a stated ratio, contacts prior landlords, and reviews credit and background reports. Written criteria applied identically to every applicant are what make the process defensible.",
       "Fair housing law governs how screening is conducted, and adverse action based on a consumer report carries its own notice requirements.",
@@ -1361,7 +1361,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "Laws prohibiting discrimination in housing based on protected characteristics, applying to advertising, screening, and terms.",
     definition: [
-      "Fair housing law covers the whole cycle — how a unit is advertised, who is shown it, how applicants are screened, and the terms offered. Federal protected classes are supplemented by state and local ones.",
+      "Fair housing law covers the whole cycle: how a unit is advertised, who is shown it, how applicants are screened, and the terms offered. Federal protected classes are supplemented by state and local ones.",
       "Intent is not the test. Language or a policy that has a discriminatory effect can violate the law even when no one meant harm, which is why advertising copy and screening criteria are written carefully.",
     ],
     whyItMatters:
@@ -1374,7 +1374,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     term: "Rent roll",
     category: "renting",
     short:
-      "A schedule of every unit with its tenant, rent, lease dates, and deposit — the income snapshot of a property.",
+      "A schedule of every unit with its tenant, rent, lease dates, and deposit, the income snapshot of a property.",
     definition: [
       "A rent roll lists occupancy and income unit by unit: who is in place, what they pay, when the lease ends, and what deposit is held. It is a standard diligence document when buying a tenanted property.",
       "Reading it well means looking for concentration of lease expirations, rents below market, and units occupied without a current written lease.",
@@ -1388,7 +1388,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     aliases: ["unit turn", "make ready"],
     category: "renting",
     short:
-      "The work and vacancy between one tenancy and the next — cleaning, repairs, marketing, and re-leasing.",
+      "The work and vacancy between one tenancy and the next: cleaning, repairs, marketing, and re-leasing.",
     definition: [
       "Turnover combines direct cost (cleaning, paint, repairs, marketing) with the vacancy loss while the unit is off the market. It is one of the largest controllable costs in rental ownership.",
       "Because turnover is expensive, retaining a reliable tenant at a slightly below-market rent is often better economics than pushing for the maximum and re-leasing.",
@@ -1403,7 +1403,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     short:
       "The legal process for removing a tenant, which must follow statutory notice and court procedure.",
     definition: [
-      "Eviction is a court process with prescribed notice periods and filings. Only the process — never self-help such as changing locks or shutting off utilities — can remove a tenant.",
+      "Eviction is a court process with prescribed notice periods and filings. Only the process (never self-help such as changing locks or shutting off utilities) can remove a tenant.",
       "Procedural mistakes commonly restart the timeline, which is why documentation and correct notices matter more than speed.",
     ],
     whyItMatters:
@@ -1430,7 +1430,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
       "The gradual deterioration expected from ordinary use, which cannot be charged against a security deposit.",
     definition: [
       "Carpet worn along a traffic path, minor scuffs, and faded paint are ordinary use. A burn, a pet stain through to the pad, or a hole in a wall is damage.",
-      "The distinction is where most deposit disputes live, and it is settled by evidence — dated condition reports and photographs at move-in and move-out.",
+      "The distinction is where most deposit disputes live, and it is settled by evidence: dated condition reports and photographs at move-in and move-out.",
     ],
     seeAlso: ["security-deposit", "move-out-inspection", "turnover"],
   },
@@ -1471,7 +1471,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
       "A tenant’s policy covering personal belongings and liability, which a landlord’s policy does not cover.",
     definition: [
       "The landlord’s policy covers the building, not the tenant’s possessions or personal liability. Renters insurance covers those, usually inexpensively, and many leases require it.",
-      "Liability coverage is the part tenants underestimate — it responds when a tenant is responsible for damage or injury.",
+      "Liability coverage is the part tenants underestimate. It responds when a tenant is responsible for damage or injury.",
     ],
     seeAlso: ["lease-agreement", "homeowners-insurance"],
   },
@@ -1480,7 +1480,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     term: "Rent-ready",
     category: "renting",
     short:
-      "The condition a unit must reach before it can be marketed — clean, functional, safe, and legal to occupy.",
+      "The condition a unit must reach before it can be marketed: clean, functional, safe, and legal to occupy.",
     definition: [
       "Rent-ready means cleaned, repaired, with working systems, smoke and carbon monoxide detectors in place, and no habitability defects. It is the point at which photographs and showings are worthwhile.",
       "Listing before a unit is rent-ready tends to cost more than the delay saves: weak photos and disappointing showings extend vacancy.",
@@ -1529,7 +1529,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
     short:
       "A policy protecting against defects in a property’s ownership history, issued after a search of the public record.",
     definition: [
-      "Unlike other insurance, title insurance looks backward. It protects against problems that already exist in the chain of title — undisclosed heirs, forged documents, recording errors, unpaid liens — and is paid once at closing.",
+      "Unlike other insurance, title insurance looks backward. It protects against problems that already exist in the chain of title (undisclosed heirs, forged documents, recording errors, unpaid liens) and is paid once at closing.",
       "The lender’s policy protects the lender for the loan amount and is usually required. An owner’s policy protects your equity and is generally optional but far cheaper bought at closing than later.",
     ],
     whyItMatters:
@@ -1545,7 +1545,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
       "An examination of public records to confirm ownership and surface liens, easements, or other claims.",
     definition: [
       "The search traces the chain of ownership and looks for anything attached to the property: mortgages, tax liens, judgments, easements, and restrictions. Findings are listed as exceptions in the title commitment.",
-      "Reading the commitment’s exceptions during due diligence is worthwhile — an easement or restriction can affect how you are able to use the property.",
+      "Reading the commitment’s exceptions during due diligence is worthwhile: an easement or restriction can affect how you are able to use the property.",
     ],
     seeAlso: ["title-insurance", "lien", "deed", "due-diligence"],
   },
@@ -1583,7 +1583,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
       "The neutral third party who holds funds and documents and carries out the closing according to instructions.",
     definition: [
       "The escrow officer holds earnest money, collects signed documents and funds, pays off existing liens, disburses proceeds, and sends the deed for recording. They act for the transaction, not for either side.",
-      "Escrow in this sense — a neutral closing party — is different from the escrow account your servicer uses for taxes and insurance after closing.",
+      "Escrow in this sense, a neutral closing party, is different from the escrow account your servicer uses for taxes and insurance after closing.",
     ],
     seeAlso: ["settlement", "escrow-account", "title-insurance", "recording"],
   },
@@ -1607,7 +1607,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
       "Filing the deed and security instrument with the county so the transfer and any liens become public record.",
     definition: [
       "Recording puts the world on notice of ownership and of liens against the property, and it establishes priority among competing claims.",
-      "Until documents record, the transfer is not reflected in the public record — which is why recording, not signing, is the moment most often treated as completion.",
+      "Until documents record, the transfer is not reflected in the public record, which is why recording, not signing, is the moment most often treated as completion.",
     ],
     seeAlso: ["deed", "lien", "settlement", "title-search"],
   },
@@ -1620,7 +1620,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
       "Notarization performed over live audio-video with identity verification, producing a digitally signed and sealed record.",
     definition: [
       "In a RON session the signer appears by live audio-video, passes identity verification, and signs electronically while the notary applies a digital seal. The session is recorded and retained under the rules of the notary’s commissioning state.",
-      "Acceptance depends on the commissioning state’s authority and on whether the receiving party — a lender, title company, or county recorder — accepts electronically notarized documents.",
+      "Acceptance depends on the commissioning state’s authority and on whether the receiving party (a lender, title company, or county recorder) accepts electronically notarized documents.",
     ],
     whyItMatters:
       "RON removes travel from a signing, which matters most for out-of-state sellers, deployed service members, and anyone closing across time zones.",
@@ -1638,7 +1638,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
     short:
       "A notarial act where the signer confirms to the notary that the signature is theirs and was made willingly.",
     definition: [
-      "In an acknowledgment, the notary verifies identity and the signer acknowledges having signed voluntarily. The signature does not have to be made in front of the notary — only acknowledged.",
+      "In an acknowledgment, the notary verifies identity and the signer acknowledges having signed voluntarily. The signature does not have to be made in front of the notary, only acknowledged.",
       "Acknowledgments are the usual act for deeds and other recordable instruments.",
     ],
     seeAlso: ["jurat", "ron", "deed"],
@@ -1664,7 +1664,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
     short:
       "A certificate authenticating a public document for legal use in another participating country.",
     definition: [
-      "An apostille is issued by a designated state authority — commonly the Secretary of State — certifying the authenticity of a notary’s commission or an official’s signature so the document is recognized abroad.",
+      "An apostille is issued by a designated state authority, commonly the Secretary of State, certifying the authenticity of a notary’s commission or an official’s signature so the document is recognized abroad.",
       "It authenticates the official who signed, not the contents. Countries outside the applicable convention use a different legalization process.",
     ],
     seeAlso: ["notary-acknowledgment", "ron"],
@@ -1752,6 +1752,11 @@ export function glossaryTermsByCategory(category: GlossaryCategory): GlossaryTer
 export function glossaryInitial(entry: GlossaryTerm): string {
   const first = entry.term.trim().charAt(0).toUpperCase()
   return /[A-Z]/.test(first) ? first : "#"
+}
+
+/** DOM id for a letter group on /glossary/. "#" cannot live in a URL fragment, so it becomes "other". */
+export function glossaryLetterId(initial: string): string {
+  return `letter-${initial === "#" ? "other" : initial}`
 }
 
 export function glossaryInitials(): string[] {

@@ -1,6 +1,7 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { CITY_MARKET_AS_OF, cityMarketData } from "@/lib/city-market-data"
 const slug = "/blog/best-neighborhoods-lehi-utah"
 const title = "Best Neighborhoods in Lehi, Utah (2026 Guide)"
 const description = "Traverse Mountain, Thanksgiving Point, or Lehi Old Town? A local breakdown of Lehi's top neighborhoods with home prices, schools, commute, and investment notes."
@@ -8,6 +9,8 @@ const published = "2026-04-06"
 const author = "Ondo RE Team"
 const category = "Neighborhood Guide"
 const image = "/modern-townhouse-garage.png"
+// Same figures as /market-reports/lehi/ and /locations/lehi/.
+const market = cityMarketData["Lehi"]
 const keywords = ["best neighborhoods Lehi Utah", "Traverse Mountain Lehi", "Thanksgiving Point neighborhood", "living in Lehi Utah", "Lehi real estate"]
 
 export const metadata = articleMetadata({
@@ -37,7 +40,7 @@ export default function BestNeighborhoodsLehi() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              Lehi is the fastest-growing city on the Wasatch Front and the beating heart of Silicon Slopes. Adobe, Vivint, Podium, and dozens of startups call it home. But Lehi isn&apos;t one neighborhood, it&apos;s three distinct communities with very different lifestyles and price points. Here&apos;s how to choose.
+              Lehi is one of the fastest-growing cities on the Wasatch Front and the beating heart of Silicon Slopes. Adobe, Vivint, Podium, and dozens of startups call it home. But Lehi isn&apos;t one neighborhood, it&apos;s three distinct communities with very different lifestyles and price points. Here&apos;s how to choose.
             </p>
 
             <h2>1. Traverse Mountain: Silicon Slopes in a Suburb</h2>
@@ -60,12 +63,16 @@ export default function BestNeighborhoodsLehi() {
 
             <h2>Lehi Market Snapshot (2026)</h2>
             <ul>
-              <li>Median home price: $540,000</li>
-              <li>Median rent: $1,950/mo</li>
-              <li>Average days on market: 12 days</li>
-              <li>Population: 98,000+ (fastest-growing city in Utah)</li>
-              <li>Top employers: Adobe, Vivint, Podium, Ancestry, IM Flash</li>
+              <li>Median home price: ${market.medianHomePrice.toLocaleString("en-US")}</li>
+              <li>Median rent: ${market.medianRent.toLocaleString("en-US")}/mo</li>
+              <li>Average days on market: {market.avgDaysOnMarket} days</li>
+              <li>Population: {market.population.toLocaleString("en-US")}, growing {market.growthRate} annually</li>
+              <li>Top employers: Adobe, Vivint, Podium, Ancestry, Texas Instruments</li>
             </ul>
+            <p className="text-sm text-foreground/70">
+              Ondo city medians as of {CITY_MARKET_AS_OF}, the same figures as the{" "}
+              <Link href="/market-reports/lehi/">Lehi market report</Link>. Not an MLS pull or appraisal.
+            </p>
 
             <h2>Bottom Line</h2>
             <p>Traverse Mountain for HOA retail and commute. Thanksgiving Point for museums, gardens, and golf. Old Town for acquisition basis and renovation upside. Match housing stock and commute to the investment thesis, and talk to Ondo RE before you finalize a decision.</p>

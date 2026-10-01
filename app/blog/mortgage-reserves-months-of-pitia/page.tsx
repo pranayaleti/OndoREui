@@ -1,6 +1,6 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { ComparisonTable } from "@/components/content/comparison-table"
-import { LENDING_FACTS_AS_OF, RELOCATION_SEASONING, RESERVES_PITIA } from "@/lib/content"
+import { LENDING_FACTS_AS_OF, RESERVES_PITIA } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
@@ -9,11 +9,13 @@ const path = "/blog/mortgage-reserves-months-of-pitia"
 const faqs = [
   {
     question: "Are reserves extra money I pay at closing?",
-    answer: RESERVES_PITIA.notCashToClose,
+    answer:
+      "No. You do not write a check for reserves at the table. They are documented assets that remain in your accounts after closing, and cash to close is a separate stack.",
   },
   {
     question: "Can gift funds count as reserves?",
-    answer: RESERVES_PITIA.counted,
+    answer:
+      "Often not. Gift funds are frequently limited or excluded as reserves, and money already used for the down payment or closing costs cannot count twice. Confirm the rule for your program.",
   },
 ]
 
@@ -106,7 +108,7 @@ export default function MortgageReservesPitiaPage() {
           <Link href="/learn/investment">investment financing</Link>.
         </li>
         <li>
-          Some future-employment / relocation paths add reserve tests: {RELOCATION_SEASONING.reserves} Guide:{" "}
+          Some future-employment / relocation paths with no paystub yet add reserve tests, often six months’ PITIA or enough liquid assets to cover the months before the start date plus one. Confirm the guide in force. Guide:{" "}
           <Link href="/blog/relocating-to-utah-job-seasoning">job seasoning when work starts in 60 days</Link>.
         </li>
         <li>Non-QM overlays (DSCR, asset-depletion, bank-statement) often set their own reserve months.</li>

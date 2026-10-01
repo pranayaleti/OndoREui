@@ -2,18 +2,18 @@
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import { SecondLookForm } from "@/components/lending/second-look-form"
-import { SITE_URL, pageTitle } from "@/lib/site"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
 import { LoanOfficerLine } from "@/components/lending/loan-officer-line"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
   "Under contract with another lender? Send the key numbers from your Loan Estimate and a licensed loan officer will walk you through how they compare. No credit check to start."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageCanonicalMetadata("/loans/second-look/", {
   title: pageTitle("Under Contract? Get a Second Look at Your Loan Estimate"),
   description,
-  alternates: { canonical: `${SITE_URL}/loans/second-look/` },
-}
+})
 
 /** Where to look on the standard CFPB Loan Estimate, and why each line matters. */
 const LINES_TO_COMPARE = [

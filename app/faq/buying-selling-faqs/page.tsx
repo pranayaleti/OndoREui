@@ -3,9 +3,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { PURCHASE_CLOSING_RANGE } from "@/lib/service-faq"
 import Link from "next/link"
 import { ArrowLeft, Home } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
@@ -77,7 +77,7 @@ export default function BuyingSellingFAQPage() {
     {
       question: "How long does a typical purchase take?",
       answer:
-        "Most financed purchases close in 30–45 days after acceptance. Cash purchases can close faster depending on title and inspections.",
+        `Many financed purchases close about ${PURCHASE_CLOSING_RANGE} after acceptance when the contract and file cooperate. Cash purchases can close faster depending on title and inspections.`,
     },
   ]
 
@@ -161,21 +161,6 @@ export default function BuyingSellingFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="buying-selling-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

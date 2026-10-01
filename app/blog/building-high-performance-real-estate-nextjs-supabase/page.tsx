@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/building-high-performance-real-estate-nextjs-supabase";
-const title = "Building a High-Performance Real Estate Platform with Next.js 15 and Supabase";
+const title = "Building a Real Estate Platform with Next.js and Supabase";
 const description = "A technical deep dive into the architecture of Ondo Real Estate, featuring App Router, React Server Components, and Supabase.";
 const author = "Engineering Team";
 

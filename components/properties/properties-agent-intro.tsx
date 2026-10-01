@@ -65,7 +65,7 @@ export function PropertiesAgentIntro() {
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
-          Ready to apply or tour? Applications are invitation-based, email{" "}
+          Ready to apply or tour? Apply from a listing page when applications are open. To schedule a tour, email{" "}
           <a href={`mailto:${SITE_EMAILS.info}`} className="underline hover:text-foreground">
             {SITE_EMAILS.info}
           </a>{" "}

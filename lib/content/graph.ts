@@ -398,7 +398,6 @@ const NODES: ContentNode[] = [
     intent: "commercial",
     related: [
       "guide-jumbo-fhfa",
-      "guide-utah-county-limit",
       "guide-interest-only",
       "program-conventional",
       "commercial-rates",
@@ -655,7 +654,7 @@ const NODES: ContentNode[] = [
     path: "/calculators/cost-of-living",
     title: "Monthly cost of living calculator",
     description:
-      "Estimate monthly housing, transportation, utilities, food, and other living expenses. Planning only — not a loan quote.",
+      "Estimate monthly housing, transportation, utilities, food, and other living expenses. Planning only, not a loan quote.",
     kind: "calculator",
     cluster: "first-time-buyer",
     audiences: ["fthb", "repeat"],
@@ -924,7 +923,7 @@ const NODES: ContentNode[] = [
     path: "/blog/va-funding-fee-finance-vs-pay-cash",
     title: "VA Funding Fee: Finance vs Pay Cash",
     description:
-      "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and what it does to cash to close — not advice.",
+      "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and what it does to cash to close, not advice.",
     kind: "guide",
     cluster: "va",
     audiences: ["veteran"],
@@ -948,7 +947,7 @@ const NODES: ContentNode[] = [
     path: "/blog/va-entitlement-second-va-loan",
     title: "Can I Use VA If I Still Have a VA Loan?",
     description:
-      "Remaining entitlement, occupancy, and restoration — how a second VA purchase is underwritten when you have not sold the first home.",
+      "Remaining entitlement, occupancy, and restoration: how a second VA purchase is underwritten when you have not sold the first home.",
     kind: "guide",
     cluster: "va",
     audiences: ["veteran"],
@@ -1016,7 +1015,6 @@ const NODES: ContentNode[] = [
     intent: "informational",
     related: [
       "program-jumbo",
-      "guide-utah-county-limit",
       "guide-interest-only",
       "program-conventional",
       "commercial-rates",
@@ -1158,30 +1156,6 @@ const NODES: ContentNode[] = [
     author: "Ondo RE Team",
   },
   {
-    id: "guide-utah-county-limit",
-    path: "/blog/utah-county-conforming-loan-limit-lookup",
-    title: "Utah County Conforming Limit Lookup (How-To)",
-    description:
-      "How to look up this year’s FHFA conforming limit for a Utah county. Summit is not Salt Lake. Do not reuse a stale dollar figure.",
-    kind: "guide",
-    cluster: "rates",
-    audiences: ["high_income", "repeat"],
-    programs: ["conventional", "jumbo"],
-    intent: "informational",
-    related: [
-      "guide-jumbo-fhfa",
-      "program-jumbo",
-      "program-conventional",
-      "commercial-rates",
-      "conversion-contact",
-    ],
-    cta: { label: "Rates hub", href: "/buy/rates" },
-    category: "Mortgages",
-    published: "2026-08-29",
-    modified: "2026-08-29",
-    author: "Ondo RE Team",
-  },
-  {
     id: "guide-k1-income",
     path: "/blog/k-1-income-what-usually-counts",
     title: "K-1 Income: What Usually Counts",
@@ -1265,7 +1239,7 @@ const NODES: ContentNode[] = [
     path: "/blog/parent-gifting-down-payment-who-signs",
     title: "Parent Is Gifting: Who Signs What",
     description:
-      "Gift letter, donor statements, occupancy, and title — who signs when a parent helps with down payment, and when the parent is actually a co-borrower instead.",
+      "Gift letter, donor statements, occupancy, and title: who signs when a parent helps with down payment, and when the parent is actually a co-borrower instead.",
     kind: "guide",
     cluster: "first-time-buyer",
     audiences: ["fthb", "gift_funds"],
@@ -1291,7 +1265,7 @@ const NODES: ContentNode[] = [
     path: "/blog/student-loans-dti-idr-save",
     title: "Student Loans and DTI After IDR / SAVE Changes",
     description:
-      "A $0 student-loan line on a dashboard is not automatically $0 in DTI. How Fannie, Freddie, FHA, and VA typically count IDR, deferment, and forbearance — dated, not a quote.",
+      "A $0 student-loan line on a dashboard is not automatically $0 in DTI. How Fannie, Freddie, FHA, and VA typically count IDR, deferment, and forbearance. Dated, not a quote.",
     kind: "guide",
     cluster: "credit",
     audiences: ["fthb"],
@@ -1315,7 +1289,7 @@ const NODES: ContentNode[] = [
     path: "/blog/arm-caps-in-plain-english",
     title: "ARM Caps in Plain English",
     description:
-      "Initial, periodic, and lifetime caps are percentage-point limits on the note rate — not a payment promise. How to read 2/1/5 on an ARM.",
+      "Initial, periodic, and lifetime caps are percentage-point limits on the note rate. They are not a payment promise. How to read 2/1/5 on an ARM.",
     kind: "guide",
     cluster: "rates",
     audiences: ["repeat", "high_income"],
@@ -1367,7 +1341,7 @@ const NODES: ContentNode[] = [
     path: "/blog/mip-vs-pmi-how-mortgage-insurance-ends",
     title: "How MIP vs PMI Actually Leaves the Loan",
     description:
-      "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. How each ends — not whether to wait for 20% down.",
+      "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. This post covers how each one ends.",
     kind: "guide",
     cluster: "loan-programs",
     audiences: ["fthb", "repeat"],
@@ -1515,7 +1489,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-qualify-asks",
     path: "/blog/what-a-mortgage-conversation-asks",
-    title: "What a Mortgage Conversation Asks — and What It Will Not Promise",
+    title: "What a Mortgage Conversation Asks, and What It Will Not Promise",
     description:
       "Occupancy, income type, debts, assets, and credit authorization. A conversation is not approval, a lock, or a quote. Supporting guide for the qualify page.",
     kind: "guide",
@@ -1541,7 +1515,7 @@ const NODES: ContentNode[] = [
     path: "/learn/non-qm",
     title: "Non-QM besides bank-statement: asset depletion and DSCR",
     description:
-      "Bank-statement, DSCR, and asset-depletion are different Non-QM stacks. When agency tax-return income does not match cash flow — not a cheaper conventional shortcut.",
+      "Bank-statement, DSCR, and asset-depletion are different Non-QM stacks. They apply when agency tax-return income does not match cash flow, and are not a cheaper conventional shortcut.",
     kind: "pillar",
     cluster: "nonqm",
     audiences: ["self_employed", "high_income", "investor"],
@@ -1708,7 +1682,7 @@ const NODES: ContentNode[] = [
     path: "/learn/investment",
     title: "Investment property financing: DSCR, occupancy, and house-hacking",
     description:
-      "DSCR vs full-doc rental qualification, occupancy types, cash-out to buy a rental, and FHA duplex house-hacks. Informational only — not occupancy coaching.",
+      "DSCR vs full-doc rental qualification, occupancy types, cash-out to buy a rental, and FHA duplex house-hacks. Informational only, not occupancy coaching.",
     kind: "pillar",
     cluster: "investment",
     audiences: ["investor", "high_income", "fthb"],
@@ -1764,7 +1738,7 @@ const NODES: ContentNode[] = [
     path: "/blog/business-vs-personal-bank-co-mingling",
     title: "Business Bank vs Personal: Co-Mingling That Stalls Files",
     description:
-      "Business deposits in a personal account — or the reverse — stall sourcing and deposit averages. Seasoning is a paper trail, not a workaround.",
+      "Business deposits in a personal account, or the reverse, stall sourcing and deposit averages. Seasoning is a paper trail, not a workaround.",
     kind: "guide",
     cluster: "variable-income",
     audiences: ["self_employed", "contract_1099"],
@@ -1841,7 +1815,7 @@ const NODES: ContentNode[] = [
     path: "/blog/cash-out-to-buy-a-rental",
     title: "Cash-Out to Buy a Rental: Occupancy and LTV Traps",
     description:
-      "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another. Not a HELOC vs cash-out clone.",
+      "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another.",
     kind: "guide",
     cluster: "investment",
     audiences: ["investor", "repeat"],
@@ -1868,7 +1842,7 @@ const NODES: ContentNode[] = [
     path: "/blog/medical-collections-after-fico-model-change",
     title: "Medical Collections After the FICO Model Change",
     description:
-      "Bureau reporting of medical collections changed in 2022–2023. Mortgage tri-merge scores are often still classic FICO. Dated snapshot — not a score-raise promise.",
+      "Bureau reporting of medical collections changed in 2022–2023. Mortgage tri-merge scores are often still classic FICO. Dated snapshot, not a score-raise promise.",
     kind: "guide",
     cluster: "credit",
     audiences: ["fthb", "imperfect_credit"],
@@ -1893,7 +1867,7 @@ const NODES: ContentNode[] = [
     path: "/blog/no-traditional-credit-alternative-credit",
     title: "No Traditional Credit / Alternative Credit",
     description:
-      "Rent, utilities, and similar 12-month references can document a thin file. Weak traditional credit is a different path. Fair Housing safe — no steering.",
+      "Rent, utilities, and similar 12-month references can document a thin file. Weak traditional credit is a different path. Fair Housing safe: no steering.",
     kind: "guide",
     cluster: "credit",
     audiences: ["fthb", "imperfect_credit"],
@@ -1972,7 +1946,7 @@ const NODES: ContentNode[] = [
     path: "/blog/apr-vs-rate-on-a-loan-estimate",
     title: "APR vs Rate on a Loan Estimate",
     description:
-      "The note rate prices principal and interest. APR folds in most lender prepaid finance charges. Compare Loan Estimates — this is not a live-rate table.",
+      "The note rate prices principal and interest. APR folds in most lender prepaid finance charges. Compare Loan Estimates. This is not a live-rate table.",
     kind: "guide",
     cluster: "rates",
     audiences: ["fthb", "repeat"],
@@ -2035,7 +2009,7 @@ const NODES: ContentNode[] = [
     path: "/blog/selling-with-va-loan-entitlement-restoration",
     title: "Selling with a VA Loan: Entitlement Restoration",
     description:
-      "How VA entitlement is typically restored after you sell and pay off the loan — distinct from keeping a VA loan and buying another. No entitlement dollar figures.",
+      "How VA entitlement is typically restored after you sell and pay off the loan. This is distinct from keeping a VA loan and buying another. No entitlement dollar figures.",
     kind: "guide",
     cluster: "va",
     audiences: ["veteran"],
@@ -2469,7 +2443,7 @@ const NODES: ContentNode[] = [
     path: "/blog/heloc-after-year-two-vs-cash-out",
     title: "HELOC After Year Two vs Cash-Out",
     description:
-      "When you can tap equity after a recent closing. Seasoning overlays, not a remake of HELOC vs cash-out structure. Not a federal two-year wait.",
+      "When you can tap equity after a recent closing, and how seasoning rules affect a HELOC or a cash-out refinance. Not a federal two-year wait.",
     kind: "guide",
     cluster: "home-equity",
     audiences: ["repeat", "investor"],
@@ -2495,7 +2469,7 @@ const NODES: ContentNode[] = [
     path: "/blog/cross-collateral-equity-to-buy-another-house",
     title: "Cross-Collateral and Using Equity to Buy Another House",
     description:
-      "Pledging more than one property versus cash-out or a HELOC. Educational only — not a published product you can assume.",
+      "Pledging more than one property versus cash-out or a HELOC. Educational only; this is not a published product you can assume.",
     kind: "guide",
     cluster: "investment",
     audiences: ["investor", "repeat"],
@@ -2520,7 +2494,7 @@ const NODES: ContentNode[] = [
     path: "/blog/biweekly-extra-principal-vs-refinance",
     title: "Biweekly Extra Principal vs Refinance",
     description:
-      "One extra payment a year versus changing the note. Illustrate — this page does not quote interest saved. Link break-even and pay-down tactics.",
+      "One extra payment a year versus changing the note. This page illustrates the idea and does not quote interest saved. Link break-even and pay-down tactics.",
     kind: "guide",
     cluster: "refinance",
     audiences: ["repeat"],
@@ -2623,7 +2597,7 @@ const NODES: ContentNode[] = [
     path: "/blog/hill-afb-va-coe-occupancy",
     title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
     description:
-      "Hill Air Force Base is in Davis County, Utah. COE, occupancy, and base housing vs a purchase — not a mill doorway. Occupancy must match use.",
+      "Hill Air Force Base is in Davis County, Utah. How the VA Certificate of Eligibility and occupancy rules apply to a purchase near the base. Occupancy must match use.",
     kind: "guide",
     cluster: "va",
     audiences: ["veteran"],
@@ -2700,7 +2674,7 @@ const NODES: ContentNode[] = [
     path: "/blog/first-time-buyer-file-mistakes",
     title: "First-Time Buyer Mistakes That Are Really File Mistakes",
     description:
-      "New debt, job change, large deposits, and occupancy — the underwriting stalls, not a generic homebuying-mistakes listicle.",
+      "New debt, a job change, large deposits, and occupancy changes are the common reasons underwriting stalls for first-time buyers.",
     kind: "guide",
     cluster: "first-time-buyer",
     audiences: ["fthb"],
@@ -2855,7 +2829,7 @@ const NODES: ContentNode[] = [
     path: "/blog/manufactured-housing-adu-financing",
     title: "Manufactured Housing and ADU Financing",
     description:
-      "Manufactured homes and accessory dwellings are different property types. Confirm the handbook in force — no invented HUD codes as a permanent product.",
+      "Manufactured homes and accessory dwellings are different property types. Confirm the handbook in force. No invented HUD codes as a permanent product.",
     kind: "guide",
     cluster: "loan-programs",
     audiences: ["fthb", "repeat", "investor"],
@@ -2980,7 +2954,7 @@ const NODES: ContentNode[] = [
     path: "/blog/first-mortgage-statement-vs-note-rate",
     title: "First Mortgage Statement vs Note Rate",
     description:
-      "The first bill is usually PITI plus odd-days timing — not a secret rate change. Not tax advice.",
+      "The first bill is usually PITI plus odd-days timing, not a secret rate change. Not tax advice.",
     kind: "guide",
     cluster: "closing",
     audiences: ["fthb", "repeat"],
@@ -3006,7 +2980,7 @@ const NODES: ContentNode[] = [
     path: "/blog/impounds-vs-waiving-escrow",
     title: "Impounds vs Waiving Escrow",
     description:
-      "When an escrow waiver exists, it is an overlay — not a promise at 20% down. Cash-to-close vs monthly tradeoff. Informational only.",
+      "When an escrow waiver exists, it is an overlay, not a promise at 20% down. Cash-to-close vs monthly tradeoff. Informational only.",
     kind: "guide",
     cluster: "closing",
     audiences: ["repeat", "fthb"],
@@ -3064,7 +3038,7 @@ const NODES: ContentNode[] = [
     path: "/blog/va-loan-assumption-entitlement",
     title: "VA Loan Assumption and What Happens to Entitlement",
     description:
-      "A VA loan can often be assumed — but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
+      "A VA loan can often be assumed, but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
     kind: "guide",
     cluster: "va",
     audiences: ["veteran", "repeat"],
@@ -3082,7 +3056,7 @@ const NODES: ContentNode[] = [
     path: "/blog/seller-concessions-what-they-cover",
     title: "Seller Concessions: What They Can and Cannot Pay For",
     description:
-      "A seller credit can cover closing costs, prepaids, and a rate buydown — not the down payment. Every program caps the amount, and the cap depends on the file.",
+      "A seller credit can cover closing costs, prepaids, and a rate buydown, but not the down payment. Every program caps the amount, and the cap depends on the file.",
     kind: "guide",
     cluster: "closing",
     audiences: ["fthb", "repeat"],
@@ -3100,32 +3074,14 @@ const NODES: ContentNode[] = [
     path: "/blog/appraisal-comes-in-low",
     title: "When the Appraisal Comes In Low",
     description:
-      "Lenders size the loan from the lower of price or appraised value. That turns an appraisal gap into cash, a renegotiation, or a cancellation — on a deadline.",
+      "Lenders size the loan from the lower of price or appraised value. That turns an appraisal gap into cash, a renegotiation, or a cancellation, and all of it runs on a deadline.",
     kind: "guide",
     cluster: "closing",
     audiences: ["fthb", "repeat"],
     programs: [],
     intent: "informational",
-    related: ["guide-repc-deadlines", "guide-inspection-vs-appraisal", "guide-cash-to-close", "conversion-qualify"],
+    related: ["guide-repc-deadline", "guide-inspection-vs-appraisal", "guide-cash-to-close", "conversion-qualify"],
     cta: { label: "Talk through the options", href: "/qualify" },
-    category: "First-Time Buyers",
-    published: "2026-09-17",
-    modified: "2026-09-17",
-    author: "Ondo RE Team",
-  },
-  {
-    id: "guide-repc-deadlines",
-    path: "/blog/utah-repc-deadlines",
-    title: "Utah REPC Deadlines and What They Do to Your Loan File",
-    description:
-      "Four independent deadlines, calendar days, 5 p.m. Mountain — and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
-    kind: "guide",
-    cluster: "closing",
-    audiences: ["fthb", "repeat"],
-    programs: [],
-    intent: "informational",
-    related: ["guide-earnest-money", "guide-appraisal-low", "guide-preapproval-stages", "conversion-qualify"],
-    cta: { label: "Line the file up against your dates", href: "/qualify" },
     category: "First-Time Buyers",
     published: "2026-09-17",
     modified: "2026-09-17",
@@ -3142,7 +3098,7 @@ const NODES: ContentNode[] = [
     audiences: ["fthb"],
     programs: [],
     intent: "informational",
-    related: ["guide-appraisal-low", "guide-repc-deadlines", "guide-seller-concessions", "conversion-qualify"],
+    related: ["guide-appraisal-low", "guide-repc-deadline", "guide-seller-concessions", "conversion-qualify"],
     cta: { label: "Ask what the file needs", href: "/qualify" },
     category: "First-Time Buyers",
     published: "2026-09-17",

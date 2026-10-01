@@ -19,6 +19,7 @@ import {
   listingHighlights,
   listingLocationFacts,
   listingMarketStatus,
+  listingOfferAvailability,
   listingMetricRows,
   listingInquiryDraftMessage,
   buildListingInquiryMessage,
@@ -388,5 +389,19 @@ describe("amenity matching uses whole words and respects negation", () => {
         id: "pets", price: 1, bedrooms: 1, bathrooms: 1, sqft: 1, amenities: ["Parking"],
       }),
     ).toBe("Ask leasing")
+  })
+})
+
+describe("listingOfferAvailability", () => {
+  it("maps market status to schema.org availability instead of move-in text", () => {
+    expect(listingOfferAvailability({ status: "vacant", listingKind: "lease" })).toBe("https://schema.org/InStock")
+    expect(listingOfferAvailability({ status: "vacant" })).toBe("https://schema.org/InStock")
+    expect(listingOfferAvailability({ status: "pending" })).toBe("https://schema.org/LimitedAvailability")
+    expect(listingOfferAvailability({ status: "occupied", listingKind: "lease" })).toBe("https://schema.org/OutOfStock")
+    expect(listingOfferAvailability({ status: "occupied", listingKind: "sale" })).toBe("https://schema.org/OutOfStock")
+  })
+
+  it("omits availability when the status is unusable", () => {
+    expect(listingOfferAvailability({ status: "rejected" })).toBeUndefined()
   })
 })

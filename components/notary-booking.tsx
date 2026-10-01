@@ -38,7 +38,7 @@ export function NotaryBooking() {
             </Button>
             
             <p className="text-sm text-muted-foreground mt-4">
-              For urgent requests, please call us at <a href={`tel:${SITE_PHONE_TEL}`} className="font-semibold text-primary underline underline-offset-4">{SITE_PHONE}</a>
+              For urgent remote requests, please call us at <a href={`tel:${SITE_PHONE_TEL}`} className="font-semibold text-primary underline underline-offset-4">{SITE_PHONE}</a>
             </p>
           </div>
         </div>

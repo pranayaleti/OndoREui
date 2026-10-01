@@ -61,9 +61,9 @@ const newsVsQuoteRows: readonly ComparisonRow[] = [
 ]
 
 export const metadata: Metadata = pageCanonicalMetadata("/buy/rates", {
-  title: pageTitle("Utah Mortgage Rates Today: Compare Loan Programs"),
+  title: pageTitle("Utah Mortgage Rates: Why Your Quote Is Not the Average"),
   description:
-    "Compare Utah mortgage rates across conventional, FHA, VA and jumbo. See how credit score, down payment and points move your actual payment.",
+    "This page is not a live rate table. It explains rate vs APR vs payment, what moves a Utah Loan Estimate, and why a news average is not your quote.",
 })
 
 

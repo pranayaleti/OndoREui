@@ -43,7 +43,7 @@ export default function FinishingBasementRoi() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              A finished basement is one of the highest-leverage ways to add usable space in a home , 
+              A finished basement is one of the highest-leverage ways to add usable space in a home,
               often at a lower cost per square foot than an addition. But the return depends on doing it
               to code and matching the finish to the neighborhood.
             </p>

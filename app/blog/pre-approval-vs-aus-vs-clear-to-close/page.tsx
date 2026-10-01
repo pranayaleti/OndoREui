@@ -57,7 +57,7 @@ export const metadata = articleMetadata({
   path,
   title: "Pre-Approval Letter vs AUS Findings vs Clear to Close",
   description:
-    "Three documents, three jobs. A letter is a snapshot, AUS is an engine result, CTC is an underwriter sign-off — not a guarantee you will fund.",
+    "Three documents, three jobs. A letter is a snapshot, AUS is an engine result, and CTC is an underwriter sign-off. None of them guarantees you will fund.",
   published: "2026-08-29",
   category: "Credit",
   keywords: ["pre-approval vs underwriting", "AUS findings", "clear to close meaning"],
@@ -71,7 +71,7 @@ export default function PreapprovalStagesPage() {
         path,
         title: "Pre-Approval Letter vs AUS Findings vs Clear to Close",
         description:
-          "Three documents, three jobs. A letter is a snapshot, AUS is an engine result, CTC is an underwriter sign-off — not a guarantee you will fund.",
+          "Three documents, three jobs. A letter is a snapshot, AUS is an engine result, and CTC is an underwriter sign-off. None of them guarantees you will fund.",
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "Sellers want a letter. The file needs findings. Closing needs CTC.",

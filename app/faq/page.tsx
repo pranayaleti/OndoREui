@@ -3,76 +3,16 @@ import type { ReactNode } from "react"
 import { AlertCircle, DollarSign, Home, Building2, AlertTriangle, CheckCircle, ChevronRight, FileText } from "lucide-react"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_EMAILS, pageTitle, pageTitleText } from "@/lib/site"
+import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { SITE_URL, SITE_EMAILS, pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageCanonicalMetadata("/faq/", {
   title: pageTitle("FAQs | Property Management & Rentals | Ondo Real Estate"),
   description: "Find answers to common questions about our property management services and renting with Ondo Real Estate.",
-  alternates: { canonical: `${SITE_URL}/faq/` },
-  openGraph: {
-    title: pageTitleText("FAQs | Property Management & Rentals | Ondo Real Estate"),
-    description: "Find answers to common questions about our property management services and renting with Ondo Real Estate.",
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
-}
+})
 
-
-const faqItems = [
-  {
-    question: "How do I apply for a property?",
-    answer:
-      'You can apply for a property by clicking the "View Details" button on any property listing. This will open an application form where you can provide your information. Once submitted, a property manager will review your application and contact you within 1-2 business days.',
-  },
-  {
-    question: "What documents do I need to apply?",
-    answer:
-      "For a complete rental application, you'll typically need proof of income (pay stubs, tax returns, or bank statements), photo ID, references from previous landlords, and authorization for a credit and background check. Having these documents ready will speed up your application process.",
-  },
-  {
-    question: "How much is the security deposit?",
-    answer:
-      "Security deposits typically equal one month's rent, but may vary based on the property and your application details. The exact amount will be specified in your lease agreement. Security deposits are fully refundable at the end of your lease, minus any charges for damages beyond normal wear and tear.",
-  },
-  {
-    question: "How do I report maintenance issues?",
-    answer:
-      "You can report maintenance issues through our tenant portal, by email, or by phone for emergencies. Our maintenance team responds to emergency requests within 24 hours and non-emergency requests within 2-3 business days. We provide 24/7 emergency maintenance support for issues like water leaks, heating failures, or security concerns.",
-  },
-  {
-    question: "Can I have pets in my rental?",
-    answer:
-      "Pet policies vary by property. Properties that allow pets typically require an additional pet deposit and/or monthly pet rent. Breed and size restrictions may apply. Assistance animals that provide disability-related assistance are not pets, and we do not charge pet rent, pet deposits, or pet fees for them.",
-  },
-  {
-    question: "What services do you offer property owners?",
-    answer:
-      "We offer comprehensive property management services including tenant screening and placement, rent collection, property maintenance, financial reporting, legal compliance, and property marketing. We can customize our services based on your specific needs and property requirements.",
-  },
-  {
-    question: "How do you screen potential tenants?",
-    answer:
-      "Our thorough screening process includes credit checks, criminal background checks, employment verification, income verification (requiring income of 3x the monthly rent), rental history verification, and personal references. This comprehensive approach helps us find reliable, responsible tenants for your property.",
-  },
-  {
-    question: "What are your management fees?",
-    answer:
-      "Starter is 10% of collected rent for 1–4 units; Growth is 8% for 5–15 units. Leasing is a one-time 50% of first month’s rent when we place a new tenant (none on renewals). You only pay management when rent is collected.",
-  },
-  {
-    question: "How do you handle maintenance and repairs?",
-    answer:
-      "We have a network of licensed, insured, and vetted contractors who provide quality work at reasonable rates. For minor repairs (typically under $500), we handle them without owner approval to ensure prompt service. For larger repairs, we consult with you, provide estimates, and proceed with your approval.",
-  },
-  {
-    question: "How often will I receive statements and payments?",
-    answer:
-      "Property owners receive detailed monthly statements showing all income and expenses. Rent payments, minus management fees and any maintenance costs, are directly deposited to your bank account by the 15th of each month. You'll also receive annual statements for tax purposes and have 24/7 access to your property's financial information through our owner portal.",
-  },
-]
 
 interface FAQTile {
   id: string
@@ -180,8 +120,6 @@ export default function FAQPage() {
     { name: "FAQ", url: `${SITE_URL}/faq` },
   ])
 
-  const faqJsonLd = generateFAQJsonLd(faqItems)
-
   return (
     <div className="flex flex-col min-h-screen">
       <SEO
@@ -189,7 +127,7 @@ export default function FAQPage() {
         description="Find answers to common questions about our property management services and renting with Ondo Real Estate."
         pathname="/faq"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
-        jsonLd={[breadcrumbJsonLd, faqJsonLd]}
+        jsonLd={[breadcrumbJsonLd]}
       />
       <PageBanner
         title="Frequently Asked Questions"

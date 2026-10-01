@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import Link from "next/link"
 import { utahFairHousingClassesText } from "@/lib/content/utah-rental-law"
 const slug = "/blog/ultimate-guide-becoming-utah-landlord-2026"
-const title = "The Ultimate Guide to Becoming a Utah Landlord (2026 Edition)"
+const title = "The Ultimate Guide to Becoming a Utah Landlord (2026)"
 const description =
   "Everything you need to start, scale, and protect a Utah rental portfolio in 2026, the new state property-management license law, financing, tenant screening, leases, taxes, and when to hand it off."
 const published = "2026-05-18"

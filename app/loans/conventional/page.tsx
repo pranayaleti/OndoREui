@@ -16,12 +16,12 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: pageTitle("Conventional Loans in Utah: 3% Down & PMI Rules"),
-  description: "Conventional mortgages in Utah with as little as 3% down. See loan limits, credit tiers and exactly when PMI drops off at 78% LTV.",
+  title: pageTitle("Conventional Loans in Utah: 3% Down, Credit & PMI"),
+  description: "Conventional mortgages in Utah with as little as 3% down. See typical credit and DTI ranges, down payment options, and how PMI can be removed with equity.",
   alternates: { canonical: `${SITE_URL}/loans/conventional/` },
   openGraph: {
-    title: pageTitleText("Conventional Loans in Utah: 3% Down & PMI Rules"),
-    description: "Conventional mortgages in Utah with as little as 3% down. See loan limits, credit tiers and exactly when PMI drops off at 78% LTV.",
+    title: pageTitleText("Conventional Loans in Utah: 3% Down, Credit & PMI"),
+    description: "Conventional mortgages in Utah with as little as 3% down. See typical credit and DTI ranges, down payment options, and how PMI can be removed with equity.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },

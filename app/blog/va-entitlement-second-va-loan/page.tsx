@@ -19,7 +19,7 @@ export const metadata = articleMetadata({
   path,
   title: "Can I Use VA If I Still Have a VA Loan?",
   description:
-    "Remaining entitlement, occupancy, and restoration — how a second VA purchase is underwritten when you have not sold the first home.",
+    "Remaining entitlement, occupancy, and restoration: how a second VA purchase is underwritten when you have not sold the first home.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["VA entitlement second loan", "remaining VA entitlement occupancy"],
@@ -33,7 +33,7 @@ export default function VaEntitlementPage() {
         path,
         title: "Can I Use VA If I Still Have a VA Loan?",
         description:
-          "Remaining entitlement, occupancy, and restoration — how a second VA purchase is underwritten when you have not sold the first home.",
+          "Remaining entitlement, occupancy, and restoration: how a second VA purchase is underwritten when you have not sold the first home.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "A second VA purchase is remaining entitlement plus occupancy, not a second-home slogan.",
@@ -52,7 +52,7 @@ export default function VaEntitlementPage() {
         <li>
           <strong>Remaining entitlement.</strong> {VA_ENTITLEMENT.remainingEntitlement} County limits still matter when
           entitlement is partial. Look up method:{" "}
-          <Link href="/blog/utah-county-conforming-loan-limit-lookup">Utah county limit how-to</Link>.
+          <Link href="/blog/jumbo-vs-conforming-fhfa-county-limit">county limit how-to</Link>.
         </li>
         <li>
           <strong>Occupancy.</strong> {VA_ENTITLEMENT.occupancy} Moving for work or a permanent change of station is a

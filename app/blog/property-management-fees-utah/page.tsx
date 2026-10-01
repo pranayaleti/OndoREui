@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/property-management-fees-utah"
-const title = "Property Management Fees in Utah: What to Expect and How to Compare"
+const title = "Property Management Fees in Utah: What to Expect"
 const description = "A transparent breakdown of property management fees in Utah, management rates, leasing fees, maintenance markups, and how to calculate true annual cost."
 const published = "2026-03-23"
 const modified = "2026-03-23"

@@ -13,7 +13,8 @@ const canonical = `${SITE_URL}/referral/`
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
-  robots: { index: true, follow: true },
+  // Only meaningful with a ?ref= code from a friend; ?ref= links keep working.
+  robots: { index: false, follow: true },
   alternates: {
     canonical,
     languages: buildMetadataLanguages("/referral"),

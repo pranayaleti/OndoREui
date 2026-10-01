@@ -84,8 +84,8 @@ export default function RefinanceBlogPage() {
               <Button key="/blog/recast-vs-refinance" asChild variant="outline" size="sm">
                 <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>
               </Button>
-              <Button key="/blog/rent-vs-own-calculator-guide" asChild variant="outline" size="sm">
-                <Link href="/blog/rent-vs-own-calculator-guide">Rent vs own</Link>
+              <Button key="/blog/renting-vs-buying-salt-lake-city" asChild variant="outline" size="sm">
+                <Link href="/blog/renting-vs-buying-salt-lake-city">Rent vs buy</Link>
               </Button>
               <Button key="/blog" asChild variant="outline" size="sm">
                 <Link href="/blog">All blog posts</Link>

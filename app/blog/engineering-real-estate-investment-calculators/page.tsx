@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/engineering-real-estate-investment-calculators";
-const title = "Engineering Accuracy: Behind the Scenes of Real Estate Investment Calculators";
+const title = "Behind the Scenes of Real Estate Investment Calculators";
 const description = "How we built the real estate financial calculators on this site using React and TypeScript.";
 const author = "Engineering Team";
 
@@ -106,7 +106,7 @@ export default function EngineeringInvestmentCalculators() {
 
           <div className="prose prose-lg max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
-              Real estate investing isn't about guessing; it's about math. At Ondo Real Estate, we didn't just embed a widget, we engineered a comprehensive <strong>ROI Calculator</strong> from scratch.
+              Real estate investing isn't about guessing; it's about math. At Ondo Real Estate, we didn't just embed a widget, we engineered a comprehensive <strong>ROI Calculator</strong> from scratch. You can <Link href="/calculators/roi">try the ROI Calculator</Link> with your own numbers.
             </p>
 
             <p>

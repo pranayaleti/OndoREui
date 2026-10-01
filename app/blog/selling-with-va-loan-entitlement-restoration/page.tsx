@@ -57,7 +57,7 @@ export const metadata = articleMetadata({
   path,
   title: "Selling with a VA Loan: Entitlement Restoration",
   description:
-    "How VA entitlement is typically restored after you sell and pay off the loan. Distinct from keeping a VA loan and buying another. No entitlement dollar figures.",
+    "How VA entitlement is typically restored after you sell and pay off the loan. This differs from keeping a VA loan and buying another.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["VA entitlement restoration after sale", "selling a home with a VA loan", "restore VA entitlement"],
@@ -71,7 +71,7 @@ export default function VaEntitlementRestorationPage() {
         path,
         title: "Selling with a VA Loan: Entitlement Restoration",
         description:
-          "How VA entitlement is typically restored after you sell and pay off the loan. Distinct from keeping a VA loan and buying another. No entitlement dollar figures.",
+          "How VA entitlement is typically restored after you sell and pay off the loan. This differs from keeping a VA loan and buying another.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "Payoff plus disposition is a different file from “can I keep this VA loan and buy another.”",

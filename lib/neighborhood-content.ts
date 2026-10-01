@@ -639,7 +639,7 @@ export const neighborhoodsByCity: Record<string, NeighborhoodInfo[]> = {
       name: "Val Verda",
       slug: "val-verda",
       city: "Bountiful",
-      description: "Established south Bountiful streets with mid-century homes, mature trees, and a short hop to I-15 and Centerville FrontRunner.",
+      description: "Established south Bountiful streets with mid-century homes, mature trees, and a short hop to I-15 and Woods Cross FrontRunner.",
       character: "Mid-century ramblers and split-levels on established lots.",
       typicalHomes: "Mid-century ramblers and split-levels",
       priceRange: "$450K–$700K",
@@ -836,13 +836,24 @@ function distinctiveTokens(value: string): string[] {
 }
 
 /**
+ * Split a city-content neighborhood label into its name and description on the
+ * FIRST ", " only. Descriptions contain commas of their own, and a plain split
+ * dropped everything after the second one.
+ */
+export function splitNeighborhoodLabel(label: string): [name: string, description: string | null] {
+  const at = label.indexOf(", ")
+  if (at === -1) return [label, null]
+  return [label.slice(0, at), label.slice(at + 2)]
+}
+
+/**
  * Match a city-content neighborhood label (e.g. "Avenues" or
  * "Traverse Mountain, master-planned…") to a neighborhood-content entry.
  */
 export function findNeighborhoodForCard(cityName: string, cardLabel: string): NeighborhoodInfo | null {
   const candidates = neighborhoodsByCity[cityName]
   if (!candidates) return null
-  const namePart = cardLabel.includes(", ") ? cardLabel.split(", ")[0] : cardLabel
+  const [namePart] = splitNeighborhoodLabel(cardLabel)
   const normalized = expandPlaceAbbrevs(normalizeHoodLabel(namePart))
   const exact =
     candidates.find((n) => {

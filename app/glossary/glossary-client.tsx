@@ -11,6 +11,7 @@ import {
   type GlossaryTerm,
   glossaryHref,
   glossaryInitial,
+  glossaryLetterId,
   searchGlossary,
   sortedGlossaryTerms,
 } from "@/lib/content/glossary"
@@ -141,7 +142,7 @@ export function GlossaryClient() {
             {groups.map(([letter]) => (
               <a
                 key={letter}
-                href={`#letter-${letter}`}
+                href={`#${glossaryLetterId(letter)}`}
                 className="rounded px-2 py-1 font-mono text-xs font-medium text-foreground/70 transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {letter}
@@ -173,12 +174,12 @@ export function GlossaryClient() {
       ) : (
         <div className="mt-8 space-y-12">
           {groups.map(([letter, entries]) => (
-            <section key={letter} aria-labelledby={`letter-${letter}-heading`}>
+            <section key={letter} aria-labelledby={`${glossaryLetterId(letter)}-heading`}>
               <h2
-                id={`letter-${letter}-heading`}
+                id={`${glossaryLetterId(letter)}-heading`}
                 className="scroll-mt-24 border-b border-border/60 pb-2 font-mono text-sm font-semibold uppercase tracking-widest text-primary"
               >
-                <span id={`letter-${letter}`} className="scroll-mt-24">
+                <span id={glossaryLetterId(letter)} className="scroll-mt-24">
                   {letter}
                 </span>
               </h2>

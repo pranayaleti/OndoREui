@@ -13,6 +13,8 @@ type IsThisRightForMeProps = {
   highlight?: ProgramFitId
   heading?: string
   intro?: string
+  /** Pass "" when the page already ends with the lending disclaimer, so it is not shown twice. */
+  footnote?: string
 }
 
 const DEFAULT_HEADING: Record<ProgramFitTableId, string> = {
@@ -33,6 +35,7 @@ export function IsThisRightForMe({
   highlight,
   heading,
   intro,
+  footnote = LENDING_FACTS_VERIFY,
 }: IsThisRightForMeProps) {
   const columns = filterProgramColumns(table, programs)
   const rows = rowsForTable(table)
@@ -49,7 +52,7 @@ export function IsThisRightForMe({
         columns={columns}
         rows={rows}
         highlightId={highlight}
-        footnote={LENDING_FACTS_VERIFY}
+        footnote={footnote}
       />
     </section>
   )

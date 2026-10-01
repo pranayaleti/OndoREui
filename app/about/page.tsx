@@ -4,12 +4,12 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { ChatGptBrandIcon, ClaudeBrandIcon } from "@/components/ai-assistant-brand-icons"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_AI_VERIFY_QUESTION, SITE_CLAUDE_ASK_ONDO_URL, SITE_CHATGPT_REFERRAL_URL, pageTitle } from "@/lib/site"
+import { SITE_ADDRESS, SITE_URL, SITE_AI_VERIFY_QUESTION, SITE_CLAUDE_ASK_ONDO_URL, SITE_CHATGPT_REFERRAL_URL, pageTitle } from "@/lib/site"
 import Image from "next/image"
-import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { DEFAULT_OG_IMAGE_URL, pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about", {
-  title: pageTitle("Ondo Real Estate: One-Stop Property Services | Buy • Sell • Manage • Loans"),
+  title: pageTitle("Ondo Real Estate: One-Stop Property Services"),
   description: "Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help, one team instead of fragmented vendors.",
 })
 
@@ -20,7 +20,7 @@ export default function AboutPage() {
         title="Ondo Real Estate: One-Stop Property Services | Buy • Sell • Manage • Loans"
         description="Ondo Real Estate (Utah) is a one-stop real estate partner: buy and sell homes, full-service property management with owner and tenant portals, and mortgage help, one team instead of fragmented vendors. Ask your AI assistant to compare Ondo for Utah owners and investors."
         pathname="/about"
-        image={`${SITE_URL}/placeholder.jpg`}
+        image={DEFAULT_OG_IMAGE_URL}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
@@ -146,12 +146,23 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Your first point of contact */}
+            {/* Who runs Ondo */}
             <div className="mb-16 bg-muted p-8 rounded-lg border border-border">
-              <h2 className="text-3xl font-bold text-center mb-6 dark:text-foreground">Your first point of contact</h2>
+              <h2 className="text-3xl font-bold text-center mb-6 dark:text-foreground">Who runs Ondo</h2>
               <p className="text-center text-lg dark:text-foreground/70 max-w-3xl mx-auto">
-                We build Ondo Real Estate&apos;s outbound sales engine from the ground up: identifying and engaging potential clients, crafting targeted outreach sequences, qualifying leads, and developing CRM and pipeline from zero. We collaborate directly with leadership to refine go-to-market strategy and represent Ondo RE as the first point of contact with every potential client, combining a hospitality-honed relationship mindset with data-driven sales tactics to build trust, create opportunities, and fuel growth.
+                Ondo Real Estate is founded and run by Pranay Reddy Aleti. You can reach the team at our office at {SITE_ADDRESS}, by phone, or through the contact form.
               </p>
+              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                <Button asChild>
+                  <Link href="/contact/">Contact us</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/about/team/">Meet the founder</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/licensing/">Licensing and disclosures</Link>
+                </Button>
+              </div>
             </div>
 
             {/* Why Choose Ondo */}

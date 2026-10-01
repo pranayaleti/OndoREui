@@ -10,6 +10,7 @@ import {
   glossaryHref,
   glossaryInitial,
   glossaryInitials,
+  glossaryLetterId,
   glossaryTermsByCategory,
   glossaryTermsForCalculator,
   relatedGlossaryTerms,
@@ -132,6 +133,14 @@ describe("glossary lookup helpers", () => {
     expect(numeric, "expected at least one numeric term such as the 1% rule").toBeDefined()
     expect(glossaryInitial(numeric!)).toBe("#")
     expect(glossaryInitials()).toContain("#")
+  })
+
+  it("builds fragment-safe letter ids, with # mapped to a real anchor", () => {
+    expect(glossaryLetterId("C")).toBe("letter-C")
+    expect(glossaryLetterId("#")).toBe("letter-other")
+    for (const initial of glossaryInitials()) {
+      expect(glossaryLetterId(initial)).toMatch(/^letter-[A-Za-z]+$/)
+    }
   })
 
   it("resolves seeAlso slugs to entries", () => {

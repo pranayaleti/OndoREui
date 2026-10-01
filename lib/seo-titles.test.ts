@@ -33,8 +33,22 @@ describe("stripBrand", () => {
     )
   })
 
+  it("removes the long 'Ondo Real Estate Utah' form of the brand", () => {
+    expect(stripBrand("Property Management | Ondo Real Estate Utah")).toBe("Property Management")
+  })
+
   it("leaves a title that is only the brand alone", () => {
     expect(stripBrand("Ondo RE")).toBe("Ondo RE")
+  })
+
+  it("strips the ONDO Notary sub-brand so notary titles carry one brand, not two", () => {
+    expect(stripBrand("Remote Online Notary in Lehi, UT | ONDO Notary")).toBe("Remote Online Notary in Lehi, UT")
+    expect(pageTitleText("Remote Online Notary in Lehi, UT | ONDO Notary")).toBe(
+      "Remote Online Notary in Lehi, UT | Ondo RE",
+    )
+    expect(pageTitleText("On-Demand Notary: Same-Day When We Can | ONDO Notary | Ondo RE")).toBe(
+      "On-Demand Notary: Same-Day When We Can | Ondo RE",
+    )
   })
 })
 
@@ -47,6 +61,13 @@ describe("pageTitle", () => {
     const long = "Washington Terrace, UT: Cost of Living and Home Prices"
     expect(pageTitleText(long)).toBe(long)
     expect(brandCount(pageTitleText(long))).toBe(0)
+  })
+
+  it("does not append the brand to a title that already names it", () => {
+    expect(pageTitleText("Become an Ondo RE Affiliate")).toBe("Become an Ondo RE Affiliate")
+    expect(pageTitleText("Ondo RE vs Buildium: Full-Service vs DIY Software | Ondo RE")).toBe(
+      "Ondo RE vs Buildium: Full-Service vs DIY Software",
+    )
   })
 
   it("is idempotent, so a second pass cannot double the brand", () => {

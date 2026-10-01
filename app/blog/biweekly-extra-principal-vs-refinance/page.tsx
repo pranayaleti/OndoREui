@@ -45,7 +45,7 @@ export const metadata = articleMetadata({
   path,
   title: "Biweekly Extra Principal vs Refinance",
   description:
-    "One extra payment a year versus changing the note. Illustrate — this page does not quote interest saved. Link break-even and pay-down tactics.",
+    "One extra payment a year versus changing the note. This page illustrates the idea and does not quote interest saved. Link break-even and pay-down tactics.",
   published: "2026-08-29",
   category: "Refinance",
   keywords: ["biweekly mortgage vs refinance", "extra principal vs refinance", "one extra payment a year"],
@@ -59,7 +59,7 @@ export default function BiweeklyVsRefinancePage() {
         path,
         title: "Biweekly Extra Principal vs Refinance",
         description:
-          "One extra payment a year versus changing the note. Illustrate — this page does not quote interest saved.",
+          "One extra payment a year versus changing the note. This page illustrates the idea and does not quote interest saved.",
         published: "2026-08-29",
         category: "Refinance",
         bannerSubtitle: "Amortization arithmetic versus a new note. No savings promise.",

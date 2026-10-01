@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { render, screen, waitFor } from "@testing-library/react"
 import PropertiesClient from "./page-client"
+import { mapApiProperty } from "@/lib/mapProperty"
+import type { ApiProperty } from "@/app/types/property"
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
@@ -52,6 +54,28 @@ vi.mock("@/lib/bfcache-optimization", () => ({
 }))
 
 const originalFetch = global.fetch
+
+function listing(publicId: string, title: string): ApiProperty {
+  return {
+    publicId,
+    title,
+    type: "house",
+    addressLine1: "123 Main St",
+    addressLine2: null,
+    city: "Lehi",
+    state: "UT",
+    country: "US",
+    zipcode: "84043",
+    description: "A rental.",
+    price: 2400,
+    bedrooms: 3,
+    bathrooms: 2,
+    sqft: 1500,
+    status: "vacant",
+    createdAt: "2026-01-01T00:00:00.000Z",
+    photos: [],
+  } as unknown as ApiProperty
+}
 
 afterEach(() => {
   global.fetch = originalFetch
@@ -124,5 +148,23 @@ describe("PropertiesClient", () => {
     const headers = new Headers(init.headers)
     expect(headers.get("accept")).toBe("application/json")
     expect(headers.has("content-type")).toBe(false)
+  })
+
+  it("renders build-time listings on the first paint, before any fetch resolves", () => {
+    global.fetch = vi.fn().mockReturnValue(new Promise(() => undefined)) as unknown as typeof fetch
+
+    render(
+      <PropertiesClient
+        initialProperties={[
+          mapApiProperty(listing("p1", "Lehi Townhome")),
+          mapApiProperty(listing("p2", "Provo Condo")),
+        ]}
+      />,
+    )
+
+    expect(screen.getByText("Lehi Townhome")).toBeInTheDocument()
+    expect(screen.getByText("Provo Condo")).toBeInTheDocument()
+    expect(screen.getByText("2 homes on the market")).toBeInTheDocument()
+    expect(screen.queryByText("Loading...")).not.toBeInTheDocument()
   })
 })

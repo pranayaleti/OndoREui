@@ -55,7 +55,7 @@ export const metadata = articleMetadata({
   path,
   title: "Cash-Out to Buy a Rental: Occupancy and LTV Traps",
   description:
-    "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another. Not a HELOC clone.",
+    "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another.",
   published: "2026-08-29",
   category: "Refinance",
   keywords: ["cash out refinance to buy rental", "using equity to buy investment property"],

@@ -13,12 +13,13 @@ import {
 } from "@/lib/notary-cities"
 import { buildStateRonFaqs } from "@/lib/notary-location-copy"
 import {
+  NOTARY_SERVICE_ID,
   buildPageMetadata,
   generateBreadcrumbJsonLd,
   generateFAQJsonLd,
   generateServiceJsonLd,
 } from "@/lib/seo"
-import { SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 type Params = Promise<{ state: string }>
 
 /** Static export cannot render unknown state slugs on demand. */
@@ -33,10 +34,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (isReservedNotarySegment(stateSlug)) return {}
   const state = getRonStateBySlug(stateSlug)
   if (!state || state.ronServingStatus !== "serves") return {}
-  const title = `Remote Online Notary in ${state.name} | ONDO Notary`
+  const title = `Remote Online Notary in ${state.name}`
   return {
     ...buildPageMetadata({
-      title,
+      title: pageTitleText(title),
       description: `Secure remote online notarization (RON) for clients in ${state.name}. Identity-verified sessions for real estate, loan signings, and estate documents.`,
       pathname: `/notary/${state.slug}/`,
       keywords: [
@@ -62,7 +63,7 @@ export default async function NotaryStateRoute({ params }: { params: Params }) {
   return (
     <>
       <SEO
-        title={`Remote Online Notary in ${state.name} | ONDO Notary`}
+        title={`Remote Online Notary in ${state.name}`}
         description={`Secure remote online notarization (RON) for clients in ${state.name}.`}
         pathname={`/notary/${state.slug}/`}
         jsonLd={[
@@ -76,6 +77,8 @@ export default async function NotaryStateRoute({ params }: { params: Params }) {
             description: `RON for clients in ${state.name}`,
             serviceType: "Remote Online Notarization",
             areaServed: state.name,
+            providerIsSiteOrganization: true,
+            relatedToServiceId: NOTARY_SERVICE_ID,
           }),
           generateFAQJsonLd(
             faqs.map((f) => ({ question: f.question, answer: f.answer }))

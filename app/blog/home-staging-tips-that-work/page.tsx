@@ -46,7 +46,7 @@ export default function HomeStagingTipsThatWork() {
             <h2>Start Outside: Curb Appeal Sets First Impressions</h2>
             <p>Buyers form an opinion within 8 seconds of pulling up. In Utah, the exterior work that pays most reliably is:</p>
             <ul>
-              <li><strong>Fresh paint on the front door and shutters</strong>, $100–300, consistently cited as top ROI improvement</li>
+              <li><strong>Fresh paint on the front door and shutters</strong> ($100–300), consistently cited as top ROI improvement</li>
               <li><strong>Clean, edged lawn and trimmed shrubs</strong>, dried-out or overgrown landscaping is the #1 visual negative</li>
               <li><strong>Power-wash the driveway and walkway</strong>, Utah's red rock dust and inversion grime builds up fast</li>
               <li><strong>Replace or clean outdoor light fixtures</strong>, buyers tour in evenings; light fixtures signal maintenance habits</li>
@@ -59,14 +59,14 @@ export default function HomeStagingTipsThatWork() {
               <li><strong>Kitchen:</strong> Clear all countertops except one decorative item. Deep clean appliances inside and out.</li>
               <li><strong>Primary bedroom:</strong> Hotel-style bedding, minimal nightstand items, no laundry visible.</li>
               <li><strong>Bathrooms:</strong> Remove all personal care products. Add matching white towels and a new shower curtain.</li>
-              <li><strong>Garage:</strong> Buyers tour it; organise and sweep. A messy garage reads as "no storage."</li>
+              <li><strong>Garage:</strong> Buyers tour it; organize and sweep. A messy garage reads as "no storage."</li>
             </ul>
 
             <h2>Light Is the Single Biggest Lever Inside</h2>
-            <p>Dark rooms feel smaller and less inviting. Before every showing: open all blinds, turn on every light in the house including closets and range hoods. Replace any burned-out bulbs with matching colour temperature (2700–3000K for warm, inviting light). Add a floor lamp or table lamp to any room that feels dark even with overhead lighting. Professional photos should be taken with all lights on and on an overcast or early morning shoot for even natural light.</p>
+            <p>Dark rooms feel smaller and less inviting. Before every showing: open all blinds, turn on every light in the house including closets and range hoods. Replace any burned-out bulbs with matching color temperature (2700–3000K for warm, inviting light). Add a floor lamp or table lamp to any room that feels dark even with overhead lighting. Professional photos should be taken with all lights on and on an overcast or early morning shoot for even natural light.</p>
 
             <h2>Neutral, Clean, and Smell-Neutral</h2>
-            <p>Buyers who are sensitive to odours (pets, cooking, must) will walk out and not come back. A professional carpet cleaning, fresh air for 24–48 hours, and a light neutral scent (clean linen, not heavy fragrance) resets the olfactory experience. Repaint any rooms with bold colours in a soft neutral, Benjamin Moore Accessible Beige, Sherwin-Williams Agreeable Gray, or similar. Buyers pay a premium to not repaint.</p>
+            <p>Buyers who are sensitive to odors (pets, cooking, must) will walk out and not come back. A professional carpet cleaning, fresh air for 24–48 hours, and a light neutral scent (clean linen, not heavy fragrance) resets the olfactory experience. Repaint any rooms with bold colors in a soft neutral, Benjamin Moore Accessible Beige, Sherwin-Williams Agreeable Gray, or similar. Buyers pay a premium to not repaint.</p>
 
             <h2>The Walk-Through Test</h2>
             <p>Walk every room as a buyer would: stand in the doorway and evaluate the first 3 seconds. Check: does it feel open? Is the focal point (fireplace, view, built-in) highlighted? Is the furniture arrangement making the room feel smaller? A common staging move is to pull furniture 6–12 inches away from walls, counterintuitively, this makes rooms feel larger. Remove extra chairs and side tables that create traffic flow obstacles.</p>

@@ -46,7 +46,7 @@ export default function ContactPage() {
 
       <PageBanner
         title="Contact us"
-        subtitle="We're your first point of contact: qualified leads, strategic outreach, and a relationship-driven team ready to help with property management, investments, and leasing"
+        subtitle="Tell us what you need: buying, selling, a loan, or property management. A person from our team will reply"
       />
 
       <section className="py-16 bg-background">

@@ -9,11 +9,13 @@ const path = "/blog/manufactured-housing-adu-financing"
 const faqs = [
   {
     question: "Is an ADU the same as a manufactured home for a lender?",
-    answer: MANUFACTURED_AND_ADU.distinct,
+    answer:
+      "No. A manufactured home is a factory-built dwelling built to the HUD Code. An ADU is a second dwelling on a site-built parcel. Lenders underwrite them as different property types with different overlays.",
   },
   {
     question: "Can I use a HUD program code from a blog as the product?",
-    answer: MANUFACTURED_AND_ADU.noInventedHudCode,
+    answer:
+      "No. HUD program codes and FHA manufactured-home paths change over time. Ask your lender which handbook and investor overlay apply to your file today.",
   },
 ]
 
@@ -28,8 +30,8 @@ const rows: readonly ComparisonRow[] = [
     id: "what",
     criterion: "What it is",
     cells: {
-      mh: MANUFACTURED_AND_ADU.manufactured,
-      adu: MANUFACTURED_AND_ADU.adu,
+      mh: "A factory-built home, built to the HUD Code and moved to the site.",
+      adu: "A second dwelling on the same parcel as a site-built house.",
       duplex: FHA_HOUSE_HACK.occupancy,
     },
   },
@@ -37,8 +39,8 @@ const rows: readonly ComparisonRow[] = [
     id: "finance",
     criterion: "Typical financing question",
     cells: {
-      mh: MANUFACTURED_AND_ADU.landHome,
-      adu: MANUFACTURED_AND_ADU.aduIncome,
+      mh: "Real property on a foundation, or a chattel loan on personal property.",
+      adu: "Whether any ADU rent counts, and on what documents.",
       duplex: FHA_HOUSE_HACK.duplexVs34,
     },
   },
@@ -62,7 +64,7 @@ export default function ManufacturedHousingAduPage() {
         path,
         title: "Manufactured Housing and ADU Financing",
         description:
-          "Two property types, two underwrites. Do not collapse them. Confirm the handbook in force — not a blog code.",
+          "Two property types, two underwrites. Do not collapse them, and confirm the current handbook for your loan program.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "A factory-built home on a chassis is not a granny flat over the garage.",

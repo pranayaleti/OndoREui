@@ -6,6 +6,9 @@ import Link from "next/link"
 
 const path = "/blog/utah-repc-deadlines"
 
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/utah-repc-deadline-and-your-loan", title: "What a Utah REPC Deadline Actually Does to Your Loan" }
+
 const faqs = [
   {
     question: "What are the four REPC deadlines?",
@@ -32,6 +35,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Utah REPC Deadlines and What They Do to Your Loan File",
   description:
     "Four independent deadlines, calendar days, 5 p.m. Mountain — and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
@@ -46,6 +50,7 @@ export default function UtahRepcDeadlinesPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Utah REPC Deadlines and What They Do to Your Loan File",
         description:
           "Four independent deadlines, calendar days, 5 p.m. Mountain — and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
@@ -82,7 +87,7 @@ export default function UtahRepcDeadlinesPage() {
       <p>{UTAH_REPC.timeOfEssence}</p>
 
       <ArticleCallout variant="warning" title="Your lender is not on this clock">
-        {UTAH_REPC.lenderNotAParty} A pre-approval letter, favourable AUS findings, or an expected clear-to-close are
+        {UTAH_REPC.lenderNotAParty} A pre-approval letter, favorable AUS findings, or an expected clear-to-close are
         not contract performance. The three stages and what each one actually does are in{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs clear to close</Link>.
       </ArticleCallout>

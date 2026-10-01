@@ -13,6 +13,8 @@ import {
   GLOSSARY_SLUGS,
   getGlossaryTerm,
   glossaryHref,
+  glossaryInitial,
+  glossaryLetterId,
   glossaryTermsByCategory,
   relatedGlossaryTerms,
 } from "@/lib/content/glossary"
@@ -50,6 +52,7 @@ export default async function GlossaryTermPage({ params }: { params: Params }) {
   const base = SITE_URL.replace(/\/$/, "")
   const url = `${base}${glossaryHref(entry.slug)}`
   const categoryLabel = GLOSSARY_CATEGORY_LABELS[entry.category]
+  const initial = glossaryInitial(entry)
   const seeAlso = relatedGlossaryTerms(entry)
   const calculators = (entry.calculators ?? [])
     .map((calcSlug) => ({ slug: calcSlug, meta: CALCULATOR_CATALOG[calcSlug] }))
@@ -113,12 +116,17 @@ export default async function GlossaryTermPage({ params }: { params: Params }) {
 
         {/* ---- Heading ---- */}
         <header>
-          <Link
-            href={`/glossary/#letter-${entry.term.trim().charAt(0).toUpperCase()}`}
-            className="inline-flex rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-medium text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary"
-          >
-            {categoryLabel}
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-medium text-foreground/70">
+              {categoryLabel}
+            </span>
+            <Link
+              href={`/glossary/#${glossaryLetterId(initial)}`}
+              className="text-xs font-medium text-foreground/60 underline underline-offset-4 hover:text-primary"
+            >
+              All terms starting with {initial === "#" ? "a number" : initial}
+            </Link>
+          </div>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
             {entry.term}
           </h1>

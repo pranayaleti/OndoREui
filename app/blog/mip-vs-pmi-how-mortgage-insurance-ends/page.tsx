@@ -14,11 +14,13 @@ const path = "/blog/mip-vs-pmi-how-mortgage-insurance-ends"
 const faqs = [
   {
     question: "If I build equity on FHA, does annual MIP drop off like PMI?",
-    answer: MORTGAGE_INSURANCE_EXIT.fhaPost2013,
+    answer:
+      "No. On FHA loans with case numbers assigned on or after June 3, 2013, extra principal or a higher home value does not cancel annual MIP on its original schedule. Refinancing out of FHA is the usual early exit.",
   },
   {
     question: "When does conventional PMI automatically end?",
-    answer: `${MORTGAGE_INSURANCE_EXIT.conventionalHpa} ${MORTGAGE_INSURANCE_EXIT.notAppraisalPmi}`,
+    answer:
+      "At 78% of the original value, if the loan is current. You can ask the servicer to remove it earlier, at 80%. Lender-paid PMI and some investor products work differently, so read your note.",
   },
 ]
 
@@ -40,8 +42,8 @@ const rows: readonly ComparisonRow[] = [
     id: "ends",
     criterion: "How it usually ends",
     cells: {
-      mip: MORTGAGE_INSURANCE_EXIT.fhaPost2013,
-      pmi: MORTGAGE_INSURANCE_EXIT.conventionalHpa,
+      mip: "11 years if original LTV is 90% or less, otherwise the remaining loan term (up to 30 years).",
+      pmi: "Request removal at 80% of original value. It terminates automatically at 78% if you are current.",
     },
   },
   {
@@ -49,14 +51,14 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Later equity / a new appraisal",
     cells: {
       mip: "Paying extra principal or a higher value does not cancel post-2013 annual MIP on the original schedule. Refinancing into conventional is the usual early exit.",
-      pmi: MORTGAGE_INSURANCE_EXIT.notAppraisalPmi,
+      pmi: "A new appraisal of current value is a separate request to the servicer from automatic termination on original value.",
     },
   },
   {
     id: "not",
     criterion: "Not this page",
     cells: {
-      mip: MORTGAGE_INSURANCE_EXIT.notWaitFor20,
+      mip: "Whether to wait until you can put 20% down. That is a purchase question.",
       pmi: "Waiting until you can put 20% down on a purchase is a different first-time question. Automatic vs appraisal-based PMI removal is a later conventional topic.",
     },
   },
@@ -66,7 +68,7 @@ export const metadata = articleMetadata({
   path,
   title: "How MIP vs PMI Actually Leaves the Loan",
   description:
-    "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. How each ends — not whether to wait for 20% down.",
+    "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. This post covers how each one ends.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["MIP vs PMI", "FHA mortgage insurance cancellation", "when does PMI come off"],
@@ -80,7 +82,7 @@ export default function MipVsPmiPage() {
         path,
         title: "How MIP vs PMI Actually Leaves the Loan",
         description:
-          "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. How each ends — not whether to wait for 20% down.",
+          "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. This post covers how each one ends.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "MIP and PMI are different products with different off-ramps. Equity is not a universal cancel button.",

@@ -1,7 +1,7 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
 const slug = "/blog/online-notary-for-lease-agreements"
-const title = "Online Notary for Lease Agreements: What Landlords Need to Know"
+const title = "Online Notary for Lease Agreements: Landlord Guide"
 const description = "When a lease needs notarization, how remote online notarization (RON) works, and what makes it legally sound across states."
 const published = "2026-07-24"
 const modified = "2026-07-24"

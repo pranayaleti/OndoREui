@@ -86,7 +86,7 @@ export default function RecastVsRefinancePage() {
       <h2>What this page will not do</h2>
       <ul>
         <li>Quote a recast fee, a new rate, or interest saved.</li>
-        <li>Clone a standalone “recast after a lump sum” how-to (a different matrix item if written later).</li>
+        <li>Cover recasting after a lump sum in depth, which is a separate topic.</li>
         <li>Promise that every servicer recasts FHA, VA, or ARM notes.</li>
       </ul>
 

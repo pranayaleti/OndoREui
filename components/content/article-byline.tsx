@@ -13,7 +13,7 @@ type ArticleBylineProps = {
  * Dates arrive as plain `YYYY-MM-DD`. Parsing that yields UTC midnight, so the
  * formatter has to be pinned to UTC or a US locale renders the previous day.
  */
-function formatArticleDate(iso: string): string {
+export function formatArticleDate(iso: string): string {
   return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",

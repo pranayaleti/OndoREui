@@ -6,7 +6,6 @@ import { UTAH_RENTAL_LAW_DISCLAIMER, utahRulesAsFaqs } from "@/lib/content/utah-
 import { SITE_URL, SITE_PHONE, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, Home } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
@@ -35,7 +34,7 @@ export default function TenantFAQPage() {
     },
     {
       question: "How much is the security deposit?",
-      answer: "Security deposits typically equal one month's rent, but may vary based on the property and your application details. The exact amount will be specified in your lease agreement. Security deposits are fully refundable at the end of your lease, minus any charges for damages beyond normal wear and tear."
+      answer: "Security deposits typically equal one month's rent, but may vary based on the property and your application details. The exact amount will be specified in your lease agreement. Your deposit is returned after the tenancy ends, minus deductions Utah law allows: unpaid rent, cleaning costs, damage beyond normal wear and tear, and other losses from a lease breach. Any deductions must appear on a written itemized statement."
     },
     {
       question: "How do I report maintenance issues?",
@@ -140,21 +139,6 @@ export default function TenantFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="tenant-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

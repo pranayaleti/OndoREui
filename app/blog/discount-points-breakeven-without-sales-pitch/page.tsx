@@ -62,7 +62,7 @@ export const metadata = articleMetadata({
   path,
   title: "Discount Points: Breakeven Without a Sales Pitch",
   description:
-    "One point is typically 1% of the loan to lower the note. Break-even is cost divided by monthly P&I savings — not a temporary buydown.",
+    "One point is typically 1% of the loan to lower the note. Break-even is cost divided by monthly P&I savings. This is not a temporary buydown.",
   published: "2026-08-29",
   category: "Mortgages",
   keywords: ["discount points breakeven", "should I buy mortgage points", "mortgage points vs buydown"],
@@ -76,7 +76,7 @@ export default function DiscountPointsPage() {
         path,
         title: "Discount Points: Breakeven Without a Sales Pitch",
         description:
-          "One point is typically 1% of the loan to lower the note. Break-even is cost divided by monthly P&I savings — not a temporary buydown.",
+          "One point is typically 1% of the loan to lower the note. Break-even is cost divided by monthly P&I savings. This is not a temporary buydown.",
         published: "2026-08-29",
         category: "Mortgages",
         bannerSubtitle: "Points are prepaid interest. They are not a coupon for approval.",

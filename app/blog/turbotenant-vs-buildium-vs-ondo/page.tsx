@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import Link from "next/link"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 const slug = "/blog/turbotenant-vs-buildium-vs-ondo"
-const title = pageTitleText("TurboTenant vs Buildium vs Ondo: The Honest Comparison (2026)")
+const title = pageTitleText("TurboTenant vs Buildium vs Ondo: The Honest Comparison")
 const description = "A straight comparison of TurboTenant, Buildium, and Ondo across pricing, features, tenant fees, and who each one actually fits."
 const published = "2026-07-24"
 const modified = "2026-07-24"

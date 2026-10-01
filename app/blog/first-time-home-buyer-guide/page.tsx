@@ -67,7 +67,7 @@ export default function FirstTimeHomeBuyerGuide() {
             <p>Search tips for Utah:</p>
             <ul>
               <li>Watch days-on-market. Anything under 7 days in the Salt Lake metro usually means multiple offers.</li>
-              <li>Check flood zone maps, FEMA-designated zones affect insurance cost significantly.</li>
+              <li>Check flood zone maps. FEMA-designated zones affect insurance cost significantly.</li>
               <li>Verify HOA documents: budget, reserve study, and meeting minutes before going under contract.</li>
             </ul>
 

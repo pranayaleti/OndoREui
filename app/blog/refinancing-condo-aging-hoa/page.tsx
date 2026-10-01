@@ -69,7 +69,7 @@ export default function RefinancingCondoAgingHoaPage() {
         path,
         title: "Refinancing a Condo with an Aging HOA",
         description:
-          "Project risk — reserves, litigation, insurance — can stall a condo refinance. Not a clone of the FHA roster how-to.",
+          "Project risk, including reserves, litigation, and insurance, can stall a condo refinance.",
         published: "2026-08-29",
         category: "Refinance",
         bannerSubtitle: "Your tri-merge can be fine. The association’s questionnaire can still fail the project.",

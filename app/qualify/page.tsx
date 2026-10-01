@@ -110,7 +110,7 @@ export default function QualifyPage() {
             </ul>
             <p>{QUALIFY_CONVERSATION.notNeededFirstCall}</p>
             <p>
-              Crawlable detail:{" "}
+              Read more:{" "}
               <Link href="/blog/what-a-mortgage-conversation-asks">
                 what a mortgage conversation asks
               </Link>

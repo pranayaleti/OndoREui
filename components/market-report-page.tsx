@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useMemo } from "react"
 import { SITE_PHONE } from "@/lib/site"
-import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
+import { type UtahCity, cityGuideLabel, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -252,7 +252,7 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
           title={`${city.name} Resources`}
           variant="pills"
           links={[
-            { label: `${city.name} City Guide`, href: `/locations/${citySlug}/` },
+            { label: cityGuideLabel(city.name), href: `/locations/${citySlug}/` },
             { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
             { label: `${city.name} Property Management`, href: `/property-management/${citySlug}/` },
             { label: `${city.name} Home Loans`, href: `/loans/${citySlug}/` },

@@ -1,7 +1,7 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 const slug = "/blog/property-management-automation-checklist"
 const title = "Property Management Automation Checklist"
-const description = "High-ROI automations for rent, maintenance, and owner reporting, built by a dev who also manages units."
+const description = "High-ROI automations for rent, maintenance, and owner reporting for small rental portfolios."
 const published = "2025-12-10"
 const modified = "2025-12-10"
 const author = "ONDO Team"
@@ -63,13 +63,6 @@ export default function PropertyManagementAutomationChecklist() {
               <li>Monthly P&L + variance to budget; link to invoices.</li>
               <li>DSCR/NOI trend with alerts when thresholds break.</li>
               <li>CapEx tracker with receipts and expected lifecycle dates.</li>
-            </ul>
-
-            <h2>Developer’s Build Notes</h2>
-            <ul>
-              <li>State machines for tickets/payments; webhooks for events.</li>
-              <li>Single thread per unit for comms; push/email/SMS options.</li>
-              <li>Role-based views: tenant simplicity; owner detail; PM control.</li>
             </ul>
 
             <h2>Takeaway</h2>

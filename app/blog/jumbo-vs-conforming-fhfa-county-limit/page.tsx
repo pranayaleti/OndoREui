@@ -60,10 +60,6 @@ export default function JumboFhfaPage() {
         <li>If you are over, you are in jumbo overlays: credit, reserves, and down payment are investor-specific.</li>
       </ol>
       <p>{FHFA_LOOKUP.utahNote}</p>
-      <p>
-        Utah-specific walkthrough:{" "}
-        <Link href="/blog/utah-county-conforming-loan-limit-lookup">Utah county conforming limit how-to</Link>.
-      </p>
 
       <h2>What jumbo is not</h2>
       <ul>

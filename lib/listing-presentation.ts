@@ -556,6 +556,33 @@ export function listingMarketStatus(input: {
   return { label: "For Lease", tone: "lease" }
 }
 
+/**
+ * schema.org availability URL for a listing's Offer, derived from the market
+ * status (not from whether a move-in date string exists). Returns undefined
+ * when the status is unknown so the property is omitted rather than guessed.
+ */
+export function listingOfferAvailability(input: {
+  status?: string | null
+  listingKind?: "lease" | "sale" | null
+}): string | undefined {
+  const market = listingMarketStatus(input)
+  if (!market) return undefined
+  switch (market.tone) {
+    case "lease":
+    case "sale":
+      return "https://schema.org/InStock"
+    case "pending":
+      return "https://schema.org/LimitedAvailability"
+    case "leased":
+    case "sold":
+      return "https://schema.org/OutOfStock"
+    default: {
+      const _exhaustive: never = market.tone
+      return _exhaustive
+    }
+  }
+}
+
 export function marketStatusBadgeClass(tone: MarketStatusTone): string {
   switch (tone) {
     case "lease":

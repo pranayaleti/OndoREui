@@ -8,13 +8,14 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { getGlossaryTerm, glossaryHref } from "@/lib/content/glossary"
 
 export const metadata: Metadata = {
-  title: pageTitle("Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate"),
+  title: pageTitle("Real Estate Resources: Guides, Calculators & Glossary"),
   description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
   alternates: { canonical: `${SITE_URL}/resources/` },
   openGraph: {
-    title: pageTitleText("Real Estate Resources | Guides, Formulas, Calculators & Glossary | Ondo Real Estate"),
+    title: pageTitleText("Real Estate Resources: Guides, Calculators & Glossary"),
     description: "Central hub for Ondo Real Estate resources: buyer & seller guides, property management playbooks, loan education, notary help, key investment formulas, and glossary.",
     images: DEFAULT_OG_IMAGES,
   },
@@ -81,47 +82,25 @@ const formulaSections = [
   },
 ]
 
-const glossaryHighlights = [
-  {
-    term: "Net Operating Income (NOI)",
-    definition:
-      "Total income after operating expenses (repairs, management, taxes, insurance, utilities where applicable), before debt service and income taxes.",
-  },
-  {
-    term: "Cap Rate (Capitalization Rate)",
-    definition:
-      "NOI divided by purchase price or value, used to compare potential returns across similar properties.",
-  },
-  {
-    term: "Debt Service",
-    definition: "Total annual principal and interest payments owed on a property’s loans.",
-  },
-  {
-    term: "Debt Service Coverage Ratio (DSCR)",
-    definition:
-      "A key lending metric indicating how many times NOI covers annual debt service; most lenders want DSCR above 1.20×.",
-  },
-  {
-    term: "Gross Operating Income (GOI)",
-    definition:
-      "Gross rent plus other income (parking, storage, pet fees) minus vacancy and credit loss.",
-  },
-  {
-    term: "Operating Expense Ratio (OER)",
-    definition:
-      "Operating expenses divided by effective gross income; helps compare cost efficiency across properties.",
-  },
-  {
-    term: "Vacancy Rate",
-    definition:
-      "Percentage of rentable units or square footage that is not leased and not generating income.",
-  },
-  {
-    term: "Investment Property",
-    definition:
-      "Real estate purchased primarily for income and/or appreciation rather than owner occupancy.",
-  },
-]
+/**
+ * Terms shown in the Glossary Highlights card. Definitions come from the glossary
+ * itself (lib/content/glossary.ts) so they cannot drift from /glossary/<slug>/.
+ */
+const GLOSSARY_HIGHLIGHT_SLUGS = [
+  "noi",
+  "cap-rate",
+  "dscr",
+  "cash-on-cash-return",
+  "cash-flow",
+  "operating-expenses",
+  "vacancy-rate",
+  "grm",
+] as const
+
+const glossaryHighlights = GLOSSARY_HIGHLIGHT_SLUGS.flatMap((slug) => {
+  const entry = getGlossaryTerm(slug)
+  return entry ? [entry] : []
+})
 
 const loanFAQs = [
   {
@@ -442,7 +421,7 @@ export default function ResourcesPage() {
                       <Link href="/calculators/cost-of-living">Cost of living</Link>
                     </Button>
                     <Button asChild size="sm" variant="outline">
-                      <Link href="/blog/renting-vs-owning-hidden-math">Rent vs. own guide</Link>
+                      <Link href="/blog/renting-vs-buying-salt-lake-city">Rent vs. own guide</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -611,15 +590,18 @@ export default function ResourcesPage() {
                   className="space-y-4 text-sm text-foreground/80 max-h-[460px] overflow-y-auto pr-2"
                 >
                   {glossaryHighlights.map((entry) => (
-                    <div key={entry.term}>
-                      <p className="font-semibold">{entry.term}</p>
-                      <p className="text-foreground/70">{entry.definition}</p>
+                    <div key={entry.slug}>
+                      <p className="font-semibold">
+                        <Link href={glossaryHref(entry.slug)} className="underline underline-offset-2">
+                          {entry.term}
+                        </Link>
+                      </p>
+                      <p className="text-foreground/70">{entry.short}</p>
                     </div>
                   ))}
-                  <p className="text-xs text-foreground/60">
-                    Glossary concepts based on common commercial and residential real estate language so you can speak the
-                    same language as lenders, brokers, and investors.
-                  </p>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href="/glossary">Browse the full glossary</Link>
+                  </Button>
                 </CardContent>
               </Card>
 
@@ -641,8 +623,8 @@ export default function ResourcesPage() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/blog/utah-rent-vs-buy-wasatch-front" className="underline underline-offset-2">
-                        Rent vs. buy on the Wasatch Front
+                      <Link href="/blog/renting-vs-buying-salt-lake-city" className="underline underline-offset-2">
+                        Rent vs. buy in Salt Lake City
                       </Link>
                     </li>
                     <li>

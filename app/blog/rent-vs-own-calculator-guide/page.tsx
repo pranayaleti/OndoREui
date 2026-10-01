@@ -1,6 +1,9 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
 const slug = "/blog/rent-vs-own-calculator-guide"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/renting-vs-buying-salt-lake-city", title: "Renting vs. Buying in Salt Lake City (2026 Analysis)" }
 const title = "Rent vs Own Calculator: How to Make the Call in 2026"
 const description = "The real math behind renting versus owning — opportunity cost, break-even horizon, and how to use a calculator to decide."
 const published = "2026-07-24"
@@ -16,6 +19,7 @@ const keywords = [
 
 export const metadata = articleMetadata({
   path: slug,
+  mergedInto,
   title,
   description,
   published,
@@ -30,6 +34,7 @@ export default function RentVsOwnCalculatorGuide() {
     <ArticleShell
       meta={{
         path: slug,
+        mergedInto,
         title,
         description,
         published,

@@ -46,7 +46,7 @@ export const metadata = articleMetadata({
   path,
   title: "HELOC After Year Two vs Cash-Out",
   description:
-    "When you can tap equity after a recent closing. Seasoning overlays, not a remake of HELOC vs cash-out structure. Not a federal two-year wait.",
+    "When you can tap equity after a recent closing, and how seasoning rules affect a HELOC or a cash-out refinance. Not a federal two-year wait.",
   published: "2026-08-29",
   category: "Refinance",
   keywords: ["HELOC seasoning", "cash out after purchase", "when can I tap equity"],
@@ -60,10 +60,10 @@ export default function HelocAfterYearTwoPage() {
         path,
         title: "HELOC After Year Two vs Cash-Out",
         description:
-          "When you can tap equity after a recent closing. Seasoning overlays, not a remake of HELOC vs cash-out structure.",
+          "When you can tap equity after a recent closing, and how seasoning rules affect a HELOC or a cash-out refinance.",
         published: "2026-08-29",
         category: "Refinance",
-        bannerSubtitle: "Timing and overlays — not a remake of lien position.",
+        bannerSubtitle: "Timing and overlays after a recent closing.",
         faqs,
         keywords: ["HELOC after closing", "equity seasoning"],
       }}
@@ -71,7 +71,7 @@ export default function HelocAfterYearTwoPage() {
       <p className="lead text-xl text-foreground/70">
         If you just closed, tapping equity again is a seasoning and occupancy conversation — often six to twelve months
         of ownership, sometimes described as after year one or into year two. It is not a federal two-year waiting
-        period, and it is not a remake of HELOC versus cash-out as a structure. Snapshot as of {LENDING_FACTS_AS_OF}.
+        period. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{HELOC_SEASONING.vsStructure}</p>
       <p>

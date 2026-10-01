@@ -72,6 +72,11 @@ export function toCitySlug(cityName: string): string {
     .replace(/(^-|-$)+/g, "")
 }
 
+/** Link text for a city's guide page: "Lehi City Guide", but "Salt Lake City Guide" (not "Salt Lake City City Guide"). */
+export function cityGuideLabel(cityName: string): string {
+  return /\sCity$/.test(cityName) ? `${cityName} Guide` : `${cityName} City Guide`
+}
+
 export function findCityBySlug(slug: string): UtahCity | undefined {
   const normalized = slug.toLowerCase()
   return utahCitiesFromNorthOgdenToNephi.find(
@@ -79,9 +84,29 @@ export function findCityBySlug(slug: string): UtahCity | undefined {
   )
 }
 
-export function findCityByZip(zip: string): UtahCity | undefined {
-  const digits = zip.trim()
-  return utahCitiesFromNorthOgdenToNephi.find((c) => c.zips.includes(digits))
+/**
+ * Primary city for every ZIP that more than one city lists. A ZIP page renders
+ * one city's content, so each shared ZIP needs an explicit owner; "first city
+ * whose list contains it" sent Cottonwood Heights' only ZIP (84121) to a Salt
+ * Lake City page. Unshared ZIPs need no entry.
+ */
+export const ZIP_PRIMARY_CITY: Record<string, string> = {
+  "84003": "American Fork",
+  "84015": "Clearfield",
+  "84065": "Riverton",
+  "84070": "Sandy",
+  "84106": "Salt Lake City",
+  "84107": "Murray",
+  "84109": "Millcreek",
+  "84115": "South Salt Lake",
+  "84117": "Holladay",
+  "84119": "West Valley City",
+  "84121": "Cottonwood Heights",
+  "84123": "Taylorsville",
+  "84124": "Holladay",
+  "84129": "Taylorsville",
+  "84403": "Ogden",
+  "84405": "South Ogden",
 }
 
 /**
@@ -94,13 +119,20 @@ export function findCitiesByZip(zip: string): UtahCity[] {
   return utahCitiesFromNorthOgdenToNephi.filter((c) => c.zips.includes(digits))
 }
 
+/** The one city whose page represents the ZIP: the explicit owner for a shared ZIP, else the only city. */
+export function findCityByZip(zip: string): UtahCity | undefined {
+  const matches = findCitiesByZip(zip)
+  const primaryName = ZIP_PRIMARY_CITY[zip.trim()]
+  return matches.find((c) => c.name === primaryName) ?? matches[0]
+}
+
 export const allCitySlugs = utahCitiesFromNorthOgdenToNephi.map((c) => toCitySlug(c.name))
 /**
  * Unique ZIPs across all cities. Several ZIPs span multiple cities (84015 covers
  * Clinton, West Point, Sunset and Clearfield), so the raw flatMap yields 100
  * entries for 78 ZIPs — duplicate `generateStaticParams` entries for every
- * `/{service}/zip/[zip]/` route. `findCityByZip` returns the first match either
- * way, so dedupe at the source.
+ * `/{service}/zip/[zip]/` route. `findCityByZip` resolves each ZIP to a single
+ * primary city, so dedupe at the source.
  */
 export const allZips = [...new Set(utahCitiesFromNorthOgdenToNephi.flatMap((c) => c.zips))]
 

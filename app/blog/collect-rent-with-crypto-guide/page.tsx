@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import Link from "next/link"
 const slug = "/blog/collect-rent-with-crypto-guide"
 const title = "How to Collect Rent Using Crypto: A Landlord's Guide"
-const description = "A practical guide to accepting rent in crypto — stablecoins vs volatile assets, tax and record-keeping, and how to keep it low-risk."
+const description = "A practical guide to accepting rent in crypto: stablecoins vs volatile assets, tax and record-keeping, and how to keep it low-risk."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"

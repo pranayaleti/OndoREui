@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { analyticsAttributes } from '@/lib/analytics'
+import { CALCULATOR_CATALOG } from '@/lib/calculator-catalog'
 import { 
   Calculator as CalcIcon,
   Home as HomeIcon,
@@ -34,7 +35,7 @@ interface CalculatorTile {
 }
 
 const CalculatorsPage: React.FC = () => {
-  const calculators: CalculatorTile[] = [
+  const tiles: CalculatorTile[] = [
     {
       id: 'owner-vs-self',
       name: 'Self-Manage vs Ondo RE',
@@ -216,6 +217,10 @@ const CalculatorsPage: React.FC = () => {
       color: 'from-primary to-primary',
     }
   ]
+
+  // The catalog is the single source for calculator names, so a tile, the page H1,
+  // and the structured data cannot drift apart.
+  const calculators = tiles.map((tile) => ({ ...tile, name: CALCULATOR_CATALOG[tile.id]?.name ?? tile.name }))
 
   const categories = ['All', 'Mortgage', 'Purchase', 'Sale', 'Analysis', 'Planning', 'Investment']
 

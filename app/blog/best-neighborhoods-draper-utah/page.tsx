@@ -1,6 +1,7 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { CITY_MARKET_AS_OF, cityMarketData } from "@/lib/city-market-data"
 const slug = "/blog/best-neighborhoods-draper-utah"
 const title = "Best Neighborhoods in Draper, Utah (2026 Guide)"
 const description = "A local guide to Draper's top neighborhoods, South Mountain, Suncrest, and Draper Peaks, with home prices, schools, lifestyle, and investment notes."
@@ -8,6 +9,8 @@ const published = "2026-04-06"
 const author = "Ondo RE Team"
 const category = "Neighborhood Guide"
 const image = "/suburban-house-garden.png"
+// Same figures as /market-reports/draper/ and /locations/draper/.
+const market = cityMarketData["Draper"]
 const keywords = ["best neighborhoods Draper Utah", "Draper neighborhoods", "Suncrest Draper", "South Mountain Draper", "living in Draper Utah"]
 
 export const metadata = articleMetadata({
@@ -59,12 +62,16 @@ export default function BestNeighborhoodsDraper() {
 
             <h2>Market Snapshot: Draper Real Estate in 2026</h2>
             <ul>
-              <li>Median home price: $620,000</li>
-              <li>Median rent: $2,100/mo</li>
-              <li>Average days on market: 18 days</li>
-              <li>Population growth: 3.1% annually</li>
+              <li>Median home price: ${market.medianHomePrice.toLocaleString("en-US")}</li>
+              <li>Median rent: ${market.medianRent.toLocaleString("en-US")}/mo</li>
+              <li>Average days on market: {market.avgDaysOnMarket} days</li>
+              <li>Population growth: {market.growthRate} annually</li>
               <li>Top employers: Adobe (5 min), Vivint (8 min), HealthEquity, Instructure</li>
             </ul>
+            <p className="text-sm text-foreground/70">
+              Ondo city medians as of {CITY_MARKET_AS_OF}, the same figures as the{" "}
+              <Link href="/market-reports/draper/">Draper market report</Link>. Not an MLS pull or appraisal.
+            </p>
 
             <h2>Bottom Line</h2>
             <p>South Mountain and Suncrest are premium, large-lot product; Draper Peaks is the lower entry and higher-yield townhome/SFR band. If you&apos;re managing a Draper rental or hunting for your next property, Ondo RE has local agents who live and work in this corridor.</p>

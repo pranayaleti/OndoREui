@@ -5,9 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
+import { findDistrictForCity } from "@/lib/school-district-content"
 import { getNearbyCities } from "@/lib/nearby-cities"
 import { generateFAQJsonLd } from "@/lib/seo"
-import { findNeighborhoodForCard } from "@/lib/neighborhood-content"
+import { findNeighborhoodForCard, splitNeighborhoodLabel } from "@/lib/neighborhood-content"
 import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { CityTeamSection } from "@/components/city-team-section"
@@ -37,6 +38,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
   const citySlug = toCitySlug(city.name)
   const content = cityContentByName[city.name]
   const market = cityMarketData[city.name]
+  const schoolGuide = market?.schoolDistrict ? findDistrictForCity(city.name) : undefined
   const nearbyCities = getNearbyCities(city.name, 6)
 
   const jsonLd = {
@@ -179,7 +181,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {content.neighborhoods.map((hood) => {
-                const [name, desc] = hood.includes(", ") ? hood.split(", ") : [hood, null]
+                const [name, desc] = splitNeighborhoodLabel(hood)
                 const neighborhoodSlug = findNeighborhoodForCard(city.name, name)?.slug
                 const cardBody = (
                   <Card className={neighborhoodSlug ? "hover:bg-muted/50 transition-colors cursor-pointer h-full" : undefined}>
@@ -242,6 +244,15 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             </h2>
             <p className="text-foreground/70 mb-3">
               {city.name} is served by <strong>{market.schoolDistrict}</strong>.
+              {schoolGuide ? (
+                <>
+                  {" "}
+                  <Link href={`/schools/${schoolGuide.slug}/`} className="prose-link">
+                    See the {schoolGuide.name} guide
+                  </Link>
+                  .
+                </>
+              ) : null}
             </p>
             {market.notableSchools.length > 0 && (
               <div className="flex flex-wrap gap-2">

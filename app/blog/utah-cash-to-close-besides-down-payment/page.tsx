@@ -124,11 +124,11 @@ export default function CashToClosePage() {
         ]}
       />
 
-      <h2>Utah-specific, without cloning city pages</h2>
+      <h2>Utah-specific notes</h2>
       <p>
         {UTAH_CLOSING_NOTES.transferTax} Recording and tax amounts still differ in{" "}
         <Link href="/loans/salt-lake-city">Salt Lake City</Link>, <Link href="/loans/lehi">Lehi</Link>,{" "}
-        <Link href="/loans/provo">Provo</Link>, and <Link href="/loans/draper">Draper</Link>. Those landings are market
+        <Link href="/loans/provo">Provo</Link>, and <Link href="/loans/draper">Draper</Link>. Those city pages are market
         context, not a second set of fee tables.
       </p>
 

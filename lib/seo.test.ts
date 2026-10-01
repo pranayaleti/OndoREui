@@ -10,6 +10,11 @@ import {
   generatePropertyJsonLd,
   generateWebPageJsonLd,
   generateBlogPostingJsonLd,
+  generateDefinedTermJsonLd,
+  generateDefinedTermSetJsonLd,
+  generateSitemapItemListJsonLd,
+  NOTARY_SERVICE_ID,
+  SITE_ORGANIZATION_ID,
   generateWebApplicationJsonLd,
   generateRealEstateBusinessJsonLd,
   getSiteGeoMetaOther,
@@ -28,6 +33,43 @@ describe("seo", () => {
       expect(out["@type"]).toBe("Service")
       expect(out.name).toBe("Property Management")
       expect(out.areaServed).toBeUndefined()
+    })
+    it("can point its provider at the one site-wide Organization and nest a city in the state", () => {
+      const out = generateServiceJsonLd({
+        name: "RON in Provo",
+        description: "RON",
+        serviceType: "Remote Online Notarization",
+        areaServed: "Utah",
+        areaServedCity: "Provo",
+        providerIsSiteOrganization: true,
+      })
+      expect(out.provider).toEqual({ "@id": SITE_ORGANIZATION_ID })
+      expect(out.areaServed).toEqual({
+        "@type": "City",
+        name: "Provo",
+        containedInPlace: { "@type": "State", name: "Utah" },
+      })
+    })
+    it("emits a stable @id, hours, a Country area and a pointer to a related Service", () => {
+      const out = generateServiceJsonLd({
+        id: NOTARY_SERVICE_ID,
+        name: "RON",
+        description: "RON",
+        serviceType: "Remote Online Notarization",
+        areaServed: "United States",
+        areaServedType: "Country",
+        hoursAvailable: { dayOfWeek: ["Monday"], opens: "09:00", closes: "19:00" },
+        relatedToServiceId: NOTARY_SERVICE_ID,
+      })
+      expect(out["@id"]).toBe(`${SITE_URL}/notary/#service`)
+      expect(out.areaServed).toEqual({ "@type": "Country", name: "United States" })
+      expect(out.hoursAvailable).toEqual({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday"],
+        opens: "09:00",
+        closes: "19:00",
+      })
+      expect(out.isRelatedTo).toEqual({ "@id": NOTARY_SERVICE_ID })
     })
     it("includes areaServed when provided", () => {
       const out = generateServiceJsonLd({
@@ -62,6 +104,14 @@ describe("seo", () => {
       expect(
         generateLocalBusinessJsonLd({ name: "Co", url: "" })
       ).toBeNull()
+    })
+    it("types the address as a PostalAddress so schema.org does not ignore it", () => {
+      const out = generateLocalBusinessJsonLd({
+        name: "Test Co",
+        url: "https://example.com",
+        address: { addressRegion: "UT", addressCountry: "US", addressLocality: "Lehi" },
+      })
+      expect(out?.address).toMatchObject({ "@type": "PostalAddress", addressLocality: "Lehi" })
     })
     it("returns schema when name and url provided", () => {
       const out = generateLocalBusinessJsonLd({
@@ -102,7 +152,7 @@ describe("seo", () => {
       const out = generateRealEstateBusinessJsonLd()
       const actions = out.potentialAction as Array<{ "@type": string; target: { urlTemplate: string } }>
       expect(actions.map((a) => a["@type"])).toEqual(["CommunicateAction", "ReserveAction"])
-      expect(actions[0].target.urlTemplate).toMatch(/\/contact$/)
+      expect(actions[0].target.urlTemplate).toMatch(/\/contact\/$/)
       expect(actions[1].target.urlTemplate).toMatch(/calendly\.com/)
     })
   })
@@ -225,6 +275,43 @@ describe("seo", () => {
       })
       expect(out?.["@type"]).toBe("RealEstateListing")
     })
+    it("publishes rent as a monthly UnitPriceSpecification and omits unknown availability", () => {
+      const out = generatePropertyJsonLd({
+        name: "House",
+        description: "Nice house",
+        address: {
+          streetAddress: "123 Main",
+          addressLocality: "Lehi",
+          addressRegion: "UT",
+          postalCode: "84043",
+          addressCountry: "US",
+        },
+        offers: { price: 4200, priceCurrency: "USD", pricePeriod: "month" },
+      })
+      const offer = out?.offers as Record<string, unknown>
+      expect(offer.availability).toBeUndefined()
+      expect(offer.priceSpecification).toEqual({
+        "@type": "UnitPriceSpecification",
+        price: 4200,
+        priceCurrency: "USD",
+        unitCode: "MON",
+      })
+    })
+    it("leaves a plain price alone when no period is given", () => {
+      const out = generatePropertyJsonLd({
+        name: "House",
+        description: "Nice house",
+        address: {
+          streetAddress: "123 Main",
+          addressLocality: "Lehi",
+          addressRegion: "UT",
+          postalCode: "84043",
+          addressCountry: "US",
+        },
+        offers: { price: 500000, priceCurrency: "USD", availability: "https://schema.org/InStock" },
+      })
+      expect((out?.offers as Record<string, unknown>).priceSpecification).toBeUndefined()
+    })
   })
 
   describe("generateWebPageJsonLd", () => {
@@ -258,6 +345,86 @@ describe("seo", () => {
         authorName: "Ondo Real Estate",
       })
       expect(out?.author).toEqual({ "@type": "Organization", name: "Ondo Real Estate" })
+    })
+  })
+
+  describe("blog structured data", () => {
+    const base = {
+      title: "Post",
+      description: "Desc",
+      url: "/blog/post",
+      datePublished: "2024-01-01",
+    }
+    it("names a publisher with a logo", () => {
+      const out = generateBlogPostingJsonLd(base) as { publisher: { logo: { url: string } } }
+      expect(out.publisher.logo.url).toMatch(/\/logo-favicon\.png$/)
+    })
+    it("types a listed team member as a Person with a page, and the company as an Organization", () => {
+      const person = generateBlogPostingJsonLd({ ...base, authorName: "Pranay Reddy Aleti" })
+      expect(person?.author).toEqual({
+        "@type": "Person",
+        name: "Pranay Reddy Aleti",
+        url: `${SITE_URL.replace(/\/$/, "")}/about/team/`,
+      })
+      expect(generateBlogPostingJsonLd({ ...base, authorName: "Ondo RE Team" })?.author).toMatchObject({
+        "@type": "Organization",
+      })
+    })
+  })
+
+  describe("JSON-LD page URLs match the canonical (trailing slash)", () => {
+    const origin = SITE_URL.replace(/\/$/, "")
+    it("normalises every generator that emits a page url", () => {
+      const urls: string[] = []
+      const webPage = generateWebPageJsonLd({ name: "About", url: "/about", description: "d" })
+      urls.push(webPage!.url)
+      const post = generateBlogPostingJsonLd({
+        title: "Post",
+        description: "Desc",
+        url: `${origin}/blog/post`,
+        datePublished: "2024-01-01",
+      })
+      urls.push(post!.mainEntityOfPage)
+      const term = generateDefinedTermJsonLd({
+        name: "Escrow",
+        description: "d",
+        url: "/glossary/escrow",
+        termSetName: "Glossary",
+        termSetUrl: "/glossary",
+      })
+      urls.push(term!.url, term!.inDefinedTermSet.url)
+      const termSet = generateDefinedTermSetJsonLd({
+        name: "Glossary",
+        description: "d",
+        url: "/glossary",
+        terms: [{ name: "Escrow", description: "d", url: "/glossary/escrow" }],
+      })
+      urls.push(termSet!.url, ...(termSet!.hasDefinedTerm as Array<{ url: string }>).map((t) => t.url))
+      urls.push(
+        generateWebApplicationJsonLd({
+          name: "App",
+          description: "d",
+          url: "/calculators/mortgage-payment",
+          applicationCategory: "FinanceApplication",
+        })!.url,
+      )
+      urls.push(
+        generateLocalBusinessJsonLd({ name: "Co", url: `${origin}/notary` })!.url,
+        ...(generateSitemapItemListJsonLd([{ name: "A", url: `${origin}/a` }]).itemListElement.map((i) => i.url)),
+      )
+      for (const url of urls) {
+        expect(url, url).toMatch(/^https?:\/\/[^/]+\/(.*\/)?$/)
+      }
+    })
+    it("leaves files and other hosts alone", () => {
+      expect(
+        generateWebPageJsonLd({ name: "Feed", url: `${origin}/feed.xml` })!.url,
+      ).toBe(`${origin}/feed.xml`)
+    })
+    it("keeps the Calendly template exactly as configured", () => {
+      const out = generateRealEstateBusinessJsonLd()
+      const actions = out.potentialAction as Array<{ target: { urlTemplate: string } }>
+      expect(actions[1].target.urlTemplate).toMatch(/^https:\/\/calendly\.com\/[^/]+\/[^/]+$/)
     })
   })
 

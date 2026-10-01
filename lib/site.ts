@@ -290,7 +290,10 @@ export function getBackendConnectSrc(): string {
 /** Rendered title budget before Google truncates (~600px, ~60 characters). */
 export const SITE_TITLE_MAX = 60
 
-const BRAND_SUFFIX_RE = /\s*[|·|–|—|-]\s*(Ondo Real Estate|Ondo RE|Ondo)\s*$/i
+const BRAND_SUFFIX_RE = /\s*[|·|–|—|-]\s*(Ondo Real Estate Utah|Ondo Real Estate|Ondo RE|ONDO Notary|Ondo)\s*$/i
+
+/** The brand already appears inside the title ("Become an Ondo RE Affiliate"), so appending it again repeats it. */
+const INTERIOR_BRAND_RE = /\bOndo (Real Estate|RE)\b/i
 
 /** Remove any trailing brand the caller already appended, however many times. */
 export function stripBrand(raw: string): string {
@@ -303,9 +306,14 @@ export function stripBrand(raw: string): string {
   return title || String(raw ?? "").trim()
 }
 
-/** Canonical title string: brand appended once, and only if it still fits. */
+/**
+ * Canonical title string: brand appended once, and only if it still fits.
+ * Never trims the core: a core over SITE_TITLE_MAX is a copy problem to fix at the
+ * page (lib/seo-titles.test.ts scans every page's title), not something to cut here.
+ */
 export function pageTitleText(raw: string): string {
   const core = stripBrand(raw)
+  if (INTERIOR_BRAND_RE.test(core)) return core
   const branded = `${core} | ${SITE_BRAND_SHORT}`
   return branded.length <= SITE_TITLE_MAX ? branded : core
 }

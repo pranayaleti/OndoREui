@@ -40,7 +40,7 @@ export function CalculatorAgentIntro({ slug }: CalculatorAgentIntroProps) {
     >
       <div className="container mx-auto max-w-3xl px-4">
         <h2 id={`calc-intro-${slug}`} className="text-xl font-semibold text-foreground">
-          How the {catalog.name.toLowerCase()} works
+          How the {catalog.name} works
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">{catalog.description}</p>
 

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
-import { ArticleShell } from "./article-shell"
+import { ArticleShell, articleMetadata } from "./article-shell"
 
 const meta = {
   path: "/blog/example-post",
@@ -98,5 +98,68 @@ describe("ArticleShell", () => {
     const body = container.querySelector(".prose")
     expect(body).toBeInTheDocument()
     expect(body?.className).not.toContain("prose-invert")
+  })
+  describe("hub and fallbacks", () => {
+    const landlord = { path: "/blog/example-landlord-post", category: "Property Management" }
+
+    it("keeps mortgage posts under the Learn hub", () => {
+      renderShell(<h2>Only heading</h2>)
+      expect(screen.getByRole("link", { name: "Learn" })).toHaveAttribute("href", "/learn/")
+      expect(screen.getByRole("link", { name: "← Mortgage learning hub" })).toHaveAttribute("href", "/learn/")
+    })
+
+    it("files a landlord post under the blog index, not the mortgage hub", () => {
+      renderShell(<h2>Only heading</h2>, landlord)
+      expect(screen.getByRole("link", { name: "Blog" })).toHaveAttribute("href", "/blog/")
+      expect(screen.getByRole("link", { name: "← All articles" })).toHaveAttribute("href", "/blog/")
+      expect(screen.queryByText("← Mortgage learning hub")).not.toBeInTheDocument()
+      expect(screen.queryByRole("link", { name: "Learn" })).not.toBeInTheDocument()
+    })
+
+    it("gives a post outside the content graph related links and a next step", () => {
+      renderShell(<h2>Only heading</h2>, landlord)
+      expect(screen.getByRole("heading", { name: "Keep going" })).toBeInTheDocument()
+      expect(screen.getByRole("heading", { name: "What to do next" })).toBeInTheDocument()
+      expect(screen.getByRole("link", { name: "See Ondo RE property management" })).toHaveAttribute(
+        "href",
+        "/property-management/",
+      )
+      expect(screen.queryByText(/loan officer/i)).not.toBeInTheDocument()
+    })
+
+    it("uses the graph, not the fallback, for a post the graph covers", () => {
+      renderShell(<h2>Only heading</h2>, { path: "/blog/appraisal-comes-in-low" })
+      expect(screen.getByRole("link", { name: "Talk through the options" })).toHaveAttribute("href", "/qualify/")
+    })
+  })
+
+  describe("posts folded into a stronger post", () => {
+    const mergedInto = { path: "/blog/the-kept-post", title: "The Kept Post" }
+
+    it("is noindex,follow with its canonical on the kept post", () => {
+      const merged = articleMetadata({ ...meta, mergedInto })
+      expect(merged.robots).toEqual({ index: false, follow: true })
+      expect(merged.alternates?.canonical).toBe("https://www.ondorealestate.com/blog/the-kept-post/")
+    })
+
+    it("keeps an ordinary post indexable with a self-canonical", () => {
+      const own = articleMetadata(meta)
+      expect(own.robots).toBeUndefined()
+      expect(own.alternates?.canonical).toBe("https://www.ondorealestate.com/blog/example-post/")
+    })
+
+    it("links readers to the kept post", () => {
+      render(
+        <ArticleShell meta={{ ...meta, mergedInto }}>
+          <h2>Only heading</h2>
+        </ArticleShell>,
+      )
+      expect(screen.getByRole("link", { name: "The Kept Post" })).toHaveAttribute("href", "/blog/the-kept-post/")
+    })
+
+    it("shows no merge notice on an ordinary post", () => {
+      renderShell(<h2>Only heading</h2>)
+      expect(screen.queryByText(/now lives in/i)).not.toBeInTheDocument()
+    })
   })
 })

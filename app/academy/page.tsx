@@ -34,7 +34,7 @@ const startHerePaths = [
   {
     icon: Users,
     title: "Buyers",
-    description: "Utah buying paths, loan education, and calculators — estimates, not promises.",
+    description: "Utah buying paths, loan education, and calculators. Estimates, not promises.",
     href: "/buy",
     label: "Buyer start here",
   },
@@ -72,7 +72,7 @@ const libraryLinks = [
   {
     icon: PlayCircle,
     title: "Guides and academy",
-    description: "Written training, calculators, and a live walkthrough. Not a placeholder video wall.",
+    description: "Written training, calculators, and a live walkthrough.",
     href: "/video-library",
     label: "Open learning guides",
   },
@@ -109,7 +109,7 @@ export default function AcademyPage() {
               Start here
             </h2>
             <p className="text-foreground/70">
-              Pick the role that matches you. Each path goes to a live page — not a course upsell.
+              Pick the role that matches you. Each path goes to a live page.
             </p>
           </div>
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2">

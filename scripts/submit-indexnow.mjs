@@ -5,7 +5,8 @@
  * Bing (and therefore Copilot / ChatGPT's Bing-backed retrieval) picks up
  * changes from an IndexNow ping in hours instead of waiting on a crawl cycle.
  * IndexNow is meant for *changed* URLs, so this hashes each exported page and
- * only submits the ones whose bytes actually moved since the last successful
+ * only submits the ones whose content actually moved (build ids and chunk hashes
+ * ignored, see indexnow-normalize.mjs) since the last successful
  * submit. State lives in .indexnow-cache/ (git-ignored; restored in CI via
  * actions/cache). A cold cache falls back to a full submit, which is safe.
  *
@@ -20,6 +21,7 @@ import { createHash } from 'node:crypto'
 import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
+import { contentToHash } from './indexnow-normalize.mjs'
 
 const OUT_DIR = 'out'
 const STATE_DIR = '.indexnow-cache'
@@ -75,7 +77,8 @@ async function hashUrl(url) {
   const file = fileForUrl(url)
   if (!file || !existsSync(file)) return null
   const buf = await readFile(file)
-  return createHash('sha256').update(buf).digest('hex')
+  // Hash the page with build ids and chunk hashes stripped, or every deploy looks like a full change.
+  return createHash('sha256').update(contentToHash(buf, file)).digest('hex')
 }
 
 async function loadState() {

@@ -48,7 +48,7 @@ export default function RateTermRefinancePage() {
               <Card key="Lower your rate">
                 <CardHeader>
                   <CardTitle className="text-lg">Lower your rate</CardTitle>
-                  <CardDescription>A lower rate reduces both your monthly payment and total interest paid.</CardDescription>
+                  <CardDescription>A lower rate can reduce your monthly payment, but closing costs and a longer term can offset the savings. Check the break-even first.</CardDescription>
                 </CardHeader>
               </Card>
               <Card key="Shorten the term">

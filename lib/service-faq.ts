@@ -2,17 +2,31 @@ import { type CityFaq } from "./city-content"
 
 export type ServiceKey = "property-management" | "buy-sell" | "loans"
 
+/**
+ * Single sources for service terms that several FAQ surfaces repeat (service FAQ bank,
+ * /faq/owner-faqs, /faq/general-faqs, /faq/buying-selling-faqs, /faq/escrow-faqs).
+ * Change the wording here, not on each page.
+ */
+export const PM_SERVICE_AREA_SUMMARY =
+  "We manage single-family homes, townhomes, and small multifamily across the Wasatch Front, including Salt Lake City, Utah County, Davis County, and Weber County."
+export const PM_INSPECTION_ANSWER =
+  "We complete move-in/move-out inspections, annual or semi-annual checkups, and spot checks as needed, with detailed photo reports."
+export const PM_REPAIR_APPROVAL_ANSWER =
+  "Yes. We obtain owner approval for non-emergency repairs above your chosen dollar threshold. Emergencies are handled to prevent further damage."
+/** Typical contract-to-close range for a financed purchase. Matches PURCHASE_TIMELINE.overall in lib/content/lending-facts.ts. */
+export const PURCHASE_CLOSING_RANGE = "21–45 days"
+
 export const propertyManagementFaqBank: CityFaq[] = [
-  { q: "What areas do you manage in Utah?", a: "We manage single-family homes, townhomes, and small multifamily across the Wasatch Front, including Salt Lake City, Utah County, Davis County, and Weber County." },
+  { q: "What areas do you manage in Utah?", a: PM_SERVICE_AREA_SUMMARY },
   { q: "What are your management and leasing fees?", a: "Starter is 10% of collected rent for 1–4 units; Growth is 8% for 5–15 units. Leasing is a one-time 50% of first month’s rent when we place a new tenant (none on renewals). You only pay management when rent is collected." },
   { q: "How quickly can you lease my property?", a: "Most homes we list, when priced to local comps, typically lease within a few weeks depending on seasonality. We share weekly showing and application activity rather than a fill-by date." },
   { q: "How do you screen tenants?", a: "We verify income, credit, criminal background, prior evictions, rental history, and employment. Applications are scored against fair, written criteria." },
   { q: "How is maintenance handled?", a: "Tenants submit requests online 24/7. We triage, dispatch vetted vendors, and keep owners informed. Emergencies route to the 24/7 emergency line and are triaged as they come in." },
   { q: "Is there a maintenance reserve or markups?", a: "We maintain a small operating reserve to cover minor repairs and do not add markups to vendor invoices. You receive copies of all bills in monthly statements." },
-  { q: "How often do you inspect properties?", a: "We complete move-in/move-out inspections, annual or semi-annual checkups, and spot checks as needed, with detailed photo reports." },
+  { q: "How often do you inspect properties?", a: PM_INSPECTION_ANSWER },
   { q: "When will I receive owner payouts?", a: "Owner disbursements are sent monthly after rent clears and expenses are reconciled. You’ll receive a statement itemizing all income and costs." },
   { q: "How do you handle late rent and evictions?", a: "We follow Utah statutes for notices and timelines, apply late fees per lease, and coordinate with legal partners when necessary to protect your interests." },
-  { q: "Can I approve repairs over a certain amount?", a: "Yes. We obtain owner approval for non-emergency repairs above your chosen dollar threshold. Emergencies are handled to prevent further damage." },
+  { q: "Can I approve repairs over a certain amount?", a: PM_REPAIR_APPROVAL_ANSWER },
   { q: "Do you allow pets?", a: "Pet policies are owner-led. If allowed, we use pet screening, deposits, and pet rent to mitigate risk while expanding the renter pool." },
   { q: "What does onboarding look like?", a: "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings, typically within 48–72 hours." },
 ]
@@ -23,10 +37,10 @@ export const buySellFaqBank: CityFaq[] = [
   { q: "How competitive is the market right now?", a: "Competitiveness varies by city and price band. We share current absorption rates, days on market, and strategy for winning in multiple-offer scenarios." },
   { q: "Should I waive inspections or appraisal?", a: "We protect your interests. We rarely recommend waiving protections; instead we tailor timelines, escalation terms, and credits to strengthen offers." },
   { q: "What closing costs should I expect?", a: "Plan for 2–3% of purchase price for lender, title, and prepaid items. We can pursue seller credits to offset costs where appropriate." },
-  { q: "Do you represent new construction buyers?", a: "Yes. We help evaluate builders, negotiate upgrades, review timelines, and coordinate inspections. Compensation on new construction is also negotiated — it is not automatically covered by the builder. You will have a written buyer agreement before we tour." },
+  { q: "Do you represent new construction buyers?", a: "Yes. We help evaluate builders, negotiate upgrades, review timelines, and coordinate inspections. Compensation on new construction is also negotiated. It is not automatically covered by the builder. You will have a written buyer agreement before we tour." },
   { q: "Can you help me sell my current home and buy another?", a: "Yes. We coordinate pricing, timing, and financing, often with leasebacks or extended closings, to minimize overlap and stress." },
   { q: "What is earnest money?", a: "A good-faith deposit credited at closing. It signals commitment and is protected by your contract’s contingencies and timelines." },
-  { q: "How long does a typical purchase take?", a: "Most close in 30–45 days from acceptance. Cash can be faster. Pre-approval and document readiness help keep timelines tight." },
+  { q: "How long does a typical purchase take?", a: `Many financed purchases close about ${PURCHASE_CLOSING_RANGE} after acceptance when the contract and file cooperate. Cash can be faster. Pre-approval and document readiness help keep timelines tight.` },
   { q: "How do you market homes for sale?", a: "For sellers, we use professional photography, video, 3D tours, targeted digital ads, and agent networks to maximize exposure and results." },
   { q: "What improvements deliver the best ROI before selling?", a: "Light paint, landscaping refresh, lighting updates, deep clean, and minor repairs usually yield strong returns vs. cost and time." },
   { q: "Can I buy before I sell?", a: "Potentially. We can explore bridge loans, HELOCs, or contract terms that align both transactions with manageable risk." },

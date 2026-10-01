@@ -174,7 +174,7 @@ describe("mortgage content graph", () => {
     expect(DELAYED_FINANCING.notInvented).toMatch(/not invent an overlay as if it were a statute/i)
     expect(DELAYED_FINANCING.what).toMatch(/B2-1\.3-03|six months/i)
     expect(COSIGN_VS_COBORROWER.fairHousing).toMatch(/not require a spouse/i)
-    expect(FTHB_FILE_MISTAKES.notLifestyle).toMatch(/does not clone/i)
+    expect(FTHB_FILE_MISTAKES.notLifestyle).toMatch(/underwriting file conditions/i)
     expect(PURCHASE_TIMELINE.notAPromise).toMatch(/not a closing-date guarantee/i)
     expect(CLOSING_CREDIT_CARD.notARaise).toMatch(/does not say closing a card will raise/i)
     expect(HAZARD_HO3_HO6.notAdvice).toMatch(/not insurance advice/i)
@@ -496,7 +496,6 @@ describe("mortgage content graph", () => {
     const stale = /\$\d{3},\d{3}/
     const files = [
       "app/blog/jumbo-vs-conforming-fhfa-county-limit/page.tsx",
-      "app/blog/utah-county-conforming-loan-limit-lookup/page.tsx",
     ]
     for (const file of files) {
       const text = readFileSync(join(process.cwd(), file), "utf8")
@@ -676,7 +675,7 @@ describe("mortgage content graph", () => {
     expect(MANUFACTURED_AND_ADU.distinct).toMatch(/different property types/i)
 
     expect(RECAST_VS_REFI.whoAllows).toMatch(/does not invent a recast right/i)
-    expect(CONDO_AGING_HOA.notRosterClone).toMatch(/not the FHA roster how-to/i)
+    expect(CONDO_AGING_HOA.notRosterClone).toMatch(/FHA roster/i)
     expect(TITLE_OWNER_VS_LENDER.notLegalAdvice).toMatch(/not legal advice/i)
     expect(WEEK_AFTER_FUNDING.notLegalAdvice).toMatch(/not legal advice/i)
     expect(FIRST_STATEMENT_VS_NOTE.notARateChange).toMatch(/not the lender changing the note/i)

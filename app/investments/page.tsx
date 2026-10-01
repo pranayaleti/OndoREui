@@ -8,13 +8,13 @@ import { toCanonicalPageUrl } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/investments") },
-  title: pageTitle("Utah Investment Property: Rentals & Multifamily"),
+  title: pageTitle("Utah Commercial & Fractional Real Estate Investing"),
   description:
-    "Utah investment property that cash flows: single-family rentals, small multifamily, and how commercial and fractional ownership work, with management in-house.",
+    "How commercial real estate and fractional ownership work in Utah, plus Opportunity Zones and what to ask first. Sample deals only, no live offering.",
   openGraph: {
-    title: pageTitleText("Utah Investment Property: Rentals & Multifamily"),
+    title: pageTitleText("Utah Commercial & Fractional Real Estate Investing"),
     description:
-      "Utah investment property that cash flows: single-family rentals, small multifamily, and how commercial and fractional ownership work, with management in-house.",
+      "How commercial real estate and fractional ownership work in Utah, plus Opportunity Zones and what to ask first. Sample deals only, no live offering.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -31,21 +31,21 @@ const sections = [
     icon: Building2,
     title: "Commercial Real Estate",
     description:
-      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
+      "Explore asset classes, office, retail, industrial, multifamily, and how commercial deals are structured.",
   },
   {
     href: "/investments/opportunity-zones",
     icon: MapPin,
     title: "Opportunity Zones",
     description:
-      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
+      "Learn how Qualified Opportunity Zones can defer and reduce capital-gains tax when gains are reinvested in designated tracts for the long term.",
   },
   {
     href: "/investments/fractional",
     icon: Users,
     title: "Fractional Ownership",
     description:
-      "Utah investment property that cash flows: single-family rentals, small multifamily, commercial and fractional deals, with management in-house.",
+      "Understand how LLC/SPV structures let you invest alongside other investors with lower minimums, and what to read before you do.",
   },
   {
     href: "/investments/opportunities",

@@ -14,14 +14,14 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: "Housing Grants & Down Payment Assistance Programs",
+  title: "Utah Down Payment Assistance & Homebuyer Grants",
   description:
-    "A guide to down payment assistance and homebuyer grant programs. Eligibility is determined by the agency and the lender, not this page.",
+    "Utah down payment assistance through Utah Housing Corporation, plus the national grant and loan programs Utah buyers can pair with it. Eligibility is set by the agency and the lender, not this page.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
-    title: pageTitleText("Housing Grants & Down Payment Assistance Programs | Ondo Real Estate"),
+    title: pageTitleText("Utah Down Payment Assistance & Homebuyer Grants | Ondo Real Estate"),
     description:
-      "Down payment assistance and grant programs for U.S. homebuyers, with eligibility summaries and official links.",
+      "Utah Housing Corporation down payment assistance and the national grant and loan programs Utah buyers can pair with it, with official links.",
     url: `${SITE_URL}/buy/first-time/grants/`,
     images: DEFAULT_OG_IMAGES,
   },
@@ -37,17 +37,24 @@ interface GrantProgram {
 
 const programs: GrantProgram[] = [
   {
-    name: "State Housing Finance Agencies (HFAs)",
+    name: "Utah Housing Corporation (FirstHome, HomeAgain, Score)",
+    eligibility: "Utah buyers who meet each program's income, purchase-price and credit limits",
+    description:
+      "Utah's state housing finance agency offers first mortgages paired with down payment and closing-cost assistance. FirstHome, HomeAgain and Score are its main loan programs, and the agency also runs a first-time homebuyer assistance program. Credit score minimums, income limits and assistance amounts change, so check the current program matrix before you plan around a number.",
+    href: "https://utahhousingcorp.org/homebuyer/programs/",
+  },
+  {
+    name: "Other state Housing Finance Agencies (HFAs)",
     eligibility: "First-time and repeat buyers meeting state income and purchase-price limits",
     description:
-      "Every state has a Housing Finance Agency offering below-market first mortgages paired with down payment and closing-cost assistance (grants or second loans). This is the first place most buyers should look.",
+      "Every state has a Housing Finance Agency offering below-market first mortgages paired with down payment and closing-cost assistance (grants or second loans). The NCSHA directory lists each one, which helps if you are moving to or from Utah.",
     href: "https://www.ncsha.org/housing-help/",
   },
   {
     name: "Down payment assistance (grants & second loans)",
     eligibility: "Income-qualified buyers in participating states, counties, and cities",
     description:
-      "Thousands of local programs, administered by states, counties, cities, and nonprofits, offer forgivable grants or low-interest second loans to cover down payment and closing costs. Availability and amounts vary by location.",
+      "Local programs run by states, counties, cities, and nonprofits offer forgivable grants or low-interest second loans to cover down payment and closing costs. Check your city and county housing office as well as the state agency. Availability and amounts vary by location.",
     href: "https://downpaymentresource.com/",
   },
   {
@@ -91,8 +98,8 @@ export default function HousingGrantsPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="Housing Grants & Down Payment Assistance Programs"
-        description="A guide to down payment assistance and homebuyer grant programs in the U.S., state housing finance agencies, FHA/VA/USDA loans, and who qualifies."
+        title="Utah Down Payment Assistance & Homebuyer Grants"
+        description="Utah down payment assistance through Utah Housing Corporation, plus the national grant and loan programs Utah buyers can pair with it, and who qualifies."
         pathname="/buy/first-time/grants"
         image={`${SITE_URL}/suburban-house-garden.png`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -103,7 +110,7 @@ export default function HousingGrantsPage() {
         ])}
       />
       <PageBanner
-        title="Housing Grants & Down Payment Assistance"
+        title="Utah Down Payment Assistance & Grants"
         subtitle="Programs that help buyers bridge the down payment gap"
       />
 
@@ -113,8 +120,8 @@ export default function HousingGrantsPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Assistance for Homebuyers</h2>
               <p className="text-lg text-foreground/70">
-                The down payment is often the first hurdle. Across the U.S., state housing agencies, local grants, and
-                federal loan programs can cover part of it. Terms, funding, and eligibility change. Confirm with the
+                The down payment is often the first hurdle. In Utah, Utah Housing Corporation is the first place to look. Local
+                grants and federal loan programs can cover part of it too. Terms, funding, and eligibility change. Confirm with the
                 agency. If a family gift will sit next to DPA on an FHA file, read{" "}
                 <Link href="/blog/dpa-stacked-with-fha-gift-funds" className="prose-link">
                   how DPA stacks with an FHA gift

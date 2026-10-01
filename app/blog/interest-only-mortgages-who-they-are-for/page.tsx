@@ -9,11 +9,13 @@ const path = "/blog/interest-only-mortgages-who-they-are-for"
 const faqs = [
   {
     question: "Is interest-only a teaser rate?",
-    answer: INTEREST_ONLY.notTeaser,
+    answer:
+      "No. Interest-only changes whether principal is required for a stated period. An ARM teaser changes the rate. Neither is a forever-low payment.",
   },
   {
     question: "What is payment shock on an IO loan?",
-    answer: INTEREST_ONLY.paymentShock,
+    answer:
+      "It is the jump in the required payment when the IO period ends and principal starts to amortize over the remaining term. It can happen even if the note rate did not change.",
   },
 ]
 
@@ -28,7 +30,7 @@ const rows: readonly ComparisonRow[] = [
     id: "what",
     criterion: "What it changes",
     cells: {
-      io: INTEREST_ONLY.what,
+      io: "Scheduled payments cover interest only for a stated period.",
       arm: ARM_CAPS.notation,
       buydown: TEMPORARY_BUYDOWN.twoOne,
     },
@@ -37,7 +39,7 @@ const rows: readonly ComparisonRow[] = [
     id: "end",
     criterion: "When the payment can jump",
     cells: {
-      io: INTEREST_ONLY.paymentShock,
+      io: "When the IO period ends and the payment re-amortizes over the remaining term.",
       arm: ARM_CAPS.paymentNote,
       buydown: TEMPORARY_BUYDOWN.yearThree,
     },

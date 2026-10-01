@@ -68,13 +68,6 @@ export default function VacancyRiskPlaybook() {
             <h2>Utah Lens</h2>
             <p>Leasing slows in deep winter. Front-load renewals before holidays; use flexible start dates and remote showings when roads/air quality are rough.</p>
 
-            <h2>Developer’s Angle</h2>
-            <ul>
-              <li>Dashboard: expirations by month, lead-to-lease conversion, days vacant.</li>
-              <li>Alerts: leases clustering in off-season; low lead count triggers marketing push.</li>
-              <li>Templates: renewal offers, showing scripts, concession guardrails.</li>
-            </ul>
-
             <h2>Takeaway</h2>
             <p>Vacancy is predictable. Model it, smooth expirations, and keep tenants by being responsive. The numbers will thank you.</p>
           

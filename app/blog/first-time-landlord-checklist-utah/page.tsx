@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/first-time-landlord-checklist-utah"
-const title = "First-Time Landlord Checklist: Setting Up a Utah Rental Property"
+const title = "First-Time Landlord Checklist for a Utah Rental Property"
 const description = "A complete checklist for first-time Utah landlords, legal setup, lease structure, tenant screening, move-in procedures, and ongoing management systems."
 const published = "2026-03-23"
 const modified = "2026-03-23"

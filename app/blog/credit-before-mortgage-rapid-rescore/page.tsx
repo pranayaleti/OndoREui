@@ -114,7 +114,7 @@ export default function CreditBeforeMortgagePage() {
       />
 
       <ArticleCallout variant="pitfall" title="The dispute trap">
-        {CREDIT_BEFORE_MORTGAGE.disputeWarning} It is genuinely counterintuitive: doing the responsible thing at the
+        {CREDIT_BEFORE_MORTGAGE.disputeWarning} It is counterintuitive: doing the responsible thing at the
         wrong moment can stall the file you are trying to save.
       </ArticleCallout>
 

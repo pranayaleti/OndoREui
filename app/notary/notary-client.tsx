@@ -6,7 +6,8 @@ import Link from "next/link";
 import SEO from "@/components/seo";
 import { SITE_URL, SITE_PHONE, SITE_PHONE_TEL, SITE_EMAILS } from "@/lib/site";
 import { analyticsAttributes } from "@/lib/analytics";
-import { generateBreadcrumbJsonLd, generateLocalBusinessJsonLd } from "@/lib/seo";
+import { NOTARY_SERVICE_ID, generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo";
+import { NOTARY_HOURS_SPEC } from "@/lib/notary-fees";
 import {
   CheckCircle,
   Clock,
@@ -70,33 +71,28 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
   <main className="min-h-screen">
     {/* SEO */}
     <SEO
-      title="Remote Online Notary – Available Nationwide | ONDO Notary"
+      title="Remote Online Notary – Available Nationwide"
       description="Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments."
-      pathname="/notary"
+      pathname="/notary/"
       image={imageUrl}
       keywords={KEYWORDS}
       jsonLd={[
         generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Notary", url: `${SITE_URL}/notary` },
+          { name: "Notary", url: `${SITE_URL}/notary/` },
         ]),
-        generateLocalBusinessJsonLd({
-          name: "ONDO Notary Services",
-          url: `${SITE_URL}/notary`,
-          telephone: SITE_PHONE,
-          image: imageUrl,
+        // The one notary entity. Hours come from the posted notary schedule (not the office
+        // hours on the site Organization); state and city pages point back here by @id.
+        generateServiceJsonLd({
+          id: NOTARY_SERVICE_ID,
+          name: "Remote Online Notarization (RON)",
+          description:
+            "Remote online notarization nationwide for real estate, loan signings, affidavits, POA and estate documents. Identity-verified video sessions, no office visits or mobile travel.",
+          serviceType: "Remote Online Notarization",
           areaServed: "United States",
-          openingHours: "Mo-Fr 09:00-19:00",
-          address: {
-            addressLocality: "Lehi",
-            addressRegion: "UT",
-            addressCountry: "US",
-          },
-          makesOffer: [
-            { itemOffered: { name: "Remote Online Notarization (RON)" } },
-            { itemOffered: { name: "Loan Signing Agent" } },
-            { itemOffered: { name: "On-demand Notary" } },
-          ],
+          areaServedType: "Country",
+          hoursAvailable: NOTARY_HOURS_SPEC,
+          providerIsSiteOrganization: true,
         }),
       ]}
     />

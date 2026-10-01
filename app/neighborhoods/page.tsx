@@ -61,8 +61,7 @@ export default function NeighborhoodsHubPage() {
 
           <section className="max-w-3xl space-y-4 text-foreground/80">
             <p>
-              We publish named neighborhood pages for cities where we already maintain that layer of detail. Each page
-              sits under its city: <code className="text-sm">/neighborhoods/{"{city}"}/{"{neighborhood}"}/</code>. For a
+              We publish named neighborhood pages for cities where we already maintain that layer of detail. For a
               full city service menu (buy, sell, loans, management), use{" "}
               <Link href="/locations/" className="font-medium text-primary underline-offset-4 hover:underline">
                 Locations
@@ -84,7 +83,7 @@ export default function NeighborhoodsHubPage() {
                     href={`/locations/${citySlug}/`}
                     className="text-sm text-primary underline-offset-4 hover:underline"
                   >
-                    {cityName} city guide
+                    City guide: {cityName}
                   </Link>
                 </div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

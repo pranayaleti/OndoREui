@@ -6,14 +6,21 @@ import SEO from "@/components/seo"
 import { getServedRonStates } from "@/lib/notary-ron-states"
 import { getNotaryCitiesByStateSlug, notaryStatePath } from "@/lib/notary-cities"
 import { buildPageMetadata, generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Notary Locations by State | ONDO Notary",
-  description:
-    "Browse remote online notary state hubs across all 50 U.S. states and Washington, D.C. Find curated city RON pages and book a secure session.",
-  pathname: "/notary/locations/",
-})
+const TITLE = "Notary Locations by State"
+// The branded text for the Open Graph card; the document title below is absolute so the layout adds no second brand.
+const CARD_TITLE = pageTitleText(TITLE)
+
+export const metadata: Metadata = {
+  ...buildPageMetadata({
+    title: CARD_TITLE,
+    description:
+      "Browse remote online notary state hubs across all 50 U.S. states and Washington, D.C. Find curated city RON pages and book a secure session.",
+    pathname: "/notary/locations/",
+  }),
+  title: pageTitle(TITLE),
+}
 
 export default function NotaryLocationsPage() {
   const states = getServedRonStates()
@@ -22,7 +29,7 @@ export default function NotaryLocationsPage() {
   return (
     <>
       <SEO
-        title="Notary Locations by State | ONDO Notary"
+        title={TITLE}
         description="Browse remote online notary state hubs across all 50 U.S. states and Washington, D.C."
         pathname="/notary/locations/"
         jsonLd={generateBreadcrumbJsonLd([
@@ -55,7 +62,7 @@ export default function NotaryLocationsPage() {
                   >
                     {state.name}
                   </Link>
-                  <span className="text-muted-foreground text-sm"> · {count} cities</span>
+                  <span className="text-muted-foreground text-sm"> · {count} {count === 1 ? "city" : "cities"}</span>
                 </li>
               )
             })}

@@ -19,6 +19,10 @@ import { countWords, extractOutline } from "@/lib/content/article-outline"
 import { KeyTakeaways } from "@/components/content/key-takeaways"
 import { ARTICLE_ADVICE_NOTICE, articleDisclosureKind, type ArticleDisclosureKind } from "@/lib/content/article-disclosure"
 import { ARRIVAL_REAL_ESTATE_DISCLOSURE } from "@/lib/utah-arrival"
+import { articleFallbackFor, articleHubFor, isMortgageArticle } from "@/lib/content/article-fallback"
+import { getContentNodeByPath } from "@/lib/content"
+
+const NON_MORTGAGE_NEXT_STEP_BODY = "Questions about your own property or plan? Ondo RE can walk through it with you."
 
 const DEFAULT_AUTHOR = "Ondo Real Estate Editorial Team"
 
@@ -40,10 +44,16 @@ export type ArticleShellMeta = {
   faqs?: readonly ContentFaqItem[]
   /** Footer disclosure. Defaults from `category` (see lib/content/article-disclosure.ts). */
   disclosure?: ArticleDisclosureKind
+  /**
+   * Set on a duplicate post that was folded into a stronger one. The page stays reachable but is
+   * noindex,follow with its canonical pointing at the kept post, and it links readers there.
+   */
+  mergedInto?: { path: string; title: string }
 }
 
 export function articleMetadata(meta: ArticleShellMeta): Metadata {
-  return pageCanonicalMetadata(meta.path, {
+  return pageCanonicalMetadata(meta.mergedInto?.path ?? meta.path, {
+    ...(meta.mergedInto ? { robots: { index: false, follow: true } } : {}),
     // Absolute so the root layout template cannot append a second brand.
     title: pageTitle(`${meta.title} | Ondo Real Estate`),
     description: meta.description,
@@ -83,10 +93,15 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
   const { nodes, outline, wordCount: bodyWordCount } = extractOutline(children)
   // Takeaways render outside the children, so count them separately.
   const wordCount = bodyWordCount + countWords((meta.takeaways ?? []).join(" "))
+  // Mortgage posts live under the Learn hub; landlord, neighborhood, notary and
+  // other posts under the blog index.
+  const hub = articleHubFor(meta.path, meta.category)
+  // Posts outside the content graph would otherwise end with no related links or next step.
+  const fallback = getContentNodeByPath(meta.path) ? undefined : articleFallbackFor(meta.category)
   const jsonLd: object[] = [
     generateBreadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: "Learn", url: `${SITE_URL}/learn` },
+      { name: hub.label, url: `${SITE_URL}${hub.href}` },
       { name: meta.title, url: `${SITE_URL}${meta.path}` },
     ]),
   ]
@@ -114,7 +129,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
         <div className="container mx-auto max-w-5xl px-4 md:px-6">
           <BreadcrumbNav
             items={[
-              { label: "Learn", href: "/learn" },
+              { label: hub.label, href: hub.href },
               { label: meta.category ?? "Guide" },
             ]}
           />
@@ -131,7 +146,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
           />
           <div className="not-prose mb-8">
             <Button asChild variant="outline" size="sm">
-              <Link href="/learn">← Mortgage learning hub</Link>
+              <Link href={hub.href}>{hub.backLabel}</Link>
             </Button>
           </div>
           {meta.takeaways?.length ? <KeyTakeaways items={meta.takeaways} caption={meta.takeawaysCaption} className="mb-8" /> : null}
@@ -141,6 +156,15 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
                 items={outline}
                 className="mb-8 rounded-lg border border-border bg-muted/30 p-4 lg:hidden"
               />
+              {meta.mergedInto ? (
+                <p className="not-prose mb-6 rounded-lg border border-border bg-muted p-4 text-sm text-foreground/80">
+                  This guide now lives in{" "}
+                  <Link href={meta.mergedInto.path} className="font-medium underline underline-offset-2">
+                    {meta.mergedInto.title}
+                  </Link>
+                  . Read it there.
+                </p>
+              ) : null}
               <div className="prose prose-lg max-w-none">{nodes}</div>
               {meta.faqs?.length ? <ContentFaq items={meta.faqs} /> : null}
             </div>
@@ -149,8 +173,12 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
               <ArticleToc items={outline} />
             </aside>
           </div>
-          <RelatedContent path={meta.path} title="Keep going" />
-          <NextStepCta path={meta.path} />
+          <RelatedContent path={meta.path} title="Keep going" fallbackLinks={fallback?.links} />
+          <NextStepCta
+            path={meta.path}
+            fallback={fallback}
+            body={fallback && !isMortgageArticle(meta.path, meta.category) ? NON_MORTGAGE_NEXT_STEP_BODY : undefined}
+          />
           <ArticleDisclosure kind={articleDisclosureKind(meta.category, meta.disclosure)} />
         </div>
       </article>

@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { DEFAULT_OG_IMAGE_URL } from "./page-canonical"
 import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_EMAILS, SITE_SOCIALS, SITE_ADDRESS_OBJ, SITE_HOURS } from "./site"
 
 // Generate structured data for different page types
@@ -235,9 +236,8 @@ export const generateMetadata = {
       description: property.description,
       images: [
         {
-          url: `${SITE_URL}/placeholder.jpg`,
-          width: 1200,
-          height: 630,
+          // The shared preview image, with no size claim: the file is not 1200x630.
+          url: DEFAULT_OG_IMAGE_URL,
           alt: property.name,
         },
       ],

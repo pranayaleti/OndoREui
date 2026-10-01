@@ -57,4 +57,18 @@ describe("CityGuidePage", () => {
     expect(screen.getByRole("link", { name: /Guides & resources/i })).toHaveAttribute("href", "/resources/")
     expect(screen.getByRole("link", { name: /^Blog$/i })).toHaveAttribute("href", "/blog/")
   })
+
+  it("links the school district guide when one exists for the city's district", () => {
+    render(<CityGuidePage city={findCityBySlug("layton")!} />)
+    expect(screen.getByRole("link", { name: /Davis School District guide/i })).toHaveAttribute(
+      "href",
+      "/schools/davis-school-district/",
+    )
+  })
+
+  it("names the district without a guide link when the district has no guide", () => {
+    render(<CityGuidePage city={findCityBySlug("holladay")!} />)
+    expect(screen.getAllByText("Granite School District").length).toBeGreaterThan(0)
+    expect(screen.queryByRole("link", { name: /School District guide/i })).not.toBeInTheDocument()
+  })
 })

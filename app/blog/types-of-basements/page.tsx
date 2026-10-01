@@ -33,7 +33,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
-  title: "Types of Basements: What Each One Actually Means for Your Home",
+  title: "Types of Basements: What Each One Means for Your Home",
   description:
     "Full, partial, walkout, walk-up, daylight, and crawlspace. Six basement types explained, including the egress rule that decides if a basement room is a legal bedroom.",
   published: "2026-09-13",
@@ -56,7 +56,7 @@ export default function TypesOfBasementsPage() {
     <ArticleShell
       meta={{
         path,
-        title: "Types of Basements: What Each One Actually Means for Your Home",
+        title: "Types of Basements: What Each One Means for Your Home",
         description:
           "Full, partial, walkout, walk-up, daylight, and crawlspace. Six basement types explained, including the egress rule that decides if a basement room is a legal bedroom.",
         published: "2026-09-13",

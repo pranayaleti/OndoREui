@@ -66,17 +66,6 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
         section="Notary"
         tags={["Remote Online Notary", "Real Estate Closing", "Loan Signing", "Investors"]}
         keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: "Remote Online Notary for Real Estate Closings",
-          description:
-            "How ONDO Notary supports purchases, refinances, HELOCs, and investor closings with compliant Remote Online Notarization.",
-          author: { "@type": "Organization", name: "ONDO Notary" },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
       />
 
       <PageBanner

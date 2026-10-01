@@ -17,7 +17,7 @@ import { buildRenterSearchPrefill, DEFAULT_RENT_FILTER_RANGE } from '@/lib/rente
 import { fetchAllPublicListingRows, listingDetailPath, PublicListingsHttpError } from '@/lib/public-property';
 import { matchesPropertyTypeFilter, normalizePropertyType } from '@/lib/property-type-filter';
 import { matchesRentRange } from '@/lib/rent-filter';
-import { availabilityBadge } from '@/lib/listing-presentation';
+import { availabilityBadge, listingOfferAvailability } from '@/lib/listing-presentation';
 import { cn } from '@/lib/utils';
 
 // Dynamic load with Next.js (avoids React.lazy + webpack "reading 'call'" issues)
@@ -104,14 +104,19 @@ function listingsErrorMessage(e: unknown): string {
   return e instanceof Error ? e.message : 'An unexpected error occurred while loading properties';
 }
 
-export default function PropertiesClient() {
+export default function PropertiesClient({
+  initialProperties = [],
+}: {
+  /** Listings fetched at build time so the static HTML already has cards, links and JSON-LD; the client refreshes them. */
+  initialProperties?: Property[];
+}) {
   const router = useRouter();
+  const hasInitialProperties = initialProperties.length > 0;
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
   const [showingInterestId, setShowingInterestId] = useState<string | null>(null);
   const [mobilePane, setMobilePane] = useState<ListingsMobilePane>('list');
-  const [allApiProperties, setAllApiProperties] = useState<Property[]>([]);
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [allApiProperties, setAllApiProperties] = useState<Property[]>(initialProperties);
+  const [loading, setLoading] = useState(!hasInitialProperties);
   const [error, setError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState(0);
 
@@ -165,7 +170,8 @@ export default function PropertiesClient() {
           return;
         }
 
-        setLoading(true);
+        // With build-time cards on screen, the first refresh runs quietly; "Try again" shows the skeleton.
+        if (!hasInitialProperties || retryCount > 0) setLoading(true);
         setError(null);
         // Follows pagination: the API returns only 20 rows per request by default.
         const rawArray = await fetchAllPublicListingRows(fetch, {
@@ -221,8 +227,9 @@ export default function PropertiesClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propertiesCacheKey]);
 
-  // 3b) Apply your existing filter/sort/search on the fetched list
-  useEffect(() => {
+  // 3b) Apply your existing filter/sort/search on the fetched list.
+  // Derived (not effect-set) so the server-rendered HTML contains the cards.
+  const properties = useMemo(() => {
     let filtered = [...allApiProperties];
 
     filtered = filtered.filter((p) => matchesRentRange(p.price, filters.priceRange));
@@ -326,7 +333,7 @@ export default function PropertiesClient() {
       }
     }
 
-    setProperties(filtered);
+    return filtered;
   }, [allApiProperties, filters, sortBy, searchQuery]);
 
   const mapProperties = useMemo(
@@ -418,7 +425,8 @@ export default function PropertiesClient() {
         ? {
             price: p.price,
             priceCurrency: 'USD',
-            availability: 'https://schema.org/InStock',
+            availability: listingOfferAvailability({ status: p.status, listingKind: p.listingKind }),
+            pricePeriod: p.listingKind === 'sale' ? undefined : 'month',
           }
         : undefined,
     });
@@ -436,7 +444,7 @@ export default function PropertiesClient() {
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: 'Home', url: SITE_URL },
-            { name: 'Properties', url: `${SITE_URL}/properties` },
+            { name: 'Properties', url: `${SITE_URL}/properties/` },
           ]),
           ...propertySchemas,
         ]}

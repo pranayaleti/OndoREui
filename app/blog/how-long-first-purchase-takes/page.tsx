@@ -121,7 +121,7 @@ export default function PurchaseTimelinePage() {
         <li>Appraisal queue, condo questionnaire, or a project that is not FHA-eligible.</li>
         <li>
           File mistakes: new debt, job change, unsourced deposits.{" "}
-          <Link href="/blog/first-time-buyer-file-mistakes">file mistakes, not lifestyle listicles</Link>.
+          <Link href="/blog/first-time-buyer-file-mistakes">first-time buyer file mistakes</Link>.
         </li>
         <li>Insurance binder that does not match the legal regime (HO-3 vs HO-6).</li>
       </ul>

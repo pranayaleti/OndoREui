@@ -16,8 +16,12 @@ import {
 import { getTestimonialKind, testimonials } from "./testimonials"
 import { toAbsoluteSiteUrl } from "./url"
 import { htmlPathToMarkdownPath } from "./html-to-agent-markdown"
+import { teamMembers } from "./team-data"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
+
+/** Organization / publisher logo used in JSON-LD. */
+const SITE_LOGO_URL = `${baseSiteUrl}/logo-favicon.png`
 
 const toAbsoluteUrl = (value?: string) => {
   if (!value) return undefined
@@ -25,16 +29,40 @@ const toAbsoluteUrl = (value?: string) => {
   return `${baseSiteUrl}${value.startsWith("/") ? value : `/${value}`}`
 }
 
+/** Absolute, canonical (trailing-slash) URL of a page; the form JSON-LD `url` fields must use. */
+const pageUrl = (value?: string) => {
+  const absolute = toAbsoluteUrl(value)
+  return absolute ? canonicalCrumbUrl(absolute) : undefined
+}
+
 export interface FAQItem {
   question: string
   answer: string
 }
 
+/** Stable @id of the single Organization entity (emitted once by generateRealEstateBusinessJsonLd). */
+export const SITE_ORGANIZATION_ID = `${SITE_URL.replace(/\/$/, "")}/#organization`
+
+/** Stable @id of the one notary Service entity (emitted on /notary/, referenced from state and city pages). */
+export const NOTARY_SERVICE_ID = `${SITE_URL.replace(/\/$/, "")}/notary/#service`
+
 export interface ServiceData {
   name: string
   description: string
   serviceType: string
+  /** Stable @id so other pages can reference this Service instead of describing it again. */
+  id?: string
   areaServed?: string
+  /** Schema type of `areaServed`; defaults to "State". Use "Country" for nationwide services. */
+  areaServedType?: "State" | "Country"
+  /** Weekly availability, emitted as hoursAvailable. */
+  hoursAvailable?: { dayOfWeek: string[]; opens: string; closes: string }
+  /** @id of a Service defined elsewhere that this one belongs to; emitted as isRelatedTo. */
+  relatedToServiceId?: string
+  /** City inside `areaServed` (a state name); emitted as a City nested in that State. */
+  areaServedCity?: string
+  /** When true the provider is a reference to the site-wide #organization entity, not a new one. */
+  providerIsSiteOrganization?: boolean
   offers?: {
     description: string
   }
@@ -90,18 +118,33 @@ export function generateServiceJsonLd(service: ServiceData) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    ...(service.id ? { '@id': service.id } : {}),
     name: service.name,
     description: service.description,
-    provider: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      alternateName: [SITE_BRAND_SHORT, "OnDo"],
-      url: SITE_URL,
-    },
-    areaServed: service.areaServed ? {
-      '@type': 'State',
-      name: service.areaServed,
-    } : undefined,
+    provider: service.providerIsSiteOrganization
+      ? { '@id': SITE_ORGANIZATION_ID }
+      : {
+          '@type': 'Organization',
+          name: SITE_NAME,
+          alternateName: [SITE_BRAND_SHORT, "OnDo"],
+          url: SITE_URL,
+        },
+    areaServed: service.areaServed
+      ? service.areaServedCity
+        ? {
+            '@type': 'City',
+            name: service.areaServedCity,
+            containedInPlace: { '@type': 'State', name: service.areaServed },
+          }
+        : {
+            '@type': service.areaServedType ?? 'State',
+            name: service.areaServed,
+          }
+      : undefined,
+    ...(service.hoursAvailable
+      ? { hoursAvailable: { '@type': 'OpeningHoursSpecification', ...service.hoursAvailable } }
+      : {}),
+    ...(service.relatedToServiceId ? { isRelatedTo: { '@id': service.relatedToServiceId } } : {}),
     serviceType: service.serviceType,
     offers: service.offers ? {
       '@type': 'Offer',
@@ -133,7 +176,7 @@ export function generateFAQJsonLd(faqs: FAQItem[]) {
  * Generate JSON-LD for LocalBusiness/RealEstateAgent
  */
 export function generateLocalBusinessJsonLd(business: LocalBusinessData) {
-  const absoluteUrl = toAbsoluteUrl(business.url)
+  const absoluteUrl = pageUrl(business.url)
   if (!business.name || !absoluteUrl) return null
 
   const absoluteImage = toAbsoluteUrl(business.image)
@@ -156,7 +199,8 @@ export function generateLocalBusinessJsonLd(business: LocalBusinessData) {
     logo: absoluteLogo,
     areaServed: business.areaServed,
     openingHours: business.openingHours,
-    address: business.address,
+    // schema.org ignores an address without its type.
+    address: business.address ? { '@type': 'PostalAddress', ...business.address } : undefined,
     sameAs: business.sameAs,
     makesOffer: business.makesOffer,
     contactPoint: business.contactPoint,
@@ -178,8 +222,8 @@ export function generateOrganizationJsonLd() {
     alternateName: [SITE_BRAND_SHORT, "OnDo"],
     url: SITE_URL,
     telephone: SITE_PHONE,
-    image: `${SITE_URL}/logo-favicon.png`,
-    logo: `${SITE_URL}/logo-favicon.png`,
+    image: SITE_LOGO_URL,
+    logo: SITE_LOGO_URL,
     areaServed: [
       { "@type": "State", name: "Utah" },
       { "@type": "AdministrativeArea", name: "Salt Lake County" },
@@ -291,15 +335,15 @@ export function generateRealEstateBusinessJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'RealEstateBusiness', 'RealEstateAgent'],
-    '@id': `${SITE_URL}/#organization`,
+    '@id': SITE_ORGANIZATION_ID,
     name: SITE_NAME,
     alternateName: [SITE_BRAND_SHORT, "OnDo", "Ondo RE"],
     url: SITE_URL,
     telephone: SITE_PHONE,
-    image: `${SITE_URL}/logo-favicon.png`,
+    image: SITE_LOGO_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${SITE_URL}/logo-favicon.png`,
+      url: SITE_LOGO_URL,
       width: 512,
       height: 512,
     },
@@ -350,7 +394,7 @@ export function generateRealEstateBusinessJsonLd() {
         name: 'Contact Ondo Real Estate',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: `${SITE_URL.replace(/\/$/, "")}/contact`,
+          urlTemplate: `${SITE_URL.replace(/\/$/, "")}/contact/`,
           actionPlatform: [
             'https://schema.org/DesktopWebPlatform',
             'https://schema.org/MobileWebPlatform',
@@ -403,7 +447,7 @@ export function generateRealEstateBusinessJsonLd() {
  * point at a 301 instead of the canonical page, so add the slash here once for every caller.
  * Files, other hosts, and anything already canonical pass through untouched.
  */
-function canonicalCrumbUrl(url: string): string {
+export function canonicalCrumbUrl(url: string): string {
   const siteOrigin = SITE_URL.replace(/\/+$/, "")
   if (!url.startsWith("/") && !url.startsWith(`${siteOrigin}/`) && url !== siteOrigin) return url
   const [base = "", ...rest] = url.split(/(?=[?#])/)
@@ -440,7 +484,7 @@ export function generateSitemapItemListJsonLd(
       position: index + 1,
       name: item.name,
       description: item.description,
-      url: item.url,
+      url: canonicalCrumbUrl(item.url),
     })),
   }
 }
@@ -511,7 +555,10 @@ export function generatePropertyJsonLd(property: {
   offers?: {
     price: number
     priceCurrency: string
-    availability: string
+    /** schema.org availability URL; omitted from the markup when unknown. */
+    availability?: string
+    /** Set for rentals so the price is read as monthly rent, not a sale price. */
+    pricePeriod?: 'month'
   }
 }) {
   const absoluteImages = property.image?.map(toAbsoluteUrl).filter(Boolean)
@@ -550,6 +597,12 @@ export function generatePropertyJsonLd(property: {
       price: property.offers.price,
       priceCurrency: property.offers.priceCurrency,
       availability: property.offers.availability,
+      priceSpecification: property.offers.pricePeriod === 'month' ? {
+        '@type': 'UnitPriceSpecification',
+        price: property.offers.price,
+        priceCurrency: property.offers.priceCurrency,
+        unitCode: 'MON',
+      } : undefined,
     } : undefined,
   }
 }
@@ -560,7 +613,7 @@ export function generateWebPageJsonLd(params: {
   description?: string
 }) {
   const { name, url, description } = params
-  const absoluteUrl = toAbsoluteUrl(url)
+  const absoluteUrl = pageUrl(url)
   if (!name || !absoluteUrl) return null
 
   return {
@@ -589,11 +642,11 @@ export function generateBlogPostingJsonLd(params: {
 
   if (!title || !description || !url || !datePublished) return null
 
-  const absoluteUrl = toAbsoluteUrl(url)
+  const absoluteUrl = pageUrl(url)
   if (!absoluteUrl) return null
 
   const absoluteImage = toAbsoluteUrl(image)
-  const absolutePublisherLogo = toAbsoluteUrl(publisherLogo)
+  const absolutePublisherLogo = toAbsoluteUrl(publisherLogo ?? SITE_LOGO_URL)
 
   const keywordList = keywords?.filter(Boolean)
 
@@ -606,11 +659,14 @@ export function generateBlogPostingJsonLd(params: {
     datePublished,
     dateModified: dateModified || datePublished,
     mainEntityOfPage: absoluteUrl,
-    // Blog authors are the company, never an individual we cannot document.
-    author: {
-      '@type': 'Organization',
-      name: authorName || SITE_NAME,
-    },
+    // Blog authors are the company unless the byline names a real, listed team member
+    // (lib/team-data.ts), who is then typed as a Person with a page to link to.
+    author: teamMembers.some((member) => member.name === authorName)
+      ? { '@type': 'Person', name: authorName, url: pageUrl('/about/team/') }
+      : {
+          '@type': 'Organization',
+          name: authorName || SITE_NAME,
+        },
     publisher: {
       '@type': 'Organization',
       name: publisherName || SITE_NAME,
@@ -647,8 +703,8 @@ export function generateDefinedTermJsonLd(params: {
   const { name, description, url, termSetName, termSetUrl, inCategory } = params
   if (!name || !description || !url) return null
 
-  const absoluteUrl = toAbsoluteUrl(url)
-  const absoluteSetUrl = toAbsoluteUrl(termSetUrl)
+  const absoluteUrl = pageUrl(url)
+  const absoluteSetUrl = pageUrl(termSetUrl)
   if (!absoluteUrl || !absoluteSetUrl) return null
 
   return {
@@ -678,12 +734,12 @@ export function generateDefinedTermSetJsonLd(params: {
   const { name, description, url, terms } = params
   if (!name || !url || terms.length === 0) return null
 
-  const absoluteUrl = toAbsoluteUrl(url)
+  const absoluteUrl = pageUrl(url)
   if (!absoluteUrl) return null
 
   const members = terms
     .map((term) => {
-      const absoluteTermUrl = toAbsoluteUrl(term.url)
+      const absoluteTermUrl = pageUrl(term.url)
       if (!absoluteTermUrl || !term.name) return null
       return {
         '@type': 'DefinedTerm',
@@ -720,7 +776,7 @@ export function generateWebApplicationJsonLd(params: {
 
   if (!name || !description || !url || !applicationCategory) return null
 
-  const absoluteUrl = toAbsoluteUrl(url)
+  const absoluteUrl = pageUrl(url)
   if (!absoluteUrl) return null
 
   const absoluteImage = toAbsoluteUrl(image)

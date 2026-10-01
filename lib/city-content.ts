@@ -53,7 +53,7 @@ export const cityContentByName: Record<string, CityContent> = {
       { q: "Best time to list?", a: "Late spring through mid-summer delivers the highest application volumes, but year-round demand is healthy." },
     ],
     lifestyleDescription:
-      "Layton is the retail and dining hub of Davis County, Layton Hills Mall, Kneaders Bakery, and dozens of restaurants line Antelope Drive. The FrontRunner station connects downtown SLC in 35 minutes, making Layton popular with commuters who want suburban lots. Weekends include hiking the Bonneville Shoreline Trail from East Layton trailheads, splash pads at Layton Commons Park, and city rec soccer. Layton Lex Night Market and summer food truck rallies run on warm evenings. Davis School District elementary names can be listed as geography.",
+      "Layton is the retail and dining hub of Davis County, Layton Hills Mall, Kneaders Bakery, and dozens of restaurants line Antelope Drive. The FrontRunner station connects downtown SLC in 35 minutes, making Layton popular with commuters who want suburban lots. Weekends include hiking the Bonneville Shoreline Trail from East Layton trailheads, splash pads at Layton Commons Park, and city rec soccer. Layton Lex Night Market and summer food truck rallies run on warm evenings. Davis School District serves the city.",
   },
   Bountiful: {
     overview:
@@ -64,11 +64,11 @@ export const cityContentByName: Record<string, CityContent> = {
       { q: "Do you coordinate yard care?", a: "Yes. For premium rentals we recommend owner-provided lawn care to protect curb appeal and reduce disputes." },
     ],
     lifestyleDescription:
-      "Bountiful feels like a small town minutes from downtown Salt Lake. The east bench offers panoramic valley views and direct access to Mueller Park Canyon trails for evening hikes. Main Street has a walkable strip with local bakeries, boutiques, and the beloved Bountiful Farmers Market on Saturday mornings. Commuters reach SLC in 15 minutes via I-15 or the Centerville FrontRunner station. Bountiful Handcart Days in July is a week-long celebration with pioneer re-enactments, concerts, and a fireworks show that draws the entire community to the park.",
+      "Bountiful feels like a small town minutes from downtown Salt Lake. The east bench offers panoramic valley views and direct access to Mueller Park Canyon trails for evening hikes. Main Street has a walkable strip with local bakeries, boutiques, and the beloved Bountiful Farmers Market on Saturday mornings. Commuters reach SLC in 15 minutes via I-15, or ride FrontRunner from the Woods Cross station. Bountiful Handcart Days in July is a week-long celebration with pioneer re-enactments, concerts, and a fireworks show that draws the entire community to the park.",
   },
   "Salt Lake City": {
     overview:
-      "Utah's urban core spans distinct neighborhoods like the Avenues, Liberty Wells, and Sugar House. Proximity to hospitals, tech employers, and TRAX is a listing fact. Thoughtful pet policies and in-unit laundry materially improve marketing performance.",
+      "Utah's urban core spans distinct neighborhoods like the Avenues, Liberty Wells, and Sugar House. Hospitals, tech employers, and TRAX are close by. Thoughtful pet policies and in-unit laundry help rentals lease faster.",
     neighborhoods: ["Avenues", "Sugar House", "Liberty Wells", "Downtown"],
     highlights: ["High marketing exposure", "Mix of condos, bungalows, and downtown apartments", "Premium for updated kitchens/baths"],
     faq: [
@@ -97,7 +97,7 @@ export const cityContentByName: Record<string, CityContent> = {
       { q: "Marketing recommendations?", a: "Twilight exterior photography and 60–90 second video tours consistently boost lead volume and showing conversions." },
     ],
     lifestyleDescription:
-      "Draper is the southern gateway to both Silicon Slopes offices and Big Cottonwood Canyon recreation. Morning commutes to Lehi tech campuses run 15–20 minutes on I-15. Corner Canyon trails draw mountain bikers and trail runners daily, the network connects to BST for 50+ miles of ridgeline paths. Weekends include brunch at local cafes along 12300 South, Cowabunga Bay waterpark, and evening strolls through Draper City Park. CrossFit gyms, climbing gyms, and yoga studios sit along the commercial corridors.",
+      "Draper sits at the south end of Salt Lake County, close to Silicon Slopes offices and Corner Canyon recreation. Morning commutes to Lehi tech campuses run 15–20 minutes on I-15. Corner Canyon trails draw mountain bikers and trail runners daily, the network connects to BST for 50+ miles of ridgeline paths. Weekends include brunch at local cafes along 12300 South, Cowabunga Bay waterpark, and evening strolls through Draper City Park. CrossFit gyms, climbing gyms, and yoga studios sit along the commercial corridors.",
   },
   Lehi: {
     overview:
@@ -252,7 +252,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Life in Hooper moves at a different speed. Mornings might start with feeding horses before commuting 15 minutes to Ogden on 5500 South. Weber County School District zoning covers the city; roads are low-traffic compared with I-15 corridors. The Tomato Days festival in September is the social event of the year, tomato-themed food, contests, and a community parade. Weekends involve Antelope Island excursions, fishing at Willard Bay, or simply tending to garden plots. There's no real commercial district, residents drive to Riverdale or Roy for groceries and dining. Neighbors trade produce over the fence, and the night sky is genuinely dark, something transplants from the Wasatch Front appreciate immediately.",
+      "Life in Hooper moves at a different speed. Mornings might start with feeding horses before commuting 15 minutes to Ogden on 5500 South. Weber County School District zoning covers the city; roads are low-traffic compared with I-15 corridors. The Tomato Days festival in September is the social event of the year, tomato-themed food, contests, and a community parade. Weekends involve Antelope Island excursions, fishing at Willard Bay, or simply tending to garden plots. There's no real commercial district, residents drive to Riverdale or Roy for groceries and dining. Neighbors trade produce over the fence, and the night sky is very dark, something transplants from the Wasatch Front appreciate immediately.",
   },
 
   Clinton: {
@@ -317,7 +317,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "West Point has new-subdivision energy: clean sidewalks, fresh landscaping, and 2000s–2010s floor plans. Morning commutes run to Hill AFB or the Clearfield FrontRunner station. Parks and canal-path trails are popular for evening walks and bike rides. There's limited commercial development within city limits, so most errands and dining happen in Clinton or Syracuse. West Point Heritage Days in late summer brings the community together with a parade, outdoor movie, and food vendors. The sunsets over the Great Salt Lake are genuinely spectacular from the western neighborhoods.",
+      "West Point has new-subdivision energy: clean sidewalks, fresh landscaping, and 2000s–2010s floor plans. Morning commutes run to Hill AFB or the Clearfield FrontRunner station. Parks and canal-path trails are popular for evening walks and bike rides. There's limited commercial development within city limits, so most errands and dining happen in Clinton or Syracuse. West Point Heritage Days in late summer brings the community together with a parade, outdoor movie, and food vendors. The sunsets over the Great Salt Lake are spectacular from the western neighborhoods.",
   },
 
   Sunset: {
@@ -331,7 +331,7 @@ export const cityContentByName: Record<string, CityContent> = {
     highlights: [
       "Lowest median home prices in Davis County",
       "Strong cash-flow yields on buy-and-hold rentals",
-      "Walking distance to FrontRunner rail and Main Street shops",
+      "Short drive to the Clearfield FrontRunner station and Main Street shops",
       "Hill AFB employment base ensures consistent demand",
     ],
     faq: [
@@ -429,7 +429,6 @@ export const cityContentByName: Record<string, CityContent> = {
     ],
     highlights: [
       "Davis School District zoning; low vacancy",
-      "Low vacancy rates across all property types",
       "Historic downtown with walkable dining and community events",
       "Premium rental rates support higher acquisition costs",
     ],
@@ -473,7 +472,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "How does Lagoon affect nearby properties?",
-        a: "Lagoon Amusement Park generates seasonal traffic and noise, particularly on summer evenings and weekends. Properties immediately adjacent to the park may experience noise impacts, which should be disclosed. However, for most Farmington neighborhoods, Lagoon is far enough away to be an amenity rather than a nuisance, and season-pass proximity is a listing fact. The park's employee workforce also creates some rental demand during operating season (April–October).",
+        a: "Lagoon Amusement Park generates seasonal traffic and noise, particularly on summer evenings and weekends. Properties immediately adjacent to the park may experience noise impacts, which should be disclosed. However, for most Farmington neighborhoods, Lagoon is far enough away to be an amenity rather than a nuisance, and season-pass proximity is a local perk. The park's employee workforce also creates some rental demand during operating season (April–October).",
       },
       {
         q: "Is Farmington overpriced for investment?",
@@ -481,7 +480,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Farmington residents enjoy a walkable lifestyle centered on Station Park, morning coffee, evening dining, weekend shopping, and movie dates all happen without starting the car. The FrontRunner station makes SLC commutes straightforward (40 min door-to-door). Farmington Canyon offers an after-work escape with hiking, mountain biking, and picnicking in Farmington Creek Park. Lagoon season passes are a local amenity; the park is within a short drive of most neighborhoods. Historic Main Street hosts a charming Christmas celebration, and the city's small-town Fourth of July parade draws the whole community. The overall feel is polished but unpretentious.",
+      "Farmington residents enjoy a walkable lifestyle centered on Station Park, morning coffee, evening dining, weekend shopping, and movie dates all happen without starting the car. The FrontRunner station makes SLC commutes simple (40 min door-to-door). Farmington Canyon offers an after-work escape with hiking, mountain biking, and picnicking in Farmington Creek Park. Lagoon season passes are a local amenity; the park is within a short drive of most neighborhoods. Historic Main Street hosts a charming Christmas celebration, and the city's small-town Fourth of July parade draws the whole community. The overall feel is polished but unpretentious.",
   },
 
   Centerville: {
@@ -576,7 +575,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "Is there a train station?",
-        a: "North Salt Lake does not have its own FrontRunner station, the nearest stops are Woods Cross (5 min south) and Centerville (5 min north). However, the city's proximity to SLC makes FrontRunner less necessary for most commuters, as the drive is only 10 minutes. UTA bus routes do serve major corridors. For tenants who work outside SLC (Ogden, Provo), the nearby FrontRunner stations provide viable options, and North Salt Lake's location between two stations is reasonably convenient.",
+        a: "North Salt Lake does not have its own FrontRunner station. The nearest stops are Woods Cross to the north and North Temple in Salt Lake City to the south, each a short drive away. However, the city's proximity to SLC makes FrontRunner less necessary for most commuters, as the drive is only 10 minutes. UTA bus routes do serve major corridors. For tenants who work outside SLC (Ogden, Provo), the nearby FrontRunner stations provide viable options, and North Salt Lake's location between two stations is reasonably convenient.",
       },
     ],
     lifestyleDescription:
@@ -585,7 +584,7 @@ export const cityContentByName: Record<string, CityContent> = {
 
   "West Valley City": {
     overview:
-      "West Valley City is Utah's second-largest city, with a population exceeding 140,000. The city's housing stock ranges from 1970s ramblers and split-levels to newer townhome and apartment developments near the USANA Amphitheater and Maverik Center. West Valley anchors the western Salt Lake Valley with major employers including eBay, Overstock (recently rebranded), and numerous distribution centers. Affordability relative to Salt Lake City proper supports workforce-housing demand and first-time renter applications. Investors find strong cash-flow potential here, acquisition costs are well below SLC median while rents hold steady due to consistent demand. The TRAX Green Line provides transit connectivity to downtown SLC, and the city is investing in its Fairpark and city center areas to improve walkability and services.",
+      "West Valley City is Utah's second-largest city, with a population exceeding 140,000. The city's housing stock ranges from 1970s ramblers and split-levels to newer townhome and apartment developments near the USANA Amphitheater and Maverik Center. West Valley anchors the western Salt Lake Valley with major employers including eBay, Overstock (recently rebranded), and numerous distribution centers. Affordability relative to Salt Lake City proper supports workforce-housing demand and first-time renter applications. Investors find strong cash-flow potential here, acquisition costs are well below SLC median while rents hold steady due to consistent demand. The TRAX Green Line provides transit connectivity to downtown SLC, and the city is investing in its city center area to improve walkability and services.",
     neighborhoods: [
       "Granger, established 1970s–1980s neighborhood with large lots",
       "Hunter, western residential area with newer construction pockets",
@@ -597,7 +596,6 @@ export const cityContentByName: Record<string, CityContent> = {
       "Utah's second-largest city with diversified employment base",
       "Salt Lake County's most affordable single-family market",
       "TRAX Green Line transit connects to downtown SLC",
-      "Utah's second-largest city with a broad mix of housing types",
     ],
     faq: [
       {
@@ -614,7 +612,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "West Valley City is one of Utah's most culturally rich communities, taco trucks and pho restaurants outnumber chain drive-throughs, and the international grocery stores on 3500 South are an experience unto themselves. The TRAX Green Line makes SLC commutes feasible without a car. Weekends might mean a concert at USANA Amphitheater, a hockey game at Maverik Center, or a round at Stonebridge Golf Club. Valley Fair Mall and WinCo Foods anchor daily shopping. Community gardens in the Western Garden area are a local amenity. WestFest in summer brings food, music, and performances to the city calendar.",
+      "West Valley City's food scene runs to taco trucks and pho restaurants, and the international grocery stores on 3500 South are worth a trip. The TRAX Green Line makes SLC commutes feasible without a car. Weekends might mean a concert at USANA Amphitheater, a hockey game at Maverik Center, or a round at Stonebridge Golf Club. Valley Fair Mall and WinCo Foods anchor daily shopping. Community gardens in the Western Garden area are a local amenity. WestFest in summer brings food, music, and performances to the city calendar.",
   },
 
   Magna: {
@@ -685,7 +683,7 @@ export const cityContentByName: Record<string, CityContent> = {
 
   Taylorsville: {
     overview:
-      "Taylorsville is a centrally located Salt Lake County city of roughly 60,000 residents, bordered by Murray, West Valley City, and West Jordan. The city's housing stock is diverse, 1970s–1990s single-family homes dominate, supplemented by a growing townhome and apartment inventory. Taylorsville's Redwood Road and 5400 South corridors provide extensive commercial services, and Valley Regional Medical Center is a significant local employer. The TRAX Red Line runs through the city, providing transit access to downtown SLC, the University of Utah, and Sandy. For investors, Taylorsville offers a middle-market sweet spot, affordable enough for cash flow, well-located enough for appreciation, and diverse enough to draw from a wide tenant pool. The city's central position means tenants can reach employment in any direction without long commutes.",
+      "Taylorsville is a centrally located Salt Lake County city of roughly 60,000 residents, bordered by Murray, West Valley City, and West Jordan. The city's housing stock is diverse, 1970s–1990s single-family homes dominate, supplemented by a growing townhome and apartment inventory. Taylorsville's Redwood Road and 5400 South corridors provide extensive commercial services, and Valley Regional Medical Center is a significant local employer. Taylorsville has no TRAX stations of its own, but UTA bus routes connect to TRAX stations in neighboring Murray. For investors, Taylorsville offers a middle-market sweet spot, affordable enough for cash flow, well-located enough for appreciation, and diverse enough to draw from a wide tenant pool. The city's central position means tenants can reach employment in any direction without long commutes.",
     neighborhoods: [
       "Bennion, established neighborhood with mature trees",
       "5400 South corridor, commercial adjacency with mixed housing",
@@ -694,7 +692,7 @@ export const cityContentByName: Record<string, CityContent> = {
     ],
     highlights: [
       "Central Salt Lake County location with multi-directional commute access",
-      "TRAX Red Line provides transit connectivity to SLC and Sandy",
+      "UTA bus routes connect to TRAX stations in neighboring Murray",
       "Middle-market pricing with balanced cash flow and appreciation",
       "Valley Regional Medical Center as local employment anchor",
     ],
@@ -704,8 +702,8 @@ export const cityContentByName: Record<string, CityContent> = {
         a: "Taylorsville and Murray share similar geography and commute access, but Taylorsville's median home prices run 10–15% lower, translating to better cash-on-cash returns. Murray has a more established commercial identity with its Fashion Place Mall area, which commands a modest rent premium. For pure investment returns, Taylorsville tends to outperform on yield while Murray may edge ahead on appreciation. Both are solid middle-market plays, and many investors hold properties in both cities to diversify within the submarket.",
       },
       {
-        q: "What's the TRAX impact on rentals?",
-        a: "Properties within walking distance (0.5 miles) of TRAX stations in Taylorsville enjoy a distinct marketing advantage, a car-optional commute to downtown or the University of Utah. These properties can command a $100–$150/month premium and experience lower vacancy. The Red Line runs through central Taylorsville with stops that connect to downtown SLC in 25 minutes.",
+        q: "Is there TRAX or FrontRunner service in Taylorsville?",
+        a: "Taylorsville has no TRAX or FrontRunner stations of its own. UTA bus routes connect to TRAX stations in neighboring Murray, and I-215 and Redwood Road make most of the valley a short drive. Tenants who want a rail commute should compare rentals in Murray, where TRAX and FrontRunner meet at Murray Central.",
       },
       {
         q: "What renovations make sense in Taylorsville?",
@@ -713,7 +711,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Taylorsville sits at Salt Lake County's geographic center, making it a 15–20 minute drive to practically anywhere in the valley. Daily life revolves around the Redwood Road and 5400 South commercial strips for groceries, dining, and services, the international restaurant scene along Redwood Road is a hidden gem with Vietnamese, Salvadoran, and Ethiopian options. The TRAX Red Line enables car-free commuting to the U of U or downtown SLC. Taylorsville Dayzz festival in summer brings rides, concerts, and a community spirit to the city park. Valley Regional Park and the Jordan River Parkway offer green space for evening walks and weekend recreation.",
+      "Taylorsville sits at Salt Lake County's geographic center, making it a 15–20 minute drive to practically anywhere in the valley. Daily life revolves around the Redwood Road and 5400 South commercial strips for groceries, dining, and services, the international restaurant scene along Redwood Road is a hidden gem with Vietnamese, Salvadoran, and Ethiopian options. UTA bus routes connect to TRAX in neighboring Murray for trips to the U of U or downtown SLC. Taylorsville Dayzz festival in summer brings rides, concerts, and a community spirit to the city park. Valley Regional Park and the Jordan River Parkway offer green space for evening walks and weekend recreation.",
   },
 
   Murray: {
@@ -735,7 +733,7 @@ export const cityContentByName: Record<string, CityContent> = {
     faq: [
       {
         q: "How does the hospital affect the rental market?",
-        a: "Intermountain Medical Center employs thousands of workers across all shifts, doctors, nurses, technicians, administrators, and support staff. This creates a deep, year-round demand pool for rentals in Murray. Travel nurses on 13-week assignments create a furnished rental niche. Permanent staff prefer proximity to minimize commute time, especially those on early or late shifts. Properties within 10 minutes of the hospital can list commute time to Intermountain Medical Center as a geography fact. The hospital's institutional stability insulates Murray's rental market from broader economic volatility.",
+        a: "Intermountain Medical Center employs thousands of workers across all shifts, doctors, nurses, technicians, administrators, and support staff. This creates a deep, year-round demand pool for rentals in Murray. Travel nurses on 13-week assignments create a furnished rental niche. Permanent staff prefer proximity to minimize commute time, especially those on early or late shifts. Properties within 10 minutes of the hospital offer a short commute to Intermountain Medical Center. The hospital's institutional stability insulates Murray's rental market from broader economic volatility.",
       },
       {
         q: "What's the Fireclay District?",
@@ -780,7 +778,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "South Salt Lake is where the valley's urban energy concentrates at accessible prices. The State Street corridor has exploded with craft breweries (Fisher, Shades), taquerias, pho houses, and a growing coffee shop scene. TRAX gets commuters to downtown SLC in 10 minutes. Weekend activities include the People's Market (an outdoor flea/artisan market), Jordan River Parkway walks, and brewery hopping. The vibe is eclectic and unpretentious, food trucks share parking lots with auto shops, and that's the charm. The city's cultural diversity shows in its food scene, some of Utah's best international dining is on South Salt Lake's State Street. Central Pointe area is becoming a genuine mixed-use neighborhood with increasing walkability.",
+      "South Salt Lake is where the valley's urban energy concentrates at accessible prices. The State Street corridor has exploded with craft breweries (Fisher, Shades), taquerias, pho houses, and a growing coffee shop scene. TRAX gets commuters to downtown SLC in 10 minutes. Weekend activities include the People's Market (an outdoor flea/artisan market), Jordan River Parkway walks, and brewery hopping. The vibe is eclectic and unpretentious, food trucks share parking lots with auto shops, and that's the charm. The State Street food scene includes international restaurants and markets. Central Pointe area is becoming a genuine mixed-use neighborhood with increasing walkability.",
   },
 
   Millcreek: {
@@ -818,7 +816,7 @@ export const cityContentByName: Record<string, CityContent> = {
 
   Holladay: {
     overview:
-      "Holladay is a premium residential city in the southeast Salt Lake Valley, known for Cottonwood Heights and Big Cottonwood Canyon adjacency. The city's roughly 31,000 residents enjoy some of the valley's finest mountain views, mature tree-lined streets, and the upscale Holladay Village shopping area. Housing ranges from mid-century homes in established neighborhoods to luxury estates in the foothills. The Cottonwood Mall site redevelopment into Holladay Village created a walkable retail and dining destination. For investors, Holladay is a premium market: acquisition costs are high, but rents, occupancy, and appreciation reflect canyon access and limited supply. Demand is supported by nearby hospital employment, canyon access, and Canyons School District zoning. Big and Little Cottonwood Canyon skiing (Brighton, Solitude, Snowbird, Alta) is 20–30 minutes away.",
+      "Holladay is a premium residential city in the southeast Salt Lake Valley, known for Cottonwood Heights and Big Cottonwood Canyon adjacency. The city's roughly 31,000 residents enjoy some of the valley's finest mountain views, mature tree-lined streets, and the upscale Holladay Village shopping area. Housing ranges from mid-century homes in established neighborhoods to luxury estates in the foothills. The Cottonwood Mall site redevelopment into Holladay Village created a walkable retail and dining destination. For investors, Holladay is a premium market: acquisition costs are high, but rents, occupancy, and appreciation reflect canyon access and limited supply. Demand is supported by nearby hospital employment, canyon access, and Granite School District zoning. Big and Little Cottonwood Canyon skiing (Brighton, Solitude, Snowbird, Alta) is 20–30 minutes away.",
     neighborhoods: [
       "Holladay Village, walkable retail and dining with adjacent townhomes",
       "Olympus Cove, luxury hillside homes with panoramic views",
@@ -829,7 +827,7 @@ export const cityContentByName: Record<string, CityContent> = {
       "Holladay Village walkable retail/dining destination",
       "Big and Little Cottonwood Canyon skiing within 20–30 minutes",
       "Premium rents near canyon access and Holladay Village",
-      "Canyons School District zoning; canyon commute",
+      "Granite School District zoning; canyon commute",
     ],
     faq: [
       {
@@ -996,7 +994,6 @@ export const cityContentByName: Record<string, CityContent> = {
       "Low turnover and HOA-maintained 1990s–2010s housing",
       "Jordan School District zoning; Bangerter and MVC access",
       "Moderate acquisition costs for quality 2000s-era housing",
-      "Bangerter Highway and Mountain View Corridor commute access",
     ],
     faq: [
       {
@@ -1051,7 +1048,7 @@ export const cityContentByName: Record<string, CityContent> = {
 
   Bluffdale: {
     overview:
-      "Bluffdale is a small city of roughly 16,000 at the Salt Lake–Utah County line, straddling the Jordan River between the Traverse and Oquirrh mountain ranges. The city maintains a semi-rural character with equestrian properties and large-lot zoning alongside newer master-planned subdivisions. The NSA Utah Data Center, located in Bluffdale, adds a unique federal employment presence. The city's position at the Point of the Mountain gives it direct access to both Salt Lake and Utah County job markets, I-15 runs through the center of town. For investors, Bluffdale offers a mix of opportunities: premium large-lot properties for niche tenants and newer subdivision homes for 3–5 bedroom demand. The Canyons School District serves much of the city. Acquisition costs are higher than Herriman but reflect the smaller, large-lot community feel.",
+      "Bluffdale is a small city of roughly 16,000 at the Salt Lake–Utah County line, straddling the Jordan River between the Traverse and Oquirrh mountain ranges. The city maintains a semi-rural character with equestrian properties and large-lot zoning alongside newer master-planned subdivisions. The NSA Utah Data Center, located in Bluffdale, adds a unique federal employment presence. The city's position at the Point of the Mountain gives it direct access to both Salt Lake and Utah County job markets, I-15 runs through the center of town. For investors, Bluffdale offers a mix of opportunities: premium large-lot properties for niche tenants and newer subdivision homes for 3–5 bedroom demand. The Jordan School District serves the city. Acquisition costs are higher than Herriman but reflect the smaller, large-lot community feel.",
     neighborhoods: [
       "14600 South area, newer subdivisions with HOA commons",
       "Eastern Bluffdale, equestrian and large-lot properties",
@@ -1071,7 +1068,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What housing types lease in Bluffdale?",
-        a: "Bluffdale tenants fall into two distinct categories: 3–5 bedroom homes in newer subdivisions (Jordan or Canyons School District zoning) and large-lot or equestrian properties with pasture or outbuildings. The latter group pays premium rents ($2,500–$4,000+) and shows exceptional retention, moving horses is expensive and inconvenient, so these tenants stay for years. Federal employees and contractors associated with the NSA facility form a smaller but steady demand segment with reliable income verification.",
+        a: "Bluffdale tenants fall into two distinct categories: 3–5 bedroom homes in newer subdivisions (Jordan School District zoning) and large-lot or equestrian properties with pasture or outbuildings. The latter group pays premium rents ($2,500–$4,000+) and shows exceptional retention, moving horses is expensive and inconvenient, so these tenants stay for years. Federal employees and contractors associated with the NSA facility form a smaller but steady demand segment with reliable income verification.",
       },
       {
         q: "Is Bluffdale accessible by transit?",
@@ -1194,7 +1191,6 @@ export const cityContentByName: Record<string, CityContent> = {
     highlights: [
       "Large lots and emerging Town Center retail",
       "Alpine School District zoning; large-lot housing",
-      "Emerging Town Center adding walkable amenities",
       "Strong appreciation driven by limited supply and persistent demand",
     ],
     faq: [
@@ -1242,7 +1238,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What schools serve American Fork?",
-        a: "American Fork is served by the Alpine School District. American Fork High School is the local high school. Listings can name the zoned elementary as a location fact.",
+        a: "American Fork is served by the Alpine School District, and American Fork High School is the local high school. The zoned elementary depends on the address, so confirm it with the district.",
       },
     ],
     lifestyleDescription:
@@ -1267,7 +1263,7 @@ export const cityContentByName: Record<string, CityContent> = {
     faq: [
       {
         q: "What makes Pleasant Grove tenants stay?",
-        a: "Pleasant Grove has one of Utah County's strongest community identities, and tenants who engage with it, attending Strawberry Days and using Battle Creek trails. Alpine School District zoning is local geography. The city's compact size and festival calendar support renewals when rents stay near comps. Properties near the historic center and Battle Creek trailheads often show stronger occupancy.",
+        a: "Pleasant Grove has one of Utah County's strongest community identities, and tenants who engage with it by attending Strawberry Days and using Battle Creek trails. Alpine School District serves the city. The city's compact size and festival calendar support renewals when rents stay near comps. Properties near the historic center and Battle Creek trailheads often show stronger occupancy.",
       },
       {
         q: "How does the downtown area perform?",
@@ -1275,7 +1271,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What's the commute situation?",
-        a: "Pleasant Grove's central Utah County location is a genuine advantage, Lehi's Silicon Slopes campuses are 10 minutes north, Provo/BYU is 10 minutes south, and I-15 interchange access is straightforward. This flexibility means the tenant pool draws from both Salt Lake County southbound commuters and Utah County northbound workers. FrontRunner service is accessible via the Orem or American Fork stations (5–10 min drive). The positioning means tenants rarely feel trapped by geography, which is a retention advantage, they can change jobs without needing to move.",
+        a: "Pleasant Grove's central Utah County location is a genuine advantage, Lehi's Silicon Slopes campuses are 10 minutes north, Provo/BYU is 10 minutes south, and I-15 interchange access is easy. This flexibility means the tenant pool draws from both Salt Lake County southbound commuters and Utah County northbound workers. FrontRunner service is accessible via the Orem or American Fork stations (5–10 min drive). Tenants can change jobs without needing to move, which helps retention.",
       },
     ],
     lifestyleDescription:
@@ -1312,7 +1308,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Lindon is the kind of place where you might pass a horse trailer on your way to the tech office. Morning commutes to Silicon Slopes or BYU take 10 minutes in opposite directions via I-15. The city's lack of commercial development means most errands happen in Orem or Pleasant Grove, but residents view this as a feature: residential streets, large yards, and less commercial traffic. The Lindon Days celebration in August centers on the city park with a parade, carnival, and community dinner. The Murdock Canal Trail passes through for cycling and walking. Evenings are genuinely quiet, and the Timpanogos Mountain views from the larger lots are among the best in Utah County. Large lots and I-15 access are the usual listing facts.",
+      "Lindon is the kind of place where you might pass a horse trailer on your way to the tech office. Morning commutes to Silicon Slopes or BYU take 10 minutes in opposite directions via I-15. The city's lack of commercial development means most errands happen in Orem or Pleasant Grove, but residents view this as a feature: residential streets, large yards, and less commercial traffic. The Lindon Days celebration in August centers on the city park with a parade, carnival, and community dinner. The Murdock Canal Trail passes through for cycling and walking. Evenings are quiet, and the Timpanogos Mountain views from the larger lots are among the best in Utah County. Large lots and I-15 access are the main draws.",
   },
 
   Vineyard: {
@@ -1384,7 +1380,7 @@ export const cityContentByName: Record<string, CityContent> = {
 
   Springville: {
     overview:
-      "Springville is known as 'Art City' for its long tradition of artistic culture, centered on the Springville Museum of Art, one of Utah's finest. The city of roughly 35,000 sits south of Provo along the I-15 corridor with Wasatch foothills to the east and Utah Lake to the west. Housing stock ranges from historic homes near downtown to newer subdivisions on the city's expanding southern edge. Springville's Main Street retains a genuine small-town character with independent shops and restaurants. The city's Spring Creek and Hobble Creek Canyon provide recreation access. For investors, Springville offers moderate pricing, 3–4 bedroom demand, and a distinct Art City identity. The market is more affordable than Provo while sharing Alpine School District zoning and I-15 commute convenience.",
+      "Springville is known as 'Art City' for its long tradition of artistic culture, centered on the Springville Museum of Art, one of Utah's finest. The city of roughly 35,000 sits south of Provo along the I-15 corridor with Wasatch foothills to the east and Utah Lake to the west. Housing stock ranges from historic homes near downtown to newer subdivisions on the city's expanding southern edge. Springville's Main Street retains a genuine small-town character with independent shops and restaurants. The city's Spring Creek and Hobble Creek Canyon provide recreation access. For investors, Springville offers moderate pricing, 3–4 bedroom demand, and a distinct Art City identity. The market is more affordable than Provo, with Nebo School District zoning and I-15 commute convenience.",
     neighborhoods: [
       "Historic Downtown, walkable Main Street with character homes and renovation upside",
       "East Springville, foothills neighborhoods near Hobble Creek Canyon",
@@ -1394,7 +1390,7 @@ export const cityContentByName: Record<string, CityContent> = {
     highlights: [
       "Springville Museum of Art, cultural anchor and community identity",
       "Hobble Creek Canyon recreation access for hiking, camping, and fishing",
-      "More affordable than Provo; Alpine School District zoning",
+      "More affordable than Provo; Nebo School District zoning",
       "Historic Main Street with genuine small-town character",
     ],
     faq: [
@@ -1412,7 +1408,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Springville moves at a gentler pace than its Provo neighbor. The Museum of Art is a genuine community treasure, residents attend exhibition openings. Main Street has a bakery, a pizza shop, and independent businesses. Hobble Creek Canyon is the weekend trail and picnic corridor, with fall foliage drives as a seasonal tradition. Art City Days in June includes a parade, art shows, and a carnival. Art City Elementary is the nearby school name for geography. Evening walks end with Wasatch Mountain alpenglow visible from most streets in town.",
+      "Springville moves at a gentler pace than its Provo neighbor. The Museum of Art is a genuine community treasure, residents attend exhibition openings. Main Street has a bakery, a pizza shop, and independent businesses. Hobble Creek Canyon is the weekend trail and picnic corridor, with fall foliage drives as a seasonal tradition. Art City Days in June includes a parade, art shows, and a carnival. Art City Elementary is the nearby elementary school. Evening walks end with Wasatch Mountain alpenglow visible from most streets in town.",
   },
 
   Mapleton: {
@@ -1441,11 +1437,11 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What about Maple Mountain recreation access?",
-        a: "Maple Mountain is Mapleton's defining geographic feature, and trail access from the city's eastern neighborhoods is a primary lifestyle draw. Hiking, mountain biking, horseback riding, and seasonal hunting are all accessible within minutes. The Spanish Fork Peak trail and Maple Mountain trails provide challenging alpine hikes without the canyon traffic of Provo or American Fork. For tenants, this daily recreation access is genuinely unique, stepping out the back door and being on a mountain trail within 10 minutes is something they'll pay premium rent to maintain.",
+        a: "Maple Mountain is Mapleton's defining geographic feature, and trail access from the city's eastern neighborhoods is a primary lifestyle draw. Hiking, mountain biking, horseback riding, and seasonal hunting are all accessible within minutes. The Spanish Fork Peak trail and Maple Mountain trails provide challenging alpine hikes without the canyon traffic of Provo or American Fork. For tenants, this daily recreation access is unusual, stepping out the back door and being on a mountain trail within 10 minutes is something they'll pay premium rent to maintain.",
       },
     ],
     lifestyleDescription:
-      "Mapleton life is defined by the mountain. Morning routines include watching sunrise paint Maple Mountain from the kitchen window, and evening walks transition into foothill trail runs. The city has no commercial district, groceries and dining happen in Springville or Spanish Fork, and that's by design. Mapleton residents value quiet, space, and natural beauty above convenience. The city is in the Nebo School District; large lots are the housing-stock fact. The annual Mapleton Parade and community celebration is a small-town affair where everyone waves from lawn chairs. Weekends revolve around outdoor pursuits, mountain biking, horseback riding, canyon exploring, and yard projects on the big lots. The night sky is darker here than on the valley floor, and residents notice.",
+      "Mapleton life is defined by the mountain. Morning routines include watching sunrise paint Maple Mountain from the kitchen window, and evening walks transition into foothill trail runs. The city has no commercial district, groceries and dining happen in Springville or Spanish Fork, and that's by design. Mapleton residents value quiet, space, and natural beauty above convenience. The city is in the Nebo School District, and large lots are typical of the housing stock. The annual Mapleton Parade and community celebration is a small-town affair where everyone waves from lawn chairs. Weekends revolve around outdoor pursuits, mountain biking, horseback riding, canyon exploring, and yard projects on the big lots. The night sky is darker here than on the valley floor, and residents notice.",
   },
 
   "Spanish Fork": {
@@ -1462,7 +1458,7 @@ export const cityContentByName: Record<string, CityContent> = {
       "Fiesta Days, premier Western heritage celebration and PRCA rodeo",
       "Spanish Fork Canyon recreation access for fishing, hiking, and camping",
       "Utah County value pricing with canyon access and growth",
-      "Nebo School District zoning; Fiesta Days and canyon access",
+      "Nebo School District zoning",
     ],
     faq: [
       {
@@ -1495,7 +1491,7 @@ export const cityContentByName: Record<string, CityContent> = {
       "Salem Pond as beloved community recreation and gathering anchor",
       "Rapid growth bringing rooftops and commercial development",
       "Affordable new construction relative to north Utah County",
-      "Nebo School District zoning; Salem Pond recreation",
+      "Nebo School District zoning",
     ],
     faq: [
       {
@@ -1504,20 +1500,20 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "How is the commute from Salem?",
-        a: "Salem to Provo is about 15 minutes via I-15, and Spanish Fork is 5 minutes. Silicon Slopes in Lehi is 25–30 minutes, and downtown SLC is 50–60 minutes. The commute is the primary trade-off, Salem's affordability comes at the cost of distance from the heaviest employment concentrations. FrontRunner service is accessible via the Springville or Payson stations. For tenants who work in south Utah County or Provo, Salem is convenient. For Silicon Slopes commuters, the daily drive is manageable but not insignificant. Remote workers find Salem's value proposition particularly attractive.",
+        a: "Salem to Provo is about 15 minutes via I-15, and Spanish Fork is 5 minutes. Silicon Slopes in Lehi is 25–30 minutes, and downtown SLC is 50–60 minutes. The commute is the primary trade-off, Salem's affordability comes at the cost of distance from the heaviest employment concentrations. There is no FrontRunner station in south Utah County, and the nearest is Provo Central. For tenants who work in south Utah County or Provo, Salem is convenient. For Silicon Slopes commuters, the daily drive is manageable but not insignificant. Remote workers find Salem's value proposition particularly attractive.",
       },
       {
         q: "What makes Salem Pond important?",
-        a: "Salem Pond is more than a fishing spot, it's the community's social center. The park surrounding the pond hosts Salem Days, Fourth of July celebrations, summer concerts, and informal daily gathering. Walking loops, bank fishing, and civic events draw consistent turnout. Proximity to Salem Pond is a geography amenity in listings. Properties within a 5-minute walk often lease a bit faster.",
+        a: "Salem Pond is more than a fishing spot, it's the community's social center. The park surrounding the pond hosts Salem Days, Fourth of July celebrations, summer concerts, and informal daily gathering. Walking loops, bank fishing, and civic events draw consistent turnout. Properties within a 5-minute walk often lease a bit faster.",
       },
     ],
     lifestyleDescription:
-      "Salem life revolves around the pond. Evening walks around Salem Pond are a daily ritual, and the fishing is genuinely good (trout and bluegill from the banks). Salem Days in August packs the park with carnival rides, a parade, and community dinners. The Loafer Mountain foothills provide hiking and ATV trails accessible from the city's eastern edge. Daily errands happen in Spanish Fork or Payson (both 5–10 min), and the growing commercial development along Salem's main corridors is slowly adding local options. The vibe is small-town-turning-suburban: agricultural lots sit next to post-2010 subdivisions. Nebo School District zoning is local geography.",
+      "Salem life revolves around the pond. Evening walks around Salem Pond are a daily ritual, and the fishing is good (trout and bluegill from the banks). Salem Days in August packs the park with carnival rides, a parade, and community dinners. The Loafer Mountain foothills provide hiking and ATV trails accessible from the city's eastern edge. Daily errands happen in Spanish Fork or Payson (both 5–10 min), and the growing commercial development along Salem's main corridors is slowly adding local options. The vibe is small-town-turning-suburban: agricultural lots sit next to post-2010 subdivisions. Nebo School District serves the city.",
   },
 
   Payson: {
     overview:
-      "Payson is a city of roughly 21,000 in southern Utah County with deep agricultural roots and a growing residential base. The city sits at the mouth of Payson Canyon, offering direct access to Nebo Loop, one of Utah's most scenic drives. Payson's Main Street retains an authentic small-town character with local businesses, and the annual Onion Days celebration reflects the city's farming heritage. Housing ranges from affordable older homes near downtown to new construction on the southern and western edges. The FrontRunner commuter rail station in Payson provides transit connectivity that sets it apart from other south Utah County cities. For investors, Payson offers Utah County's most affordable entry points with transit access, community identity, and growth potential. The city's distance from north Utah County employment is offset by the FrontRunner station and Payson's own growing commercial base.",
+      "Payson is a city of roughly 21,000 in southern Utah County with deep agricultural roots and a growing residential base. The city sits at the mouth of Payson Canyon, offering direct access to Nebo Loop, one of Utah's most scenic drives. Payson's Main Street retains an authentic small-town character with local businesses, and the annual Onion Days celebration reflects the city's farming heritage. Housing ranges from affordable older homes near downtown to new construction on the southern and western edges. Payson has no FrontRunner station of its own, and the nearest is Provo Central, reached by I-15. For investors, Payson offers some of Utah County's most affordable entry points, community identity, and growth potential. The city's distance from north Utah County employment is partly offset by Payson's own growing commercial base.",
     neighborhoods: [
       "Downtown Payson, historic Main Street with walkable character",
       "Payson Canyon entrance, eastern gateway to Nebo Loop recreation",
@@ -1525,19 +1521,19 @@ export const cityContentByName: Record<string, CityContent> = {
       "West Payson, newer subdivisions on the expanding frontier",
     ],
     highlights: [
-      "FrontRunner commuter rail station, southernmost stop with SLC connectivity",
+      "I-15 access north to Spanish Fork and Provo",
       "Nebo Loop scenic byway and Payson Canyon recreation access",
-      "Utah County's most affordable markets with transit advantage",
+      "Some of Utah County's most affordable markets",
       "Onion Days, beloved harvest celebration with strong community identity",
     ],
     faq: [
       {
-        q: "How does the FrontRunner station change the investment picture?",
-        a: "Payson's FrontRunner station is a transformative asset, it provides commuter rail service to Provo (20 min), Salt Lake City (75 min), and all intermediate stops. This transit connectivity is unique among south Utah County cities and expands the potential tenant pool beyond car-dependent commuters. Properties near the station can market car-optional living, which supports car-optional commutes to Provo and SLC. The station area is also likely to attract transit-oriented development over time, which could lift surrounding property values. For investors, the FrontRunner station justifies Payson consideration over comparably priced but transit-disconnected alternatives.",
+        q: "How is the commute from Payson?",
+        a: "Payson does not have a FrontRunner station. The nearest is Provo Central, and most residents drive north on I-15 to Spanish Fork, Provo, or Orem. Commute length is the main trade-off for Payson's lower housing costs, so it helps to market homes to tenants who already work in south Utah County or work remotely.",
       },
       {
         q: "What drives demand in Payson?",
-        a: "Payson's demand drivers include affordability (among Utah County's lowest home prices), FrontRunner transit, Nebo School District schools, and community identity. Demand is dominated by households working in Provo/Orem or Spanish Fork who accept a 10–20 minute commute in exchange for lower housing costs. The FrontRunner also attracts SLC workers willing to trade a longer transit commute for dramatically lower housing costs. As north Utah County prices continue to climb, spillover demand flows south to cities like Payson where the value proposition is compelling.",
+        a: "Payson's demand drivers include affordability (among Utah County's lowest home prices), I-15 access, Nebo School District schools, and community identity. Demand is dominated by households working in Provo/Orem or Spanish Fork who accept a 10–20 minute commute in exchange for lower housing costs. Some Salt Lake and Silicon Slopes workers also accept a longer drive in exchange for dramatically lower housing costs. As north Utah County prices continue to climb, spillover demand flows south to cities like Payson where the value proposition is compelling.",
       },
       {
         q: "What is Nebo Loop and why does it matter?",
@@ -1545,7 +1541,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Payson combines small-town heritage with growing connectivity. The FrontRunner station makes morning commutes to Provo (20 min) or SLC (75 min) possible by rail, residents read or work rather than driving. Onion Days in September is the beloved community celebration with a parade, harvest-themed events, and the whole town gathering at the park. Payson Canyon and the Nebo Loop scenic drive are the weekend recreation anchors, fall drives through the aspens are a local tradition. Downtown Main Street has a barbershop, a cafe, and local businesses that longtime residents support fiercely. The Peteetneet Academy museum hosts community events and classes. Nebo School District zoning and the city park system are local amenities. The pace is slower than north Utah County.",
+      "Payson combines small-town heritage with easy I-15 access to the rest of Utah County. Morning commutes head north toward Spanish Fork and Provo. Onion Days in September is the beloved community celebration with a parade, harvest-themed events, and the whole town gathering at the park. Payson Canyon and the Nebo Loop scenic drive are the weekend recreation anchors, fall drives through the aspens are a local tradition. Downtown Main Street has a barbershop, a cafe, and local businesses that longtime residents support fiercely. The Peteetneet Academy museum hosts community events and classes. Nebo School District zoning and the city park system are local amenities. The pace is slower than north Utah County.",
   },
 
   Santaquin: {
@@ -1566,7 +1562,7 @@ export const cityContentByName: Record<string, CityContent> = {
     faq: [
       {
         q: "Is Santaquin too far south for investment?",
-        a: "Distance is Santaquin's primary challenge, it's the farthest Utah County city from Silicon Slopes and SLC employment. However, the affordability gap is significant enough to attract households who prioritize newer floor plans over a shorter commute. Spanish Fork (10 min) and Provo (20 min) provide closer employment access, and remote work trends have reduced the commute barrier. The FrontRunner station in Payson is 10 minutes north. For investors, Santaquin's low acquisition costs produce strong yields, and the growth trajectory suggests appreciation as the city's commercial infrastructure matures. It's a patience play that rewards long-term holders.",
+        a: "Distance is Santaquin's primary challenge, it's the farthest Utah County city from Silicon Slopes and SLC employment. However, the affordability gap is significant enough to attract households who prioritize newer floor plans over a shorter commute. Spanish Fork (10 min) and Provo (20 min) provide closer employment access, and remote work trends have reduced the commute barrier. The nearest FrontRunner station is Provo Central, a drive north on I-15. For investors, Santaquin's low acquisition costs produce strong yields, and the growth trajectory suggests appreciation as the city's commercial infrastructure matures. It's a patience play that rewards long-term holders.",
       },
       {
         q: "What commercial services are available?",
@@ -1578,7 +1574,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Santaquin has a frontier-community feel where agricultural heritage meets new-subdivision growth. Morning commutes head north on I-15 to Spanish Fork, Provo, or beyond. The historic town center has a small general store, a gas station, and residential streets where neighbors still wave. Orchard Days in August celebrates the city's farming roots with a parade, pie-eating contests, and community gathering at the park. The foothills east of town provide hiking and horseback riding with views down the entire valley. Nebo School District zoning and a growing park system are local amenities. There's one standout pizza place that every resident knows by name. Evening entertainment is a porch sunset watching the Wasatch alpenglow, and honestly, that's a pretty good deal for the price of admission.",
+      "Santaquin has a frontier-community feel where agricultural heritage meets new-subdivision growth. Morning commutes head north on I-15 to Spanish Fork, Provo, or beyond. The historic town center has a small general store, a gas station, and residential streets where neighbors still wave. Orchard Days in August celebrates the city's farming roots with a parade, pie-eating contests, and community gathering at the park. The foothills east of town provide hiking and horseback riding with views down the entire valley. Nebo School District zoning and a growing park system are local amenities. There's one standout pizza place that every resident knows by name. Evening entertainment is a porch sunset watching the Wasatch alpenglow, and admission is free.",
   },
 
   Nephi: {
@@ -1607,10 +1603,10 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What's the quality of life in Nephi?",
-        a: "Nephi offers genuine small-town living with mountain scenery, Mount Nebo (11,928 ft, highest peak in the Wasatch Range) dominates the eastern horizon. The city has basic amenities, grocery stores, restaurants, a movie theater, and community parks. Outdoor recreation includes hiking, fishing, hunting, and ATV riding in the surrounding mountains. The Ute Stampede rodeo in July is the community highlight. The listing facts are space, Mount Nebo recreation, and affordability relative to Utah County. The trade-off is distance from major employment and services, Salt Lake City is 90 minutes north, and Provo is 55 minutes.",
+        a: "Nephi offers genuine small-town living with mountain scenery, Mount Nebo (11,928 ft, highest peak in the Wasatch Range) dominates the eastern horizon. The city has basic amenities, grocery stores, restaurants, a movie theater, and community parks. Outdoor recreation includes hiking, fishing, hunting, and ATV riding in the surrounding mountains. The Ute Stampede rodeo in July is the community highlight. The draws are space, Mount Nebo recreation, and affordability relative to Utah County. The trade-off is distance from major employment and services, Salt Lake City is 90 minutes north, and Provo is 55 minutes.",
       },
     ],
     lifestyleDescription:
-      "Nephi is small-town Utah at its most authentic. The pace is set by agriculture, planting, harvest, and the rhythms of livestock operations visible from the city's edges. The Ute Stampede rodeo in July is the community event of the year, drawing visitors from across Juab County. Daily life involves morning commutes to the courthouse or local businesses, afternoons at the city park, and evenings watching Mount Nebo's shadow lengthen across the valley. The grocery store and a handful of restaurants on Main Street handle daily needs. Weekends include exploring the Nebo Loop from the southern entrance, fishing in nearby reservoirs, and hunting in the surrounding mountains during season. Neighbors know each other by name, The city's small scale and agricultural edges define the setting. It is a rural I-15-corridor market, not a Wasatch Front suburb.",
+      "Nephi is small-town Utah at its most authentic. The pace is set by agriculture, planting, harvest, and the rhythms of livestock operations visible from the city's edges. The Ute Stampede rodeo in July is the community event of the year, drawing visitors from across Juab County. Daily life involves morning commutes to the courthouse or local businesses, afternoons at the city park, and evenings watching Mount Nebo's shadow lengthen across the valley. The grocery store and a handful of restaurants on Main Street handle daily needs. Weekends include exploring the Nebo Loop from the southern entrance, fishing in nearby reservoirs, and hunting in the surrounding mountains during season. Neighbors know each other by name. The city's small scale and agricultural edges define the setting. It is a rural I-15-corridor market, not a Wasatch Front suburb.",
   },
 }

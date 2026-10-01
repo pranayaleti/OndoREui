@@ -81,17 +81,6 @@ export default function PrepareForRemoteOnlineNotarySession() {
         section="Notary"
         tags={["Remote Online Notary", "Checklist", "ID Verification", "RON Prep"]}
         keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: "Checklist: Prepare for Your Remote Online Notary Session",
-          description:
-            "A step-by-step checklist to prepare for Remote Online Notarization and avoid delays.",
-          author: { "@type": "Organization", name: "ONDO Notary" },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
       />
 
       <PageBanner

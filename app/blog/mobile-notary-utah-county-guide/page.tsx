@@ -14,7 +14,7 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 import { pageTitle, pageTitleText } from "@/lib/site"
 
-const TITLE = "Notary in Utah County: Remote Online Notarization, Fees, and How to Book"
+const TITLE = "Notary in Utah County: Remote Online Notarization Guide"
 const DESCRIPTION =
   "ONDO Notary serves Utah County by Remote Online Notarization (RON), $25 per remote act, same-day when capacity allows. No mobile travel or in-office appointments."
 
@@ -78,16 +78,6 @@ export default function MobileNotaryUtahCountyGuide() {
         section="Notary"
         tags={["Remote Online Notary", "Utah County", "Loan Signing", "Real Estate"]}
         keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: TITLE,
-          description: DESCRIPTION,
-          author: { "@type": "Organization", name: "ONDO Notary" },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
       />
 
       <PageBanner

@@ -7,11 +7,13 @@ const path = "/blog/utah-closing-costs-title-origination-prepaids"
 const faqs = [
   {
     question: "Does Utah charge a real estate transfer tax?",
-    answer: UTAH_CLOSING_NOTES.transferTax,
+    answer:
+      "No. Utah has no statewide real estate transfer tax, but county recording fees still apply and differ by county.",
   },
   {
     question: "Why is my friend’s Lehi title bill different from mine in Salt Lake County?",
-    answer: `${UTAH_CLOSING_NOTES.titleVaries} ${UTAH_CLOSING_NOTES.taxCalendar}`,
+    answer:
+      "Title premiums and escrow or closing fees vary by title company, even inside the same county, and recording fees differ by county. Compare the title and recording lines on each Loan Estimate.",
   },
 ]
 
@@ -55,8 +57,8 @@ export default function UtahClosingCostsPage() {
         <li>{UTAH_CLOSING_NOTES.taxCalendar}</li>
       </ul>
       <p>
-        That is why this site does not clone a Utah fee table onto Arizona, Colorado, Oregon, or Texas pages. Those
-        states have different closing customs and, in some cases, different taxes.
+        That is why this page covers Utah only. Arizona, Colorado, Oregon, and Texas have different closing customs
+        and, in some cases, different taxes.
       </p>
 
       <h2>Three buckets on the Loan Estimate</h2>
@@ -76,7 +78,7 @@ export default function UtahClosingCostsPage() {
         </li>
       </ol>
 
-      <h2>City landings are not a second fee sheet</h2>
+      <h2>City pages are market context, not a fee sheet</h2>
       <p>
         For market context only: <Link href="/loans/salt-lake-city">Salt Lake City</Link>,{" "}
         <Link href="/loans/lehi">Lehi</Link>, <Link href="/loans/provo">Provo</Link>,{" "}

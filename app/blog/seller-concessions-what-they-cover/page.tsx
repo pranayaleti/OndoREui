@@ -35,7 +35,7 @@ export const metadata = articleMetadata({
   path,
   title: "Seller Concessions: What They Can and Cannot Pay For",
   description:
-    "A seller credit can cover closing costs, prepaids, and a rate buydown — not the down payment. Every program caps the amount, and the cap depends on the file.",
+    "A seller credit can cover closing costs, prepaids, and a rate buydown, but not the down payment. Every program caps the amount, and the cap depends on the file.",
   published: "2026-09-17",
   category: "First-Time Buyers",
   keywords: ["seller concessions", "seller paid closing costs", "seller credit limits"],
@@ -49,7 +49,7 @@ export default function SellerConcessionsPage() {
         path,
         title: "Seller Concessions: What They Can and Cannot Pay For",
         description:
-          "A seller credit can cover closing costs, prepaids, and a rate buydown — not the down payment. Every program caps the amount, and the cap depends on the file.",
+          "A seller credit can cover closing costs, prepaids, and a rate buydown, but not the down payment. Every program caps the amount, and the cap depends on the file.",
         published: "2026-09-17",
         category: "First-Time Buyers",
         bannerSubtitle: "A credit is negotiated in the contract but spent under program rules.",

@@ -3,9 +3,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_PHONE, SITE_EMAILS, pageTitle, pageTitleText } from "@/lib/site"
+import { PM_SERVICE_AREA_SUMMARY } from "@/lib/service-faq"
 import Link from "next/link"
 import { ArrowLeft, HelpCircle } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
@@ -30,7 +30,7 @@ export default function GeneralFAQPage() {
     },
     {
       question: "What areas do you serve?",
-      answer: "We currently serve the greater Salt Lake City area, including Salt Lake City, Holladay, Midvale, Magna, and surrounding communities. We're continuously expanding to new areas."
+      answer: `${PM_SERVICE_AREA_SUMMARY} If your property is somewhere else, contact us and we will tell you whether we can help.`
     },
     {
       question: "How do I get started with your services?",
@@ -122,21 +122,6 @@ export default function GeneralFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="general-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

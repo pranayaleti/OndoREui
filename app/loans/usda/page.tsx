@@ -25,9 +25,9 @@ export const metadata: Metadata = {
 }
 
 const benefits = [
-  { title: "Zero down when eligible", description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", icon: <DollarSign className="h-6 w-6" /> },
+  { title: "Zero down when eligible", description: "100% financing is available only when the property map, household income, occupancy, and overlays all fit.", icon: <DollarSign className="h-6 w-6" /> },
   { title: "Address-specific map", description: USDA_SNAPSHOT.mapNote, icon: <MapPin className="h-6 w-6" /> },
-  { title: "Guarantee fee (snapshot)", description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", icon: <Home className="h-6 w-6" /> },
+  { title: "Guarantee fee (snapshot)", description: `${USDA_SNAPSHOT.upfrontGuaranteeFee}. Annual: ${USDA_SNAPSHOT.annualFee}. ${USDA_SNAPSHOT.feeNote}`, icon: <Home className="h-6 w-6" /> },
   { title: "Primary residence", description: USDA_SNAPSHOT.occupancy, icon: <CheckCircle className="h-6 w-6" /> },
 ]
 

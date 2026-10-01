@@ -161,7 +161,7 @@ const RECAST_VS_REFI_ROWS: readonly ComparisonRow[] = [
     id: "cost-shape",
     criterion: "Typical cost shape (illustration, not a quote)",
     cells: {
-      recast: "A servicer recast fee — often a few hundred dollars when the investor allows it — plus the lump sum you already chose to send.",
+      recast: "A servicer recast fee (often a few hundred dollars when the investor allows it) plus the lump sum you already chose to send.",
       "refi-pay": "Title, origination, points, prepaid interest. Put all of it in the numerator.",
       "refi-credit": "Cash at closing can look small. Run break-even against the higher P&I, not against zero cost.",
     },

@@ -1,8 +1,8 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
 const slug = "/blog/property-management-pwa-offline"
-const title = "What Is a PWA? Why Your Property Management App Should Work Offline"
-const description = "How progressive web apps deliver installable, offline-capable property management — and why that matters in the field."
+const title = "What Is a PWA? Why Property Apps Should Work Offline"
+const description = "How progressive web apps deliver installable, offline-capable property management, and why that matters in the field."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"
@@ -62,7 +62,7 @@ export default function PropertyManagementPwaOffline() {
             <p>A service worker caches the app shell and data; an offline queue (backed by IndexedDB) holds writes and replays them on reconnect via background sync — so the app feels instant and never blocks your work.</p>
 
             <h2>Takeaway</h2>
-            <p>Field work is offline work. A PWA makes property management installable, fast, and resilient. See the <Link href="/demo/">platform demo</Link> for how Ondo builds it in.</p>
+            <p>Field work is offline work. A PWA makes property management installable, fast, and resilient. See <Link href="/property-management/">Ondo RE property management</Link> for how Ondo manages rentals.</p>
           
     </ArticleShell>
   )

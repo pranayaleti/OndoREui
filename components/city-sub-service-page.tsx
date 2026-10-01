@@ -1,14 +1,7 @@
 import Link from "next/link"
-import Script from "next/script"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import { PageBanner } from "@/components/page-banner"
 import { CommuteBadges } from "@/components/commute-badges"
 import { MarketDataCard } from "@/components/market-data-card"
@@ -22,7 +15,8 @@ import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
 import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
-import { SITE_HOURS, SITE_NAME, SITE_PHONE, SITE_SOCIALS, SITE_URL } from "@/lib/site"
+import { SITE_URL } from "@/lib/site"
+import { generateServiceJsonLd } from "@/lib/seo"
 import {
   type SubServiceDefinition,
   getSubServicesForParent,
@@ -66,7 +60,7 @@ import {
   TreePine,
   School,
 } from "lucide-react"
-import { safeJsonLd } from "@/components/json-ld"
+import { JsonLd } from "@/components/json-ld"
 
 const iconMap: Record<string, React.ReactNode> = {
   FileText: <FileText className="h-6 w-6" />,
@@ -130,79 +124,24 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
   const allFaqs = [...localizedBaseFaqs, ...cityFaqs]
   const canonicalPath = `/${subService.parentService}/${citySlug}/${subService.slug}/`
 
-  const businessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "RealEstateAgent"],
-    name: SITE_NAME,
-    areaServed: `${city.name}, UT`,
-    url: `${SITE_URL}${canonicalPath}`,
-    telephone: SITE_PHONE,
-    openingHours: SITE_HOURS,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: city.name,
-      addressRegion: "UT",
-      addressCountry: "US",
-    },
-    sameAs: SITE_SOCIALS,
-    ...(city.lat && city.lng
-      ? {
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: city.lat,
-            longitude: city.lng,
-          },
-        }
-      : {}),
-  }
-
+  // One Organization entity site-wide (#organization in the root layout): the page
+  // describes a Service that points at it, never a second per-city business. FAQ
+  // markup lives once on the city's locations page, not on every service page.
   const serviceJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: `${subService.name} in ${city.name}, UT`,
-    description: subService.metaDescription(city.name),
-    areaServed: `${city.name}, UT`,
-    serviceType: subService.parentName,
+    ...generateServiceJsonLd({
+      name: `${subService.name} in ${city.name}, UT`,
+      description: subService.metaDescription(city.name),
+      serviceType: subService.parentName,
+      areaServed: "Utah",
+      areaServedCity: city.name,
+      providerIsSiteOrganization: true,
+    }),
     url: `${SITE_URL}${canonicalPath}`,
-    provider: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-  }
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: allFaqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
   }
 
   return (
     <main className="min-h-screen">
-      <Script
-        id={`subservice-business-jsonld-${citySlug}-${subService.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(businessJsonLd) }}
-      />
-      <Script
-        id={`subservice-service-jsonld-${citySlug}-${subService.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }}
-      />
-      {allFaqs.length > 0 ? (
-        <Script
-          id={`subservice-faq-jsonld-${citySlug}-${subService.slug}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
-        />
-      ) : null}
+      <JsonLd id={`subservice-service-jsonld-${citySlug}-${subService.slug}`} data={serviceJsonLd} />
 
       <PageBanner
         title={`${subService.name} in ${city.name}, Utah`}
@@ -428,24 +367,22 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
 
         <Separator />
 
-        {/* FAQ accordion */}
+        {/* FAQ: <details> keeps every answer in the static HTML */}
         {allFaqs.length > 0 && (
           <section>
             <h2 className="text-2xl font-bold mb-4">
               Frequently Asked Questions
             </h2>
-            <Accordion type="single" collapsible className="w-full">
-              {allFaqs.map((f, i) => (
-                <AccordionItem key={i} value={`faq-${i}`}>
-                  <AccordionTrigger className="text-left">
+            <div className="space-y-3">
+              {allFaqs.map((f) => (
+                <details key={f.q} className="group rounded-lg border p-4">
+                  <summary className="cursor-pointer text-left font-medium group-open:mb-2">
                     {f.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-foreground/70 leading-relaxed">
-                    {f.a}
-                  </AccordionContent>
-                </AccordionItem>
+                  </summary>
+                  <p className="text-foreground/70 leading-relaxed">{f.a}</p>
+                </details>
               ))}
-            </Accordion>
+            </div>
           </section>
         )}
 

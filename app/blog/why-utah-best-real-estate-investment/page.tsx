@@ -106,7 +106,7 @@ export default function WhyUtahBestInvestment() {
             <ul>
               <li><strong>Rent-to-Price Ratios</strong>: Aim for ≥0.7% monthly in value markets (higher in Ogden, lower in Lehi for appreciation plays).</li>
               <li><strong>Vacancy & Lease-Up</strong>: Track seasonality around winter; maintain conservative assumptions in pro formas.</li>
-              <li><strong>Property Taxes & Insurance</strong>: Annualize increases; Utah valuations can reset after transactions.</li>
+              <li><strong>Property Taxes & Insurance</strong>: Annualize increases; Utah reassesses property to market value every year.</li>
               <li><strong>Job Announcements</strong>: Follow major employer expansions in Silicon Slopes for forward-looking demand signals.</li>
             </ul>
 

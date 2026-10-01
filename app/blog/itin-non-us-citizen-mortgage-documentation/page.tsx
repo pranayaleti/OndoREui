@@ -9,11 +9,13 @@ const path = "/blog/itin-non-us-citizen-mortgage-documentation"
 const faqs = [
   {
     question: "Is an ITIN the same as a Social Security number for an agency loan?",
-    answer: ITIN_DOCUMENTATION.agencyVsNonQm,
+    answer:
+      "No. Many agency conventional and FHA files expect a valid Social Security number, so a file with only an ITIN usually goes through a Non-QM or portfolio lender instead.",
   },
   {
     question: "Is national origin a reason to pick a program or a document stack?",
-    answer: ITIN_DOCUMENTATION.noEasier,
+    answer:
+      "No. Lenders document citizenship and lawful presence because some federal programs have legal eligibility rules. Country of origin is not a reason to pick a program, and no origin makes a file easier.",
   },
 ]
 
@@ -27,15 +29,16 @@ const rows: readonly ComparisonRow[] = [
     id: "id",
     criterion: "Typical identity / tax number",
     cells: {
-      agency: ITIN_DOCUMENTATION.agencyVsNonQm,
-      nonqm: ITIN_DOCUMENTATION.whatItinIs,
+      agency: "A valid Social Security number, for the credit report and automated underwriting.",
+      nonqm: "An IRS ITIN, with the lender’s own overlay on credit and documents.",
     },
   },
   {
     id: "docs",
     criterion: "Documentation categories (not preferences)",
     cells: {
-      agency: ITIN_DOCUMENTATION.docs,
+      agency:
+        "Government-issued ID, an SSN card, tax returns, and lawful-presence evidence when the borrower is not a U.S. citizen.",
       nonqm:
         "Same categories, plus investor overlays that may accept an ITIN file when agency AUS will not. Overlays change. Not a ranking of visa types.",
     },

@@ -8,6 +8,8 @@ type RelatedContentProps = {
   kinds?: readonly ContentKind[]
   limit?: number
   variant?: "grid" | "pills"
+  /** Shown when the content graph has no related links for this path. */
+  fallbackLinks?: readonly { label: string; href: string; description: string }[]
 }
 
 export function RelatedContent({
@@ -16,8 +18,10 @@ export function RelatedContent({
   kinds,
   limit = 6,
   variant = "grid",
+  fallbackLinks,
 }: RelatedContentProps) {
-  const links = relatedLinksForPath(path, { kinds, limit })
+  const graphLinks = relatedLinksForPath(path, { kinds, limit })
+  const links = graphLinks.length > 0 ? graphLinks : (fallbackLinks ?? []).slice(0, limit)
   if (links.length === 0) return null
 
   return (

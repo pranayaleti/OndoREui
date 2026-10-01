@@ -1,5 +1,6 @@
 import { PageBanner } from "@/components/page-banner"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { FaqAccordion, guideLink } from "@/components/faq-accordion"
+import { PURCHASE_CLOSING_RANGE } from "@/lib/service-faq"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
@@ -8,7 +9,6 @@ import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import Link from "next/link"
 import { ArrowLeft, CheckCircle } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
@@ -33,7 +33,7 @@ export default function EscrowFAQPage() {
     },
     {
       question: "How long does escrow typically take?",
-      answer: "Escrow typically takes 30-45 days, depending on the complexity of the transaction, loan processing time, and any contingencies that need to be resolved."
+      answer: `Escrow on a financed purchase typically runs about ${PURCHASE_CLOSING_RANGE} from acceptance, depending on the complexity of the transaction, loan processing time, and any contingencies that need to be resolved.`
     },
     {
       question: "What happens to my earnest money if the deal falls through?",
@@ -53,31 +53,38 @@ export default function EscrowFAQPage() {
     },
     {
       question: "Can I cancel my escrow account?",
-      answer: "A conventional escrow waiver, when it exists, is an overlay — not a federal right and not automatic at 20% down. FHA, VA, and USDA commonly require impounds. See impounds vs waiving escrow. This FAQ does not promise you can waive."
+      answer: "A conventional escrow waiver, when it exists, is a lender overlay. It is not a federal right and not automatic at 20% down. FHA, VA, and USDA commonly require impounds.",
+      links: [guideLink("impounds-vs-waiving-escrow", "Impounds vs waiving escrow")],
     },
     {
       question: "What happens if my escrow account has a shortage?",
-      answer: "If your escrow account has a shortage (usually due to increased taxes or insurance), your lender will typically spread the shortage over the next 12 months by increasing your monthly payment, or you can pay it in a lump sum. A shortage is not the same as the cushion. See escrow shortage after the first year, how the escrow cushion is set, and Utah tax calendar vs first escrow analysis."
+      answer: "If your escrow account has a shortage (usually due to increased taxes or insurance), your lender will typically spread the shortage over the next 12 months by increasing your monthly payment, or you can pay it in a lump sum. A shortage is not the same as the cushion.",
+      links: [guideLink("escrow-shortage-after-first-year", "Escrow shortage after the first year"), guideLink("escrow-cushion-how-it-is-set", "How the escrow cushion is set"), guideLink("utah-property-tax-calendar-first-escrow-analysis", "Utah tax calendar and first escrow analysis")],
     },
     {
       question: "When are Utah property taxes typically due?",
-      answer: "Utah property taxes are typically due November 30 and billed once a year. The mortgage escrow year is a different clock, so the first analysis after closing can surprise. Confirm the county treasurer. Not tax advice. See the Utah tax calendar guide."
+      answer: "Utah property taxes are typically due November 30 and billed once a year. The mortgage escrow year is a different clock, so the first analysis after closing can surprise. Confirm the county treasurer. Not tax advice.",
+      links: [guideLink("utah-property-tax-calendar-first-escrow-analysis", "Utah tax calendar and first escrow analysis")],
     },
     {
       question: "How is the escrow cushion set?",
-      answer: "Federal aggregate accounting generally lets a servicer require a cushion of no more than about two months of estimated annual disbursements. That is a ceiling, not a universal formula. See the escrow cushion guide."
+      answer: "Federal aggregate accounting generally lets a servicer require a cushion of no more than about two months of estimated annual disbursements. That is a ceiling, not a universal formula.",
+      links: [guideLink("escrow-cushion-how-it-is-set", "How the escrow cushion is set")],
     },
     {
       question: "Is hazard insurance the same as an HO-3 or HO-6?",
-      answer: "Hazard insurance is the dwelling coverage a lender requires. HO-3 is a common homeowners form for many houses. HO-6 is the common condo unit-owners form next to the master policy. See hazard vs HO-3 vs HO-6. Not insurance advice."
+      answer: "Hazard insurance is the dwelling coverage a lender requires. HO-3 is a common homeowners form for many houses. HO-6 is the common condo unit-owners form next to the master policy. Not insurance advice.",
+      links: [guideLink("hazard-vs-ho3-vs-ho6-condo-insurance", "Hazard vs HO-3 vs HO-6")],
     },
     {
       question: "Can I waive escrow if I put 20% down?",
-      answer: "Not as a promise. A conventional escrow waiver, when it exists, is an overlay — often discussed around 20% equity, still investor-specific, and often unavailable on FHA, VA, and USDA. See impounds vs waiving escrow. Link the cushion and shortage guides. This FAQ does not promise you can waive."
+      answer: "Not as a promise. A conventional escrow waiver, when it exists, is a lender overlay. It is often discussed around 20% equity, still investor-specific, and often unavailable on FHA, VA, and USDA.",
+      links: [guideLink("impounds-vs-waiving-escrow", "Impounds vs waiving escrow"), guideLink("escrow-cushion-how-it-is-set", "How the escrow cushion is set"), guideLink("escrow-shortage-after-first-year", "Escrow shortage after the first year")],
     },
     {
       question: "Why doesn’t my first statement match the note rate?",
-      answer: "The first bill is usually PITI plus odd-days timing from closing — not a secret rate change. See first mortgage statement vs note rate and the week after funding."
+      answer: "The first bill is usually PITI plus odd-days timing from closing, not a secret rate change.",
+      links: [guideLink("first-mortgage-statement-vs-note-rate", "First mortgage statement vs note rate")],
     }
   ]
 
@@ -123,22 +130,7 @@ export default function EscrowFAQPage() {
               </div>
             </div>
 
-            <Accordion type="single" collapsible className="w-full space-y-3">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
-                >
-                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
-                    <span className="text-left font-semibold">{faq.question}</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <FaqAccordion items={faqs} />
 
             <RelatedContent path="/faq/escrow-faqs" title="Utah tax calendar and escrow cushion" />
             <NextStepCta path="/faq/escrow-faqs" />
@@ -157,21 +149,6 @@ export default function EscrowFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="escrow-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

@@ -78,8 +78,8 @@ export default function SpouseW2OffsetPage() {
       <p className="lead text-xl text-foreground/70">
         A steadier W-2 can support a 1099 or commission average — when the person who earns the W-2 is on the
         application as a borrower. A spouse (or partner) who is not on the note does not automatically donate their
-        paycheck to your qualifying income. Utah is not a community-property state, and this page is not a doorway
-        into Texas or Arizona homestead or community-property law. Snapshot as of {LENDING_FACTS_AS_OF}.
+        paycheck to your qualifying income. Utah is not a community-property state, and this page covers Utah
+        files only. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
       <p>{SPOUSE_INCOME_OFFSET.fairHousing}</p>
@@ -99,9 +99,9 @@ export default function SpouseW2OffsetPage() {
         and the <Link href="/blog/1099-mortgage-documentation-checklist">1099 checklist</Link>.
       </p>
       <p>
-        {SPOUSE_INCOME_OFFSET.utahNotCommunityProperty} If you are applying from another licensed state, ask the loan
-        officer which guide applies to the <em>property</em> and the <em>borrowers</em> — do not import a blog paragraph
-        from a different state’s family-property statute.
+        {SPOUSE_INCOME_OFFSET.utahNotCommunityProperty} If you are applying from another state, ask the loan
+        officer which rules apply to the <em>property</em> and the <em>borrowers</em>, because each state’s
+        family-property law is different.
       </p>
 
       <h2>If the W-2 earner should not be on the loan</h2>

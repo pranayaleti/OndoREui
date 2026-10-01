@@ -11,23 +11,23 @@ export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/data") },
   title: pageTitle("Utah Housing Data: Prices, Rents & Inventory"),
   description:
-    "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
+    "Where Ondo publishes Utah housing numbers: city market reports, a locations directory and school district guides. Each city is dated and none is an MLS pull or appraisal.",
 }
 
 const reportKinds = [
   {
     title: "City market reports",
-    description: "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
+    description: "One report per city with the median home price, median rent, average days on market and commute notes we maintain, plus links to buy, sell, loan and property management pages.",
     href: "/market-reports/",
   },
   {
     title: "Locations directory",
-    description: "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
+    description: "A directory of Utah cities grouped by county, with the median home price, rent and commute times for each, so you can compare towns side by side.",
     href: "/locations/",
   },
   {
     title: "School district guides",
-    description: "Utah housing data by city: median sale price, median rent, inventory, days on market and rent-to-price ratio, in one comparable dataset.",
+    description: "Guides to the school districts we cover: which cities each one serves, the campuses we list and the official district site. We do not rank schools.",
     href: "/schools/",
   },
 ]

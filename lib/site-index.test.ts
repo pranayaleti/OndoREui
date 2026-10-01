@@ -42,8 +42,15 @@ describe("LLM briefs", () => {
   })
 
   it("points crawlers at the generated briefs instead of a per-city index.txt tree", () => {
-    expect(buildLlmsTxtBody()).toMatch(/\/loans\/heloc\/index\.txt is a pointer only/)
-    expect(buildLlmsFullTxtBody()).toMatch(/\/loans\/heloc\/index\.txt is a pointer only/)
+    for (const body of [buildLlmsTxtBody(), buildLlmsFullTxtBody()]) {
+      expect(body).toMatch(/Do not fetch a per-city index\.txt tree/)
+      expect(body).toContain("/llms.txt")
+    }
+  })
+
+  it("does not advertise /loans/heloc/index.txt, which the static export overwrites with an RSC payload", () => {
+    expect(buildLlmsTxtBody()).not.toContain("/loans/heloc/index.txt")
+    expect(buildLlmsFullTxtBody()).not.toContain("/loans/heloc/index.txt")
   })
 
   it("tells agents how to fetch Markdown via Accept: text/markdown", () => {
@@ -192,11 +199,18 @@ describe("next-sitemap exclusions", () => {
       "/chat",
       "/verify",
       "/unsubscribe",
+      "/referral",
+      "/referral/",
+      // ZIP pages canonicalize to their city page, so they stay out of the sitemap.
+      "/property-management/zip/84043/",
+      "/buy-sell/zip/84121",
+      "/loans/zip/84003/",
     ]
     for (const path of excluded) {
       expect(await cfg.transform(cfg, path), path).toBeNull()
     }
     expect(await cfg.transform(cfg, "/buy-sell")).not.toBeNull()
+    expect(await cfg.transform(cfg, "/property-management/lehi/")).not.toBeNull()
     expect(await cfg.transform(cfg, "/")).not.toBeNull()
   })
 
@@ -208,10 +222,22 @@ describe("next-sitemap exclusions", () => {
     expect(buySell.alternateRefs[0].hrefIsAbsolute).toBe(true)
     expect(buySell.alternateRefs[0].href).toMatch(/\/buy-sell\/$/)
     expect(buySell.alternateRefs[0].href).not.toMatch(/\/buy-sell\/buy-sell/)
-    const txt = (await cfg.transform(cfg, "/llms.txt")) as {
-      alternateRefs: Array<{ href: string }>
+  })
+
+  it("keeps file-like paths (robots.txt, llms.txt, index.md) out of the XML sitemap", async () => {
+    const cfg = nextSitemapConfig as typeof nextSitemapConfig & { additionalPaths?: unknown }
+    for (const path of [
+      "/robots.txt",
+      "/llms.txt",
+      "/llms-full.txt",
+      "/.well-known/llms.txt",
+      "/llms.json",
+      "/index.md",
+      "/sitemap.md",
+      "/.well-known/agents.json",
+    ]) {
+      expect(await cfg.transform(cfg, path), path).toBeNull()
     }
-    expect(txt.alternateRefs[0].href).toMatch(/\/llms\.txt$/)
-    expect(txt.alternateRefs[0].href).not.toMatch(/llms\.txt\/llms\.txt/)
+    expect(cfg.additionalPaths).toBeUndefined()
   })
 })

@@ -5,7 +5,6 @@ import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_PHONE, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, DollarSign, AlertCircle } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 import { FIND_YOUR_SERVICER, NOT_A_SERVICER } from "@/lib/content/mortgage-referral"
@@ -153,21 +152,6 @@ export default function PaymentsFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="payments-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

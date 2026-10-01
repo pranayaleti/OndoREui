@@ -26,9 +26,9 @@ export const metadata: Metadata = {
 
 const benefits = [
   { title: "Zero down when eligible", description: VA_FUNDING_FEE.downPaymentNote, icon: <DollarSign className="h-6 w-6" /> },
-  { title: "No private mortgage insurance", description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", icon: <Shield className="h-6 w-6" /> },
-  { title: "VA pricing", description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", icon: <Star className="h-6 w-6" /> },
-  { title: "Closing costs", description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", icon: <CheckCircle className="h-6 w-6" /> },
+  { title: "No private mortgage insurance", description: "VA loans do not charge monthly PMI. That is not a published monthly savings versus conventional.", icon: <Shield className="h-6 w-6" /> },
+  { title: "VA pricing", description: "VA loans are often priced differently from conventional because of the guarantee. That is not a promise of a lower rate on your file.", icon: <Star className="h-6 w-6" /> },
+  { title: "Closing costs", description: "VA rules allow sellers to pay some or all of certain closing costs, up to program limits. It is not automatic.", icon: <CheckCircle className="h-6 w-6" /> },
 ]
 
 export default function VALoanPage() {
@@ -96,7 +96,7 @@ export default function VALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Required before the loan can close</li>
                     <li>• Most lenders pull it directly from VA systems (takes minutes)</li>
-                    <li>• Or request via eBenefits or VA Form 26-1880</li>
+                    <li>• Or request online at VA.gov, or by mail with VA Form 26-1880</li>
                   </ul>
                 </div>
                 <div>

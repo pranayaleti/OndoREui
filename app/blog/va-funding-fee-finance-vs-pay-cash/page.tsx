@@ -25,7 +25,7 @@ export const metadata = articleMetadata({
   path,
   title: "VA Funding Fee: Finance vs Pay Cash",
   description:
-    "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and cash to close — not advice.",
+    "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and cash to close. Not advice.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["VA funding fee finance vs cash", "VA funding fee Utah"],
@@ -44,7 +44,7 @@ export default function VaFundingFeePage() {
         path,
         title: "VA Funding Fee: Finance vs Pay Cash",
         description:
-          "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and cash to close — not advice.",
+          "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and cash to close. Not advice.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "Financing the fee raises the loan. Paying cash raises cash to close. Run both.",

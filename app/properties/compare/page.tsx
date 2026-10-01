@@ -1,12 +1,32 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ListingCompareClient } from "./page-client"
-import { SITE_NAME, SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+
+const TITLE = `Compare listings | ${SITE_NAME}`
+const DESCRIPTION = "Compare two or three Ondo rental listings using the facts on each public listing."
+const CANONICAL = `${SITE_URL}/properties/compare/`
+
+// Own openGraph/twitter: Next replaces (does not merge) the parent layout's
+// objects, so without these the preview inherits the /properties/ layout copy.
 export const metadata: Metadata = {
-  title: pageTitle(`Compare listings | ${SITE_NAME}`),
-  description: "Compare two or three Ondo rental listings using the facts on each public listing.",
+  title: pageTitle(TITLE),
+  description: DESCRIPTION,
   robots: { index: false, follow: true },
-  alternates: { canonical: `${SITE_URL}/properties/compare/` },
+  alternates: { canonical: CANONICAL },
+  openGraph: {
+    title: pageTitleText(TITLE),
+    description: DESCRIPTION,
+    url: CANONICAL,
+    images: DEFAULT_OG_IMAGES,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitleText(TITLE),
+    description: DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE_URL],
+  },
 }
 
 export default function ListingComparePage() {

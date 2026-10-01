@@ -11,12 +11,12 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = {
-  title: pageTitle("Utah Refinance Process: Timeline & Documents"),
-  description: "What refinancing a Utah mortgage takes: the document checklist, appraisal step, typical 21 to 30 day timeline, and when break-even makes sense.",
+  title: pageTitle("Utah Refinance Process: Steps From Start to Closing"),
+  description: "How a Utah mortgage refinance works, step by step: evaluate your loan, talk through your options, choose a program, apply, underwriting and closing.",
   alternates: { canonical: `${SITE_URL}/refinance/process/` },
   openGraph: {
-    title: pageTitleText("Utah Refinance Process: Timeline & Documents"),
-    description: "What refinancing a Utah mortgage takes: the document checklist, appraisal step, typical 21 to 30 day timeline, and when break-even makes sense.",
+    title: pageTitleText("Utah Refinance Process: Steps From Start to Closing"),
+    description: "How a Utah mortgage refinance works, step by step: evaluate your loan, talk through your options, choose a program, apply, underwriting and closing.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -33,8 +33,8 @@ export default function RefinanceProcessPage() {
     },
     {
       number: 2,
-      title: "Get Pre-Approved",
-      description: "Complete our quick pre-approval process to see what rates and terms you qualify for.",
+      title: "Talk Through Your Options",
+      description: "Talk with us about your goals and documents to see which options may fit. Pre-approval is not a commitment to lend.",
       icon: <CheckCircle className="h-6 w-6" />
     },
     {
@@ -58,7 +58,7 @@ export default function RefinanceProcessPage() {
     {
       number: 6,
       title: "Closing",
-      description: "Sign your loan documents and complete the refinance process, typically in 30-45 days.",
+      description: "Sign your loan documents and complete the refinance. Timing depends on the lender, the appraisal and how quickly your documents come in.",
       icon: <Clock className="h-6 w-6" />
     }
   ]

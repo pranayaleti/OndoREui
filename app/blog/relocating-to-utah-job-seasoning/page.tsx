@@ -43,7 +43,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
-  title: "Relocating to Utah: Income Seasoning When the Job Starts in 60 Days",
+  title: "Relocating to Utah: Income Seasoning for a New Job",
   description:
     "An offer letter can sometimes qualify a conventional purchase before the first paycheck. Sixty days is a common question, not a published 60-day rule.",
   published: "2026-08-29",
@@ -57,7 +57,7 @@ export default function RelocatingUtahPage() {
     <ArticleShell
       meta={{
         path,
-        title: "Relocating to Utah: Income Seasoning When the Job Starts in 60 Days",
+        title: "Relocating to Utah: Income Seasoning for a New Job",
         description:
           "An offer letter can sometimes qualify a conventional purchase before the first paycheck. Sixty days is not a published Fannie Mae rule.",
         published: "2026-08-29",
@@ -97,7 +97,7 @@ export default function RelocatingUtahPage() {
       </p>
       <p>
         Commute, rent, and city context belong on{" "}
-        <Link href="/moving-to-utah">New to Utah</Link> — not on cloned city doorway pages.
+        <Link href="/moving-to-utah">New to Utah</Link>.
       </p>
 
       <h2>What happens next</h2>

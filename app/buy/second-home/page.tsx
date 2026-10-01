@@ -36,7 +36,7 @@ export default function SecondHomePage() {
       />
       <PageBanner
         title="Buying a Second Home"
-        subtitle="Your guide to purchasing a vacation home or investment property in Utah"
+        subtitle="How financing a second home differs from a primary residence or a rental, and why occupancy matters"
       />
 
       <section className="py-16 bg-background">
@@ -68,7 +68,11 @@ export default function SecondHomePage() {
                   <CardTitle>Investment Property</CardTitle>
                   <CardDescription>
                     Generate rental income only when occupancy is actually investment — not by labeling a rental as a
-                    second home. See occupancy vs rental qualification.
+                    second home. See{" "}
+                    <Link href="/blog/second-home-vs-investment-occupancy" className="text-primary underline-offset-4 hover:underline">
+                      occupancy vs rental qualification
+                    </Link>
+                    .
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -79,7 +83,7 @@ export default function SecondHomePage() {
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle>Future Retirement</CardTitle>
-                  <CardDescription>Secure your retirement location now while prices are favorable.</CardDescription>
+                  <CardDescription>Think through where you may want to retire and whether a second home fits that plan. Prices and rates can move either way.</CardDescription>
                 </CardHeader>
               </Card>
 
@@ -130,7 +134,7 @@ export default function SecondHomePage() {
               <h3 className="text-2xl font-bold mb-6">Ready to Explore Second Home Options?</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg">
-                  <Link href="/properties">Browse Properties</Link>
+                  <Link href="/get-matched">Get matched</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/qualify">Talk with a loan officer</Link>

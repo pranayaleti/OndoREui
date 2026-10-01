@@ -140,7 +140,7 @@ export default function InspectionVsAppraisalPage() {
       <p>{UTAH_REPC.fourDeadlines}</p>
       <p>
         Which is why the timing matters as much as the reports: see{" "}
-        <Link href="/blog/utah-repc-deadlines">Utah REPC deadlines</Link>, and{" "}
+        <Link href="/blog/utah-repc-deadline-and-your-loan">Utah REPC deadlines</Link>, and{" "}
         <Link href="/blog/appraisal-comes-in-low">when the appraisal comes in low</Link> for what happens when value is
         the problem.
       </p>

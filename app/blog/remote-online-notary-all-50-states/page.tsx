@@ -36,7 +36,11 @@ const published = "2025-01-10";
 const modified = "2025-01-10";
 const slug = "/blog/remote-online-notary-all-50-states";
 
-const topStates = NOTARY_RON_STATES.slice(0, 10);
+// Utah is the home state, so it leads; the rest follow alphabetically. This is a sample, not a ranking.
+const featuredStates = [
+  ...NOTARY_RON_STATES.filter((state) => state.code === "UT"),
+  ...NOTARY_RON_STATES.filter((state) => state.code !== "UT").slice(0, 9),
+];
 const keywords = [
   "remote online notary",
   "online notary in all 50 states",
@@ -62,17 +66,6 @@ export default function RemoteOnlineNotaryAllStatesPage() {
         section="Notary"
         tags={["Remote Online Notary", "RON", "Nationwide Notary", "Real Estate"]}
         keywords={keywords}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: "Remote Online Notary in All 50 States",
-          description:
-            "How ONDO Notary delivers compliant, secure Remote Online Notarization across all 50 states.",
-          author: { "@type": "Organization", name: "ONDO Notary" },
-          datePublished: published,
-          dateModified: modified,
-          mainEntityOfPage: `${SITE_URL}${slug}`,
-        }}
       />
 
       <PageBanner
@@ -162,16 +155,20 @@ export default function RemoteOnlineNotaryAllStatesPage() {
 
             <h2>State-by-State Coverage Highlights</h2>
             <p className="mb-4">
-              We serve every state and Washington, D.C. Here are the first ten, in alphabetical order:
+              We serve every state and Washington, D.C. Utah is our home state, followed by nine others in alphabetical
+              order. See{" "}
+              <Link href="/notary/locations/" className="text-primary underline">
+                every state we serve
+              </Link>
+              .
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-              {topStates.map((state) => (
+              {featuredStates.map((state) => (
                 <Card key={state.slug} className="bg-muted border-border">
                   <CardContent className="p-4">
-                    <p className="font-semibold text-foreground">{state.name}</p>
-                    <p className="text-sm text-foreground/70">
-                      Remote online notarization with ID verification, electronic seal, and download-ready PDFs.
-                    </p>
+                    <Link href={`/notary/${state.slug}/`} className="font-semibold text-foreground hover:underline">
+                      Online notary in {state.name}
+                    </Link>
                   </CardContent>
                 </Card>
               ))}

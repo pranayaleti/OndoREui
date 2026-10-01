@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/salt-lake-city-rental-market-report"
-const title = "Salt Lake City Rental Market Report: Vacancy Rates, Rents & Trends"
+const title = "Salt Lake City Rental Market Report: Vacancy and Rents"
 const description = "A data-driven look at the Salt Lake City rental market in 2026, vacancy rates, average rents by neighborhood, and what landlords should expect."
 const published = "2026-03-23"
 const modified = "2026-03-23"

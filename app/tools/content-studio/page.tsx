@@ -12,14 +12,14 @@ import { CONTENT_TYPES, contentStudioPortalPath, type ContentType } from "@/lib/
 export const metadata: Metadata = {
   title: pageTitle("Content studio | Ondo Real Estate"),
   description:
-    "Draft listing video scripts, local content ideas, buyer Q&A, and market commentary from the Ondo portal. Scripts only — disclosures are appended after generation.",
+    "Draft listing video scripts, local content ideas, buyer Q&A, and market commentary from the Ondo portal. Scripts only. Disclosures are appended after generation.",
   robots: { index: false },
 }
 
 const TYPE_COPY: Record<ContentType, { title: string; body: string; icon: typeof Video }> = {
   listing_video_script: {
     title: "Listing video script",
-    body: "A 45-second spoken tour of the home. Words to read on camera — we do not render video.",
+    body: "A 45-second spoken tour of the home. Words to read on camera. We do not render video.",
     icon: Video,
   },
   local_content_ideas: {
@@ -34,7 +34,7 @@ const TYPE_COPY: Record<ContentType, { title: string; body: string; icon: typeof
   },
   buyer_questions: {
     title: "Buyer questions",
-    body: "Practical questions a first-time buyer would ask before a showing. Questions only — no loan advice.",
+    body: "Practical questions a first-time buyer would ask before a showing. Questions only, no loan advice.",
     icon: HelpCircle,
   },
   buyer_question_video: {
@@ -44,7 +44,7 @@ const TYPE_COPY: Record<ContentType, { title: string; body: string; icon: typeof
   },
   market_commentary: {
     title: "Market commentary",
-    body: "General buyer or seller update. Live MLS/rate stats are not attached yet — educational context only. Required disclosures are appended by the server.",
+    body: "General buyer or seller update. Live MLS/rate stats are not attached yet. This is educational context only. Required disclosures are appended by the server.",
     icon: LineChart,
   },
 }
@@ -66,14 +66,14 @@ export default function ContentStudioPage() {
       />
       <PageBanner
         title="Content studio"
-        subtitle="Scripts for listings, local guides, and buyer education — generated in the portal"
+        subtitle="Scripts for listings, local guides, and buyer education, generated in the portal"
       />
       <section className="container mx-auto px-4 py-12 max-w-5xl space-y-8">
         <p className="text-muted-foreground max-w-3xl">
           Managers and owners draft listing video scripts, local content ideas, YouTube scripts,
           buyer questions, and market commentary from the invitation-only portal. Select a listing,
           generate ideas or questions, then pick one to turn into a ~45-second script. City and
-          listing details come from your properties — never invented sample cities or prices. This
+          listing details come from your properties, never invented sample cities or prices. This
           page does not generate copy for the public. Market commentary is general information, not
           financial advice; Ondo does not currently attach a live MLS or rate feed, so current
           figures must be verified. Disclosures are appended after generation.

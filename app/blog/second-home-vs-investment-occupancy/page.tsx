@@ -98,7 +98,7 @@ export default function OccupancyPage() {
         Investment pricing is higher than second-home pricing, which makes the cheaper label tempting. Lenders also
         put the occupancy promise in the security instrument itself — Section 6 of the uniform instrument, replaced by
         a Second Home Rider on second homes — so a use that does not match what was stated can have consequences long
-        after closing. If your plan for the property is genuinely uncertain, that is a
+        after closing. If your plan for the property is uncertain, that is a
         conversation to have with a loan officer before the application, not a box to guess at.
       </ArticleCallout>
 

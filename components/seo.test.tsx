@@ -39,3 +39,44 @@ describe("SEO", () => {
     ])
   })
 })
+
+describe("SEO structured data", () => {
+  const entriesOf = (container: HTMLElement) => {
+    const script = container.querySelector('script[type="application/ld+json"]')
+    const payload = JSON.parse(script?.innerHTML ?? "[]")
+    return (Array.isArray(payload) ? payload : [payload]) as Array<Record<string, unknown>>
+  }
+
+  it("points WebPage and BlogPosting at the canonical trailing-slash URL", () => {
+    const { container } = render(
+      <SEO
+        title="A post"
+        description="d"
+        pathname="/blog/a-post"
+        publishedTime="2026-01-01"
+        tags={["Utah landlords"]}
+      />,
+    )
+    const entries = entriesOf(container)
+    expect(entries.find((e) => e["@type"] === "WebPage")?.url).toBe(`${domain}/blog/a-post/`)
+    expect(entries.find((e) => e["@type"] === "BlogPosting")?.mainEntityOfPage).toBe(`${domain}/blog/a-post/`)
+  })
+
+  it("keeps BlogPosting keywords to the post's own tags, not the site-wide list", () => {
+    const { container } = render(
+      <SEO title="A post" description="d" pathname="/blog/a-post/" publishedTime="2026-01-01" tags={["Utah landlords", "Rent"]} />,
+    )
+    const post = entriesOf(container).find((e) => e["@type"] === "BlogPosting")
+    expect(post?.keywords).toEqual(["Utah landlords", "Rent"])
+  })
+
+  it("gives the BlogPosting a publisher logo and emits one article block", () => {
+    const { container } = render(
+      <SEO title="A post" description="d" pathname="/blog/a-post/" publishedTime="2026-01-01" />,
+    )
+    const entries = entriesOf(container)
+    const posts = entries.filter((e) => e["@type"] === "BlogPosting" || e["@type"] === "Article")
+    expect(posts).toHaveLength(1)
+    expect(posts[0]?.publisher).toMatchObject({ logo: { "@type": "ImageObject" } })
+  })
+})

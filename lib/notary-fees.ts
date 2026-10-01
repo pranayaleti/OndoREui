@@ -26,6 +26,12 @@ export const NOTARY_LATE_CANCEL_USD = 40
 export const NOTARY_NO_SHOW_USD = 50
 
 export const NOTARY_HOURS_LABEL = "Mon–Fri 9 AM – 7 PM MT"
+/** Same hours as NOTARY_HOURS_LABEL, for schema.org hoursAvailable. */
+export const NOTARY_HOURS_SPEC = {
+  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  opens: "09:00",
+  closes: "19:00",
+}
 export const NOTARY_AFTER_HOURS_START = "7 PM"
 
 export const NOTARY_PRICING_SUMMARY =

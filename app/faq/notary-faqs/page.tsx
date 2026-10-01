@@ -1,12 +1,11 @@
 import { PageBanner } from "@/components/page-banner"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { FaqAccordion } from "@/components/faq-accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { NOTARY_PRICING_SUMMARY } from "@/lib/notary-fees"
 import Link from "next/link"
 import { ArrowLeft, FileText } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
@@ -26,9 +25,9 @@ export const metadata: Metadata = {
 export default function NotaryFAQPage() {
   const faqs = [
     {
-      question: "What do I need to bring to a notary appointment?",
+      question: "What do I need for a remote notary session?",
       answer:
-        "Bring a valid government‑issued photo ID, your unsigned documents, and any required witnesses. For Remote Online Notary (RON), you'll also need a phone or computer with camera, microphone, and stable internet. We'll guide you on exactly what each document type needs before your session.",
+        "Have a valid government‑issued photo ID and your unsigned documents ready. All sessions are Remote Online Notary (RON), so you also need a phone or computer with a camera, microphone, and stable internet. If your document needs witnesses, tell us when you book and we will confirm how that works for a remote session. We'll guide you on exactly what each document type needs before your session.",
     },
     {
       question: "Can you notarize documents for out‑of‑state transactions?",
@@ -43,12 +42,14 @@ export default function NotaryFAQPage() {
     {
       question: "How quickly can I get a document notarized?",
       answer:
-        "We'll try to accommodate same-day when capacity allows, especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. Same-day is best-effort, not a guaranteed SLA. See /notary/on-demand for how on-demand scheduling works.",
+        "We'll try to accommodate same-day when capacity allows, especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. Same-day is best-effort, not a guaranteed SLA.",
+      links: [{ label: "How on-demand scheduling works", href: "/notary/on-demand/" }],
     },
     {
       question: "Do you offer on-demand or same-day notary?",
       answer:
-        "Yes. ONDO Notary offers on-demand scheduling for urgent remote online notarization. We try to accommodate same-day when our calendar allows, RON nationwide. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent. Learn more at /notary/on-demand or book from /notary.",
+        "Yes. ONDO Notary offers on-demand scheduling for urgent remote online notarization. We try to accommodate same-day when our calendar allows, RON nationwide. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent.",
+      links: [{ label: "On-demand notary", href: "/notary/on-demand/" }, { label: "Book a notary session", href: "/notary/" }],
     },
     {
       question: "What types of documents can you notarize?",
@@ -103,25 +104,10 @@ export default function NotaryFAQPage() {
               </div>
             </div>
 
-            <Accordion type="single" collapsible className="w-full space-y-3">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border border-border rounded-xl bg-card/60 px-6 py-2 backdrop-blur-sm"
-                >
-                  <AccordionTrigger className="text-foreground hover:no-underline py-4">
-                    <span className="text-left font-semibold">{faq.question}</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-4 pt-2 leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <FaqAccordion items={faqs} />
 
             <div className="mt-12 text-center">
-              <p className="text-muted-foreground mb-4">Ready to schedule a notary appointment?</p>
+              <p className="text-muted-foreground mb-4">Ready to book a remote notary session?</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/notary"
@@ -147,21 +133,6 @@ export default function NotaryFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="notary-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

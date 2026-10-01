@@ -11,13 +11,13 @@ import {
 import { getRonStateBySlug, isReservedNotarySegment } from "@/lib/notary-ron-states"
 import { buildCityRonFaqs } from "@/lib/notary-location-copy"
 import {
+  NOTARY_SERVICE_ID,
   buildPageMetadata,
   generateBreadcrumbJsonLd,
   generateFAQJsonLd,
-  generateLocalBusinessJsonLd,
   generateServiceJsonLd,
 } from "@/lib/seo"
-import { SITE_ADDRESS_OBJ, SITE_GEO, SITE_HOURS, SITE_PHONE, SITE_URL, pageTitle } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 type Params = Promise<{ state: string; city: string }>
 
 /** Static export cannot render unknown city slugs on demand. */
@@ -35,10 +35,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const city = getNotaryCity(stateSlug, citySlug)
   if (!state || !city || state.ronServingStatus !== "serves") return {}
 
-  const title = `Remote Online Notary in ${city.name}, ${state.code} | ONDO Notary`
+  const title = `Remote Online Notary in ${city.name}, ${state.code}`
   return {
     ...buildPageMetadata({
-      title,
+      title: pageTitleText(title),
       description: `Secure remote online notarization in ${city.name}, ${state.name}. Identity-verified RON sessions for real estate, loans, and estate documents.`,
       pathname: `/notary/${state.slug}/${city.slug}/`,
       keywords: [
@@ -71,29 +71,17 @@ export default async function NotaryCityRoute({ params }: { params: Params }) {
     description: `RON for clients in ${city.name}, ${state.name}`,
     serviceType: "Remote Online Notarization",
     areaServed: state.name,
-  })
-
-  // HQ NAP + SITE_GEO only, never pair HQ address with city coordinates (fake NAP).
-  const businessLd = generateLocalBusinessJsonLd({
-    name: "ONDO Notary Services",
-    url: pageUrl,
-    telephone: SITE_PHONE,
-    openingHours: SITE_HOURS,
-    areaServed: `${city.name}, ${state.name}`,
-    address: {
-      streetAddress: SITE_ADDRESS_OBJ.streetAddress,
-      addressLocality: SITE_ADDRESS_OBJ.addressLocality,
-      addressRegion: SITE_ADDRESS_OBJ.addressRegion,
-      postalCode: SITE_ADDRESS_OBJ.postalCode,
-      addressCountry: SITE_ADDRESS_OBJ.addressCountry,
-    },
-    geo: { latitude: SITE_GEO.latitude, longitude: SITE_GEO.longitude },
+    areaServedCity: city.name,
+    // One Organization entity site-wide (#organization in the root layout). Per-city
+    // LocalBusiness nodes all described the single Lehi office.
+    providerIsSiteOrganization: true,
+    relatedToServiceId: NOTARY_SERVICE_ID,
   })
 
   return (
     <>
       <SEO
-        title={`Remote Online Notary in ${city.name}, ${state.code} | ONDO Notary`}
+        title={`Remote Online Notary in ${city.name}, ${state.code}`}
         description={`Secure remote online notarization in ${city.name}, ${state.name}.`}
         pathname={`/notary/${state.slug}/${city.slug}/`}
         jsonLd={[
@@ -104,7 +92,6 @@ export default async function NotaryCityRoute({ params }: { params: Params }) {
             { name: city.name, url: pageUrl },
           ]),
           serviceLd,
-          businessLd,
           generateFAQJsonLd(
             faqs.map((f) => ({ question: f.question, answer: f.answer }))
           ),

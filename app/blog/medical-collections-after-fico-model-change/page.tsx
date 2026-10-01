@@ -9,11 +9,13 @@ const path = "/blog/medical-collections-after-fico-model-change"
 const faqs = [
   {
     question: "Will paying a medical collection raise my mortgage score?",
-    answer: MEDICAL_COLLECTIONS.noPromise,
+    answer:
+      "Not necessarily. Many mortgage files still use older FICO models, and a paid collection that still appears on the tri-merge may not raise that score. Whether it must be paid at closing is a separate underwriting question.",
   },
   {
     question: "Did the bureaus stop reporting all medical debt?",
-    answer: MEDICAL_COLLECTIONS.bureauReporting,
+    answer:
+      "No. The bureaus said they would stop reporting paid medical collections and unpaid ones under $500, but that is reporting policy, not a guarantee that every medical bill is invisible. Check the tri-merge your lender pulls.",
   },
 ]
 

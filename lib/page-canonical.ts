@@ -43,8 +43,22 @@ export function toCanonicalPageUrl(pathname: string): string {
   return toAbsoluteSiteUrl(pathname)
 }
 
+/** Plain string form of a Next `Metadata["title"]`, for reuse in OG and Twitter cards. */
+function resolveTitleText(title: Metadata["title"]): string | undefined {
+  if (!title) return undefined
+  if (typeof title === "string") return title
+  if ("absolute" in title && title.absolute) return title.absolute
+  if ("default" in title && title.default) return title.default
+  return undefined
+}
+
 export function pageCanonicalMetadata(pathname: string, extra: Metadata = {}): Metadata {
   const canonical = toCanonicalPageUrl(pathname)
+  // A page that defines its own openGraph REPLACES the root layout's, and a page that
+  // defines none inherits the homepage's title and description. Carry the page's own
+  // title and description into the cards so previews describe the page being shared.
+  const ogTitle = resolveTitleText(extra.title)
+  const pageDescription = extra.description ?? undefined
   const {
     alternates: extraAlternates,
     openGraph: extraOpenGraph,
@@ -73,12 +87,18 @@ export function pageCanonicalMetadata(pathname: string, extra: Metadata = {}): M
       ...restExtraAlternates,
     },
     openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
       url: canonical,
+      ...(ogTitle ? { title: ogTitle } : {}),
+      ...(pageDescription ? { description: pageDescription } : {}),
       ...extraOpenGraph,
       images: ogImages,
     },
     twitter: {
       card: "summary_large_image",
+      ...(ogTitle ? { title: ogTitle } : {}),
+      ...(pageDescription ? { description: pageDescription } : {}),
       ...extraTwitter,
       images: extraTwitter?.images ?? [DEFAULT_OG_IMAGE_URL],
     },

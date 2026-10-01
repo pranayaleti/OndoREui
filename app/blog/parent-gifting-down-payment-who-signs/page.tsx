@@ -68,7 +68,7 @@ export const metadata = articleMetadata({
   path,
   title: "Parent Is Gifting: Who Signs What",
   description:
-    "Gift letter, donor statements, occupancy, and title — who signs when a parent helps with down payment.",
+    "Gift letter, donor statements, occupancy, and title: who signs when a parent helps with down payment.",
   published: "2026-08-29",
   category: "First-Time Buyers",
   keywords: ["parent gift down payment signatures", "who signs gift letter mortgage", "parent on title vs gift"],
@@ -82,7 +82,7 @@ export default function ParentGiftingPage() {
         path,
         title: "Parent Is Gifting: Who Signs What",
         description:
-          "Gift letter, donor statements, occupancy, and title — who signs when a parent helps with down payment.",
+          "Gift letter, donor statements, occupancy, and title: who signs when a parent helps with down payment.",
         published: "2026-08-29",
         category: "First-Time Buyers",
         bannerSubtitle: "A gift is paperwork and occupancy. It is not a quiet extra signature on the deed.",

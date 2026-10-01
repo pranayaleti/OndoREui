@@ -4,6 +4,9 @@ import Link from "next/link"
 
 const path = "/blog/utah-county-conforming-loan-limit-lookup"
 
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/jumbo-vs-conforming-fhfa-county-limit", title: "Jumbo vs Conforming: Look Up This Year’s FHFA County Limit" }
+
 const faqs = [
   {
     question: "Can I use last year’s Salt Lake number for a Park City purchase?",
@@ -17,6 +20,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Utah County Conforming Limit Lookup (How-To)",
   description:
     "How to look up this year’s FHFA conforming limit for a Utah county. Summit is not Salt Lake. Do not reuse a stale dollar figure.",
@@ -31,6 +35,7 @@ export default function UtahCountyLimitPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Utah County Conforming Limit Lookup (How-To)",
         description:
           "How to look up this year’s FHFA conforming limit for a Utah county. Summit is not Salt Lake. Do not reuse a stale dollar figure.",

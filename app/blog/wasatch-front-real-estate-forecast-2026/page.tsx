@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/wasatch-front-real-estate-forecast-2026"
-const title = "Wasatch Front Real Estate Forecast: What Owners and Investors Should Watch"
+const title = "Wasatch Front Real Estate Forecast 2026: What to Watch"
 const description = "An outlook for the Wasatch Front real estate market in 2026, interest rates, inventory, rent trends, and strategic positioning for Utah property owners and investors."
 const published = "2026-03-23"
 const modified = "2026-03-23"

@@ -53,22 +53,22 @@ const services = [
   {
     icon: <LineChart className="h-8 w-8" />,
     title: "CMA & pricing",
-    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
+    description: "Comparative market analysis and a written pricing strategy before you list.",
   },
   {
     icon: <Camera className="h-8 w-8" />,
     title: "Photography & marketing",
-    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
+    description: "Professional photography, staging guidance, and MLS syndication to major portals.",
   },
   {
     icon: <Users className="h-8 w-8" />,
     title: "Showings",
-    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
+    description: "Coordinated showings while the home is on market, not a promised days-on-market.",
   },
   {
     icon: <Shield className="h-8 w-8" />,
     title: "Negotiation through close",
-    description: "List your Utah home with a full-service team: comparative market analysis, professional photography, MLS syndication and negotiation to close.",
+    description: "Offer review, negotiation, and closing coordination with your listing agent.",
   },
 ]
 

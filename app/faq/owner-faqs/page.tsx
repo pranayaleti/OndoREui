@@ -4,9 +4,9 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { UTAH_RENTAL_LAW_DISCLAIMER, utahRulesAsFaqs } from "@/lib/content/utah-rental-law"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { PM_INSPECTION_ANSWER, PM_REPAIR_APPROVAL_ANSWER } from "@/lib/service-faq"
 import Link from "next/link"
 import { ArrowLeft, Building2 } from "lucide-react"
-import Script from "next/script"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
@@ -39,7 +39,7 @@ export default function OwnerFAQPage() {
     },
     {
       question: "How do you handle maintenance and repairs?",
-      answer: "We have a network of licensed, insured, and vetted contractors who provide quality work at reasonable rates. For minor repairs (typically under $500), we handle them without owner approval to ensure prompt service. For larger repairs, we consult with you, provide estimates, and proceed with your approval."
+      answer: `We use a network of vetted vendors. ${PM_REPAIR_APPROVAL_ANSWER} Vendor invoices carry no markup, and you get copies of bills in your monthly statement.`
     },
     {
       question: "How often will I receive statements and payments?",
@@ -47,7 +47,7 @@ export default function OwnerFAQPage() {
     },
     {
       question: "How often do you inspect properties?",
-      answer: "We conduct move-in, move-out, and regular quarterly inspections. We also perform drive-by inspections monthly and full interior inspections annually. This helps us catch maintenance issues early and ensure tenants are maintaining the property properly."
+      answer: `${PM_INSPECTION_ANSWER} This helps us catch maintenance issues early and confirm tenants are maintaining the property properly.`
     },
     {
       question: "What happens if a tenant doesn't pay rent?",
@@ -140,21 +140,6 @@ export default function OwnerFAQPage() {
         </div>
       </main>
 
-      {/* FAQ JSON-LD */}
-      <Script id="owner-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map(faq => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        })}
-      </Script>
     </div>
   )
 }

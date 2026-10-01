@@ -6,16 +6,18 @@ import { PageBanner } from "@/components/page-banner"
 import { Button } from "@/components/ui/button"
 import { NotaryBooking } from "@/components/notary-booking"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
-import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_PHONE, SITE_EMAILS } from "@/lib/site"
+import { NOTARY_SERVICE_ID, generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
+import { SITE_URL, SITE_PHONE, SITE_EMAILS, pageTitle, pageTitleText } from "@/lib/site"
+
+const TITLE = "On-Demand Notary: Same-Day When We Can"
 
 export const metadata: Metadata = {
-  title: "On-Demand Notary: Same-Day When We Can | ONDO Notary",
+  title: pageTitle(TITLE),
   description:
     "On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows, remote online (RON) nationwide.",
   alternates: { canonical: `${SITE_URL}/notary/on-demand/` },
   openGraph: {
-    title: "On-Demand Notary: Same-Day When We Can | ONDO Notary",
+    title: pageTitleText(TITLE),
     description:
       "Need a notarization today? We try to accommodate same-day when capacity allows. Remote online (RON) nationwide.",
     url: `${SITE_URL}/notary/on-demand/`,
@@ -40,9 +42,9 @@ export default function OnDemandNotaryPage() {
   return (
     <main className="min-h-screen">
       <SEO
-        title="On-Demand Notary: Same-Day When We Can | ONDO Notary"
+        title={TITLE}
         description="On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows, remote online (RON) nationwide."
-        pathname="/notary/on-demand"
+        pathname="/notary/on-demand/"
         image={`${SITE_URL}/modern-office-building.webp`}
         keywords={[
           "on demand notary",
@@ -54,8 +56,8 @@ export default function OnDemandNotaryPage() {
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
-            { name: "Notary", url: `${SITE_URL}/notary` },
-            { name: "On-demand", url: `${SITE_URL}/notary/on-demand` },
+            { name: "Notary", url: `${SITE_URL}/notary/` },
+            { name: "On-demand", url: `${SITE_URL}/notary/on-demand/` },
           ]),
           generateServiceJsonLd({
             name: "On-Demand Notary",
@@ -63,6 +65,9 @@ export default function OnDemandNotaryPage() {
               "On-demand notarization with best-effort same-day scheduling when capacity allows. Remote Online Notarization nationwide.",
             serviceType: "NotaryPublic",
             areaServed: "United States",
+            areaServedType: "Country",
+            relatedToServiceId: NOTARY_SERVICE_ID,
+            providerIsSiteOrganization: true,
             offers: {
               description: "Same-day when capacity allows, not a guaranteed SLA.",
             },

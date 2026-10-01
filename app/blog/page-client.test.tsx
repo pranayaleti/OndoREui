@@ -7,6 +7,7 @@ vi.mock("next/image", () => ({
 }))
 
 import BlogPage from "./page-client"
+import { getBlogPosts } from "@/lib/blog-posts"
 
 describe("blog index cards", () => {
   it("renders each post title as an h3 containing the only link to that post", () => {
@@ -23,6 +24,26 @@ describe("blog index cards", () => {
     // One link per card, so the accessible name is the title, not the whole card.
     expect(within(grid).getAllByRole("link")).toHaveLength(headings.length)
     expect(grid.querySelectorAll("img:not([alt=''])")).toHaveLength(0)
+  })
+
+  it("links every post in the registry once, newest first, with the newest featured", () => {
+    render(<BlogPage />)
+    const [newest, ...rest] = getBlogPosts()
+    const featuredSection = screen.getByRole("heading", { level: 2, name: "Featured Article" }).parentElement as HTMLElement
+    expect(within(featuredSection).getByRole("heading", { level: 3 })).toHaveTextContent(newest!.title)
+
+    const latest = screen.getByRole("heading", { level: 2, name: "Latest Articles" })
+    const grid = latest.nextElementSibling as HTMLElement
+    const hrefs = within(grid)
+      .getAllByRole("link")
+      .map((a) => a.getAttribute("href")?.replace(/\/$/, ""))
+    expect(hrefs).toEqual(rest.map((p) => `/blog/${p.slug}`))
+  })
+
+  it("shows the read time from the registry, and none where the post has no byline", () => {
+    render(<BlogPage />)
+    const withTime = getBlogPosts().find((p) => p.readMinutes && p.slug !== getBlogPosts()[0]!.slug)!
+    expect(screen.getAllByText(`${withTime.readMinutes} min read`).length).toBeGreaterThan(0)
   })
 
   it("names the featured link after the article", () => {

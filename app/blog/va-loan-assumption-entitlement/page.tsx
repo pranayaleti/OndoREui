@@ -40,7 +40,7 @@ export const metadata = articleMetadata({
   path,
   title: "VA Loan Assumption and What Happens to Entitlement",
   description:
-    "A VA loan can often be assumed — but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
+    "A VA loan can often be assumed, but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
   published: "2026-09-17",
   category: "Loan Programs",
   keywords: ["VA loan assumption", "substitution of entitlement", "VA release of liability"],
@@ -54,7 +54,7 @@ export default function VaLoanAssumptionPage() {
         path,
         title: "VA Loan Assumption and What Happens to Entitlement",
         description:
-          "A VA loan can often be assumed — but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
+          "A VA loan can often be assumed, but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
         published: "2026-09-17",
         category: "Loan Programs",
         bannerSubtitle: "Two things have to happen on a VA assumption: release of liability, and substitution of entitlement.",

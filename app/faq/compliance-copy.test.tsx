@@ -20,7 +20,8 @@ describe("licensing page", () => {
 
 describe("FAQ copy", () => {
   it("pet answers say assistance animals are not pets and carry no fees", () => {
-    for (const file of ["app/faq/page.tsx", "app/faq/tenant-faqs/page.tsx"]) {
+    // The /faq hub no longer carries Q&As; the tenant FAQ is the one pet answer.
+    for (const file of ["app/faq/tenant-faqs/page.tsx"]) {
       const src = read(file)
       expect(src).not.toMatch(/Service animals are accommodated/)
       expect(src).toMatch(/Assistance animals that provide disability-related assistance are not pets/)

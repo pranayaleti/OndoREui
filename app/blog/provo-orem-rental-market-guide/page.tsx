@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/provo-orem-rental-market-guide"
-const title = "Provo and Orem Rental Market: Student Housing and 3–4 Bedroom Rentals"
+const title = "Provo and Orem Rental Market Guide: Student Housing"
 const description = "A landlord's guide to the Provo and Orem rental market, BYU and UVU demand, seasonal vacancy, rent trends, and what investors should know in 2026."
 const published = "2026-03-23"
 const modified = "2026-03-23"

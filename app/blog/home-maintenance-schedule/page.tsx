@@ -77,8 +77,8 @@ export default function HomeMaintenanceSchedule() {
             <h2>Let ONDO remind you</h2>
             <p>
               You don’t have to keep this calendar in your head. ONDO’s home-care reminders track the
-              recurring tasks above, air filters (90 days), HVAC service (annual), garage-door lube,
-              gutters, water-heater flush, dryer vent, smoke/CO batteries, and sprinkler winterizing , 
+              recurring tasks above, including air filters (90 days), HVAC service (annual), garage-door lube,
+              gutters, water-heater flush, dryer vent, smoke/CO batteries, and sprinkler winterizing,
               and surface each one when it’s due, tuned to your property type.
             </p>
 

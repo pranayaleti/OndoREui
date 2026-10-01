@@ -48,7 +48,7 @@ export const metadata = articleMetadata({
   path,
   title: "First-Time Buyer Mistakes That Are Really File Mistakes",
   description:
-    "New debt, job change, large deposits, and occupancy — the underwriting stalls, not a generic homebuying-mistakes listicle.",
+    "New debt, a job change, large deposits, and occupancy changes are the common reasons underwriting stalls for first-time buyers.",
   published: "2026-08-29",
   category: "First-Time Buyers",
   keywords: ["first-time buyer file mistakes", "mortgage underwriting mistakes", "new debt during underwriting"],
@@ -62,7 +62,7 @@ export default function FthbFileMistakesPage() {
         path,
         title: "First-Time Buyer Mistakes That Are Really File Mistakes",
         description:
-          "New debt, job change, large deposits, and occupancy — underwriting stalls, not a lifestyle listicle.",
+          "New debt, a job change, large deposits, and occupancy changes are the common reasons underwriting stalls for first-time buyers.",
         published: "2026-08-29",
         category: "First-Time Buyers",
         bannerSubtitle: "The letter is a snapshot. The underwrite is the file you keep feeding.",
@@ -72,8 +72,8 @@ export default function FthbFileMistakesPage() {
     >
       <p className="lead text-xl text-foreground/70">
         The first-time “mistakes” that actually kill a purchase file are underwriting facts: new installment debt, a
-        job or hours change, an unsourced large deposit, or occupancy that does not match how you will live. They
-        are not a generic listicle about inspections and overbidding. Snapshot as of {LENDING_FACTS_AS_OF}.
+        job or hours change, an unsourced large deposit, or occupancy that does not match how you will live. This page covers
+        underwriting facts, not general advice about inspections or overbidding. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{FTHB_FILE_MISTAKES.whatThisIs}</p>
 
@@ -106,7 +106,7 @@ export default function FthbFileMistakesPage() {
 
       <h2>What this page will not do</h2>
       <ul>
-        <li>Clone “10 homebuying mistakes” about skip-the-inspection or “always offer over ask.”</li>
+        <li>Give general homebuying advice such as skipping the inspection or always offering over ask.</li>
         <li>Promise that avoiding these items guarantees approval. {FTHB_FILE_MISTAKES.notLifestyle}</li>
         <li>Coach occupancy misrepresentation. {OCCUPANCY_TYPES.fraud}</li>
       </ul>

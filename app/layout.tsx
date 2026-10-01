@@ -104,9 +104,11 @@ export const metadata: Metadata = {
     "Utah housing market",
     "MLS listings Utah",
   ],
+  // No openGraph.url here: child pages inherit this object unless they define their own,
+  // and a fixed "/" made every inheriting page claim the homepage as its og:url.
+  // The homepage sets its own url (app/page.tsx).
   openGraph: {
     type: "website",
-    url: `${SITE_URL.replace(/\/$/, "")}/`,
     siteName: SITE_NAME,
     title: `${SITE_BRAND_SHORT} | ${SITE_NAME}: Utah real estate & property management`,
     description:

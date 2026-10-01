@@ -127,7 +127,7 @@ const CLOSING: CalculatorInputCopy = {
 const REFINANCE: CalculatorInputCopy = {
   slug: "refinance",
   heading: "Include points and origination in break-even",
-  lead: `A lower note rate still loses if you move or refinance again before costs are earned back. Put points, origination, title, and prepaid interest into closing costs — not just the appraisal. Snapshot as of ${LENDING_FACTS_AS_OF}.`,
+  lead: `A lower note rate still loses if you move or refinance again before costs are earned back. Put points, origination, title, and prepaid interest into closing costs, not just the appraisal. Snapshot as of ${LENDING_FACTS_AS_OF}.`,
   fields: [
     {
       name: "Current balance, rate, and remaining term",

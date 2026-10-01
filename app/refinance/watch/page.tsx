@@ -3,18 +3,18 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { RateWatchForm } from "@/components/lending/rate-watch-form"
-import { SITE_URL, pageTitle } from "@/lib/site"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
 import { LoanOfficerLine } from "@/components/lending/loan-officer-line"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
   "Tell us your current rate and the rate that would make refinancing worth it. We'll reach out when rates get close. No credit check to join."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageCanonicalMetadata("/refinance/watch/", {
   title: pageTitle("Refinance Rate Watch List"),
   description,
-  alternates: { canonical: `${SITE_URL}/refinance/watch/` },
-}
+})
 
 export default function RateWatchPage() {
   return (

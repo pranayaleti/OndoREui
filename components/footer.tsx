@@ -202,8 +202,23 @@ const Footer = memo(() => {
             <li><Link href="/learn/first-time" className="text-foreground/70 hover:text-foreground">First-time buyer cash and closing</Link></li>
             <li><Link href="/learn/non-qm" className="text-foreground/70 hover:text-foreground">Non-QM, bank-statement, DSCR</Link></li>
             <li><Link href="/learn/investment" className="text-foreground/70 hover:text-foreground">Investment occupancy and DSCR</Link></li>
+            <li><Link href="/tour" className="text-foreground/70 hover:text-foreground">Platform tour</Link></li>
+            <li><Link href="/why-utah" className="text-foreground/70 hover:text-foreground">Why Utah</Link></li>
             <li><Link href="/academy" className="text-foreground/70 hover:text-foreground">Academy</Link></li>
             <li><Link href="/glossary" className="text-foreground/70 hover:text-foreground">Real estate glossary</Link></li>
+          </FooterNavSection>
+
+          {/* Owners: real links in the server HTML, since the header mega-menu panels only mount on hover */}
+          <FooterNavSection label="Owners & Investors" icon={<Building className="h-5 w-5" />} href="/property-management">
+            <li><Link href="/property-management" className="text-foreground/70 hover:text-foreground">Property management</Link></li>
+            <li><Link href="/pricing" className="text-foreground/70 hover:text-foreground">Pricing</Link></li>
+            <li><Link href="/compare-utah-property-managers" className="text-foreground/70 hover:text-foreground">Compare Utah property managers</Link></li>
+            <li><Link href="/compare" className="text-foreground/70 hover:text-foreground">Compare Ondo to other software</Link></li>
+            <li><Link href="/solutions" className="text-foreground/70 hover:text-foreground">Solutions</Link></li>
+            <li><Link href="/solutions/landlords" className="text-foreground/70 hover:text-foreground">For landlords</Link></li>
+            <li><Link href="/solutions/investors" className="text-foreground/70 hover:text-foreground">For investors</Link></li>
+            <li><Link href="/solutions/property-managers" className="text-foreground/70 hover:text-foreground">For property managers</Link></li>
+            <li><Link href="/solutions/tenants" className="text-foreground/70 hover:text-foreground">For tenants</Link></li>
           </FooterNavSection>
 
           {/* Areas */}

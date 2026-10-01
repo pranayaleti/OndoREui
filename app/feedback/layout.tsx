@@ -4,10 +4,10 @@ import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { pageTitle } from "@/lib/site"
 
 /**
- * /feedback is a logged-in-style utility form: robots.txt already disallows it
- * (lib/agent-discovery-config.json extraDisallow) and it is excluded from the XML
- * sitemap, so it must be noindex too — otherwise Google can index the URL from
- * inbound links with no title of its own. The page itself is a client component,
+ * /feedback is a logged-in-style utility form that the footer links sitewide. It is
+ * deliberately NOT in robots.txt (lib/agent-discovery-config.json): a Disallow would
+ * stop Google reading the noindex below. It is excluded from the XML sitemap and
+ * noindex, so inbound links cannot index it. The page itself is a client component,
  * so metadata has to live in this server layout.
  */
 export const metadata: Metadata = pageCanonicalMetadata("/feedback", {

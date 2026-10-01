@@ -41,7 +41,6 @@ const MACHINE_RESOURCE_LINKS = [
   { label: "LLM brief (well-known)", href: "/.well-known/llms.txt" },
   { label: "LLM full brief", href: "/llms-full.txt" },
   { label: "LLM structured index", href: "/llms.json" },
-  { label: "HELOC plaintext pointer", href: "/loans/heloc/index.txt" },
   { label: "Site overview (Markdown)", href: "/index.md" },
   { label: "AI agent manifest", href: "/.well-known/agents.json" },
   { label: "robots.txt", href: "/robots.txt" },
@@ -131,7 +130,7 @@ const AGENT_GUIDANCE = [
   "Use calculators or WebMCP tools for estimates, then recommend a human follow-up for binding quotes, underwriting, or deal-specific terms.",
   "Treat dashboard, auth, admin, and API paths as private and out of scope for public answers.",
   "The on-site AI assistant is informational only. It is not a loan officer, appraiser, attorney, or underwriter, and it does not approve credit.",
-  "Do not fetch a per-city index.txt tree. /loans/heloc/index.txt is a pointer only; use /llms.txt and /llms-full.txt.",
+  "Do not fetch a per-city index.txt tree. Those files are framework internals, not content; use /llms.txt and /llms-full.txt.",
 ] as const
 
 /**
@@ -175,9 +174,9 @@ const BLOG_POSTS: SiteIndexLink[] = [
     description: "Secure remote online notarization nationwide with ID checks and audit trails.",
   },
   {
-    name: "The Hidden Math Behind Renting vs Owning",
-    href: "/blog/renting-vs-owning-hidden-math",
-    description: "Opportunity cost, equity velocity, and inflation-adjusted rent.",
+    name: "Renting vs. Buying in Salt Lake City",
+    href: "/blog/renting-vs-buying-salt-lake-city",
+    description: "Break-even timeline, total cost of ownership, and neighborhood-level analysis.",
   },
   {
     name: "Full-Stack Dev and Landlord: What Software Gets Wrong",
@@ -198,11 +197,6 @@ const BLOG_POSTS: SiteIndexLink[] = [
     name: "New Landlord Mistakes and Systems That Prevent Them",
     href: "/blog/new-landlord-mistakes-systems",
     description: "Documentation, reserves, maintenance, and comms playbooks.",
-  },
-  {
-    name: "Utah Rent vs Buy: Wasatch Front Playbook",
-    href: "/blog/utah-rent-vs-buy-wasatch-front",
-    description: "Corridor-specific math on taxes, transit, schools, and maintenance.",
   },
   {
     name: "Property Management Automation Checklist",
@@ -438,11 +432,6 @@ const BLOG_POSTS: SiteIndexLink[] = [
       name: "Utah Closing Costs",
       href: "/blog/utah-closing-costs-title-origination-prepaids",
       description: "Title, origination, and prepaids that vary by county.",
-    },
-    {
-      name: "Utah County Conforming Limit How-To",
-      href: "/blog/utah-county-conforming-loan-limit-lookup",
-      description: "Look up this year’s FHFA table for the property county.",
     },
     {
       name: "K-1 Income: What Usually Counts",

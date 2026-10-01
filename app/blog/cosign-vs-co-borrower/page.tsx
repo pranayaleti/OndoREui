@@ -71,7 +71,7 @@ export default function CosignVsCoborrowerPage() {
         path,
         title: "Cosign vs Co-Borrower",
         description:
-          "Who is on the note, who is on title, and who is only helping credit. Not a silent auto-loan cosigner.",
+          "Who is on the note, who is on title, and who is only helping with credit, and what each role means for the loan.",
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "The note, the deed, and a gift letter are three different signatures.",

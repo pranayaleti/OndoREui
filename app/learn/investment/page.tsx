@@ -143,7 +143,7 @@ export default function InvestmentLearnPage() {
             </ul>
           </div>
           <ContentFaq items={faqs} />
-          <RelatedContent path="/learn/investment" title="Guides in this cluster" />
+          <RelatedContent path="/learn/investment" title="Related guides" />
           <NextStepCta
             path="/learn/investment"
             heading="Occupancy is the first question"

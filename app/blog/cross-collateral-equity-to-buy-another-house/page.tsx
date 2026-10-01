@@ -48,7 +48,7 @@ export const metadata = articleMetadata({
   path,
   title: "Cross-Collateral and Using Equity to Buy Another House",
   description:
-    "Pledging more than one property versus cash-out or a HELOC. Educational only — not a published product you can assume.",
+    "Pledging more than one property versus cash-out or a HELOC. Educational only; this is not a published product you can assume.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["cross collateral mortgage", "using equity to buy another house", "blanket mortgage rental"],
@@ -62,7 +62,7 @@ export default function CrossCollateralPage() {
         path,
         title: "Cross-Collateral and Using Equity to Buy Another House",
         description:
-          "Pledging more than one property versus cash-out or a HELOC. Educational only — not a published product you can assume.",
+          "Pledging more than one property versus cash-out or a HELOC. Educational only; this is not a published product you can assume.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "Tying two houses together is a risk conversation, not a standard agency purchase.",

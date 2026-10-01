@@ -8,8 +8,8 @@ import { SITE_URL } from "@/lib/site";
 const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/technical-seo-for-real-estate";
-const title = "Technical SEO for Real Estate: JSON-LD, Sitemaps, and Core Web Vitals";
-const description = "A blueprint for dominating local real estate search results using Next.js SEO primitives and structured data.";
+const title = "Technical SEO for Real Estate: JSON-LD and Core Web Vitals";
+const description = "How Ondo uses Next.js structured data, sitemaps and static pages to make its Utah real estate pages easy for search engines to read.";
 const author = "Growth Team";
 
 const keywords = [
@@ -26,6 +26,8 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 import { pageTitle, pageTitleText } from "@/lib/site"
 
 export const metadata: Metadata = {
+  // Internal engineering write-up, not consumer search content: kept reachable but out of the index.
+  robots: { index: false, follow: true },
   title: pageTitle(`${title} | Ondo Real Estate`),
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
@@ -74,7 +76,7 @@ export default function TechnicalSEOForRealEstate() {
 
       <PageBanner
         title={title}
-        subtitle="Dominating local search with Next.js SEO primitives."
+        subtitle="Structured data, sitemaps and static pages for local search."
         backgroundImage="/modern-office-building.webp"
       />
 
@@ -101,12 +103,12 @@ export default function TechnicalSEOForRealEstate() {
           <div className="not-prose grid gap-4 md:grid-cols-3 mb-10">
             <CardSpot title="Goal" body="Own local intent for Utah real estate and services." />
             <CardSpot title="Method" body="Structured data + sitemaps + performance baked into components." />
-            <CardSpot title="Signal" body="Page 1 visibility through Core Web Vitals and programmatic coverage." />
+            <CardSpot title="Signal" body="Fast pages and clear markup that help the right searches find the right page." />
           </div>
 
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="lead text-xl text-foreground/70 mb-8">
-              In real estate, if you aren't on Page 1, you don't exist. Ondo Real Estate utilizes a &quot;Programmatic SEO&quot; approach built on Next.js to ensure our listings and services dominate local search results in Utah.
+              Local search is a major way Utah buyers, sellers and landlords find a real estate company. Ondo Real Estate uses a &quot;Programmatic SEO&quot; approach built on Next.js so each listing, city and service page has a clear title, description and structured data.
             </p>
 
             <h2>Structured Data (JSON-LD)</h2>
@@ -155,7 +157,7 @@ export const generateBreadcrumbJsonLd = (items) => ({
             <ul>
               <li>&quot;Lehi real estate&quot;</li>
               <li>&quot;Utah County property management&quot;</li>
-              <li>&quot;Mobile notary Orem&quot;</li>
+              <li>&quot;Utah real estate market reports&quot;</li>
             </ul>
             <p>
               By injecting these keywords into the <code>metadata</code> export of our Next.js pages, we signal strong local relevance.
@@ -176,7 +178,7 @@ export const generateBreadcrumbJsonLd = (items) => ({
               Google's Core Web Vitals are a ranking factor. Our architecture optimizes for this naturally:
             </p>
             <ul>
-              <li><strong>Next/Image</strong>: Automatic distinct resizing prevents layout shifts.</li>
+              <li><strong>Image sizing</strong>: Explicit dimensions on images reserve space and prevent layout shifts. Images are served as authored on this static site, so we size the files ourselves.</li>
               <li><strong>Font Optimization</strong>: <code>next/font</code> eliminates Flash of Unstyled Text (FOUT).</li>
               <li><strong>Static Generation</strong>: Marketing pages are pre-rendered, offering near-instant Time to First Byte (TTFB).</li>
             </ul>
@@ -198,7 +200,7 @@ export const generateBreadcrumbJsonLd = (items) => ({
             <div className="space-y-6">
               <div>
                 <h4 className="font-bold text-lg">Q: Why is JSON-LD important for real estate?</h4>
-                <p>A: It helps Google display &quot;Rich Snippets&quot;, like price, address, and star ratings, directly in the search results, increasing click-through rates.</p>
+                <p>A: It helps Google display &quot;Rich Snippets&quot;, such as breadcrumb paths, in search results when Google chooses to show them. Markup does not guarantee a rich result or a ranking.</p>
               </div>
               <div>
                 <h4 className="font-bold text-lg">Q: What is Programmatic SEO?</h4>
@@ -209,7 +211,7 @@ export const generateBreadcrumbJsonLd = (items) => ({
             <div className="mt-12 p-6 bg-muted rounded-lg">
               <h3 className="text-xl font-bold mb-4">Summary</h3>
               <p className="mb-0">
-                Ondo Real Estate employs a technical SEO strategy built on Next.js primitives. Key tactics include automated <code>sitemap.xml</code> generation via <code>next-sitemap</code>, dynamic JSON-LD injection for <code>BreadcrumbList</code> and <code>LocalBusiness</code> schemas, and hyper-local keyword targeting for the Utah market. The platform optimizes for Core Web Vitals (LCP, CLS) using server-side rendering and image optimization, treating performance as a primary search ranking signal.
+                Ondo Real Estate employs a technical SEO strategy built on Next.js primitives. Key tactics include automated <code>sitemap.xml</code> generation via <code>next-sitemap</code>, dynamic JSON-LD injection for <code>BreadcrumbList</code> and <code>LocalBusiness</code> schemas, and hyper-local keyword targeting for the Utah market. The platform optimizes for Core Web Vitals (LCP, CLS) using static generation and reserved image space. Page experience is one signal among many, not a guarantee.
               </p>
             </div>
           </div>

@@ -134,15 +134,17 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
       description: `Use our ${prettyTitle.toLowerCase()} calculator to plan your Utah real estate decisions.`,
       applicationCategory: "FinancialApplication",
     }
+  // The catalog name ("DSCR Calculator"), not the slug ("Dscr"), so structured data matches the page.
+  const calculatorUrl = `${SITE_URL}/calculators/${slug}/`
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: "Home", url: SITE_URL },
-    { name: "Calculators", url: `${SITE_URL}/calculators` },
-    { name: prettyTitle, url: `${SITE_URL}/calculators/${slug}` },
+    { name: "Calculators", url: `${SITE_URL}/calculators/` },
+    { name: detail.name, url: calculatorUrl },
   ])
   const webAppJsonLd = generateWebApplicationJsonLd({
     name: detail.name,
     description: detail.description,
-    url: `${SITE_URL}/calculators/${slug}`,
+    url: calculatorUrl,
     applicationCategory: detail.applicationCategory || "FinancialApplication",
     providerName: SITE_NAME,
   })
@@ -150,8 +152,8 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
   return (
     <main className="min-h-screen">
       <SEO
-        title={`${prettyTitle} Calculator`}
-        description={`Use our ${prettyTitle.toLowerCase()} calculator to plan your Utah real estate decisions.`}
+        title={detail.name}
+        description={detail.description}
         pathname={`/calculators/${slug}`}
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={structuredData}

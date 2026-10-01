@@ -5,6 +5,7 @@ import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { zipPageCanonical } from "@/lib/zip-pages"
 
 type Params = Promise<{ zip: string }>
 
@@ -18,7 +19,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const cityName = city?.name ?? "Utah"
   const title = pageTitleText(`Property Management ${zip} (${cityName}) | ${SITE_BRAND_SHORT}`)
   const description = `Rental property management in ${zip} ${cityName}, tenant screening, rent collection, and maintenance. Get a free rental analysis.`
-  const canonical = `${SITE_URL}/property-management/zip/${zip}/`
+  // Same content as the primary city's page, so that page is the canonical.
+  const canonical = zipPageCanonical("property-management", zip)
   return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: DEFAULT_OG_IMAGES },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
 }
@@ -40,7 +42,7 @@ export default async function Page({ params }: { params: Params }) {
           { name: `${zip} (${city.name})`, url: `${SITE_URL}/property-management/zip/${zip}/` },
         ])}
       />
-      <CityServicePage city={city} service="property-management" />
+      <CityServicePage city={city} service="property-management" zip={zip} />
     </>
   )
 }

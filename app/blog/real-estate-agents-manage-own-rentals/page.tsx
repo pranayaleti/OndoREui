@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import Link from "next/link"
 const slug = "/blog/real-estate-agents-manage-own-rentals"
 const title = "Why Real Estate Agents Should Manage Their Own Rentals"
-const description = "Agents already have the market data, network, and licensing edge — here is why self-managing your rentals compounds that advantage."
+const description = "Agents already have the market data, network, and licensing edge. Here is why self-managing your rentals compounds that advantage."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"

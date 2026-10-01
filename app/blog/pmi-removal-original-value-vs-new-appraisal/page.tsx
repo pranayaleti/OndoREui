@@ -61,7 +61,7 @@ export const metadata = articleMetadata({
   path,
   title: "Removing PMI: Original Value vs New Appraisal",
   description:
-    "HPA cancellation uses original value. A new appraisal of current value is a separate investor path — not FHA MIP and not the wait-for-20% question.",
+    "HPA cancellation uses original value. A new appraisal of current value is a separate path with its own investor rules.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["PMI removal", "cancel PMI appraisal", "Homeowners Protection Act 80% 78%"],
@@ -75,7 +75,7 @@ export default function PmiRemovalPage() {
         path,
         title: "Removing PMI: Original Value vs New Appraisal",
         description:
-          "HPA cancellation uses original value. A new appraisal of current value is a separate investor path — not FHA MIP and not the wait-for-20% question.",
+          "HPA cancellation uses original value. A new appraisal of current value is a separate path with its own investor rules.",
         published: "2026-08-29",
         category: "Loan Programs",
         bannerSubtitle: "Two off-ramps. Original value is a statute clock. Current value is an investor maybe.",

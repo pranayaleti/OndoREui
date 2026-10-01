@@ -36,6 +36,7 @@ import {
   listingHighlights,
   listingLocationFacts,
   listingMarketStatus,
+  listingOfferAvailability,
   listingMediaEmbeds,
   listingMetricRows,
   listingPetPolicyRows,
@@ -200,7 +201,11 @@ export function PropertyListingDetail({
     offers: {
       price: property.price,
       priceCurrency: "USD",
-      availability: property.availability ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+      availability: listingOfferAvailability({
+        status: property.status,
+        listingKind: property.listingKind,
+      }),
+      pricePeriod: property.listingKind === "sale" ? undefined : "month",
     },
   })
 
@@ -213,8 +218,8 @@ export function PropertyListingDetail({
   })
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-    { name: "Properties", url: `${SITE_URL}/properties` },
-    { name: property.title, url: `${SITE_URL}/properties/${publicId}` },
+    { name: "Properties", url: `${SITE_URL}/properties/` },
+    { name: property.title, url: `${SITE_URL}/properties/${publicId}/` },
   ])
 
   const navItems = [

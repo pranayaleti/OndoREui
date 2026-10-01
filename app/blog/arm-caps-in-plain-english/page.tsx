@@ -57,7 +57,7 @@ export const metadata = articleMetadata({
   path,
   title: "ARM Caps in Plain English",
   description:
-    "Initial, periodic, and lifetime caps are percentage-point limits on the note rate — not a payment promise.",
+    "Initial, periodic, and lifetime caps are percentage-point limits on the note rate. They are not a payment promise.",
   published: "2026-08-29",
   category: "Mortgages",
   keywords: ["ARM caps explained", "2/1/5 ARM", "adjustable rate cap initial periodic lifetime"],
@@ -71,7 +71,7 @@ export default function ArmCapsPage() {
         path,
         title: "ARM Caps in Plain English",
         description:
-          "Initial, periodic, and lifetime caps are percentage-point limits on the note rate — not a payment promise.",
+          "Initial, periodic, and lifetime caps are percentage-point limits on the note rate. They are not a payment promise.",
         published: "2026-08-29",
         category: "Mortgages",
         bannerSubtitle: "Read the three numbers on the ARM. They limit the note rate, not the rest of the payment.",

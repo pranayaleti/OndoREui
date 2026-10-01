@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { neighborhoodsByCity, findNeighborhoodForCard } from "./neighborhood-content"
+import { neighborhoodsByCity, findNeighborhoodForCard, splitNeighborhoodLabel } from "./neighborhood-content"
 
 describe("neighborhood center coordinates", () => {
   it("every neighborhood has a plausible Utah lat/lng", () => {
@@ -70,5 +70,18 @@ describe("housing-stock coverage for major PM cities", () => {
         expect(hood.character, hood.name).not.toMatch(/who (should )?live/i)
       }
     }
+  })
+})
+
+describe("splitNeighborhoodLabel", () => {
+  it("splits on the first comma only so descriptions keep their own commas", () => {
+    expect(splitNeighborhoodLabel("Traverse Mountain, newer builds, townhomes, and families")).toEqual([
+      "Traverse Mountain",
+      "newer builds, townhomes, and families",
+    ])
+  })
+
+  it("returns no description when the label has no comma", () => {
+    expect(splitNeighborhoodLabel("Avenues")).toEqual(["Avenues", null])
   })
 })

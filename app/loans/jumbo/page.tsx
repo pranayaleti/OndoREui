@@ -134,7 +134,6 @@ export default function JumboLoanPage() {
               <h3 className="text-2xl font-bold mb-6">Discuss a jumbo purchase</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg"><Link href="/blog/jumbo-vs-conforming-fhfa-county-limit">FHFA lookup how-to</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/utah-county-conforming-loan-limit-lookup">Utah county lookup</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/blog/interest-only-mortgages-who-they-are-for">Interest-only (not a teaser)</Link></Button>
               </div>
             </div>

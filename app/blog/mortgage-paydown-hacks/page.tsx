@@ -44,8 +44,8 @@ export default function MortgagePaydownHacks() {
     >
             <p className="lead text-xl text-foreground/70 mb-6">
               A mortgage front-loads interest: in the early years, most of each payment is interest,
-              not principal. Anything that adds to principal early compounds into large lifetime savings
-             , but the right move depends on your rate and your alternatives.
+              not principal. Anything that adds to principal early compounds into large lifetime savings,
+              but the right move depends on your rate and your alternatives.
             </p>
 
             <h2>Tactics that work</h2>

@@ -1,5 +1,6 @@
 import { JsonLd } from "@/components/json-ld"
 import {
+  canonicalCrumbUrl,
   generateBlogPostingJsonLd,
   generateBreadcrumbJsonLd,
   generateWebPageJsonLd,
@@ -43,49 +44,9 @@ export default function SEO({
     return value.startsWith("http://") || value.startsWith("https://") ? value : `${domain}${value}`
   }
 
-  const url = `${domain}${pathname}`
+  // Structured-data URLs must match the canonical, which ends with "/" (trailingSlash: true).
+  const url = canonicalCrumbUrl(`${domain}${pathname}`)
   const ogImage = toAbsolute(image) || `${domain}/modern-office-building.webp`
-
-  // Enhanced keywords with default real estate terms
-  const defaultKeywords = [
-    // Core brand/market terms
-    "Utah real estate",
-    "Utah real estate listings",
-    "real estate Utah",
-    "homes for sale Utah",
-    "houses for sale Utah",
-    // Services
-    "property management Utah",
-    "rental property management",
-    "tenant screening Utah",
-    "landlord services Utah",
-    "home buying Utah",
-    "first-time home buyer Utah",
-    "home selling Utah",
-    "sell my house Utah",
-    // Finance
-    "mortgage loans Utah",
-    "mortgage lender Utah",
-    "mortgage pre-approval Utah",
-    "refinance Utah",
-    // Geos
-    "Wasatch Front",
-    "Salt Lake City real estate",
-    "Lehi real estate",
-    "Provo real estate",
-    "Orem real estate",
-    "Sandy real estate",
-    "Draper real estate",
-    "American Fork real estate",
-    "Pleasant Grove real estate",
-    "Utah County real estate",
-    "Salt Lake County real estate",
-    "Davis County real estate",
-    // Topics
-    "Utah housing market",
-    "MLS listings Utah",
-  ]
-  const allKeywords = [...new Set([...defaultKeywords, ...keywords])]
 
   const providedJsonLd = Array.isArray(jsonLd) ? jsonLd.filter(Boolean) : jsonLd ? [jsonLd] : []
 
@@ -110,7 +71,9 @@ export default function SEO({
           datePublished: publishedTime,
           dateModified: modifiedTime,
           authorName: author || SITE_NAME,
-          keywords: [...new Set([...(tags || []), ...allKeywords])],
+          // Post-specific terms only. Merging the site-wide list put the same 30+
+          // keywords on every post, which Google ignores and treats as stuffing.
+          keywords: tags.length ? tags : keywords,
           articleSection: section,
         })
       : null

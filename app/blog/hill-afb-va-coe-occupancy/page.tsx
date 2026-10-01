@@ -53,7 +53,7 @@ export const metadata = articleMetadata({
   path,
   title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
   description:
-    "Hill Air Force Base is in Davis County, Utah. COE, occupancy, and base housing vs a purchase — not a mill doorway. Occupancy must match use.",
+    "Hill Air Force Base is in Davis County, Utah. How the VA Certificate of Eligibility and occupancy rules apply to a purchase near the base. Occupancy must match use.",
   published: "2026-08-29",
   category: "Loan Programs",
   keywords: ["Hill AFB VA loan", "Hill Air Force Base COE", "VA occupancy Utah"],
@@ -67,18 +67,18 @@ export default function HillAfbVaPage() {
         path,
         title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
         description:
-          "Hill Air Force Base is in Davis County, Utah. COE and occupancy — not a mill doorway. Occupancy must match use.",
+          "Hill Air Force Base is in Davis County, Utah. How the VA Certificate of Eligibility and occupancy rules apply to a purchase near the base. Occupancy must match use.",
         published: "2026-08-29",
         category: "Loan Programs",
-        bannerSubtitle: "A useful Utah veteran resource. Not a /hill-afb-mortgage mill.",
+        bannerSubtitle: "COE and occupancy for a VA purchase near Hill Air Force Base.",
         faqs,
         keywords: ["Hill AFB VA", "VA Certificate of Eligibility occupancy"],
       }}
     >
       <p className="lead text-xl text-foreground/70">
         Hill Air Force Base is in Davis County, Utah. A VA purchase there still needs a Certificate of Eligibility
-        and occupancy that matches how you will actually live. This is not a mill doorway, not a second-VA-loan
-        clone, and not a restoration guide. Snapshot as of {LENDING_FACTS_AS_OF}.
+        and occupancy that matches how you will actually live. Second VA loans and entitlement restoration
+        have their own posts, linked below. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{HILL_AFB_VA.where}</p>
       <p>{OCCUPANCY_TYPES.fairHousing}</p>
@@ -103,7 +103,7 @@ export default function HillAfbVaPage() {
         caption={`On-base housing vs a VA purchase as of ${LENDING_FACTS_AS_OF}. Occupancy has to match use.`}
         columns={columns}
         rows={rows}
-        footnote="Not occupancy coaching. Not a BAH quote."
+        footnote="Not a BAH quote."
       />
       <p>{HILL_AFB_VA.baseHousingVsPurchase}</p>
       <p>
@@ -111,7 +111,7 @@ export default function HillAfbVaPage() {
         <Link href="/blog/second-home-vs-investment-occupancy">occupancy types</Link>.
       </p>
 
-      <h2>Commute geography, not a mill</h2>
+      <h2>Commute and location</h2>
       <p>{HILL_AFB_VA.commute}</p>
       <p>
         Program overview: <Link href="/loans/va">VA loans in Utah</Link>. A veteran in a rural tract is a different
@@ -131,13 +131,13 @@ export default function HillAfbVaPage() {
       <ul>
         <li>Invent a current BAH dollar figure or treat BAH as qualifying income by itself.</li>
         <li>Coach anyone to label a rental as a VA primary while remaining in base housing.</li>
-        <li>Publish a city mill of “best Hill AFB lenders” or swap Utah copy onto another base.</li>
+        <li>Rank “best Hill AFB lenders” or recommend a specific lender.</li>
       </ul>
 
       <h2>What happens next</h2>
       <ol>
         <li>Ask a loan officer to pull or review the COE before you treat zero-down as automatic.</li>
-        <li>Say how you will occupy the house — including PCS timing and whether you will leave base housing.</li>
+        <li>Say how you will occupy the house, including PCS timing and whether you will leave base housing.</li>
         <li>
           Conversation, not a promise: <Link href="/qualify">start a mortgage conversation</Link>. Residual and
           funding-fee questions belong in that file, not in a neighborhood slogan.

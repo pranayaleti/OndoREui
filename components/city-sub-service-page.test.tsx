@@ -2,7 +2,9 @@ import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { CitySubServicePage } from "./city-sub-service-page"
 import { findCityBySlug } from "@/lib/utah-cities"
+import { cityContentByName } from "@/lib/city-content"
 import { subServiceDefinitions } from "@/lib/sub-service-content"
+import { SITE_ORGANIZATION_ID } from "@/lib/seo"
 
 vi.mock("@/lib/leads-api", async () => {
   const actual = await vi.importActual<typeof import("@/lib/leads-api")>("@/lib/leads-api")
@@ -71,3 +73,29 @@ describe("CitySubServicePage lead capture", () => {
     expect(document.body.textContent).not.toMatch(/not a commitment to lend/i)
   })
 })
+
+describe("CitySubServicePage structured data and FAQ", () => {
+  const jsonLdBlocks = () =>
+    Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map((s) => JSON.parse(s.textContent || "{}"))
+
+  it("emits one Service that points at the site Organization, no per-city business and no FAQPage", () => {
+    render(<CitySubServicePage city={lehi} subService={screening} />)
+    const blocks = jsonLdBlocks()
+    expect(blocks.map((b) => b["@type"])).toEqual(["Service"])
+    expect(blocks[0].provider).toEqual({ "@id": SITE_ORGANIZATION_ID })
+    expect(JSON.stringify(blocks[0])).not.toMatch(/PostalAddress|LocalBusiness/)
+  })
+
+  it("keeps every FAQ answer in the rendered HTML, not behind an unmounted accordion", () => {
+    render(<CitySubServicePage city={lehi} subService={screening} />)
+    const details = Array.from(document.querySelectorAll("details"))
+    expect(details.length).toBe(screening.baseFaqs.length + (cityContentFaqCount()))
+    for (const d of details) {
+      expect(d.querySelector("p")?.textContent?.length).toBeGreaterThan(20)
+    }
+  })
+})
+
+function cityContentFaqCount(): number {
+  return cityContentByName[lehi.name]?.faq?.length ?? 0
+}

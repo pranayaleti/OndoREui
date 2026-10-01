@@ -352,14 +352,6 @@ const blogPosts: SearchResult[] = [
     keywords: ['notary', 'remote notary', 'online notary', 'RON', 'notarization']
   },
   {
-    id: 'renting-vs-owning-hidden-math',
-    title: 'The Hidden Math Behind Renting vs Owning',
-    description: 'Opportunity cost, equity velocity, and inflation-adjusted rent modeled by a developer-landlord',
-    href: '/blog/renting-vs-owning-hidden-math',
-    category: 'Blog',
-    keywords: ['rent vs own', 'renting', 'owning', 'math', 'comparison']
-  },
-  {
     id: 'full-stack-dev-landlord-gaps',
     title: 'I\'m a Full-Stack Dev and Landlord: What Software Gets Wrong',
     description: 'UX gaps in property software and how to design flows that serve tenants and owners',
@@ -392,17 +384,9 @@ const blogPosts: SearchResult[] = [
     keywords: ['landlord', 'mistakes', 'systems', 'documentation', 'maintenance']
   },
   {
-    id: 'utah-rent-vs-buy-wasatch-front',
-    title: 'Utah Rent vs Buy: Wasatch Front Playbook',
-    description: 'Corridor-specific math on taxes, transit, schools, and maintenance along the Wasatch Front',
-    href: '/blog/utah-rent-vs-buy-wasatch-front',
-    category: 'Blog',
-    keywords: ['utah', 'rent vs buy', 'wasatch front', 'utah real estate']
-  },
-  {
     id: 'property-management-automation-checklist',
     title: 'Property Management Automation Checklist',
-    description: 'High-ROI automations for rent, maintenance, and owner reporting, built by a dev-operator',
+    description: 'High-ROI automations for rent, maintenance, and owner reporting for small rental portfolios',
     href: '/blog/property-management-automation-checklist',
     category: 'Blog',
     keywords: ['property management', 'automation', 'checklist', 'ROI']
@@ -656,12 +640,12 @@ const blogPosts: SearchResult[] = [
     keywords: ['Utah closing costs', 'title', 'origination']
   },
   {
-    id: 'utah-county-conforming-loan-limit-lookup',
-    title: 'Utah County Conforming Limit How-To',
-    description: 'Look up this year’s FHFA table for the property county',
-    href: '/blog/utah-county-conforming-loan-limit-lookup',
+    id: 'renting-vs-buying-salt-lake-city',
+    title: 'Renting vs. Buying in Salt Lake City (2026 Analysis)',
+    description: 'Break-even timeline, total cost of ownership, and neighborhood-level analysis for renting versus buying',
+    href: '/blog/renting-vs-buying-salt-lake-city',
     category: 'Blog',
-    keywords: ['Utah loan limit', 'FHFA', 'Summit County']
+    keywords: ['rent vs buy', 'renting', 'buying', 'Salt Lake City', 'comparison']
   },
   {
     id: 'k-1-income-what-usually-counts',

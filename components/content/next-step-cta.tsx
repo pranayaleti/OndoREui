@@ -1,11 +1,14 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ctaForPath, relatedLinksForPath } from "@/lib/content"
+import type { ArticleFallback } from "@/lib/content/article-fallback"
 
 type NextStepCtaProps = {
   path: string
   heading?: string
   body?: string
+  /** Used when the content graph has no node for this path. */
+  fallback?: ArticleFallback
 }
 
 function headingIdForPath(path: string): string {
@@ -17,9 +20,11 @@ export function NextStepCta({
   path,
   heading = "What to do next",
   body = "Education first. A conversation with a loan officer is how you find out what may actually fit your file.",
+  fallback,
 }: NextStepCtaProps) {
-  const primary = ctaForPath(path)
-  const conversions = relatedLinksForPath(path, { kinds: ["conversion", "calculator", "program"], limit: 3 })
+  const primary = ctaForPath(path) ?? fallback?.cta
+  const graphConversions = relatedLinksForPath(path, { kinds: ["conversion", "calculator", "program"], limit: 3 })
+  const conversions = graphConversions.length > 0 ? graphConversions : (fallback?.links ?? []).slice(0, 3)
   const headingId = headingIdForPath(path)
 
   if (!primary && conversions.length === 0) return null

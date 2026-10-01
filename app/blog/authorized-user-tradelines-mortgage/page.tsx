@@ -62,7 +62,7 @@ export default function AuthorizedUserTradelinesPage() {
         path,
         title: "Authorized User Tradelines: Help or Overlay Risk",
         description:
-          "What AU tradelines do and do not do on a mortgage tri-merge. Not a piggyback scheme.",
+          "What authorized-user tradelines do and do not do on a mortgage tri-merge, and why they are not a shortcut to a higher score.",
         published: "2026-08-29",
         category: "Credit",
         bannerSubtitle: "A card you can swipe is not automatically a tradeline the AUS will count.",

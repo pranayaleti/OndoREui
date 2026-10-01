@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { SITE_PHONE } from "@/lib/site"
-import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
+import { type UtahCity, cityGuideLabel, toCitySlug } from "@/lib/utah-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cityMarketData } from "@/lib/city-market-data"
@@ -304,7 +304,7 @@ export function CityPricingGuide({ city }: CityPricingGuideProps) {
           title={`More ${city.name} Resources`}
           variant="pills"
           links={[
-            { label: `${city.name} City Guide`, href: `/locations/${citySlug}/` },
+            { label: cityGuideLabel(city.name), href: `/locations/${citySlug}/` },
             { label: `${city.name} Property Management`, href: `/property-management/${citySlug}/` },
             { label: `${city.name} Home Loans`, href: `/loans/${citySlug}/` },
             { label: `Buy or Sell in ${city.name}`, href: `/buy-sell/${citySlug}/` },

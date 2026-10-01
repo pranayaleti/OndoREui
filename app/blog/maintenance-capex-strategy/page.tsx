@@ -1,5 +1,4 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
-import Link from "next/link"
 const slug = "/blog/maintenance-capex-strategy"
 const title = "Maintenance and CapEx Strategy for Rentals"
 const description = "A practical lifecycle and reserve plan to keep NOI stable and assets healthy."
@@ -64,13 +63,6 @@ export default function MaintenanceCapexStrategy() {
               <li>Quarterly: filters, minor leaks, GFCIs, exterior walk.</li>
               <li>Annual: roof/attic check, HVAC service, caulking/weatherproofing.</li>
               <li>Per-turn: paint touch-up, deep clean, safety devices, photo doc.</li>
-            </ul>
-
-            <h2>Developer’s Angle</h2>
-            <ul>
-              <li>Track lifecycle dates per asset; alert 12 months before end-of-life.</li>
-              <li>Standardize materials; bulk pricing; store SKUs in the system.</li>
-              <li>Link maintenance tickets to asset IDs; see failure patterns.</li>
             </ul>
 
             <h2>Utah Lens</h2>

@@ -2,7 +2,7 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/how-to-choose-property-management-company-utah"
-const title = "How to Choose a Property Management Company in Utah (2026 Guide)"
+const title = "How to Choose a Property Management Company in Utah"
 const description = "A step-by-step guide to evaluating Utah property management companies, fees, services, communication, and red flags to watch for."
 const published = "2026-03-23"
 const modified = "2026-03-23"

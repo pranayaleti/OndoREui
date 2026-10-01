@@ -1,6 +1,9 @@
 import Link from "next/link"
-import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_HOURS, SITE_SOCIALS } from "@/lib/site"
-import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
+import { SITE_URL } from "@/lib/site"
+import { type UtahCity, cityGuideLabel, toCitySlug } from "@/lib/utah-cities"
+import { generateServiceJsonLd } from "@/lib/seo"
+import { zipsOwnedByOtherCities } from "@/lib/zip-pages"
+import { ZipSharedCities } from "@/components/zip-shared-cities"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -30,9 +33,11 @@ import { JsonLd } from "@/components/json-ld"
 type CityServicePageProps = {
   city: UtahCity
   service: "property-management" | "buy-sell" | "loans"
+  /** Set on /{service}/zip/[zip]/ pages so a shared ZIP can point at the other cities that use it. */
+  zip?: string
 }
 
-export function CityServicePage({ city, service }: CityServicePageProps) {
+export function CityServicePage({ city, service, zip }: CityServicePageProps) {
   const citySlug = toCitySlug(city.name)
   const marketData = cityMarketData[city.name]
   const cityContent = cityContentByName[city.name]
@@ -73,92 +78,44 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
     return "/faq/loans-faqs"
   })()
 
-  const businessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "RealEstateAgent"],
-    name: SITE_NAME,
-    areaServed: city.name + ", UT",
-    url: SITE_URL,
-    telephone: SITE_PHONE,
-    openingHours: SITE_HOURS,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: city.name,
-      addressRegion: "UT",
-      addressCountry: "US",
-    },
-    sameAs: SITE_SOCIALS,
-    ...(city.lat && city.lng
-      ? {
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: city.lat,
-            longitude: city.lng,
-          },
-        }
-      : {}),
-    makesOffer: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Property Management" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Home Buying" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Home Selling" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Home Loans" } },
-    ],
-  }
-
+  // One Organization entity site-wide (#organization in the root layout): the page
+  // describes a Service that points at it, never a second per-city business.
   const serviceJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name:
-      service === "property-management"
-        ? `Property Management in ${city.name}, UT`
-        : service === "buy-sell"
-        ? `Home Buying & Selling in ${city.name}, UT`
-        : `Home Loans & Mortgages in ${city.name}, UT`,
-    serviceType:
-      service === "property-management"
-        ? "Property Management"
-        : service === "buy-sell"
-        ? "Real Estate Agent Services"
-        : "Mortgage Lending",
-    areaServed: city.name + ", UT",
-    provider: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    ...generateServiceJsonLd({
+      name:
+        service === "property-management"
+          ? `Property Management in ${city.name}, UT`
+          : service === "buy-sell"
+          ? `Home Buying & Selling in ${city.name}, UT`
+          : `Home Loans & Mortgages in ${city.name}, UT`,
+      description: headline,
+      serviceType:
+        service === "property-management"
+          ? "Property Management"
+          : service === "buy-sell"
+          ? "Real Estate Agent Services"
+          : "Mortgage Lending",
+      areaServed: "Utah",
+      areaServedCity: city.name,
+      providerIsSiteOrganization: true,
+    }),
+    url: `${SITE_URL}/${service}/${citySlug}/`,
   }
 
-  const baseFaqs = getServiceFaqBank(service)
-  const localizedBaseFaqs = baseFaqs.map((item) => ({
-    q: item.q,
-    a: item.a
-      .replace(/Utah(?!\w)/g, `${city.name}, Utah`)
-      .replace(/Wasatch Front/g, `${city.name} area`),
-  }))
-  const citySpecificFaqs = cityContent?.faq || []
-  const faqList = [...localizedBaseFaqs, ...citySpecificFaqs]
+  // The bank is statewide text, so it renders as written. Regex-swapping "Utah" or
+  // "Wasatch Front" for the city name produced "We follow Ogden, Utah statutes".
+  const faqList = [...getServiceFaqBank(service), ...(cityContent?.faq || [])]
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqList.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.a,
-      },
-    })),
-  }
+  // A shared ZIP's page belongs to one primary city, so only link ZIPs this city owns.
+  const sharedZips = zipsOwnedByOtherCities(city)
+  const ownedZips = city.zips.filter((z) => !sharedZips.includes(z))
 
   const serviceLabel = service === "property-management" ? "Property Management" : service === "buy-sell" ? "Buy & Sell" : "Home Loans"
   const serviceBasePath = service === "property-management" ? "property-management" : service === "buy-sell" ? "buy-sell" : "loans"
 
   return (
     <main className="container mx-auto px-4 py-10 space-y-10">
-      <JsonLd id="city-business-jsonld" data={businessJsonLd} />
       <JsonLd id="city-service-jsonld" data={serviceJsonLd} />
-      <JsonLd id="city-faq-jsonld" data={faqJsonLd} />
 
       <BreadcrumbNav items={[
         { label: serviceLabel, href: `/${serviceBasePath}/` },
@@ -204,6 +161,8 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
           )}
         </CardContent>
       </Card>
+
+      {zip && <ZipSharedCities zip={zip} service={service} />}
 
       <LocalProofCTA city={city} service={service} marketData={marketData} />
       <CityPageLeadCapture
@@ -360,15 +319,20 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         }))}
       />
 
-      {city.zips.length > 0 && (
+      {ownedZips.length > 0 && (
         <CrossLinkSection
           title={`${city.name} ZIP codes we serve`}
           variant="pills"
-          links={city.zips.map((zip) => ({
-            label: zip,
-            href: `/${service}/zip/${zip}/`,
+          links={ownedZips.map((z) => ({
+            label: z,
+            href: `/${service}/zip/${z}/`,
           }))}
         />
+      )}
+      {sharedZips.length > 0 && (
+        <p className="text-sm text-muted-foreground">
+          We also serve {city.name} addresses in ZIP {sharedZips.join(", ")}. Each of those ZIPs is shared with another city and has its page there.
+        </p>
       )}
 
       <Separator />
@@ -400,7 +364,7 @@ export function CityServicePage({ city, service }: CityServicePageProps) {
         title={`More ${city.name} Resources`}
         variant="pills"
         links={[
-          { label: `${city.name} City Guide`, href: `/locations/${citySlug}/` },
+          { label: cityGuideLabel(city.name), href: `/locations/${citySlug}/` },
           { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
           { label: `${city.name} Market Report`, href: `/market-reports/${citySlug}/` },
           { label: "Guides & resources", href: "/resources/" },

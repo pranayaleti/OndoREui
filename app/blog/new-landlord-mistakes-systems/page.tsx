@@ -41,7 +41,7 @@ export default function NewLandlordMistakesSystems() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              After managing and coding systems for rentals, the biggest mistakes I see are operational, not financial. Here are the recurring ones and the simple systems that stop them.
+              The biggest new-landlord mistakes are operational, not financial. Here are the recurring ones and the simple systems that stop them.
             </p>
 
             <h2>Top Mistakes</h2>
@@ -76,13 +76,6 @@ export default function NewLandlordMistakesSystems() {
               <li>States: new → triage → scheduled → in-progress → done → rated.</li>
               <li>Response targets: same day acknowledge; schedule within 24–48 hours.</li>
               <li>Preferred vendor list with price bands; avoid scramble pricing.</li>
-            </ul>
-
-            <h2>Developer’s Angle</h2>
-            <ul>
-              <li>Automate status updates; tenants see state changes without tickets.</li>
-              <li>Store media (photos/video) with events; makes disputes trivial.</li>
-              <li>Dashboards: vacancy pipeline, work order aging, reserve levels.</li>
             </ul>
 
             <h2>Utah Lens</h2>

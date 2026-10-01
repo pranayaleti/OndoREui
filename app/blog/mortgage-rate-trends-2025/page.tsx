@@ -2,14 +2,14 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 const slug = "/blog/mortgage-rate-trends-2025"
-const title = "Mortgage Rate Trends: What to Expect in 2025"
-const description = "Analysis of current mortgage rate trends and predictions for the coming year."
+const title = "Mortgage Rates: How They Move and How to Read a Quote"
+const description = "What moves 30-year mortgage rates, why a headline average is not your quote, and how to compare Loan Estimates and decide when to lock."
 const published = "2024-11-28"
-const modified = "2024-11-28"
+const modified = "2026-10-01"
 const author = "Ondo Real Estate"
 const category = "Mortgage"
 const image = "/modern-townhouse-garage.png"
-const keywords = ["mortgage rate trends 2025", "Utah mortgage rates", "when to lock mortgage rate", "Fed rate cuts 2025", "refinance timing Utah"]
+const keywords = ["mortgage rate trends", "Utah mortgage rates", "when to lock mortgage rate", "Fed rate cuts and mortgage rates", "compare loan estimates"]
 
 export const metadata = articleMetadata({
   path: slug,
@@ -36,11 +36,11 @@ export default function MortgageRateTrends2025() {
         category,
         image,
         keywords,
-        bannerSubtitle: "What buyers and refinancers should watch in the current rate environment.",
+        bannerSubtitle: "What moves rates, and what to compare once you have a quote.",
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              After a volatile 2023–2024, buyers and refinancers are watching rates carefully. Here is what the data, Fed signals, and Utah-specific demand suggest for the mortgage market.
+              Rates make the news, but your quote is what you pay. This guide covers what moves mortgage rates, why a headline average is not your quote, and how to compare offers. It does not predict where rates go next.
             </p>
 
             <h2>How Mortgage Rates Are Set</h2>
@@ -53,14 +53,17 @@ export default function MortgageRateTrends2025() {
               <li><strong>MBS spreads</strong>, mortgage-backed securities spreads over Treasuries reflect lender risk appetite</li>
             </ul>
 
-            <h2>What Happened in 2023–2024</h2>
-            <p>The fastest rate hiking cycle in four decades pushed the 30-year fixed from sub-3% (2021) to above 8% (late 2023). Utah buyers saw purchasing power compressed by over 40% from peak to trough. The Fed began cutting its benchmark rate in late 2024, but 30-year mortgage rates did not fall proportionally, the 10-year yield remained elevated due to persistent inflation and large Treasury supply.</p>
+            <h2>Why Rates and the Fed Do Not Move Together</h2>
+            <p>The 2022–2023 hiking cycle was the fastest in four decades and pushed the 30-year fixed from under 3% in 2021 to nearly 8% in late 2023. When the Fed began cutting its benchmark rate in September 2024, 30-year mortgage rates did not fall in step, because they follow longer-term yields rather than the federal funds rate. A Fed cut is a signal, not a promise that your quote drops.</p>
+
+            <h2>A Headline Average Is Not Your Quote</h2>
+            <p>Weekly averages in the news are survey numbers for a typical borrower. Your quote depends on credit score, down payment, property type, occupancy, loan amount, points, lender credits and lock period. Two files with the same note rate can have different costs, so use the averages for direction and your Loan Estimate for decisions. This site does not publish a live-rate table. See <Link href="/blog/apr-vs-rate-on-a-loan-estimate">APR vs. rate on a Loan Estimate</Link> for how to read one.</p>
 
             <h2>Reading a Rate Quote Correctly</h2>
             <p>When a lender quotes you a rate, understand the full cost picture:</p>
             <ul>
-              <li><strong>Rate vs. APR</strong>: APR includes origination fees, discount points, and other costs, always compare APRs</li>
-              <li><strong>Discount points</strong>: 1 point = 1% of loan amount paid upfront to buy down the rate. Break-even is typically 3–5 years; only worth it if you plan to stay</li>
+              <li><strong>Rate vs. APR</strong>: APR folds in the note rate plus most lender prepaid charges, but it is not the only number to read. Compare Loan Estimates with the same loan amount, property type and lock period, and read the note rate, APR, points, lender credits and cash to close together</li>
+              <li><strong>Discount points</strong>: 1 point is typically 1% of the loan amount paid upfront to buy down the rate. Break-even is the point cost divided by the monthly savings, and pricing is specific to your file, so compare two Loan Estimates rather than assuming a standard payback period. See <Link href="/blog/discount-points-breakeven-without-sales-pitch">discount points break-even</Link></li>
               <li><strong>Rate lock period</strong>: Standard locks are 30–45 days; longer locks cost more. Know your close timeline before locking</li>
               <li><strong>Float-down options</strong>: Some lenders offer a one-time float-down if rates drop after you lock, worth asking about</li>
             </ul>
@@ -74,7 +77,7 @@ export default function MortgageRateTrends2025() {
             </ul>
 
             <h2>Utah-Specific Demand Context</h2>
-            <p>Utah's population growth (top 3 nationally for the past decade) creates a structural demand floor for housing that softens rate-driven price corrections relative to slower-growth markets. Silicon Slopes tech employment concentration in Utah County and Salt Lake County creates income resilience. This means buyers should model purchase decisions on long-hold (7+ year) scenarios rather than trying to time the market bottom.</p>
+            <p>Utah's steady population growth supports housing demand, which can soften rate-driven price swings compared with slower-growth markets. Local conditions still vary by city and price point, so check the <Link href="/market-reports">city market reports</Link> and model a purchase on how long you plan to stay rather than on trying to time the market bottom.</p>
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">

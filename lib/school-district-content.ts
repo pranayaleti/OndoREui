@@ -36,7 +36,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
       { name: "Bonneville High School", level: "High", grades: "10–12", enrollment: 1900 },
       { name: "Roy High School", level: "High", grades: "10–12", enrollment: 2100 },
     ],
-    citiesServed: ["North Ogden", "Ogden", "South Ogden", "Washington Terrace", "Riverdale", "Roy", "Hooper", "West Point"],
+    citiesServed: ["North Ogden", "South Ogden", "Washington Terrace", "Riverdale", "Roy", "Hooper"],
     notablePrograms: ["STEM Academy", "Dual Immersion (Spanish, Mandarin)", "Career & Technical Education", "Advanced Placement"],
     highlights: [
       "Multiple CTE pathways: healthcare, IT, manufacturing",
@@ -55,11 +55,12 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
       { name: "Layton High School", level: "High", grades: "10–12", enrollment: 2600, notes: "Robust theater and performing arts" },
       { name: "Viewmont High School", level: "High", grades: "10–12", enrollment: 2200 },
       { name: "Bountiful High School", level: "High", grades: "10–12", enrollment: 1800 },
+      { name: "Northridge High School", level: "High", grades: "10–12", notes: "Layton" },
       { name: "Farmington High School", level: "High", grades: "10–12", enrollment: 2400, notes: "Opened in 2020" },
       { name: "Centerville Junior High", level: "Middle", grades: "7–9" },
       { name: "Kaysville Elementary", level: "Elementary", grades: "K–6" },
     ],
-    citiesServed: ["Layton", "Kaysville", "Farmington", "Centerville", "Bountiful", "Woods Cross", "North Salt Lake", "Clinton", "Syracuse", "Clearfield"],
+    citiesServed: ["Layton", "Kaysville", "Farmington", "Centerville", "Bountiful", "Woods Cross", "North Salt Lake", "Clinton", "Syracuse", "Clearfield", "West Point", "Sunset"],
     notablePrograms: ["AP Capstone Program", "IB Diploma (Farmington HS)", "STEM Pathways", "Concurrent Enrollment with SLCC/UVU"],
     highlights: [
       "IB Diploma Programme at Farmington High School",
@@ -94,7 +95,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     name: "Canyons School District",
     slug: "canyons-school-district",
     overview:
-      "Canyons School District serves the southeastern Salt Lake Valley, Sandy, Draper, Holladay, Cottonwood Heights, and South Jordan. The district lists AP Capstone, STEM Academy, and career and technical programs.",
+      "Canyons School District serves the southeastern Salt Lake Valley, Sandy, Draper, Cottonwood Heights, and Midvale. The district lists AP Capstone, STEM Academy, and career and technical programs.",
     headquarters: "Sandy, UT",
     website: "https://www.canyonsdistrict.org",
     enrollment: 34000,
@@ -106,7 +107,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
       { name: "Draper Elementary", level: "Elementary", grades: "K–5" },
       { name: "Cottonwood Elementary", level: "Elementary", grades: "K–5" },
     ],
-    citiesServed: ["Draper", "Sandy", "Holladay", "Cottonwood Heights", "Midvale", "South Jordan"],
+    citiesServed: ["Draper", "Sandy", "Cottonwood Heights", "Midvale"],
     notablePrograms: ["AP Capstone Diploma Program", "STEM Academy at Corner Canyon", "CTE Health Sciences", "Gifted & Talented IEP programs"],
     highlights: [
       "STEM Academy program at multiple schools",
@@ -124,11 +125,10 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
       { name: "Lone Peak High School", level: "High", grades: "10–12", enrollment: 3400 },
       { name: "Lehi High School", level: "High", grades: "10–12", enrollment: 3100 },
       { name: "American Fork High School", level: "High", grades: "10–12", enrollment: 3300 },
-      { name: "Northridge High School", level: "High", grades: "10–12", enrollment: 2400 },
       { name: "Vista Heights Middle", level: "Middle", grades: "6–8" },
       { name: "Traverse Mountain Elementary", level: "Elementary", grades: "K–6", notes: "Serves Traverse Mountain community" },
     ],
-    citiesServed: ["Lehi", "American Fork", "Highland", "Alpine", "Saratoga Springs", "Eagle Mountain", "Vineyard", "Lindon", "Pleasant Grove"],
+    citiesServed: ["Lehi", "American Fork", "Highland", "Alpine", "Saratoga Springs", "Eagle Mountain", "Vineyard", "Lindon", "Pleasant Grove", "Orem"],
     notablePrograms: ["STEM Excellence Programs", "Dual Language (Spanish, Portuguese)", "CTE Technology & Engineering", "IB Candidate School"],
     highlights: [
       "Utah's largest school district by enrollment",
@@ -163,6 +163,11 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
 
 export function findDistrictBySlug(slug: string): SchoolDistrictInfo | undefined {
   return schoolDistricts.find((d) => d.slug === slug)
+}
+
+/** The district guide that lists a city, if we have written one (not every district has a guide). */
+export function findDistrictForCity(cityName: string): SchoolDistrictInfo | undefined {
+  return schoolDistricts.find((d) => d.citiesServed.includes(cityName))
 }
 
 export const allDistrictSlugs = schoolDistricts.map((d) => d.slug)

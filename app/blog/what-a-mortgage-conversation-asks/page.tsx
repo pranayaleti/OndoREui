@@ -43,7 +43,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
-  title: "What a Mortgage Conversation Asks — and What It Will Not Promise",
+  title: "What a Mortgage Conversation Asks and Will Not Promise",
   description:
     "Occupancy, income type, debts, assets, and credit authorization. A conversation is not approval, a lock, or a quote.",
   published: "2026-08-29",
@@ -57,7 +57,7 @@ export default function QualifyAsksGuidePage() {
     <ArticleShell
       meta={{
         path,
-        title: "What a Mortgage Conversation Asks — and What It Will Not Promise",
+        title: "What a Mortgage Conversation Asks and Will Not Promise",
         description:
           "Occupancy, income type, debts, assets, and credit authorization. A conversation is not approval, a lock, or a quote.",
         published: "2026-08-29",

@@ -41,42 +41,42 @@ const loanTypes = [
     icon: <Home className="h-8 w-8" />,
     title: "Conventional Loans",
     href: "/loans/conventional",
-    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
+    description: "Conforming mortgages for borrowers who meet credit, down payment, and DTI guidelines.",
     features: ["Some products start around 3% down", "PMI can often be removed with enough equity", "Waiting for 20% vs buying sooner is a cash-and-timeline trade"],
   },
   {
     icon: <Shield className="h-8 w-8" />,
     title: "FHA Loans",
     href: "/loans/fha",
-    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
+    description: "Government-insured loans with lower down payment options and more flexible credit overlays, subject to MIP.",
     features: ["3.5% down at 580+ (HUD policy; overlays apply)", "Gift funds often allowed", "Primary residence"],
   },
   {
     icon: <Users className="h-8 w-8" />,
     title: "VA Loans",
     href: "/loans/va",
-    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
+    description: "For eligible veterans, active-duty service members, and some surviving spouses. Zero down only with remaining entitlement.",
     features: ["0% down when eligible", "No monthly PMI", "Funding fee may apply or be waived"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "USDA Loans",
     href: "/loans/usda",
-    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
+    description: "Rural development loans for eligible properties and income limits on the USDA map.",
     features: ["0% down when eligible", "Income and map tests", "Primary residence"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "Jumbo Loans",
     href: "/loans/jumbo",
-    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
+    description: "Financing above the current FHFA conforming limit for the property county. Limits change annually.",
     features: ["Look up this year’s FHFA county table", "Investor overlays on credit and reserves", "Not a single Utah-wide dollar cap"],
   },
   {
     icon: <DollarSign className="h-8 w-8" />,
     title: "Non-QM (bank-statement, DSCR)",
     href: "/learn/non-qm",
-    description: "Compare every Utah mortgage program side by side: down payment, credit minimum, mortgage insurance and loan limits. Pre-approval from a local MLO.",
+    description: "When agency tax-return income does not match cash flow. Bank-statement, DSCR, and asset-depletion are different stacks, not a cheaper conventional shortcut.",
     features: ["Bank-statement deposit analysis", "DSCR on investment property rent", "Asset-depletion overlays"],
   },
 ]
@@ -191,8 +191,8 @@ export default function LoansPage() {
                 <div className="flex items-start">
                   <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold">Fast Processing</h4>
-                    <p className="text-foreground/70">Streamlined application process with quick pre-approvals and closings</p>
+                    <h4 className="font-semibold">Clear Process</h4>
+                    <p className="text-foreground/70">We walk you through each step and the timeline for your file. Timing varies, and talking with us is not a commitment to lend.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
