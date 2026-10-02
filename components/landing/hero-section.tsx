@@ -92,7 +92,7 @@ export function HeroSection() {
           ))}
         </div>
         <p className="mt-6 text-sm text-foreground/50">
-          Trusted by property owners from North Ogden to Nephi{" "}
+          Trusted by property owners across the Wasatch Front{" "}
           &bull;{" "}
           <Link
             href="/licensing"
