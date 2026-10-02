@@ -11,7 +11,11 @@ import {
   buildSitemapMdBody,
   getSiteIndexSections,
   LLMS_DISCLOSURES_BLOCK,
+  SITE_INDEX_LAYOUT,
+  SITE_INDEX_NOT_LISTED,
+  getSiteIndexCatalogHrefs,
 } from "./site-index"
+import { getBlogPosts } from "./blog-posts"
 
 // next-sitemap.config.js is CJS; load it once for the drift tests below so we
 // verify the two robots.txt producers stay in lockstep.
@@ -239,5 +243,39 @@ describe("next-sitemap exclusions", () => {
       expect(await cfg.transform(cfg, path), path).toBeNull()
     }
     expect(cfg.additionalPaths).toBeUndefined()
+  })
+})
+
+describe("site index layout", () => {
+  const sections = getSiteIndexSections()
+  const listed = sections.flatMap((section) => section.links.map((link) => link.href))
+
+  it("leads with the services people come for: buy, sell, then loans", () => {
+    expect(sections.slice(0, 3).map((section) => section.id)).toEqual(["buy", "sell", "loans"])
+  })
+
+  it("lists every page once", () => {
+    expect(new Set(listed).size).toBe(listed.length)
+  })
+
+  it("never lists noindexed pages or template examples", () => {
+    for (const href of SITE_INDEX_NOT_LISTED) expect(listed).not.toContain(href)
+  })
+
+  // A page dropped from the layout would silently vanish from the sitemap and the llms files.
+  it("places every catalog page somewhere unless it is hidden on purpose", () => {
+    const missing = getSiteIndexCatalogHrefs().filter((href) => !listed.includes(href) && !SITE_INDEX_NOT_LISTED.has(href))
+    expect(missing).toEqual([])
+  })
+
+  it("resolves every page the layout names", () => {
+    const named = SITE_INDEX_LAYOUT.flatMap((section) => ("hrefs" in section ? section.hrefs : []))
+    const unresolved = named.filter((href) => !listed.includes(href) && !SITE_INDEX_NOT_LISTED.has(href))
+    expect(unresolved).toEqual([])
+  })
+
+  it("lists exactly the indexable blog posts from the registry", () => {
+    const blog = sections.find((section) => section.id === "blog")!.links.map((link) => link.href)
+    expect(new Set(blog)).toEqual(new Set(["/blog", ...getBlogPosts().map((post) => `/blog/${post.slug}`)]))
   })
 })

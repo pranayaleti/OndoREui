@@ -34,25 +34,32 @@ export const metadata: Metadata = pageCanonicalMetadata("/sitemap", {
 })
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
-  "home-company": Building2,
-  "buy-finance": Landmark,
-  "local-hubs": MapPin,
-  "sell-invest": TrendingUp,
-  "rent-manage": Home,
+  buy: Home,
+  sell: TrendingUp,
+  loans: Landmark,
+  "rent-manage": Search,
+  invest: TrendingUp,
   notary: FileSignature,
   calculators: Calculator,
+  local: MapPin,
+  company: Users,
+  platform: Building2,
   faq: CircleHelp,
-  blog: BookOpen,
-  about: Users,
-  connect: Newspaper,
+  glossary: BookOpen,
+  blog: Newspaper,
   "legal-trust": Scale,
 }
+
+/** Machine-readable files (sitemap.xml, llms.txt, ...) are listed for agents in sitemap.md, not for people here. */
+const isPageLink = (href: string) => !/\.[a-z0-9]+$/i.test(href)
 
 // Off-screen sections skip layout and paint until scrolled near (CSS only, links stay in the HTML).
 const SECTION_RENDER_HINT = "scroll-mt-24 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
 
 export default function SitemapPage() {
   const siteSections = getSiteIndexSections()
+    .map((section) => ({ ...section, links: section.links.filter((link) => isPageLink(link.href)) }))
+    .filter((section) => section.links.length > 0)
   // Name and URL only: schema.org ListItem descriptions are not used for rich results, and
   // with ~1,000 links they were most of the page's JSON-LD weight.
   const itemList = getFlatSiteIndexForJsonLd().map(({ name, url }) => ({ name, url }))
@@ -81,11 +88,11 @@ export default function SitemapPage() {
             <h1 className="mb-4 text-4xl font-bold tracking-tight">Site map</h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               Browse every public page on this site by topic. For crawlers, use the{" "}
-              <a href="/sitemap.xml" className="text-primary underline-offset-4 hover:underline">
+              <a href="/sitemap.xml" className="text-primary underline underline-offset-4">
                 XML sitemap
               </a>{" "}
               or the{" "}
-              <a href="/llms.txt" className="text-primary underline-offset-4 hover:underline">
+              <a href="/llms.txt" className="text-primary underline underline-offset-4">
                 LLM / agent brief
               </a>
               .
