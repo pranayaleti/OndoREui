@@ -146,7 +146,7 @@
     "qrcode": "^1.5.4",
     "sharp": "^0.34.4",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5",
+    "typescript": "^7",
     "vitest": "^4.0.18",
     "wait-on": "^9.0.1"
   }
