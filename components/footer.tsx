@@ -26,13 +26,131 @@ import {
   Home,
   Building,
   Users,
-  HelpCircle,
   TrendingUp,
   Calendar,
   BookOpen,
+  Landmark,
+  Tag,
+  type LucideIcon,
 } from "lucide-react"
 import { EqualHousingIcon, socialPlatformFor } from "@/components/social-icons"
 import { analyticsAttributes } from "@/lib/analytics"
+
+type FooterLink = { label: string; href: string; highlight?: boolean }
+
+/**
+ * Eight columns of six links, so the footer fills two even rows of four on desktop. Order follows
+ * what visitors come for (buy, sell, loans first). Every link is a real, indexable page; noindexed
+ * pages (events, sample deals, retired posts) stay out. The header's hover menus are not in the
+ * HTML, so hubs such as /solutions, /tour and /why-utah keep a crawlable link here. The HTML
+ * sitemap lists everything else.
+ */
+export const FOOTER_COLUMNS: ReadonlyArray<{ label: string; Icon: LucideIcon; href: string; links: readonly FooterLink[] }> = [
+  {
+    label: "Buy a Home",
+    Icon: Home,
+    href: "/buy",
+    links: [
+      { label: "First-time homebuyer", href: "/buy/first-time" },
+      { label: "Down payment help", href: "/buy/first-time/grants" },
+      { label: "Buying a second home", href: "/buy/second-home" },
+      { label: "What can I afford? quiz", href: "/buy/quiz" },
+      { label: "Buy and sell by city", href: "/buy-sell" },
+      { label: "Mortgage rates explained", href: "/buy/rates" },
+    ],
+  },
+  {
+    label: "Sell a Home",
+    Icon: Tag,
+    href: "/sell",
+    links: [
+      { label: "Sell with Ondo", href: "/sell" },
+      { label: "What's my home worth?", href: "/whats-my-home-worth" },
+      { label: "Home sale proceeds calculator", href: "/calculators/home-sale" },
+      { label: "City market reports", href: "/market-reports" },
+      { label: "Buying and selling FAQs", href: "/faq/buying-selling-faqs" },
+      { label: "Get matched with a service", href: "/get-matched" },
+    ],
+  },
+  {
+    label: "Home Loans",
+    Icon: Landmark,
+    href: "/loans",
+    links: [
+      { label: "Conventional loans", href: "/loans/conventional" },
+      { label: "FHA loans", href: "/loans/fha" },
+      { label: "VA loans", href: "/loans/va" },
+      { label: "USDA loans", href: "/loans/usda" },
+      { label: "Jumbo loans", href: "/loans/jumbo" },
+      { label: "HELOC and home equity loans", href: "/loans/heloc" },
+    ],
+  },
+  {
+    label: "Refinance",
+    Icon: TrendingUp,
+    href: "/refinance",
+    links: [
+      { label: "Refinance options", href: "/refinance" },
+      { label: "How refinancing works", href: "/refinance/process" },
+      { label: "Rate-and-term refinance", href: "/refinance/rate-term" },
+      { label: "Cash-out refinance", href: "/refinance/cash-out" },
+      { label: "Recast vs refinance", href: "/blog/recast-vs-refinance" },
+      { label: "Refinance calculator", href: "/calculators/refinance" },
+    ],
+  },
+  {
+    label: "Property Management",
+    Icon: Building,
+    href: "/property-management",
+    links: [
+      { label: "Property management", href: "/property-management" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Homes for rent", href: "/properties" },
+      { label: "Tenant screening", href: "/property-management/tenant-screening" },
+      { label: "Compare Utah property managers", href: "/compare-utah-property-managers" },
+      { label: "Solutions for owners and tenants", href: "/solutions" },
+    ],
+  },
+  {
+    label: "Calculators",
+    Icon: Calculator,
+    href: "/calculators",
+    links: [
+      { label: "Self-manage vs Ondo ROI", href: "/calculators/owner-vs-self", highlight: true },
+      { label: "Mortgage payment calculator", href: "/calculators/mortgage-payment" },
+      { label: "Affordability calculator", href: "/calculators/affordability" },
+      { label: "Closing cost calculator", href: "/calculators/closing-cost" },
+      { label: "Rent vs own calculator", href: "/calculators/rent-vs-own" },
+      { label: "All calculators", href: "/calculators" },
+    ],
+  },
+  {
+    label: "Learn",
+    Icon: BookOpen,
+    href: "/learn",
+    links: [
+      { label: "Mortgage learning hub", href: "/learn" },
+      { label: "Why Utah", href: "/why-utah" },
+      { label: "Tour the Ondo platform", href: "/tour" },
+      { label: "Neighborhood guides", href: "/neighborhoods" },
+      { label: "Real estate glossary", href: "/glossary" },
+      { label: "Blog", href: "/blog" },
+    ],
+  },
+  {
+    label: "About Ondo",
+    Icon: Users,
+    href: "/about",
+    links: [
+      { label: "About us", href: "/about" },
+      { label: "Founder's letter", href: "/founders-letter" },
+      { label: "Service areas", href: "/locations" },
+      { label: "Help and FAQs", href: "/faq" },
+      { label: "Affiliate program", href: "/affiliate" },
+      { label: "Contact us", href: "/contact" },
+    ],
+  },
+]
 
 /** Collapsible footer nav section for mobile, expands on tap, always open on md+. */
 function FooterNavSection({ label, icon, href, children }: { label: string; icon: React.ReactNode; href: string; children: React.ReactNode }) {
@@ -139,105 +257,20 @@ const Footer = memo(() => {
       <div className="container mx-auto px-4 py-12" aria-label="Ondo Real Estate footer navigation">
         <h2 className="sr-only">Site links</h2>
         <div className="grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
-          {/* Buying a Home */}
-          <FooterNavSection label="Buying a Home" icon={<Home className="h-5 w-5" />} href="/buy">
-            <li><Link href="/buy/first-time" className="text-foreground/70 hover:text-foreground">First-time homebuyer</Link></li>
-            <li><Link href="/buy/second-home" className="text-foreground/70 hover:text-foreground">Buying a second home</Link></li>
-            <li><Link href="/buy/fixed-rate" className="text-foreground/70 hover:text-foreground">Fixed-rate mortgage</Link></li>
-            <li><Link href="/buy/adjustable-rate" className="text-foreground/70 hover:text-foreground">Adjustable-rate mortgage</Link></li>
-            <li><Link href="/buy/30-year" className="text-foreground/70 hover:text-foreground">30 year mortgage</Link></li>
-            <li><Link href="/buy/15-year" className="text-foreground/70 hover:text-foreground">15 year mortgage</Link></li>
-            <li><Link href="/buy/rates" className="text-foreground/70 hover:text-foreground">Mortgage rates explained</Link></li>
-            <li><Link href="/buy-sell" className="text-foreground/70 hover:text-foreground">Buy &amp; sell by city</Link></li>
-          </FooterNavSection>
-
-          {/* Refinance */}
-          <FooterNavSection label="Refinance" icon={<TrendingUp className="h-5 w-5" />} href="/refinance/process">
-            <li><Link href="/refinance/process" className="text-foreground/70 hover:text-foreground">Mortgage refinance process</Link></li>
-            <li><Link href="/refinance/rate-term" className="text-foreground/70 hover:text-foreground">Rate-and-term refinance</Link></li>
-            <li><Link href="/refinance/cash-out" className="text-foreground/70 hover:text-foreground">Cash-out refinance</Link></li>
-            <li><Link href="/refinance/blog" className="text-foreground/70 hover:text-foreground">Mortgage blog – Refinance</Link></li>
-            <li><Link href="/blog/recast-vs-refinance" className="text-foreground/70 hover:text-foreground">Recast vs refinance</Link></li>
-          </FooterNavSection>
-
-          {/* Mortgage Loans */}
-          <FooterNavSection label="Mortgage Loans" icon={<Building className="h-5 w-5" />} href="/loans">
-            <li><Link href="/loans/conventional" className="text-foreground/70 hover:text-foreground">Conventional</Link></li>
-            <li><Link href="/loans/fha" className="text-foreground/70 hover:text-foreground">FHA</Link></li>
-            <li><Link href="/loans/usda" className="text-foreground/70 hover:text-foreground">USDA</Link></li>
-            <li><Link href="/loans/va" className="text-foreground/70 hover:text-foreground">VA</Link></li>
-            <li><Link href="/loans/heloc" className="text-foreground/70 hover:text-foreground">HELOC / HELOAN</Link></li>
-            <li><Link href="/loans/reverse" className="text-foreground/70 hover:text-foreground">Reverse Mortgage</Link></li>
-            <li><Link href="/loans/jumbo" className="text-foreground/70 hover:text-foreground">Jumbo Loans</Link></li>
-          </FooterNavSection>
-
-          {/* Mortgage Calculators */}
-          <FooterNavSection label="Calculators" icon={<Calculator className="h-5 w-5" />} href="/calculators">
-            <li><Link href="/calculators/owner-vs-self" className="text-primary hover:text-primary/80 font-semibold">Self-manage vs Ondo ROI</Link></li>
-            <li><Link href="/calculators/mortgage-payment" className="text-foreground/70 hover:text-foreground">Mortgage payment calculator</Link></li>
-            <li><Link href="/calculators/affordability" className="text-foreground/70 hover:text-foreground">Affordability calculator</Link></li>
-            <li><Link href="/calculators/income" className="text-foreground/70 hover:text-foreground">Income calculator</Link></li>
-            <li><Link href="/calculators/closing-cost" className="text-foreground/70 hover:text-foreground">Closing cost calculator</Link></li>
-            <li><Link href="/calculators/refinance" className="text-foreground/70 hover:text-foreground">Refinance calculator</Link></li>
-            <li><Link href="/calculators/home-sale" className="text-foreground/70 hover:text-foreground">Home sale calculator</Link></li>
-            <li><Link href="/calculators/buying-power" className="text-foreground/70 hover:text-foreground">Buying power calculator</Link></li>
-            <li><Link href="/calculators/cost-of-living" className="text-foreground/70 hover:text-foreground">Cost of living calculator</Link></li>
-          </FooterNavSection>
-
-          {/* Company */}
-          <FooterNavSection label="Company" icon={<Users className="h-5 w-5" />} href="/about">
-            <li><Link href="/moving-to-utah/" className="text-foreground/70 hover:text-foreground">New to Utah</Link></li>
-            <li><Link href="/qualify" className="text-foreground/70 hover:text-foreground">Start a mortgage conversation</Link></li>
-            <li><Link href="/events" className="text-foreground/70 hover:text-foreground">Events</Link></li>
-            <li><Link href="/socials" className="text-foreground/70 hover:text-foreground">Socials</Link></li>
-            <li><Link href="/news" className="text-foreground/70 hover:text-foreground">Industry news</Link></li>
-            <li><Link href="/affiliate" className="text-foreground/70 hover:text-foreground">Affiliate Program</Link></li>
-          </FooterNavSection>
-
-          {/* Learn */}
-          <FooterNavSection label="Learn" icon={<BookOpen className="h-5 w-5" />} href="/learn">
-            <li><Link href="/learn" className="text-foreground/70 hover:text-foreground">Mortgage learning hub</Link></li>
-            <li><Link href="/learn/variable-income" className="text-foreground/70 hover:text-foreground">Variable income mortgages</Link></li>
-            <li><Link href="/learn/first-time" className="text-foreground/70 hover:text-foreground">First-time buyer cash and closing</Link></li>
-            <li><Link href="/learn/non-qm" className="text-foreground/70 hover:text-foreground">Non-QM, bank-statement, DSCR</Link></li>
-            <li><Link href="/learn/investment" className="text-foreground/70 hover:text-foreground">Investment occupancy and DSCR</Link></li>
-            <li><Link href="/tour" className="text-foreground/70 hover:text-foreground">Platform tour</Link></li>
-            <li><Link href="/why-utah" className="text-foreground/70 hover:text-foreground">Why Utah</Link></li>
-            <li><Link href="/academy" className="text-foreground/70 hover:text-foreground">Academy</Link></li>
-            <li><Link href="/glossary" className="text-foreground/70 hover:text-foreground">Real estate glossary</Link></li>
-          </FooterNavSection>
-
-          {/* Owners: real links in the server HTML, since the header mega-menu panels only mount on hover */}
-          <FooterNavSection label="Owners & Investors" icon={<Building className="h-5 w-5" />} href="/property-management">
-            <li><Link href="/property-management" className="text-foreground/70 hover:text-foreground">Property management</Link></li>
-            <li><Link href="/pricing" className="text-foreground/70 hover:text-foreground">Pricing</Link></li>
-            <li><Link href="/compare-utah-property-managers" className="text-foreground/70 hover:text-foreground">Compare Utah property managers</Link></li>
-            <li><Link href="/compare" className="text-foreground/70 hover:text-foreground">Compare Ondo to other software</Link></li>
-            <li><Link href="/solutions" className="text-foreground/70 hover:text-foreground">Solutions</Link></li>
-            <li><Link href="/solutions/landlords" className="text-foreground/70 hover:text-foreground">For landlords</Link></li>
-            <li><Link href="/solutions/investors" className="text-foreground/70 hover:text-foreground">For investors</Link></li>
-            <li><Link href="/solutions/property-managers" className="text-foreground/70 hover:text-foreground">For property managers</Link></li>
-            <li><Link href="/solutions/tenants" className="text-foreground/70 hover:text-foreground">For tenants</Link></li>
-          </FooterNavSection>
-
-          {/* Areas */}
-          <FooterNavSection label="Areas" icon={<MapPin className="h-5 w-5" />} href="/locations">
-            <li><Link href="/locations" className="text-foreground/70 hover:text-foreground">Service areas</Link></li>
-            <li><Link href="/market-reports" className="text-foreground/70 hover:text-foreground">City market reports</Link></li>
-            <li><Link href="/neighborhoods" className="text-foreground/70 hover:text-foreground">Neighborhood guides</Link></li>
-            <li><Link href="/schools" className="text-foreground/70 hover:text-foreground">School district guides</Link></li>
-          </FooterNavSection>
-
-          {/* Help Center */}
-          <FooterNavSection label="Help Center" icon={<HelpCircle className="h-5 w-5" />} href="/faq">
-            <li><Link href="/faq/payments-faqs" className="text-foreground/70 hover:text-foreground">Payment questions</Link></li>
-            <li><Link href="/faq/hardship-faqs" className="text-foreground/70 hover:text-foreground">Hardship assistance</Link></li>
-            <li><Link href="/faq/loan-payoffs-faqs" className="text-foreground/70 hover:text-foreground">Loan payoffs</Link></li>
-            <li><Link href="/faq/loans-faqs" className="text-foreground/70 hover:text-foreground">Mortgage FAQs</Link></li>
-            <li><Link href="/faq/escrow-faqs" className="text-foreground/70 hover:text-foreground">Escrow</Link></li>
-            <li><Link href="/faq/disaster-faqs" className="text-foreground/70 hover:text-foreground">Natural Disaster Resources</Link></li>
-          </FooterNavSection>
+          {FOOTER_COLUMNS.map(({ label, Icon, href, links }) => (
+            <FooterNavSection key={label} label={label} icon={<Icon className="h-5 w-5" />} href={href}>
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={link.highlight ? "font-semibold text-primary hover:text-primary/80" : "text-foreground/70 hover:text-foreground"}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </FooterNavSection>
+          ))}
         </div>
 
         {/* Contact Information */}
