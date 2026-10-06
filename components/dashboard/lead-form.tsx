@@ -40,10 +40,17 @@ export function LeadForm() {
     e.preventDefault()
     
     try {
-      const res = await fetch(backendUrl("/api/leads/submit"), {
+      const res = await fetch(backendUrl("/api/leads/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.comments,
+          inquiryType: formData.propertyType || "general",
+          source: formData.source || "website",
+        }),
       })
       
       if (!res.ok) {
