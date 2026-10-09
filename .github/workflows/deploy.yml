@@ -41,14 +41,14 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # workflow_run defaults to the default branch; pin to the exact commit CI
           # validated so we never ship something CI did not actually test.
           ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           # CI/deploy use Node 24 and .nvmrc matches it. engines (>=20.19.0) is the supported floor.
           node-version: '24'
@@ -58,7 +58,7 @@ jobs:
         run: npm ci
 
       - name: Restore IndexNow submit state
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .indexnow-cache
           # Unique key each run so the updated state is always saved; restore-keys
@@ -136,16 +136,16 @@ jobs:
           PY
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./out
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       # Tells Bing (and therefore Copilot / ChatGPT's Bing-backed retrieval) which
       # URLs changed, instead of waiting on a crawl cycle. Submits only pages whose
