@@ -22,10 +22,10 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           # CI uses Node 24 and .nvmrc matches it. engines (>=20.19.0) is the supported floor.
           node-version: "24"
@@ -77,7 +77,7 @@ jobs:
         run: node scripts/analyze-bundle.mjs --check
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           # Keyed on the lockfile: it pins the Playwright version, and each version needs its own browser build.
