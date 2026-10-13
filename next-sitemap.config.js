@@ -238,6 +238,8 @@ module.exports = {
     '/feedback',
     // No events published yet, so the page is noindex and must not be submitted either.
     '/events',
+    // Reel landing page (noindex); the indexable versions live under /calculators/.
+    '/numbers',
     '/events/',
     // Illustrative scenarios, not verified case studies: noindex until real ones replace them.
     '/about/case-studies',

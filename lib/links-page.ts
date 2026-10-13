@@ -81,6 +81,8 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     links: [
       // U+00A0 non-breaking space keeps "60 seconds" together when the label wraps on phones.
       { id: "quiz", label: "Get matched to the right service in 60 seconds", href: "/get-matched/" },
+      // The "Comment NUMBERS" reel calculator, for viewers who tap the bio instead of commenting.
+      { id: "numbers", label: "See what a high rate, empty rental or overpriced listing costs you", href: "/numbers/" },
     ],
   },
   {
