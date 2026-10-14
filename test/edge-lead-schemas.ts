@@ -2,7 +2,7 @@
  * Parity copy of the request schemas the Edge API enforces for lead forms.
  *
  * Source of truth (OndoREBackend, outside this repo):
- *   supabase/functions/_shared/routes/leads.ts           contactLeadSchema
+ *   supabase/functions/_shared/routes/leads.ts           contactLeadSchema, intakeLeadSchema
  *   supabase/functions/_shared/marketing-attribution.ts  marketingAttributionSchema (.strict())
  *   supabase/functions/_shared/lead-inbox-helpers.ts     INQUIRY_TYPES
  *
@@ -68,6 +68,40 @@ export const edgeContactLeadSchema = z.object({
   inquiryType: z.enum(EDGE_INQUIRY_TYPES).optional(),
   attribution: edgeMarketingAttributionSchema.optional(),
 })
+
+/** Optional short text: capped, trimmed, and dropped when blank (same helper as the Edge route). */
+const optionalShort = (max: number) => z.string().max(max).optional().transform((s) => s?.trim() || undefined)
+
+/** POST /api/leads/intake (client intake questionnaire, components/intake/intake-form.tsx). */
+export const edgeIntakeLeadSchema = z.object({
+  intakeType: z.enum(["buyer", "seller", "owner", "tenant"]),
+  firstName: z.string().trim().min(1).max(80),
+  lastName: z.string().trim().min(1).max(80),
+  email: z.string().trim().email().max(254).transform((s) => s.toLowerCase()),
+  phone: z
+    .string()
+    .trim()
+    .max(20)
+    .regex(/^[+\d\s\-().]+$/, "Invalid phone format")
+    .refine((s) => s.replace(/\D/g, "").length >= 10, "Enter a 10-digit phone number"),
+  phoneType: optionalShort(40),
+  preferredContact: optionalShort(40),
+  referralSource: optionalShort(160),
+  referredBy: optionalShort(120),
+  answers: z.record(z.unknown()).default({}),
+  labels: z.record(z.unknown()).default({}),
+  textConsent: z.boolean().default(false),
+  consentText: z.string().max(600).optional(),
+  attribution: edgeMarketingAttributionSchema.optional(),
+})
+
+export function parseIntakeLeadBody(body: unknown) {
+  const result = edgeIntakeLeadSchema.strict().safeParse(body)
+  if (!result.success) {
+    throw new Error(`Edge intakeLeadSchema rejected the request: ${JSON.stringify(result.error.flatten())}`)
+  }
+  return result.data
+}
 
 /** Body of POST lead-qualify (see lib/api/qualification.ts). */
 export const edgeQualifyRequestSchema = z.object({

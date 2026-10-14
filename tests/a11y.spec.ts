@@ -52,6 +52,9 @@ const routes = [
   "/buy/quiz/",
   // Service matcher behind the /links "60-second" button (first question).
   "/get-matched/",
+  // Client questionnaire sent by direct link (noindex, but public). The ?type= link lands on a real step.
+  "/intake/",
+  "/intake/?type=tenant",
   // Loan forms linked from /links (deploy only once the NMLS license is active).
   "/loans/second-look/",
   "/refinance/watch/",

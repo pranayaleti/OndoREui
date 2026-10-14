@@ -731,6 +731,7 @@ export const SITE_INDEX_NOT_LISTED: ReadonlySet<string> = new Set([
   "/referral",
   "/buy-sell/lehi",
   "/buy-sell/zip/84043",
+  "/intake",
 ])
 
 /** Pages the catalog does not describe yet. */

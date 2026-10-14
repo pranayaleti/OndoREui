@@ -177,3 +177,57 @@ export async function submitContactLead(
     return { error: "Could not reach the server. Please try again." }
   }
 }
+
+/** Body of POST /api/leads/intake (client intake questionnaire at /intake). */
+export interface SubmitIntakeLeadPayload {
+  intakeType: "buyer" | "seller" | "owner" | "tenant"
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  phoneType?: string
+  preferredContact?: string
+  referralSource?: string
+  referredBy?: string
+  /** Answers keyed by question id from lib/intake-questions.ts. */
+  answers: Record<string, string | string[]>
+  /** Question text per answer id, so the staff email and inbox read naturally. */
+  labels: Record<string, string>
+  textConsent: boolean
+  /** Exact consent wording shown, sent only when the box is ticked. */
+  consentText?: string
+  attribution?: MarketingAttribution
+}
+
+/**
+ * Submit the client intake questionnaire. Saved as a website lead (source "intake") with the
+ * answers attached; the backend emails the team and sends the visitor a thank-you.
+ * Validation errors come back with per-field `details`, keyed by payload field name.
+ */
+export async function submitIntakeLead(
+  payload: SubmitIntakeLeadPayload,
+): Promise<SubmitContactLeadSuccess | SubmitContactLeadError> {
+  const formName = "client_intake"
+  try {
+    const res = await fetch(backendUrl("/api/leads/intake"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) {
+      analytics.trackFormSubmission(formName, false)
+      const error =
+        res.status === 429
+          ? "Too many submissions in a short time. Wait a few minutes and try again."
+          : ((data.error as string | undefined) ?? (data.message as string | undefined) ?? "Failed to submit")
+      return { error, ...(data.details && { details: data.details }) }
+    }
+    analytics.trackFormSubmission(formName, true)
+    analytics.trackLeadGeneration(formName)
+    return data as SubmitContactLeadSuccess
+  } catch {
+    analytics.trackFormSubmission(formName, false)
+    return { error: "Could not reach the server. Please try again." }
+  }
+}

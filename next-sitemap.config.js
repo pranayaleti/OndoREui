@@ -211,6 +211,8 @@ module.exports = {
     },
   },
   exclude: [
+    '/intake',
+    '/intake/',
     '/calculators/*-calculator',
     '/calculators/*-calculator/',
     '/auth',
