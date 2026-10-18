@@ -3,8 +3,14 @@ import { render, screen } from "@testing-library/react"
 import { LoanOfficerLine } from "./loan-officer-line"
 
 describe("LoanOfficerLine", () => {
-  it("shows only the individual NMLS ID while licensing is off", () => {
-    render(<LoanOfficerLine />)
+  // His NMLS license is not active yet: naming him as a loan officer with an ID would advertise one.
+  it("renders nothing while licensing is off", () => {
+    const { container } = render(<LoanOfficerLine />)
+    expect(container).toBeEmptyDOMElement()
+  })
+
+  it("names the loan officer and his NMLS ID once live", () => {
+    render(<LoanOfficerLine live companyId="" />)
     expect(screen.getByText("Loan officer: Pranay Reddy Aleti, NMLS #2699085")).toBeInTheDocument()
     expect(screen.queryByRole("link", { name: /nmls consumer access/i })).not.toBeInTheDocument()
   })

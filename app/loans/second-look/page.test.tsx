@@ -10,10 +10,11 @@ describe("/loans/second-look", () => {
     expect(screen.getByText(/equal housing lender/i)).toBeInTheDocument()
   })
 
-  // A page soliciting loan business names the loan officer and his personal NMLS ID.
-  it("names the loan officer with his NMLS ID", () => {
+  // A licensed loan officer and NMLS ID appear only once LICENSING_LIVE is on (lib/site.ts).
+  it("does not name a loan officer or NMLS ID while licensing is pending", () => {
     render(<SecondLookPage />)
-    expect(screen.getByText("Loan officer: Pranay Reddy Aleti, NMLS #2699085")).toBeInTheDocument()
+    expect(screen.queryByText(/NMLS #\d/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/Loan officer: Pranay/)).not.toBeInTheDocument()
   })
 
   // "Most buyers can" was an unsupported legal generalization; the copy hedges and points to the contract.
