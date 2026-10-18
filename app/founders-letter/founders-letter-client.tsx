@@ -2,9 +2,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { User, Building2, Lightbulb, TrendingUp, Handshake, Rocket, Code, Home, Zap, Target } from "lucide-react"
 import SEO from "@/components/seo"
-import { SITE_ORGANIZATION_ID, generateBreadcrumbJsonLd } from "@/lib/seo"
+import { SITE_ORGANIZATION_ID, founderPersonRef, generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_ADDRESS_CITY, SITE_NAME, SITE_URL } from "@/lib/site"
 import { FOUNDED_MONTH_LABEL, FOUNDED_YEAR, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
+import { FOUNDER_PROFILE_PATH } from "@/lib/team-data"
 import { toAbsoluteSiteUrl } from "@/lib/url"
 
 export const FOUNDERS_LETTER_PATH = "/founders-letter/"
@@ -35,7 +36,7 @@ const RELATED_LINKS = [
   { href: "/about/", label: "About Ondo Real Estate" },
   { href: "/property-management/", label: "How we manage property" },
   { href: "/why-utah/", label: "Why we work in Utah" },
-  { href: "/about/team/", label: "Meet the team" },
+  { href: FOUNDER_PROFILE_PATH, label: "Pranay's full profile" },
 ]
 
 const TIMELINE = [
@@ -76,36 +77,21 @@ export default function FoundersLetterPage() {
 
   const canonical = toAbsoluteSiteUrl(FOUNDERS_LETTER_PATH)
   const founderImage = toAbsoluteSiteUrl(FOUNDER_IMAGE_PATH)
-  const founderId = `${canonical}#founder`
-
-  // ProfilePage is a WebPage subtype; the array type keeps <SEO> from adding a second WebPage block.
-  const profilePageJsonLd = {
+  // The full Person lives on the profile page (FOUNDER_PROFILE_PATH); the letter is an Article by it.
+  const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": ["WebPage", "ProfilePage"],
-    "@id": `${canonical}#webpage`,
-    url: canonical,
-    name: FOUNDERS_LETTER_TITLE,
+    "@type": "Article",
+    "@id": `${canonical}#article`,
+    headline: FOUNDERS_LETTER_TITLE,
     description: FOUNDERS_LETTER_DESCRIPTION,
+    url: canonical,
+    mainEntityOfPage: canonical,
+    image: founderImage,
+    datePublished: modified,
     dateModified: modified,
     inLanguage: "en-US",
-    primaryImageOfPage: { "@type": "ImageObject", url: founderImage, width: 1770, height: 1354 },
-    about: { "@id": founderId },
-    mainEntity: {
-      "@type": "Person",
-      "@id": founderId,
-      name: FOUNDER_NAME,
-      jobTitle: "Founder",
-      description:
-        "Software engineer turned Utah landlord. Founded Ondo Real Estate in 2022 to give property owners visibility and tenants a fair, simple renting experience.",
-      url: canonical,
-      image: founderImage,
-      worksFor: { "@id": SITE_ORGANIZATION_ID },
-      knowsAbout: ["Property management", "Utah real estate", "Real estate investing", "Full stack software development"],
-      homeLocation: {
-        "@type": "Place",
-        address: { "@type": "PostalAddress", addressLocality: SITE_ADDRESS_CITY, addressRegion: "UT", addressCountry: "US" },
-      },
-    },
+    author: founderPersonRef(),
+    publisher: { "@id": SITE_ORGANIZATION_ID },
   }
 
   const stats = [
@@ -131,7 +117,7 @@ export default function FoundersLetterPage() {
             { name: "Home", url: SITE_URL },
             { name: "Founder's Letter", url: canonical },
           ]),
-          profilePageJsonLd,
+          articleJsonLd,
         ]}
       />
 

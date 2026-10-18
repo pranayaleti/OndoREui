@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
 import FoundersLetterPage, { metadata } from "./page"
+import { FOUNDER_PERSON_ID } from "@/lib/seo"
 
 const jsonLdBlocks = (container: HTMLElement) =>
   Array.from(container.querySelectorAll('script[type="application/ld+json"]')).flatMap((node) => {
@@ -50,17 +51,15 @@ describe("/founders-letter page", () => {
     expect(Array.isArray(ogImages) && ogImages.length).toBe(1)
   })
 
-  it("marks the page up as a ProfilePage about the founder, without a duplicate WebPage block", () => {
+  it("marks the letter up as an Article by the founder's one Person id", () => {
     const { container } = render(<FoundersLetterPage />)
     const blocks = jsonLdBlocks(container)
-    const webPages = blocks.filter((block) => hasType(block, "WebPage"))
-    expect(webPages).toHaveLength(1)
-    const profile = webPages[0]
-    expect(hasType(profile, "ProfilePage")).toBe(true)
-    expect(profile.url).toBe("https://www.ondorealestate.com/founders-letter/")
-    expect(profile.mainEntity["@type"]).toBe("Person")
-    expect(profile.mainEntity.name).toBe("Pranay Reddy Aleti")
-    expect(profile.mainEntity.worksFor["@id"]).toBe("https://www.ondorealestate.com/#organization")
+    expect(blocks.filter((block) => hasType(block, "ProfilePage"))).toHaveLength(0)
+    expect(blocks.filter((block) => hasType(block, "WebPage"))).toHaveLength(1)
+    const article = blocks.find((block) => hasType(block, "Article"))
+    expect(article.author).toEqual({ "@type": "Person", "@id": FOUNDER_PERSON_ID, name: "Pranay Reddy Aleti" })
+    expect(article.url).toBe("https://www.ondorealestate.com/founders-letter/")
+    expect(JSON.stringify(blocks)).not.toContain('"jobTitle"')
     const breadcrumb = blocks.find((block) => hasType(block, "BreadcrumbList"))
     expect(breadcrumb.itemListElement.at(-1).item).toBe("https://www.ondorealestate.com/founders-letter/")
   })
@@ -68,7 +67,7 @@ describe("/founders-letter page", () => {
   it("links the letter to the pages it talks about with canonical trailing-slash hrefs", () => {
     render(<FoundersLetterPage />)
     const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"))
-    for (const expected of ["/property-management/", "/solutions/tenants/", "/about/", "/why-utah/", "/contact/"]) {
+    for (const expected of ["/property-management/", "/solutions/tenants/", "/about/", "/why-utah/", "/contact/", "/about/team/pranay-reddy-aleti/"]) {
       expect(hrefs).toContain(expected)
     }
     for (const href of hrefs) {
