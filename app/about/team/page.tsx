@@ -7,7 +7,7 @@ import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
-import { getTeam } from "@/lib/team-data"
+import { FOUNDER_SLUG, getTeam } from "@/lib/team-data"
 
 export const metadata: Metadata = pageCanonicalMetadata("/about/team", {
   title: pageTitle("Our Team | Ondo Real Estate"),
@@ -48,7 +48,15 @@ export default function TeamPage() {
                   >
                     {member.name.charAt(0)}
                   </div>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
+                  <CardTitle className="text-xl">
+                    {member.slug === FOUNDER_SLUG ? (
+                      <Link href={`/about/team/${member.slug}/`} className="hover:text-primary hover:underline underline-offset-4">
+                        {member.name}
+                      </Link>
+                    ) : (
+                      member.name
+                    )}
+                  </CardTitle>
                   <CardDescription className="text-primary">{member.title}</CardDescription>
                 </CardHeader>
                 <CardContent className="text-center">

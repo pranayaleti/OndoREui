@@ -1,7 +1,8 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ export default function ThirtyYearPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="30-Year Mortgage Guide | Utah Real Estate"
         description="Learn about 30-year fixed-rate mortgages in Utah. Understand benefits, rates, and why it's the most popular home loan option."
         pathname="/buy/30-year"
@@ -133,6 +135,7 @@ export default function ThirtyYearPage() {
           </div>
         </div>
       </section>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

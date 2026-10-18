@@ -1,9 +1,10 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { SITE_SOCIALS, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
 import { JsonLd } from "@/components/json-ld"
-import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, generateServiceJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -86,6 +87,7 @@ export default function LoansPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Utah Home Loans & Mortgages | Conventional, FHA, VA, USDA"
         description="Compare conventional, FHA, VA, and USDA education for Utah buyers. Talk with a loan officer. This is not a credit decision."
         pathname="/loans/"
@@ -293,6 +295,7 @@ export default function LoansPage() {
           </Button>
         </div>
       </section>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

@@ -41,6 +41,18 @@ describe("SEO", () => {
 })
 
 describe("SEO structured data", () => {
+  it("puts reviewedBy and lastReviewed on the WebPage node", () => {
+    const id = "https://www.ondorealestate.com/about/team/pranay-reddy-aleti/#person"
+    const { container } = render(
+      <SEO title="FHA" description="d" pathname="/loans/fha/" reviewedBy={id} lastReviewed="2026-10-18" />,
+    )
+    const payload = JSON.parse(container.querySelector('script[type="application/ld+json"]')?.innerHTML ?? "[]")
+    const nodes = Array.isArray(payload) ? payload : [payload]
+    const webPage = nodes.find((node: { "@type"?: string }) => node["@type"] === "WebPage")
+    expect(webPage.reviewedBy).toEqual({ "@id": id })
+    expect(webPage.lastReviewed).toBe("2026-10-18")
+  })
+
   const entriesOf = (container: HTMLElement) => {
     const script = container.querySelector('script[type="application/ld+json"]')
     const payload = JSON.parse(script?.innerHTML ?? "[]")

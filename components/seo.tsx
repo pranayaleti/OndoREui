@@ -23,6 +23,10 @@ type SEOProps = {
   author?: string
   section?: string
   tags?: string[]
+  /** `@id` of the person who reviewed this page (FOUNDER_PERSON_ID); lands on the WebPage node. */
+  reviewedBy?: string
+  /** YYYY-MM-DD of the reviewer's last check. */
+  lastReviewed?: string
 }
 
 export default function SEO({
@@ -36,7 +40,9 @@ export default function SEO({
   modifiedTime,
   author,
   section,
-  tags = []
+  tags = [],
+  reviewedBy,
+  lastReviewed,
 }: SEOProps) {
   const domain = SITE_URL.replace(/\/$/, "")
   const toAbsolute = (value?: string) => {
@@ -83,6 +89,8 @@ export default function SEO({
         name: title,
         url,
         description,
+        reviewedBy,
+        lastReviewed,
       })
     : null
 

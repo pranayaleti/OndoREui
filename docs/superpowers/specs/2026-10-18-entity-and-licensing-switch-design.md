@@ -1,7 +1,7 @@
 # Entity and licensing switch: design
 
 Date: 2026-10-18
-Status: draft, awaiting owner review
+Status: approved 2026-10-18; revised the same day after code review (see "Revisions")
 Sub-project 1 of 4 in the "get found as a Utah agent and loan officer" program.
 
 ## Goal
@@ -19,7 +19,7 @@ Make Pranay Reddy Aleti one entity that Google and AI assistants can recognize, 
 ## Why
 
 - The site describes him in five places that are not connected: the sitewide Organization `founder` (name only), the founder's letter `Person` (`/founders-letter/#founder`), blog author links (`/about/team/`), Review nodes, and the `/links` intro. Google cannot tell these are one person.
-- 153 blog posts are credited to "ONDO Team", "Ondo RE Team", "Product Team", or "Editorial Team". A generic team credit is something Google cannot check, so the content gets no credit from a real person standing behind it.
+- 152 blog posts are credited to "ONDO Team", "Ondo RE Team", "Product Team", or "Editorial Team". A generic team credit is something Google cannot check, so the content gets no credit from a real person standing behind it.
 - The buy, sell, loan, and refinance pages, which match "agent" and "lender" searches, name no person at all.
 - `llms.txt` and the Markdown page copies never say who runs Ondo, so an assistant asked "who runs Ondo Real Estate" has nothing on the site to quote.
 - On Oct 12 a license claim reached production because nothing checked for one. A guard has to make that impossible.
@@ -45,7 +45,7 @@ Add `FOUNDER_PERSON_ID = ${SITE_URL}/about/team/pranay-reddy-aleti/#person` and 
 
 ### 2. The profile page
 
-New route: `app/about/team/[slug]/page.tsx`. It is generated statically from `teamMembers`, which today produces exactly one page, `/about/team/pranay-reddy-aleti/`.
+New route: `app/about/team/pranay-reddy-aleti/page.tsx`, a static folder (only the founder has a profile record; a `[slug]` route can replace it when a second person does). The page body lives in `components/people/founder-profile.tsx`, because Next.js page files may not export extra components.
 
 - Metadata goes through `pageCanonicalMetadata`. The title is "Pranay Reddy Aleti: Founder of Ondo Real Estate" while the switch is off, and gains the licensed titles when it is on. It must fit in 60 characters; `lib/page-titles.test.ts` already checks that. The social preview image is the founder photo.
 - JSON-LD: a `ProfilePage` whose `mainEntity` is `founderPersonJsonLd()`, plus a breadcrumb (Home > About > Team > Pranay Reddy Aleti).
@@ -59,10 +59,12 @@ New route: `app/about/team/[slug]/page.tsx`. It is generated statically from `te
 
 | Place | Today | After |
 |---|---|---|
-| Organization `founder` (`lib/seo.ts`) | `{ @type: Person, name }` | `{ @id: FOUNDER_PERSON_ID }` |
-| Founder's letter | its own `Person` at `#founder` | `author: { @id }` |
-| Blog posts (`generateBlogPostingJsonLd`) | an author `Person` that links to `/about/team/` | author stays the Organization; add a `WebPage` with `reviewedBy: { @id }` and `lastReviewed` |
+| Organization `founder` (`lib/seo.ts`) | `{ @type: Person, name }` | `founderPersonRef()` = `{ @type: Person, @id: FOUNDER_PERSON_ID, name }` |
+| Founder's letter | its own `Person` at `#founder` | an `Article` whose `author` is `founderPersonRef()` |
+| Blog posts (`generateBlogPostingJsonLd`) | an author `Person` that links to `/about/team/` | author stays the Organization; the page's `WebPage` gets `reviewedBy: { @id }` and `lastReviewed` |
 | Contact card pages (section 4) | nothing | the page's `WebPage` gets `reviewedBy: { @id }` |
+
+`reviewedBy` and `lastReviewed` reach the `WebPage` node through two new optional props on the shared `<SEO>` component, which already generates that node for every page. A page adds one prop; no page hand-builds a `WebPage`.
 
 ### 4. Visible bylines and contact cards
 
@@ -81,7 +83,8 @@ New route: `app/about/team/[slug]/page.tsx`. It is generated statically from `te
   - Card placement:
     - `/buy/` and its 9 static subpages, plus `/sell/`, use `role="agent"`.
     - `/loans/` and its 8 static subpages, plus `/refinance/` and its 5 static subpages, use `role="loan"`.
-    - The dynamic city templates `app/loans/[city]/page.tsx` and `app/loans/[city]/[loantype]/page.tsx` use `role="loan"`. Each template is one edit and covers every city page it generates.
+    - 26 pages in all. Each is a server component with exactly one `<main>`; the card goes immediately before `</main>`.
+    - The city loan templates (`/loans/[city]/`, `/loans/[city]/[loantype]/`) are deferred: their `<main>` lives in `components/city-service-page.tsx` and `components/city-sub-service-page.tsx`, which another session is rewriting (41 files staged, uncommitted). Add the card there once that work lands.
 
 ### 5. AI-facing text
 
@@ -95,7 +98,7 @@ New route: `app/about/team/[slug]/page.tsx`. It is generated statically from `te
 ## Tests
 
 1. **One person.** Render the home page, the founder's letter, one `ArticleShell` post, one non-`ArticleShell` post, `/loans/fha/`, and `/buy/`, and collect every `Person` node and every `{ @id }` reference. Each one must resolve to `FOUNDER_PERSON_ID`, and only the profile page may contain the full `Person` node.
-2. **No early claims.** A post-build script, `scripts/check-license-claims.mjs`, added to `postbuild` next to `check:main-landmark`, scans `out/**/*.html` and `out/**/*.md`. With the switch off it fails on any of these:
+2. **No early claims.** Patterns live in `lib/license-claims.ts` (unit-tested); `scripts/check-license-claims.ts`, run with `npx tsx` in `postbuild` after `check:main-landmark` (same shape as `check:links`), scans `out/**/*.html`, `out/**/*.md`, and the top-level `out/*.txt`. With the switch off it fails on any of these:
    - `real estate agent` used as his title, matched by the pattern `/\b(as a|i am a|, )\s*utah real estate agent/i` and by `jobTitle` containing "Real Estate Agent"
    - `loan officer` next to his name or `NMLS #`
    - `"jobTitle"` containing "Loan Officer"
@@ -105,6 +108,8 @@ New route: `app/about/team/[slug]/page.tsx`. It is generated statically from `te
 3. **Switch on.** Unit tests call `founderPersonJsonLd(true)`, `<YourContactCard live />`, and the profile page with `live` set and test license values, and check that the titles, `hasCredential`, the sponsor names, and the Consumer Access link all appear.
 4. **No blank placeholders.** Extend the existing "never ships live with a missing company ID" test in `lib/site.test.ts`. When `LICENSING_LIVE` is true, the brokerage name, real estate license number, lender name, and lender NMLS ID must all be filled in.
 5. **Existing checks still pass:** the page-title length scan, `check:seo`, `check:links`, the a11y suite (the profile page is added to its route list), and the bundle budget.
+
+5. **Licensing day does not break the build.** `scripts/check-llms-txt-export.mjs` today fails unless `llms.txt` contains "NMLS ID on file", which stops being true the moment the switch is on. It accepts either "NMLS ID on file" or "Company NMLS ID <digits>".
 
 ## Rollout
 
@@ -122,8 +127,16 @@ New route: `app/about/team/[slug]/page.tsx`. It is generated statically from `te
 - 4: Measurement, built from Search Console exports the owner supplies, plus confirming GA4 is running.
 - New city or "best agent in X" pages.
 
+## Revisions (2026-10-18)
+
+- `LoanOfficerLine` already printed "Loan officer: Pranay Reddy Aleti, NMLS #2699085" on `/loans/second-look/` and `/refinance/watch/` after today's deploy. Hotfix 6e900c721 makes it render nothing until the switch is on. The no-early-claims scan would have caught it.
+- Organization `founder` and the founder's letter `author` carry `@type` and `name` beside the `@id`, so consumers that do not resolve `@id` across pages still read a named person.
+- City loan templates deferred (section 4). Contact card pages: 26, not 28.
+- Blog post count is 153, not 161 (145 on `ArticleShell`, 7 not, 1 directory without a page).
+- The scanner is a `tsx` script over a tested library, not a standalone `.mjs`, so its patterns have unit tests.
+
 ## Risks
 
 - **A claim slips past the scanner.** Wording no pattern anticipated could still get through. Mitigation: everything licensed is rendered only through `founderPersonJsonLd`, `YourContactCard`, and the profile page's licensing block, so the scanner is a second line of defense, not the only one.
-- **Blog-wide markup change.** Adding `reviewedBy` changes structured data on 153 pages at once. Mitigation: the one-person test, plus checking a sample of live pages in Google's Rich Results Test after deploy.
+- **Blog-wide markup change.** Adding `reviewedBy` changes structured data on 152 posts at once. Mitigation: the one-person test, plus checking a sample of live pages in Google's Rich Results Test after deploy.
 - **Uncommitted work from other sessions.** About 42 files of other sessions' uncommitted work sit in the working tree, including `lib/site.ts` and `deploy.yml`. Mitigation: implementation runs in its own worktree from `origin/main` and never stages those files.

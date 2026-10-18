@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
+import { LICENSING_LIVE } from "@/lib/site"
 import RateWatchPage from "./page"
 
 describe("/refinance/watch", () => {
@@ -9,9 +10,10 @@ describe("/refinance/watch", () => {
     expect(screen.getByText(/equal housing lender/i)).toBeInTheDocument()
   })
 
-  // A page soliciting loan business names the loan officer and his personal NMLS ID.
-  it("names the loan officer with his NMLS ID", () => {
+  // The loan officer's NMLS ID appears only once LICENSING_LIVE is on (lib/site.ts), and then once.
+  it("names the loan officer's NMLS ID only when licensing is live, and only once", () => {
     render(<RateWatchPage />)
-    expect(screen.getByText("Loan officer: Pranay Reddy Aleti, NMLS #2699085")).toBeInTheDocument()
+    expect(screen.queryAllByText(/NMLS #2699085/)).toHaveLength(LICENSING_LIVE ? 1 : 0)
+    expect(screen.queryByText(/Loan officer: Pranay/)).not.toBeInTheDocument()
   })
 })

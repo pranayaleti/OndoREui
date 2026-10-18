@@ -7,16 +7,17 @@ type LoanOfficerLineProps = {
 }
 
 /**
- * "Loan officer: name, NMLS #id". Once licensing is live and the owner has supplied the
- * sponsoring company's NMLS ID, the company ID is shown beside the officer's and NMLS
- * Consumer Access is linked. Until then it prints the individual line only.
+ * "Loan officer: name, NMLS #id". Renders nothing until licensing is live: naming him as a
+ * loan officer with an ID before the NMLS license is active would advertise one. Once live,
+ * the company ID is shown beside the officer's when supplied, and NMLS Consumer Access is linked.
  */
 export function LoanOfficerLine({
   className = "mt-2 text-sm text-muted-foreground",
   live = LICENSING_LIVE,
   companyId = SITE_COMPANY_NMLS_ID,
 }: LoanOfficerLineProps) {
-  const showCompany = live && companyId.length > 0
+  if (!live) return null
+  const showCompany = companyId.length > 0
   return (
     <p className={className}>
       Loan officer: {SITE_LOAN_OFFICER.name}, NMLS #{SITE_LOAN_OFFICER.nmlsId}

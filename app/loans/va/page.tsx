@@ -1,10 +1,11 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { DollarSign, Shield, Star, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
@@ -40,6 +41,7 @@ export default function VALoanPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="VA Home Loans in Utah"
         description="VA loans offer zero down payment and no PMI for eligible veterans in Utah."
         pathname="/loans/va/"
@@ -200,6 +202,7 @@ export default function VALoanPage() {
       </section>
 
       <CityLinksGrid title="VA Loans by City" servicePrefix="loans" subServiceSlug="va" />
+      <YourContactCard kind="loan" />
     </main>
   )
 }

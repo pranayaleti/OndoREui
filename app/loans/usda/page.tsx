@@ -1,10 +1,11 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { DollarSign, MapPin, Home, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
@@ -35,6 +36,7 @@ export default function USDALoanPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="USDA Rural Loans in Utah"
         description="USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools."
         pathname="/loans/usda"
@@ -149,6 +151,7 @@ export default function USDALoanPage() {
       </section>
 
       <CityLinksGrid title="USDA Loans by City" servicePrefix="loans" subServiceSlug="usda" />
+      <YourContactCard kind="loan" />
     </main>
   )
 }

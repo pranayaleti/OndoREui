@@ -1,3 +1,5 @@
+import { ReviewedBy } from "@/components/content/reviewed-by"
+import { FOUNDER_PERSON_ID } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner";
 import SEO from "@/components/seo";
 import { Badge } from "@/components/ui/badge";
@@ -71,6 +73,8 @@ export default function PrepareForRemoteOnlineNotarySession() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
+        lastReviewed={modified || published}
         title="Checklist: Prepare for Your Remote Online Notary Session"
         description="Follow this RON checklist to pass ID verification, avoid rescheduling, and receive sealed documents immediately after your remote online notarization."
         pathname={slug}
@@ -91,6 +95,7 @@ export default function PrepareForRemoteOnlineNotarySession() {
 
       <article className="bg-background py-12">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <ReviewedBy date={modified || published} className="mb-6" />
           <div className="flex flex-wrap gap-3 mb-8">
             <Badge variant="secondary">Checklist</Badge>
             <Badge variant="outline">Remote Online Notary</Badge>

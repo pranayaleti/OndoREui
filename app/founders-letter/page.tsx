@@ -19,7 +19,7 @@ const founderOgImage = {
 export const metadata: Metadata = pageCanonicalMetadata(FOUNDERS_LETTER_PATH, {
   title: pageTitle(FOUNDERS_LETTER_TITLE),
   description: FOUNDERS_LETTER_DESCRIPTION,
-  openGraph: { type: "profile", images: [founderOgImage] },
+  openGraph: { type: "article", images: [founderOgImage] },
   twitter: { images: [founderOgImage.url] },
 })
 

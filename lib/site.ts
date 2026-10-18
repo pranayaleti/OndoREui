@@ -92,6 +92,40 @@ export const SITE_LOAN_OFFICER = { name: "Pranay Reddy Aleti", nmlsId: "2699085"
  */
 export const LICENSING_LIVE = false as boolean
 export const SITE_COMPANY_NMLS_ID = "" as string
+/**
+ * Licensing placeholders, supplied by the owner on licensing day and never invented.
+ * Turning LICENSING_LIVE on with any of these empty fails lib/site.test.ts.
+ *
+ * Licensing-day checklist (found by flipping the switch with test values on 2026-10-18):
+ * - nmlsIdentification() says "Company NMLS ID <SITE_COMPANY_NMLS_ID>" after "provided by Ondo Real
+ *   Estate", but that ID belongs to the sponsoring lender (SITE_LENDER_NAME). Have counsel word it.
+ * - These tests pin the pre-licensing "NMLS ID on file" wording and must be updated in the same
+ *   commit: lib/site.test.ts (is off by default), lib/site-index.test.ts (does not invent NMLS
+ *   numbers), lib/agent-markdown.test.ts, lib/cost-of-living.test.ts, lib/utah-arrival.test.ts,
+ *   components/footer.test.tsx, app/faq/compliance-copy.test.tsx, app/links/page.test.tsx (lending
+ *   and fair housing disclosures), app/moving-to-utah/page.test.tsx,
+ *   components/properties/listing-investor-worksheet.test.tsx.
+ */
+/** Utah real estate sales agent license number (Division of Real Estate). */
+export const SITE_RE_LICENSE_NUMBER = "" as string
+/** Brokerage the real estate license is affiliated with. */
+export const SITE_BROKERAGE_NAME = "" as string
+/** Mortgage company sponsoring the NMLS license; its NMLS ID is SITE_COMPANY_NMLS_ID. */
+export const SITE_LENDER_NAME = "" as string
+
+/** Names of licensing placeholders that are still blank. Must be empty before LICENSING_LIVE goes on. */
+export function missingLicensingFields(
+  fields: Record<string, string> = {
+    SITE_COMPANY_NMLS_ID,
+    SITE_RE_LICENSE_NUMBER,
+    SITE_BROKERAGE_NAME,
+    SITE_LENDER_NAME,
+  },
+): string[] {
+  return Object.entries(fields)
+    .filter(([, value]) => value.trim() === "")
+    .map(([name]) => name)
+}
 export const NMLS_CONSUMER_ACCESS_URL = "https://www.nmlsconsumeraccess.org/"
 
 /**

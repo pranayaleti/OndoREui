@@ -35,6 +35,7 @@ const routes = [
   "/",
   "/feedback",
   "/founders-letter",
+  "/about/team/pranay-reddy-aleti/",
   "/accessibility",
   "/contact",
   // Primary marketing flows

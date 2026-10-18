@@ -1,7 +1,8 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -24,6 +25,7 @@ export default function SecondHomePage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Buying a Second Home | Utah Real Estate"
         description="Second-home occupancy versus investment occupancy. Education, not a credit decision or occupancy coaching."
         pathname="/buy/second-home"
@@ -153,6 +155,7 @@ export default function SecondHomePage() {
           </div>
         </div>
       </section>
+      <YourContactCard kind="agent" />
     </main>
   )
 }

@@ -1,10 +1,11 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Home, DollarSign, Shield, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
@@ -56,6 +57,7 @@ export default function ConventionalLoanPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Conventional Loans in Utah"
         description="Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges."
         pathname="/loans/conventional"
@@ -188,6 +190,7 @@ export default function ConventionalLoanPage() {
       </section>
 
       <CityLinksGrid title="Conventional Loans by City" servicePrefix="loans" subServiceSlug="conventional" />
+      <YourContactCard kind="loan" />
     </main>
   )
 }
