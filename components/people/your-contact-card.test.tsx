@@ -25,15 +25,23 @@ describe("YourContactCard", () => {
     expect(screen.getByRole("link", { name: /book a call/i })).toHaveAttribute("target", "_blank")
   })
 
-  it("shows the brokerage on agent pages once live", () => {
-    render(<YourContactCard kind="agent" live />)
-    expect(screen.getByText("Brokered by Test Realty")).toBeInTheDocument()
-    expect(document.body.textContent).not.toMatch(/NMLS/)
+  // Each license is advertised with its own required identifier: brokerage for the agent title,
+  // NMLS IDs for the loan officer title. A card never shows the other license's title.
+  it("titles agent pages 'Utah real estate agent' with the brokerage, and no loan officer or NMLS, once live", () => {
+    const { container } = render(<YourContactCard kind="agent" live />)
+    expect(screen.getByText("Utah real estate agent with Test Realty")).toBeInTheDocument()
+    expect(container.textContent).not.toMatch(/loan officer|NMLS/i)
   })
 
-  it("shows the loan officer line once, with the lender, on loan pages once live", () => {
-    render(<YourContactCard kind="loan" live />)
-    expect(screen.getAllByText(/NMLS #2699085/)).toHaveLength(1)
-    expect(screen.getByText("with Test Lending")).toBeInTheDocument()
+  it("titles loan pages 'Loan officer' with both NMLS IDs and the lender, and no agent title, once live", () => {
+    const { container } = render(<YourContactCard kind="loan" live />)
+    expect(screen.getByText("Loan officer, NMLS #2699085")).toBeInTheDocument()
+    expect(screen.getByText(/with Test Lending \(NMLS #123456\)/)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /verify at nmls consumer access/i })).toHaveAttribute(
+      "href",
+      "https://www.nmlsconsumeraccess.org/",
+    )
+    expect(container.textContent).not.toMatch(/real estate agent/i)
+    expect(container.textContent?.match(/Pranay Reddy Aleti/g)).toHaveLength(1)
   })
 })

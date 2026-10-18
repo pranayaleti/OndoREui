@@ -2,9 +2,17 @@ import Image from "next/image"
 import Link from "next/link"
 import { Calendar, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { LoanOfficerLine } from "@/components/lending/loan-officer-line"
 import { analyticsAttributes } from "@/lib/analytics"
-import { LICENSING_LIVE, SITE_BROKERAGE_NAME, SITE_CALENDLY_URL, SITE_LENDER_NAME, SITE_PHONE_TEL } from "@/lib/site"
+import {
+  LICENSING_LIVE,
+  NMLS_CONSUMER_ACCESS_URL,
+  SITE_BROKERAGE_NAME,
+  SITE_CALENDLY_URL,
+  SITE_COMPANY_NMLS_ID,
+  SITE_LENDER_NAME,
+  SITE_LOAN_OFFICER,
+  SITE_PHONE_TEL,
+} from "@/lib/site"
 import { FOUNDER_PROFILE_PATH, founderRoleLabel, getFounder } from "@/lib/team-data"
 
 export type ContactKind = "agent" | "loan"
@@ -17,9 +25,17 @@ type YourContactCardProps = {
 
 /**
  * "Your contact" on buy, sell, loan and refinance pages: the founder's photo, name and profile link,
- * so every page that matches agent or lender searches points at one person. License titles render
- * only once licensing is live (LICENSING_LIVE in lib/site.ts).
+ * so every page that matches agent or lender searches points at one person. Once licensing is live
+ * (LICENSING_LIVE in lib/site.ts) the card shows only the license its page is about, with that
+ * license's required identifier: the brokerage for the agent title, NMLS IDs for the loan title.
  */
+function titleLine(kind: ContactKind, live: boolean): string {
+  if (!live) return founderRoleLabel(false)
+  return kind === "agent"
+    ? `Utah real estate agent with ${SITE_BROKERAGE_NAME}`
+    : `Loan officer, NMLS #${SITE_LOAN_OFFICER.nmlsId}`
+}
+
 export function YourContactCard({ kind, live = LICENSING_LIVE }: YourContactCardProps) {
   const founder = getFounder()
   return (
@@ -43,15 +59,19 @@ export function YourContactCard({ kind, live = LICENSING_LIVE }: YourContactCard
               {founder.name}
             </Link>
           </p>
-          <p className="text-sm text-foreground/70">{founderRoleLabel(live)}</p>
-          {live && kind === "agent" ? (
-            <p className="mt-1 text-sm text-foreground/70">Brokered by {SITE_BROKERAGE_NAME}</p>
-          ) : null}
-          {kind === "loan" ? (
-            <>
-              <LoanOfficerLine live={live} className="mt-1 text-sm text-foreground/70" />
-              {live ? <p className="text-sm text-foreground/70">with {SITE_LENDER_NAME}</p> : null}
-            </>
+          <p className="text-sm text-foreground/70">{titleLine(kind, live)}</p>
+          {live && kind === "loan" ? (
+            <p className="mt-1 text-sm text-foreground/70">
+              with {SITE_LENDER_NAME} (NMLS #{SITE_COMPANY_NMLS_ID}).{" "}
+              <a
+                href={NMLS_CONSUMER_ACCESS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline underline-offset-4"
+              >
+                Verify at NMLS Consumer Access
+              </a>
+            </p>
           ) : null}
         </div>
         <div className="flex flex-col gap-2 sm:w-44">
