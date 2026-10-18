@@ -1,28 +1,27 @@
 import { describe, it, expect } from "vitest"
-import { teamMembers, getTeam, findTeamMemberBySlug } from "./team-data"
+import { FOUNDER_PROFILE_PATH, FOUNDER_SLUG, founderRoleLabel, getFounder } from "./team-data"
 
-describe("team-data", () => {
-  it("lists only the founder", () => {
-    expect(teamMembers.map((m) => m.name)).toEqual(["Pranay Reddy Aleti"])
-    expect(getTeam()).toBe(teamMembers)
+describe("founder record", () => {
+  it("is the listed team member with a profile path under /about/team/", () => {
+    const founder = getFounder()
+    expect(founder.slug).toBe(FOUNDER_SLUG)
+    expect(founder.name).toBe("Pranay Reddy Aleti")
+    expect(FOUNDER_PROFILE_PATH).toBe("/about/team/pranay-reddy-aleti/")
+    expect(founder.image).toBe("/founder-image.webp")
+    expect(founder.areaServed).toEqual(["Salt Lake County", "Utah County", "Davis County", "Weber County"])
+    expect(founder.sameAs).toEqual([])
   })
 
-  it("does not carry titles, credentials or contact details that cannot be verified", () => {
-    const blob = JSON.stringify(teamMembers)
-    expect(blob).not.toMatch(/NMLS|license|certif|CPA|years? (of )?experience/i)
-    expect(blob).not.toMatch(/mortgage advisor|loan officer/i)
-    for (const member of teamMembers) {
-      expect(member.title).toBe("Founder")
-      // No stock photos and no personal mailbox that is not in SITE_EMAILS.
-      expect(member).not.toHaveProperty("image")
-      expect(member).not.toHaveProperty("email")
-    }
+  it("carries the NMLS ID and empty sponsor placeholders until licensing", () => {
+    expect(getFounder().licenses).toEqual({
+      realEstate: { number: "", brokerageName: "" },
+      mortgage: { nmlsId: "2699085", lenderName: "", lenderNmlsId: "" },
+    })
   })
 
-  it("finds a member by slug and returns undefined for the removed fictional staff", () => {
-    expect(findTeamMemberBySlug("pranay-reddy-aleti")?.name).toBe("Pranay Reddy Aleti")
-    for (const slug of ["marcus-thompson", "sarah-kim", "jennifer-nakamura", "david-patel"]) {
-      expect(findTeamMemberBySlug(slug)).toBeUndefined()
-    }
+  it("adds the license titles to the role line only when live", () => {
+    expect(founderRoleLabel(false)).toBe("Founder, Ondo Real Estate")
+    expect(founderRoleLabel(false)).not.toMatch(/agent|loan officer/i)
+    expect(founderRoleLabel(true)).toBe("Founder · Utah real estate agent and loan officer")
   })
 })

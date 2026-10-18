@@ -23,6 +23,7 @@ import {
   SITE_LOAN_OFFICER,
   NMLS_CONSUMER_ACCESS_URL,
   nmlsIdentification,
+  missingLicensingFields,
 } from "./site"
 import { ARRIVAL_LENDING_DISCLOSURE } from "./utah-arrival"
 import { LLMS_DISCLOSURES_BLOCK } from "./site-index"
@@ -103,8 +104,26 @@ describe("NMLS identification gate", () => {
     expect(text).toContain(NMLS_CONSUMER_ACCESS_URL)
   })
 
-  it("never ships live with a missing company ID or an 'on file' disclosure", () => {
+  it("lists every licensing placeholder still empty, by constant name", () => {
+    expect(missingLicensingFields()).toEqual([
+      "SITE_COMPANY_NMLS_ID",
+      "SITE_RE_LICENSE_NUMBER",
+      "SITE_BROKERAGE_NAME",
+      "SITE_LENDER_NAME",
+    ])
+    expect(
+      missingLicensingFields({
+        SITE_COMPANY_NMLS_ID: "123456",
+        SITE_RE_LICENSE_NUMBER: "RE-1",
+        SITE_BROKERAGE_NAME: "B",
+        SITE_LENDER_NAME: " ",
+      }),
+    ).toEqual(["SITE_LENDER_NAME"])
+  })
+
+  it("never ships live with an empty placeholder or an 'on file' disclosure", () => {
     if (!LICENSING_LIVE) return
+    expect(missingLicensingFields()).toEqual([])
     expect(SITE_COMPANY_NMLS_ID).toMatch(/^\d+$/)
     expect(ARRIVAL_LENDING_DISCLOSURE).not.toMatch(/on file/i)
     expect(LLMS_DISCLOSURES_BLOCK).not.toMatch(/on file/i)

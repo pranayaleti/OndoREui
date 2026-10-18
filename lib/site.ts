@@ -74,6 +74,30 @@ export const SITE_LOAN_OFFICER = { name: "Pranay Reddy Aleti", nmlsId: "2699085"
  */
 export const LICENSING_LIVE = false as boolean
 export const SITE_COMPANY_NMLS_ID = "" as string
+/**
+ * Licensing placeholders, supplied by the owner on licensing day and never invented.
+ * Turning LICENSING_LIVE on with any of these empty fails lib/site.test.ts.
+ */
+/** Utah real estate sales agent license number (Division of Real Estate). */
+export const SITE_RE_LICENSE_NUMBER = "" as string
+/** Brokerage the real estate license is affiliated with. */
+export const SITE_BROKERAGE_NAME = "" as string
+/** Mortgage company sponsoring the NMLS license; its NMLS ID is SITE_COMPANY_NMLS_ID. */
+export const SITE_LENDER_NAME = "" as string
+
+/** Names of licensing placeholders that are still blank. Must be empty before LICENSING_LIVE goes on. */
+export function missingLicensingFields(
+  fields: Record<string, string> = {
+    SITE_COMPANY_NMLS_ID,
+    SITE_RE_LICENSE_NUMBER,
+    SITE_BROKERAGE_NAME,
+    SITE_LENDER_NAME,
+  },
+): string[] {
+  return Object.entries(fields)
+    .filter(([, value]) => value.trim() === "")
+    .map(([name]) => name)
+}
 export const NMLS_CONSUMER_ACCESS_URL = "https://www.nmlsconsumeraccess.org/"
 
 /**
