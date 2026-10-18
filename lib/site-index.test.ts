@@ -2,6 +2,7 @@ import { createRequire } from "node:module"
 import { describe, expect, it } from "vitest"
 import agentDiscoveryConfig from "./agent-discovery-config.json"
 import { toAbsoluteSiteUrl } from "./url"
+import { LICENSING_LIVE } from "./site"
 import {
   AGENT_MARKDOWN_TWINS,
   AI_CRAWLER_AGENTS,
@@ -284,13 +285,14 @@ describe("site index layout", () => {
 
 describe("Who runs Ondo", () => {
   it("names the founder, the founding dates and the profile in both briefs, with no license title while off", () => {
+    expect(buildWhoRunsOndoLines(false).join("\n")).not.toMatch(/NMLS 2699085|real estate agent \(license/i)
     for (const brief of [buildLlmsTxtBody(), buildLlmsFullTxtBody()]) {
       expect(brief).toContain("## Who runs Ondo")
       expect(brief).toContain("Pranay Reddy Aleti, founder")
       expect(brief).toContain("May 2022")
       expect(brief).toContain("July 2022")
       expect(brief).toContain(toAbsoluteSiteUrl("/about/team/pranay-reddy-aleti/"))
-      expect(brief).not.toMatch(/NMLS 2699085|real estate agent \(license/i)
+      if (!LICENSING_LIVE) expect(brief).not.toMatch(/NMLS 2699085|real estate agent \(license/i)
     }
   })
 

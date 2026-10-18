@@ -10,7 +10,8 @@ vi.mock("@/lib/site", async (importOriginal) => ({
 }))
 
 import FounderProfilePage, { metadata } from "./page"
-import { FounderProfile } from "@/components/people/founder-profile"
+import { FounderProfile, founderProfileTitle } from "@/components/people/founder-profile"
+import { LICENSING_LIVE } from "@/lib/site"
 import { FOUNDER_PERSON_ID } from "@/lib/seo"
 
 const jsonLdBlocks = (container: HTMLElement) =>
@@ -32,15 +33,16 @@ describe("/about/team/pranay-reddy-aleti/", () => {
 
   it("publishes a self-canonical, a name-first title and a snippet-length description", () => {
     const title = typeof metadata.title === "object" && metadata.title && "absolute" in metadata.title ? metadata.title.absolute : ""
-    expect(title).toBe("Pranay Reddy Aleti: Founder of Ondo Real Estate")
+    expect(title).toBe(founderProfileTitle(LICENSING_LIVE))
+    expect(founderProfileTitle(false)).toBe("Pranay Reddy Aleti: Founder of Ondo Real Estate")
     expect(title.length).toBeLessThanOrEqual(60)
     expect(metadata.description?.length).toBeLessThanOrEqual(160)
     expect(metadata.alternates?.canonical).toBe("https://www.ondorealestate.com/about/team/pranay-reddy-aleti/")
     expect(metadata.robots).toBeUndefined()
   })
 
-  it("embeds the one full Person node as the ProfilePage's main entity, with no license title", () => {
-    const { container } = render(<FounderProfilePage />)
+  it("embeds the one full Person node as the ProfilePage's main entity, with no license title while off", () => {
+    const { container } = render(<FounderProfile live={false} />)
     const blocks = jsonLdBlocks(container)
     const webPages = blocks.filter((block) => hasType(block, "WebPage"))
     expect(webPages).toHaveLength(1)
@@ -51,7 +53,7 @@ describe("/about/team/pranay-reddy-aleti/", () => {
   })
 
   it("says licensing is in progress and shows no license number while the switch is off", () => {
-    render(<FounderProfilePage />)
+    render(<FounderProfile live={false} />)
     expect(screen.getByText(/licensing is in progress/i)).toBeInTheDocument()
     expect(document.body.textContent).not.toMatch(/NMLS #\d|license #/i)
     expect(screen.getByRole("link", { name: /licensing & disclosures/i })).toHaveAttribute("href", "/licensing/")

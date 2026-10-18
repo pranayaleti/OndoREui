@@ -12,6 +12,7 @@ vi.mock("@/lib/site", async (importOriginal) => ({
 import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 import LinksPage from "./page"
 import { buildLinksPageIntro } from "@/lib/links-page"
+import { LICENSING_LIVE } from "@/lib/site"
 
 describe("/links page", () => {
   it("names the business in the page's one h1", () => {
@@ -31,12 +32,19 @@ describe("/links page", () => {
   // Owner's call: buying, selling and home loans lead, in the copy and in the tile order.
   // Until LICENSING_LIVE is on, the page must not call him an agent or loan officer.
   it("names the services without a license title or NMLS ID while licensing is pending", () => {
+    const pending = buildLinksPageIntro(false).paragraphs[1]!
+    const highlighted = pending.flatMap((segment) => (typeof segment === "string" ? [] : [segment.highlight]))
+    expect(highlighted).toEqual(["owners", "buying", "selling", "home loans"])
+    const text = pending.map((segment) => (typeof segment === "string" ? segment : segment.highlight)).join("")
+    expect(text).not.toMatch(/NMLS #/)
+    expect(text).not.toMatch(/as a utah real estate agent/i)
+  })
+
+  it("renders the intro that matches the licensing switch", () => {
     render(<LinksPage />)
     const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i }).closest("section")!
-    const highlighted = Array.from(intro.querySelectorAll("strong")).map((node) => node.textContent)
-    expect(highlighted).toEqual(["owners", "buying", "selling", "home loans"])
-    expect(intro).not.toHaveTextContent(/NMLS #/)
-    expect(intro).not.toHaveTextContent(/as a utah real estate agent/i)
+    if (LICENSING_LIVE) expect(intro).toHaveTextContent(/loan officer \(NMLS #2699085\)/)
+    else expect(intro).not.toHaveTextContent(/NMLS #/)
   })
 
   // Once live: titles lead, and mortgage advertising names the originator's NMLS ID next to the loan officer claim.

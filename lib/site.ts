@@ -77,6 +77,16 @@ export const SITE_COMPANY_NMLS_ID = "" as string
 /**
  * Licensing placeholders, supplied by the owner on licensing day and never invented.
  * Turning LICENSING_LIVE on with any of these empty fails lib/site.test.ts.
+ *
+ * Licensing-day checklist (found by flipping the switch with test values on 2026-10-18):
+ * - nmlsIdentification() says "Company NMLS ID <SITE_COMPANY_NMLS_ID>" after "provided by Ondo Real
+ *   Estate", but that ID belongs to the sponsoring lender (SITE_LENDER_NAME). Have counsel word it.
+ * - These tests pin the pre-licensing "NMLS ID on file" wording and must be updated in the same
+ *   commit: lib/site.test.ts (is off by default), lib/site-index.test.ts (does not invent NMLS
+ *   numbers), lib/agent-markdown.test.ts, lib/cost-of-living.test.ts, lib/utah-arrival.test.ts,
+ *   components/footer.test.tsx, app/faq/compliance-copy.test.tsx, app/links/page.test.tsx (lending
+ *   and fair housing disclosures), app/moving-to-utah/page.test.tsx,
+ *   components/properties/listing-investor-worksheet.test.tsx.
  */
 /** Utah real estate sales agent license number (Division of Real Estate). */
 export const SITE_RE_LICENSE_NUMBER = "" as string

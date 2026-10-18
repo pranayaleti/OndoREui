@@ -5,7 +5,7 @@ import { LoanOfficerLine } from "./loan-officer-line"
 describe("LoanOfficerLine", () => {
   // His NMLS license is not active yet: naming him as a loan officer with an ID would advertise one.
   it("renders nothing while licensing is off", () => {
-    const { container } = render(<LoanOfficerLine />)
+    const { container } = render(<LoanOfficerLine live={false} />)
     expect(container).toBeEmptyDOMElement()
   })
 
