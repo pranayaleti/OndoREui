@@ -1,21 +1,27 @@
 import type { Metadata } from "next"
-import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import FoundersLetterClient from "./founders-letter-client"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { pageCanonicalMetadata } from "@/lib/page-canonical"
+import { pageTitle } from "@/lib/site"
+import { toAbsoluteSiteUrl } from "@/lib/url"
+import FoundersLetterClient, {
+  FOUNDER_IMAGE_PATH,
+  FOUNDERS_LETTER_DESCRIPTION,
+  FOUNDERS_LETTER_PATH,
+  FOUNDERS_LETTER_TITLE,
+} from "./founders-letter-client"
 
-export const metadata: Metadata = {
-  title: pageTitle("Founder's Letter | Ondo Real Estate"),
-  description: "A personal letter from the founder of Ondo Real Estate on our mission, values, and the future of property management.",
-  alternates: { canonical: `${SITE_URL}/founders-letter/` },
-  openGraph: {
-    type: "website",
-    title: pageTitleText("Founder's Letter | Ondo Real Estate"),
-    description: "A personal letter from the founder of Ondo Real Estate on our mission, values, and the future of property management.",
-    url: `${SITE_URL}/founders-letter/`,
-    images: DEFAULT_OG_IMAGES,
-  },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+const founderOgImage = {
+  url: toAbsoluteSiteUrl(FOUNDER_IMAGE_PATH),
+  width: 1770,
+  height: 1354,
+  alt: "Pranay Reddy Aleti, founder of Ondo Real Estate",
 }
+
+export const metadata: Metadata = pageCanonicalMetadata(FOUNDERS_LETTER_PATH, {
+  title: pageTitle(FOUNDERS_LETTER_TITLE),
+  description: FOUNDERS_LETTER_DESCRIPTION,
+  openGraph: { type: "profile", images: [founderOgImage] },
+  twitter: { images: [founderOgImage.url] },
+})
 
 export default function FoundersLetterPage() {
   return <FoundersLetterClient />

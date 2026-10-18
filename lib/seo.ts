@@ -15,6 +15,7 @@ import {
 } from "./site"
 import { getTestimonialKind, testimonials } from "./testimonials"
 import { toAbsoluteSiteUrl } from "./url"
+import { FOUNDED_DATE } from "./social-proof-stats"
 import { htmlPathToMarkdownPath } from "./html-to-agent-markdown"
 import { teamMembers } from "./team-data"
 
@@ -349,7 +350,7 @@ export function generateRealEstateBusinessJsonLd() {
     },
     description:
       'Full-service Utah real estate company offering property management, mortgage lending, home buying and selling, and notary services across the Wasatch Front.',
-    foundingDate: '2024',
+    foundingDate: FOUNDED_DATE,
     founder: {
       '@type': 'Person',
       name: 'Pranay Reddy Aleti',

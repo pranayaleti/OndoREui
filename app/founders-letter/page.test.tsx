@@ -1,6 +1,15 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
-import FoundersLetterPage from "./page"
+import FoundersLetterPage, { metadata } from "./page"
+
+const jsonLdBlocks = (container: HTMLElement) =>
+  Array.from(container.querySelectorAll('script[type="application/ld+json"]')).flatMap((node) => {
+    const parsed = JSON.parse(node.textContent ?? "null")
+    return Array.isArray(parsed) ? parsed : [parsed]
+  })
+
+const hasType = (block: { "@type"?: string | string[] }, type: string) =>
+  Array.isArray(block["@type"]) ? block["@type"].includes(type) : block["@type"] === type
 
 describe("/founders-letter page", () => {
   it("renders one main landmark labelled by the h1 and no banner landmarks", () => {
@@ -28,5 +37,42 @@ describe("/founders-letter page", () => {
     const cards = Array.from(container.querySelectorAll("div.bg-primary\\/20"))
     expect(cards).toHaveLength(4)
     expect(container.querySelector(".bg-opacity-20")).toBeNull()
+  })
+
+  it("publishes a self-canonical with a search-intent title and a description that fits a snippet", () => {
+    const title = typeof metadata.title === "object" && metadata.title && "absolute" in metadata.title ? metadata.title.absolute : ""
+    expect(title).toContain("Ondo Real Estate")
+    expect(title.length).toBeLessThanOrEqual(60)
+    expect(metadata.description?.length).toBeLessThanOrEqual(160)
+    expect(metadata.alternates?.canonical).toBe("https://www.ondorealestate.com/founders-letter/")
+    expect(metadata.alternates?.types?.["text/markdown"]).toBe("https://www.ondorealestate.com/founders-letter.md")
+    const ogImages = metadata.openGraph?.images
+    expect(Array.isArray(ogImages) && ogImages.length).toBe(1)
+  })
+
+  it("marks the page up as a ProfilePage about the founder, without a duplicate WebPage block", () => {
+    const { container } = render(<FoundersLetterPage />)
+    const blocks = jsonLdBlocks(container)
+    const webPages = blocks.filter((block) => hasType(block, "WebPage"))
+    expect(webPages).toHaveLength(1)
+    const profile = webPages[0]
+    expect(hasType(profile, "ProfilePage")).toBe(true)
+    expect(profile.url).toBe("https://www.ondorealestate.com/founders-letter/")
+    expect(profile.mainEntity["@type"]).toBe("Person")
+    expect(profile.mainEntity.name).toBe("Pranay Reddy Aleti")
+    expect(profile.mainEntity.worksFor["@id"]).toBe("https://www.ondorealestate.com/#organization")
+    const breadcrumb = blocks.find((block) => hasType(block, "BreadcrumbList"))
+    expect(breadcrumb.itemListElement.at(-1).item).toBe("https://www.ondorealestate.com/founders-letter/")
+  })
+
+  it("links the letter to the pages it talks about with canonical trailing-slash hrefs", () => {
+    render(<FoundersLetterPage />)
+    const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"))
+    for (const expected of ["/property-management/", "/solutions/tenants/", "/about/", "/why-utah/", "/contact/"]) {
+      expect(hrefs).toContain(expected)
+    }
+    for (const href of hrefs) {
+      if (href?.startsWith("/")) expect(href.endsWith("/")).toBe(true)
+    }
   })
 })
