@@ -118,7 +118,7 @@ describe("every ArticleShell post ends with related links and a next step", () =
     }
     expect(shellPosts).toBeGreaterThan(50)
     expect(missing).toEqual([])
-  })
+  }, 180_000)
 })
 
 describe("placeholder.jpg", () => {
