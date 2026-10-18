@@ -47,6 +47,31 @@ describe("findLicenseClaims", () => {
     expect(rules("<p>I am a real estate agent based in Lehi.</p>")).toContain("first-person-title")
   })
 
+  it("catches claim shapes the first rules missed (final review)", () => {
+    for (const html of [
+      "<p>As a real estate agent and loan officer, I help you buy a home.</p>",
+      "<p>As a licensed real estate agent, I can help.</p>",
+      "<p>As a Utah-licensed loan officer I review files.</p>",
+      "<p>I\u2019m a loan officer in Lehi.</p>",
+      "<p>I&#39;m your loan officer.</p>",
+      "<p>I work as a loan officer at Ondo.</p>",
+      "<p>NMLS No. 2699085</p>",
+      "<p>NMLS&#160;#2699085</p>",
+      '<a href="https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/2699085">Verify</a>',
+      '<script type="application/ld+json">{"hasCredential":{"identifier":"NMLS 2699085"}}</script>',
+      '<script type="application/ld+json">{"hasOccupation":{"name":"Loan Officer"}}</script>',
+      '<img alt="Pranay Reddy Aleti, loan officer" src="/x.webp">',
+      '<meta name="description" content="Pranay Reddy Aleti, Utah real estate agent in Lehi">',
+      "<p>Company NMLS #1234</p>",
+    ]) {
+      expect(rules(html), html).not.toEqual([])
+    }
+  })
+
+  it("scans JSON, XML and vCard exports for the loan officer's NMLS ID", () => {
+    expect(rules('{"name":"Ondo","nmls":"2699085"}', "text")).toContain("nmls-id-literal")
+  })
+
   it("scans Markdown and plain text as-is", () => {
     expect(rules("- Loan officer: Pranay Reddy Aleti, NMLS #2699085", "text")).toContain("nmls-number")
     expect(rules("- Pranay Reddy Aleti, founder.", "text")).toEqual([])

@@ -14,7 +14,7 @@ function* exportedFiles(dir: string): Generator<string> {
     const full = join(dir, entry.name)
     if (entry.isDirectory()) {
       if (entry.name !== "_next") yield* exportedFiles(full)
-    } else if (/\.(html|md|txt)$/.test(entry.name)) {
+    } else if (/\.(html|md|txt|json|xml|vcf)$/.test(entry.name)) {
       yield full
     }
   }
