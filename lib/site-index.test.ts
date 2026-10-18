@@ -1,12 +1,14 @@
 import { createRequire } from "node:module"
 import { describe, expect, it } from "vitest"
 import agentDiscoveryConfig from "./agent-discovery-config.json"
+import { toAbsoluteSiteUrl } from "./url"
 import {
   AGENT_MARKDOWN_TWINS,
   AI_CRAWLER_AGENTS,
   buildLlmsFullTxtBody,
   buildLlmsJsonData,
   buildLlmsTxtBody,
+  buildWhoRunsOndoLines,
   buildRobotsTxtBody,
   buildSitemapMdBody,
   getSiteIndexSections,
@@ -277,5 +279,24 @@ describe("site index layout", () => {
   it("lists exactly the indexable blog posts from the registry", () => {
     const blog = sections.find((section) => section.id === "blog")!.links.map((link) => link.href)
     expect(new Set(blog)).toEqual(new Set(["/blog", ...getBlogPosts().map((post) => `/blog/${post.slug}`)]))
+  })
+})
+
+describe("Who runs Ondo", () => {
+  it("names the founder, the founding dates and the profile in both briefs, with no license title while off", () => {
+    for (const brief of [buildLlmsTxtBody(), buildLlmsFullTxtBody()]) {
+      expect(brief).toContain("## Who runs Ondo")
+      expect(brief).toContain("Pranay Reddy Aleti, founder")
+      expect(brief).toContain("May 2022")
+      expect(brief).toContain("July 2022")
+      expect(brief).toContain(toAbsoluteSiteUrl("/about/team/pranay-reddy-aleti/"))
+      expect(brief).not.toMatch(/NMLS 2699085|real estate agent \(license/i)
+    }
+  })
+
+  it("adds the license titles and IDs once live", () => {
+    const lines = buildWhoRunsOndoLines(true).join("\n")
+    expect(lines).toMatch(/Utah real estate agent \(license /)
+    expect(lines).toMatch(/loan officer \(NMLS 2699085/)
   })
 })

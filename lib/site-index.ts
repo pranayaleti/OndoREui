@@ -14,7 +14,15 @@ import {
   SITE_SOCIALS,
   SITE_URL,
   nmlsIdentification,
+  LICENSING_LIVE,
+  SITE_BROKERAGE_NAME,
+  SITE_COMPANY_NMLS_ID,
+  SITE_LENDER_NAME,
+  SITE_LOAN_OFFICER,
+  SITE_RE_LICENSE_NUMBER,
 } from "@/lib/site"
+import { FOUNDED_MONTH_LABEL, FOUNDED_YEAR } from "@/lib/social-proof-stats"
+import { FOUNDER_PROFILE_PATH, getFounder } from "@/lib/team-data"
 import { glossaryHref, sortedGlossaryTerms } from "@/lib/content/glossary"
 import { toAbsoluteSiteUrl, toSitePath } from "@/lib/url"
 
@@ -846,6 +854,22 @@ export function getFlatSiteIndexForJsonLd(): Array<{ name: string; url: string; 
   return out
 }
 
+/** "Who runs Ondo" for llms.txt and llms-full.txt. License titles and IDs only once licensing is live. */
+export function buildWhoRunsOndoLines(live: boolean = LICENSING_LIVE): string[] {
+  const founder = getFounder()
+  const licensing = live
+    ? `Utah real estate agent (license ${SITE_RE_LICENSE_NUMBER}, ${SITE_BROKERAGE_NAME}) and loan officer (NMLS ${SITE_LOAN_OFFICER.nmlsId}, ${SITE_LENDER_NAME}, company NMLS ${SITE_COMPANY_NMLS_ID}).`
+    : "Real estate and mortgage licensing in progress; check the licensing page before relying on a licensed service."
+  return [
+    "## Who runs Ondo",
+    `- ${founder.name}, founder. After a decade in full stack software engineering and owning Utah rental property since 2019, Pranay started OndoSoft (a software consultancy) in May 2022 and founded Ondo Real Estate in ${FOUNDED_MONTH_LABEL} ${FOUNDED_YEAR}.`,
+    `- Point of contact for property management, buying, selling and home loans. ${licensing}`,
+    `- Serves ${(founder.areaServed ?? []).join(", ")} on Utah's Wasatch Front.`,
+    `- Profile: ${toAbsoluteSiteUrl(FOUNDER_PROFILE_PATH)}`,
+    `- Licensing and disclosures: ${toAbsoluteSiteUrl("/licensing/")}`,
+  ]
+}
+
 /** Plain-text outline for /llms.txt (and similar consumers). */
 export function buildLlmsTxtBody(): string {
   const lines: string[] = [
@@ -912,6 +936,8 @@ export function buildLlmsTxtBody(): string {
     `- Notary: ${SITE_EMAILS.notary}`,
     `- Media: ${SITE_EMAILS.media}`,
     "",
+    ...buildWhoRunsOndoLines(),
+    "",
     LLMS_DISCLOSURES_BLOCK,
     "",
     "## Major public paths",
@@ -945,6 +971,8 @@ export function buildLlmsFullTxtBody(): string {
     `- **Address**: ${SITE_ADDRESS}`,
     `- **Hours**: ${SITE_HOURS_LABEL}`,
     `- **Scheduling**: ${SITE_CALENDLY_URL}`,
+    "",
+    ...buildWhoRunsOndoLines(),
     "",
     "## Supported locales",
     "",
