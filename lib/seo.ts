@@ -12,12 +12,14 @@ import {
   SITE_BRAND_SHORT,
   SITE_GEO,
   SITE_CALENDLY_URL,
+  LICENSING_LIVE,
+  NMLS_CONSUMER_ACCESS_URL,
 } from "./site"
 import { getTestimonialKind, testimonials } from "./testimonials"
 import { toAbsoluteSiteUrl } from "./url"
 import { FOUNDED_DATE } from "./social-proof-stats"
 import { htmlPathToMarkdownPath } from "./html-to-agent-markdown"
-import { teamMembers } from "./team-data"
+import { FOUNDER_PROFILE_PATH, FOUNDER_SLUG, getFounder, teamMembers } from "./team-data"
 
 const baseSiteUrl = SITE_URL.replace(/\/$/, "")
 
@@ -46,6 +48,71 @@ export const SITE_ORGANIZATION_ID = `${SITE_URL.replace(/\/$/, "")}/#organizatio
 
 /** Stable @id of the one notary Service entity (emitted on /notary/, referenced from state and city pages). */
 export const NOTARY_SERVICE_ID = `${SITE_URL.replace(/\/$/, "")}/notary/#service`
+
+/** Every JSON-LD reference to the founder points at this id; the full node lives on the profile page. */
+export const FOUNDER_PERSON_ID = `${baseSiteUrl}${FOUNDER_PROFILE_PATH}#person`
+
+/** Founder reference for use inside other nodes (Organization.founder, Article.author, BlogPosting.author). */
+export function founderPersonRef() {
+  return { '@type': 'Person', '@id': FOUNDER_PERSON_ID, name: getFounder().name }
+}
+
+/**
+ * The full founder Person node. Only the profile page embeds it; every other page uses
+ * founderPersonRef(). License titles, credentials and sponsors appear only when `live`.
+ */
+export function founderPersonJsonLd(live: boolean = LICENSING_LIVE): Record<string, unknown> {
+  const founder = getFounder()
+  const licenses = founder.licenses
+  const image = toAbsoluteUrl(founder.image)
+  return {
+    '@type': 'Person',
+    '@id': FOUNDER_PERSON_ID,
+    name: founder.name,
+    url: pageUrl(FOUNDER_PROFILE_PATH),
+    ...(image ? { image } : {}),
+    description: founder.bio,
+    jobTitle: live ? ['Founder', 'Real Estate Agent', 'Loan Officer'] : 'Founder',
+    worksFor: { '@id': SITE_ORGANIZATION_ID },
+    ...(founder.knowsAbout?.length ? { knowsAbout: [...founder.knowsAbout] } : {}),
+    ...(founder.areaServed?.length
+      ? { areaServed: founder.areaServed.map((name) => ({ '@type': 'AdministrativeArea', name })) }
+      : {}),
+    ...(founder.sameAs?.length ? { sameAs: [...founder.sameAs] } : {}),
+    ...(live && licenses
+      ? {
+          hasCredential: [
+            {
+              '@type': 'EducationalOccupationalCredential',
+              credentialCategory: 'license',
+              name: 'Utah real estate sales agent license',
+              identifier: licenses.realEstate.number,
+              recognizedBy: { '@type': 'GovernmentOrganization', name: 'Utah Division of Real Estate' },
+            },
+            {
+              '@type': 'EducationalOccupationalCredential',
+              credentialCategory: 'license',
+              name: 'Mortgage loan originator license',
+              identifier: `NMLS ${licenses.mortgage.nmlsId}`,
+              recognizedBy: {
+                '@type': 'Organization',
+                name: 'Nationwide Multistate Licensing System (NMLS)',
+                url: NMLS_CONSUMER_ACCESS_URL,
+              },
+            },
+          ],
+          affiliation: [
+            { '@type': 'Organization', name: licenses.realEstate.brokerageName },
+            {
+              '@type': 'Organization',
+              name: licenses.mortgage.lenderName,
+              identifier: `NMLS ${licenses.mortgage.lenderNmlsId}`,
+            },
+          ],
+        }
+      : {}),
+  }
+}
 
 export interface ServiceData {
   name: string
@@ -351,10 +418,7 @@ export function generateRealEstateBusinessJsonLd() {
     description:
       'Full-service Utah real estate company offering property management, mortgage lending, home buying and selling, and notary services across the Wasatch Front.',
     foundingDate: FOUNDED_DATE,
-    founder: {
-      '@type': 'Person',
-      name: 'Pranay Reddy Aleti',
-    },
+    founder: founderPersonRef(),
     areaServed: [
       { '@type': 'State', name: 'Utah' },
       { '@type': 'AdministrativeArea', name: 'Salt Lake County' },
@@ -612,8 +676,12 @@ export function generateWebPageJsonLd(params: {
   name: string
   url: string
   description?: string
+  /** `@id` of the person who reviewed the page (FOUNDER_PERSON_ID). */
+  reviewedBy?: string
+  /** YYYY-MM-DD of the last review. */
+  lastReviewed?: string
 }) {
-  const { name, url, description } = params
+  const { name, url, description, reviewedBy, lastReviewed } = params
   const absoluteUrl = pageUrl(url)
   if (!name || !absoluteUrl) return null
 
@@ -623,6 +691,8 @@ export function generateWebPageJsonLd(params: {
     name,
     url: absoluteUrl,
     description,
+    ...(reviewedBy ? { reviewedBy: { '@id': reviewedBy } } : {}),
+    ...(lastReviewed ? { lastReviewed } : {}),
   }
 }
 
@@ -650,6 +720,7 @@ export function generateBlogPostingJsonLd(params: {
   const absolutePublisherLogo = toAbsoluteUrl(publisherLogo ?? SITE_LOGO_URL)
 
   const keywordList = keywords?.filter(Boolean)
+  const authorMember = teamMembers.find((member) => member.name === authorName)
 
   return {
     '@context': 'https://schema.org',
@@ -660,10 +731,12 @@ export function generateBlogPostingJsonLd(params: {
     datePublished,
     dateModified: dateModified || datePublished,
     mainEntityOfPage: absoluteUrl,
-    // Blog authors are the company unless the byline names a real, listed team member
-    // (lib/team-data.ts), who is then typed as a Person with a page to link to.
-    author: teamMembers.some((member) => member.name === authorName)
-      ? { '@type': 'Person', name: authorName, url: pageUrl('/about/team/') }
+    // Blog authors are the company unless the byline names a listed team member (lib/team-data.ts).
+    // The founder is referenced by the shared Person id so every page points at the same entity.
+    author: authorMember
+      ? authorMember.slug === FOUNDER_SLUG
+        ? founderPersonRef()
+        : { '@type': 'Person', name: authorMember.name, url: pageUrl('/about/team/') }
       : {
           '@type': 'Organization',
           name: authorName || SITE_NAME,

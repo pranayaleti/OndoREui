@@ -19,6 +19,9 @@ import {
   generateRealEstateBusinessJsonLd,
   getSiteGeoMetaOther,
   buildPageMetadata,
+  FOUNDER_PERSON_ID,
+  founderPersonRef,
+  founderPersonJsonLd,
 } from "./seo"
 import { SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_GEO, SITE_URL } from "./site"
 
@@ -359,12 +362,12 @@ describe("seo", () => {
       const out = generateBlogPostingJsonLd(base) as { publisher: { logo: { url: string } } }
       expect(out.publisher.logo.url).toMatch(/\/logo-favicon\.png$/)
     })
-    it("types a listed team member as a Person with a page, and the company as an Organization", () => {
+    it("credits the founder by the shared Person id, and the company as an Organization", () => {
       const person = generateBlogPostingJsonLd({ ...base, authorName: "Pranay Reddy Aleti" })
       expect(person?.author).toEqual({
         "@type": "Person",
+        "@id": FOUNDER_PERSON_ID,
         name: "Pranay Reddy Aleti",
-        url: `${SITE_URL.replace(/\/$/, "")}/about/team/`,
       })
       expect(generateBlogPostingJsonLd({ ...base, authorName: "Ondo RE Team" })?.author).toMatchObject({
         "@type": "Organization",
@@ -437,6 +440,53 @@ describe("seo", () => {
         applicationCategory: "RealEstateApplication",
       })
       expect(out?.["@type"]).toBe("WebApplication")
+    })
+  })
+  describe("founder entity", () => {
+    it("has one id on the profile page", () => {
+      expect(FOUNDER_PERSON_ID).toBe(`${SITE_URL.replace(/\/$/, "")}/about/team/pranay-reddy-aleti/#person`)
+      expect(founderPersonRef()).toEqual({ "@type": "Person", "@id": FOUNDER_PERSON_ID, name: "Pranay Reddy Aleti" })
+    })
+
+    it("makes the Organization founder a reference to that id", () => {
+      expect(generateRealEstateBusinessJsonLd().founder).toEqual(founderPersonRef())
+    })
+
+    it("builds the full Person with no license title or credential while licensing is off", () => {
+      const person = founderPersonJsonLd(false)
+      expect(person).toMatchObject({
+        "@type": "Person",
+        "@id": FOUNDER_PERSON_ID,
+        name: "Pranay Reddy Aleti",
+        url: `${SITE_URL.replace(/\/$/, "")}/about/team/pranay-reddy-aleti/`,
+        image: `${SITE_URL.replace(/\/$/, "")}/founder-image.webp`,
+        jobTitle: "Founder",
+        worksFor: { "@id": SITE_ORGANIZATION_ID },
+      })
+      expect(person.areaServed).toEqual([
+        { "@type": "AdministrativeArea", name: "Salt Lake County" },
+        { "@type": "AdministrativeArea", name: "Utah County" },
+        { "@type": "AdministrativeArea", name: "Davis County" },
+        { "@type": "AdministrativeArea", name: "Weber County" },
+      ])
+      expect(person).not.toHaveProperty("hasCredential")
+      expect(person).not.toHaveProperty("affiliation")
+      expect(person).not.toHaveProperty("sameAs")
+    })
+  })
+
+  describe("generateWebPageJsonLd reviewer", () => {
+    it("adds reviewedBy as an id reference and lastReviewed only when given", () => {
+      const reviewed = generateWebPageJsonLd({
+        name: "FHA",
+        url: "/loans/fha/",
+        reviewedBy: FOUNDER_PERSON_ID,
+        lastReviewed: "2026-10-18",
+      })
+      expect(reviewed).toMatchObject({ reviewedBy: { "@id": FOUNDER_PERSON_ID }, lastReviewed: "2026-10-18" })
+      const plain = generateWebPageJsonLd({ name: "FHA", url: "/loans/fha/" })
+      expect(plain).not.toHaveProperty("reviewedBy")
+      expect(plain).not.toHaveProperty("lastReviewed")
     })
   })
 })
