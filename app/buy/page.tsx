@@ -1,9 +1,10 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { SITE_SOCIALS, pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, generateServiceJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -83,6 +84,7 @@ export default function BuyPage() {
     <main>
       <WebMCPMortgageTool />
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Buy a Home in Utah | Agent-Led Search & Lending"
         description="Work with an Ondo buyer’s agent. Agent-led for-sale search, in-house mortgages, and rental inventory on this site. Not a public MLS feed."
         pathname="/buy/"
@@ -264,6 +266,7 @@ export default function BuyPage() {
           serviceType: "Real Estate Sales",
         })}
       </Script>
+      <YourContactCard kind="agent" />
     </main>
   )
 }

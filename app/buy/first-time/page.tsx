@@ -1,7 +1,8 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -23,6 +24,7 @@ export default function FirstTimeBuyerPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="First-Time Homebuyer Guide | Utah Real Estate"
         description="Step-by-step guidance, programs, and calculators for first-time homebuyers in Utah. Learn about down payment assistance, FHA loans, and more."
         pathname="/buy/first-time"
@@ -186,6 +188,7 @@ export default function FirstTimeBuyerPage() {
           </div>
         </div>
       </section>
+      <YourContactCard kind="agent" />
     </main>
   )
 }

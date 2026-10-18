@@ -1,10 +1,10 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 // Solicits mortgage business: only deploy once the NMLS license is active (see lib/lending-leads.ts).
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import { SecondLookForm } from "@/components/lending/second-look-form"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { pageTitle } from "@/lib/site"
-import { LoanOfficerLine } from "@/components/lending/loan-officer-line"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
@@ -56,7 +56,6 @@ export default function SecondLookPage() {
           key numbers from your Loan Estimate and a licensed loan officer will walk you through how they compare. No
           credit check to start.
         </p>
-        <LoanOfficerLine />
 
         <section aria-labelledby="lines-to-compare" className="mt-10">
           <h2 id="lines-to-compare" className="font-outfit text-xl font-semibold">
@@ -84,6 +83,7 @@ export default function SecondLookPage() {
 
         <p className="mt-8 text-xs leading-relaxed text-muted-foreground">{ARRIVAL_LENDING_DISCLOSURE}</p>
       </div>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

@@ -1,3 +1,4 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 // Solicits mortgage business: only deploy once the NMLS license is active (see lib/lending-leads.ts).
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
@@ -5,7 +6,6 @@ import Link from "next/link"
 import { RateWatchForm } from "@/components/lending/rate-watch-form"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { pageTitle } from "@/lib/site"
-import { LoanOfficerLine } from "@/components/lending/loan-officer-line"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
@@ -25,7 +25,6 @@ export default function RateWatchPage() {
           Tell us your current rate and the rate that would make refinancing worth it. When rates get close, we&apos;ll
           reach out with real numbers. No credit check to join.
         </p>
-        <LoanOfficerLine />
         <p className="mt-3 text-sm text-muted-foreground">
           Want to see the math today?{" "}
           <Link href="/calculators/refinance/" className="font-medium text-primary underline-offset-4 hover:underline">
@@ -43,6 +42,7 @@ export default function RateWatchPage() {
 
         <p className="mt-8 text-xs leading-relaxed text-muted-foreground">{ARRIVAL_LENDING_DISCLOSURE}</p>
       </div>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

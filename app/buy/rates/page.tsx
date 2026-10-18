@@ -1,7 +1,8 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, generateFAQJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle } from "@/lib/site"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -71,6 +72,7 @@ export default function MortgageRatesPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Why Your Quote Is Not the 30-Year Average"
         description="Rate vs APR vs payment, what moves a Loan Estimate, and why a news average is not your quote."
         pathname="/buy/rates"
@@ -313,6 +315,7 @@ export default function MortgageRatesPage() {
           </div>
         </div>
       </section>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

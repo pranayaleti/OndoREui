@@ -1,9 +1,10 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import SEO from "@/components/seo"
 import { HomebuyerQuiz } from "@/components/homebuyer-quiz"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 
 const title = "How Much Home Can You Afford in Utah? 60-Second Quiz"
@@ -23,6 +24,7 @@ export default function HomebuyerQuizPage() {
   return (
     <main className="min-h-screen bg-background py-12 md:py-16">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title={pageTitleText(title)}
         description={description}
         pathname="/buy/quiz"
@@ -41,6 +43,7 @@ export default function HomebuyerQuizPage() {
         </header>
         <HomebuyerQuiz />
       </div>
+      <YourContactCard kind="agent" />
     </main>
   )
 }

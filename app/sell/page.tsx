@@ -1,9 +1,10 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { SITE_SOCIALS, pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, generateServiceJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -77,6 +78,7 @@ export default function SellPage() {
   return (
     <main>
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Sell Your Utah Home | CMA, Listing & Negotiation"
         description="List with Ondo: CMA, photography, MLS syndication, and negotiation. Compensation is quoted in writing."
         pathname="/sell/"
@@ -252,6 +254,7 @@ export default function SellPage() {
           serviceType: "Real Estate Sales",
         })}
       </Script>
+      <YourContactCard kind="agent" />
     </main>
   )
 }

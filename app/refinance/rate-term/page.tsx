@@ -1,9 +1,10 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
 import { RelatedContent } from "@/components/content/related-content"
@@ -24,6 +25,7 @@ export default function RateTermRefinancePage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Rate-and-Term Refinance in Utah"
         description={"A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math."}
         pathname="/refinance/rate-term"
@@ -110,6 +112,7 @@ export default function RateTermRefinancePage() {
           </div>
         </div>
       </section>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

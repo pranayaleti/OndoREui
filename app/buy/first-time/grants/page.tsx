@@ -1,7 +1,8 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import type { Metadata } from "next"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitleText } from "@/lib/site"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -99,6 +100,7 @@ export default function HousingGrantsPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Utah Down Payment Assistance & Homebuyer Grants"
         description="Utah down payment assistance through Utah Housing Corporation, plus the national grant and loan programs Utah buyers can pair with it, and who qualifies."
         pathname="/buy/first-time/grants"
@@ -193,6 +195,7 @@ export default function HousingGrantsPage() {
           </div>
         </div>
       </section>
+      <YourContactCard kind="loan" />
     </main>
   )
 }

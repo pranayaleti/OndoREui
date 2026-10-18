@@ -1,10 +1,11 @@
+import { YourContactCard } from "@/components/people/your-contact-card"
 import { PageBanner } from "@/components/page-banner"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { DollarSign, TrendingUp, Building2, CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
+import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import { RelatedContent } from "@/components/content/related-content"
@@ -34,6 +35,7 @@ export default function JumboLoanPage() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Jumbo Loans in Utah"
         description="Jumbo loans finance homes above the current FHFA conforming limit for the property county."
         pathname="/loans/jumbo"
@@ -146,6 +148,7 @@ export default function JumboLoanPage() {
       </section>
 
       <CityLinksGrid title="Jumbo Loans by City" servicePrefix="loans" subServiceSlug="jumbo" />
+      <YourContactCard kind="loan" />
     </main>
   )
 }
