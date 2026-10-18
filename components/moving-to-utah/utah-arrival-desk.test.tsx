@@ -5,6 +5,15 @@ import { CITY_MARKET_AS_OF } from "@/lib/city-market-data"
 import { STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS } from "@/components/sticky-mobile-cta-bar"
 import { UtahArrivalDesk } from "./utah-arrival-desk"
 
+/** A start date comfortably past the 60-day touring lead, whatever today is. */
+function isoDaysFromToday(days: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() + days)
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  return `${d.getFullYear()}-${mm}-${dd}`
+}
+
 function MockTypedName() {
   const [name, setName] = useState("")
   return <input aria-label="Mock name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -70,7 +79,7 @@ describe("UtahArrivalDesk", () => {
   it("shows a touring window when a start date is far enough out", () => {
     render(<UtahArrivalDesk />)
     fireEvent.change(screen.getByLabelText(/^start date \(optional\)$/i), {
-      target: { value: "2026-12-01" },
+      target: { value: isoDaysFromToday(90) },
     })
     expect(screen.getByText(/begin touring between/i)).toBeInTheDocument()
   })

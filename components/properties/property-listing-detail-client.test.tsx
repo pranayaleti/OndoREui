@@ -2,6 +2,16 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import { render, screen, waitFor } from "@testing-library/react"
 import type { ApiProperty } from "@/app/types/property"
 import { PropertyListingDetailClient } from "./property-listing-detail-client"
+import { availabilityBadge } from "@/lib/listing-presentation"
+
+/** A move-in date that stays in the future, so the badge reads "Available <date>" and not "Available now". */
+function isoDaysFromToday(days: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() + days)
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  return `${d.getFullYear()}-${mm}-${dd}`
+}
 
 vi.mock("next/link", () => ({
   default: ({ href, children }: { href: string; children: React.ReactNode }) => (
@@ -130,16 +140,17 @@ describe("PropertyListingDetailClient", () => {
   })
 
   it("shows listed fees, move-in, and pet notes only when the payload has them", async () => {
+    const availability = isoDaysFromToday(60)
     fetchById.mockResolvedValue({
       ...listing,
-      availability: "2026-10-15",
+      availability,
       fees: "Trash $25/mo, listed by the manager",
       leaseTerms: "12 months",
       amenities: ["laundry", "pet_friendly", "parking"],
     })
     render(<PropertyListingDetailClient publicId={listing.publicId} />)
 
-    expect(await screen.findByText(/available oct 15, 2026/i)).toBeInTheDocument()
+    expect(await screen.findByText(availabilityBadge(availability).label)).toBeInTheDocument()
     expect(screen.getAllByText(/trash \$25\/mo, listed by the manager/i).length).toBeGreaterThan(0)
     expect(screen.getByRole("heading", { level: 2, name: /^pets$/i })).toBeInTheDocument()
     expect(screen.getAllByText(/pets allowed/i).length).toBeGreaterThan(0)
