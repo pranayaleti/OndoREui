@@ -10,15 +10,12 @@ import { Separator } from "@/components/ui/separator"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
 import { comparisonsForCitySlug } from "@/lib/city-compare-pairs"
-import { CommuteBadges } from "@/components/commute-badges"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import {
   TrendingUp,
   Home,
   DollarSign,
   Users,
-  Briefcase,
-  School,
   Phone,
   BarChart3,
   Clock,
@@ -132,42 +129,15 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
           </div>
         </section>
 
-        {/* Employment */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <Briefcase className="h-6 w-6 text-primary" />
-            Major Employers
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {market.topEmployers.map((emp) => (
-              <span key={emp} className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm">
-                {emp}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        {/* Commute */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Commute Times</h2>
-          <CommuteBadges commuteTimes={market.commuteTimes} />
-        </section>
-
-        {/* Schools */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <School className="h-6 w-6 text-primary" />
-            Education
-          </h2>
-          <p className="text-foreground/70 mb-3">
-            School District: <strong>{market.schoolDistrict}</strong>
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {market.notableSchools.map((s) => (
-              <span key={s} className="inline-flex items-center rounded-full border px-3 py-1 text-sm">{s}</span>
-            ))}
-          </div>
-        </section>
+        {/* Employers, commute and schools live on the city guide, so the report stays
+            on housing data and does not compete with it for "living in <city>". */}
+        <p className="text-foreground/70">
+          Employers, commute times and schools are in the{" "}
+          <Link href={`/locations/${citySlug}/`} className="prose-link">
+            {cityGuideLabel(city.name)}
+          </Link>
+          .
+        </p>
 
         {/* Nearby City Comparison Table */}
         {nearbyCities.length > 0 && (
@@ -228,9 +198,13 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
 
         {/* CTA */}
         <section className="text-center py-8">
-          <h2 className="text-2xl font-bold mb-3">Invest in {city.name} Real Estate</h2>
+          <h2 className="text-2xl font-bold mb-3">Put these numbers to work in {city.name}</h2>
           <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
-            Get expert guidance on buying, selling, or managing property in {city.name}.
+            Get help buying, selling, or managing property in {city.name}. Buying a rental? See{" "}
+            <Link href={`/buy-sell/${citySlug}/investment-properties/`} className="prose-link">
+              {city.name} investment properties
+            </Link>
+            .
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
@@ -253,7 +227,6 @@ export function MarketReportPage({ city }: MarketReportPageProps) {
           variant="pills"
           links={[
             { label: cityGuideLabel(city.name), href: `/locations/${citySlug}/` },
-            { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
             { label: `${city.name} Property Management`, href: `/property-management/${citySlug}/` },
             { label: `${city.name} Home Loans`, href: `/loans/${citySlug}/` },
             { label: `Buy or Sell in ${city.name}`, href: `/buy-sell/${citySlug}/` },

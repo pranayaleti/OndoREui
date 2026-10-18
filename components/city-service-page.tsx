@@ -25,8 +25,8 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { NeighborhoodHousingCards } from "@/components/neighborhood-housing-cards"
 import { OwnerProcessSection } from "@/components/owner-process-section"
 import { CityOwnerOpsSection } from "@/components/city-owner-ops-section"
+import { CityManagementFees } from "@/components/city-management-fees"
 import { getSubServicesForParent } from "@/lib/sub-service-content"
-import { School, TreePine } from "lucide-react"
 import type { ContactInquiryType } from "@/lib/leads-api"
 import { JsonLd } from "@/components/json-ld"
 
@@ -129,7 +129,6 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
           <CityTrustChips />
         </CardHeader>
         <CardContent className="space-y-6">
-          {cityContent?.overview && <p className="max-w-3xl">{cityContent.overview}</p>}
           <p className="max-w-3xl">
             {service === "property-management" && (
               <>
@@ -172,25 +171,11 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
         defaultInquiryType={leadInquiryType}
       />
 
+      {service === "property-management" && <CityManagementFees cityName={city.name} />}
+
       {/* Market data snapshot */}
       {marketData && (
         <MarketDataCard cityName={city.name} data={marketData} variant="compact" />
-      )}
-
-      {cityContent?.lifestyleDescription && (
-        <Card>
-          <CardHeader>
-            <CardTitle>What Living in {city.name} Feels Like</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="max-w-3xl">{cityContent.lifestyleDescription}</p>
-            {marketData?.localLandmarks.length ? (
-              <p className="text-sm text-muted-foreground">
-                Notable local spots: {marketData.localLandmarks.join(", ")}.
-              </p>
-            ) : null}
-          </CardContent>
-        </Card>
       )}
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -204,9 +189,6 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
               <li>Transparent pricing and detailed owner/borrower dashboards</li>
               <li>Fast communication and proactive support</li>
               <li>Modern marketing, screening, and analytics</li>
-              {cityContent?.highlights?.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
             </ul>
           </CardContent>
         </Card>
@@ -219,71 +201,18 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
             <p>
               We serve the entire {city.name} area and surrounding communities in {city.county || "Utah"} County, including all listed ZIP codes.
             </p>
-            {service !== "property-management" && cityContent?.neighborhoods && (
-              <>
-                <p className="mt-2 font-medium">Key Neighborhoods</p>
-                <ul className="list-disc pl-6">
-                  {cityContent.neighborhoods.map((n) => (
-                    <li key={n}>{n}</li>
-                  ))}
-                </ul>
-              </>
-            )}
+            {/* Neighborhoods, schools and lifestyle live on the city guide only, so the
+                service page and the guide stop competing for "living in {city}" searches. */}
+            <p className="mt-2 text-sm text-muted-foreground">
+              Neighborhoods, schools, commute times and cost of living are in the{" "}
+              <Link href={`/locations/${citySlug}/`} className="underline underline-offset-4">
+                {cityGuideLabel(city.name)}
+              </Link>
+              .
+            </p>
           </CardContent>
         </Card>
       </div>
-
-      {/* Schools & recreation */}
-      {marketData && (
-        <div className="grid gap-6 md:grid-cols-2">
-          {marketData.notableSchools.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <School className="h-5 w-5" /> Schools & Education
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-1">
-                  <span className="font-medium">District:</span> {marketData.schoolDistrict}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {marketData.notableSchools.join(", ")}
-                </p>
-              </CardContent>
-            </Card>
-          )}
-          {(marketData.outdoorRec.length > 0 || marketData.localLandmarks.length > 0) && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TreePine className="h-5 w-5" /> Lifestyle & Recreation
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {marketData.geographyNote && (
-                  <p className="text-sm text-foreground/80">{marketData.geographyNote}</p>
-                )}
-                {marketData.outdoorRec.length > 0 && (
-                  <ul className="list-disc pl-5 text-sm text-foreground/70">
-                    {marketData.outdoorRec.map((r) => <li key={r}>{r}</li>)}
-                  </ul>
-                )}
-                {marketData.localLandmarks.length > 0 && (
-                  <>
-                    <p className="font-medium text-sm pt-2">Local Landmarks</p>
-                    <ul className="list-disc pl-5 text-sm text-foreground/70">
-                      {marketData.localLandmarks.map((landmark) => (
-                        <li key={landmark}>{landmark}</li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      )}
 
       {service === "property-management" && (
         <NeighborhoodHousingCards cityName={city.name} />
@@ -365,7 +294,9 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
         variant="pills"
         links={[
           { label: cityGuideLabel(city.name), href: `/locations/${citySlug}/` },
-          { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
+          ...(service === "property-management"
+            ? []
+            : [{ label: `${city.name} Property Management Fees`, href: `/property-management/${citySlug}/#fees` }]),
           { label: `${city.name} Market Report`, href: `/market-reports/${citySlug}/` },
           { label: "Guides & resources", href: "/resources/" },
           { label: "Learn", href: "/learn/" },

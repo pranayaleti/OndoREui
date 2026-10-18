@@ -96,6 +96,24 @@ describe("CitySubServicePage structured data and FAQ", () => {
   })
 })
 
+describe("CitySubServicePage topic ownership", () => {
+  const investment = subServiceDefinitions["investment-properties"]!
+  const highlights = cityContentByName[lehi.name]?.highlights ?? []
+
+  it("puts the city's rental-demand notes on the investment properties page", () => {
+    render(<CitySubServicePage city={lehi} subService={investment} />)
+    expect(screen.getByRole("heading", { name: "What drives rental demand in Lehi" })).toBeInTheDocument()
+    for (const h of highlights) expect(document.body.textContent).toContain(h)
+  })
+
+  it("leaves lifestyle, schools and neighborhoods to the city guide on other sub-services", () => {
+    render(<CitySubServicePage city={lehi} subService={screening} />)
+    const text = document.body.textContent ?? ""
+    expect(text).not.toMatch(/Local Context in Lehi|Lifestyle & Recreation|Schools & Education|Lehi Neighborhoods|What drives rental demand/)
+    expect(screen.getByRole("link", { name: "Lehi City Guide" })).toHaveAttribute("href", "/locations/lehi/")
+  })
+})
+
 function cityContentFaqCount(): number {
   return cityContentByName[lehi.name]?.faq?.length ?? 0
 }

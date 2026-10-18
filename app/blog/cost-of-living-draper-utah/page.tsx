@@ -85,7 +85,7 @@ export default function CostOfLivingDraper() {
 
             <div className="not-prose mt-8 flex flex-wrap gap-3">
               <Button asChild>
-                <Link href="/pricing/draper/">Draper Pricing Guide</Link>
+                <Link href="/market-reports/draper/">Draper Housing Market Report</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/locations/draper/">Draper City Guide</Link>

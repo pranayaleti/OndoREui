@@ -91,7 +91,7 @@ export const edgeIntakeLeadSchema = z.object({
   answers: z.record(z.unknown()).default({}),
   labels: z.record(z.unknown()).default({}),
   textConsent: z.boolean().default(false),
-  consentText: z.string().max(600).optional(),
+  consentVersion: z.string().max(40).optional(),
   attribution: edgeMarketingAttributionSchema.optional(),
 })
 

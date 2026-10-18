@@ -60,8 +60,31 @@ describe("CityServicePage", () => {
 
   it("labels the guide link once for cities whose name already ends in City", () => {
     render(<CityServicePage city={findCityBySlug("salt-lake-city")!} service="property-management" />)
-    expect(screen.getByRole("link", { name: "Salt Lake City Guide" })).toHaveAttribute("href", "/locations/salt-lake-city/")
+    const guideLinks = screen.getAllByRole("link", { name: "Salt Lake City Guide" })
+    expect(guideLinks.length).toBeGreaterThan(0)
+    for (const link of guideLinks) expect(link).toHaveAttribute("href", "/locations/salt-lake-city/")
     expect(document.body.textContent).not.toMatch(/City City/)
+  })
+
+  // Lifestyle, neighborhoods and schools belong to /locations/<city>/ only, so service
+  // pages stop competing with the city guide for "living in <city>" searches.
+  it("leaves city-guide content to the guide and links to it instead", () => {
+    render(<CityServicePage city={lehi} service="buy-sell" />)
+    const text = document.body.textContent ?? ""
+    expect(text).not.toMatch(/What Living in Lehi Feels Like|Key Neighborhoods|Lifestyle & Recreation|Schools & Education/)
+    expect(screen.getAllByRole("link", { name: "Lehi City Guide" })[0]).toHaveAttribute("href", "/locations/lehi/")
+  })
+
+  it("shows the fee schedule under #fees on property management pages only", () => {
+    const pm = render(<CityServicePage city={lehi} service="property-management" />)
+    expect(pm.container.querySelector("#fees")).not.toBeNull()
+    pm.unmount()
+    const loans = render(<CityServicePage city={lehi} service="loans" />)
+    expect(loans.container.querySelector("#fees")).toBeNull()
+    expect(screen.getByRole("link", { name: "Lehi Property Management Fees" })).toHaveAttribute(
+      "href",
+      "/property-management/lehi/#fees",
+    )
   })
 
   it("links only the ZIPs a city owns and offers the other cities on a shared ZIP page", () => {

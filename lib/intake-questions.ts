@@ -60,6 +60,8 @@ export interface IntakeSection {
   id: string
   title: string
   intro?: string
+  /** Link rendered after the intro (for example the privacy policy where PII is first collected). */
+  introLink?: { href: string; label: string }
   fields: readonly IntakeField[]
 }
 
@@ -97,7 +99,8 @@ export const INTAKE_TYPES: readonly IntakeTypeOption[] = [
 export const CONTACT_SECTION: IntakeSection = {
   id: "contact",
   title: "How to reach you",
-  intro: "We use this only to follow up on your request.",
+  intro: "We use this only to follow up on your request. See our",
+  introLink: { href: "/privacy-policy/", label: "Privacy Policy" },
   fields: [
     { id: "first_name", label: "First name", type: "text", required: true, half: true, autoComplete: "given-name" },
     { id: "last_name", label: "Last name", type: "text", required: true, half: true, autoComplete: "family-name" },

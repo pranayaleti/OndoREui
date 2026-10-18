@@ -45,7 +45,7 @@ import {
   type IntakeTypeId,
 } from "@/lib/intake-questions"
 import { submitIntakeLead } from "@/lib/leads-api"
-import { textConsentText } from "@/lib/text-consent"
+import { TEXT_CONSENT_VERSION, textConsentText } from "@/lib/text-consent"
 
 const FORM_NAME = "client_intake"
 const PICKER: IntakeSection = { id: "type", title: "What can we help you with?", fields: [] }
@@ -289,7 +289,8 @@ export function IntakeForm() {
   const isLast = Boolean(type) && safeStep === steps.length - 1
   const done = status === "sent"
   const progress = done ? 1 : type ? safeStep / (steps.length - 1) : 0
-  const consentText = textConsentText(type ? INTAKE_CONSENT_TOPIC[type] : "your request")
+  const phoneForConsent = typeof answers["phone"] === "string" ? answers["phone"] : ""
+  const consentText = textConsentText(type ? INTAKE_CONSENT_TOPIC[type] : "your request", phoneForConsent)
 
   useEffect(() => {
     if (!hydrated || done) return
@@ -351,7 +352,7 @@ export function IntakeForm() {
     }
     setStatus("sending")
     setServerError(null)
-    const payload = buildIntakePayload(type, answers, { textConsent, consentText }, getAttributionPayloadForApi())
+    const payload = buildIntakePayload(type, answers, { textConsent, consentVersion: TEXT_CONSENT_VERSION }, getAttributionPayloadForApi())
     const result = await submitIntakeLead(payload)
     if ("error" in result) {
       setStatus("idle")
@@ -457,7 +458,20 @@ export function IntakeForm() {
         <h2 id={headingId} ref={headingRef} tabIndex={-1} className="mt-1 font-outfit text-2xl font-bold leading-snug focus:outline-none md:text-3xl">
           {section.title}
         </h2>
-        {section.intro ? <p className="mt-2 text-sm text-muted-foreground">{section.intro}</p> : null}
+        {section.intro ? (
+          <p className="mt-2 text-sm text-muted-foreground">
+            {section.intro}
+            {section.introLink ? (
+              <>
+                {" "}
+                <Link href={section.introLink.href} className="underline hover:text-foreground">
+                  {section.introLink.label}
+                </Link>
+                .
+              </>
+            ) : null}
+          </p>
+        ) : null}
 
         {errorCount > 0 ? (
           <p className="mt-4 text-sm font-medium text-destructive-emphasis" role="alert">

@@ -1,4 +1,12 @@
 export const SITE_NAME = "Ondo Real Estate"
+
+/**
+ * Brokerage identification for advertising of real estate services (Utah R162-2f-401h):
+ * brokerage name as registered with the Division, office address, phone and licence number.
+ * Unset until the licence is active; pages that advertise services render it when present.
+ * The backend mirrors this for emails via BROKERAGE_DISCLOSURE.
+ */
+export const BROKERAGE_DISCLOSURE: string | null = process.env["NEXT_PUBLIC_BROKERAGE_DISCLOSURE"]?.trim() || null
 /** Short brand form for titles and marketing (SEO: "Ondo RE"). */
 export const SITE_BRAND_SHORT = "Ondo RE"
 export const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || "https://www.ondorealestate.com"
@@ -20,10 +28,20 @@ const DEFAULT_DASHBOARD_URL =
 
 /** App portal (Owner/Tenant/Manager dashboard). Must point to the separate dashboard app, not the marketing site. */
 const configuredDashboardUrl = process.env['NEXT_PUBLIC_DASHBOARD_URL']?.trim()
+/**
+ * A production site origin means a production build: the exported HTML and the tracked
+ * public/*.md twins must never carry a localhost portal link from a developer's .env.local.
+ */
+const siteIsProduction = /(^|\.)ondorealestate\.com$/i.test(
+  (() => { try { return new URL(process.env['NEXT_PUBLIC_SITE_URL'] ?? "").hostname } catch { return "" } })(),
+)
+const dashboardLooksLocal = /^https?:\/\/(localhost|127\.0\.0\.1|[^/]*\.localhost)(:\d+)?(\/|$)/i.test(configuredDashboardUrl ?? "")
 export const APP_PORTAL_URL =
-  configuredDashboardUrl && /^https?:\/\//.test(configuredDashboardUrl)
+  configuredDashboardUrl && /^https?:\/\//.test(configuredDashboardUrl) && !(siteIsProduction && dashboardLooksLocal)
     ? configuredDashboardUrl.replace(/\/$/, "")
-    : DEFAULT_DASHBOARD_URL
+    : siteIsProduction
+      ? "https://app.ondorealestate.com"
+      : DEFAULT_DASHBOARD_URL
 export const APP_PORTAL_IS_EXTERNAL = /^https?:\/\//.test(APP_PORTAL_URL)
 export const APP_PORTAL_LOGIN_URL = APP_PORTAL_IS_EXTERNAL
   ? `${APP_PORTAL_URL.replace(/\/$/, "")}/login`

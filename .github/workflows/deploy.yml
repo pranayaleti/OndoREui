@@ -84,6 +84,8 @@ jobs:
           # live as repository variables: Settings > Secrets and variables > Actions > Variables.
           # Unset means that tag stays off. Without these the site shipped with no analytics at all.
           NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+          # Brokerage identification line (Utah R162-2f-401h); set the repo variable once licensed.
+          NEXT_PUBLIC_BROKERAGE_DISCLOSURE: ${{ vars.NEXT_PUBLIC_BROKERAGE_DISCLOSURE }}
           NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
           NEXT_PUBLIC_HUBSPOT_PORTAL_ID: ${{ vars.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || '245076632' }}
           # Ad pixels (Meta, TikTok, LinkedIn) share browsing data for ad targeting. Update

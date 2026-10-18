@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { render } from "@testing-library/react"
-import { CityPricingGuide } from "./city-pricing-guide"
+import { CityManagementFees } from "./city-management-fees"
 import { findCityBySlug } from "@/lib/utah-cities"
 import { cityMarketData } from "@/lib/city-market-data"
 import { LEASING_FEE_RATE, STARTER_MGMT_RATE, GROWTH_MGMT_RATE } from "@/lib/fee-comparison"
@@ -8,9 +8,9 @@ import { PRICING_INCLUDED_ROWS, VENDOR_INVOICE_POLICY } from "@/lib/pricing-incl
 
 const lehi = findCityBySlug("lehi")!
 
-describe("CityPricingGuide fee schedule", () => {
+describe("CityManagementFees fee schedule", () => {
   it("states the same fees as /pricing, from the shared constants", () => {
-    const { container } = render(<CityPricingGuide city={lehi} />)
+    const { container } = render(<CityManagementFees cityName={lehi.name} />)
     const text = container.textContent ?? ""
     const starter = Math.round(STARTER_MGMT_RATE * 100)
     const growth = Math.round(GROWTH_MGMT_RATE * 100)
@@ -27,13 +27,13 @@ describe("CityPricingGuide fee schedule", () => {
   })
 
   it("computes the monthly example from the Starter rate on the city's median rent", () => {
-    const { container } = render(<CityPricingGuide city={lehi} />)
+    const { container } = render(<CityManagementFees cityName={lehi.name} />)
     const expected = Math.round(cityMarketData[lehi.name]!.medianRent * STARTER_MGMT_RATE)
     expect(container.textContent).toContain(`≈ $${expected.toLocaleString("en-US")}/mo at 10%`)
   })
 
   it("no longer publishes the old ranges or an unpublished coordination fee", () => {
-    const { container } = render(<CityPricingGuide city={lehi} />)
+    const { container } = render(<CityManagementFees cityName={lehi.name} />)
     const text = container.textContent ?? ""
     expect(text).not.toMatch(/50–100%/)
     expect(text).not.toMatch(/8–10%/)

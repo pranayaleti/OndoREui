@@ -71,4 +71,18 @@ describe("CityGuidePage", () => {
     expect(screen.getAllByText("Granite School District").length).toBeGreaterThan(0)
     expect(screen.queryByRole("link", { name: /School District guide/i })).not.toBeInTheDocument()
   })
+
+  // Investing and detailed market stats have their own pages; the guide links to them.
+  it("hands investing and market detail to their own pages", () => {
+    render(<CityGuidePage city={slc} />)
+    expect(screen.queryByRole("heading", { name: /Why Invest in/ })).not.toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Salt Lake City investment properties" })).toHaveAttribute(
+      "href",
+      "/buy-sell/salt-lake-city/investment-properties/",
+    )
+    expect(screen.getByRole("link", { name: "Full Salt Lake City housing market report" })).toHaveAttribute(
+      "href",
+      "/market-reports/salt-lake-city/",
+    )
+  })
 })

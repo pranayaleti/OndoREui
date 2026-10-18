@@ -1,11 +1,16 @@
-import { CityPricingGuide } from "@/components/city-pricing-guide"
-import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
 import type { Metadata } from "next"
-import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import SEO from "@/components/seo"
-import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { notFound } from "next/navigation"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { QrRedirect } from "@/app/go/[placement]/qr-redirect"
+import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
+import { SITE_URL, pageTitle } from "@/lib/site"
+
+/**
+ * /pricing/<city>/ used to be a "Cost of Real Estate Services" page that mixed management
+ * fees, buying costs, mortgage estimates and rent data, each of which already has a page of
+ * its own. It split "<city> property management fees" with /property-management/<city>/,
+ * so the fee schedule moved there (#fees) and this route redirects. Meta refresh plus a
+ * client-side replace, like /neighborhoods/<city>/; noindex and out of the sitemap.
+ */
+export const dynamicParams = false
 
 type Params = Promise<{ city: string }>
 
@@ -13,37 +18,34 @@ export function generateStaticParams(): { city: string }[] {
   return allCitySlugs.map((city) => ({ city }))
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { city: citySlug } = await params
-  const city = findCityBySlug(citySlug)
-  const cityName = city?.name ?? citySlug
-  const title = pageTitleText(`Cost of Real Estate Services in ${cityName}, Utah | ${SITE_BRAND_SHORT}`)
-  const description = `Property management fees, home buying costs, mortgage estimates, and rental market data for ${cityName}, UT. Compare with nearby cities.`
-  const canonical = `${SITE_URL}/pricing/${citySlug}/`
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
+function pricingRedirectTarget(citySlug: string): string {
+  return `/property-management/${citySlug}/#fees`
 }
 
-export default async function Page({ params }: { params: Params }) {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { city: citySlug } = await params
-  const city = findCityBySlug(citySlug)
-  if (!city) {
-    notFound()
+  const cityName = findCityBySlug(citySlug)?.name ?? citySlug
+  return {
+    title: pageTitle(`${cityName} Property Management Fees`),
+    robots: { index: false, follow: true },
+    alternates: { canonical: `${SITE_URL}/property-management/${citySlug}/` },
   }
+}
+
+export default async function PricingCityRedirect({ params }: { params: Params }) {
+  const { city: citySlug } = await params
+  const target = pricingRedirectTarget(citySlug)
   return (
-    <>
-      <SEO
-        title={`Cost of Real Estate Services in ${city.name}, Utah | ${SITE_BRAND_SHORT}`}
-        description={`Property management fees, home buying costs, and rental market data for ${city.name}, UT.`}
-        pathname={`/pricing/${citySlug}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
-        jsonLd={generateBreadcrumbJsonLd([
-          { name: "Home", url: SITE_URL },
-          { name: "Pricing", url: `${SITE_URL}/pricing/` },
-          { name: city.name, url: `${SITE_URL}/pricing/${citySlug}/` },
-        ])}
-      />
-      <CityPricingGuide city={city} />
-    </>
+    <main className="grid min-h-[50vh] place-items-center px-6 text-center">
+      <meta httpEquiv="refresh" content={`0;url=${target}`} />
+      <QrRedirect to={target} />
+      <p className="text-muted-foreground">
+        Opening{" "}
+        <a href={target} className="font-medium text-primary underline underline-offset-4">
+          property management fees
+        </a>
+        …
+      </p>
+    </main>
   )
 }

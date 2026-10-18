@@ -98,7 +98,8 @@ export function LeadContactFields({
 }) {
   const ids = { name: useId(), email: useId(), phone: useId(), consent: useId() }
   const set = (patch: Partial<ContactValues>) => onChange({ ...value, ...patch })
-  const consentText = textConsentText(topic)
+  // Name the number being consented to once the person has typed it.
+  const consentText = textConsentText(topic, value.phone)
 
   return (
     <div className="space-y-3">

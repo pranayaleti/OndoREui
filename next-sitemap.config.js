@@ -255,6 +255,9 @@ module.exports = {
     // QR short links redirect to /links; the contact card is a file, not a page.
     '/go/*',
     '/go/**',
+    // City pricing pages redirect to /property-management/<city>/#fees (noindex stubs).
+    // Matched without the trailing slash, so this leaves the /pricing hub listed.
+    '/pricing/*',
     '/ondo-real-estate.vcf',
     '/health',
     '/search',

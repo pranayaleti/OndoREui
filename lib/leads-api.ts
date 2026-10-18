@@ -194,8 +194,8 @@ export interface SubmitIntakeLeadPayload {
   /** Question text per answer id, so the staff email and inbox read naturally. */
   labels: Record<string, string>
   textConsent: boolean
-  /** Exact consent wording shown, sent only when the box is ticked. */
-  consentText?: string
+  /** Version of the consent wording shown (lib/text-consent.ts); the server rebuilds the text. */
+  consentVersion?: string
   attribution?: MarketingAttribution
 }
 

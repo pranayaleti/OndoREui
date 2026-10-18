@@ -2,7 +2,7 @@
 import type { Metadata } from "next"
 import { IntakeForm } from "@/components/intake/intake-form"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
-import { SITE_URL, pageTitleText } from "@/lib/site"
+import { BROKERAGE_DISCLOSURE, SITE_URL, pageTitleText } from "@/lib/site"
 
 const title = pageTitleText("Client Questionnaire | Ondo Real Estate")
 const description =
@@ -32,6 +32,11 @@ export default function IntakePage() {
           </p>
         </header>
         <IntakeForm />
+        {BROKERAGE_DISCLOSURE ? (
+          <p className="mx-auto mt-8 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+            {BROKERAGE_DISCLOSURE} Equal Housing Opportunity.
+          </p>
+        ) : null}
       </div>
     </main>
   )

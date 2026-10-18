@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { CityServicePage } from "./city-service-page"
-import { CityPricingGuide } from "./city-pricing-guide"
 import { ProtectedPortalNotice } from "./portal/protected-portal-notice"
 import { BreadcrumbNav } from "./breadcrumb-nav"
 import { CommandDialog, CommandInput, CommandList } from "./ui/command"
@@ -23,11 +22,6 @@ const lehi = findCityBySlug("lehi")!
 describe("one main landmark on generated templates", () => {
   it("city service pages render a single main", () => {
     const { container } = render(<CityServicePage city={lehi} service="property-management" />)
-    expect(container.querySelectorAll("main")).toHaveLength(1)
-  })
-
-  it("city pricing pages render a single main", () => {
-    const { container } = render(<CityPricingGuide city={lehi} />)
     expect(container.querySelectorAll("main")).toHaveLength(1)
   })
 

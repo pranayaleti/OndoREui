@@ -136,19 +136,16 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
                 </CardContent>
               </Card>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-              <div className="rounded-lg border p-4">
-                <p className="text-sm text-foreground/60">Avg Days on Market</p>
-                <p className="text-lg font-semibold">{market.avgDaysOnMarket} days</p>
-              </div>
-              <div className="rounded-lg border p-4">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-lg border p-4">
+              <div>
                 <p className="text-sm text-foreground/60">Median Household Income</p>
                 <p className="text-lg font-semibold">{formatCompactUsd(market.medianHouseholdIncome)}</p>
               </div>
-              <div className="rounded-lg border p-4">
-                <p className="text-sm text-foreground/60">Owner-Occupied</p>
-                <p className="text-lg font-semibold">{market.ownerOccupiedPct}%</p>
-              </div>
+              {/* Days on market, inventory and rent-to-price belong to the market report,
+                  so the guide and the report stop competing for "<city> housing market". */}
+              <Link href={`/market-reports/${citySlug}/`} className="prose-link text-sm">
+                Full {city.name} housing market report
+              </Link>
             </div>
           </section>
         )}
@@ -302,20 +299,15 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
           </section>
         )}
 
-        {/* Highlights */}
-        {content?.highlights && content.highlights.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Why Invest in {city.name}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {content.highlights.map((h) => (
-                <div key={h} className="flex items-start gap-3 rounded-lg border p-4">
-                  <TrendingUp className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <p className="text-foreground/80">{h}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+        {/* Investing in the city is its own search intent; it lives on the
+            investment-properties page, not on the "living in" guide. */}
+        <p className="text-foreground/70">
+          Buying a rental here? Rents, returns and rental demand are on{" "}
+          <Link href={`/buy-sell/${citySlug}/investment-properties/`} className="prose-link">
+            {city.name} investment properties
+          </Link>
+          .
+        </p>
 
         {/* FAQ */}
         {content?.faq && content.faq.length > 0 && (
@@ -372,6 +364,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
             { label: `${city.name} Property Management`, href: `/property-management/${citySlug}/` },
             { label: `Buy or Sell in ${city.name}`, href: `/buy-sell/${citySlug}/` },
             { label: `${city.name} Home Loans`, href: `/loans/${citySlug}/` },
+            { label: `${city.name} Housing Market Report`, href: `/market-reports/${citySlug}/` },
             { label: "Investment Opportunities", href: "/investments/opportunities/" },
             { label: "Guides & resources", href: "/resources/" },
             { label: "Calculators", href: "/calculators/" },

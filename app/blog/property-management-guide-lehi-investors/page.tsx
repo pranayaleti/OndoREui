@@ -108,7 +108,7 @@ export default function PropertyManagementGuideLehi() {
                 <Link href="/property-management/lehi/">Lehi Property Management</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link href="/pricing/lehi/">Lehi Pricing Guide</Link>
+                <Link href="/property-management/lehi/#fees">Lehi Management Fees</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/investments/opportunities/">Investment Opportunities</Link>

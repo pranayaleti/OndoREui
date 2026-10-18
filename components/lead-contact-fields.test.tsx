@@ -20,12 +20,12 @@ function Harness({ errors }: { errors?: Parameters<typeof LeadContactFields>[0][
 describe("LeadContactFields text consent", () => {
   it("shows the full consent wording with Privacy and Terms links, unchecked by default", () => {
     render(<Harness />)
-    const box = screen.getByRole("checkbox", { name: /text and call you at this number about your loan/i })
+    const box = screen.getByRole("checkbox", { name: /call and text me at this number, including marketing messages.*about your loan/i })
     expect(box).not.toBeChecked()
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/")
     expect(screen.getByRole("link", { name: "Terms of Use" })).toHaveAttribute("href", "/terms-of-service/")
     expect(screen.getByText(/not a condition of any purchase or service/i)).toBeInTheDocument()
-    expect(screen.getByText(/Reply STOP to cancel or HELP for help/)).toBeInTheDocument()
+    expect(screen.getByText(/Reply STOP to opt out or HELP for help/)).toBeInTheDocument()
   })
 
   it("records the wording and a timestamp when checked and clears them when unchecked", () => {
@@ -33,7 +33,7 @@ describe("LeadContactFields text consent", () => {
     const box = screen.getByRole("checkbox")
     fireEvent.click(box)
     expect(latest.textConsent).toBe(true)
-    expect(latest.consentText).toContain("Ondo Real Estate may text and call you")
+    expect(latest.consentText).toContain("Ondo Real Estate may call and text me")
     expect(latest.consentAt).toMatch(/^\d{4}-\d{2}-\d{2}T/)
     fireEvent.click(box)
     expect(latest.textConsent).toBe(false)

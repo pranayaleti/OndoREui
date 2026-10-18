@@ -40,7 +40,7 @@ describe("SecondLookForm", () => {
     render(<SecondLookForm />)
     fillContact()
     fireEvent.change(screen.getByLabelText(/closing date/i), { target: { value: "2026-10-30" } })
-    fireEvent.click(screen.getByRole("checkbox", { name: /text and call you at this number about your loan/i }))
+    fireEvent.click(screen.getByRole("checkbox", { name: /call and text me at this number, including marketing messages.*about your loan/i }))
     fireEvent.click(screen.getByRole("button", { name: /second look/i }))
     expect(screen.getByLabelText(/^phone/i)).toHaveAttribute("aria-invalid", "true")
     expect(submitContactLead).not.toHaveBeenCalled()
@@ -51,7 +51,7 @@ describe("SecondLookForm", () => {
     const { message } = submitContactLead.mock.calls[0]![0]
     expect(message).toContain("OK to text: Yes")
     expect(message).toMatch(/Text consent given: \d{4}-\d{2}-\d{2}T/)
-    expect(message).toContain("Reply STOP to cancel or HELP for help")
+    expect(message).toContain("Reply STOP to opt out or HELP for help")
   })
 
   it("asks for a closing date, since that sets how fast we need to move, instead of disabling Send", () => {

@@ -284,7 +284,7 @@ export default function CostOfLiving${city.replace(/[^a-zA-Z]/g, "")}() {
               <Link href="/calculators/affordability">Run Affordability Calculator</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/pricing/${slug}/">${city} Pricing Guide</Link>
+              <Link href="/market-reports/${slug}/">${city} Housing Market Report</Link>
             </Button>
           </div>
         </div>

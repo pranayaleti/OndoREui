@@ -75,7 +75,7 @@ describe("IntakeForm", () => {
     pick("3")
     pick("Dog")
     type(/tell us about your pets/i, "Lab, 60 lb")
-    fireEvent.click(screen.getByRole("checkbox", { name: /text and call you/i }))
+    fireEvent.click(screen.getByRole("checkbox", { name: /call and text me/i }))
     fireEvent.click(screen.getByRole("button", { name: /send my answers/i }))
 
     await waitFor(() => expect(submitIntakeLead).toHaveBeenCalledTimes(1))
@@ -88,8 +88,8 @@ describe("IntakeForm", () => {
       textConsent: true,
       answers: { lease_length: "12 months", pets: "Dog", pet_details: "Lab, 60 lb", cities: ["Lehi"] },
     })
-    expect(body.consentText).toContain("finding a rental")
-    expect(body.consentText).toContain("Consent is not a condition of any purchase or service")
+    expect(body.consentVersion).toBe("2026-10-14")
+    expect(body.textConsent).toBe(true)
     expect(await screen.findByRole("heading", { name: /answers sent/i })).toBeInTheDocument()
     expect(screen.getByRole("link", { name: /pick a time to talk/i })).toBeInTheDocument()
   })
@@ -112,9 +112,9 @@ describe("IntakeForm", () => {
     fireEvent.click(screen.getByRole("button", { name: /send my answers/i }))
 
     await waitFor(() => expect(submitIntakeLead).toHaveBeenCalledTimes(1))
-    const payload = submitIntakeLead.mock.calls[0]![0] as { textConsent: boolean; consentText?: string }
+    const payload = submitIntakeLead.mock.calls[0]![0] as { textConsent: boolean; consentVersion?: string }
     expect(payload.textConsent).toBe(false)
-    expect(payload.consentText).toBeUndefined()
+    expect(payload.consentVersion).toBeUndefined()
   })
 
   it("returns to the contact step when the server rejects a contact field", async () => {

@@ -25,7 +25,7 @@ describe("bundle boundaries", () => {
   it.each([
     "components/city-service-page.tsx",
     "components/city-guide-page.tsx",
-    "components/city-pricing-guide.tsx",
+    "components/city-management-fees.tsx",
     "components/city-testimonials.tsx",
     "components/city-team-section.tsx",
     "components/city-owner-ops-section.tsx",

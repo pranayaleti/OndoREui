@@ -72,7 +72,7 @@ describe("buildIntakePayload", () => {
         cities__other: "Orem",
         anything_else: "  ",
       },
-      { textConsent: true, consentText: "By checking this box..." },
+      { textConsent: true, consentVersion: "2026-10-14" },
     )
     const body = parseIntakeLeadBody(JSON.parse(JSON.stringify(payload)))
     expect(body).toMatchObject({
@@ -80,7 +80,7 @@ describe("buildIntakePayload", () => {
       firstName: "Ada",
       referredBy: "Grace",
       textConsent: true,
-      consentText: "By checking this box...",
+      consentVersion: "2026-10-14",
       answers: { financing: "Paying cash", price_range: "$500K to $1M", cities: ["Lehi", "Other: Orem"] },
       labels: { price_range: "Price range" },
     })
@@ -90,9 +90,9 @@ describe("buildIntakePayload", () => {
   })
 
   it("leaves the consent wording out when the box is not ticked", () => {
-    const payload = buildIntakePayload("tenant", contact, { textConsent: false, consentText: "x" })
+    const payload = buildIntakePayload("tenant", contact, { textConsent: false, consentVersion: "2026-10-14" })
     expect(payload.textConsent).toBe(false)
-    expect(payload).not.toHaveProperty("consentText")
+    expect(payload).not.toHaveProperty("consentVersion")
   })
 })
 

@@ -102,7 +102,7 @@ export const PAYLOAD_TO_CONTACT_FIELD: Record<string, string> = {
 export function buildIntakePayload(
   type: IntakeTypeId,
   answers: IntakeFormAnswers,
-  consent: { textConsent: boolean; consentText: string },
+  consent: { textConsent: boolean; consentVersion: string },
   attribution?: MarketingAttribution,
 ): SubmitIntakeLeadPayload {
   const contact: Record<string, string | undefined> = {}
@@ -135,7 +135,7 @@ export function buildIntakePayload(
     answers: out,
     labels,
     textConsent: consent.textConsent,
-    ...(consent.textConsent ? { consentText: consent.consentText } : {}),
+    ...(consent.textConsent ? { consentVersion: consent.consentVersion } : {}),
     ...(attribution ? { attribution } : {}),
   }
 }

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { PageBanner } from "@/components/page-banner"
 import { CommuteBadges } from "@/components/commute-badges"
@@ -11,7 +11,7 @@ import ConsultationCTA from "@/components/ConsultationCTA"
 import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import { CityTrustChips } from "@/components/city-trust-chips"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
-import { type UtahCity, toCitySlug } from "@/lib/utah-cities"
+import { type UtahCity, cityGuideLabel, toCitySlug } from "@/lib/utah-cities"
 import { cityContentByName } from "@/lib/city-content"
 import { cityMarketData } from "@/lib/city-market-data"
 import { getNearbyCities } from "@/lib/nearby-cities"
@@ -56,9 +56,6 @@ import {
   Search,
   SlidersHorizontal,
   Receipt,
-  BookOpen,
-  TreePine,
-  School,
 } from "lucide-react"
 import { JsonLd } from "@/components/json-ld"
 
@@ -123,6 +120,7 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
   const cityFaqs = cityContent?.faq || []
   const allFaqs = [...localizedBaseFaqs, ...cityFaqs]
   const canonicalPath = `/${subService.parentService}/${citySlug}/${subService.slug}/`
+  const isInvestmentPage = subService.parentService === "buy-sell" && subService.slug === "investment-properties"
 
   // One Organization entity site-wide (#organization in the root layout): the page
   // describes a Service that points at it, never a second per-city business. FAQ
@@ -176,29 +174,6 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
               {subService.localizedIntro(city.name, marketData)}
             </p>
           </section>
-        )}
-
-        {cityContent?.lifestyleDescription && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5" /> Local Context in {city.name}
-              </CardTitle>
-              <CardDescription>
-                The neighborhood patterns, community habits, and daily rhythms that shape this market.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <p>{cityContent.lifestyleDescription}</p>
-              {cityContent.highlights?.length ? (
-                <ul className="list-disc pl-5 text-sm text-foreground/70 space-y-1">
-                  {cityContent.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </CardContent>
-          </Card>
         )}
 
         {/* Commute badges */}
@@ -264,78 +239,29 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
           </section>
         )}
 
-        {/* Schools & education */}
-        {marketData?.notableSchools && marketData.notableSchools.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <School className="h-5 w-5" /> Schools & Education
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-2">
-                <span className="font-medium">School District:</span>{" "}
-                {marketData.schoolDistrict}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Notable schools: {marketData.notableSchools.join(", ")}
-              </p>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Outdoor recreation & landmarks */}
-        {marketData && (marketData.outdoorRec.length > 0 || marketData.localLandmarks.length > 0) && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <TreePine className="h-5 w-5" /> Lifestyle & Recreation
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {marketData.geographyNote && (
-                <p className="text-foreground/80">{marketData.geographyNote}</p>
-              )}
-              {marketData.outdoorRec.length > 0 && (
-                <div>
-                  <p className="font-medium text-sm mb-1">Outdoor Activities</p>
-                  <ul className="list-disc pl-5 text-sm text-foreground/70 space-y-1">
-                    {marketData.outdoorRec.map((r) => (
-                      <li key={r}>{r}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {marketData.localLandmarks.length > 0 && (
-                <div>
-                  <p className="font-medium text-sm mb-1">Local Landmarks</p>
-                  <ul className="list-disc pl-5 text-sm text-foreground/70 space-y-1">
-                    {marketData.localLandmarks.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Neighborhoods */}
-        {cityContent?.neighborhoods && cityContent.neighborhoods.length > 0 && (
+        {/* The investment page owns "why invest in {city}"; the city guide no longer carries it. */}
+        {isInvestmentPage && cityContent?.highlights?.length ? (
           <section>
-            <h2 className="text-xl font-bold mb-3">
-              {city.name} Neighborhoods
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {cityContent.neighborhoods.map((n) => (
-                <div key={n} className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  <span>{n}</span>
-                </div>
+            <h2 className="text-2xl font-bold mb-4">What drives rental demand in {city.name}</h2>
+            <ul className="space-y-3">
+              {cityContent.highlights.map((h) => (
+                <li key={h} className="flex items-start gap-3">
+                  <TrendingUp className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                  <span>{h}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
-        )}
+        ) : null}
+
+        {/* Neighborhoods, schools and lifestyle live on the city guide only. */}
+        <p className="text-sm text-muted-foreground">
+          Neighborhoods, schools, commute times and cost of living are in the{" "}
+          <Link href={`/locations/${citySlug}/`} className="underline underline-offset-4">
+            {cityGuideLabel(city.name)}
+          </Link>
+          .
+        </p>
 
         <Separator />
 

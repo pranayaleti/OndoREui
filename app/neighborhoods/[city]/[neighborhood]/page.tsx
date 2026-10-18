@@ -338,7 +338,6 @@ export default async function Page({ params }: { params: Params }) {
             links={[
               { label: `${city.name} City Guide`, href: `/locations/${citySlug}/` },
               { label: `${city.name} Market Report`, href: `/market-reports/${citySlug}/` },
-              { label: `${city.name} Pricing Guide`, href: `/pricing/${citySlug}/` },
               { label: `${city.name} Property Management`, href: `/property-management/${citySlug}/` },
             ]}
           />
