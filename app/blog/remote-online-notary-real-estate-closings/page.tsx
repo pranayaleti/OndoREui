@@ -1,3 +1,5 @@
+import { ReviewedBy } from "@/components/content/reviewed-by"
+import { FOUNDER_PERSON_ID } from "@/lib/seo"
 import { PageBanner } from "@/components/page-banner";
 import SEO from "@/components/seo";
 import { Badge } from "@/components/ui/badge";
@@ -56,6 +58,8 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
   return (
     <main className="min-h-screen">
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
+        lastReviewed={modified || published}
         title="Remote Online Notary for Real Estate Closings"
         description="Use ONDO Remote Online Notary for purchases, refinances, HELOCs, and investor closings with compliant ID checks, audit trails, and title-ready documents."
         pathname={slug}
@@ -76,6 +80,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
 
       <article className="bg-background py-12">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <ReviewedBy date={modified || published} className="mb-6" />
           <div className="flex flex-wrap gap-3 mb-8">
             <Badge variant="secondary">Real Estate</Badge>
             <Badge variant="outline">Remote Online Notary</Badge>

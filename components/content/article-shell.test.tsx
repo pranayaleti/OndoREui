@@ -58,8 +58,9 @@ describe("ArticleShell", () => {
   })
 
   it("prefers an explicit author over the default", () => {
-    renderShell(<h2>Only heading</h2>, { author: "Pranay Reddy Aleti" } as Partial<typeof meta>)
-    expect(screen.getByText("Pranay Reddy Aleti")).toBeInTheDocument()
+    renderShell(<h2>Only heading</h2>, { author: "Ondo RE Lending Desk" } as Partial<typeof meta>)
+    expect(screen.getByText("Ondo RE Lending Desk")).toBeInTheDocument()
+    expect(screen.queryByText("Ondo Real Estate Editorial Team")).not.toBeInTheDocument()
   })
 
   it("renders an at-a-glance box when the post supplies takeaways", () => {

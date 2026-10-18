@@ -9,12 +9,13 @@ import { BreadcrumbNav } from "@/components/breadcrumb-nav"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
-import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
+import { FOUNDER_PERSON_ID, generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { ContentFaq, type ContentFaqItem } from "@/components/content/content-faq"
 import { ArticleToc } from "@/components/content/article-toc"
 import { ArticleByline } from "@/components/content/article-byline"
+import { ReviewedBy } from "@/components/content/reviewed-by"
 import { countWords, extractOutline } from "@/lib/content/article-outline"
 import { KeyTakeaways } from "@/components/content/key-takeaways"
 import { ARTICLE_ADVICE_NOTICE, articleDisclosureKind, type ArticleDisclosureKind } from "@/lib/content/article-disclosure"
@@ -98,6 +99,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
   const hub = articleHubFor(meta.path, meta.category)
   // Posts outside the content graph would otherwise end with no related links or next step.
   const fallback = getContentNodeByPath(meta.path) ? undefined : articleFallbackFor(meta.category)
+  const lastReviewed = meta.modified || meta.published
   const jsonLd: object[] = [
     generateBreadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
@@ -122,6 +124,8 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
         author={meta.author}
         section={meta.category}
         tags={meta.keywords}
+        reviewedBy={FOUNDER_PERSON_ID}
+        lastReviewed={lastReviewed}
         jsonLd={jsonLd}
       />
       <PageBanner title={meta.title} subtitle={meta.bannerSubtitle ?? meta.description} backgroundImage={image} />
@@ -142,8 +146,9 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
             published={meta.published}
             modified={meta.modified}
             wordCount={wordCount}
-            className="mb-6"
+            className="mb-2"
           />
+          <ReviewedBy date={lastReviewed} className="mb-6" />
           <div className="not-prose mb-8">
             <Button asChild variant="outline" size="sm">
               <Link href={hub.href}>{hub.backLabel}</Link>

@@ -7,7 +7,6 @@ const description =
   "Everything you need to start, scale, and protect a Utah rental portfolio in 2026, the new state property-management license law, financing, tenant screening, leases, taxes, and when to hand it off."
 const published = "2026-05-18"
 const modified = "2026-05-18"
-const author = "Pranay Reddy Aleti"
 const category = "Property Management"
 const image = "/modern-office-building.webp"
 const keywords = [
@@ -26,7 +25,6 @@ export const metadata = articleMetadata({
   description,
   published,
   modified,
-  author,
   category,
   image,
   keywords,
@@ -41,7 +39,6 @@ export default function UltimateUtahLandlordGuide2026() {
         description,
         published,
         modified,
-        author,
         category,
         image,
         keywords,
@@ -188,7 +185,7 @@ export default function UltimateUtahLandlordGuide2026() {
             <div className="not-prose mt-12 rounded-lg border border-primary/30 bg-primary/5 p-6">
               <h3 className="text-lg font-bold mb-2">About this guide</h3>
               <p className="text-sm text-foreground/70">
-                Written by Pranay Reddy Aleti, founder of Ondo Real Estate, a Utah-based property management and brokerage platform serving owners and tenants across 55+ Wasatch Front cities. Last updated {modified}. Information is general guidance, not legal or tax advice. Confirm specifics with a Utah-licensed attorney, CPA, or insurance professional before acting.
+                Reviewed by Pranay Reddy Aleti, founder of Ondo Real Estate, a Utah-based property management and brokerage platform serving owners and tenants across 55+ Wasatch Front cities. Last updated {modified}. Information is general guidance, not legal or tax advice. Confirm specifics with a Utah-licensed attorney, CPA, or insurance professional before acting.
               </p>
             </div>
           
