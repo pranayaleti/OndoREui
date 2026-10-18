@@ -1,4 +1,4 @@
-import { APP_PORTAL_URL, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
+import { APP_PORTAL_URL, LICENSING_LIVE, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
 import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 
 /**
@@ -25,43 +25,65 @@ export type LinksPageSection = {
 /** Plain text, or a phrase the page highlights in the brand color. */
 export type IntroSegment = string | { highlight: string }
 
+type LinksPageIntro = {
+  heading: string
+  paragraphs: readonly (readonly IntroSegment[])[]
+  facts: readonly string[]
+}
+
+/** The role sentence once both licenses are active: titles, NMLS ID, and the three services. */
+const LICENSED_ROLE_PARAGRAPH: readonly IntroSegment[] = [
+  "As a Utah ",
+  { highlight: "real estate agent" },
+  " and ",
+  { highlight: "loan officer" },
+  ` (NMLS #${SITE_LOAN_OFFICER.nmlsId}), I help you `,
+  { highlight: "buy a home" },
+  ", ",
+  { highlight: "sell your home" },
+  " and ",
+  { highlight: "find the right home loan" },
+  ". My team manages rentals too.",
+]
+
+/** Placeholder until licensing: same services, no title or NMLS claim. */
+const PENDING_ROLE_PARAGRAPH: readonly IntroSegment[] = [
+  "I help Utah ",
+  { highlight: "owners" },
+  " manage their rentals today, and I'm here to talk ",
+  { highlight: "buying" },
+  ", ",
+  { highlight: "selling" },
+  " and ",
+  { highlight: "home loans" },
+  " while my real estate and loan officer licenses finalize.",
+]
+
 /**
  * First thing a new visitor reads after watching a video: who Pranay is, in his own
  * words (adapted from the founder's letter at /founders-letter), with his roles and
  * Ondo's buy, sell and loan services highlighted.
  *
  * LICENSE CLAIMS: "real estate agent", "loan officer" and the NMLS ID are only true
- * once his licenses are active. He deploys this page only after licensing; do not
- * push these lines before then.
+ * once his licenses are active, so they render only when LICENSING_LIVE (lib/site.ts)
+ * is on. Until then the pending paragraph names the services without the titles.
  */
-export const LINKS_PAGE_INTRO: {
-  heading: string
-  paragraphs: readonly (readonly IntroSegment[])[]
-  facts: readonly string[]
-} = {
-  heading: "Hi, I'm Pranay",
-  paragraphs: [
-    [
-      "I spent over a decade building software, and I own and manage rental property myself. I built Ondo to make real estate simpler.",
+export function buildLinksPageIntro(live: boolean = LICENSING_LIVE): LinksPageIntro {
+  return {
+    heading: "Hi, I'm Pranay",
+    paragraphs: [
+      [
+        "I spent over a decade building software, and I own and manage rental property myself. I built Ondo to make real estate simpler.",
+      ],
+      live ? LICENSED_ROLE_PARAGRAPH : PENDING_ROLE_PARAGRAPH,
+      ["Everything's in one place here. Start with a free call, or pick your path below."],
     ],
-    [
-      "As a Utah ",
-      { highlight: "real estate agent" },
-      " and ",
-      { highlight: "loan officer" },
-      ` (NMLS #${SITE_LOAN_OFFICER.nmlsId}), I help you `,
-      { highlight: "buy a home" },
-      ", ",
-      { highlight: "sell your home" },
-      " and ",
-      { highlight: "find the right home loan" },
-      ". My team manages rentals too.",
-    ],
-    ["Everything's in one place here. Start with a free call, or pick your path below."],
-  ],
-  /** Same numbers the homepage shows (lib/social-proof-stats.ts), so the two never drift apart. */
-  facts: [`${UTAH_CITIES_SERVED}+ Utah cities`, `${PROPERTIES_MANAGED}+ properties managed`, "Based in Lehi, Utah"],
+    /** Same numbers the homepage shows (lib/social-proof-stats.ts), so the two never drift apart. */
+    facts: [`${UTAH_CITIES_SERVED}+ Utah cities`, `${PROPERTIES_MANAGED}+ properties managed`, "Based in Lehi, Utah"],
+  }
 }
+
+export const LINKS_PAGE_INTRO: LinksPageIntro = buildLinksPageIntro()
 
 /**
  * The one solid-orange button, right under Call / Text / Email / Save. It sits above the intro

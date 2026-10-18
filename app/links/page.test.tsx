@@ -11,6 +11,7 @@ vi.mock("@/lib/site", async (importOriginal) => ({
 
 import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 import LinksPage from "./page"
+import { buildLinksPageIntro } from "@/lib/links-page"
 
 describe("/links page", () => {
   it("names the business in the page's one h1", () => {
@@ -28,10 +29,21 @@ describe("/links page", () => {
   })
 
   // Owner's call: buying, selling and home loans lead, in the copy and in the tile order.
-  it("highlights his roles and the buy, sell and loan services in the intro", () => {
+  // Until LICENSING_LIVE is on, the page must not call him an agent or loan officer.
+  it("names the services without a license title or NMLS ID while licensing is pending", () => {
     render(<LinksPage />)
     const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i }).closest("section")!
     const highlighted = Array.from(intro.querySelectorAll("strong")).map((node) => node.textContent)
+    expect(highlighted).toEqual(["owners", "buying", "selling", "home loans"])
+    expect(intro).not.toHaveTextContent(/NMLS #/)
+    expect(intro).not.toHaveTextContent(/as a utah real estate agent/i)
+  })
+
+  // Once live: titles lead, and mortgage advertising names the originator's NMLS ID next to the loan officer claim.
+  it("highlights his roles with the NMLS ID beside the loan officer title once licensing is live", () => {
+    const live = buildLinksPageIntro(true)
+    const roles = live.paragraphs[1]!
+    const highlighted = roles.flatMap((segment) => (typeof segment === "string" ? [] : [segment.highlight]))
     expect(highlighted).toEqual([
       "real estate agent",
       "loan officer",
@@ -39,13 +51,8 @@ describe("/links page", () => {
       "sell your home",
       "find the right home loan",
     ])
-  })
-
-  // Mortgage advertising names the originator's NMLS ID next to the loan officer claim.
-  it("puts the NMLS ID right beside the loan officer title", () => {
-    render(<LinksPage />)
-    const intro = screen.getByRole("heading", { level: 2, name: /hi, i'm pranay/i }).closest("section")!
-    expect(intro).toHaveTextContent(/loan officer \(NMLS #2699085\)/)
+    const text = roles.map((segment) => (typeof segment === "string" ? segment : segment.highlight)).join("")
+    expect(text).toMatch(/loan officer \(NMLS #2699085\)/)
   })
 
   it("links the Loan Estimate second look and the rate watch from Home loans", () => {
