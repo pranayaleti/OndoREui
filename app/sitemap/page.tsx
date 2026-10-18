@@ -54,7 +54,8 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
 const isPageLink = (href: string) => !/\.[a-z0-9]+$/i.test(href)
 
 // Off-screen sections skip layout and paint until scrolled near (CSS only, links stay in the HTML).
-const SECTION_RENDER_HINT = "scroll-mt-24 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
+// Intrinsic size matches the fixed card height below so the grid doesn't jump as sections render.
+const SECTION_RENDER_HINT = "scroll-mt-24 [content-visibility:auto] [contain-intrinsic-size:auto_20rem]"
 
 export default function SitemapPage() {
   const siteSections = getSiteIndexSections()
@@ -115,34 +116,37 @@ export default function SitemapPage() {
             </ul>
           </nav>
 
-          <nav aria-label="Site index" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <nav aria-label="Site index" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {siteSections.map((section) => {
               const Icon = SECTION_ICONS[section.id] ?? Building2
               return (
                 <section key={section.id} id={section.id} className={SECTION_RENDER_HINT}>
-                  <Card className="h-full transition-shadow hover:shadow-lg">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-3 text-lg">
-                        <Icon className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+                  <Card className="flex h-80 flex-col overflow-hidden transition-shadow hover:shadow-lg">
+                    <CardHeader className="shrink-0 space-y-1 border-b border-border p-4">
+                      <CardTitle className="flex items-center gap-2 text-base">
+                        <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden />
                         {section.title}
+                        <span className="ml-auto text-xs font-normal text-muted-foreground">
+                          {section.links.length}
+                        </span>
                       </CardTitle>
                       {section.description ? (
-                        <p className="text-sm text-muted-foreground">{section.description}</p>
+                        <p className="line-clamp-2 text-xs text-muted-foreground">{section.description}</p>
                       ) : null}
                     </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-3">
+                    <CardContent className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 pt-3">
+                      <ul className="space-y-2">
                         {section.links.map((link) => (
                           <li
                             key={`${section.id}-${link.href}-${link.name}`}
-                            className="border-b border-border pb-3 last:border-b-0 last:pb-0"
+                            className="border-b border-border pb-2 last:border-b-0 last:pb-0"
                           >
                             <Link
                               href={link.href}
                               className="block rounded-sm hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                             >
-                              <span className="font-semibold text-sm">{link.name}</span>
-                              <span className="mt-1 block text-xs text-muted-foreground">{link.description}</span>
+                              <span className="text-sm font-medium">{link.name}</span>
+                              <span className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{link.description}</span>
                             </Link>
                           </li>
                         ))}

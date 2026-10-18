@@ -28,4 +28,14 @@ describe("/sitemap/ page", () => {
     expect(sections.length).toBeGreaterThan(3)
     sections.forEach((section) => expect(section.className).toContain("content-visibility:auto"))
   })
+
+  it("keeps cards a fixed height and scrolls each link list inside its card", () => {
+    const { container } = render(<SitemapPage />)
+    const cards = container.querySelectorAll("nav[aria-label='Site index'] > section > div")
+    expect(cards.length).toBeGreaterThan(3)
+    cards.forEach((card) => {
+      expect(card.className).toContain("h-80")
+      expect(card.querySelector("ul")?.parentElement?.className).toContain("overflow-y-auto")
+    })
+  })
 })
