@@ -862,7 +862,7 @@ export function buildWhoRunsOndoLines(live: boolean = LICENSING_LIVE): string[] 
     : "Real estate and mortgage licensing in progress; check the licensing page before relying on a licensed service."
   return [
     "## Who runs Ondo",
-    `- ${founder.name}, founder. After a decade in full stack software engineering and owning Utah rental property since 2019, Pranay started OndoSoft (a software consultancy) in May 2022 and founded Ondo Real Estate in ${FOUNDED_MONTH_LABEL} ${FOUNDED_YEAR}.`,
+    `- ${founder.name}, founder. After over a decade in full stack software engineering, and a Utah homeowner since 2019, Pranay started OndoSoft (a software consultancy) in May 2022 and founded Ondo Real Estate in ${FOUNDED_MONTH_LABEL} ${FOUNDED_YEAR}.`,
     `- Point of contact for property management, buying, selling and home loans. ${licensing}`,
     `- Serves ${(founder.areaServed ?? []).join(", ")} on Utah's Wasatch Front.`,
     `- Profile: ${toAbsoluteSiteUrl(FOUNDER_PROFILE_PATH)}`,

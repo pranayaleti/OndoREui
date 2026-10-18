@@ -57,6 +57,13 @@ describe("/about/team/pranay-reddy-aleti/", () => {
     expect(screen.getByRole("link", { name: /licensing & disclosures/i })).toHaveAttribute("href", "/licensing/")
   })
 
+  // Unlicensed, the services belong to Ondo; a first-person offer to list or negotiate waits for licensing.
+  it("offers services as Ondo, not in the first person, while licensing is off", () => {
+    render(<FounderProfile live={false} />)
+    expect(screen.getByRole("heading", { level: 2, name: "How Ondo can help" })).toBeInTheDocument()
+    expect(screen.queryByRole("heading", { name: "How I can help" })).not.toBeInTheDocument()
+  })
+
   it("lists license numbers, sponsors and NMLS Consumer Access once live", () => {
     render(<FounderProfile live />)
     expect(screen.getByText(/license #RE-1234567, with Test Realty/)).toBeInTheDocument()

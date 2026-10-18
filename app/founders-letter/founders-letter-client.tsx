@@ -27,7 +27,7 @@ const CORE_VALUES = ["Innovation first", "Client success", "Transparency", "Comm
 
 const BACKGROUND = [
   { title: "Full stack development", detail: "React, Node.js, modern web apps" },
-  { title: "Real estate investing", detail: `Utah homeowner and landlord since ${FIRST_UTAH_HOME_YEAR}` },
+  { title: "Real estate investing", detail: `Utah homeowner since ${FIRST_UTAH_HOME_YEAR}; owns and manages rentals` },
   { title: "Property management", detail: "Owner and tenant relations" },
   { title: "Technology", detail: "AI and automation for property operations" },
 ]

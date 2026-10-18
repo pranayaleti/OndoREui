@@ -294,6 +294,13 @@ describe("Who runs Ondo", () => {
     }
   })
 
+  it("dates the first Utah home, not rentals, to 2019", () => {
+    const lines = buildWhoRunsOndoLines(false).join("\n")
+    expect(lines).toContain("a Utah homeowner since 2019")
+    expect(lines).not.toMatch(/rental property since 2019/)
+    expect(lines).toContain("over a decade")
+  })
+
   it("adds the license titles and IDs once live", () => {
     const lines = buildWhoRunsOndoLines(true).join("\n")
     expect(lines).toMatch(/Utah real estate agent \(license /)

@@ -51,6 +51,11 @@ describe("/founders-letter page", () => {
     expect(Array.isArray(ogImages) && ogImages.length).toBe(1)
   })
 
+  it("does not date being a landlord to the first home in 2019", () => {
+    render(<FoundersLetterPage />)
+    expect(document.body.textContent).not.toMatch(/landlord since 2019/i)
+  })
+
   it("marks the letter up as an Article by the founder's one Person id", () => {
     const { container } = render(<FoundersLetterPage />)
     const blocks = jsonLdBlocks(container)

@@ -122,7 +122,7 @@ export function FounderProfile({ live }: { live: boolean }) {
 
         <section aria-labelledby="profile-services-heading" className="mt-12">
           <h2 id="profile-services-heading" className={heading}>
-            How I can help
+            {live ? "How I can help" : "How Ondo can help"}
           </h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {SERVICES.map((service) => (
