@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest"
-import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react"
 import Header from "./header"
 
 vi.mock("next/navigation", () => ({
@@ -46,6 +46,7 @@ vi.mock("@/components/navigation", () => ({
   ),
   allNavigationItems: [{ href: "/buy", labelKey: "nav.buy" }],
   overflowNavigationItems: [],
+  secondaryNavigationItems: [],
   primaryNavigationItems: [{ href: "/buy", labelKey: "nav.buy" }],
 }))
 
@@ -74,8 +75,7 @@ describe("Header mobile menu", () => {
     expect(menu).not.toHaveAttribute("role")
     expect(menu.className).toContain("100dvh")
     expect(menu.className).not.toContain("100vh")
-    expect(screen.getByRole("link", { name: "nav.ownerLogin" })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: "nav.tenantLogin" })).toBeInTheDocument()
+    expect(within(menu).getByRole("link", { name: "nav.login" })).toBeInTheDocument()
     expect(menu.querySelector("a button")).toBeNull()
   })
 

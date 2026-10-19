@@ -62,9 +62,7 @@ export const DEFAULT_STICKY_CTA: StickyCta = HOME_WORTH_CTA
 export const STICKY_CTA_ROUTES: ReadonlyArray<{ prefix: string; cta: StickyCta }> = [
   { prefix: "/property-management", cta: RENTAL_ANALYSIS_CTA },
   { prefix: "/pricing", cta: RENTAL_ANALYSIS_CTA },
-  { prefix: "/solutions", cta: RENTAL_ANALYSIS_CTA },
   { prefix: "/compare-utah-property-managers", cta: RENTAL_ANALYSIS_CTA },
-  { prefix: "/vs", cta: RENTAL_ANALYSIS_CTA },
   { prefix: "/buy", cta: { label: "Start the buyer quiz", href: "/buy/quiz", event: "mobile_cta_buyer_quiz" } },
   { prefix: "/sell", cta: HOME_WORTH_CTA },
   {

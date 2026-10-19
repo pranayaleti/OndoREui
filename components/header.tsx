@@ -6,14 +6,8 @@ import dynamic from "next/dynamic"
 import { useState, useEffect, useRef, useCallback, memo } from "react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Menu, X, Search, ChevronDown, Phone } from "lucide-react"
-import { Navigation, allNavigationItems, overflowNavigationItems, primaryNavigationItems } from "@/components/navigation"
+import { Menu, X, Search, Phone } from "lucide-react"
+import { Navigation, primaryNavigationItems, secondaryNavigationItems } from "@/components/navigation"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { usePathname } from "next/navigation"
 import { APP_PORTAL_LOGIN_URL, SITE_NAME, SITE_PHONE } from "@/lib/site"
@@ -182,50 +176,6 @@ const Header = memo(() => {
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-200 bg-background ${isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : ""}`}>
-      {/*
-        Utility strip: mirrors the "conversion CTAs stay on-screen" pattern
-        that local PM sites (e.g. Keyrenter) use — free rental analysis,
-        available rentals, and both portal logins are one click from every
-        page. Desktop-only; the mobile drawer already exposes portal logins
-        and the sticky mobile CTA bar covers rental analysis + call.
-      */}
-      <div className="hidden md:block border-b border-border/50 bg-muted/40 text-xs">
-        <div className="container flex items-center justify-end gap-4 px-4 py-1.5 sm:px-6 lg:px-8">
-          <Link
-            href="/whats-my-home-worth"
-            className="font-medium text-foreground/80 hover:text-primary transition-colors"
-          >
-            {t("utilityBar.freeRentalAnalysis")}
-          </Link>
-          <span aria-hidden="true" className="text-foreground/30">
-            |
-          </span>
-          <Link
-            href="/properties"
-            className="font-medium text-foreground/80 hover:text-primary transition-colors"
-          >
-            {t("utilityBar.availableRentals")}
-          </Link>
-          <span aria-hidden="true" className="text-foreground/30">
-            |
-          </span>
-          <Link
-            href={APP_PORTAL_LOGIN_URL}
-            className="font-medium text-foreground/80 hover:text-primary transition-colors"
-          >
-            {t("utilityBar.ownerLogin")}
-          </Link>
-          <span aria-hidden="true" className="text-foreground/30">
-            |
-          </span>
-          <Link
-            href={APP_PORTAL_LOGIN_URL}
-            className="font-medium text-foreground/80 hover:text-primary transition-colors"
-          >
-            {t("utilityBar.residentLogin")}
-          </Link>
-        </div>
-      </div>
       <div className="container flex h-16 items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo (left) */}
         <div className="flex shrink-0 items-center">
@@ -306,75 +256,10 @@ const Header = memo(() => {
           >
             <Search className="h-5 w-5" />
           </Button>
-          {/* Desktop overflow menu */}
-          <div className="hidden md:flex items-center">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  type="button"
-                  className="inline-flex min-h-11 items-center gap-1 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-0 bg-transparent cursor-pointer shrink-0"
-                  aria-label="More navigation"
-                  aria-haspopup="menu"
-                >
-                  <ChevronDown className="h-4 w-4 shrink-0" aria-hidden />
-                  <Menu className="h-4 w-4 shrink-0" aria-hidden />
-                  <span className="hidden lg:inline">{t("nav.more")}</span>
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" sideOffset={6} className="w-64 py-2">
-                <div className="px-3 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t("nav.explore")}
-                </div>
-                {overflowNavigationItems.map((item) => (
-                  <DropdownMenuItem key={item.href} asChild>
-                    <Link
-                      href={item.href}
-                      className="flex items-center px-3 py-2 cursor-pointer"
-                    >
-                      <span className="truncate">{t(item.labelKey)}</span>
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
           <ModeToggle />
-          {/*
-            Login: single dashboard URL, but present it as separate Owner /
-            Tenant entry points so visitors instantly see the app is for them.
-            Both links resolve to APP_PORTAL_LOGIN_URL; the dashboard
-            role-redirects after auth. Do not fabricate distinct portal URLs.
-          */}
-          <div className="hidden sm:inline-flex shrink-0">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" aria-label={t("nav.login")}>
-                  <span className="hidden md:inline">{t("nav.login")}</span>
-                  <span className="md:hidden">{t("nav.portalShort")}</span>
-                  <ChevronDown className="ml-1 h-4 w-4" aria-hidden />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" sideOffset={6} className="w-48 py-2">
-                <DropdownMenuItem asChild>
-                  <Link
-                    href={APP_PORTAL_LOGIN_URL}
-                    className="flex items-center px-3 py-2 cursor-pointer"
-                  >
-                    {t("nav.ownerLogin")}
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link
-                    href={APP_PORTAL_LOGIN_URL}
-                    className="flex items-center px-3 py-2 cursor-pointer"
-                  >
-                    {t("nav.tenantLogin")}
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex shrink-0">
+            <Link href={APP_PORTAL_LOGIN_URL}>{t("nav.login")}</Link>
+          </Button>
           {/* Mobile hamburger */}
           <button
             ref={menuToggleRef}
@@ -403,27 +288,15 @@ const Header = memo(() => {
             <Navigation
               className="flex flex-col gap-2"
               onLinkClick={handleMenuClose}
-              items={allNavigationItems.filter(i => i.href !== "/solutions" && i.href !== "/resources" && i.href !== "/notary" && i.href !== "/property-management")}
+              items={primaryNavigationItems}
             />
-
-            {/* Owners + Solutions + Resources + Notary, mobile inline (children sourced from allNavigationItems to stay DRY) */}
-            {allNavigationItems
-              .filter(i => i.href === "/property-management" || i.href === "/solutions" || i.href === "/resources" || i.href === "/notary")
-              .map(item => (
-                <div key={item.href} className="pt-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 px-3 mb-1">{t(item.labelKey)}</p>
-                  {item.children?.map(({ href, labelKey }) => (
-                    <Link
-                      key={href}
-                      href={href}
-                      className="flex min-h-11 items-center pl-6 pr-3 py-2 text-sm text-foreground hover:bg-muted rounded-md"
-                      onClick={handleMenuClose}
-                    >
-                      {t(labelKey)}
-                    </Link>
-                  ))}
-                </div>
-              ))}
+            <div className="mt-3 border-t border-border/60 pt-3">
+              <Navigation
+                className="flex flex-col gap-1"
+                onLinkClick={handleMenuClose}
+                items={secondaryNavigationItems}
+              />
+            </div>
 
             <div className="mt-4 flex flex-col gap-2">
               <a
@@ -433,20 +306,13 @@ const Header = memo(() => {
                 {...analyticsAttributes("contact_click", "header_menu", "call")}
               >
                 <Phone className="h-4 w-4" />
-                {SITE_PHONE}, Free Consultation
+                {SITE_PHONE}
               </a>
-              <div className="grid grid-cols-2 gap-2">
-                <Button asChild variant="outline" size="sm" className="w-full">
-                  <Link href={APP_PORTAL_LOGIN_URL} onClick={handleMenuClose}>
-                    {t("nav.ownerLogin")}
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="sm" className="w-full">
-                  <Link href={APP_PORTAL_LOGIN_URL} onClick={handleMenuClose}>
-                    {t("nav.tenantLogin")}
-                  </Link>
-                </Button>
-              </div>
+              <Button asChild variant="outline" size="sm" className="w-full">
+                <Link href={APP_PORTAL_LOGIN_URL} onClick={handleMenuClose}>
+                  {t("nav.login")}
+                </Link>
+              </Button>
             </div>
           </div>
         </nav>

@@ -18,7 +18,6 @@ describe("stickyCtaForPath", () => {
   it("gives landlord and homepage visitors the rental analysis and everyone else a fitting offer", () => {
     expect(stickyCtaForPath("/")).toBe(RENTAL_ANALYSIS_CTA)
     expect(stickyCtaForPath("/property-management/")).toBe(RENTAL_ANALYSIS_CTA)
-    expect(stickyCtaForPath("/vs/buildium/")).toBe(RENTAL_ANALYSIS_CTA)
     expect(stickyCtaForPath("/blog/anything/")).toBe(DEFAULT_STICKY_CTA)
     expect(stickyCtaForPath(null)).toBe(DEFAULT_STICKY_CTA)
     expect(DEFAULT_STICKY_CTA).not.toBe(RENTAL_ANALYSIS_CTA)

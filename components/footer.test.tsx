@@ -78,7 +78,7 @@ describe("Footer", () => {
     const siteLinks = screen.getByRole("heading", { level: 2, name: "Site links" })
     expect(siteLinks).toHaveClass("sr-only")
     // Desktop heading link and mobile accordion button are separate h3s, one hidden per breakpoint.
-    const buying = screen.getAllByRole("heading", { level: 3, name: "Buy a Home" })
+    const buying = screen.getAllByRole("heading", { level: 3, name: "Buy" })
     expect(buying).toHaveLength(2)
     expect(container.querySelector("h3 > button[aria-expanded]")).not.toBeNull()
     // No heading in the footer is deeper than h3 without an h2 before it.
@@ -94,8 +94,8 @@ describe("footer columns", () => {
     for (const column of FOOTER_COLUMNS) expect(column.links, column.label).toHaveLength(6)
   })
 
-  it("leads with buying, selling and home loans", () => {
-    expect(FOOTER_COLUMNS.slice(0, 3).map((column) => column.label)).toEqual(["Buy a Home", "Sell a Home", "Home Loans"])
+  it("leads with rent, buy and sell, then manage, loans and notary", () => {
+    expect(FOOTER_COLUMNS.slice(0, 6).map((column) => column.label)).toEqual(["Rent", "Buy", "Sell", "Manage", "Loans", "Notary"])
   })
 
   it("links only to pages that exist and are not hidden from the site index", () => {

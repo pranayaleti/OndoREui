@@ -39,114 +39,111 @@ import { analyticsAttributes } from "@/lib/analytics"
 type FooterLink = { label: string; href: string; highlight?: boolean }
 
 /**
- * Eight columns of six links, so the footer fills two even rows of four on desktop. Order follows
- * what visitors come for (buy, sell, loans first). Every link is a real, indexable page; noindexed
- * pages (events, sample deals, retired posts) stay out. The header's hover menus are not in the
- * HTML, so hubs such as /solutions, /tour and /why-utah keep a crawlable link here. The HTML
- * sitemap lists everything else.
+ * Eight columns of six links: the five services plus rentals, then tools and company. Every
+ * link is a real, indexable page. The HTML sitemap lists everything else.
  */
 export const FOOTER_COLUMNS: ReadonlyArray<{ label: string; Icon: LucideIcon; href: string; links: readonly FooterLink[] }> = [
   {
-    label: "Buy a Home",
+    label: "Rent",
     Icon: Home,
-    href: "/buy",
+    href: "/properties",
     links: [
-      { label: "First-time homebuyer", href: "/buy/first-time" },
-      { label: "Down payment help", href: "/buy/first-time/grants" },
-      { label: "Buying a second home", href: "/buy/second-home" },
-      { label: "What can I afford? quiz", href: "/buy/quiz" },
-      { label: "Buy and sell by city", href: "/buy-sell" },
-      { label: "Mortgage rates explained", href: "/buy/rates" },
+      { label: "Homes for rent", href: "/properties" },
+      { label: "Rental map", href: "/explore" },
+      { label: "Neighborhood guides", href: "/neighborhoods" },
+      { label: "New to Utah", href: "/moving-to-utah" },
+      { label: "Renter FAQs", href: "/faq/tenant-faqs" },
+      { label: "Rent vs own calculator", href: "/calculators/rent-vs-own" },
     ],
   },
   {
-    label: "Sell a Home",
+    label: "Buy",
     Icon: Tag,
+    href: "/buy",
+    links: [
+      { label: "Buy a home", href: "/buy" },
+      { label: "First-time buyers", href: "/buy/first-time" },
+      { label: "Down payment help", href: "/buy/first-time/grants" },
+      { label: "What can I afford? quiz", href: "/buy/quiz" },
+      { label: "Affordability calculator", href: "/calculators/affordability" },
+      { label: "Buying and selling FAQs", href: "/faq/buying-selling-faqs" },
+    ],
+  },
+  {
+    label: "Sell",
+    Icon: TrendingUp,
     href: "/sell",
     links: [
       { label: "Sell with Ondo", href: "/sell" },
       { label: "What's my home worth?", href: "/whats-my-home-worth" },
       { label: "Home sale proceeds calculator", href: "/calculators/home-sale" },
       { label: "City market reports", href: "/market-reports" },
-      { label: "Buying and selling FAQs", href: "/faq/buying-selling-faqs" },
-      { label: "Get matched with a service", href: "/get-matched" },
+      { label: "Not sure where to start?", href: "/get-matched" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   {
-    label: "Home Loans",
+    label: "Manage",
+    Icon: Building,
+    href: "/property-management",
+    links: [
+      { label: "Property management", href: "/property-management" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Tenant screening", href: "/property-management/tenant-screening" },
+      { label: "Maintenance coordination", href: "/property-management/maintenance-coordination" },
+      { label: "Self-manage vs Ondo calculator", href: "/calculators/owner-vs-self", highlight: true },
+      { label: "Owner FAQs", href: "/faq/owner-faqs" },
+    ],
+  },
+  {
+    label: "Loans",
     Icon: Landmark,
     href: "/loans",
     links: [
       { label: "Conventional loans", href: "/loans/conventional" },
       { label: "FHA loans", href: "/loans/fha" },
       { label: "VA loans", href: "/loans/va" },
-      { label: "USDA loans", href: "/loans/usda" },
-      { label: "Jumbo loans", href: "/loans/jumbo" },
-      { label: "HELOC and home equity loans", href: "/loans/heloc" },
-    ],
-  },
-  {
-    label: "Refinance",
-    Icon: TrendingUp,
-    href: "/refinance",
-    links: [
-      { label: "Refinance options", href: "/refinance" },
-      { label: "How refinancing works", href: "/refinance/process" },
-      { label: "Rate-and-term refinance", href: "/refinance/rate-term" },
-      { label: "Cash-out refinance", href: "/refinance/cash-out" },
-      { label: "Recast vs refinance", href: "/blog/recast-vs-refinance" },
-      { label: "Refinance calculator", href: "/calculators/refinance" },
-    ],
-  },
-  {
-    label: "Property Management",
-    Icon: Building,
-    href: "/property-management",
-    links: [
-      { label: "Property management", href: "/property-management" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Homes for rent", href: "/properties" },
-      { label: "Tenant screening", href: "/property-management/tenant-screening" },
-      { label: "Compare Utah property managers", href: "/compare-utah-property-managers" },
-      { label: "Solutions for owners and tenants", href: "/solutions" },
-    ],
-  },
-  {
-    label: "Calculators",
-    Icon: Calculator,
-    href: "/calculators",
-    links: [
-      { label: "Self-manage vs Ondo ROI", href: "/calculators/owner-vs-self", highlight: true },
+      { label: "Refinance", href: "/refinance" },
       { label: "Mortgage payment calculator", href: "/calculators/mortgage-payment" },
-      { label: "Affordability calculator", href: "/calculators/affordability" },
-      { label: "Closing cost calculator", href: "/calculators/closing-cost" },
-      { label: "Rent vs own calculator", href: "/calculators/rent-vs-own" },
-      { label: "All calculators", href: "/calculators" },
-    ],
-  },
-  {
-    label: "Learn",
-    Icon: BookOpen,
-    href: "/learn",
-    links: [
       { label: "Mortgage learning hub", href: "/learn" },
-      { label: "Why Utah", href: "/why-utah" },
-      { label: "Tour the Ondo platform", href: "/tour" },
-      { label: "Neighborhood guides", href: "/neighborhoods" },
-      { label: "Real estate glossary", href: "/glossary" },
-      { label: "Blog", href: "/blog" },
     ],
   },
   {
-    label: "About Ondo",
+    label: "Notary",
+    Icon: BookOpen,
+    href: "/notary",
+    links: [
+      { label: "Remote online notary", href: "/notary" },
+      { label: "Same-day sessions", href: "/notary/on-demand" },
+      { label: "Notary by state", href: "/notary/locations" },
+      { label: "Notary FAQs", href: "/faq/notary-faqs" },
+      { label: "How to prepare for a session", href: "/blog/prepare-for-remote-online-notary-session" },
+      { label: "Notary for lease signings", href: "/blog/online-notary-for-lease-agreements" },
+    ],
+  },
+  {
+    label: "Tools",
+    Icon: Calculator,
+    href: "/resources",
+    links: [
+      { label: "All calculators", href: "/calculators" },
+      { label: "Resources", href: "/resources" },
+      { label: "Landlord templates", href: "/resources/templates" },
+      { label: "Real estate glossary", href: "/glossary" },
+      { label: "Investments", href: "/investments" },
+      { label: "Service areas", href: "/locations" },
+    ],
+  },
+  {
+    label: "Company",
     Icon: Users,
     href: "/about",
     links: [
-      { label: "About us", href: "/about" },
+      { label: "About Ondo", href: "/about" },
       { label: "Founder's letter", href: "/founders-letter" },
-      { label: "Service areas", href: "/locations" },
       { label: "Help and FAQs", href: "/faq" },
       { label: "Affiliate program", href: "/affiliate" },
+      { label: "Licensing", href: "/licensing" },
       { label: "Contact us", href: "/contact" },
     ],
   },
@@ -220,8 +217,8 @@ const Footer = memo(() => {
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-sm font-semibold leading-tight">Got ideas?</p>
-                <p className="text-sm text-foreground/70 leading-tight">We&apos;re listening! Share feedback.</p>
+                <p className="text-sm font-semibold leading-tight">Have feedback?</p>
+                <p className="text-sm text-foreground/70 leading-tight">Tell us what would make this site better.</p>
               </div>
             </div>
             <Link
@@ -360,9 +357,6 @@ const Footer = memo(() => {
                     loading="lazy"
                   />
                 </Link>
-                <span className="text-xs text-foreground/70 hidden sm:block">
-                  Click or scan for all links
-                </span>
               </div>
             </div>
 
@@ -391,26 +385,16 @@ const Footer = memo(() => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/70">
             <div className="flex flex-col items-center gap-1 text-center md:items-start md:text-left">
               <p>© {new Date().getFullYear()} Ondo Real Estate. All rights reserved.</p>
-              <p className="flex flex-wrap items-center justify-center gap-x-1 md:justify-start">
-                <span>Designed. Developed. Deployed by</span>
+              <p>
+                Built by{" "}
                 <Link
                   href="https://www.ondosoft.com/?utm_source=ondorealestate"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-primary hover:text-primary transition-colors duration-200 hover:underline decoration-primary underline-offset-2"
+                  className="font-semibold text-primary hover:underline underline-offset-2"
                 >
                   OndoSoft
                 </Link>
-                <span>
-                  The digital engine behind{" "}
-                  <Link
-                    href="/"
-                    className="font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-4 hover:text-primary"
-                  >
-                    Ondo Real Estate
-                  </Link>
-                  .
-                </span>
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">

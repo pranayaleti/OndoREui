@@ -16,7 +16,7 @@ beforeAll(() => {
   )
 })
 
-const COLUMNS = ["Buy a Home", "Sell a Home", "Home Loans", "Refinance", "Property Management", "Calculators", "Learn", "About Ondo"]
+const COLUMNS = ["Rent", "Buy", "Sell", "Manage", "Loans", "Notary", "Tools", "Company"]
 const hrefsIn = (name: string) =>
   within(screen.getByRole("navigation", { name }))
     .getAllByRole("link")
@@ -32,18 +32,17 @@ describe("Footer navigation columns", () => {
     }
   })
 
-  it("puts the area guides and glossary under Learn and About Ondo", () => {
+  it("puts the glossary and service areas under Tools and the company pages under Company", () => {
     render(<Footer />)
-    expect(hrefsIn("Learn")).toEqual(expect.arrayContaining(["/glossary", "/neighborhoods", "/why-utah"]))
-    expect(hrefsIn("About Ondo")).toEqual(expect.arrayContaining(["/about", "/locations", "/contact"]))
+    expect(hrefsIn("Tools")).toEqual(expect.arrayContaining(["/glossary", "/locations", "/calculators"]))
+    expect(hrefsIn("Company")).toEqual(expect.arrayContaining(["/about", "/licensing", "/contact"]))
   })
 
-  it("links the owner, solutions and platform hubs that the hover-only header menus hide from crawlers", () => {
+  it("gives every service column its own page links", () => {
     render(<Footer />)
-    expect(hrefsIn("Property Management")).toEqual(
-      expect.arrayContaining(["/property-management", "/pricing", "/compare-utah-property-managers", "/solutions"]),
-    )
-    expect(hrefsIn("Learn")).toEqual(expect.arrayContaining(["/tour", "/why-utah"]))
+    expect(hrefsIn("Manage")).toEqual(expect.arrayContaining(["/property-management", "/pricing", "/faq/owner-faqs"]))
+    expect(hrefsIn("Notary")).toEqual(expect.arrayContaining(["/notary", "/notary/on-demand", "/faq/notary-faqs"]))
+    expect(hrefsIn("Rent")).toEqual(expect.arrayContaining(["/properties", "/faq/tenant-faqs"]))
   })
 
   it("does not link the sweepstakes page", () => {

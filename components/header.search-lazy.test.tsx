@@ -18,6 +18,7 @@ vi.mock("@/components/navigation", () => ({
   Navigation: () => <nav aria-label="Site links" />,
   allNavigationItems: [],
   overflowNavigationItems: [],
+  secondaryNavigationItems: [],
   primaryNavigationItems: [],
 }))
 

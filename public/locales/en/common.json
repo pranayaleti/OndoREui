@@ -1,5 +1,7 @@
 {
   "nav": {
+    "rent": "Rent",
+    "manage": "Manage",
     "buy": "Buy",
     "explore": "Explore",
     "sell": "Sell",

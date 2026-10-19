@@ -23,7 +23,7 @@ describe("StickyMobileCtaBar", () => {
     )
   })
 
-  it.each(["/property-management/", "/pricing/", "/solutions/landlords/"])(
+  it.each(["/property-management/", "/pricing/", "/compare-utah-property-managers/"])(
     "keeps the rental analysis on landlord page %s",
     (pathname) => {
       mockPathname = pathname
