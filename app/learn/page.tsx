@@ -14,7 +14,7 @@ import { pageCanonicalMetadata } from "@/lib/page-canonical"
 export const metadata: Metadata = pageCanonicalMetadata("/learn", {
   title: pageTitle("Mortgage Learning Hub | Ondo Real Estate"),
   description:
-    "Utah mortgage education by topic: first-time buyers, loan programs, variable income, refinance, VA, FHA, credit, and calculators. Informational, not a credit decision.",
+    "Utah mortgage education by topic: first-time buyers, loan programs, variable income, refinance, VA, FHA and credit. Informational, not a credit decision.",
 })
 
 export default function LearnHubPage() {

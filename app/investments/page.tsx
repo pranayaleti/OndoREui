@@ -83,10 +83,10 @@ export default function InvestmentsPage() {
           </div>
           <p className="mt-10 text-sm text-foreground/70">
             Tools:{" "}
-            <Link href="/calculators/cap-rate/" className="font-medium text-primary underline-offset-4 hover:underline">cap rate</Link>,{" "}
-            <Link href="/calculators/cash-on-cash/" className="font-medium text-primary underline-offset-4 hover:underline">cash-on-cash</Link>,{" "}
-            <Link href="/calculators/dscr/" className="font-medium text-primary underline-offset-4 hover:underline">DSCR</Link>. Lending side:{" "}
-            <Link href="/learn/investment/" className="font-medium text-primary underline-offset-4 hover:underline">investment property loans</Link>.
+            <Link href="/calculators/cap-rate/" className="font-medium text-primary underline underline-offset-4">cap rate</Link>,{" "}
+            <Link href="/calculators/cash-on-cash/" className="font-medium text-primary underline underline-offset-4">cash-on-cash</Link>,{" "}
+            <Link href="/calculators/dscr/" className="font-medium text-primary underline underline-offset-4">DSCR</Link>. Lending side:{" "}
+            <Link href="/learn/investment/" className="font-medium text-primary underline underline-offset-4">investment property loans</Link>.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button asChild size="lg">

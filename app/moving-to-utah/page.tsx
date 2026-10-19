@@ -9,7 +9,7 @@ import { ARRIVAL_FAIR_HOUSING, ARRIVAL_LENDING_DISCLOSURE, ARRIVAL_REAL_ESTATE_D
 
 const title = "New to Utah: commute, rent, and buy"
 const description =
-  "Starting a Wasatch Front job? See commute minutes and typical rents across 55 Utah cities, then rent with invite-only apply, buy with help on the loan, or leave a home with Ondo management."
+  "Starting a Wasatch Front job? See commute minutes and typical rents across 55 Utah cities, then rent, buy, or hand a home to Ondo management."
 
 export const metadata: Metadata = pageCanonicalMetadata("/moving-to-utah", {
   title,

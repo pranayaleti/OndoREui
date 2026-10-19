@@ -12,7 +12,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 const title = "Utah Property Management Companies Compared (2026)"
 const ogTitle = `${title} | Ondo RE`
 const description =
-  "Ondo Real Estate next to Rentomatic, Rhino, Wolfnest and Keyrenter on fees, leasing, setup and technology, plus how full service compares with software you run yourself."
+  "Ondo Real Estate next to Rentomatic, Rhino, Wolfnest and Keyrenter on fees, leasing, setup and technology, plus full service vs software you run yourself."
 
 export const metadata: Metadata = {
   title,
@@ -148,7 +148,7 @@ export default function CompareUtahPropertyManagersPage() {
           <p className="text-foreground/80">{ONDO_PRICING_FRAMING}</p>
           <p className="mt-4 text-foreground/80">
             Put your own hourly rate, vacancy and repair time into the{" "}
-            <Link href="/calculators/owner-vs-self/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/calculators/owner-vs-self/" className="font-medium text-primary underline underline-offset-4">
               self-manage vs Ondo calculator
             </Link>{" "}
             and compare the two numbers.

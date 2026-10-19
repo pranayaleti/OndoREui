@@ -104,11 +104,11 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
           </ul>
           <p className="mt-6 text-center text-sm text-foreground/70">
             Need it today?{" "}
-            <Link href="/notary/on-demand/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/notary/on-demand/" className="font-medium text-primary underline underline-offset-4">
               Same-day sessions
             </Link>
             . Outside Utah?{" "}
-            <Link href="/notary/locations/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/notary/locations/" className="font-medium text-primary underline underline-offset-4">
               Notary by state
             </Link>
             .

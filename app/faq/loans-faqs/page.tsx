@@ -196,7 +196,7 @@ export default function LoansFAQPage() {
 
             <p className="mt-12 text-center text-muted-foreground">
               Ready to talk through a file?{" "}
-              <Link href="/qualify/" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/qualify/" className="font-medium text-primary underline underline-offset-4">
                 Talk with a loan officer
               </Link>
               .

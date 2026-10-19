@@ -107,11 +107,11 @@ export default function BuyPage() {
           </ul>
           <p className="mt-6 text-center text-sm text-foreground/70">
             Not sure where to start?{" "}
-            <Link href="/get-matched/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/get-matched/" className="font-medium text-primary underline underline-offset-4">
               Tell us what you are looking for
             </Link>{" "}
             or compare{" "}
-            <Link href="/calculators/rent-vs-own/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/calculators/rent-vs-own/" className="font-medium text-primary underline underline-offset-4">
               rent vs own
             </Link>
             .

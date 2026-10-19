@@ -131,7 +131,7 @@ export default function PropertyManagementPage() {
                 {i > 0 ? ", " : null}
                 <Link
                   href={service.href}
-                  className="font-medium text-primary underline-offset-4 hover:underline"
+                  className="font-medium text-primary underline underline-offset-4"
                   {...analyticsAttributes("pm_hub_service_click", "property_management", service.label.toLowerCase().replace(/\s+/g, "-"))}
                 >
                   {service.label}

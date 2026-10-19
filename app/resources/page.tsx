@@ -100,7 +100,7 @@ export default function ResourcesPage() {
                   <ul className="space-y-2 text-sm">
                     {group.links.map((link) => (
                       <li key={link.href}>
-                        <Link href={link.href} className="text-primary underline-offset-4 hover:underline">
+                        <Link href={link.href} className="text-primary underline underline-offset-4">
                           {link.label}
                         </Link>
                       </li>

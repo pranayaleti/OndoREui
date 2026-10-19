@@ -117,7 +117,7 @@ export default function SellPage() {
               <p className="text-foreground/70">
                 Send the address and your timing. We follow up with a pricing conversation and a marketing outline.
                 Prefer to talk first?{" "}
-                <Link href="/contact?audience=seller#book-a-call" className="font-medium text-primary underline-offset-4 hover:underline">
+                <Link href="/contact?audience=seller#book-a-call" className="font-medium text-primary underline underline-offset-4">
                   Book a call
                 </Link>
                 .

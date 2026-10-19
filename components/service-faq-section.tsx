@@ -25,7 +25,7 @@ export function ServiceFaqSection({ id, faqs, heading = "Common questions", more
         </h2>
         <FaqAccordion items={items} />
         <p className="mt-6 text-center text-sm">
-          <Link href={moreHref} className="font-medium text-primary underline-offset-4 hover:underline">
+          <Link href={moreHref} className="font-medium text-primary underline underline-offset-4">
             {moreLabel}
           </Link>
         </p>

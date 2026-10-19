@@ -17,7 +17,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata: Metadata = {
   title: "Utah Down Payment Assistance & Homebuyer Grants",
   description:
-    "Utah down payment assistance through Utah Housing Corporation, plus the national grant and loan programs Utah buyers can pair with it. Eligibility is set by the agency and the lender, not this page.",
+    "Utah Housing Corporation down payment assistance, plus the national grant and loan programs Utah buyers can pair with it. Eligibility is set by the agency.",
   alternates: { canonical: `${SITE_URL}/buy/first-time/grants/` },
   openGraph: {
     type: "website",

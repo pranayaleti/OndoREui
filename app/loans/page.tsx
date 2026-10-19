@@ -104,11 +104,11 @@ export default function LoansPage() {
           </ul>
           <p className="mt-6 text-center text-sm text-foreground/70">
             Start with the{" "}
-            <Link href="/calculators/mortgage-payment/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/calculators/mortgage-payment/" className="font-medium text-primary underline underline-offset-4">
               payment calculator
             </Link>{" "}
             or the{" "}
-            <Link href="/learn/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/learn/" className="font-medium text-primary underline underline-offset-4">
               mortgage learning hub
             </Link>
             .
@@ -141,11 +141,11 @@ export default function LoansPage() {
           </div>
           <p className="mt-8 text-center text-sm text-foreground/70">
             Already own? See{" "}
-            <Link href="/refinance/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/refinance/" className="font-medium text-primary underline underline-offset-4">
               refinancing
             </Link>{" "}
             and{" "}
-            <Link href="/loans/heloc/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/loans/heloc/" className="font-medium text-primary underline underline-offset-4">
               HELOCs
             </Link>
             .

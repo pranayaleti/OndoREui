@@ -106,7 +106,7 @@ export default function FAQPage() {
             <FaqAccordion items={generalFaqs} />
             <p className="mt-10 text-center text-muted-foreground">
               Something else?{" "}
-              <Link href="/contact/" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/contact/" className="font-medium text-primary underline underline-offset-4">
                 Contact us
               </Link>
               .

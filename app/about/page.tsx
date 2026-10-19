@@ -67,7 +67,7 @@ export default function AboutPage() {
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {services.map((service) => (
               <li key={service.href} className="rounded-lg border border-border bg-card p-5">
-                <Link href={service.href} className="text-lg font-semibold text-primary underline-offset-4 hover:underline">
+                <Link href={service.href} className="text-lg font-semibold text-primary underline underline-offset-4">
                   {service.name}
                 </Link>
                 <p className="mt-1 text-sm text-foreground/70">{service.line}</p>
@@ -76,7 +76,7 @@ export default function AboutPage() {
           </ul>
           <p className="mt-6 text-center text-sm text-foreground/70">
             We work in {UTAH_CITIES_SERVED} cities across Salt Lake, Utah, Davis and Weber counties.{" "}
-            <Link href="/locations/" className="font-medium text-primary underline-offset-4 hover:underline">
+            <Link href="/locations/" className="font-medium text-primary underline underline-offset-4">
               See the city guides
             </Link>
             .
@@ -122,12 +122,12 @@ export default function AboutPage() {
           </div>
           <p className="mt-10 text-sm text-foreground/60">
             Checking us out in an AI assistant? Ask{" "}
-            <a href={SITE_CLAUDE_ASK_ONDO_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline">
+            <a href={SITE_CLAUDE_ASK_ONDO_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary underline underline-offset-4">
               <ClaudeBrandIcon className="h-4 w-4" />
               Claude
             </a>{" "}
             or{" "}
-            <a href={SITE_CHATGPT_REFERRAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline">
+            <a href={SITE_CHATGPT_REFERRAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary underline underline-offset-4">
               <ChatGptBrandIcon className="h-4 w-4" />
               ChatGPT
             </a>{" "}

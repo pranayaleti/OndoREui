@@ -1,7 +1,6 @@
 import Link from "next/link"
 import {
   NOTARY_CANCEL_NOTICE_HOURS,
-  NOTARY_EXAMPLE_QUOTES,
   NOTARY_HOURS_LABEL,
   NOTARY_IN_PERSON_ACT_USD,
   NOTARY_LATE_CANCEL_USD,
@@ -34,8 +33,7 @@ export function NotaryFees() {
             ONDO Notary Fees & Availability
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Utah-compliant remote online notarization, quoted before we book. No in-office visits
-            and no published travel schedule, sessions are completed by secure video.
+            Quoted before we book. Every session is by secure video.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
@@ -60,10 +58,10 @@ export function NotaryFees() {
                 Weekends by appointment
               </p>
               <p className="text-sm text-muted-foreground">
-                Same-day is best-effort when capacity allows, not a guaranteed SLA.{" "}
                 <Link href="/notary/on-demand" className="text-primary underline underline-offset-4 hover:no-underline">
-                  On-demand details
-                </Link>
+                  Same-day sessions
+                </Link>{" "}
+                when there is room.
               </p>
             </div>
           </div>
@@ -72,8 +70,7 @@ export function NotaryFees() {
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Scheduling and witnesses</h3>
               <p className="text-muted-foreground text-sm mb-4">
-                Same-day, after-hours and weekend sessions are best-effort when capacity allows. We
-                do not add a scheduling surcharge to a remote notarial act.
+                No scheduling surcharge on a remote notarial act, including same-day.
               </p>
               <FeeRow
                 label="Witness coordination"
@@ -85,9 +82,7 @@ export function NotaryFees() {
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Loan signing</h3>
               <p className="text-muted-foreground text-sm mb-4">
-                Remote signing-agent sessions for packages your title company or lender accepts by
-                RON. Notarial acts inside the package stay at ${NOTARY_RON_ACT_USD} each. Title and
-                escrow invoices welcome.
+                For packages your title company or lender accepts by RON. Title and escrow invoices welcome.
               </p>
               <FeeRow label="Purchase or refinance package" amount={NOTARY_LOAN_PURCHASE_REFINANCE} />
               <FeeRow label="Seller package" amount={NOTARY_LOAN_SELLER} />
@@ -96,81 +91,23 @@ export function NotaryFees() {
             </div>
           </div>
 
-          <div className="p-6 bg-muted border border-border rounded-lg mb-12">
-            <h3 className="text-xl font-semibold text-foreground mb-2">Wills, POA, and estate documents</h3>
-            <p className="text-foreground/80 text-sm leading-relaxed">
-              We notarize wills, powers of attorney, directives, and trust-related signatures by RON
-              at ${NOTARY_RON_ACT_USD} per remote notarial act. Confirm the receiving party accepts electronic notarization. ONDO Notary
-              does not prepare legal documents or provide legal advice. Have documents drafted by an
-              attorney before your session.
-            </p>
-          </div>
-
-          <div className="p-6 bg-background border border-primary rounded-lg">
-            <h3 className="text-xl text-primary font-semibold mb-4">Example quotes</h3>
-            <ul className="space-y-4 text-sm text-foreground/80">
-              {NOTARY_EXAMPLE_QUOTES.map((quote) => (
-                <li key={quote.title}>
-                  <strong className="text-foreground">{quote.title}.</strong> {quote.detail}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="text-sm text-foreground/70">
+            Wills, powers of attorney and trust signatures are ${NOTARY_RON_ACT_USD} per remote act. We do not prepare
+            legal documents or give legal advice; have them drafted by an attorney first.
+          </p>
         </div>
       </section>
 
-      <section id="policies" className="scroll-mt-24 py-16 md:py-24 bg-card dark:bg-background border-y border-border">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-4">
-            Policies & what to expect
-          </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Posted so there are no surprises at the appointment.
+      <section id="policies" className="scroll-mt-24 border-y border-border bg-card py-12 dark:bg-background">
+        <div className="container mx-auto max-w-3xl px-4">
+          <h2 className="mb-4 text-2xl font-bold text-foreground">Policies</h2>
+          <p className="text-sm leading-relaxed text-foreground/80">
+            Cancel more than {NOTARY_CANCEL_NOTICE_HOURS} hours ahead at no charge; later cancellations are ${NOTARY_LATE_CANCEL_USD} and a
+            no-show is ${NOTARY_NO_SHOW_USD}. Payment is due at or before the session by card, app pay or title invoice.
+            Sessions are remote only. We do not notarize documents Ondo or the notary has an interest in, incomplete
+            documents, or vital records, and we do not give legal, tax or lending advice. Immigration-status forms are
+            capped at ${NOTARY_IN_PERSON_ACT_USD} per person under Utah law.
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Cancellation & no-show</h3>
-              <ul className="text-sm text-foreground space-y-2">
-                <li>• More than {NOTARY_CANCEL_NOTICE_HOURS} hours&apos; notice: no charge</li>
-                <li>• Less than {NOTARY_CANCEL_NOTICE_HOURS} hours: ${NOTARY_LATE_CANCEL_USD} cancellation fee</li>
-                <li>• Missed session / no-show: ${NOTARY_NO_SHOW_USD}</li>
-                <li>• Missed or abandoned RON sessions may be billed as a cancellation</li>
-                <li>• One complimentary reschedule may be offered at our discretion</li>
-              </ul>
-            </div>
-
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Payment & appointments</h3>
-              <ul className="text-sm text-foreground space-y-2">
-                <li>• Payment is due at or before the session</li>
-                <li>• We confirm accepted methods when you book (card, app pay, or title invoice)</li>
-                <li>• Remote online only, no walk-in office and no mobile travel appointments</li>
-              </ul>
-            </div>
-
-            <div className="p-6 bg-background border border-primary rounded-lg md:col-span-2">
-              <h3 className="text-xl text-primary font-semibold mb-4">Limits we follow</h3>
-              <ul className="text-sm text-foreground/80 space-y-2">
-                <li>
-                  • ONDO Notary does not prepare legal documents or provide legal, tax, or lending
-                  advice.
-                </li>
-                <li>
-                  • We will not notarize documents in which Ondo Real Estate or the notary has a
-                  beneficial interest (for example, a listing or a loan we originated).
-                </li>
-                <li>
-                  • We cannot notarize incomplete documents, vital records (birth/death/marriage
-                  certificates), or papers with blank spaces meant to be filled in later.
-                </li>
-                <li>
-                  • Immigration-status forms are capped at ${NOTARY_IN_PERSON_ACT_USD} per person under
-                  Utah law.
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
     </>

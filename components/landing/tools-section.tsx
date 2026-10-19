@@ -37,13 +37,13 @@ export function ToolsSection() {
             <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
               {CALCULATORS.map(({ href, label }) => (
                 <li key={href}>
-                  <Link href={href} className="text-primary underline-offset-4 hover:underline">
+                  <Link href={href} className="text-primary underline underline-offset-4">
                     {label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/calculators" className="text-foreground/70 underline-offset-4 hover:underline">
+                <Link href="/calculators" className="text-foreground/70 underline underline-offset-4">
                   All calculators
                 </Link>
               </li>

@@ -22,7 +22,6 @@ Results are capped at 100 rows per call. Each row returns id, title, city, addre
 - **Name**: `search_available_properties`
 - **Access**: read-only (no user confirmation required)
 - **Page**: https://www.ondorealestate.com/properties/
-- **Data feed**: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api/properties/public (JSON, read-only)
 
 The HTML search box on the same page is the declarative tool `search_listings_by_text` (toolautosubmit). Prefer `search_available_properties` when the agent has city, bedroom, or price filters.
 

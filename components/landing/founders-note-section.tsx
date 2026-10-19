@@ -30,7 +30,7 @@ export function FoundersNoteSection() {
             </p>
             <p className="mb-6 max-w-3xl text-sm text-foreground/60">
               Real estate and mortgage licensing is in progress. Where each line of business stands is on the{" "}
-              <Link href="/licensing" className="text-primary underline-offset-4 hover:underline">
+              <Link href="/licensing" className="text-primary underline underline-offset-4">
                 licensing page
               </Link>
               .

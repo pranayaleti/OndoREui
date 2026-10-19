@@ -12,7 +12,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata: Metadata = {
   title: pageTitle("Landlord Templates & Seller Listing-Prep | Ondo Real Estate"),
   description:
-    "Browse Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet for other states. We email the file after you request it, not an instant download.",
+    "Utah landlord templates, addendums and disclosures, plus a federal lead-paint packet. We email the file after you request it.",
   alternates: { canonical: `${SITE_URL}/resources/templates/` },
   openGraph: {
     type: "website",

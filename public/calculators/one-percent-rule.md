@@ -1,12 +1,12 @@
 ---
-title: "1% Rule Calculator: Ondo Real Estate"
-description: "Check if a property's rent meets the 1% rule benchmark."
+title: "1% and 50% Rule Calculator: Ondo Real Estate"
+description: "Screen a rental two ways: rent as a share of price (1%) and operating expenses as half of rent (50%)."
 canonical: https://www.ondorealestate.com/calculators/one-percent-rule/
 ---
 
-# 1% Rule Calculator
+# 1% and 50% Rule Calculator
 
-> Check if a property's rent meets the 1% rule benchmark.
+> Screen a rental two ways: rent as a share of price (1%) and operating expenses as half of rent (50%).
 
 ## Formula
 

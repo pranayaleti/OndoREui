@@ -391,7 +391,7 @@ const Footer = memo(() => {
                   href="https://www.ondosoft.com/?utm_source=ondorealestate"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-primary hover:underline underline-offset-2"
+                  className="font-semibold text-primary underline underline-offset-2"
                 >
                   OndoSoft
                 </Link>

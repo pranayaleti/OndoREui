@@ -8,7 +8,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = pageTitleText("Get Matched with the Right Ondo RE Service | 60-Second Quiz")
 const description =
-  "Answer a few quick questions and get matched with the right Ondo Real Estate service: property management, buying, selling, renting, loans, or notary. No commitment, and a real person follows up within one business day."
+  "A few questions, then we match you with the right Ondo service: management, buying, selling, renting, loans or notary. We reply within one business day."
 
 export const metadata: Metadata = {
   title: { absolute: title },

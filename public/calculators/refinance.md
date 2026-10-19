@@ -10,7 +10,7 @@ canonical: https://www.ondorealestate.com/calculators/refinance/
 
 ## Formula
 
-Break-even months = closing costs ÷ (old payment − new payment). Holding past that horizon is the usual test — it is still not a promise the refinance saves money after tax, moving, or a second refinance.
+Break-even months = closing costs ÷ (old payment − new payment). Holding past that horizon is the usual test, it is still not a promise the refinance saves money after tax, moving, or a second refinance.
 
 ## Inputs
 
