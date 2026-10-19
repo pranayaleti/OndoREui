@@ -37,7 +37,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Occupancy",
     cells: {
       hack: "Primary. FHA and many conventional 2–4 unit purchases require you to live in one unit.",
-      rental: "Investment. Second-home occupancy is exclusive personal use — not a rental business label.",
+      rental: "Investment. Second-home occupancy is exclusive personal use, not a rental business label.",
     },
   },
   {
@@ -99,30 +99,30 @@ export default function InvestmentLearnPage() {
                 <Link href="/blog/first-rental-occupancy-if-you-still-live-there">
                   First rental: occupancy if you still live there
                 </Link>{" "}
-                — stay-put rental is investment occupancy. Not a duplex house-hack.
+              stay-put rental is investment occupancy. Not a duplex house-hack.
               </li>
               <li>
-                <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc rental loan</Link> — property qualifies
+                <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc rental loan</Link>, property qualifies
                 vs borrower qualifies. Calculator: <Link href="/calculators/dscr">DSCR illustration</Link>.
               </li>
               <li>
-                <Link href="/blog/second-home-vs-investment-occupancy">Second home vs investment occupancy</Link> — three
+                <Link href="/blog/second-home-vs-investment-occupancy">Second home vs investment occupancy</Link>, three
                 occupancy types. Commercial: <Link href="/buy/second-home">second-home overview</Link>.
               </li>
               <li>
-                <Link href="/blog/cash-out-to-buy-a-rental">Cash-out to buy a rental</Link> — two LTVs, two occupancies.
+                <Link href="/blog/cash-out-to-buy-a-rental">Cash-out to buy a rental</Link>, two LTVs, two occupancies.
                 Compare structure on <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out</Link>.
               </li>
               <li>
                 <Link href="/blog/delayed-financing-after-cash-purchase">Delayed financing after a cash purchase</Link>{" "}
-                — agency exception when you bought with cash, then want a mortgage later. Not HELOC seasoning.
+              agency exception when you bought with cash, then want a mortgage later. Not HELOC seasoning.
               </li>
               <li>
-                <Link href="/blog/house-hacking-duplex-with-fha">House-hacking a duplex with FHA</Link> — occupy one
+                <Link href="/blog/house-hacking-duplex-with-fha">House-hacking a duplex with FHA</Link>, occupy one
                 unit. Self-sufficiency is a 3–4 unit test.
               </li>
               <li>
-                <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E rental income</Link> — history on
+                <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E rental income</Link>, history on
                 properties you already own. Depreciation add-back:{" "}
                 <Link href="/blog/depreciation-add-back-schedule-e">what agency files allow</Link>.
               </li>
@@ -130,14 +130,14 @@ export default function InvestmentLearnPage() {
                 <Link href="/blog/cross-collateral-equity-to-buy-another-house">
                   Cross-collateral / using equity to buy another house
                 </Link>{" "}
-                — educational; not a published agency product you can assume.
+              educational; not a published agency product you can assume.
               </li>
               <li>
-                <Link href="/blog/mortgage-reserves-months-of-pitia">Reserves: months of PITIA</Link> — investment and
+                <Link href="/blog/mortgage-reserves-months-of-pitia">Reserves: months of PITIA</Link>, investment and
                 2–4 unit files commonly need more remaining assets after cash to close.
               </li>
               <li>
-                <Link href="/learn/non-qm">Non-QM hub</Link> — bank-statement, DSCR, and{" "}
+                <Link href="/learn/non-qm">Non-QM hub</Link>, bank-statement, DSCR, and{" "}
                 <Link href="/blog/asset-depletion-qualifying-non-qm">asset-depletion</Link> as different stacks.
               </li>
             </ul>

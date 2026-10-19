@@ -59,7 +59,7 @@ export const metadata = articleMetadata({
   path,
   title: "First Mortgage Statement vs Note Rate",
   description:
-    "The first bill is usually PITI plus odd-days timing — not a secret rate change. Escrow and prepaid interest explain most of the gap. Not tax advice.",
+    "The first bill is usually PITI plus odd-days timing, not a secret rate change. Escrow and prepaid interest explain most of the gap. Not tax advice.",
   published: "2026-08-29",
   category: "First-Time Buyers",
   keywords: ["first mortgage statement vs note rate", "first mortgage bill higher", "odd days interest"],
@@ -76,14 +76,14 @@ export default function FirstStatementVsNoteRatePage() {
           "The first statement is usually PITI and odd-days timing, not a rate change. Not tax advice.",
         published: "2026-08-29",
         category: "First-Time Buyers",
-        bannerSubtitle: "If the P&I line matches the note, the extra is usually escrow — not a bait-and-switch rate.",
+        bannerSubtitle: "If the P&I line matches the note, the extra is usually escrow, not a bait-and-switch rate.",
         faqs,
         keywords: ["first mortgage statement", "note rate vs payment"],
       }}
     >
       <p className="lead text-xl text-foreground/70">
         The first mortgage statement can look different from the note rate because the bill is usually PITI (principal,
-        interest, taxes, and insurance) and because odd-days interest was already collected at closing — not because the
+        interest, taxes, and insurance) and because odd-days interest was already collected at closing, not because the
         lender quietly changed the rate. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{FIRST_STATEMENT_VS_NOTE.notAdvice}</p>
@@ -122,7 +122,7 @@ export default function FirstStatementVsNoteRatePage() {
       <p>
         A 6% note on a given balance produces a P&amp;I figure. The statement adds escrow and, if applicable, PMI or MIP.
         If those lines explain the gap, the rate did not change. If the P&amp;I line itself is wrong, that is a servicing
-        error to dispute with the note in hand — not a blog formula.
+        error to dispute with the note in hand, not a blog formula.
       </p>
       <p>
         APR vs note rate on the Loan Estimate is a different document:{" "}

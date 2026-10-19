@@ -50,7 +50,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "After the first year",
     cells: {
       impound: ESCROW_SHORTAGE.howItAppears,
-      waive: "No annual escrow analysis — you still owe the treasurer and the carrier on their calendars.",
+      waive: "No annual escrow analysis, you still owe the treasurer and the carrier on their calendars.",
     },
   },
 ]
@@ -59,7 +59,7 @@ export const metadata = articleMetadata({
   path,
   title: "Impounds vs Waiving Escrow",
   description:
-    "When an escrow waiver exists, it is an overlay — not a promise at 20% down. Cash-to-close vs monthly tradeoff. Links cushion and shortage. Informational only.",
+    "When an escrow waiver exists, it is an overlay, not a promise at 20% down. Cash-to-close vs monthly tradeoff. Links cushion and shortage. Informational only.",
   published: "2026-08-29",
   category: "First-Time Buyers",
   keywords: ["impounds vs waiving escrow", "escrow waiver 20 percent", "mortgage impound account"],
@@ -121,14 +121,14 @@ export default function ImpoundsVsWaivingEscrowPage() {
       <h2>Scenarios</h2>
       <ul>
         <li>
-          <strong>Conventional, lower LTV, you want a lower monthly draft</strong> — ask whether a waiver exists on
+          <strong>Conventional, lower LTV, you want a lower monthly draft</strong>, ask whether a waiver exists on
           that investor, and what it costs in price or fee. Not automatic.
         </li>
         <li>
-          <strong>FHA, VA, or USDA</strong> — plan on impounds. {ESCROW_WAIVER.government}
+          <strong>FHA, VA, or USDA</strong>, plan on impounds. {ESCROW_WAIVER.government}
         </li>
         <li>
-          <strong>You waive and then miss a November tax bill</strong> — that is a treasurer and possible lien problem,
+          <strong>You waive and then miss a November tax bill</strong>, that is a treasurer and possible lien problem,
           not an escrow analysis. Not tax advice.
         </li>
       </ul>

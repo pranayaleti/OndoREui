@@ -96,48 +96,48 @@ export default function FirstTimeLearnPage() {
             <h2>If family or an agency is helping</h2>
             <ul>
               <li>
-                <Link href="/blog/gift-funds-down-payment-rules">Gift-fund paper trail</Link> — the gift letter is not
+                <Link href="/blog/gift-funds-down-payment-rules">Gift-fund paper trail</Link>, the gift letter is not
                 optional.
               </li>
               <li>
-                <Link href="/blog/parent-gifting-down-payment-who-signs">Parent is gifting: who signs what</Link> —
+                <Link href="/blog/parent-gifting-down-payment-who-signs">Parent is gifting: who signs what</Link>,
                 occupancy and title are not the same as a donor signature.
               </li>
               <li>
-                <Link href="/blog/student-loans-dti-idr-save">Student loans and DTI after IDR / SAVE</Link> — a $0
+                <Link href="/blog/student-loans-dti-idr-save">Student loans and DTI after IDR / SAVE</Link>, a $0
                 dashboard line is not automatically $0 in underwriting.
               </li>
               <li>
-                <Link href="/blog/should-i-wait-for-20-percent-down">Should I wait for 20% down?</Link> — PMI vs
+                <Link href="/blog/should-i-wait-for-20-percent-down">Should I wait for 20% down?</Link>, PMI vs
                 saving longer is a cash-and-timeline trade, not how MIP later ends.
               </li>
               <li>
-                <Link href="/blog/utah-repc-deadline-and-your-loan">What a Utah REPC deadline does to your loan</Link> —
+                <Link href="/blog/utah-repc-deadline-and-your-loan">What a Utah REPC deadline does to your loan</Link>,
                 due diligence and financing are separate 5:00 p.m. Mountain Time clocks.
               </li>
               <li>
-                <Link href="/blog/how-long-first-purchase-takes">How long a first purchase usually takes</Link> — ranges
+                <Link href="/blog/how-long-first-purchase-takes">How long a first purchase usually takes</Link>, ranges
                 from pre-approval to CTC, not a closing-date promise.
               </li>
               <li>
-                <Link href="/blog/first-time-buyer-file-mistakes">File mistakes, not lifestyle listicles</Link> — new
+                <Link href="/blog/first-time-buyer-file-mistakes">File mistakes, not lifestyle listicles</Link>, new
                 debt, job change, large deposits, occupancy.
               </li>
               <li>
-                <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">Townhome vs condo HOA docs</Link> — not every
+                <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">Townhome vs condo HOA docs</Link>, not every
                 townhome is a condo. The plat is the underwrite. Insurance form:{" "}
                 <Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">hazard vs HO-3 vs HO-6</Link>.
               </li>
               <li>
-                <Link href="/blog/relocating-to-utah-job-seasoning">Relocating when the job starts in 60 days</Link> —
+                <Link href="/blog/relocating-to-utah-job-seasoning">Relocating when the job starts in 60 days</Link>,
                 offer-letter seasoning is not a published 60-day rule.
               </li>
               <li>
-                <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link> — a second lien is
+                <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link>, a second lien is
                 not a gift.
               </li>
               <li>
-                <Link href="/buy/first-time/grants">Grants and assistance map</Link> — agency rules change; confirm
+                <Link href="/buy/first-time/grants">Grants and assistance map</Link>, agency rules change; confirm
                 with the agency.
               </li>
             </ul>

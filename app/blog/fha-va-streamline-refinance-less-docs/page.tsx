@@ -39,7 +39,7 @@ const rows: readonly ComparisonRow[] = [
     cells: {
       fha: STREAMLINE_REFI.fha,
       va: STREAMLINE_REFI.va,
-      full: "Full income, assets, appraisal (unless waived), and credit — the usual refinance stack. See break-even math.",
+      full: "Full income, assets, appraisal (unless waived), and credit, the usual refinance stack. See break-even math.",
     },
   },
   {
@@ -80,7 +80,7 @@ export default function StreamlineRefiPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        A streamline refinance is FHA-to-FHA or VA-to-VA with a shorter document list — not a generic “no closing
+        A streamline refinance is FHA-to-FHA or VA-to-VA with a shorter document list, not a generic “no closing
         cost, no docs” refinance. Occupancy, recent payment history, and a net-benefit or recoupment test still apply.
         Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -96,7 +96,7 @@ export default function StreamlineRefiPage() {
       <p>{STREAMLINE_REFI.fha}</p>
       <p>
         Credit-qualifying vs non-credit-qualifying streamlines are different files. Skipping income docs on a
-        non-credit-qualifying path is allowed only when HUD and the lender overlay say so — and the net-tangible-benefit
+        non-credit-qualifying path is allowed only when HUD and the lender overlay say so, and the net-tangible-benefit
         test still has to pass. MIP on the new FHA loan follows FHA rules; it is not automatically deleted. See{" "}
         <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">how MIP vs PMI ends</Link>.
       </p>
@@ -113,7 +113,7 @@ export default function StreamlineRefiPage() {
       <p>{STREAMLINE_REFI.stillRequires}</p>
       <ul>
         <li>You generally cannot take cash out on a true streamline.</li>
-        <li>Late payments in the lookback usually push you to a full refinance — or no refinance.</li>
+        <li>Late payments in the lookback usually push you to a full refinance, or no refinance.</li>
         <li>
           Costs still exist. Run{" "}
           <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even including points and origination</Link>{" "}

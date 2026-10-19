@@ -38,7 +38,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Typical property",
     cells: {
       hazard: "The coverage the mortgagee requires on the collateral, whatever form the policy takes.",
-      ho3: "Often a fee-simple house or a PUD townhome you own including the land — confirm the plat.",
+      ho3: "Often a fee-simple house or a PUD townhome you own including the land, confirm the plat.",
       ho6: "Condo unit plus master policy on the building and common elements.",
     },
   },

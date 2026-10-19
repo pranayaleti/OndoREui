@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "Can a non-veteran assume a VA loan?",
     answer:
-      "Often yes, with VA and servicer approval — but the seller's entitlement generally stays tied to that loan, because there is no eligible buyer to substitute their own. That is the trade-off a veteran seller has to understand before agreeing.",
+      "Often yes, with VA and servicer approval, but the seller's entitlement generally stays tied to that loan, because there is no eligible buyer to substitute their own. That is the trade-off a veteran seller has to understand before agreeing.",
   },
   {
     question: "What is substitution of entitlement?",
@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "Do I still owe anything after someone assumes my VA loan?",
     answer:
-      "Not automatically. On a VA loan the release has to come from both the loan holder and VA — VA's release addresses your liability to the Government. Neither one restores your entitlement; only substitution does. Get both named in writing before closing.",
+      "Not automatically. On a VA loan the release has to come from both the loan holder and VA, VA's release addresses your liability to the Government. Neither one restores your entitlement; only substitution does. Get both named in writing before closing.",
   },
   {
     question: "Does the buyer pay a VA funding fee on an assumption?",
@@ -60,7 +60,7 @@ export default function VaLoanAssumptionPage() {
         bannerSubtitle: "Two things have to happen on a VA assumption: release of liability, and substitution of entitlement.",
         takeaways: [
           "A VA loan can often be assumed, including by a buyer who is not a veteran, with VA and servicer approval.",
-          "For the seller, the risk is not the debt alone — it is entitlement. It generally stays tied to that loan unless an eligible buyer substitutes their own.",
+          "For the seller, the risk is not the debt alone, it is entitlement. It generally stays tied to that loan unless an eligible buyer substitutes their own.",
           "Release of liability and substitution of entitlement are two separate approvals. Getting one does not give you the other.",
           "A veteran who sells by assumption without both can stay liable for the loan and be unable to use that entitlement on a next purchase.",
         ],
@@ -78,7 +78,7 @@ export default function VaLoanAssumptionPage() {
       <h2>The mechanics are the same as any assumption</h2>
       <p>{LOAN_ASSUMPTION.whatItIs}</p>
       <p>
-        {LOAN_ASSUMPTION.creditStillApplies} The buyer also covers the gap between price and remaining balance —{" "}
+        {LOAN_ASSUMPTION.creditStillApplies} The buyer also covers the gap between price and remaining balance,{" "}
         {LOAN_ASSUMPTION.theEquityGap} The general mechanics are laid out in{" "}
         <Link href="/blog/how-fha-loan-assumption-works">how an FHA loan assumption works</Link>; what follows is what
         is specific to VA.
@@ -88,9 +88,9 @@ export default function VaLoanAssumptionPage() {
       <p>{VA_ENTITLEMENT_RESTORATION.substitution}</p>
       <p>
         It is worth seeing the contrast. Entitlement is restored the ordinary way when the prior VA loan is paid in full
-        and the property is disposed of under VA rules. An assumption does neither — the loan survives, so restoration
+        and the property is disposed of under VA rules. An assumption does neither, the loan survives, so restoration
         has to come from substitution by an eligible buyer, not from payoff. If you are trying to keep the first home
-        and buy another, that is a different question again — see{" "}
+        and buy another, that is a different question again, see{" "}
         <Link href="/blog/va-entitlement-second-va-loan">a second VA loan</Link>.
       </p>
 
@@ -142,7 +142,7 @@ export default function VaLoanAssumptionPage() {
 
       <h2>What happens next</h2>
       <p>
-        Get the servicer's assumption requirements in writing, and — if you are the veteran seller — get release of
+        Get the servicer's assumption requirements in writing, and, if you are the veteran seller, get release of
         liability and substitution of entitlement named explicitly in what you agree to. {LOAN_ASSUMPTION.notAPromise} A
         loan officer can compare an assumption against a normal file:{" "}
         <Link href="/qualify">start a conversation</Link>.

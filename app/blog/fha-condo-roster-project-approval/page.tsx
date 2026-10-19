@@ -72,10 +72,10 @@ export default function FhaCondoRosterPage() {
           "Look up the project on HUD’s condominium list before you write an FHA offer. Expired approval is not current approval.",
         published: "2026-08-29",
         category: "Loan Programs",
-        bannerSubtitle: "FHA finances a unit in an approved project — or a unit HUD agrees to review. Not every condo.",
+        bannerSubtitle: "FHA finances a unit in an approved project, or a unit HUD agrees to review. Not every condo.",
         takeaways: [
           "An FHA condo loan needs the project to qualify, not only the borrower.",
-          "Check HUD's condominium list before writing an FHA offer. Expired, withdrawn, and rejected are all different from approved — and none of them are approved.",
+          "Check HUD's condominium list before writing an FHA offer. Expired, withdrawn, and rejected are all different from approved, and none of them are approved.",
           "Match the legal project name, not the marketing name on a listing site.",
           "Single-unit approval is a separate path for a unit in a project that is not on the roster. It is a review, not a workaround.",
         ],
@@ -130,7 +130,7 @@ export default function FhaCondoRosterPage() {
 
       <h2>What the HOA still has to produce</h2>
       <ul>
-        <li>Budget, reserves, and insurance certificates (including fidelity coverage when required). Condo unit-owners coverage is typically HO-6 next to the master —{" "}
+        <li>Budget, reserves, and insurance certificates (including fidelity coverage when required). Condo unit-owners coverage is typically HO-6 next to the master,{" "}
           <Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">hazard vs HO-3 vs HO-6</Link>.</li>
         <li>Litigation disclosure. Active construction-defect or HOA lawsuits stall both paths.</li>
         <li>Owner-occupancy and FHA-concentration facts. A building full of FHA units can fail concentration even if the roster was once approved.</li>
@@ -148,7 +148,7 @@ export default function FhaCondoRosterPage() {
         <li>Run the HUD search before you waive the financing contingency in your head.</li>
         <li>Ask the listing agent for the legal project name and HOA questionnaire early.</li>
         <li>
-          If the project is not approved, ask a loan officer whether single-unit approval is even possible — before
+          If the project is not approved, ask a loan officer whether single-unit approval is even possible, before
           you spend inspection money. A late condo fail is a common{" "}
           <Link href="/blog/declined-after-pre-approval">decline after pre-approval</Link>.
         </li>

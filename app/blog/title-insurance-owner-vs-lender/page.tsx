@@ -44,7 +44,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "On a later refinance",
     cells: {
       lender: TITLE_OWNER_VS_LENDER.refinance,
-      owner: "The purchase-dated owner’s policy may still apply to you, subject to date and exclusions — ask title.",
+      owner: "The purchase-dated owner’s policy may still apply to you, subject to date and exclusions, ask title.",
     },
   },
 ]
@@ -96,7 +96,7 @@ export default function TitleInsuranceOwnerVsLenderPage() {
       <p>
         {UTAH_CLOSING_NOTES.closingVenue} {UTAH_CLOSING_NOTES.instrument} Fee buckets:{" "}
         <Link href="/blog/utah-closing-costs-title-origination-prepaids">
-          closing costs — title, origination, prepaids
+          closing costs, title, origination, prepaids
         </Link>
         . Cash besides down payment:{" "}
         <Link href="/blog/utah-cash-to-close-besides-down-payment">cash to close</Link>.
@@ -104,7 +104,7 @@ export default function TitleInsuranceOwnerVsLenderPage() {
 
       <h2>What a commitment is for</h2>
       <ul>
-        <li>Covered risks and exclusions — survey, later construction, and zoning are common conversation topics.</li>
+        <li>Covered risks and exclusions, survey, later construction, and zoning are common conversation topics.</li>
         <li>Who must be paid off (liens, judgments) before the policy will issue.</li>
         <li>Endorsements the lender requires on the lender’s policy.</li>
       </ul>
@@ -124,7 +124,7 @@ export default function TitleInsuranceOwnerVsLenderPage() {
       <ol>
         <li>Read the title commitment with the title company before you waive coverage you do not understand.</li>
         <li>
-          Illustrate ranges on the <Link href="/calculators/closing-cost">closing-cost calculator</Link> — still not a
+          Illustrate ranges on the <Link href="/calculators/closing-cost">closing-cost calculator</Link>, still not a
           title quote.
         </li>
         <li>

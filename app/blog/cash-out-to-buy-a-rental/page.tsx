@@ -38,7 +38,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "LTV conversation",
     cells: {
       first: CASH_OUT_TO_RENTAL.ltvTrap,
-      rental: "Investment purchase down payment is a separate overlay — often more cash than a primary.",
+      rental: "Investment purchase down payment is a separate overlay, often more cash than a primary.",
     },
   },
   {
@@ -110,7 +110,7 @@ export default function CashOutToRentalPage() {
         <Link href="/blog/heloc-vs-cash-out-refinance">payment, lien position, and tax questions</Link>. This page is
         what happens when the proceeds buy a rental. If the house you just bought was all cash and you want a mortgage
         on that same house later, that is{" "}
-        <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing</Link> — a different fact pattern.
+        <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing</Link>, a different fact pattern.
       </p>
       <IsThisRightForMe table="equity" highlight="refinance" />
 
@@ -127,7 +127,7 @@ export default function CashOutToRentalPage() {
         <li>Say whether you will still occupy the house you are cashing out.</li>
         <li>Model cash-out costs on the <Link href="/calculators/refinance">refinance calculator</Link> before you count proceeds as down payment.</li>
         <li>
-          Ask which stack can see the rental — agency investment, DSCR, or something else. That is a conversation, not
+          Ask which stack can see the rental, agency investment, DSCR, or something else. That is a conversation, not
           a commitment to lend.
         </li>
       </ol>

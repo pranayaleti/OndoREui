@@ -100,7 +100,7 @@ export default function NoClosingCostRefiPage() {
         Put the higher payment of the credit file in the comparison, not only “$0 due at closing.”
       </p>
       <p>
-        Discount points are the other direction — you pay more cash for a lower note:{" "}
+        Discount points are the other direction, you pay more cash for a lower note:{" "}
         <Link href="/blog/discount-points-breakeven-without-sales-pitch">points without a sales pitch</Link>.
       </p>
 
@@ -116,7 +116,7 @@ export default function NoClosingCostRefiPage() {
         is higher; one has $4,000 in costs and a lower note that saves $40 of principal and interest per month. The
         pay-costs file’s simple break-even is 100 months. If you expect to move in year three, the credit file can win
         in this toy model. If you keep the loan twelve years, the higher rate can cost more than the $4,000. Taxes,
-        remaining term, and a later refinance change the story — that is a loan-officer model, not this paragraph.
+        remaining term, and a later refinance change the story, that is a loan-officer model, not this paragraph.
       </p>
 
       <h2>What happens next</h2>

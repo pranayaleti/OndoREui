@@ -12,7 +12,7 @@ import {
 } from "@/lib/content/glossary"
 
 type GlossaryTermStripProps = {
-  /** Calculator slug — renders the terms that feed that tool. */
+  /** Calculator slug, renders the terms that feed that tool. */
   calculatorSlug?: string
   /** Explicit terms, when the caller has already selected them. */
   terms?: readonly GlossaryTerm[]
@@ -85,7 +85,7 @@ export function GlossaryTermStrip({
  *
  * Shows every category with a live term count and a few example terms, so the
  * links crawlers follow are real terms rather than a single "see the glossary"
- * link. Server-rendered — no client JS.
+ * link. Server-rendered, no client JS.
  */
 export function GlossaryCategoryGrid({
   heading = "Not sure what a term means?",

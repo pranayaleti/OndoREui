@@ -8,7 +8,7 @@ type NextStep = {
 
 const BUY_NEXT_STEPS: readonly NextStep[] = [
   { href: "/buy/quiz/", label: "See what you can afford", hint: "Eight quick questions and a price range right away. No email required." },
-  { href: "/loans", label: "Home loans", hint: "Conventional, FHA, VA, USDA — not a credit decision on this page." },
+  { href: "/loans", label: "Home loans", hint: "Conventional, FHA, VA, USDA, not a credit decision on this page." },
   { href: "/calculators", label: "Calculators", hint: "Payment, affordability, buying power, and more." },
   { href: "/calculators/rent-vs-own", label: "Rent vs own", hint: "Compare long-term cost and equity with your numbers." },
   { href: "/get-matched", label: "Work with an agent", hint: "A short quiz so we can route you to the right person." },
@@ -22,7 +22,7 @@ const SELL_NEXT_STEPS: readonly NextStep[] = [
   { href: "/faq/buying-selling-faqs", label: "Buying & selling FAQs", hint: "Compensation, agreements, and Utah process questions." },
   { href: "/contact?audience=seller#book-a-call", label: "Contact (selling)", hint: "Seller inquiry plus Calendly on the same page." },
   { href: "/calculators/home-sale", label: "Sale proceeds calculator", hint: "Estimate net proceeds. Not a quote." },
-  { href: "/resources/templates", label: "Listing-prep checklist", hint: "Request the showing-prep file — we email it, it is not an instant download." },
+  { href: "/resources/templates", label: "Listing-prep checklist", hint: "Request the showing-prep file, we email it, it is not an instant download." },
 ]
 
 type BuySellNextStepsProps = {

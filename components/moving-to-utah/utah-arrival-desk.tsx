@@ -49,7 +49,7 @@ const PATHS: ReadonlyArray<{
   {
     id: "people-ops",
     title: "Housing for someone joining a team",
-    body: "Share the hub they will commute to. We point at current rentals and showings — same written screening for every complete application.",
+    body: "Share the hub they will commute to. We point at current rentals and showings, same written screening for every complete application.",
   },
 ]
 

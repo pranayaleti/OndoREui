@@ -44,7 +44,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "FHA project test",
     cells: {
       condo: FHA_CONDO_ROSTER.projectApproval,
-      pud: "HUD’s condominium roster is a condo-project tool. A typical fee-simple townhome is not that list — and a townhome that is legally a condo still is.",
+      pud: "HUD’s condominium roster is a condo-project tool. A typical fee-simple townhome is not that list, and a townhome that is legally a condo still is.",
     },
   },
 ]
@@ -77,7 +77,7 @@ export default function TownhomeVsCondoHoaDocsPage() {
     >
       <p className="lead text-xl text-foreground/70">
         A lender does not underwrite the listing photo. A “townhome” can be a fee-simple planned-unit development or a
-        condominium. Do not treat every townhome as a condo — and do not assume a townhome skips HOA documents. Snapshot
+        condominium. Do not treat every townhome as a condo, and do not assume a townhome skips HOA documents. Snapshot
         as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{TOWNHOME_VS_CONDO.legal}</p>

@@ -97,7 +97,7 @@ export default function FirstRentalOccupancyPage() {
         you will live in: <Link href="/blog/house-hacking-duplex-with-fha">house-hacking a duplex with FHA</Link>.
       </p>
 
-      <h2>Scenario A — you are not moving</h2>
+      <h2>Scenario A, you are not moving</h2>
       <p>{FIRST_RENTAL_OCCUPANCY.stayPut}</p>
       <ul>
         <li>Expect investment pricing, down payment, and reserves on the new loan.</li>
@@ -112,11 +112,11 @@ export default function FirstRentalOccupancyPage() {
           <Link href="/blog/cross-collateral-equity-to-buy-another-house">cross-collateral</Link>. Neither changes
           occupancy on the rental. If you paid cash for the house you now occupy and want a mortgage on that same
           house later, that is{" "}
-          <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing</Link> — a different fact pattern.
+          <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing</Link>, a different fact pattern.
         </li>
       </ul>
 
-      <h2>Scenario B — you will move and rent the old house</h2>
+      <h2>Scenario B, you will move and rent the old house</h2>
       <p>{FIRST_RENTAL_OCCUPANCY.moveIn}</p>
       <ul>
         <li>The purchase occupancy is primary if that is where you will live.</li>
@@ -135,7 +135,7 @@ export default function FirstRentalOccupancyPage() {
       <ol>
         <li>Write down where you will actually sleep most of the year after closing. That sentence is occupancy.</li>
         <li>
-          If the new house is a rental, start on the <Link href="/learn/investment">investment hub</Link> — not FHA
+          If the new house is a rental, start on the <Link href="/learn/investment">investment hub</Link>, not FHA
           purchase occupancy.
         </li>
         <li>

@@ -77,8 +77,8 @@ export default function DtiHoaPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Front-end DTI is the housing payment — principal, interest, taxes, insurance, and HOA when the property has
-        dues — divided by gross monthly income. Back-end DTI is that housing payment plus the other debts the investor
+        Front-end DTI is the housing payment, principal, interest, taxes, insurance, and HOA when the property has
+        dues, divided by gross monthly income. Back-end DTI is that housing payment plus the other debts the investor
         counts. A townhome or condo with a “cheap” note payment can still fail because HOA is housing, not a footnote.
         Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -92,8 +92,8 @@ export default function DtiHoaPage() {
 
       <h2>Why condos surprise people</h2>
       <p>
-        {DTI_HOA.specialAssessment} FHA condos also need project approval —{" "}
-        <Link href="/blog/fha-condo-roster-project-approval">FHA condo roster</Link> — which is not a DTI test but can
+        {DTI_HOA.specialAssessment} FHA condos also need project approval,{" "}
+        <Link href="/blog/fha-condo-roster-project-approval">FHA condo roster</Link>, which is not a DTI test but can
         kill the same contract.
       </p>
       <p>
@@ -115,7 +115,7 @@ export default function DtiHoaPage() {
         <li>Re-run DTI with PITI + HOA as housing, plus car and student loans as counted debts.</li>
         <li>
           If the building is a condo and you hoped for FHA, look up the project before you write the offer. Then talk
-          with a loan officer — that conversation is not a credit decision.
+          with a loan officer, that conversation is not a credit decision.
         </li>
       </ol>
     </ArticleShell>

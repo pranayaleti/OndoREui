@@ -122,7 +122,7 @@ export default function BuildingHighPerformanceRealEstatePlatform() {
 
             <h2>The Core Stack: Next.js 15 App Router</h2>
             <p>
-              We migrated to the Next.js App Router to leverage <strong>React Server Components (RSC)</strong>. This architecture allows us to render static content (like property descriptions and legal disclaimers) on the server, significantly reducing the JavaScript bundle sent to the client.
+              We migrated to the Next.js App Router to use <strong>React Server Components (RSC)</strong>. This architecture allows us to render static content (like property descriptions and legal disclaimers) on the server, significantly reducing the JavaScript bundle sent to the client.
             </p>
 
             <div className="not-prose my-6 grid gap-3 md:grid-cols-2">

@@ -45,7 +45,7 @@ function clampPercent(value: number): number {
 
 /**
  * Illustrative underwrite from listed monthly rent plus user assumptions.
- * Returns null when purchase price is missing or not positive — no yields.
+ * Returns null when purchase price is missing or not positive, no yields.
  */
 export function calculateListingInvestorIllustration(
   input: ListingInvestorAssumptions,

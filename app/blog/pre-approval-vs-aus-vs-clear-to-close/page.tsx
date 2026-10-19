@@ -79,7 +79,7 @@ export default function PreapprovalStagesPage() {
           "These are three different artifacts doing three different jobs, not three words for approval.",
           "The pre-approval letter is a snapshot that helps you shop. It is not a commitment to lend.",
           "AUS findings are an engine result testing one program against the credit file. An automated approval is not a human sign-off.",
-          "Clear to close is an underwriter stating that this property's conditions are satisfied as of that date — which is why it can still move if the file changes.",
+          "Clear to close is an underwriter stating that this property's conditions are satisfied as of that date, which is why it can still move if the file changes.",
         ],
         faqs,
         keywords: ["pre-approval vs AUS vs CTC", "what is clear to close"],
@@ -104,14 +104,14 @@ export default function PreapprovalStagesPage() {
       <h2>Where files usually break</h2>
       <ul>
         <li>
-          <Link href="/blog/new-auto-loan-during-underwriting">New auto loan during underwriting</Link> — DTI and the
+          <Link href="/blog/new-auto-loan-during-underwriting">New auto loan during underwriting</Link>, DTI and the
           next credit pull.
         </li>
         <li>
-          <Link href="/blog/large-deposits-60-day-paper-trail">Large deposits</Link> — assets the letter never saw.
+          <Link href="/blog/large-deposits-60-day-paper-trail">Large deposits</Link>, assets the letter never saw.
         </li>
         <li>
-          Job or income change after the letter —{" "}
+          Job or income change after the letter,{" "}
           <Link href="/blog/how-underwriters-verify-income">how income is verified</Link>.
         </li>
         <li>
@@ -130,7 +130,7 @@ export default function PreapprovalStagesPage() {
       <h2>What happens next</h2>
       <ol>
         <li>Treat the letter as permission to shop, not as a property or rate lock.</li>
-        <li>Ask whether AUS has actually been run on this program and this LTV — and what the findings were.</li>
+        <li>Ask whether AUS has actually been run on this program and this LTV, and what the findings were.</li>
         <li>Do not schedule movers off a letter. CTC plus a CD that matches is closer to a closing date.</li>
       </ol>
     </ArticleShell>

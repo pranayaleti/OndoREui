@@ -71,7 +71,7 @@ export default function CrossCollateralPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Using equity to buy another house usually means taking cash out or drawing a HELOC — not pledging both
+        Using equity to buy another house usually means taking cash out or drawing a HELOC, not pledging both
         properties on one blanket loan. Cross-collateral exists on some portfolio and private files. It is not a
         published Fannie, Freddie, FHA, VA, or USDA purchase product you can assume. Snapshot as of{" "}
         {LENDING_FACTS_AS_OF}.

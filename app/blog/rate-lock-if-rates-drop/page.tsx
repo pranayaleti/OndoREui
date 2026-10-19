@@ -73,7 +73,7 @@ export default function LockIfRatesDropPage() {
       <p className="lead text-xl text-foreground/70">
         If you already locked and the 30-year average on the news falls, you do not automatically get the lower rate.
         A lock holds the quoted rate and points for the window on your confirmation. A float-down, if it exists, is a
-        written lock-desk policy — not a blog right. This page does not publish current rates. Snapshot as of{" "}
+        written lock-desk policy, not a blog right. This page does not publish current rates. Snapshot as of{" "}
         {LENDING_FACTS_AS_OF}.
       </p>
       <p>{LOCK_IF_RATES_DROP.notARate}</p>
@@ -90,7 +90,7 @@ export default function LockIfRatesDropPage() {
       <h2>Not the same as extension vs floating</h2>
       <p>
         {LOCK_IF_RATES_DROP.vsExtension} The companion page is{" "}
-        <Link href="/blog/rate-lock-extension-vs-floating">lock extension vs floating</Link> — that file is about whether
+        <Link href="/blog/rate-lock-extension-vs-floating">lock extension vs floating</Link>, that file is about whether
         to lock, float, or pay to extend when the window is running out. This page is the borrower question after you
         already locked: the market improved, now what?
       </p>

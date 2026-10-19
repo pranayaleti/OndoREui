@@ -30,7 +30,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "What typically qualifies",
     cells: {
       agency: SCHEDULE_E_RENTAL.method,
-      k1: "Entity K-1 lines and matching returns — not a personal Schedule E add-back you can copy across.",
+      k1: "Entity K-1 lines and matching returns, not a personal Schedule E add-back you can copy across.",
       dscr: "Rent versus the proposed payment. Depreciation on your 1040 is not the DSCR engine.",
     },
   },
@@ -80,7 +80,7 @@ export default function DepreciationAddBackPage() {
       <p>
         Parent guide:{" "}
         <Link href="/blog/schedule-e-rental-income-purchase-file">rental income on Schedule E in a purchase file</Link>{" "}
-        — history on properties you already own versus proposed rent.
+      history on properties you already own versus proposed rent.
       </p>
 
       <h2>What usually gets added back</h2>
@@ -111,7 +111,7 @@ export default function DepreciationAddBackPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>If you already own rentals, bring the Schedule E pages — not a depreciation summary slide.</li>
+        <li>If you already own rentals, bring the Schedule E pages, not a depreciation summary slide.</li>
         <li>
           Occupancy on the house in this purchase still has to match use:{" "}
           <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first rental occupancy</Link>.

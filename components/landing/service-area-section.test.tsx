@@ -34,7 +34,7 @@ describe("ServiceAreaSection city coverage", () => {
   it("stamps median rent with the Ondo city-median as-of date", () => {
     render(<ServiceAreaSection />)
     expect(screen.getByText(new RegExp(CITY_MARKET_AS_OF))).toBeInTheDocument()
-    expect(screen.getByText(/as of .+ — verify/i)).toBeInTheDocument()
+    expect(screen.getByText(/as of .+, verify/i)).toBeInTheDocument()
     expect(screen.getByText(/not an mls pull/i)).toBeInTheDocument()
   })
 

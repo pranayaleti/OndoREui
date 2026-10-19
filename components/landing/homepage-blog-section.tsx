@@ -18,7 +18,7 @@ export function HomepageBlogSection() {
               Utah landlord guides
             </h2>
             <p className="mt-2 text-foreground/70">
-              Practical writing from the Ondo team &mdash; how to price, screen, maintain, and
+              Practical writing from the Ondo team, how to price, screen, maintain, and
               scale rentals along the Wasatch Front.
             </p>
           </div>

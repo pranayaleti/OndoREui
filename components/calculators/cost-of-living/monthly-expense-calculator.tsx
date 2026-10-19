@@ -280,7 +280,7 @@ export function MonthlyExpenseCalculator() {
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <p className="mb-6 max-w-2xl text-sm text-muted-foreground">
-          Build a realistic monthly picture — housing, transportation, utilities, food, and the rest — without
+          Build a realistic monthly picture, housing, transportation, utilities, food, and the rest, without
           treating suggested amounts as exact bills. Totals update as you type.
         </p>
 

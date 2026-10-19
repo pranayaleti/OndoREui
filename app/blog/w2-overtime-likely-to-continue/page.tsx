@@ -63,7 +63,7 @@ export default function W2OvertimePage() {
       <ul>
         <li>Two years of W-2s that show overtime in the same job or line of work, not a one-off project.</li>
         <li>Year-to-date paystubs that do not contradict the story (a sudden zero is a red flag).</li>
-        <li>An employer that still offers the overtime — VOE language matters more than a text from a supervisor.</li>
+        <li>An employer that still offers the overtime, VOE language matters more than a text from a supervisor.</li>
       </ul>
       <p>
         Bonus is a cousin of overtime and is often averaged the same way. Commission is a different file: see{" "}

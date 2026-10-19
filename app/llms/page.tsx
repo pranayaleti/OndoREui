@@ -127,7 +127,7 @@ export default function LlmsDiscoveryPage() {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <Button asChild variant="secondary" size="sm">
-                    {/* Static files, not Next routes — <Link> would prefetch a
+                    {/* Static files, not Next routes, <Link> would prefetch a
                         nonexistent RSC payload (e.g. /llms.txt.txt?_rsc=…) and 404. */}
                     <a href={item.href}>Open {item.href}</a>
                   </Button>

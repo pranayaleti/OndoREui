@@ -60,7 +60,7 @@ export default function RefinanceHubPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Should You Refinance?</h2>
               <p className="text-lg text-foreground/70">
-                Refinancing replaces your current mortgage with a new one — to change rate or term, or to convert equity
+                Refinancing replaces your current mortgage with a new one, to change rate or term, or to convert equity
                 into cash. A lower note rate can still lose after costs if you move or refinance again first. Run
                 break-even before you treat a headline rate as savings.
               </p>
@@ -128,7 +128,7 @@ export default function RefinanceHubPage() {
                   <CardTitle className="text-lg">
                     <Link href="/blog/heloc-after-year-two-vs-cash-out" className="hover:text-primary">HELOC after year two</Link>
                   </CardTitle>
-                  <CardDescription>Seasoning overlays after a recent closing — not a remake of lien structure.</CardDescription>
+                  <CardDescription>Seasoning overlays after a recent closing, not a remake of lien structure.</CardDescription>
                 </CardHeader>
               </Card>
               <Card key="Delayed financing">
@@ -136,7 +136,7 @@ export default function RefinanceHubPage() {
                   <CardTitle className="text-lg">
                     <Link href="/blog/delayed-financing-after-cash-purchase" className="hover:text-primary">Delayed financing</Link>
                   </CardTitle>
-                  <CardDescription>Cash purchase, then a cash-out later. Agency exception — not a statute.</CardDescription>
+                  <CardDescription>Cash purchase, then a cash-out later. Agency exception, not a statute.</CardDescription>
                 </CardHeader>
               </Card>
               <Card key="Biweekly vs refinance">

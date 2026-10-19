@@ -21,7 +21,7 @@ export function EmploymentRecords({
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        Add each current and recent job. Self-employed work uses the same fields — list the business name as
+        Add each current and recent job. Self-employed work uses the same fields, list the business name as
         the employer.
       </p>
       {rows.map((job, index) => (

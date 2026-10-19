@@ -42,7 +42,7 @@ export default function TenNinetyNineDocsPage() {
         takeaways: [
           "A 1099 file is proving a durable average from filed returns, so the documents that matter are the ones the IRS already has.",
           "Expect two years of personal returns with all schedules; some files qualify on one year, and lenders commonly order IRS transcripts that must match what was filed.",
-          "A year-to-date profit and loss supports the current year. Note whether it is CPA-prepared or self-prepared — lenders weigh those differently.",
+          "A year-to-date profit and loss supports the current year. Note whether it is CPA-prepared or self-prepared, lenders weigh those differently.",
           "Write-offs that lower taxable income also lower qualifying income. That trade-off is the single most common surprise on these files.",
         ],
         faqs,
@@ -88,7 +88,7 @@ export default function TenNinetyNineDocsPage() {
         <Link href="/blog/just-went-1099-last-month">just went 1099 last month</Link>, that is a seasoning question,
         not this checklist. If a partner’s W-2 is part of the story, they generally need to be a borrower:{" "}
         <Link href="/blog/spouse-w2-offset-1099-volatility">spouse W-2 offset</Link>. Partners and S-corp owners:{" "}
-        <Link href="/blog/k-1-income-what-usually-counts">K-1 income — what usually counts</Link>.
+        <Link href="/blog/k-1-income-what-usually-counts">K-1 income, what usually counts</Link>.
       </p>
     </ArticleShell>
   )

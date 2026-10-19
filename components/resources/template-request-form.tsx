@@ -105,7 +105,7 @@ export function TemplateRequestForm({
           <DialogTitle>Request {templateTitle}</DialogTitle>
           <DialogDescription>
             Leave your name and email and we&apos;ll follow up with the file. This is a sample for
-            reference only — not an instant download and not legal advice. It must be reviewed
+            reference only, not an instant download and not legal advice. It must be reviewed
             through appropriate legal channels before it can be approved or used.
           </DialogDescription>
         </DialogHeader>

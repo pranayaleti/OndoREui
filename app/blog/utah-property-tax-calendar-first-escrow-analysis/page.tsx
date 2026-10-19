@@ -85,7 +85,7 @@ export default function UtahTaxCalendarEscrowPage() {
       <p>{UTAH_TAX_CALENDAR.dueDate}</p>
       <p>{UTAH_TAX_CALENDAR.annualBill}</p>
       <ul>
-        <li>Confirm the treasurer for the property county — Salt Lake, Utah, Davis, Weber, Washington, and Summit are not identical mail dates.</li>
+        <li>Confirm the treasurer for the property county, Salt Lake, Utah, Davis, Weber, Washington, and Summit are not identical mail dates.</li>
         <li>Valuation notices (often mid-year) are not the tax bill you pay in November.</li>
         <li>A protest or exemption deadline is a treasurer/assessor process. This page does not calendar it for you.</li>
       </ul>
@@ -105,7 +105,7 @@ export default function UtahTaxCalendarEscrowPage() {
         <Link href="/blog/escrow-cushion-how-it-is-set">how the escrow cushion is set</Link>.
       </p>
       <p>
-        Shortage options after an analysis are a servicing notice — spread versus lump sum — not origination pricing.
+        Shortage options after an analysis are a servicing notice, spread versus lump sum, not origination pricing.
         Sequel: <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>. Related
         FAQ: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>.
       </p>
@@ -129,7 +129,7 @@ export default function UtahTaxCalendarEscrowPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Read the county treasurer site for the property — due date and notice schedule — not a national “semi-annual” assumption.</li>
+        <li>Read the county treasurer site for the property, due date and notice schedule, not a national “semi-annual” assumption.</li>
         <li>Keep the first escrow analysis letter. Shortage and surplus options are on that notice.</li>
         <li>
           Ask a loan officer how prepaid taxes were estimated on your Loan Estimate. This page is not your next

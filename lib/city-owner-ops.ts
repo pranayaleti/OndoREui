@@ -41,7 +41,7 @@ function wasatchWinterTip(cityName: string): string {
 /**
  * Four operational patterns owners hit in a city, drawn from existing
  * city-content overviews / highlights / FAQs. Housing stock, vacancy, HOA,
- * winter — never occupant type, crime, or invented freeze counts.
+ * winter, never occupant type, crime, or invented freeze counts.
  */
 export function getCityOwnerOpsPatterns(cityName: string): CityOwnerOp[] {
   const content: CityContent | undefined = cityContentByName[cityName]

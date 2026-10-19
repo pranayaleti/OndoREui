@@ -104,7 +104,7 @@ export default function PmiRemovalPage() {
       <h2>Call the servicer with the right question</h2>
       <p>
         Ask whether they are measuring original value (HPA) or whether they even offer a current-value appraisal
-        cancellation — and what seasoning they require. A “you have 22% equity on a website estimate” screenshot is
+        cancellation, and what seasoning they require. A “you have 22% equity on a website estimate” screenshot is
         not either test. Program overview: <Link href="/loans/conventional">conventional loans</Link>.
       </p>
 
@@ -119,7 +119,7 @@ export default function PmiRemovalPage() {
 
       <h2>Still deciding whether to put 20% down on a purchase?</h2>
       <p>
-        That is <Link href="/blog/should-i-wait-for-20-percent-down">should I wait for 20% down</Link> — a first-time
+        That is <Link href="/blog/should-i-wait-for-20-percent-down">should I wait for 20% down</Link>, a first-time
         cash-and-timeline question, not a servicer cancellation form.
       </p>
 

@@ -80,7 +80,7 @@ export default function CosignVsCoborrowerPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        On a mortgage, “cosign” usually means someone will be on the note — and then they are underwritten as a
+        On a mortgage, “cosign” usually means someone will be on the note, and then they are underwritten as a
         borrower, occupant or not. That is different from being on title only, and different from a parent who only
         gifts. A silent auto-loan cosigner is not how most purchase files work. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -134,7 +134,7 @@ export default function CosignVsCoborrowerPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Decide whether the helper is a donor, a co-borrower, or someone who will take title — then match the contract and the application.</li>
+        <li>Decide whether the helper is a donor, a co-borrower, or someone who will take title, then match the contract and the application.</li>
         <li>
           Tri-merge mechanics: <Link href="/blog/what-a-tri-merge-credit-report-shows">what a tri-merge shows</Link>.
         </li>

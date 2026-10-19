@@ -30,7 +30,7 @@ const rows: readonly ComparisonRow[] = [
     cells: {
       fannie: "Often use that payment, or the documented current statement if it differs.",
       "freddie-fha": "Often use the reported or documented payment.",
-      va: "VA has its own student-loan treatment. Confirm the current handbook — do not import a conventional percent.",
+      va: "VA has its own student-loan treatment. Confirm the current handbook, do not import a conventional percent.",
     },
   },
   {
@@ -100,21 +100,21 @@ export default function StudentLoansIdrPage() {
       <h2>SAVE and other IDR plans</h2>
       <p>
         SAVE has been in legal and servicing flux. Borrowers who were on SAVE may be in a forbearance or a different
-        IDR. Underwriting follows the <em>current</em> repayment status and the investor’s student-loan rule — not the
+        IDR. Underwriting follows the <em>current</em> repayment status and the investor’s student-loan rule, not the
         plan name on an old letter. Ask the servicer for a current statement before you shop as if DTI ignores the
         balance.
       </p>
       <p>
         First-time cash still has to close on top of DTI. See{" "}
         <Link href="/learn/first-time">first-time cash and closing</Link> and the{" "}
-        <Link href="/calculators/affordability">affordability calculator</Link> — enter the student-loan payment the
+        <Link href="/calculators/affordability">affordability calculator</Link>, enter the student-loan payment the
         investor is likely to count, not $0 because a website said $0.
       </p>
 
       <h2>Documents that actually move the file</h2>
       <ul>
         <li>Current student-loan statement(s) showing repayment plan, payment, and outstanding balance.</li>
-        <li>If you claim IDR $0, written servicer confirmation of that payment — not only the credit report.</li>
+        <li>If you claim IDR $0, written servicer confirmation of that payment, not only the credit report.</li>
         <li>If loans are in forbearance, the forbearance terms and when payment resumes.</li>
       </ul>
 

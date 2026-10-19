@@ -127,7 +127,7 @@ export default function AdjustableRatePage() {
               <div className="space-y-4">
                 <div>
                   <h4 className="text-lg font-semibold mb-2">5/1 ARM</h4>
-                  <p className="text-foreground/70">Fixed rate for 5 years, then adjusts annually. Often used when the plan is to sell or refinance before the first adjustment — not a promise that you will.</p>
+                  <p className="text-foreground/70">Fixed rate for 5 years, then adjusts annually. Often used when the plan is to sell or refinance before the first adjustment, not a promise that you will.</p>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-2">7/1 ARM</h4>

@@ -74,7 +74,7 @@ export default function ManufacturedHousingAduPage() {
     >
       <p className="lead text-xl text-foreground/70">
         Manufactured-home financing and ADU financing are different files. One is about how the dwelling was built,
-        titled, and attached to land. The other is about a second dwelling on a site-built parcel — zoning, occupancy,
+        titled, and attached to land. The other is about a second dwelling on a site-built parcel, zoning, occupancy,
         and whether any rent counts. This page does not invent a HUD program code as a permanent product name. Snapshot
         as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -95,7 +95,7 @@ export default function ManufacturedHousingAduPage() {
       <p>{MANUFACTURED_AND_ADU.landHome}</p>
       <ul>
         <li>Foundation and whether the home is real property vs chattel.</li>
-        <li>HUD label / data plate on a HUD-Code home — look at the unit; do not memorize a blog serial-number rule.</li>
+        <li>HUD label / data plate on a HUD-Code home, look at the unit; do not memorize a blog serial-number rule.</li>
         <li>Appraisal and property standards for the program (conventional, FHA, VA, USDA each differ).</li>
         <li>
           Occupancy still has to match use: <Link href="/blog/second-home-vs-investment-occupancy">occupancy types</Link>
@@ -111,7 +111,7 @@ export default function ManufacturedHousingAduPage() {
         <li>Whether the lender counts the ADU as part of a 1-unit with accessory income, or as another unit.</li>
         <li>
           If you occupy one unit of a true 2–4 unit building, that is a house-hack conversation:{" "}
-          <Link href="/blog/house-hacking-duplex-with-fha">FHA duplex house-hack</Link> — not an ADU nickname.
+          <Link href="/blog/house-hacking-duplex-with-fha">FHA duplex house-hack</Link>, not an ADU nickname.
         </li>
         <li>
           Existing rental history on a house you already own is{" "}

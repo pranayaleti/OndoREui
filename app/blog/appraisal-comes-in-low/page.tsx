@@ -26,7 +26,7 @@ const faqs = [
   {
     question: "Can the seller just lower the price to the appraised value?",
     answer:
-      "They can agree to, and often that is the cleanest fix — but they are not required to. A low appraisal is information; it does not change the contract by itself.",
+      "They can agree to, and often that is the cleanest fix, but they are not required to. A low appraisal is information; it does not change the contract by itself.",
   },
 ]
 
@@ -78,7 +78,7 @@ export default function AppraisalLowPage() {
         steps={[
           {
             title: "Renegotiate the price",
-            body: "Often the cleanest fix, and the most common outcome. The seller is not obliged to agree — a low appraisal is information, not an amendment.",
+            body: "Often the cleanest fix, and the most common outcome. The seller is not obliged to agree, a low appraisal is information, not an amendment.",
           },
           {
             title: "Cover the difference in cash",
@@ -124,7 +124,7 @@ export default function AppraisalLowPage() {
 
       <ArticleCallout variant="note" title="Appraisal and inspection are different reports">
         An appraisal is an opinion of value for the lender. An inspection is a condition report for you. Neither
-        substitutes for the other — see{" "}
+        substitutes for the other, see{" "}
         <Link href="/blog/home-inspection-vs-appraisal">home inspection vs appraisal</Link>.
       </ArticleCallout>
 

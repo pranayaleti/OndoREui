@@ -101,7 +101,7 @@ export default function FirstTimeLandlordChecklistUtah() {
               <Link href="/resources#utah-landlord-education">
                 Utah landlord education &amp; official resources
               </Link>
-              {" "}— those programs are not Ondo’s lease packet.
+              {" "}, those programs are not Ondo’s lease packet.
             </p>
 
             <h2>Move-In Day Procedures</h2>

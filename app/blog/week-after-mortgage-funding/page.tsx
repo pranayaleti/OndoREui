@@ -43,7 +43,7 @@ export default function WeekAfterFundingPage() {
     >
       <p className="lead text-xl text-foreground/70">
         The week after funding is mostly recording, calendaring the first payment from the note and Closing Disclosure,
-        and watching for a servicing-transfer letter — not a new underwrite and not a rate change. Snapshot as of{" "}
+        and watching for a servicing-transfer letter, not a new underwrite and not a rate change. Snapshot as of{" "}
         {LENDING_FACTS_AS_OF}.
       </p>
       <p>{WEEK_AFTER_FUNDING.notLegalAdvice}</p>
@@ -90,7 +90,7 @@ export default function WeekAfterFundingPage() {
 
       <h2>Checklist for the first ten days</h2>
       <ol>
-        <li>Find the first due date on the CD and the note — do not wait for a statement.</li>
+        <li>Find the first due date on the CD and the note, do not wait for a statement.</li>
         <li>Save the servicer phone number and loan number from the CD or welcome letter.</li>
         <li>Watch mail and email for a hello / goodbye servicing letter.</li>
         <li>Keep hazard insurance in force. Impounds vs paying your own bills:{" "}

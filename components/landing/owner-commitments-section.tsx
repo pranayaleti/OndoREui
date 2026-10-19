@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Building2, Clock, ShieldCheck, Wallet } from "lucide-react"
 
 /**
- * Owner commitments — every bullet must map to a promise that is *already*
+ * Owner commitments, every bullet must map to a promise that is *already*
  * documented on `/pricing` or the property-management pages. We call these
  * "commitments" rather than "guarantees" on purpose: Ondo has no leasing /
  * eviction / maintenance-rework guarantee product to back a stronger word,
@@ -24,7 +24,7 @@ const commitments: Commitment[] = [
     icon: Wallet,
     title: "You pay when rent is collected",
     body:
-      "Management fee is a percentage of collected rent — not a flat retainer, not a per-door subscription. When your tenants pay, we get paid.",
+      "Management fee is a percentage of collected rent, not a flat retainer, not a per-door subscription. When your tenants pay, we get paid.",
     href: "/pricing",
     linkLabel: "See pricing tiers",
   },
@@ -48,7 +48,7 @@ const commitments: Commitment[] = [
     icon: ShieldCheck,
     title: "Fair Housing–compliant screening",
     body:
-      "Credit, criminal, eviction, and income checks applied to every applicant against consistent, documented criteria — with HUD-aligned handling of criminal records.",
+      "Credit, criminal, eviction, and income checks applied to every applicant against consistent, documented criteria, with HUD-aligned handling of criminal records.",
     href: "/property-management/tenant-screening",
     linkLabel: "See our screening process",
   },

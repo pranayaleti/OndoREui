@@ -18,7 +18,7 @@ describe("estimateHomeValue", () => {
 
   it("discloses Ondo city medians with an as-of stamp and no MLS or appraisal claim", () => {
     expect(ESTIMATE_DATA_DISCLOSURE).toContain(CITY_MARKET_AS_OF)
-    expect(ESTIMATE_DATA_DISCLOSURE).toMatch(/as of .+ — verify/i)
+    expect(ESTIMATE_DATA_DISCLOSURE).toMatch(/as of .+, verify/i)
     expect(ESTIMATE_DATA_DISCLOSURE).toMatch(/Ondo city medians/i)
     expect(ESTIMATE_DATA_DISCLOSURE).toMatch(/Not an MLS pull, appraisal, BPO, or CMA/i)
   })

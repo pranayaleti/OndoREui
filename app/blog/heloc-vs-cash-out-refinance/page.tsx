@@ -75,7 +75,7 @@ export default function HelocVsCashoutPage() {
       <h2>What happens next</h2>
       <p>
         Model payment change in the <Link href="/calculators/refinance">refinance calculator</Link> for a first-lien
-        refinance. A HELOC payment depends on the draw and index — ask for a structured comparison, not a slogan.
+        refinance. A HELOC payment depends on the draw and index, ask for a structured comparison, not a slogan.
       </p>
     </ArticleShell>
   )

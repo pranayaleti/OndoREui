@@ -72,7 +72,7 @@ export default function NewAutoLoanUnderwritingPage() {
       <p>
         That can look like a decline after the letter. Typical condition fails, including new debt:{" "}
         <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>. Paying the car off “at
-        closing” only helps if the debt is actually gone on the report the underwriter uses — a plan is not a payoff
+        closing” only helps if the debt is actually gone on the report the underwriter uses, a plan is not a payoff
         letter.
       </p>
       <p>{NEW_DEBT_UNDERWRITING.whatToDo}</p>
@@ -82,7 +82,7 @@ export default function NewAutoLoanUnderwritingPage() {
         <li>If you have not signed yet, ask the loan officer to re-run DTI with the proposed car payment before you commit.</li>
         <li>If you already signed, send the contract and the payment. Do not hide it for closing week.</li>
         <li>
-          Hold other new credit too — furniture, cards, co-signs. Same DTI math. Then talk through the file; that is
+          Hold other new credit too, furniture, cards, co-signs. Same DTI math. Then talk through the file; that is
           not a new promise of approval.
         </li>
       </ol>

@@ -57,7 +57,7 @@ export default function CreditBeforeMortgagePage() {
         category: "Credit",
         bannerSubtitle: "A rescore changes the timing of the truth, not the truth.",
         takeaways: [
-          "A rapid rescore is lender-initiated. It asks the bureaus to reflect a correction or a paid-down balance sooner than the normal cycle — you cannot buy one directly.",
+          "A rapid rescore is lender-initiated. It asks the bureaus to reflect a correction or a paid-down balance sooner than the normal cycle, you cannot buy one directly.",
           "It speeds up reporting of something already true. It does not remove accurate information, and a lender cannot use a score built on inaccurate removals.",
           "Revolving utilisation is one of the few factors that moves quickly, because balances update each cycle.",
           "Two well-meant moves can hurt during a file: closing old accounts, and filing disputes. Raise both with the loan officer first.",
@@ -81,7 +81,7 @@ export default function CreditBeforeMortgagePage() {
 
       <ArticleCallout variant="warning" title="A rescore is not credit repair">
         {CREDIT_BEFORE_MORTGAGE.notRepair} Be careful with any service that promises to delete accurate items or
-        guarantees a score outcome — that is a regulated industry with its own federal rules, and a file built on it
+        guarantees a score outcome, that is a regulated industry with its own federal rules, and a file built on it
         does not survive underwriting.
       </ArticleCallout>
 
@@ -101,7 +101,7 @@ export default function CreditBeforeMortgagePage() {
             title: "Do not open anything new",
             body: (
               <>
-                New debt during underwriting moves DTI and shows on the next pull — a common reason a letter does not
+                New debt during underwriting moves DTI and shows on the next pull, a common reason a letter does not
                 hold. See <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>.
               </>
             ),

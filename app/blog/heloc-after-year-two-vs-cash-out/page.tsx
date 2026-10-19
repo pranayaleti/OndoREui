@@ -37,7 +37,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "A different fact pattern",
     cells: {
       now: HELOC_SEASONING.delayedFinancing,
-      later: "Once overlays are met, compare structure — second lien vs replacing the first — on the HELOC vs cash-out page.",
+      later: "Once overlays are met, compare structure, second lien vs replacing the first, on the HELOC vs cash-out page.",
     },
   },
 ]
@@ -69,7 +69,7 @@ export default function HelocAfterYearTwoPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        If you just closed, tapping equity again is a seasoning and occupancy conversation — often six to twelve months
+        If you just closed, tapping equity again is a seasoning and occupancy conversation, often six to twelve months
         of ownership, sometimes described as after year one or into year two. It is not a federal two-year waiting
         period. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -105,12 +105,12 @@ export default function HelocAfterYearTwoPage() {
       <IsThisRightForMe
         table="equity"
         heading="Once seasoning fits, which structure are you comparing?"
-        intro="This table is lien position and payment shape — not a recommendation to tap equity, and not a waiting-period calculator."
+        intro="This table is lien position and payment shape, not a recommendation to tap equity, and not a waiting-period calculator."
       />
 
       <h2>What happens next</h2>
       <ol>
-        <li>If the closing was recent, ask what overlay the HELOC or cash-out investor actually uses — do not calendar “year two” from a blog.</li>
+        <li>If the closing was recent, ask what overlay the HELOC or cash-out investor actually uses, do not calendar “year two” from a blog.</li>
         <li>
           If the goal is another house, occupancy still has to match:{" "}
           <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first rental occupancy</Link> and{" "}

@@ -76,7 +76,7 @@ export default function CominglingPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Mixing business deposits into a personal account — or paying household bills from the business — is what
+        Mixing business deposits into a personal account, or paying household bills from the business, is what
         underwriters call co-mingling. {BUSINESS_PERSONAL_COMINGLING.problem} Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
@@ -99,7 +99,7 @@ export default function CominglingPage() {
       <p>
         A brand-new 1099 who deposits the first invoices into a personal checking account has two problems: history and
         mixing. See <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link>. K-1 income is
-        taken from the form and matching returns, not from whatever hit personal checking —{" "}
+        taken from the form and matching returns, not from whatever hit personal checking,{" "}
         <Link href="/blog/k-1-income-what-usually-counts">what usually counts on a K-1</Link>.
       </p>
 
@@ -116,7 +116,7 @@ export default function CominglingPage() {
         <li>Bring business and personal statements for the same window, plus an explanation of every large transfer.</li>
         <li>Do not park cash or shuffle accounts the week of application without asking how it must be sourced.</li>
         <li>
-          Use an income average you can document on the <Link href="/calculators/income">income calculator</Link> — not
+          Use an income average you can document on the <Link href="/calculators/income">income calculator</Link>, not
           last month’s best deposit.
         </li>
       </ol>

@@ -44,7 +44,7 @@ export default function RefiBreakevenPage() {
         takeaways: [
           "Break-even months ≈ total cash costs ÷ the monthly principal-and-interest saving. Discount points and origination belong in the cost side, not just the appraisal.",
           "A lower note rate is not a saving until those costs are earned back.",
-          "Break-even only pays off if you keep the loan that long — a 36-month break-even does nothing for a file that sells in month 18. Some refinances are still worth doing for reasons other than payment, such as leaving an ARM.",
+          "Break-even only pays off if you keep the loan that long, a 36-month break-even does nothing for a file that sells in month 18. Some refinances are still worth doing for reasons other than payment, such as leaving an ARM.",
           "Only the principal-and-interest difference counts. A tax or insurance change is not a refinance saving.",
         ],
         faqs,
@@ -73,8 +73,8 @@ export default function RefiBreakevenPage() {
         </li>
       </ul>
       <p>
-        Illustration: $6,000 in costs (including one point) and $150 less P&amp;I is 40 months — the middle column.
-        Taxes, opportunity cost of cash, and a shorter remaining term can change the story — that is a loan-officer
+        Illustration: $6,000 in costs (including one point) and $150 less P&amp;I is 40 months, the middle column.
+        Taxes, opportunity cost of cash, and a shorter remaining term can change the story, that is a loan-officer
         model, not this paragraph. Recast instead of refinancing:{" "}
         <Link href="/blog/recast-vs-refinance">recast vs refinance</Link>.
       </p>
@@ -85,7 +85,7 @@ export default function RefiBreakevenPage() {
         consHeading="A lower rate still loses when"
         pros={[
           "They are removing a risky ARM reset, even if break-even is long.",
-          "They are changing term — 30 to 15, say — for a payoff goal rather than a payment cut.",
+          "They are changing term, 30 to 15, say, for a payoff goal rather than a payment cut.",
           "There is a cash-out need, after comparing a HELOC rather than assuming cash-out is cheaper.",
         ]}
         cons={[

@@ -106,7 +106,7 @@ export default function DesigningPropertyOwnerPortal() {
 
             <h2>Conclusion</h2>
             <p>
-              The Ondo Owner Portal empowers landlords to move from &quot;reactive&quot; to &quot;proactive&quot; management. By centralizing data and communication, we help owners maximize the ROI we calculated for them in the buying stage.
+              The Ondo Owner Portal lets landlords move from &quot;reactive&quot; to &quot;proactive&quot; management. By centralizing data and communication, we help owners maximize the ROI we calculated for them in the buying stage.
             </p>
 
             <hr className="my-12 border-border" />

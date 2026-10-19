@@ -51,7 +51,7 @@ export default function UsdaVaFhaRuralPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        A veteran buying in a rural census tract may have three primary-residence conversations — VA, USDA, and FHA —
+        A veteran buying in a rural census tract may have three primary-residence conversations, VA, USDA, and FHA,
         but this page does not pick one. Run the USDA map, remaining VA entitlement, and HUD occupancy as separate
         tests. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -84,7 +84,7 @@ export default function UsdaVaFhaRuralPage() {
         table="purchase"
         programs={["va", "usda", "fha"]}
         highlight="va"
-        heading="Typical overlays — not a recommendation"
+        heading="Typical overlays, not a recommendation"
         intro="Use this as a map of occupancy, down payment, and fee snapshots. A loan officer still applies the guide in force. Fee percents are dated; confirm before anyone prices a file."
         footnote=""
       />
@@ -97,7 +97,7 @@ export default function UsdaVaFhaRuralPage() {
         </li>
         <li>
           <strong>Entitlement is tied up, USDA map and income pass.</strong> USDA may be in the conversation. It is
-          still primary occupancy — not an investment. {USDA_SNAPSHOT.occupancy}
+          still primary occupancy, not an investment. {USDA_SNAPSHOT.occupancy}
         </li>
         <li>
           <strong>Map fails or household income is over the USDA limit, and VA does not fit.</strong> FHA may be the
@@ -109,7 +109,7 @@ export default function UsdaVaFhaRuralPage() {
       <h2>What happens next</h2>
       <ol>
         <li>
-          Run the address on USDA’s published map — use the{" "}
+          Run the address on USDA’s published map, use the{" "}
           <Link href={USDA_SNAPSHOT.mapToolUrl}>official eligibility tool</Link>, not a city name.
         </li>
         <li>

@@ -117,7 +117,7 @@ export default function FirstTimeBuyerPage() {
                   <h4 className="text-lg font-semibold mb-3">FHA Loans</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• HUD policy can allow 3.5% down at 580+; many lender overlays sit higher</li>
-                    <li>• Upfront and annual MIP — compare to conventional PMI on two Loan Estimates</li>
+                    <li>• Upfront and annual MIP, compare to conventional PMI on two Loan Estimates</li>
                     <li>• Primary residence; condos need{" "}
                       <Link href="/blog/fha-condo-roster-project-approval" className="prose-link">
                         FHA project approval
@@ -134,7 +134,7 @@ export default function FirstTimeBuyerPage() {
                   <h4 className="text-lg font-semibold mb-3">USDA Loans</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Zero down only when map, household income, and occupancy tests pass</li>
-                    <li>• Address-specific USDA map — a city name is not enough</li>
+                    <li>• Address-specific USDA map, a city name is not enough</li>
                     <li>• Household income limits, not just the borrowers on the note</li>
                     <li>• No monthly PMI; USDA charges a guarantee fee instead (confirm current RD notice)</li>
                   </ul>

@@ -85,7 +85,7 @@ export default function FixedRatePage() {
                     <Calculator className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle>Easy to Understand</CardTitle>
-                  <CardDescription>Simple, straightforward loan structure with no surprises.</CardDescription>
+                  <CardDescription>Simple loan structure with no surprises.</CardDescription>
                 </CardHeader>
               </Card>
             </div>

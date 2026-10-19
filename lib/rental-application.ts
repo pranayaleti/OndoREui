@@ -50,7 +50,7 @@ export const APPLICATION_STATUS_LABELS: Record<string, string> = {
 }
 
 export function formatCents(cents: number | null | undefined): string {
-  if (cents == null || Number.isNaN(cents)) return "—"
+  if (cents == null || Number.isNaN(cents)) return ", "
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cents / 100)
 }
 

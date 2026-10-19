@@ -49,7 +49,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Occupancy",
     cells: {
       gift: "Child occupies as primary residence. Parent does not move in as a workaround to get on the loan.",
-      title: "If the parent will live there, this may be a co-borrower or non-occupant co-borrower file — not a quiet gift.",
+      title: "If the parent will live there, this may be a co-borrower or non-occupant co-borrower file, not a quiet gift.",
       coborrower: "Who occupies must match the program. Non-occupant co-borrower rules differ by FHA vs conventional.",
     },
   },
@@ -114,19 +114,19 @@ export default function ParentGiftingPage() {
       </p>
       <ul>
         <li>
-          <strong>Gift letter</strong> — donor signs. Amount, relationship, no repayment.
+          <strong>Gift letter</strong>, donor signs. Amount, relationship, no repayment.
         </li>
         <li>
-          <strong>Donor statements</strong> — show the money was theirs, then left. Screenshots without a bank header
+          <strong>Donor statements</strong>, show the money was theirs, then left. Screenshots without a bank header
           stall files.
         </li>
         <li>
-          <strong>Wire or cashier’s check</strong> — to escrow, with instructions that match the letter. A cash deposit
+          <strong>Wire or cashier’s check</strong>, to escrow, with instructions that match the letter. A cash deposit
           into the buyer’s account is the{" "}
           <Link href="/blog/large-deposits-60-day-paper-trail">large-deposit</Link> problem, not a gift.
         </li>
         <li>
-          <strong>Notary</strong> — some lenders want the gift letter notarized. That is an overlay, not a federal
+          <strong>Notary</strong>, some lenders want the gift letter notarized. That is an overlay, not a federal
           ritual.
         </li>
       </ul>
@@ -139,7 +139,7 @@ export default function ParentGiftingPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Decide whether the parent is a donor, a co-borrower, or taking title — pick one story and keep it. Note vs title vs gift:{" "}
+        <li>Decide whether the parent is a donor, a co-borrower, or taking title, pick one story and keep it. Note vs title vs gift:{" "}
           <Link href="/blog/cosign-vs-co-borrower">cosign vs co-borrower</Link>.</li>
         <li>Do not move money until a loan officer says how this program wants it sourced.</li>
         <li>

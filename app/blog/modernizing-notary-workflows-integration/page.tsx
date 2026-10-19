@@ -3,7 +3,7 @@ const published = "2025-12-10";
 const modified = "2025-12-10";
 const slug = "/blog/modernizing-notary-workflows-integration";
 const title = "Modernizing Legal Workflows with Remote Online Notary";
-const description = "How we integrated seamless booking for remote online notary (RON) services directly into the Ondo platform.";
+const description = "How we integrated booking for remote online notary (RON) services directly into the Ondo platform.";
 const author = "Product Team";
 
 const keywords = [

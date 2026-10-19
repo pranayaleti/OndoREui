@@ -89,7 +89,7 @@ export default function USDALoanPage() {
                     <li>• {USDA_SNAPSHOT.mapNote}</li>
                     <li>• Some Cache Valley, Sanpete, and rural Utah County pockets have been eligible in past map vintages. That is not a substitute for the current address lookup.</li>
                     <li>• How-to: <Link href="/blog/usda-map-income-limit-eligibility" className="text-primary underline underline-offset-4">USDA map and income limit</Link></li>
-                    <li>• Veteran in a rural tract: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary underline underline-offset-4">USDA vs VA vs FHA</Link> — comparison, not a pick.</li>
+                    <li>• Veteran in a rural tract: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary underline underline-offset-4">USDA vs VA vs FHA</Link>, comparison, not a pick.</li>
                   </ul>
                 </div>
                 <div>
@@ -105,7 +105,7 @@ export default function USDALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• {USDA_SNAPSHOT.occupancy}</li>
                     <li>• {USDA_SNAPSHOT.creditNote}</li>
-                    <li>• Property must be in a currently eligible census area — verify before the offer.</li>
+                    <li>• Property must be in a currently eligible census area, verify before the offer.</li>
                   </ul>
                 </div>
               </div>
@@ -118,17 +118,17 @@ export default function USDALoanPage() {
                   <h4 className="text-lg font-semibold mb-3 text-primary">USDA Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Zero down when map, income, and occupancy tests pass</li>
-                    <li>• Guarantee fee snapshot is dated in the facts module — confirm the current RD notice</li>
+                    <li>• Guarantee fee snapshot is dated in the facts module, confirm the current RD notice</li>
                     <li>• Compare total cost on two Loan Estimates rather than assuming USDA beats FHA</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-primary">FHA Advantages</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• No geographic map test — FHA is not census-tract limited the way USDA is</li>
+                    <li>• No geographic map test, FHA is not census-tract limited the way USDA is</li>
                     <li>• HUD credit policy can sit lower than many USDA overlays; overlays still apply</li>
                     <li>• No USDA household income cap</li>
-                    <li>• HUD county limits differ from USDA area limits — look up the current tables</li>
+                    <li>• HUD county limits differ from USDA area limits, look up the current tables</li>
                   </ul>
                 </div>
               </div>

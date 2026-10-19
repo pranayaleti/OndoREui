@@ -65,14 +65,14 @@ export default function DelayedFinancingPage() {
           "Agency delayed-financing exception: cash purchase, then a cash-out later. Overlay is not a statute.",
         published: "2026-08-29",
         category: "Refinance",
-        bannerSubtitle: "Cash now, mortgage later — a published exception shape, not a guaranteed product.",
+        bannerSubtitle: "Cash now, mortgage later, a published exception shape, not a guaranteed product.",
         faqs,
         keywords: ["delayed financing", "cash out after cash purchase"],
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Delayed financing is the agency conversation when you bought a house with cash — no mortgage on that
-        purchase — and later want a cash-out on the same property. Fannie Mae publishes a delayed-financing exception
+        Delayed financing is the agency conversation when you bought a house with cash, no mortgage on that
+        purchase, and later want a cash-out on the same property. Fannie Mae publishes a delayed-financing exception
         in Selling Guide B2-1.3-03. That is a selling-guide exception, not a statute, and overlays can be tighter.
         Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>

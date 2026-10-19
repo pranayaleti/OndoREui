@@ -37,7 +37,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Typical occupancy",
     cells: {
       dscr: "Investment. The property is not your primary or second home.",
-      full: "Investment on an agency rental purchase. If you will live in one unit, that is a house-hack / primary file — not this column.",
+      full: "Investment on an agency rental purchase. If you will live in one unit, that is a house-hack / primary file, not this column.",
     },
   },
   {
@@ -106,13 +106,13 @@ export default function DscrVsFullDocPage() {
       <h2>When DSCR even enters the chat</h2>
       <p>
         {NON_QM.dscr} Use the <Link href="/calculators/dscr">DSCR calculator</Link> as an illustration of rent versus
-        payment — including vacancy and expenses the investor will haircut. The tool cannot see occupancy or your tax
+        payment, including vacancy and expenses the investor will haircut. The tool cannot see occupancy or your tax
         returns.
       </p>
       <p>
         Funding a rental down payment from a cash-out on the house you occupy is a different trap: two occupancies, two
         LTVs. See <Link href="/blog/cash-out-to-buy-a-rental">cash-out to buy a rental</Link>. Occupancy labels are{" "}
-        <Link href="/blog/second-home-vs-investment-occupancy">primary, second home, or investment</Link> — not a
+        <Link href="/blog/second-home-vs-investment-occupancy">primary, second home, or investment</Link>, not a
         pricing hack. {DSCR_VS_FULL_DOC.occupancy}
       </p>
 

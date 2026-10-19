@@ -79,7 +79,7 @@ export default function RecastVsRefinancePage() {
       <ul>
         <li>Do you like the current note rate? If yes, recast or extra principal is usually the first conversation.</li>
         <li>Will the servicer recast this investor and this product? Ask in writing.</li>
-        <li>If you want a lower rate, put points and origination into break-even — not just the appraisal.</li>
+        <li>If you want a lower rate, put points and origination into break-even, not just the appraisal.</li>
         <li>A lump sum that you need later for reserves or another purchase is not “free” recast money.</li>
       </ul>
 
@@ -92,7 +92,7 @@ export default function RecastVsRefinancePage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Ask the servicer whether a recast is allowed and what the fee is — on your note, not a blog.</li>
+        <li>Ask the servicer whether a recast is allowed and what the fee is, on your note, not a blog.</li>
         <li>
           If you are shopping a refinance, use the{" "}
           <Link href="/calculators/refinance">refinance calculator</Link> and the stay-horizon table above.

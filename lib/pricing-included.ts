@@ -29,7 +29,7 @@ export const PRICING_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   {
     item: "When the management fee is billed",
     ondo: "Published plans bill a percentage of collected rent. Confirm the executed agreement; there is no separate vacancy retainer on those plans.",
-    typical: "Percentage of rent, or a flat monthly that may still be billed during vacancy — ask before you sign.",
+    typical: "Percentage of rent, or a flat monthly that may still be billed during vacancy, ask before you sign.",
   },
   {
     item: "Rate by portfolio size",

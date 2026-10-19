@@ -21,7 +21,7 @@ export function TourRequestForm({ propertyId }: { propertyId: string }) {
   if (done) {
     return (
       <p className="rounded-lg border border-border bg-muted/40 p-4 text-sm" role="status">
-        Tour request sent. A leasing team member will confirm a time — this form does not book a calendar slot.
+        Tour request sent. A leasing team member will confirm a time, this form does not book a calendar slot.
       </p>
     )
   }
@@ -53,7 +53,7 @@ export function TourRequestForm({ propertyId }: { propertyId: string }) {
     >
       <h3 className="font-semibold">Video or in-person tour</h3>
       <p className="text-sm text-muted-foreground">
-        Choose in person or video and a preferred time. We route this to leasing — we do not auto-book a calendar.
+        Choose in person or video and a preferred time. We route this to leasing, we do not auto-book a calendar.
       </p>
       <div className="flex flex-wrap gap-3 text-sm">
         <label className="flex min-h-11 items-center gap-2">

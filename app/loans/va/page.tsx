@@ -84,7 +84,7 @@ export default function VALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Veterans with qualifying service and discharge (confirm the current VA chart)</li>
                     <li>• Active-duty service members, National Guard, and Reserves when service-length rules are met</li>
-                    <li>• Some surviving spouses — COE is the source of truth, not this list</li>
+                    <li>• Some surviving spouses, COE is the source of truth, not this list</li>
                     <li>• Service-length and discharge rules are more detailed than a marketing bullet. Confirm on va.gov and with a Certificate of Eligibility.</li>
                   </ul>
                 </div>
@@ -158,14 +158,14 @@ export default function VALoanPage() {
                 <Link href="/blog/selling-with-va-loan-entitlement-restoration">
                   selling and restoring entitlement after payoff
                 </Link>
-                , and{" "}
+                and{" "}
                 <Link href="/blog/va-residual-income-vs-dti">residual income vs DTI</Link>. Hill AFB (Davis County)
-                occupancy and COE — not a mill doorway:{" "}
+                occupancy and COE, not a mill doorway:{" "}
                 <Link href="/blog/hill-afb-va-coe-occupancy">Hill AFB COE + occupancy</Link>. A veteran buying in a rural
                 tract should compare tests, not slogans:{" "}
                 <Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link>. A VA-to-VA rate reduction
                 with fewer docs is a{" "}
-                <Link href="/blog/fha-va-streamline-refinance-less-docs">VA IRRRL / streamline</Link> — not a cash-out.
+                <Link href="/blog/fha-va-streamline-refinance-less-docs">VA IRRRL / streamline</Link>, not a cash-out.
               </p>
             </div>
 

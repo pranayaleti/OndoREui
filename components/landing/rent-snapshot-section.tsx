@@ -27,7 +27,7 @@ export function RentSnapshotSection() {
 
   const prefill =
     revealed && estimate
-      ? `Homepage rent snapshot — ${city}, ${bedrooms} bed. Estimated rent ${formatUsd0(estimate.rentLow)}–${formatUsd0(estimate.rentHigh)}/mo.`
+      ? `Homepage rent snapshot, ${city}, ${bedrooms} bed. Estimated rent ${formatUsd0(estimate.rentLow)}–${formatUsd0(estimate.rentHigh)}/mo.`
       : ""
 
   return (
@@ -48,7 +48,7 @@ export function RentSnapshotSection() {
           </h2>
           <p className="mt-4 text-lg text-foreground/70">
             City and bedrooms in, a median-based rent range out. Contact is
-            optional and only shows after the number — one form, tagged as an
+            optional and only shows after the number, one form, tagged as an
             owner inquiry.
           </p>
         </div>
@@ -148,7 +148,7 @@ export function RentSnapshotSection() {
               />
             ) : (
               <div className="rounded-xl border border-dashed border-border bg-card/50 p-6 text-sm text-foreground/60">
-                Your note to the team appears here after the rent range — one
+                Your note to the team appears here after the rent range, one
                 owner form, not a second copy of the same fields.
               </div>
             )}

@@ -64,13 +64,13 @@ export default function MortgageReservesPitiaPage() {
           "Reserves are remaining liquid assets after cash to close, counted as months of PITIA. Not extra closing costs. Gift funds often cannot fill this line.",
         published: "2026-08-29",
         category: "First-Time Buyers",
-        bannerSubtitle: "Months of the full housing payment left after you close — not a second earnest-money check.",
+        bannerSubtitle: "Months of the full housing payment left after you close, not a second earnest-money check.",
         faqs,
         keywords: ["PITIA reserves", "mortgage reserve months"],
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Reserves are liquid assets that remain after cash to close, measured as months of PITIA — principal, interest,
+        Reserves are liquid assets that remain after cash to close, measured as months of PITIA, principal, interest,
         taxes, insurance, and association dues when they apply. They are not extra closing costs you write a check for
         at the table. Snapshot as of {LENDING_FACTS_AS_OF}. This page does not publish a single required number of
         months.

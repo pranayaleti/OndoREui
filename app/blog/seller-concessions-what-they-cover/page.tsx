@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "What happens if we agree to more than the cap?",
     answer:
-      "It does not simply get paid anyway. Depending on the program the excess is either disallowed and reallocated at closing or — on FHA, where an over-limit contribution is treated as an inducement to purchase — subtracted from the value used to size the loan, which cuts the loan amount as well. Either way the buyer is short at the table, and by more than the excess in the second case. Get the applicable limit from the loan officer before the concession goes into the contract.",
+      "It does not simply get paid anyway. Depending on the program the excess is either disallowed and reallocated at closing or, on FHA, where an over-limit contribution is treated as an inducement to purchase, subtracted from the value used to size the loan, which cuts the loan amount as well. Either way the buyer is short at the table, and by more than the excess in the second case. Get the applicable limit from the loan officer before the concession goes into the contract.",
   },
   {
     question: "Is a seller credit better than a lower price?",
@@ -56,7 +56,7 @@ export default function SellerConcessionsPage() {
         takeaways: [
           "A seller concession is a credit at closing toward closing costs, prepaids, or a rate buydown. It is negotiated in the contract and spent under program rules.",
           "It generally cannot go toward the down payment on agency financing. A buyer short there needs something else, such as documented gift funds.",
-          "Every program caps the contribution, and the cap moves with program, occupancy, and loan-to-value — so the number belongs in the offer after a loan officer confirms it, not before.",
+          "Every program caps the contribution, and the cap moves with program, occupancy, and loan-to-value, so the number belongs in the offer after a loan officer confirms it, not before.",
           "Raising the price to fund a credit changes the loan amount and still has to appraise at the higher figure.",
         ],
         faqs,
@@ -72,7 +72,7 @@ export default function SellerConcessionsPage() {
       <h2>What a concession is</h2>
       <p>{SELLER_CONCESSIONS.whatItIs}</p>
       <p>
-        That is the whole mechanism — money moving from the seller's side of the settlement statement to the buyer's
+        That is the whole mechanism, money moving from the seller's side of the settlement statement to the buyer's
         costs. It is not a discount applied to the loan, and it does not reduce the amount being borrowed.
       </p>
 
@@ -86,7 +86,7 @@ export default function SellerConcessionsPage() {
 
       <ArticleCallout variant="warning" title="Not the down payment">
         {SELLER_CONCESSIONS.notDownPayment} This is the single most common misunderstanding about concessions, and it
-        surfaces late — usually when cash to close is being finalised. If the down payment is the gap, look at{" "}
+        surfaces late, usually when cash to close is being finalised. If the down payment is the gap, look at{" "}
         <Link href="/blog/gift-funds-down-payment-rules">gift funds</Link> instead.
       </ArticleCallout>
 
@@ -108,7 +108,7 @@ export default function SellerConcessionsPage() {
           "Cash at the table is the binding constraint, not the loan amount.",
         ]}
         cons={[
-          "The appraisal is the constraint — a lower price is a lower value to support.",
+          "The appraisal is the constraint, a lower price is a lower value to support.",
           "The concession would exceed the program cap anyway.",
           "The buyer will hold the loan a long time, where a permanently lower balance can outweigh a one-time credit.",
         ]}

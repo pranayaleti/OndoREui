@@ -6,7 +6,7 @@
  * - https://www.rhautah.org/education-center
  *
  * Ondo does not operate these programs and does not host their PDFs.
- * Educational only — not legal advice.
+ * Educational only, not legal advice.
  */
 
 export const UTAH_LANDLORD_EDUCATION_KINDS = [
@@ -31,10 +31,10 @@ export interface UtahLandlordEducationLink {
 export const UTAH_LANDLORD_EDUCATION_SECTION_HREF = "/resources#utah-landlord-education"
 
 export const UTAH_LANDLORD_EDUCATION_DISCLAIMER =
-  "These are third-party programs and official public pages. Ondo Real Estate does not operate The Good Landlord or the Rental Housing Association of Utah (RHA Utah), does not host their class content or form PDFs, and does not issue city business-license discounts. Educational only — not legal advice, not a substitute for a licensed attorney, and not Ondo’s lease packet. Fair Housing and Equal Housing Opportunity rules apply to every rental; we do not steer applicants toward or away from any neighborhood or protected class."
+  "These are third-party programs and official public pages. Ondo Real Estate does not operate The Good Landlord or the Rental Housing Association of Utah (RHA Utah), does not host their class content or form PDFs, and does not issue city business-license discounts. Educational only, not legal advice, not a substitute for a licensed attorney, and not Ondo’s lease packet. Fair Housing and Equal Housing Opportunity rules apply to every rental; we do not steer applicants toward or away from any neighborhood or protected class."
 
 export const UTAH_LANDLORD_EDUCATION_INTRO =
-  "Some Utah cities require a Good Landlord class for a rental business-license fee discount. Confirm whether your city participates and what it currently accepts — use the cities page below, then verify with the city. Completing a class through Ondo is not how that discount is granted."
+  "Some Utah cities require a Good Landlord class for a rental business-license fee discount. Confirm whether your city participates and what it currently accepts, use the cities page below, then verify with the city. Completing a class through Ondo is not how that discount is granted."
 
 export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[] = [
   {
@@ -50,7 +50,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.utcourts.gov/en/self-help/services/ocap.html",
     source: "Utah State Courts",
     description:
-      "Utah State Courts OCAP — the destination The Good Landlord labeled “Utah Eviction process.” Use it to generate court forms; it is not legal advice and not an Ondo filing service.",
+      "Utah State Courts OCAP, the destination The Good Landlord labeled “Utah Eviction process.” Use it to generate court forms; it is not legal advice and not an Ondo filing service.",
     kind: "official",
   },
   {
@@ -58,7 +58,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.utcourts.gov/en/self-help/case-categories/housing.html",
     source: "Utah State Courts",
     description:
-      "Official self-help hub for eviction and other landlord-tenant topics. Educational court information — not a substitute for a licensed attorney.",
+      "Official self-help hub for eviction and other landlord-tenant topics. Educational court information, not a substitute for a licensed attorney.",
     kind: "official",
   },
   {
@@ -78,7 +78,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     kind: "official",
   },
   {
-    title: "The Good Landlord — helpful websites",
+    title: "The Good Landlord, helpful websites",
     href: "https://www.thegoodlandlord.net/home/helpfulwebsites",
     source: "The Good Landlord",
     description:
@@ -86,7 +86,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     kind: "official",
   },
   {
-    title: "The Good Landlord — training home",
+    title: "The Good Landlord, training home",
     href: "https://www.thegoodlandlord.net/home/",
     source: "The Good Landlord",
     description:
@@ -94,7 +94,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     kind: "training",
   },
   {
-    title: "The Good Landlord — live classes",
+    title: "The Good Landlord, live classes",
     href: "https://www.thegoodlandlord.net/home/classes",
     source: "The Good Landlord",
     description:
@@ -102,7 +102,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     kind: "training",
   },
   {
-    title: "The Good Landlord — online training",
+    title: "The Good Landlord, online training",
     href: "https://www.thegoodlandlord.net/home/onlinetraining",
     source: "The Good Landlord",
     description:
@@ -115,11 +115,11 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.thegoodlandlord.net/home/goodlandlordcities",
     source: "The Good Landlord",
     description:
-      "Cities this provider lists as participating in a Good Landlord program. Participation and license-fee discounts change — verify with the city before you rely on a discount.",
+      "Cities this provider lists as participating in a Good Landlord program. Participation and license-fee discounts change, verify with the city before you rely on a discount.",
     kind: "training",
   },
   {
-    title: "The Good Landlord — background checks",
+    title: "The Good Landlord, background checks",
     href: "https://www.thegoodlandlord.net/home/backgroundchecks",
     source: "The Good Landlord",
     description:
@@ -128,7 +128,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     loginMayBeRequired: true,
   },
   {
-    title: "RHA Utah — Good Landlord class",
+    title: "RHA Utah, Good Landlord class",
     href: "https://www.rhautah.org/good-landlord",
     source: "RHA Utah",
     description:
@@ -140,7 +140,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.rhautah.org/upro-certification",
     source: "RHA Utah",
     description:
-      "RHA of Utah’s 32-hour UPRO designation series. Association education — not an Ondo credential.",
+      "RHA of Utah’s 32-hour UPRO designation series. Association education, not an Ondo credential.",
     kind: "training",
   },
   {
@@ -172,7 +172,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.rhautah.org/cas-certification",
     source: "RHA Utah",
     description:
-      "NAA Certified Apartment Supplier designation administered by RHA of Utah for industry suppliers — not a landlord license.",
+      "NAA Certified Apartment Supplier designation administered by RHA of Utah for industry suppliers, not a landlord license.",
     kind: "training",
   },
   {
@@ -185,7 +185,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     loginMayBeRequired: true,
   },
   {
-    title: "The Good Landlord — download forms",
+    title: "The Good Landlord, download forms",
     href: "https://www.thegoodlandlord.net/home/forms",
     source: "The Good Landlord",
     description:
@@ -198,7 +198,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.rhautah.org/education-downloads",
     source: "RHA Utah",
     description:
-      "RHA Education Center pamphlets and PDFs (including a landlord guide and HUD assistance-animal materials they publish). Link out — Ondo does not host the files.",
+      "RHA Education Center pamphlets and PDFs (including a landlord guide and HUD assistance-animal materials they publish). Link out, Ondo does not host the files.",
     kind: "forms",
   },
   {
@@ -214,7 +214,7 @@ export const UTAH_LANDLORD_EDUCATION_LINKS: readonly UtahLandlordEducationLink[]
     href: "https://www.rhautah.org/economic-data",
     source: "RHA Utah",
     description:
-      "RHA economic-forecast and multifamily market report downloads. Third-party data — not an Ondo appraisal, CMA, or valuation.",
+      "RHA economic-forecast and multifamily market report downloads. Third-party data, not an Ondo appraisal, CMA, or valuation.",
     kind: "association",
   },
 ]

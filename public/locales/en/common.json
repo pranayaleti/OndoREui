@@ -618,7 +618,7 @@
     "notesLabel": "Notes (optional)",
     "notesPlaceholder": "Condition, HOA, timeline, or questions for the listing agent.",
     "photosLabel": "Photos or documents (optional)",
-    "photosHint": "Describe what you have (exterior photos, floor plan, HOA docs). We'll request files by email — this form does not upload files.",
+    "photosHint": "Describe what you have (exterior photos, floor plan, HOA docs). We'll request files by email, this form does not upload files.",
     "photosPlaceholder": "e.g. iPhone exteriors and a PDF floor plan",
     "submit": "Request listing packet",
     "sending": "Sending…",
@@ -647,7 +647,7 @@
     "term": "Term (years)",
     "calculate": "Estimate P&I",
     "result": "Estimated monthly P&I: {{amount}}",
-    "piNote": "P&I only — not taxes, insurance, or PMI. Example inputs, not a quote.",
+    "piNote": "P&I only, not taxes, insurance, or PMI. Example inputs, not a quote.",
     "licensing": "Licensing disclosures"
   },
   "testimonialUi": {

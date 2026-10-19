@@ -70,14 +70,14 @@ export default function ItinDocumentationPage() {
           "What lenders typically document for ITIN and lawful-presence files. Citizenship is a legal eligibility topic, not a national-origin preference.",
         published: "2026-08-29",
         category: "Credit",
-        bannerSubtitle: "Legal eligibility and documents — not who we prefer.",
+        bannerSubtitle: "Legal eligibility and documents, not who we prefer.",
         faqs,
         keywords: ["ITIN mortgage", "non-citizen documentation"],
       }}
     >
       <p className="lead text-xl text-foreground/70">
         Lenders document citizenship and immigration status because some federal loan programs have legal eligibility
-        rules — not because national origin is a credit score. An ITIN is an IRS tax number, not work authorization and
+        rules, not because national origin is a credit score. An ITIN is an IRS tax number, not work authorization and
         not a promise of approval. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
       <p>{ITIN_DOCUMENTATION.notNationalOrigin}</p>
@@ -93,7 +93,7 @@ export default function ItinDocumentationPage() {
       <p>{ITIN_DOCUMENTATION.agencyVsNonQm}</p>
       <p>{ITIN_DOCUMENTATION.utahNote}</p>
 
-      <h2>Documentation categories — not a preference list</h2>
+      <h2>Documentation categories, not a preference list</h2>
       <ComparisonTable
         caption={`Documentation categories as of ${LENDING_FACTS_AS_OF}. Confirm the guide in force.`}
         columns={columns}
@@ -106,7 +106,7 @@ export default function ItinDocumentationPage() {
       <h2>What this page will not do</h2>
       <ul>
         <li>Rank a file by country of origin or visa nationality.</li>
-        <li>Treat GSE or HUD residency rules as frozen forever — confirm the guide in force.</li>
+        <li>Treat GSE or HUD residency rules as frozen forever, confirm the guide in force.</li>
         <li>Give immigration, tax, or legal advice.</li>
         <li>Steer anyone to a neighborhood or a program by national origin.</li>
       </ul>
@@ -114,7 +114,7 @@ export default function ItinDocumentationPage() {
       <h2>What happens next</h2>
       <ol>
         <li>
-          If agency income already documents with a valid SSN and lawful presence, start there —{" "}
+          If agency income already documents with a valid SSN and lawful presence, start there,{" "}
           <Link href="/loans">loan programs</Link> and{" "}
           <Link href="/blog/1099-mortgage-documentation-checklist">1099 checklist</Link> when income is contract.
         </li>

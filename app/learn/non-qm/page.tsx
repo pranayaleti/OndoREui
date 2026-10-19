@@ -104,35 +104,35 @@ export default function NonQmLearnPage() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link> — new 1099 income is
+                <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link>, new 1099 income is
                 usually not yet an agency average, and it is not automatically a bank-statement file either.
               </li>
               <li>
-                <Link href="/blog/k-1-income-what-usually-counts">K-1 income: what usually counts</Link> — agency K-1
+                <Link href="/blog/k-1-income-what-usually-counts">K-1 income: what usually counts</Link>, agency K-1
                 calc vs a Non-QM conversation when the return does not match cash.
               </li>
               <li>
                 <Link href="/blog/asset-depletion-qualifying-non-qm">
                   Asset-depletion qualifying: retirement and investment assets
                 </Link>{" "}
-                — a written formula on eligible assets, not a brokerage screenshot. Agency and Non-QM paths differ.
+              a written formula on eligible assets, not a brokerage screenshot. Agency and Non-QM paths differ.
               </li>
               <li>
-                <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc rental loan</Link> — property
+                <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc rental loan</Link>, property
                 qualifies vs borrower qualifies. Occupancy still has to match use.
               </li>
               <li>
                 <Link href="/blog/itin-non-us-citizen-mortgage-documentation">
                   ITIN / non-U.S. citizen documentation
                 </Link>{" "}
-                — legal eligibility and document categories, not a national-origin preference.
+              legal eligibility and document categories, not a national-origin preference.
               </li>
               <li>
-                <Link href="/calculators/dscr">DSCR calculator</Link> — illustration of rent vs payment, not an
+                <Link href="/calculators/dscr">DSCR calculator</Link>, illustration of rent vs payment, not an
                 approval.
               </li>
               <li>
-                <Link href="/learn/investment">Investment financing hub</Link> — occupancy, cash-out to a rental, FHA
+                <Link href="/learn/investment">Investment financing hub</Link>, occupancy, cash-out to a rental, FHA
                 house-hack.
               </li>
             </ul>

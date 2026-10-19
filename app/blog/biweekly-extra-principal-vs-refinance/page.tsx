@@ -36,7 +36,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Same dollars, different machine",
     cells: {
       bi: BIWEEKLY_VS_REFI.extraPrincipal,
-      refi: "Costs have to be earned back. See break-even — a lower note rate can still lose if you move first.",
+      refi: "Costs have to be earned back. See break-even, a lower note rate can still lose if you move first.",
     },
   },
 ]
@@ -68,7 +68,7 @@ export default function BiweeklyVsRefinancePage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        A true biweekly schedule is 26 half-payments a year — one extra full payment compared with 12 monthly payments.
+        A true biweekly schedule is 26 half-payments a year, one extra full payment compared with 12 monthly payments.
         A refinance changes the note. They are different tools. This page does not quote a dollar of interest saved or a
         number of years shaved. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -90,7 +90,7 @@ export default function BiweeklyVsRefinancePage() {
       <h2>When extra principal is the conversation</h2>
       <ul>
         <li>You like the current rate and want faster payoff without new closing costs.</li>
-        <li>You can send extra principal the servicer will apply — ask, do not assume a third-party biweekly company.</li>
+        <li>You can send extra principal the servicer will apply, ask, do not assume a third-party biweekly company.</li>
         <li>
           A recast after a lump sum is another servicing tool; it is not a refinance.{" "}
           <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>.
@@ -106,7 +106,7 @@ export default function BiweeklyVsRefinancePage() {
         </li>
       </ul>
 
-      <h2>Illustrate — do not memorize a blog savings number</h2>
+      <h2>Illustrate, do not memorize a blog savings number</h2>
       <p>
         Use the <Link href="/calculators/mortgage-payment">mortgage payment calculator</Link> to see extra principal on
         the current note, and the <Link href="/calculators/refinance">refinance calculator</Link> to include costs on a

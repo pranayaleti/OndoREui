@@ -130,7 +130,7 @@ export const allCitySlugs = utahCitiesFromNorthOgdenToNephi.map((c) => toCitySlu
 /**
  * Unique ZIPs across all cities. Several ZIPs span multiple cities (84015 covers
  * Clinton, West Point, Sunset and Clearfield), so the raw flatMap yields 100
- * entries for 78 ZIPs — duplicate `generateStaticParams` entries for every
+ * entries for 78 ZIPs, duplicate `generateStaticParams` entries for every
  * `/{service}/zip/[zip]/` route. `findCityByZip` resolves each ZIP to a single
  * primary city, so dedupe at the source.
  */

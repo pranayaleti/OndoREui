@@ -78,7 +78,7 @@ export interface ApiProperty {
   manager?: ApiContact | null;
   /**
    * Optional marketing fields. Current public listings omit these.
-   * UI must hide any section whose values are missing — never invent figures.
+   * UI must hide any section whose values are missing, never invent figures.
    */
   listingKind?: ListingKind | null;
   yearBuilt?: number | null;

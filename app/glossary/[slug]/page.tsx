@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!entry) return {}
 
   // "What is X?" mirrors how the term is actually searched, without keyword stuffing.
-  const title = pageTitleText(`${entry.term} — What It Means | ${SITE_NAME}`)
+  const title = pageTitleText(`${entry.term}, What It Means | ${SITE_NAME}`)
   return pageCanonicalMetadata(glossaryHref(entry.slug), {
     title: pageTitle(title),
     description: entry.short,
@@ -84,7 +84,7 @@ export default async function GlossaryTermPage({ params }: { params: Params }) {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title={`${entry.term} — What It Means`}
+        title={`${entry.term}, What It Means`}
         description={entry.short}
         pathname={glossaryHref(entry.slug)}
         image={`${SITE_URL}/modern-office-building.webp`}

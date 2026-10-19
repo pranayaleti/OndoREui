@@ -95,7 +95,7 @@ export default function RefinancingCondoAgingHoaPage() {
         caption={`Aging-HOA project lines as of ${LENDING_FACTS_AS_OF}. Not legal or insurance advice.`}
         columns={columns}
         rows={rows}
-        footnote="The HOA questionnaire, budget, and insurance certificates are the source documents — not a listing’s year built."
+        footnote="The HOA questionnaire, budget, and insurance certificates are the source documents, not a listing’s year built."
       />
 
       <h2>Fannie project review vs FHA roster</h2>
@@ -117,7 +117,7 @@ export default function RefinancingCondoAgingHoaPage() {
       <h2>Checklist for a condo refinance</h2>
       <ul>
         <li>Current HOA questionnaire, budget, and reserve study (or a written explanation if none exists).</li>
-        <li>Litigation disclosure — pending and threatened, not only “we won last year.”</li>
+        <li>Litigation disclosure, pending and threatened, not only “we won last year.”</li>
         <li>Master policy, deductible, and walls-in vs walls-out.</li>
         <li>Special assessments: amount, remaining term, and whether they are in DTI.</li>
         <li>If FHA is the new loan, look up the project on HUD’s list before you pay for a full refinance file.</li>
@@ -135,7 +135,7 @@ export default function RefinancingCondoAgingHoaPage() {
         <li>Ask the association (or your agent) for the questionnaire packet before you lock a refinance plan.</li>
         <li>
           Run <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even</Link> only after the project
-          looks eligible — costs on an ineligible building are wasted.
+          looks eligible, costs on an ineligible building are wasted.
         </li>
         <li>
           <Link href="/refinance">Refinance hub</Link> · <Link href="/loans/fha">FHA loans</Link> ·{" "}

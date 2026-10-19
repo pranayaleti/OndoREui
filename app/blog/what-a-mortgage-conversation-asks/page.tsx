@@ -83,7 +83,7 @@ export default function QualifyAsksGuidePage() {
 
       <h2>Checklist before you talk</h2>
       <ul>
-        <li>How you are paid (W-2, 1099, K-1, mixed) — see the <Link href="/learn/variable-income">variable-income hub</Link> if it is not the same every month.</li>
+        <li>How you are paid (W-2, 1099, K-1, mixed), see the <Link href="/learn/variable-income">variable-income hub</Link> if it is not the same every month.</li>
         <li>Monthly debts you know about, including a car you might finance next week.</li>
         <li>Whether gift funds or DPA are in the plan.</li>
         <li>Occupancy: you will live there, second home, or rental.</li>
@@ -92,7 +92,7 @@ export default function QualifyAsksGuidePage() {
 
       <h2>After the conversation</h2>
       <p>
-        If a letter is issued, that is still only a snapshot. The three stages — letter, AUS findings, clear to close —
+        If a letter is issued, that is still only a snapshot. The three stages, letter, AUS findings, clear to close,
         are <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs CTC</Link>. Typical late
         fails: <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>.
       </p>
@@ -106,7 +106,7 @@ export default function QualifyAsksGuidePage() {
           Send a message or book time via <Link href="/contact">contact</Link>. Asking is not a loan application.
         </li>
         <li>
-          Use calculators as illustrations only — <Link href="/calculators/affordability">affordability</Link> does not
+          Use calculators as illustrations only, <Link href="/calculators/affordability">affordability</Link> does not
           underwrite you.
         </li>
       </ol>

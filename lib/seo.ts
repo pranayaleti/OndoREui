@@ -796,7 +796,7 @@ export function generateDefinedTermJsonLd(params: {
 /**
  * `DefinedTermSet` for the glossary index, listing its entries by URL.
  *
- * Kept to name/description/url per member — repeating each full definition here
+ * Kept to name/description/url per member, repeating each full definition here
  * would duplicate every term page's own markup for no gain.
  */
 export function generateDefinedTermSetJsonLd(params: {

@@ -12,7 +12,7 @@ export function SellIncludedVsTypicalTable() {
         Full-service listing, line by line
       </h2>
       <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-foreground/70">
-        Ondo on the left. A typical Utah full-service listing on the right — industry
+        Ondo on the left. A typical Utah full-service listing on the right, industry
         pattern, not a named dunk, and not a savings claim. Compensation is quoted in
         writing for your property.
       </p>

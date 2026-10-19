@@ -37,7 +37,7 @@ export default function SwitchFromTurbotenantMigrationGuide() {
         author,
         keywords,
         category: "Migration",
-        bannerSubtitle: "A clean cutover — no lost records, no confused tenants.",
+        bannerSubtitle: "A clean cutover, no lost records, no confused tenants.",
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
@@ -66,7 +66,7 @@ export default function SwitchFromTurbotenantMigrationGuide() {
             </ul>
 
             <h2>Takeaway</h2>
-            <p>Export, reconcile, then cut over on a clean date — that is the whole trick. Compare where you are landing first: <Link href="/vs/turbotenant">Ondo vs TurboTenant</Link> and the <Link href="/blog/turbotenant-vs-buildium-vs-ondo">three-way honest comparison</Link>.</p>
+            <p>Export, reconcile, then cut over on a clean date, that is the whole trick. Compare where you are landing first: <Link href="/vs/turbotenant">Ondo vs TurboTenant</Link> and the <Link href="/blog/turbotenant-vs-buildium-vs-ondo">three-way honest comparison</Link>.</p>
           
     </ArticleShell>
   )

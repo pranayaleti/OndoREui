@@ -50,7 +50,7 @@ export const CONTACT_INQUIRY_OPTIONS = CONTACT_AUDIENCE_OPTIONS
  * After a successful submit we send the visitor somewhere useful for their
  * audience. Renters go to browse rentals; owners stay on /contact so the
  * Calendly embed on the same page is one scroll away. Anything else stays
- * put — no jarring redirect for support or general questions.
+ * put, no jarring redirect for support or general questions.
  */
 function postSubmitPathFor(inquiryType: ContactInquiryType | ""): string | null {
   switch (inquiryType) {

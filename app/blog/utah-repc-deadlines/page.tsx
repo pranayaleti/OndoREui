@@ -38,7 +38,7 @@ export const metadata = articleMetadata({
   mergedInto,
   title: "Utah REPC Deadlines and What They Do to Your Loan File",
   description:
-    "Four independent deadlines, calendar days, 5 p.m. Mountain — and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
+    "Four independent deadlines, calendar days, 5 p.m. Mountain, and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
   published: "2026-09-17",
   category: "First-Time Buyers",
   keywords: ["Utah REPC deadlines", "due diligence deadline Utah", "financing and appraisal deadline"],
@@ -53,12 +53,12 @@ export default function UtahRepcDeadlinesPage() {
         mergedInto,
         title: "Utah REPC Deadlines and What They Do to Your Loan File",
         description:
-          "Four independent deadlines, calendar days, 5 p.m. Mountain — and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
+          "Four independent deadlines, calendar days, 5 p.m. Mountain, and a lender who is not a party to any of them. How REPC timing interacts with underwriting.",
         published: "2026-09-17",
         category: "First-Time Buyers",
         bannerSubtitle: "The contract runs on its own clock. Your loan file does not control it.",
         takeaways: [
-          "The REPC typically carries four independent deadlines — Seller Disclosure, Due Diligence, Financing & Appraisal, and Settlement. Clearing one does not clear another.",
+          "The REPC typically carries four independent deadlines, Seller Disclosure, Due Diligence, Financing & Appraisal, and Settlement. Clearing one does not clear another.",
           "Time is of the essence, days are calendar days, and a dated performance is generally due by 5:00 p.m. Mountain on that date.",
           "Your lender, title company, and appraiser are not parties to the contract, so nothing in your loan pipeline extends a contract deadline.",
           "Written notice is what preserves a cancel right. A deadline that passes without it can put earnest money at risk even when the underlying problem was real.",
@@ -98,7 +98,7 @@ export default function UtahRepcDeadlinesPage() {
       <h2>Financing and appraisal</h2>
       <p>{UTAH_REPC.financingAppraisal}</p>
       <p>
-        This is why a low appraisal is a timing question as much as a value question — see{" "}
+        This is why a low appraisal is a timing question as much as a value question, see{" "}
         <Link href="/blog/appraisal-comes-in-low">when the appraisal comes in low</Link>. And it is why the earnest
         money in your <Link href="/blog/utah-cash-to-close-besides-down-payment">cash stack</Link> is not purely a
         timing entry once deadlines start passing.
@@ -109,7 +109,7 @@ export default function UtahRepcDeadlinesPage() {
         steps={[
           {
             title: "Write the four dates down at acceptance",
-            body: "Not the loan milestones — the contract dates. They are the ones with consequences.",
+            body: "Not the loan milestones, the contract dates. They are the ones with consequences.",
           },
           {
             title: "Ask your loan officer where the file will realistically be on each date",
@@ -121,7 +121,7 @@ export default function UtahRepcDeadlinesPage() {
           },
           {
             title: "Extend in writing if you need more time",
-            body: "An extension is an agreement between the parties, documented as an addendum — not an assumption that everyone is being reasonable.",
+            body: "An extension is an agreement between the parties, documented as an addendum, not an assumption that everyone is being reasonable.",
           },
         ]}
       />

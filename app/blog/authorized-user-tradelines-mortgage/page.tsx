@@ -109,7 +109,7 @@ export default function AuthorizedUserTradelinesPage() {
         </li>
         <li>
           <strong>The only revolving history is a parent’s card.</strong> Overlays and AUS often treat that as not
-          enough of <em>your</em> history. Alternative credit (rent, utilities) may be the conversation — not adding
+          enough of <em>your</em> history. Alternative credit (rent, utilities) may be the conversation, not adding
           more AU cards.
         </li>
         <li>
@@ -127,7 +127,7 @@ export default function AuthorizedUserTradelinesPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Ask what the tri-merge counted — obligated tradelines vs AU — not what a consumer app displayed.</li>
+        <li>Ask what the tri-merge counted, obligated tradelines vs AU, not what a consumer app displayed.</li>
         <li>
           If someone else will be on the <em>note</em>, that is{" "}
           <Link href="/blog/cosign-vs-co-borrower">cosign vs co-borrower</Link>, not AU.

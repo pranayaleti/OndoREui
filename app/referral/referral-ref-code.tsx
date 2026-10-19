@@ -11,7 +11,7 @@ import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
  * `useSearchParams()` makes its closest Suspense boundary render the fallback
  * during static export, so the two ref-dependent pieces live here behind their
  * own small boundaries. Wrapping the whole page instead left `/referral/` with
- * no server-rendered body at all — an indexable page with only nav and footer.
+ * no server-rendered body at all, an indexable page with only nav and footer.
  */
 function useRefCode(): string {
   const searchParams = useSearchParams()

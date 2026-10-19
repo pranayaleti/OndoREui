@@ -38,7 +38,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Unpaid medical under $500",
     cells: {
       consumer: "The three bureaus stated they would stop including these on credit reports from 2023. If it is not on the report, it cannot score.",
-      mortgage: "Same report feed — if the bureau no longer lists it, the tri-merge usually will not either. Confirm the actual report. This is not a score-raise promise.",
+      mortgage: "Same report feed, if the bureau no longer lists it, the tri-merge usually will not either. Confirm the actual report. This is not a score-raise promise.",
     },
   },
   {
@@ -55,7 +55,7 @@ export const metadata = articleMetadata({
   path,
   title: "Medical Collections After the FICO Model Change",
   description:
-    "Bureau medical-collection reporting changed in 2022–2023. Mortgage files often still use classic FICO. Dated snapshot — not a score-raise promise.",
+    "Bureau medical-collection reporting changed in 2022–2023. Mortgage files often still use classic FICO. Dated snapshot, not a score-raise promise.",
   published: "2026-08-29",
   category: "Credit",
   keywords: ["medical collections mortgage FICO", "medical debt credit score mortgage"],
@@ -78,7 +78,7 @@ export default function MedicalCollectionsPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Medical collections are treated differently than they were a few years ago — on <em>credit reports</em> and on
+        Medical collections are treated differently than they were a few years ago, on <em>credit reports</em> and on
         some <em>consumer</em> scores. A mortgage file still often uses older FICO models on a tri-merge. This page is
         a dated snapshot of that gap. It does not say your score will go up. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -88,7 +88,7 @@ export default function MedicalCollectionsPage() {
       <p>{MEDICAL_COLLECTIONS.bureauReporting}</p>
       <p>
         A proposed federal rule to strip medical debt from credit reports more broadly was not a durable, in-force
-        replacement for those bureau policies as of this snapshot. Confirm current reporting on your actual tri-merge —
+        replacement for those bureau policies as of this snapshot. Confirm current reporting on your actual tri-merge,
         not a 2023 headline.
       </p>
 
@@ -117,7 +117,7 @@ export default function MedicalCollectionsPage() {
       <ol>
         <li>Do not treat a Credit Karma or issuer FICO 8 as the mortgage middle score.</li>
         <li>
-          Ask a loan officer to read the tri-merge that will actually be used — after you authorize a pull. See{" "}
+          Ask a loan officer to read the tri-merge that will actually be used, after you authorize a pull. See{" "}
           <Link href="/blog/what-a-mortgage-conversation-asks">what a conversation asks</Link>.
         </li>
         <li>If a medical collection still reports, ask whether it is a score issue, a payoff condition, or both.</li>

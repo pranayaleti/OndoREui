@@ -77,7 +77,7 @@ export default function TriMergeCreditReportPage() {
     >
       <p className="lead text-xl text-foreground/70">
         A tri-merge is a credit report that pulls Equifax, Experian, and TransUnion together. Mortgage underwriting
-        typically uses that combined file and, when three classic FICO scores are present, the middle score — not the
+        typically uses that combined file and, when three classic FICO scores are present, the middle score, not the
         average, not the highest, and not the number on a monitoring app. Snapshot as of {LENDING_FACTS_AS_OF}. This
         page does not promise that paying a collection will raise a score.
       </p>
@@ -97,7 +97,7 @@ export default function TriMergeCreditReportPage() {
         <li>Tradelines: installment loans, revolving accounts, mortgages, authorized-user lines.</li>
         <li>Balances, credit limits, and payment history as each bureau reports them.</li>
         <li>Inquiries. A cluster of new auto or card inquiries during underwriting is a common re-pull surprise.</li>
-        <li>Public records and collections — including medical collections, which have their own reporting snapshot.</li>
+        <li>Public records and collections, including medical collections, which have their own reporting snapshot.</li>
       </ul>
       <p>
         Medical collections after bureau reporting changes:{" "}
@@ -119,7 +119,7 @@ export default function TriMergeCreditReportPage() {
       <ul>
         <li>Do not close a card or open a car loan “to build score” the week of application without asking.</li>
         <li>If two bureaus disagree on a collection, that disagreement can sit on the tri-merge. Bring the paper.</li>
-        <li>A spouse’s credit is in the file when that person is a borrower — not as a hidden extra score.</li>
+        <li>A spouse’s credit is in the file when that person is a borrower, not as a hidden extra score.</li>
       </ul>
 
       <h2>What happens next</h2>

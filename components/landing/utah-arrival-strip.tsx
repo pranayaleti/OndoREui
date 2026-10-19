@@ -13,7 +13,7 @@ export function UtahArrivalStrip() {
             Starting a job in Utah?
           </h2>
           <p className="mt-1 text-sm text-foreground/70">
-            Pick the city you&apos;ll commute to. See typical rents nearby, then rent, buy, or leave a home on the books — invite-only apply after a showing.
+            Pick the city you&apos;ll commute to. See typical rents nearby, then rent, buy, or leave a home on the books, invite-only apply after a showing.
           </p>
         </div>
         <Link

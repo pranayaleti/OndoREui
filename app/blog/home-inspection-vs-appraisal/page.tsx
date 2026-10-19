@@ -42,7 +42,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Which Utah deadline it sits under",
     cells: {
       inspection: "Due Diligence Deadline.",
-      appraisal: "Financing & Appraisal Deadline — a separate, independent date.",
+      appraisal: "Financing & Appraisal Deadline, a separate, independent date.",
     },
   },
   {
@@ -111,7 +111,7 @@ export default function InspectionVsAppraisalPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        These two reports get confused constantly, usually at the worst moment — when one of them comes back badly and
+        These two reports get confused constantly, usually at the worst moment, when one of them comes back badly and
         a buyer assumes the other covered it. They answer different questions for different people. Snapshot as of{" "}
         {LENDING_FACTS_AS_OF}.
       </p>
@@ -126,7 +126,7 @@ export default function InspectionVsAppraisalPage() {
       <h2>Why the distinction matters in practice</h2>
       <p>
         The inspection exists to tell you what you are buying. The appraisal exists to tell the lender what it is
-        lending against. A buyer who waives due diligence still gets an appraisal — and gets no condition report.
+        lending against. A buyer who waives due diligence still gets an appraisal, and gets no condition report.
         A buyer whose appraisal comes in low still has whatever condition issues the inspection found.
       </p>
       <p>{APPRAISAL_GAP.lowerOfNote}</p>
@@ -148,7 +148,7 @@ export default function InspectionVsAppraisalPage() {
       <h2>What happens next</h2>
       <p>
         Put both dates on the calendar at acceptance and know which report answers which question before either one
-        lands. If condition findings turn into a renegotiation, a seller credit may be part of the answer — within
+        lands. If condition findings turn into a renegotiation, a seller credit may be part of the answer, within
         limits: <Link href="/blog/seller-concessions-what-they-cover">seller concessions</Link>.
       </p>
     </ArticleShell>

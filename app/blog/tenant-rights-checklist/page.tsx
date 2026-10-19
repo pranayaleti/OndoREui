@@ -41,12 +41,12 @@ export default function TenantRightsChecklist() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              Tenant protections vary by state and city, but a core set of rights shows up almost everywhere. Knowing them — and documenting — keeps small issues from becoming expensive ones.
+              Tenant protections vary by state and city, but a core set of rights shows up almost everywhere. Knowing them, and documenting, keeps small issues from becoming expensive ones.
             </p>
 
             <h2>Core rights (most places)</h2>
             <ul>
-              <li><strong>Habitability:</strong> a safe, working home — heat, water, and essential repairs.</li>
+              <li><strong>Habitability:</strong> a safe, working home, heat, water, and essential repairs.</li>
               <li><strong>Deposit protection:</strong> a timeline for itemized return and limits on what can be deducted. Check your state, since some cap the amount and Utah does not.</li>
               <li><strong>Entry notice:</strong> advance notice before a landlord enters, except emergencies.</li>
               <li><strong>Anti-retaliation &amp; fair housing:</strong> protection for asserting your rights.</li>
@@ -60,10 +60,10 @@ export default function TenantRightsChecklist() {
             </ul>
 
             <h2>Know your local rules</h2>
-            <p>City and state laws vary widely — check your local housing authority for specifics on deposits, notice periods, and rent rules. This is general information, not legal advice.</p>
+            <p>City and state laws vary widely, check your local housing authority for specifics on deposits, notice periods, and rent rules. This is general information, not legal advice.</p>
 
             <h2>Takeaway</h2>
-            <p>A documented tenant is a protected tenant. Ondo is built for both sides of the door — see our <Link href="/tenant">tenant tools</Link> and <Link href="/blog/first-time-home-buyer-guide">first-time buyer guide</Link> when you are ready to own.</p>
+            <p>A documented tenant is a protected tenant. Ondo is built for both sides of the door, see our <Link href="/tenant">tenant tools</Link> and <Link href="/blog/first-time-home-buyer-guide">first-time buyer guide</Link> when you are ready to own.</p>
           
     </ArticleShell>
   )

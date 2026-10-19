@@ -29,7 +29,7 @@ const rows: readonly ComparisonRow[] = [
     id: "meaning",
     criterion: "What the file usually is",
     cells: {
-      none: "Little or no score because tradelines were never opened — or not enough to generate a usable score after a three-bureau check.",
+      none: "Little or no score because tradelines were never opened, or not enough to generate a usable score after a three-bureau check.",
       weak: "Scores exist. Late pays, collections, or high utilization are on traditional revolving and installment lines.",
     },
   },
@@ -55,7 +55,7 @@ export const metadata = articleMetadata({
   path,
   title: "No Traditional Credit / Alternative Credit",
   description:
-    "Rent and utilities can document a thin file. Weak traditional credit is a different path. Fair Housing safe — no steering.",
+    "Rent and utilities can document a thin file. Weak traditional credit is a different path. Fair Housing safe, no steering.",
   published: "2026-08-29",
   category: "Credit",
   keywords: ["alternative credit mortgage", "no credit history FHA", "nontraditional credit Fannie Mae"],
@@ -79,7 +79,7 @@ export default function AlternativeCreditPage() {
     >
       <p className="lead text-xl text-foreground/70">
         If you have little or no traditional credit, some purchase programs can still look at documented rent, utilities,
-        and similar payments — often about 12 months. That path is for a thin or no-hit file after the lender checks
+        and similar payments, often about 12 months. That path is for a thin or no-hit file after the lender checks
         all three repositories. It is not a workaround for bad traditional credit, and it is not assigned by who you
         are. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -97,7 +97,7 @@ export default function AlternativeCreditPage() {
       <h2>What usually counts as a reference</h2>
       <ul>
         <li>Housing payments to a landlord or documented private housing payments (not a relative’s informal IOU without paper).</li>
-        <li>Utilities billed in your name — electricity, gas, water, phone, internet — when they are not already inside the rent.</li>
+        <li>Utilities billed in your name, electricity, gas, water, phone, internet, when they are not already inside the rent.</li>
         <li>Insurance premiums, documented private installment payments, or similar 12-month patterns the guide allows.</li>
       </ul>
       <p>
@@ -109,8 +109,8 @@ export default function AlternativeCreditPage() {
       <p>{ALTERNATIVE_CREDIT.fannie}</p>
       <p>
         {ALTERNATIVE_CREDIT.fha} Compare programs on{" "}
-        <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link> the same way any other buyer would —
-        occupancy, MIP vs PMI, cash to close — not as a product “for” a type of person. Medical collections that still
+        <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link> the same way any other buyer would,
+        occupancy, MIP vs PMI, cash to close, not as a product “for” a type of person. Medical collections that still
         report are{" "}
         <Link href="/blog/medical-collections-after-fico-model-change">a different, dated credit snapshot</Link>.
       </p>

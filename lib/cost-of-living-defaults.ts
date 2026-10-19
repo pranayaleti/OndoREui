@@ -8,9 +8,9 @@ import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 export const COST_OF_LIVING_STORAGE_KEY = "ondo:cost-of-living:v1"
 
 export const TYPICAL_ESTIMATE_HINT =
-  "Typical estimate — adjust based on your actual cost."
+  "Typical estimate, adjust based on your actual cost."
 export const SUGGESTED_STARTING_POINT_HINT =
-  "Suggested starting point — not an exact figure. Adjust to your actual expenses."
+  "Suggested starting point, not an exact figure. Adjust to your actual expenses."
 export const DONT_KNOW_YOUR_NUMBER = "Don't know your number?"
 export const INCLUDED_IN_HOUSING = "Included in housing"
 export const INCLUDED_IN_VEHICLES = "Included in vehicles"
@@ -22,7 +22,7 @@ export const COST_OF_LIVING_PLANNING_DISCLAIMER =
 export const COST_OF_LIVING_NOT_ADVICE =
   "This calculator is a planning tool. It is not a loan quote, credit decision, underwriting result, or financial, tax, or legal advice. You are not required to use Ondo for financing to buy or sell with Ondo."
 
-/** Server-side template disclosure — never omit from the calculator surface. */
+/** Server-side template disclosure, never omit from the calculator surface. */
 export const COST_OF_LIVING_LENDING_DISCLAIMER = ARRIVAL_LENDING_DISCLOSURE
 
 export const HOUSING_BUDGET_RANGE_COPY =
@@ -55,7 +55,7 @@ export const COST_OF_LIVING_DEFAULTS = {
       downPaymentPercent: 20,
       interestRate: DEFAULT_MORTGAGE_RATE,
       loanTermYears: 30,
-      /** Annual tax as a percent of price — used to seed the editable dollar field. */
+      /** Annual tax as a percent of price, used to seed the editable dollar field. */
       propertyTaxRatePercent: 0.65,
       /** Annual homeowners insurance as a percent of price. */
       homeownersInsuranceRatePercent: 0.35,

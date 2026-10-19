@@ -83,7 +83,7 @@ export default function PurchaseTimelinePage() {
           "Pre-approval through contract, underwriting, CTC, and funding. Ranges, not a closing-date promise.",
         published: "2026-08-29",
         category: "First-Time Buyers",
-        bannerSubtitle: "The REPC dates and the file speed set the calendar — not a blog’s favorite number of days.",
+        bannerSubtitle: "The REPC dates and the file speed set the calendar, not a blog’s favorite number of days.",
         faqs,
         keywords: ["how long first purchase takes", "mortgage timeline Utah"],
       }}
@@ -142,7 +142,7 @@ export default function PurchaseTimelinePage() {
         </li>
         <li>
           Illustration: <Link href="/calculators/closing-cost">closing-cost calculator</Link>. Then{" "}
-          <Link href="/qualify">a conversation</Link> — not a date guarantee.
+          <Link href="/qualify">a conversation</Link>, not a date guarantee.
         </li>
       </ol>
     </ArticleShell>

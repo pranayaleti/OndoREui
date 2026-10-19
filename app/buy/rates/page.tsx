@@ -201,7 +201,7 @@ export default function MortgageRatesPage() {
                 <li>• Credit, occupancy (primary vs second home vs investment), and loan-to-value</li>
                 <li>• Property type (condo and <Link href="/blog/manufactured-housing-adu-financing" className="prose-link">manufactured or ADU</Link> overlays differ)</li>
                 <li>• Lock period and whether you are buying <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="prose-link">discount points</Link> or taking a lender credit, or a <Link href="/blog/temporary-buydown-who-pays-year-three" className="prose-link">temporary 2-1 / 3-2-1 buydown</Link>. How <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="prose-link">APR vs rate on the Loan Estimate</Link> differ</li>
-                <li>• Program (conventional, FHA, VA, USDA, jumbo) — jumbo starts at the{" "}
+                <li>• Program (conventional, FHA, VA, USDA, jumbo), jumbo starts at the{" "}
                   <Link href="/blog/jumbo-vs-conforming-fhfa-county-limit" className="prose-link">
                     FHFA county limit
                   </Link>
@@ -220,13 +220,13 @@ export default function MortgageRatesPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-2">Fixed-Rate Mortgages</h4>
                   <p className="text-foreground/70">
-                    Your interest rate stays the same for the entire loan term. Most common are 15-year and 30-year fixed-rate mortgages. Predictable principal and interest — taxes and insurance can still change.
+                    Your interest rate stays the same for the entire loan term. Most common are 15-year and 30-year fixed-rate mortgages. Predictable principal and interest, taxes and insurance can still change.
                   </p>
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-2">Adjustable-Rate Mortgages (ARMs)</h4>
                   <p className="text-foreground/70">
-                    Start with a fixed rate for an initial period (e.g., 5, 7, or 10 years), then adjust periodically. Caps limit how far the <em>note rate</em> can move — they are not a payment promise. Read{" "}
+                    Start with a fixed rate for an initial period (e.g., 5, 7, or 10 years), then adjust periodically. Caps limit how far the <em>note rate</em> can move, they are not a payment promise. Read{" "}
                     <Link href="/blog/arm-caps-in-plain-english" className="prose-link">
                       ARM caps in plain English
                     </Link>
@@ -251,7 +251,7 @@ export default function MortgageRatesPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-2">Rate lock</h4>
                   <p className="text-foreground/70">
-                    A lock holds a quoted rate for a stated window (often 30–60 days). It is not a promise that the market will not move after you lock, and it is not a commitment to lend. If rates fall while you are locked, you do not automatically get the lower rate — that is a written float-down, if it exists at all. Deep guides:{" "}
+                    A lock holds a quoted rate for a stated window (often 30–60 days). It is not a promise that the market will not move after you lock, and it is not a commitment to lend. If rates fall while you are locked, you do not automatically get the lower rate, that is a written float-down, if it exists at all. Deep guides:{" "}
                     <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">
                       what a lock does if rates drop
                     </Link>
@@ -269,7 +269,7 @@ export default function MortgageRatesPage() {
               <h3 className="text-2xl font-bold mb-6">How to compare Loan Estimates</h3>
               <ul className="space-y-3 text-foreground/70">
                 <li>• Hold loan amount, occupancy, property type, and lock period constant across lenders</li>
-                <li>• Read note rate, APR, discount points, and lender credits on the same page — not rate alone</li>
+                <li>• Read note rate, APR, discount points, and lender credits on the same page, not rate alone</li>
                 <li>• Compare cash to close and which fees are financed (MIP, funding fee, guarantee fee, points)</li>
                 <li>• Separate origination from third-party title, recording, and prepaid lines</li>
                 <li>• A news average is not an LE. Two LEs with the same rate can still differ in APR and cash to close</li>

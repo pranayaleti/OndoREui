@@ -56,7 +56,7 @@ export function TemplatesCatalog() {
           </Label>
           <p id="template-state-filter-help" className="mt-1 text-sm text-foreground/70">
             Utah packets are listed first. Nevada includes the federal lead-paint disclosure plus a
-            request-for-review card — not a fill-in Nevada statute form.
+            request-for-review card, not a fill-in Nevada statute form.
           </p>
         </div>
         <select

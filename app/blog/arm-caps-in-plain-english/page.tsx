@@ -105,7 +105,7 @@ export default function ArmCapsPage() {
 
       <h2>How this sits next to a quote</h2>
       <p>
-        A news average is still not your quote — see{" "}
+        A news average is still not your quote, see{" "}
         <Link href="/buy/rates">why your quote is not the 30-year average</Link>. Product shape (fixed vs ARM) lives
         on <Link href="/buy/adjustable-rate">adjustable-rate mortgages</Link> and{" "}
         <Link href="/buy/fixed-rate">fixed-rate mortgages</Link>. Use the{" "}
@@ -117,7 +117,7 @@ export default function ArmCapsPage() {
       <ol>
         <li>Ask for the cap structure in writing (initial / periodic / lifetime) on the same Loan Estimate as the start rate, index, and margin.</li>
         <li>Plan for the first adjustment date, not only year-one principal and interest.</li>
-        <li>If you might refinance before that date, still run <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even after costs</Link> — an ARM is not a free refinance option.</li>
+        <li>If you might refinance before that date, still run <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even after costs</Link>, an ARM is not a free refinance option.</li>
       </ol>
     </ArticleShell>
   )

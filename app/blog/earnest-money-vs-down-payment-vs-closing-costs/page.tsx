@@ -72,7 +72,7 @@ export default function EarnestVsDownVsClosingPage() {
     >
       <p className="lead text-xl text-foreground/70">
         Earnest money, down payment, and closing costs are three different cash lines. Earnest money is a deposit with
-        the purchase contract and is usually credited at closing toward funds you already owe — it is not a fourth pile
+        the purchase contract and is usually credited at closing toward funds you already owe, it is not a fourth pile
         of cash forever, and it is not automatically extra on top of down payment. Snapshot as of {LENDING_FACTS_AS_OF}.
         Not legal advice.
       </p>

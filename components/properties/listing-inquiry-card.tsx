@@ -31,7 +31,7 @@ export function ListingInquiryCard({
       </ul>
       <p className="mt-4 text-xs text-muted-foreground">
         These figures come from the listing. Other move-in costs are confirmed with leasing
-        before you apply — we do not estimate them here.
+        before you apply, we do not estimate them here.
       </p>
       <div className="mt-5">
         <ListingLeadForms title={title} address={address} propertyId={propertyId} />

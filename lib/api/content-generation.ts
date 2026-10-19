@@ -1,5 +1,5 @@
 /**
- * Content studio contract — POST /api/content/generate
+ * Content studio contract, POST /api/content/generate
  *
  * The marketing site does not call this endpoint (portal cookies live on the
  * dashboard origin). Types stay in lockstep with OndoREBackend so agent copy

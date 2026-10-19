@@ -122,7 +122,7 @@ describe("arrival labels", () => {
 
   it("discloses Ondo city medians with an as-of stamp and no MLS or appraisal claim", () => {
     expect(ARRIVAL_RENT_DISCLOSURE).toContain(CITY_MARKET_AS_OF)
-    expect(ARRIVAL_RENT_DISCLOSURE).toMatch(/as of .+ — verify/i)
+    expect(ARRIVAL_RENT_DISCLOSURE).toMatch(/as of .+, verify/i)
     expect(ARRIVAL_RENT_DISCLOSURE).toMatch(/compiled by Ondo Real Estate/i)
     expect(ARRIVAL_RENT_DISCLOSURE).toMatch(/not an MLS pull, an appraisal/i)
     expect(ARRIVAL_RENT_DISCLOSURE).not.toMatch(/guaranteed|you qualify|pre-?approved/i)

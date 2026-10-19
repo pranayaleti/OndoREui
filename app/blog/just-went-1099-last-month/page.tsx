@@ -37,7 +37,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "1099 work started last month",
     cells: {
       now: "Almost never as a full qualifying average. Contracts can support the story; they do not replace a tax-year history.",
-      later: "After you have the history the investor requires — often two years, sometimes a one-year overlay in the same occupation.",
+      later: "After you have the history the investor requires, often two years, sometimes a one-year overlay in the same occupation.",
     },
   },
   {
@@ -74,7 +74,7 @@ export default function JustWent1099Page() {
         bannerSubtitle: "A career change is not a documentation shortcut. The average still needs a history.",
         takeaways: [
           "Going 1099 last month usually stalls the file because there is no filed history yet to average.",
-          "The income that can be documented today is what a loan officer has to work with — not what the new arrangement is expected to pay.",
+          "The income that can be documented today is what a loan officer has to work with, not what the new arrangement is expected to pay.",
           "One-year self-employed documentation exists on some products, with its own tests. It is not a general shortcut.",
           "If you have to buy before a tax year of 1099s exists, the realistic levers are usually a co-borrower, a smaller loan, or waiting.",
         ],
@@ -110,7 +110,7 @@ export default function JustWent1099Page() {
         {SELF_EMPLOYED_HISTORY.oneYearOverlay} Details:{" "}
         <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">two years vs one year</Link>.
       </p>
-      <p>Typical compensating pieces — still not a promise:</p>
+      <p>Typical compensating pieces, still not a promise:</p>
       <ul>
         <li>Same occupation and similar duties (for example, a nurse who went 1099 in the same specialty).</li>
         <li>A full year of filed returns is still the usual overlay ask, not 30 days of invoices.</li>
@@ -128,7 +128,7 @@ export default function JustWent1099Page() {
             title: "Gather what is already documentable",
             body: (
               <>
-                W-2s, the last paystubs from the job you left, and any contracts — then ask which lines can be used{" "}
+                W-2s, the last paystubs from the job you left, and any contracts, then ask which lines can be used{" "}
                 <em>now</em>.
               </>
             ),
@@ -145,7 +145,7 @@ export default function JustWent1099Page() {
             title: "If you must buy now, talk through the real levers",
             body: (
               <>
-                A co-borrower, a smaller loan, or waiting — not a hidden exception.{" "}
+                A co-borrower, a smaller loan, or waiting, not a hidden exception.{" "}
                 <Link href="/learn/variable-income">Variable income hub</Link>.
               </>
             ),

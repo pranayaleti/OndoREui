@@ -50,7 +50,7 @@ export default function CashToClosePage() {
         bannerSubtitle: "Down payment is the line everyone quotes. Cash to close is the file.",
         takeaways: [
           "Down payment is one line in the stack. Cash to close also includes earnest money, lender fees, title and escrow, and prepaids.",
-          "Earnest money leaves your account at contract. It is normally credited toward your cash at closing rather than being an extra cost — but under the Utah REPC it can be at risk if deadlines pass without the required written notice.",
+          "Earnest money leaves your account at contract. It is normally credited toward your cash at closing rather than being an extra cost, but under the Utah REPC it can be at risk if deadlines pass without the required written notice.",
           "Some programs and overlays additionally want reserves: months of PITIA still sitting there after closing. That is cash too, even though it stays yours.",
           "Utah title and escrow charges vary by county and by title company, so the same purchase price does not produce the same cash to close everywhere.",
         ],
@@ -59,7 +59,7 @@ export default function CashToClosePage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        Besides down payment, you typically need earnest money, closing costs, and prepaids — and sometimes reserves.
+        Besides down payment, you typically need earnest money, closing costs, and prepaids, and sometimes reserves.
         On a ${price} illustration, {`3.5%`} down is ${fhaDown}. That is not cash to close. {EXAMPLE_NOTE} Snapshot as
         of {LENDING_FACTS_AS_OF}.
       </p>

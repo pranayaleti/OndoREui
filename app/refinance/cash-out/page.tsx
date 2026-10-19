@@ -43,7 +43,7 @@ export default function CashOutRefinancePage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Is a Cash-Out Refinance?</h2>
-              <p className="text-lg text-foreground/70">A cash-out refinance replaces your mortgage with a larger loan and gives you the difference as cash. Lenders typically let you borrow up to 80% of your home’s value. It’s often cheaper than other borrowing because it’s secured by your home — but it resets your mortgage.</p>
+              <p className="text-lg text-foreground/70">A cash-out refinance replaces your mortgage with a larger loan and gives you the difference as cash. Lenders typically let you borrow up to 80% of your home’s value. It’s often cheaper than other borrowing because it’s secured by your home, but it resets your mortgage.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
@@ -68,7 +68,7 @@ export default function CashOutRefinancePage() {
               <Card key="Weigh the reset">
                 <CardHeader>
                   <CardTitle className="text-lg">Weigh the reset</CardTitle>
-                  <CardDescription>You’re re-starting the loan and paying closing costs — run the numbers first.</CardDescription>
+                  <CardDescription>You’re re-starting the loan and paying closing costs, run the numbers first.</CardDescription>
                 </CardHeader>
               </Card>
             </div>

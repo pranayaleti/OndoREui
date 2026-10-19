@@ -9,7 +9,7 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { GlossaryClient } from "./glossary-client"
 
 const TITLE = "Real Estate Glossary"
-const DESCRIPTION = `Plain-English definitions of ${GLOSSARY_TERMS.length} real estate, mortgage, investing, and property management terms — what each one means and why it matters.`
+const DESCRIPTION = `Plain-English definitions of ${GLOSSARY_TERMS.length} real estate, mortgage, investing, and property management terms, what each one means and why it matters.`
 
 export const metadata: Metadata = pageCanonicalMetadata("/glossary", {
   title: pageTitle(`${TITLE} | ${SITE_NAME}`),
@@ -81,7 +81,7 @@ export default function GlossaryIndexPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-foreground/70">
             {GLOSSARY_TERMS.length} terms from buying, selling, lending, investing, leasing and
-            closing — each one explained in plain English, with what it actually changes for you.
+            closing, each one explained in plain English, with what it actually changes for you.
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-foreground/60">
             Looking for a number rather than a definition? Every term links through to the{" "}

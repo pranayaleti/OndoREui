@@ -43,8 +43,8 @@ export default function DeclinedAfterPreapprovalPage() {
         takeaways: [
           "A pre-approval letter is a snapshot of what was verified that day. It is not a commitment to lend.",
           "Late declines are usually a failed condition rather than a changed market: a job or income change, an unsourced deposit, new debt, or a property that does not meet the program.",
-          "Anything that moves DTI during underwriting can undo the letter — a financed sofa counts.",
-          "If you are declined, the lender owes you a written notice — either the specific principal reasons or your right to request them. Get the failed condition in writing; that is what tells you whether a fix and a re-run are possible.",
+          "Anything that moves DTI during underwriting can undo the letter, a financed sofa counts.",
+          "If you are declined, the lender owes you a written notice, either the specific principal reasons or your right to request them. Get the failed condition in writing; that is what tells you whether a fix and a re-run are possible.",
         ],
         faqs,
         keywords: ["pre-approval declined", "mortgage underwriting conditions"],
@@ -86,17 +86,17 @@ export default function DeclinedAfterPreapprovalPage() {
 
       <ArticleCallout variant="pitfall" title="The two that catch people mid-underwriting">
         Opening new credit and moving large amounts of cash are the two things most likely to undo a letter you already
-        have, and both usually feel harmless at the time. Neither is a reason to panic if it has happened — it is a
+        have, and both usually feel harmless at the time. Neither is a reason to panic if it has happened, it is a
         reason to tell your loan officer before underwriting finds it.
       </ArticleCallout>
 
       <h2>What a pre-approval was never doing</h2>
       <p>
         It was not locking a rate by itself, not waiving an appraisal, and not promising that variable income would
-        average the way you hoped. The three stages — letter, AUS, CTC — are{" "}
+        average the way you hoped. The three stages, letter, AUS, CTC, are{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs clear to close</Link>. Tight DTI
         with documented strengths is{" "}
-        <Link href="/blog/compensating-factors-in-aus-findings">compensating factors in findings</Link> — not a promise
+        <Link href="/blog/compensating-factors-in-aus-findings">compensating factors in findings</Link>, not a promise
         the letter will hold. See{" "}
         <Link href="/faq/loans-faqs">loans FAQs</Link> for pre-approval vs pre-qualification. First-time underwriting
         stalls in one map: <Link href="/blog/first-time-buyer-file-mistakes">file mistakes</Link>. Timeline ranges:{" "}

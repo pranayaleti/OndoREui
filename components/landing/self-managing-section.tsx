@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Calculator, Calendar } from "lucide-react"
 
 /**
- * "Self-managing your rental?" pitch — modeled on the highest-converting
+ * "Self-managing your rental?" pitch, modeled on the highest-converting
  * section local PM competitors run (Keyrenter et al.), but rewritten in
  * Ondo's voice and pointing to real Ondo assets: the owner-vs-self
  * calculator, the free home estimate, and the Calendly on /contact.
@@ -15,12 +15,12 @@ const painPoints: ReadonlyArray<{ title: string; body: string }> = [
   {
     title: "Screening applicants",
     body:
-      "Consistent, documented criteria across credit, eviction, criminal, and income — applied the same way to every applicant so every decision is traceable.",
+      "Consistent, documented criteria across credit, eviction, criminal, and income, applied the same way to every applicant so every decision is traceable.",
   },
   {
     title: "Filling vacancies",
     body:
-      "Photos, syndicated listings, showings, and application flow that keeps units marketed until they're leased — instead of stopping after the first weekend.",
+      "Photos, syndicated listings, showings, and application flow that keeps units marketed until they're leased, instead of stopping after the first weekend.",
   },
   {
     title: "Collecting rent on time",

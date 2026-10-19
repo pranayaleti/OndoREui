@@ -1,4 +1,4 @@
-/** Build-time shells for `output: "export"` — tokens are not enumerable at build time. */
+/** Build-time shells for `output: "export"`, tokens are not enumerable at build time. */
 export const SCHEDULE_EXPORT_SHELL = "__ondo_schedule_export_shell__"
 export const CONFIRM_EXPORT_SHELL = "__ondo_visit_export_shell__"
 

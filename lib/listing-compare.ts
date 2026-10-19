@@ -1,6 +1,6 @@
 /**
  * Lightweight public listing shortlist. Lives in sessionStorage so it does not
- * require an account or a backend. Cap is 3 — enough to scan, not a matrix engine.
+ * require an account or a backend. Cap is 3, enough to scan, not a matrix engine.
  */
 
 import { listingComparePath } from "@/lib/public-property"

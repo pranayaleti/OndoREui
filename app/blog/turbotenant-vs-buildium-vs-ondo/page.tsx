@@ -38,7 +38,7 @@ export default function TurbotenantVsBuildiumVsOndo() {
         author,
         keywords,
         category: "Comparison",
-        bannerSubtitle: "No spin — where each platform wins, and where it does not.",
+        bannerSubtitle: "No spin, where each platform wins, and where it does not.",
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
@@ -53,7 +53,7 @@ export default function TurbotenantVsBuildiumVsOndo() {
             </ul>
 
             <h2>Pricing &amp; fees</h2>
-            <p>Sticker price is only half the story — watch tenant-side ACH and e-signature fees, which quietly shift cost onto renters. Compare total annual cost for your unit count, not the headline plan. Our <Link href="/compare-utah-property-managers">comparison page</Link> breaks this down.</p>
+            <p>Sticker price is only half the story, watch tenant-side ACH and e-signature fees, which quietly shift cost onto renters. Compare total annual cost for your unit count, not the headline plan. Our <Link href="/compare-utah-property-managers">comparison page</Link> breaks this down.</p>
 
             <h2>Who each fits</h2>
             <ul>

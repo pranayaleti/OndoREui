@@ -96,8 +96,8 @@ export default function OccupancyPage() {
 
       <ArticleCallout variant="warning" title="Occupancy is not a pricing choice">
         Investment pricing is higher than second-home pricing, which makes the cheaper label tempting. Lenders also
-        put the occupancy promise in the security instrument itself — Section 6 of the uniform instrument, replaced by
-        a Second Home Rider on second homes — so a use that does not match what was stated can have consequences long
+        put the occupancy promise in the security instrument itself, Section 6 of the uniform instrument, replaced by
+        a Second Home Rider on second homes, so a use that does not match what was stated can have consequences long
         after closing. If your plan for the property is uncertain, that is a
         conversation to have with a loan officer before the application, not a box to guess at.
       </ArticleCallout>
@@ -113,14 +113,14 @@ export default function OccupancyPage() {
       <h2>What second home usually means</h2>
       <p>
         {OCCUPANCY_TYPES.secondHome} Exclusive use, a reasonable distance from the primary in many overlays, and limits
-        on treating the property as a rental business are typical tests — they are investor overlays, not a checklist
+        on treating the property as a rental business are typical tests, they are investor overlays, not a checklist
         for how to “make it look like” a second home. The commercial overview is{" "}
         <Link href="/buy/second-home">buying a second home</Link>.
       </p>
 
       <h2>What investment occupancy means</h2>
       <p>
-        {OCCUPANCY_TYPES.investment} Qualification may be full-doc or DSCR — see{" "}
+        {OCCUPANCY_TYPES.investment} Qualification may be full-doc or DSCR, see{" "}
         <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc</Link>. Using cash-out from the house you live
         in to buy a rental is two files:{" "}
         <Link href="/blog/cash-out-to-buy-a-rental">occupancy and LTV traps</Link>.
@@ -131,7 +131,7 @@ export default function OccupancyPage() {
         <Link href="/blog/house-hacking-duplex-with-fha">house-hacking a duplex with FHA</Link>. Buying a separate
         rental while you still occupy your current home is{" "}
         <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first-rental occupancy</Link>. VA remaining
-        entitlement is still an occupancy conversation, not a second-home product — see{" "}
+        entitlement is still an occupancy conversation, not a second-home product, see{" "}
         <Link href="/blog/va-entitlement-second-va-loan">a second VA loan</Link>.
       </p>
 

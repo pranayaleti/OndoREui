@@ -35,7 +35,7 @@ const rows: readonly ComparisonRow[] = [
     id: "gift",
     criterion: "Gift from an eligible donor",
     cells: {
-      ok: "Gift letter, donor statements, and evidence the funds moved — before or as they hit your account.",
+      ok: "Gift letter, donor statements, and evidence the funds moved, before or as they hit your account.",
       stall: "Cash in an envelope, then a letter written after the underwriter asks.",
     },
   },
@@ -85,7 +85,7 @@ export default function LargeDepositsPage() {
     >
       <p className="lead text-xl text-foreground/70">
         Underwriters typically read about 60 days of asset statements. A large deposit in that window has to be
-        sourced — payroll, a documented gift, sale of an asset, or a transfer between your own accounts. Undocumented
+        sourced, payroll, a documented gift, sale of an asset, or a transfer between your own accounts. Undocumented
         cash is one of the fastest ways a pre-approval fails later. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
@@ -107,9 +107,9 @@ export default function LargeDepositsPage() {
       <h2>Do not create a mystery in the 60-day window</h2>
       <p>{LARGE_DEPOSITS.cash}</p>
       <p>
-        Parent help belongs on a gift letter and donor trail —{" "}
+        Parent help belongs on a gift letter and donor trail,{" "}
         <Link href="/blog/parent-gifting-down-payment-who-signs">who signs what</Link> and{" "}
-        <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link> — not a ATM deposit two weeks
+        <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>, not a ATM deposit two weeks
         before closing. How income is verified is a different stack:{" "}
         <Link href="/blog/how-underwriters-verify-income">W-2 vs 1099 vs bank</Link>.
       </p>

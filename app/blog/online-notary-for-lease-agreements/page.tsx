@@ -37,11 +37,11 @@ export default function OnlineNotaryForLeaseAgreements() {
         author,
         keywords,
         category: "Notary",
-        bannerSubtitle: "Sign and notarize from anywhere — with an audit trail that holds up.",
+        bannerSubtitle: "Sign and notarize from anywhere, with an audit trail that holds up.",
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              Most residential leases do not require notarization, but many landlord documents do — and remote online notarization (RON) makes that step painless and defensible.
+              Most residential leases do not require notarization, but many landlord documents do, and remote online notarization (RON) makes that step painless and defensible.
             </p>
 
             <h2>When notarization matters</h2>
@@ -52,7 +52,7 @@ export default function OnlineNotaryForLeaseAgreements() {
             </ul>
 
             <h2>How RON works</h2>
-            <p>A commissioned notary meets the signer over secure video, verifies ID with knowledge-based checks and credential analysis, witnesses the signature, and seals it — producing a tamper-evident record and full audit trail.</p>
+            <p>A commissioned notary meets the signer over secure video, verifies ID with knowledge-based checks and credential analysis, witnesses the signature, and seals it, producing a tamper-evident record and full audit trail.</p>
 
             <h2>What makes it hold up</h2>
             <ul>

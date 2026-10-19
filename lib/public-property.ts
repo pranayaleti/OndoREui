@@ -9,7 +9,7 @@ export function listingDetailPath(publicId: string): string {
   return `/properties/${encodeURIComponent(publicId)}`
 }
 
-/** Existing PDP worksheet hash — not a second investor funnel. */
+/** Existing PDP worksheet hash, not a second investor funnel. */
 export function listingWorksheetPath(publicId: string): string {
   return `${listingDetailPath(publicId)}#underwrite`
 }
@@ -203,7 +203,7 @@ export function publicIdsFromListBody(body: unknown): string[] {
  *
  * `GET /api/properties/public/:id` tries `public_id` then internal `id` for
  * approved vacant rows. Keep a list fallback for rollout (old Edge without
- * by-id) and transient by-id failures — it cannot invent a listing.
+ * by-id) and transient by-id failures, it cannot invent a listing.
  */
 export async function fetchPublicPropertyByPublicId(
   publicId: string,

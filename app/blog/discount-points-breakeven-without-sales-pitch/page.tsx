@@ -86,8 +86,8 @@ export default function DiscountPointsPage() {
     >
       <p className="lead text-xl text-foreground/70">
         Discount points are optional prepaid interest: typically 1% of the loan amount per point, paid at closing to
-        lower the note rate for the life of that loan. Whether that purchase pays off is a calendar question — months
-        until the extra cash at closing is earned back in principal-and-interest savings — not a sales pitch about a
+        lower the note rate for the life of that loan. Whether that purchase pays off is a calendar question, months
+        until the extra cash at closing is earned back in principal-and-interest savings, not a sales pitch about a
         headline rate. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
@@ -106,7 +106,7 @@ export default function DiscountPointsPage() {
       </p>
       <p>{DISCOUNT_POINTS.breakeven}</p>
       <p>
-        Put points in the cost box of the <Link href="/calculators/refinance">refinance calculator</Link> the same way —
+        Put points in the cost box of the <Link href="/calculators/refinance">refinance calculator</Link> the same way,
         a lower note still loses after costs. Purchase pricing lives on{" "}
         <Link href="/buy/rates">why your quote is not the 30-year average</Link>.
       </p>
@@ -127,7 +127,7 @@ export default function DiscountPointsPage() {
         </li>
         <li>
           If a builder is offering a 2-1 instead, that is{" "}
-          <Link href="/blog/temporary-buydown-who-pays-year-three">temporary buydown: who pays, year 3</Link> — model
+          <Link href="/blog/temporary-buydown-who-pays-year-three">temporary buydown: who pays, year 3</Link>, model
           it on the <Link href="/calculators/temporary-buydown">buydown calculator</Link>.
         </li>
       </ol>

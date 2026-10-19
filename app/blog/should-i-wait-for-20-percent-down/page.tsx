@@ -39,7 +39,7 @@ const rows: readonly ComparisonRow[] = [
     id: "cash",
     criterion: "Cash at purchase (illustration)",
     cells: {
-      wait: `On a $${price.toLocaleString("en-US")} price, 20% is $${down20.toLocaleString("en-US")} down — plus closing costs and prepaids.`,
+      wait: `On a $${price.toLocaleString("en-US")} price, 20% is $${down20.toLocaleString("en-US")} down, plus closing costs and prepaids.`,
       sooner: `5% is $${down5.toLocaleString("en-US")}; FHA 3.5% is $${down35.toLocaleString("en-US")}. The gap versus 20% is real cash you still have to source later or keep saving.`,
     },
   },
@@ -56,7 +56,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Time and rent",
     cells: {
       wait: "Months or years of saving. Rent (or staying put) continues. The house you wanted may not still be at this illustration price.",
-      sooner: "You may buy on a documented file now. PMI or MIP is a line on the payment until it ends under that product’s rules — not a life sentence on every loan.",
+      sooner: "You may buy on a documented file now. PMI or MIP is a line on the payment until it ends under that product’s rules, not a life sentence on every loan.",
     },
   },
   {
@@ -98,7 +98,7 @@ export default function WaitFor20DownPage() {
       <p className="lead text-xl text-foreground/70">
         You do not have to wait until you can put 20% down to buy. Waiting can avoid conventional PMI. Buying sooner
         with a smaller down payment usually means PMI (conventional) or MIP (FHA) until that product’s rules let it
-        end. The honest comparison is cash, timeline, and what you pay for housing in the meantime — not a rule that
+        end. The honest comparison is cash, timeline, and what you pay for housing in the meantime, not a rule that
         20% is “responsible.” Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
@@ -150,7 +150,7 @@ export default function WaitFor20DownPage() {
         <li>
           Put PMI or MIP on two payment illustrations with the{" "}
           <Link href="/calculators/mortgage-payment">payment calculator</Link> and include HOA if the property has
-          dues — see <Link href="/blog/dti-frontend-backend-with-hoa">DTI with HOA</Link>.
+          dues, see <Link href="/blog/dti-frontend-backend-with-hoa">DTI with HOA</Link>.
         </li>
         <li>
           Compare FHA vs conventional on insurance duration, not only the note rate:{" "}

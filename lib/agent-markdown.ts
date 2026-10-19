@@ -351,7 +351,7 @@ const CALCULATOR_DETAILS: Record<string, CalculatorMarkdownDetail> = {
   },
   refinance: {
     formula:
-      "Break-even months = closing costs ÷ (old payment − new payment). Holding past that horizon is the usual test — it is still not a promise the refinance saves money after tax, moving, or a second refinance.",
+      "Break-even months = closing costs ÷ (old payment − new payment). Holding past that horizon is the usual test, it is still not a promise the refinance saves money after tax, moving, or a second refinance.",
     inputs: ["Current balance", "Current rate", "New rate", "Remaining term", "Closing costs (include points and origination)"],
     notes: [
       "Break-even ignores tax benefits and opportunity cost of the closing outlay.",

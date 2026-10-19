@@ -53,7 +53,7 @@ export default function UtahCountyLimitPage() {
 
       <h2>Utah how-to (no stale table)</h2>
       <ol>
-        <li>Find the county on the tax notice or title commitment — not “Park City” vs “Heber” as a substitute.</li>
+        <li>Find the county on the tax notice or title commitment, not “Park City” vs “Heber” as a substitute.</li>
         <li>
           Open{" "}
           <a href={FHFA_LOOKUP.officialUrl} rel="noopener noreferrer">

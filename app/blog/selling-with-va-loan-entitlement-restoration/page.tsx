@@ -81,7 +81,7 @@ export default function VaEntitlementRestorationPage() {
     >
       <p className="lead text-xl text-foreground/70">
         If you sell a home that has a VA loan and that loan is paid in full, used entitlement is typically restored so
-        you can use VA again on a later purchase. That is restoration after sale — not the question of keeping the first
+        you can use VA again on a later purchase. That is restoration after sale, not the question of keeping the first
         VA loan and buying another house. This page does not quote entitlement dollars. Snapshot as of{" "}
         {LENDING_FACTS_AS_OF} ({VA_ENTITLEMENT_RESTORATION.source}).
       </p>
@@ -95,7 +95,7 @@ export default function VaEntitlementRestorationPage() {
         footnote="Educational snapshot. Occupancy, remaining guaranty, and lender overlays still apply."
       />
       <p>
-        If you are not selling — you want to keep the first house as a rental or you still live there — start with{" "}
+        If you are not selling, you want to keep the first house as a rental or you still live there, start with{" "}
         <Link href="/blog/va-entitlement-second-va-loan">can I use VA if I still have a VA loan</Link>. Occupancy
         mislabeling is a different problem:{" "}
         <Link href="/blog/second-home-vs-investment-occupancy">second home vs investment occupancy</Link>.
@@ -141,7 +141,7 @@ export default function VaEntitlementRestorationPage() {
         <li>Tell the listing side and the loan officer that the loan to be paid is VA. Payoff letters take time.</li>
         <li>
           If you will buy again with VA, do not write the next offer as if zero-down entitlement is already restored
-          until the COE reflects it — or until a loan officer has applied current VA rules to the timeline.
+          until the COE reflects it, or until a loan officer has applied current VA rules to the timeline.
         </li>
         <li>
           A Utah purchase contract still runs its own clocks:{" "}

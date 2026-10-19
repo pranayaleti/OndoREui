@@ -5,7 +5,7 @@ const slug = "/blog/rent-vs-own-calculator-guide"
 /** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
 const mergedInto = { path: "/blog/renting-vs-buying-salt-lake-city", title: "Renting vs. Buying in Salt Lake City (2026 Analysis)" }
 const title = "Rent vs Own Calculator: How to Make the Call in 2026"
-const description = "The real math behind renting versus owning — opportunity cost, break-even horizon, and how to use a calculator to decide."
+const description = "The real math behind renting versus owning, opportunity cost, break-even horizon, and how to use a calculator to decide."
 const published = "2026-07-24"
 const modified = "2026-07-24"
 const author = "ONDO Team"
@@ -42,7 +42,7 @@ export default function RentVsOwnCalculatorGuide() {
         author,
         keywords,
         category: "Finance",
-        bannerSubtitle: "Past the rules of thumb — the numbers that actually decide it.",
+        bannerSubtitle: "Past the rules of thumb, the numbers that actually decide it.",
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
@@ -64,7 +64,7 @@ export default function RentVsOwnCalculatorGuide() {
             </ul>
 
             <h2>Run your numbers</h2>
-            <p>Plug your own figures into the <Link href="/calculators/rent-vs-own">rent vs own calculator</Link> and the <Link href="/calculators/affordability">affordability calculator</Link> — the break-even year usually makes the decision obvious.</p>
+            <p>Plug your own figures into the <Link href="/calculators/rent-vs-own">rent vs own calculator</Link> and the <Link href="/calculators/affordability">affordability calculator</Link>, the break-even year usually makes the decision obvious.</p>
 
             <h2>Takeaway</h2>
             <p>Decide on your horizon and opportunity cost, not a rule of thumb. For the deeper model, read <Link href="/blog/renting-vs-owning-hidden-math">The Hidden Math Behind Renting vs Owning</Link>.</p>

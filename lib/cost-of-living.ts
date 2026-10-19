@@ -1,7 +1,7 @@
 /**
  * Pure calculation engine for the monthly cost of living calculator.
  * UI must not re-implement these formulas. Suggested dollar amounts live in
- * cost-of-living-defaults.ts — this file only sanitizes, sums, and excludes
+ * cost-of-living-defaults.ts, this file only sanitizes, sums, and excludes
  * double-counted lines.
  */
 import { calculateMaxLoanFromPayment, calculateMonthlyPI } from "@/lib/mortgage-utils"

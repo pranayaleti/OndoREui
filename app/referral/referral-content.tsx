@@ -79,7 +79,7 @@ export function ReferralContent() {
           </div>
         </section>
 
-        {/* Referral bonus banner — depends on `?ref=`, so it resolves after hydration. */}
+        {/* Referral bonus banner, depends on `?ref=`, so it resolves after hydration. */}
         <Suspense fallback={null}>
           <ReferralBonusBanner />
         </Suspense>

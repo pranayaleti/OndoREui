@@ -56,14 +56,14 @@ export default function FirstTimeHomeBuyerGuide() {
             <p>A pre-qualification is a quick estimate from self-reported numbers. A pre-approval is a lender reviewing tax returns, W-2s, pay stubs, and bank statements to decide whether it can issue a letter. That letter is still not a commitment to lend. In competitive Utah markets, sellers often want a documented pre-approval. Work with a lender who knows Utah title, HOA, and county practices.</p>
             <p>Utah first-time buyer programs to ask about (confirm current terms with the agency, not this page):</p>
             <ul>
-              <li><strong>Utah Housing Corporation (UHC) FirstHome Loan</strong> — UHC publishes purchase products and optional DPA. Rate and DPA terms change; verify on UHC’s site.</li>
-              <li><strong>UHC Score Loan</strong> — ask UHC whether a lower-score product still exists for your file.</li>
-              <li><strong>FHA loans</strong> — {FHA_SNAPSHOT.minDownPayment580Plus} down at 580+ under HUD policy; overlays apply. DPA stacking is file-specific.</li>
-              <li><strong>USDA Rural Development</strong> — zero down only in eligible census tracts and when income limits fit. Check the USDA map for the property, not a city slogan.</li>
+              <li><strong>Utah Housing Corporation (UHC) FirstHome Loan</strong>, UHC publishes purchase products and optional DPA. Rate and DPA terms change; verify on UHC’s site.</li>
+              <li><strong>UHC Score Loan</strong>, ask UHC whether a lower-score product still exists for your file.</li>
+              <li><strong>FHA loans</strong>, {FHA_SNAPSHOT.minDownPayment580Plus} down at 580+ under HUD policy; overlays apply. DPA stacking is file-specific.</li>
+              <li><strong>USDA Rural Development</strong>, zero down only in eligible census tracts and when income limits fit. Check the USDA map for the property, not a city slogan.</li>
             </ul>
 
             <h2>Step 3: Find the Right Agent and Search Smart</h2>
-            <p>A buyer&apos;s agent works under a written buyer-broker agreement. Compensation is negotiated — it is not typically free, and the seller does not automatically pay both sides. That agreement is how you get negotiation help, contract knowledge, and a search that includes MLS inventory your agent can access. Look for someone who specialises in your target corridor; Wasatch Front dynamics differ dramatically from Park City or St. George.</p>
+            <p>A buyer&apos;s agent works under a written buyer-broker agreement. Compensation is negotiated, it is not typically free, and the seller does not automatically pay both sides. That agreement is how you get negotiation help, contract knowledge, and a search that includes MLS inventory your agent can access. Look for someone who specialises in your target corridor; Wasatch Front dynamics differ dramatically from Park City or St. George.</p>
             <p>Search tips for Utah:</p>
             <ul>
               <li>Watch days-on-market. Anything under 7 days in the Salt Lake metro usually means multiple offers.</li>

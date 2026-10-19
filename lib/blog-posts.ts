@@ -89,7 +89,7 @@ const BLOG_POSTS: readonly BlogPostEntry[] = [
     published: "2026-09-17",
     category: "First-Time Buyers",
     image: "/modern-office-building.webp",
-    readMinutes: 4,
+    readMinutes: 3,
   },
   {
     slug: "va-loan-assumption-entitlement",
@@ -260,7 +260,7 @@ const BLOG_POSTS: readonly BlogPostEntry[] = [
     published: "2026-08-29",
     category: "Credit",
     image: "/modern-office-building.webp",
-    readMinutes: 3,
+    readMinutes: 2,
   },
   {
     slug: "delayed-financing-after-cash-purchase",
@@ -584,7 +584,7 @@ const BLOG_POSTS: readonly BlogPostEntry[] = [
     published: "2026-08-29",
     category: "Refinance",
     image: "/modern-office-building.webp",
-    readMinutes: 4,
+    readMinutes: 3,
   },
   {
     slug: "no-traditional-credit-alternative-credit",

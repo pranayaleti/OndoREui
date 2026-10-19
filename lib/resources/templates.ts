@@ -15,7 +15,7 @@ export type TemplateKind = (typeof TEMPLATE_KINDS)[number]
 export const ALL_STATES_FILTER = "all"
 
 export const TEMPLATE_DISCLAIMER =
-  "Educational sample for reference only — not legal advice, not a binding form, and not an instant download. Requesting a file asks our team to email materials. It must be reviewed through appropriate legal channels (a licensed attorney for the applicable state) before it can be approved or used."
+  "Educational sample for reference only, not legal advice, not a binding form, and not an instant download. Requesting a file asks our team to email materials. It must be reviewed through appropriate legal channels (a licensed attorney for the applicable state) before it can be approved or used."
 
 export interface ResourceTemplate {
   id: string
@@ -50,7 +50,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
       "Late fee and grace period schedules",
     ],
     appliesWhen:
-      "You are leasing a Utah residential dwelling and need a starting packet for attorney review — not a one-click binding contract.",
+      "You are leasing a Utah residential dwelling and need a starting packet for attorney review, not a one-click binding contract.",
     watchFor: bullets("UT", [
       "owner_agent_identity",
       "deposit_return",
@@ -93,7 +93,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
       "Auto-routes to vendor assignment",
     ],
     appliesWhen:
-      "Whenever a Utah resident reports a repair — especially habitability items (heat, water, weatherproofing) that should be timestamped.",
+      "Whenever a Utah resident reports a repair, especially habitability items (heat, water, weatherproofing) that should be timestamped.",
     watchFor: bullets("UT", ["entry_notice"]),
     disclaimer: TEMPLATE_DISCLAIMER,
   },
@@ -120,7 +120,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
     id: "listing-prep-showing-feedback",
     title: "Listing-Prep & Showing-Feedback Checklist",
     description:
-      "A brokerage checklist for sellers getting a home ready to list and collecting showing notes afterward. We email the file after you request it — this is not a QR code, text-for-info shortcode, or YouTube tour product.",
+      "A brokerage checklist for sellers getting a home ready to list and collecting showing notes afterward. We email the file after you request it, this is not a QR code, text-for-info shortcode, or YouTube tour product.",
     state: "UT",
     kind: "checklist",
     inquiryType: "seller",
@@ -128,14 +128,14 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
       "Prep before photos: declutter, repairs, curb appeal",
       "Showing-day checklist for occupants",
       "How to record showing feedback we send you",
-      "Request the file — we email it, not an instant download",
+      "Request the file, we email it, not an instant download",
     ],
     appliesWhen:
       "You are preparing a Utah home to list with Ondo brokerage services, or you want a showing-feedback log after tours.",
     watchFor: [
       "This is a prep checklist, not a listing agreement and not a valuation or appraisal.",
       "It is not a QR code, SMS shortcode, or YouTube-tour product.",
-      "Describe the property and its condition — never a preferred occupant or protected class.",
+      "Describe the property and its condition, never a preferred occupant or protected class.",
     ],
     disclaimer: TEMPLATE_DISCLAIMER,
   },
@@ -200,7 +200,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
     id: "methamphetamine-contamination",
     title: "Methamphetamine Contamination History",
     description:
-      "A Utah disclosure topic already cited in Ondo’s landlord-tenant guide (Utah Code § 57-27). Request the educational packet — this is not a lab report and not a finding that contamination occurred.",
+      "A Utah disclosure topic already cited in Ondo’s landlord-tenant guide (Utah Code § 57-27). Request the educational packet, this is not a lab report and not a finding that contamination occurred.",
     state: "UT",
     kind: "disclosure",
     inquiryType: "owner",
@@ -246,7 +246,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
       "Federal requirement for pre-1978 housing",
       "Applies in Nevada the same way it applies in other states",
       "Not a Nevada-only form and not a paint inspection",
-      "Request the file — we email it",
+      "Request the file, we email it",
     ],
     appliesWhen:
       "Nevada housing built before 1978 (federal rule). Use this card when you need the lead packet, not a full Nevada lease.",
@@ -262,7 +262,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
     kind: "other",
     inquiryType: "owner",
     details: [
-      "Educational packet — not a fill-and-sign Nevada lease",
+      "Educational packet, not a fill-and-sign Nevada lease",
       "We can introduce counsel review; we do not invent Nevada statutes here",
       "Federal lead-paint still applies to pre-1978 housing",
       "Request is not an instant download",
@@ -272,7 +272,7 @@ export const RESOURCE_TEMPLATES: readonly ResourceTemplate[] = [
     watchFor: [
       "Do not reuse a Utah lease in Nevada and assume it is valid.",
       "Federal lead-based paint still applies to pre-1978 housing.",
-      "This request is a conversation starter for attorney review — not a downloadable Nevada statute form.",
+      "This request is a conversation starter for attorney review, not a downloadable Nevada statute form.",
     ],
     disclaimer: TEMPLATE_DISCLAIMER,
   },

@@ -67,7 +67,7 @@ export function HousingStep({ state, onChange, principalAndInterest, housingTota
             value={buy.interestRate}
             onChange={(interestRate) => updateBuy({ interestRate })}
             max={20}
-            hint={`Example ${D.housing.buy.interestRate}% — not a quote, lock, or APR.`}
+            hint={`Example ${D.housing.buy.interestRate}%, not a quote, lock, or APR.`}
           />
           <NumberStepper
             label="Loan term (years)"

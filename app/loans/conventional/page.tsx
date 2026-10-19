@@ -144,7 +144,7 @@ export default function ConventionalLoanPage() {
                   <h4 className="text-lg font-semibold mb-3 dark:text-foreground text-primary">Conventional Advantages</h4>
                   <ul className="space-y-2 text-foreground/70 dark:text-foreground/70">
                     <li>• No upfront mortgage insurance</li>
-                    <li>• PMI can often be removed with equity — how it ends: <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="underline underline-offset-4">MIP vs PMI</Link>; servicer mechanics: <Link href="/blog/pmi-removal-original-value-vs-new-appraisal" className="underline underline-offset-4">original value vs new appraisal</Link></li>
+                    <li>• PMI can often be removed with equity, how it ends: <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="underline underline-offset-4">MIP vs PMI</Link>; servicer mechanics: <Link href="/blog/pmi-removal-original-value-vs-new-appraisal" className="underline underline-offset-4">original value vs new appraisal</Link></li>
                     <li>• Higher loan limits</li>
                     <li>• More flexible terms</li>
                   </ul>

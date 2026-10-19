@@ -47,7 +47,7 @@ export default function UsdaMapPage() {
         result. Snapshot as of {LENDING_FACTS_AS_OF} ({USDA_SNAPSHOT.source}).
       </p>
 
-      <h2>Step 1 — map the address</h2>
+      <h2>Step 1, map the address</h2>
       <p>{USDA_SNAPSHOT.mapNote}</p>
       <p>
         Use the official tool:{" "}
@@ -58,11 +58,11 @@ export default function UsdaMapPage() {
         neighboring pocket is eligible.
       </p>
 
-      <h2>Step 2 — test household income</h2>
+      <h2>Step 2, test household income</h2>
       <p>{USDA_SNAPSHOT.incomeNote}</p>
       <p>
         This page does not publish an AMI dollar figure. Those numbers change and differ by county and household
-        size. If household income is over the limit, FHA or conventional is the usual next comparison — not a “USDA
+        size. If household income is over the limit, FHA or conventional is the usual next comparison, not a “USDA
         exception.”
       </p>
 
@@ -80,7 +80,7 @@ export default function UsdaMapPage() {
       <p>
         Map the address, then talk with a loan officer before you write a USDA offer. Program page:{" "}
         <Link href="/loans/usda">USDA loans in Utah</Link>. If the map fails,{" "}
-        <Link href="/loans/fha">FHA</Link> is often the fallback for low down payment — see{" "}
+        <Link href="/loans/fha">FHA</Link> is often the fallback for low down payment, see{" "}
         <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link>.
       </p>
     </ArticleShell>

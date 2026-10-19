@@ -55,7 +55,7 @@ export const DEMO_VIDEO_EMBED_URL = process.env["NEXT_PUBLIC_DEMO_VIDEO_EMBED_UR
 /**
  * Public phone. Override with NEXT_PUBLIC_SITE_PHONE.
  * Default remains +1-408-538-0420 (also used in the dashboard companyInfo).
- * No documented Utah (801/385) production number exists in this workspace — do not invent one.
+ * No documented Utah (801/385) production number exists in this workspace, do not invent one.
  * Office hours are SITE_HOURS_LABEL (Mon–Fri 9–5 MT). Do not promise 24/7 coverage anywhere; there is no staffed line.
  */
 export const SITE_PHONE = process.env['NEXT_PUBLIC_SITE_PHONE'] || "+1-408-538-0420"

@@ -67,7 +67,7 @@ export function GlossaryClient() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search a term — try “escrow”, “DTI”, or “cap rate”"
+            placeholder="Search a term, try “escrow”, “DTI”, or “cap rate”"
             autoComplete="off"
             className="w-full rounded-full border border-border bg-card/60 py-3.5 pl-12 pr-12 text-base text-foreground placeholder:text-foreground/40 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
@@ -157,7 +157,7 @@ export function GlossaryClient() {
         <div className="py-20 text-center">
           <p className="text-lg font-medium text-foreground">No term matches “{query}”.</p>
           <p className="mx-auto mt-2 max-w-md text-sm text-foreground/70">
-            Try a shorter word or an abbreviation — most entries are also indexed under their
+            Try a shorter word or an abbreviation, most entries are also indexed under their
             initials, so “LTV” and “loan to value” both find the same page.
           </p>
           <button

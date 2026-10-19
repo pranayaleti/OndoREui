@@ -65,7 +65,7 @@ export default function AssetDepletionQualifyingPage() {
           "Eligible assets can be treated as qualifying income under a written formula. Agency and Non-QM paths differ. Not “cash means approved.”",
         published: "2026-08-29",
         category: "Loan Programs",
-        bannerSubtitle: "A written formula on eligible assets — not a screenshot of a brokerage balance.",
+        bannerSubtitle: "A written formula on eligible assets, not a screenshot of a brokerage balance.",
         faqs,
         keywords: ["asset depletion qualifying", "assets as income mortgage"],
       }}
@@ -93,7 +93,7 @@ export default function AssetDepletionQualifyingPage() {
       <p>{ASSET_DEPLETION.eligible}</p>
       <ul>
         <li>Seasoned accounts in the borrower’s name, with statements.</li>
-        <li>Subtract funds needed to close and required reserves — those dollars are not also “income.”</li>
+        <li>Subtract funds needed to close and required reserves, those dollars are not also “income.”</li>
         <li>Haircuts on stocks, concentrated holdings, and retirement are common.</li>
         <li>Recently deposited gifts and business accounts are often limited or excluded.</li>
       </ul>
@@ -110,7 +110,7 @@ export default function AssetDepletionQualifyingPage() {
         <li>
           Not a substitute for{" "}
           <Link href="/blog/just-went-1099-last-month">brand-new 1099 income</Link> unless the overlay actually uses
-          assets — ask, do not assume.
+          assets, ask, do not assume.
         </li>
       </ul>
 

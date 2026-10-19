@@ -39,7 +39,7 @@ const rows: readonly ComparisonRow[] = [
     cells: {
       shortage: ESCROW_SHORTAGE.options,
       cushion: ESCROW_CUSHION.whyItMoves,
-      surplus: "Often a refund or a credit against future escrow deposits, subject to the notice and federal surplus tests. Confirm the letter — not this page.",
+      surplus: "Often a refund or a credit against future escrow deposits, subject to the notice and federal surplus tests. Confirm the letter, not this page.",
     },
   },
 ]
@@ -121,7 +121,7 @@ export default function EscrowShortagePage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Read the annual escrow analysis notice — shortage, surplus, and new monthly collection are on that letter.</li>
+        <li>Read the annual escrow analysis notice, shortage, surplus, and new monthly collection are on that letter.</li>
         <li>
           Related questions: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>. Closing prepaids:{" "}
           <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link>.

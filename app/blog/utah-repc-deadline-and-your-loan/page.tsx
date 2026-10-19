@@ -27,7 +27,7 @@ const rows: readonly ComparisonRow[] = [
     id: "what",
     criterion: "What the clock is for",
     cells: {
-      dd: "Property, disclosures, inspections, insurance availability — buyer’s sole discretion if the condition is checked.",
+      dd: "Property, disclosures, inspections, insurance availability, buyer’s sole discretion if the condition is checked.",
       fa: "Appraisal at or above price, and whether the buyer is satisfied with loan terms. Separate from due diligence.",
     },
   },
@@ -120,7 +120,7 @@ export default function UtahRepcDeadlinePage() {
         leaves your account when the REPC says it must. Pair this with{" "}
         <Link href="/blog/utah-cash-to-close-besides-down-payment">cash besides down payment</Link> and the{" "}
         <Link href="/learn/first-time">first-time hub</Link>. If you are moving for a job that has not started, the
-        contract clock still runs — see{" "}
+        contract clock still runs, see{" "}
         <Link href="/blog/relocating-to-utah-job-seasoning">relocating and job seasoning</Link>.
       </p>
 
@@ -129,7 +129,7 @@ export default function UtahRepcDeadlinePage() {
         <li>Read Section 24 dates on the form you signed. They are calendar days at 5:00 p.m. Mountain Time unless altered.</li>
         <li>Tell the loan officer those dates on day one. Ask what has to be true before the Financing & Appraisal Deadline.</li>
         <li>
-          Any cancel or extension is written notice under the contract, signed, and received — not a text to the lender.
+          Any cancel or extension is written notice under the contract, signed, and received, not a text to the lender.
         </li>
       </ol>
     </ArticleShell>

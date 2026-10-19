@@ -15,7 +15,7 @@ import { toCitySlug } from "@/lib/utah-cities"
 export const metadata: Metadata = pageCanonicalMetadata("/neighborhoods", {
   title: "Utah Neighborhood Guides",
   description:
-    "Housing-stock notes for named Wasatch Front neighborhoods: typical homes, walkability, parks, and school campuses nearby. Amenities only — not who should live there.",
+    "Housing-stock notes for named Wasatch Front neighborhoods: typical homes, walkability, parks, and school campuses nearby. Amenities only, not who should live there.",
 })
 
 const faqs = [
@@ -53,7 +53,7 @@ export default function NeighborhoodsHubPage() {
       <main className="min-h-screen">
         <PageBanner
           title="Neighborhood guides"
-          subtitle="Housing, parks, and how the streets connect — not a profile of residents."
+          subtitle="Housing, parks, and how the streets connect, not a profile of residents."
           backgroundImage="/suburban-house-garden.webp"
         />
         <div className="container mx-auto max-w-6xl space-y-12 px-4 py-12">

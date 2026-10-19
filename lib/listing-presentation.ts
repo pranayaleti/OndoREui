@@ -964,7 +964,7 @@ export type RelatedListingSeed = {
 
 /**
  * Rank related listings by type, city, state, price band, and size.
- * Returns an empty array when nothing shares those facts — never random padding.
+ * Returns an empty array when nothing shares those facts, never random padding.
  */
 export function pickRelatedListings<T extends RelatedListingSeed>(
   current: T,
@@ -1113,7 +1113,7 @@ export function listingAgents(input: {
   ]
 }
 
-/** Visible draft in the listing inquiry box. Address only — no rates or credit language. */
+/** Visible draft in the listing inquiry box. Address only, no rates or credit language. */
 export function listingInquiryDraftMessage(address: string): string {
   const place = address.trim()
   if (!place) return ""

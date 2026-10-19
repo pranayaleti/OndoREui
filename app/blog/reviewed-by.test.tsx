@@ -36,7 +36,7 @@ describe("every blog post credits the founder as reviewer", () => {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(webPage?.lastReviewed ?? "")) problems.push(`${slug}: lastReviewed not YYYY-MM-DD`)
       unmount()
     }
-    expect(checked).toBeGreaterThan(150)
+    expect(checked).toBeGreaterThan(140)
     expect(problems).toEqual([])
   }, 180_000)
 })

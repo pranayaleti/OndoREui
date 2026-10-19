@@ -54,7 +54,7 @@ export function escapeMapPopupText(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
-/** Resize must never remount a Leaflet host — that re-inits on the same node. */
+/** Resize must never remount a Leaflet host, that re-inits on the same node. */
 export function syncLeafletSizeAfterContainerResize(
   map: { invalidateSize: () => void } | null,
 ): void {

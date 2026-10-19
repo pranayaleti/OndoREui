@@ -69,7 +69,7 @@ export default function SecondHomePage() {
                   </div>
                   <CardTitle>Investment Property</CardTitle>
                   <CardDescription>
-                    Generate rental income only when occupancy is actually investment — not by labeling a rental as a
+                    Generate rental income only when occupancy is actually investment, not by labeling a rental as a
                     second home. See{" "}
                     <Link href="/blog/second-home-vs-investment-occupancy" className="text-primary underline-offset-4 hover:underline">
                       occupancy vs rental qualification
@@ -106,7 +106,7 @@ export default function SecondHomePage() {
                 <p>
                   A second home is typically for your exclusive use for part of the year. A property you will rent as a
                   business is investment occupancy. Those are different loan files, with different down payment and
-                  pricing. Stating the wrong occupancy to get a cheaper rate is occupancy fraud — a federal crime, not a
+                  pricing. Stating the wrong occupancy to get a cheaper rate is occupancy fraud, a federal crime, not a
                   paperwork preference. Read{" "}
                   <Link href="/blog/second-home-vs-investment-occupancy" className="text-primary underline-offset-4 hover:underline">
                     second home vs investment occupancy
@@ -115,7 +115,7 @@ export default function SecondHomePage() {
                 </p>
                 <p>
                   Financing a second home often means more down payment than a primary and different overlays than a
-                  rental. If the property will be a rental, qualification may be full-doc or DSCR — see{" "}
+                  rental. If the property will be a rental, qualification may be full-doc or DSCR, see{" "}
                   <Link href="/blog/dscr-vs-full-doc-rental-loan" className="text-primary underline-offset-4 hover:underline">
                     DSCR vs full-doc
                   </Link>

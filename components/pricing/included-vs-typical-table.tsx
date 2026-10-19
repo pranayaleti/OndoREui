@@ -12,7 +12,7 @@ export function IncludedVsTypicalTable() {
         What is included, line by line
       </h2>
       <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-foreground/70">
-        Ondo on the left. A typical Utah full-service shop on the right — industry
+        Ondo on the left. A typical Utah full-service shop on the right, industry
         pattern, not a named dunk. Verify any competitor&rsquo;s current offer
         before you rely on it.
       </p>

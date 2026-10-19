@@ -74,7 +74,7 @@ export default function InterestOnlyMortgagesPage() {
     >
       <p className="lead text-xl text-foreground/70">
         An interest-only mortgage is for borrowers who can document a plan for the fully amortizing payment when the IO
-        period ends — typically jumbo or portfolio overlays, not a standard conforming 30-year you can assume. It hurts
+        period ends, typically jumbo or portfolio overlays, not a standard conforming 30-year you can assume. It hurts
         anyone who budgets only the interest draft and treats IO as a teaser that never ends. Snapshot as of{" "}
         {LENDING_FACTS_AS_OF}.
       </p>
@@ -93,7 +93,7 @@ export default function InterestOnlyMortgagesPage() {
       <h2>Payment shock</h2>
       <p>{INTEREST_ONLY.paymentShock}</p>
       <ul>
-        <li>Write down the fully amortizing P&amp;I the note describes after IO — not only year-one interest.</li>
+        <li>Write down the fully amortizing P&amp;I the note describes after IO, not only year-one interest.</li>
         <li>Add taxes, insurance, HOA, and mortgage insurance. Those lines are not capped by an IO schedule.</li>
         <li>
           Extra principal during IO is optional. It is not the same as a recast or a refinance. See{" "}
@@ -114,7 +114,7 @@ export default function InterestOnlyMortgagesPage() {
       <ul>
         <li>
           <strong>Often in the conversation:</strong> high cash-flow files, jumbo/portfolio overlays, borrowers who
-          will sell or refinance with eyes open before amortization starts — still run{" "}
+          will sell or refinance with eyes open before amortization starts, still run{" "}
           <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even after costs</Link> if a refinance is
           the plan.
         </li>

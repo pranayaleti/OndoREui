@@ -15,7 +15,7 @@ export const ARRIVAL_REAL_ESTATE_DISCLOSURE =
   "Real estate services provided by Ondo Real Estate. Information is deemed reliable but is not guaranteed and should be independently verified. Equal Housing Opportunity."
 
 export const ARRIVAL_RENT_DISCLOSURE =
-  `Typical rents and any home-value figures are city medians from our 55-city Utah coverage set, compiled by Ondo Real Estate as of ${CITY_MARKET_AS_OF} — verify. They are estimates for a city, not a quote for a specific home, and are not an MLS pull, an appraisal, a broker price opinion, or a comparative market analysis.`
+  `Typical rents and any home-value figures are city medians from our 55-city Utah coverage set, compiled by Ondo Real Estate as of ${CITY_MARKET_AS_OF}, verify. They are estimates for a city, not a quote for a specific home, and are not an MLS pull, an appraisal, a broker price opinion, or a comparative market analysis.`
 
 export const ARRIVAL_FAIR_HOUSING =
   "Equal Housing Opportunity. We consider every complete rental application using the same written, property-specific criteria. Starting an application is not an approval. Reasonable accommodations, including alternatives to an in-person showing, are available on request."
@@ -294,7 +294,7 @@ export function arrivalContactPrefill(
     case "buy":
       return `I'm arriving in Utah and looking at buying near ${where}. Weekday workplace: ${work}. Please follow up about buying and financing. This is not a loan application.`
     case "leaving-a-home":
-      return `I'm moving to Utah and still own a home I may rent. Weekday workplace will be ${work}. Please follow up about a rental estimate and management — I understand the management fee is charged when rent is collected.`
+      return `I'm moving to Utah and still own a home I may rent. Weekday workplace will be ${work}. Please follow up about a rental estimate and management, I understand the management fee is charged when rent is collected.`
     case "people-ops":
       return `I'm arranging housing for someone starting work near ${work}. Housing city of interest: ${where}. Please share current rentals and how to request a showing. This is not a public rental application.`
     default: {

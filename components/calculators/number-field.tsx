@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useSta
 import { Minus, Plus, RotateCcw, X } from "lucide-react"
 
 /**
- * NumberField — the numeric input used by the calculators.
+ * NumberField, the numeric input used by the calculators.
  *
  * ## Why this exists
  *
@@ -16,7 +16,7 @@ import { Minus, Plus, RotateCcw, X } from "lucide-react"
  * Driving that in a real browser turns up four distinct defects:
  *
  * 1. `value={x || ''}` renders a legitimate 0 as empty, so **0 cannot be entered
- *    at all** — typing "0" leaves the field blank. That matters for HOA dues,
+ *    at all**, typing "0" leaves the field blank. That matters for HOA dues,
  *    a 0% down VA loan, and any "no, none of this" answer.
  * 2. A field whose value is *derived* (`((down / price) * 100).toFixed(1)`)
  *    re-formats under the caret on every keystroke. Typing "12.5" into the
@@ -34,7 +34,7 @@ import { Minus, Plus, RotateCcw, X } from "lucide-react"
  *
  * ## The model
  *
- * While the field is focused it owns a **draft string** — the literal characters
+ * While the field is focused it owns a **draft string**, the literal characters
  * typed. The parsed number flows up to the caller so results stay live, but the
  * number is never written back into the box mid-edit. On blur the draft is
  * clamped, rounded, committed, and discarded, and the field renders the
@@ -71,7 +71,7 @@ type KindSpec = {
 }
 
 const KIND_SPECS: Record<NumberFieldKind, KindSpec> = {
-  // Money moves in useful chunks — $3,000 → $2,000 is one Shift+Down.
+  // Money moves in useful chunks, $3,000 → $2,000 is one Shift+Down.
   currency: { decimals: 0, step: 100, inputMode: "decimal", group: true, prefix: "$" },
   // Rate sheets are priced in eighths, so that is what an arrow key should move.
   rate: { decimals: 3, step: 0.125, inputMode: "decimal", group: false, suffix: "%" },
@@ -109,7 +109,7 @@ export type NumberFieldProps = {
   hint?: string
   /**
    * The value this field starts at when the calculator loads. When the current
-   * value differs, the field is marked as yours and offers a one-click revert —
+   * value differs, the field is marked as yours and offers a one-click revert,
    * so a site-supplied estimate never looks like something you entered.
    */
   defaultValue?: number
@@ -196,7 +196,7 @@ export function NumberField({
 
   const [draft, setDraft] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  // Escape blurs the field, and blur runs before the setDraft(null) has flushed —
+  // Escape blurs the field, and blur runs before the setDraft(null) has flushed,
   // without this the abandoned draft would be committed on the way out.
   const abandonRef = useRef(false)
   // Keystrokes push a live number up so the results panel tracks typing, which
@@ -205,7 +205,7 @@ export function NumberField({
   const valueAtFocusRef = useRef(value)
   // Selecting inside onFocus does not survive: setDraft rewrites the DOM value
   // ("3,000" -> "3000") on the next render and drops the selection. Deferring with
-  // requestAnimationFrame is worse — it can land AFTER the first keystroke and
+  // requestAnimationFrame is worse, it can land AFTER the first keystroke and
   // re-select, so the second character replaces the first. Select exactly once,
   // synchronously, in the layout effect that follows the draft being installed.
   const selectOnDraftRef = useRef(false)
@@ -238,7 +238,7 @@ export function NumberField({
     (rawDraft: string) => {
       const parsed = Number.parseFloat(rawDraft)
       if (!Number.isFinite(parsed)) {
-        // Empty or a lone "." — keep the last good value rather than leaving the
+        // Empty or a lone ".", keep the last good value rather than leaving the
         // field holding nothing. The caller's number is never made NaN.
         setDraft(null)
         return
@@ -354,7 +354,7 @@ export function NumberField({
             onFocus={() => {
               valueAtFocusRef.current = value
               // Select on entry so a single click and type replaces the value.
-              // A later click inside the field places the caret as normal — the
+              // A later click inside the field places the caret as normal, the
               // clear button is the escape hatch for "start over".
               selectOnDraftRef.current = true
               setDraft(format(value, spec).replace(/,/g, ""))

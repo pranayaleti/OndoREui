@@ -69,7 +69,7 @@ export default function RelocatingUtahPage() {
     >
       <p className="lead text-xl text-foreground/70">
         If you are relocating to Utah and the new job starts in about 60 days, some conventional purchase files can use
-        a fully executed, non-contingent offer letter as qualifying income — when the investor’s future-employment tests
+        a fully executed, non-contingent offer letter as qualifying income, when the investor’s future-employment tests
         are met. Sixty days is a common borrower question. It is not a published “60-day rule.” Snapshot as of{" "}
         {LENDING_FACTS_AS_OF} ({RELOCATION_SEASONING.source}).
       </p>
@@ -90,7 +90,7 @@ export default function RelocatingUtahPage() {
       <p>{RELOCATION_SEASONING.utahNote}</p>
       <p>
         {UTAH_CLOSING_NOTES.closingVenue} {UTAH_CLOSING_NOTES.instrument} The purchase contract still has 5:00 p.m.
-        Mountain Time deadlines even if payroll has not started —{" "}
+        Mountain Time deadlines even if payroll has not started,{" "}
         <Link href="/blog/utah-repc-deadline-and-your-loan">what a Utah REPC deadline does to your loan</Link>. Cash
         besides down payment does not shrink because you are new in town:{" "}
         <Link href="/blog/utah-cash-to-close-besides-down-payment">cash to close</Link>.
@@ -103,7 +103,7 @@ export default function RelocatingUtahPage() {
       <h2>What happens next</h2>
       <ol>
         <li>Bring the signed offer: employer, position, pay type, start date, and any remaining conditions.</li>
-        <li>Ask whether the start date sits inside the investor window (often through 90 days after the note — confirm).</li>
+        <li>Ask whether the start date sits inside the investor window (often through 90 days after the note, confirm).</li>
         <li>
           Line the REPC Financing & Appraisal Deadline up with underwriting, not with your first paycheck fantasy date.
         </li>

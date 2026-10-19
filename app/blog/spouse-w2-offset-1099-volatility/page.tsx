@@ -35,7 +35,7 @@ const rows: readonly ComparisonRow[] = [
     id: "credit",
     criterion: "Credit and DTI",
     cells: {
-      joint: "Both credit files and both counted debts are in the DTI. A strong W-2 can support a volatile 1099 average — and a thin credit file on the second applicant can also constrain pricing.",
+      joint: "Both credit files and both counted debts are in the DTI. A strong W-2 can support a volatile 1099 average, and a thin credit file on the second applicant can also constrain pricing.",
       nonborrow: "The non-applicant is usually not a qualifying-income source. Community-property debt rules in some other states are not Utah’s default.",
     },
   },
@@ -76,7 +76,7 @@ export default function SpouseW2OffsetPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        A steadier W-2 can support a 1099 or commission average — when the person who earns the W-2 is on the
+        A steadier W-2 can support a 1099 or commission average, when the person who earns the W-2 is on the
         application as a borrower. A spouse (or partner) who is not on the note does not automatically donate their
         paycheck to your qualifying income. Utah is not a community-property state, and this page covers Utah
         files only. Snapshot as of {LENDING_FACTS_AS_OF}.
@@ -121,7 +121,7 @@ export default function SpouseW2OffsetPage() {
         </li>
         <li>
           Map the rest of the file on the <Link href="/learn/variable-income">variable-income hub</Link>, then start a{" "}
-          <Link href="/qualify">conversation</Link> — not a promise of approval.
+          <Link href="/qualify">conversation</Link>, not a promise of approval.
         </li>
       </ol>
     </ArticleShell>

@@ -24,7 +24,7 @@ export function HousingWeManageSection() {
           <p className="mt-4 text-lg text-foreground/70">
             Single-family, townhomes, condos with HOAs, and small multifamily
             across {UTAH_CITIES_SERVED}+ Utah cities. Each note below is pulled from housing we
-            already document — not a generic &ldquo;we manage everything&rdquo; grid.
+            already document, not a generic &ldquo;we manage everything&rdquo; grid.
           </p>
         </div>
 

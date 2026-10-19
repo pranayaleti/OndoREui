@@ -119,7 +119,7 @@ function stayScenarioRows(): readonly ComparisonRow[] {
     cells: Object.fromEntries(
       BREAK_EVEN_STAY_SCENARIOS.map((scenario) => {
         const value = breakEvenMonths(scenario.costs, scenario.monthlyPiSavings)
-        return [scenario.id, value === null ? "—" : `${value} months`]
+        return [scenario.id, value === null ? "n/a" : `${value} months`]
       }),
     ),
   }

@@ -25,7 +25,7 @@ export function RenterAvailabilityNote({
       : "Looking for a different street or move-in date?"
   const body =
     variant === "empty"
-      ? "Widen the filters, or send the leasing team your city, beds, and budget. A person replies with current Ondo-managed homes — we do not keep a public waitlist."
+      ? "Widen the filters, or send the leasing team your city, beds, and budget. A person replies with current Ondo-managed homes, we do not keep a public waitlist."
       : "Send the leasing team your city, beds, and budget. We'll reply with current Ondo-managed homes that match, and how to tour."
 
   return (

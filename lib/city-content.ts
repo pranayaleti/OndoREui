@@ -46,7 +46,7 @@ export const cityContentByName: Record<string, CityContent> = {
   },
   Layton: {
     overview:
-      "Layton combines robust retail, Davis School District zoning, and Hill AFB proximity. Townhome communities and modern single-family homes are prime inventory. Well-staged listings with video walkthroughs regularly achieve above-average inquiry rates.",
+      "Layton combines strong retail, Davis School District zoning, and Hill AFB proximity. Townhome communities and modern single-family homes are prime inventory. Well-staged listings with video walkthroughs regularly achieve above-average inquiry rates.",
     neighborhoods: ["East Layton", "Hill AFB area", "Antelope Dr corridor"],
     highlights: ["Consistent leasing timelines", "Attractive for long-term holds", "Consistent 3–4 bedroom demand"],
     faq: [
@@ -783,7 +783,7 @@ export const cityContentByName: Record<string, CityContent> = {
 
   Millcreek: {
     overview:
-      "Millcreek incorporated as a city in 2016 after decades as one of Salt Lake County's largest unincorporated areas. The city of roughly 63,000 residents occupies a prime position between Salt Lake City, Holladay, and Murray. Millcreek's housing stock is remarkably diverse, mid-century ramblers, 1990s developments, luxury hillside homes, and an increasing number of mixed-use projects along 3300 South (the newly branded 'Millcreek Mile'). Canyon access via Millcreek Canyon for hiking and mountain biking is a major lifestyle draw. The commercial corridors along 3300 South and Highland Drive have transformed with restaurants, breweries, and boutique fitness studios. For investors, Millcreek offers a mature, central market with strong fundamentals, appreciation has been robust, tenant demand is broad, and the city's recent incorporation has spurred infrastructure improvements.",
+      "Millcreek incorporated as a city in 2016 after decades as one of Salt Lake County's largest unincorporated areas. The city of roughly 63,000 residents occupies a prime position between Salt Lake City, Holladay, and Murray. Millcreek's housing stock is remarkably diverse, mid-century ramblers, 1990s developments, luxury hillside homes, and an increasing number of mixed-use projects along 3300 South (the newly branded 'Millcreek Mile'). Canyon access via Millcreek Canyon for hiking and mountain biking is a major lifestyle draw. The commercial corridors along 3300 South and Highland Drive have transformed with restaurants, breweries, and boutique fitness studios. For investors, Millcreek offers a mature, central market with strong fundamentals, appreciation has been strong, tenant demand is broad, and the city's recent incorporation has spurred infrastructure improvements.",
     neighborhoods: [
       "Millcreek Mile (3300 South), walkable dining, shops, and mixed-use living",
       "East Millcreek, hillside homes with canyon access and mountain views",
@@ -844,7 +844,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
     ],
     lifestyleDescription:
-      "Holladay residents enjoy a lifestyle that seamlessly blends mountain recreation with urban refinement. Morning routines might include a trail run up the Bonneville Shoreline before commuting 15 minutes to a downtown SLC office. Holladay Village is the evening and weekend anchor, farm-to-table restaurants, boutique shopping, and a Whole Foods make it a walkable hub. Winter weekends mean ski mornings at Brighton or Solitude via Big Cottonwood Canyon, often home by noon. Summer evenings are spent on patios with valley views or hiking the Olympus Cove trails. Daily life is oriented around canyon recreation and Holladay Village dining rather than a large civic downtown.",
+      "Holladay residents enjoy a lifestyle that blends mountain recreation with urban refinement. Morning routines might include a trail run up the Bonneville Shoreline before commuting 15 minutes to a downtown SLC office. Holladay Village is the evening and weekend anchor, farm-to-table restaurants, boutique shopping, and a Whole Foods make it a walkable hub. Winter weekends mean ski mornings at Brighton or Solitude via Big Cottonwood Canyon, often home by noon. Summer evenings are spent on patios with valley views or hiking the Olympus Cove trails. Daily life is oriented around canyon recreation and Holladay Village dining rather than a large civic downtown.",
   },
 
   "Cottonwood Heights": {
@@ -1333,7 +1333,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "How does the FrontRunner station help?",
-        a: "Vineyard's FrontRunner station is a game-changer, it provides direct rail service to Provo (10 min), Salt Lake City (55 min), and all stops in between. For tenants who work along the Wasatch Front, the transit option reduces car dependency and makes Vineyard accessible in a way that Eagle Mountain or Saratoga Springs can't match. Properties within walking distance of the station can market car-optional living, which supports car-optional commutes to Provo and SLC. The station area is slated for transit-oriented development that will add commercial density and walkable amenities.",
+        a: "Vineyard's FrontRunner station matters: it provides direct rail service to Provo (10 min), Salt Lake City (55 min), and all stops in between. For tenants who work along the Wasatch Front, the transit option reduces car dependency and makes Vineyard accessible in a way that Eagle Mountain or Saratoga Springs can't match. Properties within walking distance of the station can market car-optional living, which supports car-optional commutes to Provo and SLC. The station area is slated for transit-oriented development that will add commercial density and walkable amenities.",
       },
       {
         q: "What about the Geneva Steel environmental legacy?",

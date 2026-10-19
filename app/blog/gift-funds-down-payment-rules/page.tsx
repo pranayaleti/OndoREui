@@ -40,7 +40,7 @@ export default function GiftFundsPage() {
         category: "First-Time Buyers",
         bannerSubtitle: "A gift can be a legitimate source of funds. A mystery deposit is not.",
         takeaways: [
-          "A gift is a legitimate source of funds. An undocumented deposit is not — on this file, the paperwork is the product.",
+          "A gift is a legitimate source of funds. An undocumented deposit is not, on this file, the paperwork is the product.",
           "Three pieces usually have to be in the file: a letter stating repayment is not required, evidence the donor had the money, and evidence it moved.",
           "Gift funds solve cash to close. They do not replace qualifying income.",
           "Donor eligibility and deposit seasoning differ by program, and Utah assistance programs have their own rules about stacking with a gift.",
@@ -72,7 +72,7 @@ export default function GiftFundsPage() {
       <ArticleCallout variant="pitfall">
         A gift that is quietly expected to be repaid is not treated as a gift. Lenders underwrite a repayable advance
         as a debt, and the gift letter asks the donor to state that repayment is not expected. If there is an
-        expectation of repayment, say so — disclosed, it is usually just another monthly obligation in the DTI;
+        expectation of repayment, say so, disclosed, it is usually just another monthly obligation in the DTI;
         undisclosed, it is the kind of thing that unwinds a file late.
       </ArticleCallout>
 
@@ -90,7 +90,7 @@ export default function GiftFundsPage() {
         gifts. How DPA and an FHA gift can sit on the same file:{" "}
         <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link>. Who signs when a parent
         is the donor:{" "}
-        <Link href="/blog/parent-gifting-down-payment-who-signs">parent gifting — who signs what</Link>.
+        <Link href="/blog/parent-gifting-down-payment-who-signs">parent gifting, who signs what</Link>.
       </p>
     </ArticleShell>
   )

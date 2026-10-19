@@ -41,22 +41,22 @@ export default function BuildRentalPortfolioInvestor2026() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              A portfolio is not ten random purchases — it is a repeatable system: buy on the numbers, finance deliberately, and operate so the eleventh door is no harder than the first.
+              A portfolio is not ten random purchases, it is a repeatable system: buy on the numbers, finance deliberately, and operate so the eleventh door is no harder than the first.
             </p>
 
-            <h2>Stage 1 — Buy on the numbers</h2>
+            <h2>Stage 1, Buy on the numbers</h2>
             <ul>
               <li>Screen every deal on <Link href="/calculators/cash-on-cash">cash-on-cash</Link>, <Link href="/calculators/cap-rate">cap rate</Link>, and <Link href="/calculators/dscr">DSCR</Link>.</li>
-              <li>Reserve for CapEx from day one — see <Link href="/blog/maintenance-capex-strategy">maintenance &amp; CapEx strategy</Link>.</li>
+              <li>Reserve for CapEx from day one, see <Link href="/blog/maintenance-capex-strategy">maintenance &amp; CapEx strategy</Link>.</li>
             </ul>
 
-            <h2>Stage 2 — Finance deliberately</h2>
+            <h2>Stage 2, Finance deliberately</h2>
             <ul>
               <li>Understand DSCR and portfolio loans as you scale past conventional limits.</li>
               <li>Track equity growth with <Link href="/calculators/roi">ROI</Link> and refinance strategically.</li>
             </ul>
 
-            <h2>Stage 3 — Systematize operations</h2>
+            <h2>Stage 3, Systematize operations</h2>
             <ul>
               <li>Standardize leasing, rent collection, and maintenance so adding a door adds minutes, not hours.</li>
               <li>Use dashboards to catch vacancy and delinquency early.</li>

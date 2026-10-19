@@ -3,7 +3,7 @@
  *
  * These figures are not a quote. Management is a percentage of collected rent
  * (Starter 10% for 1–4 units, Growth 8% for 5–15). `monthlyRent` is **per
- * unit**. `units` only selects the published rate band — it does not multiply
+ * unit**. `units` only selects the published rate band, it does not multiply
  * the dollar ledger into a portfolio total. Leasing is a separate
  * one-time line (50% of first month’s rent) and is never rolled into the
  * monthly management fee.

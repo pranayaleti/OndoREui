@@ -3,8 +3,8 @@
  *
  * One entry per term people actually type into a search box. Each entry powers
  * three surfaces from a single definition:
- *   1. `/glossary/` — the browsable index (search + category + A–Z).
- *   2. `/glossary/{slug}/` — a standalone page with its own title, canonical and
+ *   1. `/glossary/`, the browsable index (search + category + A–Z).
+ *   2. `/glossary/{slug}/`, a standalone page with its own title, canonical and
  *      `DefinedTerm` structured data, so a search for the term can land here.
  *   3. Inline term strips on calculators and service pages.
  *
@@ -59,7 +59,7 @@ export type GlossaryLink = {
 }
 
 export type GlossaryTerm = {
-  /** URL segment. Stable — changing it breaks an indexed page. */
+  /** URL segment. Stable, changing it breaks an indexed page. */
   slug: string
   term: string
   /** Abbreviations and alternate phrasings people search. Feeds on-page search only. */

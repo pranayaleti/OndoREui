@@ -47,16 +47,16 @@ export default function HelocPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              <Card key="HELOC — flexible">
+              <Card key="HELOC, flexible">
                 <CardHeader>
-                  <CardTitle className="text-lg">HELOC — flexible</CardTitle>
+                  <CardTitle className="text-lg">HELOC, flexible</CardTitle>
                   <CardDescription>A revolving credit line you draw and repay as needed during the draw period.</CardDescription>
                 </CardHeader>
               </Card>
-              <Card key="HELOAN — fixed">
+              <Card key="HELOAN, fixed">
                 <CardHeader>
-                  <CardTitle className="text-lg">HELOAN — fixed</CardTitle>
-                  <CardDescription>A lump sum at a fixed rate and payment — predictable for a one-time cost.</CardDescription>
+                  <CardTitle className="text-lg">HELOAN, fixed</CardTitle>
+                  <CardDescription>A lump sum at a fixed rate and payment, predictable for a one-time cost.</CardDescription>
                 </CardHeader>
               </Card>
               <Card key="Keep your first mortgage">

@@ -14,7 +14,7 @@ export function PropertyOwnerSection() {
               Property management for Utah owners &amp; landlords
             </h2>
             <p className="text-lg mb-6 dark:text-foreground/70">
-              Ondo RE delivers full-service property management across the Wasatch Front &mdash;
+              Ondo RE delivers full-service property management across the Wasatch Front,
               leasing, tenant screening, rent collection, maintenance, and real-time owner
               reporting. From Salt Lake City to Payson, we handle the operations so you focus on
               growing your portfolio.

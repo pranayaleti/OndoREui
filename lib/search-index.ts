@@ -978,7 +978,7 @@ const blogPosts: SearchResult[] = [
   {
     id: 'first-time-buyer-file-mistakes',
     title: 'First-Time Buyer File Mistakes',
-    description: 'New debt, job change, deposits, occupancy — not a lifestyle listicle',
+    description: 'New debt, job change, deposits, occupancy, not a lifestyle listicle',
     href: '/blog/first-time-buyer-file-mistakes',
     category: 'Blog',
     keywords: ['first-time buyer mistakes', 'mortgage file mistakes', 'underwriting conditions']

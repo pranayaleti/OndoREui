@@ -41,7 +41,7 @@ export default function ListingComparePage() {
       <header className="mb-6">
         <h1 className="font-outfit text-3xl font-bold tracking-tight">Compare listings</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Side-by-side facts from the public listings you chose — rent, rooms, size, type, city,
+          Side-by-side facts from the public listings you chose, rent, rooms, size, type, city,
           move-in, amenities, and pets. We do not rank homes or invent neighborhood scores.
         </p>
       </header>

@@ -44,7 +44,7 @@ export function buildListingPacketMessage(input: {
     input.notes?.trim() ? `Notes: ${input.notes.trim()}` : null,
     input.photosNote?.trim()
       ? `Photos/docs (description only, no upload): ${input.photosNote.trim()}`
-      : "Photos/docs: none described — request files by email if needed.",
+      : "Photos/docs: none described, request files by email if needed.",
   ]
   return lines.filter((line): line is string => Boolean(line)).join("\n").slice(0, MESSAGE_MAX)
 }

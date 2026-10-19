@@ -60,7 +60,7 @@ export default function TwoYearReturnsPage() {
 
       <h2>When a one-year overlay even enters the chat</h2>
       <p>{SELF_EMPLOYED_HISTORY.oneYearOverlay}</p>
-      <p>Typical compensating pieces people bring — still not a promise:</p>
+      <p>Typical compensating pieces people bring, still not a promise:</p>
       <ul>
         <li>Same occupation and similar duties as the prior W-2 role (for example, a nurse who went 1099 in the same specialty).</li>
         <li>A full year of filed returns, matching transcripts, and a year-to-date profit and loss that a CPA will stand behind.</li>
@@ -83,7 +83,7 @@ export default function TwoYearReturnsPage() {
           month’s deposits.
         </li>
         <li>
-          Ask a loan officer which investor overlay, if any, can treat one year — before you write an offer that
+          Ask a loan officer which investor overlay, if any, can treat one year, before you write an offer that
           assumes it.
         </li>
       </ol>

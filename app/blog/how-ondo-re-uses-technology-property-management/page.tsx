@@ -47,7 +47,7 @@ export default function HowOndoReUsesTechnology() {
         category,
         image,
         keywords,
-        bannerSubtitle: "Real-time visibility, AI-powered operations, and automated workflows: all in one platform.",
+        bannerSubtitle: "Real-time visibility, automated operations, and automated workflows: all in one platform.",
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
@@ -80,7 +80,7 @@ export default function HowOndoReUsesTechnology() {
             <ul>
               <li><strong>Maintenance routing:</strong> The AI reviews incoming maintenance requests, assesses urgency, and suggests vendor assignment based on issue type, location, and vendor performance history</li>
               <li><strong>Lease review:</strong> AI-assisted lease review flags non-standard clauses, missing required Utah disclosures, and potential compliance issues before a lease is executed</li>
-              <li><strong>Market pricing:</strong> AI-powered rent analysis pulls comparable rental data to recommend optimal pricing at lease renewal or vacancy</li>
+              <li><strong>Market pricing:</strong> automated rent analysis pulls comparable rental data to recommend optimal pricing at lease renewal or vacancy</li>
             </ul>
 
             <h2>Automated Workflows That Replace Manual Follow-Up</h2>

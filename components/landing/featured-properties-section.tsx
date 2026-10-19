@@ -54,7 +54,7 @@ export function FeaturedPropertiesSection() {
         }
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") return
-        // Network / server failure — treat as empty so we never render
+        // Network / server failure, treat as empty so we never render
         // fabricated inventory. The empty state still links to /properties.
         setState({ kind: "empty" })
       }

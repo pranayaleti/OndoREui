@@ -45,12 +45,12 @@ export default function PropertyManagementPwaOffline() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              A progressive web app (PWA) installs like a native app and keeps working when the network does not — which is exactly what you need standing in a basement doing a maintenance inspection.
+              A progressive web app (PWA) installs like a native app and keeps working when the network does not, which is exactly what you need standing in a basement doing a maintenance inspection.
             </p>
 
             <h2>What a PWA is</h2>
             <ul>
-              <li>Installs to your home screen — no app store required.</li>
+              <li>Installs to your home screen, no app store required.</li>
               <li>Loads instantly from cache, even on flaky connections.</li>
               <li>One codebase across phone, tablet, and desktop.</li>
             </ul>
@@ -63,7 +63,7 @@ export default function PropertyManagementPwaOffline() {
             </ul>
 
             <h2>How it works under the hood</h2>
-            <p>A service worker caches the app shell and data; an offline queue (backed by IndexedDB) holds writes and replays them on reconnect via background sync — so the app feels instant and never blocks your work.</p>
+            <p>A service worker caches the app shell and data; an offline queue (backed by IndexedDB) holds writes and replays them on reconnect via background sync, so the app feels instant and never blocks your work.</p>
 
             <h2>Takeaway</h2>
             <p>Field work is offline work. A PWA makes property management installable, fast, and resilient. See <Link href="/property-management/">Ondo RE property management</Link> for how Ondo manages rentals.</p>

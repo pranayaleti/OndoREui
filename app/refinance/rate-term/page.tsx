@@ -43,7 +43,7 @@ export default function RateTermRefinancePage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Is a Rate-and-Term Refinance?</h2>
-              <p className="text-lg text-foreground/70">A rate-and-term refinance replaces your loan with a new one at a better rate, a different term (e.g. 30 → 15 years), or both — without increasing the balance. It’s the most common refinance, used to cut monthly payments or pay the loan off faster.</p>
+              <p className="text-lg text-foreground/70">A rate-and-term refinance replaces your loan with a new one at a better rate, a different term (e.g. 30 → 15 years), or both, without increasing the balance. It’s the most common refinance, used to cut monthly payments or pay the loan off faster.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">

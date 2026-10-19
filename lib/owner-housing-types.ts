@@ -18,7 +18,7 @@ export const OWNER_HOUSING_TYPES: readonly OwnerHousingType[] = [
     id: "sfh",
     title: "Single-family homes",
     utahHook:
-      "Victorian, Craftsman, and mid-century houses — the Avenues-style stock already on our neighborhood pages.",
+      "Victorian, Craftsman, and mid-century houses, the Avenues-style stock already on our neighborhood pages.",
     opsNote:
       "Wasatch winters mean furnace inspections and pipe insulation before freeze-up. Working heat is a landlord obligation; no-heat is handled as an emergency.",
     href: "/neighborhoods/salt-lake-city/the-avenues/",
@@ -40,7 +40,7 @@ export const OWNER_HOUSING_TYPES: readonly OwnerHousingType[] = [
     utahHook:
       "Downtown lofts, converted warehouses, and association buildings where rental caps and move-in windows live in the CC&Rs.",
     opsNote:
-      "We coordinate against HOA billing, elevator reservations, and rental-registration rules. Occupant type is never the filter — the documents are.",
+      "We coordinate against HOA billing, elevator reservations, and rental-registration rules. Occupant type is never the filter, the documents are.",
     href: "/neighborhoods/salt-lake-city/downtown/",
     linkLabel: "Downtown housing notes",
   },
@@ -48,7 +48,7 @@ export const OWNER_HOUSING_TYPES: readonly OwnerHousingType[] = [
     id: "small-multifamily",
     title: "Small multifamily",
     utahHook:
-      "Duplexes, fourplexes, and 2–8 unit conversions — the Liberty Wells mix of bungalows and small multi-family.",
+      "Duplexes, fourplexes, and 2–8 unit conversions, the Liberty Wells mix of bungalows and small multi-family.",
     opsNote:
       "Five or more doors under one owner is why Growth pricing (5 to 15 units) is a different rate than Starter. We manage the building, not a nightly calendar.",
     href: "/neighborhoods/salt-lake-city/liberty-wells/",

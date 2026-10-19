@@ -35,7 +35,7 @@ const rows: readonly ComparisonRow[] = [
     id: "cannot",
     criterion: "What it cannot do",
     cells: {
-      returns: "A missing year is still a missing year. Some overlays allow one year in the same line of work — that is not a CPA shortcut.",
+      returns: "A missing year is still a missing year. Some overlays allow one year in the same line of work, that is not a CPA shortcut.",
       cpa: CPA_LETTER_VS_RETURNS.whatDoesNot,
     },
   },
@@ -88,7 +88,7 @@ export default function CpaLetterVsReturnsPage() {
         <li>Confirmation that the business exists and you are self-employed in that line of work.</li>
         <li>
           Support for a{" "}
-          <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">one-year overlay conversation</Link> — next
+          <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">one-year overlay conversation</Link>, next
           to a full year of filed returns, not instead of them. {SELF_EMPLOYED_HISTORY.oneYearOverlay}
         </li>
       </ul>
@@ -115,7 +115,7 @@ export default function CpaLetterVsReturnsPage() {
       <p>
         {CPA_LETTER_VS_RETURNS.nonQm} Start with{" "}
         <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">bank-statement loans</Link> and the{" "}
-        <Link href="/learn/non-qm">Non-QM hub</Link> — not a stronger letterhead.
+        <Link href="/learn/non-qm">Non-QM hub</Link>, not a stronger letterhead.
       </p>
 
       <h2>What happens next</h2>

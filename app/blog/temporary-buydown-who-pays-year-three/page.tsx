@@ -44,7 +44,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "Not this product",
     cells: {
       twoOne: TEMPORARY_BUYDOWN.notDiscountPoints,
-      three: "Not an ARM. Caps on an adjustable note are a different structure — see ARM caps in plain English.",
+      three: "Not an ARM. Caps on an adjustable note are a different structure, see ARM caps in plain English.",
     },
   },
 ]
@@ -78,7 +78,7 @@ export default function TemporaryBuydownPage() {
       <p className="lead text-xl text-foreground/70">
         A temporary buydown (2-1 or 3-2-1) lowers the payment for the first years by funding a subsidy account. The
         note rate does not change. When the subsidy ends, you pay the full note payment plus taxes, insurance, and
-        HOA. Who pays for the subsidy — seller, builder, borrower, or a lender credit — is a contract and Loan
+        HOA. Who pays for the subsidy, seller, builder, borrower, or a lender credit, is a contract and Loan
         Estimate question, not a free gift. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
@@ -110,7 +110,7 @@ export default function TemporaryBuydownPage() {
         Model the subsidy and the full payment on the{" "}
         <Link href="/calculators/temporary-buydown">temporary buydown calculator</Link>. If you plan to refinance before
         the subsidy ends, still run <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even after
-        costs</Link> — a buydown is not a prepaid refinance.
+        costs</Link>, a buydown is not a prepaid refinance.
       </p>
 
       <h2>What happens next</h2>
@@ -118,7 +118,7 @@ export default function TemporaryBuydownPage() {
         <li>Get the structure in writing (2-1, 3-2-1, or flat) and who is funding the subsidy account.</li>
         <li>Budget the full note payment, not year-one principal and interest.</li>
         <li>
-          Compare that offer to buying points on two Loan Estimates with the same lock period — different products,
+          Compare that offer to buying points on two Loan Estimates with the same lock period, different products,
           different calendars.
         </li>
       </ol>

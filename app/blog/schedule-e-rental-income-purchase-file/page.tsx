@@ -38,7 +38,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "History the file usually wants",
     cells: {
       existing: SCHEDULE_E_RENTAL.history,
-      subject: "A lease plus market rent support — not a screenshot of a listing — and occupancy has to match the program.",
+      subject: "A lease plus market rent support, not a screenshot of a listing, and occupancy has to match the program.",
     },
   },
   {
@@ -78,7 +78,7 @@ export default function ScheduleERentalPage() {
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        If you already own rentals, a purchase file usually starts from Schedule E — not from last month’s deposits
+        If you already own rentals, a purchase file usually starts from Schedule E, not from last month’s deposits
         or a “it will rent for” note on the house you are buying. {SCHEDULE_E_RENTAL.method} Snapshot as of{" "}
         {LENDING_FACTS_AS_OF}.
       </p>
@@ -108,7 +108,7 @@ export default function ScheduleERentalPage() {
       <h2>W-2 plus rentals</h2>
       <p>
         Many files are a W-2 (or 1099) primary job plus Schedule E on the side. The W-2 is still verified the usual
-        way — see <Link href="/blog/how-underwriters-verify-income">income verification</Link>. The rentals do not
+        way, see <Link href="/blog/how-underwriters-verify-income">income verification</Link>. The rentals do not
         replace a missing job history. If the rentals are in an entity, you may also have{" "}
         <Link href="/blog/k-1-income-what-usually-counts">K-1 income</Link> instead of, or in addition to, Schedule E.
       </p>
@@ -125,7 +125,7 @@ export default function ScheduleERentalPage() {
           Use the <Link href="/calculators/income">income calculator</Link> with an average you can document.
         </li>
         <li>
-          Tell the loan officer whether the new property is a home you will occupy or another rental — occupancy
+          Tell the loan officer whether the new property is a home you will occupy or another rental, occupancy
           changes the worksheet.
         </li>
       </ol>

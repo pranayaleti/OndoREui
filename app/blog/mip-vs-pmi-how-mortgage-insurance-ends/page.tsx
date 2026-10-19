@@ -116,7 +116,7 @@ export default function MipVsPmiPage() {
         Upfront MIP is often financed: {FHA_SNAPSHOT.upfrontMip}. Financing it raises the base loan. That is a Loan
         Estimate line, not a reason MIP will vanish later. Program overview: <Link href="/loans/fha">FHA loans</Link>.
         If you later refinance FHA-to-FHA, that may be a{" "}
-        <Link href="/blog/fha-va-streamline-refinance-less-docs">streamline</Link> — it does not automatically delete
+        <Link href="/blog/fha-va-streamline-refinance-less-docs">streamline</Link>, it does not automatically delete
         annual MIP; the new FHA loan has its own MIP rules.
       </p>
 
@@ -140,7 +140,7 @@ export default function MipVsPmiPage() {
         <li>
           If you already have FHA MIP and want it gone before the 11-year / life-of-loan clock, ask about a
           conventional refinance and run <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even</Link>{" "}
-          — MIP savings can be eaten by costs.
+        MIP savings can be eaten by costs.
         </li>
         <li>
           Use the <Link href="/calculators/mortgage-payment">payment calculator</Link> as an illustration only; it

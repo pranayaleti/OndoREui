@@ -12,7 +12,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata: Metadata = {
   title: pageTitle("Landlord Templates & Seller Listing-Prep | Ondo Real Estate"),
   description:
-    "Browse Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet for other states. We email the file after you request it — not an instant download.",
+    "Browse Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet for other states. We email the file after you request it, not an instant download.",
   alternates: { canonical: `${SITE_URL}/resources/templates/` },
   openGraph: {
     type: "website",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: pageTitleText("Landlord Templates | Ondo Real Estate"),
     description:
-      "Utah lease, addendums, disclosures, and a seller listing-prep checklist. Request the file — not an instant download.",
+      "Utah lease, addendums, disclosures, and a seller listing-prep checklist. Request the file, not an instant download.",
     images: [DEFAULT_OG_IMAGE_URL],
   },
 }
@@ -46,7 +46,7 @@ export default function TemplatesPage() {
       />
       <PageBanner
         title="Templates & Resources"
-        subtitle="Utah-oriented landlord forms, addendums, and disclosures, plus a seller listing-prep checklist. Samples are for reference only. Request the file — we email it. Not legal advice."
+        subtitle="Utah-oriented landlord forms, addendums, and disclosures, plus a seller listing-prep checklist. Samples are for reference only. Request the file, we email it. Not legal advice."
         backgroundImage="/modern-apartment-balcony.webp"
       />
 
@@ -58,7 +58,7 @@ export default function TemplatesPage() {
               <p className="text-lg text-foreground/70">
                 These packets reflect forms we use at Ondo. Landlord files are written for Utah law unless
                 a card says otherwise (for example, federal lead-based paint). Each card lists when it
-                applies and what to watch for. Leave your name and email to request the file — we email
+                applies and what to watch for. Leave your name and email to request the file, we email
                 it; this is not an instant download or a binding contract. Samples are for reference
                 only and must be reviewed through appropriate legal channels (a licensed attorney for
                 the applicable state) before they can be approved or used.

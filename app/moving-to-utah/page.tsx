@@ -65,7 +65,7 @@ export default function MovingToUtahPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-foreground/70">
             Ondo covers 55 cities with rentals, brokerage, home loans, remote notary and management.
-            Pick the weekday workplace. We line up nearby housing cities with typical rents — then you rent, buy, or leave a home on the books.
+            Pick the weekday workplace. We line up nearby housing cities with typical rents, then you rent, buy, or leave a home on the books.
           </p>
         </div>
       </header>

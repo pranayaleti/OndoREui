@@ -64,7 +64,7 @@ export function ServiceAreaSection() {
             55+ Cities Along Utah&apos;s Wasatch Front
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">
-            From North Ogden to Nephi. Type a city to see median rent, then open the guide — no hover required.
+            From North Ogden to Nephi. Type a city to see median rent, then open the guide, no hover required.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export function ServiceAreaSection() {
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Find your city — Lehi, Ogden, Utah County…"
+              placeholder="Find your city, Lehi, Ogden, Utah County…"
               autoComplete="address-level2"
               className="min-h-11 pl-9"
             />

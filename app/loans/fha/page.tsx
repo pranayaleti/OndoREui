@@ -101,11 +101,11 @@ export default function FHALoanPage() {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Property Requirements</h4>
                   <ul className="space-y-2 text-foreground/70">
-                    <li>• Must be primary residence. A 2–4 unit house-hack is still occupancy of one unit — see{" "}
+                    <li>• Must be primary residence. A 2–4 unit house-hack is still occupancy of one unit, see{" "}
                       <Link href="/blog/house-hacking-duplex-with-fha" className="underline underline-offset-4">FHA duplex house-hack</Link>.</li>
                     <li>• FHA appraisal required (stricter than conventional)</li>
                     <li>• Property must meet HUD minimum property standards</li>
-                    <li>• Condos: the project must be on HUD’s current roster or qualify for single-unit approval. See the <Link href="/blog/fha-condo-roster-project-approval" className="underline underline-offset-4">FHA condo roster guide</Link>. A listing that says “townhome” is not automatically a condo — <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="underline underline-offset-4">townhome vs condo HOA docs</Link>.</li>
+                    <li>• Condos: the project must be on HUD’s current roster or qualify for single-unit approval. See the <Link href="/blog/fha-condo-roster-project-approval" className="underline underline-offset-4">FHA condo roster guide</Link>. A listing that says “townhome” is not automatically a condo, <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="underline underline-offset-4">townhome vs condo HOA docs</Link>.</li>
                   </ul>
                 </div>
               </div>

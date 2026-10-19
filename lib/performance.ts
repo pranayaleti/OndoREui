@@ -7,7 +7,7 @@
 // Prefer replaceState for in-page state updates so history entries stay bfcache-eligible;
 // avoid pushState right before the user navigates away.
 //
-// Prefetch: do NOT add Speculation Rules or <link rel="prefetch"> — the GitHub Pages origin
+// Prefetch: do NOT add Speculation Rules or <link rel="prefetch">, the GitHub Pages origin
 // returns 503 for any request carrying `Sec-Purpose: prefetch`. Rely on Next.js <Link> prefetch.
 export const performanceMonitor = {
   // Measure page load time

@@ -18,7 +18,7 @@ export type RentalFunnelAction = (typeof RENTAL_FUNNEL_ACTIONS)[number]
 
 /**
  * Funnel events for rental apply. `propertyRef` may be a public listing id or
- * property UUID — never an applicant name, email, SSN, or document contents.
+ * property UUID, never an applicant name, email, SSN, or document contents.
  */
 export function trackRentalFunnel(action: RentalFunnelAction, propertyRef?: string): void {
   analytics.trackEvent(`rental_${action}`, RENTAL_FUNNEL_CATEGORY, propertyRef)

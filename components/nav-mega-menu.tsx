@@ -71,8 +71,8 @@ export function NavMegaMenu({ item, triggerClassName, onLinkClick, wide = false 
   }, [])
 
   /**
-   * The panel is portalled to <body> because its natural parent — the primary
-   * <nav> — is an overflow-x-auto scroll container at every breakpoint, which
+   * The panel is portalled to <body> because its natural parent, the primary
+   * <nav>, is an overflow-x-auto scroll container at every breakpoint, which
    * would clip it. Fixed positioning off the trigger's rect, clamped to the
    * viewport, is what keeps the 600px Resources panel on screen at 768px where
    * an anchored panel measured out at x=-185.

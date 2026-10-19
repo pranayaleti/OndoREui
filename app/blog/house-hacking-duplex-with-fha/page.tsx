@@ -88,7 +88,7 @@ export default function FhaHouseHackPage() {
         <Link href="/blog/second-home-vs-investment-occupancy">occupancy types</Link> and{" "}
         <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc</Link> instead of relabeling the file. If you
         already occupy a home and the new house will be rented, that is{" "}
-        <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first-rental occupancy</Link> — not this
+        <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first-rental occupancy</Link>, not this
         duplex house-hack.
       </p>
 
@@ -123,7 +123,7 @@ export default function FhaHouseHackPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Confirm you will occupy one unit as your home — that is the occupancy question, not a slogan.</li>
+        <li>Confirm you will occupy one unit as your home, that is the occupancy question, not a slogan.</li>
         <li>Look up this year’s HUD 2-unit limit for the county. Do not reuse a blog dollar amount.</li>
         <li>
           Bring leases or ask how proposed rent on the other unit is counted. Existing rentals you already own still use{" "}

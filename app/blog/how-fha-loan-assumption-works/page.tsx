@@ -65,7 +65,7 @@ export default function FhaLoanAssumptionPage() {
           "Assuming an FHA loan transfers the existing rate and balance to the buyer. You still qualify, you still cover the equity gap, and the mortgage insurance travels with the loan.",
         published: "2026-09-17",
         category: "Loan Programs",
-        bannerSubtitle: "The rate travels with the loan. So does the mortgage insurance — and so does the underwriting.",
+        bannerSubtitle: "The rate travels with the loan. So does the mortgage insurance, and so does the underwriting.",
         takeaways: [
           "An assumption transfers the existing loan to the buyer on its existing terms. The rate, remaining term, and balance travel with it.",
           "You still qualify. On FHA loans originated since December 1, 1986, the servicer reviews credit, income, and debts and can decline.",
@@ -78,7 +78,7 @@ export default function FhaLoanAssumptionPage() {
     >
       <p className="lead text-xl text-foreground/70">
         When existing loans carry rates below what is available on a new loan, assuming one starts to look attractive.
-        An FHA assumption is a real path, not a loophole — and it has a specific cost structure that decides whether it
+        An FHA assumption is a real path, not a loophole, and it has a specific cost structure that decides whether it
         helps your file. Snapshot as of {LENDING_FACTS_AS_OF}. {LOAN_ASSUMPTION.notAPromise}
       </p>
 
@@ -89,13 +89,13 @@ export default function FhaLoanAssumptionPage() {
       <h2>Who can assume an FHA loan</h2>
       <p>{LOAN_ASSUMPTION.creditStillApplies}</p>
       <p>
-        {LOAN_ASSUMPTION.occupancy} That makes an assumption a different conversation from buying a rental — occupancy
+        {LOAN_ASSUMPTION.occupancy} That makes an assumption a different conversation from buying a rental, occupancy
         is a program rule here, not a label you pick. See{" "}
         <Link href="/blog/second-home-vs-investment-occupancy">second home vs investment occupancy</Link>.
       </p>
       <p>
         Credit standards on an assumption come from a servicer creditworthiness review against FHA's requirements plus
-        the servicer's own — not from the purchase down-payment matrix. An assuming buyer makes no down payment, so a
+        the servicer's own, not from the purchase down-payment matrix. An assuming buyer makes no down payment, so a
         minimum-score-and-down-payment figure from a purchase page does not transfer to this conversation. Program
         overview: <Link href="/loans/fha">FHA loans</Link>.
       </p>
@@ -124,7 +124,7 @@ export default function FhaLoanAssumptionPage() {
             title: "Submit the application and documents",
             body: (
               <>
-                Expect an income, credit, and debt review to program standards — the same stack described in{" "}
+                Expect an income, credit, and debt review to program standards, the same stack described in{" "}
                 <Link href="/blog/how-underwriters-verify-income">how underwriters verify income</Link>.
               </>
             ),
@@ -140,7 +140,7 @@ export default function FhaLoanAssumptionPage() {
       <p>{LOAN_ASSUMPTION.theEquityGap}</p>
       <p>
         Illustration: on a ${price} purchase where the seller owes ${balance}, the buyer covers roughly ${gap} to
-        assume — before closing costs. That is the number that decides whether an assumption is available to you, and
+        assume, before closing costs. That is the number that decides whether an assumption is available to you, and
         it has nothing to do with how good the rate is. {EXAMPLE_NOTE}
       </p>
       <p>
@@ -160,7 +160,7 @@ export default function FhaLoanAssumptionPage() {
         ]}
         cons={[
           "The equity gap is larger than the cash you have, which is the usual reason assumptions fall apart.",
-          "You need to close on a predictable timeline — servicer assumption queues are not an origination pipeline.",
+          "You need to close on a predictable timeline, servicer assumption queues are not an origination pipeline.",
           "You want the loan structured around your file: term, mortgage insurance, and product are fixed on an assumption.",
         ]}
       />
@@ -173,14 +173,14 @@ export default function FhaLoanAssumptionPage() {
       </ArticleCallout>
 
       <ArticleCallout variant="warning" title="Sellers: liability does not transfer by itself">
-        {LOAN_ASSUMPTION.releaseOfLiability} On a VA loan there is a second step as well — entitlement. See{" "}
+        {LOAN_ASSUMPTION.releaseOfLiability} On a VA loan there is a second step as well, entitlement. See{" "}
         <Link href="/blog/va-loan-assumption-entitlement">VA loan assumption and entitlement</Link>.
       </ArticleCallout>
 
       <h2>What happens next</h2>
       <p>
         Get the servicer's assumption packet and the remaining balance in writing, then price a normal FHA or
-        conventional file next to it. An assumption is worth pursuing when the cash works — not because the rate looks
+        conventional file next to it. An assumption is worth pursuing when the cash works, not because the rate looks
         good. A loan officer can run both: <Link href="/qualify">start a conversation</Link>. {LOAN_ASSUMPTION.timing}
       </p>
     </ArticleShell>

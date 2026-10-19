@@ -114,7 +114,7 @@ export default function EscrowCushionPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>Read the initial escrow disclosure at closing and the first annual analysis — they are different documents.</li>
+        <li>Read the initial escrow disclosure at closing and the first annual analysis, they are different documents.</li>
         <li>If there is a shortage, the notice lists spread versus lump-sum options. That is servicing, not a new loan. Sequel:{" "}
           <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>.</li>
         <li>Ask the servicer which cushion they used. Do not assume two months.</li>

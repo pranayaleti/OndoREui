@@ -31,7 +31,7 @@ const faqs = [
   {
     question: "If I have a W-2 job and gig income, how is the average built?",
     answer:
-      "Usually as two streams — W-2 history and gig or 1099 history — then added. A peak gig month does not replace the gig average, and a CPA letter does not replace tax returns. See the gig-plus-W-2 guide and the CPA letter vs returns guide.",
+      "Usually as two streams, W-2 history and gig or 1099 history, then added. A peak gig month does not replace the gig average, and a CPA letter does not replace tax returns. See the gig-plus-W-2 guide and the CPA letter vs returns guide.",
   },
 ]
 
@@ -85,12 +85,12 @@ export default function VariableIncomePillarPage() {
             <ul>
               <li>
                 <strong>Gig plus W-2.</strong>{" "}
-                <Link href="/blog/gig-plus-w2-income-mortgage-average">How the average is built</Link> — two streams,
+                <Link href="/blog/gig-plus-w2-income-mortgage-average">How the average is built</Link>, two streams,
                 then add. A peak gig month is not the method.
               </li>
               <li>
                 <strong>CPA letter vs tax returns.</strong>{" "}
-                <Link href="/blog/cpa-letter-vs-tax-returns-underwriting">What actually moves underwriting</Link> — a
+                <Link href="/blog/cpa-letter-vs-tax-returns-underwriting">What actually moves underwriting</Link>, a
                 letter supports; it does not replace returns and transcripts.
               </li>
               <li>
@@ -110,7 +110,7 @@ export default function VariableIncomePillarPage() {
               </li>
               <li>
                 <strong>K-1 (partner / S-corp).</strong>{" "}
-                <Link href="/blog/k-1-income-what-usually-counts">What usually counts on a K-1</Link> — distributions
+                <Link href="/blog/k-1-income-what-usually-counts">What usually counts on a K-1</Link>, distributions
                 are not a qualifying method.
               </li>
               <li>
@@ -123,7 +123,7 @@ export default function VariableIncomePillarPage() {
                 <strong>1099 / contract.</strong> See the{" "}
                 <Link href="/blog/1099-mortgage-documentation-checklist">1099 documentation checklist</Link>. If you{" "}
                 <Link href="/blog/just-went-1099-last-month">just went 1099 last month</Link>, that income is usually
-                not yet an average. A spouse or partner’s W-2 only helps when they are a borrower —{" "}
+                not yet an average. A spouse or partner’s W-2 only helps when they are a borrower,{" "}
                 <Link href="/blog/spouse-w2-offset-1099-volatility">spouse W-2 offset</Link>.
               </li>
               <li>
@@ -131,7 +131,7 @@ export default function VariableIncomePillarPage() {
                 <Link href="/blog/business-vs-personal-bank-co-mingling">
                   Business vs personal co-mingling
                 </Link>{" "}
-                stalls sourcing — pair with the{" "}
+                stalls sourcing, pair with the{" "}
                 <Link href="/blog/large-deposits-60-day-paper-trail">60-day large-deposit trail</Link>.
               </li>
               <li>

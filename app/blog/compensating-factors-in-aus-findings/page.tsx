@@ -36,7 +36,7 @@ const rows: readonly ComparisonRow[] = [
     criterion: "What actually appears",
     cells: {
       aus: COMPENSATING_FACTORS.typical,
-      manual: "Often the same themes — reserves, residual, payment shock, unused income — with a written test, not a vibe.",
+      manual: "Often the same themes, reserves, residual, payment shock, unused income, with a written test, not a vibe.",
     },
   },
 ]
@@ -62,7 +62,7 @@ export default function CompensatingFactorsPage() {
           "Reserves, residual income, and other strengths that show up in AUS or manual underwriting. Not a guarantee that findings will flip.",
         published: "2026-08-29",
         category: "Credit",
-        bannerSubtitle: "Documented strengths in the file — not a second score that overrides a decline.",
+        bannerSubtitle: "Documented strengths in the file, not a second score that overrides a decline.",
         faqs,
         keywords: ["compensating factors", "AUS findings"],
       }}
@@ -79,8 +79,8 @@ export default function CompensatingFactorsPage() {
       <p>
         A pre-approval letter is not findings. Findings are not clear to close. See{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs CTC</Link>. A decline after a
-        letter is usually a later condition fail —{" "}
-        <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link> — not a missing pep talk in
+        letter is usually a later condition fail,{" "}
+        <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>, not a missing pep talk in
         the findings.
       </p>
       <ComparisonTable
@@ -95,7 +95,7 @@ export default function CompensatingFactorsPage() {
       <ul>
         <li>
           <strong>Reserves after cash to close.</strong>{" "}
-          <Link href="/blog/mortgage-reserves-months-of-pitia">Months of PITIA</Link> — remaining assets, not extra
+          <Link href="/blog/mortgage-reserves-months-of-pitia">Months of PITIA</Link>, remaining assets, not extra
           closing costs.
         </li>
         <li>
@@ -103,7 +103,7 @@ export default function CompensatingFactorsPage() {
           <Link href="/blog/dti-frontend-backend-with-hoa">front-end vs back-end with HOA</Link>.
         </li>
         <li>
-          <strong>VA residual income.</strong> A separate test from DTI —{" "}
+          <strong>VA residual income.</strong> A separate test from DTI,{" "}
           <Link href="/blog/va-residual-income-vs-dti">residual vs DTI</Link>. This page does not quote residual
           dollars.
         </li>
@@ -116,7 +116,7 @@ export default function CompensatingFactorsPage() {
 
       <h2>What happens next</h2>
       <ol>
-        <li>If findings are tight, ask which messages actually printed — not which slogan to add to the letter.</li>
+        <li>If findings are tight, ask which messages actually printed, not which slogan to add to the letter.</li>
         <li>Document reserves, housing history, and unused income the guide will accept. Informal stories do not count.</li>
         <li>
           A conversation still does not approve you: <Link href="/qualify">what a mortgage conversation asks</Link>.

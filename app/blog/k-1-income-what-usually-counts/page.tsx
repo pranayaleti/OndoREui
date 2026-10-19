@@ -82,7 +82,7 @@ export default function K1IncomePage() {
     >
       <p className="lead text-xl text-foreground/70">
         If you are a partner or S-corp owner, underwriters usually count K-1 income that shows up on the tax returns
-        and that you can actually take — not the cash that hit your personal account last quarter. Distributions by
+        and that you can actually take, not the cash that hit your personal account last quarter. Distributions by
         themselves are not a qualifying method. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
 
@@ -113,7 +113,7 @@ export default function K1IncomePage() {
       <h2>Documents to gather</h2>
       <ul>
         <li>Two years of personal returns with all K-1s, plus business returns for the entity.</li>
-        <li>IRS transcripts when the lender orders them — they have to match what was filed.</li>
+        <li>IRS transcripts when the lender orders them, they have to match what was filed.</li>
         <li>Year-to-date profit and loss if you are in a new tax year, and a YTD K-1 or equivalent if the CPA will issue one.</li>
         <li>The operating agreement or bylaws if ownership percentage or distribution rights are in question.</li>
         <li>

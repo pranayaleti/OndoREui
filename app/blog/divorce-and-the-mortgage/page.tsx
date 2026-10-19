@@ -56,7 +56,7 @@ export default function DivorceAndMortgagePage() {
           "A divorce decree allocates responsibility between the parties. It does not remove either borrower from the note, because the lender was not a party to it.",
           "Until the loan is refinanced, assumed, or paid off, a missed payment can still reach both credit reports.",
           "The three real paths are refinancing into one name, assuming the loan where the program allows, or selling. Which are open depends on the loan, the equity, and whether one party qualifies alone.",
-          "Support payments may count as income or as a debt depending on documentation and continuance — an underwriting question, not a settled one.",
+          "Support payments may count as income or as a debt depending on documentation and continuance, an underwriting question, not a settled one.",
         ],
         takeawaysCaption:
           "Summary only, and general information rather than legal advice about your decree. The detail, the current figures, and the disclosures are in the article below.",
@@ -71,7 +71,7 @@ export default function DivorceAndMortgagePage() {
 
       <ArticleCallout variant="warning" title="The decree does not bind the lender">
         {DIVORCE_AND_MORTGAGE.decreeDoesNotBind} If the person keeping the house pays late, it can land on both credit
-        reports. Whatever the decree gives the other party is between them and their attorney — it is not something the
+        reports. Whatever the decree gives the other party is between them and their attorney, it is not something the
         servicer or the credit bureaus act on.
       </ArticleCallout>
 
@@ -98,14 +98,14 @@ export default function DivorceAndMortgagePage() {
 
       <ArticleCallout variant="note" title="One federal exception matters here">
         On most residential loans a lender generally may not call the balance due because the property transferred to a
-        spouse under a divorce decree or a property settlement. That protects the transfer — it does <em>not</em>
+        spouse under a divorce decree or a property settlement. That protects the transfer, it does <em>not</em>
         release the departing spouse from the note, and it is not the same thing as assuming the loan. Confirm how it
         applies with the servicer, and with your attorney on the decree side.
       </ArticleCallout>
 
       <h2>Assuming the loan</h2>
       <p>
-        Where the program and servicer allow it, an assumption keeps the existing rate, term, and balance — which in a
+        Where the program and servicer allow it, an assumption keeps the existing rate, term, and balance, which in a
         higher-rate environment can be the difference between keeping the house and not.{" "}
         {LOAN_ASSUMPTION.creditStillApplies}
       </p>
@@ -118,7 +118,7 @@ export default function DivorceAndMortgagePage() {
 
       <ArticleCallout variant="pitfall" title="Quitclaim deeds do not move the debt">
         Signing a quitclaim deed transfers an interest in the property. It does nothing to the note. It is entirely
-        possible to be off the title and still on the loan — which is the worst of both positions, and it happens
+        possible to be off the title and still on the loan, which is the worst of both positions, and it happens
         regularly. Which deed to use, and whether to sign one at all, is a question for your attorney, not for the loan
         file.
       </ArticleCallout>
@@ -130,7 +130,7 @@ export default function DivorceAndMortgagePage() {
       <h2>What happens next</h2>
       <p>
         Find out early whether either party qualifies alone, because that single answer decides which paths exist. Then
-        settle liability explicitly — refinance, documented assumption with release, or sale — rather than relying on
+        settle liability explicitly, refinance, documented assumption with release, or sale, rather than relying on
         the decree to have done it. <Link href="/qualify">Start a conversation</Link>.
       </p>
     </ArticleShell>

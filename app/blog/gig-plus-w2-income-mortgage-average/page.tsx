@@ -111,7 +111,7 @@ export default function GigPlusW2IncomePage() {
       <h2>Worked shape (illustration)</h2>
       <p>
         W-2 base that is documented on the last two W-2s can be a stable core. Gig 1099s that show $40,000 then $22,000
-        are usually averaged (or limited if the trend is declining) — the $4,000 app month in the file window does not
+        are usually averaged (or limited if the trend is declining), the $4,000 app month in the file window does not
         replace that average. This paragraph is a shape, not your qualifying income.
       </p>
 

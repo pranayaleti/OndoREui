@@ -281,7 +281,7 @@ export function ListingInvestorWorksheet({
           <p id={rateAprId} className="text-xs text-muted-foreground">
             The typed rate is not a quote or APR. Estimated principal and interest uses a{" "}
             {LISTING_INVESTOR_LOAN_TERM_YEARS}-year fixed term assumption. Empty expense fields are
-            treated as 0% — we do not fill market defaults.
+            treated as 0%, we do not fill market defaults.
           </p>
           {showLendingDisclosure ? (
             <p id={rateHelpId} className="text-xs leading-relaxed text-muted-foreground">

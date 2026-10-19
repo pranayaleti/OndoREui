@@ -42,20 +42,20 @@ export default function PropertyManagementCalculatorsWhichOne() {
       }}
     >
             <p className="lead text-xl text-foreground/70 mb-6">
-              There is no single "right" number in real estate — each calculator answers a specific question. Use the wrong one and a good deal looks bad (or a bad one looks good).
+              There is no single "right" number in real estate, each calculator answers a specific question. Use the wrong one and a good deal looks bad (or a bad one looks good).
             </p>
 
             <h2>Screening a deal</h2>
             <ul>
               <li><Link href="/calculators/one-percent-rule">1% and 50% rules</Link>: fast first-pass filters.</li>
-              <li><Link href="/calculators/cap-rate">Cap rate</Link> — the asset's unleveraged yield.</li>
+              <li><Link href="/calculators/cap-rate">Cap rate</Link>, the asset's unleveraged yield.</li>
             </ul>
 
             <h2>Judging your actual return</h2>
             <ul>
-              <li><Link href="/calculators/cash-on-cash">Cash-on-cash</Link> — annual cash yield on the money you put in.</li>
+              <li><Link href="/calculators/cash-on-cash">Cash-on-cash</Link>, annual cash yield on the money you put in.</li>
               <li><Link href="/calculators/roi">ROI</Link>: total growth over the hold.</li>
-              <li><Link href="/calculators/dscr">DSCR</Link> — whether the income covers the loan (and qualifies you for one).</li>
+              <li><Link href="/calculators/dscr">DSCR</Link>, whether the income covers the loan (and qualifies you for one).</li>
             </ul>
 
             <h2>Buying a home to live in</h2>

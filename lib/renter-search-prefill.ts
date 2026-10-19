@@ -35,7 +35,7 @@ function bathroomPreference(bathrooms: string | undefined): string | null {
 
 /**
  * Builds the ContactLeadForm message for a renter who is browsing listings.
- * Beds / budget / city / property type only — no occupant-type or "quality" language.
+ * Beds / budget / city / property type only, no occupant-type or "quality" language.
  */
 export function buildRenterSearchPrefill(input: RenterSearchPrefillInput): string {
   const title = input.listingTitle?.trim()

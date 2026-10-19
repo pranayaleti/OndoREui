@@ -100,7 +100,7 @@ export default function AprVsRatePage() {
       <p>
         Discount points are a separate math problem: {DISCOUNT_POINTS.breakeven} See{" "}
         <Link href="/blog/discount-points-breakeven-without-sales-pitch">discount points without a sales pitch</Link>.
-        A temporary 2-1 buydown changes the payment for a few years, not the note —{" "}
+        A temporary 2-1 buydown changes the payment for a few years, not the note,{" "}
         <Link href="/blog/temporary-buydown-who-pays-year-three">who pays, year 3</Link>. ARM caps limit the note, not
         the tax line: <Link href="/blog/arm-caps-in-plain-english">ARM caps in plain English</Link>.
       </p>

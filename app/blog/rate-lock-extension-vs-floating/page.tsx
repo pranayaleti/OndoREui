@@ -65,13 +65,13 @@ export default function LockExtensionVsFloatingPage() {
           "A lock holds a quoted rate for a window. Floating leaves it open. An extension is a cost if you miss the window. Not a live-rate table.",
         published: "2026-08-29",
         category: "Mortgages",
-        bannerSubtitle: "A lock is a window, not a promise that the market — or your file — cannot change.",
+        bannerSubtitle: "A lock is a window, not a promise that the market, or your file, cannot change.",
         faqs,
         keywords: ["rate lock vs float", "mortgage lock extension"],
       }}
     >
       <p className="lead text-xl text-foreground/70">
-        A rate lock holds a quoted rate and points for a stated number of days. Floating means you have not locked —
+        A rate lock holds a quoted rate and points for a stated number of days. Floating means you have not locked,
         the quote can move. If the lock expires before funding, an extension is usually a cost or a relock, not a free
         extra week. This page does not publish current rates. Snapshot as of {LENDING_FACTS_AS_OF}.
       </p>
@@ -114,7 +114,7 @@ export default function LockExtensionVsFloatingPage() {
       </ul>
       <p>{LOCK_VS_FLOAT.floatDown}</p>
       <p>
-        If you already locked and the question is “rates dropped — now what?”, that is a different intent:{" "}
+        If you already locked and the question is “rates dropped, now what?”, that is a different intent:{" "}
         <Link href="/blog/rate-lock-if-rates-drop">what a lock does if rates drop after you lock</Link>. This page stays
         lock vs float vs extension.
       </p>

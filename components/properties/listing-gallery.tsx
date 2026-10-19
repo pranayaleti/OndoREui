@@ -21,7 +21,7 @@ type ListingGalleryProps = {
 }
 
 function photoAlt(title: string, photo: ListingGalleryPhoto, index: number, total: number): string {
-  return photo.caption?.trim() || `${title} — photo ${index + 1} of ${total}`
+  return photo.caption?.trim() || `${title}, photo ${index + 1} of ${total}`
 }
 
 function sortedPhotos(photos: ListingGalleryPhoto[]): ListingGalleryPhoto[] {
