@@ -53,7 +53,7 @@ const services: OwnerService[] = [
   {
     id: "maintenance",
     label: "Maintenance",
-    headline: "Coordinated repairs, 24/7 emergency line",
+    headline: "Coordinated repairs, emergencies first",
     body: "Tenant requests routed to trusted local vendors with photo/video documentation, cost approvals per your thresholds, and an emergency line for after-hours issues.",
     href: "/property-management/maintenance-coordination",
     linkLabel: "See maintenance coordination",

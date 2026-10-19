@@ -51,7 +51,7 @@ describe("QualificationChat", () => {
 
     openChat()
 
-    expect(await screen.findByText(/we.ll be in touch within 24 hours/i)).toBeInTheDocument()
+    expect(await screen.findByText(/we.ll be in touch within one business day/i)).toBeInTheDocument()
     await waitFor(() => expect(screen.queryByPlaceholderText("Type your answer...")).not.toBeInTheDocument())
   })
 
@@ -72,6 +72,6 @@ describe("QualificationChat", () => {
     openChat()
 
     expect(await screen.findByText("All set.")).toBeInTheDocument()
-    expect(screen.getByText(/we.ll be in touch within 24 hours/i)).toBeInTheDocument()
+    expect(screen.getByText(/we.ll be in touch within one business day/i)).toBeInTheDocument()
   })
 })

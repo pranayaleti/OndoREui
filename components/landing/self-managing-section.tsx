@@ -30,7 +30,7 @@ const painPoints: ReadonlyArray<{ title: string; body: string }> = [
   {
     title: "Coordinating maintenance",
     body:
-      "Trusted local vendors, per-owner cost thresholds, and a 24/7 emergency line — routed with photo and video documentation for each work order.",
+      "Trusted local vendors, per-owner cost thresholds, and emergencies handled first, with photo and video documentation for each work order.",
   },
   {
     title: "Serving notices",

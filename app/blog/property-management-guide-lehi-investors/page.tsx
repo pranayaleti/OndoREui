@@ -80,7 +80,7 @@ export default function PropertyManagementGuideLehi() {
               <li>Tenant screening: credit, criminal, eviction history, income verification (3x rent standard)</li>
               <li>Lease execution with Utah-compliant forms</li>
               <li>Online rent collection with direct deposit to owner</li>
-              <li>24/7 emergency maintenance coordination</li>
+              <li>Emergency maintenance coordination</li>
               <li>Annual inspections with photo documentation</li>
               <li>Owner dashboard with real-time financials</li>
               <li>Year-end statements and 1099s for tax preparation</li>

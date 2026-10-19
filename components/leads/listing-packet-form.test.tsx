@@ -63,6 +63,6 @@ describe("ListingPacketForm", () => {
         message: expect.stringContaining("Listing packet request"),
       }),
     )
-    expect(await screen.findByRole("status")).toHaveTextContent(/invite-only/i)
+    expect(await screen.findByRole("status")).toHaveTextContent(/one business day/i)
   })
 })

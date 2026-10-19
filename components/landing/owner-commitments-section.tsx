@@ -38,7 +38,7 @@ const commitments: Commitment[] = [
   },
   {
     icon: Building2,
-    title: "24/7 emergency maintenance line",
+    title: "Emergencies handled first",
     body:
       "After-hours line for burst pipes, no-heat, and lockout emergencies. Included in every management plan so urgent issues don't wait until Monday.",
     href: "/property-management/maintenance-coordination",

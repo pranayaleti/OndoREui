@@ -90,7 +90,7 @@ export function CityManagementFees({ cityName }: { cityName: string }) {
         <ul className="space-y-2">
           {[
             "Online rent collection with direct deposit",
-            "24/7 emergency maintenance line",
+            "Emergency maintenance coordination",
             "Monthly financial statements and tax-ready reports",
             "Tenant screening (credit, criminal, eviction, income)",
             "Real-time owner dashboard with AI insights",

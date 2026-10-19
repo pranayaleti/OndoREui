@@ -20,7 +20,7 @@ export const OWNER_HOUSING_TYPES: readonly OwnerHousingType[] = [
     utahHook:
       "Victorian, Craftsman, and mid-century houses — the Avenues-style stock already on our neighborhood pages.",
     opsNote:
-      "Wasatch winters mean furnace inspections and pipe insulation before freeze-up. Working heat is a landlord obligation; after-hours no-heat goes to the 24/7 emergency line.",
+      "Wasatch winters mean furnace inspections and pipe insulation before freeze-up. Working heat is a landlord obligation; no-heat is handled as an emergency.",
     href: "/neighborhoods/salt-lake-city/the-avenues/",
     linkLabel: "Avenues housing notes",
   },
@@ -50,7 +50,7 @@ export const OWNER_HOUSING_TYPES: readonly OwnerHousingType[] = [
     utahHook:
       "Duplexes, fourplexes, and 2–8 unit conversions — the Liberty Wells mix of bungalows and small multi-family.",
     opsNote:
-      "Several doors under one owner is why Growth pricing (5+) is a different rate than Starter. We manage the building, not a nightly calendar.",
+      "Five or more doors under one owner is why Growth pricing (5 to 15 units) is a different rate than Starter. We manage the building, not a nightly calendar.",
     href: "/neighborhoods/salt-lake-city/liberty-wells/",
     linkLabel: "Liberty Wells housing notes",
   },

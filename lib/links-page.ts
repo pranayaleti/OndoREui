@@ -1,5 +1,5 @@
 import { APP_PORTAL_URL, LICENSING_LIVE, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
-import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
+import { UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 
 /**
  * Content for /links, the link-in-bio page that replaced linktr.ee/ondorealestate.
@@ -79,7 +79,7 @@ export function buildLinksPageIntro(live: boolean = LICENSING_LIVE): LinksPageIn
       ["Everything's in one place here. Start with a free call, or pick your path below."],
     ],
     /** Same numbers the homepage shows (lib/social-proof-stats.ts), so the two never drift apart. */
-    facts: [`${UTAH_CITIES_SERVED}+ Utah cities`, `${PROPERTIES_MANAGED}+ properties managed`, "Based in Lehi, Utah"],
+    facts: [`${UTAH_CITIES_SERVED} Utah cities`, "Founded 2022", "Based in Lehi, Utah"],
   }
 }
 

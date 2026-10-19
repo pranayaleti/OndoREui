@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 }
 
 const features = [
-  { title: "Monthly Statements", description: "Detailed income and expense statements delivered by the 10th: rent collected, vendor invoices, management fees, net disbursement", icon: <FileText className="h-6 w-6" /> },
+  { title: "Monthly Statements", description: "Detailed income and expense statements each month: rent collected, vendor invoices, management fees, net disbursement", icon: <FileText className="h-6 w-6" /> },
   { title: "NOI Tracking", description: "Gross rent, vacancy, operating expenses, and net operating income tracked monthly with year-over-year comparison", icon: <BarChart3 className="h-6 w-6" /> },
   { title: "Disbursement History", description: "Every owner distribution logged with bank reference: downloadable for tax preparation or lender review", icon: <DollarSign className="h-6 w-6" /> },
   { title: "Document Vault", description: "Leases, inspection reports, invoices, and notices stored and searchable: access any document in seconds", icon: <FolderOpen className="h-6 w-6" /> },

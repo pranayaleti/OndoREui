@@ -8,7 +8,7 @@ import { IncludedVsTypicalTable } from "@/components/pricing/included-vs-typical
 import { SITE_BRAND_SHORT, SITE_URL, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { GROWTH_MGMT_RATE, STARTER_MGMT_RATE } from "@/lib/fee-comparison"
+import { GROWTH_MGMT_RATE, GROWTH_MIN_UNITS, PORTFOLIO_MIN_UNITS, STARTER_MAX_UNITS, STARTER_MGMT_RATE } from "@/lib/fee-comparison"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
@@ -30,10 +30,10 @@ export const metadata: Metadata = {
 const tiers = [
   {
     name: "Starter",
-    units: "1\u20134 units",
+    units: `1 to ${STARTER_MAX_UNITS} units`,
     price: `${Math.round(STARTER_MGMT_RATE * 100)}%`,
     priceLabel: "of collected rent",
-    description: "Perfect for individual property owners getting started with professional management.",
+    description: "For owners handing off their first rentals.",
     features: [
       "Tenant screening & placement",
       "Rent collection & disbursement",
@@ -46,7 +46,7 @@ const tiers = [
   },
   {
     name: "Growth",
-    units: "5\u201315 units",
+    units: `${GROWTH_MIN_UNITS} to ${PORTFOLIO_MIN_UNITS - 1} units`,
     price: `${Math.round(GROWTH_MGMT_RATE * 100)}%`,
     priceLabel: "of collected rent",
     description: "For growing landlords who need hands-off management and proactive property care.",
@@ -62,10 +62,10 @@ const tiers = [
   },
   {
     name: "Portfolio",
-    units: "16+ units",
+    units: `${PORTFOLIO_MIN_UNITS}+ units`,
     price: "Custom",
     priceLabel: "tailored to your portfolio",
-    description: "Enterprise-grade management for investors and institutions with large holdings.",
+    description: "For investors with larger holdings.",
     features: [
       "Everything in Growth",
       "Custom reporting & analytics",
@@ -81,7 +81,7 @@ const tiers = [
 
 const includedInEveryPlan = [
   "Online rent payments via Stripe",
-  "24/7 emergency maintenance line",
+  "Emergency maintenance coordination",
   "Tenant portal with lease & payment history",
   "Owner dashboard with real-time financials",
   "Utah legal compliance & fair housing adherence",
@@ -91,7 +91,7 @@ const includedInEveryPlan = [
 const faqs = [
   {
     q: "Are there any hidden fees beyond the management percentage?",
-    a: "No. Our management fee is a straightforward percentage of collected rent. You only pay that percentage when rent is collected. The only additional cost we publish is the one-time leasing fee when we place a new tenant. There is no setup fee.",
+    a: "No. Our management fee is a percentage of collected rent. You only pay that percentage when rent is collected. The only additional cost we publish is the one-time leasing fee when we place a new tenant. There is no setup fee.",
   },
   {
     q: "What is the leasing fee and when does it apply?",
@@ -103,7 +103,7 @@ const faqs = [
   },
   {
     q: "Do you handle properties outside of Utah?",
-    a: "Currently we focus exclusively on the Utah market so we can deliver best-in-class local expertise. If you have properties in neighboring states, reach out and we\u2019ll discuss options.",
+    a: "Currently we focus exclusively on the Utah market so we know the market we manage in. If you have properties in neighboring states, reach out and we\u2019ll discuss options.",
   },
 ]
 
@@ -127,7 +127,7 @@ export default function PricingPage() {
             Transparent pricing for Utah property owners
           </h1>
           <p className="mt-4 text-lg text-foreground/70">
-            No hidden fees, no surprise charges. You pay a simple percentage of collected rent &mdash; and only when your tenants pay.
+            No hidden fees, no surprise charges. You pay a percentage of collected rent, and only when your tenants pay.
           </p>
         </div>
       </section>

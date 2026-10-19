@@ -19,10 +19,10 @@ export const metadata: Metadata = {
 }
 
 const checks = [
-  { title: "Credit Report", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <FileText className="h-6 w-6" /> },
-  { title: "Criminal Background", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <Shield className="h-6 w-6" /> },
-  { title: "Eviction History", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <UserCheck className="h-6 w-6" /> },
-  { title: "Income Verification", description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", icon: <Clock className="h-6 w-6" /> },
+  { title: "Credit Report", description: "Full tri-merge credit report with score, payment history, collections and debt load", icon: <FileText className="h-6 w-6" /> },
+  { title: "Criminal Background", description: "National and state-level criminal background search with sex offender registry check", icon: <Shield className="h-6 w-6" /> },
+  { title: "Eviction History", description: "National eviction database search covering court filings and judgments", icon: <UserCheck className="h-6 w-6" /> },
+  { title: "Income Verification", description: "Employer verification, pay stub review and bank statements against the written income threshold", icon: <Clock className="h-6 w-6" /> },
 ]
 
 export default function TenantScreeningPage() {

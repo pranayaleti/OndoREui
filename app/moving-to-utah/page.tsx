@@ -9,7 +9,7 @@ import { ARRIVAL_FAIR_HOUSING, ARRIVAL_LENDING_DISCLOSURE, ARRIVAL_REAL_ESTATE_D
 
 const title = "New to Utah: commute, rent, and buy"
 const description =
-  "Starting a Wasatch Front job? See commute minutes and typical rents across 55 Utah cities, then rent with invite-only apply, buy with NMLS-licensed lending, or leave a home with Ondo management."
+  "Starting a Wasatch Front job? See commute minutes and typical rents across 55 Utah cities, then rent with invite-only apply, buy with help on the loan, or leave a home with Ondo management."
 
 export const metadata: Metadata = pageCanonicalMetadata("/moving-to-utah", {
   title,
@@ -64,7 +64,7 @@ export default function MovingToUtahPage() {
             Where will you spend the workweek?
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-foreground/70">
-            Ondo covers 55 cities with rentals, brokerage, NMLS-licensed lending, remote notary, and management.
+            Ondo covers 55 cities with rentals, brokerage, home loans, remote notary and management.
             Pick the weekday workplace. We line up nearby housing cities with typical rents — then you rent, buy, or leave a home on the books.
           </p>
         </div>

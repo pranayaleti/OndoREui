@@ -79,13 +79,13 @@ const maintenanceCoordination: SubServiceDefinition = {
   parentHref: "/property-management",
   metaTitle: (city) =>
     fitTitle(
-      `${city} Rental Maintenance Coordination, 24/7`,
-      `Rental Maintenance in ${city}, UT: 24/7`,
+      `${city} Rental Maintenance Coordination`,
+      `Rental Maintenance in ${city}, UT`,
     ),
   metaDescription: (city) =>
-    `24/7 maintenance coordination for ${city} rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.`,
+    `Maintenance coordination for ${city} rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.`,
   features: [
-    { title: "24/7 Emergency Line", description: "Round-the-clock emergency response for after-hours issues like burst pipes, HVAC failures, and lockouts", iconName: "Phone" },
+    { title: "Emergencies First", description: "Burst pipes, HVAC failures and lockouts are triaged ahead of routine work", iconName: "Phone" },
     { title: "Licensed Vendor Network", description: "Pre-vetted, licensed, and insured contractors across plumbing, electrical, HVAC, roofing, and general repair", iconName: "Wrench" },
     { title: "Owner Approval Workflow", description: "Transparent cost estimates with owner approval required for non-emergency repairs above your set threshold", iconName: "CheckCircle" },
     { title: "Digital Work Orders", description: "Tenants submit requests online with photos; you track status, costs, and completion in your owner dashboard", iconName: "ClipboardList" },
@@ -101,11 +101,11 @@ const maintenanceCoordination: SubServiceDefinition = {
     `Local vendor network familiar with ${city} building codes and ${data.schoolDistrict} area HOA requirements`,
     `Preventive maintenance scheduling tailored to ${city}'s elevation and climate conditions`,
     `Transparent pricing, we share vendor bids and never mark up materials or labor`,
-    `24/7 emergency line plus portal maintenance requests for ${city} properties, with urgent issues triaged 24–48 hours and routine work scheduled during business hours`,
+    `Portal maintenance requests for ${city} properties, with urgent issues triaged first and routine work scheduled during business hours`,
   ],
   baseFaqs: [
-    { q: "How do tenants submit maintenance requests?", a: "Tenants submit requests through the Ondo portal or mobile app, 24/7. They can include photos and detailed descriptions of the issue. Requests are automatically categorized by urgency, emergency issues like water leaks or no heat trigger immediate alerts, while routine requests are scheduled during normal business hours. Tenants receive status updates at each stage." },
-    { q: "What is your emergency maintenance policy?", a: "Emergencies are defined as conditions that threaten life, safety, or property, burst pipes, gas leaks, no heat in winter, electrical hazards, and flooding. We maintain a 24/7 emergency line and dispatch licensed vendors immediately for emergency situations. Non-emergency repairs are handled during business hours with owner notification." },
+    { q: "How do tenants submit maintenance requests?", a: "Tenants submit requests through the Ondo portal or mobile app at any time. They can include photos and detailed descriptions of the issue. Requests are automatically categorized by urgency, emergency issues like water leaks or no heat trigger immediate alerts, while routine requests are scheduled during normal business hours. Tenants receive status updates at each stage." },
+    { q: "What is your emergency maintenance policy?", a: "Emergencies are defined as conditions that threaten life, safety, or property, burst pipes, gas leaks, no heat in winter, electrical hazards, and flooding. Emergencies are triaged first and we dispatch licensed vendors as quickly as we can. Non-emergency repairs are handled during business hours with owner notification." },
     { q: "Do I approve repair costs before work begins?", a: "Yes, for non-emergency repairs. You set an approval threshold (e.g., $300). Any repair estimated above that amount requires your authorization before we dispatch a vendor. For emergencies, we proceed immediately to prevent property damage and notify you as soon as possible. All costs are documented in your owner dashboard." },
     { q: "How do you select maintenance vendors?", a: "Every vendor in our network is licensed, insured, and background-checked. We evaluate vendors on response time, work quality, pricing transparency, and tenant feedback. We maintain relationships with multiple vendors per trade so we can always get competitive pricing and fast response times for your property." },
   ],
@@ -132,7 +132,7 @@ const ownerReporting: SubServiceDefinition = {
   ],
   howItWorks: [
     { step: "1", title: "Data Collection", desc: "Every financial transaction: rent payments, maintenance costs, management fees, utility reimbursements: is automatically recorded and categorized in real time. No manual entry, no spreadsheets, no waiting for month-end to know where you stand." },
-    { step: "2", title: "Monthly Reports", desc: "By the 5th of each month, you receive a detailed statement covering the prior month's income, expenses, and net owner distribution. Reports include year-to-date totals and variance analysis against budget. Digital copies are stored in your owner portal for easy access." },
+    { step: "2", title: "Monthly Reports", desc: "Each month you receive a detailed statement covering the prior month's income, expenses, and net owner distribution. Reports include year-to-date totals and variance analysis against budget. Digital copies are stored in your owner portal for easy access." },
     { step: "3", title: "Annual Tax Preparation", desc: "By January 31, you receive a complete year-end tax package including 1099-MISC forms, annual income/expense summary organized by IRS Schedule E categories, and documentation for all capital expenditures. Your CPA can import the data directly." },
   ],
   localizedIntro: (city, data) =>
@@ -144,7 +144,7 @@ const ownerReporting: SubServiceDefinition = {
     `Vacancy cost tracking showing the real impact of each day your ${city} property sits empty`,
   ],
   baseFaqs: [
-    { q: "When do I receive monthly statements?", a: "Monthly owner statements are delivered by the 5th of each month, covering the prior month's activity. Statements include all rent collected, maintenance expenses, management fees, and your net owner distribution. Year-to-date totals and variance analysis are included so you can track performance trends. Digital copies are permanently available in your owner portal." },
+    { q: "When do I receive monthly statements?", a: "Monthly owner statements cover the prior month's activity. Statements include all rent collected, maintenance expenses, management fees, and your net owner distribution. Year-to-date totals and variance analysis are included so you can track performance trends. Digital copies are permanently available in your owner portal." },
     { q: "What's included in the year-end tax package?", a: "Your year-end package includes 1099-MISC forms for rental income, a complete annual income and expense summary organized by IRS Schedule E line items, documentation for all capital expenditures, and a depreciation schedule. We deliver everything by January 31 so your CPA has plenty of time before the April filing deadline. The package is designed to make tax preparation easier." },
     { q: "Can I access reports in real time?", a: "Yes. Your owner dashboard shows live data including current rent collection status, outstanding maintenance tickets with costs, lease expiration dates, and vacancy status. You can access the dashboard from any device at any time. We also send automated alerts for important events like late rent payments or maintenance costs exceeding your threshold." },
     { q: "Do you provide market rent analysis?", a: "Yes. Each quarter we run a rent comparable analysis for your properties, comparing your current rent to similar properties in the area. The analysis considers property type, size, condition, and location to give you an accurate picture of where your rent sits relative to market. We include a recommendation on whether to adjust rent at lease renewal." },

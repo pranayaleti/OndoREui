@@ -19,12 +19,12 @@ describe("FeeAlignmentWidget", () => {
     expect(screen.getByText(formatUsd0(DEFAULT_EXAMPLE_MONTHLY_RENT))).toBeInTheDocument()
   })
 
-  it("shows Starter 10% per unit and drops to Growth 8% when 5–15 doors is selected", () => {
+  it("shows Starter 10% per unit and drops to Growth 8% when 5 to 15 doors is selected", () => {
     render(<FeeAlignmentWidget />)
     const starter = buildFeeSnapshot(DEFAULT_EXAMPLE_MONTHLY_RENT, 1)
     expect(screen.getByText(formatUsd0(starter.ondoMonthlyFee))).toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole("radio", { name: /5–15 doors/i }))
+    fireEvent.click(screen.getByRole("radio", { name: /5 to 15 doors/i }))
     const growth = buildFeeSnapshot(DEFAULT_EXAMPLE_MONTHLY_RENT, 5)
     expect(screen.getByText(formatUsd0(growth.ondoMonthlyFee))).toBeInTheDocument()
     expect(screen.getByText("Ondo per unit this month")).toBeInTheDocument()

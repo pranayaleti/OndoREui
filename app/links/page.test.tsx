@@ -9,7 +9,7 @@ vi.mock("@/lib/site", async (importOriginal) => ({
   ],
 }))
 
-import { PROPERTIES_MANAGED, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
+import { UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 import LinksPage from "./page"
 import { buildLinksPageIntro } from "@/lib/links-page"
 import { LICENSING_LIVE } from "@/lib/site"
@@ -79,8 +79,8 @@ describe("/links page", () => {
 
   it("shows the same service-area and portfolio numbers as the homepage", () => {
     render(<LinksPage />)
-    expect(screen.getByText(`${UTAH_CITIES_SERVED}+ Utah cities`)).toBeInTheDocument()
-    expect(screen.getByText(`${PROPERTIES_MANAGED}+ properties managed`)).toBeInTheDocument()
+    expect(screen.getByText(`${UTAH_CITIES_SERVED} Utah cities`)).toBeInTheDocument()
+    expect(screen.getByText("Founded 2022")).toBeInTheDocument()
   })
 
   it("offers the founder's story and the company background in one place", () => {

@@ -13,7 +13,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata = {
   title: "Contact Us",
   description:
-    "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. Most messages get a same-day reply.",
+    "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. We reply within one business day.",
   alternates: {
     canonical: `${SITE_URL}/contact/`,
     // First-party Markdown twin for AI agents. Also served on-the-fly via
@@ -23,7 +23,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     title: pageTitleText("Contact Ondo Real Estate: Utah Agents & Lenders"),
-    description: "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. Most messages get a same-day reply.",
+    description: "Talk to a Utah agent, loan officer or property manager. Call, text or book a time that works. We reply within one business day.",
     url: `${SITE_URL}/contact`,
     images: DEFAULT_OG_IMAGES,
   },

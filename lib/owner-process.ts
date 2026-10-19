@@ -19,7 +19,7 @@ export const OWNER_PROCESS_STEPS = [
   {
     step: 4,
     title: "Track everything live",
-    desc: "Your owner dashboard shows rent status, expenses, occupancy, and AI-powered risk alerts.",
+    desc: "Your owner dashboard shows rent status, expenses and occupancy.",
   },
 ] as const
 
@@ -27,7 +27,7 @@ const onboardingFaq = propertyManagementFaqBank.find((item) =>
   /onboarding/i.test(item.q),
 )
 
-/** Owner onboarding window from the PM FAQ bank — not a dispatched-tech ETA. */
+/** Owner onboarding window from the PM FAQ bank, not a dispatched-tech ETA. */
 export const OWNER_ONBOARDING_NOTE =
   onboardingFaq?.a ??
-  "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings, typically within 48–72 hours."
+  "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings, typically within 48 to 72 hours."

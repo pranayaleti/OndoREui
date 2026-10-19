@@ -11,5 +11,5 @@ export const FOUNDED_YEAR = 2022
 /** Month name for prose ("In July 2022 I started..."). */
 export const FOUNDED_MONTH_LABEL = "July"
 export const LICENSING_HREF = "/licensing/"
-export const LICENSING_CHIP_LABEL = "Licensed"
-export const EMERGENCY_LINE_CHIP_LABEL = "24/7 emergency line"
+export const LICENSING_CHIP_LABEL = "Licensing"
+export const EMERGENCY_LINE_CHIP_LABEL = "Emergency maintenance"

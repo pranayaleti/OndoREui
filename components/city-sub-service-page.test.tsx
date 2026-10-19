@@ -49,14 +49,14 @@ describe("CitySubServicePage lead capture", () => {
     const maintenance = subServiceDefinitions["maintenance-coordination"]!
     render(<CitySubServicePage city={lehi} subService={maintenance} />)
     expect(document.body.textContent).not.toMatch(/under 4 hours/i)
-    expect(document.body.textContent).toMatch(/24\/7 emergency line/i)
+    expect(document.body.textContent).toMatch(/triaged ahead of routine work|emergencies first/i)
   })
 
   it("shows factual trust chips without Google scores or placeholder NMLS numbers", () => {
     render(<CitySubServicePage city={lehi} subService={screening} />)
     expect(screen.getByText(/55\+.*cities/i)).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /^licensed$/i })).toHaveAttribute("href", "/licensing/")
-    expect(screen.getAllByText(/24\/7 emergency line/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByRole("link", { name: /^licensing$/i })).toHaveAttribute("href", "/licensing/")
+    expect(screen.getAllByText(/emergency maintenance/i).length).toBeGreaterThanOrEqual(1)
     expect(document.body.textContent).not.toMatch(/NMLS\s*#\s*123456/i)
   })
 

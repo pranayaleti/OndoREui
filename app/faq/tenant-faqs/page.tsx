@@ -39,7 +39,7 @@ export default function TenantFAQPage() {
     },
     {
       question: "How do I report maintenance issues?",
-      answer: `You can report maintenance issues through our tenant portal, by email, or by phone for emergencies at ${SITE_PHONE}. Our maintenance team responds to emergency requests within 24 hours and non-emergency requests within 2-3 business days. We provide 24/7 emergency maintenance support for issues like water leaks, heating failures, or security concerns.`
+      answer: `You can report maintenance issues through our tenant portal, by email, or by phone for emergencies at ${SITE_PHONE}. Emergencies like water leaks, no heat or security problems are handled first. Routine requests are scheduled within 2 to 3 business days.`
     },
     {
       question: "Can I have pets in my rental?",

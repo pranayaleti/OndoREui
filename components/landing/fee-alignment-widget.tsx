@@ -10,6 +10,10 @@ import {
   DEFAULT_EXAMPLE_MONTHLY_RENT,
   FEE_COMPARISON_AS_OF,
   GROWTH_MGMT_RATE,
+  GROWTH_MIN_UNITS,
+  PORTFOLIO_MIN_UNITS,
+  STARTER_MAX_UNITS,
+  STARTER_MGMT_RATE,
   RENT_SLIDER_MAX,
   RENT_SLIDER_MIN,
   RENT_SLIDER_STEP,
@@ -75,10 +79,9 @@ export function FeeAlignmentWidget() {
             Fees that wait for the rent
           </h2>
           <p className="mt-4 text-lg text-foreground/70">
-            Ondo bills a percentage of rent that actually hits the account.
-            Dollars below are <strong className="font-semibold text-foreground">per unit</strong>
-            — door count only picks Starter 10% (1–4) or Growth 8% (5–15).
-            Leasing stays on its own one-time line.
+            Ondo bills a percentage of the rent that is collected. Figures are{" "}
+            <strong className="font-semibold text-foreground">per unit</strong>. Pick your door count to
+            see the rate. Leasing is a separate one-time line.
           </p>
         </div>
 
@@ -117,7 +120,7 @@ export function FeeAlignmentWidget() {
 
               <fieldset>
                 <legend className="mb-2 text-sm font-medium text-foreground">
-                  Published rate (does not multiply the ledger)
+                  Published rate
                 </legend>
                 <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                   <label className={`flex ${STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS} cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5`}>
@@ -129,7 +132,7 @@ export function FeeAlignmentWidget() {
                       onChange={() => setMode("starter")}
                       className="accent-primary"
                     />
-                    1–4 doors · Starter 10%
+                    1 to {STARTER_MAX_UNITS} doors · Starter {Math.round(STARTER_MGMT_RATE * 100)}%
                   </label>
                   <label className={`flex ${STICKY_MOBILE_CTA_SCROLL_MARGIN_CLASS} cursor-pointer items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5`}>
                     <input
@@ -140,11 +143,11 @@ export function FeeAlignmentWidget() {
                       onChange={() => setMode("growth")}
                       className="accent-primary"
                     />
-                    5–15 doors · Growth 8%
+                    {GROWTH_MIN_UNITS} to {PORTFOLIO_MIN_UNITS - 1} doors · Growth {Math.round(GROWTH_MGMT_RATE * 100)}%
                   </label>
                 </div>
                 <p className="mt-2 text-xs text-foreground/50">
-                  16+ units is a custom Portfolio quote — not illustrated here.
+                  {PORTFOLIO_MIN_UNITS}+ units is a custom Portfolio quote.
                 </p>
               </fieldset>
 
@@ -161,8 +164,7 @@ export function FeeAlignmentWidget() {
               </div>
               {showTime && (
                 <p className="text-sm text-foreground/70">
-                  This ledger stays on fees. Hours, hourly rate, vacancy, and
-                  repairs live on the full calculator —{" "}
+                  Hours, vacancy and repairs are on the full calculator:{" "}
                   <Link
                     href="/calculators/owner-vs-self"
                     className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
@@ -176,7 +178,7 @@ export function FeeAlignmentWidget() {
 
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-foreground/60">
-                Per-unit ledger
+                Per-unit fees
               </p>
               <dl className="divide-y divide-border rounded-lg border border-border">
                 <div className="flex items-baseline justify-between gap-4 px-4 py-3">

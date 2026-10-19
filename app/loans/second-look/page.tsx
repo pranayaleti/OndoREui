@@ -8,7 +8,7 @@ import { pageTitle } from "@/lib/site"
 import { ARRIVAL_LENDING_DISCLOSURE } from "@/lib/utah-arrival"
 
 const description =
-  "Under contract with another lender? Send the key numbers from your Loan Estimate and a licensed loan officer will walk you through how they compare. No credit check to start."
+  "Under contract with another lender? Send the key numbers from your Loan Estimate and we will walk you through how they compare. No credit check to start."
 
 export const metadata: Metadata = pageCanonicalMetadata("/loans/second-look/", {
   title: pageTitle("Under Contract? Get a Second Look at Your Loan Estimate"),
@@ -53,7 +53,7 @@ export default function SecondLookPage() {
         </h1>
         <p className="mt-4 leading-relaxed text-muted-foreground">
           You may be able to switch lenders while under contract; check your purchase agreement deadlines. Send us the
-          key numbers from your Loan Estimate and a licensed loan officer will walk you through how they compare. No
+          key numbers from your Loan Estimate and we will walk you through how they compare. No
           credit check to start.
         </p>
 

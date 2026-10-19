@@ -60,9 +60,9 @@ export default function LicensingPage() {
               </p>
               <p className="mx-auto mt-4 max-w-2xl text-foreground/70">
                 Ondo Real Estate offers multiple regulated services under one
-                brand. Each line of business is licensed separately. This page
-                summarizes those disclosures and points you to the state
-                registries where you can verify every one of them.
+                brand. Each line of business is licensed separately, and licensing is
+                in progress. This page says where each one stands and points you
+                to the state registries where you can verify it.
               </p>
             </div>
 
@@ -77,11 +77,10 @@ export default function LicensingPage() {
                 <CardContent className="space-y-3 text-sm text-foreground/80">
                   <p>
                     Brokerage services (buyer representation, seller
-                    representation, and listing services) are provided by
-                    licensed Ondo Real Estate agents under the supervision of
-                    the principal broker. License numbers are available on
-                    request and are also on file with the Utah Division of
-                    Real Estate.
+                    representation, and listing services) are offered as Ondo Real
+                    Estate. Brokerage licensing is in progress. License numbers
+                    will be published here once active and can be verified with
+                    the Utah Division of Real Estate.
                   </p>
                   <p>{FAIR_HOUSING_STATEMENT}</p>
                 </CardContent>
@@ -130,9 +129,9 @@ export default function LicensingPage() {
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-foreground/80">
                   <p>
-                    Property management services are provided in Utah under
-                    the principal broker&rsquo;s supervision by licensed real
-                    estate agents and brokers. Utah&rsquo;s separate property
+                    Property management services are offered in Utah as Ondo
+                    Real Estate while brokerage licensing is in progress.
+                    Utah&rsquo;s separate property
                     manager license, created by the Utah Real Estate Licensing
                     and Practices Act and amended in the 2026 general session,
                     becomes available January 1, 2027; Ondo will hold that

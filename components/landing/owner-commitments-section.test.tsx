@@ -13,7 +13,7 @@ describe("OwnerCommitmentsSection", () => {
       screen.getByRole("heading", { name: /30-day notice/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole("heading", { name: /24\/7 emergency maintenance line/i }),
+      screen.getByRole("heading", { name: /emergencies handled first/i }),
     ).toBeInTheDocument()
     expect(
       screen.getByRole("heading", { name: /Fair Housing.compliant screening/i }),

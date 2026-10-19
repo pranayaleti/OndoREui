@@ -1,8 +1,16 @@
 import {
   ADVERTISED_FLAT_MONTHLY,
   FEE_COMPARISON_AS_OF,
+  GROWTH_MGMT_RATE,
+  GROWTH_MIN_UNITS,
+  LEASING_FEE_RATE,
+  PORTFOLIO_MIN_UNITS,
+  STARTER_MAX_UNITS,
+  STARTER_MGMT_RATE,
   TYPICAL_UTAH_PM_RANGE_LABEL,
 } from "./fee-comparison"
+
+const pct = (rate: number) => `${Math.round(rate * 100)}%`
 
 /** Vendor invoice policy, shared by /pricing and the per-city pricing guides. */
 export const VENDOR_INVOICE_POLICY = "No markup"
@@ -25,7 +33,7 @@ export const PRICING_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   },
   {
     item: "Rate by portfolio size",
-    ondo: "Starter 10% (1–4 units). Growth 8% (5–15 units). Portfolio 16+ is a custom quote.",
+    ondo: `Starter ${pct(STARTER_MGMT_RATE)} (1 to ${STARTER_MAX_UNITS} units). Growth ${pct(GROWTH_MGMT_RATE)} (${GROWTH_MIN_UNITS} to ${PORTFOLIO_MIN_UNITS - 1} units). Portfolio ${PORTFOLIO_MIN_UNITS}+ is a custom quote.`,
     typical: `Advertised ${TYPICAL_UTAH_PM_RANGE_LABEL} of collected rent (${FEE_COMPARISON_AS_OF}), or a flat monthly (some Utah shops publish ~$${ADVERTISED_FLAT_MONTHLY} as of ${FEE_COMPARISON_AS_OF}) that does not move with your rent.`,
   },
   {
@@ -35,12 +43,12 @@ export const PRICING_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   },
   {
     item: "Leasing / placement",
-    ondo: "One-time 50% of first month’s rent when we place a new tenant. No leasing fee on renewals.",
+    ondo: `One-time ${pct(LEASING_FEE_RATE)} of first month’s rent when we place a new tenant. No leasing fee on renewals.`,
     typical: "0–100% of first month. Some Utah managers advertise $0 placement; others charge a full month. Verify the current offer.",
   },
   {
     item: "Cancellation",
-    ondo: "30-day written notice. Month to month — we earn the next month.",
+    ondo: "30-day written notice. Month to month.",
     typical: "30–90 day notice or an annual term. Read the agreement.",
   },
   {
@@ -50,17 +58,17 @@ export const PRICING_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   },
   {
     item: "Owner technology",
-    ondo: "Custom owner portal and AI assistant — built for Ondo, not a white-label franchise login.",
+    ondo: "Custom owner portal built for Ondo.",
     typical: "AppFolio-class or franchise stack shared across many offices.",
   },
   {
     item: "After-hours emergencies",
-    ondo: "24/7 emergency line for burst pipes, no-heat, and lockouts. Not office-hours-only.",
+    ondo: "Tenants report emergencies any time through the portal. Burst pipes, no heat and lockouts are handled first.",
     typical: "Business hours plus an answering service. Coverage varies by office.",
   },
   {
     item: "Licenses in one shop",
-    ondo: "Licensed brokerage and property management in one shop. NMLS ID is on file. This table is not an offer or commitment to lend.",
+    ondo: "Property management, brokerage and lending under one roof. Licensing details on /licensing. This table is not an offer or commitment to lend.",
     typical: "Brokerage and PM in-house; lending often a separate shop.",
   },
 ]

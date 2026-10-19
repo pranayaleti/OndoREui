@@ -15,7 +15,7 @@ describe("maintenance coordination claims", () => {
       ...maintenance.baseFaqs.map((f) => `${f.q} ${f.a}`),
     ].join("\n")
     expect(blob).not.toMatch(/under 4 hours/i)
-    expect(blob).toMatch(/24\/7 emergency line/i)
+    expect(blob).toMatch(/emergencies first/i)
   })
 })
 

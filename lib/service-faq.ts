@@ -1,4 +1,14 @@
 import { type CityFaq } from "./city-content"
+import {
+  GROWTH_MGMT_RATE,
+  GROWTH_MIN_UNITS,
+  LEASING_FEE_RATE,
+  PORTFOLIO_MIN_UNITS,
+  STARTER_MAX_UNITS,
+  STARTER_MGMT_RATE,
+} from "./fee-comparison"
+
+const pct = (rate: number) => `${Math.round(rate * 100)}%`
 
 export type ServiceKey = "property-management" | "buy-sell" | "loans"
 
@@ -18,17 +28,17 @@ export const PURCHASE_CLOSING_RANGE = "21–45 days"
 
 export const propertyManagementFaqBank: CityFaq[] = [
   { q: "What areas do you manage in Utah?", a: PM_SERVICE_AREA_SUMMARY },
-  { q: "What are your management and leasing fees?", a: "Starter is 10% of collected rent for 1–4 units; Growth is 8% for 5–15 units. Leasing is a one-time 50% of first month’s rent when we place a new tenant (none on renewals). You only pay management when rent is collected." },
-  { q: "How quickly can you lease my property?", a: "Most homes we list, when priced to local comps, typically lease within a few weeks depending on seasonality. We share weekly showing and application activity rather than a fill-by date." },
+  { q: "What are your management and leasing fees?", a: `Starter is ${pct(STARTER_MGMT_RATE)} of collected rent for 1 to ${STARTER_MAX_UNITS} units. Growth is ${pct(GROWTH_MGMT_RATE)} for ${GROWTH_MIN_UNITS} to ${PORTFOLIO_MIN_UNITS - 1} units. Leasing is a one-time ${pct(LEASING_FEE_RATE)} of the first month’s rent when we place a new tenant, and nothing on renewals. You only pay management when rent is collected.` },
+  { q: "How quickly can you lease my property?", a: "Most homes priced to local comps lease within a few weeks, depending on the season. We share weekly showing and application activity rather than a fill-by date." },
   { q: "How do you screen tenants?", a: "We verify income, credit, criminal background, prior evictions, rental history, and employment. Applications are scored against fair, written criteria." },
-  { q: "How is maintenance handled?", a: "Tenants submit requests online 24/7. We triage, dispatch vetted vendors, and keep owners informed. Emergencies route to the 24/7 emergency line and are triaged as they come in." },
+  { q: "How is maintenance handled?", a: "Tenants submit requests online any time. We triage, dispatch vetted vendors, and keep you informed. Emergencies are handled first." },
   { q: "Is there a maintenance reserve or markups?", a: "We maintain a small operating reserve to cover minor repairs and do not add markups to vendor invoices. You receive copies of all bills in monthly statements." },
   { q: "How often do you inspect properties?", a: PM_INSPECTION_ANSWER },
   { q: "When will I receive owner payouts?", a: "Owner disbursements are sent monthly after rent clears and expenses are reconciled. You’ll receive a statement itemizing all income and costs." },
   { q: "How do you handle late rent and evictions?", a: "We follow Utah statutes for notices and timelines, apply late fees per lease, and coordinate with legal partners when necessary to protect your interests." },
   { q: "Can I approve repairs over a certain amount?", a: PM_REPAIR_APPROVAL_ANSWER },
   { q: "Do you allow pets?", a: "Pet policies are owner-led. If allowed, we use pet screening, deposits, and pet rent to mitigate risk while expanding the renter pool." },
-  { q: "What does onboarding look like?", a: "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings, typically within 48–72 hours." },
+  { q: "What does onboarding look like?", a: "We review your goals, collect documents and keys, perform a walk-through, set pricing, activate marketing, and begin showings, typically within 48 to 72 hours." },
 ]
 
 export const buySellFaqBank: CityFaq[] = [

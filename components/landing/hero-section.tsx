@@ -92,13 +92,12 @@ export function HeroSection() {
           ))}
         </div>
         <p className="mt-6 text-sm text-foreground/50">
-          Trusted by property owners across the Wasatch Front{" "}
-          &bull;{" "}
+          Property management, brokerage and lending under one roof.{" "}
           <Link
             href="/licensing"
             className="underline underline-offset-4 hover:text-foreground/80"
           >
-            Licensed brokerage, property management, and NMLS
+            Licensing details
           </Link>
         </p>
         <p className="mt-2 text-xs text-foreground/50">

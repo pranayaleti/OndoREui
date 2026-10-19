@@ -101,7 +101,7 @@ const SELLING: ArticleFallback = {
 const NOTARY: ArticleFallback = {
   cta: { label: "See notary services", href: "/notary" },
   links: [
-    { label: "Notary services", href: "/notary", description: "Mobile and remote online notarization from Ondo RE." },
+    { label: "Notary services", href: "/notary", description: "Remote online notarization from Ondo RE." },
     { label: "Talk with Ondo RE", href: "/contact", description: "Ask about a signing." },
   ],
 }

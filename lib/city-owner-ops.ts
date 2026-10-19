@@ -35,7 +35,7 @@ function trimBody(text: string, max = 320): string {
 }
 
 function wasatchWinterTip(cityName: string): string {
-  return `In ${cityName}, schedule furnace inspections and pipe insulation before freezing weather. Working heat is a Utah landlord obligation; after-hours no-heat is handled on the 24/7 emergency line.`
+  return `In ${cityName}, schedule furnace inspections and pipe insulation before freezing weather. Working heat is a Utah landlord obligation; no-heat is handled as an emergency line.`
 }
 
 /**

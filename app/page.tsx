@@ -33,7 +33,6 @@ export default function Home() {
         pathname="/"
         image={`${SITE_URL}/modern-office-building.webp`}
         keywords={[
-          SITE_BRAND_SHORT,
           "Ondo RE",
           "Ondo Real Estate",
           "ondo real estate utah",

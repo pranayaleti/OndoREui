@@ -11,18 +11,18 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: pageTitle("Utah Rental Maintenance Coordination, 24/7"),
-  description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.",
+  title: pageTitle("Utah Rental Maintenance Coordination"),
+  description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.",
   alternates: { canonical: `${SITE_URL}/property-management/maintenance-coordination/` },
-  openGraph: { type: "website", title: pageTitleText("Utah Rental Maintenance Coordination, 24/7"), description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Utah Rental Maintenance Coordination, 24/7"), description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Utah Rental Maintenance Coordination"), description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: DEFAULT_OG_IMAGES },
+  twitter: { card: "summary_large_image", title: pageTitleText("Utah Rental Maintenance Coordination"), description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: [DEFAULT_OG_IMAGE_URL] },
 }
 
 const features = [
-  { title: "24/7 Request Intake", description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", icon: <Bell className="h-6 w-6" /> },
-  { title: "Vetted Vendor Network", description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", icon: <Users className="h-6 w-6" /> },
-  { title: "Owner Approval Thresholds", description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", icon: <ClipboardList className="h-6 w-6" /> },
-  { title: "Completion Tracking", description: "24/7 maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", icon: <Wrench className="h-6 w-6" /> },
+  { title: "Request Intake", description: "Tenants submit requests in the portal any time, sorted by urgency, with photos attached", icon: <Bell className="h-6 w-6" /> },
+  { title: "Vetted Vendor Network", description: "We dispatch from a pre-screened Utah vendor network: licensed, insured and rated on past work", icon: <Users className="h-6 w-6" /> },
+  { title: "Owner Approval Thresholds", description: "You set a dollar threshold. Work under it proceeds; above it waits for your sign-off", icon: <ClipboardList className="h-6 w-6" /> },
+  { title: "Completion Tracking", description: "Every request logged from open to close with photos, invoices and tenant sign-off", icon: <Wrench className="h-6 w-6" /> },
 ]
 
 export default function MaintenanceCoordinationPage() {

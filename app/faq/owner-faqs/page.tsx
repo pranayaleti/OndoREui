@@ -44,7 +44,7 @@ export default function OwnerFAQPage() {
     },
     {
       question: "How often will I receive statements and payments?",
-      answer: "Property owners receive detailed monthly statements showing all income and expenses. Rent payments, minus management fees and any maintenance costs, are directly deposited to your bank account by the 15th of each month. You'll also receive annual statements for tax purposes and have 24/7 access to your property's financial information through our owner portal."
+      answer: "Property owners receive detailed monthly statements showing all income and expenses. Rent payments, minus management fees and any maintenance costs, are deposited to your bank account each month. You'll also receive annual statements for tax purposes and can see your property's financial information any time in the owner portal."
     },
     {
       question: "How often do you inspect properties?",
@@ -56,7 +56,7 @@ export default function OwnerFAQPage() {
     },
     {
       question: "Can I see my property's financial information online?",
-      answer: "Yes! Our owner portal provides 24/7 access to your property's financial information, including income statements, expense reports, tenant payment history, and maintenance records. You can view and download reports at any time."
+      answer: "Yes! Our owner portal gives you access any time to your property's financial information, including income statements, expense reports, tenant payment history, and maintenance records. You can view and download reports at any time."
     }
   ]
 

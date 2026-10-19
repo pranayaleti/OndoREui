@@ -38,8 +38,8 @@ const PATHS: ReadonlyArray<{
   },
   {
     id: "buy",
-    title: "Buy with brokerage + NMLS",
-    body: "Purchase help and NMLS-licensed lending in one shop. Asking is not a loan application or a credit decision, and you are not required to use Ondo for financing.",
+    title: "Buy with one team",
+    body: "Purchase help and home loans in one shop. Asking is not a loan application or a credit decision, and you are not required to use Ondo for financing.",
   },
   {
     id: "leaving-a-home",

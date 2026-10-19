@@ -9,8 +9,8 @@ describe("PRICING_INCLUDED_ROWS", () => {
     expect(blob).toMatch(/30-day/)
     expect(blob).toMatch(/markup/)
     expect(blob).toMatch(/owner portal|custom/)
-    expect(blob).toMatch(/24\/7/)
-    expect(blob).toMatch(/nmls/)
+    expect(blob).toMatch(/emergencies/)
+    expect(blob).toMatch(/licensing/)
     expect(blob).toMatch(/setup/)
   })
 

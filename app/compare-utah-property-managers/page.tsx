@@ -158,7 +158,7 @@ export default function CompareUtahPropertyManagersPage() {
           <div className="prose prose-lg prose-invert max-w-none text-foreground/80">
             <p>
               You should pick Ondo RE if you want real-time owner visibility, a
-              custom owner portal and AI assistant, and a partner that built its own software stack rather than licensing the same AppFolio everyone else uses. If you have a portfolio of 1–20 units and value
+              custom owner portal and AI assistant, and a partner that built its own software stack rather than licensing the same AppFolio everyone else uses. If you have a portfolio of 1 to 15 units and value
               transparent dashboards over a thicker rolodex of long-tenured local relationships, we
               fit.
             </p>
@@ -184,7 +184,7 @@ export default function CompareUtahPropertyManagersPage() {
               <Link href="/calculators/owner-vs-self" className="prose-link">
                 Self-Manage vs Ondo ROI calculator
               </Link>.
-              Whatever the answer, you'll walk into every PM conversation with leverage.
+              Whatever the answer, you'll walk into every PM conversation with a real number.
             </p>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { Building2, ClipboardCheck, Shield, Wallet, Wrench, Bot, BarChart3, Bell, Users, Zap } from "lucide-react"
+import { Building2, ClipboardCheck, Shield, Wallet, Wrench, Bell, Users, Zap } from "lucide-react"
 import SEO from "@/components/seo"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -22,7 +22,7 @@ import { analyticsAttributes } from "@/lib/analytics"
 export const metadata: Metadata = {
   title: pageTitle("Utah Property Management: Fees, Leasing & Screening"),
   description:
-    "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
+    "Utah property management on the Wasatch Front: 10% of collected rent, tenant screening, maintenance coordination and monthly owner statements.",
   keywords: [
     "Utah property management",
     "property management Lehi",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     title: pageTitleText("Utah Property Management: Fees, Leasing & Screening"),
     description:
-      "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
+      "Utah property management on the Wasatch Front: 10% of collected rent, tenant screening, maintenance coordination and monthly owner statements.",
     url: `${SITE_URL}/property-management/`,
     images: [
       {
@@ -55,22 +55,22 @@ const pillars = [
   {
     icon: <ClipboardCheck className="h-8 w-8 text-primary" aria-hidden />,
     title: "Leasing & screening",
-    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
+    description: "Marketing, showings and screening against written criteria, so the home leases to a qualified tenant.",
   },
   {
     icon: <Wallet className="h-8 w-8 text-primary" aria-hidden />,
     title: "Rent & reporting",
-    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
+    description: "Rent collection, owner statements and clear financial reporting so you always know how the asset is performing.",
   },
   {
     icon: <Wrench className="h-8 w-8 text-primary" aria-hidden />,
     title: "Maintenance & compliance",
-    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
+    description: "Coordinated repairs, vetted vendors and documented work, plus support for Utah rental compliance.",
   },
   {
     icon: <Shield className="h-8 w-8 text-primary" aria-hidden />,
     title: "Owner & tenant experience",
-    description: "Property management across the Wasatch Front: transparent fees, tenant screening, 24/7 maintenance and owner reporting. Free rental analysis.",
+    description: "One partner for owners and tenants: fewer handoffs, faster answers and one place to see everything.",
   },
 ]
 
@@ -221,16 +221,14 @@ export default function PropertyManagementPage() {
         <section className="max-w-5xl mx-auto mb-16">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Built-in technology for owners</h2>
           <p className="text-center text-foreground/70 mb-10 max-w-2xl mx-auto">
-            Our platform includes AI-assisted tools to help you keep an eye on your investment.
+            The owner portal keeps your investment in view.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: <Bot className="h-6 w-6 text-primary" />, title: "AI assistant", desc: "Ask questions about your portfolio in plain English and get instant answers." },
-              { icon: <BarChart3 className="h-6 w-6 text-primary" />, title: "At-risk tenant scoring", desc: "AI flags tenants likely to miss payments before it happens." },
               { icon: <Bell className="h-6 w-6 text-primary" />, title: "Push notifications", desc: "Real-time alerts for payments, maintenance, and lease events." },
               { icon: <Zap className="h-6 w-6 text-primary" />, title: "Automation rules", desc: "Auto-send reminders, escalate overdue maintenance, and trigger workflows." },
               { icon: <Users className="h-6 w-6 text-primary" />, title: "Vendor management", desc: "Track preferred vendors, assign work orders, and compare bids." },
-              { icon: <Shield className="h-6 w-6 text-primary" />, title: "24/7 emergency response", desc: "Tenants report emergencies anytime. We coordinate the fix." },
+              { icon: <Shield className="h-6 w-6 text-primary" />, title: "Emergency maintenance", desc: "Tenants report emergencies any time. We coordinate the fix." },
             ].map((f) => (
               <div key={f.title} className="flex items-start gap-3 p-4 rounded-lg border border-border bg-card">
                 {f.icon}
@@ -252,7 +250,7 @@ export default function PropertyManagementPage() {
             <ul className="space-y-3 text-foreground/80">
               <li>• Same team context when you buy, refinance, or sell the asset you already manage with us.</li>
               <li>• Notary and loan signing workflows available when closings and paperwork need to move fast.</li>
-              <li>• Operators-focused tooling for lean teams, autopay, screening, and maintenance in one rhythm.</li>
+              <li>• Autopay, screening and maintenance in one place.</li>
             </ul>
             <div className="flex flex-wrap gap-3 mt-8">
               <Button asChild>

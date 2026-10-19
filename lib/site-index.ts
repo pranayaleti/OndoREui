@@ -506,17 +506,17 @@ function catalogSections(): SiteIndexSection[] {
     {
       id: "notary",
       title: "Notary & signing",
-      description: "Mobile and remote online notarization for real estate and general documents.",
+      description: "Remote online notarization for real estate and general documents.",
       links: [
         {
           name: "Notary services",
           href: "/notary",
-          description: "RON, loan signings, estate packages, and mobile coverage.",
+          description: "Remote online notarization, loan signings and estate packages.",
         },
         {
           name: "On-demand notary",
           href: "/notary/on-demand",
-          description: "Urgent and same-day when capacity allows, RON or mobile.",
+          description: "Same-day remote sessions when capacity allows.",
         },
         {
           name: "Notary locations",

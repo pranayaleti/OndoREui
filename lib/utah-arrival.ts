@@ -292,7 +292,7 @@ export function arrivalContactPrefill(
     case "rent":
       return `I need an Ondo-managed rental before a Utah start date. Weekday workplace: ${work}. Housing city of interest: ${where}. Please share current listings and how to request a showing.`
     case "buy":
-      return `I'm arriving in Utah and looking at buying near ${where}. Weekday workplace: ${work}. Please follow up about brokerage and NMLS-licensed lending. This is not a loan application.`
+      return `I'm arriving in Utah and looking at buying near ${where}. Weekday workplace: ${work}. Please follow up about buying and financing. This is not a loan application.`
     case "leaving-a-home":
       return `I'm moving to Utah and still own a home I may rent. Weekday workplace will be ${work}. Please follow up about a rental estimate and management — I understand the management fee is charged when rent is collected.`
     case "people-ops":

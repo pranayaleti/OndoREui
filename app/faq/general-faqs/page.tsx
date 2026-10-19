@@ -39,7 +39,7 @@ export default function GeneralFAQPage() {
     },
     {
       question: "Are you licensed and insured?",
-      answer: "Property management services are provided in Utah under the principal broker's supervision by licensed real estate agents and brokers. Utah's separate property manager license becomes available January 1, 2027, and Ondo will hold that credential as required once the Division of Real Estate finalizes its rules. See our Licensing & Disclosures page for details."
+      answer: "Real estate and mortgage licensing is in progress. Property management is offered as Ondo Real Estate. Utah's separate property manager license becomes available January 1, 2027, and Ondo will hold it once the Division of Real Estate finalizes its rules. See our Licensing & Disclosures page for the current status of each line of business."
     },
     {
       question: "How do you handle legal compliance?",

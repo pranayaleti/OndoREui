@@ -102,11 +102,12 @@ export default function PropertyManagementFeesUtah() {
               <li>Maintenance markup (15% on $1,500 in maintenance): $225</li>
               <li><strong>True annual cost: ~$3,585, effectively 14.9% of annual rent</strong></li>
             </ul>
-            <p>Compare this to a company charging 10% with no leasing fee, no renewal fee, and no maintenance markup:</p>
+            <p>Compare this to Ondo's published structure: 10% of collected rent, a one-time 50% leasing fee when a new tenant is placed, no renewal fee and no maintenance markup:</p>
             <ul>
               <li>Management fee (10%): $2,400/year</li>
-              <li>No leasing fee, no renewal fee, no markup</li>
-              <li><strong>True annual cost: $2,400, effectively 10% of annual rent</strong></li>
+              <li>Leasing fee (50% of one month, 1 tenant change): $1,000</li>
+              <li>No renewal fee, no markup</li>
+              <li><strong>True annual cost: $3,400, effectively 14.2% of annual rent</strong></li>
             </ul>
 
             <h2>What Full-Service Management Should Include</h2>

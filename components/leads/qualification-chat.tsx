@@ -112,7 +112,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
             )}
             {completed && (
               <div role="status" className="text-center text-sm text-muted-foreground py-4">
-                Thanks! We&apos;ll be in touch within 24 hours.
+                Thanks! We&apos;ll be in touch within one business day.
               </div>
             )}
             {expired && (
