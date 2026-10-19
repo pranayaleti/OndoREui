@@ -4,452 +4,134 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SEO from "@/components/seo";
-import { SITE_URL, SITE_PHONE, SITE_PHONE_TEL, SITE_EMAILS } from "@/lib/site";
+import { SITE_URL, SITE_PHONE, SITE_PHONE_TEL, SITE_EMAILS, SITE_ADDRESS } from "@/lib/site";
 import { analyticsAttributes } from "@/lib/analytics";
 import { NOTARY_SERVICE_ID, generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo";
 import { NOTARY_HOURS_SPEC } from "@/lib/notary-fees";
-import {
-  CheckCircle,
-  Clock,
-  MapPin,
-  Phone,
-  Mail,
-  FileText,
-  Shield,
-  Users,
-  Calendar,
-  TrendingUp,
-  Award,
-  Building2,
-} from "lucide-react";
+import { NOTARY_PAGE_FAQS } from "@/lib/service-faq";
+import { CheckCircle, Phone, Mail, MapPin, Calendar } from "lucide-react";
 import { NotaryBooking } from "@/components/notary-booking";
 import { NotaryFees } from "@/components/notary-fees";
+import { ServiceFaqSection } from "@/components/service-faq-section";
 import ConsultationModal from "@/components/ConsultationModal";
-import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed";
-import { notaryStatePath } from "@/lib/notary-cities";
 
-const FEATURED_STATES = [
-  { name: "Utah", slug: "utah" },
-  { name: "California", slug: "california" },
-  { name: "Texas", slug: "texas" },
-  { name: "Florida", slug: "florida" },
-  { name: "New York", slug: "new-york" },
-];
-
-const META_KEYWORDS = [
+const KEYWORDS = [
   "remote online notary",
   "RON nationwide",
   "online notary USA",
   "loan signing agent",
   "real estate notary",
   "digital notarization",
-  "notary Texas",
-  "notary California",
-  "notary New York",
-  "notary Florida",
+  "Utah notary public",
+  "apostille assistance",
 ];
 
-const KEYWORDS = Array.from(
-  new Set([
-    "remote online notary",
-    "RON nationwide",
-    "online notary US",
-    "loan signing agent",
-    "real estate notary",
-    "notary near me",
-    "Utah notary public",
-    "apostille assistance",
-    ...META_KEYWORDS,
-  ])
-);
+const whatYouGet = [
+  { title: "Remote online notarization", body: "A secure video session from wherever you are, accepted in every state. Real estate, powers of attorney, affidavits, estate and business documents." },
+  { title: "Loan signings", body: "Purchases, refinances, HELOCs and investor closings, walked through page by page and returned to title on time." },
+  { title: "Same day when there is room", body: "Ask early in the day and we fit you in when capacity allows." },
+  { title: "The extras", body: "I-9 verification, apostille help for Utah documents and witnesses when a document needs them." },
+];
 
 /** `imageUrl` comes from the server page so this client bundle stays free of lib/page-canonical. */
 export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-  <main className="min-h-screen">
-    {/* SEO */}
-    <SEO
-      title="Remote Online Notary – Available Nationwide"
-      description="Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments."
-      pathname="/notary/"
-      image={imageUrl}
-      keywords={KEYWORDS}
-      jsonLd={[
-        generateBreadcrumbJsonLd([
-          { name: "Home", url: SITE_URL },
-          { name: "Notary", url: `${SITE_URL}/notary/` },
-        ]),
-        // The one notary entity. Hours come from the posted notary schedule (not the office
-        // hours on the site Organization); state and city pages point back here by @id.
-        generateServiceJsonLd({
-          id: NOTARY_SERVICE_ID,
-          name: "Remote Online Notarization (RON)",
-          description:
-            "Remote online notarization nationwide for real estate, loan signings, affidavits, POA and estate documents. Identity-verified video sessions, no office visits or mobile travel.",
-          serviceType: "Remote Online Notarization",
-          areaServed: "United States",
-          areaServedType: "Country",
-          hoursAvailable: NOTARY_HOURS_SPEC,
-          providerIsSiteOrganization: true,
-        }),
-      ]}
-    />
+    <main className="min-h-screen">
+      <SEO
+        title="Remote Online Notary – Available Nationwide"
+        description="Remote online notarization (RON) in every state: real estate, loan signings, affidavits and estate documents by secure video. No office visit, no mobile travel."
+        pathname="/notary/"
+        image={imageUrl}
+        keywords={KEYWORDS}
+        jsonLd={[
+          generateBreadcrumbJsonLd([
+            { name: "Home", url: SITE_URL },
+            { name: "Notary", url: `${SITE_URL}/notary/` },
+          ]),
+          // The one notary entity. Hours come from the posted notary schedule (not the office
+          // hours on the site Organization); state and city pages point back here by @id.
+          generateServiceJsonLd({
+            id: NOTARY_SERVICE_ID,
+            name: "Remote Online Notarization (RON)",
+            description:
+              "Remote online notarization nationwide for real estate, loan signings, affidavits, POA and estate documents. Identity-verified video sessions, no office visits or mobile travel.",
+            serviceType: "Remote Online Notarization",
+            areaServed: "United States",
+            areaServedType: "Country",
+            hoursAvailable: NOTARY_HOURS_SPEC,
+            providerIsSiteOrganization: true,
+          }),
+        ]}
+      />
 
-    {/* HERO */}
-    <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card text-center">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-          Remote Online Notary – Available Nationwide
-        </h1>
-        <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-8">
-          ONDO Notary provides secure Remote Online Notarization (RON) from anywhere in the U.S.
-          Ideal for real estate, loan packages, affidavits, POA, estate documents, and business
-          agreements. No office visit and no mobile travel appointments.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      {/* HERO */}
+      <section className="bg-gradient-to-b from-background to-card py-16 text-center md:py-24">
+        <div className="container mx-auto px-4">
+          <h1 className="mb-4 text-4xl font-bold text-foreground md:text-6xl">
+            Online notary, any state
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/80">
+            Sign on a video call with a commissioned Utah notary. No office visit, no travel.
+          </p>
           <Button
             size="lg"
-            className="bg-primary text-primary-foreground flex gap-2"
+            className="flex gap-2 bg-primary text-primary-foreground"
             onClick={() => setIsModalOpen(true)}
           >
-            <Calendar className="w-5 h-5" />
-            Book with ONDO Notary
+            <Calendar className="h-5 w-5" />
+            Book a session
           </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-card/75"
-          >
-            <Link href="#services" className="flex gap-2">
-              <FileText className="w-5 h-5" /> View Services
+        </div>
+      </section>
+
+      {/* WHAT YOU GET */}
+      <section className="bg-background py-16" aria-labelledby="notary-what-heading">
+        <div className="container mx-auto max-w-3xl px-4">
+          <h2 id="notary-what-heading" className="mb-8 text-center text-3xl font-bold text-foreground">
+            What you get
+          </h2>
+          <ul className="space-y-4">
+            {whatYouGet.map((item) => (
+              <li key={item.title} className="flex items-start gap-3">
+                <CheckCircle className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <p className="text-foreground/80">
+                  <span className="font-semibold text-foreground">{item.title}.</span> {item.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-center text-sm text-foreground/70">
+            Need it today?{" "}
+            <Link href="/notary/on-demand/" className="font-medium text-primary underline-offset-4 hover:underline">
+              Same-day sessions
             </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted dark:border-white dark:text-white dark:hover:bg-card/75"
-          >
-            <Link href="#fees" className="flex gap-2">
-              Fees & policies
+            . Outside Utah?{" "}
+            <Link href="/notary/locations/" className="font-medium text-primary underline-offset-4 hover:underline">
+              Notary by state
             </Link>
-          </Button>
+            .
+          </p>
         </div>
-
-        <p className="text-muted-foreground mt-6 text-sm">
-          On-demand available • We try to accommodate same-day • RON nationwide
-        </p>
-      </div>
-    </section>
-
-    {/* ON-DEMAND */}
-    <section id="on-demand" className="py-16 md:py-20 bg-card border-y border-border">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="flex flex-col md:flex-row md:items-center gap-8">
-          <div className="flex-1">
-            <div className="inline-flex items-center gap-2 text-primary text-sm font-medium mb-3">
-              <Clock className="w-4 h-4" />
-              On-demand notary
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Need a notarization today?
-            </h2>
-            <p className="text-foreground/80 text-lg leading-relaxed mb-4">
-              ONDO Notary offers on-demand scheduling for remote online appointments.
-              We&apos;ll try to accommodate same-day when capacity allows, earlier requests
-              improve your odds.
-            </p>
-            <p className="text-foreground/60 text-sm mb-6">
-              Same-day is best-effort, not a guaranteed SLA. RON nationwide via secure video.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground">
-                <Link href="/notary/on-demand">Learn about on-demand</Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => setIsModalOpen(true)}
-              >
-                Request same-day slot
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* ABOUT */}
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-          Professional Remote Notary Services by ONDO Notary
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-2xl font-semibold text-primary mb-4">Remote‑First, Nationwide with ONDO Notary</h3>
-            <p className="text-foreground/80 leading-relaxed text-lg mb-4">
-              ONDO Notary provides secure, convenient Remote Online Notarization (RON) across all 50
-              U.S. states. Sign your documents from anywhere via video, with no travel or delays.
-            </p>
-            <p className="text-foreground/80 leading-relaxed mb-6">
-              Backed by real estate and loan signing expertise, every ONDO Notary session is handled
-              with precision and professionalism.
-            </p>
-
-            <div className="space-y-4">
-              <div className="flex gap-3">
-                <Shield className="w-6 h-6 text-primary" />
-                <div>
-                  <h4 className="font-semibold text-foreground">Commissioned & Bonded</h4>
-                  <p className="text-foreground/80 text-sm">
-                    Fully commissioned Utah Notary Public with training, certification, and bonding.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <Users className="w-6 h-6 text-primary" />
-                <div>
-                  <h4 className="font-semibold text-foreground">Real Estate & Loan Signing Expertise</h4>
-                  <p className="text-foreground/80 text-sm">
-                    Specialized in mortgage packages, refinances, closings, and investment property documents.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-8 bg-gradient-to-b from-background to-card border border-border rounded-lg">
-            <h3 className="text-xl font-semibold text-foreground mb-4">Why Choose ONDO Notary?</h3>
-            <ul className="space-y-3 text-foreground/80">
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Nationwide remote notarization</li>
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Same-day when capacity allows</li>
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Real estate & loan document experts</li>
-              <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Posted fee schedule, quoted before we book</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* SERVICES */}
-    <section id="services" className="scroll-mt-24 py-16 md:py-24 bg-card dark:bg-gradient-to-b dark:from-background dark:to-card">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
-          ONDO Notary Services Offered
-        </h2>
-        <p className="text-center text-foreground/70 mb-8 max-w-2xl mx-auto">
-          Remote online notarization nationwide. No in-office visits and no mobile travel schedule.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* RON */}
-          <div className="p-6 bg-background border border-primary rounded-lg">
-            <h3 className="text-xl text-primary font-semibold mb-3">
-              Remote Online Notarization (RON) by ONDO Notary
-            </h3>
-            <p className="text-foreground/80 mb-4">
-              Secure online notarization for clients in all 50 U.S. states.
-            </p>
-            <ul className="text-foreground/80 text-sm space-y-2">
-              <li>• Identity verification via government ID</li>
-              <li>• Digital signatures & electronic seal</li>
-              <li>• Fastest notarization method available</li>
-              <li>• Ideal for real estate, POA, affidavits, and business documents</li>
-            </ul>
-          </div>
-
-          {/* Loan Signing */}
-          <div className="p-6 bg-background border border-primary rounded-lg">
-            <h3 className="text-xl text-primary font-semibold mb-3">Loan Signing Agent by ONDO Notary</h3>
-            <p className="text-foreground/80 text-sm mb-4">
-              Full mortgage packages, refinances, and investment property closings.
-            </p>
-            <ul className="text-foreground/80 text-sm space-y-2">
-              <li>• Purchases, refinances, HELOCs</li>
-              <li>• Investor closings</li>
-              <li>• Full borrower walkthrough</li>
-            </ul>
-          </div>
-
-          {/* Additional */}
-          <div className="p-6 bg-background border border-primary rounded-lg md:col-span-2">
-            <h3 className="text-xl text-primary font-semibold mb-3">Additional Services</h3>
-            <ul className="text-foreground/80 text-sm space-y-2">
-              <li>• I‑9 Employment Verification</li>
-              <li>• Apostille Assistance (Utah documents)</li>
-              <li>• Certified Copy Oversight</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
       <NotaryFees />
 
-      {/* WHAT TO BRING */}
-      <section className="py-16 md:py-24 bg-card dark:bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            What to Bring for ONDO Notary
+      <ServiceFaqSection id="notary-faq" faqs={NOTARY_PAGE_FAQS} moreHref="/faq/notary-faqs/" moreLabel="All notary questions" />
+
+      {/* CONTACT + BOOKING */}
+      <section id="contact" className="bg-background py-16 md:py-24">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="mb-10 text-center text-3xl font-bold text-foreground md:text-4xl">
+            Book or ask a question
           </h2>
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Required items for your appointment.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Required Items</h3>
-              <ul className="space-y-3 text-foreground">
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Valid government photo ID (driver’s license, passport, or state ID)</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Unsigned documents (no blank spaces to fill in later)</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Witnesses (if the document requires them)</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Payment due at or before the appointment</li>
-              </ul>
-            </div>
-
-            <div className="p-6 bg-background border border-primary rounded-lg">
-              <h3 className="text-xl text-primary font-semibold mb-4">RON Appointments</h3>
-              <ul className="space-y-3 text-foreground/80">
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Laptop or smartphone</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Camera & microphone</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Stable internet</li>
-                <li className="flex gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Quiet space</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LOAN SIGNING */}
-      <section className="py-16 md:py-24 bg-card dark:bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            ONDO Notary Loan Signing Expertise
-          </h2>
-          <p className="text-center text-foreground/70 mb-8 max-w-2xl mx-auto">
-            Professional, accurate mortgage signing services.
-          </p>
-
-          <div className="bg-background p-8 border border-primary rounded-lg mb-12">
-              <h3 className="text-2xl font-semibold text-primary flex gap-2 mb-4">
-                <TrendingUp className="w-6 h-6" /> Why ONDO Notary Loan Signing Agents Matter
-            </h3>
-            <p className="text-foreground/80 leading-relaxed">
-          A trained ONDO Notary signing agent ensures mortgage documents are executed correctly,
-          properly notarized, and returned promptly, preventing delays and funding issues.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <h3 className="text-xl font-semibold flex gap-2 mb-4">
-                <FileText className="w-5 h-5 text-primary" />
-                Key Responsibilities
-              </h3>
-              <ul className="text-sm text-foreground space-y-2">
-                <li>• Guide borrowers through loan documents</li>
-                <li>• Verify identity and signatures</li>
-                <li>• Ensure accurate notarization</li>
-                <li>• Coordinate with title & escrow</li>
-              </ul>
-            </div>
-
-            <div className="p-6 bg-muted border border-border rounded-lg">
-              <h3 className="text-xl font-semibold flex gap-2 mb-4">
-                <Award className="w-5 h-5 text-primary" />
-                Professional Standards
-              </h3>
-              <p className="text-sm text-foreground">
-                Certified, trained, and compliant with Utah notarial law and industry standards.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    {/* NATIONWIDE COVERAGE */}
-    <section className="py-16 md:py-24 bg-gradient-to-b from-card to-background">
-      <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-6">
-          Nationwide Coverage – ONDO Notary in All 50 States
-        </h2>
-        <p className="text-center text-foreground/80 max-w-3xl mx-auto mb-10">
-          We support Remote Online Notarization for clients across the United States.
-          Browse a state hub for local pages, and confirm receiving-party acceptance before you book.
-        </p>
-        <section className="mt-10" aria-labelledby="browse-states">
-          <h3 id="browse-states" className="text-2xl font-semibold text-foreground mb-3 text-center">
-            Browse notary by state
-          </h3>
-          <p className="text-center text-foreground/80 mb-6">
-            Explore state hubs and curated city pages for remote online notarization.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {FEATURED_STATES.map((state) => (
-              <Link
-                key={state.slug}
-                href={notaryStatePath(state.slug)}
-                className="block rounded-md border border-border bg-card/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-primary hover:bg-primary/10"
-              >
-                {state.name}
-              </Link>
-            ))}
-          </div>
-          <div className="mt-6 text-center">
-            <Link
-              href="/notary/locations/"
-              className="text-primary underline-offset-4 hover:underline font-medium"
-            >
-              All notary locations
-            </Link>
-          </div>
-        </section>
-      </div>
-    </section>
-
-      {/* Centralized FAQs live on /faq */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Questions about ONDO Notary services?
-          </h2>
-          <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
-            Visit our Help Center to browse detailed FAQs on remote online notarization and document signing.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted"
-          >
-            <Link href="/faq/notary-faqs">View Notary FAQs</Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            Contact ONDO Notary & Booking
-          </h2>
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Book online, call, or text for urgent same-day remote notarization.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="space-y-6">
               <div className="flex gap-4">
-                <Phone className="w-6 h-6 text-primary" />
+                <Phone className="h-6 w-6 text-primary" />
                 <div>
-                  <h3 className="text-foreground font-semibold">Phone</h3>
+                  <h3 className="font-semibold text-foreground">Call or text</h3>
                   <p className="text-foreground/80">
                     <a
                       href={`tel:${SITE_PHONE_TEL}`}
@@ -459,22 +141,21 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
                       {SITE_PHONE}
                     </a>
                     <br />
-                    Text or call for urgent requests.{" "}
                     <a
                       href={`sms:${SITE_PHONE_TEL}`}
                       className="text-primary hover:underline"
                       {...analyticsAttributes("notary_contact_click", "notary_contact", "text")}
                     >
                       Text us
-                    </a>
+                    </a>{" "}
+                    for urgent requests.
                   </p>
                 </div>
               </div>
-
               <div className="flex gap-4">
-                <Mail className="w-6 h-6 text-primary" />
+                <Mail className="h-6 w-6 text-primary" />
                 <div>
-                  <h3 className="text-foreground font-semibold">Email</h3>
+                  <h3 className="font-semibold text-foreground">Email</h3>
                   <p className="text-foreground/80">
                     <a
                       href={`mailto:${SITE_EMAILS.notary}`}
@@ -486,66 +167,35 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
                   </p>
                 </div>
               </div>
-
               <div className="flex gap-4">
-                <MapPin className="w-6 h-6 text-primary" />
+                <MapPin className="h-6 w-6 text-primary" />
                 <div>
-                  <h3 className="text-foreground font-semibold">Based in Lehi</h3>
+                  <h3 className="font-semibold text-foreground">Based in Lehi</h3>
                   <p className="text-foreground/80">
-                    2701 N Thanksgiving Way, Lehi, UT 84043
+                    {SITE_ADDRESS}
                     <br />
-                    Remote sessions only, we do not take walk-in or mobile travel appointments.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Building2 className="w-6 h-6 text-primary" />
-                <div>
-                  <h3 className="text-foreground font-semibold">Service Area</h3>
-                  <p className="text-foreground/80">
-                    Remote online notarization across all 50 U.S. states. No in-office visits and no
-                    mobile travel appointments.
+                    Sessions are remote only.
                   </p>
                 </div>
               </div>
             </div>
-
             <NotaryBooking />
-          </div>
-
-          <div className="mt-14 max-w-3xl mx-auto border-t border-border pt-10">
-            <h3 className="text-xl font-semibold text-foreground text-center mb-2">
-              Or schedule a call
-            </h3>
-            <p className="text-center text-muted-foreground text-sm mb-6 max-w-md mx-auto">
-              Same calendar for notary questions, loan signings, and general scheduling.
-            </p>
-            <div className="rounded-lg border border-border bg-card/50 p-2">
-              <CalendlyInlineEmbed
-                variant="compact"
-                heading={null}
-                showFallbackLink
-                className="mt-0 [&_iframe]:bg-card"
-              />
-            </div>
           </div>
         </div>
       </section>
 
       {/* Sticky Mobile CTA */}
-      <div data-fixed-bottom-bar className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-primary text-primary-foreground py-3 px-4 flex justify-between items-center shadow-lg">
-        <span className="font-medium text-lg">Need ONDO Notary?</span>
+      <div data-fixed-bottom-bar className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-between bg-primary px-4 py-3 text-primary-foreground shadow-lg md:hidden">
+        <span className="text-lg font-medium">Need a notary?</span>
         <Button
           size="sm"
-          className="bg-card text-primary font-semibold"
+          className="bg-card font-semibold text-primary"
           onClick={() => setIsModalOpen(true)}
         >
-          Book ONDO
+          Book
         </Button>
       </div>
 
-      {/* MODAL */}
       <ConsultationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

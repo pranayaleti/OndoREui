@@ -1,4 +1,5 @@
 import { type CityFaq } from "./city-content"
+import { NOTARY_HOURS_LABEL, NOTARY_LOAN_PURCHASE_REFINANCE, NOTARY_RON_ACT_USD, NOTARY_WITNESS_USD } from "./notary-fees"
 import {
   GROWTH_MGMT_RATE,
   GROWTH_MIN_UNITS,
@@ -10,7 +11,7 @@ import {
 
 const pct = (rate: number) => `${Math.round(rate * 100)}%`
 
-export type ServiceKey = "property-management" | "buy-sell" | "loans"
+export type ServiceKey = "property-management" | "buy-sell" | "loans" | "notary"
 
 /**
  * Single sources for service terms that several FAQ surfaces repeat (service FAQ bank,
@@ -71,11 +72,32 @@ export const loansFaqBank: CityFaq[] = [
   { q: "Can I refinance later?", a: "You can ask about refinancing later to change rate, term, or equity access. We do not promise to notify you when a refinance is advantageous." },
 ]
 
+export const notaryFaqBank: CityFaq[] = [
+  { q: "How does a remote online notarization work?", a: "You meet the notary on a secure video call, show a government photo ID, and sign electronically. The notary applies a digital seal and you get the completed document the same day." },
+  { q: "Is an online notarization valid in my state?", a: "Yes. A remote online notarization by a commissioned Utah notary is accepted in every state. Confirm the receiving party takes electronic notarization before you book; lenders and title companies nearly always do." },
+  { q: "What does it cost?", a: `$${NOTARY_RON_ACT_USD} per notarial act and $${NOTARY_WITNESS_USD} per witness we supply. Loan signing packages run ${NOTARY_LOAN_PURCHASE_REFINANCE}. We quote the total before we book.` },
+  { q: "Can I get it done today?", a: `Often, yes. Sessions run ${NOTARY_HOURS_LABEL}, and we fit same-day requests in when there is room. Earlier requests have better odds.` },
+  { q: "What do I need for the session?", a: "A laptop or phone with a camera and microphone, a quiet space, your unsigned documents, and a valid government photo ID. If the document needs witnesses, tell us and we can supply them." },
+  { q: "Do you come to me or have an office?", a: "No. Every session is remote by video. We do not take walk-in or mobile travel appointments." },
+]
+
 export function getServiceFaqBank(service: ServiceKey): CityFaq[] {
   if (service === "property-management") return propertyManagementFaqBank
   if (service === "loans") return loansFaqBank
+  if (service === "notary") return notaryFaqBank
   return buySellFaqBank
 }
+
+function pick(bank: CityFaq[], patterns: RegExp[]): CityFaq[] {
+  return patterns.flatMap((re) => bank.filter((f) => re.test(f.q)).slice(0, 1))
+}
+
+/** The five questions each service page shows. The category page under /faq has the rest. */
+export const PM_PAGE_FAQS = pick(propertyManagementFaqBank, [/fees/i, /lease my property/i, /screen tenants/i, /maintenance handled/i, /onboarding/i])
+export const BUY_PAGE_FAQS = pick(buySellFaqBank, [/agents paid/i, /down payment/i, /waive/i, /closing costs/i, /how long/i])
+export const SELL_PAGE_FAQS = pick(buySellFaqBank, [/market homes/i, /best ROI/i, /sell my current home/i, /buy before I sell/i, /agents paid/i])
+export const LOANS_PAGE_FAQS = pick(loansFaqBank, [/programs are available/i, /pre-approval/i, /credit score/i, /self-employed/i, /rate lock/i])
+export const NOTARY_PAGE_FAQS = notaryFaqBank.slice(0, 5)
 
 export const HOMEPAGE_OWNER_FAQ_COUNT = 6
 

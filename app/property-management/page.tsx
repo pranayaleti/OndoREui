@@ -1,14 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
-import { Building2, ClipboardCheck, Shield, Wallet, Wrench, Bell, Users, Zap } from "lucide-react"
+import { CheckCircle } from "lucide-react"
 import SEO from "@/components/seo"
-import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PageBanner } from "@/components/page-banner"
-import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
-import { SITE_NAME, SITE_PHONE_TEL, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import ConsultationCTA from "@/components/ConsultationCTA"
+import { ServiceFaqSection } from "@/components/service-faq-section"
+import { YourContactCard } from "@/components/people/your-contact-card"
+import { generateBreadcrumbJsonLd, generateServiceJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
+import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import {
   GROWTH_MGMT_RATE,
   GROWTH_MIN_UNITS,
@@ -17,19 +15,21 @@ import {
   STARTER_MAX_UNITS,
   STARTER_MGMT_RATE,
 } from "@/lib/fee-comparison"
+import { PM_PAGE_FAQS } from "@/lib/service-faq"
 import { analyticsAttributes } from "@/lib/analytics"
+
+const DESCRIPTION =
+  "Utah property management on the Wasatch Front: 10% of collected rent, tenant screening, maintenance coordination and monthly owner statements."
 
 export const metadata: Metadata = {
   title: pageTitle("Utah Property Management: Fees, Leasing & Screening"),
-  description:
-    "Utah property management on the Wasatch Front: 10% of collected rent, tenant screening, maintenance coordination and monthly owner statements.",
+  description: DESCRIPTION,
   keywords: [
     "Utah property management",
     "property management Lehi",
     "rental management Utah",
     "tenant screening Utah",
     "property manager Salt Lake County",
-    "owner portal property management",
   ],
   alternates: {
     canonical: `${SITE_URL}/property-management/`,
@@ -37,8 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: pageTitleText("Utah Property Management: Fees, Leasing & Screening"),
-    description:
-      "Utah property management on the Wasatch Front: 10% of collected rent, tenant screening, maintenance coordination and monthly owner statements.",
+    description: DESCRIPTION,
     url: `${SITE_URL}/property-management/`,
     images: [
       {
@@ -51,65 +50,36 @@ export const metadata: Metadata = {
   },
 }
 
-const pillars = [
-  {
-    icon: <ClipboardCheck className="h-8 w-8 text-primary" aria-hidden />,
-    title: "Leasing & screening",
-    description: "Marketing, showings and screening against written criteria, so the home leases to a qualified tenant.",
-  },
-  {
-    icon: <Wallet className="h-8 w-8 text-primary" aria-hidden />,
-    title: "Rent & reporting",
-    description: "Rent collection, owner statements and clear financial reporting so you always know how the asset is performing.",
-  },
-  {
-    icon: <Wrench className="h-8 w-8 text-primary" aria-hidden />,
-    title: "Maintenance & compliance",
-    description: "Coordinated repairs, vetted vendors and documented work, plus support for Utah rental compliance.",
-  },
-  {
-    icon: <Shield className="h-8 w-8 text-primary" aria-hidden />,
-    title: "Owner & tenant experience",
-    description: "One partner for owners and tenants: fewer handoffs, faster answers and one place to see everything.",
-  },
-]
-
 const percent = (rate: number) => `${Math.round(rate * 100)}%`
+
+const whatYouGet = [
+  { title: "Leasing and screening", body: "Marketing, showings and screening against written criteria that apply to every applicant." },
+  { title: "Rent and statements", body: "Online rent collection, direct deposit and a monthly statement with every bill attached." },
+  { title: "Maintenance", body: "Tenants report issues any time. We dispatch vetted vendors, you approve anything over your threshold, and no invoice is marked up." },
+  { title: "One place to see it all", body: "An owner portal with rent status, expenses, documents and occupancy." },
+  { title: "Terms you can leave", body: "No setup fee and 30 days' written notice to cancel." },
+]
 
 // Same published figures as /pricing/ (lib/fee-comparison.ts), so the two pages cannot drift.
 const feeSummary = [
-  {
-    name: "Starter",
-    units: `1\u2013${STARTER_MAX_UNITS} units`,
-    price: percent(STARTER_MGMT_RATE),
-    note: "of collected rent",
-  },
-  {
-    name: "Growth",
-    units: `${GROWTH_MIN_UNITS}\u2013${PORTFOLIO_MIN_UNITS - 1} units`,
-    price: percent(GROWTH_MGMT_RATE),
-    note: "of collected rent",
-  },
-  {
-    name: "Portfolio",
-    units: `${PORTFOLIO_MIN_UNITS}+ units`,
-    price: "Custom",
-    note: "quoted for your portfolio",
-  },
+  { name: "Starter", units: `1 to ${STARTER_MAX_UNITS} units`, price: percent(STARTER_MGMT_RATE), note: "of collected rent" },
+  { name: "Growth", units: `${GROWTH_MIN_UNITS} to ${PORTFOLIO_MIN_UNITS - 1} units`, price: percent(GROWTH_MGMT_RATE), note: "of collected rent" },
+  { name: "Portfolio", units: `${PORTFOLIO_MIN_UNITS}+ units`, price: "Custom", note: "quoted for your portfolio" },
 ]
 
 const serviceLinks = [
-  { href: "/property-management/tenant-screening/", label: "Tenant screening", hint: "Fair Housing-compliant verification before you hand over keys." },
-  { href: "/property-management/maintenance-coordination/", label: "Maintenance coordination", hint: "Requests, vendors, and follow-through in one place." },
-  { href: "/property-management/owner-reporting/", label: "Owner reporting", hint: "Statements and visibility into rent, expenses, and vacancy." },
+  { href: "/property-management/tenant-screening/", label: "Tenant screening" },
+  { href: "/property-management/maintenance-coordination/", label: "Maintenance coordination" },
+  { href: "/property-management/owner-reporting/", label: "Owner reporting" },
 ]
 
 export default function PropertyManagementPage() {
   return (
     <main>
       <SEO
+        reviewedBy={FOUNDER_PERSON_ID}
         title="Utah Property Management | Owners & Investors"
-        description="Full-service Utah property management with leasing, screening, rent collection, maintenance, and owner visibility, alongside brokerage, mortgage, and notary under one roof."
+        description={DESCRIPTION}
         pathname="/property-management/"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={[
@@ -128,8 +98,8 @@ export default function PropertyManagementPage() {
       />
 
       <PageBanner
-        title="Property management built for Utah owners"
-        subtitle="Leasing, screening, rent, maintenance, and reporting: with brokerage, loans, and notary when you need them in the same relationship."
+        title="Property management for Utah owners"
+        subtitle="Hand off the leasing, rent, repairs and paperwork. Keep full visibility."
         backgroundImage="/modern-office-building.webp"
         primaryCta={{
           label: "Get a free home estimate",
@@ -137,46 +107,52 @@ export default function PropertyManagementPage() {
           event: "page_banner_rental_analysis",
           analyticsLabel: "property-management",
         }}
-        secondaryCta={{
-          label: "Call us",
-          href: `tel:${SITE_PHONE_TEL}`,
-          event: "page_banner_call",
-          analyticsLabel: "property-management",
-        }}
       />
 
-      <div className="container mx-auto px-4 py-12 md:py-16">
-        <div className="max-w-3xl mx-auto text-center mb-14">
-          <p className="text-lg text-foreground/80 leading-relaxed">
-            Whether you own one door or a growing portfolio, Ondo Real Estate runs day-to-day operations so you are not juggling
-            spreadsheets, vendors, and tenant messages alone. We combine property management with the rest of our real estate
-            stack, so sales, refinancing, and notarized documents do not require a separate cast of vendors.
+      <section className="bg-background py-16" aria-labelledby="pm-what-heading">
+        <div className="container mx-auto max-w-3xl px-4">
+          <h2 id="pm-what-heading" className="mb-8 text-center text-3xl font-bold text-foreground">
+            What you get
+          </h2>
+          <ul className="space-y-4">
+            {whatYouGet.map((item) => (
+              <li key={item.title} className="flex items-start gap-3">
+                <CheckCircle className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <p className="text-foreground/80">
+                  <span className="font-semibold text-foreground">{item.title}.</span> {item.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-center text-sm text-foreground/70">
+            Read more:{" "}
+            {serviceLinks.map((service, i) => (
+              <span key={service.href}>
+                {i > 0 ? ", " : null}
+                <Link
+                  href={service.href}
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                  {...analyticsAttributes("pm_hub_service_click", "property_management", service.label.toLowerCase().replace(/\s+/g, "-"))}
+                >
+                  {service.label}
+                </Link>
+              </span>
+            ))}
+            .
           </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
-          {pillars.map(({ icon, title, description }) => (
-            <Card key={title} className="border-border bg-card">
-              <CardHeader className="flex flex-row items-start gap-4 space-y-0">
-                {icon}
-                <div>
-                  <CardTitle className="text-xl">{title}</CardTitle>
-                  <CardDescription className="text-base mt-2 text-foreground/70">{description}</CardDescription>
-                </div>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-
-        <section className="max-w-5xl mx-auto mb-16" aria-labelledby="pm-fees-heading">
-          <h2 id="pm-fees-heading" className="text-2xl md:text-3xl font-bold text-center mb-3">
+      <section className="border-y border-border/40 bg-muted/30 py-16" aria-labelledby="pm-fees-heading">
+        <div className="container mx-auto max-w-5xl px-4">
+          <h2 id="pm-fees-heading" className="mb-3 text-center text-3xl font-bold text-foreground">
             What management costs
           </h2>
-          <p className="text-center text-foreground/70 mb-8 max-w-2xl mx-auto">
-            A percentage of the rent we collect, charged only when your tenants pay. We also charge a one-time leasing fee of{" "}
-            {percent(LEASING_FEE_RATE)} of the first month&rsquo;s rent when we place a new tenant.
+          <p className="mx-auto mb-8 max-w-2xl text-center text-foreground/70">
+            A percentage of the rent we collect, charged only when your tenant pays. Placing a new tenant is a
+            one-time {percent(LEASING_FEE_RATE)} of the first month&rsquo;s rent.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
+          <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {feeSummary.map((tier) => (
               <div key={tier.name} className="rounded-lg border border-border bg-card p-5 text-center">
                 <p className="font-semibold text-foreground">{tier.name}</p>
@@ -195,102 +171,12 @@ export default function PropertyManagementPage() {
               See full pricing and what is included
             </Link>
           </p>
-        </section>
-
-        <section className="max-w-5xl mx-auto mb-16" aria-labelledby="pm-services-heading">
-          <h2 id="pm-services-heading" className="text-2xl md:text-3xl font-bold text-center mb-8">
-            Management services in detail
-          </h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {serviceLinks.map((service) => (
-              <li key={service.href}>
-                <Link
-                  href={service.href}
-                  className="flex h-full flex-col rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  {...analyticsAttributes("pm_hub_service_click", "property_management", service.label.toLowerCase().replace(/\s+/g, "-"))}
-                >
-                  <span className="font-semibold text-primary">{service.label}</span>
-                  <span className="mt-2 text-sm text-foreground/70">{service.hint}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Platform features, AI & automation */}
-        <section className="max-w-5xl mx-auto mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Built-in technology for owners</h2>
-          <p className="text-center text-foreground/70 mb-10 max-w-2xl mx-auto">
-            The owner portal keeps your investment in view.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: <Bell className="h-6 w-6 text-primary" />, title: "Push notifications", desc: "Real-time alerts for payments, maintenance, and lease events." },
-              { icon: <Zap className="h-6 w-6 text-primary" />, title: "Automation rules", desc: "Auto-send reminders, escalate overdue maintenance, and trigger workflows." },
-              { icon: <Users className="h-6 w-6 text-primary" />, title: "Vendor management", desc: "Track preferred vendors, assign work orders, and compare bids." },
-              { icon: <Shield className="h-6 w-6 text-primary" />, title: "Emergency maintenance", desc: "Tenants report emergencies any time. We coordinate the fix." },
-            ].map((f) => (
-              <div key={f.title} className="flex items-start gap-3 p-4 rounded-lg border border-border bg-card">
-                {f.icon}
-                <div>
-                  <h3 className="font-semibold text-foreground">{f.title}</h3>
-                  <p className="text-sm text-foreground/70 mt-1">{f.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="max-w-5xl mx-auto mb-16 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-2">
-              <Building2 className="h-8 w-8 text-primary shrink-0" aria-hidden />
-              Why one partner for management + deals
-            </h2>
-            <ul className="space-y-3 text-foreground/80">
-              <li>• Same team context when you buy, refinance, or sell the asset you already manage with us.</li>
-              <li>• Notary and loan signing workflows available when closings and paperwork need to move fast.</li>
-              <li>• Autopay, screening and maintenance in one place.</li>
-            </ul>
-            <div className="flex flex-wrap gap-3 mt-8">
-              <Button asChild>
-                <Link href="/contact/">Talk to our team</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/properties/">Browse rentals</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative h-64 md:h-80 rounded-lg overflow-hidden border border-border">
-            <Image
-              src="/modern-office-building.png"
-              alt="Utah property management office representing Ondo Real Estate"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-        </section>
-
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <p className="text-foreground/70">
-            Dig deeper: our{" "}
-            <Link href="/blog/property-management-automation-checklist/" className="text-primary hover:underline font-medium">
-              property management automation checklist
-            </Link>{" "}
-            and full company story on{" "}
-            <Link href="/about/" className="text-primary hover:underline font-medium">
-              About
-            </Link>
-            .
-          </p>
         </div>
+      </section>
 
-        <ConsultationCTA
-          title="Get a management plan for your Utah rentals"
-          description="Tell us about your units and goals, we will follow up with next steps."
-        />
-      </div>
+      <ServiceFaqSection id="pm-faq" faqs={PM_PAGE_FAQS} moreHref="/faq/owner-faqs/" moreLabel="All owner questions" />
+
+      <YourContactCard kind="agent" />
     </main>
   )
 }

@@ -7,12 +7,12 @@ const TITLE = "Remote Online Notary – Available Nationwide"
 
 export const metadata: Metadata = {
   title: pageTitle(TITLE),
-  description: "Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments.",
+  description: "Remote online notarization (RON) in every state: real estate, loan signings, affidavits and estate documents by secure video. No office visit, no mobile travel.",
   alternates: { canonical: `${SITE_URL}/notary/` },
   openGraph: {
     type: "website",
     title: pageTitleText(TITLE),
-    description: "Secure Remote Online Notarization (RON) nationwide. Real estate, loan signings, affidavits, and estate documents, no office visit and no mobile travel appointments.",
+    description: "Remote online notarization (RON) in every state: real estate, loan signings, affidavits and estate documents by secure video. No office visit, no mobile travel.",
     url: `${SITE_URL}/notary/`,
     images: DEFAULT_OG_IMAGES,
   },

@@ -13,7 +13,6 @@ import SellPage from "./sell/page"
 import BuyPage from "./buy/page"
 import LoansPage from "./loans/page"
 import RefinancePage from "./refinance/page"
-import { SITE_PHONE_TEL } from "@/lib/site"
 
 function bannerLink(name: string) {
   // A page may repeat the same label further down, so pick the banner's own link.
@@ -25,10 +24,10 @@ function bannerLink(name: string) {
 }
 
 describe("first-screen calls to action on the revenue pages", () => {
-  it("property management offers the home estimate and a call, and links fees and service pages", () => {
+  it("property management offers the home estimate as its one banner action, and links fees and service pages", () => {
     render(<PropertyManagementPage />)
     expect(bannerLink("Get a free home estimate")).toHaveAttribute("href", "/whats-my-home-worth/")
-    expect(bannerLink("Call us")).toHaveAttribute("href", `tel:${SITE_PHONE_TEL}`)
+    expect(screen.queryByRole("link", { name: "Call us" })).toBeNull()
 
     expect(screen.getByRole("heading", { name: "What management costs" })).toBeInTheDocument()
     expect(screen.getByText("10%", { selector: "p" })).toBeInTheDocument()
@@ -43,11 +42,19 @@ describe("first-screen calls to action on the revenue pages", () => {
     }
   })
 
-  it("sell offers the home value and jumps to the listing packet form", () => {
+  it("sell offers the home value in the banner and keeps the listing packet form on the page", () => {
     render(<SellPage />)
     expect(bannerLink("Get my home value")).toHaveAttribute("href", "/whats-my-home-worth/")
-    expect(bannerLink("Request listing packet")).toHaveAttribute("href", "#listing-packet-heading")
     expect(document.getElementById("listing-packet-heading")).not.toBeNull()
+  })
+
+  it("every service banner has exactly one call to action", () => {
+    for (const Page of [PropertyManagementPage, SellPage, BuyPage, LoansPage]) {
+      const { unmount } = render(<Page />)
+      const bannerLinks = screen.getAllByRole("link").filter((l) => l.getAttribute("data-analytics-category") === "page_banner")
+      expect(bannerLinks).toHaveLength(1)
+      unmount()
+    }
   })
 
   it("buy offers the affordability quiz in the first screen", () => {

@@ -8,25 +8,25 @@ export type BuySellProcessStep = {
 
 /**
  * Buyer sequence for /buy only. Homepage HowItWorksSection stays owner-PM.
- * Financing is a parallel track via /loans — not an instant prequal letter.
+ * Financing is a parallel track via /loans.
  */
 export const BUY_PROCESS_STEPS: readonly BuySellProcessStep[] = [
   {
     label: "Shop",
     title: "Shop with an agent",
-    desc: "An Ondo agent searches live for-sale inventory with you, including the MLS. This website lists rentals we manage, not a public for-sale feed.",
+    desc: "Your agent searches live for-sale inventory with you, including the MLS, and sets up tours.",
     href: "/get-matched",
     hrefLabel: "Get matched with an agent",
   },
   {
     label: "Offer",
     title: "Write the offer",
-    desc: "We help structure price, dates, and contingencies on the Utah purchase contract after a real lending conversation — not an instant online approval.",
+    desc: "We help you set price, dates and contingencies on the Utah purchase contract once your financing conversation is underway.",
   },
   {
     label: "Negotiate",
     title: "Negotiate",
-    desc: "Inspection, appraisal, and credits. Your agent works the contract. Nothing on this site is a credit decision.",
+    desc: "Inspection, appraisal and credits. Your agent works the contract.",
   },
   {
     label: "Close",
@@ -45,7 +45,7 @@ export const SELL_PROCESS_STEPS: readonly BuySellProcessStep[] = [
   {
     label: "CMA",
     title: "Price with a CMA",
-    desc: "A comparative market analysis and a written pricing range before you list. The online estimator is not a CMA.",
+    desc: "A comparative market analysis and a written pricing range before you list.",
     href: "/whats-my-home-worth",
     hrefLabel: "Start with a home-value estimate",
   },

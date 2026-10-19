@@ -25,8 +25,8 @@ export function BuySellHowItWorksSection({ audience }: BuySellHowItWorksSectionP
     audience === "buyer" ? "How buying with Ondo works" : "How selling with Ondo works"
   const intro =
     audience === "buyer"
-      ? "Four steps from first conversation to close. Financing can start on day one via home loans — this is not an instant pre-qualification letter."
-      : "Four steps from a CMA to close. We list, market, and negotiate; we do not promise a sale price or days on market."
+      ? "Four steps from first conversation to close. Financing can start on day one."
+      : "Four steps from a CMA to close."
 
   return (
     <section className="border-y border-border bg-card py-16" aria-labelledby={headingId}>

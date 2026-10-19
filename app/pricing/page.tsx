@@ -3,8 +3,7 @@ import Link from "next/link"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { FeeAlignmentWidget } from "@/components/landing/fee-alignment-widget"
-import { IncludedVsTypicalTable } from "@/components/pricing/included-vs-typical-table"
+import { VENDOR_INVOICE_POLICY } from "@/lib/pricing-included"
 import { SITE_BRAND_SHORT, SITE_URL, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -14,13 +13,13 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent property management pricing for Utah property owners. No hidden fees, just percentage-based plans that scale with your portfolio.",
+    "Utah property management pricing: 10% of collected rent for 1 to 4 units, 8% for 5 to 15, a one-time leasing fee, no setup fee and 30 days' notice to cancel.",
   alternates: { canonical: `${SITE_URL}/pricing/` },
   openGraph: {
     type: "website",
     title: pageTitleText(`Pricing | ${SITE_BRAND_SHORT}`),
     description:
-      "Property management pricing Utah, percentage-based plans for portfolios of every size. Tenant screening, rent collection, maintenance, and more.",
+      "Utah property management pricing: 10% of collected rent for 1 to 4 units, 8% for 5 to 15, a one-time leasing fee, no setup fee and 30 days' notice to cancel.",
     url: `${SITE_URL}/pricing`,
     images: DEFAULT_OG_IMAGES,
   },
@@ -55,7 +54,6 @@ const tiers = [
       "Priority maintenance dispatch",
       "Quarterly property inspections",
       "Lease renewal management",
-      "Dedicated account manager",
     ],
     cta: "Get started",
     highlighted: true,
@@ -68,11 +66,9 @@ const tiers = [
     description: "For investors with larger holdings.",
     features: [
       "Everything in Growth",
-      "Custom reporting & analytics",
+      "Custom reporting",
       "Bulk lease management",
-      "Investor portal access",
-      "API access & integrations",
-      "Negotiated response-time terms",
+      "Negotiated terms for your portfolio",
     ],
     cta: "Contact us",
     highlighted: false,
@@ -82,6 +78,7 @@ const tiers = [
 const includedInEveryPlan = [
   "Online rent payments via Stripe",
   "Emergency maintenance coordination",
+  `${VENDOR_INVOICE_POLICY} on vendor invoices`,
   "Tenant portal with lease & payment history",
   "Owner dashboard with real-time financials",
   "Utah legal compliance & fair housing adherence",
@@ -112,7 +109,7 @@ export default function PricingPage() {
     <main className="min-h-screen dark:bg-[var(--gradient-overlay)]">
       <SEO
         title="Pricing"
-        description="Transparent property management pricing for Utah property owners. No hidden fees."
+        description="Utah property management pricing: a percentage of collected rent, a one-time leasing fee, no setup fee."
         pathname="/pricing"
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
@@ -124,10 +121,10 @@ export default function PricingPage() {
       <section className="py-20 px-4 text-center">
         <div className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight dark:text-foreground sm:text-5xl">
-            Transparent pricing for Utah property owners
+            Pricing for Utah property owners
           </h1>
           <p className="mt-4 text-lg text-foreground/70">
-            No hidden fees, no surprise charges. You pay a percentage of collected rent, and only when your tenants pay.
+            You pay a percentage of collected rent, and only when your tenant pays.
           </p>
         </div>
       </section>
@@ -178,8 +175,6 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <FeeAlignmentWidget />
-
       {/* Leasing fee callout */}
       <section className="mx-auto max-w-4xl px-4 pb-16">
         <Card className="border-dashed bg-muted/40">
@@ -209,8 +204,6 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <IncludedVsTypicalTable />
-
       {/* FAQ */}
       <section className="border-t border-border py-20 px-4">
         <div className="mx-auto max-w-3xl">
@@ -232,10 +225,10 @@ export default function PricingPage() {
       <section className="py-20 px-4 text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold dark:text-foreground sm:text-3xl">
-            Ready to simplify your property management?
+            Want a number for your property?
           </h2>
           <p className="mt-3 text-foreground/70">
-            Book a free consultation and we&rsquo;ll build a plan tailored to your portfolio.
+            Book a 30-minute call and we will walk through your units and the fee that applies.
           </p>
           <Button asChild size="lg" className="mt-6">
             <Link href="/contact/#book-a-call">Book a free consultation</Link>

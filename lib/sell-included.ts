@@ -9,7 +9,7 @@ import type { PricingIncludedRow } from "./pricing-included"
 export const SELL_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   {
     item: "Pricing (CMA)",
-    ondo: "Comparative market analysis and a written pricing strategy before you list. The online estimator is not a CMA.",
+    ondo: "Comparative market analysis and a written pricing strategy before you list.",
     typical: "A CMA is common with a full-service listing agent. Automated estimates are not a CMA.",
   },
   {
@@ -34,12 +34,12 @@ export const SELL_INCLUDED_ROWS: readonly PricingIncludedRow[] = [
   },
   {
     item: "Listing compensation",
-    ondo: "Quoted in writing for your property. No published flat listing fee on this site.",
+    ondo: "Quoted in writing for your property.",
     typical: "Negotiated with the listing broker. There is no single statewide rate.",
   },
   {
     item: "Buyer-broker compensation",
-    ondo: "A separate, negotiated item. We do not advertise that the seller automatically pays the buyer’s agent.",
-    typical: "Since 2024, buyer-broker pay is negotiated and written into a buyer agreement — not “typically free.”",
+    ondo: "A separate, negotiated item. The seller does not automatically pay the buyer’s agent.",
+    typical: "Since 2024, buyer-broker pay is negotiated and written into a buyer agreement.",
   },
 ]
