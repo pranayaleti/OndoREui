@@ -24,7 +24,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "impound", heading: "Impounds on", href: "/faq/escrow-faqs" },
+  { id: "impound", heading: "Impounds on", href: "/faq/buying-selling-faqs" },
   { id: "waive", heading: "Waiver (when it exists)" },
 ]
 
@@ -144,7 +144,7 @@ export default function ImpoundsVsWaivingEscrowPage() {
       <ol>
         <li>Read the Loan Estimate for whether escrow is required and whether a waiver fee appears.</li>
         <li>
-          Related: <Link href="/faq/escrow-faqs">escrow FAQs</Link>. First statement vs note:{" "}
+          Related: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>. First statement vs note:{" "}
           <Link href="/blog/first-mortgage-statement-vs-note-rate">first statement vs note rate</Link>.
         </li>
         <li>

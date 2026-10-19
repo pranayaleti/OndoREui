@@ -2260,8 +2260,8 @@ const NODES: ContentNode[] = [
   },
   {
     id: "faq-escrow",
-    path: "/faq/escrow-faqs",
-    title: "Escrow, taxes, and insurance FAQs",
+    path: "/faq/buying-selling-faqs",
+    title: "Buying, selling and escrow FAQs",
     description:
       "How impound accounts hold taxes and insurance, why the first analysis can surprise, and how the cushion is set. Informational only.",
     kind: "faq",
@@ -2969,7 +2969,7 @@ const NODES: ContentNode[] = [
       "pillar-first-time",
       "conversion-qualify",
     ],
-    cta: { label: "Escrow FAQs", href: "/faq/escrow-faqs" },
+    cta: { label: "Escrow FAQs", href: "/faq/buying-selling-faqs" },
     category: "First-Time Buyers",
     published: "2026-08-29",
     modified: "2026-08-29",

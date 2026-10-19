@@ -107,7 +107,7 @@ export default function UtahTaxCalendarEscrowPage() {
       <p>
         Shortage options after an analysis are a servicing notice — spread versus lump sum — not origination pricing.
         Sequel: <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>. Related
-        FAQ: <Link href="/faq/escrow-faqs">escrow FAQs</Link>.
+        FAQ: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>.
       </p>
 
       <h2>Worked timing (illustration, not your file)</h2>

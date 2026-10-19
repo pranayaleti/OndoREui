@@ -3,7 +3,7 @@ import { FaqAccordion } from "@/components/faq-accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import { NOTARY_PRICING_SUMMARY } from "@/lib/notary-fees"
+import { NOTARY_PAGE_FAQS, notaryFaqBank } from "@/lib/service-faq"
 import Link from "next/link"
 import { ArrowLeft, FileText } from "lucide-react"
 import type { Metadata } from "next"
@@ -24,44 +24,11 @@ export const metadata: Metadata = {
 
 
 export default function NotaryFAQPage() {
-  const faqs = [
-    {
-      question: "What do I need for a remote notary session?",
-      answer:
-        "Have a valid government‑issued photo ID and your unsigned documents ready. All sessions are Remote Online Notary (RON), so you also need a phone or computer with a camera, microphone, and stable internet. If your document needs witnesses, tell us when you book and we will confirm how that works for a remote session. We'll guide you on exactly what each document type needs before your session.",
-    },
-    {
-      question: "Can you notarize documents for out‑of‑state transactions?",
-      answer:
-        "Yes. Remote Online Notarization lets us notarize for clients located anywhere in the U.S., as long as the receiving party accepts RON documents (most modern lenders and employers do). We regularly support out‑of‑state real estate closings, employment forms, and business agreements.",
-    },
-    {
-      question: "What's the difference between mobile and online notarization?",
-      answer:
-        "ONDO Notary offers Remote Online Notarization (RON) only, a secure video session available nationwide. We do not offer in-office or mobile travel appointments. Confirm the receiving party accepts electronic notarization before you book.",
-    },
-    {
-      question: "How quickly can I get a document notarized?",
-      answer:
-        "We'll try to accommodate same-day when capacity allows, especially for Remote Online Notary (RON). Request earlier in the day (ideally by noon MT) for the best odds. Same-day is best-effort, not a guaranteed SLA.",
-      links: [{ label: "How on-demand scheduling works", href: "/notary/on-demand/" }],
-    },
-    {
-      question: "Do you offer on-demand or same-day notary?",
-      answer:
-        "Yes. ONDO Notary offers on-demand scheduling for urgent remote online notarization. We try to accommodate same-day when our calendar allows, RON nationwide. Evenings and weekends are limited and not guaranteed. For the best chance of same-day, request by noon Mountain Time and tell us your documents are urgent.",
-      links: [{ label: "On-demand notary", href: "/notary/on-demand/" }, { label: "Book a notary session", href: "/notary/" }],
-    },
-    {
-      question: "What types of documents can you notarize?",
-      answer:
-        "We notarize a wide variety of documents including real estate closing documents, power of attorney, wills and estate documents, business agreements, loan documents, affidavits, and more. If you're unsure if your document can be notarized, contact us and we'll let you know.",
-    },
-    {
-      question: "How much does notarization cost?",
-      answer: NOTARY_PRICING_SUMMARY,
-    },
-  ]
+  const faqs = NOTARY_PAGE_FAQS.concat(notaryFaqBank.slice(5)).map((f) => ({
+    question: f.q,
+    answer: f.a,
+    links: /today/i.test(f.q) ? [{ label: "Same-day sessions", href: "/notary/on-demand/" }] : undefined,
+  }))
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -81,7 +48,7 @@ export default function NotaryFAQPage() {
       />
       <PageBanner
         title="Notary & Closings FAQs"
-        subtitle="Common questions about notarization services and what to expect"
+        subtitle="Remote Online Notary (RON): how it works, what it costs and what to bring."
       />
 
       <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
@@ -100,7 +67,7 @@ export default function NotaryFAQPage() {
                 <FileText className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">Notary & Closings Questions</h2>
+                <h2 className="text-2xl font-bold text-foreground">Notary questions</h2>
                 <p className="text-muted-foreground text-sm">Everything about notarization and document signing</p>
               </div>
             </div>

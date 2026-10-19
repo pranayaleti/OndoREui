@@ -18,7 +18,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "shortage", heading: "Shortage", href: "/faq/escrow-faqs" },
+  { id: "shortage", heading: "Shortage", href: "/faq/buying-selling-faqs" },
   { id: "cushion", heading: "Cushion", href: "/blog/escrow-cushion-how-it-is-set" },
   { id: "surplus", heading: "Surplus" },
 ]
@@ -123,7 +123,7 @@ export default function EscrowShortagePage() {
       <ol>
         <li>Read the annual escrow analysis notice — shortage, surplus, and new monthly collection are on that letter.</li>
         <li>
-          Related questions: <Link href="/faq/escrow-faqs">escrow FAQs</Link>. Closing prepaids:{" "}
+          Related questions: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>. Closing prepaids:{" "}
           <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link>.
         </li>
         <li>Ask the servicer which cushion they used and which bills they projected. This page is not your next payment.</li>

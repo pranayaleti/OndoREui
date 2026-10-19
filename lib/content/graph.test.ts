@@ -394,7 +394,7 @@ describe("mortgage content graph", () => {
       expect(getContentNodeByPath(path)?.kind, path).toBe("guide")
     }
 
-    expect(getContentNodeByPath("/faq/escrow-faqs")?.kind).toBe("faq")
+    expect(getContentNodeByPath("/faq/buying-selling-faqs")?.kind).toBe("faq")
 
     const investHrefs = relatedLinksForPath("/learn/investment", { limit: 8 }).map((link) => link.href)
     expect(investHrefs).toContain("/blog/first-rental-occupancy-if-you-still-live-there")
@@ -460,7 +460,7 @@ describe("mortgage content graph", () => {
     const lockHrefs = relatedLinksForPath("/blog/rate-lock-extension-vs-floating", { limit: 8 }).map((link) => link.href)
     expect(lockHrefs).toContain("/blog/rate-lock-if-rates-drop")
 
-    const escrowHrefs = relatedLinksForPath("/faq/escrow-faqs", { limit: 8 }).map((link) => link.href)
+    const escrowHrefs = relatedLinksForPath("/faq/buying-selling-faqs", { limit: 8 }).map((link) => link.href)
     expect(escrowHrefs).toContain("/blog/escrow-shortage-after-first-year")
     expect(escrowHrefs).toContain("/blog/hazard-vs-ho3-vs-ho6-condo-insurance")
 
@@ -522,7 +522,7 @@ describe("mortgage content graph", () => {
     expect(loansHrefs).toContain("/blog/manufactured-housing-adu-financing")
     expect(loansHrefs).toContain("/blog/interest-only-mortgages-who-they-are-for")
 
-    const escrowHrefs = relatedLinksForPath("/faq/escrow-faqs", { limit: 8 }).map((link) => link.href)
+    const escrowHrefs = relatedLinksForPath("/faq/buying-selling-faqs", { limit: 8 }).map((link) => link.href)
     expect(escrowHrefs).toContain("/blog/impounds-vs-waiving-escrow")
 
     const firstHrefsLong = relatedLinksForPath("/learn/first-time", { limit: 12 }).map((link) => link.href)

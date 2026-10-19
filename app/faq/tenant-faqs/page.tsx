@@ -10,13 +10,13 @@ import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
-  title: pageTitle("Tenant FAQs | Ondo Real Estate"),
-  description: "Find answers to common tenant questions about applications, leases, payments, maintenance, and renting with Ondo Real Estate.",
+  title: pageTitle("Renting FAQs | Ondo Real Estate"),
+  description: "Renting with Ondo: how to apply, deposits, paying rent, autopay, maintenance and your lease.",
   alternates: { canonical: `${SITE_URL}/faq/tenant-faqs/` },
   openGraph: {
     type: "website",
-    title: pageTitleText("Tenant FAQs | Ondo Real Estate"),
-    description: "Find answers to common tenant questions about applications, leases, payments, maintenance, and renting with Ondo Real Estate.",
+    title: pageTitleText("Renting FAQs | Ondo Real Estate"),
+    description: "Renting with Ondo: how to apply, deposits, paying rent, autopay, maintenance and your lease.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -27,7 +27,7 @@ export default function TenantFAQPage() {
   const businessFaqs = [
     {
       question: "How do I apply for a property?",
-      answer: 'You can apply for a property by clicking the "View Details" button on any property listing. This will open an application form where you can provide your information. Once submitted, a property manager will review your application and contact you within 1-2 business days.'
+      answer: "Pick a home on the rentals page and request a showing. After the showing we send an application link. Every applicant is screened against the same written criteria, and we reply within one business day."
     },
     {
       question: "What documents do I need to apply?",
@@ -46,8 +46,12 @@ export default function TenantFAQPage() {
       answer: "Pet policies vary by property. Properties that allow pets typically require an additional pet deposit and/or monthly pet rent. Breed and size restrictions may apply. Assistance animals that provide disability-related assistance are not pets, and we do not charge pet rent, pet deposits, or pet fees for them."
     },
     {
+      question: "When is rent due, and what if I am late?",
+      answer: "Your lease sets the due date, any grace period and any late fee. If you are going to have trouble paying, tell us before the due date so we can talk through it."
+    },
+    {
       question: "How do I pay rent?",
-      answer: "We offer multiple payment options including online payments through our portal, automatic bank transfers, and traditional check payments. Online payments are the most convenient and secure option. You can set up automatic payments to never miss a due date."
+      answer: "Log in to the tenant portal and go to Payments. You can pay once or set up autopay for the date your lease allows. The portal lists the payment methods for your home and any fee before you confirm."
     },
     {
       question: "What happens if I need to break my lease early?",
@@ -67,8 +71,8 @@ export default function TenantFAQPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SEO
-        title="Tenant FAQs | Ondo Real Estate"
-        description="Find answers to common tenant questions about applications, leases, payments, maintenance, and renting with Ondo Real Estate."
+        title="Renting FAQs | Ondo Real Estate"
+        description="Renting with Ondo: how to apply, deposits, paying rent, autopay, maintenance and your lease."
         pathname="/faq/tenant-faqs"
         image={`${SITE_URL}/modern-apartment-balcony.png`}
         jsonLd={[
@@ -81,8 +85,8 @@ export default function TenantFAQPage() {
         ]}
       />
       <PageBanner
-        title="Tenant FAQs"
-        subtitle="Everything renters need to know about applications, leases, and living in our properties"
+        title="Renting FAQs"
+        subtitle="Applying, deposits, rent, maintenance and your lease."
       />
 
       <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
@@ -101,8 +105,8 @@ export default function TenantFAQPage() {
                 <Home className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">For Tenants</h2>
-                <p className="text-muted-foreground text-sm">Applications, leases, payments, and maintenance</p>
+                <h2 className="text-2xl font-bold text-foreground">For renters</h2>
+                <p className="text-muted-foreground text-sm">Applications, deposits, payments and maintenance</p>
               </div>
             </div>
 

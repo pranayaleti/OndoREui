@@ -18,7 +18,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "cushion", heading: "Cushion", href: "/faq/escrow-faqs" },
+  { id: "cushion", heading: "Cushion", href: "/faq/buying-selling-faqs" },
   { id: "shortage", heading: "Shortage / surplus", href: "/blog/utah-property-tax-calendar-first-escrow-analysis" },
 ]
 
@@ -101,7 +101,7 @@ export default function EscrowCushionPage() {
         .
       </p>
       <p>
-        Related questions: <Link href="/faq/escrow-faqs">escrow FAQs</Link>. Closing prepaids:{" "}
+        Related questions: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>. Closing prepaids:{" "}
         <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link>.
       </p>
 

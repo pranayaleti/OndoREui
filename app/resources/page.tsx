@@ -313,7 +313,7 @@ export default function ResourcesPage() {
                       <Link href="/faq/tenant-faqs">Tenant FAQs</Link>
                     </Button>
                     <Button asChild size="sm" variant="ghost">
-                      <Link href="/faq/payments-faqs">Payment help</Link>
+                      <Link href="/faq/tenant-faqs">Rent payment help</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -507,7 +507,7 @@ export default function ResourcesPage() {
                     <Link href="/notary">See full notary services</Link>
                   </Button>
                   <Button asChild size="sm" variant="outline">
-                    <Link href="/faq/escrow-faqs">Closing & escrow help</Link>
+                    <Link href="/faq/buying-selling-faqs">Closing & escrow help</Link>
                   </Button>
                 </div>
               </CardContent>

@@ -28,8 +28,8 @@ describe("FAQ copy", () => {
     }
   })
 
-  it("general FAQ does not claim a property manager license or E&O policy", () => {
-    const src = read("app/faq/general-faqs/page.tsx")
+  it("the FAQ hub does not claim a property manager license or E&O policy", () => {
+    const src = read("app/faq/page.tsx")
     expect(src).not.toMatch(/fully licensed property managers/)
     expect(src).not.toMatch(/errors & omissions/i)
     expect(src).toMatch(/January 1, 2027/)

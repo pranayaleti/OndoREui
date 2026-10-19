@@ -13,7 +13,7 @@ const files = [
 // Fixed-colour text on theme-token backgrounds is invisible in one of the two themes.
 describe("FAQ pages use theme tokens for text", () => {
   it("covers every FAQ page", () => {
-    expect(files.length).toBeGreaterThanOrEqual(12)
+    expect(files.length).toBe(6)
   })
 
   it.each(files)("%s has no hard-coded white or gray-300 text on token backgrounds", (file) => {

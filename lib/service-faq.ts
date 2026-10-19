@@ -15,7 +15,7 @@ export type ServiceKey = "property-management" | "buy-sell" | "loans" | "notary"
 
 /**
  * Single sources for service terms that several FAQ surfaces repeat (service FAQ bank,
- * /faq/owner-faqs, /faq/general-faqs, /faq/buying-selling-faqs, /faq/escrow-faqs).
+ * /faq, /faq/owner-faqs, /faq/buying-selling-faqs).
  * Change the wording here, not on each page.
  */
 export const PM_SERVICE_AREA_SUMMARY =

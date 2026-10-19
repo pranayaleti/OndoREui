@@ -116,7 +116,7 @@ export default function HazardHo3Ho6Page() {
         <li>Mortgagee clause or coverage amount that does not match investor overlay.</li>
       </ul>
       <p>
-        Related servicing questions after you close: <Link href="/faq/escrow-faqs">escrow, taxes, and insurance FAQs</Link>
+        Related servicing questions after you close: <Link href="/faq/buying-selling-faqs">escrow, taxes, and insurance FAQs</Link>
         .
       </p>
 

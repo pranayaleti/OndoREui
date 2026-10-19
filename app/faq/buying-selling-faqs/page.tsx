@@ -11,12 +11,12 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Buying & Selling FAQs | Ondo Real Estate"),
-  description: "Get answers to common questions about buying homes, selling properties, renting vs buying, home valuations, and the Utah real estate market.",
+  description: "Buying and selling in Utah: agent agreements and compensation, pricing, escrow, earnest money and closing.",
   alternates: { canonical: `${SITE_URL}/faq/buying-selling-faqs/` },
   openGraph: {
     type: "website",
     title: pageTitleText("Buying & Selling FAQs | Ondo Real Estate"),
-    description: "Get answers to common questions about buying homes, selling properties, renting vs buying, home valuations, and the Utah real estate market.",
+    description: "Buying and selling in Utah: agent agreements and compensation, pricing, escrow, earnest money and closing.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -39,11 +39,6 @@ export default function BuyingSellingFAQPage() {
       question: "What should I do before listing my home for sale?",
       answer:
         "Most homes benefit from a deep clean, small cosmetic fixes, decluttering, and addressing obvious repairs. You don't have to fully remodel to get a strong result. We'll walk the home with you and prioritize only the projects that move the needle for your specific price point and neighborhood.",
-    },
-    {
-      question: "What should I look for in a rental as a tenant?",
-      answer:
-        "Beyond price and location, look at responsiveness of management, clarity of the lease, condition of the unit, parking, and how maintenance is handled. With Ondo‑managed rentals, you'll get clear expectations up front, documented move‑in condition, and easy ways to pay rent and submit maintenance requests.",
     },
     {
       question: "How do I get started with buying a home in Utah?",
@@ -80,13 +75,33 @@ export default function BuyingSellingFAQPage() {
       answer:
         `Many financed purchases close about ${PURCHASE_CLOSING_RANGE} after acceptance when the contract and file cooperate. Cash purchases can close faster depending on title and inspections.`,
     },
+    {
+      question: "What is escrow?",
+      answer:
+        "A neutral third party holds the funds and documents until every condition of the contract is met. In Utah the buyer and seller agree on the escrow company during the offer.",
+    },
+    {
+      question: "What happens to my earnest money if the deal falls through?",
+      answer:
+        "If you cancel inside your contingency periods (inspection, appraisal, financing) you typically get it back. Cancel outside them and the seller may be entitled to keep it. Deadlines on the Utah REPC are written notice by 5:00 p.m. Mountain Time.",
+    },
+    {
+      question: "What are closing costs and who pays them?",
+      answer:
+        "Title insurance, escrow fees, lender fees and prepaid taxes and insurance. In Utah they are split between buyer and seller by negotiation. Your Loan Estimate and settlement statement show the exact numbers.",
+    },
+    {
+      question: "What is an escrow account for taxes and insurance?",
+      answer:
+        "Your lender collects part of your property tax and insurance with each payment and pays those bills when due. If taxes or premiums rise, the account can run short and your payment adjusts the following year.",
+    },
   ]
 
   return (
     <div className="flex flex-col min-h-screen">
       <SEO
         title="Buying & Selling FAQs | Ondo Real Estate"
-        description="Get answers to common questions about buying homes, selling properties, renting vs buying, home valuations, and the Utah real estate market."
+        description="Buying and selling in Utah: agent agreements and compensation, pricing, escrow, earnest money and closing."
         pathname="/faq/buying-selling-faqs"
         image={`${SITE_URL}/suburban-house-garden.png`}
         jsonLd={[

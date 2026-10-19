@@ -72,7 +72,7 @@ describe("/founders-letter page", () => {
   it("links the letter to the pages it talks about with canonical trailing-slash hrefs", () => {
     render(<FoundersLetterPage />)
     const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"))
-    for (const expected of ["/property-management/", "/solutions/tenants/", "/about/", "/why-utah/", "/contact/", "/about/team/pranay-reddy-aleti/"]) {
+    for (const expected of ["/property-management/", "/properties/", "/about/", "/moving-to-utah/", "/contact/", "/about/team/pranay-reddy-aleti/"]) {
       expect(hrefs).toContain(expected)
     }
     for (const href of hrefs) {

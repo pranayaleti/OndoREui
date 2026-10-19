@@ -1,25 +1,24 @@
 import { PageBanner } from "@/components/page-banner"
 import { FaqAccordion, guideLink } from "@/components/faq-accordion"
 import { PURCHASE_CLOSING_RANGE } from "@/lib/service-faq"
+import { FIND_YOUR_SERVICER, HUD_COUNSELING_PHONE, NOT_A_SERVICER } from "@/lib/content/mortgage-referral"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import Link from "next/link"
 import { ArrowLeft, DollarSign } from "lucide-react"
-import { RelatedContent } from "@/components/content/related-content"
-import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import type { Metadata } from "next"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Loans & Financing FAQs | Ondo Real Estate"),
-  description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
+  description: "Utah home loan questions: pre-approval, programs, credit, gift funds, refinancing, and where to get help with a loan you already have.",
   alternates: { canonical: `${SITE_URL}/faq/loans-faqs/` },
   openGraph: {
     type: "website",
     title: pageTitleText("Loans & Financing FAQs | Ondo Real Estate"),
-    description: "Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options.",
+    description: "Utah home loan questions: pre-approval, programs, credit, gift funds, refinancing, and where to get help with a loan you already have.",
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
@@ -100,40 +99,10 @@ export default function LoansFAQPage() {
       links: [guideLink("va-residual-income-vs-dti", "VA residual income vs DTI")],
     },
     {
-      question: "How do I know if USDA is even available?",
-      answer:
-        "Run the property address on USDA’s published map tool and test household income against the current area limit. A city name is not a map result.",
-      links: [guideLink("usda-map-income-limit-eligibility", "USDA map and income limits")],
-    },
-    {
       question: "Why would a file be declined after pre-approval?",
       answer:
         "A pre-approval is not a commitment to lend. Typical later fails include a job change, undocumented large deposits, new debt, or a property that does not meet the program’s standards.",
       links: [guideLink("declined-after-pre-approval", "Declined after pre-approval")],
-    },
-    {
-      question: "If I just went 1099, can that income count yet?",
-      answer:
-        "Usually not as a full average. Remaining W-2 wages and a documented history in the same occupation can still matter. Last month’s first invoice does not replace tax-year history.",
-      links: [guideLink("just-went-1099-last-month", "Just went 1099"), { label: "Variable income hub", href: "/learn/variable-income/" }],
-    },
-    {
-      question: "Does a $0 student-loan IDR payment mean $0 in DTI?",
-      answer:
-        "Not automatically. Investors calculate a payment from the credit report, a servicer statement, or a percent of the balance. SAVE and other federal plans have been in flux. Confirm the current investor rule.",
-      links: [guideLink("student-loans-dti-idr-save", "Student loans and DTI")],
-    },
-    {
-      question: "How do FHA MIP and conventional PMI actually end?",
-      answer:
-        "They are different products. Post-2013 FHA annual MIP is timed from original LTV (11 years or life of loan). Conventional borrower-paid PMI can often come off with equity under the Homeowners Protection Act.",
-      links: [guideLink("mip-vs-pmi-how-mortgage-insurance-ends", "MIP vs PMI")],
-    },
-    {
-      question: "Is a streamline refinance a no-docs refinance?",
-      answer:
-        "No. FHA Streamline and VA IRRRL reduce documentation. Occupancy, payment history, and a net-benefit test still apply. Cash-out is generally not a streamline.",
-      links: [guideLink("fha-va-streamline-refinance-less-docs", "FHA and VA streamline refinance"), guideLink("refinance-break-even-when-lower-rate-loses", "Refinance break-even")],
     },
     {
       question: "Do large deposits in the last 60 days have to be sourced?",
@@ -146,169 +115,42 @@ export default function LoansFAQPage() {
         "Not automatically. Waiting can avoid conventional PMI; buying sooner with PMI is a cash-and-timeline trade.",
       links: [guideLink("should-i-wait-for-20-percent-down", "Wait for 20% down?"), guideLink("mip-vs-pmi-how-mortgage-insurance-ends", "MIP vs PMI")],
     },
+  ]
+
+  // Ondo does not service loans. These answers point people at their servicer and free counseling.
+  const servicingFaqs = [
     {
-      question: "What is the difference between a pre-approval letter, AUS findings, and clear to close?",
-      answer:
-        "A letter is a snapshot for shopping. AUS (often DU or LPA) is an engine result for a program and credit file. CTC is an underwriter sign-off on this property as of that date. None of them is a guarantee you will fund.",
-      links: [guideLink("pre-approval-vs-aus-vs-clear-to-close", "Pre-approval vs AUS vs clear to close")],
+      question: "How do I get a payoff quote?",
+      answer: `Ask your mortgage servicer. ${FIND_YOUR_SERVICER} ${NOT_A_SERVICER}`,
     },
     {
-      question: "Can I buy a car after I am pre-approved?",
-      answer:
-        "A new auto loan usually appears on the next credit pull and changes DTI. Findings can flip. Ask before you sign.",
-      links: [guideLink("new-auto-loan-during-underwriting", "New auto loan during underwriting")],
+      question: "I cannot make my mortgage payment. What do I do?",
+      answer: `Call your servicer before you miss the payment if you can, and ask about a repayment plan, deferral, forbearance or modification. ${NOT_A_SERVICER} Only your servicer, or the investor that owns the loan, can offer those options.`,
     },
     {
-      question: "Is HOA part of DTI?",
-      answer:
-        "Required HOA dues are housing expense (front-end) and then sit in back-end with other counted debts. A modest note payment plus a large HOA can still fail the ratio.",
-      links: [guideLink("dti-frontend-backend-with-hoa", "DTI and HOA dues")],
+      question: "Who can help me for free?",
+      answer: `A HUD-approved housing counselor can review your situation and help you talk to your servicer at no cost. Call ${HUD_COUNSELING_PHONE} or visit hud.gov. The Consumer Financial Protection Bureau takes complaints about mortgage servicers at consumerfinance.gov.`,
     },
     {
-      question: "What will a first mortgage conversation ask, and what will it promise?",
-      answer:
-        "Expect occupancy, income type, debts, assets, and credit authorization when you are ready. A conversation does not approve you, lock a rate, or quote APR.",
-      links: [{ label: "Qualify page", href: "/qualify/" }],
+      question: "How do I avoid hardship scams?",
+      answer: "Be careful with anyone who asks for a fee up front to change your loan, tells you to stop talking to your servicer, or asks you to sign over your deed. Real housing counseling through HUD is free.",
     },
     {
-      question: "Is DSCR the same as a full-doc rental loan?",
-      answer:
-        "No. DSCR typically qualifies on the property’s rent versus the payment. Full-doc qualifies the borrower with DTI and a rental worksheet. Occupancy still has to match use.",
-      links: [guideLink("dscr-vs-full-doc-rental-loan", "DSCR vs full-doc rental loan")],
+      question: "My home was damaged in a disaster. Can I get help with the mortgage?",
+      answer: "Call your servicer and ask about disaster relief; forbearance pauses payments but they are still owed. If your area has a federal disaster declaration, apply at disasterassistance.gov. Document the damage and file your insurance claim first.",
     },
     {
-      question: "What does a Utah REPC financing deadline do to my loan?",
-      answer:
-        "Due diligence and financing/appraisal are separate contract clocks, usually 5:00 p.m. Mountain Time. A lender timeline is not a REPC deadline. Missing written notice can put earnest money at risk. This is not legal advice.",
-      links: [guideLink("utah-repc-deadline-and-your-loan", "REPC deadlines and your loan")],
-    },
-    {
-      question: "Will paying a medical collection raise my mortgage score?",
-      answer:
-        "Not as a promise. Bureau reporting of medical collections changed in 2022–2023, but many mortgage files still use classic FICO on a tri-merge.",
-      links: [guideLink("medical-collections-after-fico-model-change", "Medical collections and FICO")],
-    },
-    {
-      question: "Can I get a mortgage with no traditional credit?",
-      answer:
-        "Sometimes, if you can document alternative references such as rent and utilities. That is not the same as weak traditional credit, and it is not assigned by who you are.",
-      links: [guideLink("no-traditional-credit-alternative-credit", "No traditional credit")],
-    },
-    {
-      question: "If I sell a home with a VA loan, is entitlement restored?",
-      answer:
-        "Typically when the VA loan is paid in full and the property is disposed of under current VA rules, used entitlement is restored. That is different from keeping a VA loan and buying another. Check current VA rules for entitlement amounts.",
-      links: [guideLink("selling-with-va-loan-entitlement-restoration", "VA entitlement restoration")],
-    },
-    {
-      question: "Does a CPA letter replace tax returns for a self-employed mortgage?",
-      answer:
-        "Usually no. Agency files are moved by returns and transcripts. A CPA letter and YTD P&L can support that stack.",
-      links: [guideLink("cpa-letter-vs-tax-returns-underwriting", "CPA letter vs tax returns")],
-    },
-    {
-      question: "Is a no-closing-cost refinance free?",
-      answer:
-        "Usually the lender credit that covers fees is paid for with a higher note rate. Prepaids can still show as cash. Run break-even.",
-      links: [guideLink("no-closing-cost-refinance-rate-credit-tradeoff", "No-closing-cost refinance")],
-    },
-    {
-      question: "What does a tri-merge credit report show?",
-      answer:
-        "Equifax, Experian, and TransUnion together. Mortgage files often use classic FICO and the middle score, not a monitoring-app number.",
-      links: [guideLink("what-a-tri-merge-credit-report-shows", "Tri-merge credit report")],
-    },
-    {
-      question: "Is earnest money extra on top of down payment?",
-      answer:
-        "It is usually credited at closing toward funds you already owe. Timing still matters: it leaves your account when the REPC is executed.",
-      links: [guideLink("earnest-money-vs-down-payment-vs-closing-costs", "Earnest vs down vs closing costs")],
-    },
-    {
-      question: "If I still live in my house, is the rental I buy a second home?",
-      answer:
-        "Usually no. A house you will rent as a business is typically investment occupancy. A duplex you will live in is a house-hack. Do not relabel occupancy for pricing.",
-      links: [guideLink("first-rental-occupancy-if-you-still-live-there", "First rental occupancy")],
-    },
-    {
-      question: "Do compensating factors guarantee AUS will approve?",
-      answer:
-        "No. They are documented strengths that can appear in findings or a manual underwrite. They are not a second score.",
-      links: [guideLink("compensating-factors-in-aus-findings", "Compensating factors in AUS findings")],
-    },
-    {
-      question: "Should a veteran in a rural tract always take USDA?",
-      answer:
-        "No. VA, USDA, and FHA are different tests (entitlement, map and household income, MIP).",
-      links: [guideLink("usda-vs-va-vs-fha-veteran-rural", "USDA vs VA vs FHA")],
-    },
-    {
-      question: "Is an ITIN the same as an SSN for an agency mortgage?",
-      answer:
-        "Often no. Many agency and FHA files expect a valid SSN for credit and AUS. An ITIN-only file is typically a Non-QM overlay conversation. Citizenship is a legal eligibility topic, not a national-origin preference.",
-      links: [guideLink("itin-non-us-citizen-mortgage-documentation", "ITIN documentation")],
-    },
-    {
-      question: "Does biweekly extra principal beat a refinance?",
-      answer:
-        "They are different tools. Biweekly is one extra payment a year on the current note. A refinance changes rate, term, and costs.",
-      links: [guideLink("biweekly-extra-principal-vs-refinance", "Biweekly vs refinance"), guideLink("refinance-break-even-when-lower-rate-loses", "Refinance break-even")],
-    },
-    {
-      question: "If I locked and rates drop, do I automatically get the lower rate?",
-      answer:
-        "No. A lock holds the quoted rate for the window. A float-down, if it exists, is a written lock-desk policy.",
-      links: [guideLink("rate-lock-if-rates-drop", "If rates drop after a lock"), guideLink("rate-lock-extension-vs-floating", "Lock extension vs floating")],
-    },
-    {
-      question: "Is a mortgage cosigner the same as a co-borrower?",
-      answer:
-        "If someone is on the note, they are underwritten as a borrower. Title (the deed) is a different signature from the note. A parent who only gifts is usually neither.",
-      links: [guideLink("cosign-vs-co-borrower", "Cosign vs co-borrower")],
-    },
-    {
-      question: "Should I close a credit card before I apply?",
-      answer:
-        "Closing a card can raise utilization by shrinking available credit. AUS reads the tri-merge.",
-      links: [guideLink("closing-credit-card-before-mortgage", "Closing a credit card before you apply")],
-    },
-    {
-      question: "Can I cash-out refinance a house I just bought with cash?",
-      answer:
-        "Sometimes, under an agency delayed-financing exception (a selling-guide exception, not a statute).",
-      links: [guideLink("delayed-financing-after-cash-purchase", "Delayed financing after a cash purchase")],
-    },
-    {
-      question: "Do authorized-user tradelines help a mortgage file?",
-      answer:
-        "They can appear on a tri-merge and still be discounted or excluded. They do not make you a co-borrower.",
-      links: [guideLink("authorized-user-tradelines-mortgage", "Authorized-user tradelines")],
-    },
-    {
-      question: "Is an interest-only payment a teaser rate?",
-      answer:
-        "No. IO skips scheduled principal for a stated period. Payment shock when amortization starts is the risk. It is different from an ARM and from a temporary buydown.",
-      links: [guideLink("interest-only-mortgages-who-they-are-for", "Interest-only mortgages")],
-    },
-    {
-      question: "Should I recast or refinance after a lump sum?",
-      answer:
-        "A recast keeps the rate and re-spreads the payment. A refinance is a new note with costs. Run break-even.",
-      links: [guideLink("recast-vs-refinance", "Recast vs refinance")],
-    },
-    {
-      question: "Can I finance a manufactured home or an ADU the same way as a house?",
-      answer:
-        "No. A HUD-code manufactured home and an accessory dwelling unit are different property types, with different title, foundation, zoning, and occupancy questions.",
-      links: [guideLink("manufactured-housing-adu-financing", "Manufactured housing and ADU financing")],
+      question: "What happens after I pay off my loan?",
+      answer: "Your servicer releases the lien and records the release with the county. Ask for the timeline and keep your final statement and the recorded release.",
     },
   ]
+
 
   return (
     <div className="flex flex-col min-h-screen">
       <SEO
         title="Loans & Financing FAQs | Ondo Real Estate"
-        description="Get answers to common questions about Utah home loans, mortgages, pre-approval, down payments, and refinancing options."
+        description="Utah home loan questions: pre-approval, programs, credit, gift funds, refinancing, and where to get help with a loan you already have."
         pathname="/faq/loans-faqs"
         image={`${SITE_URL}/modern-office-building.png`}
         jsonLd={[
@@ -317,12 +159,12 @@ export default function LoansFAQPage() {
             { name: "FAQ", url: `${SITE_URL}/faq` },
             { name: "Loans FAQs", url: `${SITE_URL}/faq/loans-faqs` },
           ]),
-          generateFAQJsonLd(faqs),
+          generateFAQJsonLd([...faqs, ...servicingFaqs]),
         ]}
       />
       <PageBanner
-        title="Loans & Financing FAQs"
-        subtitle="Common questions about mortgages, pre-approval, and loan options"
+        title="Home loan FAQs"
+        subtitle="Getting a loan, and help with the one you already have."
       />
 
       <main className="flex-1 py-12 bg-gradient-to-b from-background to-card">
@@ -341,32 +183,24 @@ export default function LoansFAQPage() {
                 <DollarSign className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">Loans & Financing Questions</h2>
-                <p className="text-muted-foreground text-sm">Everything about mortgages, pre-approval, and loan programs</p>
+                <h2 className="text-2xl font-bold text-foreground">Getting a loan</h2>
+                <p className="text-muted-foreground text-sm">Pre-approval, programs, credit and timing</p>
               </div>
             </div>
 
             <FaqAccordion items={faqs} />
 
-            <div className="mt-12 text-center">
-              <p className="text-muted-foreground mb-4">Need help with your loan application?</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/loans"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-accent-1 to-accent-2 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
-                >
-                  Explore Loan Options
-                </Link>
-                <Link
-                  href="/calculators"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-accent-1 text-accent-2 font-semibold rounded-lg hover:bg-accent-1/10 transition-colors"
-                >
-                  Use Loan Calculators
-                </Link>
-              </div>
-            </div>
-            <RelatedContent path="/faq/loans-faqs" title="Guides that answer these in depth" />
-            <NextStepCta path="/faq/loans-faqs" />
+            <h2 className="mt-14 mb-2 text-2xl font-bold text-foreground">Your current loan</h2>
+            <p className="mb-6 text-sm text-muted-foreground">Payoffs, hardship and disaster help start with your servicer, not with us.</p>
+            <FaqAccordion items={servicingFaqs} />
+
+            <p className="mt-12 text-center text-muted-foreground">
+              Ready to talk through a file?{" "}
+              <Link href="/qualify/" className="font-medium text-primary underline-offset-4 hover:underline">
+                Talk with a loan officer
+              </Link>
+              .
+            </p>
             <LendingDisclaimer className="mt-8" />
           </div>
         </div>

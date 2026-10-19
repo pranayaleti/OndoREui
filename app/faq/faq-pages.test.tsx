@@ -9,11 +9,9 @@ import { PURCHASE_TIMELINE } from "@/lib/content/lending-facts"
 vi.mock("next/navigation", () => ({ usePathname: () => "/faq/" }))
 
 import FaqHub from "./page"
-import GeneralFaqs from "./general-faqs/page"
 import TenantFaqs from "./tenant-faqs/page"
 import OwnerFaqs from "./owner-faqs/page"
 import LoansFaqs from "./loans-faqs/page"
-import EscrowFaqs from "./escrow-faqs/page"
 import NotaryFaqs from "./notary-faqs/page"
 import BuyingSellingFaqs from "./buying-selling-faqs/page"
 
@@ -29,8 +27,8 @@ function faqPageBlocks(container: HTMLElement) {
 }
 
 describe("FAQ subpages structured data", () => {
-  it("has 11 FAQ subpages and none adds a second FAQPage block through next/script", () => {
-    expect(subpages.length).toBe(11)
+  it("has 5 FAQ subpages and none adds a second FAQPage block through next/script", () => {
+    expect(subpages.length).toBe(5)
     for (const dir of subpages) {
       const src = readFileSync(join(faqDir, dir, "page.tsx"), "utf8")
       expect(src, dir).not.toMatch(/from "next\/script"/)
@@ -40,7 +38,7 @@ describe("FAQ subpages structured data", () => {
   })
 
   it.each([
-    ["general", GeneralFaqs],
+    ["hub", FaqHub],
     ["owner", OwnerFaqs],
     ["loans", LoansFaqs],
     ["notary", NotaryFaqs],
@@ -49,15 +47,16 @@ describe("FAQ subpages structured data", () => {
     expect(faqPageBlocks(container)).toHaveLength(1)
   })
 
-  it("the /faq hub does not mark up Q&As that are not on the page", () => {
+  it("the /faq hub marks up only the general questions it shows", () => {
     const { container } = render(<FaqHub />)
-    expect(faqPageBlocks(container)).toHaveLength(0)
+    const [block] = faqPageBlocks(container)
+    expect(block.mainEntity).toHaveLength(5)
   })
 })
 
 describe("FAQ answers are in the rendered HTML while collapsed", () => {
-  it("general FAQ includes the answer text and keeps panels closed", () => {
-    const { container } = render(<GeneralFaqs />)
+  it("the hub includes the general answer text and keeps panels closed", () => {
+    const { container } = render(<FaqHub />)
     expect(container.textContent).toContain("We manage single-family homes")
     expect(container.querySelectorAll('[role="region"][data-state="open"]')).toHaveLength(0)
     expect(container.querySelectorAll('[role="region"][data-state="closed"]').length).toBeGreaterThan(0)
@@ -72,7 +71,7 @@ describe("FAQ answers are in the rendered HTML while collapsed", () => {
 describe("FAQ copy has no dead-end pointers or authoring notes", () => {
   it.each([
     ["loans", LoansFaqs],
-    ["escrow", EscrowFaqs],
+    ["buying-selling", BuyingSellingFaqs],
     ["notary", NotaryFaqs],
   ])("%s FAQ", (_name, Page) => {
     const { container } = render(<Page />)
@@ -86,8 +85,8 @@ describe("FAQ copy has no dead-end pointers or authoring notes", () => {
     expect(text).not.toMatch(/ \/notary(\/on-demand)?[ .]/)
   })
 
-  it("every guide link on loans and escrow FAQs points at a registered blog post or a real route", () => {
-    for (const Page of [LoansFaqs, EscrowFaqs, NotaryFaqs]) {
+  it("every guide link on loans and notary FAQs points at a registered blog post or a real route", () => {
+    for (const Page of [LoansFaqs, NotaryFaqs]) {
       const { container, unmount } = render(<Page />)
       const related = Array.from(container.querySelectorAll("p")).filter((p) => p.textContent?.startsWith("Related:"))
       expect(related.length).toBeGreaterThan(0)
@@ -127,16 +126,16 @@ describe("FAQ answers agree with the single service sources", () => {
     expect(text).toMatch(/unpaid rent, cleaning costs, damage beyond normal wear and tear/)
   })
 
-  it("general FAQ service area includes the whole Wasatch Front, not only Salt Lake City", () => {
-    const { container } = render(<GeneralFaqs />)
+  it("the hub service area includes the whole Wasatch Front, not only Salt Lake City", () => {
+    const { container } = render(<FaqHub />)
     const text = container.textContent ?? ""
     expect(text).toContain("Wasatch Front")
     expect(text).not.toMatch(/Holladay, Midvale, Magna/)
   })
 
-  it("one closing range appears on the loans, buying, and escrow FAQs and matches the lending facts", () => {
+  it("one closing range appears on the loans and buying FAQs and matches the lending facts", () => {
     expect(PURCHASE_TIMELINE.overall).toContain(PURCHASE_CLOSING_RANGE)
-    for (const Page of [LoansFaqs, BuyingSellingFaqs, EscrowFaqs]) {
+    for (const Page of [LoansFaqs, BuyingSellingFaqs]) {
       const { container, unmount } = render(<Page />)
       expect(container.textContent).toContain(PURCHASE_CLOSING_RANGE)
       expect(container.textContent).not.toMatch(/30[–-]45 days/)

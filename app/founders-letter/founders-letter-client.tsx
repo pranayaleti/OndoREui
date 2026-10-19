@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { User, Building2, Lightbulb, TrendingUp, Handshake, Rocket, Code, Home, Zap, Target } from "lucide-react"
+import { User, Building2, Lightbulb, TrendingUp, Rocket } from "lucide-react"
 import SEO from "@/components/seo"
 import { SITE_ORGANIZATION_ID, founderPersonRef, generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_ADDRESS_CITY, SITE_NAME, SITE_URL } from "@/lib/site"
@@ -18,57 +18,17 @@ export const FOUNDER_IMAGE_PATH = "/founder-image.webp"
 const FOUNDER_NAME = "Pranay Reddy Aleti"
 const FOUNDER_TITLE = `Founder, ${SITE_NAME}`
 /** Bump when the letter's wording changes; surfaces as dateModified on the ProfilePage. */
-const modified = "2026-10-17"
+const modified = "2026-10-18"
 
 const FIRST_YEAR_IN_SOFTWARE = 2013
 const FIRST_UTAH_HOME_YEAR = 2019
 
-const CORE_VALUES = ["Innovation first", "Client success", "Transparency", "Community focus"]
-
-const BACKGROUND = [
-  { title: "Full stack development", detail: "React, Node.js, modern web apps" },
-  { title: "Real estate investing", detail: `Utah homeowner since ${FIRST_UTAH_HOME_YEAR}; owns and manages rentals` },
-  { title: "Property management", detail: "Owner and tenant relations" },
-  { title: "Technology", detail: "AI and automation for property operations" },
-]
-
 const RELATED_LINKS = [
   { href: "/about/", label: "About Ondo Real Estate" },
   { href: "/property-management/", label: "How we manage property" },
-  { href: "/why-utah/", label: "Why we work in Utah" },
+  { href: "/moving-to-utah/", label: "New to Utah" },
   { href: FOUNDER_PROFILE_PATH, label: "Pranay's full profile" },
 ]
-
-const TIMELINE = [
-  {
-    year: String(FIRST_YEAR_IN_SOFTWARE),
-    Icon: Code,
-    title: "Started in software",
-    body: "Full stack engineering: building and scaling the applications businesses run on, and learning what good tools feel like.",
-    tags: ["Full stack", "Engineering"],
-  },
-  {
-    year: String(FIRST_UTAH_HOME_YEAR),
-    Icon: Home,
-    title: "First home in Utah",
-    body: "Bought a house, learned the process the hard way, then started helping friends and family buy homes and place tenants.",
-    tags: ["First home", "Utah market"],
-  },
-  {
-    year: String(FOUNDED_YEAR),
-    Icon: Zap,
-    title: "The launch",
-    body: `Started OndoSoft in May and founded Ondo Real Estate in ${FOUNDED_MONTH_LABEL}, then began building the platform behind this site.`,
-    tags: ["Ondo launch", "Tech + RE"],
-  },
-  {
-    year: "Now",
-    Icon: Target,
-    title: "Under one roof",
-    body: `Managing property across ${UTAH_CITIES_SERVED}+ Wasatch Front cities with owner and tenant portals, and expanding into buying, selling, and investing.`,
-    tags: ["Owner portal", "Tenant portal"],
-  },
-] as const
 
 export default function FoundersLetterPage() {
   const currentYear = new Date().getFullYear()
@@ -98,7 +58,7 @@ export default function FoundersLetterPage() {
     { value: `${yearsInTech}+`, label: "Years in software", detail: "Full stack engineer" },
     { value: `${yearsInUtah}+`, label: "Years a Utah homeowner", detail: "Owner and landlord" },
     { value: String(FOUNDED_YEAR), label: "Ondo founded", detail: `${SITE_ADDRESS_CITY}, Utah` },
-    { value: `${UTAH_CITIES_SERVED}+`, label: "Wasatch Front cities", detail: "Where we manage and sell" },
+    { value: String(UTAH_CITIES_SERVED), label: "Wasatch Front cities", detail: "Where we manage and sell" },
   ]
 
   const paragraph = "text-foreground/70 text-lg leading-relaxed"
@@ -170,11 +130,8 @@ export default function FoundersLetterPage() {
                 </p>
               </div>
               <p className={paragraph}>
-                I came to the U.S. for a <strong className="text-primary">master&apos;s degree in computer science</strong> and
-                figured I would spend my career in software. For over a decade I did: building applications, solving hard
-                problems, and shipping code that businesses run on. Somewhere in there I noticed what held my attention was{" "}
-                <strong className="text-primary">real estate</strong>. Software is how I work. Real estate is about people,
-                growth, and legacy.
+                I came to the U.S. for a master&apos;s degree in computer science and spent over a decade building software.
+                Somewhere in there, real estate took over my attention. Software is how I work. Real estate is about people.
               </p>
             </section>
 
@@ -204,9 +161,8 @@ export default function FoundersLetterPage() {
                 property.
               </p>
               <p className={paragraph}>
-                This website is where the two meet. I started building it the same year and it has not stopped changing
-                since. Every release has one job: make owning and renting property simpler and more transparent for the
-                people on both sides of the lease.
+                This website is where the two meet. Every release has one job: make owning and renting property simpler
+                for the people on both sides of the lease.
               </p>
             </section>
 
@@ -246,30 +202,11 @@ export default function FoundersLetterPage() {
                   full-service management
                 </Link>{" "}
                 with statements, maintenance, and rent in one portal. Tenants get a{" "}
-                <Link href="/solutions/tenants/" className={inlineLink}>
+                <Link href="/properties/" className={inlineLink}>
                   portal of their own
                 </Link>{" "}
                 where paying rent or reporting a problem takes a minute, not a week of phone tag. Nobody should feel like a
                 number in a system.
-              </p>
-            </section>
-
-            <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="personal-note-heading">
-              <div className="flex items-center mb-6">
-                <Handshake className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
-                <h2 id="personal-note-heading" className="text-3xl font-bold text-foreground">
-                  A personal note
-                </h2>
-              </div>
-              <p className={`${paragraph} mb-4`}>
-                I am not building Ondo from a distance. I own and manage rental property myself, so I deal with the same
-                repair calls, lease questions, and year-end paperwork our owners do.
-              </p>
-              <p className={paragraph}>
-                I have taken real risks in software, real estate, and crypto. Some paid off and some taught me something,
-                and all of them taught me resilience. That is why Ondo is built for the long term:{" "}
-                <strong className="text-primary">long-term value</strong> for owners, for tenants, and for the Utah
-                communities we work in.
               </p>
             </section>
 
@@ -281,12 +218,11 @@ export default function FoundersLetterPage() {
                 </h2>
               </div>
               <p className={`${paragraph} mb-4`}>
-                The future of real estate is <strong className="text-primary">human connection</strong> backed by good
-                software. That is what Ondo stands for. If you own property on the Wasatch Front and want management you
-                can see into, if you are looking for a home to rent, or if you build things and want to partner, I would
-                like to hear from you.
+                I own and manage rental property myself, so I deal with the same repair calls and year-end paperwork our
+                owners do. If you own property on the Wasatch Front, are looking for a home, or want to work together, I
+                would like to hear from you.
               </p>
-              <p className={paragraph}>Thank you for reading. This is just the beginning.</p>
+              <p className={paragraph}>Thank you for reading.</p>
             </section>
 
             <div className="bg-gradient-to-r from-[var(--color-gradient-to)] to-background rounded-xl p-8 border border-primary">
@@ -298,36 +234,6 @@ export default function FoundersLetterPage() {
           </article>
 
           <aside className="space-y-6">
-            <section className="bg-card rounded-xl p-6 border border-border" aria-labelledby="core-values-heading">
-              <h3 id="core-values-heading" className="text-xl font-bold text-primary mb-4">
-                Core values
-              </h3>
-              <ul className="space-y-3">
-                {CORE_VALUES.map((value) => (
-                  <li key={value} className="flex items-center">
-                    <span className="text-primary mr-3" aria-hidden="true">
-                      ✓
-                    </span>
-                    <span className="text-foreground/70">{value}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section className="bg-card rounded-xl p-6 border border-border" aria-labelledby="expertise-heading">
-              <h3 id="expertise-heading" className="text-xl font-bold text-primary mb-4">
-                Background
-              </h3>
-              <ul className="space-y-3">
-                {BACKGROUND.map((item) => (
-                  <li key={item.title} className="bg-muted rounded-lg p-3">
-                    <div className="text-foreground font-semibold">{item.title}</div>
-                    <div className="text-foreground/70 text-sm">{item.detail}</div>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
             <section className="bg-card rounded-xl p-6 border border-border" aria-labelledby="related-pages-heading">
               <h3 id="related-pages-heading" className="text-xl font-bold text-primary mb-4">
                 Keep reading
@@ -364,75 +270,6 @@ export default function FoundersLetterPage() {
         </div>
       </div>
 
-      <section className="max-w-7xl mx-auto px-4 py-24" aria-labelledby="ondo-journey-heading">
-        <div className="text-center mb-16">
-          <h2 id="ondo-journey-heading" className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            The <span className="text-primary">Ondo</span> journey
-          </h2>
-          <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-            A decade in software, a first home in Utah, and a company built where the two meet.
-          </p>
-        </div>
-
-        <div className="relative">
-          <div
-            className="hidden md:block absolute top-16 left-0 right-0 h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20"
-            aria-hidden="true"
-          ></div>
-
-          <ol className="grid md:grid-cols-4 gap-8 md:gap-4">
-            {TIMELINE.map(({ year, Icon, title, body, tags }) => (
-              <li key={year} className="group relative">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative mb-6">
-                    <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-background font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-8 w-8" aria-hidden="true" />
-                    </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
-                      {year}
-                    </div>
-                  </div>
-                  <div className="bg-card rounded-xl p-6 border border-border shadow-sm group-hover:shadow-lg transition-all duration-300 group-hover:border-primary/50">
-                    <h3 className="text-xl font-bold text-foreground mb-3">{title}</h3>
-                    <p className="text-foreground/70 text-sm leading-relaxed">{body}</p>
-                    <div className="mt-4 flex flex-wrap justify-center gap-2">
-                      {tags.map((tag) => (
-                        <span key={tag} className="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <div className="bg-gradient-to-b from-background to-card py-20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Ready to work with Ondo?</h2>
-          <p className="text-xl text-foreground mb-8 opacity-90">
-            If you own rental property and want to see what is happening with it, or you are looking for a home, start
-            with a conversation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact/"
-              className="bg-background hover:bg-background/90 text-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors text-center"
-            >
-              Talk to us
-            </Link>
-            <Link
-              href="/property-management/"
-              className="bg-background hover:bg-background/90 text-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors text-center"
-            >
-              See how we manage property
-            </Link>
-          </div>
-        </div>
-      </div>
     </main>
   )
 }

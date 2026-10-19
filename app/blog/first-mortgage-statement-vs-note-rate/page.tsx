@@ -144,7 +144,7 @@ export default function FirstStatementVsNoteRatePage() {
           <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>.
         </li>
         <li>
-          Questions: <Link href="/faq/escrow-faqs">escrow FAQs</Link>.
+          Questions: <Link href="/faq/buying-selling-faqs">escrow FAQs</Link>.
         </li>
       </ol>
     </ArticleShell>

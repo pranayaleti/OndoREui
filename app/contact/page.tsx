@@ -47,7 +47,7 @@ export default function ContactPage() {
 
       <PageBanner
         title="Contact us"
-        subtitle="Tell us what you need: buying, selling, a loan, or property management. A person from our team will reply"
+        subtitle="Tell us what you need. A person replies within one business day."
       />
 
       <section className="py-16 bg-background">
