@@ -9,7 +9,10 @@ import {
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/discount-points-breakeven-without-sales-pitch"
+const path = "/blog/refinance-break-even-when-lower-rate-loses"
+
+/** Folded into the refinance guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/refinance-break-even-when-lower-rate-loses", title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline" }
 const loanAmount = Math.round(EXAMPLE_PURCHASE_PRICE_UTAH * 0.8)
 const onePoint = Math.round(loanAmount * 0.01)
 const monthlySavingsIllustration = 28
@@ -28,7 +31,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "points", heading: "Discount points", href: "/buy/rates" },
-  { id: "buydown", heading: "Temporary buydown", href: "/blog/temporary-buydown-who-pays-year-three" },
+  { id: "buydown", heading: "Temporary buydown", href: "/blog/rate-lock-if-rates-drop" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -60,6 +63,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Discount Points: Breakeven Without a Sales Pitch",
   description:
     "One point is typically 1% of the loan to lower the note. Break-even is cost divided by monthly P&I savings. This is not a temporary buydown.",
@@ -74,6 +78,7 @@ export default function DiscountPointsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Discount Points: Breakeven Without a Sales Pitch",
         description:
           "One point is typically 1% of the loan to lower the note. Break-even is cost divided by monthly P&I savings. This is not a temporary buydown.",
@@ -127,7 +132,7 @@ export default function DiscountPointsPage() {
         </li>
         <li>
           If a builder is offering a 2-1 instead, that is{" "}
-          <Link href="/blog/temporary-buydown-who-pays-year-three">temporary buydown: who pays, year 3</Link>, model
+          <Link href="/blog/rate-lock-if-rates-drop">temporary buydown: who pays, year 3</Link>, model
           it on the <Link href="/calculators/temporary-buydown">buydown calculator</Link>.
         </li>
       </ol>

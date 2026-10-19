@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, STREAMLINE_REFI } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/fha-va-streamline-refinance-less-docs"
+const path = "/blog/refinance-break-even-when-lower-rate-loses"
+
+/** Folded into the refinance guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/refinance-break-even-when-lower-rate-loses", title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline" }
 
 const faqs = [
   {
@@ -55,6 +58,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Streamline Refi: What “Less Docs” Still Requires",
   description:
     "FHA Streamline and VA IRRRL reduce documentation. Occupancy, payment history, and a net-benefit test still apply.",
@@ -69,6 +73,7 @@ export default function StreamlineRefiPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Streamline Refi: What “Less Docs” Still Requires",
         description:
           "FHA Streamline and VA IRRRL reduce documentation. Occupancy, payment history, and a net-benefit test still apply.",
@@ -98,14 +103,14 @@ export default function StreamlineRefiPage() {
         Credit-qualifying vs non-credit-qualifying streamlines are different files. Skipping income docs on a
         non-credit-qualifying path is allowed only when HUD and the lender overlay say so, and the net-tangible-benefit
         test still has to pass. MIP on the new FHA loan follows FHA rules; it is not automatically deleted. See{" "}
-        <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">how MIP vs PMI ends</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">how MIP vs PMI ends</Link>.
       </p>
 
       <h2>VA IRRRL</h2>
       <p>{STREAMLINE_REFI.va}</p>
       <p>
         Funding-fee treatment on an IRRRL is a separate snapshot on{" "}
-        <Link href="/blog/va-funding-fee-finance-vs-pay-cash">VA funding fee</Link>. Residual income is not re-quoted
+        <Link href="/blog/va-loan-assumption-entitlement">VA funding fee</Link>. Residual income is not re-quoted
         as a dollar figure on this page; occupancy still has to match VA rules.
       </p>
 

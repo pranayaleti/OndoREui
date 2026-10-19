@@ -4,7 +4,13 @@ import { LENDING_FACTS_AS_OF, PARENT_GIFTING } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/parent-gifting-down-payment-who-signs"
+const path = "/blog/should-i-wait-for-20-percent-down"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/should-i-wait-for-20-percent-down",
+  title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+}
 
 const faqs = [
   {
@@ -20,7 +26,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "gift", heading: "Gift only", href: "/blog/gift-funds-down-payment-rules" },
+  { id: "gift", heading: "Gift only", href: "/blog/should-i-wait-for-20-percent-down" },
   { id: "title", heading: "Parent on title, not the loan", href: "/learn/first-time" },
   { id: "coborrower", heading: "Parent is a co-borrower", href: "/qualify" },
 ]
@@ -66,6 +72,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Parent Is Gifting: Who Signs What",
   description:
     "Gift letter, donor statements, occupancy, and title: who signs when a parent helps with down payment.",
@@ -80,6 +87,7 @@ export default function ParentGiftingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Parent Is Gifting: Who Signs What",
         description:
           "Gift letter, donor statements, occupancy, and title: who signs when a parent helps with down payment.",
@@ -109,7 +117,7 @@ export default function ParentGiftingPage() {
       <h2>Donor documentation (signatures and paper)</h2>
       <p>
         The paper trail itself lives on{" "}
-        <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>. This page is who touches which
+        <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link>. This page is who touches which
         document:
       </p>
       <ul>
@@ -123,7 +131,7 @@ export default function ParentGiftingPage() {
         <li>
           <strong>Wire or cashier’s check</strong>, to escrow, with instructions that match the letter. A cash deposit
           into the buyer’s account is the{" "}
-          <Link href="/blog/large-deposits-60-day-paper-trail">large-deposit</Link> problem, not a gift.
+          <Link href="/blog/should-i-wait-for-20-percent-down">large-deposit</Link> problem, not a gift.
         </li>
         <li>
           <strong>Notary</strong>, some lenders want the gift letter notarized. That is an overlay, not a federal
@@ -134,7 +142,7 @@ export default function ParentGiftingPage() {
       <h2>If down payment assistance is also in the stack</h2>
       <p>
         A second-lien DPA is not a gift and has its own signatures (note, deed of trust, agency affidavits). How they
-        sit together: <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link>.
+        sit together: <Link href="/blog/fha-vs-conventional-loans-utah">DPA stacked with an FHA gift</Link>.
       </p>
 
       <h2>What happens next</h2>

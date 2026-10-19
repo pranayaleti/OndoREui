@@ -80,7 +80,7 @@ export default function AdjustableRatePage() {
                   <CardTitle>Rate Caps</CardTitle>
                   <CardDescription>
                     Initial, periodic, and lifetime caps limit how far the note rate can move. Read{" "}
-                    <Link href="/blog/arm-caps-in-plain-english" className="underline underline-offset-4">
+                    <Link href="/blog/rate-lock-if-rates-drop" className="underline underline-offset-4">
                       ARM caps in plain English
                     </Link>
                     .
@@ -117,7 +117,7 @@ export default function AdjustableRatePage() {
               <p className="mt-2 text-foreground/70">{ARM_CAPS.paymentNote}</p>
               <p className="mt-4">
                 <Button asChild variant="outline" size="sm">
-                  <Link href="/blog/arm-caps-in-plain-english">ARM caps in plain English</Link>
+                  <Link href="/blog/rate-lock-if-rates-drop">ARM caps in plain English</Link>
                 </Button>
               </p>
             </div>
@@ -155,7 +155,7 @@ export default function AdjustableRatePage() {
                   <Link href="/calculators/mortgage-payment">Compare Loan Options</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/blog/arm-caps-in-plain-english">Read the cap structure</Link>
+                  <Link href="/blog/rate-lock-if-rates-drop">Read the cap structure</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/blog/interest-only-mortgages-who-they-are-for">Interest-only vs ARM</Link>

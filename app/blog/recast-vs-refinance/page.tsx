@@ -3,7 +3,10 @@ import { BreakEvenTable } from "@/components/content/break-even-table"
 import { BIWEEKLY_VS_REFI, LENDING_FACTS_AS_OF, RECAST_VS_REFI } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/recast-vs-refinance"
+const path = "/blog/refinance-break-even-when-lower-rate-loses"
+
+/** Folded into the refinance guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/refinance-break-even-when-lower-rate-loses", title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline" }
 
 const faqs = [
   {
@@ -18,6 +21,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Recast vs Refinance",
   description:
     "A recast re-amortizes the same note after a principal curtailment. A refinance is a new loan with costs. Compare the fee vs break-even. Not a savings quote.",
@@ -32,6 +36,7 @@ export default function RecastVsRefinancePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Recast vs Refinance",
         description:
           "Recast keeps the rate and re-spreads the payment after a lump sum. Refinance changes the note. Not a savings quote.",
@@ -55,8 +60,8 @@ export default function RecastVsRefinancePage() {
       <p>{RECAST_VS_REFI.vsBiweekly}</p>
       <p>
         Extra principal without a recast:{" "}
-        <Link href="/blog/biweekly-extra-principal-vs-refinance">biweekly vs refinance</Link>. Tactics overview:{" "}
-        <Link href="/blog/mortgage-paydown-hacks">mortgage pay-down hacks</Link>. {BIWEEKLY_VS_REFI.extraPrincipal}
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">biweekly vs refinance</Link>. Tactics overview:{" "}
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">mortgage pay-down hacks</Link>. {BIWEEKLY_VS_REFI.extraPrincipal}
       </p>
 
       <h2>What a refinance does</h2>
@@ -65,7 +70,7 @@ export default function RecastVsRefinancePage() {
         Deep math:{" "}
         <Link href="/blog/refinance-break-even-when-lower-rate-loses">when a lower rate still loses after costs</Link>.
         Lender-credit files:{" "}
-        <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff">“no closing cost” refinance</Link>.
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">“no closing cost” refinance</Link>.
       </p>
 
       <h2>Reusable comparison (same table as the refinance hub)</h2>

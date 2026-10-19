@@ -7,7 +7,7 @@ describe("BreakEvenTable", () => {
     render(<BreakEvenTable table="stay-scenarios" />)
     expect(screen.getByRole("link", { name: "Costs include a point" })).toHaveAttribute(
       "href",
-      "/blog/discount-points-breakeven-without-sales-pitch/",
+      "/blog/refinance-break-even-when-lower-rate-loses/",
     )
     expect(screen.getByText("40 months")).toBeInTheDocument()
     expect(screen.getByText(/cash costs ÷ monthly principal-and-interest savings/i)).toBeInTheDocument()
@@ -15,7 +15,7 @@ describe("BreakEvenTable", () => {
 
   it("renders recast vs refinance columns", () => {
     render(<BreakEvenTable table="recast-vs-refi" />)
-    expect(screen.getByRole("link", { name: "Recast" })).toHaveAttribute("href", "/blog/recast-vs-refinance/")
+    expect(screen.getByRole("link", { name: "Recast" })).toHaveAttribute("href", "/blog/refinance-break-even-when-lower-rate-loses/")
     expect(screen.getByText(/Same note rate and remaining term/i)).toBeInTheDocument()
   })
 })

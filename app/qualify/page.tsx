@@ -77,7 +77,7 @@ export default function QualifyPage() {
             <p>{QUALIFY_CONVERSATION.notNeededFirstCall}</p>
             <p>
               Read more:{" "}
-              <Link href="/blog/what-a-mortgage-conversation-asks">
+              <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">
                 what a mortgage conversation asks
               </Link>
               . After a letter, the stages are{" "}

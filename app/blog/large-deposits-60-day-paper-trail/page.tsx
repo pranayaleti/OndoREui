@@ -4,7 +4,13 @@ import { LARGE_DEPOSITS, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/large-deposits-60-day-paper-trail"
+const path = "/blog/should-i-wait-for-20-percent-down"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/should-i-wait-for-20-percent-down",
+  title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+}
 
 const faqs = [
   {
@@ -18,8 +24,8 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "ok", heading: "Often acceptable when documented", href: "/blog/gift-funds-down-payment-rules" },
-  { id: "stall", heading: "Often a stall", href: "/blog/declined-after-pre-approval" },
+  { id: "ok", heading: "Often acceptable when documented", href: "/blog/should-i-wait-for-20-percent-down" },
+  { id: "stall", heading: "Often a stall", href: "/blog/pre-approval-vs-aus-vs-clear-to-close" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -59,6 +65,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Large Deposits: 60-Day Paper Trail",
   description:
     "About 60 days of statements, and large deposits in that window have to be sourced. Cash from family without a gift letter is a common stall.",
@@ -73,6 +80,7 @@ export default function LargeDepositsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Large Deposits: 60-Day Paper Trail",
         description:
           "About 60 days of statements, and large deposits in that window have to be sourced. Cash from family without a gift letter is a common stall.",
@@ -108,8 +116,8 @@ export default function LargeDepositsPage() {
       <p>{LARGE_DEPOSITS.cash}</p>
       <p>
         Parent help belongs on a gift letter and donor trail,{" "}
-        <Link href="/blog/parent-gifting-down-payment-who-signs">who signs what</Link> and{" "}
-        <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>, not a ATM deposit two weeks
+        <Link href="/blog/should-i-wait-for-20-percent-down">who signs what</Link> and{" "}
+        <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link>, not a ATM deposit two weeks
         before closing. How income is verified is a different stack:{" "}
         <Link href="/blog/how-underwriters-verify-income">W-2 vs 1099 vs bank</Link>.
       </p>
@@ -120,7 +128,7 @@ export default function LargeDepositsPage() {
         <li>Keep PDF statements with the bank’s name, not cropped mobile screenshots.</li>
         <li>
           If a condition already failed, read{" "}
-          <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link> before you move more cash.
+          <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link> before you move more cash.
         </li>
       </ol>
     </ArticleShell>

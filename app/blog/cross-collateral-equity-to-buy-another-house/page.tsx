@@ -4,7 +4,10 @@ import { CROSS_COLLATERAL, LENDING_FACTS_AS_OF, OCCUPANCY_TYPES } from "@/lib/co
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/cross-collateral-equity-to-buy-another-house"
+const path = "/blog/heloc-vs-cash-out-refinance"
+
+/** Folded into the HELOC vs cash-out equity guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/heloc-vs-cash-out-refinance", title: "HELOC vs Cash-Out Refinance: Tapping Equity, Buying a Rental and Delayed Financing" }
 
 const faqs = [
   {
@@ -19,7 +22,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "cross", heading: "Cross-collateral / blanket", href: "/learn/investment" },
-  { id: "cash", heading: "Cash-out then purchase", href: "/blog/cash-out-to-buy-a-rental" },
+  { id: "cash", heading: "Cash-out then purchase", href: "/blog/heloc-vs-cash-out-refinance" },
   { id: "heloc", heading: "HELOC draw", href: "/blog/heloc-vs-cash-out-refinance" },
 ]
 
@@ -46,6 +49,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Cross-Collateral and Using Equity to Buy Another House",
   description:
     "Pledging more than one property versus cash-out or a HELOC. Educational only; this is not a published product you can assume.",
@@ -60,6 +64,7 @@ export default function CrossCollateralPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Cross-Collateral and Using Equity to Buy Another House",
         description:
           "Pledging more than one property versus cash-out or a HELOC. Educational only; this is not a published product you can assume.",
@@ -100,11 +105,11 @@ export default function CrossCollateralPage() {
       <ul>
         <li>
           Cash-out traps (two LTVs, two occupancies):{" "}
-          <Link href="/blog/cash-out-to-buy-a-rental">cash-out to buy a rental</Link>.
+          <Link href="/blog/heloc-vs-cash-out-refinance">cash-out to buy a rental</Link>.
         </li>
         <li>
           When you can even ask after a recent closing:{" "}
-          <Link href="/blog/heloc-after-year-two-vs-cash-out">HELOC after year two vs cash-out</Link>.
+          <Link href="/blog/heloc-vs-cash-out-refinance">HELOC after year two vs cash-out</Link>.
         </li>
       </ul>
 

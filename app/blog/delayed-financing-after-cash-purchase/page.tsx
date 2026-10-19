@@ -4,7 +4,10 @@ import { DELAYED_FINANCING, HELOC_SEASONING, LENDING_FACTS_AS_OF, OCCUPANCY_TYPE
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/delayed-financing-after-cash-purchase"
+const path = "/blog/heloc-vs-cash-out-refinance"
+
+/** Folded into the HELOC vs cash-out equity guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/heloc-vs-cash-out-refinance", title: "HELOC vs Cash-Out Refinance: Tapping Equity, Buying a Rental and Delayed Financing" }
 
 const faqs = [
   {
@@ -19,8 +22,8 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "delayed", heading: "Delayed financing", href: "/refinance/cash-out" },
-  { id: "seasoned", heading: "HELOC after seasoning", href: "/blog/heloc-after-year-two-vs-cash-out" },
-  { id: "rental", heading: "Cash-out to buy a rental", href: "/blog/cash-out-to-buy-a-rental" },
+  { id: "seasoned", heading: "HELOC after seasoning", href: "/blog/heloc-vs-cash-out-refinance" },
+  { id: "rental", heading: "Cash-out to buy a rental", href: "/blog/heloc-vs-cash-out-refinance" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -46,6 +49,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Delayed Financing After a Cash Purchase",
   description:
     "Agency delayed-financing exception: cash purchase, then a cash-out later. Distinct from HELOC seasoning. Overlay is not a statute.",
@@ -60,6 +64,7 @@ export default function DelayedFinancingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Delayed Financing After a Cash Purchase",
         description:
           "Agency delayed-financing exception: cash purchase, then a cash-out later. Overlay is not a statute.",
@@ -94,8 +99,8 @@ export default function DelayedFinancingPage() {
       />
       <p>
         {DELAYED_FINANCING.vsSeasoning} Named on{" "}
-        <Link href="/blog/heloc-after-year-two-vs-cash-out">HELOC after year two vs cash-out</Link>. If the cash-out is
-        to fund another house: <Link href="/blog/cash-out-to-buy-a-rental">cash-out to buy a rental</Link>. If you still
+        <Link href="/blog/heloc-vs-cash-out-refinance">HELOC after year two vs cash-out</Link>. If the cash-out is
+        to fund another house: <Link href="/blog/heloc-vs-cash-out-refinance">cash-out to buy a rental</Link>. If you still
         live in your current home and the new house is the rental:{" "}
         <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first rental occupancy</Link>.
       </p>
@@ -112,11 +117,11 @@ export default function DelayedFinancingPage() {
         </li>
         <li>
           <strong>A parent gifted the purchase funds.</strong> {DELAYED_FINANCING.giftsAndBorrowed} Gift paper trail:{" "}
-          <Link href="/blog/gift-funds-down-payment-rules">gift funds</Link>.
+          <Link href="/blog/should-i-wait-for-20-percent-down">gift funds</Link>.
         </li>
         <li>
           <strong>You already financed the purchase.</strong> Delayed financing is the wrong page. Use{" "}
-          <Link href="/blog/heloc-after-year-two-vs-cash-out">seasoning overlays</Link>.
+          <Link href="/blog/heloc-vs-cash-out-refinance">seasoning overlays</Link>.
         </li>
       </ul>
 

@@ -62,7 +62,7 @@ export default function WeekAfterFundingPage() {
         </li>
         <li>
           <strong>Title.</strong> Owner’s vs lender’s coverage:{" "}
-          <Link href="/blog/title-insurance-owner-vs-lender">owner’s vs lender’s title insurance</Link>.
+          <Link href="/blog/utah-closing-costs-title-origination-prepaids">owner’s vs lender’s title insurance</Link>.
         </li>
       </ul>
 
@@ -94,7 +94,7 @@ export default function WeekAfterFundingPage() {
         <li>Save the servicer phone number and loan number from the CD or welcome letter.</li>
         <li>Watch mail and email for a hello / goodbye servicing letter.</li>
         <li>Keep hazard insurance in force. Impounds vs paying your own bills:{" "}
-          <Link href="/blog/impounds-vs-waiving-escrow">impounds vs waiving escrow</Link>.</li>
+          <Link href="/blog/escrow-shortage-after-first-year">impounds vs waiving escrow</Link>.</li>
       </ol>
 
       <h2>What this page will not do</h2>
@@ -109,7 +109,7 @@ export default function WeekAfterFundingPage() {
         <li>If a statement’s P&amp;I line does not match the note, call the servicer with the note in hand.</li>
         <li>
           Escrow calendar:{" "}
-          <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis">Utah tax calendar vs first analysis</Link>
+          <Link href="/blog/escrow-shortage-after-first-year">Utah tax calendar vs first analysis</Link>
           .
         </li>
         <li>

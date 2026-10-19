@@ -9,7 +9,10 @@ import {
 } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/usda-vs-va-vs-fha-veteran-rural"
+const path = "/blog/va-loan-assumption-entitlement"
+
+/** Folded into the VA guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/va-loan-assumption-entitlement", title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions" }
 
 const faqs = [
   {
@@ -26,6 +29,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "USDA vs VA vs FHA for a Veteran in a Rural Tract",
   description:
     "Comparison of typical tests when a veteran is buying in a USDA-map area. Not a recommendation to take one program. Fee percents are dated snapshots.",
@@ -40,6 +44,7 @@ export default function UsdaVaFhaRuralPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "USDA vs VA vs FHA for a Veteran in a Rural Tract",
         description:
           "Comparison of typical tests when a veteran is buying in a USDA-map area. Not a recommendation to take one program.",
@@ -64,13 +69,13 @@ export default function UsdaVaFhaRuralPage() {
           <strong>VA.</strong> {RURAL_VETERAN_COMPARE.vaFirst} Funding fee (first use, less than 5% down snapshot):{" "}
           {VA_FUNDING_FEE.firstUseLessThan5PercentDown}.{" "}
           <Link href="/loans/va">VA loans</Link>.{" "}
-          <Link href="/blog/va-funding-fee-finance-vs-pay-cash">Finance vs pay the funding fee</Link>.
+          <Link href="/blog/va-loan-assumption-entitlement">Finance vs pay the funding fee</Link>.
         </li>
         <li>
           <strong>USDA.</strong> {RURAL_VETERAN_COMPARE.usdaMap} Upfront guarantee fee snapshot:{" "}
           {USDA_SNAPSHOT.upfrontGuaranteeFee}; annual {USDA_SNAPSHOT.annualFee}.{" "}
           <Link href="/loans/usda">USDA loans</Link>.{" "}
-          <Link href="/blog/usda-map-income-limit-eligibility">Map and income how-to</Link>.
+          <Link href="/blog/fha-vs-conventional-loans-utah">Map and income how-to</Link>.
         </li>
         <li>
           <strong>FHA.</strong> {RURAL_VETERAN_COMPARE.fhaFallback} Down payment at 580+:{" "}
@@ -114,7 +119,7 @@ export default function UsdaVaFhaRuralPage() {
         </li>
         <li>
           Ask a lender to pull or update the COE. Entitlement restoration after a sale is a different page:{" "}
-          <Link href="/blog/selling-with-va-loan-entitlement-restoration">VA entitlement restoration</Link>.
+          <Link href="/blog/va-loan-assumption-entitlement">VA entitlement restoration</Link>.
         </li>
         <li>Compare two Loan Estimates if two programs both fit. This page is not a quote or a lock.</li>
       </ol>

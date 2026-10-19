@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, NO_CLOSING_COST_REFI, STREAMLINE_REFI } from "@/li
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/no-closing-cost-refinance-rate-credit-tradeoff"
+const path = "/blog/refinance-break-even-when-lower-rate-loses"
+
+/** Folded into the refinance guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/refinance-break-even-when-lower-rate-loses", title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline" }
 
 const faqs = [
   {
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "“No Closing Cost” Refinance: The Cost Is in the Rate",
   description:
     "A lender credit that covers fees is usually paid for with a higher note rate. Run break-even. Not a free refinance.",
@@ -65,6 +69,7 @@ export default function NoClosingCostRefiPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "“No Closing Cost” Refinance: The Cost Is in the Rate",
         description:
           "A lender credit that covers fees is usually paid for with a higher note rate. Run break-even. Not a free refinance.",
@@ -101,13 +106,13 @@ export default function NoClosingCostRefiPage() {
       </p>
       <p>
         Discount points are the other direction, you pay more cash for a lower note:{" "}
-        <Link href="/blog/discount-points-breakeven-without-sales-pitch">points without a sales pitch</Link>.
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">points without a sales pitch</Link>.
       </p>
 
       <h2>Not the same as a streamline</h2>
       <p>
         {NO_CLOSING_COST_REFI.vsStreamline} {STREAMLINE_REFI.stillRequires} Guide:{" "}
-        <Link href="/blog/fha-va-streamline-refinance-less-docs">FHA Streamline and VA IRRRL</Link>.
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">FHA Streamline and VA IRRRL</Link>.
       </p>
 
       <h2>Illustration (not your quote)</h2>

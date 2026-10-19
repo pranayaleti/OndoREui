@@ -41,7 +41,7 @@ export const BREAK_EVEN_STAY_SCENARIOS: readonly BreakEvenStayScenario[] = [
   {
     id: "points",
     heading: "Costs include a point",
-    href: "/blog/discount-points-breakeven-without-sales-pitch",
+    href: "/blog/refinance-break-even-when-lower-rate-loses",
     costs: 6_000,
     monthlyPiSavings: 150,
     stayMonths: 24,
@@ -49,7 +49,7 @@ export const BREAK_EVEN_STAY_SCENARIOS: readonly BreakEvenStayScenario[] = [
   {
     id: "thin",
     heading: "Thin monthly savings",
-    href: "/blog/no-closing-cost-refinance-rate-credit-tradeoff",
+    href: "/blog/refinance-break-even-when-lower-rate-loses",
     costs: 4_000,
     monthlyPiSavings: 50,
     stayMonths: 24,
@@ -134,7 +134,7 @@ function stayScenarioRows(): readonly ComparisonRow[] {
 }
 
 const RECAST_VS_REFI_COLUMNS: readonly ComparisonColumn[] = [
-  { id: "recast", heading: "Recast", href: "/blog/recast-vs-refinance" },
+  { id: "recast", heading: "Recast", href: "/blog/refinance-break-even-when-lower-rate-loses" },
   {
     id: "refi-pay",
     heading: "Refinance (pay costs)",
@@ -143,7 +143,7 @@ const RECAST_VS_REFI_COLUMNS: readonly ComparisonColumn[] = [
   {
     id: "refi-credit",
     heading: "Refinance (lender credit)",
-    href: "/blog/no-closing-cost-refinance-rate-credit-tradeoff",
+    href: "/blog/refinance-break-even-when-lower-rate-loses",
   },
 ] as const
 

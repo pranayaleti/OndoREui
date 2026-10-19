@@ -4,7 +4,10 @@ import { BUSINESS_PERSONAL_COMINGLING, LENDING_FACTS_AS_OF, LARGE_DEPOSITS } fro
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/business-vs-personal-bank-co-mingling"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -18,8 +21,8 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "separate", heading: "Separated books", href: "/blog/bank-statement-loans-when-tax-returns-undercount-income" },
-  { id: "mixed", heading: "Co-mingled accounts", href: "/blog/large-deposits-60-day-paper-trail" },
+  { id: "separate", heading: "Separated books", href: "/blog/how-underwriters-verify-income" },
+  { id: "mixed", heading: "Co-mingled accounts", href: "/blog/should-i-wait-for-20-percent-down" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Business Bank vs Personal: Co-Mingling That Stalls Files",
   description:
     "Business deposits in a personal account stall sourcing and deposit averages. Seasoning is a paper trail, not a workaround.",
@@ -65,6 +69,7 @@ export default function CominglingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Business Bank vs Personal: Co-Mingling That Stalls Files",
         description:
           "Business deposits in a personal account stall sourcing and deposit averages. Seasoning is a paper trail, not a workaround.",
@@ -83,7 +88,7 @@ export default function CominglingPage() {
       <h2>Why the file stalls</h2>
       <p>
         Purchase files typically include about 60 days of statements.{" "}
-        <Link href="/blog/large-deposits-60-day-paper-trail">Large deposits in that window have to be sourced</Link>.{" "}
+        <Link href="/blog/should-i-wait-for-20-percent-down">Large deposits in that window have to be sourced</Link>.{" "}
         {LARGE_DEPOSITS.conventionalThreshold} When the same account also shows owner draws, cash, Venmo, and client
         wires, every large line becomes a condition.
       </p>
@@ -98,15 +103,15 @@ export default function CominglingPage() {
       <p>{BUSINESS_PERSONAL_COMINGLING.seasoning}</p>
       <p>
         A brand-new 1099 who deposits the first invoices into a personal checking account has two problems: history and
-        mixing. See <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link>. K-1 income is
+        mixing. See <Link href="/blog/how-underwriters-verify-income">I just went 1099 last month</Link>. K-1 income is
         taken from the form and matching returns, not from whatever hit personal checking,{" "}
-        <Link href="/blog/k-1-income-what-usually-counts">what usually counts on a K-1</Link>.
+        <Link href="/blog/how-underwriters-verify-income">what usually counts on a K-1</Link>.
       </p>
 
       <h2>Bank-statement programs still want a pattern</h2>
       <p>
         {BUSINESS_PERSONAL_COMINGLING.bankStatement} If tax returns undercount cash flow after write-offs, the{" "}
-        <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">bank-statement guide</Link> and the{" "}
+        <Link href="/blog/how-underwriters-verify-income">bank-statement guide</Link> and the{" "}
         <Link href="/learn/non-qm">Non-QM hub</Link> explain that stack. Co-mingling does not convert a personal
         account into 24 months of business deposits.
       </p>

@@ -79,14 +79,14 @@ export default function RateTermRefinancePage() {
               <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
                 <Link href="/blog/refinance-break-even-when-lower-rate-loses">When a lower rate still loses</Link>
               </Button>
-              <Button key="/blog/recast-vs-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>
+              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">Recast vs refinance</Link>
               </Button>
-              <Button key="/blog/fha-va-streamline-refinance-less-docs" asChild variant="outline" size="sm">
-                <Link href="/blog/fha-va-streamline-refinance-less-docs">FHA / VA streamline</Link>
+              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">FHA / VA streamline</Link>
               </Button>
-              <Button key="/blog/no-closing-cost-refinance-rate-credit-tradeoff" asChild variant="outline" size="sm">
-                <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff">“No closing cost” refi</Link>
+              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">“No closing cost” refi</Link>
               </Button>
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>

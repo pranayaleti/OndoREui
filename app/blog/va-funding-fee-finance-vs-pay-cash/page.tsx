@@ -7,7 +7,10 @@ import {
 } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/va-funding-fee-finance-vs-pay-cash"
+const path = "/blog/va-loan-assumption-entitlement"
+
+/** Folded into the VA guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/va-loan-assumption-entitlement", title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions" }
 
 const faqs = [
   {
@@ -23,6 +26,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "VA Funding Fee: Finance vs Pay Cash",
   description:
     "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and cash to close. Not advice.",
@@ -42,6 +46,7 @@ export default function VaFundingFeePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "VA Funding Fee: Finance vs Pay Cash",
         description:
           "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and cash to close. Not advice.",
@@ -92,7 +97,7 @@ export default function VaFundingFeePage() {
       <h2>What happens next</h2>
       <p>
         Confirm exemption status and the current VA schedule. Then read{" "}
-        <Link href="/blog/va-entitlement-second-va-loan">remaining entitlement</Link> if you already have a VA loan, and{" "}
+        <Link href="/blog/va-loan-assumption-entitlement">remaining entitlement</Link> if you already have a VA loan, and{" "}
         <Link href="/loans/va">the VA program page</Link> for occupancy and COE.
       </p>
     </ArticleShell>

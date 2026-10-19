@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, UTAH_CLOSING_NOTES, UTAH_TAX_CALENDAR } from "@/li
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/utah-property-tax-calendar-first-escrow-analysis"
+const path = "/blog/escrow-shortage-after-first-year"
+
+/** Folded into the combined escrow and Utah property tax guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/escrow-shortage-after-first-year", title: "Escrow and Utah Property Taxes: Cushion, Shortages, Waiving Impounds and the First Analysis" }
 
 const faqs = [
   {
@@ -21,7 +24,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "county", heading: "County tax calendar", href: "/blog/utah-closing-costs-title-origination-prepaids" },
-  { id: "escrow", heading: "Mortgage escrow year", href: "/blog/escrow-cushion-how-it-is-set" },
+  { id: "escrow", heading: "Mortgage escrow year", href: "/blog/escrow-shortage-after-first-year" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -45,6 +48,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Utah Property Tax Calendar vs Your First Escrow Analysis",
   description:
     "Utah taxes are typically due November 30, billed once a year. Why the first mortgage escrow analysis can surprise. Not tax advice.",
@@ -63,6 +67,7 @@ export default function UtahTaxCalendarEscrowPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Utah Property Tax Calendar vs Your First Escrow Analysis",
         description:
           "Utah taxes are typically due November 30, billed once a year. Why the first mortgage escrow analysis can surprise. Not tax advice.",
@@ -102,7 +107,7 @@ export default function UtahTaxCalendarEscrowPage() {
         If you close in spring, a large November bill may still be coming. If you close in late fall, the next
         November may be a year away. Either way, the first annual analysis uses actual bills, not the closing
         projection. How that cushion is capped:{" "}
-        <Link href="/blog/escrow-cushion-how-it-is-set">how the escrow cushion is set</Link>.
+        <Link href="/blog/escrow-shortage-after-first-year">how the escrow cushion is set</Link>.
       </p>
       <p>
         Shortage options after an analysis are a servicing notice, spread versus lump sum, not origination pricing.
@@ -124,7 +129,7 @@ export default function UtahTaxCalendarEscrowPage() {
       <p>
         Title, origination, and prepaid ranges:{" "}
         <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link>. Cash besides down
-        payment: <Link href="/blog/utah-cash-to-close-besides-down-payment">cash to close</Link>.
+        payment: <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash to close</Link>.
       </p>
 
       <h2>What happens next</h2>

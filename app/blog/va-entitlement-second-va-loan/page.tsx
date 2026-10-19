@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { LENDING_FACTS_AS_OF, VA_ENTITLEMENT, VA_FUNDING_FEE } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/va-entitlement-second-va-loan"
+const path = "/blog/va-loan-assumption-entitlement"
+
+/** Folded into the VA guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/va-loan-assumption-entitlement", title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions" }
 
 const faqs = [
   {
@@ -17,6 +20,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Can I Use VA If I Still Have a VA Loan?",
   description:
     "Remaining entitlement, occupancy, and restoration: how a second VA purchase is underwritten when you have not sold the first home.",
@@ -31,6 +35,7 @@ export default function VaEntitlementPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Can I Use VA If I Still Have a VA Loan?",
         description:
           "Remaining entitlement, occupancy, and restoration: how a second VA purchase is underwritten when you have not sold the first home.",
@@ -61,7 +66,7 @@ export default function VaEntitlementPage() {
         <li>
           <strong>Restoration after sale.</strong> Paying off the VA loan and disposing of the property is a different
           file from remaining entitlement. See{" "}
-          <Link href="/blog/selling-with-va-loan-entitlement-restoration">selling and entitlement restoration</Link>.
+          <Link href="/blog/va-loan-assumption-entitlement">selling and entitlement restoration</Link>.
         </li>
       </ol>
 
@@ -69,7 +74,7 @@ export default function VaEntitlementPage() {
       <p>
         Subsequent-use funding fee snapshot (less than 5% down): {VA_FUNDING_FEE.subsequentUseLessThan5PercentDown}.
         Confirm the current schedule. Finance vs cash:{" "}
-        <Link href="/blog/va-funding-fee-finance-vs-pay-cash">funding fee guide</Link>.
+        <Link href="/blog/va-loan-assumption-entitlement">funding fee guide</Link>.
       </p>
 
       <h2>What happens next</h2>
@@ -77,7 +82,7 @@ export default function VaEntitlementPage() {
         Pull or update the Certificate of Eligibility so remaining entitlement is visible. Do not write an offer that
         assumes a second zero-down VA loan until a loan officer has applied current VA and lender overlays. Program
         overview: <Link href="/loans/va">VA loans in Utah</Link>. Residual income still applies:{" "}
-        <Link href="/blog/va-residual-income-vs-dti">residual vs DTI</Link>.
+        <Link href="/blog/va-loan-assumption-entitlement">residual vs DTI</Link>.
       </p>
     </ArticleShell>
   )

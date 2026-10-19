@@ -123,16 +123,16 @@ export default function OccupancyPage() {
         {OCCUPANCY_TYPES.investment} Qualification may be full-doc or DSCR, see{" "}
         <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc</Link>. Using cash-out from the house you live
         in to buy a rental is two files:{" "}
-        <Link href="/blog/cash-out-to-buy-a-rental">occupancy and LTV traps</Link>.
+        <Link href="/blog/heloc-vs-cash-out-refinance">occupancy and LTV traps</Link>.
       </p>
       <p>
         Living in one unit of a duplex and renting the other is usually a <em>primary</em> FHA or conventional
         house-hack, not investment occupancy. Read{" "}
-        <Link href="/blog/house-hacking-duplex-with-fha">house-hacking a duplex with FHA</Link>. Buying a separate
+        <Link href="/blog/fha-vs-conventional-loans-utah">house-hacking a duplex with FHA</Link>. Buying a separate
         rental while you still occupy your current home is{" "}
         <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first-rental occupancy</Link>. VA remaining
         entitlement is still an occupancy conversation, not a second-home product, see{" "}
-        <Link href="/blog/va-entitlement-second-va-loan">a second VA loan</Link>.
+        <Link href="/blog/va-loan-assumption-entitlement">a second VA loan</Link>.
       </p>
 
       <h2>What happens next</h2>

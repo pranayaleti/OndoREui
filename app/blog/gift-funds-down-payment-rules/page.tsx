@@ -3,7 +3,13 @@ import { ArticleCallout } from "@/components/content/article-callout"
 import { FHA_SNAPSHOT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/gift-funds-down-payment-rules"
+const path = "/blog/should-i-wait-for-20-percent-down"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/should-i-wait-for-20-percent-down",
+  title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+}
 
 const faqs = [
   {
@@ -19,6 +25,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Gift Funds for a Down Payment: What Lenders Need to See",
   description:
     "Gift letters, paper trails, and program differences for FHA, conventional, and VA. Family help is common. Undocumented cash is not.",
@@ -33,6 +40,7 @@ export default function GiftFundsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Gift Funds for a Down Payment: What Lenders Need to See",
         description:
           "Gift letters, paper trails, and program differences for FHA, conventional, and VA. Family help is common. Undocumented cash is not.",
@@ -80,7 +88,7 @@ export default function GiftFundsPage() {
       <p>
         Gift funds solve cash to close. They do not replace qualifying income. Read{" "}
         <Link href="/learn/variable-income">variable income</Link> and{" "}
-        <Link href="/blog/can-i-get-a-mortgage-if-my-income-changes-every-month">
+        <Link href="/blog/how-underwriters-verify-income">
           Can I get a mortgage if my income changes every month?
         </Link>
       </p>
@@ -88,9 +96,9 @@ export default function GiftFundsPage() {
         Utah first-time and assistance programs are listed separately on{" "}
         <Link href="/buy/first-time/grants">housing grants</Link>. Those agencies have their own stacking rules with
         gifts. How DPA and an FHA gift can sit on the same file:{" "}
-        <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link>. Who signs when a parent
+        <Link href="/blog/fha-vs-conventional-loans-utah">DPA stacked with an FHA gift</Link>. Who signs when a parent
         is the donor:{" "}
-        <Link href="/blog/parent-gifting-down-payment-who-signs">parent gifting, who signs what</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">parent gifting, who signs what</Link>.
       </p>
     </ArticleShell>
   )

@@ -11,7 +11,13 @@ import {
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/refinancing-condo-aging-hoa"
+const path = "/blog/townhome-vs-condo-hoa-docs-lenders-ask"
+
+/** Folded into the combined condo, townhome and HOA guide: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/townhome-vs-condo-hoa-docs-lenders-ask",
+  title: "Condos, Townhomes and HOAs: The Documents Lenders Ask For, Insurance, and Refinancing an Aging HOA",
+}
 
 const faqs = [
   {
@@ -27,7 +33,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "reserves", heading: "Reserves & assessments" },
   { id: "litigation", heading: "Litigation" },
-  { id: "insurance", heading: "Master insurance", href: "/blog/hazard-vs-ho3-vs-ho6-condo-insurance" },
+  { id: "insurance", heading: "Master insurance", href: "/blog/townhome-vs-condo-hoa-docs-lenders-ask" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -53,6 +59,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Refinancing a Condo with an Aging HOA",
   description:
     "Reserves, litigation, insurance, and Fannie project review can stall a condo refinance even when your credit is fine. Links FHA roster and HO-3 vs HO-6. Informational only.",
@@ -67,6 +74,7 @@ export default function RefinancingCondoAgingHoaPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Refinancing a Condo with an Aging HOA",
         description:
           "Project risk, including reserves, litigation, and insurance, can stall a condo refinance.",
@@ -102,7 +110,7 @@ export default function RefinancingCondoAgingHoaPage() {
       <p>{CONDO_AGING_HOA.fannieProject}</p>
       <p>
         FHA purchase and FHA-to-FHA refinance still need current HUD project approval or a documented single-unit path:{" "}
-        <Link href="/blog/fha-condo-roster-project-approval">FHA condo roster / project approval</Link>.{" "}
+        <Link href="/blog/fha-vs-conventional-loans-utah">FHA condo roster / project approval</Link>.{" "}
         {FHA_CONDO_ROSTER.projectApproval}
       </p>
       <p>{CONDO_AGING_HOA.notRosterClone}</p>
@@ -110,7 +118,7 @@ export default function RefinancingCondoAgingHoaPage() {
       <h2>Insurance on an older building</h2>
       <p>
         {HAZARD_HO3_HO6.ho6} Master plus HO-6:{" "}
-        <Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">hazard vs HO-3 vs HO-6</Link>.{" "}
+        <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">hazard vs HO-3 vs HO-6</Link>.{" "}
         {HAZARD_HO3_HO6.notAdvice}
       </p>
 

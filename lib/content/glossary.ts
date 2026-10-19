@@ -100,7 +100,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "A lower rate with high fees can carry a higher APR than a slightly higher rate with none. Compare both numbers on the Loan Estimate rather than shopping on rate alone.",
     seeAlso: ["interest-rate", "discount-points", "loan-estimate", "origination-fee"],
     calculators: ["mortgage-payment", "refinance"],
-    related: [{ label: "APR vs rate on a Loan Estimate", href: "/blog/apr-vs-rate-on-a-loan-estimate/" }],
+    related: [{ label: "APR vs rate on a Loan Estimate", href: "/blog/rate-lock-if-rates-drop/" }],
     lending: true,
   },
   {
@@ -116,7 +116,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     ],
     seeAlso: ["principal", "interest-rate", "recast", "piti"],
     calculators: ["mortgage-payment"],
-    related: [{ label: "Mortgage paydown strategies", href: "/blog/mortgage-paydown-hacks/" }],
+    related: [{ label: "Mortgage paydown strategies", href: "/blog/refinance-break-even-when-lower-rate-loses/" }],
     lending: true,
   },
   {
@@ -133,7 +133,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "An ARM can make sense when the fixed period comfortably outlasts how long you expect to hold the loan. It is a bet on your own timeline, so price the worst case before taking one.",
     seeAlso: ["fixed-rate-mortgage", "interest-rate", "refinance"],
-    related: [{ label: "ARM caps in plain English", href: "/blog/arm-caps-in-plain-english/" }],
+    related: [{ label: "ARM caps in plain English", href: "/blog/rate-lock-if-rates-drop/" }],
     lending: true,
   },
   {
@@ -149,10 +149,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     ],
     seeAlso: ["prepaids", "down-payment", "earnest-money", "closing-disclosure", "seller-concessions"],
     calculators: ["closing-cost", "home-sale"],
-    related: [
-      { label: "Utah closing costs: title, origination, prepaids", href: "/blog/utah-closing-costs-title-origination-prepaids/" },
-      { label: "Cash to close beyond the down payment", href: "/blog/utah-cash-to-close-besides-down-payment/" },
-    ],
+    related: [{ label: "Utah closing costs: title, origination, prepaids", href: "/blog/utah-closing-costs-title-origination-prepaids/" }],
     lending: true,
   },
   {
@@ -217,7 +214,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "Points reward a long hold. If you refinance or sell before the break-even, you paid for a discount you never collected.",
     seeAlso: ["apr", "interest-rate", "rate-lock", "temporary-buydown"],
     calculators: ["mortgage-payment", "refinance"],
-    related: [{ label: "Discount points break-even, without the sales pitch", href: "/blog/discount-points-breakeven-without-sales-pitch/" }],
+    related: [{ label: "Discount points break-even, without the sales pitch", href: "/blog/refinance-break-even-when-lower-rate-loses/" }],
     lending: true,
   },
   {
@@ -232,10 +229,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     ],
     seeAlso: ["loan-to-value", "pmi", "closing-costs", "earnest-money", "gift-funds"],
     calculators: ["affordability", "mortgage-payment"],
-    related: [
-      { label: "Should you wait for 20% down?", href: "/blog/should-i-wait-for-20-percent-down/" },
-      { label: "Down payment assistance and gift funds", href: "/blog/gift-funds-down-payment-rules/" },
-    ],
+    related: [{ label: "Should you wait for 20% down?", href: "/blog/should-i-wait-for-20-percent-down/" }],
     lending: true,
   },
   {
@@ -252,10 +246,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "The escrow account is why “fixed rate” does not mean “fixed payment.” Only principal and interest are fixed.",
     seeAlso: ["piti", "prepaids", "property-tax", "homeowners-insurance"],
-    related: [
-      { label: "How the escrow cushion is set", href: "/blog/escrow-cushion-how-it-is-set/" },
-      { label: "Escrow shortage after year one", href: "/blog/escrow-shortage-after-first-year/" },
-    ],
+    related: [{ label: "How the escrow cushion is set", href: "/blog/escrow-shortage-after-first-year/" }],
     lending: true,
   },
   {
@@ -328,7 +319,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     calculators: ["mortgage-payment"],
     related: [
       { label: "Mortgage rates explained", href: "/buy/rates/" },
-      { label: "Why the headline average is not your quote", href: "/blog/mortgage-rate-trends-2025/" },
+      { label: "Why the headline average is not your quote", href: "/blog/rate-lock-if-rates-drop/" },
     ],
     lending: true,
   },
@@ -361,7 +352,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "Ask every lender for a Loan Estimate on the same day. Rates move, so quotes gathered a week apart are not a fair comparison.",
     seeAlso: ["apr", "closing-disclosure", "closing-costs", "origination-fee"],
-    related: [{ label: "APR vs rate on a Loan Estimate", href: "/blog/apr-vs-rate-on-a-loan-estimate/" }],
+    related: [{ label: "APR vs rate on a Loan Estimate", href: "/blog/rate-lock-if-rates-drop/" }],
     lending: true,
   },
   {
@@ -393,7 +384,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "That difference in how the insurance ends is often the deciding factor between FHA and conventional, not the rate.",
     seeAlso: ["pmi", "fha-loan", "conventional-loan", "refinance"],
-    related: [{ label: "How mortgage insurance actually ends", href: "/blog/mip-vs-pmi-how-mortgage-insurance-ends/" }],
+    related: [{ label: "How mortgage insurance actually ends", href: "/blog/should-i-wait-for-20-percent-down/" }],
     lending: true,
   },
   {
@@ -409,7 +400,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     ],
     seeAlso: ["mip", "loan-to-value", "down-payment", "conventional-loan"],
     calculators: ["mortgage-payment", "affordability"],
-    related: [{ label: "PMI removal: original value vs new appraisal", href: "/blog/pmi-removal-original-value-vs-new-appraisal/" }],
+    related: [{ label: "PMI removal: original value vs new appraisal", href: "/blog/should-i-wait-for-20-percent-down/" }],
     lending: true,
   },
   {
@@ -490,7 +481,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     ],
     seeAlso: ["amortization", "interest-rate", "recast", "equity"],
     calculators: ["mortgage-payment"],
-    related: [{ label: "Biweekly and extra principal vs refinancing", href: "/blog/biweekly-extra-principal-vs-refinance/" }],
+    related: [{ label: "Biweekly and extra principal vs refinancing", href: "/blog/refinance-break-even-when-lower-rate-loses/" }],
     lending: true,
   },
   {
@@ -505,10 +496,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "If a lock expires before closing, an extension usually has a cost. If rates fall meaningfully after you lock, whether you can capture that depends on the lender’s written float-down policy, which is a specific product feature, not a courtesy.",
     ],
     seeAlso: ["interest-rate", "discount-points", "underwriting"],
-    related: [
-      { label: "Lock vs float, and extensions", href: "/blog/rate-lock-extension-vs-floating/" },
-      { label: "What a lock does if rates drop", href: "/blog/rate-lock-if-rates-drop/" },
-    ],
+    related: [{ label: "Lock vs float, and extensions", href: "/blog/rate-lock-if-rates-drop/" }],
     lending: true,
   },
   {
@@ -525,7 +513,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "If you like your rate and simply want a smaller payment after a windfall, a recast is often the cheaper answer than refinancing.",
     seeAlso: ["refinance", "amortization", "principal"],
-    related: [{ label: "Recast vs refinance", href: "/blog/recast-vs-refinance/" }],
+    related: [{ label: "Recast vs refinance", href: "/blog/refinance-break-even-when-lower-rate-loses/" }],
     lending: true,
   },
   {
@@ -562,7 +550,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     calculators: ["refinance"],
     related: [
       { label: "Cash-out refinance", href: "/refinance/cash-out/" },
-      { label: "Using cash-out to buy a rental", href: "/blog/cash-out-to-buy-a-rental/" },
+      { label: "Using cash-out to buy a rental", href: "/blog/heloc-vs-cash-out-refinance/" },
     ],
     lending: true,
   },
@@ -578,7 +566,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "Streamlines generally do not allow cash out beyond a small limit, and eligibility depends on payment history and on the refinance producing a genuine benefit under the program’s test.",
     ],
     seeAlso: ["refinance", "fha-loan", "va-loan"],
-    related: [{ label: "FHA and VA streamline refinances", href: "/blog/fha-va-streamline-refinance-less-docs/" }],
+    related: [{ label: "FHA and VA streamline refinances", href: "/blog/refinance-break-even-when-lower-rate-loses/" }],
     lending: true,
   },
   {
@@ -596,7 +584,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "The cost of a buydown is roughly the sum of the subsidized payments. If the seller is funding it, compare that against simply asking for the equivalent as a price reduction or permanent rate buydown.",
     seeAlso: ["discount-points", "seller-concessions", "interest-rate"],
     calculators: ["temporary-buydown"],
-    related: [{ label: "Who pays in year three", href: "/blog/temporary-buydown-who-pays-year-three/" }],
+    related: [{ label: "Who pays in year three", href: "/blog/rate-lock-if-rates-drop/" }],
     lending: true,
   },
   {
@@ -613,7 +601,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     seeAlso: ["pre-approval", "dti", "reserves", "appraisal"],
     related: [
       { label: "How underwriters verify income", href: "/blog/how-underwriters-verify-income/" },
-      { label: "A new auto loan during underwriting", href: "/blog/new-auto-loan-during-underwriting/" },
+      { label: "A new auto loan during underwriting", href: "/blog/credit-before-mortgage-rapid-rescore/" },
     ],
     lending: true,
   },
@@ -631,7 +619,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     seeAlso: ["va-loan", "fha-loan", "down-payment"],
     related: [
       { label: "USDA loans", href: "/loans/usda/" },
-      { label: "Reading the USDA map and income limits", href: "/blog/usda-map-income-limit-eligibility/" },
+      { label: "Reading the USDA map and income limits", href: "/blog/fha-vs-conventional-loans-utah/" },
     ],
     lending: true,
   },
@@ -649,7 +637,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     seeAlso: ["usda-loan", "fha-loan", "down-payment", "occupancy"],
     related: [
       { label: "VA loans", href: "/loans/va/" },
-      { label: "Second VA loan and entitlement", href: "/blog/va-entitlement-second-va-loan/" },
+      { label: "Second VA loan and entitlement", href: "/blog/va-loan-assumption-entitlement/" },
     ],
     lending: true,
   },
@@ -683,7 +671,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     seeAlso: ["dscr-loan", "underwriting", "self-employed-income"],
     related: [
       { label: "Non-QM options", href: "/learn/non-qm/" },
-      { label: "Bank statement loans", href: "/blog/bank-statement-loans-when-tax-returns-undercount-income/" },
+      { label: "Bank statement loans", href: "/blog/how-underwriters-verify-income/" },
     ],
     lending: true,
   },
@@ -714,7 +702,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "Retirement accounts often count at a discounted value rather than in full, and the funds generally have to be documented and sourced like any other asset.",
     ],
     seeAlso: ["piti", "underwriting", "jumbo-loan", "gift-funds"],
-    related: [{ label: "How reserves are counted", href: "/blog/mortgage-reserves-months-of-pitia/" }],
+    related: [{ label: "How reserves are counted", href: "/blog/should-i-wait-for-20-percent-down/" }],
     lending: true,
   },
   {
@@ -728,7 +716,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "The documentation is the hard part. Lenders trace the money from the donor’s account into yours, so a cash deposit or a transfer that cannot be sourced can hold up a file even when the gift itself is perfectly allowable.",
     ],
     seeAlso: ["down-payment", "reserves", "underwriting"],
-    related: [{ label: "Gift funds and down payment rules", href: "/blog/gift-funds-down-payment-rules/" }],
+    related: [{ label: "Gift funds and down payment rules", href: "/blog/should-i-wait-for-20-percent-down/" }],
     lending: true,
   },
   {
@@ -745,7 +733,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     seeAlso: ["dti", "non-qm", "underwriting", "dscr-loan"],
     related: [
       { label: "Variable income", href: "/learn/variable-income/" },
-      { label: "Two years of returns vs one", href: "/blog/two-years-of-tax-returns-vs-one-year-mortgage/" },
+      { label: "Two years of returns vs one", href: "/blog/how-underwriters-verify-income/" },
     ],
     lending: true,
   },
@@ -832,7 +820,7 @@ const BUYING_TERMS: readonly GlossaryTerm[] = [
       "Whether it is refundable depends entirely on the contingencies and their deadlines. Within a live contingency, a buyer who withdraws properly generally recovers it; after those deadlines pass, it is at risk.",
     ],
     seeAlso: ["contingency", "down-payment", "closing-costs", "repc"],
-    related: [{ label: "Earnest money vs down payment vs closing costs", href: "/blog/earnest-money-vs-down-payment-vs-closing-costs/" }],
+    related: [{ label: "Earnest money vs down payment vs closing costs", href: "/blog/utah-closing-costs-title-origination-prepaids/" }],
   },
   {
     slug: "escalation-clause",
@@ -1152,7 +1140,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "This is tax treatment, and it depends on your circumstances. Confirm the specifics with a qualified tax professional.",
     seeAlso: ["noi", "cash-flow", "1031-exchange", "self-employed-income"],
-    related: [{ label: "Depreciation add-back on Schedule E", href: "/blog/depreciation-add-back-schedule-e/" }],
+    related: [{ label: "Depreciation add-back on Schedule E", href: "/blog/how-underwriters-verify-income/" }],
   },
   {
     slug: "1031-exchange",
@@ -1248,7 +1236,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Occupancy requirements are real obligations, and some programs allow a portion of projected rent to help you qualify. The rules are program-specific.",
     ],
     seeAlso: ["fha-loan", "occupancy", "cash-flow", "dscr-loan"],
-    related: [{ label: "House hacking a duplex with FHA", href: "/blog/house-hacking-duplex-with-fha/" }],
+    related: [{ label: "House hacking a duplex with FHA", href: "/blog/fha-vs-conventional-loans-utah/" }],
     lending: true,
   },
   {
@@ -1495,7 +1483,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "The lender’s policy protects the lender, not you. If you want your own equity protected, that is the separate owner’s policy.",
     seeAlso: ["title-search", "lien", "deed", "escrow-officer"],
-    related: [{ label: "Owner’s vs lender’s title insurance", href: "/blog/title-insurance-owner-vs-lender/" }],
+    related: [{ label: "Owner’s vs lender’s title insurance", href: "/blog/utah-closing-costs-title-origination-prepaids/" }],
   },
   {
     slug: "title-search",
@@ -1642,7 +1630,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
     ],
     calculators: ["mortgage-payment"],
     seeAlso: ["escrow-account", "piti", "prepaids", "operating-expenses"],
-    related: [{ label: "Understanding property taxes in Utah", href: "/blog/understanding-property-taxes-utah/" }],
+    related: [{ label: "Understanding property taxes in Utah", href: "/blog/escrow-shortage-after-first-year/" }],
   },
   {
     slug: "homeowners-insurance",
@@ -1657,7 +1645,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
     ],
     calculators: ["mortgage-payment"],
     seeAlso: ["prepaids", "escrow-account", "piti", "hoa", "renters-insurance"],
-    related: [{ label: "Hazard vs HO-3 vs HO-6 condo insurance", href: "/blog/hazard-vs-ho3-vs-ho6-condo-insurance/" }],
+    related: [{ label: "Hazard vs HO-3 vs HO-6 condo insurance", href: "/blog/townhome-vs-condo-hoa-docs-lenders-ask/" }],
   },
   {
     slug: "condo",

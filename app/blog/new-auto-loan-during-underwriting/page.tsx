@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { LENDING_FACTS_AS_OF, NEW_DEBT_UNDERWRITING } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/new-auto-loan-during-underwriting"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -17,6 +20,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "New Auto Loan During Underwriting",
   description:
     "A car payment signed after pre-approval usually shows on the next credit pull and changes DTI. Ask before you sign.",
@@ -31,6 +35,7 @@ export default function NewAutoLoanUnderwritingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "New Auto Loan During Underwriting",
         description:
           "A car payment signed after pre-approval usually shows on the next credit pull and changes DTI. Ask before you sign.",
@@ -63,7 +68,7 @@ export default function NewAutoLoanUnderwritingPage() {
         <li>A new inquiry pattern if several dealers pulled credit.</li>
         <li>
           Whether cash for the car down payment also created a{" "}
-          <Link href="/blog/large-deposits-60-day-paper-trail">large-deposit</Link> problem on the mortgage asset
+          <Link href="/blog/should-i-wait-for-20-percent-down">large-deposit</Link> problem on the mortgage asset
           statements.
         </li>
       </ul>
@@ -71,7 +76,7 @@ export default function NewAutoLoanUnderwritingPage() {
       <h2>If the findings flip</h2>
       <p>
         That can look like a decline after the letter. Typical condition fails, including new debt:{" "}
-        <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>. Paying the car off “at
+        <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link>. Paying the car off “at
         closing” only helps if the debt is actually gone on the report the underwriter uses, a plan is not a payoff
         letter.
       </p>

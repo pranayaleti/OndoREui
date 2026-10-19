@@ -20,7 +20,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "note", heading: "On the note", href: "/qualify" },
   { id: "title", heading: "On title (deed)" },
-  { id: "gift", heading: "Helping credit / gift only", href: "/blog/parent-gifting-down-payment-who-signs" },
+  { id: "gift", heading: "Helping credit / gift only", href: "/blog/should-i-wait-for-20-percent-down" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -100,8 +100,8 @@ export default function CosignVsCoborrowerPage() {
       <p>
         Occupancy types: <Link href="/blog/second-home-vs-investment-occupancy">primary vs second home vs investment</Link>
         . A parent who is only gifting:{" "}
-        <Link href="/blog/parent-gifting-down-payment-who-signs">who signs what</Link>. Gift paper trail:{" "}
-        <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">who signs what</Link>. Gift paper trail:{" "}
+        <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link>.
       </p>
 
       <h2>Scenarios</h2>
@@ -121,8 +121,8 @@ export default function CosignVsCoborrowerPage() {
       </ul>
       <p>
         Adding someone mid-file is a new application, not a nickname. New installment debt if they also buy a car:{" "}
-        <Link href="/blog/new-auto-loan-during-underwriting">auto loan during underwriting</Link>. File-level first-time
-        stalls: <Link href="/blog/first-time-buyer-file-mistakes">file mistakes</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">auto loan during underwriting</Link>. File-level first-time
+        stalls: <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">file mistakes</Link>.
       </p>
 
       <h2>What this page will not do</h2>
@@ -136,7 +136,7 @@ export default function CosignVsCoborrowerPage() {
       <ol>
         <li>Decide whether the helper is a donor, a co-borrower, or someone who will take title, then match the contract and the application.</li>
         <li>
-          Tri-merge mechanics: <Link href="/blog/what-a-tri-merge-credit-report-shows">what a tri-merge shows</Link>.
+          Tri-merge mechanics: <Link href="/blog/credit-before-mortgage-rapid-rescore">what a tri-merge shows</Link>.
         </li>
         <li>
           Conversation: <Link href="/qualify">what a mortgage conversation asks</Link>. Adding a person is not a

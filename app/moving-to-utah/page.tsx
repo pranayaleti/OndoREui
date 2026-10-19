@@ -85,7 +85,7 @@ export default function MovingToUtahPage() {
         </section>
         <p className="mt-10 max-w-3xl text-sm text-foreground/70">
           Buying before the first Utah paycheck is a seasoning question:{" "}
-          <Link href="/blog/relocating-to-utah-job-seasoning" className="prose-link">
+          <Link href="/blog/how-underwriters-verify-income" className="prose-link">
             income when the job starts in 60 days
           </Link>
           . Utah purchase-contract clocks are separate from underwriting:{" "}

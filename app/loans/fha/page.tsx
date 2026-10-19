@@ -87,7 +87,7 @@ export default function FHALoanPage() {
                     <li>• Upfront MIP: {FHA_SNAPSHOT.upfrontMip} (as of {LENDING_FACTS_AS_OF})</li>
                     <li>• Annual MIP: {FHA_SNAPSHOT.annualMipNote}</li>
                     <li>• MIP stays for life of loan if down payment &lt; 10%</li>
-                    <li>• How annual MIP actually ends vs conventional PMI: <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="underline underline-offset-4">MIP vs PMI</Link></li>
+                    <li>• How annual MIP actually ends vs conventional PMI: <Link href="/blog/should-i-wait-for-20-percent-down" className="underline underline-offset-4">MIP vs PMI</Link></li>
                   </ul>
                 </div>
                 <div>
@@ -102,10 +102,10 @@ export default function FHALoanPage() {
                   <h4 className="text-lg font-semibold mb-3">Property Requirements</h4>
                   <ul className="space-y-2 text-foreground/70">
                     <li>• Must be primary residence. A 2–4 unit house-hack is still occupancy of one unit, see{" "}
-                      <Link href="/blog/house-hacking-duplex-with-fha" className="underline underline-offset-4">FHA duplex house-hack</Link>.</li>
+                      <Link href="/blog/fha-vs-conventional-loans-utah" className="underline underline-offset-4">FHA duplex house-hack</Link>.</li>
                     <li>• FHA appraisal required (stricter than conventional)</li>
                     <li>• Property must meet HUD minimum property standards</li>
-                    <li>• Condos: the project must be on HUD’s current roster or qualify for single-unit approval. See the <Link href="/blog/fha-condo-roster-project-approval" className="underline underline-offset-4">FHA condo roster guide</Link>. A listing that says “townhome” is not automatically a condo, <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="underline underline-offset-4">townhome vs condo HOA docs</Link>.</li>
+                    <li>• Condos: the project must be on HUD’s current roster or qualify for single-unit approval. See the <Link href="/blog/fha-vs-conventional-loans-utah" className="underline underline-offset-4">FHA condo roster guide</Link>. A listing that says “townhome” is not automatically a condo, <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="underline underline-offset-4">townhome vs condo HOA docs</Link>.</li>
                   </ul>
                 </div>
               </div>
@@ -143,16 +143,16 @@ export default function FHALoanPage() {
               </div>
               <h4 className="text-lg font-semibold mt-8 mb-3">More FHA guides</h4>
               <ul className="grid gap-2 text-foreground/70 sm:grid-cols-2 text-left max-w-3xl mx-auto">
-                  <li><Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance" className="text-primary hover:underline">Hazard vs HO-3 vs HO-6</Link></li>
-                  <li><Link href="/blog/fha-condo-roster-project-approval" className="text-primary hover:underline">FHA condo roster</Link></li>
+                  <li><Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="text-primary hover:underline">Hazard vs HO-3 vs HO-6</Link></li>
+                  <li><Link href="/blog/fha-vs-conventional-loans-utah" className="text-primary hover:underline">FHA condo roster</Link></li>
                   <li><Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="text-primary hover:underline">Townhome vs condo HOA docs</Link></li>
                   <li><Link href="/blog/should-i-wait-for-20-percent-down" className="text-primary hover:underline">Wait for 20% vs buy sooner</Link></li>
-                  <li><Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends" className="text-primary hover:underline">MIP vs PMI exit</Link></li>
-                  <li><Link href="/blog/house-hacking-duplex-with-fha" className="text-primary hover:underline">FHA duplex house-hack</Link></li>
-                  <li><Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary hover:underline">USDA vs VA vs FHA</Link></li>
-                  <li><Link href="/blog/dpa-stacked-with-fha-gift-funds" className="text-primary hover:underline">DPA + FHA gift</Link></li>
+                  <li><Link href="/blog/should-i-wait-for-20-percent-down" className="text-primary hover:underline">MIP vs PMI exit</Link></li>
+                  <li><Link href="/blog/fha-vs-conventional-loans-utah" className="text-primary hover:underline">FHA duplex house-hack</Link></li>
+                  <li><Link href="/blog/va-loan-assumption-entitlement" className="text-primary hover:underline">USDA vs VA vs FHA</Link></li>
+                  <li><Link href="/blog/fha-vs-conventional-loans-utah" className="text-primary hover:underline">DPA + FHA gift</Link></li>
                   <li><Link href="/blog/manufactured-housing-adu-financing" className="text-primary hover:underline">Manufactured / ADU</Link></li>
-                  <li><Link href="/blog/refinancing-condo-aging-hoa" className="text-primary hover:underline">Condo aging HOA</Link></li>
+                  <li><Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="text-primary hover:underline">Condo aging HOA</Link></li>
               </ul>
             </div>
             <RelatedContent path="/loans/fha" />

@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, MEDICAL_COLLECTIONS } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/medical-collections-after-fico-model-change"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -53,6 +56,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Medical Collections After the FICO Model Change",
   description:
     "Bureau medical-collection reporting changed in 2022–2023. Mortgage files often still use classic FICO. Dated snapshot, not a score-raise promise.",
@@ -67,6 +71,7 @@ export default function MedicalCollectionsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Medical Collections After the FICO Model Change",
         description:
           "Bureau medical-collection reporting changed in 2022–2023. Mortgage files often still use classic FICO. Not a score-raise promise.",
@@ -109,7 +114,7 @@ export default function MedicalCollectionsPage() {
       </p>
       <p>
         Thin files without traditional tradelines are a different path:{" "}
-        <Link href="/blog/no-traditional-credit-alternative-credit">alternative credit</Link>. Derogatory traditional
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">alternative credit</Link>. Derogatory traditional
         credit is not “no credit.”
       </p>
 
@@ -118,7 +123,7 @@ export default function MedicalCollectionsPage() {
         <li>Do not treat a Credit Karma or issuer FICO 8 as the mortgage middle score.</li>
         <li>
           Ask a loan officer to read the tri-merge that will actually be used, after you authorize a pull. See{" "}
-          <Link href="/blog/what-a-mortgage-conversation-asks">what a conversation asks</Link>.
+          <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">what a conversation asks</Link>.
         </li>
         <li>If a medical collection still reports, ask whether it is a score issue, a payoff condition, or both.</li>
       </ol>

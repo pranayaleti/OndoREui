@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, QUALIFY_CONVERSATION } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/what-a-mortgage-conversation-asks"
+const path = "/blog/pre-approval-vs-aus-vs-clear-to-close"
+
+/** Folded into the comprehensive pre-approval to clear-to-close guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/pre-approval-vs-aus-vs-clear-to-close", title: "From First Conversation to Clear to Close: Pre-Approval, AUS Findings and Why Files Get Declined" }
 
 const faqs = [
   {
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "What a Mortgage Conversation Asks and Will Not Promise",
   description:
     "Occupancy, income type, debts, assets, and credit authorization. A conversation is not approval, a lock, or a quote.",
@@ -57,6 +61,7 @@ export default function QualifyAsksGuidePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "What a Mortgage Conversation Asks and Will Not Promise",
         description:
           "Occupancy, income type, debts, assets, and credit authorization. A conversation is not approval, a lock, or a quote.",
@@ -94,7 +99,7 @@ export default function QualifyAsksGuidePage() {
       <p>
         If a letter is issued, that is still only a snapshot. The three stages, letter, AUS findings, clear to close,
         are <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs CTC</Link>. Typical late
-        fails: <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>.
+        fails: <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link>.
       </p>
 
       <h2>What happens next</h2>

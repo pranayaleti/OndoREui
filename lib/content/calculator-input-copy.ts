@@ -55,7 +55,7 @@ const AFFORDABILITY: CalculatorInputCopy = {
   ],
   related: [
     { label: "How underwriters verify income", href: "/blog/how-underwriters-verify-income" },
-    { label: "Student loans and DTI after IDR / SAVE", href: "/blog/student-loans-dti-idr-save" },
+    { label: "Student loans and DTI after IDR / SAVE", href: "/blog/credit-before-mortgage-rapid-rescore" },
     { label: "DTI: front-end vs back-end with HOA", href: "/blog/dti-frontend-backend-with-hoa" },
     { label: "Variable income hub", href: "/learn/variable-income" },
   ],
@@ -82,12 +82,7 @@ const INCOME: CalculatorInputCopy = {
         " Variable income is still averaged before this ratio is run.",
     },
   ],
-  related: [
-    { label: "Can I get a mortgage if income changes monthly?", href: "/blog/can-i-get-a-mortgage-if-my-income-changes-every-month" },
-    { label: "Gig plus W-2: how the average is built", href: "/blog/gig-plus-w2-income-mortgage-average" },
-    { label: "CPA letter vs tax returns", href: "/blog/cpa-letter-vs-tax-returns-underwriting" },
-    { label: "I just went 1099 last month", href: "/blog/just-went-1099-last-month" },
-  ],
+  related: [{ label: "Can I get a mortgage if income changes monthly?", href: "/blog/how-underwriters-verify-income" }],
 }
 
 const CLOSING: CalculatorInputCopy = {
@@ -113,15 +108,7 @@ const CLOSING: CalculatorInputCopy = {
         UTAH_CLOSING_NOTES.titleVaries,
     },
   ],
-  related: [
-    { label: "Utah closing costs: title, origination, prepaids", href: "/blog/utah-closing-costs-title-origination-prepaids" },
-    { label: "Owner’s vs lender’s title insurance", href: "/blog/title-insurance-owner-vs-lender" },
-    { label: "Impounds vs waiving escrow", href: "/blog/impounds-vs-waiving-escrow" },
-    { label: "Escrow shortage after the first year", href: "/blog/escrow-shortage-after-first-year" },
-    { label: "Earnest money vs down payment vs closing costs", href: "/blog/earnest-money-vs-down-payment-vs-closing-costs" },
-    { label: "Cash besides down payment", href: "/blog/utah-cash-to-close-besides-down-payment" },
-    { label: "First-time buyer hub", href: "/learn/first-time" },
-  ],
+  related: [{ label: "Utah closing costs: title, origination, prepaids", href: "/blog/utah-closing-costs-title-origination-prepaids" }, { label: "Impounds vs waiving escrow", href: "/blog/escrow-shortage-after-first-year" }, { label: "First-time buyer hub", href: "/learn/first-time" }],
 }
 
 const REFINANCE: CalculatorInputCopy = {
@@ -143,14 +130,7 @@ const REFINANCE: CalculatorInputCopy = {
         "Origination can be a fee or a lender credit. Discount points are a prepaid interest cost. Title, recording, and prepaid interest still apply. Break-even months = those costs ÷ monthly principal-and-interest savings. Credits reduce the numerator.",
     },
   ],
-  related: [
-    { label: "When a lower rate still loses after costs", href: "/blog/refinance-break-even-when-lower-rate-loses" },
-    { label: "“No closing cost” refinance: the cost is in the rate", href: "/blog/no-closing-cost-refinance-rate-credit-tradeoff" },
-    { label: "Discount points: breakeven without a sales pitch", href: "/blog/discount-points-breakeven-without-sales-pitch" },
-    { label: "FHA / VA streamline: what less docs still requires", href: "/blog/fha-va-streamline-refinance-less-docs" },
-    { label: "Recast vs refinance", href: "/blog/recast-vs-refinance" },
-    { label: "Delayed financing after a cash purchase", href: "/blog/delayed-financing-after-cash-purchase" },
-  ],
+  related: [{ label: "When a lower rate still loses after costs", href: "/blog/refinance-break-even-when-lower-rate-loses" }, { label: "Delayed financing after a cash purchase", href: "/blog/heloc-vs-cash-out-refinance" }],
 }
 
 const MORTGAGE_PAYMENT: CalculatorInputCopy = {
@@ -170,9 +150,9 @@ const MORTGAGE_PAYMENT: CalculatorInputCopy = {
     },
   ],
   related: [
-    { label: "How MIP vs PMI actually leaves the loan", href: "/blog/mip-vs-pmi-how-mortgage-insurance-ends" },
+    { label: "How MIP vs PMI actually leaves the loan", href: "/blog/should-i-wait-for-20-percent-down" },
     { label: "DTI with HOA", href: "/blog/dti-frontend-backend-with-hoa" },
-    { label: "Discount points breakeven", href: "/blog/discount-points-breakeven-without-sales-pitch" },
+    { label: "Discount points breakeven", href: "/blog/refinance-break-even-when-lower-rate-loses" },
     { label: "Interest-only: who it is for", href: "/blog/interest-only-mortgages-who-they-are-for" },
     { label: "Why your quote is not the 30-year average", href: "/buy/rates" },
   ],
@@ -200,8 +180,8 @@ const TEMPORARY_BUYDOWN_COPY: CalculatorInputCopy = {
     },
   ],
   related: [
-    { label: "Temporary buydown: who pays, year 3", href: "/blog/temporary-buydown-who-pays-year-three" },
-    { label: "Discount points breakeven", href: "/blog/discount-points-breakeven-without-sales-pitch" },
+    { label: "Temporary buydown: who pays, year 3", href: "/blog/rate-lock-if-rates-drop" },
+    { label: "Discount points breakeven", href: "/blog/refinance-break-even-when-lower-rate-loses" },
     { label: "Rates hub", href: "/buy/rates" },
   ],
 }
@@ -227,13 +207,7 @@ const DSCR: CalculatorInputCopy = {
         "The typed rate is not a quote or APR. Required DSCR (often around 1.0–1.25 depending on the investor) is an overlay, not a published right. Occupancy on a DSCR purchase is typically investment.",
     },
   ],
-  related: [
-    { label: "DSCR vs full-doc rental loan", href: "/blog/dscr-vs-full-doc-rental-loan" },
-    { label: "Asset-depletion qualifying", href: "/blog/asset-depletion-qualifying-non-qm" },
-    { label: "Non-QM hub", href: "/learn/non-qm" },
-    { label: "Investment financing hub", href: "/learn/investment" },
-    { label: "Schedule E rental income", href: "/blog/schedule-e-rental-income-purchase-file" },
-  ],
+  related: [{ label: "DSCR vs full-doc rental loan", href: "/blog/dscr-vs-full-doc-rental-loan" }, { label: "Asset-depletion qualifying", href: "/blog/how-underwriters-verify-income" }, { label: "Non-QM hub", href: "/learn/non-qm" }, { label: "Investment financing hub", href: "/learn/investment" }],
 }
 
 const COPY_BY_SLUG: Record<string, CalculatorInputCopy> = {

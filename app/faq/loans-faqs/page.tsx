@@ -62,7 +62,7 @@ export default function LoansFAQPage() {
       question: "What are current Utah mortgage rates?",
       answer:
         "Mortgage rates change daily and vary by loan type, credit score, and down payment. A news 30-year average is not your Loan Estimate. Contact a loan officer for a current pricing discussion. This page is not a quote.",
-      links: [guideLink("apr-vs-rate-on-a-loan-estimate", "Rate vs APR on a Loan Estimate")],
+      links: [guideLink("rate-lock-if-rates-drop", "Rate vs APR on a Loan Estimate")],
     },
     {
       question: "How long does the loan process take?",
@@ -74,13 +74,13 @@ export default function LoansFAQPage() {
       question: "Can I get a mortgage if my income changes every month?",
       answer:
         "Often yes if you can document a pattern. Underwriters typically average overtime, bonus, commission, or 1099 income over a history rather than using the highest recent month.",
-      links: [{ label: "Variable income hub", href: "/learn/variable-income/" }, guideLink("1099-mortgage-documentation-checklist", "1099 documentation checklist")],
+      links: [{ label: "Variable income hub", href: "/learn/variable-income/" }, guideLink("how-underwriters-verify-income", "1099 documentation checklist")],
     },
     {
       question: "Can I use gift funds for a down payment?",
       answer:
         "Often, when the donor is eligible and the paper trail is complete. Program rules differ for FHA, conventional, and VA. Do not move large cash without asking how it must be sourced.",
-      links: [guideLink("gift-funds-down-payment-rules", "Gift fund rules")],
+      links: [guideLink("should-i-wait-for-20-percent-down", "Gift fund rules")],
     },
     {
       question: "Do you offer first-time home buyer programs?",
@@ -96,13 +96,13 @@ export default function LoansFAQPage() {
       question: "What is VA residual income?",
       answer:
         "Residual income is cash left after the proposed housing payment, counted debts, and estimated utilities. It is a separate VA test from DTI. Utah files typically use the West region table. Confirm the current published table rather than a blog dollar figure.",
-      links: [guideLink("va-residual-income-vs-dti", "VA residual income vs DTI")],
+      links: [guideLink("va-loan-assumption-entitlement", "VA residual income vs DTI")],
     },
     {
       question: "Why would a file be declined after pre-approval?",
       answer:
         "A pre-approval is not a commitment to lend. Typical later fails include a job change, undocumented large deposits, new debt, or a property that does not meet the program’s standards.",
-      links: [guideLink("declined-after-pre-approval", "Declined after pre-approval")],
+      links: [guideLink("pre-approval-vs-aus-vs-clear-to-close", "Declined after pre-approval")],
     },
     {
       question: "Do large deposits in the last 60 days have to be sourced?",
@@ -113,7 +113,7 @@ export default function LoansFAQPage() {
       question: "Should I wait until I can put 20% down?",
       answer:
         "Not automatically. Waiting can avoid conventional PMI; buying sooner with PMI is a cash-and-timeline trade.",
-      links: [guideLink("should-i-wait-for-20-percent-down", "Wait for 20% down?"), guideLink("mip-vs-pmi-how-mortgage-insurance-ends", "MIP vs PMI")],
+      links: [guideLink("should-i-wait-for-20-percent-down", "Wait for 20% down?")],
     },
   ]
 

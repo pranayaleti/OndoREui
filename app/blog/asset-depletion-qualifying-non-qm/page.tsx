@@ -4,7 +4,10 @@ import { ASSET_DEPLETION, LENDING_FACTS_AS_OF, NON_QM } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/asset-depletion-qualifying-non-qm"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -18,7 +21,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "bank", heading: "Bank-statement", href: "/blog/bank-statement-loans-when-tax-returns-undercount-income" },
+  { id: "bank", heading: "Bank-statement", href: "/blog/how-underwriters-verify-income" },
   { id: "dscr", heading: "DSCR", href: "/blog/dscr-vs-full-doc-rental-loan" },
   { id: "asset", heading: "Asset-depletion" },
 ]
@@ -46,6 +49,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Asset-Depletion Qualifying: Retirement and Investment Assets",
   description:
     "Eligible assets can be treated as qualifying income under a written formula. Agency and Non-QM paths differ. Not “cash means approved.”",
@@ -60,6 +64,7 @@ export default function AssetDepletionQualifyingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Asset-Depletion Qualifying: Retirement and Investment Assets",
         description:
           "Eligible assets can be treated as qualifying income under a written formula. Agency and Non-QM paths differ. Not “cash means approved.”",
@@ -99,7 +104,7 @@ export default function AssetDepletionQualifyingPage() {
       </ul>
       <p>
         Reserves after cash to close are a separate test:{" "}
-        <Link href="/blog/mortgage-reserves-months-of-pitia">months of PITIA</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">months of PITIA</Link>.
       </p>
 
       <h2>Who this is (and is not) for</h2>
@@ -109,7 +114,7 @@ export default function AssetDepletionQualifyingPage() {
         <li>Not a way to skip occupancy rules on a rental. Occupancy still has to match use.</li>
         <li>
           Not a substitute for{" "}
-          <Link href="/blog/just-went-1099-last-month">brand-new 1099 income</Link> unless the overlay actually uses
+          <Link href="/blog/how-underwriters-verify-income">brand-new 1099 income</Link> unless the overlay actually uses
           assets, ask, do not assume.
         </li>
       </ul>

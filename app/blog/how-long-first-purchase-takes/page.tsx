@@ -113,7 +113,7 @@ export default function PurchaseTimelinePage() {
       <p>
         Pre-approval, AUS, and CTC are three documents:{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs CTC</Link>. If a condition fails
-        after the letter: <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>.
+        after the letter: <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link>.
       </p>
 
       <h2>What actually stretches a first file</h2>
@@ -121,7 +121,7 @@ export default function PurchaseTimelinePage() {
         <li>Appraisal queue, condo questionnaire, or a project that is not FHA-eligible.</li>
         <li>
           File mistakes: new debt, job change, unsourced deposits.{" "}
-          <Link href="/blog/first-time-buyer-file-mistakes">first-time buyer file mistakes</Link>.
+          <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">first-time buyer file mistakes</Link>.
         </li>
         <li>Insurance binder that does not match the legal regime (HO-3 vs HO-6).</li>
       </ul>

@@ -138,6 +138,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-income-changes",
     path: "/blog/can-i-get-a-mortgage-if-my-income-changes-every-month",
+    mergedInto: "guide-verify-income",
     title: "Can I Get a Mortgage If My Income Changes Every Month?",
     description:
       "Yes, if you can document a pattern. Underwriters usually average 12–24 months of variable income rather than last month’s paycheck. Here is what that looks like.",
@@ -163,6 +164,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-1099-docs",
     path: "/blog/1099-mortgage-documentation-checklist",
+    mergedInto: "guide-verify-income",
     title: "1099 Mortgage Documentation Checklist",
     description:
       "What contract and gig workers typically need for a mortgage file: returns, transcripts, YTD profit and loss, bank statements, and contracts, plus common gaps that stall underwriting.",
@@ -188,6 +190,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-bank-statement",
     path: "/blog/bank-statement-loans-when-tax-returns-undercount-income",
+    mergedInto: "guide-verify-income",
     title: "Bank-Statement Loans When Tax Returns Undercount Income",
     description:
       "When write-offs make tax returns a poor picture of cash flow, some Non-QM bank-statement programs look at deposits instead. Who they are for, what they cost, and what they are not.",
@@ -213,6 +216,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-gift-funds",
     path: "/blog/gift-funds-down-payment-rules",
+    mergedInto: "guide-wait-20-down",
     title: "Gift Funds for a Down Payment: What Lenders Need to See",
     description:
       "Gift letters, paper trails, and program differences for FHA, conventional, and VA. Family help is common. Undocumented cash is not.",
@@ -258,9 +262,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-fha-vs-conventional",
     path: "/blog/fha-vs-conventional-loans-utah",
-    title: "FHA vs Conventional Loans in Utah: Which Is Right for You?",
-    description:
-      "Side-by-side comparison of FHA and conventional mortgages for Utah buyers: down payment, mortgage insurance, credit, and stay-vs-refinance scenarios.",
+    title: "FHA vs Conventional in Utah, Plus USDA: Down Payment, MIP, Condos and Assumptions",
+    description: "Compare FHA, conventional and USDA for Utah buyers: down payment, MIP vs PMI, condo approval, duplex house hacking, DPA with gift funds, and FHA assumptions.",
     kind: "guide",
     cluster: "loan-programs",
     audiences: ["fthb", "repeat"],
@@ -772,6 +775,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-two-year-returns",
     path: "/blog/two-years-of-tax-returns-vs-one-year-mortgage",
+    mergedInto: "guide-verify-income",
     title: "Two Years of Tax Returns vs One Year: When Overlays Allow",
     description:
       "Most agency self-employed files want two years of returns. Some overlays allow one year in the same line of work. What that conversation actually is.",
@@ -798,6 +802,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-w2-overtime",
     path: "/blog/w2-overtime-likely-to-continue",
+    mergedInto: "guide-verify-income",
     title: "Overtime on a W-2: What “Likely to Continue” Means",
     description:
       "Underwriters usually average overtime over a documented history and ask whether it is likely to continue. A strong month is not a qualifying method.",
@@ -824,6 +829,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-commission-income",
     path: "/blog/commission-income-mortgage-averaging",
+    mergedInto: "guide-verify-income",
     title: "Commission-Only Sales: Averaging and a Down Year",
     description:
       "Commission income is typically averaged, and a down year usually counts. How 12- vs 24-month averages work, and what a declining trend does to the file.",
@@ -850,6 +856,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-cash-to-close",
     path: "/blog/utah-cash-to-close-besides-down-payment",
+    mergedInto: "guide-utah-closing-costs",
     title: "How Much Cash Do I Need Besides Down Payment in Utah?",
     description:
       "Earnest money, title, origination, prepaids, and reserves sit on top of down payment. Utah closings vary by county and title company.",
@@ -876,6 +883,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-dpa-gift",
     path: "/blog/dpa-stacked-with-fha-gift-funds",
+    mergedInto: "guide-fha-vs-conventional",
     title: "UHC / DPA Stacked with an FHA Gift: How They Work Together",
     description:
       "Down payment assistance is often a second lien. A gift is not. Stacking them on FHA is common and still has paper-trail and agency rules.",
@@ -901,6 +909,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-va-funding-fee",
     path: "/blog/va-funding-fee-finance-vs-pay-cash",
+    mergedInto: "guide-va-assumption",
     title: "VA Funding Fee: Finance vs Pay Cash",
     description:
       "Worked examples of financing the VA funding fee versus paying it in cash. Snapshot percents, exemptions, and what it does to cash to close, not advice.",
@@ -925,6 +934,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-va-entitlement",
     path: "/blog/va-entitlement-second-va-loan",
+    mergedInto: "guide-va-assumption",
     title: "Can I Use VA If I Still Have a VA Loan?",
     description:
       "Remaining entitlement, occupancy, and restoration: how a second VA purchase is underwritten when you have not sold the first home.",
@@ -949,6 +959,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-va-residual",
     path: "/blog/va-residual-income-vs-dti",
+    mergedInto: "guide-va-assumption",
     title: "VA Residual Income vs DTI",
     description:
       "VA residual income is cash left after PITI and debts. It can fail when DTI looks fine, and pass when DTI looks high. How the test works.",
@@ -967,6 +978,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-usda-map",
     path: "/blog/usda-map-income-limit-eligibility",
+    mergedInto: "guide-fha-vs-conventional",
     title: "USDA Map and Income Limit: Am I Even Eligible?",
     description:
       "USDA is address-specific and household-income-specific. How to use the official map and income tools before you assume zero-down is available.",
@@ -1009,9 +1021,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-refi-breakeven",
     path: "/blog/refinance-break-even-when-lower-rate-loses",
-    title: "When a Lower Rate Still Loses After Costs",
-    description:
-      "Break-even months include points and origination, not just the appraisal. A lower note rate can still lose if you move or refinance again first.",
+    title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline",
+    description: "Refinance break-even with points and origination, the no-closing-cost rate trade, recast vs refinance, extra principal, and FHA and VA streamlines.",
     kind: "guide",
     cluster: "refinance",
     audiences: ["repeat"],
@@ -1031,15 +1042,14 @@ const NODES: ContentNode[] = [
     cta: { label: "Model refinance break-even", href: "/calculators/refinance" },
     category: "Refinance",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-heloc-vs-cashout",
     path: "/blog/heloc-vs-cash-out-refinance",
-    title: "Cash-Out vs HELOC: Payment, Lien Position, and Tax Questions",
-    description:
-      "A cash-out refinance replaces the first lien. A HELOC sits in second position. Payment, rate risk, and tax questions differ. Not tax advice.",
+    title: "HELOC vs Cash-Out Refinance: Tapping Equity, Buying a Rental and Delayed Financing",
+    description: "How a HELOC and a cash-out refinance differ in lien, payment and tax questions, when you can tap equity after closing, buying a rental, and delayed financing.",
     kind: "guide",
     cluster: "home-equity",
     audiences: ["repeat"],
@@ -1049,15 +1059,14 @@ const NODES: ContentNode[] = [
     cta: { label: "Compare equity options", href: "/contact" },
     category: "Refinance",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-verify-income",
     path: "/blog/how-underwriters-verify-income",
-    title: "How Underwriters Verify Income (W-2 vs 1099 vs Bank)",
-    description:
-      "W-2, 1099, and bank-statement files are verified differently: paystubs and VOE vs returns and transcripts vs deposits. What each stack is trying to prove.",
+    title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements",
+    description: "How lenders verify W-2, overtime, commission, 1099, K-1, Schedule E rental and bank-statement income: what gets averaged, what counts, and what does not.",
     kind: "guide",
     cluster: "credit",
     audiences: ["self_employed", "contract_1099", "commission"],
@@ -1075,12 +1084,13 @@ const NODES: ContentNode[] = [
     cta: { label: "See the income calculator", href: "/calculators/income" },
     category: "Credit",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-declined-preapproval",
     path: "/blog/declined-after-pre-approval",
+    mergedInto: "guide-preapproval-stages",
     title: "Declined After Pre-Approval: Typical Condition Fails",
     description:
       "A pre-approval is not a commitment to lend. Job changes, large deposits, new debt, and income that will not average are the usual late fails.",
@@ -1108,9 +1118,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-utah-closing-costs",
     path: "/blog/utah-closing-costs-title-origination-prepaids",
-    title: "Closing Costs in Utah: Title, Origination, and Prepaids",
-    description:
-      "Utah funds at title companies, uses deeds of trust, and has no statewide transfer tax. Recording, title premiums, and tax calendars still vary by county.",
+    title: "Utah Closing Costs and Cash to Close: Title, Origination, Prepaids and Earnest Money",
+    description: "Utah closes at a title company with a deed of trust and no transfer tax. How earnest money, title insurance, prepaids, and reserves add up to cash to close.",
     kind: "guide",
     cluster: "closing",
     audiences: ["fthb"],
@@ -1132,12 +1141,13 @@ const NODES: ContentNode[] = [
     cta: { label: "Closing cost calculator", href: "/calculators/closing-cost" },
     category: "First-Time Buyers",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-k1-income",
     path: "/blog/k-1-income-what-usually-counts",
+    mergedInto: "guide-verify-income",
     title: "K-1 Income: What Usually Counts",
     description:
       "Partnership and S-corp K-1 income is taken from the form and matching returns, not from distributions alone. What underwriters typically count, limit, or exclude.",
@@ -1165,6 +1175,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-schedule-e",
     path: "/blog/schedule-e-rental-income-purchase-file",
+    mergedInto: "guide-verify-income",
     title: "Rental Income on Schedule E in a Purchase File",
     description:
       "How existing rental income on Schedule E is averaged on a purchase, depreciation add-backs, and why proposed rent on a house you do not own yet is a different calculation.",
@@ -1191,6 +1202,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-just-went-1099",
     path: "/blog/just-went-1099-last-month",
+    mergedInto: "guide-verify-income",
     title: "I Just Went 1099 Last Month",
     description:
       "A brand-new 1099 job is usually not yet a qualifying average. What still counts from W-2 history, when a one-year overlay even enters the chat, and what to do next.",
@@ -1208,7 +1220,7 @@ const NODES: ContentNode[] = [
       "calc-income",
       "conversion-qualify",
     ],
-    cta: { label: "1099 documentation checklist", href: "/blog/1099-mortgage-documentation-checklist" },
+    cta: { label: "1099 documentation checklist", href: "/blog/how-underwriters-verify-income" },
     category: "Credit",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -1217,6 +1229,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-parent-gifting",
     path: "/blog/parent-gifting-down-payment-who-signs",
+    mergedInto: "guide-wait-20-down",
     title: "Parent Is Gifting: Who Signs What",
     description:
       "Gift letter, donor statements, occupancy, and title: who signs when a parent helps with down payment, and when the parent is actually a co-borrower instead.",
@@ -1243,6 +1256,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-student-loans-idr",
     path: "/blog/student-loans-dti-idr-save",
+    mergedInto: "guide-credit-rescore",
     title: "Student Loans and DTI After IDR / SAVE Changes",
     description:
       "A $0 student-loan line on a dashboard is not automatically $0 in DTI. How Fannie, Freddie, FHA, and VA typically count IDR, deferment, and forbearance. Dated, not a quote.",
@@ -1267,6 +1281,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-arm-caps",
     path: "/blog/arm-caps-in-plain-english",
+    mergedInto: "guide-lock-if-rates-drop",
     title: "ARM Caps in Plain English",
     description:
       "Initial, periodic, and lifetime caps are percentage-point limits on the note rate. They are not a payment promise. How to read 2/1/5 on an ARM.",
@@ -1292,6 +1307,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-fha-condo-roster",
     path: "/blog/fha-condo-roster-project-approval",
+    mergedInto: "guide-fha-vs-conventional",
     title: "FHA Condo Roster / Project Approval",
     description:
       "Look up the project on HUD’s condominium list before you write an FHA offer. Expired approval and single-unit approval are not the same as a current roster listing.",
@@ -1319,6 +1335,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-mip-vs-pmi",
     path: "/blog/mip-vs-pmi-how-mortgage-insurance-ends",
+    mergedInto: "guide-wait-20-down",
     title: "How MIP vs PMI Actually Leaves the Loan",
     description:
       "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. This post covers how each one ends.",
@@ -1344,6 +1361,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-streamline-refi",
     path: "/blog/fha-va-streamline-refinance-less-docs",
+    mergedInto: "guide-refi-breakeven",
     title: "Streamline Refi: What “Less Docs” Still Requires",
     description:
       "FHA Streamline and VA IRRRL reduce documentation. Occupancy, payment history, and a net-benefit test still apply. Not a generic refinance and not no-docs.",
@@ -1370,6 +1388,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-large-deposits",
     path: "/blog/large-deposits-60-day-paper-trail",
+    mergedInto: "guide-wait-20-down",
     title: "Large Deposits: 60-Day Paper Trail",
     description:
       "About 60 days of statements, and large deposits in that window have to be sourced. Cash from family without a gift letter is a common underwriting stall.",
@@ -1395,9 +1414,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-wait-20-down",
     path: "/blog/should-i-wait-for-20-percent-down",
-    title: "Should I Wait for 20% Down?",
-    description:
-      "Waiting for 20% can avoid conventional PMI. Buying sooner with PMI is a cash-and-timeline trade. Distinct from how MIP vs PMI later ends, and from PMI removal mechanics.",
+    title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+    description: "Wait for 20% or buy sooner with PMI? How PMI and FHA MIP end, gift fund rules, who signs when a parent gifts, the 60-day deposit trail, and reserves.",
     kind: "guide",
     cluster: "first-time-buyer",
     audiences: ["fthb"],
@@ -1414,12 +1432,13 @@ const NODES: ContentNode[] = [
     cta: { label: "Run affordability with PMI on", href: "/calculators/affordability" },
     category: "First-Time Buyers",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-pmi-removal",
     path: "/blog/pmi-removal-original-value-vs-new-appraisal",
+    mergedInto: "guide-wait-20-down",
     title: "Removing PMI: Original Value vs New Appraisal",
     description:
       "HPA cancellation uses original value. A new appraisal of current value is a separate investor path. Not the wait-for-20% purchase question, and not FHA MIP.",
@@ -1444,6 +1463,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-discount-points",
     path: "/blog/discount-points-breakeven-without-sales-pitch",
+    mergedInto: "guide-refi-breakeven",
     title: "Discount Points: Breakeven Without a Sales Pitch",
     description:
       "One point is typically 1% of the loan paid to lower the note. Break-even is cost divided by monthly P&I savings. Not a temporary buydown and not a pricing slogan.",
@@ -1469,6 +1489,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-qualify-asks",
     path: "/blog/what-a-mortgage-conversation-asks",
+    mergedInto: "guide-preapproval-stages",
     title: "What a Mortgage Conversation Asks, and What It Will Not Promise",
     description:
       "Occupancy, income type, debts, assets, and credit authorization. A conversation is not approval, a lock, or a quote. Supporting guide for the qualify page.",
@@ -1520,6 +1541,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-auto-loan-uw",
     path: "/blog/new-auto-loan-during-underwriting",
+    mergedInto: "guide-credit-rescore",
     title: "New Auto Loan During Underwriting",
     description:
       "A car payment signed after pre-approval usually shows on the next credit pull and changes DTI. Findings can flip. Ask before you sign.",
@@ -1571,9 +1593,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-preapproval-stages",
     path: "/blog/pre-approval-vs-aus-vs-clear-to-close",
-    title: "Pre-Approval Letter vs AUS Findings vs Clear to Close",
-    description:
-      "Three documents, three jobs. A letter is a snapshot, AUS is an engine result, CTC is an underwriter sign-off. None of them is a guarantee you will fund.",
+    title: "From First Conversation to Clear to Close: Pre-Approval, AUS Findings and Why Files Get Declined",
+    description: "What a first mortgage conversation asks, what a pre-approval letter, AUS findings and clear to close each mean, and why files get declined after the letter.",
     kind: "guide",
     cluster: "credit",
     audiences: ["fthb", "repeat"],
@@ -1592,12 +1613,13 @@ const NODES: ContentNode[] = [
     cta: { label: "What a conversation will ask", href: "/qualify" },
     category: "Credit",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-spouse-w2-offset",
     path: "/blog/spouse-w2-offset-1099-volatility",
+    mergedInto: "guide-verify-income",
     title: "Using a Spouse’s W-2 to Offset 1099 Volatility",
     description:
       "A steadier W-2 helps when that person is a co-borrower. A non-borrowing spouse’s paycheck does not automatically average in. Utah is not a community-property state.",
@@ -1623,6 +1645,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-temp-buydown",
     path: "/blog/temporary-buydown-who-pays-year-three",
+    mergedInto: "guide-lock-if-rates-drop",
     title: "Temporary Buydown: Who Pays, What Happens in Year 3",
     description:
       "2-1 and 3-2-1 buydowns subsidize the payment for a few years. The note rate is still the note rate. Distinct from buying discount points.",
@@ -1716,6 +1739,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-comingling",
     path: "/blog/business-vs-personal-bank-co-mingling",
+    mergedInto: "guide-verify-income",
     title: "Business Bank vs Personal: Co-Mingling That Stalls Files",
     description:
       "Business deposits in a personal account, or the reverse, stall sourcing and deposit averages. Seasoning is a paper trail, not a workaround.",
@@ -1732,7 +1756,7 @@ const NODES: ContentNode[] = [
       "guide-bank-statement",
       "conversion-qualify",
     ],
-    cta: { label: "Large-deposit paper trail", href: "/blog/large-deposits-60-day-paper-trail" },
+    cta: { label: "Large-deposit paper trail", href: "/blog/should-i-wait-for-20-percent-down" },
     category: "Credit",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -1793,6 +1817,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-cash-out-rental",
     path: "/blog/cash-out-to-buy-a-rental",
+    mergedInto: "guide-heloc-vs-cashout",
     title: "Cash-Out to Buy a Rental: Occupancy and LTV Traps",
     description:
       "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another.",
@@ -1820,6 +1845,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-medical-collections",
     path: "/blog/medical-collections-after-fico-model-change",
+    mergedInto: "guide-credit-rescore",
     title: "Medical Collections After the FICO Model Change",
     description:
       "Bureau reporting of medical collections changed in 2022–2023. Mortgage tri-merge scores are often still classic FICO. Dated snapshot, not a score-raise promise.",
@@ -1845,6 +1871,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-alternative-credit",
     path: "/blog/no-traditional-credit-alternative-credit",
+    mergedInto: "guide-credit-rescore",
     title: "No Traditional Credit / Alternative Credit",
     description:
       "Rent, utilities, and similar 12-month references can document a thin file. Weak traditional credit is a different path. Fair Housing safe: no steering.",
@@ -1872,6 +1899,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-fha-house-hack",
     path: "/blog/house-hacking-duplex-with-fha",
+    mergedInto: "guide-fha-vs-conventional",
     title: "House-Hacking a Duplex with FHA",
     description:
       "FHA can finance a 2–4 unit if you occupy one unit as your home. Self-sufficiency is a 3–4 unit test, not a duplex test. Not a condo-roster file.",
@@ -1899,6 +1927,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-relocating-utah",
     path: "/blog/relocating-to-utah-job-seasoning",
+    mergedInto: "guide-verify-income",
     title: "Relocating to Utah: Income Seasoning When the Job Starts in 60 Days",
     description:
       "An offer letter can sometimes qualify a conventional purchase before the first paycheck. Sixty days is a common question, not a published 60-day rule. Utah-specific where the closing is unique.",
@@ -1924,6 +1953,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-apr-vs-rate",
     path: "/blog/apr-vs-rate-on-a-loan-estimate",
+    mergedInto: "guide-lock-if-rates-drop",
     title: "APR vs Rate on a Loan Estimate",
     description:
       "The note rate prices principal and interest. APR folds in most lender prepaid finance charges. Compare Loan Estimates. This is not a live-rate table.",
@@ -1987,6 +2017,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-va-restoration",
     path: "/blog/selling-with-va-loan-entitlement-restoration",
+    mergedInto: "guide-va-assumption",
     title: "Selling with a VA Loan: Entitlement Restoration",
     description:
       "How VA entitlement is typically restored after you sell and pay off the loan. This is distinct from keeping a VA loan and buying another. No entitlement dollar figures.",
@@ -2011,6 +2042,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-cpa-letter",
     path: "/blog/cpa-letter-vs-tax-returns-underwriting",
+    mergedInto: "guide-verify-income",
     title: "CPA Letter vs Tax Returns: What Actually Moves Underwriting",
     description:
       "Agency self-employed files are usually moved by returns and transcripts. A CPA letter supports; it does not replace the stack. Not tax advice.",
@@ -2036,6 +2068,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-lock-float",
     path: "/blog/rate-lock-extension-vs-floating",
+    mergedInto: "guide-lock-if-rates-drop",
     title: "Rate Lock Extension vs Floating",
     description:
       "A lock holds a quoted rate for a window. Floating leaves it open. An extension is a cost if you miss the window. Not a live-rate table.",
@@ -2062,6 +2095,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-no-closing-cost-refi",
     path: "/blog/no-closing-cost-refinance-rate-credit-tradeoff",
+    mergedInto: "guide-refi-breakeven",
     title: "“No Closing Cost” Refinance: The Cost Is in the Rate",
     description:
       "A lender credit that covers fees is usually paid for with a higher note rate. Run break-even. Not a free refinance and not a streamline.",
@@ -2087,6 +2121,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-tri-merge",
     path: "/blog/what-a-tri-merge-credit-report-shows",
+    mergedInto: "guide-credit-rescore",
     title: "What a Tri-Merge Credit Report Actually Shows",
     description:
       "Equifax, Experian, and TransUnion together. Mortgage files often use classic FICO and the middle score. Not a consumer-app score and not a score-raise method.",
@@ -2114,6 +2149,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-earnest-money",
     path: "/blog/earnest-money-vs-down-payment-vs-closing-costs",
+    mergedInto: "guide-utah-closing-costs",
     title: "Earnest Money vs Down Payment vs Closing Costs",
     description:
       "Three different cash lines. Earnest money is usually credited at closing. Timing and the Utah REPC still matter. Not legal advice.",
@@ -2139,9 +2175,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-townhome-condo",
     path: "/blog/townhome-vs-condo-hoa-docs-lenders-ask",
-    title: "Townhome vs Condo: HOA Docs a Lender Will Ask For",
-    description:
-      "Lenders underwrite the legal regime, not the listing photo. Not every townhome is a condo. HOA dues still sit in DTI either way.",
+    title: "Condos, Townhomes and HOAs: The Documents Lenders Ask For, Insurance, and Refinancing an Aging HOA",
+    description: "Condo vs PUD townhome, the HOA documents lenders ask for, hazard vs HO-3 vs HO-6 next to the master policy, and why an aging HOA can stall a refinance.",
     kind: "guide",
     cluster: "fha",
     audiences: ["fthb", "repeat"],
@@ -2159,12 +2194,13 @@ const NODES: ContentNode[] = [
     cta: { label: "FHA loans in Utah", href: "/loans/fha" },
     category: "Loan Programs",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-reserves",
     path: "/blog/mortgage-reserves-months-of-pitia",
+    mergedInto: "guide-wait-20-down",
     title: "Mortgage Reserves: How Many Months of PITIA",
     description:
       "Reserves are remaining liquid assets after cash to close, counted as months of PITIA. Not extra closing costs. Gift funds often cannot fill this line.",
@@ -2191,6 +2227,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-asset-depletion",
     path: "/blog/asset-depletion-qualifying-non-qm",
+    mergedInto: "guide-verify-income",
     title: "Asset-Depletion Qualifying: Retirement and Investment Assets",
     description:
       "Eligible assets can be treated as qualifying income under a written formula. Agency and Non-QM paths differ. Not “cash means approved.”",
@@ -2215,6 +2252,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-gig-w2",
     path: "/blog/gig-plus-w2-income-mortgage-average",
+    mergedInto: "guide-verify-income",
     title: "Gig Plus W-2 Mix: How the Average Is Built",
     description:
       "Gig or 1099 income and W-2 wages are usually averaged as separate streams, then added. A peak gig month does not cover an undocumented W-2, and the reverse.",
@@ -2291,6 +2329,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-depreciation-addback",
     path: "/blog/depreciation-add-back-schedule-e",
+    mergedInto: "guide-verify-income",
     title: "Depreciation Add-Back: What Agency Files Allow",
     description:
       "How underwriters add depreciation back on Schedule E for rental qualifying. Distinct from the Schedule E overview. Not tax advice.",
@@ -2307,7 +2346,7 @@ const NODES: ContentNode[] = [
       "calc-income",
       "conversion-qualify",
     ],
-    cta: { label: "Schedule E rental income", href: "/blog/schedule-e-rental-income-purchase-file" },
+    cta: { label: "Schedule E rental income", href: "/blog/how-underwriters-verify-income" },
     category: "Credit",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -2316,6 +2355,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-compensating-factors",
     path: "/blog/compensating-factors-in-aus-findings",
+    mergedInto: "guide-preapproval-stages",
     title: "Compensating Factors That Appear in Findings",
     description:
       "Reserves, residual income, and other strengths that show up in AUS or manual underwriting. Not a guarantee that findings will flip.",
@@ -2341,6 +2381,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-utah-tax-escrow",
     path: "/blog/utah-property-tax-calendar-first-escrow-analysis",
+    mergedInto: "guide-escrow-shortage",
     title: "Utah Property Tax Calendar vs Your First Escrow Analysis",
     description:
       "Utah taxes are typically due November 30, billed once a year. Why the first mortgage escrow analysis can surprise. Not tax advice.",
@@ -2369,6 +2410,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-escrow-cushion",
     path: "/blog/escrow-cushion-how-it-is-set",
+    mergedInto: "guide-escrow-shortage",
     title: "Escrow: How the Cushion Is Set, Why It Changes",
     description:
       "RESPA aggregate analysis generally caps the cushion at about two months of disbursements. Servicers may require less. Not a universal formula.",
@@ -2387,7 +2429,7 @@ const NODES: ContentNode[] = [
       "calc-closing",
       "conversion-qualify",
     ],
-    cta: { label: "Utah tax calendar vs first analysis", href: "/blog/utah-property-tax-calendar-first-escrow-analysis" },
+    cta: { label: "Estimate your closing costs and prepaids", href: "/calculators/closing-cost" },
     category: "First-Time Buyers",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -2396,6 +2438,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-usda-va-fha-rural",
     path: "/blog/usda-vs-va-vs-fha-veteran-rural",
+    mergedInto: "guide-va-assumption",
     title: "USDA vs VA vs FHA for a Veteran in a Rural Tract",
     description:
       "Comparison of typical tests when a veteran is buying in a USDA-map area. Not a recommendation to take one program. Fee percents are dated snapshots.",
@@ -2421,6 +2464,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-heloc-year-two",
     path: "/blog/heloc-after-year-two-vs-cash-out",
+    mergedInto: "guide-heloc-vs-cashout",
     title: "HELOC After Year Two vs Cash-Out",
     description:
       "When you can tap equity after a recent closing, and how seasoning rules affect a HELOC or a cash-out refinance. Not a federal two-year wait.",
@@ -2447,6 +2491,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-cross-collateral",
     path: "/blog/cross-collateral-equity-to-buy-another-house",
+    mergedInto: "guide-heloc-vs-cashout",
     title: "Cross-Collateral and Using Equity to Buy Another House",
     description:
       "Pledging more than one property versus cash-out or a HELOC. Educational only; this is not a published product you can assume.",
@@ -2472,6 +2517,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-biweekly-vs-refi",
     path: "/blog/biweekly-extra-principal-vs-refinance",
+    mergedInto: "guide-refi-breakeven",
     title: "Biweekly Extra Principal vs Refinance",
     description:
       "One extra payment a year versus changing the note. This page illustrates the idea and does not quote interest saved. Link break-even and pay-down tactics.",
@@ -2523,9 +2569,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-lock-if-rates-drop",
     path: "/blog/rate-lock-if-rates-drop",
-    title: "What a Lock Does If Rates Drop After You Lock",
-    description:
-      "A lock does not automatically follow the market down. Float-down is a written lock-desk policy, distinct from extension vs floating. Not a live-rate table.",
+    title: "Mortgage Rates, Locks and APR: What Moves Your Rate, Locks, Buydowns and ARM Caps",
+    description: "What moves mortgage rates, rate vs APR on a Loan Estimate, what a lock does if rates drop, extensions vs floating, 2-1 buydowns and ARM caps. Not a rate table.",
     kind: "guide",
     cluster: "rates",
     audiences: ["fthb", "repeat"],
@@ -2542,15 +2587,14 @@ const NODES: ContentNode[] = [
     cta: { label: "Why a quote is not the news average", href: "/buy/rates" },
     category: "Mortgages",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-escrow-shortage",
     path: "/blog/escrow-shortage-after-first-year",
-    title: "Escrow Shortage After the First Year",
-    description:
-      "How a shortage appears on the first annual analysis, and typical options to pay or spread. Sequel to the Utah tax calendar and cushion guides. Not tax advice.",
+    title: "Escrow and Utah Property Taxes: Cushion, Shortages, Waiving Impounds and the First Analysis",
+    description: "How the escrow cushion is capped, why Utah's November tax bill makes the first analysis surprise, shortage options, and when impounds can be waived.",
     kind: "guide",
     cluster: "closing",
     audiences: ["fthb", "repeat"],
@@ -2566,15 +2610,16 @@ const NODES: ContentNode[] = [
       "calc-closing",
       "conversion-qualify",
     ],
-    cta: { label: "Utah tax calendar vs first analysis", href: "/blog/utah-property-tax-calendar-first-escrow-analysis" },
+    cta: { label: "Estimate your closing costs and prepaids", href: "/calculators/closing-cost" },
     category: "First-Time Buyers",
     published: "2026-08-29",
-    modified: "2026-08-29",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
     id: "guide-hill-afb-va",
     path: "/blog/hill-afb-va-coe-occupancy",
+    mergedInto: "guide-va-assumption",
     title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
     description:
       "Hill Air Force Base is in Davis County, Utah. How the VA Certificate of Eligibility and occupancy rules apply to a purchase near the base. Occupancy must match use.",
@@ -2601,6 +2646,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-delayed-financing",
     path: "/blog/delayed-financing-after-cash-purchase",
+    mergedInto: "guide-heloc-vs-cashout",
     title: "Delayed Financing After a Cash Purchase",
     description:
       "Agency delayed-financing exception: cash purchase, then a cash-out later. Distinct from HELOC seasoning. Overlay is not a statute.",
@@ -2652,6 +2698,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-file-mistakes",
     path: "/blog/first-time-buyer-file-mistakes",
+    mergedInto: "guide-preapproval-stages",
     title: "First-Time Buyer Mistakes That Are Really File Mistakes",
     description:
       "New debt, a job change, large deposits, and occupancy changes are the common reasons underwriting stalls for first-time buyers.",
@@ -2705,6 +2752,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-close-credit-card",
     path: "/blog/closing-credit-card-before-mortgage",
+    mergedInto: "guide-credit-rescore",
     title: "Closing a Credit Card Before You Apply",
     description:
       "Closing a card can raise utilization by shrinking available credit. AUS reads the tri-merge. Not a score-raise method.",
@@ -2722,7 +2770,7 @@ const NODES: ContentNode[] = [
       "faq-loans",
       "conversion-qualify",
     ],
-    cta: { label: "What a tri-merge shows", href: "/blog/what-a-tri-merge-credit-report-shows" },
+    cta: { label: "What a tri-merge shows", href: "/blog/credit-before-mortgage-rapid-rescore" },
     category: "Credit",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -2731,6 +2779,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-hazard-ho3-ho6",
     path: "/blog/hazard-vs-ho3-vs-ho6-condo-insurance",
+    mergedInto: "guide-townhome-condo",
     title: "Hazard vs HO-3 vs HO-6",
     description:
       "What lenders mean by hazard insurance, when an HO-3 fits a house, and when a condo needs an HO-6 plus the master policy. Not insurance advice.",
@@ -2757,6 +2806,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-au-tradelines",
     path: "/blog/authorized-user-tradelines-mortgage",
+    mergedInto: "guide-credit-rescore",
     title: "Authorized User Tradelines: Help or Overlay Risk",
     description:
       "What AU tradelines do and do not do on a mortgage tri-merge. Overlays often discount them. Not a piggyback scheme.",
@@ -2773,7 +2823,7 @@ const NODES: ContentNode[] = [
       "faq-loans",
       "conversion-qualify",
     ],
-    cta: { label: "What a tri-merge shows", href: "/blog/what-a-tri-merge-credit-report-shows" },
+    cta: { label: "What a tri-merge shows", href: "/blog/credit-before-mortgage-rapid-rescore" },
     category: "Credit",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -2832,6 +2882,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-recast-vs-refi",
     path: "/blog/recast-vs-refinance",
+    mergedInto: "guide-refi-breakeven",
     title: "Recast vs Refinance",
     description:
       "A recast re-amortizes the same note after a principal curtailment. A refinance is a new loan with costs. Not a savings quote.",
@@ -2857,6 +2908,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-condo-aging-hoa",
     path: "/blog/refinancing-condo-aging-hoa",
+    mergedInto: "guide-townhome-condo",
     title: "Refinancing a Condo with an Aging HOA",
     description:
       "Reserves, litigation, insurance, and project review can stall a condo refinance even when your credit is fine. Informational only.",
@@ -2873,7 +2925,7 @@ const NODES: ContentNode[] = [
       "program-refinance",
       "conversion-qualify",
     ],
-    cta: { label: "FHA condo roster", href: "/blog/fha-condo-roster-project-approval" },
+    cta: { label: "FHA condo roster", href: "/blog/fha-vs-conventional-loans-utah" },
     category: "Refinance",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -2882,6 +2934,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-title-owner-lender",
     path: "/blog/title-insurance-owner-vs-lender",
+    mergedInto: "guide-utah-closing-costs",
     title: "Title Insurance: Owner’s vs Lender’s Policy",
     description:
       "The lender’s policy protects the lien. The owner’s policy protects your equity. Utah title closings. Not legal advice.",
@@ -2958,6 +3011,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-escrow-waiver",
     path: "/blog/impounds-vs-waiving-escrow",
+    mergedInto: "guide-escrow-shortage",
     title: "Impounds vs Waiving Escrow",
     description:
       "When an escrow waiver exists, it is an overlay, not a promise at 20% down. Cash-to-close vs monthly tradeoff. Informational only.",
@@ -2975,7 +3029,7 @@ const NODES: ContentNode[] = [
       "calc-closing",
       "conversion-qualify",
     ],
-    cta: { label: "How the escrow cushion is set", href: "/blog/escrow-cushion-how-it-is-set" },
+    cta: { label: "How the escrow cushion is set", href: "/blog/escrow-shortage-after-first-year" },
     category: "First-Time Buyers",
     published: "2026-08-29",
     modified: "2026-08-29",
@@ -2998,6 +3052,7 @@ const NODES: ContentNode[] = [
   {
     id: "guide-fha-assumption",
     path: "/blog/how-fha-loan-assumption-works",
+    mergedInto: "guide-fha-vs-conventional",
     title: "How an FHA Loan Assumption Actually Works",
     description:
       "Assuming an FHA loan transfers the existing rate and balance to the buyer. You still qualify, you still cover the equity gap, and the mortgage insurance travels with the loan.",
@@ -3016,9 +3071,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-va-assumption",
     path: "/blog/va-loan-assumption-entitlement",
-    title: "VA Loan Assumption and What Happens to Entitlement",
-    description:
-      "A VA loan can often be assumed, but the seller's entitlement stays tied up unless an eligible buyer substitutes theirs and the VA approves a release of liability.",
+    title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions",
+    description: "Utah VA guide: COE and occupancy, funding fee finance vs cash, remaining entitlement, residual income vs DTI, restoration after a sale, and assumptions.",
     kind: "guide",
     cluster: "va",
     audiences: ["veteran", "repeat"],
@@ -3028,7 +3082,7 @@ const NODES: ContentNode[] = [
     cta: { label: "Talk through a VA assumption", href: "/qualify" },
     category: "Loan Programs",
     published: "2026-09-17",
-    modified: "2026-09-17",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
@@ -3088,9 +3142,8 @@ const NODES: ContentNode[] = [
   {
     id: "guide-credit-rescore",
     path: "/blog/credit-before-mortgage-rapid-rescore",
-    title: "Credit Before a Mortgage: What a Rapid Rescore Is and Is Not",
-    description:
-      "A rescore speeds up reporting of something already true. It does not remove accurate information. What actually moves a score during a loan file, and what stalls one.",
+    title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt",
+    description: "What a mortgage tri-merge shows, what a rapid rescore can and cannot do, and how closed cards, AU lines, medical collections and student loans read in a file.",
     kind: "guide",
     cluster: "credit",
     audiences: ["fthb", "imperfect_credit"],
@@ -3100,7 +3153,7 @@ const NODES: ContentNode[] = [
     cta: { label: "Review the file with a loan officer", href: "/qualify" },
     category: "Credit",
     published: "2026-09-17",
-    modified: "2026-09-17",
+    modified: "2026-10-19",
     author: "Ondo RE Team",
   },
   {
@@ -3170,9 +3223,17 @@ export function nodesInCluster(clusterId: TopicClusterId): ContentNode[] {
 export function relatedNodes(id: string): ContentNode[] {
   const node = nodesById.get(id)
   if (!node) return []
-  return node.related
-    .map((relatedId) => nodesById.get(relatedId))
-    .filter((related): related is ContentNode => Boolean(related))
+  const out: ContentNode[] = []
+  const seen = new Set<string>([id])
+  for (const relatedId of node.related) {
+    let related = nodesById.get(relatedId)
+    // A retired post resolves to the guide it was folded into, so readers never land on a noindex page.
+    if (related?.mergedInto) related = nodesById.get(related.mergedInto)
+    if (!related || seen.has(related.id)) continue
+    seen.add(related.id)
+    out.push(related)
+  }
+  return out
 }
 
 export function relatedLinksForPath(

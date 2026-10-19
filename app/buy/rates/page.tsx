@@ -179,7 +179,7 @@ export default function MortgageRatesPage() {
                   <p className="text-foreground/70">
                     A broader cost measure that includes most lender prepaid finance charges. Two files with the same
                     note rate can have different APRs. Compare APR plus cash to close, not APR alone. Deep guide:{" "}
-                    <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="prose-link">
+                    <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">
                       APR vs rate on a Loan Estimate
                     </Link>
                     .
@@ -200,7 +200,7 @@ export default function MortgageRatesPage() {
               <ul className="space-y-3 text-foreground/70">
                 <li>• Credit, occupancy (primary vs second home vs investment), and loan-to-value</li>
                 <li>• Property type (condo and <Link href="/blog/manufactured-housing-adu-financing" className="prose-link">manufactured or ADU</Link> overlays differ)</li>
-                <li>• Lock period and whether you are buying <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="prose-link">discount points</Link> or taking a lender credit, or a <Link href="/blog/temporary-buydown-who-pays-year-three" className="prose-link">temporary 2-1 / 3-2-1 buydown</Link>. How <Link href="/blog/apr-vs-rate-on-a-loan-estimate" className="prose-link">APR vs rate on the Loan Estimate</Link> differ</li>
+                <li>• Lock period and whether you are buying <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="prose-link">discount points</Link> or taking a lender credit, or a <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">temporary 2-1 / 3-2-1 buydown</Link>. How <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">APR vs rate on the Loan Estimate</Link> differ</li>
                 <li>• Program (conventional, FHA, VA, USDA, jumbo), jumbo starts at the{" "}
                   <Link href="/blog/jumbo-vs-conforming-fhfa-county-limit" className="prose-link">
                     FHFA county limit
@@ -227,7 +227,7 @@ export default function MortgageRatesPage() {
                   <h4 className="text-lg font-semibold mb-2">Adjustable-Rate Mortgages (ARMs)</h4>
                   <p className="text-foreground/70">
                     Start with a fixed rate for an initial period (e.g., 5, 7, or 10 years), then adjust periodically. Caps limit how far the <em>note rate</em> can move, they are not a payment promise. Read{" "}
-                    <Link href="/blog/arm-caps-in-plain-english" className="prose-link">
+                    <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">
                       ARM caps in plain English
                     </Link>
                     . Product overview:{" "}
@@ -256,7 +256,7 @@ export default function MortgageRatesPage() {
                       what a lock does if rates drop
                     </Link>
                     {" "}and{" "}
-                    <Link href="/blog/rate-lock-extension-vs-floating" className="prose-link">
+                    <Link href="/blog/rate-lock-if-rates-drop" className="prose-link">
                       lock extension vs floating
                     </Link>
                     .
@@ -283,19 +283,19 @@ export default function MortgageRatesPage() {
                   <Link href="/calculators/mortgage-payment">Calculate Payment</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/blog/apr-vs-rate-on-a-loan-estimate">APR vs rate on the LE</Link>
+                  <Link href="/blog/rate-lock-if-rates-drop">APR vs rate on the LE</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/blog/rate-lock-if-rates-drop">If rates drop after you lock</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/blog/rate-lock-extension-vs-floating">Lock vs float</Link>
+                  <Link href="/blog/rate-lock-if-rates-drop">Lock vs float</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/blog/discount-points-breakeven-without-sales-pitch">Discount points breakeven</Link>
+                  <Link href="/blog/refinance-break-even-when-lower-rate-loses">Discount points breakeven</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/blog/temporary-buydown-who-pays-year-three">Temporary buydown</Link>
+                  <Link href="/blog/rate-lock-if-rates-drop">Temporary buydown</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/contact">Talk with a loan officer</Link>

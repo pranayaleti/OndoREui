@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { DTI_EDUCATION, LENDING_FACTS_AS_OF, VA_RESIDUAL_INCOME } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/va-residual-income-vs-dti"
+const path = "/blog/va-loan-assumption-entitlement"
+
+/** Folded into the VA guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/va-loan-assumption-entitlement", title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions" }
 
 const faqs = [
   {
@@ -18,6 +21,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "VA Residual Income vs DTI",
   description:
     "VA residual income is cash left after PITI and debts. It can fail when DTI looks fine, and pass when DTI looks high.",
@@ -32,6 +36,7 @@ export default function VaResidualPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "VA Residual Income vs DTI",
         description:
           "VA residual income is cash left after PITI and debts. It can fail when DTI looks fine, and pass when DTI looks high.",

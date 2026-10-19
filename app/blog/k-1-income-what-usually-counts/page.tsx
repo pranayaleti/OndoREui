@@ -4,7 +4,10 @@ import { K1_INCOME, LENDING_FACTS_AS_OF, SELF_EMPLOYED_HISTORY } from "@/lib/con
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/k-1-income-what-usually-counts"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -21,7 +24,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "counts", heading: "Often counted", href: "/learn/variable-income" },
   { id: "limited", heading: "Often limited", href: "/blog/how-underwriters-verify-income" },
-  { id: "excluded", heading: "Often excluded", href: "/blog/two-years-of-tax-returns-vs-one-year-mortgage" },
+  { id: "excluded", heading: "Often excluded", href: "/blog/how-underwriters-verify-income" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -56,6 +59,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "K-1 Income: What Usually Counts",
   description:
     "Partnership and S-corp K-1 income is taken from the form and matching returns, not from distributions alone.",
@@ -70,6 +74,7 @@ export default function K1IncomePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "K-1 Income: What Usually Counts",
         description:
           "Partnership and S-corp K-1 income is taken from the form and matching returns, not from distributions alone.",
@@ -105,9 +110,9 @@ export default function K1IncomePage() {
       <p>{K1_INCOME.declining}</p>
       <p>
         A brand-new LLC or S-election last year is closer to{" "}
-        <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link> than to a seasoned partner
+        <Link href="/blog/how-underwriters-verify-income">I just went 1099 last month</Link> than to a seasoned partner
         file. History in the same line of work:{" "}
-        <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">two years of returns vs one year</Link>.
+        <Link href="/blog/how-underwriters-verify-income">two years of returns vs one year</Link>.
       </p>
 
       <h2>Documents to gather</h2>
@@ -130,7 +135,7 @@ export default function K1IncomePage() {
         </li>
         <li>
           If write-offs crush taxable income while deposits look strong, that is a{" "}
-          <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">bank-statement / Non-QM</Link>{" "}
+          <Link href="/blog/how-underwriters-verify-income">bank-statement / Non-QM</Link>{" "}
           conversation, not “please ignore the K-1.”
         </li>
       </ol>

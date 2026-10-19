@@ -4,7 +4,10 @@ import { AUTHORIZED_USER_TRADELINES, LENDING_FACTS_AS_OF, TRI_MERGE } from "@/li
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/authorized-user-tradelines-mortgage"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -19,7 +22,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "au", heading: "Authorized user" },
-  { id: "borrower", heading: "You are obligated", href: "/blog/what-a-tri-merge-credit-report-shows" },
+  { id: "borrower", heading: "You are obligated", href: "/blog/credit-before-mortgage-rapid-rescore" },
   { id: "coborrower", heading: "Co-borrower", href: "/blog/cosign-vs-co-borrower" },
 ]
 
@@ -46,6 +49,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Authorized User Tradelines: Help or Overlay Risk",
   description:
     "What AU tradelines do and do not do on a mortgage tri-merge. Overlays often discount them. Not a piggyback scheme and not a score-raise method.",
@@ -60,6 +64,7 @@ export default function AuthorizedUserTradelinesPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Authorized User Tradelines: Help or Overlay Risk",
         description:
           "What authorized-user tradelines do and do not do on a mortgage tri-merge, and why they are not a shortcut to a higher score.",
@@ -92,13 +97,13 @@ export default function AuthorizedUserTradelinesPage() {
       <h2>What the tri-merge actually shows</h2>
       <p>
         {TRI_MERGE.what} {TRI_MERGE.middleScore} Deep guide:{" "}
-        <Link href="/blog/what-a-tri-merge-credit-report-shows">what a tri-merge shows</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">what a tri-merge shows</Link>.
       </p>
       <p>
         Closing a card you <em>are</em> obligated on is a different utilization problem:{" "}
-        <Link href="/blog/closing-credit-card-before-mortgage">closing a credit card before you apply</Link>. A thin
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">closing a credit card before you apply</Link>. A thin
         traditional file is a different path from AU cosmetics:{" "}
-        <Link href="/blog/no-traditional-credit-alternative-credit">alternative credit</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">alternative credit</Link>.
       </p>
 
       <h2>Scenarios (file facts, not coaching)</h2>

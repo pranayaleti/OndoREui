@@ -1,7 +1,10 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-const slug = "/blog/mortgage-rate-trends-2025"
+const slug = "/blog/rate-lock-if-rates-drop"
+
+/** Folded into the combined rates guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/rate-lock-if-rates-drop", title: "Mortgage Rates, Locks and APR: What Moves Your Rate, Locks, Buydowns and ARM Caps" }
 const title = "Mortgage Rates: How They Move and How to Read a Quote"
 const description = "What moves 30-year mortgage rates, why a headline average is not your quote, and how to compare Loan Estimates and decide when to lock."
 const published = "2024-11-28"
@@ -13,6 +16,7 @@ const keywords = ["mortgage rate trends", "Utah mortgage rates", "when to lock m
 
 export const metadata = articleMetadata({
   path: slug,
+  mergedInto,
   title,
   description,
   published,
@@ -28,6 +32,7 @@ export default function MortgageRateTrends2025() {
     <ArticleShell
       meta={{
         path: slug,
+        mergedInto,
         title,
         description,
         published,
@@ -57,13 +62,13 @@ export default function MortgageRateTrends2025() {
             <p>The 2022–2023 hiking cycle was the fastest in four decades and pushed the 30-year fixed from under 3% in 2021 to nearly 8% in late 2023. When the Fed began cutting its benchmark rate in September 2024, 30-year mortgage rates did not fall in step, because they follow longer-term yields rather than the federal funds rate. A Fed cut is a signal, not a promise that your quote drops.</p>
 
             <h2>A Headline Average Is Not Your Quote</h2>
-            <p>Weekly averages in the news are survey numbers for a typical borrower. Your quote depends on credit score, down payment, property type, occupancy, loan amount, points, lender credits and lock period. Two files with the same note rate can have different costs, so use the averages for direction and your Loan Estimate for decisions. This site does not publish a live-rate table. See <Link href="/blog/apr-vs-rate-on-a-loan-estimate">APR vs. rate on a Loan Estimate</Link> for how to read one.</p>
+            <p>Weekly averages in the news are survey numbers for a typical borrower. Your quote depends on credit score, down payment, property type, occupancy, loan amount, points, lender credits and lock period. Two files with the same note rate can have different costs, so use the averages for direction and your Loan Estimate for decisions. This site does not publish a live-rate table. See <Link href="/blog/rate-lock-if-rates-drop">APR vs. rate on a Loan Estimate</Link> for how to read one.</p>
 
             <h2>Reading a Rate Quote Correctly</h2>
             <p>When a lender quotes you a rate, understand the full cost picture:</p>
             <ul>
               <li><strong>Rate vs. APR</strong>: APR folds in the note rate plus most lender prepaid charges, but it is not the only number to read. Compare Loan Estimates with the same loan amount, property type and lock period, and read the note rate, APR, points, lender credits and cash to close together</li>
-              <li><strong>Discount points</strong>: 1 point is typically 1% of the loan amount paid upfront to buy down the rate. Break-even is the point cost divided by the monthly savings, and pricing is specific to your file, so compare two Loan Estimates rather than assuming a standard payback period. See <Link href="/blog/discount-points-breakeven-without-sales-pitch">discount points break-even</Link></li>
+              <li><strong>Discount points</strong>: 1 point is typically 1% of the loan amount paid upfront to buy down the rate. Break-even is the point cost divided by the monthly savings, and pricing is specific to your file, so compare two Loan Estimates rather than assuming a standard payback period. See <Link href="/blog/refinance-break-even-when-lower-rate-loses">discount points break-even</Link></li>
               <li><strong>Rate lock period</strong>: Standard locks are 30–45 days; longer locks cost more. Know your close timeline before locking</li>
               <li><strong>Float-down options</strong>: Some lenders offer a one-time float-down if rates drop after you lock, worth asking about</li>
             </ul>

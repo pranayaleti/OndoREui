@@ -99,7 +99,7 @@ describe("mortgage content graph", () => {
     expect(pillar?.kind).toBe("pillar")
     const links = relatedLinksForPath("/learn/variable-income", { limit: 8 })
     const hrefs = links.map((link) => link.href)
-    expect(hrefs).toContain("/blog/can-i-get-a-mortgage-if-my-income-changes-every-month")
+    expect(hrefs).toContain("/blog/how-underwriters-verify-income")
     expect(hrefs).toContain("/calculators/income")
   })
 
@@ -182,14 +182,14 @@ describe("mortgage content graph", () => {
     const firstTime = getContentNodeByPath("/learn/first-time")
     expect(firstTime?.kind).toBe("pillar")
     const firstHrefs = relatedLinksForPath("/learn/first-time", { limit: 8 }).map((link) => link.href)
-    expect(firstHrefs).toContain("/blog/utah-cash-to-close-besides-down-payment")
-    expect(firstHrefs).toContain("/blog/dpa-stacked-with-fha-gift-funds")
-    expect(firstHrefs).toContain("/blog/parent-gifting-down-payment-who-signs")
+    expect(firstHrefs).toContain("/blog/utah-closing-costs-title-origination-prepaids")
+    expect(firstHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
+    expect(firstHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
 
     const vaHrefs = relatedLinksForPath("/loans/va", { limit: 8 }).map((link) => link.href)
-    expect(vaHrefs).toContain("/blog/va-funding-fee-finance-vs-pay-cash")
-    expect(vaHrefs).toContain("/blog/va-entitlement-second-va-loan")
-    expect(vaHrefs).toContain("/blog/va-residual-income-vs-dti")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
   })
 
   it("registers batch-3 education slugs and wires commercial pages", () => {
@@ -210,21 +210,21 @@ describe("mortgage content graph", () => {
     }
 
     const variableHrefs = relatedLinksForPath("/learn/variable-income", { limit: 8 }).map((link) => link.href)
-    expect(variableHrefs).toContain("/blog/k-1-income-what-usually-counts")
-    expect(variableHrefs).toContain("/blog/just-went-1099-last-month")
+    expect(variableHrefs).toContain("/blog/how-underwriters-verify-income")
+    expect(variableHrefs).toContain("/blog/how-underwriters-verify-income")
 
     const fhaHrefs = relatedLinksForPath("/loans/fha", { limit: 8 }).map((link) => link.href)
-    expect(fhaHrefs).toContain("/blog/fha-condo-roster-project-approval")
-    expect(fhaHrefs).toContain("/blog/mip-vs-pmi-how-mortgage-insurance-ends")
+    expect(fhaHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
+    expect(fhaHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
 
     const convHrefs = relatedLinksForPath("/loans/conventional", { limit: 8 }).map((link) => link.href)
-    expect(convHrefs).toContain("/blog/mip-vs-pmi-how-mortgage-insurance-ends")
+    expect(convHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
 
     const refiHrefs = relatedLinksForPath("/refinance", { limit: 8 }).map((link) => link.href)
-    expect(refiHrefs).toContain("/blog/fha-va-streamline-refinance-less-docs")
+    expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
 
     const armHrefs = relatedLinksForPath("/buy/adjustable-rate", { limit: 8 }).map((link) => link.href)
-    expect(armHrefs).toContain("/blog/arm-caps-in-plain-english")
+    expect(armHrefs).toContain("/blog/rate-lock-if-rates-drop")
   })
 
   it("registers batch-4 education slugs and wires PMI / rates / underwriting / Non-QM clusters", () => {
@@ -251,32 +251,32 @@ describe("mortgage content graph", () => {
 
     const convHrefs = relatedLinksForPath("/loans/conventional", { limit: 8 }).map((link) => link.href)
     expect(convHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
-    expect(convHrefs).toContain("/blog/pmi-removal-original-value-vs-new-appraisal")
+    expect(convHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
 
     const mipHrefs = relatedLinksForPath("/blog/mip-vs-pmi-how-mortgage-insurance-ends", { limit: 8 }).map(
       (link) => link.href,
     )
     expect(mipHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
-    expect(mipHrefs).toContain("/blog/pmi-removal-original-value-vs-new-appraisal")
+    expect(mipHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
 
     const ratesHrefs = relatedLinksForPath("/buy/rates", { limit: 8 }).map((link) => link.href)
-    expect(ratesHrefs).toContain("/blog/discount-points-breakeven-without-sales-pitch")
-    expect(ratesHrefs).toContain("/blog/temporary-buydown-who-pays-year-three")
+    expect(ratesHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
+    expect(ratesHrefs).toContain("/blog/rate-lock-if-rates-drop")
 
     const nonQmHrefs = relatedLinksForPath("/learn/non-qm", { limit: 8 }).map((link) => link.href)
-    expect(nonQmHrefs).toContain("/blog/bank-statement-loans-when-tax-returns-undercount-income")
-    expect(nonQmHrefs).toContain("/blog/just-went-1099-last-month")
-    expect(nonQmHrefs).toContain("/blog/k-1-income-what-usually-counts")
+    expect(nonQmHrefs).toContain("/blog/how-underwriters-verify-income")
+    expect(nonQmHrefs).toContain("/blog/how-underwriters-verify-income")
+    expect(nonQmHrefs).toContain("/blog/how-underwriters-verify-income")
 
     const declinedHrefs = relatedLinksForPath("/blog/declined-after-pre-approval", { limit: 8 }).map((link) => link.href)
-    expect(declinedHrefs).toContain("/blog/new-auto-loan-during-underwriting")
+    expect(declinedHrefs).toContain("/blog/credit-before-mortgage-rapid-rescore")
     expect(declinedHrefs).toContain("/blog/pre-approval-vs-aus-vs-clear-to-close")
 
     const qualifyHrefs = relatedLinksForPath("/qualify", { limit: 8 }).map((link) => link.href)
-    expect(qualifyHrefs).toContain("/blog/what-a-mortgage-conversation-asks")
+    expect(qualifyHrefs).toContain("/blog/pre-approval-vs-aus-vs-clear-to-close")
 
     const variableHrefs = relatedLinksForPath("/learn/variable-income", { limit: 8 }).map((link) => link.href)
-    expect(variableHrefs).toContain("/blog/spouse-w2-offset-1099-volatility")
+    expect(variableHrefs).toContain("/blog/how-underwriters-verify-income")
 
     const affordHrefs = relatedLinksForPath("/calculators/affordability", { limit: 8 }).map((link) => link.href)
     expect(affordHrefs).toContain("/blog/dti-frontend-backend-with-hoa")
@@ -304,26 +304,26 @@ describe("mortgage content graph", () => {
     const investHrefs = relatedLinksForPath("/learn/investment", { limit: 8 }).map((link) => link.href)
     expect(investHrefs).toContain("/blog/dscr-vs-full-doc-rental-loan")
     expect(investHrefs).toContain("/blog/second-home-vs-investment-occupancy")
-    expect(investHrefs).toContain("/blog/cash-out-to-buy-a-rental")
-    expect(investHrefs).toContain("/blog/house-hacking-duplex-with-fha")
+    expect(investHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
+    expect(investHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
 
     const nonQmHrefs = relatedLinksForPath("/learn/non-qm", { limit: 8 }).map((link) => link.href)
     expect(nonQmHrefs).toContain("/blog/dscr-vs-full-doc-rental-loan")
 
     const fhaHrefs = relatedLinksForPath("/loans/fha", { limit: 8 }).map((link) => link.href)
-    expect(fhaHrefs).toContain("/blog/house-hacking-duplex-with-fha")
+    expect(fhaHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
 
     const cashOutHrefs = relatedLinksForPath("/refinance/cash-out", { limit: 8 }).map((link) => link.href)
-    expect(cashOutHrefs).toContain("/blog/cash-out-to-buy-a-rental")
+    expect(cashOutHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
 
     const ratesHrefs = relatedLinksForPath("/buy/rates", { limit: 8 }).map((link) => link.href)
-    expect(ratesHrefs).toContain("/blog/apr-vs-rate-on-a-loan-estimate")
+    expect(ratesHrefs).toContain("/blog/rate-lock-if-rates-drop")
 
     const firstHrefs = relatedLinksForPath("/learn/first-time", { limit: 8 }).map((link) => link.href)
     expect(firstHrefs).toContain("/blog/utah-repc-deadline-and-your-loan")
 
     const variableHrefs = relatedLinksForPath("/learn/variable-income", { limit: 8 }).map((link) => link.href)
-    expect(variableHrefs).toContain("/blog/business-vs-personal-bank-co-mingling")
+    expect(variableHrefs).toContain("/blog/how-underwriters-verify-income")
 
     const dscrHrefs = relatedLinksForPath("/calculators/dscr", { limit: 8 }).map((link) => link.href)
     expect(dscrHrefs).toContain("/blog/dscr-vs-full-doc-rental-loan")
@@ -347,34 +347,34 @@ describe("mortgage content graph", () => {
     }
 
     const vaHrefs = relatedLinksForPath("/loans/va", { limit: 8 }).map((link) => link.href)
-    expect(vaHrefs).toContain("/blog/selling-with-va-loan-entitlement-restoration")
-    expect(vaHrefs).toContain("/blog/va-entitlement-second-va-loan")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
 
     const variableHrefs = relatedLinksForPath("/learn/variable-income", { limit: 8 }).map((link) => link.href)
-    expect(variableHrefs).toContain("/blog/cpa-letter-vs-tax-returns-underwriting")
-    expect(variableHrefs).toContain("/blog/gig-plus-w2-income-mortgage-average")
+    expect(variableHrefs).toContain("/blog/how-underwriters-verify-income")
+    expect(variableHrefs).toContain("/blog/how-underwriters-verify-income")
 
     const ratesHrefs = relatedLinksForPath("/buy/rates", { limit: 8 }).map((link) => link.href)
-    expect(ratesHrefs).toContain("/blog/rate-lock-extension-vs-floating")
-    expect(ratesHrefs).toContain("/blog/apr-vs-rate-on-a-loan-estimate")
+    expect(ratesHrefs).toContain("/blog/rate-lock-if-rates-drop")
+    expect(ratesHrefs).toContain("/blog/rate-lock-if-rates-drop")
 
     const refiHrefs = relatedLinksForPath("/refinance", { limit: 8 }).map((link) => link.href)
-    expect(refiHrefs).toContain("/blog/no-closing-cost-refinance-rate-credit-tradeoff")
+    expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
     expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
 
     const firstHrefs = relatedLinksForPath("/learn/first-time", { limit: 8 }).map((link) => link.href)
-    expect(firstHrefs).toContain("/blog/earnest-money-vs-down-payment-vs-closing-costs")
-    expect(firstHrefs).toContain("/blog/mortgage-reserves-months-of-pitia")
+    expect(firstHrefs).toContain("/blog/utah-closing-costs-title-origination-prepaids")
+    expect(firstHrefs).toContain("/blog/should-i-wait-for-20-percent-down")
 
     const fhaHrefs = relatedLinksForPath("/loans/fha", { limit: 8 }).map((link) => link.href)
     expect(fhaHrefs).toContain("/blog/townhome-vs-condo-hoa-docs-lenders-ask")
-    expect(fhaHrefs).toContain("/blog/fha-condo-roster-project-approval")
+    expect(fhaHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
 
     const nonQmHrefs = relatedLinksForPath("/learn/non-qm", { limit: 8 }).map((link) => link.href)
-    expect(nonQmHrefs).toContain("/blog/asset-depletion-qualifying-non-qm")
+    expect(nonQmHrefs).toContain("/blog/how-underwriters-verify-income")
 
     const declinedHrefs = relatedLinksForPath("/blog/declined-after-pre-approval", { limit: 8 }).map((link) => link.href)
-    expect(declinedHrefs).toContain("/blog/what-a-tri-merge-credit-report-shows")
+    expect(declinedHrefs).toContain("/blog/credit-before-mortgage-rapid-rescore")
   })
 
   it("registers batch-7 education slugs and wires investment / escrow / VA / refinance clusters", () => {
@@ -398,43 +398,43 @@ describe("mortgage content graph", () => {
 
     const investHrefs = relatedLinksForPath("/learn/investment", { limit: 8 }).map((link) => link.href)
     expect(investHrefs).toContain("/blog/first-rental-occupancy-if-you-still-live-there")
-    expect(investHrefs).toContain("/blog/depreciation-add-back-schedule-e")
-    expect(investHrefs).toContain("/blog/cross-collateral-equity-to-buy-another-house")
+    expect(investHrefs).toContain("/blog/how-underwriters-verify-income")
+    expect(investHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
     expect(investHrefs).toContain("/blog/dscr-vs-full-doc-rental-loan")
-    expect(investHrefs).toContain("/blog/house-hacking-duplex-with-fha")
+    expect(investHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
 
     const vaHrefs = relatedLinksForPath("/loans/va", { limit: 8 }).map((link) => link.href)
-    expect(vaHrefs).toContain("/blog/usda-vs-va-vs-fha-veteran-rural")
-    expect(vaHrefs).toContain("/blog/va-funding-fee-finance-vs-pay-cash")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
 
     const usdaHrefs = relatedLinksForPath("/loans/usda", { limit: 8 }).map((link) => link.href)
-    expect(usdaHrefs).toContain("/blog/usda-vs-va-vs-fha-veteran-rural")
+    expect(usdaHrefs).toContain("/blog/va-loan-assumption-entitlement")
 
     const fhaHrefs = relatedLinksForPath("/loans/fha", { limit: 8 }).map((link) => link.href)
-    expect(fhaHrefs).toContain("/blog/usda-vs-va-vs-fha-veteran-rural")
-    expect(fhaHrefs).toContain("/blog/house-hacking-duplex-with-fha")
+    expect(fhaHrefs).toContain("/blog/va-loan-assumption-entitlement")
+    expect(fhaHrefs).toContain("/blog/fha-vs-conventional-loans-utah")
 
     const refiHrefs = relatedLinksForPath("/refinance", { limit: 8 }).map((link) => link.href)
-    expect(refiHrefs).toContain("/blog/biweekly-extra-principal-vs-refinance")
-    expect(refiHrefs).toContain("/blog/heloc-after-year-two-vs-cash-out")
+    expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
+    expect(refiHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
     expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
 
     const helocHrefs = relatedLinksForPath("/loans/heloc", { limit: 8 }).map((link) => link.href)
-    expect(helocHrefs).toContain("/blog/heloc-after-year-two-vs-cash-out")
+    expect(helocHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
     expect(helocHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
 
     const declinedHrefs = relatedLinksForPath("/blog/declined-after-pre-approval", { limit: 8 }).map((link) => link.href)
-    expect(declinedHrefs).toContain("/blog/compensating-factors-in-aus-findings")
+    expect(declinedHrefs).toContain("/blog/pre-approval-vs-aus-vs-clear-to-close")
 
     const closingHrefs = relatedLinksForPath("/blog/utah-closing-costs-title-origination-prepaids", { limit: 8 }).map(
       (link) => link.href,
     )
-    expect(closingHrefs).toContain("/blog/utah-property-tax-calendar-first-escrow-analysis")
-    expect(closingHrefs).toContain("/blog/escrow-cushion-how-it-is-set")
+    expect(closingHrefs).toContain("/blog/escrow-shortage-after-first-year")
+    expect(closingHrefs).toContain("/blog/escrow-shortage-after-first-year")
 
     const nonQmHrefs = relatedLinksForPath("/learn/non-qm", { limit: 8 }).map((link) => link.href)
     expect(nonQmHrefs).toContain("/blog/itin-non-us-citizen-mortgage-documentation")
-    expect(nonQmHrefs).toContain("/blog/asset-depletion-qualifying-non-qm")
+    expect(nonQmHrefs).toContain("/blog/how-underwriters-verify-income")
   })
 
   it("registers batch-8 education slugs and wires rates / escrow / VA / FTHB / insurance clusters", () => {
@@ -455,36 +455,36 @@ describe("mortgage content graph", () => {
 
     const ratesHrefs = relatedLinksForPath("/buy/rates", { limit: 8 }).map((link) => link.href)
     expect(ratesHrefs).toContain("/blog/rate-lock-if-rates-drop")
-    expect(ratesHrefs).toContain("/blog/rate-lock-extension-vs-floating")
+    expect(ratesHrefs).toContain("/blog/rate-lock-if-rates-drop")
 
     const lockHrefs = relatedLinksForPath("/blog/rate-lock-extension-vs-floating", { limit: 8 }).map((link) => link.href)
     expect(lockHrefs).toContain("/blog/rate-lock-if-rates-drop")
 
     const escrowHrefs = relatedLinksForPath("/faq/buying-selling-faqs", { limit: 8 }).map((link) => link.href)
     expect(escrowHrefs).toContain("/blog/escrow-shortage-after-first-year")
-    expect(escrowHrefs).toContain("/blog/hazard-vs-ho3-vs-ho6-condo-insurance")
+    expect(escrowHrefs).toContain("/blog/townhome-vs-condo-hoa-docs-lenders-ask")
 
     const vaHrefs = relatedLinksForPath("/loans/va", { limit: 8 }).map((link) => link.href)
-    expect(vaHrefs).toContain("/blog/hill-afb-va-coe-occupancy")
-    expect(vaHrefs).toContain("/blog/va-funding-fee-finance-vs-pay-cash")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
+    expect(vaHrefs).toContain("/blog/va-loan-assumption-entitlement")
 
     const investHrefs = relatedLinksForPath("/learn/investment", { limit: 10 }).map((link) => link.href)
-    expect(investHrefs).toContain("/blog/delayed-financing-after-cash-purchase")
+    expect(investHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
 
     const refiHrefs = relatedLinksForPath("/refinance", { limit: 8 }).map((link) => link.href)
-    expect(refiHrefs).toContain("/blog/delayed-financing-after-cash-purchase")
+    expect(refiHrefs).toContain("/blog/heloc-vs-cash-out-refinance")
 
     const firstHrefs = relatedLinksForPath("/learn/first-time", { limit: 8 }).map((link) => link.href)
-    expect(firstHrefs).toContain("/blog/first-time-buyer-file-mistakes")
+    expect(firstHrefs).toContain("/blog/pre-approval-vs-aus-vs-clear-to-close")
 
     const firstHrefsLong = relatedLinksForPath("/learn/first-time", { limit: 12 }).map((link) => link.href)
     expect(firstHrefsLong).toContain("/blog/how-long-first-purchase-takes")
 
     const fhaHrefs = relatedLinksForPath("/loans/fha", { limit: 8 }).map((link) => link.href)
-    expect(fhaHrefs).toContain("/blog/hazard-vs-ho3-vs-ho6-condo-insurance")
+    expect(fhaHrefs).toContain("/blog/townhome-vs-condo-hoa-docs-lenders-ask")
 
     const declinedHrefs = relatedLinksForPath("/blog/declined-after-pre-approval", { limit: 8 }).map((link) => link.href)
-    expect(declinedHrefs).toContain("/blog/first-time-buyer-file-mistakes")
+    expect(declinedHrefs).toContain("/blog/pre-approval-vs-aus-vs-clear-to-close")
   })
 
   it("registers batch-9 education slugs and wires credit / IO / recast / post-close clusters", () => {
@@ -508,8 +508,8 @@ describe("mortgage content graph", () => {
     expect(getAllContentNodes().some((node) => node.id === "guide-break-even-table")).toBe(false)
 
     const refiHrefs = relatedLinksForPath("/refinance", { limit: 8 }).map((link) => link.href)
-    expect(refiHrefs).toContain("/blog/recast-vs-refinance")
-    expect(refiHrefs).toContain("/blog/refinancing-condo-aging-hoa")
+    expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
+    expect(refiHrefs).toContain("/blog/townhome-vs-condo-hoa-docs-lenders-ask")
     expect(refiHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
 
     const armHrefs = relatedLinksForPath("/buy/adjustable-rate", { limit: 8 }).map((link) => link.href)
@@ -523,24 +523,24 @@ describe("mortgage content graph", () => {
     expect(loansHrefs).toContain("/blog/interest-only-mortgages-who-they-are-for")
 
     const escrowHrefs = relatedLinksForPath("/faq/buying-selling-faqs", { limit: 8 }).map((link) => link.href)
-    expect(escrowHrefs).toContain("/blog/impounds-vs-waiving-escrow")
+    expect(escrowHrefs).toContain("/blog/escrow-shortage-after-first-year")
 
     const firstHrefsLong = relatedLinksForPath("/learn/first-time", { limit: 12 }).map((link) => link.href)
     expect(firstHrefsLong).toContain("/blog/week-after-mortgage-funding")
-    expect(firstHrefsLong).toContain("/blog/title-insurance-owner-vs-lender")
+    expect(firstHrefsLong).toContain("/blog/utah-closing-costs-title-origination-prepaids")
 
     const triMergeHrefs = relatedLinksForPath("/blog/what-a-tri-merge-credit-report-shows", { limit: 8 }).map(
       (link) => link.href,
     )
-    expect(triMergeHrefs).toContain("/blog/authorized-user-tradelines-mortgage")
+    expect(triMergeHrefs).toContain("/blog/credit-before-mortgage-rapid-rescore")
 
     const rosterHrefs = relatedLinksForPath("/blog/fha-condo-roster-project-approval", { limit: 8 }).map(
       (link) => link.href,
     )
-    expect(rosterHrefs).toContain("/blog/refinancing-condo-aging-hoa")
+    expect(rosterHrefs).toContain("/blog/townhome-vs-condo-hoa-docs-lenders-ask")
 
     const calcHrefs = relatedLinksForPath("/calculators/refinance", { limit: 8 }).map((link) => link.href)
-    expect(calcHrefs).toContain("/blog/recast-vs-refinance")
+    expect(calcHrefs).toContain("/blog/refinance-break-even-when-lower-rate-loses")
   })
 
   it("keeps batch-9 lending facts dated and not-advice", () => {

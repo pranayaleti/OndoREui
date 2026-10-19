@@ -4,7 +4,13 @@ import { EARNEST_VS_DOWN_VS_CLOSING, LENDING_FACTS_AS_OF, UTAH_REPC } from "@/li
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/earnest-money-vs-down-payment-vs-closing-costs"
+const path = "/blog/utah-closing-costs-title-origination-prepaids"
+
+/** Folded into the Utah closing-costs guide: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/utah-closing-costs-title-origination-prepaids",
+  title: "Utah Closing Costs and Cash to Close: Title, Origination, Prepaids and Earnest Money",
+}
 
 const faqs = [
   {
@@ -46,6 +52,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Earnest Money vs Down Payment vs Closing Costs",
   description:
     "Three different cash lines. Earnest money is usually credited at closing. Timing and the Utah REPC still matter. Not legal advice.",
@@ -60,6 +67,7 @@ export default function EarnestVsDownVsClosingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Earnest Money vs Down Payment vs Closing Costs",
         description:
           "Three different cash lines. Earnest money is usually credited at closing. Timing and the Utah REPC still matter. Not legal advice.",
@@ -89,10 +97,10 @@ export default function EarnestVsDownVsClosingPage() {
       <h2>How this fits Utah cash to close</h2>
       <p>
         The stack (earnest, down, title, origination, prepaids, sometimes reserves) is mapped in{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">how much cash besides down payment</Link>. Title,
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">how much cash besides down payment</Link>. Title,
         origination, and prepaid ranges:{" "}
         <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link>. Reserves are remaining
-        assets after that stack: <Link href="/blog/mortgage-reserves-months-of-pitia">months of PITIA</Link>.
+        assets after that stack: <Link href="/blog/should-i-wait-for-20-percent-down">months of PITIA</Link>.
       </p>
 
       <h2>The REPC can put earnest money at risk</h2>
@@ -109,7 +117,7 @@ export default function EarnestVsDownVsClosingPage() {
         <li>At closing they typically reduce cash to close. You still needed down payment and costs as well.</li>
         <li>
           Gift funds that arrive after earnest is already wired still need a paper trail:{" "}
-          <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>.
+          <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link>.
         </li>
       </ul>
 

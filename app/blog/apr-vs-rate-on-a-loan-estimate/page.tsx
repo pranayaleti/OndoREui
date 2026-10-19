@@ -4,7 +4,10 @@ import { APR_VS_RATE, DISCOUNT_POINTS, LENDING_FACTS_AS_OF } from "@/lib/content
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/apr-vs-rate-on-a-loan-estimate"
+const path = "/blog/rate-lock-if-rates-drop"
+
+/** Folded into the combined rates guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/rate-lock-if-rates-drop", title: "Mortgage Rates, Locks and APR: What Moves Your Rate, Locks, Buydowns and ARM Caps" }
 
 const faqs = [
   {
@@ -55,6 +58,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "APR vs Rate on a Loan Estimate",
   description:
     "The note rate prices principal and interest. APR folds in most lender prepaid finance charges. Not a live-rate table.",
@@ -69,6 +73,7 @@ export default function AprVsRatePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "APR vs Rate on a Loan Estimate",
         description:
           "The note rate prices principal and interest. APR folds in most lender prepaid finance charges. Not a live-rate table.",
@@ -99,10 +104,10 @@ export default function AprVsRatePage() {
       <p>{APR_VS_RATE.howToCompare}</p>
       <p>
         Discount points are a separate math problem: {DISCOUNT_POINTS.breakeven} See{" "}
-        <Link href="/blog/discount-points-breakeven-without-sales-pitch">discount points without a sales pitch</Link>.
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">discount points without a sales pitch</Link>.
         A temporary 2-1 buydown changes the payment for a few years, not the note,{" "}
-        <Link href="/blog/temporary-buydown-who-pays-year-three">who pays, year 3</Link>. ARM caps limit the note, not
-        the tax line: <Link href="/blog/arm-caps-in-plain-english">ARM caps in plain English</Link>.
+        <Link href="/blog/rate-lock-if-rates-drop">who pays, year 3</Link>. ARM caps limit the note, not
+        the tax line: <Link href="/blog/rate-lock-if-rates-drop">ARM caps in plain English</Link>.
       </p>
 
       <h2>The rates hub is the parent, not a table</h2>

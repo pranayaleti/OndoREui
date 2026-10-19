@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, TRI_MERGE } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/what-a-tri-merge-credit-report-shows"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "What a Tri-Merge Credit Report Actually Shows",
   description:
     "Equifax, Experian, and TransUnion together. Mortgage files often use classic FICO and the middle score. Not a consumer-app score.",
@@ -65,6 +69,7 @@ export default function TriMergeCreditReportPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "What a Tri-Merge Credit Report Actually Shows",
         description:
           "Equifax, Experian, and TransUnion together. Mortgage files often use classic FICO and the middle score. Not a consumer-app score.",
@@ -101,16 +106,16 @@ export default function TriMergeCreditReportPage() {
       </ul>
       <p>
         Medical collections after bureau reporting changes:{" "}
-        <Link href="/blog/medical-collections-after-fico-model-change">medical collections after the FICO model change</Link>
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">medical collections after the FICO model change</Link>
         . Thin file with rent and utilities instead of cards:{" "}
-        <Link href="/blog/no-traditional-credit-alternative-credit">alternative credit</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">alternative credit</Link>.
       </p>
 
       <h2>Why a letter can fail after a refresh</h2>
       <p>
         {TRI_MERGE.duringUw} That path is documented in{" "}
-        <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link> and{" "}
-        <Link href="/blog/new-auto-loan-during-underwriting">a new auto loan during underwriting</Link>. Pre-approval,
+        <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link> and{" "}
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">a new auto loan during underwriting</Link>. Pre-approval,
         AUS, and CTC are still three documents:{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">stages guide</Link>.
       </p>

@@ -20,7 +20,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "stay", heading: "Stay in current home", href: "/learn/investment" },
   { id: "move", heading: "Move into the new house", href: "/blog/second-home-vs-investment-occupancy" },
-  { id: "hack", heading: "Occupy one unit of 2–4", href: "/blog/house-hacking-duplex-with-fha" },
+  { id: "hack", heading: "Occupy one unit of 2–4", href: "/blog/fha-vs-conventional-loans-utah" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -94,7 +94,7 @@ export default function FirstRentalOccupancyPage() {
       <p>
         Occupancy types in one place:{" "}
         <Link href="/blog/second-home-vs-investment-occupancy">second home vs investment occupancy</Link>. FHA duplex
-        you will live in: <Link href="/blog/house-hacking-duplex-with-fha">house-hacking a duplex with FHA</Link>.
+        you will live in: <Link href="/blog/fha-vs-conventional-loans-utah">house-hacking a duplex with FHA</Link>.
       </p>
 
       <h2>Scenario A, you are not moving</h2>
@@ -103,16 +103,16 @@ export default function FirstRentalOccupancyPage() {
         <li>Expect investment pricing, down payment, and reserves on the new loan.</li>
         <li>
           Qualifying is often full-doc (your income plus{" "}
-          <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E</Link> history if you already have
+          <Link href="/blog/how-underwriters-verify-income">Schedule E</Link> history if you already have
           rentals) or <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc</Link> on the new property.
         </li>
         <li>
           Using equity in the home you occupy is a separate structure:{" "}
-          <Link href="/blog/cash-out-to-buy-a-rental">cash-out to buy a rental</Link> or{" "}
-          <Link href="/blog/cross-collateral-equity-to-buy-another-house">cross-collateral</Link>. Neither changes
+          <Link href="/blog/heloc-vs-cash-out-refinance">cash-out to buy a rental</Link> or{" "}
+          <Link href="/blog/heloc-vs-cash-out-refinance">cross-collateral</Link>. Neither changes
           occupancy on the rental. If you paid cash for the house you now occupy and want a mortgage on that same
           house later, that is{" "}
-          <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing</Link>, a different fact pattern.
+          <Link href="/blog/heloc-vs-cash-out-refinance">delayed financing</Link>, a different fact pattern.
         </li>
       </ul>
 

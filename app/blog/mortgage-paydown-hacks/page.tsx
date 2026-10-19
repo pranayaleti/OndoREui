@@ -1,6 +1,9 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import Link from "next/link"
-const slug = "/blog/mortgage-paydown-hacks"
+const slug = "/blog/refinance-break-even-when-lower-rate-loses"
+
+/** Folded into the refinance guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/refinance-break-even-when-lower-rate-loses", title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline" }
 const title = "Mortgage Pay-Down Hacks That Actually Save Interest"
 const description = "Biweekly payments, extra principal, recasting, and refinancing, which mortgage pay-down tactics really move the needle, and when not to."
 const published = "2026-07-24"
@@ -18,6 +21,7 @@ const keywords = [
 
 export const metadata = articleMetadata({
   path: slug,
+  mergedInto,
   title,
   description,
   published,
@@ -32,6 +36,7 @@ export default function MortgagePaydownHacks() {
     <ArticleShell
       meta={{
         path: slug,
+        mergedInto,
         title,
         description,
         published,
@@ -54,7 +59,7 @@ export default function MortgagePaydownHacks() {
               <li><strong>Biweekly payments:</strong> paying half the monthly amount every two weeks yields 26 half-payments, one extra full payment a year, shaving years off a 30-year loan.</li>
               <li><strong>Round up:</strong> rounding a $1,840 payment to $2,000 is a painless, automatic principal boost.</li>
               <li><strong>Recast:</strong> after a lump-sum principal payment, ask the servicer to recast, same rate and term, lower payment. Compare the fee with refinance costs in{" "}
-                <Link href="/blog/recast-vs-refinance">recast vs refinance</Link>. Not a savings quote.</li>
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">recast vs refinance</Link>. Not a savings quote.</li>
               <li><strong>Refinance (when rates drop):</strong> a lower rate or shorter term can cut total interest, weigh closing costs against the break-even.</li>
             </ul>
 
@@ -62,7 +67,7 @@ export default function MortgagePaydownHacks() {
             <p>
               Model how extra principal and rate changes affect your payoff with the{" "}
               <Link href="/calculators/mortgage-payment">mortgage payment calculator</Link>. Extra principal versus a
-              new note: <Link href="/blog/biweekly-extra-principal-vs-refinance">biweekly vs refinance</Link>.
+              new note: <Link href="/blog/refinance-break-even-when-lower-rate-loses">biweekly vs refinance</Link>.
             </p>
 
             <h2>When NOT to pay down</h2>

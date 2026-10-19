@@ -68,7 +68,7 @@ export default function LearnHubPage() {
               the week after funding
             </Link>
             ,{" "}
-            <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis" className="prose-link">
+            <Link href="/blog/escrow-shortage-after-first-year" className="prose-link">
               Utah tax calendar vs first escrow analysis
             </Link>
             ,{" "}
@@ -76,11 +76,11 @@ export default function LearnHubPage() {
               escrow shortage after the first year
             </Link>
             ,{" "}
-            <Link href="/blog/impounds-vs-waiving-escrow" className="prose-link">
+            <Link href="/blog/escrow-shortage-after-first-year" className="prose-link">
               impounds vs waiving escrow
             </Link>
             ,{" "}
-            <Link href="/blog/hill-afb-va-coe-occupancy" className="prose-link">
+            <Link href="/blog/va-loan-assumption-entitlement" className="prose-link">
               Hill AFB VA: COE and occupancy
             </Link>
             , the{" "}

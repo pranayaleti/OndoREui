@@ -4,7 +4,13 @@ import { LENDING_FACTS_AS_OF, RESERVES_PITIA } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/mortgage-reserves-months-of-pitia"
+const path = "/blog/should-i-wait-for-20-percent-down"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/should-i-wait-for-20-percent-down",
+  title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+}
 
 const faqs = [
   {
@@ -20,7 +26,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "ctc", heading: "Cash to close", href: "/blog/utah-cash-to-close-besides-down-payment" },
+  { id: "ctc", heading: "Cash to close", href: "/blog/utah-closing-costs-title-origination-prepaids" },
   { id: "res", heading: "Reserves (months of PITIA)" },
 ]
 
@@ -45,6 +51,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Mortgage Reserves: How Many Months of PITIA",
   description:
     "Reserves are remaining liquid assets after cash to close, counted as months of PITIA. Not extra closing costs. Gift funds often cannot fill this line.",
@@ -59,6 +66,7 @@ export default function MortgageReservesPitiaPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Mortgage Reserves: How Many Months of PITIA",
         description:
           "Reserves are remaining liquid assets after cash to close, counted as months of PITIA. Not extra closing costs. Gift funds often cannot fill this line.",
@@ -86,9 +94,9 @@ export default function MortgageReservesPitiaPage() {
       />
       <p>
         Utah cash stack:{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">cash besides down payment</Link>. Earnest vs down vs
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash besides down payment</Link>. Earnest vs down vs
         costs:{" "}
-        <Link href="/blog/earnest-money-vs-down-payment-vs-closing-costs">three cash lines</Link>. HOA in the payment:{" "}
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">three cash lines</Link>. HOA in the payment:{" "}
         <Link href="/blog/dti-frontend-backend-with-hoa">DTI with HOA</Link>.
       </p>
 
@@ -109,7 +117,7 @@ export default function MortgageReservesPitiaPage() {
         </li>
         <li>
           Some future-employment / relocation paths with no paystub yet add reserve tests, often six months’ PITIA or enough liquid assets to cover the months before the start date plus one. Confirm the guide in force. Guide:{" "}
-          <Link href="/blog/relocating-to-utah-job-seasoning">job seasoning when work starts in 60 days</Link>.
+          <Link href="/blog/how-underwriters-verify-income">job seasoning when work starts in 60 days</Link>.
         </li>
         <li>Non-QM overlays (DSCR, asset-depletion, bank-statement) often set their own reserve months.</li>
       </ul>

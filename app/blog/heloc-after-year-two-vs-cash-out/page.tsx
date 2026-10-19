@@ -5,7 +5,10 @@ import { HELOC_SEASONING, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/heloc-after-year-two-vs-cash-out"
+const path = "/blog/heloc-vs-cash-out-refinance"
+
+/** Folded into the HELOC vs cash-out equity guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/heloc-vs-cash-out-refinance", title: "HELOC vs Cash-Out Refinance: Tapping Equity, Buying a Rental and Delayed Financing" }
 
 const faqs = [
   {
@@ -44,6 +47,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "HELOC After Year Two vs Cash-Out",
   description:
     "When you can tap equity after a recent closing, and how seasoning rules affect a HELOC or a cash-out refinance. Not a federal two-year wait.",
@@ -58,6 +62,7 @@ export default function HelocAfterYearTwoPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "HELOC After Year Two vs Cash-Out",
         description:
           "When you can tap equity after a recent closing, and how seasoning rules affect a HELOC or a cash-out refinance.",
@@ -77,7 +82,7 @@ export default function HelocAfterYearTwoPage() {
       <p>
         Structure (lien, payment, tax questions):{" "}
         <Link href="/blog/heloc-vs-cash-out-refinance">cash-out vs HELOC</Link>. Using cash-out proceeds to buy a
-        rental: <Link href="/blog/cash-out-to-buy-a-rental">cash-out to buy a rental</Link>.
+        rental: <Link href="/blog/heloc-vs-cash-out-refinance">cash-out to buy a rental</Link>.
       </p>
 
       <h2>Just closed versus seasoned</h2>
@@ -99,7 +104,7 @@ export default function HelocAfterYearTwoPage() {
       <p>{HELOC_SEASONING.delayedFinancing}</p>
       <p>
         Deep guide (cash purchase, then a mortgage later):{" "}
-        <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing after a cash purchase</Link>.
+        <Link href="/blog/heloc-vs-cash-out-refinance">delayed financing after a cash purchase</Link>.
       </p>
 
       <IsThisRightForMe
@@ -114,7 +119,7 @@ export default function HelocAfterYearTwoPage() {
         <li>
           If the goal is another house, occupancy still has to match:{" "}
           <Link href="/blog/first-rental-occupancy-if-you-still-live-there">first rental occupancy</Link> and{" "}
-          <Link href="/blog/cross-collateral-equity-to-buy-another-house">cross-collateral</Link>.
+          <Link href="/blog/heloc-vs-cash-out-refinance">cross-collateral</Link>.
         </li>
         <li>
           Model costs on the <Link href="/calculators/refinance">refinance calculator</Link> if cash-out is the

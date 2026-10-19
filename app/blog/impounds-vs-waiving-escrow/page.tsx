@@ -10,7 +10,10 @@ import {
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/impounds-vs-waiving-escrow"
+const path = "/blog/escrow-shortage-after-first-year"
+
+/** Folded into the combined escrow and Utah property tax guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/escrow-shortage-after-first-year", title: "Escrow and Utah Property Taxes: Cushion, Shortages, Waiving Impounds and the First Analysis" }
 
 const faqs = [
   {
@@ -57,6 +60,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Impounds vs Waiving Escrow",
   description:
     "When an escrow waiver exists, it is an overlay, not a promise at 20% down. Cash-to-close vs monthly tradeoff. Links cushion and shortage. Informational only.",
@@ -71,6 +75,7 @@ export default function ImpoundsVsWaivingEscrowPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Impounds vs Waiving Escrow",
         description:
           "Waiver is an overlay, not a right. Cash-to-close versus monthly draft. Not a promise you can waive.",
@@ -101,11 +106,11 @@ export default function ImpoundsVsWaivingEscrowPage() {
       <p>
         At origination, an impounded loan often collects months of taxes and insurance plus an allowed cushion.{" "}
         {ESCROW_CUSHION.maxCushion}{" "}
-        <Link href="/blog/escrow-cushion-how-it-is-set">How the cushion is set</Link>.
+        <Link href="/blog/escrow-shortage-after-first-year">How the cushion is set</Link>.
       </p>
       <p>
         {UTAH_TAX_CALENDAR.dueDate}{" "}
-        <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis">
+        <Link href="/blog/escrow-shortage-after-first-year">
           Utah tax calendar vs first escrow analysis
         </Link>
         .

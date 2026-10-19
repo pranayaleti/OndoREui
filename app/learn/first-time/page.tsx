@@ -70,41 +70,41 @@ export default function FirstTimeLearnPage() {
             <h2>Start with the cash stack</h2>
             <p>
               Read{" "}
-              <Link href="/blog/utah-cash-to-close-besides-down-payment">how much cash besides down payment</Link> before
+              <Link href="/blog/utah-closing-costs-title-origination-prepaids">how much cash besides down payment</Link> before
               you shop as if 3.5% is the whole number. Then{" "}
-              <Link href="/blog/earnest-money-vs-down-payment-vs-closing-costs">
+              <Link href="/blog/utah-closing-costs-title-origination-prepaids">
                 earnest money vs down payment vs closing costs
               </Link>{" "}
               for the three cash lines, and the{" "}
               <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing-cost guide</Link> for title,
               origination, and prepaids that vary by county and title company. Remaining assets after that stack:{" "}
-              <Link href="/blog/mortgage-reserves-months-of-pitia">reserves as months of PITIA</Link>. After you close,
+              <Link href="/blog/should-i-wait-for-20-percent-down">reserves as months of PITIA</Link>. After you close,
               Utah’s once-a-year tax bill vs the first impound analysis:{" "}
-              <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis">
+              <Link href="/blog/escrow-shortage-after-first-year">
                 property tax calendar vs first escrow analysis
               </Link>{" "}
-              and <Link href="/blog/escrow-cushion-how-it-is-set">how the escrow cushion is set</Link>. After the first
+              and <Link href="/blog/escrow-shortage-after-first-year">how the escrow cushion is set</Link>. After the first
               year, a shortage on the analysis notice is a different letter:{" "}
               <Link href="/blog/escrow-shortage-after-first-year">escrow shortage after the first year</Link>. The week
               after funding and the first statement:{" "}
               <Link href="/blog/week-after-mortgage-funding">what happens the week after funding</Link> and{" "}
               <Link href="/blog/first-mortgage-statement-vs-note-rate">first statement vs note rate</Link>. Owner’s vs
               lender’s title:{" "}
-              <Link href="/blog/title-insurance-owner-vs-lender">title insurance: owner vs lender</Link>. Impounds vs a
-              waiver overlay: <Link href="/blog/impounds-vs-waiving-escrow">impounds vs waiving escrow</Link>.
+              <Link href="/blog/utah-closing-costs-title-origination-prepaids">title insurance: owner vs lender</Link>. Impounds vs a
+              waiver overlay: <Link href="/blog/escrow-shortage-after-first-year">impounds vs waiving escrow</Link>.
             </p>
             <h2>If family or an agency is helping</h2>
             <ul>
               <li>
-                <Link href="/blog/gift-funds-down-payment-rules">Gift-fund paper trail</Link>, the gift letter is not
+                <Link href="/blog/should-i-wait-for-20-percent-down">Gift-fund paper trail</Link>, the gift letter is not
                 optional.
               </li>
               <li>
-                <Link href="/blog/parent-gifting-down-payment-who-signs">Parent is gifting: who signs what</Link>,
+                <Link href="/blog/should-i-wait-for-20-percent-down">Parent is gifting: who signs what</Link>,
                 occupancy and title are not the same as a donor signature.
               </li>
               <li>
-                <Link href="/blog/student-loans-dti-idr-save">Student loans and DTI after IDR / SAVE</Link>, a $0
+                <Link href="/blog/credit-before-mortgage-rapid-rescore">Student loans and DTI after IDR / SAVE</Link>, a $0
                 dashboard line is not automatically $0 in underwriting.
               </li>
               <li>
@@ -120,20 +120,20 @@ export default function FirstTimeLearnPage() {
                 from pre-approval to CTC, not a closing-date promise.
               </li>
               <li>
-                <Link href="/blog/first-time-buyer-file-mistakes">File mistakes, not lifestyle listicles</Link>, new
+                <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">File mistakes, not lifestyle listicles</Link>, new
                 debt, job change, large deposits, occupancy.
               </li>
               <li>
                 <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">Townhome vs condo HOA docs</Link>, not every
                 townhome is a condo. The plat is the underwrite. Insurance form:{" "}
-                <Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">hazard vs HO-3 vs HO-6</Link>.
+                <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">hazard vs HO-3 vs HO-6</Link>.
               </li>
               <li>
-                <Link href="/blog/relocating-to-utah-job-seasoning">Relocating when the job starts in 60 days</Link>,
+                <Link href="/blog/how-underwriters-verify-income">Relocating when the job starts in 60 days</Link>,
                 offer-letter seasoning is not a published 60-day rule.
               </li>
               <li>
-                <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link>, a second lien is
+                <Link href="/blog/fha-vs-conventional-loans-utah">DPA stacked with an FHA gift</Link>, a second lien is
                 not a gift.
               </li>
               <li>
@@ -145,7 +145,7 @@ export default function FirstTimeLearnPage() {
             <p>
               <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link> is the usual first comparison.{" "}
               <Link href="/loans/usda">USDA</Link> only if the{" "}
-              <Link href="/blog/usda-map-income-limit-eligibility">map and income tests</Link> pass.{" "}
+              <Link href="/blog/fha-vs-conventional-loans-utah">map and income tests</Link> pass.{" "}
               <Link href="/loans/va">VA</Link> if you have remaining entitlement.
             </p>
           </div>

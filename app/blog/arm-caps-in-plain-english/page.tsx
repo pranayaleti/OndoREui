@@ -4,7 +4,10 @@ import { ARM_CAPS, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/arm-caps-in-plain-english"
+const path = "/blog/rate-lock-if-rates-drop"
+
+/** Folded into the combined rates guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/rate-lock-if-rates-drop", title: "Mortgage Rates, Locks and APR: What Moves Your Rate, Locks, Buydowns and ARM Caps" }
 
 const faqs = [
   {
@@ -55,6 +58,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "ARM Caps in Plain English",
   description:
     "Initial, periodic, and lifetime caps are percentage-point limits on the note rate. They are not a payment promise.",
@@ -69,6 +73,7 @@ export default function ArmCapsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "ARM Caps in Plain English",
         description:
           "Initial, periodic, and lifetime caps are percentage-point limits on the note rate. They are not a payment promise.",

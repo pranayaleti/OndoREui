@@ -85,61 +85,61 @@ export default function VariableIncomePillarPage() {
             <ul>
               <li>
                 <strong>Gig plus W-2.</strong>{" "}
-                <Link href="/blog/gig-plus-w2-income-mortgage-average">How the average is built</Link>, two streams,
+                <Link href="/blog/how-underwriters-verify-income">How the average is built</Link>, two streams,
                 then add. A peak gig month is not the method.
               </li>
               <li>
                 <strong>CPA letter vs tax returns.</strong>{" "}
-                <Link href="/blog/cpa-letter-vs-tax-returns-underwriting">What actually moves underwriting</Link>, a
+                <Link href="/blog/how-underwriters-verify-income">What actually moves underwriting</Link>, a
                 letter supports; it does not replace returns and transcripts.
               </li>
               <li>
                 <strong>Commission or seasonal work.</strong> Two years is a common ask when the work is cyclical. See{" "}
-                <Link href="/blog/commission-income-mortgage-averaging">commission averaging and a down year</Link>.
+                <Link href="/blog/how-underwriters-verify-income">commission averaging and a down year</Link>.
               </li>
               <li>
                 <strong>W-2 overtime or bonus.</strong> History on the W-2s usually matters more than a verbal promise.{" "}
-                <Link href="/blog/w2-overtime-likely-to-continue">Likely to continue</Link>.
+                <Link href="/blog/how-underwriters-verify-income">Likely to continue</Link>.
               </li>
               <li>
                 <strong>Self-employed history.</strong>{" "}
-                <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">
+                <Link href="/blog/how-underwriters-verify-income">
                   Two years of returns vs one year
                 </Link>
                 .
               </li>
               <li>
                 <strong>K-1 (partner / S-corp).</strong>{" "}
-                <Link href="/blog/k-1-income-what-usually-counts">What usually counts on a K-1</Link>, distributions
+                <Link href="/blog/how-underwriters-verify-income">What usually counts on a K-1</Link>, distributions
                 are not a qualifying method.
               </li>
               <li>
                 <strong>Schedule E rentals.</strong>{" "}
-                <Link href="/blog/schedule-e-rental-income-purchase-file">Rental income on a purchase file</Link> is
+                <Link href="/blog/how-underwriters-verify-income">Rental income on a purchase file</Link> is
                 history on properties you already own, not proposed rent. Depreciation add-back:{" "}
-                <Link href="/blog/depreciation-add-back-schedule-e">what agency files allow</Link>.
+                <Link href="/blog/how-underwriters-verify-income">what agency files allow</Link>.
               </li>
               <li>
                 <strong>1099 / contract.</strong> See the{" "}
-                <Link href="/blog/1099-mortgage-documentation-checklist">1099 documentation checklist</Link>. If you{" "}
-                <Link href="/blog/just-went-1099-last-month">just went 1099 last month</Link>, that income is usually
+                <Link href="/blog/how-underwriters-verify-income">1099 documentation checklist</Link>. If you{" "}
+                <Link href="/blog/how-underwriters-verify-income">just went 1099 last month</Link>, that income is usually
                 not yet an average. A spouse or partner’s W-2 only helps when they are a borrower,{" "}
-                <Link href="/blog/spouse-w2-offset-1099-volatility">spouse W-2 offset</Link>.
+                <Link href="/blog/how-underwriters-verify-income">spouse W-2 offset</Link>.
               </li>
               <li>
                 <strong>Co-mingled business and personal deposits.</strong>{" "}
-                <Link href="/blog/business-vs-personal-bank-co-mingling">
+                <Link href="/blog/how-underwriters-verify-income">
                   Business vs personal co-mingling
                 </Link>{" "}
                 stalls sourcing, pair with the{" "}
-                <Link href="/blog/large-deposits-60-day-paper-trail">60-day large-deposit trail</Link>.
+                <Link href="/blog/should-i-wait-for-20-percent-down">60-day large-deposit trail</Link>.
               </li>
               <li>
                 <strong>Self-employed with heavy write-offs.</strong> Taxable income can look small while deposits look
                 strong. That is the{" "}
                 <Link href="/learn/non-qm">Non-QM hub</Link> (bank-statement, DSCR, asset-depletion), not a conventional
                 shortcut you can assume. Start with{" "}
-                <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">
+                <Link href="/blog/how-underwriters-verify-income">
                   bank-statement loans
                 </Link>
                 .
@@ -149,7 +149,7 @@ export default function VariableIncomePillarPage() {
             <p>
               It does not tell you that you will qualify. It does not pick a rate. It does not replace tax advice about
               how you report income. If gift funds are part of the down payment, read{" "}
-              <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link> before you move money.
+              <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link> before you move money.
             </p>
           </div>
           <ContentFaq items={faqs} />

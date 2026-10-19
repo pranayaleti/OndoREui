@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, SCHEDULE_E_RENTAL } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/schedule-e-rental-income-purchase-file"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -53,6 +56,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Rental Income on Schedule E in a Purchase File",
   description:
     "How existing rental income on Schedule E is averaged on a purchase, and why proposed rent is a different calculation.",
@@ -67,6 +71,7 @@ export default function ScheduleERentalPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Rental Income on Schedule E in a Purchase File",
         description:
           "How existing rental income on Schedule E is averaged on a purchase, and why proposed rent is a different calculation.",
@@ -96,7 +101,7 @@ export default function ScheduleERentalPage() {
       <ul>
         <li>Take the rental income and expenses from the Schedule E for each property.</li>
         <li>Add back depreciation and other non-cash items the guide allows. Dedicated guide:{" "}
-        <Link href="/blog/depreciation-add-back-schedule-e">depreciation add-back</Link>.</li>
+        <Link href="/blog/how-underwriters-verify-income">depreciation add-back</Link>.</li>
         <li>Average the result, often across two years when both years are in the file.</li>
         <li>Net that against PITI and HOA, or count the full housing on that rental, depending on the worksheet.</li>
       </ul>
@@ -110,7 +115,7 @@ export default function ScheduleERentalPage() {
         Many files are a W-2 (or 1099) primary job plus Schedule E on the side. The W-2 is still verified the usual
         way, see <Link href="/blog/how-underwriters-verify-income">income verification</Link>. The rentals do not
         replace a missing job history. If the rentals are in an entity, you may also have{" "}
-        <Link href="/blog/k-1-income-what-usually-counts">K-1 income</Link> instead of, or in addition to, Schedule E.
+        <Link href="/blog/how-underwriters-verify-income">K-1 income</Link> instead of, or in addition to, Schedule E.
       </p>
       <p>
         A DSCR or investor product that qualifies on the property’s rent is a different stack. The{" "}

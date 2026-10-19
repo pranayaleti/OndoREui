@@ -4,7 +4,13 @@ import { LENDING_FACTS_AS_OF, TITLE_OWNER_VS_LENDER, UTAH_CLOSING_NOTES } from "
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/title-insurance-owner-vs-lender"
+const path = "/blog/utah-closing-costs-title-origination-prepaids"
+
+/** Folded into the Utah closing-costs guide: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/utah-closing-costs-title-origination-prepaids",
+  title: "Utah Closing Costs and Cash to Close: Title, Origination, Prepaids and Earnest Money",
+}
 
 const faqs = [
   {
@@ -51,6 +57,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Title Insurance: Owner’s vs Lender’s Policy",
   description:
     "The lender’s policy protects the lien. The owner’s policy protects your equity. Simultaneous issue is common in Utah title closings. Not legal advice.",
@@ -65,6 +72,7 @@ export default function TitleInsuranceOwnerVsLenderPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Title Insurance: Owner’s vs Lender’s Policy",
         description:
           "Lender’s policy protects the loan. Owner’s policy protects you. Not legal advice and not a premium quote.",
@@ -99,7 +107,7 @@ export default function TitleInsuranceOwnerVsLenderPage() {
           closing costs, title, origination, prepaids
         </Link>
         . Cash besides down payment:{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">cash to close</Link>.
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash to close</Link>.
       </p>
 
       <h2>What a commitment is for</h2>

@@ -4,7 +4,10 @@ import { FTHB_FILE_MISTAKES, LENDING_FACTS_AS_OF, NEW_DEBT_UNDERWRITING, OCCUPAN
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/first-time-buyer-file-mistakes"
+const path = "/blog/pre-approval-vs-aus-vs-clear-to-close"
+
+/** Folded into the comprehensive pre-approval to clear-to-close guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/pre-approval-vs-aus-vs-clear-to-close", title: "From First Conversation to Clear to Close: Pre-Approval, AUS Findings and Why Files Get Declined" }
 
 const faqs = [
   {
@@ -18,8 +21,8 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "debt", heading: "New debt", href: "/blog/new-auto-loan-during-underwriting" },
-  { id: "deposit", heading: "Large deposit", href: "/blog/large-deposits-60-day-paper-trail" },
+  { id: "debt", heading: "New debt", href: "/blog/credit-before-mortgage-rapid-rescore" },
+  { id: "deposit", heading: "Large deposit", href: "/blog/should-i-wait-for-20-percent-down" },
   { id: "occupy", heading: "Occupancy", href: "/blog/second-home-vs-investment-occupancy" },
 ]
 
@@ -46,6 +49,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "First-Time Buyer Mistakes That Are Really File Mistakes",
   description:
     "New debt, a job change, large deposits, and occupancy changes are the common reasons underwriting stalls for first-time buyers.",
@@ -60,6 +64,7 @@ export default function FthbFileMistakesPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "First-Time Buyer Mistakes That Are Really File Mistakes",
         description:
           "New debt, a job change, large deposits, and occupancy changes are the common reasons underwriting stalls for first-time buyers.",
@@ -90,18 +95,18 @@ export default function FthbFileMistakesPage() {
       <p>
         Why the letter and the clear-to-close are different documents:{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs CTC</Link>. Typical later
-        fails: <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>.
+        fails: <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link>.
       </p>
 
       <h2>Closing a card is utilization, not a lifestyle tip</h2>
       <p>
         {FTHB_FILE_MISTAKES.closingCard} Deep guide:{" "}
-        <Link href="/blog/closing-credit-card-before-mortgage">closing a credit card before you apply</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">closing a credit card before you apply</Link>.
       </p>
       <p>
         Adding a parent the wrong way (title vs note vs gift):{" "}
         <Link href="/blog/cosign-vs-co-borrower">cosign vs co-borrower</Link> and{" "}
-        <Link href="/blog/parent-gifting-down-payment-who-signs">who signs a gift</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">who signs a gift</Link>.
       </p>
 
       <h2>What this page will not do</h2>

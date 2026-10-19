@@ -5,7 +5,10 @@ import { JUST_WENT_1099, LENDING_FACTS_AS_OF, SELF_EMPLOYED_HISTORY } from "@/li
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/just-went-1099-last-month"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -20,7 +23,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "now", heading: "Usually usable now", href: "/blog/how-underwriters-verify-income" },
-  { id: "later", heading: "Usually not yet", href: "/blog/two-years-of-tax-returns-vs-one-year-mortgage" },
+  { id: "later", heading: "Usually not yet", href: "/blog/how-underwriters-verify-income" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -52,6 +55,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "I Just Went 1099 Last Month",
   description:
     "A brand-new 1099 job is usually not yet a qualifying average. What still counts from W-2 history and when a one-year overlay even enters the chat.",
@@ -66,6 +70,7 @@ export default function JustWent1099Page() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "I Just Went 1099 Last Month",
         description:
           "A brand-new 1099 job is usually not yet a qualifying average. What still counts from W-2 history and when a one-year overlay even enters the chat.",
@@ -93,7 +98,7 @@ export default function JustWent1099Page() {
       <p>{JUST_WENT_1099.seasoning}</p>
       <p>
         {SELF_EMPLOYED_HISTORY.twoYearTypical} This is a different question from the{" "}
-        <Link href="/blog/1099-mortgage-documentation-checklist">1099 documentation checklist</Link>, which is for
+        <Link href="/blog/how-underwriters-verify-income">1099 documentation checklist</Link>, which is for
         people who already have a contract-income history.
       </p>
 
@@ -108,7 +113,7 @@ export default function JustWent1099Page() {
       <p>{JUST_WENT_1099.sameOccupation}</p>
       <p>
         {SELF_EMPLOYED_HISTORY.oneYearOverlay} Details:{" "}
-        <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">two years vs one year</Link>.
+        <Link href="/blog/how-underwriters-verify-income">two years vs one year</Link>.
       </p>
       <p>Typical compensating pieces, still not a promise:</p>
       <ul>

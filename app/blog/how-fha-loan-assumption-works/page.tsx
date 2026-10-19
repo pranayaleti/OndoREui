@@ -10,7 +10,10 @@ import {
 } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/how-fha-loan-assumption-works"
+const path = "/blog/fha-vs-conventional-loans-utah"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/fha-vs-conventional-loans-utah", title: "FHA vs Conventional in Utah, Plus USDA: Down Payment, MIP, Condos and Assumptions" }
 
 const faqs = [
   {
@@ -42,6 +45,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "How an FHA Loan Assumption Actually Works",
   description:
     "Assuming an FHA loan transfers the existing rate and balance to the buyer. You still qualify, you still cover the equity gap, and the mortgage insurance travels with the loan.",
@@ -60,6 +64,7 @@ export default function FhaLoanAssumptionPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "How an FHA Loan Assumption Actually Works",
         description:
           "Assuming an FHA loan transfers the existing rate and balance to the buyer. You still qualify, you still cover the equity gap, and the mortgage insurance travels with the loan.",
@@ -145,8 +150,8 @@ export default function FhaLoanAssumptionPage() {
       </p>
       <p>
         {LOAN_ASSUMPTION.mipContinues} How FHA mortgage insurance ends is a separate question:{" "}
-        <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">MIP vs PMI</Link>. What else sits on top of the
-        down payment: <Link href="/blog/utah-cash-to-close-besides-down-payment">Utah cash to close</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">MIP vs PMI</Link>. What else sits on top of the
+        down payment: <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah cash to close</Link>.
       </p>
 
       <h2>Assumption vs a new loan</h2>

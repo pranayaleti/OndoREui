@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/bank-statement-loans-when-tax-returns-undercount-income"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,6 +22,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Bank-Statement Loans When Tax Returns Undercount Income",
   description:
     "When write-offs shrink taxable income, some Non-QM programs look at bank deposits. Who they are for, what they cost, and what they are not.",
@@ -33,6 +37,7 @@ export default function BankStatementLoansPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Bank-Statement Loans When Tax Returns Undercount Income",
         description:
           "When write-offs shrink taxable income, some Non-QM programs look at bank deposits. Who they are for, what they cost, and what they are not.",
@@ -77,7 +82,7 @@ export default function BankStatementLoansPage() {
         If your returns already support the payment you want, start with{" "}
         <Link href="/loans/conventional">conventional</Link> or <Link href="/loans/fha">FHA</Link>. If they do not,
         start at the <Link href="/learn/non-qm">Non-QM hub</Link>, bring complete statements, and the{" "}
-        <Link href="/blog/1099-mortgage-documentation-checklist">1099 checklist</Link> to a conversation. Use{" "}
+        <Link href="/blog/how-underwriters-verify-income">1099 checklist</Link> to a conversation. Use{" "}
         <Link href="/calculators/affordability">affordability</Link> only as an illustration. Asking about Non-QM is
         not an application and not an approval.
       </p>

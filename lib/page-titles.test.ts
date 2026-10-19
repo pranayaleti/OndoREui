@@ -53,7 +53,8 @@ describe("static page titles", () => {
       if (brandCount(title) > 1) repeatsBrand.push(`${path}: ${title}`)
     }
 
-    expect(checked).toBeGreaterThan(150)
+    // 68 merged mortgage posts went noindex in Oct 2026, so the floor dropped from 150.
+    expect(checked).toBeGreaterThan(120)
     expect(tooLong).toEqual([])
     expect(repeatsBrand).toEqual([])
   }, 180_000)

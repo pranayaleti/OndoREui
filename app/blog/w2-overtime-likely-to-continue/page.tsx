@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { DTI_EDUCATION, EXAMPLE_NOTE, EXAMPLE_PURCHASE_PRICE_UTAH, LENDING_FACTS_AS_OF, VARIABLE_INCOME_LIKELY_TO_CONTINUE } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/w2-overtime-likely-to-continue"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,6 +22,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Overtime on a W-2: What “Likely to Continue” Means",
   description:
     "Underwriters usually average overtime over a documented history and ask whether it is likely to continue.",
@@ -35,6 +39,7 @@ export default function W2OvertimePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Overtime on a W-2: What “Likely to Continue” Means",
         description:
           "Underwriters usually average overtime over a documented history and ask whether it is likely to continue.",
@@ -67,7 +72,7 @@ export default function W2OvertimePage() {
       </ul>
       <p>
         Bonus is a cousin of overtime and is often averaged the same way. Commission is a different file: see{" "}
-        <Link href="/blog/commission-income-mortgage-averaging">commission averaging and a down year</Link>.
+        <Link href="/blog/how-underwriters-verify-income">commission averaging and a down year</Link>.
       </p>
 
       <h2>What usually does not help</h2>

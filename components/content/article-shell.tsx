@@ -30,6 +30,11 @@ const DEFAULT_AUTHOR = "Ondo Real Estate Editorial Team"
 export type ArticleShellMeta = {
   path: string
   title: string
+  /**
+   * Shorter title for the <title> tag and social cards when the H1 runs past the SERP budget
+   * (SITE_TITLE_MAX). The H1 keeps `title`.
+   */
+  seoTitle?: string
   description: string
   published: string
   modified?: string
@@ -53,13 +58,14 @@ export type ArticleShellMeta = {
 }
 
 export function articleMetadata(meta: ArticleShellMeta): Metadata {
+  const tagTitle = meta.seoTitle ?? meta.title
   return pageCanonicalMetadata(meta.mergedInto?.path ?? meta.path, {
     ...(meta.mergedInto ? { robots: { index: false, follow: true } } : {}),
     // Absolute so the root layout template cannot append a second brand.
-    title: pageTitle(`${meta.title} | Ondo Real Estate`),
+    title: pageTitle(`${tagTitle} | Ondo Real Estate`),
     description: meta.description,
     openGraph: {
-      title: pageTitleText(`${meta.title} | Ondo Real Estate`),
+      title: pageTitleText(`${tagTitle} | Ondo Real Estate`),
       description: meta.description,
       type: "article",
       publishedTime: meta.published,
@@ -67,7 +73,7 @@ export function articleMetadata(meta: ArticleShellMeta): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: pageTitleText(`${meta.title} | Ondo Real Estate`),
+      title: pageTitleText(`${tagTitle} | Ondo Real Estate`),
       description: meta.description,
     },
   })

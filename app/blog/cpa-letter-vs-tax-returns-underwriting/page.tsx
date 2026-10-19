@@ -4,7 +4,10 @@ import { CPA_LETTER_VS_RETURNS, LENDING_FACTS_AS_OF, SELF_EMPLOYED_HISTORY } fro
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/cpa-letter-vs-tax-returns-underwriting"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -18,7 +21,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "returns", heading: "Tax returns + transcripts", href: "/blog/two-years-of-tax-returns-vs-one-year-mortgage" },
+  { id: "returns", heading: "Tax returns + transcripts", href: "/blog/how-underwriters-verify-income" },
   { id: "cpa", heading: "CPA letter / YTD P&L" },
 ]
 
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "CPA Letter vs Tax Returns: What Actually Moves Underwriting",
   description:
     "Agency self-employed files are usually moved by returns and transcripts. A CPA letter supports; it does not replace the stack.",
@@ -57,6 +61,7 @@ export default function CpaLetterVsReturnsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "CPA Letter vs Tax Returns: What Actually Moves Underwriting",
         description:
           "Agency self-employed files are usually moved by returns and transcripts. A CPA letter supports; it does not replace the stack.",
@@ -88,11 +93,11 @@ export default function CpaLetterVsReturnsPage() {
         <li>Confirmation that the business exists and you are self-employed in that line of work.</li>
         <li>
           Support for a{" "}
-          <Link href="/blog/two-years-of-tax-returns-vs-one-year-mortgage">one-year overlay conversation</Link>, next
+          <Link href="/blog/how-underwriters-verify-income">one-year overlay conversation</Link>, next
           to a full year of filed returns, not instead of them. {SELF_EMPLOYED_HISTORY.oneYearOverlay}
         </li>
       </ul>
-      <p>{CPA_LETTER_VS_RETURNS.k1Note} Deep guide: <Link href="/blog/k-1-income-what-usually-counts">K-1 income</Link>.</p>
+      <p>{CPA_LETTER_VS_RETURNS.k1Note} Deep guide: <Link href="/blog/how-underwriters-verify-income">K-1 income</Link>.</p>
 
       <h2>Where it stalls the file</h2>
       <ul>
@@ -102,19 +107,19 @@ export default function CpaLetterVsReturnsPage() {
         </li>
         <li>
           Using a letter to paper over{" "}
-          <Link href="/blog/just-went-1099-last-month">a 1099 job that started last month</Link>. Last month’s first
+          <Link href="/blog/how-underwriters-verify-income">a 1099 job that started last month</Link>. Last month’s first
           invoice is still not a history.
         </li>
         <li>
           Co-mingled deposits that the P&amp;L cannot explain:{" "}
-          <Link href="/blog/business-vs-personal-bank-co-mingling">business vs personal co-mingling</Link>.
+          <Link href="/blog/how-underwriters-verify-income">business vs personal co-mingling</Link>.
         </li>
       </ul>
 
       <h2>If write-offs crush taxable income</h2>
       <p>
         {CPA_LETTER_VS_RETURNS.nonQm} Start with{" "}
-        <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">bank-statement loans</Link> and the{" "}
+        <Link href="/blog/how-underwriters-verify-income">bank-statement loans</Link> and the{" "}
         <Link href="/learn/non-qm">Non-QM hub</Link>, not a stronger letterhead.
       </p>
 

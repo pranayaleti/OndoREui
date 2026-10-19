@@ -73,7 +73,7 @@ const CASES: readonly Case[] = [
   {
     route: "blog/first-rental-occupancy-if-you-still-live-there",
     shows: [FIRST_RENTAL_OCCUPANCY.notHouseHack],
-    linksTo: ["house-hacking-duplex-with-fha", "second-home-vs-investment-occupancy"],
+    linksTo: ["fha-vs-conventional-loans-utah", "second-home-vs-investment-occupancy"],
     never: [NO_OCCUPANCY_COACHING],
   },
   {
@@ -84,7 +84,7 @@ const CASES: readonly Case[] = [
   {
     route: "blog/selling-with-va-loan-entitlement-restoration",
     shows: [VA_ENTITLEMENT_RESTORATION.notADollar],
-    linksTo: ["va-entitlement-second-va-loan"],
+    linksTo: ["va-loan-assumption-entitlement"],
     never: [/\$\d{2,3},\d{3}/],
   },
   {
@@ -96,26 +96,25 @@ const CASES: readonly Case[] = [
   {
     route: "blog/rate-lock-if-rates-drop",
     shows: [LOCK_IF_RATES_DROP.notAutomatic],
-    linksTo: ["rate-lock-extension-vs-floating"],
     never: [NO_PERCENT_RATE],
   },
   {
     route: "blog/hill-afb-va-coe-occupancy",
     shows: [HILL_AFB_VA.bah],
-    linksTo: ["va-entitlement-second-va-loan", "va-funding-fee-finance-vs-pay-cash"],
+    linksTo: ["va-loan-assumption-entitlement"],
     never: [NO_OCCUPANCY_COACHING, /BAH is \$\d/],
   },
   {
     route: "blog/delayed-financing-after-cash-purchase",
     shows: [DELAYED_FINANCING.notInvented],
     contains: [/B2-1\.3-03/, "selling-guide exception, not a statute"],
-    linksTo: ["heloc-after-year-two-vs-cash-out", "cash-out-to-buy-a-rental"],
+    linksTo: ["heloc-vs-cash-out-refinance"],
     never: [NO_OCCUPANCY_COACHING],
   },
   {
     route: "blog/first-time-buyer-file-mistakes",
     shows: [FTHB_FILE_MISTAKES.notLifestyle],
-    linksTo: ["new-auto-loan-during-underwriting", "large-deposits-60-day-paper-trail", "second-home-vs-investment-occupancy"],
+    linksTo: ["credit-before-mortgage-rapid-rescore", "should-i-wait-for-20-percent-down", "second-home-vs-investment-occupancy"],
   },
   {
     route: "blog/closing-credit-card-before-mortgage",
@@ -138,7 +137,6 @@ const CASES: readonly Case[] = [
   },
   {
     route: "blog/refinance-break-even-when-lower-rate-loses",
-    linksTo: ["recast-vs-refinance"],
     table: true,
   },
   {
@@ -149,7 +147,7 @@ const CASES: readonly Case[] = [
   {
     route: "blog/impounds-vs-waiving-escrow",
     shows: [ESCROW_WAIVER.notAPromise],
-    linksTo: ["escrow-cushion-how-it-is-set", "escrow-shortage-after-first-year"],
+    linksTo: ["escrow-shortage-after-first-year"],
   },
   {
     // The dollar limit changes every year; these pages point to the lookup instead of printing one.

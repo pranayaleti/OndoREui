@@ -77,17 +77,17 @@ export default function CashOutRefinancePage() {
               <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
                 <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out</Link>
               </Button>
-              <Button key="/blog/cash-out-to-buy-a-rental" asChild variant="outline" size="sm">
-                <Link href="/blog/cash-out-to-buy-a-rental">Cash-out to buy a rental</Link>
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">Cash-out to buy a rental</Link>
               </Button>
-              <Button key="/blog/delayed-financing-after-cash-purchase" asChild variant="outline" size="sm">
-                <Link href="/blog/delayed-financing-after-cash-purchase">Delayed financing</Link>
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">Delayed financing</Link>
               </Button>
-              <Button key="/blog/heloc-after-year-two-vs-cash-out" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-after-year-two-vs-cash-out">HELOC after year two</Link>
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">HELOC after year two</Link>
               </Button>
-              <Button key="/blog/cross-collateral-equity-to-buy-another-house" asChild variant="outline" size="sm">
-                <Link href="/blog/cross-collateral-equity-to-buy-another-house">Cross-collateral education</Link>
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">Cross-collateral education</Link>
               </Button>
               <Button key="/refinance/rate-term" asChild variant="outline" size="sm">
                 <Link href="/refinance/rate-term">Rate-and-term refinance</Link>

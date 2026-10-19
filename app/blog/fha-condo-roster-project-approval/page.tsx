@@ -5,7 +5,10 @@ import { FHA_CONDO_ROSTER, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/fha-condo-roster-project-approval"
+const path = "/blog/fha-vs-conventional-loans-utah"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/fha-vs-conventional-loans-utah", title: "FHA vs Conventional in Utah, Plus USDA: Down Payment, MIP, Condos and Assumptions" }
 
 const faqs = [
   {
@@ -53,6 +56,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "FHA Condo Roster / Project Approval",
   description:
     "Look up the project on HUD’s condominium list before you write an FHA offer. Expired approval is not current approval.",
@@ -67,6 +71,7 @@ export default function FhaCondoRosterPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "FHA Condo Roster / Project Approval",
         description:
           "Look up the project on HUD’s condominium list before you write an FHA offer. Expired approval is not current approval.",
@@ -131,7 +136,7 @@ export default function FhaCondoRosterPage() {
       <h2>What the HOA still has to produce</h2>
       <ul>
         <li>Budget, reserves, and insurance certificates (including fidelity coverage when required). Condo unit-owners coverage is typically HO-6 next to the master,{" "}
-          <Link href="/blog/hazard-vs-ho3-vs-ho6-condo-insurance">hazard vs HO-3 vs HO-6</Link>.</li>
+          <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">hazard vs HO-3 vs HO-6</Link>.</li>
         <li>Litigation disclosure. Active construction-defect or HOA lawsuits stall both paths.</li>
         <li>Owner-occupancy and FHA-concentration facts. A building full of FHA units can fail concentration even if the roster was once approved.</li>
       </ul>
@@ -140,7 +145,7 @@ export default function FhaCondoRosterPage() {
         building, compare{" "}
         <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link> only after the project is even
         eligible. MIP vs how insurance ends:{" "}
-        <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">MIP vs PMI</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">MIP vs PMI</Link>.
       </p>
 
       <h2>What happens next</h2>
@@ -150,7 +155,7 @@ export default function FhaCondoRosterPage() {
         <li>
           If the project is not approved, ask a loan officer whether single-unit approval is even possible, before
           you spend inspection money. A late condo fail is a common{" "}
-          <Link href="/blog/declined-after-pre-approval">decline after pre-approval</Link>.
+          <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">decline after pre-approval</Link>.
         </li>
       </ol>
     </ArticleShell>

@@ -90,6 +90,11 @@ export type ContentNode = {
   intent: ContentIntent
   /** Other node ids. Keep this a small, editorial set, not a dump. */
   related: readonly string[]
+  /**
+   * Set when the page was folded into another guide (noindex, canonical to it). The node stays
+   * so coverage and cluster tests hold, but related links resolve to the keeper instead.
+   */
+  mergedInto?: string
   cta?: ContentCta
   category?: string
   published?: string

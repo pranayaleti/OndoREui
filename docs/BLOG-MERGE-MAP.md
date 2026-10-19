@@ -1,16 +1,23 @@
-# Blog merge map (follow-up to the October 2026 simplification)
+# Blog merge map (October 2026 simplification)
 
-Status: planned, not built. The October 2026 pass removed four off-topic posts, set the
-nine engineering posts to noindex pending their move to ondosoft.com, and left the
-mortgage library alone. This file is the merge plan for that library.
+Status: built on 2026-10-19. Twelve mortgage guides now carry the content of 80 retired
+posts. Each retired post still renders at its old URL as a noindex,follow page whose
+canonical points at its guide, with a "This guide now lives in" link at the top. The
+October 2026 pass also removed four off-topic posts and set the nine engineering posts to
+noindex pending their move to ondosoft.com.
 
-Rules when a merge is built:
-- Keep the strongest slug as the guide. Every other slug in the cluster becomes a
-  noindex,follow page with a canonical to the guide (the `MERGED` pattern in
-  `app/blog/merged-and-thin-posts.test.tsx`) and a line in `public/_redirects`.
+Rules for any further merge:
+- Keep the strongest slug as the guide. Every other slug in the cluster keeps its page but
+  passes `mergedInto` to `articleMetadata` and `ArticleShell` (noindex,follow plus the
+  canonical). Do not add it to `public/_redirects`: a redirect source cannot also be a
+  page, and `lib/legacy-redirects.test.ts` enforces that.
 - Move each retired post's unique facts into the guide before retiring it.
-- Update `lib/blog-posts.ts`, `lib/blog-slugs.ts`, `lib/content/graph.ts`,
-  `lib/search-index.ts` and `next-sitemap.config.js` in the same commit.
+- In the same commit: drop the slug from `lib/blog-posts.ts` and `lib/search-index.ts`,
+  keep it in `lib/blog-slugs.ts`, tag its node in `lib/content/graph.ts` with
+  `mergedInto`, add it to the noindex list in `next-sitemap.config.js` and to the
+  `MERGED` map in `app/blog/merged-and-thin-posts.test.tsx`, and re-point every
+  `/blog/<slug>` link to the guide.
+- Give the guide a `seoTitle` of 60 characters or fewer; the H1 can stay longer.
 
 ## Engineering posts (move to ondosoft.com, then 301)
 

@@ -9,7 +9,13 @@ import {
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/mip-vs-pmi-how-mortgage-insurance-ends"
+const path = "/blog/should-i-wait-for-20-percent-down"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/should-i-wait-for-20-percent-down",
+  title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+}
 
 const faqs = [
   {
@@ -66,6 +72,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "How MIP vs PMI Actually Leaves the Loan",
   description:
     "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. This post covers how each one ends.",
@@ -80,6 +87,7 @@ export default function MipVsPmiPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "How MIP vs PMI Actually Leaves the Loan",
         description:
           "FHA annual MIP is timed from original LTV. Conventional PMI can often come off with equity. This post covers how each one ends.",
@@ -100,7 +108,7 @@ export default function MipVsPmiPage() {
       <p>{MORTGAGE_INSURANCE_EXIT.notWaitFor20} The purchase question is{" "}
         <Link href="/blog/should-i-wait-for-20-percent-down">should I wait for 20% down</Link>. Servicer cancellation
         of conventional PMI (original value vs a new appraisal) is{" "}
-        <Link href="/blog/pmi-removal-original-value-vs-new-appraisal">PMI removal mechanics</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">PMI removal mechanics</Link>.
       </p>
 
       <ComparisonTable
@@ -116,7 +124,7 @@ export default function MipVsPmiPage() {
         Upfront MIP is often financed: {FHA_SNAPSHOT.upfrontMip}. Financing it raises the base loan. That is a Loan
         Estimate line, not a reason MIP will vanish later. Program overview: <Link href="/loans/fha">FHA loans</Link>.
         If you later refinance FHA-to-FHA, that may be a{" "}
-        <Link href="/blog/fha-va-streamline-refinance-less-docs">streamline</Link>, it does not automatically delete
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">streamline</Link>, it does not automatically delete
         annual MIP; the new FHA loan has its own MIP rules.
       </p>
 
@@ -125,7 +133,7 @@ export default function MipVsPmiPage() {
       <p>
         {MORTGAGE_INSURANCE_EXIT.conventionalHpa}         Asking the servicer to cancel based on a new appraisal of{" "}
         <em>current</em> value is allowed on some files and is a different path from automatic termination. That
-        appraisal path is <Link href="/blog/pmi-removal-original-value-vs-new-appraisal">PMI removal: original value vs
+        appraisal path is <Link href="/blog/should-i-wait-for-20-percent-down">PMI removal: original value vs
         new appraisal</Link>, not this page’s main subject.
       </p>
       <p>

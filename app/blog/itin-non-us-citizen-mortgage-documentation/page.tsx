@@ -84,7 +84,7 @@ export default function ItinDocumentationPage() {
       <p>{ITIN_DOCUMENTATION.noEasier}</p>
       <p>
         Thin traditional credit is a different path:{" "}
-        <Link href="/blog/no-traditional-credit-alternative-credit">alternative credit</Link>.{" "}
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">alternative credit</Link>.{" "}
         {ALTERNATIVE_CREDIT.fairHousing}
       </p>
 
@@ -116,7 +116,7 @@ export default function ItinDocumentationPage() {
         <li>
           If agency income already documents with a valid SSN and lawful presence, start there,{" "}
           <Link href="/loans">loan programs</Link> and{" "}
-          <Link href="/blog/1099-mortgage-documentation-checklist">1099 checklist</Link> when income is contract.
+          <Link href="/blog/how-underwriters-verify-income">1099 checklist</Link> when income is contract.
         </li>
         <li>
           If the file is ITIN-only, that is typically a <Link href="/learn/non-qm">Non-QM</Link> overlay conversation,

@@ -126,7 +126,7 @@ export default function HousingGrantsPage() {
                 The down payment is often the first hurdle. In Utah, Utah Housing Corporation is the first place to look. Local
                 grants and federal loan programs can cover part of it too. Terms, funding, and eligibility change. Confirm with the
                 agency. If a family gift will sit next to DPA on an FHA file, read{" "}
-                <Link href="/blog/dpa-stacked-with-fha-gift-funds" className="prose-link">
+                <Link href="/blog/fha-vs-conventional-loans-utah" className="prose-link">
                   how DPA stacks with an FHA gift
                 </Link>
                 .
@@ -175,7 +175,7 @@ export default function HousingGrantsPage() {
                 <Link href="/qualify">Talk with a loan officer</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA + FHA gift</Link>
+                <Link href="/blog/fha-vs-conventional-loans-utah">DPA + FHA gift</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
                 <Link href="/blog/first-time-home-buyer-guide">First-Time Buyer Blog</Link>

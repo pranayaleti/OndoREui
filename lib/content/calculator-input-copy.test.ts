@@ -19,7 +19,7 @@ describe("calculator input copy", () => {
 
     const buydown = calculatorInputCopyForSlug("temporary-buydown")
     expect(buydown?.lead).toMatch(/note rate does not change/i)
-    expect(buydown?.related.some((link) => link.href.includes("temporary-buydown-who-pays"))).toBe(true)
+    expect(buydown?.related.some((link) => link.href.includes("rate-lock-if-rates-drop"))).toBe(true)
 
     const dscr = calculatorInputCopyForSlug("dscr")
     expect(dscr?.lead).toMatch(/not personal DTI/i)
@@ -33,10 +33,10 @@ describe("calculator input copy", () => {
     expect(closing?.related.some((link) => link.href.includes("escrow-shortage-after-first-year"))).toBe(true)
 
     const refinanceCopy = calculatorInputCopyForSlug("refinance")
-    expect(refinanceCopy?.related.some((link) => link.href.includes("delayed-financing-after-cash-purchase"))).toBe(
+    expect(refinanceCopy?.related.some((link) => link.href.includes("heloc-vs-cash-out-refinance"))).toBe(
       true,
     )
-    expect(refinanceCopy?.related.some((link) => link.href.includes("recast-vs-refinance"))).toBe(true)
+    expect(refinanceCopy?.related.some((link) => link.href.includes("refinance-break-even-when-lower-rate-loses"))).toBe(true)
 
     const paymentCopy = calculatorInputCopyForSlug("mortgage-payment")
     expect(paymentCopy?.related.some((link) => link.href.includes("interest-only-mortgages-who-they-are-for"))).toBe(
@@ -44,8 +44,8 @@ describe("calculator input copy", () => {
     )
 
     const closingCopy = calculatorInputCopyForSlug("closing-cost")
-    expect(closingCopy?.related.some((link) => link.href.includes("title-insurance-owner-vs-lender"))).toBe(true)
-    expect(closingCopy?.related.some((link) => link.href.includes("impounds-vs-waiving-escrow"))).toBe(true)
+    expect(closingCopy?.related.some((link) => link.href.includes("utah-closing-costs-title-origination-prepaids"))).toBe(true)
+    expect(closingCopy?.related.some((link) => link.href.includes("escrow-shortage-after-first-year"))).toBe(true)
   })
 
   it("returns undefined for unknown slugs", () => {

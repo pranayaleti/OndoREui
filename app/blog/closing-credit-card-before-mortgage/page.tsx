@@ -4,7 +4,10 @@ import { CLOSING_CREDIT_CARD, LENDING_FACTS_AS_OF, TRI_MERGE } from "@/lib/conte
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/closing-credit-card-before-mortgage"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -18,7 +21,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "open", heading: "Leave open, pay down", href: "/blog/what-a-tri-merge-credit-report-shows" },
+  { id: "open", heading: "Leave open, pay down", href: "/blog/credit-before-mortgage-rapid-rescore" },
   { id: "close", heading: "Close the account" },
 ]
 
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Closing a Credit Card Before You Apply",
   description:
     "Closing a card can raise utilization by shrinking available credit. AUS reads the tri-merge. Not a score-raise method.",
@@ -65,6 +69,7 @@ export default function ClosingCreditCardPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Closing a Credit Card Before You Apply",
         description:
           "Closing a card can raise utilization by shrinking available credit. AUS reads the tri-merge. Not a score-raise method.",
@@ -92,7 +97,7 @@ export default function ClosingCreditCardPage() {
       />
       <p>{CLOSING_CREDIT_CARD.utilization}</p>
       <p>
-        What the report actually shows: <Link href="/blog/what-a-tri-merge-credit-report-shows">tri-merge</Link>.{" "}
+        What the report actually shows: <Link href="/blog/credit-before-mortgage-rapid-rescore">tri-merge</Link>.{" "}
         {TRI_MERGE.middleScore}
       </p>
 
@@ -100,9 +105,9 @@ export default function ClosingCreditCardPage() {
       <p>{CLOSING_CREDIT_CARD.aus}</p>
       <p>
         New installment debt is a different stall:{" "}
-        <Link href="/blog/new-auto-loan-during-underwriting">auto loan during underwriting</Link>. First-time file
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">auto loan during underwriting</Link>. First-time file
         mistakes (including this one):{" "}
-        <Link href="/blog/first-time-buyer-file-mistakes">file mistakes</Link>.
+        <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">file mistakes</Link>.
       </p>
 
       <h2>Scenarios</h2>
@@ -131,7 +136,7 @@ export default function ClosingCreditCardPage() {
         <li>If a card is about to close or you want it closed, ask the loan officer before the next credit refresh.</li>
         <li>
           Medical collections are a different bureau story:{" "}
-          <Link href="/blog/medical-collections-after-fico-model-change">medical collections</Link>.
+          <Link href="/blog/credit-before-mortgage-rapid-rescore">medical collections</Link>.
         </li>
         <li>
           Conversation: <Link href="/qualify">what we will ask</Link>. A conversation does not pull credit until you

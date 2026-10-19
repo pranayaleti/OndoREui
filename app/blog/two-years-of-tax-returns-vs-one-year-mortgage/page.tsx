@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { LENDING_FACTS_AS_OF, SELF_EMPLOYED_HISTORY } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/two-years-of-tax-returns-vs-one-year-mortgage"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -18,6 +21,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Two Years of Tax Returns vs One Year: When Overlays Allow",
   description:
     "Most agency self-employed files want two years of returns. Some overlays allow one year in the same line of work.",
@@ -32,6 +36,7 @@ export default function TwoYearReturnsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Two Years of Tax Returns vs One Year: When Overlays Allow",
         description:
           "Most agency self-employed files want two years of returns. Some overlays allow one year in the same line of work.",
@@ -68,11 +73,11 @@ export default function TwoYearReturnsPage() {
       </ul>
       <p>
         If write-offs crush taxable income, the conversation may move to{" "}
-        <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">bank-statement / Non-QM</Link>{" "}
+        <Link href="/blog/how-underwriters-verify-income">bank-statement / Non-QM</Link>{" "}
         instead of “please ignore year two.” A CPA letter still does not replace the return stack:{" "}
-        <Link href="/blog/cpa-letter-vs-tax-returns-underwriting">CPA letter vs tax returns</Link>. If the 1099 work
+        <Link href="/blog/how-underwriters-verify-income">CPA letter vs tax returns</Link>. If the 1099 work
         only started last month, start with{" "}
-        <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link>, not this overlay.
+        <Link href="/blog/how-underwriters-verify-income">I just went 1099 last month</Link>, not this overlay.
       </p>
 
       <h2>What happens next</h2>

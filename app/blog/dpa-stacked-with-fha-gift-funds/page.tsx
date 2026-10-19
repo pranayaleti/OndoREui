@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { FHA_SNAPSHOT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/dpa-stacked-with-fha-gift-funds"
+const path = "/blog/fha-vs-conventional-loans-utah"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/fha-vs-conventional-loans-utah", title: "FHA vs Conventional in Utah, Plus USDA: Down Payment, MIP, Condos and Assumptions" }
 
 const faqs = [
   {
@@ -18,6 +21,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "UHC / DPA Stacked with an FHA Gift: How They Work Together",
   description:
     "Down payment assistance is often a second lien. A gift is not. Stacking them on FHA is common and still has paper-trail and agency rules.",
@@ -32,6 +36,7 @@ export default function DpaGiftPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "UHC / DPA Stacked with an FHA Gift: How They Work Together",
         description:
           "Down payment assistance is often a second lien. A gift is not. Stacking them on FHA is common and still has paper-trail and agency rules.",
@@ -53,7 +58,7 @@ export default function DpaGiftPage() {
         <li>
           <strong>Gift.</strong> Eligible donor, gift letter, evidence the money left the donor and arrived with you or
           at closing. Not repayable. Details:{" "}
-          <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>.
+          <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link>.
         </li>
         <li>
           <strong>DPA (including many Utah Housing Corporation products).</strong> Often a second mortgage, a
@@ -81,7 +86,7 @@ export default function DpaGiftPage() {
         It will not list this year’s UHC dollar amounts, rate sheets, or income limits. Those go stale. It will not
         tell you that you will receive assistance. Ask a loan officer which first-lien and DPA pairing is even being
         offered this month, then read{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">cash besides down payment</Link> so you still fund
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash besides down payment</Link> so you still fund
         prepaids.
       </p>
     </ArticleShell>

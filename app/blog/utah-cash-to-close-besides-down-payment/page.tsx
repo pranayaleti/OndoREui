@@ -8,7 +8,13 @@ import {
 } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/utah-cash-to-close-besides-down-payment"
+const path = "/blog/utah-closing-costs-title-origination-prepaids"
+
+/** Folded into the Utah closing-costs guide: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/utah-closing-costs-title-origination-prepaids",
+  title: "Utah Closing Costs and Cash to Close: Title, Origination, Prepaids and Earnest Money",
+}
 
 const faqs = [
   {
@@ -25,6 +31,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "How Much Cash Do I Need Besides Down Payment in Utah?",
   description:
     "Earnest money, title, origination, prepaids, and reserves sit on top of down payment. Utah closings vary by county and title company.",
@@ -42,6 +49,7 @@ export default function CashToClosePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "How Much Cash Do I Need Besides Down Payment in Utah?",
         description:
           "Earnest money, title, origination, prepaids, and reserves sit on top of down payment. Utah closings vary by county and title company.",
@@ -73,7 +81,7 @@ export default function CashToClosePage() {
               <>
                 Due per the Utah REPC. Usually credited at closing, not extra forever, but it leaves your account when
                 you go under contract. Three lines:{" "}
-                <Link href="/blog/earnest-money-vs-down-payment-vs-closing-costs">
+                <Link href="/blog/utah-closing-costs-title-origination-prepaids">
                   earnest vs down payment vs closing costs
                 </Link>
                 .
@@ -85,8 +93,8 @@ export default function CashToClosePage() {
             body: (
               <>
                 Program minimums differ. Gift funds and DPA can fill this line when documented. See{" "}
-                <Link href="/blog/gift-funds-down-payment-rules">gift funds</Link> and{" "}
-                <Link href="/blog/dpa-stacked-with-fha-gift-funds">DPA stacked with an FHA gift</Link>.
+                <Link href="/blog/should-i-wait-for-20-percent-down">gift funds</Link> and{" "}
+                <Link href="/blog/fha-vs-conventional-loans-utah">DPA stacked with an FHA gift</Link>.
               </>
             ),
           },
@@ -117,7 +125,7 @@ export default function CashToClosePage() {
               <>
                 Some programs and overlays want months of PITI left after closing. That is still cash even if it stays
                 in your account. See{" "}
-                <Link href="/blog/mortgage-reserves-months-of-pitia">mortgage reserves (months of PITIA)</Link>.
+                <Link href="/blog/should-i-wait-for-20-percent-down">mortgage reserves (months of PITIA)</Link>.
               </>
             ),
           },

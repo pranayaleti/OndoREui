@@ -118,10 +118,10 @@ export default function UtahRepcDeadlinePage() {
       <p>
         Earnest money is usually credited toward what you already owe at closing. Timing still matters: the deposit
         leaves your account when the REPC says it must. Pair this with{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">cash besides down payment</Link> and the{" "}
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash besides down payment</Link> and the{" "}
         <Link href="/learn/first-time">first-time hub</Link>. If you are moving for a job that has not started, the
         contract clock still runs, see{" "}
-        <Link href="/blog/relocating-to-utah-job-seasoning">relocating and job seasoning</Link>.
+        <Link href="/blog/how-underwriters-verify-income">relocating and job seasoning</Link>.
       </p>
 
       <h2>What happens next</h2>

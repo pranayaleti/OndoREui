@@ -87,7 +87,7 @@ export default function CashOnCashReturnExplained() {
             <p>
               Cash-on-cash is the clearest read on annual cash yield for a financed deal. Combine it
               with the growth picture, and see our{" "}
-              <Link href="/blog/mortgage-paydown-hacks">mortgage pay-down hacks</Link> for how debt
+              <Link href="/blog/refinance-break-even-when-lower-rate-loses">mortgage pay-down hacks</Link> for how debt
               choices change the cash flow.
             </p>
           

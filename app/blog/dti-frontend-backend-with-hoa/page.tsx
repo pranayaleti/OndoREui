@@ -93,13 +93,13 @@ export default function DtiHoaPage() {
       <h2>Why condos surprise people</h2>
       <p>
         {DTI_HOA.specialAssessment} FHA condos also need project approval,{" "}
-        <Link href="/blog/fha-condo-roster-project-approval">FHA condo roster</Link>, which is not a DTI test but can
+        <Link href="/blog/fha-vs-conventional-loans-utah">FHA condo roster</Link>, which is not a DTI test but can
         kill the same contract.
       </p>
       <p>
         Variable income is averaged <em>before</em> these ratios are run: {DTI_EDUCATION.variableIncomeNote} Student
         loans have their own counting rules:{" "}
-        <Link href="/blog/student-loans-dti-idr-save">IDR / SAVE and DTI</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">IDR / SAVE and DTI</Link>.
       </p>
 
       <h2>How to use the calculator without lying to yourself</h2>

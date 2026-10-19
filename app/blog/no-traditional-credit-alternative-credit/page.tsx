@@ -4,7 +4,10 @@ import { ALTERNATIVE_CREDIT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/no-traditional-credit-alternative-credit"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -21,7 +24,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "none", heading: "No or thin traditional credit", href: "/loans/fha" },
-  { id: "weak", heading: "Traditional credit that is weak", href: "/blog/medical-collections-after-fico-model-change" },
+  { id: "weak", heading: "Traditional credit that is weak", href: "/blog/credit-before-mortgage-rapid-rescore" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -53,6 +56,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "No Traditional Credit / Alternative Credit",
   description:
     "Rent and utilities can document a thin file. Weak traditional credit is a different path. Fair Housing safe, no steering.",
@@ -67,6 +71,7 @@ export default function AlternativeCreditPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "No Traditional Credit / Alternative Credit",
         description:
           "Rent and utilities can document a thin file. Weak traditional credit is a different path. Fair Housing safe.",
@@ -112,7 +117,7 @@ export default function AlternativeCreditPage() {
         <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link> the same way any other buyer would,
         occupancy, MIP vs PMI, cash to close, not as a product “for” a type of person. Medical collections that still
         report are{" "}
-        <Link href="/blog/medical-collections-after-fico-model-change">a different, dated credit snapshot</Link>.
+        <Link href="/blog/credit-before-mortgage-rapid-rescore">a different, dated credit snapshot</Link>.
       </p>
 
       <h2>What happens next</h2>

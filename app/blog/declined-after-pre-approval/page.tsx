@@ -3,7 +3,10 @@ import { ArticleCallout } from "@/components/content/article-callout"
 import { LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/declined-after-pre-approval"
+const path = "/blog/pre-approval-vs-aus-vs-clear-to-close"
+
+/** Folded into the comprehensive pre-approval to clear-to-close guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/pre-approval-vs-aus-vs-clear-to-close", title: "From First Conversation to Clear to Close: Pre-Approval, AUS Findings and Why Files Get Declined" }
 
 const faqs = [
   {
@@ -20,6 +23,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Declined After Pre-Approval: Typical Condition Fails",
   description:
     "A pre-approval is not a commitment to lend. Job changes, large deposits, new debt, and income that will not average are the usual late fails.",
@@ -34,6 +38,7 @@ export default function DeclinedAfterPreapprovalPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Declined After Pre-Approval: Typical Condition Fails",
         description:
           "A pre-approval is not a commitment to lend. Job changes, large deposits, new debt, and income that will not average are the usual late fails.",
@@ -64,11 +69,11 @@ export default function DeclinedAfterPreapprovalPage() {
         </li>
         <li>
           <strong>Large undocumented deposits.</strong> Cash that cannot be sourced, or a gift moved without a letter.
-          See the <Link href="/blog/large-deposits-60-day-paper-trail">60-day paper trail</Link>.
+          See the <Link href="/blog/should-i-wait-for-20-percent-down">60-day paper trail</Link>.
         </li>
         <li>
           <strong>New debt.</strong> A car loan or financed furniture during underwriting changes DTI. See{" "}
-          <Link href="/blog/new-auto-loan-during-underwriting">new auto loan during underwriting</Link>.
+          <Link href="/blog/credit-before-mortgage-rapid-rescore">new auto loan during underwriting</Link>.
         </li>
         <li>
           <strong>Credit inquiry / new tradeline</strong> that was not on the tri-merge used for the letter.
@@ -76,7 +81,7 @@ export default function DeclinedAfterPreapprovalPage() {
         <li>
           <strong>Property.</strong> Appraisal, condo project, or HUD minimum property standards the contract did not
           anticipate. FHA condos:{" "}
-          <Link href="/blog/fha-condo-roster-project-approval">project roster / single-unit approval</Link>.
+          <Link href="/blog/fha-vs-conventional-loans-utah">project roster / single-unit approval</Link>.
         </li>
         <li>
           <strong>Occupancy or program mismatch.</strong> USDA map, VA occupancy, or FHA condo approval discovered
@@ -96,10 +101,10 @@ export default function DeclinedAfterPreapprovalPage() {
         average the way you hoped. The three stages, letter, AUS, CTC, are{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs clear to close</Link>. Tight DTI
         with documented strengths is{" "}
-        <Link href="/blog/compensating-factors-in-aus-findings">compensating factors in findings</Link>, not a promise
+        <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">compensating factors in findings</Link>, not a promise
         the letter will hold. See{" "}
         <Link href="/faq/loans-faqs">loans FAQs</Link> for pre-approval vs pre-qualification. First-time underwriting
-        stalls in one map: <Link href="/blog/first-time-buyer-file-mistakes">file mistakes</Link>. Timeline ranges:{" "}
+        stalls in one map: <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">file mistakes</Link>. Timeline ranges:{" "}
         <Link href="/blog/how-long-first-purchase-takes">how long a first purchase usually takes</Link>.
       </p>
 

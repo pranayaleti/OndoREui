@@ -1,7 +1,10 @@
 import { ArticleShell, articleMetadata } from "@/components/content/article-shell"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-const slug = "/blog/understanding-property-taxes-utah"
+const slug = "/blog/escrow-shortage-after-first-year"
+
+/** Folded into the combined escrow and Utah property tax guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/escrow-shortage-after-first-year", title: "Escrow and Utah Property Taxes: Cushion, Shortages, Waiving Impounds and the First Analysis" }
 const title = "Understanding Property Taxes in Utah"
 const description = "Complete breakdown of Utah property taxes and how they affect your investment."
 const published = "2024-11-08"
@@ -13,6 +16,7 @@ const keywords = ["Utah property taxes", "Truth in Taxation Utah", "property tax
 
 export const metadata = articleMetadata({
   path: slug,
+  mergedInto,
   title,
   description,
   published,
@@ -28,6 +32,7 @@ export default function UnderstandingPropertyTaxesUtah() {
     <ArticleShell
       meta={{
         path: slug,
+        mergedInto,
         title,
         description,
         published,

@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { LENDING_FACTS_AS_OF, USDA_SNAPSHOT } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/usda-map-income-limit-eligibility"
+const path = "/blog/fha-vs-conventional-loans-utah"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/fha-vs-conventional-loans-utah", title: "FHA vs Conventional in Utah, Plus USDA: Down Payment, MIP, Condos and Assumptions" }
 
 const faqs = [
   {
@@ -17,6 +20,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "USDA Map and Income Limit: Am I Even Eligible?",
   description:
     "USDA is address-specific and household-income-specific. How to use the official map and income tools before you assume zero-down is available.",
@@ -31,6 +35,7 @@ export default function UsdaMapPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "USDA Map and Income Limit: Am I Even Eligible?",
         description:
           "USDA is address-specific and household-income-specific. How to use the official map and income tools before you assume zero-down is available.",

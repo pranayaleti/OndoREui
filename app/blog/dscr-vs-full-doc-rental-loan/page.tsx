@@ -20,7 +20,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "dscr", heading: "DSCR (property qualifies)", href: "/calculators/dscr" },
-  { id: "full", heading: "Full-doc rental (borrower qualifies)", href: "/blog/schedule-e-rental-income-purchase-file" },
+  { id: "full", heading: "Full-doc rental (borrower qualifies)", href: "/blog/how-underwriters-verify-income" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -94,7 +94,7 @@ export default function DscrVsFullDocPage() {
       <h2>When full-doc is the first conversation</h2>
       <p>
         If you already have rental history on Schedule E, start with{" "}
-        <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E on a purchase file</Link>. Agency
+        <Link href="/blog/how-underwriters-verify-income">Schedule E on a purchase file</Link>. Agency
         investment pricing is often more standard when the borrower can be qualified. {NON_QM.notAgency}
       </p>
       <p>
@@ -111,7 +111,7 @@ export default function DscrVsFullDocPage() {
       </p>
       <p>
         Funding a rental down payment from a cash-out on the house you occupy is a different trap: two occupancies, two
-        LTVs. See <Link href="/blog/cash-out-to-buy-a-rental">cash-out to buy a rental</Link>. Occupancy labels are{" "}
+        LTVs. See <Link href="/blog/heloc-vs-cash-out-refinance">cash-out to buy a rental</Link>. Occupancy labels are{" "}
         <Link href="/blog/second-home-vs-investment-occupancy">primary, second home, or investment</Link>, not a
         pricing hack. {DSCR_VS_FULL_DOC.occupancy}
       </p>

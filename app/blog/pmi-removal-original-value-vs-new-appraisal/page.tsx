@@ -4,7 +4,13 @@ import { LENDING_FACTS_AS_OF, PMI_REMOVAL } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/pmi-removal-original-value-vs-new-appraisal"
+const path = "/blog/should-i-wait-for-20-percent-down"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/should-i-wait-for-20-percent-down",
+  title: "Down Payment, PMI and Gift Funds: Should You Wait for 20% Down?",
+}
 
 const faqs = [
   {
@@ -59,6 +65,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Removing PMI: Original Value vs New Appraisal",
   description:
     "HPA cancellation uses original value. A new appraisal of current value is a separate path with its own investor rules.",
@@ -73,6 +80,7 @@ export default function PmiRemovalPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Removing PMI: Original Value vs New Appraisal",
         description:
           "HPA cancellation uses original value. A new appraisal of current value is a separate path with its own investor rules.",
@@ -111,7 +119,7 @@ export default function PmiRemovalPage() {
       <h2>If the loan is FHA</h2>
       <p>
         Stop. Annual MIP is timed from original LTV. Read{" "}
-        <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">how MIP vs PMI actually leaves the loan</Link>. A
+        <Link href="/blog/should-i-wait-for-20-percent-down">how MIP vs PMI actually leaves the loan</Link>. A
         conventional refinance can be the early-exit conversation; run{" "}
         <Link href="/blog/refinance-break-even-when-lower-rate-loses">break-even after costs</Link> before you treat
         MIP savings as free.

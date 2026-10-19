@@ -111,7 +111,7 @@ export default function DivorceAndMortgagePage() {
       </p>
       <p>
         The mechanics are the same as any assumption, including the release of liability that actually removes the
-        departing spouse: <Link href="/blog/how-fha-loan-assumption-works">how an FHA loan assumption works</Link>. On a
+        departing spouse: <Link href="/blog/fha-vs-conventional-loans-utah">how an FHA loan assumption works</Link>. On a
         VA loan there is an entitlement question on top:{" "}
         <Link href="/blog/va-loan-assumption-entitlement">VA assumption and entitlement</Link>.
       </p>

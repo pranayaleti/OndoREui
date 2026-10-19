@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, STUDENT_LOAN_DTI } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/student-loans-dti-idr-save"
+const path = "/blog/credit-before-mortgage-rapid-rescore"
+
+/** Folded into the comprehensive credit guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/credit-before-mortgage-rapid-rescore", title: "Credit Before a Mortgage: Tri-Merge Scores, Rescores, Collections, Student Loans and New Debt" }
 
 const faqs = [
   {
@@ -56,6 +59,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Student Loans and DTI After IDR / SAVE Changes",
   description:
     "A $0 student-loan line on a dashboard is not automatically $0 in DTI. How agencies typically count IDR, deferment, and forbearance.",
@@ -70,6 +74,7 @@ export default function StudentLoansIdrPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Student Loans and DTI After IDR / SAVE Changes",
         description:
           "A $0 student-loan line on a dashboard is not automatically $0 in DTI. How agencies typically count IDR, deferment, and forbearance.",

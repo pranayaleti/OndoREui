@@ -4,7 +4,10 @@ import { APR_VS_RATE, LENDING_FACTS_AS_OF, LOCK_VS_FLOAT } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/rate-lock-extension-vs-floating"
+const path = "/blog/rate-lock-if-rates-drop"
+
+/** Folded into the combined rates guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/rate-lock-if-rates-drop", title: "Mortgage Rates, Locks and APR: What Moves Your Rate, Locks, Buydowns and ARM Caps" }
 
 const faqs = [
   {
@@ -46,6 +49,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Rate Lock Extension vs Floating",
   description:
     "A lock holds a quoted rate for a window. Floating leaves it open. An extension is a cost if you miss the window. Not a live-rate table.",
@@ -60,6 +64,7 @@ export default function LockExtensionVsFloatingPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Rate Lock Extension vs Floating",
         description:
           "A lock holds a quoted rate for a window. Floating leaves it open. An extension is a cost if you miss the window. Not a live-rate table.",
@@ -88,14 +93,14 @@ export default function LockExtensionVsFloatingPage() {
       <h2>How this sits next to APR</h2>
       <p>
         Lock period is one of the things you have to hold constant when you compare lenders. {APR_VS_RATE.howToCompare}{" "}
-        Deep guide: <Link href="/blog/apr-vs-rate-on-a-loan-estimate">APR vs rate on a Loan Estimate</Link>. Parent hub:{" "}
+        Deep guide: <Link href="/blog/rate-lock-if-rates-drop">APR vs rate on a Loan Estimate</Link>. Parent hub:{" "}
         <Link href="/buy/rates">why your quote is not the 30-year average</Link>.
       </p>
       <p>
         Discount points and lender credits change cash to close inside the same lock window:{" "}
-        <Link href="/blog/discount-points-breakeven-without-sales-pitch">points breakeven</Link>. A temporary buydown
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">points breakeven</Link>. A temporary buydown
         changes the payment for a few years, not the lock itself:{" "}
-        <Link href="/blog/temporary-buydown-who-pays-year-three">who pays, year 3</Link>.
+        <Link href="/blog/rate-lock-if-rates-drop">who pays, year 3</Link>.
       </p>
 
       <h2>Scenarios</h2>

@@ -28,9 +28,9 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "bank", heading: "Bank-statement", href: "/blog/bank-statement-loans-when-tax-returns-undercount-income" },
+  { id: "bank", heading: "Bank-statement", href: "/blog/how-underwriters-verify-income" },
   { id: "dscr", heading: "DSCR", href: "/blog/dscr-vs-full-doc-rental-loan" },
-  { id: "asset", heading: "Asset-depletion", href: "/blog/asset-depletion-qualifying-non-qm" },
+  { id: "asset", heading: "Asset-depletion", href: "/blog/how-underwriters-verify-income" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -99,20 +99,20 @@ export default function NonQmLearnPage() {
             <h2>Guides that already exist on this site</h2>
             <ul>
               <li>
-                <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">
+                <Link href="/blog/how-underwriters-verify-income">
                   Bank-statement loans when tax returns undercount income
                 </Link>
               </li>
               <li>
-                <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link>, new 1099 income is
+                <Link href="/blog/how-underwriters-verify-income">I just went 1099 last month</Link>, new 1099 income is
                 usually not yet an agency average, and it is not automatically a bank-statement file either.
               </li>
               <li>
-                <Link href="/blog/k-1-income-what-usually-counts">K-1 income: what usually counts</Link>, agency K-1
+                <Link href="/blog/how-underwriters-verify-income">K-1 income: what usually counts</Link>, agency K-1
                 calc vs a Non-QM conversation when the return does not match cash.
               </li>
               <li>
-                <Link href="/blog/asset-depletion-qualifying-non-qm">
+                <Link href="/blog/how-underwriters-verify-income">
                   Asset-depletion qualifying: retirement and investment assets
                 </Link>{" "}
               a written formula on eligible assets, not a brokerage screenshot. Agency and Non-QM paths differ.

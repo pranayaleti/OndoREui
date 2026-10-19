@@ -4,7 +4,13 @@ import { FHA_CONDO_ROSTER, HAZARD_HO3_HO6, LENDING_FACTS_AS_OF, TOWNHOME_VS_COND
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/hazard-vs-ho3-vs-ho6-condo-insurance"
+const path = "/blog/townhome-vs-condo-hoa-docs-lenders-ask"
+
+/** Folded into the combined condo, townhome and HOA guide: noindex,follow, canonical to it. */
+const mergedInto = {
+  path: "/blog/townhome-vs-condo-hoa-docs-lenders-ask",
+  title: "Condos, Townhomes and HOAs: The Documents Lenders Ask For, Insurance, and Refinancing an Aging HOA",
+}
 
 const faqs = [
   {
@@ -20,7 +26,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "hazard", heading: "Hazard (lender condition)" },
   { id: "ho3", heading: "HO-3", href: "/blog/townhome-vs-condo-hoa-docs-lenders-ask" },
-  { id: "ho6", heading: "HO-6", href: "/blog/fha-condo-roster-project-approval" },
+  { id: "ho6", heading: "HO-6", href: "/blog/fha-vs-conventional-loans-utah" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -55,6 +61,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Hazard vs HO-3 vs HO-6",
   description:
     "What lenders mean by hazard insurance, when an HO-3 fits a house, and when a condo needs an HO-6 plus the master policy. Not insurance advice.",
@@ -69,6 +76,7 @@ export default function HazardHo3Ho6Page() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Hazard vs HO-3 vs HO-6",
         description:
           "What lenders mean by hazard insurance, when an HO-3 fits a house, and when a condo needs an HO-6 plus the master. Not insurance advice.",
@@ -100,7 +108,7 @@ export default function HazardHo3Ho6Page() {
       <p>
         {TOWNHOME_VS_CONDO.legal} Docs a lender asks for:{" "}
         <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask">townhome vs condo HOA docs</Link>. FHA still needs
-        project eligibility: <Link href="/blog/fha-condo-roster-project-approval">FHA condo roster</Link>.{" "}
+        project eligibility: <Link href="/blog/fha-vs-conventional-loans-utah">FHA condo roster</Link>.{" "}
         {FHA_CONDO_ROSTER.projectApproval}
       </p>
       <p>

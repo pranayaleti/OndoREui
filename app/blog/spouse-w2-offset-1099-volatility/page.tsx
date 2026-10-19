@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, SPOUSE_INCOME_OFFSET } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/spouse-w2-offset-1099-volatility"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Using a Spouse’s W-2 to Offset 1099 Volatility",
   description:
     "A steadier W-2 helps when that person is a co-borrower. A non-borrowing spouse’s paycheck does not automatically average in. Utah is not a community-property state.",
@@ -65,6 +69,7 @@ export default function SpouseW2OffsetPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Using a Spouse’s W-2 to Offset 1099 Volatility",
         description:
           "A steadier W-2 helps when that person is a co-borrower. A non-borrowing spouse’s paycheck does not automatically average in. Utah is not a community-property state.",
@@ -95,8 +100,8 @@ export default function SpouseW2OffsetPage() {
       <p>
         Underwriters average variable income. They do not subtract a W-2 from a 1099 like a spreadsheet trick. On a
         joint file, both qualifying incomes are added after each is calculated, and both counted debts are in DTI. See{" "}
-        <Link href="/blog/can-i-get-a-mortgage-if-my-income-changes-every-month">income that changes every month</Link>{" "}
-        and the <Link href="/blog/1099-mortgage-documentation-checklist">1099 checklist</Link>.
+        <Link href="/blog/how-underwriters-verify-income">income that changes every month</Link>{" "}
+        and the <Link href="/blog/how-underwriters-verify-income">1099 checklist</Link>.
       </p>
       <p>
         {SPOUSE_INCOME_OFFSET.utahNotCommunityProperty} If you are applying from another state, ask the loan
@@ -108,7 +113,7 @@ export default function SpouseW2OffsetPage() {
       <p>
         Then you are usually qualifying on the 1099 (or mixed) file alone. That may still work with a documented
         average. It is not “using their W-2.” Adding a co-borrower is a credit pull, DTI, and title decision. Gift
-        funds from family are a different tool: <Link href="/blog/gift-funds-down-payment-rules">gift-fund rules</Link>
+        funds from family are a different tool: <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund rules</Link>
         .
       </p>
 

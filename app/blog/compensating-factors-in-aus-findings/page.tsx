@@ -4,7 +4,10 @@ import { COMPENSATING_FACTORS, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/compensating-factors-in-aus-findings"
+const path = "/blog/pre-approval-vs-aus-vs-clear-to-close"
+
+/** Folded into the comprehensive pre-approval to clear-to-close guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/pre-approval-vs-aus-vs-clear-to-close", title: "From First Conversation to Clear to Close: Pre-Approval, AUS Findings and Why Files Get Declined" }
 
 const faqs = [
   {
@@ -19,7 +22,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "aus", heading: "AUS findings", href: "/blog/pre-approval-vs-aus-vs-clear-to-close" },
-  { id: "manual", heading: "Manual underwrite", href: "/blog/declined-after-pre-approval" },
+  { id: "manual", heading: "Manual underwrite", href: "/blog/pre-approval-vs-aus-vs-clear-to-close" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Compensating Factors That Appear in Findings",
   description:
     "Reserves, residual income, and other strengths that show up in AUS or manual underwriting. Not a guarantee that findings will flip.",
@@ -57,6 +61,7 @@ export default function CompensatingFactorsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Compensating Factors That Appear in Findings",
         description:
           "Reserves, residual income, and other strengths that show up in AUS or manual underwriting. Not a guarantee that findings will flip.",
@@ -80,7 +85,7 @@ export default function CompensatingFactorsPage() {
         A pre-approval letter is not findings. Findings are not clear to close. See{" "}
         <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">pre-approval vs AUS vs CTC</Link>. A decline after a
         letter is usually a later condition fail,{" "}
-        <Link href="/blog/declined-after-pre-approval">declined after pre-approval</Link>, not a missing pep talk in
+        <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">declined after pre-approval</Link>, not a missing pep talk in
         the findings.
       </p>
       <ComparisonTable
@@ -95,7 +100,7 @@ export default function CompensatingFactorsPage() {
       <ul>
         <li>
           <strong>Reserves after cash to close.</strong>{" "}
-          <Link href="/blog/mortgage-reserves-months-of-pitia">Months of PITIA</Link>, remaining assets, not extra
+          <Link href="/blog/should-i-wait-for-20-percent-down">Months of PITIA</Link>, remaining assets, not extra
           closing costs.
         </li>
         <li>
@@ -104,7 +109,7 @@ export default function CompensatingFactorsPage() {
         </li>
         <li>
           <strong>VA residual income.</strong> A separate test from DTI,{" "}
-          <Link href="/blog/va-residual-income-vs-dti">residual vs DTI</Link>. This page does not quote residual
+          <Link href="/blog/va-loan-assumption-entitlement">residual vs DTI</Link>. This page does not quote residual
           dollars.
         </li>
         <li>

@@ -27,7 +27,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "hack", heading: "Occupy one unit (house-hack)", href: "/blog/house-hacking-duplex-with-fha" },
+  { id: "hack", heading: "Occupy one unit (house-hack)", href: "/blog/fha-vs-conventional-loans-utah" },
   { id: "rental", heading: "Do not occupy (investment)", href: "/blog/dscr-vs-full-doc-rental-loan" },
 ]
 
@@ -110,35 +110,35 @@ export default function InvestmentLearnPage() {
                 occupancy types. Commercial: <Link href="/buy/second-home">second-home overview</Link>.
               </li>
               <li>
-                <Link href="/blog/cash-out-to-buy-a-rental">Cash-out to buy a rental</Link>, two LTVs, two occupancies.
+                <Link href="/blog/heloc-vs-cash-out-refinance">Cash-out to buy a rental</Link>, two LTVs, two occupancies.
                 Compare structure on <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out</Link>.
               </li>
               <li>
-                <Link href="/blog/delayed-financing-after-cash-purchase">Delayed financing after a cash purchase</Link>{" "}
+                <Link href="/blog/heloc-vs-cash-out-refinance">Delayed financing after a cash purchase</Link>{" "}
               agency exception when you bought with cash, then want a mortgage later. Not HELOC seasoning.
               </li>
               <li>
-                <Link href="/blog/house-hacking-duplex-with-fha">House-hacking a duplex with FHA</Link>, occupy one
+                <Link href="/blog/fha-vs-conventional-loans-utah">House-hacking a duplex with FHA</Link>, occupy one
                 unit. Self-sufficiency is a 3–4 unit test.
               </li>
               <li>
-                <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E rental income</Link>, history on
+                <Link href="/blog/how-underwriters-verify-income">Schedule E rental income</Link>, history on
                 properties you already own. Depreciation add-back:{" "}
-                <Link href="/blog/depreciation-add-back-schedule-e">what agency files allow</Link>.
+                <Link href="/blog/how-underwriters-verify-income">what agency files allow</Link>.
               </li>
               <li>
-                <Link href="/blog/cross-collateral-equity-to-buy-another-house">
+                <Link href="/blog/heloc-vs-cash-out-refinance">
                   Cross-collateral / using equity to buy another house
                 </Link>{" "}
               educational; not a published agency product you can assume.
               </li>
               <li>
-                <Link href="/blog/mortgage-reserves-months-of-pitia">Reserves: months of PITIA</Link>, investment and
+                <Link href="/blog/should-i-wait-for-20-percent-down">Reserves: months of PITIA</Link>, investment and
                 2–4 unit files commonly need more remaining assets after cash to close.
               </li>
               <li>
                 <Link href="/learn/non-qm">Non-QM hub</Link>, bank-statement, DSCR, and{" "}
-                <Link href="/blog/asset-depletion-qualifying-non-qm">asset-depletion</Link> as different stacks.
+                <Link href="/blog/how-underwriters-verify-income">asset-depletion</Link> as different stacks.
               </li>
             </ul>
           </div>

@@ -100,7 +100,7 @@ export default function UtahRepcDeadlinesPage() {
       <p>
         This is why a low appraisal is a timing question as much as a value question, see{" "}
         <Link href="/blog/appraisal-comes-in-low">when the appraisal comes in low</Link>. And it is why the earnest
-        money in your <Link href="/blog/utah-cash-to-close-besides-down-payment">cash stack</Link> is not purely a
+        money in your <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash stack</Link> is not purely a
         timing entry once deadlines start passing.
       </p>
 

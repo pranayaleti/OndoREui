@@ -1228,7 +1228,7 @@ export const CREDIT_BEFORE_MORTGAGE = {
   notRepair:
     "A rescore does not remove accurate information. Services promising to delete accurate items are a separate, federally regulated industry, and an underwriter who learns a score was produced by suppressing accurate information will not be able to rely on it.",
   utilizationNote:
-    "Revolving utilisation is one of the larger score factors and one of the few a borrower can change quickly, because balances update each cycle. Paying a card down before the statement cuts is usually more effective than paying it after.",
+    "Revolving utilization is one of the larger score factors and one of the few a borrower can change quickly, because balances update each cycle. Paying a card down before the statement cuts is usually more effective than paying it after.",
   closingCardsNote:
     "Closing an old card can shorten average account age and reduce available credit, which can move a score in the wrong direction during a loan file. Talk to the loan officer before closing anything.",
   disputeWarning:

@@ -22,7 +22,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "io", heading: "Interest-only" },
   { id: "arm", heading: "ARM (amortizing)", href: "/buy/adjustable-rate" },
-  { id: "buydown", heading: "Temporary buydown", href: "/blog/temporary-buydown-who-pays-year-three" },
+  { id: "buydown", heading: "Temporary buydown", href: "/blog/rate-lock-if-rates-drop" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -97,7 +97,7 @@ export default function InterestOnlyMortgagesPage() {
         <li>Add taxes, insurance, HOA, and mortgage insurance. Those lines are not capped by an IO schedule.</li>
         <li>
           Extra principal during IO is optional. It is not the same as a recast or a refinance. See{" "}
-          <Link href="/blog/recast-vs-refinance">recast vs refinance</Link>.
+          <Link href="/blog/refinance-break-even-when-lower-rate-loses">recast vs refinance</Link>.
         </li>
       </ul>
 
@@ -105,7 +105,7 @@ export default function InterestOnlyMortgagesPage() {
       <p>{INTEREST_ONLY.notTeaser}</p>
       <p>
         {INTEREST_ONLY.vsArm} Cap structure:{" "}
-        <Link href="/blog/arm-caps-in-plain-english">ARM caps in plain English</Link>. Commercial ARM overview:{" "}
+        <Link href="/blog/rate-lock-if-rates-drop">ARM caps in plain English</Link>. Commercial ARM overview:{" "}
         <Link href="/buy/adjustable-rate">adjustable-rate mortgages</Link>. Why a news average is not your quote:{" "}
         <Link href="/buy/rates">rates hub</Link>.
       </p>

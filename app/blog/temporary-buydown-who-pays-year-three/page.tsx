@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, TEMPORARY_BUYDOWN } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/temporary-buydown-who-pays-year-three"
+const path = "/blog/rate-lock-if-rates-drop"
+
+/** Folded into the combined rates guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/rate-lock-if-rates-drop", title: "Mortgage Rates, Locks and APR: What Moves Your Rate, Locks, Buydowns and ARM Caps" }
 
 const faqs = [
   {
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Temporary Buydown: Who Pays, What Happens in Year 3",
   description:
     "2-1 and 3-2-1 buydowns subsidize the payment for a few years. The note rate does not change. Distinct from buying discount points.",
@@ -65,6 +69,7 @@ export default function TemporaryBuydownPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Temporary Buydown: Who Pays, What Happens in Year 3",
         description:
           "2-1 and 3-2-1 buydowns subsidize the payment for a few years. The note rate does not change. Distinct from buying discount points.",
@@ -85,7 +90,7 @@ export default function TemporaryBuydownPage() {
       <p>{TEMPORARY_BUYDOWN.notDiscountPoints}</p>
       <p>
         Buying points for the life of the loan is{" "}
-        <Link href="/blog/discount-points-breakeven-without-sales-pitch">discount points: breakeven</Link>. A news
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">discount points: breakeven</Link>. A news
         average is still not your quote: <Link href="/buy/rates">rates hub</Link>.
       </p>
 

@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { DTI_EDUCATION, EXAMPLE_NOTE, EXAMPLE_PURCHASE_PRICE_UTAH, LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/can-i-get-a-mortgage-if-my-income-changes-every-month"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,6 +22,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Can I Get a Mortgage If My Income Changes Every Month?",
   description:
     "Yes, if you can document a pattern. Underwriters typically average 12–24 months of variable income rather than last month’s paycheck.",
@@ -35,6 +39,7 @@ export default function VariableIncomeArticlePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Can I Get a Mortgage If My Income Changes Every Month?",
         description:
           "Yes, if you can document a pattern. Underwriters typically average 12–24 months of variable income rather than last month’s paycheck.",
@@ -83,14 +88,14 @@ export default function VariableIncomeArticlePage() {
         <li>Cash that never hit a statement.</li>
         <li>A verbal promise of future overtime.</li>
         <li>Moving large gifts without a paper trail. See{" "}
-          <Link href="/blog/gift-funds-down-payment-rules">gift-fund documentation</Link>.
+          <Link href="/blog/should-i-wait-for-20-percent-down">gift-fund documentation</Link>.
         </li>
       </ul>
 
       <h2>If tax returns understate cash flow</h2>
       <p>
         That is a different product conversation:{" "}
-        <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">
+        <Link href="/blog/how-underwriters-verify-income">
           bank-statement loans
         </Link>
         . It is not a conventional loophole, and it is not automatically “better.”

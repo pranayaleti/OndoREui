@@ -88,8 +88,8 @@ export default function USDALoanPage() {
                   <ul className="space-y-2 text-foreground/70">
                     <li>• {USDA_SNAPSHOT.mapNote}</li>
                     <li>• Some Cache Valley, Sanpete, and rural Utah County pockets have been eligible in past map vintages. That is not a substitute for the current address lookup.</li>
-                    <li>• How-to: <Link href="/blog/usda-map-income-limit-eligibility" className="text-primary underline underline-offset-4">USDA map and income limit</Link></li>
-                    <li>• Veteran in a rural tract: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural" className="text-primary underline underline-offset-4">USDA vs VA vs FHA</Link>, comparison, not a pick.</li>
+                    <li>• How-to: <Link href="/blog/fha-vs-conventional-loans-utah" className="text-primary underline underline-offset-4">USDA map and income limit</Link></li>
+                    <li>• Veteran in a rural tract: <Link href="/blog/va-loan-assumption-entitlement" className="text-primary underline underline-offset-4">USDA vs VA vs FHA</Link>, comparison, not a pick.</li>
                   </ul>
                 </div>
                 <div>
@@ -137,8 +137,8 @@ export default function USDALoanPage() {
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-6">Check the map before the offer</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg"><Link href="/blog/usda-map-income-limit-eligibility">USDA map how-to</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link></Button>
+                <Button asChild size="lg"><Link href="/blog/fha-vs-conventional-loans-utah">USDA map how-to</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/va-loan-assumption-entitlement">USDA vs VA vs FHA</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
               </div>
             </div>

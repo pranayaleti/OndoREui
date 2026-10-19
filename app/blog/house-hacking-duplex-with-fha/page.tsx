@@ -5,7 +5,10 @@ import { FHA_COUNTY_LIMIT_NOTE, FHA_HOUSE_HACK, FHA_SNAPSHOT, LENDING_FACTS_AS_O
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/house-hacking-duplex-with-fha"
+const path = "/blog/fha-vs-conventional-loans-utah"
+
+/** Folded into a stronger post on the same topic: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/fha-vs-conventional-loans-utah", title: "FHA vs Conventional in Utah, Plus USDA: Down Payment, MIP, Condos and Assumptions" }
 
 const faqs = [
   {
@@ -52,6 +55,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "House-Hacking a Duplex with FHA",
   description:
     "FHA can finance a 2–4 unit if you occupy one unit as your home. Self-sufficiency is a 3–4 unit test. Not a condo-roster file.",
@@ -66,6 +70,7 @@ export default function FhaHouseHackPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "House-Hacking a Duplex with FHA",
         description:
           "FHA can finance a 2–4 unit if you occupy one unit as your home. Self-sufficiency is a 3–4 unit test, not a duplex test.",
@@ -110,13 +115,13 @@ export default function FhaHouseHackPage() {
         Down payment and MIP still follow FHA rules: {FHA_SNAPSHOT.minDownPayment580Plus} down at 580+ under HUD
         policy (overlays often sit higher). Compare{" "}
         <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional</Link> and{" "}
-        <Link href="/blog/mip-vs-pmi-how-mortgage-insurance-ends">how MIP vs PMI ends</Link>.
+        <Link href="/blog/should-i-wait-for-20-percent-down">how MIP vs PMI ends</Link>.
       </p>
 
       <h2>This is usually not a condo file</h2>
       <p>
         {FHA_HOUSE_HACK.notCondo} The{" "}
-        <Link href="/blog/fha-condo-roster-project-approval">FHA condo roster guide</Link> is for condominium projects,
+        <Link href="/blog/fha-vs-conventional-loans-utah">FHA condo roster guide</Link> is for condominium projects,
         not a typical duplex on its own parcel.
       </p>
       <IsThisRightForMe table="purchase" programs={["fha", "conventional"]} highlight="fha" />
@@ -127,7 +132,7 @@ export default function FhaHouseHackPage() {
         <li>Look up this year’s HUD 2-unit limit for the county. Do not reuse a blog dollar amount.</li>
         <li>
           Bring leases or ask how proposed rent on the other unit is counted. Existing rentals you already own still use{" "}
-          <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E</Link>.
+          <Link href="/blog/how-underwriters-verify-income">Schedule E</Link>.
         </li>
       </ol>
     </ArticleShell>

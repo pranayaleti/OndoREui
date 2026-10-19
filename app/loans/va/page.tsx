@@ -113,7 +113,7 @@ export default function VALoanPage() {
                     <li>• {HILL_AFB_VA.commute}</li>
                     <li>• {HILL_AFB_VA.baseHousingVsPurchase}</li>
                     <li>• {HILL_AFB_VA.coe} Deep guide:{" "}
-                      <Link href="/blog/hill-afb-va-coe-occupancy" className="underline underline-offset-4">
+                      <Link href="/blog/va-loan-assumption-entitlement" className="underline underline-offset-4">
                         Hill AFB COE and occupancy
                       </Link>
                     </li>
@@ -153,19 +153,19 @@ export default function VALoanPage() {
               <h3 className="text-2xl font-bold mb-4">Funding fee, entitlement, restoration, and residual</h3>
               <p className="text-foreground/70 mb-4">
                 Three files veterans ask about next:{" "}
-                <Link href="/blog/va-funding-fee-finance-vs-pay-cash">finance vs pay the funding fee</Link>,{" "}
-                <Link href="/blog/va-entitlement-second-va-loan">using VA while another VA loan is open</Link>,{" "}
-                <Link href="/blog/selling-with-va-loan-entitlement-restoration">
+                <Link href="/blog/va-loan-assumption-entitlement">finance vs pay the funding fee</Link>,{" "}
+                <Link href="/blog/va-loan-assumption-entitlement">using VA while another VA loan is open</Link>,{" "}
+                <Link href="/blog/va-loan-assumption-entitlement">
                   selling and restoring entitlement after payoff
                 </Link>
                 and{" "}
-                <Link href="/blog/va-residual-income-vs-dti">residual income vs DTI</Link>. Hill AFB (Davis County)
+                <Link href="/blog/va-loan-assumption-entitlement">residual income vs DTI</Link>. Hill AFB (Davis County)
                 occupancy and COE, not a mill doorway:{" "}
-                <Link href="/blog/hill-afb-va-coe-occupancy">Hill AFB COE + occupancy</Link>. A veteran buying in a rural
+                <Link href="/blog/va-loan-assumption-entitlement">Hill AFB COE + occupancy</Link>. A veteran buying in a rural
                 tract should compare tests, not slogans:{" "}
-                <Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link>. A VA-to-VA rate reduction
+                <Link href="/blog/va-loan-assumption-entitlement">USDA vs VA vs FHA</Link>. A VA-to-VA rate reduction
                 with fewer docs is a{" "}
-                <Link href="/blog/fha-va-streamline-refinance-less-docs">VA IRRRL / streamline</Link>, not a cash-out.
+                <Link href="/blog/refinance-break-even-when-lower-rate-loses">VA IRRRL / streamline</Link>, not a cash-out.
               </p>
             </div>
 
@@ -173,7 +173,7 @@ export default function VALoanPage() {
               <h3 className="text-2xl font-bold mb-6">Ask about VA eligibility</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg"><Link href="/qualify">Talk with a loan officer</Link></Button>
-                <Button asChild variant="outline" size="lg"><Link href="/blog/hill-afb-va-coe-occupancy">Hill AFB COE + occupancy</Link></Button>
+                <Button asChild variant="outline" size="lg"><Link href="/blog/va-loan-assumption-entitlement">Hill AFB COE + occupancy</Link></Button>
                 <Button asChild variant="outline" size="lg"><Link href="/loans">Compare all loan types</Link></Button>
               </div>
             </div>

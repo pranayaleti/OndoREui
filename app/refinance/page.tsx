@@ -94,7 +94,7 @@ export default function RefinanceHubPage() {
               <Card key="Streamline refinance">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/fha-va-streamline-refinance-less-docs" className="hover:text-primary">FHA / VA streamline</Link>
+                    <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="hover:text-primary">FHA / VA streamline</Link>
                   </CardTitle>
                   <CardDescription>Less documentation is not no-docs. Occupancy, payment history, and net benefit still apply.</CardDescription>
                 </CardHeader>
@@ -102,7 +102,7 @@ export default function RefinanceHubPage() {
               <Card key="No closing cost refinance">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff" className="hover:text-primary">“No closing cost” refi</Link>
+                    <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="hover:text-primary">“No closing cost” refi</Link>
                   </CardTitle>
                   <CardDescription>The credit that covers fees is usually paid for in the rate. Run break-even.</CardDescription>
                 </CardHeader>
@@ -110,7 +110,7 @@ export default function RefinanceHubPage() {
               <Card key="Discount points">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/discount-points-breakeven-without-sales-pitch" className="hover:text-primary">Discount points</Link>
+                    <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="hover:text-primary">Discount points</Link>
                   </CardTitle>
                   <CardDescription>Break-even is cost divided by monthly P&amp;I savings. Not a temporary buydown.</CardDescription>
                 </CardHeader>
@@ -126,7 +126,7 @@ export default function RefinanceHubPage() {
               <Card key="HELOC after year two">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/heloc-after-year-two-vs-cash-out" className="hover:text-primary">HELOC after year two</Link>
+                    <Link href="/blog/heloc-vs-cash-out-refinance" className="hover:text-primary">HELOC after year two</Link>
                   </CardTitle>
                   <CardDescription>Seasoning overlays after a recent closing, not a remake of lien structure.</CardDescription>
                 </CardHeader>
@@ -134,7 +134,7 @@ export default function RefinanceHubPage() {
               <Card key="Delayed financing">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/delayed-financing-after-cash-purchase" className="hover:text-primary">Delayed financing</Link>
+                    <Link href="/blog/heloc-vs-cash-out-refinance" className="hover:text-primary">Delayed financing</Link>
                   </CardTitle>
                   <CardDescription>Cash purchase, then a cash-out later. Agency exception, not a statute.</CardDescription>
                 </CardHeader>
@@ -142,7 +142,7 @@ export default function RefinanceHubPage() {
               <Card key="Biweekly vs refinance">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/biweekly-extra-principal-vs-refinance" className="hover:text-primary">Biweekly vs refinance</Link>
+                    <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="hover:text-primary">Biweekly vs refinance</Link>
                   </CardTitle>
                   <CardDescription>One extra payment a year versus a new note. No savings promise.</CardDescription>
                 </CardHeader>
@@ -150,7 +150,7 @@ export default function RefinanceHubPage() {
               <Card key="Recast vs refinance">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/recast-vs-refinance" className="hover:text-primary">Recast vs refinance</Link>
+                    <Link href="/blog/refinance-break-even-when-lower-rate-loses" className="hover:text-primary">Recast vs refinance</Link>
                   </CardTitle>
                   <CardDescription>Keep the rate after a lump sum, or replace the note. Different costs.</CardDescription>
                 </CardHeader>
@@ -158,7 +158,7 @@ export default function RefinanceHubPage() {
               <Card key="Condo aging HOA">
                 <CardHeader>
                   <CardTitle className="text-lg">
-                    <Link href="/blog/refinancing-condo-aging-hoa" className="hover:text-primary">Condo with an aging HOA</Link>
+                    <Link href="/blog/townhome-vs-condo-hoa-docs-lenders-ask" className="hover:text-primary">Condo with an aging HOA</Link>
                   </CardTitle>
                   <CardDescription>Project reserves, litigation, and insurance can stall a refinance.</CardDescription>
                 </CardHeader>

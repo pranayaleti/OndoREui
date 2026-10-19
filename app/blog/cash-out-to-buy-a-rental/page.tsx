@@ -5,7 +5,10 @@ import { CASH_OUT_TO_RENTAL, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/cash-out-to-buy-a-rental"
+const path = "/blog/heloc-vs-cash-out-refinance"
+
+/** Folded into the HELOC vs cash-out equity guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/heloc-vs-cash-out-refinance", title: "HELOC vs Cash-Out Refinance: Tapping Equity, Buying a Rental and Delayed Financing" }
 
 const faqs = [
   {
@@ -53,6 +56,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Cash-Out to Buy a Rental: Occupancy and LTV Traps",
   description:
     "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another.",
@@ -67,6 +71,7 @@ export default function CashOutToRentalPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Cash-Out to Buy a Rental: Occupancy and LTV Traps",
         description:
           "Cash-out on the home you occupy is one occupancy and LTV. The rental you buy with the proceeds is another.",
@@ -110,7 +115,7 @@ export default function CashOutToRentalPage() {
         <Link href="/blog/heloc-vs-cash-out-refinance">payment, lien position, and tax questions</Link>. This page is
         what happens when the proceeds buy a rental. If the house you just bought was all cash and you want a mortgage
         on that same house later, that is{" "}
-        <Link href="/blog/delayed-financing-after-cash-purchase">delayed financing</Link>, a different fact pattern.
+        <Link href="/blog/heloc-vs-cash-out-refinance">delayed financing</Link>, a different fact pattern.
       </p>
       <IsThisRightForMe table="equity" highlight="refinance" />
 

@@ -4,7 +4,10 @@ import { ESCROW_CUSHION, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/escrow-cushion-how-it-is-set"
+const path = "/blog/escrow-shortage-after-first-year"
+
+/** Folded into the combined escrow and Utah property tax guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/escrow-shortage-after-first-year", title: "Escrow and Utah Property Taxes: Cushion, Shortages, Waiving Impounds and the First Analysis" }
 
 const faqs = [
   {
@@ -19,7 +22,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "cushion", heading: "Cushion", href: "/faq/buying-selling-faqs" },
-  { id: "shortage", heading: "Shortage / surplus", href: "/blog/utah-property-tax-calendar-first-escrow-analysis" },
+  { id: "shortage", heading: "Shortage / surplus", href: "/blog/escrow-shortage-after-first-year" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Escrow: How the Cushion Is Set, Why It Changes",
   description:
     "RESPA aggregate analysis generally caps the cushion at about two months of disbursements. Servicers may require less. Not a universal formula.",
@@ -57,6 +61,7 @@ export default function EscrowCushionPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Escrow: How the Cushion Is Set, Why It Changes",
         description:
           "RESPA aggregate analysis generally caps the cushion at about two months of disbursements. Servicers may require less. Not a universal formula.",
@@ -95,7 +100,7 @@ export default function EscrowCushionPage() {
       <p>
         Utah typically bills property tax once a year, due around November 30. Monthly collections plus a cushion still
         have to meet that single disbursement. Why the calendars clash:{" "}
-        <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis">
+        <Link href="/blog/escrow-shortage-after-first-year">
           Utah tax calendar vs first escrow analysis
         </Link>
         .

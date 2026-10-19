@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { DTI_EDUCATION, LENDING_FACTS_AS_OF, VARIABLE_INCOME_LIKELY_TO_CONTINUE } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/commission-income-mortgage-averaging"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,6 +22,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Commission-Only Sales: Averaging and a Down Year",
   description:
     "Commission income is typically averaged, and a down year usually counts. How 12- vs 24-month averages work.",
@@ -33,6 +37,7 @@ export default function CommissionIncomePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Commission-Only Sales: Averaging and a Down Year",
         description:
           "Commission income is typically averaged, and a down year usually counts. How 12- vs 24-month averages work.",
@@ -76,9 +81,9 @@ export default function CommissionIncomePage() {
       </ul>
       <p>
         If you are 1099 rather than W-2, use the{" "}
-        <Link href="/blog/1099-mortgage-documentation-checklist">1099 documentation checklist</Link>. Overtime on a W-2
+        <Link href="/blog/how-underwriters-verify-income">1099 documentation checklist</Link>. Overtime on a W-2
         is a different “likely to continue” test:{" "}
-        <Link href="/blog/w2-overtime-likely-to-continue">overtime guide</Link>.
+        <Link href="/blog/how-underwriters-verify-income">overtime guide</Link>.
       </p>
 
       <h2>What happens next</h2>

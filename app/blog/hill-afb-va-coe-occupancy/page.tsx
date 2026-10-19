@@ -4,7 +4,10 @@ import { HILL_AFB_VA, LENDING_FACTS_AS_OF, OCCUPANCY_TYPES, VA_ENTITLEMENT, VA_F
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/hill-afb-va-coe-occupancy"
+const path = "/blog/va-loan-assumption-entitlement"
+
+/** Folded into the VA guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/va-loan-assumption-entitlement", title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions" }
 
 const faqs = [
   {
@@ -51,6 +54,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
   description:
     "Hill Air Force Base is in Davis County, Utah. How the VA Certificate of Eligibility and occupancy rules apply to a purchase near the base. Occupancy must match use.",
@@ -65,6 +69,7 @@ export default function HillAfbVaPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Hill AFB / VA: Certificate of Eligibility and Occupancy",
         description:
           "Hill Air Force Base is in Davis County, Utah. How the VA Certificate of Eligibility and occupancy rules apply to a purchase near the base. Occupancy must match use.",
@@ -87,11 +92,11 @@ export default function HillAfbVaPage() {
       <p>{HILL_AFB_VA.coe}</p>
       <p>
         Remaining entitlement, a second VA loan while another is open, and occupancy of the new property:{" "}
-        <Link href="/blog/va-entitlement-second-va-loan">can I use VA if I still have a VA loan?</Link>. Funding fee
+        <Link href="/blog/va-loan-assumption-entitlement">can I use VA if I still have a VA loan?</Link>. Funding fee
         (finance vs cash, exemptions):{" "}
-        <Link href="/blog/va-funding-fee-finance-vs-pay-cash">VA funding fee</Link>. Residual income vs DTI:{" "}
-        <Link href="/blog/va-residual-income-vs-dti">residual vs DTI</Link>. After a sale and payoff:{" "}
-        <Link href="/blog/selling-with-va-loan-entitlement-restoration">entitlement restoration</Link>.{" "}
+        <Link href="/blog/va-loan-assumption-entitlement">VA funding fee</Link>. Residual income vs DTI:{" "}
+        <Link href="/blog/va-loan-assumption-entitlement">residual vs DTI</Link>. After a sale and payoff:{" "}
+        <Link href="/blog/va-loan-assumption-entitlement">entitlement restoration</Link>.{" "}
         {HILL_AFB_VA.notRestoration}
       </p>
       <p>
@@ -115,7 +120,7 @@ export default function HillAfbVaPage() {
       <p>{HILL_AFB_VA.commute}</p>
       <p>
         Program overview: <Link href="/loans/va">VA loans in Utah</Link>. A veteran in a rural tract is a different
-        comparison: <Link href="/blog/usda-vs-va-vs-fha-veteran-rural">USDA vs VA vs FHA</Link>.
+        comparison: <Link href="/blog/va-loan-assumption-entitlement">USDA vs VA vs FHA</Link>.
       </p>
 
       <h2>BAH is not a permanent number on this page</h2>

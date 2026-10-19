@@ -78,11 +78,11 @@ export default function FirstTimeBuyerPage() {
                   </div>
                   <CardTitle>Know cash to close</CardTitle>
                   <CardDescription>
-                    <Link href="/blog/utah-cash-to-close-besides-down-payment" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/utah-closing-costs-title-origination-prepaids" className="text-primary underline-offset-4 hover:underline">
                       Down payment plus title, prepaids, and earnest money
                     </Link>
                     . Three cash lines:{" "}
-                    <Link href="/blog/earnest-money-vs-down-payment-vs-closing-costs" className="prose-link">
+                    <Link href="/blog/utah-closing-costs-title-origination-prepaids" className="prose-link">
                       earnest vs down vs closing costs
                     </Link>
                     .
@@ -97,11 +97,11 @@ export default function FirstTimeBuyerPage() {
                   </div>
                   <CardTitle>Down payment assistance + gifts</CardTitle>
                   <CardDescription>
-                    <Link href="/blog/dpa-stacked-with-fha-gift-funds" className="text-primary underline-offset-4 hover:underline">
+                    <Link href="/blog/fha-vs-conventional-loans-utah" className="text-primary underline-offset-4 hover:underline">
                       How DPA and an FHA gift can sit on the same file
                     </Link>
                     . Signatures when a parent is the donor:{" "}
-                    <Link href="/blog/parent-gifting-down-payment-who-signs" className="prose-link">
+                    <Link href="/blog/should-i-wait-for-20-percent-down" className="prose-link">
                       who signs what
                     </Link>
                     .
@@ -119,7 +119,7 @@ export default function FirstTimeBuyerPage() {
                     <li>• HUD policy can allow 3.5% down at 580+; many lender overlays sit higher</li>
                     <li>• Upfront and annual MIP, compare to conventional PMI on two Loan Estimates</li>
                     <li>• Primary residence; condos need{" "}
-                      <Link href="/blog/fha-condo-roster-project-approval" className="prose-link">
+                      <Link href="/blog/fha-vs-conventional-loans-utah" className="prose-link">
                         FHA project approval
                       </Link>
                     </li>
@@ -151,7 +151,7 @@ export default function FirstTimeBuyerPage() {
                   <Link href="/blog/how-long-first-purchase-takes">How long a first purchase takes</Link>
                 </Button>
                 <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
-                  <Link href="/blog/first-time-buyer-file-mistakes">File mistakes, not listicles</Link>
+                  <Link href="/blog/pre-approval-vs-aus-vs-clear-to-close">File mistakes, not listicles</Link>
                 </Button>
                 <Button asChild variant="outline" className="h-auto min-h-10 whitespace-normal text-center">
                   <Link href="/blog/utah-repc-deadline-and-your-loan">Utah REPC deadlines</Link>

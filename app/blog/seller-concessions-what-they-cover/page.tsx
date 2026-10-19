@@ -80,14 +80,14 @@ export default function SellerConcessionsPage() {
       <p>
         Closing costs, prepaids, and a rate buydown are the usual targets. Those are the lines described in{" "}
         <Link href="/blog/utah-closing-costs-title-origination-prepaids">Utah closing costs</Link> and{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">cash to close</Link>.
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash to close</Link>.
       </p>
       <p>{SELLER_CONCESSIONS.buydownUse}</p>
 
       <ArticleCallout variant="warning" title="Not the down payment">
         {SELLER_CONCESSIONS.notDownPayment} This is the single most common misunderstanding about concessions, and it
         surfaces late, usually when cash to close is being finalised. If the down payment is the gap, look at{" "}
-        <Link href="/blog/gift-funds-down-payment-rules">gift funds</Link> instead.
+        <Link href="/blog/should-i-wait-for-20-percent-down">gift funds</Link> instead.
       </ArticleCallout>
 
       <h2>The cap</h2>

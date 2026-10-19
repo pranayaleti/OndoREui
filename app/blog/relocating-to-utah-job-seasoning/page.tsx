@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, RELOCATION_SEASONING, UTAH_CLOSING_NOTES } from "@
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/relocating-to-utah-job-seasoning"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,7 +22,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "w2", heading: "W-2 offer, start within the investor window", href: "/moving-to-utah" },
-  { id: "other", heading: "New 1099, commission-only, or start date too far out", href: "/blog/just-went-1099-last-month" },
+  { id: "other", heading: "New 1099, commission-only, or start date too far out", href: "/blog/how-underwriters-verify-income" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Relocating to Utah: Income Seasoning for a New Job",
   description:
     "An offer letter can sometimes qualify a conventional purchase before the first paycheck. Sixty days is a common question, not a published 60-day rule.",
@@ -57,6 +61,7 @@ export default function RelocatingUtahPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Relocating to Utah: Income Seasoning for a New Job",
         description:
           "An offer letter can sometimes qualify a conventional purchase before the first paycheck. Sixty days is not a published Fannie Mae rule.",
@@ -93,7 +98,7 @@ export default function RelocatingUtahPage() {
         Mountain Time deadlines even if payroll has not started,{" "}
         <Link href="/blog/utah-repc-deadline-and-your-loan">what a Utah REPC deadline does to your loan</Link>. Cash
         besides down payment does not shrink because you are new in town:{" "}
-        <Link href="/blog/utah-cash-to-close-besides-down-payment">cash to close</Link>.
+        <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash to close</Link>.
       </p>
       <p>
         Commute, rent, and city context belong on{" "}

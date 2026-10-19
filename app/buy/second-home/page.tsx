@@ -120,7 +120,7 @@ export default function SecondHomePage() {
                     DSCR vs full-doc
                   </Link>
                   . A cash-out on the house you occupy to fund a rental down payment is{" "}
-                  <Link href="/blog/cash-out-to-buy-a-rental" className="text-primary underline-offset-4 hover:underline">
+                  <Link href="/blog/heloc-vs-cash-out-refinance" className="text-primary underline-offset-4 hover:underline">
                     two occupancies and two LTVs
                   </Link>
                   . Tax treatment of a second home or rental is not tax advice.

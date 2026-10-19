@@ -4,7 +4,10 @@ import { DEPRECIATION_ADD_BACK, LENDING_FACTS_AS_OF, SCHEDULE_E_RENTAL } from "@
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/depreciation-add-back-schedule-e"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,8 +22,8 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "agency", heading: "Agency Schedule E", href: "/blog/schedule-e-rental-income-purchase-file" },
-  { id: "k1", heading: "K-1 rental", href: "/blog/k-1-income-what-usually-counts" },
+  { id: "agency", heading: "Agency Schedule E", href: "/blog/how-underwriters-verify-income" },
+  { id: "k1", heading: "K-1 rental", href: "/blog/how-underwriters-verify-income" },
   { id: "dscr", heading: "DSCR", href: "/blog/dscr-vs-full-doc-rental-loan" },
 ]
 
@@ -47,6 +50,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Depreciation Add-Back: What Agency Files Allow",
   description:
     "How underwriters add depreciation back on Schedule E for rental qualifying. Distinct from the Schedule E overview. Not tax advice.",
@@ -61,6 +65,7 @@ export default function DepreciationAddBackPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Depreciation Add-Back: What Agency Files Allow",
         description:
           "How underwriters add depreciation back on Schedule E for rental qualifying. Distinct from the Schedule E overview. Not tax advice.",
@@ -79,7 +84,7 @@ export default function DepreciationAddBackPage() {
       <p>{DEPRECIATION_ADD_BACK.notTaxAdvice}</p>
       <p>
         Parent guide:{" "}
-        <Link href="/blog/schedule-e-rental-income-purchase-file">rental income on Schedule E in a purchase file</Link>{" "}
+        <Link href="/blog/how-underwriters-verify-income">rental income on Schedule E in a purchase file</Link>{" "}
       history on properties you already own versus proposed rent.
       </p>
 
@@ -96,7 +101,7 @@ export default function DepreciationAddBackPage() {
         footnote="Confirm the selling guide in force. Overlays differ."
       />
       <p>
-        K-1 income is a different form: <Link href="/blog/k-1-income-what-usually-counts">what usually counts on a K-1</Link>.
+        K-1 income is a different form: <Link href="/blog/how-underwriters-verify-income">what usually counts on a K-1</Link>.
         Property-qualifies versus borrower-qualifies:{" "}
         <Link href="/blog/dscr-vs-full-doc-rental-loan">DSCR vs full-doc</Link>.
       </p>

@@ -107,15 +107,15 @@ export default function FirstStatementVsNoteRatePage() {
       <p>{FIRST_STATEMENT_VS_NOTE.escrow}</p>
       <p>
         {UTAH_TAX_CALENDAR.escrowMismatch}{" "}
-        <Link href="/blog/utah-property-tax-calendar-first-escrow-analysis">
+        <Link href="/blog/escrow-shortage-after-first-year">
           Utah tax calendar vs first escrow analysis
         </Link>
-        . Cushion: <Link href="/blog/escrow-cushion-how-it-is-set">how the cushion is set</Link>.{" "}
+        . Cushion: <Link href="/blog/escrow-shortage-after-first-year">how the cushion is set</Link>.{" "}
         {ESCROW_CUSHION.maxCushion}
       </p>
       <p>
         Waiving impounds is a different trade:{" "}
-        <Link href="/blog/impounds-vs-waiving-escrow">impounds vs waiving escrow</Link>.
+        <Link href="/blog/escrow-shortage-after-first-year">impounds vs waiving escrow</Link>.
       </p>
 
       <h2>Scenario: “My rate was 6% but the bill is huge”</h2>
@@ -126,7 +126,7 @@ export default function FirstStatementVsNoteRatePage() {
       </p>
       <p>
         APR vs note rate on the Loan Estimate is a different document:{" "}
-        <Link href="/blog/apr-vs-rate-on-a-loan-estimate">APR vs rate on a Loan Estimate</Link>.
+        <Link href="/blog/rate-lock-if-rates-drop">APR vs rate on a Loan Estimate</Link>.
       </p>
 
       <h2>What this page will not do</h2>

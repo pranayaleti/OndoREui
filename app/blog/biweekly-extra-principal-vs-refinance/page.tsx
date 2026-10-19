@@ -4,7 +4,10 @@ import { BIWEEKLY_VS_REFI, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/biweekly-extra-principal-vs-refinance"
+const path = "/blog/refinance-break-even-when-lower-rate-loses"
+
+/** Folded into the refinance guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/refinance-break-even-when-lower-rate-loses", title: "Should You Refinance? Break-Even, Points, No-Closing-Cost, Recast and Streamline" }
 
 const faqs = [
   {
@@ -18,7 +21,7 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "bi", heading: "Biweekly / extra principal", href: "/blog/mortgage-paydown-hacks" },
+  { id: "bi", heading: "Biweekly / extra principal", href: "/blog/refinance-break-even-when-lower-rate-loses" },
   { id: "refi", heading: "Refinance", href: "/blog/refinance-break-even-when-lower-rate-loses" },
 ]
 
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Biweekly Extra Principal vs Refinance",
   description:
     "One extra payment a year versus changing the note. This page illustrates the idea and does not quote interest saved. Link break-even and pay-down tactics.",
@@ -57,6 +61,7 @@ export default function BiweeklyVsRefinancePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Biweekly Extra Principal vs Refinance",
         description:
           "One extra payment a year versus changing the note. This page illustrates the idea and does not quote interest saved.",
@@ -83,7 +88,7 @@ export default function BiweeklyVsRefinancePage() {
       />
       <p>
         Tactics overview (biweekly, recast, round-up):{" "}
-        <Link href="/blog/mortgage-paydown-hacks">mortgage pay-down hacks</Link>. If the question is a lower rate:{" "}
+        <Link href="/blog/refinance-break-even-when-lower-rate-loses">mortgage pay-down hacks</Link>. If the question is a lower rate:{" "}
         <Link href="/blog/refinance-break-even-when-lower-rate-loses">when a lower rate still loses after costs</Link>.
       </p>
 
@@ -93,7 +98,7 @@ export default function BiweeklyVsRefinancePage() {
         <li>You can send extra principal the servicer will apply, ask, do not assume a third-party biweekly company.</li>
         <li>
           A recast after a lump sum is another servicing tool; it is not a refinance.{" "}
-          <Link href="/blog/recast-vs-refinance">Recast vs refinance</Link>.
+          <Link href="/blog/refinance-break-even-when-lower-rate-loses">Recast vs refinance</Link>.
         </li>
       </ul>
 
@@ -102,7 +107,7 @@ export default function BiweeklyVsRefinancePage() {
         <li>You want a different rate or term, and you will stay long enough to earn the costs back.</li>
         <li>
           “No closing cost” still has a rate trade:{" "}
-          <Link href="/blog/no-closing-cost-refinance-rate-credit-tradeoff">no-closing-cost refinance</Link>.
+          <Link href="/blog/refinance-break-even-when-lower-rate-loses">no-closing-cost refinance</Link>.
         </li>
       </ul>
 

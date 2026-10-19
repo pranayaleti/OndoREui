@@ -2,7 +2,10 @@ import { ArticleShell, articleMetadata } from "@/components/content/article-shel
 import { LENDING_FACTS_AS_OF } from "@/lib/content"
 import Link from "next/link"
 
-const path = "/blog/1099-mortgage-documentation-checklist"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -19,6 +22,7 @@ const faqs = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "1099 Mortgage Documentation Checklist",
   description:
     "What contract and gig workers typically gather for a mortgage: returns, transcripts, YTD P&L, statements, and contracts.",
@@ -33,6 +37,7 @@ export default function TenNinetyNineDocsPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "1099 Mortgage Documentation Checklist",
         description:
           "What contract and gig workers typically gather for a mortgage: returns, transcripts, YTD P&L, statements, and contracts.",
@@ -78,17 +83,17 @@ export default function TenNinetyNineDocsPage() {
         FHA and conventional can both work for documented 1099 income. The{" "}
         <Link href="/blog/fha-vs-conventional-loans-utah">FHA vs conventional guide</Link> is about credit, down
         payment, and mortgage insurance, not a shortcut around tax returns. If the returns are the problem, read{" "}
-        <Link href="/blog/bank-statement-loans-when-tax-returns-undercount-income">bank-statement loans</Link>.
+        <Link href="/blog/how-underwriters-verify-income">bank-statement loans</Link>.
       </p>
       <p>
         Start with the income pattern on{" "}
-        <Link href="/blog/can-i-get-a-mortgage-if-my-income-changes-every-month">variable monthly income</Link>{" "}
+        <Link href="/blog/how-underwriters-verify-income">variable monthly income</Link>{" "}
         and the cluster hub at{" "}
         <Link href="/learn/variable-income">/learn/variable-income</Link>. If you{" "}
-        <Link href="/blog/just-went-1099-last-month">just went 1099 last month</Link>, that is a seasoning question,
+        <Link href="/blog/how-underwriters-verify-income">just went 1099 last month</Link>, that is a seasoning question,
         not this checklist. If a partner’s W-2 is part of the story, they generally need to be a borrower:{" "}
-        <Link href="/blog/spouse-w2-offset-1099-volatility">spouse W-2 offset</Link>. Partners and S-corp owners:{" "}
-        <Link href="/blog/k-1-income-what-usually-counts">K-1 income, what usually counts</Link>.
+        <Link href="/blog/how-underwriters-verify-income">spouse W-2 offset</Link>. Partners and S-corp owners:{" "}
+        <Link href="/blog/how-underwriters-verify-income">K-1 income, what usually counts</Link>.
       </p>
     </ArticleShell>
   )

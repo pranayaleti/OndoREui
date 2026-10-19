@@ -77,11 +77,11 @@ export default function HelocPage() {
               <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
                 <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out guide</Link>
               </Button>
-              <Button key="/blog/heloc-after-year-two-vs-cash-out" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-after-year-two-vs-cash-out">HELOC after year two</Link>
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">HELOC after year two</Link>
               </Button>
-              <Button key="/blog/cross-collateral-equity-to-buy-another-house" asChild variant="outline" size="sm">
-                <Link href="/blog/cross-collateral-equity-to-buy-another-house">Cross-collateral education</Link>
+              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
+                <Link href="/blog/heloc-vs-cash-out-refinance">Cross-collateral education</Link>
               </Button>
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>

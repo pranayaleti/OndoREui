@@ -4,7 +4,10 @@ import { LENDING_FACTS_AS_OF, VA_ENTITLEMENT, VA_ENTITLEMENT_RESTORATION, VA_FUN
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/selling-with-va-loan-entitlement-restoration"
+const path = "/blog/va-loan-assumption-entitlement"
+
+/** Folded into the VA guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/va-loan-assumption-entitlement", title: "VA Loans in Utah: Entitlement, Funding Fee, Residual Income and Assumptions" }
 
 const faqs = [
   {
@@ -23,7 +26,7 @@ const faqs = [
 
 const columns: readonly ComparisonColumn[] = [
   { id: "restore", heading: "Sell, pay off, restore" },
-  { id: "keep", heading: "Keep the first VA loan", href: "/blog/va-entitlement-second-va-loan" },
+  { id: "keep", heading: "Keep the first VA loan", href: "/blog/va-loan-assumption-entitlement" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -55,6 +58,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Selling with a VA Loan: Entitlement Restoration",
   description:
     "How VA entitlement is typically restored after you sell and pay off the loan. This differs from keeping a VA loan and buying another.",
@@ -69,6 +73,7 @@ export default function VaEntitlementRestorationPage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Selling with a VA Loan: Entitlement Restoration",
         description:
           "How VA entitlement is typically restored after you sell and pay off the loan. This differs from keeping a VA loan and buying another.",
@@ -96,7 +101,7 @@ export default function VaEntitlementRestorationPage() {
       />
       <p>
         If you are not selling, you want to keep the first house as a rental or you still live there, start with{" "}
-        <Link href="/blog/va-entitlement-second-va-loan">can I use VA if I still have a VA loan</Link>. Occupancy
+        <Link href="/blog/va-loan-assumption-entitlement">can I use VA if I still have a VA loan</Link>. Occupancy
         mislabeling is a different problem:{" "}
         <Link href="/blog/second-home-vs-investment-occupancy">second home vs investment occupancy</Link>.
       </p>
@@ -131,9 +136,9 @@ export default function VaEntitlementRestorationPage() {
       <p>
         {VA_ENTITLEMENT_RESTORATION.fundingFee} Subsequent-use snapshot (less than 5% down):{" "}
         {VA_FUNDING_FEE.subsequentUseLessThan5PercentDown} as of {LENDING_FACTS_AS_OF}. Confirm the current schedule.
-        Finance vs cash: <Link href="/blog/va-funding-fee-finance-vs-pay-cash">funding fee guide</Link>. Residual income
+        Finance vs cash: <Link href="/blog/va-loan-assumption-entitlement">funding fee guide</Link>. Residual income
         still applies on the next purchase:{" "}
-        <Link href="/blog/va-residual-income-vs-dti">residual vs DTI</Link>.
+        <Link href="/blog/va-loan-assumption-entitlement">residual vs DTI</Link>.
       </p>
 
       <h2>Scenario: you are under contract to sell</h2>

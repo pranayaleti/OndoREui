@@ -22,7 +22,7 @@ const faqs = [
 const columns: readonly ComparisonColumn[] = [
   { id: "mh", heading: "Manufactured home" },
   { id: "adu", heading: "ADU on a site-built house" },
-  { id: "duplex", heading: "2–4 unit you occupy", href: "/blog/house-hacking-duplex-with-fha" },
+  { id: "duplex", heading: "2–4 unit you occupy", href: "/blog/fha-vs-conventional-loans-utah" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -111,11 +111,11 @@ export default function ManufacturedHousingAduPage() {
         <li>Whether the lender counts the ADU as part of a 1-unit with accessory income, or as another unit.</li>
         <li>
           If you occupy one unit of a true 2–4 unit building, that is a house-hack conversation:{" "}
-          <Link href="/blog/house-hacking-duplex-with-fha">FHA duplex house-hack</Link>, not an ADU nickname.
+          <Link href="/blog/fha-vs-conventional-loans-utah">FHA duplex house-hack</Link>, not an ADU nickname.
         </li>
         <li>
           Existing rental history on a house you already own is{" "}
-          <Link href="/blog/schedule-e-rental-income-purchase-file">Schedule E</Link>, not a listing’s “ADU rents for.”
+          <Link href="/blog/how-underwriters-verify-income">Schedule E</Link>, not a listing’s “ADU rents for.”
         </li>
       </ul>
 

@@ -4,7 +4,10 @@ import { GIG_PLUS_W2, LENDING_FACTS_AS_OF, VARIABLE_INCOME_LIKELY_TO_CONTINUE } 
 import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
 import Link from "next/link"
 
-const path = "/blog/gig-plus-w2-income-mortgage-average"
+const path = "/blog/how-underwriters-verify-income"
+
+/** Folded into the income-verification guide: noindex,follow, canonical to it. */
+const mergedInto = { path: "/blog/how-underwriters-verify-income", title: "How Lenders Verify Income: W-2, 1099, Self-Employed and Bank Statements" }
 
 const faqs = [
   {
@@ -18,8 +21,8 @@ const faqs = [
 ]
 
 const columns: readonly ComparisonColumn[] = [
-  { id: "w2", heading: "W-2 stream", href: "/blog/w2-overtime-likely-to-continue" },
-  { id: "gig", heading: "Gig / 1099 stream", href: "/blog/just-went-1099-last-month" },
+  { id: "w2", heading: "W-2 stream", href: "/blog/how-underwriters-verify-income" },
+  { id: "gig", heading: "Gig / 1099 stream", href: "/blog/how-underwriters-verify-income" },
 ]
 
 const rows: readonly ComparisonRow[] = [
@@ -43,6 +46,7 @@ const rows: readonly ComparisonRow[] = [
 
 export const metadata = articleMetadata({
   path,
+  mergedInto,
   title: "Gig Plus W-2 Mix: How the Average Is Built",
   description:
     "Gig or 1099 income and W-2 wages are usually averaged as separate streams, then added. A peak gig month is not the qualifying method.",
@@ -57,6 +61,7 @@ export default function GigPlusW2IncomePage() {
     <ArticleShell
       meta={{
         path,
+        mergedInto,
         title: "Gig Plus W-2 Mix: How the Average Is Built",
         description:
           "Gig or 1099 income and W-2 wages are usually averaged as separate streams, then added. A peak gig month is not the qualifying method.",
@@ -85,26 +90,26 @@ export default function GigPlusW2IncomePage() {
       <h2>The W-2 leg</h2>
       <p>
         {GIG_PLUS_W2.w2Leg} {VARIABLE_INCOME_LIKELY_TO_CONTINUE.overtime} Deep guide:{" "}
-        <Link href="/blog/w2-overtime-likely-to-continue">overtime, likely to continue</Link>. Commission on the W-2 is
+        <Link href="/blog/how-underwriters-verify-income">overtime, likely to continue</Link>. Commission on the W-2 is
         still commission:{" "}
-        <Link href="/blog/commission-income-mortgage-averaging">averaging and a down year</Link>.
+        <Link href="/blog/how-underwriters-verify-income">averaging and a down year</Link>.
       </p>
 
       <h2>The gig / 1099 leg</h2>
       <p>
         {GIG_PLUS_W2.gigLeg} If the gig started last month, that leg is usually not yet an average:{" "}
-        <Link href="/blog/just-went-1099-last-month">I just went 1099 last month</Link>. Documentation:{" "}
-        <Link href="/blog/1099-mortgage-documentation-checklist">1099 checklist</Link>.
+        <Link href="/blog/how-underwriters-verify-income">I just went 1099 last month</Link>. Documentation:{" "}
+        <Link href="/blog/how-underwriters-verify-income">1099 checklist</Link>.
       </p>
       <p>
         A CPA letter does not turn app deposits into two years of returns:{" "}
-        <Link href="/blog/cpa-letter-vs-tax-returns-underwriting">CPA letter vs tax returns</Link>.
+        <Link href="/blog/how-underwriters-verify-income">CPA letter vs tax returns</Link>.
       </p>
 
       <h2>Joint files</h2>
       <p>
         {GIG_PLUS_W2.joint}{" "}
-        <Link href="/blog/spouse-w2-offset-1099-volatility">Using a spouse’s W-2 to offset 1099 volatility</Link> is a
+        <Link href="/blog/how-underwriters-verify-income">Using a spouse’s W-2 to offset 1099 volatility</Link> is a
         co-borrower decision, not a hidden extra paycheck. Utah is not a community-property state.
       </p>
 

@@ -85,7 +85,7 @@ export default function AppraisalLowPage() {
             body: (
               <>
                 This is cash on top of the down payment and everything else in the{" "}
-                <Link href="/blog/utah-cash-to-close-besides-down-payment">cash stack</Link>, and it is not financeable,
+                <Link href="/blog/utah-closing-costs-title-origination-prepaids">cash stack</Link>, and it is not financeable,
                 because the loan is already capped by value.
               </>
             ),
