@@ -1024,7 +1024,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     ],
     whyItMatters:
       "Cap rate compares assets; cash-on-cash compares deals. You need both, because financing changes the answer.",
-    seeAlso: ["noi", "cash-on-cash-return", "grm", "operating-expenses"],
+    seeAlso: ["noi", "cash-on-cash-return", "operating-expenses"],
     calculators: ["cap-rate", "roi"],
   },
   {
@@ -1038,7 +1038,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Cash-on-cash divides the year’s cash flow after debt service by total cash invested: down payment, closing costs, and upfront work. Unlike cap rate, it accounts for leverage.",
       "It measures only cash flow. It ignores principal paydown, appreciation, and tax treatment, so it understates total return on a leveraged hold.",
     ],
-    seeAlso: ["cap-rate", "cash-flow", "roi", "leverage"],
+    seeAlso: ["cap-rate", "cash-flow", "roi"],
     calculators: ["cash-on-cash", "roi"],
     related: [{ label: "Cash-on-cash return explained", href: "/blog/cash-on-cash-return-explained/" }],
   },
@@ -1070,20 +1070,6 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     calculators: ["cap-rate", "dscr"],
   },
   {
-    slug: "grm",
-    term: "GRM (Gross Rent Multiplier)",
-    aliases: ["gross rent multiplier"],
-    category: "investing",
-    short:
-      "Property price divided by annual gross rent, a fast screening ratio that ignores expenses.",
-    definition: [
-      "GRM is a first-pass filter for comparing similar properties in one market. A lower number means less price paid per dollar of rent.",
-      "It says nothing about expenses, so two properties with identical GRMs can perform very differently once taxes, insurance, and maintenance are counted. Screen with GRM, decide with NOI.",
-    ],
-    seeAlso: ["cap-rate", "noi", "one-percent-rule"],
-    calculators: ["cap-rate"],
-  },
-  {
     slug: "dscr",
     term: "DSCR (Debt Service Coverage Ratio)",
     aliases: ["debt service coverage ratio"],
@@ -1109,7 +1095,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "The 1% rule is a back-of-envelope filter for deciding which listings deserve a real analysis. It is a triage tool, not an underwriting standard.",
       "It has become harder to satisfy in appreciating markets, and it ignores expenses entirely, so properties that pass can still lose money and properties that fail can still be sound.",
     ],
-    seeAlso: ["fifty-percent-rule", "grm", "cash-flow", "cap-rate"],
+    seeAlso: ["fifty-percent-rule", "cash-flow", "cap-rate"],
     calculators: ["one-percent-rule"],
   },
   {
@@ -1137,21 +1123,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "ROI is deliberately broad, which makes it useful for a full picture and easy to misuse in comparisons. A cash-flow-only ROI and one including appreciation are not the same measurement.",
       "Whenever ROI is quoted, the useful question is what is in the numerator and over what period.",
     ],
-    seeAlso: ["cash-on-cash-return", "cagr", "appreciation", "equity"],
-    calculators: ["roi"],
-  },
-  {
-    slug: "cagr",
-    term: "CAGR (Compound Annual Growth Rate)",
-    aliases: ["compound annual growth rate"],
-    category: "investing",
-    short:
-      "The smoothed annual rate at which a value would have grown to reach its ending amount over a period.",
-    definition: [
-      "CAGR converts total growth over several years into a single annualized rate, which makes holdings of different durations comparable.",
-      "It smooths away everything that happened in between. Two investments with identical CAGR can have had very different volatility along the way.",
-    ],
-    seeAlso: ["roi", "appreciation"],
+    seeAlso: ["cash-on-cash-return", "appreciation", "equity"],
     calculators: ["roi"],
   },
   {
@@ -1165,7 +1137,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Appreciation is unrealized until you sell or borrow against it, and it is not guaranteed. Treating projected appreciation as the reason a deal works turns an investment into a bet on the market.",
     ],
     calculators: ["rent-vs-own", "roi"],
-    seeAlso: ["equity", "cagr", "roi", "cash-flow"],
+    seeAlso: ["equity", "roi", "cash-flow"],
   },
   {
     slug: "depreciation",
@@ -1264,18 +1236,6 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
     ],
     calculators: ["rent-vs-own", "home-sale"],
     seeAlso: ["loan-to-value", "heloc", "cash-out-refinance", "appreciation"],
-  },
-  {
-    slug: "leverage",
-    term: "Leverage",
-    category: "investing",
-    short:
-      "Using borrowed money to control a larger asset, amplifying both returns and losses.",
-    definition: [
-      "A mortgage lets a modest down payment control a much larger asset, so appreciation and cash flow are earned on the full value while only part of the capital is yours. That is why cash-on-cash returns on financed property can exceed unlevered yield.",
-      "The amplification runs both directions. Leverage magnifies a downturn, and debt service continues through vacancy, which is what turns a difficult month into a serious problem.",
-    ],
-    seeAlso: ["cash-on-cash-return", "cap-rate", "dscr", "equity"],
   },
   {
     slug: "house-hacking",
