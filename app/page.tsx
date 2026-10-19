@@ -72,12 +72,12 @@ export default function Home() {
           generateServiceJsonLd({
             name: `${SITE_BRAND_SHORT}, Utah property management, mortgages & real estate`,
             description:
-              "Full-service Utah real estate for owners, tenants, and investors: property management, buying and selling, home loans, and portfolio-minded tools across the Wasatch Front and expansion markets.",
+              "Rentals, property management, buying, selling, home loans and remote online notarization across 55 Wasatch Front cities.",
             serviceType: "Real estate services",
             areaServed: "Utah",
             offers: {
               description:
-                "Consultations for property management, mortgages, investments, and leasing; subject to eligibility and market availability.",
+                "Consultations for property management, buying, selling, home loans and notary; subject to eligibility and availability.",
             },
           }),
         ]}

@@ -1,21 +1,24 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Building, Calculator, Calendar } from "lucide-react"
-import { HeroZipServiceSelectorLazy } from "@/components/landing/hero-zip-service-selector-lazy"
+import { Building2, FileSignature, Home, KeyRound, Landmark, Tag } from "lucide-react"
 import { analyticsAttributes } from "@/lib/analytics"
 
-/** Audience chooser under the hero buttons: one link per segment page. */
-const AUDIENCE_LINKS = [
-  { href: "/properties", label: "Rent", id: "rent" },
-  { href: "/buy", label: "Buy", id: "buy" },
-  { href: "/sell", label: "Sell", id: "sell" },
-  { href: "/property-management", label: "Manage my property", id: "manage" },
-  { href: "/loans", label: "Loans", id: "loans" },
+/** The six things a visitor can do with Ondo, in the order the header lists them. */
+export const SERVICE_TILES = [
+  { href: "/properties", label: "Rent", line: "Homes for rent across the Wasatch Front.", icon: KeyRound, id: "rent" },
+  { href: "/buy", label: "Buy", line: "An agent on your side, start to close.", icon: Home, id: "buy" },
+  { href: "/sell", label: "Sell", line: "Price it right and get it sold.", icon: Tag, id: "sell" },
+  { href: "/property-management", label: "Manage", line: "Hand off your rental, keep full visibility.", icon: Building2, id: "manage" },
+  { href: "/loans", label: "Loans", line: "Talk through programs before you shop.", icon: Landmark, id: "loans" },
+  { href: "/notary", label: "Notary", line: "Remote online notarization, same day when open.", icon: FileSignature, id: "notary" },
 ] as const
 
 export function HeroSection() {
   return (
-    <section className="relative w-full bg-gradient-to-r from-background to-card dark:bg-gradient-to-b dark:from-background dark:to-card py-20 md:py-32 overflow-hidden" aria-labelledby="hero-heading">
+    <section
+      className="relative w-full overflow-hidden bg-gradient-to-r from-background to-card py-16 dark:bg-gradient-to-b dark:from-background dark:to-card md:py-24"
+      aria-labelledby="hero-heading"
+    >
       <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
         <Image
           src="/modern-office-building.webp"
@@ -28,88 +31,32 @@ export function HeroSection() {
         />
       </div>
       <div className="container relative z-10 mx-auto px-4 text-center">
-        <div>
-          <h1 id="hero-heading" className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Utah&apos;s Full-Service Real Estate Partner
-          </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-foreground/70">
-            Property management, home loans, and brokerage across 55+ Wasatch Front cities.
-            Owners get real-time visibility. Tenants get responsive support. Investors see exactly how assets perform.
-          </p>
-        </div>
-        <section aria-label="Property search" className="relative flex justify-center">
-          <HeroZipServiceSelectorLazy />
-        </section>
-        {/*
-          Trio of equal-weight CTAs mirroring what high-converting local PM
-          sites use above the fold: browse rentals (renter intent), book a
-          call (owner intent), free home estimate (owner + investor intent).
-          Sits directly under the ZIP widget so PM shoppers who aren't ready
-          to type a ZIP still have three obvious next steps.
-        */}
-        <div
-          role="group"
-          aria-label="Primary calls to action"
-          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
-        >
-          <Link
-            href="/properties"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-transparent px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors"
-          >
-            <Building className="h-4 w-4" aria-hidden="true" />
-            Browse rentals
-          </Link>
-          <Link
-            href="/contact#book-a-call"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            <Calendar className="h-4 w-4" aria-hidden="true" />
-            Book a call
-          </Link>
-          <Link
-            href="/whats-my-home-worth"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-primary bg-transparent px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors"
-          >
-            <Calculator className="h-4 w-4" aria-hidden="true" />
-            Free home estimate
-          </Link>
-        </div>
-        <div
-          role="group"
+        <h1 id="hero-heading" className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          Rent, buy, sell, finance or notarize.
+        </h1>
+        <p className="mx-auto mb-10 max-w-2xl text-xl text-foreground/70">
+          One local team in Lehi for your home and your rental, across 55 Wasatch Front cities.
+        </p>
+        <ul
           aria-label="What do you need?"
-          className="mt-8 flex flex-wrap items-center justify-center gap-2"
+          className="mx-auto grid max-w-4xl grid-cols-2 gap-3 text-left sm:grid-cols-3 md:gap-4"
         >
-          <span className="text-sm font-medium text-foreground/70">What do you need?</span>
-          {AUDIENCE_LINKS.map(({ href, label, id }) => (
-            <Link
-              key={id}
-              href={href}
-              className="inline-flex min-h-11 items-center rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground hover:border-primary hover:text-primary transition-colors"
-              {...analyticsAttributes("hero_audience_click", "home_hero", id)}
-            >
-              {label}
-            </Link>
+          {SERVICE_TILES.map(({ href, label, line, icon: Icon, id }) => (
+            <li key={id}>
+              <Link
+                href={href}
+                className="group flex h-full flex-col rounded-xl border border-border bg-card/90 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:p-5"
+                {...analyticsAttributes("hero_audience_click", "home_hero", id)}
+              >
+                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span className="text-lg font-semibold text-foreground">{label}</span>
+                <span className="mt-1 text-sm text-foreground/70">{line}</span>
+              </Link>
+            </li>
           ))}
-        </div>
-        <p className="mt-6 text-sm text-foreground/50">
-          Property management, brokerage and lending under one roof.{" "}
-          <Link
-            href="/licensing"
-            className="underline underline-offset-4 hover:text-foreground/80"
-          >
-            Licensing details
-          </Link>
-        </p>
-        <p className="mt-2 text-xs text-foreground/50">
-          Landlord shopping a manager?{" "}
-          <Link
-            href="/calculators/owner-vs-self"
-            className="underline underline-offset-4 hover:text-foreground/80"
-          >
-            Run the numbers on self-manage vs Ondo
-          </Link>
-          .
-        </p>
+        </ul>
       </div>
     </section>
   )

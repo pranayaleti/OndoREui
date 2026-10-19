@@ -1,51 +1,42 @@
 import Link from "next/link"
-import { Calculator, Calendar, Search } from "lucide-react"
+import { Calendar, Mail, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SITE_EMAILS, SITE_PHONE, SITE_PHONE_TEL } from "@/lib/site"
+import { analyticsAttributes } from "@/lib/analytics"
 
-/**
- * Bottom-of-homepage conversion block.
- *
- * Landlords need a number before they'll book a call; renters just want the
- * listing search. Both paths are one click from here. ZIP and keyword search
- * live on /properties.
- */
 export function CTASection() {
   return (
     <section
-      className="py-16 bg-muted dark:bg-[var(--gradient-overlay)] text-foreground"
+      className="bg-muted py-16 text-foreground dark:bg-[var(--gradient-overlay)]"
       aria-labelledby="home-cta-heading"
     >
       <div className="container mx-auto px-4 text-center">
-        <h2 id="home-cta-heading" className="text-3xl font-bold mb-4">
-          What could your Utah rental earn?
+        <h2 id="home-cta-heading" className="mb-3 text-3xl font-bold">
+          Talk to a person in Lehi
         </h2>
-        <p className="mx-auto mb-8 max-w-2xl text-lg text-foreground/80">
-          See a free rent and sale estimate for your property, or book a 30-minute call to
-          talk through management, buying, or loans with the Ondo team.
+        <p className="mx-auto mb-8 max-w-xl text-lg text-foreground/80">
+          Call, book a 30-minute call, or send an email. We reply within one business day.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
-            <Link href="/whats-my-home-worth" className="inline-flex items-center gap-2">
-              <Calculator className="h-4 w-4" aria-hidden="true" />
-              Free home estimate
-            </Link>
+            <a href={`tel:${SITE_PHONE_TEL}`} className="inline-flex items-center gap-2" {...analyticsAttributes("contact_click", "home_cta", "call")}>
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call {SITE_PHONE}
+            </a>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="/contact#book-a-call" className="inline-flex items-center gap-2">
+            <Link href="/contact#book-a-call" className="inline-flex items-center gap-2" {...analyticsAttributes("book_call_click", "home_cta", "book-a-call")}>
               <Calendar className="h-4 w-4" aria-hidden="true" />
               Book a call
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost">
-            <Link href="/properties" className="inline-flex items-center gap-2">
-              <Search className="h-4 w-4" aria-hidden="true" />
-              Search rentals by ZIP
-            </Link>
+            <a href={`mailto:${SITE_EMAILS.primary}`} className="inline-flex items-center gap-2" {...analyticsAttributes("contact_click", "home_cta", "email")}>
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Email us
+            </a>
           </Button>
         </div>
-        <p className="mt-6 text-xs text-foreground/50">
-          Estimates are informational only and are not an appraisal, BPO, or CMA.
-        </p>
       </div>
     </section>
   )

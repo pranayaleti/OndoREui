@@ -4,26 +4,24 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { getHomepageOwnerFaqs } from "@/lib/service-faq"
+import { HOMEPAGE_FAQS } from "@/lib/home-faq"
 
-export function OwnerFaqSection() {
-  const faqs = getHomepageOwnerFaqs()
-
+export function HomeFaqSection() {
   return (
     <section
       className="border-y border-border/40 bg-muted/30 py-16 md:py-20"
-      aria-labelledby="owner-faq-heading"
+      aria-labelledby="home-faq-heading"
     >
       <div className="container mx-auto max-w-3xl px-4">
         <h2
-          id="owner-faq-heading"
+          id="home-faq-heading"
           className="mb-8 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
         >
-          Owner questions, answered
+          Common questions
         </h2>
         <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={faq.q} value={`owner-faq-${index}`}>
+          {HOMEPAGE_FAQS.map((faq, index) => (
+            <AccordionItem key={faq.q} value={`home-faq-${index}`}>
               <AccordionTrigger className="text-left text-foreground">
                 {faq.q}
               </AccordionTrigger>
@@ -37,3 +35,5 @@ export function OwnerFaqSection() {
     </section>
   )
 }
+
+export { HomeFaqSection as OwnerFaqSection }

@@ -5,7 +5,7 @@ export const HOME_PAGE_TITLE = "Ondo RE | Utah Property Management, Loans & Real
 
 /** Homepage meta description (≤155 chars). */
 export const HOME_PAGE_DESCRIPTION =
-  "AI-powered property management for Utah landlords. Real-time dashboards, automated rent collection, tenant screening & maintenance, plus loans and brokerage."
+  "Rentals, property management, buying, selling, home loans and remote notary from one local team in Lehi, Utah. 55 Wasatch Front cities."
 
 export const homeOpenGraphImages = [
   {

@@ -67,7 +67,7 @@ export function FeaturedPropertiesSection() {
       <div className="container mx-auto px-4">
         <div className="mb-12 flex items-center justify-between gap-4">
           <h2 id="properties-heading" className="text-3xl font-bold dark:text-foreground">
-            Featured Utah rental properties
+            Homes for rent right now
           </h2>
           {state.kind === "ready" && (
             <button
@@ -167,9 +167,8 @@ export function FeaturedPropertiesSection() {
               New listings post regularly across the Wasatch Front.
             </p>
             <p className="text-sm text-foreground/70">
-              We only feature real Ondo-managed rentals here. See what&rsquo;s
-              on the market right now, or ask us to send you the next matching
-              vacancy in your target city.
+              See what is on the market now, or ask us to send you the next
+              vacancy in your city.
             </p>
             <div className="flex flex-col gap-2 sm:flex-row">
               <Button asChild>
@@ -184,7 +183,7 @@ export function FeaturedPropertiesSection() {
 
         <div className="text-center mt-10">
           <Button asChild className="bg-background hover:bg-muted dark:hover:bg-muted text-foreground">
-            <Link href="/properties">View all properties</Link>
+            <Link href="/properties">See all rentals</Link>
           </Button>
         </div>
       </div>
