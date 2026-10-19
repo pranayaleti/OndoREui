@@ -47,14 +47,14 @@ export default function PropertyManagementCalculatorsWhichOne() {
 
             <h2>Screening a deal</h2>
             <ul>
-              <li><Link href="/calculators/one-percent-rule">1% rule</Link> and <Link href="/calculators/grm">GRM</Link> — fast first-pass filters.</li>
+              <li><Link href="/calculators/one-percent-rule">1% and 50% rules</Link>: fast first-pass filters.</li>
               <li><Link href="/calculators/cap-rate">Cap rate</Link> — the asset's unleveraged yield.</li>
             </ul>
 
             <h2>Judging your actual return</h2>
             <ul>
               <li><Link href="/calculators/cash-on-cash">Cash-on-cash</Link> — annual cash yield on the money you put in.</li>
-              <li><Link href="/calculators/roi">ROI</Link> and <Link href="/calculators/cagr">CAGR</Link> — total and annualized growth over the hold.</li>
+              <li><Link href="/calculators/roi">ROI</Link>: total growth over the hold.</li>
               <li><Link href="/calculators/dscr">DSCR</Link> — whether the income covers the loan (and qualifies you for one).</li>
             </ul>
 

@@ -12,10 +12,8 @@ export const dynamicImports = {
     closingCost: () => import("@/pages/calculators/closing-cost-calculator"),
     refinance: () => import("@/pages/calculators/refinance-calculator"),
     homeSale: () => import("@/pages/calculators/home-sale-calculator"),
-    buyingPower: () => import("@/pages/calculators/buying-power-calculator"),
     temporaryBuydown: () => import("@/pages/calculators/temporary-buydown-calculator"),
     rentVsOwn: () => import("@/pages/calculators/rent-vs-own-calculator"),
-    retirement: () => import("@/pages/calculators/retirement-calculator"),
   },
 
   // Dashboard components

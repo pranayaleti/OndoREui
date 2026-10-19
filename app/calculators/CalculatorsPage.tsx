@@ -10,7 +10,6 @@ import {
   Landmark,
   TrendingUp as TrendingUpIcon,
   Tag,
-  ShoppingCart as ShoppingCartIcon,
   ArrowLeftRight,
   PiggyBank,
   CheckCircle2,
@@ -20,8 +19,7 @@ import {
   DollarSign,
   Percent,
   Building2,
-  TrendingDown,
-  Wallet
+  TrendingDown
 } from 'lucide-react'
 
 interface CalculatorTile {
@@ -100,15 +98,6 @@ const CalculatorsPage: React.FC = () => {
       color: 'from-red-500 to-red-600',
     },
     {
-      id: 'buying-power',
-      name: 'Buying Power Calculator',
-      description: 'Determine your maximum home purchase price based on available funds.',
-      path: '/calculators/buying-power',
-      icon: <ShoppingCartIcon className="h-8 w-8" />,
-      category: 'Purchase',
-      color: 'from-teal-500 to-teal-600',
-    },
-    {
       id: 'temporary-buydown',
       name: 'Temporary Buydown Calculator',
       description: 'Model 2-1, 3-2-1, or flat temporary payment subsidies and estimated buydown cost.',
@@ -125,15 +114,6 @@ const CalculatorsPage: React.FC = () => {
       icon: <ArrowLeftRight className="h-8 w-8" />,
       category: 'Analysis',
       color: 'from-amber-500 to-amber-600',
-    },
-    {
-      id: 'retirement',
-      name: 'Retirement Calculator',
-      description: 'Shows how real estate and savings can support your income needs in retirement.',
-      path: '/calculators/retirement',
-      icon: <Landmark className="h-8 w-8" />,
-      category: 'Planning', 
-      color: 'from-emerald-500 to-emerald-600',
     },
     {
       id: 'cash-on-cash',
@@ -163,24 +143,6 @@ const CalculatorsPage: React.FC = () => {
       color: 'from-violet-500 to-violet-600',
     },
     {
-      id: 'cagr',
-      name: 'CAGR Calculator',
-      description: 'Compute the compound annual growth rate between two values over time.',
-      path: '/calculators/cagr',
-      icon: <TrendingUpIcon className="h-8 w-8" />,
-      category: 'Investment',
-      color: 'from-indigo-500 to-indigo-600',
-    },
-    {
-      id: 'grm',
-      name: 'Gross Rent Multiplier Calculator',
-      description: 'Quick screening tool to evaluate property price relative to rental income.',
-      path: '/calculators/grm',
-      icon: <Building2 className="h-8 w-8" />,
-      category: 'Investment',
-      color: 'from-secondary to-secondary',
-    },
-    {
       id: 'dscr',
       name: 'DSCR Calculator',
       description: 'Calculate Debt Service Coverage Ratio for investment property loans.',
@@ -192,29 +154,11 @@ const CalculatorsPage: React.FC = () => {
     {
       id: 'one-percent-rule',
       name: '1% Rule Calculator',
-      description: 'Quick screening tool: monthly rent should be at least 1% of purchase price.',
+      description: 'Two quick screens: rent as a share of price (1%) and expenses as half of rent (50%).',
       path: '/calculators/one-percent-rule',
       icon: <CalcIcon className="h-8 w-8" />,
       category: 'Investment',
       color: 'from-lime-500 to-lime-600',
-    },
-    {
-      id: 'fifty-percent-rule',
-      name: '50% Rule Calculator',
-      description: 'Estimate operating expenses: typically 50% of gross rental income.',
-      path: '/calculators/fifty-percent-rule',
-      icon: <Percent className="h-8 w-8" />,
-      category: 'Investment',
-      color: 'from-orange-500 to-orange-600',
-    },
-    {
-      id: 'cost-of-living',
-      name: 'Monthly Cost of Living Calculator',
-      description: 'Estimate housing, transportation, utilities, food, and the rest of a monthly budget.',
-      path: '/calculators/cost-of-living',
-      icon: <Wallet className="h-8 w-8" />,
-      category: 'Planning',
-      color: 'from-primary to-primary',
     }
   ]
 
@@ -222,7 +166,7 @@ const CalculatorsPage: React.FC = () => {
   // and the structured data cannot drift apart.
   const calculators = tiles.map((tile) => ({ ...tile, name: CALCULATOR_CATALOG[tile.id]?.name ?? tile.name }))
 
-  const categories = ['All', 'Mortgage', 'Purchase', 'Sale', 'Analysis', 'Planning', 'Investment']
+  const categories = ['All', 'Mortgage', 'Purchase', 'Sale', 'Analysis', 'Investment']
 
   const [selectedCategory, setSelectedCategory] = useState('All')
 

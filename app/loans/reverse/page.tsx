@@ -95,9 +95,6 @@ export default function ReverseMortgagePage() {
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>
               </Button>
-              <Button key="/calculators/retirement" asChild variant="outline" size="sm">
-                <Link href="/calculators/retirement">Retirement calculator</Link>
-              </Button>
               <Button key="/contact" asChild variant="outline" size="sm">
                 <Link href="/contact">Talk to us</Link>
               </Button>

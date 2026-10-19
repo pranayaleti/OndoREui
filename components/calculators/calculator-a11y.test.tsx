@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { fireEvent, render, screen } from "@testing-library/react"
 // Lives here, not beside the calculators: every file under pages/ becomes a route.
-import BuyingPowerCalculator from "@/pages/calculators/buying-power-calculator"
 import ClosingCostCalculator from "@/pages/calculators/closing-cost-calculator"
 import IncomeCalculator from "@/pages/calculators/income-calculator"
 import RefinanceCalculator from "@/pages/calculators/refinance-calculator"
@@ -9,7 +8,6 @@ import TemporaryBuydownCalculator from "@/pages/calculators/temporary-buydown-ca
 import MortgagePaymentCalculator from "@/pages/calculators/mortgage-payment-calculator"
 
 const calculators = {
-  "buying power": BuyingPowerCalculator,
   "closing cost": ClosingCostCalculator,
   income: IncomeCalculator,
   refinance: RefinanceCalculator,

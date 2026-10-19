@@ -1,12 +1,12 @@
 # 301 redirects from old PascalCase calculator URLs to new kebab-case URLs
 /calculators/AffordabilityCalculator    /calculators/affordability-calculator   301
-/calculators/BuyingPowerCalculator      /calculators/buying-power-calculator    301
+/calculators/BuyingPowerCalculator      /calculators/affordability/             301
 /calculators/CapRateCalculator          /calculators/cap-rate-calculator        301
 /calculators/CashOnCashCalculator       /calculators/cash-on-cash-calculator    301
 /calculators/ClosingCostCalculator      /calculators/closing-cost-calculator    301
 /calculators/DSCRCalculator             /calculators/dscr-calculator            301
-/calculators/FiftyPercentRuleCalculator /calculators/fifty-percent-rule-calculator 301
-/calculators/GRMCalculator              /calculators/grm-calculator             301
+/calculators/FiftyPercentRuleCalculator /calculators/one-percent-rule/          301
+/calculators/GRMCalculator              /calculators/cap-rate/                  301
 /calculators/HomeSaleCalculator         /calculators/home-sale-calculator       301
 /calculators/IncomeCalculator           /calculators/income-calculator          301
 /calculators/MortgagePaymentCalculator  /calculators/mortgage-payment-calculator 301
@@ -14,7 +14,7 @@
 /calculators/ROICalculator              /calculators/roi-calculator             301
 /calculators/RefinanceCalculator        /calculators/refinance-calculator       301
 /calculators/RentVsOwnCalculator        /calculators/rent-vs-own-calculator     301
-/calculators/RetirementCalculator       /calculators/retirement-calculator      301
+/calculators/RetirementCalculator       /calculators/                           301
 /calculators/TemporaryBuydownCalculator /calculators/temporary-buydown-calculator 301
 
 # Old and guessable URLs (Sep 2026 404 audit: Cloudflare 404 logs, the Internet Archive and common
@@ -148,3 +148,17 @@
 /buy-sell                           /buy/                              301
 /why-utah                           /moving-to-utah/                   301
 /refinance/blog                     /blog/                             301
+
+# Oct 2026 simplification: calculators trimmed from twenty to fourteen.
+/calculators/fifty-percent-rule     /calculators/one-percent-rule/     301
+/calculators/fifty-percent-rule-calculator /calculators/one-percent-rule/ 301
+/calculators/buying-power           /calculators/affordability/        301
+/calculators/buying-power-calculator /calculators/affordability/       301
+/calculators/grm                    /calculators/cap-rate/             301
+/calculators/grm-calculator         /calculators/cap-rate/             301
+/calculators/cagr                   /calculators/                      301
+/calculators/cagr-calculator        /calculators/                      301
+/calculators/retirement             /calculators/                      301
+/calculators/retirement-calculator  /calculators/                      301
+/calculators/cost-of-living         /moving-to-utah/                   301
+/calculators/cost-of-living-calculator /moving-to-utah/                301

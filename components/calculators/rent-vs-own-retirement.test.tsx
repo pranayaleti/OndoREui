@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
 // Lives here, not beside the calculators: every file under pages/ becomes a route.
 import RentVsOwnCalculator from "@/pages/calculators/rent-vs-own-calculator"
-import RetirementCalculator from "@/pages/calculators/retirement-calculator"
 
 function setField(label: string, value: string) {
   const input = screen.getByLabelText(label)
@@ -30,24 +29,5 @@ describe("rent vs own calculator", () => {
     expect(field("analysisYears").textContent).not.toContain("$")
     expect(field("investmentReturn").textContent).toContain("%")
     expect(field("monthlyRent").textContent).toContain("$")
-  })
-})
-
-describe("retirement calculator", () => {
-  it("labels a negative gap as a surplus, not a red gap", () => {
-    render(<RetirementCalculator />)
-    expect(screen.getByText("On Track")).toBeInTheDocument()
-    expect(screen.getByText("Income Surplus")).toBeInTheDocument()
-    expect(screen.queryByText("Income Gap")).not.toBeInTheDocument()
-  })
-
-  it("changes results when income, expenses and life expectancy change", () => {
-    render(<RetirementCalculator />)
-    expect(screen.getByText("Annual Savings Capacity").parentElement).toHaveTextContent("$20,000")
-    setField("Annual Income", "250000")
-    setField("Annual Expenses", "10000")
-    expect(screen.getByText("Annual Savings Capacity").parentElement).toHaveTextContent("$240,000")
-    setField("Life Expectancy", "100")
-    expect(screen.getByText("Years in Retirement").parentElement).toHaveTextContent("35")
   })
 })

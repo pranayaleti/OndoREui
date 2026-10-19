@@ -198,7 +198,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
     whyItMatters:
       "DTI is usually the constraint that decides how much home you qualify for, more often than the down payment. Published maximums are not a promise that a high-DTI file will be approved.",
     seeAlso: ["pre-approval", "underwriting", "piti", "hoa"],
-    calculators: ["affordability", "income", "buying-power"],
+    calculators: ["affordability", "income"],
     related: [{ label: "DTI, front-end and back-end, with HOA", href: "/blog/dti-frontend-backend-with-hoa/" }],
     lending: true,
   },
@@ -231,7 +231,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "Minimums differ by program, and gift funds from an eligible donor are often allowed when the paper trail is documented properly. Programs and lender overlays both apply, so confirm the requirement for your specific file.",
     ],
     seeAlso: ["loan-to-value", "pmi", "closing-costs", "earnest-money", "gift-funds"],
-    calculators: ["affordability", "buying-power", "mortgage-payment"],
+    calculators: ["affordability", "mortgage-payment"],
     related: [
       { label: "Should you wait for 20% down?", href: "/blog/should-i-wait-for-20-percent-down/" },
       { label: "Down payment assistance and gift funds", href: "/blog/gift-funds-down-payment-rules/" },
@@ -325,7 +325,7 @@ const MORTGAGE_TERMS: readonly GlossaryTerm[] = [
       "A rate you see quoted in the news is an average across many files with assumptions attached. Your rate depends on credit, loan-to-value, occupancy, property type, program, and the day you lock.",
     ],
     seeAlso: ["apr", "rate-lock", "discount-points", "arm"],
-    calculators: ["mortgage-payment", "buying-power"],
+    calculators: ["mortgage-payment"],
     related: [
       { label: "Mortgage rates explained", href: "/buy/rates/" },
       { label: "Why the headline average is not your quote", href: "/blog/mortgage-rate-trends-2025/" },
@@ -1081,7 +1081,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "It says nothing about expenses, so two properties with identical GRMs can perform very differently once taxes, insurance, and maintenance are counted. Screen with GRM, decide with NOI.",
     ],
     seeAlso: ["cap-rate", "noi", "one-percent-rule"],
-    calculators: ["grm"],
+    calculators: ["cap-rate"],
   },
   {
     slug: "dscr",
@@ -1124,7 +1124,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Actual ratios vary widely with property age, taxes, and whether the owner pays utilities. Use it to catch a projection that assumes almost no expenses, then replace it with real numbers.",
     ],
     seeAlso: ["one-percent-rule", "operating-expenses", "capex", "noi"],
-    calculators: ["fifty-percent-rule"],
+    calculators: ["one-percent-rule"],
   },
   {
     slug: "roi",
@@ -1138,7 +1138,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Whenever ROI is quoted, the useful question is what is in the numerator and over what period.",
     ],
     seeAlso: ["cash-on-cash-return", "cagr", "appreciation", "equity"],
-    calculators: ["roi", "cagr", "retirement"],
+    calculators: ["roi"],
   },
   {
     slug: "cagr",
@@ -1152,7 +1152,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "It smooths away everything that happened in between. Two investments with identical CAGR can have had very different volatility along the way.",
     ],
     seeAlso: ["roi", "appreciation"],
-    calculators: ["cagr", "retirement"],
+    calculators: ["roi"],
   },
   {
     slug: "appreciation",
@@ -1164,7 +1164,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "Market appreciation comes from conditions outside your control. Forced appreciation comes from work you do: renovation, better management, raising below-market rents.",
       "Appreciation is unrealized until you sell or borrow against it, and it is not guaranteed. Treating projected appreciation as the reason a deal works turns an investment into a bet on the market.",
     ],
-    calculators: ["rent-vs-own", "retirement", "cagr"],
+    calculators: ["rent-vs-own", "roi"],
     seeAlso: ["equity", "cagr", "roi", "cash-flow"],
   },
   {
@@ -1459,7 +1459,7 @@ const RENTING_TERMS: readonly GlossaryTerm[] = [
     ],
     whyItMatters:
       "Read the governing documents and the reserve study during due diligence. An underfunded association is a future special assessment.",
-    calculators: ["cost-of-living", "affordability"],
+    calculators: ["affordability"],
     seeAlso: ["piti", "dti", "condo", "operating-expenses"],
     related: [{ label: "Townhome vs condo: the HOA docs lenders ask for", href: "/blog/townhome-vs-condo-hoa-docs-lenders-ask/" }],
   },
@@ -1680,7 +1680,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
       "Property tax is levied by local taxing entities based on an assessed value and the applicable rates. It is prorated between buyer and seller at closing and, for most mortgages, collected monthly into an escrow account.",
       "Assessments and rates change, so a payment based on the seller’s tax figure can shift after the first assessment following a sale. Owner-occupied properties may qualify for exemptions that an investment property does not.",
     ],
-    calculators: ["cost-of-living", "mortgage-payment"],
+    calculators: ["mortgage-payment"],
     seeAlso: ["escrow-account", "piti", "prepaids", "operating-expenses"],
     related: [{ label: "Understanding property taxes in Utah", href: "/blog/understanding-property-taxes-utah/" }],
   },
@@ -1695,7 +1695,7 @@ const CLOSING_TERMS: readonly GlossaryTerm[] = [
       "Lenders require coverage protecting the structure at least to the replacement cost of the improvements. A standard homeowners policy covers a detached house; a condo unit uses a different form that coordinates with the association’s master policy.",
       "The first year is generally paid at closing as a prepaid item, with subsequent premiums collected monthly through escrow.",
     ],
-    calculators: ["cost-of-living", "mortgage-payment"],
+    calculators: ["mortgage-payment"],
     seeAlso: ["prepaids", "escrow-account", "piti", "hoa", "renters-insurance"],
     related: [{ label: "Hazard vs HO-3 vs HO-6 condo insurance", href: "/blog/hazard-vs-ho3-vs-ho6-condo-insurance/" }],
   },

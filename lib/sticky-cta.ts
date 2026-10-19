@@ -24,11 +24,9 @@ export const STICKY_BAR_HIDDEN_PREFIXES = [
   "/qualify",
   "/loans/second-look",
   "/refinance/watch",
-  // These two render their own page-specific fixed bottom bar. Without this the
-  // global bar stacks underneath theirs and the visitor loses that much viewport
-  // to two competing CTAs.
+  // Notary renders its own page-specific fixed bottom bar. Without this the global bar
+  // stacks underneath it and the visitor loses that much viewport to two competing CTAs.
   "/notary",
-  "/calculators/cost-of-living",
 ] as const
 
 export interface StickyCta {

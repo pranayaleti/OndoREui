@@ -252,14 +252,6 @@ const calculators: SearchResult[] = [
     keywords: ['home sale', 'selling', 'net proceeds', 'sale proceeds']
   },
   {
-    id: 'buying-power',
-    title: 'Buying Power Calculator',
-    description: 'Determine your maximum home purchase price based on available funds',
-    href: '/calculators/buying-power',
-    category: 'Calculator',
-    keywords: ['buying power', 'purchase price', 'maximum price', 'down payment']
-  },
-  {
     id: 'temporary-buydown',
     title: 'Temporary Buydown Calculator',
     description: 'Calculate temporary interest rate buydown benefits and costs',
@@ -274,14 +266,6 @@ const calculators: SearchResult[] = [
     href: '/calculators/rent-vs-own',
     category: 'Calculator',
     keywords: ['rent vs own', 'renting vs buying', 'rent or buy', 'comparison']
-  },
-  {
-    id: 'retirement',
-    title: 'Retirement Calculator',
-    description: 'Plan your retirement savings and investment strategy for real estate',
-    href: '/calculators/retirement',
-    category: 'Calculator',
-    keywords: ['retirement', 'retirement planning', 'savings', 'investment']
   },
   {
     id: 'cash-on-cash',
@@ -308,14 +292,6 @@ const calculators: SearchResult[] = [
     keywords: ['ROI', 'return on investment', 'cash flow', 'appreciation']
   },
   {
-    id: 'grm',
-    title: 'Gross Rent Multiplier Calculator',
-    description: 'Quick screening tool to evaluate property price relative to rental income',
-    href: '/calculators/grm',
-    category: 'Calculator',
-    keywords: ['GRM', 'gross rent multiplier', 'rental income', 'screening']
-  },
-  {
     id: 'dscr',
     title: 'DSCR Calculator',
     description: 'Calculate Debt Service Coverage Ratio for investment property loans',
@@ -325,19 +301,11 @@ const calculators: SearchResult[] = [
   },
   {
     id: 'one-percent-rule',
-    title: '1% Rule Calculator',
-    description: 'Quick screening tool: monthly rent should be at least 1% of purchase price',
+    title: '1% and 50% Rule Calculator',
+    description: 'Two quick rental screens: rent as a share of price and expenses as half of rent',
     href: '/calculators/one-percent-rule',
     category: 'Calculator',
-    keywords: ['1% rule', 'one percent rule', 'rental screening', 'rule of thumb']
-  },
-  {
-    id: 'fifty-percent-rule',
-    title: '50% Rule Calculator',
-    description: 'Estimate operating expenses: typically 50% of gross rental income',
-    href: '/calculators/fifty-percent-rule',
-    category: 'Calculator',
-    keywords: ['50% rule', 'fifty percent rule', 'operating expenses', 'expenses']
+    keywords: ['1% rule', 'one percent rule', '50% rule', 'fifty percent rule', 'operating expenses', 'rental screening', 'rule of thumb']
   }
 ]
 

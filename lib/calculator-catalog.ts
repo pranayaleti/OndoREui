@@ -66,10 +66,6 @@ export const CALCULATOR_CATALOG: Record<
     name: "Home Sale Proceeds Calculator",
     description: "Estimate net proceeds after agent fees, taxes, and payoff.",
   },
-  "buying-power": {
-    name: "Buying Power Calculator",
-    description: "See how rate, down payment, and debts change your buying power.",
-  },
   "temporary-buydown": {
     name: "Temporary Buydown Calculator",
     description:
@@ -78,10 +74,6 @@ export const CALCULATOR_CATALOG: Record<
   "rent-vs-own": {
     name: "Rent vs Own Calculator",
     description: "Compare long-term costs and equity between renting and owning.",
-  },
-  retirement: {
-    name: "Retirement Savings Calculator",
-    description: "Project retirement savings growth and future income needs.",
   },
   "cash-on-cash": {
     name: "Cash-on-Cash Return Calculator",
@@ -95,30 +87,15 @@ export const CALCULATOR_CATALOG: Record<
     name: "ROI Calculator",
     description: "Measure total ROI for a real estate investment with costs.",
   },
-  cagr: {
-    name: "CAGR Calculator",
-    description: "Compute the compound annual growth rate between two values over time.",
-  },
-  grm: {
-    name: "GRM Calculator",
-    description: "Calculate gross rent multiplier from price and rent.",
-  },
   dscr: {
     name: "DSCR Calculator",
     description: "Estimate debt service coverage ratio for rental financing.",
   },
   "one-percent-rule": {
-    name: "1% Rule Calculator",
-    description: "Check if a property's rent meets the 1% rule benchmark.",
-  },
-  "fifty-percent-rule": {
-    name: "50% Rule Calculator",
-    description: "Estimate expenses quickly using the 50% rental rule.",
-  },
-  "cost-of-living": {
-    name: "Monthly Cost of Living Calculator",
-    description:
-      "Estimate your monthly living expenses, housing costs, transportation, utilities, food, insurance, and more with Ondo’s interactive cost of living calculator.",
+    seoTitle: "Utah 1% and 50% Rule Calculator for Rentals",
+    seoDescription: "Screen a Utah rental two ways in one place: rent as a share of price (the 1% rule) and expenses as half of rent (the 50% rule).",
+    name: "1% and 50% Rule Calculator",
+    description: "Screen a rental two ways: rent as a share of price (1%) and operating expenses as half of rent (50%).",
   },
 }
 

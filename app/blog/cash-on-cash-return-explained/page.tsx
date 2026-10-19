@@ -74,7 +74,7 @@ export default function CashOnCashReturnExplained() {
               <li><strong>Cap rate</strong> = NOI ÷ property value, ignores financing, so it measures the asset, not your leveraged position.</li>
               <li><strong>Cash-on-cash</strong> includes your loan, so it reflects the effect of leverage on <em>your</em> cash.</li>
               <li><strong>CAGR</strong> measures the compounded annual growth of a value over time (e.g. equity or portfolio), while cash-on-cash is a single-year yield. Use the{" "}
-                <Link href="/calculators/cagr">CAGR calculator</Link> for the growth-over-time view.</li>
+                <Link href="/calculators/roi">ROI calculator</Link> for the growth-over-time view.</li>
             </ul>
 
             <h2>What a “good” number is</h2>

@@ -37,16 +37,10 @@ const slugToComponent: Record<string, ComponentType> = {
   "home-sale": dynamic(() => import("@/pages/calculators/home-sale-calculator"), {
     loading: () => <Loading />
   }),
-  "buying-power": dynamic(() => import("@/pages/calculators/buying-power-calculator"), {
-    loading: () => <Loading />
-  }),
   "temporary-buydown": dynamic(() => import("@/pages/calculators/temporary-buydown-calculator"), {
     loading: () => <Loading />
   }),
   "rent-vs-own": dynamic(() => import("@/pages/calculators/rent-vs-own-calculator"), {
-    loading: () => <Loading />
-  }),
-  "retirement": dynamic(() => import("@/pages/calculators/retirement-calculator"), {
     loading: () => <Loading />
   }),
   "cash-on-cash": dynamic(() => import("@/pages/calculators/cash-on-cash-calculator"), {
@@ -58,22 +52,10 @@ const slugToComponent: Record<string, ComponentType> = {
   "roi": dynamic(() => import("@/pages/calculators/roi-calculator"), {
     loading: () => <Loading />
   }),
-  "cagr": dynamic(() => import("@/pages/calculators/cagr-calculator"), {
-    loading: () => <Loading />
-  }),
-  "grm": dynamic(() => import("@/pages/calculators/grm-calculator"), {
-    loading: () => <Loading />
-  }),
   "dscr": dynamic(() => import("@/pages/calculators/dscr-calculator"), {
     loading: () => <Loading />
   }),
   "one-percent-rule": dynamic(() => import("@/pages/calculators/one-percent-rule-calculator"), {
-    loading: () => <Loading />
-  }),
-  "fifty-percent-rule": dynamic(() => import("@/pages/calculators/fifty-percent-rule-calculator"), {
-    loading: () => <Loading />
-  }),
-  "cost-of-living": dynamic(() => import("@/pages/calculators/cost-of-living-calculator"), {
     loading: () => <Loading />
   }),
 }

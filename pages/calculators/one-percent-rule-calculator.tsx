@@ -85,7 +85,7 @@ const OnePercentRuleCalculator: React.FC = () => {
               <ArrowLeft className="h-6 w-6" />
               <span className="sr-only">Back to all calculators</span>
             </Link>
-            <h1 className="text-2xl font-bold text-foreground">1% Rule Calculator</h1>
+            <h1 className="text-2xl font-bold text-foreground">1% and 50% Rule Calculator</h1>
           </div>
         </div>
       </div>
@@ -183,21 +183,39 @@ const OnePercentRuleCalculator: React.FC = () => {
                   </div>
                 )}
 
+                {/* 50% rule quick check */}
+                <div className="bg-card rounded-lg shadow-lg p-6">
+                  <h2 className="text-xl font-semibold text-foreground mb-4">50% Rule Estimate</h2>
+                  <p className="text-sm text-foreground/70 mb-4">
+                    The 50% rule assumes operating expenses (taxes, insurance, repairs, vacancy, management) eat about half of rent, before the mortgage.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <p className="text-sm text-foreground/70 mb-1">Estimated monthly expenses</p>
+                      <p className="text-lg font-semibold text-foreground">{formatCurrency(formData.monthlyRent * 0.5)}</p>
+                    </div>
+                    <div className="text-center p-3 bg-muted rounded-lg">
+                      <p className="text-sm text-foreground/70 mb-1">Estimated monthly NOI</p>
+                      <p className="text-lg font-semibold text-foreground">{formatCurrency(formData.monthlyRent * 0.5)}</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-foreground/60 mt-3">
+                    Annual: {formatCurrency(formData.monthlyRent * 12 * 0.5)} in expenses, {formatCurrency(formData.monthlyRent * 12 * 0.5)} in NOI before debt service.
+                  </p>
+                </div>
+
                 {/* Recommendations */}
                 <div className="bg-card rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold text-foreground mb-4">Analysis</h2>
                   <div className="space-y-3 text-sm text-foreground/70">
                     {results.meetsRule ? (
-                      <p className="text-primary font-medium">✓ Property meets the 1% rule! This is a good starting point for evaluation.</p>
+                      <p className="text-primary font-medium">Meets the 1% rule. A good starting point.</p>
                     ) : (
-                      <p className="text-warning-emphasis font-medium">⚠ Property does not meet the 1% rule. Consider if other factors justify the investment.</p>
+                      <p className="text-warning-emphasis font-medium">Does not meet the 1% rule. Look at the rest of the numbers before you decide.</p>
                     )}
-                    <p>• The 1% rule is a quick screening tool, not a definitive investment decision</p>
-                    <p>• Properties meeting the rule typically have better cash flow potential</p>
-                    <p>• Lower-priced markets often meet this rule more easily</p>
-                    <p>• Higher-priced markets may not meet the rule but can still be good investments</p>
-                    <p>• Always perform detailed financial analysis beyond the 1% rule</p>
-                    <p>• Consider expenses, financing, and market conditions</p>
+                    <p>• Both rules are quick screens, not a decision. They ignore financing, appreciation and your actual expenses.</p>
+                    <p>• Lower-priced markets clear the 1% rule more easily; many Wasatch Front homes do not and can still work.</p>
+                    <p>• Run cap rate, cash-on-cash and DSCR before you make an offer.</p>
                   </div>
                 </div>
               </>
@@ -207,26 +225,22 @@ const OnePercentRuleCalculator: React.FC = () => {
 
         {/* Additional Information */}
         <div className="mt-12 bg-card rounded-lg shadow-lg p-6">
-          <h2 className="text-xl font-semibold text-foreground mb-4">About the 1% Rule</h2>
+          <h2 className="text-xl font-semibold text-foreground mb-4">About the two rules</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-foreground/70">
             <div>
-              <h3 className="font-medium text-foreground mb-2">What It Is:</h3>
+              <h3 className="font-medium text-foreground mb-2">1% rule</h3>
               <ul className="space-y-1 list-disc list-inside">
-                <li>Quick screening tool for rental properties</li>
-                <li>Monthly rent should be at least 1% of purchase price</li>
-                <li>Helps identify properties with cash flow potential</li>
-                <li>Not a guarantee of profitability</li>
-                <li>Useful for initial property evaluation</li>
+                <li>Monthly rent should be at least 1% of the purchase price</li>
+                <li>A fast way to sort a list of listings</li>
+                <li>Ignores expenses, financing and appreciation</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-foreground mb-2">Important Notes:</h3>
+              <h3 className="font-medium text-foreground mb-2">50% rule</h3>
               <ul className="space-y-1 list-disc list-inside">
-                <li>Rule works better in lower-priced markets</li>
-                <li>Higher-priced markets may not meet the rule</li>
-                <li>Does not account for expenses or financing</li>
-                <li>Does not consider appreciation potential</li>
-                <li>Always perform detailed financial analysis</li>
+                <li>Operating expenses run about half of gross rent over time</li>
+                <li>What is left is NOI, before the mortgage</li>
+                <li>Replace it with real tax, insurance and repair numbers before you offer</li>
               </ul>
             </div>
           </div>
@@ -234,7 +248,7 @@ const OnePercentRuleCalculator: React.FC = () => {
       </div>
       <LeadCaptureModal
         calculatorSlug="one-percent-rule"
-        calculatorName="1% Rule"
+        calculatorName="1% and 50% Rule"
         hasCalculated={hasCalculated}
       />
     </div>

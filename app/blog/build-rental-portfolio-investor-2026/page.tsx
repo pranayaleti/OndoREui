@@ -53,7 +53,7 @@ export default function BuildRentalPortfolioInvestor2026() {
             <h2>Stage 2 — Finance deliberately</h2>
             <ul>
               <li>Understand DSCR and portfolio loans as you scale past conventional limits.</li>
-              <li>Track equity growth with <Link href="/calculators/cagr">CAGR</Link> and refinance strategically.</li>
+              <li>Track equity growth with <Link href="/calculators/roi">ROI</Link> and refinance strategically.</li>
             </ul>
 
             <h2>Stage 3 — Systematize operations</h2>
