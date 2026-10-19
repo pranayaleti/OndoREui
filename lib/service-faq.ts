@@ -97,7 +97,7 @@ export const PM_PAGE_FAQS = pick(propertyManagementFaqBank, [/fees/i, /lease my 
 export const BUY_PAGE_FAQS = pick(buySellFaqBank, [/agents paid/i, /down payment/i, /waive/i, /closing costs/i, /how long/i])
 export const SELL_PAGE_FAQS = pick(buySellFaqBank, [/market homes/i, /best ROI/i, /sell my current home/i, /buy before I sell/i, /agents paid/i])
 export const LOANS_PAGE_FAQS = pick(loansFaqBank, [/programs are available/i, /pre-approval/i, /credit score/i, /self-employed/i, /rate lock/i])
-export const NOTARY_PAGE_FAQS = notaryFaqBank.slice(0, 5)
+export const NOTARY_PAGE_FAQS = notaryFaqBank.slice(0, 3)
 
 export const HOMEPAGE_OWNER_FAQ_COUNT = 6
 

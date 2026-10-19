@@ -3,7 +3,7 @@ import { FaqAccordion } from "@/components/faq-accordion"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import { NOTARY_PAGE_FAQS, notaryFaqBank } from "@/lib/service-faq"
+import { notaryFaqBank } from "@/lib/service-faq"
 import Link from "next/link"
 import { ArrowLeft, FileText } from "lucide-react"
 import type { Metadata } from "next"
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 
 export default function NotaryFAQPage() {
-  const faqs = NOTARY_PAGE_FAQS.concat(notaryFaqBank.slice(5)).map((f) => ({
+  const faqs = notaryFaqBank.map((f) => ({
     question: f.q,
     answer: f.a,
     links: /today/i.test(f.q) ? [{ label: "Same-day sessions", href: "/notary/on-demand/" }] : undefined,

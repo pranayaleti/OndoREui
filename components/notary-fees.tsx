@@ -40,8 +40,7 @@ export function NotaryFees() {
             <div>
               <h3 className="text-2xl text-primary font-semibold mb-2">Remote online (RON)</h3>
               <p className="text-muted-foreground text-sm mb-4">
-                Available nationwide. Confirm the receiving party accepts electronic notarization
-                before you book.
+                Confirm the receiving party accepts electronic notarization before you book.
               </p>
               <FeeRow
                 label="Remote notarial act"
@@ -92,8 +91,7 @@ export function NotaryFees() {
           </div>
 
           <p className="text-sm text-foreground/70">
-            Wills, powers of attorney and trust signatures are ${NOTARY_RON_ACT_USD} per remote act. We do not prepare
-            legal documents or give legal advice; have them drafted by an attorney first.
+            Wills, powers of attorney and trust signatures are ${NOTARY_RON_ACT_USD} per act. Have them drafted by an attorney first.
           </p>
         </div>
       </section>

@@ -27,10 +27,10 @@ const KEYWORDS = [
 ];
 
 const whatYouGet = [
-  { title: "Remote online notarization", body: "A secure video session from wherever you are, accepted in every state. Real estate, powers of attorney, affidavits, estate and business documents." },
-  { title: "Loan signings", body: "Purchases, refinances, HELOCs and investor closings, walked through page by page and returned to title on time." },
-  { title: "Same day when there is room", body: "Ask early in the day and we fit you in when capacity allows." },
-  { title: "The extras", body: "I-9 verification, apostille help for Utah documents and witnesses when a document needs them." },
+  { title: "Remote online notarization", body: "A video session from wherever you are, accepted in every state. Real estate, powers of attorney, affidavits and estate documents." },
+  { title: "Loan signings", body: "Purchases, refinances and HELOCs, walked through page by page and returned to title on time." },
+  { title: "Same day when there is room", body: "Ask early and we fit you in when we can." },
+  { title: "The extras", body: "I-9 verification, apostille help and witnesses when a document needs them." },
 ];
 
 /** `imageUrl` comes from the server page so this client bundle stays free of lib/page-canonical. */
