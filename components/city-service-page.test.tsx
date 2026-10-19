@@ -101,10 +101,10 @@ describe("CityServicePage", () => {
     expect(chooser.querySelector('a[href="/loans/salt-lake-city/"]')).not.toBeNull()
   })
 
-  it("mounts lead capture twice and links resources plus blog", () => {
+  it("mounts lead capture once and links resources plus blog", () => {
     render(<CityServicePage city={lehi} service="property-management" />)
-    expect(screen.getAllByLabelText(/name/i).length).toBeGreaterThanOrEqual(2)
-    expect(screen.getAllByRole("link", { name: /Book a call/i }).length).toBeGreaterThanOrEqual(2)
+    expect(screen.getAllByLabelText(/name/i).length).toBe(1)
+    expect(screen.getAllByRole("link", { name: /Book a call/i })).toHaveLength(1)
     expect(screen.getByRole("link", { name: /Guides & resources/i })).toHaveAttribute("href", "/resources/")
     expect(screen.getByRole("link", { name: /^Blog$/i })).toHaveAttribute("href", "/blog/")
   })

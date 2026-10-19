@@ -100,10 +100,9 @@ export function NotaryFees() {
         <div className="container mx-auto max-w-3xl px-4">
           <h2 className="mb-4 text-2xl font-bold text-foreground">Policies</h2>
           <p className="text-sm leading-relaxed text-foreground/80">
-            Cancel more than {NOTARY_CANCEL_NOTICE_HOURS} hours ahead at no charge; later cancellations are ${NOTARY_LATE_CANCEL_USD} and a
-            no-show is ${NOTARY_NO_SHOW_USD}. Payment is due at or before the session by card, app pay or title invoice.
-            Sessions are remote only. We do not notarize documents Ondo or the notary has an interest in, incomplete
-            documents, or vital records, and we do not give legal, tax or lending advice. Immigration-status forms are
+            Cancel more than {NOTARY_CANCEL_NOTICE_HOURS} hours ahead at no charge; later it is ${NOTARY_LATE_CANCEL_USD}, and a
+            no-show is ${NOTARY_NO_SHOW_USD}. Payment is due by the session. We do not notarize documents we have an
+            interest in, incomplete documents or vital records, and we do not give legal advice. Immigration forms are
             capped at ${NOTARY_IN_PERSON_ACT_USD} per person under Utah law.
           </p>
         </div>

@@ -12,21 +12,13 @@ export function NotaryBooking() {
   return (
     <>
       <div>
-        <h3 className="text-2xl font-semibold mb-6 text-primary">Book Your Appointment</h3>
+        <h3 className="text-2xl font-semibold mb-6 text-primary">Book a session</h3>
         <p className="text-foreground/80 mb-6">
-          Send us a request for your notary session. Tell us what you need notarized and when, and we will confirm a time with you.
+          Tell us what you need notarized and when. We confirm a time by email.
         </p>
         <div className="bg-primary/10 rounded-lg p-8 text-center">
           <div className="flex flex-col items-center gap-6">
             <Calendar className="w-16 h-16 text-primary" />
-            <div>
-              <p className="text-lg font-semibold text-foreground mb-3">
-                Ready to schedule your appointment?
-              </p>
-              <p className="text-sm text-muted-foreground mb-6 max-w-md">
-                Click the button below to open the request form. We will reply to confirm your appointment time.
-              </p>
-            </div>
             
             <Button 
               onClick={() => setIsModalOpen(true)}

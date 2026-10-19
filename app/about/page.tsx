@@ -13,7 +13,7 @@ const DESCRIPTION =
   "Ondo Real Estate is one local team in Lehi, Utah for rentals, property management, buying, selling, home loans and remote online notary."
 
 export const metadata: Metadata = pageCanonicalMetadata("/about", {
-  title: pageTitle("About Ondo Real Estate"),
+  title: pageTitle("About Ondo Real Estate: One Team in Lehi, Utah"),
   description: DESCRIPTION,
 })
 

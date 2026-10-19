@@ -124,7 +124,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
       <section id="contact" className="bg-background py-16 md:py-24">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="mb-10 text-center text-3xl font-bold text-foreground md:text-4xl">
-            Book or ask a question
+            Book or ask
           </h2>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="space-y-6">
@@ -171,11 +171,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
                 <MapPin className="h-6 w-6 text-primary" />
                 <div>
                   <h3 className="font-semibold text-foreground">Based in Lehi</h3>
-                  <p className="text-foreground/80">
-                    {SITE_ADDRESS}
-                    <br />
-                    Sessions are remote only.
-                  </p>
+                  <p className="text-foreground/80">{SITE_ADDRESS}</p>
                 </div>
               </div>
             </div>

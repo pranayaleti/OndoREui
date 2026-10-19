@@ -4,7 +4,7 @@ import { SITE_URL, pageTitleText } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
-const title = pageTitleText("Become an Ondo RE Affiliate | Ondo Real Estate")
+const title = pageTitleText("Ondo RE Affiliate Program: Refer and Earn | Ondo Real Estate")
 const description =
   "Join the Ondo RE affiliate program. Help property professionals discover our platform and earn up to 24 free months of portal access plus prize draw entries."
 const canonical = `${SITE_URL}/affiliate/`

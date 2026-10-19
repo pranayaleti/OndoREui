@@ -7,7 +7,6 @@ import { CommuteBadges } from "@/components/commute-badges"
 import { MarketDataCard } from "@/components/market-data-card"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { LocalProofCTA } from "@/components/local-proof-cta"
-import ConsultationCTA from "@/components/ConsultationCTA"
 import { CityPageLeadCapture } from "@/components/city-page-lead-capture"
 import { CityTrustChips } from "@/components/city-trust-chips"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
@@ -155,17 +154,7 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
           focusName={subService.name}
         />
 
-        {subService.parentService === "property-management" && (
-          <>
-            <CityTrustChips />
-            <CityPageLeadCapture
-              cityName={city.name}
-              heading={`Talk with our ${city.name} team`}
-              prefillMessage={`I'd like ${subService.name.toLowerCase()} information for ${city.name}.`}
-              defaultInquiryType="owner"
-            />
-          </>
-        )}
+        {subService.parentService === "property-management" && <CityTrustChips />}
 
         {/* Localized intro */}
         {marketData && (
@@ -321,24 +310,19 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
           />
         )}
 
-        {/* CTA */}
-        <section className="text-center space-y-4">
-          <h2 className="text-2xl font-bold">
-            Ready to Get Started in {city.name}?
-          </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg">
-              <Link href="/contact">Get a Free Consultation</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href={subService.parentHref}>
-                All {subService.parentName} Services
-              </Link>
-            </Button>
-          </div>
-        </section>
-
-        <ConsultationCTA variant="default" />
+        {subService.parentService !== "property-management" && (
+          <section className="text-center space-y-4">
+            <h2 className="text-2xl font-bold">Talk to us about {city.name}</h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg">
+                <Link href="/contact/#book-a-call">Book a call</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href={subService.parentHref}>All {subService.parentName} services</Link>
+              </Button>
+            </div>
+          </section>
+        )}
 
         {/* Lending disclosure is a template property: every loans sub-service page carries it. */}
         {subService.parentService === "loans" && <LendingDisclaimer />}

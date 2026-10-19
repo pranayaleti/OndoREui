@@ -10,7 +10,7 @@ import { Accessibility, Eye, Volume2, MousePointer, Keyboard, Smartphone, Monito
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 
 export const metadata: Metadata = pageCanonicalMetadata("/accessibility", {
-  title: pageTitle("Accessibility | Ondo Real Estate"),
+  title: pageTitle("Accessibility Statement and Contact | Ondo Real Estate"),
   description: "Our accessibility target, known issues and how to reach us about accessibility on the Ondo Real Estate website.",
 })
 

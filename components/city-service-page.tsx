@@ -4,8 +4,7 @@ import { type UtahCity, cityGuideLabel, toCitySlug } from "@/lib/utah-cities"
 import { generateServiceJsonLd } from "@/lib/seo"
 import { zipsOwnedByOtherCities } from "@/lib/zip-pages"
 import { ZipSharedCities } from "@/components/zip-shared-cities"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { cityContentByName } from "@/lib/city-content"
 import { getServiceFaqBank } from "@/lib/service-faq"
@@ -15,7 +14,6 @@ import { CommuteBadges } from "@/components/commute-badges"
 import { MarketDataCard } from "@/components/market-data-card"
 import { CrossLinkSection } from "@/components/cross-link-section"
 import { LocalProofCTA } from "@/components/local-proof-cta"
-import { CityTestimonials } from "@/components/city-testimonials"
 import { CityTeamSection } from "@/components/city-team-section"
 import { SeasonalCallout } from "@/components/seasonal-callout"
 import { BreadcrumbNav } from "@/components/breadcrumb-nav"
@@ -164,12 +162,6 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
       {zip && <ZipSharedCities zip={zip} service={service} />}
 
       <LocalProofCTA city={city} service={service} marketData={marketData} />
-      <CityPageLeadCapture
-        cityName={city.name}
-        heading={`Talk with our ${city.name} team`}
-        prefillMessage={leadPrefill}
-        defaultInquiryType={leadInquiryType}
-      />
 
       {service === "property-management" && <CityManagementFees cityName={city.name} />}
 
@@ -178,41 +170,16 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
         <MarketDataCard cityName={city.name} data={marketData} variant="compact" />
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Why Choose Us in {city.name}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <ul className="list-disc pl-6">
-              <li>Local market expertise across ZIPs {city.zips.join(", ")}</li>
-              <li>Transparent pricing and detailed owner/borrower dashboards</li>
-              <li>Fast communication and proactive support</li>
-              <li>Modern marketing, screening, and analytics</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Service Coverage</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              We serve the entire {city.name} area and surrounding communities in {city.county || "Utah"} County, including all listed ZIP codes.
-            </p>
-            {/* Neighborhoods, schools and lifestyle live on the city guide only, so the
-                service page and the guide stop competing for "living in {city}" searches. */}
-            <p className="mt-2 text-sm text-muted-foreground">
-              Neighborhoods, schools, commute times and cost of living are in the{" "}
-              <Link href={`/locations/${citySlug}/`} className="underline underline-offset-4">
-                {cityGuideLabel(city.name)}
-              </Link>
-              .
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+      {/* Neighborhoods, schools and lifestyle live on the city guide only, so the
+          service page and the guide stop competing for "living in {city}" searches. */}
+      <p className="text-sm text-muted-foreground">
+        We cover all of {city.name} and the rest of {city.county || "Utah"} County. Neighborhoods, schools, commute
+        times and cost of living are in the{" "}
+        <Link href={`/locations/${citySlug}/`} className="underline underline-offset-4">
+          {cityGuideLabel(city.name)}
+        </Link>
+        .
+      </p>
 
       {service === "property-management" && (
         <NeighborhoodHousingCards cityName={city.name} />
@@ -269,20 +236,13 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
       {/* Team section */}
       <CityTeamSection cityName={city.name} />
 
-      {/* City testimonials */}
-      <CityTestimonials cityName={city.name} />
-
       {/* Cross-links to city guide & pricing */}
       {service === "loans" && (
         <CrossLinkSection
           title="Mortgage education (not city-specific)"
           variant="grid"
           links={[
-            { label: "Learning hub", href: "/learn/", description: "Topic clusters, not a blog dump." },
-            { label: "Variable income", href: "/learn/variable-income/", description: "1099, overtime, and self-employed files." },
-            { label: "First-time cash and closing", href: "/learn/first-time/", description: "Cash to close, DPA, and Utah title closings." },
-            { label: "Non-QM / bank-statement / DSCR", href: "/learn/non-qm/", description: "When agency income calc does not match cash flow." },
-            { label: "Investment occupancy and DSCR", href: "/learn/investment/", description: "Occupancy, house-hack, and rental qualification." },
+            { label: "Learning hub", href: "/learn/", description: "Programs, income types and closing, by topic." },
             { label: "Loan FAQs", href: "/faq/loans-faqs/", description: "Down payment, DTI, and pre-approval." },
             { label: "Affordability calculator", href: "/calculators/affordability/", description: "Illustration only." },
           ]}
@@ -325,19 +285,11 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
         defaultInquiryType={leadInquiryType}
       />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Have more questions?</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="max-w-3xl">
-            For detailed FAQs on buying, selling, property management, payments, Notary, and more, visit our centralized Help Center.
-          </p>
-          <Button asChild size="lg">
-            <Link href={faqHref}>View all FAQs</Link>
-          </Button>
-        </CardContent>
-      </Card>
+      <p className="text-sm">
+        <Link href={faqHref} className="font-medium text-primary underline underline-offset-4">
+          More questions and answers
+        </Link>
+      </p>
 
       {/* Lending disclosure is a template property: every loans city/ZIP page carries it. */}
       {service === "loans" && <LendingDisclaimer />}

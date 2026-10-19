@@ -31,11 +31,11 @@ const lehi = findCityBySlug("lehi")!
 const screening = subServiceDefinitions["tenant-screening"]!
 
 describe("CitySubServicePage lead capture", () => {
-  it("mounts owner lead capture twice on property-management sub-service pages", () => {
+  it("mounts owner lead capture once on property-management sub-service pages", () => {
     render(<CitySubServicePage city={lehi} subService={screening} />)
 
-    expect(screen.getAllByLabelText(/name/i).length).toBeGreaterThanOrEqual(2)
-    expect(screen.getAllByRole("link", { name: /Book a call/i }).length).toBeGreaterThanOrEqual(2)
+    expect(screen.getAllByLabelText(/name/i).length).toBe(1)
+    expect(screen.getAllByRole("link", { name: /Book a call/i })).toHaveLength(1)
     // Persona is already known (owner) so audience radios stay hidden.
     expect(screen.queryByRole("radio")).not.toBeInTheDocument()
   })
