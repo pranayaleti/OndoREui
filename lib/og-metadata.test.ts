@@ -9,8 +9,6 @@ import { pageCanonicalMetadata } from "./page-canonical"
 import { SITE_NAME, SITE_URL, pageTitle } from "./site"
 
 import { metadata as rootMetadata } from "@/app/layout"
-import { metadata as compareMetadata } from "@/app/compare/page"
-import { metadata as solutionsMetadata } from "@/app/solutions/page"
 import { metadata as faqMetadata } from "@/app/faq/page"
 import { metadata as secondLookMetadata } from "@/app/loans/second-look/page"
 import { metadata as rateWatchMetadata } from "@/app/refinance/watch/page"
@@ -53,9 +51,7 @@ describe("pageCanonicalMetadata social cards", () => {
 })
 
 describe("flagship pages: og:url equals the canonical", () => {
-  const pages: Array<[string, typeof compareMetadata, string]> = [
-    ["/compare/", compareMetadata, "compare"],
-    ["/solutions/", solutionsMetadata, "solutions"],
+  const pages: Array<[string, typeof faqMetadata, string]> = [
     ["/faq/", faqMetadata, "faq"],
     ["/loans/second-look/", secondLookMetadata, "second look"],
     ["/refinance/watch/", rateWatchMetadata, "rate watch"],

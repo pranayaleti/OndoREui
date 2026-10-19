@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | Ondo Real Estate Investments",
   },
   description:
-    "Explore commercial real estate and fractional ownership investment opportunities in Utah with Ondo Real Estate.",
+    "How commercial, fractional and Opportunity Zone investing works in Utah. Sample deals only, no live offering.",
 }
 
 export default function InvestmentsLayout({ children }: { children: React.ReactNode }) {

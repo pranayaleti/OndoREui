@@ -83,10 +83,10 @@ export default async function OpportunitiesPage() {
                 <Link href="/investments">Investment Overview</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/investments/commercial-real-estate">Commercial Real Estate</Link>
+                <Link href="/investments/">Commercial Real Estate</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/investments/fractional">Fractional Ownership</Link>
+                <Link href="/investments/">Fractional Ownership</Link>
               </Button>
             </div>
 

@@ -46,12 +46,11 @@ function getPriority(path) {
   // Individual listing detail pages get tier 8 — they're crawl-worthy but
   // less important than the index.
   if (/^\/properties\/[^/]+$/.test(p)) return 0.8
-  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/property-management', '/locations', '/buy-sell', '/market-reports', '/neighborhoods', '/schools', '/glossary']
+  const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/property-management', '/locations', '/market-reports', '/neighborhoods', '/schools', '/glossary']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = [
     '/resources',
     '/notary',
-    '/news',
     '/privacy-policy',
     '/terms-of-service',
     '/accessibility',
@@ -97,9 +96,6 @@ const SITEMAP_NOINDEX_PATHS = [
   '/sweepstakes',
   // Sample deal cards only; no live offering exists.
   '/investments/opportunities',
-  // Investment wording is pending counsel review (noindex).
-  '/strategy',
-  '/brochure',
   // Internal engineering write-ups (noindex): not consumer search content.
   '/blog/technical-seo-for-real-estate',
   '/blog/modernizing-notary-workflows-integration',
@@ -238,11 +234,8 @@ module.exports = {
     '/api/**',
     '/api/*',
     '/feedback',
-    // No events published yet, so the page is noindex and must not be submitted either.
-    '/events',
     // Reel landing page (noindex); the indexable versions live under /calculators/.
     '/numbers',
-    '/events/',
     // Illustrative scenarios, not verified case studies: noindex until real ones replace them.
     '/about/case-studies',
     '/about/case-studies/',

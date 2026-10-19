@@ -4,17 +4,13 @@ import Link from "next/link"
 import SEO from "@/components/seo"
 import { PageBanner } from "@/components/page-banner"
 import { BreadcrumbNav } from "@/components/breadcrumb-nav"
-import { RelatedContent } from "@/components/content/related-content"
-import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { ContentFaq } from "@/components/content/content-faq"
-import { ComparisonTable } from "@/components/content/comparison-table"
 import { Button } from "@/components/ui/button"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle } from "@/lib/site"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
-import { LENDING_FACTS_AS_OF, QUALIFY_CONVERSATION } from "@/lib/content"
-import type { ComparisonColumn, ComparisonRow } from "@/lib/content/program-fit"
+import { QUALIFY_CONVERSATION } from "@/lib/content"
 import QualifyTokenChat from "./page-client"
 
 const faqs = [
@@ -29,30 +25,6 @@ const faqs = [
   {
     question: "Do I need a complete document stack before the first conversation?",
     answer: QUALIFY_CONVERSATION.notNeededFirstCall,
-  },
-]
-
-const columns: readonly ComparisonColumn[] = [
-  { id: "asked", heading: "What you will be asked" },
-  { id: "not", heading: "What you will not be promised" },
-]
-
-const rows: readonly ComparisonRow[] = [
-  {
-    id: "scope",
-    criterion: "First conversation",
-    cells: {
-      asked: QUALIFY_CONVERSATION.asked,
-      not: QUALIFY_CONVERSATION.notPromised,
-    },
-  },
-  {
-    id: "later",
-    criterion: "If a file is opened",
-    cells: {
-      asked: "Credit authorization when you are ready, then the document stack for your income type. A letter, if issued, is still a snapshot.",
-      not: "A lock, APR, or clear-to-close from this page. Pre-approval is not a commitment to lend.",
-    },
   },
 ]
 
@@ -80,7 +52,7 @@ export default function QualifyPage() {
       />
       <PageBanner
         title="Start a mortgage conversation"
-        subtitle="Here is what we will ask — and what a conversation will not promise."
+        subtitle="What we will ask, and what a first conversation can and cannot promise."
         backgroundImage="/modern-office-building.webp"
       />
       <Suspense fallback={null}>
@@ -92,22 +64,16 @@ export default function QualifyPage() {
           <div className="prose prose-lg prose-invert mt-6 max-w-none">
             <p className="lead text-xl text-foreground/70">
               A first conversation is how we learn occupancy, how you are paid, what you owe, and what cash you can
-              document. It is not an instant approval, a rate lock, or a commitment to lend. Snapshot as of{" "}
-              {LENDING_FACTS_AS_OF}.
+              document. It is not an instant approval, a rate lock, or a commitment to lend.
             </p>
-            <ComparisonTable
-              caption={`What a mortgage conversation is for as of ${LENDING_FACTS_AS_OF}.`}
-              columns={columns}
-              rows={rows}
-              footnote="Fair Housing: questions are about the file (income, debts, occupancy, property), not about protected class."
-            />
-            <h2>Bring this, not a peak month</h2>
+            <h2>What to have in mind</h2>
             <ul>
               <li>Occupancy: primary, second home, or investment.</li>
               <li>Income type: W-2, 1099, K-1, mixed, or a bank-statement conversation.</li>
-              <li>Debts you know about — including a car you might finance next week.</li>
+              <li>Debts you know about, including a car you might finance next week.</li>
               <li>Whether gift funds or assistance are part of cash to close.</li>
             </ul>
+            <p className="text-sm">Fair Housing: questions are about the file (income, debts, occupancy, property), not about protected class.</p>
             <p>{QUALIFY_CONVERSATION.notNeededFirstCall}</p>
             <p>
               Read more:{" "}
@@ -122,20 +88,8 @@ export default function QualifyPage() {
             <Button asChild size="lg">
               <Link href="/contact">Talk with a loan officer</Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/faq/loans-faqs">Loan FAQs</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/calculators/affordability">Affordability illustration</Link>
-            </Button>
           </div>
           <ContentFaq items={faqs} />
-          <RelatedContent path="/qualify" title="Before you apply" />
-          <NextStepCta
-            path="/qualify"
-            heading="A message is not an application"
-            body="Send a note or book a call. We will tell you what we can see from a conversation and what still has to be documented."
-          />
           <LendingDisclaimer className="mt-8" />
         </div>
       </section>

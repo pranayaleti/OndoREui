@@ -7,7 +7,7 @@ const LOAN = [
   "app/buy/rates/page.tsx", "app/buy/first-time/grants/page.tsx", "app/loans/page.tsx", "app/loans/conventional/page.tsx",
   "app/loans/fha/page.tsx", "app/loans/heloc/page.tsx", "app/loans/jumbo/page.tsx", "app/loans/reverse/page.tsx",
   "app/loans/second-look/page.tsx", "app/loans/usda/page.tsx", "app/loans/va/page.tsx", "app/refinance/page.tsx",
-  "app/refinance/blog/page.tsx", "app/refinance/cash-out/page.tsx", "app/refinance/process/page.tsx",
+  "app/refinance/cash-out/page.tsx", "app/refinance/process/page.tsx",
   "app/refinance/rate-term/page.tsx", "app/refinance/watch/page.tsx",
 ]
 

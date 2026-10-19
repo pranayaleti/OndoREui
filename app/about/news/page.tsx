@@ -14,7 +14,7 @@ export default function CompanyNewsPage() {
   return (
     <UnpublishedPageNotice
       title="Company news"
-      alternative={{ href: "/news/", label: "Utah real estate news" }}
+      alternative={{ href: "/blog/", label: "Ondo blog" }}
     >
       <p>There are no company announcements or press releases posted here.</p>
       <p>For media questions, send a message through the contact page.</p>

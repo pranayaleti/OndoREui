@@ -223,11 +223,6 @@ function catalogSections(): SiteIndexSection[] {
           description: "Why we built Ondo and how we work with owners and residents.",
         },
         {
-          name: "Why Utah",
-          href: "/why-utah",
-          description: "Economy, quality of life, and real estate context in Utah.",
-        },
-        {
           name: "New to Utah",
           href: "/moving-to-utah",
           description: "Commute minutes and typical rents for a Wasatch Front start date.",
@@ -321,21 +316,6 @@ function catalogSections(): SiteIndexSection[] {
         { name: "Loans in Provo", href: "/loans/provo", description: "Purchase and refinance in Provo." },
         { name: "Loans in Draper", href: "/loans/draper", description: "South Valley loan resources." },
         {
-          name: "Buy & sell by city",
-          href: "/buy-sell",
-          description: "Wasatch Front city hub for buying and selling; statewide process lives on /buy and /sell.",
-        },
-        {
-          name: "Buy/sell by city (example: Lehi)",
-          href: "/buy-sell/lehi",
-          description: "Hyper-local buy and sell snapshot; more cities available via URL pattern.",
-        },
-        {
-          name: "Buy/sell by ZIP (example: 84043)",
-          href: "/buy-sell/zip/84043",
-          description: "ZIP-level market hub; substitute other Utah ZIPs in the path.",
-        },
-        {
           name: "City market reports",
           href: "/market-reports",
           description: "Index of Ondo city medians. Not an MLS pull or appraisal.",
@@ -363,36 +343,6 @@ function catalogSections(): SiteIndexSection[] {
           name: "Sample investment deals",
           href: "/investments/opportunities",
           description: "Illustrations of how a deal page could look. Not live offerings.",
-        },
-        {
-          name: "Fractional real estate",
-          href: "/investments/fractional",
-          description: "Lower minimums and diversified exposure.",
-        },
-        {
-          name: "Commercial real estate",
-          href: "/investments/commercial-real-estate",
-          description: "CRE education and sponsor-led deals.",
-        },
-        {
-          name: "Opportunity zones",
-          href: "/investments/opportunity-zones",
-          description: "Capital-gains deferral via Qualified Opportunity Zone tracts.",
-        },
-        {
-          name: "Investment strategy",
-          href: "/strategy",
-          description: "How Ondo identifies, acquires, and manages value-add Utah properties.",
-        },
-        {
-          name: "New investors",
-          href: "/new-investors",
-          description: "Getting started with passive income and long-term wealth in Utah real estate.",
-        },
-        {
-          name: "Investor overview",
-          href: "/brochure",
-          description: "Request the investor overview: strategy, track record, team, and approach.",
         },
       ],
     },
@@ -427,24 +377,9 @@ function catalogSections(): SiteIndexSection[] {
           description: "Map view of homes and rentals available now.",
         },
         {
-          name: "Compare property management software",
-          href: "/compare",
-          description: "Ondo RE vs Buildium, AppFolio, TurboTenant, and RentRedi.",
-        },
-        {
           name: "Utah property management companies compared",
           href: "/compare-utah-property-managers",
           description: "Side-by-side fees, tech, and services across Utah managers.",
-        },
-        {
-          name: "Ondo RE vs Buildium",
-          href: "/vs/buildium",
-          description: "Price, features, AI tools, and tenant experience compared.",
-        },
-        {
-          name: "Ondo RE vs TurboTenant",
-          href: "/vs/turbotenant",
-          description: "Risk scoring, calculators, roles, and PWA compared.",
         },
         {
           name: "Tenant screening",
@@ -597,17 +532,6 @@ function catalogSections(): SiteIndexSection[] {
       description: "Reach the team and follow public updates.",
       links: [
         { name: "Contact", href: "/contact", description: "Phone, email, and appointment booking." },
-        { name: "News", href: "/news", description: "Updates and industry notes." },
-        {
-          name: "Events",
-          href: "/events",
-          description: "Upcoming ONDO workshops, mixers, and community events.",
-        },
-        {
-          name: "Socials",
-          href: "/socials",
-          description: "Profile links and news sources we follow.",
-        },
         {
           name: "Subscribe",
           href: "/subscribe",
@@ -626,30 +550,11 @@ function catalogSections(): SiteIndexSection[] {
       ],
     },
     {
-      id: "solutions",
-      title: "Solutions",
-      description: "Platform capabilities by role.",
-      links: [
-        { name: "Solutions overview", href: "/solutions", description: "One platform for every stakeholder in real estate." },
-        { name: "For Investors", href: "/solutions/investors", description: "Portfolio analytics, risk scoring, and deal access." },
-        { name: "For Landlords", href: "/solutions/landlords", description: "Full-service management for property owners." },
-        { name: "For Property Managers", href: "/solutions/property-managers", description: "Scale operations with automation." },
-        { name: "For Tenants", href: "/solutions/tenants", description: "Rent, requests, and documents in one portal." },
-        { name: "Book a Demo", href: "/demo", description: "Free 15-minute platform walkthrough." },
-        { name: "Platform Tour", href: "/tour", description: "Self-serve guided tour of all platform features." },
-        { name: "Partners", href: "/partners", description: "Integrations: Stripe, Supabase, HubSpot, and more." },
-      ],
-    },
-    {
       id: "learn",
       title: "Learn",
       description: "Research, education, and market data.",
       links: [
-        { name: "Market Data", href: "/data", description: "How we publish city figures, and links to city reports." },
         { name: "City market reports", href: "/market-reports", description: "Per-city Ondo medians with an as-of date." },
-        { name: "Insights", href: "/insights", description: "Research, reports, and thought leadership." },
-        { name: "Video Library", href: "/video-library", description: "Guides, academy, demo, and calculators for learning the platform." },
-        { name: "Academy", href: "/academy", description: "Free real estate education and guides." },
         { name: "Mortgage learning hub", href: "/learn", description: "Topic clusters for buyers and homeowners. Informational only." },
         {
           name: "Variable income mortgages",
@@ -727,13 +632,8 @@ function catalogSections(): SiteIndexSection[] {
  */
 export const SITE_INDEX_NOT_LISTED: ReadonlySet<string> = new Set([
   "/investments/opportunities",
-  "/strategy",
-  "/brochure",
   "/about/case-studies",
-  "/events",
   "/referral",
-  "/buy-sell/lehi",
-  "/buy-sell/zip/84043",
   "/intake",
 ])
 
@@ -779,7 +679,7 @@ export const SITE_INDEX_LAYOUT: readonly LayoutSection[] = [
     id: "invest",
     title: "Invest",
     description: "How real estate investing works, for new and experienced investors.",
-    hrefs: ["/investments", "/new-investors", "/investments/fractional", "/investments/commercial-real-estate", "/investments/opportunity-zones"],
+    hrefs: ["/investments"],
   },
   { id: "notary", title: "Notary & signing", description: "Remote online notarization and signing services.", from: "notary" },
   { id: "calculators", title: "Calculators", description: "Free tools for buyers, owners and investors.", from: "calculators" },
@@ -787,19 +687,13 @@ export const SITE_INDEX_LAYOUT: readonly LayoutSection[] = [
     id: "local",
     title: "Utah & local guides",
     description: "Cities, neighborhoods, schools and market data across the Wasatch Front.",
-    hrefs: ["/why-utah", "/moving-to-utah", "/buy-sell", "/market-reports", "/neighborhoods", "/schools", "/data"],
+    hrefs: ["/moving-to-utah", "/market-reports", "/neighborhoods", "/schools"],
   },
   {
     id: "company",
     title: "About Ondo",
     description: "Who we are, how to reach us and where to follow along.",
-    hrefs: ["/", "/about", "/about/team", "/about/team/pranay-reddy-aleti", "/founders-letter", "/contact", "/get-matched", "/socials", "/subscribe", "/news", "/insights", "/academy", "/video-library", "/partners"],
-  },
-  {
-    id: "platform",
-    title: "Ondo platform",
-    description: "The software behind our property management, for owners, managers and tenants.",
-    hrefs: ["/solutions", "/solutions/landlords", "/solutions/investors", "/solutions/property-managers", "/solutions/tenants", "/tour", "/demo"],
+    hrefs: ["/", "/about", "/about/team", "/about/team/pranay-reddy-aleti", "/founders-letter", "/contact", "/get-matched", "/subscribe"],
   },
   { id: "faq", title: "FAQ", description: "Answers by topic for buyers, sellers, tenants, owners and notary clients.", from: "faq" },
   { id: "glossary", title: "Glossary", description: "Plain-English definitions of real estate and lending terms.", from: "glossary" },

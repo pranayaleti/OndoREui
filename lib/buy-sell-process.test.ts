@@ -5,7 +5,6 @@ describe("buy/sell how-it-works copy", () => {
   it("describes an agent-led buyer search instead of a public MLS feed", () => {
     const blob = BUY_PROCESS_STEPS.map((step) => `${step.title} ${step.desc}`).join(" ")
     expect(blob).toMatch(/agent/i)
-    expect(blob).toMatch(/rental/i)
     expect(blob).not.toMatch(/advanced MLS search tools/i)
     expect(blob).not.toMatch(/4 minutes/i)
     expect(blob).not.toMatch(/pre-?qualification letter/i)

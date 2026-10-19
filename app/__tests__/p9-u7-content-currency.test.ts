@@ -16,16 +16,11 @@ describe("lending and tax facts are current", () => {
     expect(src).toMatch(/utahhousingcorp\.org/)
   })
 
-  it("opportunity zones page reflects the 2025 law, 2027 designations and carries an as-of note", () => {
-    const src = read("app/investments/opportunity-zones/page.tsx")
+  it("the investments page reflects the 2025 Opportunity Zone law, 2027 designations and an as-of note", () => {
+    const src = read("app/investments/page.tsx")
     expect(src).toMatch(/permanent/)
     expect(src).toMatch(/January 1, 2027/)
     expect(src).toMatch(/December 31, 2026/)
-    expect(src).toMatch(/as of October 2026/)
-  })
-
-  it("/data meta description matches the page, which publishes no dataset", () => {
-    const src = read("app/data/page.tsx")
-    expect(src).not.toMatch(/in one comparable dataset/)
+    expect(src).toMatch(/As of October 2026/)
   })
 })

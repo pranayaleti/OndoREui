@@ -71,6 +71,18 @@ export default function MovingToUtahPage() {
       </header>
       <div className="container mx-auto px-4 py-10 md:py-14">
         <UtahArrivalDesk />
+        <section className="mt-14 max-w-3xl" aria-labelledby="why-utah-heading">
+          <h2 id="why-utah-heading" className="mb-3 text-2xl font-bold text-foreground">Why people move here</h2>
+          <ul className="list-disc space-y-2 pl-5 text-foreground/70">
+            <li>Jobs: the Wasatch Front keeps adding employers, from Silicon Slopes in Lehi to the Salt Lake core.</li>
+            <li>Commute math: most of the 55 cities we cover sit within 45 minutes of a major job center.</li>
+            <li>Housing mix: new-build townhomes in the south, older single-family stock near the city, and rentals in both.</li>
+          </ul>
+          <p className="mt-3 text-sm text-foreground/60">
+            Prices and rents vary by city and move with the market. City figures are on the{" "}
+            <Link href="/market-reports/" className="prose-link">market reports</Link>.
+          </p>
+        </section>
         <p className="mt-10 max-w-3xl text-sm text-foreground/70">
           Buying before the first Utah paycheck is a seasoning question:{" "}
           <Link href="/blog/relocating-to-utah-job-seasoning" className="prose-link">

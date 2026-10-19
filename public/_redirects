@@ -38,12 +38,12 @@
 /support                  /contact/                 301
 /help                     /faq/                     301
 /faqs                     /faq/                     301
-/services                 /solutions/               301
-/landlords                /solutions/landlords/     301
+/services                 /property-management/     301
+/landlords                /property-management/     301
 /property-managers        /property-management/     301
-/tenants                  /solutions/tenants/       301
-/renters                  /solutions/tenants/       301
-/investors                /solutions/investors/     301
+/tenants                  /properties/              301
+/renters                  /properties/              301
+/investors                /investments/             301
 /investing                /investments/             301
 /invest                   /investments/             301
 /rentals                  /properties/              301
@@ -85,7 +85,7 @@
 /online-notary            /notary/                  301
 /cities                   /locations/               301
 /service-areas            /locations/               301
-/vs                       /compare/                 301
+/vs                       /compare-utah-property-managers/ 301
 /link                     /links/                   301
 /linktree                 /links/                   301
 /bio                      /links/                   301
@@ -117,3 +117,34 @@
 /faq/loan-payoffs-faqs    /faq/loans-faqs/             301
 /faq/hardship-faqs        /faq/loans-faqs/             301
 /faq/disaster-faqs        /faq/loans-faqs/             301
+
+# Oct 2026 simplification: SaaS-style pages, duplicate hubs and single-topic investment pages
+# merged into the five service pages. Cloudflare serves these as real 301s; the stubs below
+# cover GitHub Pages.
+/solutions                          /property-management/              301
+/solutions/landlords                /property-management/              301
+/solutions/property-managers        /property-management/              301
+/solutions/tenants                  /properties/                       301
+/solutions/investors                /investments/                      301
+/tour                               /property-management/              301
+/demo                               /contact/                          301
+/compare                            /compare-utah-property-managers/   301
+/vs/buildium                        /compare-utah-property-managers/   301
+/vs/turbotenant                     /compare-utah-property-managers/   301
+/strategy                           /investments/                      301
+/brochure                           /investments/                      301
+/events                             /blog/                             301
+/partners                           /about/                            301
+/socials                            /links/                            301
+/investments/fractional             /investments/                      301
+/investments/commercial-real-estate /investments/                      301
+/investments/opportunity-zones      /investments/                      301
+/new-investors                      /investments/                      301
+/academy                            /resources/                        301
+/insights                           /resources/                        301
+/video-library                      /resources/                        301
+/data                               /resources/                        301
+/news                               /blog/                             301
+/buy-sell                           /buy/                              301
+/why-utah                           /moving-to-utah/                   301
+/refinance/blog                     /blog/                             301

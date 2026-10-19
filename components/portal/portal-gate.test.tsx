@@ -26,7 +26,7 @@ describe("portal gate pages", () => {
 
   it("platform gate points visitors at the public demo hub instead of calling the platform not public", () => {
     render(<BlockedPlatformPage />)
-    expect(screen.getByRole("link", { name: /open the demo hub/i })).toHaveAttribute("href", "/demo/")
+    expect(screen.getByRole("link", { name: /ask for a walkthrough/i })).toHaveAttribute("href", "/contact/")
     expect(screen.getByRole("link", { name: /property management portal/i })).toBeInTheDocument()
     expect(document.body.textContent).not.toMatch(/no longer exposed|prototype/i)
   })

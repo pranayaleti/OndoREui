@@ -33,7 +33,6 @@ describe("card descriptions on a page are not copy-pasted", () => {
     "app/loans/va/page.tsx",
     "app/loans/usda/page.tsx",
     "app/investments/page.tsx",
-    "app/data/page.tsx",
   ].map((f) => join(ROOT, f))
 
   it.each(files.map((f) => relative(ROOT, f)))("%s has no repeated card description", (relPath) => {

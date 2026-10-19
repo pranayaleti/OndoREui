@@ -4,56 +4,51 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import { toCanonicalPageUrl } from "@/lib/page-canonical"
+import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL, toCanonicalPageUrl } from "@/lib/page-canonical"
+import { Button } from "@/components/ui/button"
+import { RiskDisclosure } from "@/components/investments/risk-disclosure"
+
+const DESCRIPTION =
+  "How commercial real estate, fractional ownership and Opportunity Zones work in Utah, and what to ask before you invest. Sample deals only, no live offering."
 
 export const metadata: Metadata = {
   alternates: { canonical: toCanonicalPageUrl("/investments") },
   title: pageTitle("Utah Commercial & Fractional Real Estate Investing"),
-  description:
-    "How commercial real estate and fractional ownership work in Utah, plus Opportunity Zones and what to ask first. Sample deals only, no live offering.",
+  description: DESCRIPTION,
   openGraph: {
     type: "website",
     title: pageTitleText("Utah Commercial & Fractional Real Estate Investing"),
-    description:
-      "How commercial real estate and fractional ownership work in Utah, plus Opportunity Zones and what to ask first. Sample deals only, no live offering.",
+    description: DESCRIPTION,
     images: DEFAULT_OG_IMAGES,
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
 }
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { RiskDisclosure } from "@/components/investments/risk-disclosure"
-import { Building2, Users, LayoutGrid, MapPin, ArrowRight } from "lucide-react"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
+/** One page, four short sections. The old sub-pages redirect here. */
 const sections = [
   {
-    href: "/investments/commercial-real-estate",
-    icon: Building2,
-    title: "Commercial Real Estate",
-    description:
-      "Explore asset classes, office, retail, industrial, multifamily, and how commercial deals are structured.",
+    id: "commercial",
+    title: "Commercial real estate",
+    body:
+      "Office, retail, industrial, multifamily, medical and self-storage. Compared with a house, commercial leases run longer, tenants are often businesses, and triple-net structures can shift operating costs to the tenant. Returns come from contractual rent plus appreciation, and both depend on the tenant, the lease and the loan.",
   },
   {
-    href: "/investments/opportunity-zones",
-    icon: MapPin,
+    id: "fractional",
+    title: "Fractional ownership",
+    body:
+      "Several investors buy a property together through an LLC or SPV. A sponsor finds and underwrites the deal, investors buy membership interests, a manager runs the property, and distributions and the eventual sale follow the operating agreement. Read the offering documents and talk to an attorney and a tax professional before you commit.",
+  },
+  {
+    id: "opportunity-zones",
     title: "Opportunity Zones",
-    description:
-      "Learn how Qualified Opportunity Zones can defer and reduce capital-gains tax when gains are reinvested in designated tracts for the long term.",
+    body:
+      "Reinvest an eligible capital gain into a Qualified Opportunity Fund within 180 days to defer tax on that gain, and hold the fund investment ten years to exclude its appreciation. The 2017 designations end December 31, 2026; the July 2025 reconciliation law made the program permanent with new designations from January 1, 2027. Best for patient investors who already have a gain. As of October 2026; not tax advice.",
   },
   {
-    href: "/investments/fractional",
-    icon: Users,
-    title: "Fractional Ownership",
-    description:
-      "Understand how LLC/SPV structures let you invest alongside other investors with lower minimums, and what to read before you do.",
-  },
-  {
-    href: "/investments/opportunities",
-    icon: LayoutGrid,
-    title: "Sample Deals",
-    description:
-      "See how a commercial or fractional deal page could look. These are samples, not live offerings.",
+    id: "new-investors",
+    title: "New to investing",
+    body:
+      "Start with the numbers: run a property through the cap rate, cash-on-cash and DSCR calculators, then read how management fees change the result. When you are ready, book a call and we will talk through your goals and timeline.",
   },
 ]
 
@@ -62,7 +57,7 @@ export default function InvestmentsPage() {
     <main className="min-h-screen">
       <SEO
         title="Commercial & Fractional Real Estate Investing in Utah"
-        description="Learn how commercial real estate and fractional ownership investing works in Utah. Sample deal pages show how an offering could be presented; there is no live offering."
+        description={DESCRIPTION}
         pathname="/investments"
         image={`${SITE_URL}/modern-office-building.webp`}
         jsonLd={generateBreadcrumbJsonLd([
@@ -72,105 +67,36 @@ export default function InvestmentsPage() {
       />
 
       <PageBanner
-        title="Commercial & Fractional Real Estate Investing"
-        subtitle="How commercial and fractional ownership work in Utah, and what to ask before you invest"
+        title="Investing in Utah real estate"
+        subtitle="How commercial, fractional and Opportunity Zone deals work, and what to ask first. Ondo has no offering open to investors today."
       />
 
-      {/* Quick Navigation */}
-      <section className="py-8 border-b border-border/50">
-        <div className="container mx-auto px-4">
-          <nav
-            aria-label="Investment sections"
-            className="flex flex-wrap justify-center gap-3"
-          >
-            <Button asChild variant="outline" size="sm">
-              <Link href="/investments/commercial-real-estate">Commercial Real Estate</Link>
+      <section className="bg-background py-16">
+        <div className="container mx-auto max-w-3xl px-4">
+          <div className="space-y-10">
+            {sections.map((section) => (
+              <div key={section.id} id={section.id} className="scroll-mt-24">
+                <h2 className="mb-3 text-2xl font-bold text-foreground">{section.title}</h2>
+                <p className="text-foreground/70">{section.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-sm text-foreground/70">
+            Tools:{" "}
+            <Link href="/calculators/cap-rate/" className="font-medium text-primary underline-offset-4 hover:underline">cap rate</Link>,{" "}
+            <Link href="/calculators/cash-on-cash/" className="font-medium text-primary underline-offset-4 hover:underline">cash-on-cash</Link>,{" "}
+            <Link href="/calculators/dscr/" className="font-medium text-primary underline-offset-4 hover:underline">DSCR</Link>. Lending side:{" "}
+            <Link href="/learn/investment/" className="font-medium text-primary underline-offset-4 hover:underline">investment property loans</Link>.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link href="/contact/">Book a call</Link>
             </Button>
-            <Button asChild variant="outline" size="sm">
-              <Link href="/investments/fractional">Fractional Ownership</Link>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/investments/opportunities/">See sample deals</Link>
             </Button>
-            <Button asChild variant="outline" size="sm">
-              <Link href="/investments/opportunities">Sample Deals</Link>
-            </Button>
-          </nav>
-        </div>
-      </section>
-
-      {/* Investment Thesis */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 dark:text-foreground">
-                Why Invest in Utah Real Estate?
-              </h2>
-              <p className="text-lg text-foreground/70 dark:text-foreground/70 max-w-3xl mx-auto">
-                Utah consistently ranks among the top states for population growth, job creation, and
-                economic expansion. The Wasatch Front corridor offers a compelling combination of
-                strong tenant demand, limited supply, and long-term appreciation potential.
-              </p>
-            </div>
-
-            {/* Section Cards, each links to its sub-route */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              {sections.map((section) => (
-                <Link
-                  key={section.href}
-                  href={section.href}
-                  className="group"
-                >
-                  <Card className="h-full transition-shadow duration-200 group-hover:shadow-lg">
-                    <CardHeader className="text-center">
-                      <div className="mx-auto bg-primary/10 p-3 rounded-lg w-fit mb-4">
-                        <section.icon className="h-8 w-8 text-primary" />
-                      </div>
-                      <CardTitle className="text-lg dark:text-foreground">
-                        {section.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-foreground/70 dark:text-foreground/70 text-center">
-                        {section.description}
-                      </p>
-                      <p className="text-sm font-medium text-primary text-center mt-4 flex items-center justify-center gap-1 group-hover:underline">
-                        Learn more <ArrowRight className="h-4 w-4" />
-                      </p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-
-            {/* Thesis Detail */}
-            <div className="max-w-3xl mx-auto mb-16 space-y-4 text-foreground/70 dark:text-foreground/70">
-              <p>
-                Ondo Real Estate manages rental properties in Utah. This section explains how
-                commercial and fractional real estate investing works, so you can decide whether it
-                fits your plan. Ondo has no investment open to investors on this site today, and the
-                deal pages here are samples. If you want to be told if that changes,{" "}
-                <Link href="/contact/" className="text-primary underline underline-offset-4">
-                  get in touch
-                </Link>
-                .
-              </p>
-              <p>
-                Deals like these are often held in a standalone LLC or SPV, which can separate
-                liability and pass income through for tax purposes. Distribution and exit terms are
-                set in each offering&apos;s documents, so read them closely and talk to an attorney
-                and tax professional before you invest.
-              </p>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mb-16">
-              <Button asChild size="lg">
-                <Link href="/investments/opportunities">
-                  See Sample Deals
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Link>
-              </Button>
-            </div>
-
+          </div>
+          <div className="mt-12">
             <RiskDisclosure />
           </div>
         </div>

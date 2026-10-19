@@ -20,12 +20,12 @@ export type UtahPmRow = {
 export const UTAH_PM_COMPARISON: readonly UtahPmRow[] = [
   {
     name: "Ondo RE",
-    headline: "Tech-forward, owner + tenant portals, AI risk alerts",
-    mgmtFee: "Starter 10% (1–4 units), Growth 8% (5–15), custom 16+",
+    headline: "Owner-run, with owner and tenant portals",
+    mgmtFee: "Starter 10% (1 to 4 units), Growth 8% (5 to 15), custom 16+",
     leasingFee: "50% of one month's rent",
-    setupFee: "None — onboarding is included",
-    techStack: "Custom owner portal + AI assistant (Next.js + Supabase)",
-    ownerFit: "Real-time owner portal and custom tech stack",
+    setupFee: "None. Onboarding is included",
+    techStack: "Custom owner portal built by Ondo",
+    ownerFit: "Owners who want to see every dollar and talk to the person in charge",
     cons: `Newer (founded ${FOUNDED_YEAR}), smaller than incumbents`,
     isUs: true,
   },
@@ -34,8 +34,8 @@ export const UTAH_PM_COMPARISON: readonly UtahPmRow[] = [
     headline: "Utah PM, advertised flat monthly fee",
     mgmtFee: "$159/mo flat per unit (as advertised Aug 2026)",
     leasingFee: "$0 placement (as advertised Aug 2026)",
-    setupFee: "$0 signup (as advertised Aug 2026 — verify)",
-    techStack: "PM software not disclosed on their public site — verify",
+    setupFee: "$0 signup (as advertised Aug 2026, verify)",
+    techStack: "PM software not disclosed on their public site, verify",
     ownerFit: "Flat monthly line item, independent of collected rent",
     cons:
       "Flat fee does not move with rent collected, so percentage alignment is a tradeoff; $0 placement as advertised trades against a one-time leasing fee of 50% of first month’s rent",

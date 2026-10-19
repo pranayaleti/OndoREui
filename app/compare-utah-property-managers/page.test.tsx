@@ -27,6 +27,6 @@ describe("Compare Utah property managers page", () => {
   it("does not say Ondo waives a setup fee that pricing says does not exist", () => {
     render(<CompareUtahPropertyManagersPage />)
     expect(screen.queryByText(/waives the setup fee/i)).not.toBeInTheDocument()
-    expect(screen.getByText(/none — onboarding is included/i)).toBeInTheDocument()
+    expect(screen.getByText(/none\. onboarding is included/i)).toBeInTheDocument()
   })
 })

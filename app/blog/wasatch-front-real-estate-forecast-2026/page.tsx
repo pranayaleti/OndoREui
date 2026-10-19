@@ -97,7 +97,7 @@ export default function WasatchFrontRealEstateForecast2026() {
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">
-                <Link href="/data">View Market Data</Link>
+                <Link href="/market-reports">View market reports</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link href="/investments">Investment Opportunities</Link>

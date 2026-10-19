@@ -5,7 +5,6 @@ import { ProtectedPortalNotice } from "./portal/protected-portal-notice"
 import { BreadcrumbNav } from "./breadcrumb-nav"
 import { CommandDialog, CommandInput, CommandList } from "./ui/command"
 import { findCityBySlug } from "@/lib/utah-cities"
-import ComparePage from "@/app/compare/page"
 import PropertyManagementPage from "@/app/property-management/page"
 
 vi.mock("next/navigation", async () => {
@@ -33,26 +32,6 @@ describe("one main landmark on generated templates", () => {
   it("the protected portal notice renders a single main", () => {
     const { container } = render(<ProtectedPortalNotice title="Locked" description="Not public" />)
     expect(container.querySelectorAll("main")).toHaveLength(1)
-  })
-})
-
-describe("compare table accessibility", () => {
-  it("announces yes and no cells as text, not bare icons", () => {
-    const { container } = render(<ComparePage />)
-    const sr = Array.from(container.querySelectorAll("td .sr-only")).map((el) => el.textContent)
-    expect(sr).toContain("Yes")
-    expect(sr).toContain("No")
-    container.querySelectorAll("td svg").forEach((svg) => expect(svg).toHaveAttribute("aria-hidden", "true"))
-  })
-
-  it("has a caption, column and row headers, and a focusable scroll region", () => {
-    const { container } = render(<ComparePage />)
-    expect(container.querySelector("table caption")).not.toBeNull()
-    expect(container.querySelectorAll('thead th[scope="col"]').length).toBeGreaterThan(1)
-    expect(container.querySelectorAll('tbody th[scope="row"]').length).toBeGreaterThan(1)
-    const region = screen.getByRole("region", { name: /feature comparison/i })
-    expect(region).toHaveAttribute("tabindex", "0")
-    expect(region.querySelector("table")).not.toBeNull()
   })
 })
 

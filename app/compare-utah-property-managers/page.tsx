@@ -1,17 +1,18 @@
-// NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import Link from "next/link"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
-import { Check, ArrowRight } from "lucide-react"
+import { ONDO_PRICING_FRAMING } from "@/lib/vs-comparisons"
+import { FaqAccordion } from "@/components/faq-accordion"
+import { Check } from "lucide-react"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = "Utah Property Management Companies Compared (2026)"
 const ogTitle = `${title} | Ondo RE`
 const description =
-  "Honest side-by-side comparison of Utah's top property management companies, Ondo Real Estate vs Rentomatic, Rhino, Wolfnest, and more. Fees, tech, services, and how each offering differs."
+  "Ondo Real Estate next to Rentomatic, Rhino, Wolfnest and Keyrenter on fees, leasing, setup and technology, plus how full service compares with software you run yourself."
 
 export const metadata: Metadata = {
   title,
@@ -22,45 +23,51 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-// NOTE: Competitor fees and features below are based on publicly available
-// information at the time of writing. Verify before relying on this for
-// procurement decisions; providers update pricing without notice.
+// Competitor fees and features are from public advertising at the time noted. Verify before relying on them.
 const competitors = UTAH_PM_COMPARISON
 
 const faqs = [
   {
-    question: "What does Utah property management actually cost in 2026?",
+    question: "What does Utah property management cost in 2026?",
     answer:
-      "Most Wasatch Front property managers advertise 8–12% of collected rent for full-service management (as of Aug 2026 — verify), plus a leasing fee (typically 50–100% of one month's rent) when a new tenant is placed. Some companies advertise a flat monthly fee (about $159/month/unit as of Aug 2026 — verify). Ondo RE is Starter 10% (1–4 units) or Growth 8% (5–15 units) of collected rent, with a 50% leasing fee. There is no setup fee.",
+      "Most Wasatch Front managers advertise 8 to 12% of collected rent plus a leasing fee of 50 to 100% of one month's rent when a tenant is placed (as of Aug 2026, verify). Some advertise a flat monthly fee instead. Ondo is 10% for 1 to 4 units or 8% for 5 to 15, with a 50% leasing fee and no setup fee.",
   },
   {
-    question: "Are flat-fee or percentage-based property management fees better?",
+    question: "Flat fee or percentage: which is better?",
     answer:
-      "Flat fees are more predictable and often cheaper for higher-rent units (above ~$2,000/mo). Percentage fees align incentives, the manager earns more when your rent is higher, so they push for rent optimization. For most Utah owners under $2,000/mo, percentage fees are slightly more cost-effective.",
+      "A flat fee is predictable and can be cheaper on high-rent units. A percentage means the manager earns more when your rent is higher and nothing when it is not collected. For most Utah homes under about $2,000 a month the percentage is slightly cheaper.",
   },
   {
-    question: "What's the difference between a leasing fee and a setup fee?",
+    question: "What is the difference between a leasing fee and a setup fee?",
     answer:
-      "A leasing fee is charged when a new tenant is placed, covering marketing, showings, application processing, and lease signing. A setup fee is a one-time onboarding cost some management companies charge when you first hire them. Ondo does not charge a setup fee; the one-time extra we publish is the leasing fee when we place a tenant.",
+      "A leasing fee is charged when a new tenant is placed and covers marketing, showings, screening and the lease. A setup fee is a one-time onboarding charge some companies add when you hire them. Ondo charges the first and not the second.",
   },
   {
-    question: "What questions should I ask a Utah property management company?",
+    question: "Should I just use software and manage it myself?",
     answer:
-      "Five must-asks: (1) Are you licensed under Utah's Real Estate Licensing and Practices Act, and will you hold the separate property manager license required beginning January 1, 2027? (2) What's your average response time for maintenance requests? (3) How do you handle tenant screening, and what's your eviction rate? (4) Can I see a sample owner statement before I sign? (5) What's your average tenant tenure?",
+      "Buildium, TurboTenant and similar tools charge a subscription and leave the showings, screening calls, repairs and notices to you. Full service costs a share of rent and takes those off your plate. Run the self-manage calculator with your own hourly rate before you decide.",
   },
   {
-    question: "How long does it take to switch property managers in Utah?",
+    question: "How long does it take to switch managers?",
     answer:
-      "Most contracts have a 30–60 day termination notice clause. Once you give notice, the transition typically takes another 30 days, your existing manager has to hand off security deposits, leases, and maintenance records. Plan for ~60–90 days from decision to fully transitioned.",
+      "Most contracts need 30 to 60 days' notice, then another 30 days to hand off deposits, leases and maintenance records. Plan on 60 to 90 days from decision to fully moved.",
   },
+]
+
+const checklist = [
+  "Licensed under Utah's Real Estate Licensing and Practices Act, with the separate property manager license from January 1, 2027",
+  "Documented maintenance response times, not just promised ones",
+  "Written tenant screening criteria, applied to every applicant",
+  "A sample owner statement before you sign",
+  "Average tenant tenure over the past two years",
 ]
 
 function row(label: string, getter: (c: typeof competitors[number]) => string) {
   return (
     <tr className="border-b border-border/60">
-      <th scope="row" className="text-left text-sm font-medium text-foreground/70 py-3 pr-4 align-top w-44">{label}</th>
+      <th scope="row" className="w-44 py-3 pr-4 text-left align-top text-sm font-medium text-foreground/70">{label}</th>
       {competitors.map((c) => (
-        <td key={c.name} className={`text-sm text-foreground/90 py-3 px-3 align-top ${c.isUs ? "bg-primary/5" : ""}`}>
+        <td key={c.name} className={`px-3 py-3 align-top text-sm text-foreground/90 ${c.isUs ? "bg-primary/5" : ""}`}>
           {getter(c)}
         </td>
       ))}
@@ -83,8 +90,7 @@ export default function CompareUtahPropertyManagersPage() {
           ]),
           generateServiceJsonLd({
             name: `${SITE_NAME}, Property Management Comparison`,
-            description:
-              "Side-by-side comparison of Utah's leading property management companies, covering fees, technology, and services.",
+            description: "Side-by-side comparison of Utah property management companies on fees, technology and services.",
             serviceType: "Comparison Guide",
             areaServed: "Utah",
           }),
@@ -92,48 +98,33 @@ export default function CompareUtahPropertyManagersPage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-primary/10 via-background to-card py-16 md:py-24">
+      <section className="bg-gradient-to-br from-primary/10 via-background to-card py-16 md:py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
-            Utah Property Management Companies, Compared (2026)
+          <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
+            Utah property managers, compared
           </h1>
-          <p className="max-w-2xl mx-auto text-lg text-foreground/70">
-            An honest side-by-side of how Ondo RE stacks up against the established Wasatch Front incumbents.
-            Fees, tech, services, and how the offerings differ.
-          </p>
-          <p className="mt-4 text-xs text-muted-foreground max-w-xl mx-auto">
-            We're biased, this is our website, but the data points below are publicly available.
-            Verify with each provider before you commit.
+          <p className="mx-auto max-w-2xl text-lg text-foreground/70">
+            Fees, leasing, setup and technology side by side. This is our website, so verify every competitor figure with them before you decide.
           </p>
         </div>
       </section>
 
-      {/* Comparison table */}
       <section className="py-12">
         <div
-          className="container mx-auto px-4 max-w-6xl overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="container mx-auto max-w-6xl overflow-x-auto px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           role="region"
           aria-label="Property management company comparison table"
           // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region must be keyboard focusable (WCAG 2.1.1)
           tabIndex={0}
         >
-          <table className="w-full text-left border-collapse min-w-[800px]">
+          <table className="w-full min-w-[800px] border-collapse text-left">
             <thead>
               <tr className="border-b-2 border-border">
-                <th scope="col" className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 pr-4 w-44">Category</th>
+                <th scope="col" className="w-44 py-3 pr-4 text-left text-xs uppercase tracking-wide text-muted-foreground">Category</th>
                 {competitors.map((c) => (
-                  <th
-                    key={c.name}
-                    scope="col"
-                    className={`text-left text-sm font-bold py-3 px-3 ${c.isUs ? "bg-primary/10 text-primary" : "text-foreground"}`}
-                  >
+                  <th key={c.name} scope="col" className={`px-3 py-3 text-left text-sm font-bold ${c.isUs ? "bg-primary/10 text-primary" : "text-foreground"}`}>
                     {c.name}
-                    {c.isUs && (
-                      <span className="block text-xs font-semibold uppercase tracking-wide text-primary mt-0.5">
-                        That's us
-                      </span>
-                    )}
+                    {c.isUs && <span className="mt-0.5 block text-xs font-semibold uppercase tracking-wide text-primary">That&apos;s us</span>}
                   </th>
                 ))}
               </tr>
@@ -151,59 +142,27 @@ export default function CompareUtahPropertyManagersPage() {
         </div>
       </section>
 
-      {/* Honest take */}
-      <section className="py-12 bg-muted/30 border-y border-border/40">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">An honest take from the founder</h2>
-          <div className="prose prose-lg prose-invert max-w-none text-foreground/80">
-            <p>
-              You should pick Ondo RE if you want real-time owner visibility, a
-              custom owner portal and AI assistant, and a partner that built its own software stack rather than licensing the same AppFolio everyone else uses. If you have a portfolio of 1 to 15 units and value
-              transparent dashboards over a thicker rolodex of long-tenured local relationships, we
-              fit.
-            </p>
-            <p>
-              You should pick Rhino or Wolfnest if your priority is a decade-plus local team and
-              you'd rather trade tech for tenure. They're real, established, and have moved a lot
-              of doors. Their software is older but their people know the Wasatch Front.
-            </p>
-            <p>
-              You should pick Rentomatic if a flat advertised monthly fee and $0
-              placement (as advertised Aug 2026) matter more than paying a
-              percentage of collected rent and a one-time 50% leasing fee.
-              Confirm their current numbers before you rely on this row.
-            </p>
-            <p>
-              You should look at Keyrenter Salt Lake if the reassurance of a national franchise
-              brand and their advertised performance guarantees are more valuable to you than a
-              bespoke local operator. Read the guarantee fine print with each franchisee, terms
-              vary by market and Utah franchisees set their own leasing/eviction policies.
-            </p>
-            <p>
-              The right move before any of these conversations: run your own numbers in our{" "}
-              <Link href="/calculators/owner-vs-self" className="prose-link">
-                Self-Manage vs Ondo ROI calculator
-              </Link>.
-              Whatever the answer, you'll walk into every PM conversation with a real number.
-            </p>
-          </div>
+      <section className="border-y border-border/40 bg-muted/30 py-12">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">Doing it yourself with software</h2>
+          <p className="text-foreground/80">{ONDO_PRICING_FRAMING}</p>
+          <p className="mt-4 text-foreground/80">
+            Put your own hourly rate, vacancy and repair time into the{" "}
+            <Link href="/calculators/owner-vs-self/" className="font-medium text-primary underline-offset-4 hover:underline">
+              self-manage vs Ondo calculator
+            </Link>{" "}
+            and compare the two numbers.
+          </p>
         </div>
       </section>
 
-      {/* What to evaluate */}
       <section className="py-12">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Five things to verify with any Utah property manager</h2>
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="mb-6 text-2xl font-bold text-foreground md:text-3xl">Five things to check with any manager</h2>
           <ul className="space-y-3">
-            {[
-              "Licensed under Utah's Real Estate Licensing and Practices Act (separate property manager license required beginning January 1, 2027)",
-              "Average maintenance response time documented, not just promised",
-              "Tenant screening criteria written and applied consistently, ask for the rubric",
-              "Sample owner statement BEFORE you sign, not after",
-              "Average tenant tenure over the past 24 months",
-            ].map((item) => (
+            {checklist.map((item) => (
               <li key={item} className="flex items-start gap-3 text-foreground/80">
-                <Check className="h-5 w-5 text-primary shrink-0 mt-1" aria-hidden="true" />
+                <Check className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))}
@@ -211,43 +170,23 @@ export default function CompareUtahPropertyManagersPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-12 bg-muted/30 border-y border-border/40">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">FAQ</h2>
-          <div className="space-y-5">
-            {faqs.map((f) => (
-              <div key={f.question} className="rounded-lg border border-border bg-card p-5">
-                <h3 className="font-semibold text-foreground mb-2">{f.question}</h3>
-                <p className="text-sm text-foreground/70 leading-relaxed">{f.answer}</p>
-              </div>
-            ))}
-          </div>
+      <section className="border-y border-border/40 bg-muted/30 py-12">
+        <div className="container mx-auto max-w-3xl px-4">
+          <h2 className="mb-8 text-2xl font-bold text-foreground md:text-3xl">Common questions</h2>
+          <FaqAccordion items={faqs} />
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-16">
-        <div className="container mx-auto px-4 text-center max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Get a real quote: not a brochure</h2>
-          <p className="text-foreground/70 mb-8">
-            30 minutes, no pressure, full transparency on fees and what's included.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              Book a 30-minute call
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-            <Link
-              href="/calculators/owner-vs-self"
-              className="inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
-            >
-              Run the ROI numbers first
-            </Link>
-          </div>
+        <div className="container mx-auto max-w-2xl px-4 text-center">
+          <h2 className="mb-3 text-2xl font-bold text-foreground md:text-3xl">Want a real quote?</h2>
+          <p className="mb-6 text-foreground/70">Thirty minutes on the phone, with the fee schedule in front of us both.</p>
+          <Link
+            href="/contact/#book-a-call"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Book a 30-minute call
+          </Link>
         </div>
       </section>
     </main>

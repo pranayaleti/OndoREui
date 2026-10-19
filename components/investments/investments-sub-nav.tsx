@@ -5,10 +5,7 @@ import { usePathname } from "next/navigation"
 
 const links = [
   { href: "/investments", label: "Overview" },
-  { href: "/investments/commercial-real-estate", label: "Commercial" },
-  { href: "/investments/fractional", label: "Fractional" },
   { href: "/investments/opportunities", label: "Sample deals" },
-  { href: "/investments/opportunity-zones", label: "Opportunity Zones" },
 ]
 
 /** trailingSlash is on, so usePathname() returns "/investments/"; compare without it. */

@@ -24,7 +24,7 @@ export function ProtectedPortalNotice({
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           {showDemoLink ? (
             <Button asChild>
-              <Link href="/demo/">Open the demo hub</Link>
+              <Link href="/contact/">Ask for a walkthrough</Link>
             </Button>
           ) : null}
           <Button asChild variant={showDemoLink ? "outline" : "default"}>

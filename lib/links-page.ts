@@ -140,7 +140,7 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     links: [
       { id: "rent-estimate", label: "Get a free rent estimate", href: "/whats-my-home-worth/" },
       { id: "management", label: "Management pricing and what's included", href: "/property-management/" },
-      { id: "new-investors", label: "Start investing in Utah rentals", href: "/new-investors/" },
+      { id: "new-investors", label: "How investing in Utah real estate works", href: "/investments/" },
     ],
   },
   {
@@ -166,7 +166,6 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
     links: [
       { id: "founder-story", label: "Read my story", href: "/founders-letter/" },
       { id: "about", label: "About Ondo Real Estate", href: "/about/" },
-      { id: "platform-tour", label: "Take the platform tour", href: "/tour/" },
     ],
   },
   {

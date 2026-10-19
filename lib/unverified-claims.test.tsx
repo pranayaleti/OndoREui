@@ -12,8 +12,6 @@ import { metadata as investorMeta } from "@/app/about/investor-relations/page"
 import CareersPage, { metadata as careersMeta } from "@/app/about/careers/page"
 import SweepstakesPage, { metadata as sweepstakesMeta } from "@/app/sweepstakes/page"
 import InvestorRelationsPage from "@/app/about/investor-relations/page"
-import { metadata as strategyMeta } from "@/app/strategy/page"
-import { metadata as brochureMeta } from "@/app/brochure/page"
 import { FOUNDED_YEAR, PROPERTIES_MANAGED } from "@/lib/social-proof-stats"
 import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
 
@@ -90,8 +88,6 @@ describe("pages with unverifiable content are retired", () => {
     ["/about/investor-relations", investorMeta],
     ["/about/careers", careersMeta],
     ["/sweepstakes", sweepstakesMeta],
-    ["/strategy", strategyMeta],
-    ["/brochure", brochureMeta],
   ]
 
   it.each(retired)("%s is noindex", (_path, meta) => {

@@ -13,19 +13,19 @@ describe("InvestmentsSubNav", () => {
     pathnameMock.mockReturnValue("/investments/")
     render(<InvestmentsSubNav />)
     expect(screen.getByRole("link", { name: "Overview" })).toHaveAttribute("aria-current", "page")
-    expect(screen.getByRole("link", { name: "Fractional" })).not.toHaveAttribute("aria-current")
+    expect(screen.getByRole("link", { name: "Sample deals" })).not.toHaveAttribute("aria-current")
   })
 
-  it("marks the matching section current with or without a trailing slash", () => {
-    pathnameMock.mockReturnValue("/investments/fractional/")
+  it("marks the sample deals section current with or without a trailing slash", () => {
+    pathnameMock.mockReturnValue("/investments/opportunities/")
     const { unmount } = render(<InvestmentsSubNav />)
-    expect(screen.getByRole("link", { name: "Fractional" })).toHaveAttribute("aria-current", "page")
+    expect(screen.getByRole("link", { name: "Sample deals" })).toHaveAttribute("aria-current", "page")
     expect(screen.getByRole("link", { name: "Overview" })).not.toHaveAttribute("aria-current")
     unmount()
 
-    pathnameMock.mockReturnValue("/investments/opportunity-zones")
+    pathnameMock.mockReturnValue("/investments/opportunities")
     render(<InvestmentsSubNav />)
-    expect(screen.getByRole("link", { name: "Opportunity Zones" })).toHaveAttribute("aria-current", "page")
+    expect(screen.getByRole("link", { name: "Sample deals" })).toHaveAttribute("aria-current", "page")
   })
 
   it("is not sticky, so it cannot slide under the sticky site header", () => {
@@ -35,7 +35,7 @@ describe("InvestmentsSubNav", () => {
   })
 
   it("does not treat a sibling path with the same prefix as active", () => {
-    expect(isInvestmentsLinkActive("/investments/fractional", "/investments/fractional-extra/")).toBe(false)
-    expect(isInvestmentsLinkActive("/investments", "/investments/fractional/")).toBe(false)
+    expect(isInvestmentsLinkActive("/investments/opportunities", "/investments/opportunities-extra/")).toBe(false)
+    expect(isInvestmentsLinkActive("/investments", "/investments/opportunities/")).toBe(false)
   })
 })

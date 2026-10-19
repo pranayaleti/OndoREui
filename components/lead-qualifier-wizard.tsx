@@ -73,7 +73,7 @@ const NEXT_STEPS: Record<Intent, readonly { id: string; label: string; href: str
     { id: "rent_estimate", label: "Get a free rent estimate", href: "/whats-my-home-worth/" },
   ],
   invest: [
-    { id: "new_investors", label: "Read the new investor guide", href: "/new-investors/" },
+    { id: "new_investors", label: "How investing works", href: "/investments/" },
     { id: "browse", label: "Browse homes", href: "/properties/" },
   ],
   buy_home: [

@@ -92,10 +92,7 @@ describe("skip link target", () => {
       "app/moving-to-utah/page.tsx",
       "app/investments/page.tsx",
       "app/investments/opportunities/page.tsx",
-      "app/investments/commercial-real-estate/page.tsx",
-      "app/investments/fractional/page.tsx",
       "app/investments/[slug]/page.tsx",
-      "app/investments/opportunity-zones/page.tsx",
     ]
     for (const page of pages) expect(read(page)).not.toContain('id="main-content"')
     expect(read("app/layout.tsx")).toContain('id="main-content"')

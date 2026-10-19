@@ -1209,7 +1209,7 @@ const INVESTING_TERMS: readonly GlossaryTerm[] = [
       "The benefit depends on the structure and the holding period, not merely on buying inside the boundary.",
     ],
     seeAlso: ["1031-exchange", "appreciation"],
-    related: [{ label: "Opportunity zones", href: "/investments/opportunity-zones/" }],
+    related: [{ label: "Opportunity zones", href: "/investments/" }],
   },
   {
     slug: "vacancy-rate",

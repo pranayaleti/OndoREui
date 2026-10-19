@@ -103,10 +103,10 @@ export default function HowOndoReUsesTechnology() {
 
             <div className="not-prose my-8 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">
-                <Link href="/tour">Take a Platform Tour</Link>
+                <Link href="/property-management">See property management</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/demo">Book a Demo</Link>
+                <Link href="/contact">Book a call</Link>
               </Button>
             </div>
 

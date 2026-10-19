@@ -185,7 +185,7 @@ describe("llms.json", () => {
 describe("HTML sitemap hubs", () => {
   it("lists local-guide hubs and does not send property search to /search", () => {
     const hrefs = getSiteIndexSections().flatMap((section) => section.links.map((link) => link.href))
-    expect(hrefs).toContain("/buy-sell")
+    expect(hrefs).toContain("/moving-to-utah")
     expect(hrefs).toContain("/market-reports")
     expect(hrefs).toContain("/neighborhoods")
     expect(hrefs).toContain("/schools")

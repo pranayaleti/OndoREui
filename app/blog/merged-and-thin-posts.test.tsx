@@ -51,7 +51,6 @@ describe("duplicate posts folded into a stronger post", () => {
   it("no page or index still links to a retired post except the retired post itself", () => {
     const files = [
       "app/loans/jumbo/page.tsx",
-      "app/refinance/blog/page.tsx",
       "app/resources/page.tsx",
       "app/blog/appraisal-comes-in-low/page.tsx",
       "app/blog/home-inspection-vs-appraisal/page.tsx",

@@ -164,31 +164,6 @@ test.describe("Accessibility — error states", () => {
     expect.soft(violations, "Serious/critical a11y violations on /contact/ in its error state").toEqual([])
   })
 
-  test("demo form reports a failed submission accessibly", async ({ page }) => {
-    await page.goto("/demo/", { waitUntil: "domcontentloaded" })
-    await page.locator("main, #main-content, [role='main']").first().waitFor({ state: "visible", timeout: 15_000 })
-
-    // Force the lead request to fail (the local mock backend would accept it), so a valid
-    // submit renders the error banner, which is the state we want to scan.
-    await page.route("**/api/leads/**", (route) =>
-      route.request().method() === "GET"
-        ? route.continue()
-        : route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ error: "Test failure" }) }),
-    )
-    // lib/anti-spam.ts treats a submit within 2.5 s of load as a bot and shows a fake success.
-    await page.waitForTimeout(3_000)
-    await page.fill("#firstName", "Ada")
-    await page.fill("#lastName", "Lovelace")
-    await page.fill("#email", "ada@example.com")
-    await page.locator('form button[type="submit"]').first().click()
-
-    const alertText = await firstNonEmptyAlert(page)
-    expect(alertText, "expected the demo form to surface a submission failure").toBeTruthy()
-
-    const violations = await scanForViolations(page)
-    reportViolations("/demo/ (error state)", violations)
-    expect.soft(violations, "Serious/critical a11y violations on /demo/ in its error state").toEqual([])
-  })
 })
 
 for (const theme of THEMES) {

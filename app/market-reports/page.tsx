@@ -66,7 +66,7 @@ export default function MarketReportsHubPage() {
             <p className="text-sm text-foreground/60">{CITY_MARKET_DATA_DISCLOSURE}</p>
             <p>
               For how we talk about data on the marketing site without inventing a statewide median, see{" "}
-              <Link href="/data/" className="font-medium text-primary underline-offset-4 hover:underline">
+              <Link href="/locations/" className="font-medium text-primary underline-offset-4 hover:underline">
                 Market data
               </Link>
               .

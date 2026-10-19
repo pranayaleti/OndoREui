@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react"
 import OpportunitiesPage, { metadata as opportunitiesMeta } from "./opportunities/page"
 import InvestmentDetailPage, { generateMetadata } from "./[slug]/page"
 import InvestmentsPage from "./page"
-import FractionalPage from "./fractional/page"
 import { InvestmentCard } from "@/components/investments/investment-card"
 import { MOCK_OPPORTUNITIES, SAMPLE_DEAL_LABEL } from "@/lib/investments-data"
 
@@ -46,11 +45,10 @@ describe("sample investment deals", () => {
     }
   })
 
-  it("hub and fractional pages do not describe a live offering", () => {
+  it("the investments page does not describe a live offering", () => {
     const hub = render(<InvestmentsPage />).container.textContent ?? ""
     expect(hub).not.toMatch(/vetted opportunities|View Current Opportunities|Current Opportunities/)
-    expect(hub).toContain("Ondo has no investment open to investors")
-    const fractional = render(<FractionalPage />).container.textContent ?? ""
-    expect(fractional).not.toMatch(/\$10,000–\$50,000|institutional-quality/i)
+    expect(hub).toContain("Ondo has no offering open to investors today")
+    expect(hub).not.toMatch(/\$10,000–\$50,000|institutional-quality/i)
   })
 })
