@@ -320,30 +320,6 @@ const blogPosts: SearchResult[] = [
     keywords: ['notary', 'remote notary', 'online notary', 'RON', 'notarization']
   },
   {
-    id: 'full-stack-dev-landlord-gaps',
-    title: 'I\'m a Full-Stack Dev and Landlord: What Software Gets Wrong',
-    description: 'UX gaps in property software and how to design flows that serve tenants and owners',
-    href: '/blog/full-stack-dev-landlord-gaps',
-    category: 'Blog',
-    keywords: ['software', 'property management', 'UX', 'landlord', 'tenant']
-  },
-  {
-    id: 'commercial-real-estate-101-tenant-mix',
-    title: 'Commercial Real Estate 101: Cap Rates, NNN, and Tenant Mix',
-    description: 'A practical primer on how cap rates, lease structures, and tenant mix shape CRE value',
-    href: '/blog/commercial-real-estate-101-tenant-mix',
-    category: 'Blog',
-    keywords: ['commercial real estate', 'cap rates', 'NNN', 'tenant mix', 'CRE']
-  },
-  {
-    id: 'crypto-and-real-estate-hedge',
-    title: 'Crypto and Real Estate: Building a Barbell Hedge',
-    description: 'Balancing fast, volatile assets with slow, cashflowing rentals, without co-mingling risk',
-    href: '/blog/crypto-and-real-estate-hedge',
-    category: 'Blog',
-    keywords: ['crypto', 'real estate', 'hedge', 'investment', 'strategy']
-  },
-  {
     id: 'new-landlord-mistakes-systems',
     title: 'New Landlord Mistakes and the Systems That Prevent Them',
     description: 'Documentation, reserves, maintenance states, and comms playbooks to avoid expensive errors',
@@ -384,52 +360,12 @@ const blogPosts: SearchResult[] = [
     keywords: ['maintenance', 'capex', 'capital expenditures', 'budgeting']
   },
   {
-    id: 'dashboards-for-landlords',
-    title: 'Dashboards for Landlords',
-    description: 'Building effective dashboards to track property performance and metrics',
-    href: '/blog/dashboards-for-landlords',
-    category: 'Blog',
-    keywords: ['dashboards', 'landlord', 'metrics', 'performance', 'tracking']
-  },
-  {
-    id: 'designing-property-owner-portal',
-    title: 'Designing Property Owner Portal',
-    description: 'UX and design considerations for property owner portals',
-    href: '/blog/designing-property-owner-portal',
-    category: 'Blog',
-    keywords: ['property owner', 'portal', 'UX', 'design']
-  },
-  {
-    id: 'engineering-real-estate-investment-calculators',
-    title: 'Engineering Real Estate Investment Calculators',
-    description: 'Technical deep dive into building accurate real estate calculators',
-    href: '/blog/engineering-real-estate-investment-calculators',
-    category: 'Blog',
-    keywords: ['calculators', 'engineering', 'real estate', 'investment']
-  },
-  {
-    id: 'building-high-performance-real-estate-nextjs-supabase',
-    title: 'Building High Performance Real Estate Apps with Next.js and Supabase',
-    description: 'Technical guide to building scalable real estate applications',
-    href: '/blog/building-high-performance-real-estate-nextjs-supabase',
-    category: 'Blog',
-    keywords: ['nextjs', 'supabase', 'performance', 'real estate apps']
-  },
-  {
     id: 'mobile-notary-utah-county-guide',
     title: 'Notary in Utah County: Remote Online Notarization',
     description: 'RON for Utah County clients, posted fees, same-day when capacity allows, no mobile travel appointments',
     href: '/blog/mobile-notary-utah-county-guide',
     category: 'Blog',
     keywords: ['remote online notary', 'utah county', 'ron', 'notary services']
-  },
-  {
-    id: 'modernizing-notary-workflows-integration',
-    title: 'Modernizing Notary Workflows and Integration',
-    description: 'How to modernize notary workflows with technology and integrations',
-    href: '/blog/modernizing-notary-workflows-integration',
-    category: 'Blog',
-    keywords: ['notary', 'workflows', 'integration', 'technology']
   },
   {
     id: 'prepare-for-remote-online-notary-session',
@@ -446,14 +382,6 @@ const blogPosts: SearchResult[] = [
     href: '/blog/remote-online-notary-real-estate-closings',
     category: 'Blog',
     keywords: ['remote notary', 'real estate closings', 'closings', 'notarization']
-  },
-  {
-    id: 'technical-seo-for-real-estate',
-    title: 'Technical SEO for Real Estate',
-    description: 'SEO strategies and best practices for real estate websites',
-    href: '/blog/technical-seo-for-real-estate',
-    category: 'Blog',
-    keywords: ['SEO', 'technical SEO', 'real estate', 'marketing']
   },
   {
     id: 'can-i-get-a-mortgage-if-my-income-changes-every-month',

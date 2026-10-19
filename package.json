@@ -42,6 +42,7 @@
     "verify:agent-readability": "node scripts/verify-agent-readability.mjs",
     "cloudflare:markdown": "node scripts/enable-cloudflare-markdown.mjs",
     "cloudflare:agent-readability": "python3 scripts/apply-cloudflare-agent-readability.py",
+    "cloudflare:redirects-csv": "node scripts/export-cloudflare-redirects.mjs",
     "generate:html-md": "npx tsx scripts/generate-html-markdown-twins.ts",
     "generate:blogs": "npx tsx scripts/generate-city-blogs.ts",
     "generate:blogs:dry": "npx tsx scripts/generate-city-blogs.ts --dry-run",

@@ -14,7 +14,8 @@ const keywords = [
   "owner dashboards"
 ]
 
-export const metadata = articleMetadata({
+export const metadata = {
+  ...articleMetadata({
   path: slug,
   title,
   description,
@@ -23,7 +24,10 @@ export const metadata = articleMetadata({
   author,
   keywords,
   category: "Product",
-})
+  }),
+  // Engineering write-up: moves to ondosoft.com; out of the index until the redirect lands.
+  robots: { index: false, follow: true },
+}
 
 export default function FullStackDevLandlordGaps() {
   return (

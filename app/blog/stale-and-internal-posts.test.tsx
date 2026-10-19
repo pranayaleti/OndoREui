@@ -3,6 +3,13 @@ import { render } from "@testing-library/react"
 import RateTrends, { metadata as rateMetadata } from "./mortgage-rate-trends-2025/page"
 import TechnicalSeo, { metadata as seoMetadata } from "./technical-seo-for-real-estate/page"
 import NotaryWorkflows, { metadata as notaryMetadata } from "./modernizing-notary-workflows-integration/page"
+import { metadata as eng0 } from "./building-high-performance-real-estate-nextjs-supabase/page"
+import { metadata as eng1 } from "./engineering-real-estate-investment-calculators/page"
+import { metadata as eng4 } from "./dashboards-for-landlords/page"
+import { metadata as eng5 } from "./designing-property-owner-portal/page"
+import { metadata as eng6 } from "./full-stack-dev-landlord-gaps/page"
+import { metadata as eng7 } from "./property-management-pwa-offline/page"
+import { metadata as eng8 } from "./how-ondo-re-uses-technology-property-management/page"
 
 function text(Page: () => React.ReactElement): string {
   const { container } = render(<Page />)
@@ -28,6 +35,13 @@ describe("internal engineering posts are out of the index and make no false clai
   it.each([
     ["technical-seo-for-real-estate", seoMetadata],
     ["modernizing-notary-workflows-integration", notaryMetadata],
+    ["building-high-performance-real-estate-nextjs-supabase", eng0],
+    ["engineering-real-estate-investment-calculators", eng1],
+    ["dashboards-for-landlords", eng4],
+    ["designing-property-owner-portal", eng5],
+    ["full-stack-dev-landlord-gaps", eng6],
+    ["property-management-pwa-offline", eng7],
+    ["how-ondo-re-uses-technology-property-management", eng8],
   ])("%s is noindex,follow", (_slug, metadata) => {
     expect(metadata.robots).toEqual({ index: false, follow: true })
   })

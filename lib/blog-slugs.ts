@@ -8,11 +8,8 @@ import { getBlogPosts } from "./blog-posts";
 
 /** Slugs with their own app/blog/<slug>/page.tsx static directory. */
 const STATIC_ROUTE_SLUGS = [
-  "backyard-upgrades-and-fertilizer-guide",
   "building-high-performance-real-estate-nextjs-supabase",
   "cash-on-cash-return-explained",
-  "commercial-real-estate-101-tenant-mix",
-  "crypto-and-real-estate-hedge",
   "dashboards-for-landlords",
   "designing-property-owner-portal",
   "engineering-real-estate-investment-calculators",
@@ -49,7 +46,6 @@ const STATIC_ROUTE_SLUGS = [
   "real-estate-agents-manage-own-rentals",
   "turbotenant-vs-buildium-vs-ondo",
   "types-of-basements",
-  "collect-rent-with-crypto-guide",
   "online-notary-for-lease-agreements",
   "rent-vs-own-calculator-guide",
   "tenant-rights-checklist",

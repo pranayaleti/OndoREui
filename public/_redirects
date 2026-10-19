@@ -167,3 +167,22 @@
 /glossary/cagr            /glossary/                 301
 /glossary/grm             /glossary/                 301
 /glossary/leverage        /glossary/                 301
+
+# Oct 2026 simplification: off-topic posts.
+/blog/backyard-upgrades-and-fertilizer-guide   /blog/            301
+/blog/crypto-and-real-estate-hedge             /blog/            301
+/blog/collect-rent-with-crypto-guide           /blog/            301
+/blog/commercial-real-estate-101-tenant-mix    /investments/     301
+
+# Engineering write-ups move to ondosoft.com. Uncomment each line once the post is live there
+# (the generator and the Cloudflare export both accept absolute targets); until then the posts
+# stay published with noindex,follow.
+# /blog/building-high-performance-real-estate-nextjs-supabase  https://ondosoft.com/blog/building-high-performance-real-estate-nextjs-supabase/  301
+# /blog/engineering-real-estate-investment-calculators  https://ondosoft.com/blog/engineering-real-estate-investment-calculators/  301
+# /blog/technical-seo-for-real-estate  https://ondosoft.com/blog/technical-seo-for-real-estate/  301
+# /blog/modernizing-notary-workflows-integration  https://ondosoft.com/blog/modernizing-notary-workflows-integration/  301
+# /blog/dashboards-for-landlords  https://ondosoft.com/blog/dashboards-for-landlords/  301
+# /blog/designing-property-owner-portal  https://ondosoft.com/blog/designing-property-owner-portal/  301
+# /blog/full-stack-dev-landlord-gaps  https://ondosoft.com/blog/full-stack-dev-landlord-gaps/  301
+# /blog/property-management-pwa-offline  https://ondosoft.com/blog/property-management-pwa-offline/  301
+# /blog/how-ondo-re-uses-technology-property-management  https://ondosoft.com/blog/how-ondo-re-uses-technology-property-management/  301

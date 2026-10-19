@@ -87,9 +87,7 @@ export default function FinishingBasementRoi() {
               full, partial, walkout, daylight? See our{" "}
               <Link href="/blog/types-of-basements">basement types guide</Link> first. For the seasonal
               upkeep that keeps a finished basement dry, see our{" "}
-              <Link href="/blog/home-maintenance-schedule">home maintenance schedule</Link>, and
-              for outdoor projects, our{" "}
-              <Link href="/blog/backyard-upgrades-and-fertilizer-guide">backyard upgrades guide</Link>.
+              <Link href="/blog/home-maintenance-schedule">home maintenance schedule</Link>.
             </p>
           
     </ArticleShell>

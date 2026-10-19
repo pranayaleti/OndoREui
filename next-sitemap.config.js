@@ -99,6 +99,13 @@ const SITEMAP_NOINDEX_PATHS = [
   // Internal engineering write-ups (noindex): not consumer search content.
   '/blog/technical-seo-for-real-estate',
   '/blog/modernizing-notary-workflows-integration',
+  '/blog/building-high-performance-real-estate-nextjs-supabase',
+  '/blog/engineering-real-estate-investment-calculators',
+  '/blog/dashboards-for-landlords',
+  '/blog/designing-property-owner-portal',
+  '/blog/full-stack-dev-landlord-gaps',
+  '/blog/property-management-pwa-offline',
+  '/blog/how-ondo-re-uses-technology-property-management',
   // Duplicates folded into a stronger post (noindex,follow, canonical to the kept post).
   '/blog/utah-repc-deadlines',
   '/blog/utah-county-conforming-loan-limit-lookup',

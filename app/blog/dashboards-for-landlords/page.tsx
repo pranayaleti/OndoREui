@@ -14,7 +14,8 @@ const keywords = [
   "vacancy metrics"
 ]
 
-export const metadata = articleMetadata({
+export const metadata = {
+  ...articleMetadata({
   path: slug,
   title,
   description,
@@ -23,7 +24,10 @@ export const metadata = articleMetadata({
   author,
   keywords,
   category: "Analytics",
-})
+  }),
+  // Engineering write-up: moves to ondosoft.com; out of the index until the redirect lands.
+  robots: { index: false, follow: true },
+}
 
 export default function DashboardsForLandlords() {
   return (

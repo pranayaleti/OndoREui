@@ -13,16 +13,12 @@ import { getContentNodeByPath } from "./index"
  * the node, then delete the slug here. Do not add a slug to it.
  */
 const NOT_IN_GRAPH_YET: ReadonlySet<string> = new Set([
-  "backyard-upgrades-and-fertilizer-guide",
   "best-neighborhoods-draper-utah",
   "best-neighborhoods-invest-utah-real-estate",
   "best-neighborhoods-lehi-utah",
   "build-rental-portfolio-investor-2026",
   "cash-on-cash-return-explained",
-  "collect-rent-with-crypto-guide",
-  "commercial-real-estate-101-tenant-mix",
   "cost-of-living-draper-utah",
-  "crypto-and-real-estate-hedge",
   "dashboards-for-landlords",
   "designing-property-owner-portal",
   "finishing-basement-roi",

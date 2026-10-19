@@ -28,6 +28,8 @@ import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 import { pageTitle, pageTitleText } from "@/lib/site"
 
 export const metadata: Metadata = {
+  // Engineering write-up: moves to ondosoft.com; out of the index until the redirect lands.
+  robots: { index: false, follow: true },
   title: pageTitle(`${title} | Ondo Real Estate`),
   description: description,
   alternates: { canonical: `${SITE_URL}${slug}/` },
