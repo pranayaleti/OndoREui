@@ -5,17 +5,16 @@ import {
   FOUNDERS_LETTER_DESCRIPTION,
   founderLetterText,
   founderLetterWordCount,
-  readingMinutes,
   yearsInSoftware,
 } from "./founders-letter"
 
 describe("founder's letter copy", () => {
   it("is a long read, measured from the copy itself", () => {
+    // Read time is no longer shown; the count still bounds the length.
     const words = founderLetterWordCount()
     expect(words).toBeGreaterThan(1600)
     // The owner asked for depth; the cap keeps it a long read, not a book.
     expect(words).toBeLessThan(2600)
-    expect(readingMinutes()).toBe(Math.max(1, Math.round(words / 220)))
   })
 
   it("computes the software years from the one constant", () => {

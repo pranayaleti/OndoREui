@@ -43,8 +43,8 @@ export const FOUNDERS_LETTER_HEADLINE =
 
 export const FOUNDERS_LETTER_DESCRIPTION = `Pranay Reddy Aleti on ${yearsInSoftware()}+ years in software, the Utah house that changed the plan, and why Ondo Real Estate carries a fire in its logo. Founder-run in ${SITE_ADDRESS_CITY}.`
 
-/** Inline copy: plain text or a link. */
-export type Segment = string | { text: string; href: string; external?: boolean }
+/** Inline copy: plain text, a link, or a phrase set in the brand orange. */
+export type Segment = string | { text: string; href: string; external?: boolean } | { text: string; accent: true }
 
 export type Block =
   | { kind: "p"; segments: Segment[] }
@@ -53,7 +53,8 @@ export type Block =
 
 export type Chapter = {
   id: string
-  year: number
+  /** A year, or "Today" for what is still going on. */
+  year: number | "Today"
   title: string
   temp: "cool" | "neutral" | "warm"
   blocks: Block[]
@@ -63,6 +64,7 @@ export type Chapter = {
 
 const p = (...segments: Segment[]): Block => ({ kind: "p", segments })
 const quote = (text: string): Block => ({ kind: "quote", text })
+const accent = (text: string): Segment => ({ text, accent: true })
 
 const years = yearsInSoftware()
 
@@ -242,6 +244,23 @@ export const LETTER = {
         ),
       ],
     },
+    {
+      id: "chapter-today",
+      year: "Today",
+      title: "Betting on Utah.",
+      temp: "warm",
+      sideLabels: ["Mobly", "EZ Salt", "Stratus"],
+      blocks: [
+        p(
+          "I also invest in startups as a venture investor, and strictly local: Utah companies only. Mobly, EZ Salt and Stratus are a few of them.",
+        ),
+        p(
+          "I'm huge on ",
+          accent("Utah growth"),
+          ". Every company that builds and hires here brings people who need a place to live, and owners who need their property run well. My money sits where my work is.",
+        ),
+      ],
+    },
   ] satisfies Chapter[],
   mark: {
     heading: "Some brands choose a name. I wanted mine to represent a mindset.",
@@ -307,6 +326,7 @@ export const LETTER = {
         "Rental property I own and manage myself.",
         `About $400,000 of my own capital in two mobile home parks, in Utah and Iowa, in ${FIRST_PARKS_YEAR}, plus an investment property in Saratoga Springs.`,
         `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}.`,
+        "Venture investments in Utah startups only, including Mobly, EZ Salt and Stratus.",
         "A platform I built and run under the company.",
         `Two companies started in ${FOUNDED_YEAR}.`,
       ],
@@ -420,9 +440,4 @@ export function founderLetterText(): string {
 
 export function founderLetterWordCount(): number {
   return founderLetterText().split(/\s+/).filter(Boolean).length
-}
-
-/** Reading time at a comfortable 220 words per minute, never below one minute. */
-export function readingMinutes(): number {
-  return Math.max(1, Math.round(founderLetterWordCount() / 220))
 }

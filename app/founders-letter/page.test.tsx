@@ -41,6 +41,15 @@ describe("/founders-letter page", () => {
     expect(mark.getAttribute("alt")?.length).toBeGreaterThan(10)
   })
 
+  it("highlights Utah growth in the startup chapter and shows no read time", () => {
+    render(<FoundersLetterPage />)
+    const accent = screen.getByText("Utah growth")
+    expect(accent.tagName).toBe("STRONG")
+    expect(accent.closest("#chapter-today")).not.toBeNull()
+    for (const name of ["Mobly", "EZ Salt", "Stratus"]) expect(document.body.textContent).toContain(name)
+    expect(document.body.textContent).not.toMatch(/minute read/i)
+  })
+
   it("signs off as founder without a city or a read-through date", () => {
     render(<FoundersLetterPage />)
     expect(screen.getByText("Founder, Ondo Real Estate.")).toBeInTheDocument()
@@ -52,6 +61,7 @@ describe("/founders-letter page", () => {
       .map((h) => h.textContent?.match(/^(\d{4})/)?.[1])
       .filter(Boolean)
     expect(years).toEqual(["2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024"])
+    expect(container.querySelector("#chapter-today h2")?.textContent).toMatch(/^Today/)
     for (const h of container.querySelectorAll("main h2")) expect(h.closest("li")).toBeNull()
     expect(container.querySelector("main dl")).toBeNull()
     expect(container.querySelector("main .bg-card")).toBeNull()

@@ -15,7 +15,6 @@ import {
   ONDO_MARK_ALT,
   ONDO_MARK_PATH,
   founderLetterWordCount,
-  readingMinutes,
   type Block,
   type Segment,
 } from "@/lib/content/founders-letter"
@@ -35,6 +34,13 @@ function Segments({ segments }: { segments: readonly Segment[] }) {
     <>
       {segments.map((segment, index) => {
         if (typeof segment === "string") return segment
+        if ("accent" in segment) {
+          return (
+            <strong key={index} className={styles.accent}>
+              {segment.text}
+            </strong>
+          )
+        }
         if (segment.external) {
           return (
             <a
@@ -111,7 +117,6 @@ export default function FoundersLetter({ modified }: { modified: string }) {
   const canonical = toAbsoluteSiteUrl(FOUNDERS_LETTER_PATH)
   const ogImage = toAbsoluteSiteUrl(FOUNDERS_LETTER_OG_IMAGE_PATH)
   const founderImage = toAbsoluteSiteUrl(FOUNDER_IMAGE_PATH)
-  const minutes = readingMinutes()
 
   // The full Person lives on the profile page (FOUNDER_PROFILE_PATH); the letter is an Article by it.
   const articleJsonLd = {
@@ -148,10 +153,7 @@ export default function FoundersLetter({ modified }: { modified: string }) {
       />
 
       <div className={styles.inner}>
-        <p className={styles.masthead}>
-          <span>{masthead.lead}</span>{" "}
-          <span>{minutes} minute read.</span>
-        </p>
+        <p className={styles.masthead}>{masthead.lead}</p>
 
         <section className={styles.opening} aria-labelledby="founders-letter-heading">
           <div className={styles.openingText}>
@@ -204,7 +206,9 @@ export default function FoundersLetter({ modified }: { modified: string }) {
             <div className={styles.inner}>
               <div className={styles.chapterGrid}>
                 <h2 id={`${chapter.id}-heading`} className={styles.chapterHeading}>
-                  <span className={styles.year}>{chapter.year}</span>
+                  <span className={styles.year} data-word={typeof chapter.year === "string" ? "" : undefined}>
+                    {chapter.year}
+                  </span>
                   <span className="sr-only">: </span>
                   <span className={styles.chapterTitle}>{chapter.title}</span>
                 </h2>
