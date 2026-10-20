@@ -70,7 +70,7 @@ const years = yearsInSoftware()
 
 export const LETTER = {
   masthead: {
-    lead: `A letter from the founder of Ondo Real Estate, ${SITE_ADDRESS_CITY}, Utah.`,
+    lead: "A letter from the founder of Ondo Real Estate, Utah.",
   },
   opening: {
     headline: FOUNDERS_LETTER_HEADLINE,
@@ -172,7 +172,7 @@ export const LETTER = {
       temp: "neutral",
       blocks: [
         p(
-          `In ${FIRST_UTAH_HOME_YEAR} I bought my first home in Utah. The process was harder than it needed to be. I'd spent years making complicated things feel simple for other people, and here was a process nobody had made simple for me.`,
+          `In ${FIRST_UTAH_HOME_YEAR} I bought my first home in Lehi, Utah. The process was harder than it needed to be. I'd spent years making complicated things feel simple for other people, and here was a process nobody had made simple for me.`,
         ),
         p(
           "When it was over, friends and family started asking for help with theirs. I helped them buy, place tenants and get to closing without the guesswork. Somewhere in there it stopped feeling like a favor and started feeling like the work I wanted to do.",
@@ -320,7 +320,7 @@ export const LETTER = {
       demonstrated: [
         "A master's degree in computer science.",
         `${years}+ years as a full stack engineer for large companies.`,
-        `A first Utah home in ${FIRST_UTAH_HOME_YEAR}, then friends and family helped to closing and tenants placed.`,
+        `A first home in Lehi, Utah, in ${FIRST_UTAH_HOME_YEAR}, then friends and family helped to closing and tenants placed.`,
         "Rental property I own and manage myself.",
         `About $400,000 of my own capital in two mobile home parks, in Utah and Iowa, in ${FIRST_PARKS_YEAR}, plus an investment property in Saratoga Springs.`,
         `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}.`,

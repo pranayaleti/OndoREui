@@ -52,6 +52,12 @@ describe("/founders-letter page", () => {
     expect(screen.queryByRole("heading", { name: "Start here" })).toBeNull()
   })
 
+  it("dates the first home to Lehi and keeps the city out of the masthead", () => {
+    render(<FoundersLetterPage />)
+    expect(document.body.textContent).toContain("I bought my first home in Lehi, Utah.")
+    expect(screen.getByText("A letter from the founder of Ondo Real Estate, Utah.")).toBeInTheDocument()
+  })
+
   it("signs off as founder without a city or a read-through date", () => {
     render(<FoundersLetterPage />)
     expect(screen.getByText("Founder, Ondo Real Estate.")).toBeInTheDocument()
