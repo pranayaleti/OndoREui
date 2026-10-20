@@ -18,6 +18,9 @@ import { SITE_ADDRESS_CITY, SITE_PHONE } from "@/lib/site"
 export const ARRIVED_IN_US_YEAR = 2011
 export const FIRST_YEAR_IN_SOFTWARE = 2013
 export const FIRST_UTAH_HOME_YEAR = 2019
+export const FIRST_CRYPTO_YEAR = 2018
+export const FIRST_PARKS_YEAR = 2023
+export const EB5_YEAR = 2024
 
 /** Computed at build time; a static export shows the number as of its last build. */
 export function yearsInSoftware(now: Date = new Date()): number {
@@ -69,7 +72,7 @@ export const LETTER = {
   },
   opening: {
     headline: FOUNDERS_LETTER_HEADLINE,
-    deck: `I'm Pranay Reddy Aleti, founder of Ondo Real Estate in ${SITE_ADDRESS_CITY}, Utah. I shipped software for large companies for ${years}+ years. Then I bought a house here that was harder to buy than it needed to be, and I started a company with one rule: ON IT. DO IT. Here's the story, and what it means for your property.`,
+    deck: `I'm Pranay Reddy Aleti, founder of Ondo Real Estate in ${SITE_ADDRESS_CITY}, Utah. I shipped software for large companies for ${years}+ years. Then I bought a house here that was harder to buy than it needed to be, and I started a company with one rule: ON it. DO it. Here's the story, and what it means for your property.`,
     category: `Property management for Utah rental owners across ${UTAH_CITIES_SERVED} Wasatch Front cities. Buying, selling and home loans through Ondo while licensing is in progress.`,
     bookLabel: "Book a 30-minute call",
     callLabel: "Call Pranay",
@@ -81,7 +84,7 @@ export const LETTER = {
     blocks: [
       p("If you only read one paragraph, read this one."),
       p(
-        "I'm an engineer who became a rental owner, then started a real estate company because the first two taught me what was broken. I still own and manage rental property myself. The repair calls, the lease questions and the year-end paperwork land on my phone the same way they land on yours.",
+        `I'm an engineer who became a rental owner, then started a real estate company because the first two taught me what was broken. I still own and manage rental property myself, and since ${FIRST_PARKS_YEAR} I've put my own money into mobile home parks in Utah and Iowa and an investment property in Saratoga Springs. The repair calls, the lease questions and the year-end paperwork land on my phone the same way they land on yours.`,
       ),
       p(
         "Ondo Real Estate is founder-run. The person you talk to on day one is the one you call when something is off. I built the software underneath it: an owner portal and a tenant portal, with statements, maintenance and rent in one place.",
@@ -148,6 +151,21 @@ export const LETTER = {
       ],
     },
     {
+      id: "chapter-2018",
+      year: FIRST_CRYPTO_YEAR,
+      title: "Betting on a system I understood.",
+      temp: "cool",
+      blocks: [
+        p(
+          `In ${FIRST_CRYPTO_YEAR} I bought ETH at $170. That was the year most people gave up on crypto. I didn't buy because of a headline. I bought because I'd spent years building software, and I understood what a network like Ethereum was trying to do.`,
+        ),
+        p(
+          "It taught me to separate price from value. Prices move every day. What something is worth changes slowly, and you only see it if you understand how it works. I still follow that market closely, and I read a rental the same way: the rent, the repairs, the neighborhood, not the noise of a single month.",
+        ),
+        quote("Prices move every day. What something is worth changes slowly."),
+      ],
+    },
+    {
       id: "chapter-2019",
       year: FIRST_UTAH_HOME_YEAR,
       title: "The house that changed the plan.",
@@ -194,15 +212,45 @@ export const LETTER = {
         quote("Those aren't people problems. They're system problems. Systems are what I do."),
       ],
     },
+    {
+      id: "chapter-2023",
+      year: FIRST_PARKS_YEAR,
+      title: "My own money, on the line.",
+      temp: "warm",
+      sideLabels: ["Mobile home park, Utah", "Mobile home park, Iowa", "Investment property, Saratoga Springs"],
+      blocks: [
+        p(
+          `In ${FIRST_PARKS_YEAR} I put about $400,000 into two mobile home parks, one in Utah and one in Iowa. The same year I took on an investment property in Saratoga Springs.`,
+        ),
+        p(
+          "Owning at that scale made real estate personal in a new way. A vacancy isn't a statistic when it hits your own numbers. Neither is a repair bill that lands the same week as the property tax. I read an owner's statement like an investor, because I am one.",
+        ),
+        quote("I read an owner's statement like an investor, because I am one."),
+      ],
+    },
+    {
+      id: "chapter-2024",
+      year: EB5_YEAR,
+      title: "Committing to stay.",
+      temp: "warm",
+      blocks: [
+        p(
+          `In ${EB5_YEAR} I invested about $1 million in a resort project in California and applied through the EB-5 program, which ties a green card application to an investment in an American business that creates jobs.`,
+        ),
+        p(
+          `I came here in ${ARRIVED_IN_US_YEAR} as a student with a plan. Thirteen years later I put my own capital behind staying. That's the commitment under this company. I'm building Ondo for the long run, and the owners who work with Ondo get a founder who plans to be here.`,
+        ),
+      ],
+    },
   ] satisfies Chapter[],
   mark: {
     heading: "Some brands choose a name. I wanted mine to represent a mindset.",
-    lockup: ["ON IT.", "DO IT."],
-    decode: "ON IT is the response. DO IT is the follow-through.",
+    lockup: ["ON it.", "DO it."],
+    decode: "ON it is the response. DO it is the follow-through.",
     blocks: [
       p("Say the name out loud. Ondo. On it, do it."),
       p(
-        "ON IT is the first half of a promise: your problem has an owner now, and the owner is me. DO IT is the second half: the work gets done, and you hear about it when it's done, not when you ask.",
+        "ON it is the first half of a promise: your problem has an owner now, and the owner is me. DO it is the second half: the work gets done, and you hear about it when it's done, not when you ask.",
       ),
       p(
         "Now look at the logo. A bearded figure drawn in fire, inside a ring painted by hand. The beard is mine. That silhouette is me, and the fire is why the company exists: a burning desire to serve better than I was served. I'd rather act than wait. The fire is the push to pick a problem up today and finish it, even when finishing is inconvenient.",
@@ -234,12 +282,12 @@ export const LETTER = {
         text: "An engineer's reflex is to find the root cause. A late payment, a repeat repair, a lease question that keeps coming back: each one is a problem to close, not a ticket to sit on.",
       },
       {
-        title: "ON IT. DO IT. is the operating rule.",
+        title: "ON it. DO it. is the operating rule.",
         text: "You hear what happens next, and then it happens. When something can't be closed in one reply, that reply says what the next step is.",
       },
       {
         title: "My name is on it.",
-        text: "There's no account manager between us. My reputation in Utah is small enough that I can't afford to lose it on your building.",
+        text: "There's no account manager between us. My own money is in real estate too, so I read your numbers the way I read mine. My reputation in Utah is small enough that I can't afford to lose it on your building.",
       },
       {
         title: "The system gets better every month.",
@@ -257,6 +305,8 @@ export const LETTER = {
         `${years}+ years as a full stack engineer for large companies.`,
         `A first Utah home in ${FIRST_UTAH_HOME_YEAR}, then friends and family helped to closing and tenants placed.`,
         "Rental property I own and manage myself.",
+        `About $400,000 of my own capital in two mobile home parks, in Utah and Iowa, in ${FIRST_PARKS_YEAR}, plus an investment property in Saratoga Springs.`,
+        `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}.`,
         "A platform I built and run under the company.",
         `Two companies started in ${FOUNDED_YEAR}.`,
       ],
@@ -284,7 +334,7 @@ export const LETTER = {
         ". Property management is what Ondo does today, across the Wasatch Front.",
       ),
       p("I don't promise round-the-clock coverage. Office hours are Monday to Friday, 9 to 5 Mountain time, and we reply within one business day."),
-      p("If any of this changes, this letter changes with it. The date under my signature says when I last read it through."),
+      p("If any of this changes, this letter changes with it."),
     ],
   },
   closing: {
@@ -308,8 +358,6 @@ export const LETTER = {
     signature: {
       name: "Pranay Reddy Aleti",
       role: "Founder, Ondo Real Estate",
-      place: `${SITE_ADDRESS_CITY}, Utah`,
-      datePrefix: "Last read through on",
     },
     bookLabel: "Book a 30-minute call",
     callLabel: `Call ${SITE_PHONE}`,
@@ -364,7 +412,7 @@ export function founderLetterText(): string {
   parts.push(why.heading, why.intro, ...why.pillars.map((pillar) => `${pillar.title} ${pillar.text}`))
   parts.push(why.ledger.demonstratedLabel, ...why.ledger.demonstrated, why.ledger.inProgressLabel, ...why.ledger.inProgress.map(segmentsText))
   parts.push(restraint.heading, ...blocksText(restraint.blocks))
-  parts.push(closing.heading, ...blocksText(closing.blocks), closing.signature.name, closing.signature.role, closing.signature.place)
+  parts.push(closing.heading, ...blocksText(closing.blocks), closing.signature.name, closing.signature.role)
   parts.push(closing.bookLabel, closing.callLabel, closing.messageLabel)
   parts.push(keepReading.heading, ...keepReading.links.map((link) => link.label))
   return parts.join("\n")

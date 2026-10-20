@@ -41,12 +41,17 @@ describe("/founders-letter page", () => {
     expect(mark.getAttribute("alt")?.length).toBeGreaterThan(10)
   })
 
+  it("signs off as founder without a city or a read-through date", () => {
+    render(<FoundersLetterPage />)
+    expect(screen.getByText("Founder, Ondo Real Estate.")).toBeInTheDocument()
+  })
+
   it("tells the journey as dated chapters in order, outside any list", () => {
     const { container } = render(<FoundersLetterPage />)
     const years = Array.from(container.querySelectorAll("main h2"))
       .map((h) => h.textContent?.match(/^(\d{4})/)?.[1])
       .filter(Boolean)
-    expect(years).toEqual(["2011", "2013", "2019", String(FOUNDED_YEAR)])
+    expect(years).toEqual(["2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024"])
     for (const h of container.querySelectorAll("main h2")) expect(h.closest("li")).toBeNull()
     expect(container.querySelector("main dl")).toBeNull()
     expect(container.querySelector("main .bg-card")).toBeNull()
@@ -56,7 +61,8 @@ describe("/founders-letter page", () => {
   it("explains the name and the mark in brand voice without a license claim", () => {
     const { container } = render(<FoundersLetterPage />)
     const text = document.body.textContent ?? ""
-    expect(text).toContain("ON IT. DO IT.")
+    expect(text).toContain("ON it. DO it.")
+    expect(text).not.toContain("Last read through")
     expect(text).toContain("That silhouette is me")
     expect(text).not.toContain("—")
     expect(text).not.toMatch(/landlord/i)

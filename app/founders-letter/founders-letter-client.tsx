@@ -324,12 +324,7 @@ export default function FoundersLetter({ modified }: { modified: string }) {
           <div className={styles.signature}>
             <Image src={ONDO_MARK_PATH} alt="" aria-hidden="true" width={48} height={48} loading="lazy" className={styles.signatureMark} />
             <p className={styles.signatureName}>{closing.signature.name}</p>
-            <p className={styles.signatureRole}>
-              {closing.signature.role}. {closing.signature.place}.
-            </p>
-            <p className={styles.signatureDate}>
-              {closing.signature.datePrefix} <time dateTime={modified}>{modified}</time>.
-            </p>
+            <p className={styles.signatureRole}>{closing.signature.role}.</p>
           </div>
           <div className={styles.ctaRow}>
             <BookCall contentLabel="founders_letter_close" label="close-book-call">

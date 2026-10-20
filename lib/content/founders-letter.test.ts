@@ -13,7 +13,8 @@ describe("founder's letter copy", () => {
   it("is a long read, measured from the copy itself", () => {
     const words = founderLetterWordCount()
     expect(words).toBeGreaterThan(1600)
-    expect(words).toBeLessThan(2300)
+    // The owner asked for depth; the cap keeps it a long read, not a book.
+    expect(words).toBeLessThan(2600)
     expect(readingMinutes()).toBe(Math.max(1, Math.round(words / 220)))
   })
 
