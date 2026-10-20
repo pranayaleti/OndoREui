@@ -412,7 +412,7 @@ const investmentProperties: SubServiceDefinition = {
   features: [
     { title: "Cash Flow Analysis", description: "Detailed pro forma projections including rent estimates, operating expenses, debt service, and net cash flow", iconName: "Calculator" },
     { title: "Market Comparables", description: "Rental and sales comparables to validate purchase price and projected rental income", iconName: "BarChart3" },
-    { title: "Property Management", description: "Seamless transition from purchase to managed rental: tenant placement, maintenance, and reporting included", iconName: "Building2" },
+    { title: "Property Management", description: "From purchase to managed rental: tenant placement, maintenance, and reporting included", iconName: "Building2" },
     { title: "1031 Exchange Support", description: "Coordination with qualified intermediaries for tax-deferred exchanges when upgrading your portfolio", iconName: "ArrowRightLeft" },
   ],
   howItWorks: [

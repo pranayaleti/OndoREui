@@ -1599,7 +1599,7 @@ export const cityContentByName: Record<string, CityContent> = {
       },
       {
         q: "What drives Nephi's economy?",
-        a: "Nephi's economy rests on county government (the courthouse and county offices), agriculture (cattle, hay, and grain operations), and a growing logistics/warehouse sector that leverages the I-15 position. The nearby Nephi Municipal Airport and industrial park attract small businesses. Healthcare services at Central Valley Medical Center provide additional employment. The economy is stable but not dynamic, growth is modest and tied to broader rural Utah trends. For investors, this means steady but unspectacular demand, tenants tend to be long-term because they work locally and there's limited reason to relocate within the market.",
+        a: "Nephi's economy rests on county government (the courthouse and county offices), agriculture (cattle, hay, and grain operations), and a growing logistics/warehouse sector built on the I-15 position. The nearby Nephi Municipal Airport and industrial park attract small businesses. Healthcare services at Central Valley Medical Center provide additional employment. The economy is stable but not dynamic, growth is modest and tied to broader rural Utah trends. For investors, this means steady but unspectacular demand, tenants tend to be long-term because they work locally and there's limited reason to relocate within the market.",
       },
       {
         q: "What's the quality of life in Nephi?",

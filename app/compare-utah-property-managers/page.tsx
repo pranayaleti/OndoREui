@@ -38,28 +38,16 @@ const faqs = [
       "A flat fee is predictable and can be cheaper on high-rent units. A percentage means the manager earns more when your rent is higher and nothing when it is not collected. For most Utah homes under about $2,000 a month the percentage is slightly cheaper.",
   },
   {
-    question: "What is the difference between a leasing fee and a setup fee?",
-    answer:
-      "A leasing fee is charged when a new tenant is placed and covers marketing, showings, screening and the lease. A setup fee is a one-time onboarding charge some companies add when you hire them. Ondo charges the first and not the second.",
-  },
-  {
     question: "Should I just use software and manage it myself?",
     answer:
       "Buildium, TurboTenant and similar tools charge a subscription and leave the showings, screening calls, repairs and notices to you. Full service costs a share of rent and takes those off your plate. Run the self-manage calculator with your own hourly rate before you decide.",
-  },
-  {
-    question: "How long does it take to switch managers?",
-    answer:
-      "Most contracts need 30 to 60 days' notice, then another 30 days to hand off deposits, leases and maintenance records. Plan on 60 to 90 days from decision to fully moved.",
   },
 ]
 
 const checklist = [
   "Licensed under Utah's Real Estate Licensing and Practices Act, with the separate property manager license from January 1, 2027",
-  "Documented maintenance response times, not just promised ones",
   "Written tenant screening criteria, applied to every applicant",
   "A sample owner statement before you sign",
-  "Average tenant tenure over the past two years",
 ]
 
 function row(label: string, getter: (c: typeof competitors[number]) => string) {
@@ -104,7 +92,7 @@ export default function CompareUtahPropertyManagersPage() {
             Utah property managers, compared
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-foreground/70">
-            Fees, leasing, setup and technology side by side. This is our website, so verify every competitor figure with them before you decide.
+            Fees, leasing, setup and technology side by side. Verify every competitor figure with them before you decide.
           </p>
         </div>
       </section>
@@ -130,7 +118,6 @@ export default function CompareUtahPropertyManagersPage() {
               </tr>
             </thead>
             <tbody>
-              {row("Positioning", (c) => c.headline)}
               {row("Management fee", (c) => c.mgmtFee)}
               {row("Leasing fee", (c) => c.leasingFee)}
               {row("Setup fee", (c) => c.setupFee)}
@@ -158,7 +145,7 @@ export default function CompareUtahPropertyManagersPage() {
 
       <section className="py-12">
         <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="mb-6 text-2xl font-bold text-foreground md:text-3xl">Five things to check with any manager</h2>
+          <h2 className="mb-6 text-2xl font-bold text-foreground md:text-3xl">Three things to check with any manager</h2>
           <ul className="space-y-3">
             {checklist.map((item) => (
               <li key={item} className="flex items-start gap-3 text-foreground/80">

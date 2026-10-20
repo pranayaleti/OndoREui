@@ -341,7 +341,7 @@ export default function FhaVsConventionalLoansUtah() {
         FHA has stricter property condition standards. The home must meet HUD minimum property requirements; issues
         like peeling paint, broken windows, missing handrails, or roof concerns can trigger required repairs before
         closing. Conventional loans have more flexible property standards, making them easier to use on fixer-uppers
-        or homes with deferred maintenance. USDA appraisals follow HUD's minimum property requirements as well.
+        or homes with deferred maintenance.
       </p>
       <p>
         In competitive Utah markets like Draper, Lehi, and Salt Lake City, sellers sometimes prefer conventional

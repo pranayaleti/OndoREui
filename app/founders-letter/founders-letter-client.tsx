@@ -18,7 +18,7 @@ export const FOUNDER_IMAGE_PATH = "/founder-image.webp"
 const FOUNDER_NAME = "Pranay Reddy Aleti"
 const FOUNDER_TITLE = `Founder, ${SITE_NAME}`
 /** Bump when the letter's wording changes; surfaces as dateModified on the ProfilePage. */
-const modified = "2026-10-18"
+const modified = "2026-10-19"
 
 const FIRST_YEAR_IN_SOFTWARE = 2013
 const FIRST_UTAH_HOME_YEAR = 2019
@@ -160,10 +160,6 @@ export default function FoundersLetterPage() {
                 , I founded <strong className="text-primary">Ondo Real Estate</strong>. One for the code, one for the
                 property.
               </p>
-              <p className={paragraph}>
-                This website is where the two meet. Every release has one job: make owning and renting property simpler
-                for the people on both sides of the lease.
-              </p>
             </section>
 
             <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="why-ondo-heading">
@@ -173,14 +169,11 @@ export default function FoundersLetterPage() {
                   Why the name Ondo
                 </h2>
               </div>
-              <p className={`${paragraph} mb-4`}>
-                &ldquo;Ondo&rdquo; means <em className="text-primary">foundation and rhythm</em>. Real estate is both: the
-                foundation a family builds on, and the rhythm that keeps a neighborhood going.
-              </p>
               <p className={paragraph}>
-                I started Ondo because property management was stuck. Owners could not see what was happening with their
-                own buildings. Tenants waited days for an answer on a repair. Most of the tools were built in a different
-                decade. As an engineer and a landlord, I knew there was a better way to run this.
+                &ldquo;Ondo&rdquo; means <em className="text-primary">foundation and rhythm</em>. Real estate is both: the
+                foundation a family builds on, and the rhythm that keeps a neighborhood going. I started Ondo because
+                owners could not see what was happening with their own buildings and tenants waited days for an answer
+                on a repair.
               </p>
             </section>
 
@@ -219,8 +212,7 @@ export default function FoundersLetterPage() {
               </div>
               <p className={`${paragraph} mb-4`}>
                 I own and manage rental property myself, so I deal with the same repair calls and year-end paperwork our
-                owners do. If you own property on the Wasatch Front, are looking for a home, or want to work together, I
-                would like to hear from you.
+                owners do. If you own property on the Wasatch Front or are looking for a home, I would like to hear from you.
               </p>
               <p className={paragraph}>Thank you for reading.</p>
             </section>

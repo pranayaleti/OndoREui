@@ -52,7 +52,7 @@ export const schoolDistricts: SchoolDistrictInfo[] = [
     website: "https://www.davis.k12.ut.us",
     enrollment: 74000,
     schools: [
-      { name: "Layton High School", level: "High", grades: "10–12", enrollment: 2600, notes: "Robust theater and performing arts" },
+      { name: "Layton High School", level: "High", grades: "10–12", enrollment: 2600, notes: "Strong theater and performing arts" },
       { name: "Viewmont High School", level: "High", grades: "10–12", enrollment: 2200 },
       { name: "Bountiful High School", level: "High", grades: "10–12", enrollment: 1800 },
       { name: "Northridge High School", level: "High", grades: "10–12", notes: "Layton" },

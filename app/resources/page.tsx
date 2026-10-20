@@ -4,7 +4,6 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { UtahLandlordEducationSection } from "@/components/resources/utah-landlord-education-section"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -42,7 +41,7 @@ const groups = [
     links: [
       { href: "/learn/", label: "Mortgage learning hub" },
       { href: "/blog/", label: "Blog" },
-      { href: "/resources/templates/", label: "Landlord templates" },
+      { href: "/resources/templates/", label: "Landlord templates and Utah landlord law links" },
       { href: "/faq/", label: "FAQs" },
       { href: "/glossary/", label: "Glossary" },
     ],
@@ -149,7 +148,6 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <UtahLandlordEducationSection />
     </main>
   )
 }
