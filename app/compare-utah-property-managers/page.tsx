@@ -4,7 +4,6 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateFAQJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
-import { ONDO_PRICING_FRAMING } from "@/lib/vs-comparisons"
 import { FaqAccordion } from "@/components/faq-accordion"
 import { Check } from "lucide-react"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
@@ -25,6 +24,9 @@ export const metadata: Metadata = {
 
 // Competitor fees and features are from public advertising at the time noted. Verify before relying on them.
 const competitors = UTAH_PM_COMPARISON
+
+const ONDO_PRICING_FRAMING =
+  "Ondo is full-service management: we run the rental for a percentage of collected rent. Buildium and TurboTenant are software you run yourself, so their price is a subscription and your time is not included."
 
 const faqs = [
   {

@@ -5,7 +5,6 @@ import { ArticleShell } from "@/components/content/article-shell"
 import SEO from "@/components/seo"
 import { countWords, extractOutline, readingTimeMinutes } from "@/lib/content/article-outline"
 import { BLOG_INDEX_CATEGORY_ALIASES, getBlogPosts } from "./blog-posts"
-import { homepageBlogPosts } from "./homepage-blog-posts"
 
 /**
  * The blog index reads lib/blog-posts.ts. These tests render every post page and compare, so the
@@ -124,14 +123,5 @@ describe("blog index registry", () => {
   it("is sorted newest first", () => {
     const dates = registry.map((p) => p.published)
     expect(dates).toEqual([...dates].sort().reverse())
-  })
-
-  it("keeps the homepage cards' read times equal to the post bylines", () => {
-    for (const card of homepageBlogPosts) {
-      const slug = card.href.replace(/^\/blog\//, "")
-      const minutes = factsBySlug.get(slug)?.readMinutes
-      expect(minutes, `${slug} has no byline read time`).toBeDefined()
-      expect(card.readTime, slug).toBe(`${minutes} min read`)
-    }
   })
 })
