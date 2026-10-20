@@ -22,6 +22,7 @@ export const FIRST_CRYPTO_YEAR = 2018
 export const FIRST_PARKS_YEAR = 2023
 export const EB5_YEAR = 2024
 export const VC_INVESTING_YEAR = 2025
+export const GREEN_CARD_YEAR = 2026
 
 /** Computed at build time; a static export shows the number as of its last build. */
 export function yearsInSoftware(now: Date = new Date()): number {
@@ -51,6 +52,7 @@ export type Block =
   | { kind: "p"; segments: Segment[] }
   | { kind: "habits"; items: { lead: string; text: string }[] }
   | { kind: "quote"; text: string }
+  | { kind: "glance"; items: readonly { year: number; segments: readonly Segment[] }[] }
 
 export type Chapter = {
   id: string
@@ -82,7 +84,24 @@ export const LETTER = {
   },
   lede: {
     blocks: [
-      p("If you only read one paragraph, read this one."),
+      p("If you read nothing else, read this."),
+      {
+        kind: "glance",
+        items: [
+          { year: ARRIVED_IN_US_YEAR, segments: ["Came to the United States for a master's degree in computer science."] },
+          { year: FIRST_YEAR_IN_SOFTWARE, segments: [`Started ${years}+ years of building software for large companies.`] },
+          { year: FIRST_CRYPTO_YEAR, segments: ["Started investing in crypto. Bought ETH at $170."] },
+          { year: FIRST_UTAH_HOME_YEAR, segments: ["Bought my first home, in Lehi, Utah."] },
+          { year: FOUNDED_YEAR, segments: ["Founded OndoSoft and Ondo Real Estate."] },
+          {
+            year: FIRST_PARKS_YEAR,
+            segments: ["Put $400,000 of my own money into mobile home parks in two states, plus an investment property in Saratoga Springs."],
+          },
+          { year: EB5_YEAR, segments: ["Invested $1 million in a California resort through the EB-5 program."] },
+          { year: VC_INVESTING_YEAR, segments: ["Started venture investing, strictly in Utah startups."] },
+          { year: GREEN_CARD_YEAR, segments: ["Green card approved. Now watch what a ", accent("burning desire"), " builds."] },
+        ],
+      },
       p(
         `I'm an engineer who became a rental owner, then started a real estate company because the first two taught me what was broken. I still own and manage rental property myself, and since ${FIRST_PARKS_YEAR} I've put my own money into mobile home parks in Utah and Iowa and an investment property in Saratoga Springs. The repair calls, the lease questions and the year-end paperwork land on my phone the same way they land on yours.`,
       ),
@@ -218,7 +237,7 @@ export const LETTER = {
     {
       id: "chapter-2024",
       year: EB5_YEAR,
-      title: "Here to stay, through EB-5.",
+      title: "My EB-5 bet on staying.",
       temp: "warm",
       blocks: [
         p(
@@ -247,6 +266,22 @@ export const LETTER = {
           "I'm huge on ",
           accent("Utah growth"),
           ". Every company that builds and hires here brings people who need a place to live, and owners who need their property run well. My money sits where my work is.",
+        ),
+      ],
+    },
+    {
+      id: "chapter-2026",
+      year: GREEN_CARD_YEAR,
+      title: "Here to stay.",
+      temp: "warm",
+      blocks: [
+        p(
+          `In ${GREEN_CARD_YEAR} my green card was approved. Fifteen years after I landed as a student, the United States is home on paper too, and Utah is where I'm building.`,
+        ),
+        p(
+          "Witness my ",
+          accent("burning desire"),
+          ". It's the same fire that's in the logo. It got me here, and it's what I bring to every owner who works with Ondo.",
         ),
       ],
     },
@@ -314,7 +349,7 @@ export const LETTER = {
         `A first home in Lehi, Utah, in ${FIRST_UTAH_HOME_YEAR}, then friends and family helped to closing and tenants placed.`,
         "Rental property I own and manage myself.",
         `About $400,000 of my own capital in two mobile home parks, in Utah and Iowa, in ${FIRST_PARKS_YEAR}, plus an investment property in Saratoga Springs.`,
-        `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}.`,
+        `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}, and a green card approved in ${GREEN_CARD_YEAR}.`,
         `Venture investments in Utah startups only since ${VC_INVESTING_YEAR}, including Mobly, EZ Salt and Stratus.`,
         "A platform I built and run under the company.",
         `Two companies started in ${FOUNDED_YEAR}.`,
@@ -394,6 +429,7 @@ function blocksText(blocks: readonly Block[]): string[] {
   return blocks.map((b) => {
     if (b.kind === "p") return segmentsText(b.segments)
     if (b.kind === "quote") return b.text
+    if (b.kind === "glance") return b.items.map((i) => `${i.year} ${segmentsText(i.segments)}`).join(" ")
     return b.items.map((i) => `${i.lead} ${i.text}`).join(" ")
   })
 }

@@ -200,13 +200,40 @@
   margin-top: 0;
 }
 
-.ledeBody p:first-of-type::first-letter {
-  float: left;
-  padding: 0.08em 0.12em 0 0;
+/* The intro line above the glance list reads as a lead-in, not a paragraph. */
+.ledeBody p:first-child {
   font-family: var(--fl-serif);
-  font-weight: 600;
-  font-size: 3.6em;
-  line-height: 0.8;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--fl-muted);
+}
+
+
+/* The journey at a glance: one dated line per year */
+.glance {
+  clear: both;
+  margin: 1.25rem 0 0.5rem;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fl-rule);
+}
+
+.glance li {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--fl-rule);
+  line-height: 1.55;
+}
+
+.glanceYear {
+  font-family: var(--fl-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
   color: var(--fl-ember-text);
 }
 

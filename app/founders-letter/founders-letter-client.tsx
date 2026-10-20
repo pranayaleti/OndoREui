@@ -81,6 +81,20 @@ function Blocks({ blocks }: { blocks: readonly Block[] }) {
             </blockquote>
           )
         }
+        if (block.kind === "glance") {
+          return (
+            <ul key={index} className={styles.glance} data-glance="">
+              {block.items.map((item) => (
+                <li key={item.year}>
+                  <span className={styles.glanceYear}>{item.year}</span>{" "}
+                  <span>
+                    <Segments segments={item.segments} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
         if (block.kind === "habits") {
           return (
             <div key={index} className={styles.habits}>

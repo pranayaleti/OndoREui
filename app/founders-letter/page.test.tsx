@@ -58,15 +58,27 @@ describe("/founders-letter page", () => {
     expect(screen.getByText("A letter from the founder of Ondo Real Estate, Utah.")).toBeInTheDocument()
   })
 
+  it("opens with the whole journey at a glance, one dated line per year", () => {
+    const { container } = render(<FoundersLetterPage />)
+    expect(document.body.textContent).toContain("If you read nothing else, read this.")
+    const items = Array.from(container.querySelectorAll("main ul[data-glance] > li"))
+    expect(items.map((li) => li.textContent?.match(/^(\d{4})/)?.[1])).toEqual([
+      "2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025", "2026",
+    ])
+    expect(items.at(-1)?.textContent).toMatch(/green card approved/i)
+  })
+
   it("keeps the 2013 chapter short", () => {
     const { container } = render(<FoundersLetterPage />)
     const words = (container.querySelector("#chapter-2013")?.textContent ?? "").split(/\s+/).filter(Boolean)
     expect(words.length).toBeLessThan(130)
   })
 
-  it("titles 2024 as staying and sets the money and EB-5 in the brand orange", () => {
+  it("titles 2024 as the EB-5 bet and sets the money and EB-5 in the brand orange", () => {
     const { container } = render(<FoundersLetterPage />)
-    expect(container.querySelector("#chapter-2024 h2")?.textContent).toContain("Here to stay, through EB-5.")
+    expect(container.querySelector("#chapter-2024 h2")?.textContent).toContain("EB-5")
+    expect(container.querySelector("#chapter-2026 h2")?.textContent).toContain("Here to stay.")
+    expect(screen.getByText("burning desire", { selector: "#chapter-2026 strong" })).toBeInTheDocument()
     const accents = Array.from(container.querySelectorAll("main strong")).map((node) => node.textContent)
     for (const phrase of ["$400,000", "$1 million", "EB-5"]) expect(accents).toContain(phrase)
     expect(screen.getByText("$400,000").closest("#chapter-2023")).not.toBeNull()
@@ -83,7 +95,7 @@ describe("/founders-letter page", () => {
     const years = Array.from(container.querySelectorAll("main h2"))
       .map((h) => h.textContent?.match(/^(\d{4})/)?.[1])
       .filter(Boolean)
-    expect(years).toEqual(["2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025"])
+    expect(years).toEqual(["2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025", "2026"])
     for (const h of container.querySelectorAll("main h2")) expect(h.closest("li")).toBeNull()
     expect(container.querySelector("main dl")).toBeNull()
     expect(container.querySelector("main .bg-card")).toBeNull()
