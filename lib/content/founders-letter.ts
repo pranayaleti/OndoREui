@@ -21,6 +21,7 @@ export const FIRST_UTAH_HOME_YEAR = 2019
 export const FIRST_CRYPTO_YEAR = 2018
 export const FIRST_PARKS_YEAR = 2023
 export const EB5_YEAR = 2024
+export const VC_INVESTING_YEAR = 2025
 
 /** Computed at build time; a static export shows the number as of its last build. */
 export function yearsInSoftware(now: Date = new Date()): number {
@@ -53,8 +54,7 @@ export type Block =
 
 export type Chapter = {
   id: string
-  /** A year, or "Today" for what is still going on. */
-  year: number | "Today"
+  year: number
   title: string
   temp: "cool" | "neutral" | "warm"
   blocks: Block[]
@@ -78,11 +78,9 @@ export const LETTER = {
     category: `Property management for Utah rental owners across ${UTAH_CITIES_SERVED} Wasatch Front cities. Buying, selling and home loans through Ondo while licensing is in progress.`,
     bookLabel: "Book a 30-minute call",
     callLabel: "Call Pranay",
-    readLabel: "Or start with the story",
     plateCaption: `Pranay Reddy Aleti. ${SITE_ADDRESS_CITY}, Utah.`,
   },
   lede: {
-    heading: "Start here",
     blocks: [
       p("If you only read one paragraph, read this one."),
       p(
@@ -245,14 +243,14 @@ export const LETTER = {
       ],
     },
     {
-      id: "chapter-today",
-      year: "Today",
+      id: "chapter-2025",
+      year: VC_INVESTING_YEAR,
       title: "Betting on Utah.",
       temp: "warm",
       sideLabels: ["Mobly", "EZ Salt", "Stratus"],
       blocks: [
         p(
-          "I also invest in startups as a venture investor, and strictly local: Utah companies only. Mobly, EZ Salt and Stratus are a few of them.",
+          `Since ${VC_INVESTING_YEAR} I've been investing in startups as a venture investor, and strictly local: Utah companies only. Mobly, EZ Salt and Stratus are a few of them.`,
         ),
         p(
           "I'm huge on ",
@@ -326,7 +324,7 @@ export const LETTER = {
         "Rental property I own and manage myself.",
         `About $400,000 of my own capital in two mobile home parks, in Utah and Iowa, in ${FIRST_PARKS_YEAR}, plus an investment property in Saratoga Springs.`,
         `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}.`,
-        "Venture investments in Utah startups only, including Mobly, EZ Salt and Stratus.",
+        `Venture investments in Utah startups only since ${VC_INVESTING_YEAR}, including Mobly, EZ Salt and Stratus.`,
         "A platform I built and run under the company.",
         `Two companies started in ${FOUNDED_YEAR}.`,
       ],
@@ -419,9 +417,7 @@ export function founderLetterText(): string {
     opening.category,
     opening.bookLabel,
     opening.callLabel,
-    opening.readLabel,
     opening.plateCaption,
-    lede.heading,
     ...blocksText(lede.blocks),
   ]
   for (const chapter of chapters) {

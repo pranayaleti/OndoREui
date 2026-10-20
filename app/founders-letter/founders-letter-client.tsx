@@ -171,9 +171,6 @@ export default function FoundersLetter({ modified }: { modified: string }) {
                   {opening.callLabel}
                 </a>
               </Button>
-              <a href={`#${chapters[0].id}`} className={styles.readLink} {...analyticsAttributes("founders_letter_click", CATEGORY, "hero-read")}>
-                {opening.readLabel}
-              </a>
             </div>
           </div>
           <figure className={styles.plate}>
@@ -184,10 +181,7 @@ export default function FoundersLetter({ modified }: { modified: string }) {
           </figure>
         </section>
 
-        <section className={styles.lede} aria-labelledby="lede-heading">
-          <h2 id="lede-heading" className={styles.kicker}>
-            {lede.heading}
-          </h2>
+        <section className={styles.lede} aria-label="The short version">
           <div className={styles.ledeBody}>
             <Blocks blocks={lede.blocks} />
           </div>
@@ -206,9 +200,7 @@ export default function FoundersLetter({ modified }: { modified: string }) {
             <div className={styles.inner}>
               <div className={styles.chapterGrid}>
                 <h2 id={`${chapter.id}-heading`} className={styles.chapterHeading}>
-                  <span className={styles.year} data-word={typeof chapter.year === "string" ? "" : undefined}>
-                    {chapter.year}
-                  </span>
+                  <span className={styles.year}>{chapter.year}</span>
                   <span className="sr-only">: </span>
                   <span className={styles.chapterTitle}>{chapter.title}</span>
                 </h2>

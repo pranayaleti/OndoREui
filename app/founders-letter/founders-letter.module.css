@@ -196,6 +196,10 @@
   line-height: 1.7;
 }
 
+.ledeBody p:first-child {
+  margin-top: 0;
+}
+
 .ledeBody p:first-of-type::first-letter {
   float: left;
   padding: 0.08em 0.12em 0 0;
@@ -311,11 +315,6 @@
 
 .chapter[data-temp="warm"] .year {
   color: var(--fl-ember-text);
-}
-
-/* A word ("Today") instead of a year: same face, sized so it fits the numeral column. */
-.year[data-word] {
-  font-size: clamp(3rem, 7vw, 4.5rem);
 }
 
 .accent {
@@ -713,10 +712,6 @@
       top: 5.5rem;
       align-self: start;
       font-size: clamp(4rem, 6.5vw, 6rem);
-    }
-
-    .year[data-word] {
-      font-size: clamp(3rem, 4.5vw, 4.25rem);
     }
 
     .chapterTitle {
