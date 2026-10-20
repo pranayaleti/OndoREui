@@ -68,6 +68,18 @@ describe("/founders-letter page", () => {
     expect(items.at(-1)?.textContent).toMatch(/green card approved/i)
   })
 
+  it("links every line of the timeline to its chapter, and nothing else follows it in the lede", () => {
+    const { container } = render(<FoundersLetterPage />)
+    for (const li of container.querySelectorAll("main ul[data-glance] > li")) {
+      const link = li.querySelector("a")
+      const year = li.textContent?.match(/^(\d{4})/)?.[1]
+      expect(link?.getAttribute("href")).toBe(`#chapter-${year}`)
+      expect(container.querySelector(`#chapter-${year}`)).not.toBeNull()
+    }
+    expect(document.body.textContent).not.toContain("That's the short version")
+    expect(document.body.textContent).not.toContain("I'm an engineer who became a rental owner")
+  })
+
   it("keeps the 2013 chapter short", () => {
     const { container } = render(<FoundersLetterPage />)
     const words = (container.querySelector("#chapter-2013")?.textContent ?? "").split(/\s+/).filter(Boolean)

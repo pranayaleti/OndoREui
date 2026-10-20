@@ -86,10 +86,16 @@ function Blocks({ blocks }: { blocks: readonly Block[] }) {
             <ul key={index} className={styles.glance} data-glance="">
               {block.items.map((item) => (
                 <li key={item.year}>
-                  <span className={styles.glanceYear}>{item.year}</span>{" "}
-                  <span>
-                    <Segments segments={item.segments} />
-                  </span>
+                  <a
+                    href={`#chapter-${item.year}`}
+                    className={styles.glanceLink}
+                    {...analyticsAttributes("founders_letter_click", CATEGORY, `glance-${item.year}`)}
+                  >
+                    <span className={styles.glanceYear}>{item.year}</span>{" "}
+                    <span>
+                      <Segments segments={item.segments} />
+                    </span>
+                  </a>
                 </li>
               ))}
             </ul>

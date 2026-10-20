@@ -102,15 +102,6 @@ export const LETTER = {
           { year: GREEN_CARD_YEAR, segments: ["Green card approved. Now watch what a ", accent("burning desire"), " builds."] },
         ],
       },
-      p(
-        `I'm an engineer who became a rental owner, then started a real estate company because the first two taught me what was broken. I still own and manage rental property myself, and since ${FIRST_PARKS_YEAR} I've put my own money into mobile home parks in Utah and Iowa and an investment property in Saratoga Springs. The repair calls, the lease questions and the year-end paperwork land on my phone the same way they land on yours.`,
-      ),
-      p(
-        "Ondo Real Estate is founder-run. The person you talk to on day one is the one you call when something is off. I built the software underneath it: an owner portal and a tenant portal, with statements, maintenance and rent in one place.",
-      ),
-      p(
-        "That's the short version. The rest of this page is how I got here, and why the name on the door is a promise I have to keep.",
-      ),
     ],
   },
   chapters: [
