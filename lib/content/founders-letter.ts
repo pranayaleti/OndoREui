@@ -120,33 +120,18 @@ export const LETTER = {
       temp: "cool",
       blocks: [
         p(
-          `From ${FIRST_YEAR_IN_SOFTWARE} I worked as a full stack engineer, building websites and digital products for large companies. I'm not going to list them here. What I can show you is what that work demands, and what it left me with.`,
-        ),
-        p(
-          "At that scale nothing ships on a promise. It ships because it was planned, built, reviewed, tested and watched after launch. A form that fails for one person in a thousand is a bug, not a rounding error. A slow page costs real money.",
+          `From ${FIRST_YEAR_IN_SOFTWARE} I worked as a full stack engineer, building websites and digital products for large companies. At that scale nothing ships on a promise. It ships because it was planned, built, tested and watched after launch.`,
         ),
         p("Four habits from those years run Ondo today."),
         {
           kind: "habits",
           items: [
-            { lead: "Execution.", text: "A plan is worth nothing until it ships. A deadline is a promise to a real person." },
-            {
-              lead: "Precision.",
-              text: "The problem is always in the detail someone skipped. That's true of a lease, a statement and a move-in inspection too.",
-            },
-            {
-              lead: "Reliability.",
-              text: "Good systems are boring on purpose. You should never have to wonder whether rent was collected or a repair was closed.",
-            },
-            {
-              lead: "The person on the other side.",
-              text: "Every screen I built had someone behind it who was busy and short on patience. Owners and tenants are those people now.",
-            },
+            { lead: "Execution.", text: "A plan is worth nothing until it ships." },
+            { lead: "Precision.", text: "The problem is always in the detail someone skipped, in a lease as much as in code." },
+            { lead: "Reliability.", text: "You should never have to wonder whether rent was collected or a repair was closed." },
+            { lead: "The person on the other side.", text: "Owners and tenants are busy. Every step should respect that." },
           ],
         },
-        p(
-          "I also saw how well-run organizations work from the inside. They run on process and clear ownership, not heroics. When something breaks, they fix the cause, not the symptom, and they write down what changed so it doesn't break the same way twice. I brought that with me.",
-        ),
         quote("You learn to care about the detail nobody thanks you for, because that detail is the product."),
       ],
     },
@@ -220,7 +205,9 @@ export const LETTER = {
       sideLabels: ["Mobile home park, Utah", "Mobile home park, Iowa", "Investment property, Saratoga Springs"],
       blocks: [
         p(
-          `In ${FIRST_PARKS_YEAR} I put about $400,000 into two mobile home parks, one in Utah and one in Iowa. The same year I took on an investment property in Saratoga Springs.`,
+          `In ${FIRST_PARKS_YEAR} I put about `,
+          accent("$400,000"),
+          " into two mobile home parks, one in Utah and one in Iowa. The same year I took on an investment property in Saratoga Springs.",
         ),
         p(
           "Owning at that scale made real estate personal in a new way. A vacancy isn't a statistic when it hits your own numbers. Neither is a repair bill that lands the same week as the property tax. I read an owner's statement like an investor, because I am one.",
@@ -231,11 +218,15 @@ export const LETTER = {
     {
       id: "chapter-2024",
       year: EB5_YEAR,
-      title: "Committing to stay.",
+      title: "Here to stay, through EB-5.",
       temp: "warm",
       blocks: [
         p(
-          `In ${EB5_YEAR} I invested about $1 million in a resort project in California and applied through the EB-5 program, which ties a green card application to an investment in an American business that creates jobs.`,
+          `In ${EB5_YEAR} I invested about `,
+          accent("$1 million"),
+          " in a resort project in California and applied for my green card through the ",
+          accent("EB-5"),
+          " program, which ties permanent residency to an investment in an American business that creates jobs.",
         ),
         p(
           `I came here in ${ARRIVED_IN_US_YEAR} as a student with a plan. Thirteen years later I put my own capital behind staying. That's the commitment under this company. I'm building Ondo for the long run, and the owners who work with Ondo get a founder who plans to be here.`,

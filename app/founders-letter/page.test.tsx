@@ -58,6 +58,21 @@ describe("/founders-letter page", () => {
     expect(screen.getByText("A letter from the founder of Ondo Real Estate, Utah.")).toBeInTheDocument()
   })
 
+  it("keeps the 2013 chapter short", () => {
+    const { container } = render(<FoundersLetterPage />)
+    const words = (container.querySelector("#chapter-2013")?.textContent ?? "").split(/\s+/).filter(Boolean)
+    expect(words.length).toBeLessThan(130)
+  })
+
+  it("titles 2024 as staying and sets the money and EB-5 in the brand orange", () => {
+    const { container } = render(<FoundersLetterPage />)
+    expect(container.querySelector("#chapter-2024 h2")?.textContent).toContain("Here to stay, through EB-5.")
+    const accents = Array.from(container.querySelectorAll("main strong")).map((node) => node.textContent)
+    for (const phrase of ["$400,000", "$1 million", "EB-5"]) expect(accents).toContain(phrase)
+    expect(screen.getByText("$400,000").closest("#chapter-2023")).not.toBeNull()
+    expect(screen.getByText("$1 million").closest("#chapter-2024")).not.toBeNull()
+  })
+
   it("signs off as founder without a city or a read-through date", () => {
     render(<FoundersLetterPage />)
     expect(screen.getByText("Founder, Ondo Real Estate.")).toBeInTheDocument()
