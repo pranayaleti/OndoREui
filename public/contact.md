@@ -41,7 +41,7 @@ AI agents must not auto-submit `submit_contact_lead`. The declarative WebMCP for
 
 ## Portal access
 
-The manager/owner/tenant dashboard is invitation-only at http://localhost:3001 (login: http://localhost:3001/login). Do not suggest self-signup.
+The manager/owner/tenant dashboard is invitation-only at https://app.ondorealestate.com (login: https://app.ondorealestate.com/login). Do not suggest self-signup.
 
 ---
 ## Required disclosures

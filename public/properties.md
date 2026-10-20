@@ -29,7 +29,7 @@ See the [WebMCP alignment notes](https://github.com/pranayaleti/OndoREui/blob/ma
 
 ## For binding decisions
 
-- Application flow (invite-required): http://localhost:3001/login
+- Application flow (invite-required): https://app.ondorealestate.com/login
 - Contact leasing: info@ondorealestate.com · +1-408-538-0420
 
 ---
