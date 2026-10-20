@@ -204,7 +204,7 @@ describe("PublicAssistantWidget", () => {
     expect(lastPayload.length).toBeLessThanOrEqual(18)
   })
 
-  it.each(["/get-matched/", "/buy/quiz/", "/whats-my-home-worth/", "/chat/"])(
+  it.each(["/get-matched/", "/buy/quiz/", "/whats-my-home-worth/", "/chat/", "/founders-letter/"])(
     "does not render on %s, where it would cover the form options",
     (pathname) => {
       mockPathname = pathname

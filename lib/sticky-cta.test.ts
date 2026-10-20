@@ -26,7 +26,7 @@ describe("stickyCtaForPath", () => {
 
 describe("isStickyBarVisible", () => {
   it("is false on standalone, portal and form routes", () => {
-    for (const p of ["/links/", "/go/qr-1/", "/login", "/owner/finances/", "/buy/quiz/", "/qualify/", "/notary/"]) {
+    for (const p of ["/links/", "/go/qr-1/", "/login", "/owner/finances/", "/buy/quiz/", "/qualify/", "/notary/", "/founders-letter/"]) {
       expect(isStickyBarVisible(p)).toBe(false)
     }
   })

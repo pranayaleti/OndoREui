@@ -1,0 +1,793 @@
+/*
+ * The founder's letter: a serif editorial profile with a cool-to-ember temperature arc.
+ * Every colour maps to a site token (light defaults here, dark under :global(.dark)). Every
+ * resting state is the final state: nothing ships at opacity 0, so the static HTML, no-JS
+ * visitors, reduced-motion users and the axe scan (which injects animation: none) all see
+ * the full page. The global prefers-reduced-motion kill switch in app/globals.css covers the
+ * time-based keyframes; the scroll-driven reveal is additionally gated below.
+ */
+
+.root {
+  --fl-serif: var(--font-fl-serif), Georgia, "Times New Roman", serif;
+  --fl-display: var(--font-outfit), Inter, system-ui, sans-serif;
+  --fl-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --fl-paper: hsl(var(--background));
+  --fl-ink: hsl(var(--foreground));
+  --fl-muted: hsl(var(--muted-foreground));
+  --fl-rule: hsl(var(--border));
+  --fl-ember: hsl(var(--primary));
+  --fl-ember-text: hsl(var(--primary-text));
+  --fl-cool: hsl(216 33% 97%);
+  --fl-warm: hsl(28 50% 97%);
+  --fl-grid: hsl(215 30% 40% / 0.09);
+  --fl-rail-cool: hsl(215 15% 45%);
+  --fl-glow: 0.14;
+  --fl-halo: 0.06;
+  --fl-measure: 38rem;
+  background: var(--fl-paper);
+  color: var(--fl-ink);
+  overflow-x: clip;
+}
+
+:global(.dark) .root {
+  --fl-cool: hsl(222 28% 8%);
+  --fl-warm: hsl(18 30% 7%);
+  --fl-grid: hsl(215 40% 60% / 0.08);
+  --fl-rail-cool: hsl(215 20% 55%);
+  --fl-glow: 0.32;
+  --fl-halo: 0.14;
+}
+
+.inner {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Masthead */
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-serif);
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--fl-muted);
+}
+
+/* Opening */
+.opening {
+  display: grid;
+  gap: 2.5rem;
+  padding: 3rem 0 3.5rem;
+}
+
+.headline {
+  font-family: var(--fl-serif);
+  font-weight: 500;
+  font-size: clamp(2.125rem, 5.2vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.deck {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.category {
+  margin-top: 1rem;
+  max-width: 34rem;
+  font-family: var(--fl-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--fl-muted);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 2rem;
+}
+
+.primary {
+  font-weight: 600;
+}
+
+.secondary {
+  border-color: hsl(var(--foreground) / 0.6);
+}
+
+.readLink,
+.inlineLink {
+  color: var(--fl-ember-text);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+.readLink {
+  font-family: var(--fl-serif);
+  font-style: italic;
+  font-size: 1.0625rem;
+}
+
+.inlineLink {
+  font-weight: 500;
+}
+
+.readLink:hover,
+.inlineLink:hover {
+  text-decoration-thickness: 2px;
+}
+
+.plate {
+  position: relative;
+  margin: 0;
+  max-width: 480px;
+  padding: 6px;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+}
+
+.plate::before {
+  content: "";
+  position: absolute;
+  top: -22%;
+  right: -22%;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--primary) / var(--fl-halo)) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.plateImage {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.plateImage img {
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: saturate(0.95) contrast(1.03);
+}
+
+.plateCaption {
+  padding: 0.75rem 0.25rem 0.25rem;
+  font-family: var(--fl-serif);
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--fl-muted);
+}
+
+/* Lede */
+.lede {
+  max-width: var(--fl-measure);
+  padding: 0.5rem 0 3.5rem;
+}
+
+.kicker {
+  font-family: var(--fl-serif);
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: var(--fl-ember-text);
+}
+
+.ledeBody p,
+.chapterBody p,
+.markBody p,
+.measure p {
+  margin-top: 1.1em;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.ledeBody p {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+}
+
+.ledeBody p:first-of-type::first-letter {
+  float: left;
+  padding: 0.08em 0.12em 0 0;
+  font-family: var(--fl-serif);
+  font-weight: 600;
+  font-size: 3.6em;
+  line-height: 0.8;
+  color: var(--fl-ember-text);
+}
+
+/* Chapters: the temperature arc */
+.chapter {
+  position: relative;
+  padding: 3.5rem 0 3rem;
+  scroll-margin-top: 6rem;
+}
+
+.chapter[data-temp="cool"] {
+  background: linear-gradient(to bottom, var(--fl-paper), var(--fl-cool) 12%, var(--fl-cool) 88%, var(--fl-paper));
+}
+
+.chapter[data-temp="cool"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--fl-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fl-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+  pointer-events: none;
+}
+
+.chapter[data-temp="cool"] + .chapter[data-temp="cool"]::before {
+  background-size: 24px 24px;
+}
+
+.chapter[data-temp="warm"] {
+  background: linear-gradient(to bottom, var(--fl-paper), var(--fl-warm) 18%, var(--fl-warm));
+}
+
+.chapter[data-temp="warm"]::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 60%;
+  background: radial-gradient(60% 55% at 50% 100%, hsl(var(--primary) / var(--fl-halo)), transparent 70%);
+  pointer-events: none;
+}
+
+.chapterGrid {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+/* The rail: slate at the software years, ember once the story reaches Ondo */
+.chapterGrid::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: -6.5rem;
+  width: 2px;
+  background: var(--fl-rail-cool);
+}
+
+.chapter[data-temp="neutral"] .chapterGrid::before {
+  background: linear-gradient(to bottom, var(--fl-rail-cool), var(--fl-ember));
+}
+
+.chapter[data-temp="warm"] .chapterGrid::before {
+  background: var(--fl-ember);
+}
+
+.chapter:last-child .chapterGrid::before {
+  bottom: 0;
+}
+
+.chapterGrid::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.9rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--fl-rail-cool);
+  background: var(--fl-paper);
+}
+
+.chapter[data-temp="neutral"] .chapterGrid::after,
+.chapter[data-temp="warm"] .chapterGrid::after {
+  border-color: var(--fl-ember);
+}
+
+.chapterHeading {
+  font-family: var(--fl-serif);
+  font-weight: 500;
+}
+
+.year {
+  display: block;
+  font-family: var(--fl-display);
+  font-weight: 800;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter[data-temp="warm"] .year {
+  color: var(--fl-ember-text);
+}
+
+.chapterTitle {
+  display: block;
+  margin-top: 1rem;
+  max-width: var(--fl-measure);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.chapterBody {
+  margin-top: 1.25rem;
+  max-width: var(--fl-measure);
+}
+
+.habits {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.habits p {
+  margin-top: 0;
+}
+
+.habits strong {
+  font-family: var(--fl-serif);
+  font-weight: 600;
+  color: var(--fl-ember-text);
+}
+
+.pull {
+  margin: 2rem 0 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--fl-ember);
+}
+
+.pull p {
+  margin: 0;
+  font-family: var(--fl-serif);
+  font-style: italic;
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  line-height: 1.3;
+}
+
+.sideLabels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--fl-mono);
+  font-size: 0.8125rem;
+  color: var(--fl-muted);
+}
+
+.sideLabels li::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--fl-ember);
+  vertical-align: middle;
+}
+
+/* The mark: the one centred moment on the page */
+.mark {
+  position: relative;
+  padding-top: 5rem;
+  background: var(--fl-warm);
+}
+
+.markStage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.markFigure {
+  position: relative;
+  width: min(70vw, 420px);
+  aspect-ratio: 1;
+  margin: 0;
+}
+
+.markFigure::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    hsl(var(--primary) / var(--fl-glow)) 0%,
+    hsl(var(--primary) / calc(var(--fl-glow) * 0.5)) 35%,
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.markImage {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lockup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.35em;
+  margin-top: 1.5rem;
+  font-family: var(--fl-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.period {
+  color: var(--fl-ember-text);
+}
+
+.decode {
+  margin-top: 1rem;
+  font-family: var(--fl-mono);
+  font-size: 0.875rem;
+  color: var(--fl-muted);
+}
+
+.markHeading,
+.sectionHeading {
+  font-family: var(--fl-serif);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.markHeading {
+  max-width: 44rem;
+  margin: 3.5rem auto 0;
+  text-align: center;
+}
+
+.markBody {
+  max-width: var(--fl-measure);
+  margin: 1rem auto 0;
+}
+
+.band {
+  margin-top: 4rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid hsl(var(--primary) / 0.45);
+  border-bottom: 1px solid hsl(var(--primary) / 0.45);
+  background: linear-gradient(to bottom, var(--fl-warm), var(--fl-paper));
+}
+
+.bandText {
+  font-family: var(--fl-serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.35;
+}
+
+.band .ctaRow {
+  margin-top: 1.25rem;
+}
+
+/* The case */
+.why {
+  padding: 4rem 0 2rem;
+}
+
+.sectionHeading {
+  max-width: 44rem;
+}
+
+.intro {
+  margin-top: 1rem;
+  max-width: var(--fl-measure);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.pillars {
+  display: grid;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--fl-rule);
+}
+
+.pillar {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--fl-rule);
+}
+
+.pillar h3 {
+  font-family: var(--fl-serif);
+  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.25;
+}
+
+.pillar p {
+  margin-top: 0.6rem;
+  line-height: 1.65;
+}
+
+.ledger {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.ledgerLabel {
+  font-family: var(--fl-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fl-ember-text);
+}
+
+.ledger ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.ledger li {
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+.ledger li::marker {
+  color: var(--fl-ember);
+}
+
+/* Restraint and closing */
+.restraint {
+  padding: 2rem 0 3rem;
+}
+
+.measure {
+  max-width: var(--fl-measure);
+}
+
+.closing {
+  padding: 3.5rem 0 4rem;
+  background: linear-gradient(to bottom, var(--fl-paper), var(--fl-warm) 45%, var(--fl-paper));
+}
+
+.signature {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1rem;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.signatureMark {
+  grid-row: 1 / 4;
+  width: 48px;
+  height: 48px;
+}
+
+.signatureName {
+  font-family: var(--fl-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.signatureRole {
+  margin-top: 0.25rem;
+  color: var(--fl-muted);
+}
+
+.signatureDate {
+  margin-top: 0.25rem;
+  font-family: var(--fl-mono);
+  font-size: 0.8125rem;
+  color: var(--fl-muted);
+}
+
+.closing .ctaRow {
+  margin-top: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+/* Colophon */
+.colophon {
+  padding: 2.5rem 0 3.5rem;
+  border-top: 1px solid var(--fl-rule);
+}
+
+.colophon ul {
+  display: grid;
+  gap: 0.6rem 2rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.colophon a {
+  font-family: var(--fl-serif);
+  font-size: 1.0625rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-color: hsl(var(--primary) / 0.6);
+}
+
+.colophon a:hover {
+  color: var(--fl-ember-text);
+}
+
+/* Desktop layout */
+@media (min-width: 1024px) {
+  .inner {
+    padding-inline: 2rem;
+  }
+
+  .opening {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+    gap: 4rem;
+    padding: 4.5rem 0 4.5rem;
+  }
+
+  .deck {
+    font-size: 1.25rem;
+  }
+
+  .plate {
+    justify-self: end;
+    margin-top: 1rem;
+  }
+
+  .lede {
+    margin-left: 23.5rem;
+  }
+
+  .chapterGrid {
+    display: grid;
+    grid-template-columns: 20rem minmax(0, var(--fl-measure));
+    column-gap: 2rem;
+  }
+
+  .habits {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+  }
+
+  .pillars {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+  }
+
+  .ledger {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .colophon ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .closing .ctaRow {
+    padding-bottom: 0;
+  }
+
+  /* The year pins in the margin while its chapter scrolls; the title and body share column two. */
+  @supports (grid-template-columns: subgrid) {
+    .chapterHeading {
+      grid-column: 1 / -1;
+      grid-row: 1 / 3;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+      align-items: start;
+      pointer-events: none;
+    }
+
+    .chapterHeading > * {
+      pointer-events: auto;
+    }
+
+    .year {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      position: sticky;
+      top: 5.5rem;
+      align-self: start;
+      font-size: clamp(4.5rem, 9vw, 8rem);
+    }
+
+    .chapterTitle {
+      grid-column: 2;
+      grid-row: 1;
+      margin-top: 0.9rem;
+    }
+
+    .chapterBody {
+      grid-column: 2;
+      grid-row: 2;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+/* Motion: one settle on load, one reveal at the mark, a slow breathe behind it */
+@media (prefers-reduced-motion: no-preference) {
+  .openingText > * {
+    animation: settle 0.7s ease-out both;
+  }
+
+  .openingText > :nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .openingText > :nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  .openingText > :nth-child(4) {
+    animation-delay: 240ms;
+  }
+
+  .plate {
+    animation: settle 0.8s ease-out both;
+    animation-delay: 200ms;
+  }
+
+  .markFigure::before {
+    animation: emberBreathe 7s ease-in-out infinite;
+  }
+
+  @supports (animation-timeline: view()) {
+    .markFigure {
+      animation: markIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0.6;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes markIn {
+  from {
+    opacity: 0.7;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes emberBreathe {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
+}

@@ -2,6 +2,11 @@ import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
 import FoundersLetterPage, { metadata } from "./page"
 import { FOUNDER_PERSON_ID } from "@/lib/seo"
+import { findLicenseClaims } from "@/lib/license-claims"
+import { FOUNDED_YEAR } from "@/lib/social-proof-stats"
+import { SITE_URL } from "@/lib/site"
+
+const H1 = "I came to the United States to study computer science. I stayed to build something of my own."
 
 const jsonLdBlocks = (container: HTMLElement) =>
   Array.from(container.querySelectorAll('script[type="application/ld+json"]')).flatMap((node) => {
@@ -17,7 +22,7 @@ describe("/founders-letter page", () => {
     const { container } = render(<FoundersLetterPage />)
     const mains = screen.getAllByRole("main")
     expect(mains).toHaveLength(1)
-    expect(mains[0]).toHaveAccessibleName("A Letter From the Founder")
+    expect(mains[0]).toHaveAccessibleName(H1)
     expect(container.querySelector("header")).toBeNull()
     expect(screen.queryByRole("banner")).toBeNull()
   })
@@ -27,33 +32,52 @@ describe("/founders-letter page", () => {
     expect(container.querySelector("#main-content")).toBeNull()
   })
 
-  it("exposes the founder photo to screen readers", () => {
+  it("exposes the founder photo and the fire mark to screen readers", () => {
     render(<FoundersLetterPage />)
-    const photo = screen.getByRole("img", { name: /Pranay Reddy Aleti/ })
-    expect(photo.closest("[aria-hidden='true']")).toBeNull()
+    const photos = screen.getAllByRole("img", { name: /Pranay Reddy Aleti/ })
+    expect(photos.length).toBeGreaterThanOrEqual(1)
+    for (const photo of photos) expect(photo.closest("[aria-hidden='true']")).toBeNull()
+    const mark = screen.getByRole("img", { name: /silhouette/i })
+    expect(mark.getAttribute("alt")?.length).toBeGreaterThan(10)
   })
 
-  it("tints the stat cards instead of filling them solid orange", () => {
+  it("tells the journey as dated chapters in order, outside any list", () => {
     const { container } = render(<FoundersLetterPage />)
-    const cards = Array.from(container.querySelectorAll("div.bg-primary\\/20"))
-    expect(cards).toHaveLength(4)
-    expect(container.querySelector(".bg-opacity-20")).toBeNull()
+    const years = Array.from(container.querySelectorAll("main h2"))
+      .map((h) => h.textContent?.match(/^(\d{4})/)?.[1])
+      .filter(Boolean)
+    expect(years).toEqual(["2011", "2013", "2019", String(FOUNDED_YEAR)])
+    for (const h of container.querySelectorAll("main h2")) expect(h.closest("li")).toBeNull()
+    expect(container.querySelector("main dl")).toBeNull()
+    expect(container.querySelector("main .bg-card")).toBeNull()
+    expect(container.querySelector("main .rounded-xl")).toBeNull()
   })
 
-  it("publishes a self-canonical with a search-intent title and a description that fits a snippet", () => {
+  it("explains the name and the mark in brand voice without a license claim", () => {
+    const { container } = render(<FoundersLetterPage />)
+    const text = document.body.textContent ?? ""
+    expect(text).toContain("ON IT. DO IT.")
+    expect(text).toContain("That silhouette is me")
+    expect(text).not.toContain("—")
+    expect(text).not.toMatch(/landlord/i)
+    expect(text).not.toMatch(/\b(?:straightforward|genuinely|honestly|delve|dive into)\b/i)
+    expect(text).not.toMatch(/foundation and rhythm/i)
+    expect(findLicenseClaims(container.innerHTML, "html")).toEqual([])
+  })
+
+  it("publishes a self-canonical with a search-intent title and a pronoun-free description", () => {
     const title = typeof metadata.title === "object" && metadata.title && "absolute" in metadata.title ? metadata.title.absolute : ""
     expect(title).toContain("Ondo Real Estate")
     expect(title.length).toBeLessThanOrEqual(60)
     expect(metadata.description?.length).toBeLessThanOrEqual(160)
+    expect(metadata.description).not.toMatch(/\b(?:he|him|his)\b/i)
     expect(metadata.alternates?.canonical).toBe("https://www.ondorealestate.com/founders-letter/")
     expect(metadata.alternates?.types?.["text/markdown"]).toBe("https://www.ondorealestate.com/founders-letter.md")
     const ogImages = metadata.openGraph?.images
     expect(Array.isArray(ogImages) && ogImages.length).toBe(1)
-  })
-
-  it("does not date being a landlord to the first home in 2019", () => {
-    render(<FoundersLetterPage />)
-    expect(document.body.textContent).not.toMatch(/landlord since 2019/i)
+    const og = Array.isArray(ogImages) ? ogImages[0] : null
+    const ogUrl = og && typeof og === "object" && "url" in og ? String(og.url) : String(og)
+    expect(ogUrl).toMatch(/\/founders-letter-og\.jpg$/)
   })
 
   it("marks the letter up as an Article by the founder's one Person id", () => {
@@ -64,19 +88,41 @@ describe("/founders-letter page", () => {
     const article = blocks.find((block) => hasType(block, "Article"))
     expect(article.author).toEqual({ "@type": "Person", "@id": FOUNDER_PERSON_ID, name: "Pranay Reddy Aleti" })
     expect(article.url).toBe("https://www.ondorealestate.com/founders-letter/")
+    expect(article.wordCount).toBeGreaterThan(1500)
     expect(JSON.stringify(blocks)).not.toContain('"jobTitle"')
     const breadcrumb = blocks.find((block) => hasType(block, "BreadcrumbList"))
     expect(breadcrumb.itemListElement.at(-1).item).toBe("https://www.ondorealestate.com/founders-letter/")
   })
 
-  it("links the letter to the pages it talks about with canonical trailing-slash hrefs", () => {
+  it("links the letter to the pages it talks about with canonical trailing-slash paths", () => {
     render(<FoundersLetterPage />)
-    const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"))
-    for (const expected of ["/property-management/", "/properties/", "/about/", "/moving-to-utah/", "/contact/", "/about/team/pranay-reddy-aleti/"]) {
+    const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href") ?? "")
+    for (const expected of [
+      "/property-management/",
+      "/properties/",
+      "/about/",
+      "/moving-to-utah/",
+      "/contact/",
+      "/about/team/pranay-reddy-aleti/",
+      "/licensing/",
+      "/buy/",
+      "/sell/",
+    ]) {
       expect(hrefs).toContain(expected)
     }
     for (const href of hrefs) {
-      if (href?.startsWith("/")) expect(href.endsWith("/")).toBe(true)
+      if (href.startsWith("/")) expect(new URL(href, SITE_URL).pathname.endsWith("/")).toBe(true)
     }
+    expect(hrefs).toContain("/contact/?audience=owner")
+  })
+
+  it("offers the real conversion actions with founders_letter analytics", () => {
+    const { container } = render(<FoundersLetterPage />)
+    const bookings = container.querySelectorAll(
+      '[data-analytics-event="book_call_click"][data-analytics-category="founders_letter"]',
+    )
+    expect(bookings.length).toBeGreaterThanOrEqual(2)
+    for (const link of bookings) expect(link.getAttribute("href")).toMatch(/^https:\/\/calendly\.com\//)
+    expect(container.querySelector('a[href^="tel:"]')).not.toBeNull()
   })
 })

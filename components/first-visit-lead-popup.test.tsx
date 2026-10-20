@@ -33,6 +33,8 @@ describe("first-visit popup eligibility", () => {
     "/properties/abc123/",
     "/visit/schedule/",
     "/tenantOnboarding/some-token/",
+    // A long read; the page carries its own calls to action and a popup would cover them.
+    "/founders-letter/",
   ])("stays out of other form pages like %s", (pathname) => {
     expect(isEligiblePath(pathname)).toBe(false)
   })

@@ -27,6 +27,9 @@ export const STICKY_BAR_HIDDEN_PREFIXES = [
   // Notary renders its own page-specific fixed bottom bar. Without this the global bar
   // stacks underneath it and the visitor loses that much viewport to two competing CTAs.
   "/notary",
+  // The founder's letter is a long read with its own calls to action; the default seller CTA
+  // would point away from the story and cover the closing buttons on phones.
+  "/founders-letter",
 ] as const
 
 export interface StickyCta {

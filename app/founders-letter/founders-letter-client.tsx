@@ -1,42 +1,118 @@
-import Link from "next/link"
 import Image from "next/image"
-import { User, Building2, Lightbulb, TrendingUp, Rocket } from "lucide-react"
+import Link from "next/link"
 import SEO from "@/components/seo"
+import { CalendlyLink } from "@/components/calendly-link"
+import { Button } from "@/components/ui/button"
+import { analyticsAttributes } from "@/lib/analytics"
+import {
+  FOUNDERS_LETTER_DESCRIPTION,
+  FOUNDERS_LETTER_OG_IMAGE_PATH,
+  FOUNDERS_LETTER_PATH,
+  FOUNDERS_LETTER_TITLE,
+  FOUNDER_IMAGE_ALT,
+  FOUNDER_IMAGE_PATH,
+  LETTER,
+  ONDO_MARK_ALT,
+  ONDO_MARK_PATH,
+  founderLetterWordCount,
+  readingMinutes,
+  type Block,
+  type Segment,
+} from "@/lib/content/founders-letter"
 import { SITE_ORGANIZATION_ID, founderPersonRef, generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_ADDRESS_CITY, SITE_NAME, SITE_URL } from "@/lib/site"
-import { FOUNDED_MONTH_LABEL, FOUNDED_YEAR, UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
-import { FOUNDER_PROFILE_PATH } from "@/lib/team-data"
+import { SITE_PHONE_TEL, SITE_URL } from "@/lib/site"
 import { toAbsoluteSiteUrl } from "@/lib/url"
+import styles from "./founders-letter.module.css"
 
-export const FOUNDERS_LETTER_PATH = "/founders-letter/"
-/** Carries the brand inside the head term, so pageTitle() does not append it again. */
-export const FOUNDERS_LETTER_TITLE = "Founder's Letter: Why I Built Ondo Real Estate"
-export const FOUNDERS_LETTER_DESCRIPTION =
-  "Pranay Reddy Aleti, a software engineer turned Utah landlord, on why he started Ondo Real Estate in 2022 and what owners and tenants can expect from us."
-export const FOUNDER_IMAGE_PATH = "/founder-image.webp"
+export { FOUNDERS_LETTER_DESCRIPTION, FOUNDERS_LETTER_PATH, FOUNDERS_LETTER_TITLE, FOUNDER_IMAGE_PATH }
 
-const FOUNDER_NAME = "Pranay Reddy Aleti"
-const FOUNDER_TITLE = `Founder, ${SITE_NAME}`
-/** Bump when the letter's wording changes; surfaces as dateModified on the ProfilePage. */
-const modified = "2026-10-19"
+/** The letter was first published on this date; the page's `modified` is the last read-through. */
+const PUBLISHED = "2026-10-19"
+const CATEGORY = "founders_letter"
 
-const FIRST_YEAR_IN_SOFTWARE = 2013
-const FIRST_UTAH_HOME_YEAR = 2019
+function Segments({ segments }: { segments: readonly Segment[] }) {
+  return (
+    <>
+      {segments.map((segment, index) => {
+        if (typeof segment === "string") return segment
+        if (segment.external) {
+          return (
+            <a
+              key={index}
+              href={segment.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.inlineLink}
+              {...analyticsAttributes("founders_letter_click", CATEGORY, "ondosoft")}
+            >
+              {segment.text}
+            </a>
+          )
+        }
+        return (
+          <Link
+            key={index}
+            href={segment.href}
+            className={styles.inlineLink}
+            {...analyticsAttributes("founders_letter_click", CATEGORY, segment.href.replace(/^\/|\/$/g, "").replace(/\//g, "-"))}
+          >
+            {segment.text}
+          </Link>
+        )
+      })}
+    </>
+  )
+}
 
-const RELATED_LINKS = [
-  { href: "/about/", label: "About Ondo Real Estate" },
-  { href: "/property-management/", label: "How we manage property" },
-  { href: "/moving-to-utah/", label: "New to Utah" },
-  { href: FOUNDER_PROFILE_PATH, label: "Pranay's full profile" },
-]
+function Blocks({ blocks }: { blocks: readonly Block[] }) {
+  return (
+    <>
+      {blocks.map((block, index) => {
+        if (block.kind === "quote") {
+          return (
+            <blockquote key={index} className={styles.pull}>
+              <p>{block.text}</p>
+            </blockquote>
+          )
+        }
+        if (block.kind === "habits") {
+          return (
+            <div key={index} className={styles.habits}>
+              {block.items.map((item) => (
+                <p key={item.lead}>
+                  <strong>{item.lead}</strong> {item.text}
+                </p>
+              ))}
+            </div>
+          )
+        }
+        return (
+          <p key={index}>
+            <Segments segments={block.segments} />
+          </p>
+        )
+      })}
+    </>
+  )
+}
 
-export default function FoundersLetterPage() {
-  const currentYear = new Date().getFullYear()
-  const yearsInTech = currentYear - FIRST_YEAR_IN_SOFTWARE
-  const yearsInUtah = currentYear - FIRST_UTAH_HOME_YEAR
+function BookCall({ contentLabel, label, children }: { contentLabel: string; label: string; children: React.ReactNode }) {
+  return (
+    <Button asChild size="lg" className={styles.primary}>
+      <CalendlyLink contentLabel={contentLabel} {...analyticsAttributes("book_call_click", CATEGORY, label)}>
+        {children}
+      </CalendlyLink>
+    </Button>
+  )
+}
 
+export default function FoundersLetter({ modified }: { modified: string }) {
+  const { masthead, opening, lede, chapters, mark, midCta, why, restraint, closing, keepReading } = LETTER
   const canonical = toAbsoluteSiteUrl(FOUNDERS_LETTER_PATH)
+  const ogImage = toAbsoluteSiteUrl(FOUNDERS_LETTER_OG_IMAGE_PATH)
   const founderImage = toAbsoluteSiteUrl(FOUNDER_IMAGE_PATH)
+  const minutes = readingMinutes()
+
   // The full Person lives on the profile page (FOUNDER_PROFILE_PATH); the letter is an Article by it.
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -46,32 +122,22 @@ export default function FoundersLetterPage() {
     description: FOUNDERS_LETTER_DESCRIPTION,
     url: canonical,
     mainEntityOfPage: canonical,
-    image: founderImage,
-    datePublished: modified,
+    image: [ogImage, founderImage],
+    datePublished: PUBLISHED,
     dateModified: modified,
     inLanguage: "en-US",
+    wordCount: founderLetterWordCount(),
     author: founderPersonRef(),
     publisher: { "@id": SITE_ORGANIZATION_ID },
   }
 
-  const stats = [
-    { value: `${yearsInTech}+`, label: "Years in software", detail: "Full stack engineer" },
-    { value: `${yearsInUtah}+`, label: "Years a Utah homeowner", detail: "Owner and landlord" },
-    { value: String(FOUNDED_YEAR), label: "Ondo founded", detail: `${SITE_ADDRESS_CITY}, Utah` },
-    { value: String(UTAH_CITIES_SERVED), label: "Wasatch Front cities", detail: "Where we manage and sell" },
-  ]
-
-  const paragraph = "text-foreground/70 text-lg leading-relaxed"
-  const inlineLink =
-    "text-primary hover:text-primary/80 font-semibold underline decoration-2 underline-offset-2 transition-colors"
-
   return (
-    <main className="min-h-screen bg-background dark:bg-transparent" aria-labelledby="founders-letter-heading">
+    <main id="founders-letter" className={styles.root} aria-labelledby="founders-letter-heading">
       <SEO
         title={FOUNDERS_LETTER_TITLE}
         description={FOUNDERS_LETTER_DESCRIPTION}
         pathname={FOUNDERS_LETTER_PATH}
-        image={founderImage}
+        image={ogImage}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
@@ -81,187 +147,225 @@ export default function FoundersLetterPage() {
         ]}
       />
 
-      <div className="relative bg-gradient-to-br from-[var(--gradient-from)] via-[var(--color-gradient-via)] to-[var(--color-gradient-to)]">
-        <div className="absolute inset-0 bg-background opacity-50"></div>
-        <div className="relative max-w-7xl mx-auto px-4 py-24">
-          <h1 id="founders-letter-heading" className="text-6xl md:text-7xl font-bold text-foreground mb-6">
-            A Letter From the <span className="text-primary">Founder</span>
-          </h1>
-          <p className="text-2xl text-foreground/70 max-w-3xl">
-            I spent a decade writing software before I bought my first house in Utah. That house led to rental property,
-            and the rentals led to Ondo Real Estate. Here is the story, and what you can expect from us.
-          </p>
-          <dl className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="bg-primary/20 backdrop-blur-lg rounded-lg p-6 border border-primary">
-                <dd className="text-4xl font-bold text-foreground">{stat.value}</dd>
-                <dt className="text-foreground mt-2">{stat.label}</dt>
-                <dd className="text-foreground/70 text-sm">{stat.detail}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+      <div className={styles.inner}>
+        <p className={styles.masthead}>
+          <span>{masthead.lead}</span>{" "}
+          <span>{minutes} minute read.</span>
+        </p>
+
+        <section className={styles.opening} aria-labelledby="founders-letter-heading">
+          <div className={styles.openingText}>
+            <h1 id="founders-letter-heading" className={styles.headline}>
+              {opening.headline}
+            </h1>
+            <p className={styles.deck}>{opening.deck}</p>
+            <p className={styles.category}>{opening.category}</p>
+            <div className={styles.ctaRow}>
+              <BookCall contentLabel="founders_letter_hero" label="hero-book-call">
+                {opening.bookLabel}
+              </BookCall>
+              <Button asChild size="lg" variant="outline" className={styles.secondary}>
+                <a href={`tel:${SITE_PHONE_TEL}`} {...analyticsAttributes("contact_click", CATEGORY, "hero-call")}>
+                  {opening.callLabel}
+                </a>
+              </Button>
+              <a href={`#${chapters[0].id}`} className={styles.readLink} {...analyticsAttributes("founders_letter_click", CATEGORY, "hero-read")}>
+                {opening.readLabel}
+              </a>
+            </div>
+          </div>
+          <figure className={styles.plate}>
+            <div className={styles.plateImage}>
+              <Image src={FOUNDER_IMAGE_PATH} alt={FOUNDER_IMAGE_ALT} fill priority sizes="(min-width: 1024px) 480px, 100vw" />
+            </div>
+            <figcaption className={styles.plateCaption}>{opening.plateCaption}</figcaption>
+          </figure>
+        </section>
+
+        <section className={styles.lede} aria-labelledby="lede-heading">
+          <h2 id="lede-heading" className={styles.kicker}>
+            {lede.heading}
+          </h2>
+          <div className={styles.ledeBody}>
+            <Blocks blocks={lede.blocks} />
+          </div>
+        </section>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-3 gap-12">
-          <article className="lg:col-span-2 space-y-8">
-            <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="meet-founder-heading">
-              <div className="flex items-center mb-6">
-                <User className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
-                <h2 id="meet-founder-heading" className="text-3xl font-bold text-foreground">
-                  Meet the founder
+      <div className={styles.chapters}>
+        {chapters.map((chapter) => (
+          <section
+            key={chapter.id}
+            id={chapter.id}
+            className={styles.chapter}
+            data-temp={chapter.temp}
+            aria-labelledby={`${chapter.id}-heading`}
+          >
+            <div className={styles.inner}>
+              <div className={styles.chapterGrid}>
+                <h2 id={`${chapter.id}-heading`} className={styles.chapterHeading}>
+                  <span className={styles.year}>{chapter.year}</span>
+                  <span className="sr-only">: </span>
+                  <span className={styles.chapterTitle}>{chapter.title}</span>
                 </h2>
-              </div>
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
-                <div className="relative h-32 w-32 rounded-full border-4 border-primary overflow-hidden flex-shrink-0">
-                  <Image
-                    src={FOUNDER_IMAGE_PATH}
-                    alt={`${FOUNDER_NAME}, founder of Ondo Real Estate, professional headshot`}
-                    fill
-                    className="rounded-full object-cover"
-                    priority
-                    sizes="128px"
-                  />
+                <div className={styles.chapterBody}>
+                  <Blocks blocks={chapter.blocks} />
+                  {chapter.sideLabels ? (
+                    <ul className={styles.sideLabels}>
+                      {chapter.sideLabels.map((label) => (
+                        <li key={label}>{label}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
-                <p className={paragraph}>
-                  Hi, I&apos;m <strong className="text-primary">{FOUNDER_NAME}</strong>, founder of Ondo Real Estate in{" "}
-                  {SITE_ADDRESS_CITY}, Utah.
-                </p>
               </div>
-              <p className={paragraph}>
-                I came to the U.S. for a master&apos;s degree in computer science and spent over a decade building software.
-                Somewhere in there, real estate took over my attention. Software is how I work. Real estate is about people.
-              </p>
-            </section>
-
-            <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="founders-journey-heading">
-              <div className="flex items-center mb-6">
-                <TrendingUp className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
-                <h2 id="founders-journey-heading" className="text-3xl font-bold text-foreground">
-                  From software engineer to Utah landlord
-                </h2>
-              </div>
-              <p className={`${paragraph} mb-4`}>
-                I bought my first home in Utah in <strong className="text-primary">{FIRST_UTAH_HOME_YEAR}</strong>. The
-                process was harder than it needed to be, and once I was through it, friends and family started asking for
-                help with theirs. I helped them buy, place tenants, and get to closing without the guesswork.
-              </p>
-              <p className={`${paragraph} mb-4`}>
-                That turned into rental property of my own, then into a plan: make real estate the career, not the side
-                project. In May {FOUNDED_YEAR} I started{" "}
-                <a href="https://www.ondosoft.com/" target="_blank" rel="noopener noreferrer" className={inlineLink}>
-                  OndoSoft
-                </a>
-                , my software consultancy. Two months later, in{" "}
-                <strong className="text-primary">
-                  {FOUNDED_MONTH_LABEL} {FOUNDED_YEAR}
-                </strong>
-                , I founded <strong className="text-primary">Ondo Real Estate</strong>. One for the code, one for the
-                property.
-              </p>
-            </section>
-
-            <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="why-ondo-heading">
-              <div className="flex items-center mb-6">
-                <Lightbulb className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
-                <h2 id="why-ondo-heading" className="text-3xl font-bold text-foreground">
-                  Why the name Ondo
-                </h2>
-              </div>
-              <p className={paragraph}>
-                &ldquo;Ondo&rdquo; means <em className="text-primary">foundation and rhythm</em>. Real estate is both: the
-                foundation a family builds on, and the rhythm that keeps a neighborhood going. I started Ondo because
-                owners could not see what was happening with their own buildings and tenants waited days for an answer
-                on a repair.
-              </p>
-            </section>
-
-            <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="our-mission-heading">
-              <div className="flex items-center mb-6">
-                <Rocket className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
-                <h2 id="our-mission-heading" className="text-3xl font-bold text-foreground">
-                  What Ondo Real Estate is for
-                </h2>
-              </div>
-              <p className={`${paragraph} mb-4`}>
-                Ondo is a property management and real estate company with its own software underneath, built on{" "}
-                <strong className="text-primary">trust, transparency, and technology</strong>. The goal is simple. Owning
-                rental property should not be a second job, and renting a home should feel fair and easy.
-              </p>
-              <p className={paragraph}>
-                Owners get{" "}
-                <Link href="/property-management/" className={inlineLink}>
-                  full-service management
-                </Link>{" "}
-                with statements, maintenance, and rent in one portal. Tenants get a{" "}
-                <Link href="/properties/" className={inlineLink}>
-                  portal of their own
-                </Link>{" "}
-                where paying rent or reporting a problem takes a minute, not a week of phone tag. Nobody should feel like a
-                number in a system.
-              </p>
-            </section>
-
-            <section className="bg-card rounded-xl p-8 border border-border" aria-labelledby="looking-ahead-heading">
-              <div className="flex items-center mb-6">
-                <Building2 className="text-primary h-7 w-7 mr-4" aria-hidden="true" />
-                <h2 id="looking-ahead-heading" className="text-3xl font-bold text-foreground">
-                  Where we are headed
-                </h2>
-              </div>
-              <p className={`${paragraph} mb-4`}>
-                I own and manage rental property myself, so I deal with the same repair calls and year-end paperwork our
-                owners do. If you own property on the Wasatch Front or are looking for a home, I would like to hear from you.
-              </p>
-              <p className={paragraph}>Thank you for reading.</p>
-            </section>
-
-            <div className="bg-gradient-to-r from-[var(--color-gradient-to)] to-background rounded-xl p-8 border border-primary">
-              <p className="text-foreground/70 text-lg mb-4">Sincerely,</p>
-              <p className="text-2xl font-bold text-foreground mb-2">{FOUNDER_NAME}</p>
-              <p className="text-primary font-semibold">{FOUNDER_TITLE}</p>
-              <p className="text-foreground/70 text-sm mt-1">{SITE_ADDRESS_CITY}, Utah</p>
             </div>
-          </article>
+          </section>
+        ))}
+      </div>
 
-          <aside className="space-y-6">
-            <section className="bg-card rounded-xl p-6 border border-border" aria-labelledby="related-pages-heading">
-              <h3 id="related-pages-heading" className="text-xl font-bold text-primary mb-4">
-                Keep reading
-              </h3>
-              <ul className="space-y-2">
-                {RELATED_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="text-foreground/80 hover:text-primary underline-offset-4 hover:underline">
-                      {link.label}
-                    </Link>
+      <section className={styles.mark} aria-labelledby="mark-heading">
+        <div className={styles.inner}>
+          <div className={styles.markStage}>
+            <figure className={styles.markFigure}>
+              <Image src={ONDO_MARK_PATH} alt={ONDO_MARK_ALT} width={1024} height={1024} loading="lazy" className={styles.markImage} />
+            </figure>
+            <p className={styles.lockup} aria-hidden="true">
+              {mark.lockup.map((word, index) => (
+                <span key={word}>
+                  {index > 0 ? " " : ""}
+                  {word.slice(0, -1)}
+                  <span className={styles.period}>.</span>
+                </span>
+              ))}
+            </p>
+            <p className={styles.decode}>{mark.decode}</p>
+          </div>
+          <h2 id="mark-heading" className={styles.markHeading}>
+            {mark.heading}
+          </h2>
+          <div className={styles.markBody}>
+            <Blocks blocks={mark.blocks} />
+          </div>
+        </div>
+        <div className={styles.band}>
+          <div className={styles.inner}>
+            <p className={styles.bandText}>{midCta.text}</p>
+            <div className={styles.ctaRow}>
+              <BookCall contentLabel="founders_letter_mid" label="mid-book-call">
+                {midCta.bookLabel}
+              </BookCall>
+              <Button asChild size="lg" variant="outline" className={styles.secondary}>
+                <Link href={midCta.contactHref} {...analyticsAttributes("contact_click", CATEGORY, "mid-contact-owner")}>
+                  {midCta.contactLabel}
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.why} aria-labelledby="why-heading">
+        <div className={styles.inner}>
+          <h2 id="why-heading" className={styles.sectionHeading}>
+            {why.heading}
+          </h2>
+          <p className={styles.intro}>{why.intro}</p>
+          <div className={styles.pillars}>
+            {why.pillars.map((pillar) => (
+              <div key={pillar.title} className={styles.pillar}>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className={styles.ledger}>
+            <div>
+              <h3 className={styles.ledgerLabel}>{why.ledger.demonstratedLabel}</h3>
+              <ul>
+                {why.ledger.demonstrated.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className={styles.ledgerLabel}>{why.ledger.inProgressLabel}</h3>
+              <ul>
+                {why.ledger.inProgress.map((segments, index) => (
+                  <li key={index}>
+                    <Segments segments={segments} />
                   </li>
                 ))}
               </ul>
-            </section>
-
-            <section
-              className="bg-gradient-to-r from-[var(--color-gradient-to)] to-background rounded-xl p-6 border border-primary"
-              aria-labelledby="lets-connect-heading"
-            >
-              <h3 id="lets-connect-heading" className="text-xl font-bold text-foreground mb-4">
-                Let&apos;s talk
-              </h3>
-              <p className="text-foreground/70 text-sm mb-4">
-                Own rental property in Utah, or looking for a place to rent? Start with a call.
-              </p>
-              <Link
-                href="/contact/"
-                className="inline-flex w-full items-center justify-center bg-primary hover:bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors"
-              >
-                Schedule a call
-              </Link>
-            </section>
-          </aside>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
+      <section className={styles.restraint} aria-labelledby="restraint-heading">
+        <div className={styles.inner}>
+          <h2 id="restraint-heading" className={styles.kicker}>
+            {restraint.heading}
+          </h2>
+          <div className={styles.measure}>
+            <Blocks blocks={restraint.blocks} />
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.closing} aria-labelledby="closing-heading">
+        <div className={styles.inner}>
+          <h2 id="closing-heading" className={styles.sectionHeading}>
+            {closing.heading}
+          </h2>
+          <div className={styles.measure}>
+            <Blocks blocks={closing.blocks} />
+          </div>
+          <div className={styles.signature}>
+            <Image src={ONDO_MARK_PATH} alt="" aria-hidden="true" width={48} height={48} loading="lazy" className={styles.signatureMark} />
+            <p className={styles.signatureName}>{closing.signature.name}</p>
+            <p className={styles.signatureRole}>
+              {closing.signature.role}. {closing.signature.place}.
+            </p>
+            <p className={styles.signatureDate}>
+              {closing.signature.datePrefix} <time dateTime={modified}>{modified}</time>.
+            </p>
+          </div>
+          <div className={styles.ctaRow}>
+            <BookCall contentLabel="founders_letter_close" label="close-book-call">
+              {closing.bookLabel}
+            </BookCall>
+            <Button asChild size="lg" variant="outline" className={styles.secondary}>
+              <a href={`tel:${SITE_PHONE_TEL}`} {...analyticsAttributes("contact_click", CATEGORY, "close-call")}>
+                {closing.callLabel}
+              </a>
+            </Button>
+            <Link href="/contact/" className={styles.readLink} {...analyticsAttributes("contact_click", CATEGORY, "close-message")}>
+              {closing.messageLabel}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <nav className={styles.colophon} aria-labelledby="keep-reading-heading">
+        <div className={styles.inner}>
+          <h2 id="keep-reading-heading" className={styles.kicker}>
+            {keepReading.heading}
+          </h2>
+          <ul>
+            {keepReading.links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  {...analyticsAttributes("founders_letter_click", CATEGORY, `next-${link.href.replace(/^\/|\/$/g, "").replace(/\//g, "-")}`)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
     </main>
   )
 }

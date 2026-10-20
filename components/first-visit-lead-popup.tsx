@@ -51,6 +51,8 @@ const EXCLUDED_EXACT_PATHS = new Set([
   "/resources/templates",
   // Has its own inline listing-packet lead form.
   "/sell",
+  // A long read with its own calls to action; a modal would cover them mid-story.
+  "/founders-letter",
 ])
 
 const EXCLUDED_PREFIXES = [

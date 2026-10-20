@@ -45,6 +45,9 @@ const HIDDEN_PATH_PREFIXES = [
   '/get-matched',
   '/buy/quiz',
   '/whats-my-home-worth',
+  // The founder's letter is a long read with its own calls to action; the launcher sat on the
+  // corner of the booking button at the phone fold.
+  '/founders-letter',
 ] as const;
 
 interface PublicAssistantWidgetProps {

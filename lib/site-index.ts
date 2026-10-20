@@ -220,7 +220,7 @@ function catalogSections(): SiteIndexSection[] {
         {
           name: "Founders letter",
           href: "/founders-letter",
-          description: "Why we built Ondo and how we work with owners and residents.",
+          description: "Pranay Reddy Aleti's story: software, a first Utah home, and the ON IT. DO IT. mindset behind Ondo.",
         },
         {
           name: "New to Utah",
