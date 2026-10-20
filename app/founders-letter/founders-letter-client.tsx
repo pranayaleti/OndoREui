@@ -247,13 +247,17 @@ export default function FoundersLetter({ modified }: { modified: string }) {
               <Image src={ONDO_MARK_PATH} alt={ONDO_MARK_ALT} width={1024} height={1024} loading="lazy" className={styles.markImage} />
             </figure>
             <p className={styles.lockup} aria-hidden="true">
-              {mark.lockup.map((word, index) => (
-                <span key={word}>
-                  {index > 0 ? " " : ""}
-                  {word.slice(0, -1)}
-                  <span className={styles.period}>.</span>
-                </span>
-              ))}
+              {mark.lockup.map((word, index) => {
+                const [caps, rest] = word.slice(0, -1).split(" ")
+                return (
+                  <span key={word}>
+                    {index > 0 ? " " : ""}
+                    <span className={styles.lockupCaps}>{caps}</span>{" "}
+                    <span className={styles.lockupIt}>{rest}</span>
+                    <span className={styles.period}>.</span>
+                  </span>
+                )
+              })}
             </p>
             <p className={styles.decode}>{mark.decode}</p>
           </div>

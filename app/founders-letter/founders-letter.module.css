@@ -471,17 +471,26 @@
   height: auto;
 }
 
+/* ON and DO set upright in the page serif, "it" in its italic: the two beats of the name. */
 .lockup {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0 0.35em;
+  gap: 0 0.4em;
   margin-top: 1.5rem;
-  font-family: var(--fl-display);
-  font-weight: 800;
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-family: var(--fl-serif);
+  font-size: clamp(3.25rem, 8.5vw, 7rem);
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+}
+
+.lockupCaps {
+  font-weight: 700;
+}
+
+.lockupIt {
+  font-style: italic;
+  font-weight: 400;
 }
 
 .period {

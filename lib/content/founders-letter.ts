@@ -88,17 +88,17 @@ export const LETTER = {
       {
         kind: "glance",
         items: [
-          { year: ARRIVED_IN_US_YEAR, segments: ["Came to the United States for a master's degree in computer science."] },
+          { year: ARRIVED_IN_US_YEAR, segments: ["Came to the United States for a Master's degree in Computer Science."] },
           { year: FIRST_YEAR_IN_SOFTWARE, segments: [`Started ${years}+ years of building software for large companies.`] },
-          { year: FIRST_CRYPTO_YEAR, segments: ["Started investing in crypto. Bought ETH at $170."] },
-          { year: FIRST_UTAH_HOME_YEAR, segments: ["Bought my first home, in Lehi, Utah."] },
+          { year: FIRST_CRYPTO_YEAR, segments: ["Started investing in Cryptocurrency. Bought ETH at $170."] },
+          { year: FIRST_UTAH_HOME_YEAR, segments: ["Bought my first home in Lehi, Utah."] },
           { year: FOUNDED_YEAR, segments: ["Founded OndoSoft and Ondo Real Estate."] },
           {
             year: FIRST_PARKS_YEAR,
-            segments: ["Put $400,000 of my own money into mobile home parks in two states, plus an investment property in Saratoga Springs."],
+            segments: ["Invested $400,000 of my own money into mobile home parks in Utah and Iowa plus an investment property in Saratoga Springs."],
           },
           { year: EB5_YEAR, segments: ["Invested $1 million in a California resort through the EB-5 program."] },
-          { year: VC_INVESTING_YEAR, segments: ["Started venture investing, strictly in Utah startups."] },
+          { year: VC_INVESTING_YEAR, segments: ["Started venture capital investing Utah startups."] },
           { year: GREEN_CARD_YEAR, segments: ["Green card approved. Now watch what a ", accent("burning desire"), " builds."] },
         ],
       },
