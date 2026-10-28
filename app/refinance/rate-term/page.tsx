@@ -79,15 +79,6 @@ export default function RateTermRefinancePage() {
               <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
                 <Link href="/blog/refinance-break-even-when-lower-rate-loses">When a lower rate still loses</Link>
               </Button>
-              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
-                <Link href="/blog/refinance-break-even-when-lower-rate-loses">Recast vs refinance</Link>
-              </Button>
-              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
-                <Link href="/blog/refinance-break-even-when-lower-rate-loses">FHA / VA streamline</Link>
-              </Button>
-              <Button key="/blog/refinance-break-even-when-lower-rate-loses" asChild variant="outline" size="sm">
-                <Link href="/blog/refinance-break-even-when-lower-rate-loses">“No closing cost” refi</Link>
-              </Button>
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>
               </Button>

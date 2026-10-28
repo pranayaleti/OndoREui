@@ -77,12 +77,6 @@ export default function HelocPage() {
               <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
                 <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out guide</Link>
               </Button>
-              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-vs-cash-out-refinance">HELOC after year two</Link>
-              </Button>
-              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-vs-cash-out-refinance">Cross-collateral education</Link>
-              </Button>
               <Button key="/refinance/cash-out" asChild variant="outline" size="sm">
                 <Link href="/refinance/cash-out">Cash-out refinance</Link>
               </Button>

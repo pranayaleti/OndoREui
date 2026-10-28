@@ -77,18 +77,6 @@ export default function CashOutRefinancePage() {
               <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
                 <Link href="/blog/heloc-vs-cash-out-refinance">HELOC vs cash-out</Link>
               </Button>
-              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-vs-cash-out-refinance">Cash-out to buy a rental</Link>
-              </Button>
-              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-vs-cash-out-refinance">Delayed financing</Link>
-              </Button>
-              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-vs-cash-out-refinance">HELOC after year two</Link>
-              </Button>
-              <Button key="/blog/heloc-vs-cash-out-refinance" asChild variant="outline" size="sm">
-                <Link href="/blog/heloc-vs-cash-out-refinance">Cross-collateral education</Link>
-              </Button>
               <Button key="/refinance/rate-term" asChild variant="outline" size="sm">
                 <Link href="/refinance/rate-term">Rate-and-term refinance</Link>
               </Button>
