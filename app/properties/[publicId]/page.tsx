@@ -4,8 +4,10 @@
 import { Metadata } from "next"
 import { SITE_URL, SITE_NAME, pageTitle, pageTitleText } from "@/lib/site"
 import { buildMetadataLanguages } from "@/lib/i18n-alternates"
-import { PropertyListingDetailClient } from "@/components/properties/property-listing-detail-client"
-import { PropertyListingDetail } from "@/components/properties/property-listing-detail"
+import {
+  PropertyListingDetailClient,
+  PropertyListingDetailLive,
+} from "@/components/properties/property-listing-detail-client"
 import {
   PROPERTY_DETAIL_PLACEHOLDER_ID,
   fetchPublicListingRowsForBuild,
@@ -88,7 +90,9 @@ export default async function PropertyDetailPage({ params }: PageProps) {
   const property = await fetchPublicPropertyByPublicId(publicId)
   if (property) {
     const related = pickRelatedListings(property, await fetchPublicPropertyList())
-    return <PropertyListingDetail property={property} publicId={publicId} related={related} />
+    // Prerenders with the build-time data (SEO), then refreshes from the live
+    // API on mount so dashboard edits show without waiting for a redeploy.
+    return <PropertyListingDetailLive publicId={publicId} initialProperty={property} initialRelated={related} />
   }
   // Build-time miss (placeholder, listing added after static export): still
   // ship a client fetch so live-API listings load in next dev and via the
