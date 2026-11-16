@@ -17,7 +17,7 @@ describe("buildBreadcrumbItems", () => {
   it("routes prefixes without a page of their own to their hub (/vs has none)", () => {
     expect(buildBreadcrumbItems({ pathname: "/vs/buildium/", title: "Ondo RE vs Buildium", domain })).toEqual([
       { name: "Home", url: `${domain}/` },
-      { name: "Compare", url: `${domain}/compare/` },
+      { name: "Compare Utah Property Managers", url: `${domain}/compare-utah-property-managers/` },
       { name: "Ondo RE vs Buildium", url: `${domain}/vs/buildium/` },
     ])
   })
@@ -34,7 +34,7 @@ describe("SEO", () => {
       | undefined
     expect(breadcrumb?.itemListElement.map((element) => element.item.replace(/^https?:\/\/[^/]+/, ""))).toEqual([
       "/",
-      "/compare/",
+      "/compare-utah-property-managers/",
       "/vs/turbotenant/",
     ])
   })

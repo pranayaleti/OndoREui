@@ -1,101 +1,55 @@
-// NOTE(i18n): server component, body copy (CTAs, breadcrumb, headers) is
-// English for SEO under output: "export". Tracked as a Phase 1 follow-up:
-// move client-only sections into a "use client" subtree wired to useTranslation.
-import { Metadata } from "next"
-import { SITE_URL, SITE_NAME, pageTitle, pageTitleText } from "@/lib/site"
-import { buildMetadataLanguages } from "@/lib/i18n-alternates"
+import type { Metadata } from "next"
+import { SITE_URL } from "@/lib/site"
 import {
-  PropertyListingDetailClient,
-  PropertyListingDetailLive,
-} from "@/components/properties/property-listing-detail-client"
-import {
-  PROPERTY_DETAIL_PLACEHOLDER_ID,
-  fetchPublicListingRowsForBuild,
   fetchPublicPropertyByPublicId,
-  fetchPublicPropertyList,
-  publicIdsFromListBody,
+  legacyListingSegmentsFromListBody,
+  listingDetailPath,
+  rootListingSlug,
 } from "@/lib/public-property"
-import { pickRelatedListings } from "@/lib/listing-presentation"
-import { screenListingDescription } from "@/lib/fair-housing-steering"
-
-interface PageProps {
-  params: Promise<{ publicId: string }>
-}
+import { ListingRedirect } from "@/components/properties/listing-redirect"
+import { ListingPage, listingMetadata, listingStaticSegments } from "@/components/properties/listing-page"
 
 /**
- * Required under `output: "export"` for any dynamic segment. We still emit one
- * HTML file per listing known at build time (SEO + GitHub Pages files).
+ * Legacy listing URL. A listing with an address now lives at /{address-slug}/;
+ * this page is its redirect stub (noindex, canonical to the new URL) so links
+ * already shared keep working on GitHub Pages, which has no server redirects.
+ * A listing with no usable address still renders here, canonical.
  *
  * Unknown ids cannot get a unique HTML file on a static host. In `next dev`
  * we omit `dynamicParams = false` so those ids still render this page (client
  * fetch). On GitHub Pages, `app/not-found.tsx` recovers `/properties/{id}`
  * from the 404 shell and mounts the same client fetch.
  */
+interface PageProps {
+  params: Promise<{ publicId: string }>
+}
+
 export async function generateStaticParams(): Promise<Array<{ publicId: string }>> {
-  try {
-    const params = publicIdsFromListBody(await fetchPublicListingRowsForBuild()).map((publicId) => ({ publicId }))
-    return params.length > 0 ? params : [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
-  } catch (error) {
-    const reason = error instanceof Error ? error.message : "unknown"
-    // The production deploy sets ONDO_REQUIRE_LISTINGS so an API outage fails the build
-    // instead of publishing a site with no listing pages. Local and CI builds fall back.
-    if (process.env.ONDO_REQUIRE_LISTINGS === "1") {
-      throw new Error(`[properties/[publicId]] generateStaticParams: listings API unavailable after retries (${reason})`)
-    }
-    console.warn(
-      `[properties/[publicId]] generateStaticParams: backend unavailable (${reason}); emitting placeholder`
-    )
-    return [{ publicId: PROPERTY_DETAIL_PLACEHOLDER_ID }]
-  }
+  const segments = await listingStaticSegments("properties/[publicId]", legacyListingSegmentsFromListBody)
+  return segments.map((publicId) => ({ publicId }))
+}
+
+async function movedTo(segment: string) {
+  const property = await fetchPublicPropertyByPublicId(segment)
+  return property && rootListingSlug(property) ? listingDetailPath(property) : null
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { publicId } = await params
-  const property = await fetchPublicPropertyByPublicId(publicId)
-  if (!property) return { title: "Property not found", robots: { index: false, follow: false } }
-
-  const cityState = [property.city, property.state].filter(Boolean).join(", ")
-  const title = pageTitleText(`${property.title} – ${cityState} | ${SITE_NAME}`)
-  const fallback = `${property.bedrooms} BR / ${property.bathrooms} BA in ${cityState}. Listed at $${property.price}/mo. Review written rental requirements, then tour or apply.`
-  const description = screenListingDescription(property.description)?.slice(0, 160) ?? fallback
-  const canonicalPath = `/properties/${publicId}`
-  const canonical = `${SITE_URL}${canonicalPath}/`
-  const image = property.photos?.[0]?.url
-
-  return {
-    title: pageTitle(title),
-    description,
-    alternates: {
-      canonical,
-      languages: buildMetadataLanguages(canonicalPath),
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      type: "website",
-      images: image ? [{ url: image }] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: image ? [image] : undefined,
-    },
+  const to = await movedTo(publicId)
+  if (to) {
+    return {
+      title: "Listing moved",
+      alternates: { canonical: `${SITE_URL}${to}/` },
+      robots: { index: false, follow: true },
+    }
   }
+  return listingMetadata(publicId)
 }
 
 export default async function PropertyDetailPage({ params }: PageProps) {
   const { publicId } = await params
-  const property = await fetchPublicPropertyByPublicId(publicId)
-  if (property) {
-    const related = pickRelatedListings(property, await fetchPublicPropertyList())
-    // Prerenders with the build-time data (SEO), then refreshes from the live
-    // API on mount so dashboard edits show without waiting for a redeploy.
-    return <PropertyListingDetailLive publicId={publicId} initialProperty={property} initialRelated={related} />
-  }
-  // Build-time miss (placeholder, listing added after static export): still
-  // ship a client fetch so live-API listings load in next dev and via the
-  // static-export 404 recovery path.
-  return <PropertyListingDetailClient publicId={publicId} />
+  const to = await movedTo(publicId)
+  if (to) return <ListingRedirect to={`${to}/`} />
+  return <ListingPage segment={publicId} />
 }

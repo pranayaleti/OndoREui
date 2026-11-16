@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { FounderProfile, FOUNDER_PROFILE_DESCRIPTION, founderProfileTitle } from "@/components/people/founder-profile"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
-import { LICENSING_LIVE, pageTitle } from "@/lib/site"
+import { LICENSING, pageTitle } from "@/lib/site"
 import { FOUNDER_PROFILE_PATH } from "@/lib/team-data"
 import { toAbsoluteSiteUrl } from "@/lib/url"
 
@@ -13,12 +13,12 @@ const founderImage = {
 }
 
 export const metadata: Metadata = pageCanonicalMetadata(FOUNDER_PROFILE_PATH, {
-  title: pageTitle(founderProfileTitle(LICENSING_LIVE)),
+  title: pageTitle(founderProfileTitle(LICENSING)),
   description: FOUNDER_PROFILE_DESCRIPTION,
   openGraph: { type: "profile", images: [founderImage] },
   twitter: { images: [founderImage.url] },
 })
 
 export default function FounderProfilePage() {
-  return <FounderProfile live={LICENSING_LIVE} />
+  return <FounderProfile live={LICENSING} />
 }

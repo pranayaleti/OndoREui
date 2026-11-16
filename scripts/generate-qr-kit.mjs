@@ -2,8 +2,9 @@
  * Draws the print-ready QR kit in public/qr/ from lib/qr-placements.json: for every QR
  * placement, a vector SVG (any print size) and a 2048px PNG that carry
  * https://www.ondorealestate.com/go/<id>/ with error correction H and the Ondo mark in the
- * middle. Also refreshes public/links-qr.svg, the small logo-free code shown on the site
- * (footer and contact page), as the "web" placement.
+ * middle. Also refreshes public/links-qr.svg, the code shown on the site (128px on screen), as the
+ * "web" placement: the same mark at error correction Q, which keeps the symbol at 33 modules so
+ * each module stays large enough for a phone camera reading a screen.
  *
  * Every file is decoded again before the script finishes, at full size and at a small
  * size, and the script exits non-zero if any code does not read back as its exact URL.
@@ -92,10 +93,13 @@ async function main() {
   }
 
   const web = shortUrl("web")
-  const { svg: siteSvg } = qrSvg(web, { level: "M", logo: null })
+  const { svg: siteSvg } = qrSvg(web, { level: "Q", logo })
   const sitePath = path.join(root, "public", "links-qr.svg")
   fs.writeFileSync(sitePath, siteSvg)
-  if (!(await decodes(sitePath, web, 240))) failures.push(`${sitePath} at 240px`)
+  // 128px is the on-screen size; 96px leaves margin for a zoomed-out or partly scrolled view.
+  for (const px of [240, 128, 96]) {
+    if (!(await decodes(sitePath, web, px))) failures.push(`${sitePath} at ${px}px`)
+  }
   console.log(`qr-kit: site code  public/links-qr.svg  ${web}`)
 
   if (failures.length > 0) {

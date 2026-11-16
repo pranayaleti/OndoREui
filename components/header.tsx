@@ -239,7 +239,7 @@ const Header = memo(() => {
           {/* Phone CTA, icon-only on mobile, full number on desktop */}
           <a
             href={`tel:${SITE_PHONE.replace(/\s/g, "")}`}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-accent transition-colors shrink-0"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium hover:bg-foreground/[0.06] transition-colors shrink-0"
             aria-label={`Call ${SITE_PHONE}`}
             {...analyticsAttributes("contact_click", "header", "call")}
           >
@@ -263,7 +263,7 @@ const Header = memo(() => {
           {/* Mobile hamburger */}
           <button
             ref={menuToggleRef}
-            className="flex md:hidden min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
+            className="flex md:hidden min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-foreground/[0.06] focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}

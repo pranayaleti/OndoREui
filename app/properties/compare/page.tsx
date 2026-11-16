@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ListingCompareClient } from "./page-client"
 import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 const TITLE = `Compare listings | ${SITE_NAME}`
 const DESCRIPTION = "Compare two or three Ondo rental listings using the facts on each public listing."
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     title: pageTitleText(TITLE),
     description: DESCRIPTION,
     url: CANONICAL,
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.rent,
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitleText(TITLE),
     description: DESCRIPTION,
-    images: [DEFAULT_OG_IMAGE_URL],
+    images: [OG_IMAGE_URLS.rent],
   },
 }
 

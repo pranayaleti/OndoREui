@@ -58,6 +58,7 @@ describe("static-export 404 shell recovers dynamic routes", () => {
 
   const cases: Array<[string, string, string]> = [
     ["/properties/abc123/", "listing", "abc123"],
+    ["/4323-west-11475-south/", "listing", "4323-west-11475-south"],
     ["/apply/start/prop-1/", "apply-start", "prop-1"],
     ["/apply/tok-9/", "apply-token", "tok-9"],
     ["/apply/co/tok-7/", "co-applicant", "tok-7"],

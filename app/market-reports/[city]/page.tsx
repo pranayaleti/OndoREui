@@ -6,7 +6,7 @@ import { marketReportDescription, marketReportTitle } from "@/lib/seo-titles"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 type Params = Promise<{ city: string }>
 
@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = pageTitleText(marketReportTitle(cityName))
   const description = marketReportDescription(cityName)
   const canonical = `${SITE_URL}/market-reports/${citySlug}/`
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: OG_IMAGES.guides },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.guides] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: Params }) {
         title={marketReportTitle(city.name)}
         description={marketReportDescription(city.name)}
         pathname={`/market-reports/${citySlug}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Market Reports", url: `${SITE_URL}/market-reports/` },

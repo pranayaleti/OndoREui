@@ -63,7 +63,7 @@ describe("/founders-letter page", () => {
     expect(document.body.textContent).toContain("If you read nothing else, read this.")
     const items = Array.from(container.querySelectorAll("main ul[data-glance] > li"))
     expect(items.map((li) => li.textContent?.match(/^(\d{4})/)?.[1])).toEqual([
-      "2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025", "2026",
+      "2011", "2013", "2017", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025", "2026",
     ])
     expect(items.at(-1)?.textContent).toMatch(/green card approved/i)
   })
@@ -107,7 +107,7 @@ describe("/founders-letter page", () => {
     const years = Array.from(container.querySelectorAll("main h2"))
       .map((h) => h.textContent?.match(/^(\d{4})/)?.[1])
       .filter(Boolean)
-    expect(years).toEqual(["2011", "2013", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025", "2026"])
+    expect(years).toEqual(["2011", "2013", "2017", "2018", "2019", String(FOUNDED_YEAR), "2023", "2024", "2025", "2026"])
     for (const h of container.querySelectorAll("main h2")) expect(h.closest("li")).toBeNull()
     expect(container.querySelector("main dl")).toBeNull()
     expect(container.querySelector("main .bg-card")).toBeNull()

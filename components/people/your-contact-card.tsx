@@ -4,7 +4,7 @@ import { Calendar, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { analyticsAttributes } from "@/lib/analytics"
 import {
-  LICENSING_LIVE,
+  LICENSING,
   NMLS_CONSUMER_ACCESS_URL,
   SITE_BROKERAGE_NAME,
   SITE_CALENDLY_URL,
@@ -25,9 +25,10 @@ type YourContactCardProps = {
 
 /**
  * "Your contact" on buy, sell, loan and refinance pages: the founder's photo, name and profile link,
- * so every page that matches agent or lender searches points at one person. Once licensing is live
- * (LICENSING_LIVE in lib/site.ts) the card shows only the license its page is about, with that
- * license's required identifier: the brokerage for the agent title, NMLS IDs for the loan title.
+ * so every page that matches agent or lender searches points at one person. The card shows only the
+ * license its page is about, and only once that license is live (RE_LICENSE_LIVE for agent pages,
+ * MLO_LICENSE_LIVE for loan pages, lib/site.ts), with that license's required identifier: the
+ * brokerage for the agent title, NMLS IDs for the loan title.
  */
 function titleLine(kind: ContactKind, live: boolean): string {
   if (!live) return founderRoleLabel(false)
@@ -36,7 +37,8 @@ function titleLine(kind: ContactKind, live: boolean): string {
     : `Loan officer, NMLS #${SITE_LOAN_OFFICER.nmlsId}`
 }
 
-export function YourContactCard({ kind, live = LICENSING_LIVE }: YourContactCardProps) {
+export function YourContactCard({ kind, live }: YourContactCardProps) {
+  const isLive = live ?? (kind === "agent" ? LICENSING.re : LICENSING.mlo)
   const founder = getFounder()
   return (
     <section aria-labelledby="your-contact-heading" className="container mx-auto px-4 py-12">
@@ -59,8 +61,8 @@ export function YourContactCard({ kind, live = LICENSING_LIVE }: YourContactCard
               {founder.name}
             </Link>
           </p>
-          <p className="text-sm text-foreground/70">{titleLine(kind, live)}</p>
-          {live && kind === "loan" ? (
+          <p className="text-sm text-foreground/70">{titleLine(kind, isLive)}</p>
+          {isLive && kind === "loan" ? (
             <p className="mt-1 text-sm text-foreground/70">
               with {SITE_LENDER_NAME} (NMLS #{SITE_COMPANY_NMLS_ID}).{" "}
               <a

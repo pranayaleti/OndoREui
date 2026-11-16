@@ -63,7 +63,7 @@ export default function FAQPage() {
         title="FAQs | Ondo Real Estate"
         description={DESCRIPTION}
         pathname="/faq"
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
@@ -83,13 +83,13 @@ export default function FAQPage() {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-5">
               {faqTiles.map((tile) => (
                 <Link key={tile.path} href={tile.path} className="group block h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-border bg-card/60 p-5 transition-all hover:-translate-y-1 hover:border-accent-1/50 hover:bg-card/80">
-                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-accent-1 to-accent-2 text-white">
+                  <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/60">
+                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       {tile.icon}
                     </div>
                     <h3 className="mb-1 text-lg font-semibold text-foreground">{tile.name}</h3>
                     <p className="mb-4 text-sm text-muted-foreground">{tile.description}</p>
-                    <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-accent-1 group-hover:text-accent-2">
+                    <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 group-hover:underline">
                       Read
                       <ChevronRight className="h-4 w-4" />
                     </span>

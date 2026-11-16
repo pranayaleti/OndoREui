@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { zipPageCanonical } from "@/lib/zip-pages"
 
 type Params = Promise<{ zip: string }>
@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const description = `Rental property management in ${zip} ${cityName}, tenant screening, rent collection, and maintenance. Get a free rental analysis.`
   // Same content as the primary city's page, so that page is the canonical.
   const canonical = zipPageCanonical("property-management", zip)
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: OG_IMAGES.manage },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.manage] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Params }) {
         title={`Property Management ${zip} (${city.name}) | ${SITE_BRAND_SHORT}`}
         description={`Rental property management in ${zip} ${city.name}, tenant screening, rent collection, and maintenance.`}
         pathname={`/property-management/zip/${zip}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Property Management", url: `${SITE_URL}/property-management/` },

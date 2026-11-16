@@ -131,9 +131,11 @@ export default async function Page({ params }: { params: Params }) {
         title={`${a.name} vs ${b.name}, Utah: Real Estate Comparison | ${SITE_BRAND_SHORT}`}
         description={`${a.name} vs ${b.name}: compare home prices, rent, schools, commute, and growth.`}
         pathname={`/compare/${slug}/`}
+        // /compare/ is a legacy redirect to the property-manager comparison, not a hub for city
+        // pairs. These pages are reached from the city market reports, so roll up to those.
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Compare", url: `${SITE_URL}/compare/` },
+          { name: "Market Reports", url: `${SITE_URL}/market-reports/` },
           { name: `${a.name} vs ${b.name}`, url: `${SITE_URL}/compare/${slug}/` },
         ])}
       />

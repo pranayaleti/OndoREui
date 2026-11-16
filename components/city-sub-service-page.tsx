@@ -315,7 +315,7 @@ export function CitySubServicePage({ city, subService }: CitySubServicePageProps
             <h2 className="text-2xl font-bold">Talk to us about {city.name}</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">
-                <Link href="/contact/#book-a-call">Book a call</Link>
+                <Link href="/contact/">Book a call</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link href={subService.parentHref}>All {subService.parentName} services</Link>

@@ -15,44 +15,44 @@ export const SERVICE_TILES = [
 
 export function HeroSection() {
   return (
-    <section
-      className="relative w-full overflow-hidden bg-gradient-to-r from-background to-card py-16 dark:bg-gradient-to-b dark:from-background dark:to-card md:py-24"
-      aria-labelledby="hero-heading"
-    >
-      <div className="absolute inset-0 z-0 opacity-20" aria-hidden="true">
-        <Image
-          src="/modern-office-building.webp"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-          quality={75}
-          sizes="100vw"
-        />
+    <section className="relative w-full overflow-hidden bg-background" aria-labelledby="hero-heading">
+      {/* The brush ring from the logo, cropped by the section edge. The mask keeps the outer ring and drops
+          the portrait, which turns into a smudge at this size. Decorative: it never carries meaning. */}
+      <div
+        className="pointer-events-none absolute -bottom-64 -left-56 z-0 hidden h-[50rem] w-[50rem] opacity-[0.1] [mask-image:radial-gradient(circle_closest-side,transparent_60%,black_62%)] lg:block"
+        aria-hidden="true"
+      >
+        <Image src="/ondo-mark.webp" alt="" fill className="object-contain" sizes="800px" loading="lazy" />
       </div>
-      <div className="container relative z-10 mx-auto px-4 text-center">
-        <h1 id="hero-heading" className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          Rent, buy, sell, finance or notarize.
-        </h1>
-        <p className="mx-auto mb-10 max-w-2xl text-xl text-foreground/70">
-          One local team in Lehi for your home and your rental, across 55 Wasatch Front cities.
-        </p>
-        <ul
-          aria-label="What do you need?"
-          className="mx-auto grid max-w-4xl grid-cols-2 gap-3 text-left sm:grid-cols-3 md:gap-4"
-        >
+      <div className="container relative z-10 mx-auto grid gap-10 px-4 py-14 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-24">
+        <div className="lg:col-span-5">
+          <h1
+            id="hero-heading"
+            className="text-[2.75rem] font-bold leading-[1.04] tracking-[-0.02em] text-foreground sm:text-6xl xl:text-7xl"
+          >
+            Rent, buy, sell, finance or notarize.
+          </h1>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-foreground/70 md:text-xl">
+            One local team in Lehi for your home and your rental, across 55 Wasatch Front cities.
+          </p>
+        </div>
+        {/* A directory, not a card grid: one row per service, read top to bottom like the header. */}
+        <ul aria-label="What do you need?" className="border-t border-border lg:col-span-7">
           {SERVICE_TILES.map(({ href, label, line, icon: Icon, id }) => (
-            <li key={id}>
+            <li key={id} className="border-b border-border">
               <Link
                 href={href}
-                className="group flex h-full flex-col rounded-xl border border-border bg-card/90 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:p-5"
+                className="group flex min-h-[4.25rem] items-center gap-4 px-1 py-3 transition-colors hover:bg-foreground/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring sm:gap-6 sm:px-3 md:min-h-[4.75rem]"
                 {...analyticsAttributes("hero_audience_click", "home_hero", id)}
               >
-                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+                <span className="w-[5.5rem] shrink-0 font-display text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:w-32 md:text-3xl">
+                  {label}
                 </span>
-                <span className="text-lg font-semibold text-foreground">{label}</span>
-                <span className="mt-1 text-sm text-foreground/70">{line}</span>
+                <span className="flex-1 text-sm leading-snug text-foreground/70 sm:text-base">{line}</span>
+                <Icon
+                  className="h-5 w-5 shrink-0 text-foreground/35 transition-colors group-hover:text-primary"
+                  aria-hidden="true"
+                />
               </Link>
             </li>
           ))}

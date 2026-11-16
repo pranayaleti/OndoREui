@@ -10,6 +10,9 @@ import {
   fetchPublicPropertyListOrThrow,
   findPublicProperty,
   listingDetailPath,
+  legacyListingSegmentsFromListBody,
+  listingSegmentsFromListBody,
+  listingSlug,
   listingWorksheetPath,
   publicIdFromPathname,
   publicIdsFromListBody,
@@ -64,10 +67,21 @@ function listing(overrides: Partial<ApiProperty> = {}): ApiProperty {
 }
 
 describe("listingDetailPath", () => {
-  it("keeps the public pretty URL that cards and map pins already use", () => {
+  it("keeps /properties/{id} for a bare id", () => {
     expect(listingDetailPath("c2e653bf-1b6a-4f0c-9654-82a4896cb137")).toBe(
       "/properties/c2e653bf-1b6a-4f0c-9654-82a4896cb137",
     )
+  })
+
+  it("puts a listing with an address at the root: /{address-slug}", () => {
+    expect(
+      listingDetailPath({ publicId: "pub-1", addressLine1: "4323 West 11475 South", addressLine2: null }),
+    ).toBe("/4323-west-11475-south")
+  })
+
+  it("falls back to /properties/{publicId} with no address or a slug that collides with a route", () => {
+    expect(listingDetailPath({ publicId: "pub-1", addressLine1: null })).toBe("/properties/pub-1")
+    expect(listingDetailPath({ publicId: "pub-2", addressLine1: "Blog" })).toBe("/properties/pub-2")
   })
 })
 
@@ -91,6 +105,12 @@ describe("publicIdFromPathname", () => {
     expect(publicIdFromPathname("/properties/compare")).toBeNull()
     expect(publicIdFromPathname("/properties/compare/")).toBeNull()
     expect(publicIdFromPathname("/properties/abc/extra")).toBeNull()
+  })
+
+  it("reads an address slug from a root path, but not an ordinary typo URL", () => {
+    expect(publicIdFromPathname("/4323-west-11475-south/")).toBe("4323-west-11475-south")
+    expect(publicIdFromPathname("/blogg/")).toBeNull()
+    expect(publicIdFromPathname("/4323-west/extra/")).toBeNull()
   })
 })
 
@@ -343,5 +363,52 @@ describe("fetchPublicListingRowsForBuild", () => {
     await fetchPublicListingRowsForBuild(fetchImpl, { retryDelayMs: 0 })
     const init = (fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1] as RequestInit
     expect(init.signal).toBeInstanceOf(AbortSignal)
+  })
+})
+
+describe("listingSlug and address URLs", () => {
+  it("slugifies the street address", () => {
+    expect(listingSlug({ addressLine1: "4323 West 11475 South", addressLine2: null })).toBe(
+      "4323-west-11475-south",
+    )
+    expect(listingSlug({ addressLine1: "12 Main St.", addressLine2: "Apt #4" })).toBe(
+      "12-main-st-apt-unit-4",
+    )
+  })
+
+  it("returns null without an address", () => {
+    expect(listingSlug({ addressLine1: null, addressLine2: " " })).toBeNull()
+  })
+
+  it("builds /{slug} and falls back to /properties/{publicId}", () => {
+    expect(listingDetailPath({ publicId: "pub-1", addressLine1: "4323 West 11475 South" })).toBe(
+      "/4323-west-11475-south",
+    )
+    expect(listingDetailPath({ publicId: "pub-1", addressLine1: null })).toBe("/properties/pub-1")
+    expect(listingDetailPath({ id: "pub-2", addressParts: { line1: "9 Oak Ln" } })).toBe(
+      "/9-oak-ln",
+    )
+  })
+
+  it("prerenders one root segment per addressed listing", () => {
+    const rows = [
+      { publicId: "a", title: "A", addressLine1: "1 Elm St" },
+      { publicId: "b", title: "B", addressLine1: "1 Elm St" },
+      { publicId: "c", title: "C", addressLine1: null },
+      { publicId: "d", title: "D", addressLine1: "Blog" },
+    ]
+    expect(listingSegmentsFromListBody(rows)).toEqual(["1-elm-st"])
+    // Legacy stubs: the address URL, plus the id of each listing with no root URL.
+    expect(legacyListingSegmentsFromListBody(rows)).toEqual(["1-elm-st", "c", "blog", "d"])
+  })
+
+  it("resolves a listing by its address slug from the list fallback", async () => {
+    const rows = [{ publicId: "pub-9", title: "T", addressLine1: "9 Oak Ln", price: 1 }]
+    const fetchImpl = vi.fn(async (url: RequestInfo | URL) =>
+      String(url).includes("/public/")
+        ? new Response("{}", { status: 404 })
+        : new Response(JSON.stringify(rows), { status: 200 }),
+    ) as unknown as typeof fetch
+    expect((await fetchPublicPropertyByPublicId("9-oak-ln", fetchImpl))?.publicId).toBe("pub-9")
   })
 })

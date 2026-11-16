@@ -8,14 +8,14 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Utah Tenant Screening: Credit, Criminal & Eviction"),
   description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.",
   alternates: { canonical: `${SITE_URL}/property-management/tenant-screening/` },
-  openGraph: { type: "website", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: OG_IMAGES.manage },
+  twitter: { card: "summary_large_image", title: pageTitleText("Utah Tenant Screening: Credit, Criminal & Eviction"), description: "Screen Utah rental applicants properly: credit, criminal, eviction and income verification, Fair Housing compliant, with results you can defend.", images: [OG_IMAGE_URLS.manage] },
 }
 
 const checks = [
@@ -32,7 +32,7 @@ export default function TenantScreeningPage() {
         title="Tenant Screening Utah"
         description="Comprehensive tenant screening for Utah landlords: credit, criminal, eviction, and income verification."
         pathname="/property-management/tenant-screening"
-        image={`${SITE_URL}/property-manager-meeting.png`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Property Management", url: `${SITE_URL}/property-management` },

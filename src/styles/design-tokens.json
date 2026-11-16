@@ -15,13 +15,13 @@
     "border-light": { "value": "#E0E0E0" },
     "border-strong-light": { "value": "#D4D4D4" },
 
-    "bg-base-dark": { "value": "#0D1117" },
-    "bg-elevated-dark": { "value": "#131A25" },
+    "bg-base-dark": { "value": "#100F0E" },
+    "bg-elevated-dark": { "value": "#191817" },
     "text-primary-dark": { "value": "#F2F2F2" },
     "text-muted-dark": { "value": "#8C8C8C" },
     "link-dark": { "value": "#F2F2F2" },
-    "border-dark": { "value": "#242E3F" },
-    "border-strong-dark": { "value": "#2D3A50" },
+    "border-dark": { "value": "#2E2B29" },
+    "border-strong-dark": { "value": "#3B3835" },
 
     "accent-1": { "value": "#F97316" },
     "accent-2": { "value": "#FB923C" },
@@ -41,9 +41,9 @@
 
     "gradient-light-from": { "value": "#FFFFFF" },
     "gradient-light-to": { "value": "#FAFAFA" },
-    "gradient-dark-from": { "value": "#0D1117" },
-    "gradient-dark-to": { "value": "#131A25" },
-    "gradient-dark-accent": { "value": "linear-gradient(180deg, rgba(249,115,22,0.18) 0%, rgba(13,17,23,0) 65%)" }
+    "gradient-dark-from": { "value": "#100F0E" },
+    "gradient-dark-to": { "value": "#191817" },
+    "gradient-dark-accent": { "value": "linear-gradient(180deg, rgba(249,115,22,0.18) 0%, rgba(16,15,14,0) 65%)" }
   },
   "font": {
     "family-base": { "value": "Inter, \"Inter Fallback\"" },

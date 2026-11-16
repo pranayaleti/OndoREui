@@ -22,7 +22,8 @@ import { isValidEmail } from "@/lib/security"
 
 type Status = "idle" | "submitting" | "success" | "error"
 
-export function ListingPacketForm() {
+/** `showTitle={false}` when the section around the form already carries the same heading (as on /sell). */
+export function ListingPacketForm({ showTitle = true }: { showTitle?: boolean } = {}) {
   const { t } = useTranslation()
   const instanceId = useId().replace(/:/g, "")
   const fieldId = (name: string) => `listing-packet-${name}-${instanceId}`
@@ -99,7 +100,7 @@ export function ListingPacketForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t("listingPacket.title")}</CardTitle>
+        {showTitle ? <CardTitle>{t("listingPacket.title")}</CardTitle> : null}
         <CardDescription>{t("listingPacket.subtitle")}</CardDescription>
       </CardHeader>
       <CardContent>

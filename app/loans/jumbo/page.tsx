@@ -14,14 +14,14 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { CONFORMING_LIMIT_NOTE } from "@/lib/content"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate"),
   description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county. Look up this year’s table. This is not a quote.",
   alternates: { canonical: `${SITE_URL}/loans/jumbo/` },
-  openGraph: { type: "website", title: pageTitleText("Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate"), description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Jumbo Loans in Utah | Ondo Real Estate"), description: "Jumbo loans for high-value properties in Park City, Draper, and across Utah.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Jumbo Loans in Utah | Park City & Draper | Ondo Real Estate"), description: "Jumbo loans finance homes above the current FHFA conforming limit for the property county.", images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", title: pageTitleText("Jumbo Loans in Utah | Ondo Real Estate"), description: "Jumbo loans for high-value properties in Park City, Draper, and across Utah.", images: [OG_IMAGE_URLS.loans] },
 }
 
 const benefits = [
@@ -39,7 +39,7 @@ export default function JumboLoanPage() {
         title="Jumbo Loans in Utah"
         description="Jumbo loans finance homes above the current FHFA conforming limit for the property county."
         pathname="/loans/jumbo"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans` },

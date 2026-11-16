@@ -1,6 +1,8 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import { render, screen } from "@testing-library/react"
-import { PageBanner } from "./page-banner"
+import { PageBanner, bannerImageSrc } from "./page-banner"
 
 describe("PageBanner", () => {
   it("sets the title and subtitle in white on a theme-independent scrim", () => {
@@ -20,15 +22,44 @@ describe("PageBanner", () => {
     expect(img).not.toHaveAttribute("title")
   })
 
-  it("serves the WebP twin when a page names a PNG banner, and leaves other sources alone", () => {
-    const { container, rerender } = render(
-      <PageBanner title="T" subtitle="S" backgroundImage="/modern-office-building.png" />
-    )
-    expect(container.querySelector("img")!.getAttribute("src")).toContain("modern-office-building.webp")
+  it("serves the WebP twin when a page names a PNG photo, and leaves other sources alone", () => {
+    const { container, rerender } = render(<PageBanner title="T" subtitle="S" backgroundImage="/lehi-main-street.png" />)
+    expect(container.querySelector("img")!.getAttribute("src")).toContain("lehi-main-street.webp")
     rerender(<PageBanner title="T" subtitle="S" backgroundImage="/hero.webp" />)
     expect(container.querySelector("img")!.getAttribute("src")).toContain("hero.webp")
-    rerender(<PageBanner title="T" subtitle="S" />)
-    expect(container.querySelector("img")!.getAttribute("src")).toContain("modern-apartment-balcony.webp")
+  })
+
+  it("draws the brand ring when a page names no photo", () => {
+    const { container } = render(<PageBanner title="T" subtitle="S" />)
+    const ring = container.querySelector("img")!
+    expect(ring.getAttribute("src")).toContain("ondo-mark.webp")
+    expect(ring).toHaveAttribute("alt", "")
+    expect(bannerImageSrc(undefined)).toBeNull()
+  })
+
+  it("swaps every retired stock image for a Utah photo, whichever extension the page names", () => {
+    const { container, rerender } = render(<PageBanner title="T" subtitle="S" backgroundImage="/modern-office-building.png" />)
+    for (const [retired, photo] of [
+      ["/modern-office-building.png", "utah-mount-timpanogos.webp"],
+      ["/modern-office-building.webp", "utah-mount-timpanogos.webp"],
+      ["/property-manager-meeting.webp", "utah-mount-timpanogos.webp"],
+      ["/suburban-house-garden.webp", "utah-lake-wasatch.webp"],
+      ["/modern-apartment-balcony.webp", "utah-mountain-clouds.webp"],
+      ["/modern-townhouse-garage.webp", "utah-mountain-clouds.webp"],
+    ] as const) {
+      rerender(<PageBanner title="T" subtitle="S" backgroundImage={retired} />)
+      expect(container.querySelectorAll("img")).toHaveLength(1)
+      const img = container.querySelector("img")!
+      expect(img.getAttribute("src")).toContain(photo)
+      expect(img).toHaveAttribute("alt", "")
+      expect(img).toHaveClass("grayscale")
+    }
+  })
+
+  it("ships every Utah banner photo it points at", () => {
+    for (const name of ["utah-mount-timpanogos", "utah-lake-wasatch", "utah-mountain-clouds"]) {
+      expect(existsSync(join(process.cwd(), "public", "banners", `${name}.webp`))).toBe(true)
+    }
   })
 
   it("renders no buttons when no call to action is given", () => {

@@ -3,7 +3,6 @@ import { backendUrl } from "@/lib/backend";
 
 export interface SiteVisitPublic {
   id: string;
-  leadId: string;
   propertyId: string;
   proposedSlots: string[];
   status: string;

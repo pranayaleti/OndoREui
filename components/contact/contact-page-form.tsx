@@ -20,6 +20,7 @@ export function ContactPageForm() {
   return (
     <ContactLeadForm
       routeAfterSubmit
+      hideTitle
       initialInquiryType={initialInquiryType}
     />
   )

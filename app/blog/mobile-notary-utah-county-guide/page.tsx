@@ -13,7 +13,7 @@ import {
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { pageTitle, pageTitleText } from "@/lib/site"
 
 const TITLE = "Notary in Utah County: Remote Online Notarization Guide"
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     publishedTime: "2025-01-10",
     modifiedTime: "2026-08-13",
     authors: ["ONDO Notary Team"],
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.guides,
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: [DEFAULT_OG_IMAGE_URL],
+    images: [OG_IMAGE_URLS.guides],
   },
 }
 
@@ -75,7 +75,7 @@ export default function MobileNotaryUtahCountyGuide() {
         title={TITLE}
         description={DESCRIPTION}
         pathname={slug}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         publishedTime={published}
         modifiedTime={modified}
         author="ONDO Notary Team"

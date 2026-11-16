@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { LazyImage } from "@/components/lazy-image"
 import { useFinancialVisibility } from "@/lib/financial-visibility"
 import { backendUrl } from "@/lib/backend"
+import { listingDetailPath } from "@/lib/public-property"
 import { mapApiProperties } from "@/lib/mapProperty"
 import type { Property } from "@/app/types/property"
 import { screenListingDescription } from "@/lib/fair-housing-steering"
@@ -144,7 +145,7 @@ export function FeaturedPropertiesSection() {
                     variant="outline"
                     className="w-full dark:text-foreground dark:border-border dark:hover:bg-muted"
                   >
-                    <Link href={`/properties/${property.id}`}>View details</Link>
+                    <Link href={listingDetailPath(property)}>View details</Link>
                   </Button>
                 </CardFooter>
               </Card>

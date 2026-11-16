@@ -12,7 +12,7 @@ import ConsultationCTA from "@/components/ConsultationCTA"
 import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Utah Down Payment Assistance & Homebuyer Grants",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     description:
       "Utah Housing Corporation down payment assistance and the national grant and loan programs Utah buyers can pair with it, with official links.",
     url: `${SITE_URL}/buy/first-time/grants/`,
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.buy,
   },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.buy] },
 }
 
 interface GrantProgram {
@@ -104,7 +104,7 @@ export default function HousingGrantsPage() {
         title="Utah Down Payment Assistance & Homebuyer Grants"
         description="Utah down payment assistance through Utah Housing Corporation, plus the national grant and loan programs Utah buyers can pair with it, and who qualifies."
         pathname="/buy/first-time/grants"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

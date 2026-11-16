@@ -74,7 +74,7 @@ export default function AccessibilityPage() {
         title="Accessibility Statement | Ondo Real Estate"
         description="Our accessibility target, known issues and how to reach us about accessibility on the Ondo Real Estate website."
         pathname="/accessibility"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Accessibility", url: `${SITE_URL}/accessibility` },

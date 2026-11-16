@@ -1,9 +1,10 @@
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import type { Metadata } from "next"
 import CalculatorsPage from "./CalculatorsPage"
 import { GlossaryCategoryGrid } from "@/components/content/glossary-terms"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { SITE_URL, SITE_NAME, pageTitleText } from "@/lib/site"
+import { SITE_URL, pageTitleText } from "@/lib/site"
 export const metadata: Metadata = {
   title: "Mortgage & Affordability Calculators",
   description:
@@ -17,14 +18,15 @@ export const metadata: Metadata = {
     description:
       "Free Utah calculators for buyers, sellers and landlords: mortgage payment, closing costs, net sale proceeds and refinance break-even.",
     url: `${SITE_URL}/calculators`,
-    images: [
-      {
-        url: `${SITE_URL}/modern-office-building.webp`,
-        width: 1200,
-        height: 630,
-        alt: `Real estate calculators by ${SITE_NAME}`,
-      },
-    ],
+    images: OG_IMAGES.guides,
+  },
+  // Without its own twitter block the page inherits the root layout's, and shares the homepage's
+  // title and picture on X instead of its own.
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitleText("Utah Real Estate Calculators: Mortgage & Closing Cost"),
+    description: "Free Utah calculators for buyers, sellers and landlords: mortgage payment, closing costs, net sale proceeds and refinance break-even.",
+    images: [OG_IMAGE_URLS.guides],
   },
 }
 
@@ -35,7 +37,7 @@ export default function CalculatorsIndexPage() {
         title="Mortgage & Affordability Calculators"
         description="Use our mortgage payment, affordability, and refinance calculators to plan your Utah home purchase or refinance."
         pathname="/calculators"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Calculators", url: `${SITE_URL}/calculators` },

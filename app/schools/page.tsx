@@ -46,7 +46,7 @@ export default function SchoolsHubPage() {
         title="Utah School District Guides"
         description="Wasatch Front school district guides with official site links. Confirm details with the district."
         pathname="/schools"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={jsonLd}
       />
       <main className="min-h-screen">

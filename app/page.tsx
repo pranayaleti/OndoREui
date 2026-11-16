@@ -31,7 +31,7 @@ export default function Home() {
         title={HOME_PAGE_TITLE}
         description={HOME_PAGE_DESCRIPTION}
         pathname="/"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         keywords={[
           "Ondo RE",
           "Ondo Real Estate",

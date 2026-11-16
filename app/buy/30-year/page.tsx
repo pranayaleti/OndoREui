@@ -26,7 +26,7 @@ export default function ThirtyYearPage() {
         title="30-Year Mortgage Guide | Utah Real Estate"
         description="Learn about 30-year fixed-rate mortgages in Utah. Understand benefits, rates, and why it's the most popular home loan option."
         pathname="/buy/30-year"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

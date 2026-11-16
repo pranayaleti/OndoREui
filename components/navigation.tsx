@@ -85,13 +85,15 @@ export const Navigation = memo(function Navigation({
     return isNavItemActive(pathname, href)
   }, [pathname])
 
+  // The current page is marked by an orange rule under the label (desktop) or a quiet fill (drawer),
+  // never a solid orange pill: orange fills are reserved for the one action a page wants taken.
   const linkClass = (item: NavigationItem) =>
-    `text-xs md:text-sm font-medium px-2 md:px-3 py-2 rounded-md transition-colors duration-200 whitespace-nowrap flex-shrink-0 ${
+    `relative flex items-center text-base md:text-sm font-medium px-3 py-2 max-md:min-h-11 rounded-md transition-colors duration-150 whitespace-nowrap flex-shrink-0 ${
       item.special
-        ? "bg-gradient-to-r from-primary to-primary hover:from-primary hover:to-primary text-primary-foreground font-bold"
+        ? "bg-primary text-primary-foreground font-bold"
         : isActive(item.href)
-          ? "bg-primary text-primary-foreground"
-          : "text-foreground hover:bg-primary hover:text-primary-foreground"
+          ? "text-foreground max-md:bg-muted md:after:absolute md:after:inset-x-3 md:after:bottom-0.5 md:after:h-0.5 md:after:rounded-full md:after:bg-primary"
+          : "text-foreground/75 hover:bg-foreground/[0.06] hover:text-foreground"
     }`
 
   return (

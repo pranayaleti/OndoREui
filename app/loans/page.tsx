@@ -1,3 +1,4 @@
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { YourContactCard } from "@/components/people/your-contact-card"
 import { pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
@@ -26,14 +27,15 @@ export const metadata: Metadata = {
     title: pageTitleText("Utah Home Loans: FHA, VA, USDA, Conventional & Jumbo"),
     description: DESCRIPTION,
     url: `${SITE_URL}/loans/`,
-    images: [
-      {
-        url: `${SITE_URL}/modern-office-building.png`,
-        width: 1200,
-        height: 630,
-        alt: "Utah mortgage and loan services",
-      },
-    ],
+    images: OG_IMAGES.loans,
+  },
+  // Without its own twitter block the page inherits the root layout's, and shares the homepage's
+  // title and picture on X instead of its own.
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitleText("Utah Home Loans: FHA, VA, USDA, Conventional & Jumbo"),
+    description: DESCRIPTION,
+    images: [OG_IMAGE_URLS.loans],
   },
 }
 
@@ -61,7 +63,7 @@ export default function LoansPage() {
         title="Utah Home Loans & Mortgages | Conventional, FHA, VA, USDA"
         description={DESCRIPTION}
         pathname="/loans/"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

@@ -39,6 +39,16 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    /* Outfit is the wordmark face. Declared here, not on :root, because next/font sets --font-outfit on body. */
+    --font-display: var(--font-outfit), var(--font-family-base);
+  }
+
+  /* Headings speak in the wordmark's face; body copy stays Inter. :where() keeps specificity at zero,
+     so any class (or a page with its own type, like the founder's letter) still wins. */
+  :where(h1, h2, h3) {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
 
   /* Fix for Next.js portal elements - ensure they don't interfere with layout */

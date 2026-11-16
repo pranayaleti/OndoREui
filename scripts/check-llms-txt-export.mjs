@@ -33,7 +33,7 @@ for (const rel of disclosureFiles) {
     console.error(`${rel} looks like HTML; expected text/plain`)
     process.exit(1)
   }
-  // "NMLS ID on file" until licensing; the real company ID once LICENSING_LIVE is on.
+  // "NMLS ID on file" until licensing; the real company ID once MLO_LICENSE_LIVE is on.
   if (!text.includes("## Required disclosures") || !/NMLS ID on file|Company NMLS ID \d+/.test(text)) {
     console.error(`${rel} is missing the required disclosures block`)
     process.exit(1)

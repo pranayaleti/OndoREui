@@ -68,7 +68,7 @@ export default function FeedbackPage() {
         title="Suggest Improvements | Ondo Real Estate"
         description="Share ideas to improve Ondo Real Estate. We read every suggestion and use the useful ones to decide what to build next."
         pathname="/feedback"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Share Feedback", url: `${SITE_URL}/feedback` },

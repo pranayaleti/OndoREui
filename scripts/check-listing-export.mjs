@@ -2,7 +2,7 @@
 /**
  * Post-build guard for the production deploy: the export must contain listing pages.
  *
- * app/properties/[publicId]/page.tsx emits only /properties/_placeholder/ when the listings API is
+ * app/[listing]/page.tsx emits only /_placeholder/ when the listings API is
  * unreachable at build time, and the sitemap then has no listing URLs. Without this check a
  * transient API outage during the deploy build publishes that degraded site and the deploy goes green.
  *
@@ -15,19 +15,20 @@ import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
-/** Segments under out/properties/ that are not listings. */
-const NON_LISTING_SEGMENTS = new Set(["_placeholder", "compare"])
+/** Root-level listing URLs are /{address-slug}/, street number first. */
+const ROOT_LISTING_URL = /^https?:\/\/[^/]+\/([0-9][a-z0-9-]*)\/?$/
+const ROOT_LISTING_DIR = /^(?!404$)[0-9][a-z0-9-]*$/
 
-/** Number of exported listing detail directories (everything except the stub and /compare). */
+/** Number of exported listing detail directories at the root of the export. */
 export function countListingPages(outDir) {
-  const dir = path.join(outDir, "properties")
-  if (!fs.existsSync(dir)) return 0
+  if (!fs.existsSync(outDir)) return 0
   return fs
-    .readdirSync(dir, { withFileTypes: true })
-    .filter((e) => e.isDirectory() && !NON_LISTING_SEGMENTS.has(e.name)).length
+    .readdirSync(outDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && ROOT_LISTING_DIR.test(e.name) && fs.existsSync(path.join(outDir, e.name, "index.html")))
+    .length
 }
 
-/** Number of /properties/{id}/ URLs across out/sitemap*.xml. */
+/** Number of /{address-slug}/ URLs across out/sitemap*.xml. */
 export function countSitemapListingUrls(outDir) {
   if (!fs.existsSync(outDir)) return 0
   let count = 0
@@ -35,8 +36,7 @@ export function countSitemapListingUrls(outDir) {
     if (!/^sitemap.*\.xml$/.test(name)) continue
     const xml = fs.readFileSync(path.join(outDir, name), "utf8")
     for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
-      const match = /\/properties\/([^/]+)\/?$/.exec(m[1])
-      if (match && !NON_LISTING_SEGMENTS.has(match[1])) count += 1
+      if (ROOT_LISTING_URL.test(m[1])) count += 1
     }
   }
   return count
@@ -48,11 +48,11 @@ export function findListingExportProblems(outDir, minListings) {
   const problems = []
   const pages = countListingPages(outDir)
   if (pages < minListings) {
-    problems.push(`out/properties/ has ${pages} listing page(s), expected at least ${minListings}`)
+    problems.push(`out/ has ${pages} listing page(s) (/{address}/), expected at least ${minListings}`)
   }
   const urls = countSitemapListingUrls(outDir)
   if (urls < minListings) {
-    problems.push(`out/sitemap*.xml has ${urls} /properties/ URL(s), expected at least ${minListings}`)
+    problems.push(`out/sitemap*.xml has ${urls} listing URL(s), expected at least ${minListings}`)
   }
   return problems
 }

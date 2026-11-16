@@ -79,7 +79,7 @@ export default function SitemapPage() {
         title="Sitemap | Ondo Real Estate"
         description="Human-readable index of every public Ondo Real Estate page: buy, sell, loans, investments, notary, calculators, FAQs, and blog. Includes links to XML sitemap and LLM brief."
         pathname="/sitemap"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={structuredData}
       />
 

@@ -11,14 +11,14 @@ import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Cash-Out Refinance in Utah | Ondo Real Estate"),
   description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.",
   alternates: { canonical: `${SITE_URL}/refinance/cash-out/` },
-  openGraph: { type: "website", title: pageTitleText("Cash-Out Refinance in Utah | Ondo Real Estate"), description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", url: `${SITE_URL}/refinance/cash-out/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Cash-Out Refinance in Utah | Ondo Real Estate"), description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Cash-Out Refinance in Utah | Ondo Real Estate"), description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", url: `${SITE_URL}/refinance/cash-out/`, images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", title: pageTitleText("Cash-Out Refinance in Utah | Ondo Real Estate"), description: "A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses.", images: [OG_IMAGE_URLS.loans] },
 }
 
 export default function CashOutRefinancePage() {
@@ -29,7 +29,7 @@ export default function CashOutRefinancePage() {
         title="Cash-Out Refinance in Utah"
         description={"A cash-out refinance converts home equity into cash by replacing your mortgage with a larger loan. Learn the limits, costs, and smart uses."}
         pathname="/refinance/cash-out"
-        image={`${SITE_URL}/modern-townhouse-garage.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Refinance", url: `${SITE_URL}/refinance` },

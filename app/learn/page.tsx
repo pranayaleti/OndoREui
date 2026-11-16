@@ -24,7 +24,7 @@ export default function LearnHubPage() {
         title="Mortgage Learning Hub"
         description="Utah mortgage education by topic: first-time buyers, loan programs, variable income, refinance, and calculators."
         pathname="/learn"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Learn", url: `${SITE_URL}/learn` },

@@ -1,6 +1,5 @@
 "use client"
 import Link from "next/link"
-import Image from "next/image"
 import { memo, useState } from "react"
 import {
   SITE_SOCIAL_LINKS,
@@ -12,13 +11,12 @@ import {
   SITE_ADDRESS_CITY,
   SITE_ADDRESS_REGION,
   SITE_ADDRESS_POSTAL_CODE,
-  LICENSING_LIVE,
+  MLO_LICENSE_LIVE,
   nmlsIdentification,
 } from "@/lib/site"
 import { usePwaInstall } from "@/lib/pwa/install-context"
 import { usePathname } from "next/navigation"
 import {
-  MessageCircle,
   Phone,
   Mail,
   MapPin,
@@ -195,7 +193,6 @@ const Footer = memo(() => {
   const path = pathname ?? ""
   const isNotaryRoute = path === "/notary" || path.startsWith("/notary/")
   const isContactRoute = path === "/contact" || path === "/contact/"
-  const isFeedbackRoute = path === "/feedback" || path === "/feedback/" || path.startsWith("/feedback/")
   /** Pages that already include a full or dedicated inline Calendly, so the footer skips its booking link */
   const showFooterBooking = path !== "/" && !isContactRoute && !isNotaryRoute
 
@@ -209,28 +206,6 @@ const Footer = memo(() => {
 
   return (
     <footer className="w-full bg-card text-foreground">
-      {!isFeedbackRoute && (
-        <div className="border-b border-border bg-primary/5">
-          <div className="container mx-auto flex flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3">
-              <div className="mt-0.5 rounded-full bg-primary/10 p-2 text-primary">
-                <MessageCircle className="h-5 w-5" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold leading-tight">Have feedback?</p>
-                <p className="text-sm text-foreground/70 leading-tight">Tell us what would make this site better.</p>
-              </div>
-            </div>
-            <Link
-              href="/feedback"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            >
-              Share feedback
-            </Link>
-          </div>
-        </div>
-      )}
-
       {showFooterBooking && (
         <div className="border-b border-border bg-muted/20">
           <div className="container mx-auto flex max-w-3xl flex-col items-center gap-3 px-4 py-8 text-center sm:flex-row sm:justify-between sm:text-left">
@@ -240,7 +215,7 @@ const Footer = memo(() => {
             </div>
             {/* A link, not an inline Calendly embed: the scheduler loads only on /contact/ when someone asks for it. */}
             <Link
-              href="/contact/#book-a-call"
+              href="/contact/"
               className="inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               {...analyticsAttributes("book_call_click", "footer", "book-a-call")}
             >
@@ -340,24 +315,15 @@ const Footer = memo(() => {
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </Link>
               ))}
-              <div className="flex items-center gap-2 ml-2 pl-4 border-l border-border">
-                <Link
-                  href="/links/"
-                  className="text-foreground/70 hover:text-foreground transition-colors"
-                  aria-label="All Ondo links in one place"
-                  {...analyticsAttributes("links_hub_click", "footer", "qr")}
-                >
-                  <Image
-                    src="/links-qr.svg"
-                    alt=""
-                    width={52}
-                    height={52}
-                    className="h-8 w-8 rounded border bg-card p-0.5"
-                    sizes="32px"
-                    loading="lazy"
-                  />
-                </Link>
-              </div>
+              {/* The scannable QR lives on /contact/ only; every other page gets this one-line link. */}
+              <Link
+                href="/links/"
+                className="inline-flex min-h-11 items-center ml-2 pl-4 border-l border-border text-sm text-foreground/70 hover:text-foreground transition-colors"
+                aria-label="All Ondo links in one place"
+                {...analyticsAttributes("links_hub_click", "footer", "links")}
+              >
+                All links
+              </Link>
             </div>
 
             {/* Legal Information */}
@@ -366,7 +332,8 @@ const Footer = memo(() => {
                 <EqualHousingIcon className="text-foreground/70" />
                 <span>Equal Housing Opportunity</span>
               </div>
-              {LICENSING_LIVE ? (
+              {/* The lender line and NMLS identification belong to the mortgage license only. */}
+              {MLO_LICENSE_LIVE ? (
                 <>
                   <span className="h-4 w-px bg-muted" />
                   <span>Equal Housing Lender</span>
@@ -412,6 +379,7 @@ const Footer = memo(() => {
               <Link href="/privacy-policy" className="hover:text-foreground">Privacy Policy</Link>
               <Link href="/terms-of-service" className="hover:text-foreground">Terms of Use</Link>
               <Link href="/accessibility" className="hover:text-foreground">Accessibility</Link>
+              <Link href="/feedback/" className="hover:text-foreground">Feedback</Link>
               <Link href="/sitemap" className="hover:text-foreground">Site Map</Link>
             </div>
           </div>

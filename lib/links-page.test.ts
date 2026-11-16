@@ -46,12 +46,4 @@ describe("linksPageSocials", () => {
       "https://www.youtube.com/@OnDoRealEstate",
     ])
   })
-
-  it("drops Linktree even when live, since it now forwards to this page", () => {
-    const profiles: SocialLink[] = [
-      { url: "https://linktr.ee/ondorealestate", live: true },
-      { url: "https://x.com/OnDoRealEstate", live: true },
-    ]
-    expect(linksPageSocials(profiles)).toEqual(["https://x.com/OnDoRealEstate"])
-  })
 })

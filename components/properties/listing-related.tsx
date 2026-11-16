@@ -60,7 +60,7 @@ export function ListingRelated({ listings }: ListingRelatedProps) {
                   <p className="text-lg font-semibold">{formatMonthlyRent(listing.price)}/mo</p>
                   <h3 className="mt-1 font-medium leading-snug">
                     <Link
-                      href={listingDetailPath(listing.publicId)}
+                      href={listingDetailPath(listing)}
                       className="hover:underline"
                     >
                       {listing.title}

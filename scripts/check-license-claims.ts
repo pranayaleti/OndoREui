@@ -1,13 +1,16 @@
 #!/usr/bin/env tsx
 /**
- * Post-build guard: while LICENSING_LIVE is off, fail the build if any exported page presents
- * Pranay as a licensed real estate agent or loan officer, or prints an NMLS number.
- * Patterns and their tests: lib/license-claims.ts. Usage: npx tsx scripts/check-license-claims.ts [outDir]
+ * Post-build guard: for every license whose switch in lib/site.ts is off, fail the build if any
+ * exported page presents Pranay with that license's title or prints its number (an NMLS ID, the
+ * real estate license number, the notary commission). A live license's claims are allowed; the
+ * other lines are still scanned, so the real estate license can go live without unlocking loan
+ * officer claims. Patterns and their tests: lib/license-claims.ts.
+ * Usage: npx tsx scripts/check-license-claims.ts [outDir]
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { join, relative, resolve } from "node:path"
-import { findLicenseClaims } from "../lib/license-claims"
-import { LICENSING_LIVE } from "../lib/site"
+import { findLicenseClaims, type LicenseLine } from "../lib/license-claims"
+import { LICENSING } from "../lib/site"
 
 function* exportedFiles(dir: string): Generator<string> {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -22,8 +25,9 @@ function* exportedFiles(dir: string): Generator<string> {
 
 /* eslint-disable no-console -- CLI output */
 const outDir = resolve(process.argv[2] ?? "out")
-if (LICENSING_LIVE) {
-  console.log("check-license-claims: LICENSING_LIVE is on, licensed titles are allowed")
+const pending = (Object.keys(LICENSING) as LicenseLine[]).filter((line) => !LICENSING[line])
+if (pending.length === 0) {
+  console.log("check-license-claims: every license switch is on, licensed titles are allowed")
   process.exit(0)
 }
 if (!existsSync(outDir)) {
@@ -35,14 +39,16 @@ let scanned = 0
 for (const file of exportedFiles(outDir)) {
   scanned += 1
   const kind = file.endsWith(".html") ? "html" : "text"
-  for (const claim of findLicenseClaims(readFileSync(file, "utf8"), kind)) {
-    problems.push(`${relative(outDir, file)} [${claim.rule}] ${claim.excerpt}`)
+  for (const claim of findLicenseClaims(readFileSync(file, "utf8"), kind, LICENSING)) {
+    problems.push(`${relative(outDir, file)} [${claim.line}:${claim.rule}] ${claim.excerpt}`)
   }
 }
 if (problems.length > 0) {
   for (const problem of problems.slice(0, 50)) console.error(problem)
   if (problems.length > 50) console.error(`...and ${problems.length - 50} more`)
-  console.error(`check-license-claims: ${problems.length} license claim(s) while LICENSING_LIVE is off`)
+  console.error(
+    `check-license-claims: ${problems.length} claim(s) for a license that is not live (pending: ${pending.join(", ")})`,
+  )
   process.exit(1)
 }
-console.log(`check-license-claims: ${scanned} files, no license claims`)
+console.log(`check-license-claims: ${scanned} files, no claims for pending licenses (${pending.join(", ")})`)

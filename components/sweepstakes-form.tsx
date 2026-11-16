@@ -73,16 +73,18 @@ export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
       const data = await response.json()
 
       if (response.ok) {
-        setGeneratedCode(data.referralCode)
+        // A repeat entry gets no code back (the server never reveals an existing entrant's code).
+        setGeneratedCode(data.referralCode ?? "")
         setIsSubmitted(true)
         toast({
           title: "Success!",
-          description: "You've been entered into the sweepstakes!",
+          description: data.referralCode ? "You've been entered into the sweepstakes!" : data.message,
         })
       } else {
         toast({
           title: "Error",
-          description: data.error || "Something went wrong. Please try again.",
+          // Both backends answer errors as { message }; `error` is kept for older responses.
+          description: data.message || data.error || "Something went wrong. Please try again.",
           variant: "destructive",
         })
       }
@@ -119,6 +121,22 @@ export function SweepstakesForm({ initialReferralCode }: SweepstakesFormProps) {
         ? prev.services.filter((s) => s !== service)
         : [...prev.services, service],
     }))
+  }
+
+  if (isSubmitted && !generatedCode) {
+    return (
+      <Card className="border-primary">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-6 w-6 text-primary" />
+            <CardTitle>You're Already Entered</CardTitle>
+          </div>
+          <CardDescription>
+            This email is already in the sweepstakes. Your referral code was shown when you first entered.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    )
   }
 
   if (isSubmitted && generatedCode) {

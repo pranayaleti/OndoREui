@@ -5,26 +5,113 @@ import { backendUrl } from "@/lib/backend"
 export const PROPERTY_DETAIL_PLACEHOLDER_ID = "_placeholder"
 export const LISTING_STATIC_SEGMENTS = ["compare", PROPERTY_DETAIL_PLACEHOLDER_ID] as const
 
-export function listingDetailPath(publicId: string): string {
-  return `/properties/${encodeURIComponent(publicId)}`
+type ApiListingAddress = { publicId: string; addressLine1?: string | null; addressLine2?: string | null }
+/** The mapped UI `Property` / map pin shape: id is the publicId, address lives in addressParts. */
+type MappedListingAddress = {
+  id: string
+  addressParts?: { line1?: string | null; line2?: string | null }
+}
+type ListingAddressFields = ApiListingAddress | MappedListingAddress
+
+/**
+ * URL slug from the street address, e.g. "4323 West 11475 South" -> "4323-west-11475-south".
+ * Unit (addressLine2) is appended so two units at one address stay distinct.
+ * Null when the listing has no usable address (callers fall back to the publicId).
+ */
+export function listingSlug(
+  property: {
+    addressLine1?: string | null
+    addressLine2?: string | null
+    addressParts?: { line1?: string | null; line2?: string | null }
+  },
+): string | null {
+  const [line1, line2] =
+    property.addressParts
+      ? [property.addressParts.line1, property.addressParts.line2]
+      : [property.addressLine1, property.addressLine2]
+  const slug = [line1, line2]
+    .filter((part): part is string => typeof part === "string" && part.trim().length > 0)
+    .join(" ")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/#/g, " unit ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+  return slug || null
+}
+
+/**
+ * Top-level route names an address slug must never take. Root-level listing URLs
+ * (`/4323-west-11475-south/`) share the namespace with every static route, and a
+ * static route always wins, so a colliding listing would be unreachable. A test
+ * keeps this in step with the folders in `app/`.
+ */
+export const RESERVED_ROOT_SEGMENTS: ReadonlySet<string> = new Set([
+  "404", "_next", "about", "accessibility", "admin", "affiliate", "api", "app", "applications", "apply",
+  "auth", "blog", "buy", "buy-sell", "calculators", "chat", "compare", "compare-utah-property-managers",
+  "contact", "data", "explore", "faq", "feedback", "founders-letter", "get-matched", "glossary", "go",
+  "health", "icons", "images", "instagram", "intake", "investments", "invite", "learn", "licensing",
+  "links", "llms", "loans", "locales", "locations", "login", "market-reports", "moving-to-utah",
+  "neighborhoods", "notary", "numbers", "owner", "platform", "pricing", "privacy-policy", "properties",
+  "property-management", "qualify", "referral", "refinance", "resources", "schools", "search", "sell",
+  "sitemap", "subscribe", "sweepstakes", "tenant", "tenantonboarding", "terms-of-service", "tools", "types",
+  "unsubscribe", "verify", "visit", "whats-my-home-worth",
+])
+
+/**
+ * The root-level segment for a listing: its address slug, or null when it has no
+ * usable address or the slug collides with a site route (those stay at
+ * `/properties/{publicId}/`).
+ */
+export function rootListingSlug(property: Parameters<typeof listingSlug>[0]): string | null {
+  const slug = listingSlug(property)
+  if (!slug) return null
+  if (RESERVED_ROOT_SEGMENTS.has(slug) || (LISTING_STATIC_SEGMENTS as readonly string[]).includes(slug)) {
+    return null
+  }
+  return slug
+}
+
+/**
+ * Canonical listing path: `/{address-slug}`, e.g. `/4323-west-11475-south`.
+ * A listing with no usable address, and a bare id string, use the legacy
+ * `/properties/{publicId}` path (still resolves, but a bare id is not canonical
+ * when an address exists).
+ */
+export function listingDetailPath(property: string | ListingAddressFields): string {
+  if (typeof property !== "string") {
+    const slug = rootListingSlug(property)
+    if (slug) return `/${encodeURIComponent(slug)}`
+  }
+  const segment =
+    typeof property === "string" ? property : "publicId" in property ? property.publicId : property.id
+  return `/properties/${encodeURIComponent(segment)}`
 }
 
 /** Existing PDP worksheet hash, not a second investor funnel. */
-export function listingWorksheetPath(publicId: string): string {
-  return `${listingDetailPath(publicId)}#underwrite`
+export function listingWorksheetPath(property: string | ListingAddressFields): string {
+  return `${listingDetailPath(property)}#underwrite`
 }
 
 export function listingComparePath(): string {
   return "/properties/compare"
 }
 
+/** Root-level address slugs start with the street number: `/4323-west-11475-south`. */
+const ROOT_LISTING_PATH = /^\/([0-9][a-z0-9-]*)$/
+
 /**
- * `/properties/{publicId}` under `output: "export"` + trailingSlash.
+ * The listing id or address slug a pathname asks for, under `output: "export"` +
+ * trailingSlash: `/{address-slug}` or the legacy `/properties/{id}`.
  * Null for the browse page, nested paths, and the build-time placeholder.
+ * Root paths are matched by shape (digit first) so an ordinary typo URL still
+ * gets the plain 404; the listing client then confirms against the API.
  */
 export function publicIdFromPathname(pathname: string): string | null {
   const normalized = pathname.replace(/\/+$/, "") || "/"
-  const match = /^\/properties\/([^/]+)$/.exec(normalized)
+  const match = /^\/properties\/([^/]+)$/.exec(normalized) ?? ROOT_LISTING_PATH.exec(normalized)
   if (!match?.[1]) return null
   let id = match[1]
   try {
@@ -179,6 +266,35 @@ export async function fetchPublicPropertyList(
   }
 }
 
+/**
+ * Root-level segments to prerender: one `/{address-slug}/` per listing that has a
+ * usable, non-colliding address. Deduplicated, so an address collision keeps the
+ * first listing.
+ */
+export function listingSegmentsFromListBody(body: unknown): string[] {
+  const segments = new Set<string>()
+  for (const row of listingRows(body)) {
+    const slug = rootListingSlug(row)
+    if (slug) segments.add(slug)
+  }
+  return [...segments]
+}
+
+/**
+ * Segments to prerender under `/properties/`: the legacy address URL (a redirect
+ * stub to the root URL, so links already shared keep working on a host with no
+ * server redirects) plus the publicId for listings that have no root URL.
+ */
+export function legacyListingSegmentsFromListBody(body: unknown): string[] {
+  const segments = new Set<string>()
+  for (const row of listingRows(body)) {
+    const slug = listingSlug(row)
+    if (slug && !(LISTING_STATIC_SEGMENTS as readonly string[]).includes(slug)) segments.add(slug)
+    if (!rootListingSlug(row)) segments.add(row.publicId)
+  }
+  return [...segments]
+}
+
 export function publicIdsFromListBody(body: unknown): string[] {
   const raw = Array.isArray(body)
     ? body
@@ -199,7 +315,7 @@ export function publicIdsFromListBody(body: unknown): string[] {
 }
 
 /**
- * Resolve a public listing by publicId (or internal id).
+ * Resolve a public listing by publicId, internal id, or address slug.
  *
  * `GET /api/properties/public/:id` tries `public_id` then internal `id` for
  * approved vacant rows. Keep a list fallback for rollout (old Edge without
@@ -227,7 +343,11 @@ export async function fetchPublicPropertyByPublicId(
 
   try {
     const rows = (await fetchAllPublicListingRows(fetchImpl)).filter(isApiProperty)
-    return rows.find((row) => row.publicId === publicId || row.id === publicId) ?? null
+    return (
+      rows.find((row) => row.publicId === publicId || row.id === publicId) ??
+      rows.find((row) => listingSlug(row) === publicId) ??
+      null
+    )
   } catch {
     return null
   }
@@ -260,7 +380,9 @@ export async function checkListingAvailability(
     if (res.ok) return "available"
     if (res.status !== 404) return "unknown"
     const rows = (await fetchAllPublicListingRows(fetchImpl, { cache: "no-store" })).filter(isApiProperty)
-    return rows.some((row) => row.publicId === publicId || row.id === publicId)
+    return rows.some(
+      (row) => row.publicId === publicId || row.id === publicId || listingSlug(row) === publicId,
+    )
       ? "available"
       : "unavailable"
   } catch {

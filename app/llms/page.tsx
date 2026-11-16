@@ -95,7 +95,7 @@ export default function LlmsDiscoveryPage() {
         title="LLM & agent discovery | Ondo Real Estate"
         description="Machine-readable briefs and structured data for AI assistants and crawlers covering Ondo Real Estate."
         pathname="/llms"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={structuredData}
       />
 

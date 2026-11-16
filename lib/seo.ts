@@ -1,3 +1,4 @@
+import { shareImageKeyForPath, shareImagePath } from "@/lib/share-images"
 import type { Metadata } from "next"
 import {
   SITE_NAME,
@@ -12,8 +13,14 @@ import {
   SITE_BRAND_SHORT,
   SITE_GEO,
   SITE_CALENDLY_URL,
-  LICENSING_LIVE,
+  LICENSING,
+  licensingState,
+  type LicensingState,
   NMLS_CONSUMER_ACCESS_URL,
+  SITE_NOTARY_COMMISSION_NUMBER,
+  UTAH_DIVISION_OF_REAL_ESTATE_URL,
+  UTAH_NOTARY_SEARCH_URL,
+  nmlsConsumerAccessUrl,
 } from "./site"
 import { getTestimonialKind, testimonials } from "./testimonials"
 import { toAbsoluteSiteUrl } from "./url"
@@ -59,12 +66,87 @@ export function founderPersonRef() {
 
 /**
  * The full founder Person node. Only the profile page embeds it; every other page uses
- * founderPersonRef(). License titles, credentials and sponsors appear only when `live`.
+ * founderPersonRef(). Each license's title, credential and sponsor appears only when that
+ * license is live (lib/site.ts): the agent title with RE_LICENSE_LIVE, the loan officer title,
+ * NMLS credential and Consumer Access link with MLO_LICENSE_LIVE, the notary commission with
+ * NOTARY_COMMISSION_LIVE. The legacy boolean means both licenses.
  */
-export function founderPersonJsonLd(live: boolean = LICENSING_LIVE): Record<string, unknown> {
+export function founderPersonJsonLd(live: boolean | LicensingState = LICENSING): Record<string, unknown> {
+  const state = licensingState(live)
   const founder = getFounder()
   const licenses = founder.licenses
   const image = toAbsoluteUrl(founder.image)
+  const jobTitles = [
+    'Founder',
+    ...(state.re ? ['Real Estate Agent'] : []),
+    ...(state.mlo ? ['Loan Officer', 'Mortgage Loan Originator'] : []),
+    ...(state.notary ? ['Notary Public'] : []),
+  ]
+  const hasCredential = [
+    ...(state.re && licenses
+      ? [
+          {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'license',
+            name: 'Utah real estate sales agent license',
+            identifier: licenses.realEstate.number,
+            recognizedBy: {
+              '@type': 'GovernmentOrganization',
+              name: 'Utah Division of Real Estate',
+              url: UTAH_DIVISION_OF_REAL_ESTATE_URL,
+            },
+          },
+        ]
+      : []),
+    ...(state.mlo && licenses
+      ? [
+          {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'license',
+            name: 'Mortgage loan originator license',
+            identifier: `NMLS ${licenses.mortgage.nmlsId}`,
+            recognizedBy: {
+              '@type': 'Organization',
+              name: 'Nationwide Multistate Licensing System (NMLS)',
+              url: NMLS_CONSUMER_ACCESS_URL,
+            },
+          },
+        ]
+      : []),
+    ...(state.notary
+      ? [
+          {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'commission',
+            name: 'Utah notary public commission',
+            identifier: SITE_NOTARY_COMMISSION_NUMBER,
+            recognizedBy: {
+              '@type': 'GovernmentOrganization',
+              name: 'Office of the Utah Lieutenant Governor',
+              url: UTAH_NOTARY_SEARCH_URL,
+            },
+          },
+        ]
+      : []),
+  ]
+  const affiliation = [
+    ...(state.re && licenses ? [{ '@type': 'Organization', name: licenses.realEstate.brokerageName }] : []),
+    ...(state.mlo && licenses
+      ? [
+          {
+            '@type': 'Organization',
+            name: licenses.mortgage.lenderName,
+            identifier: `NMLS ${licenses.mortgage.lenderNmlsId}`,
+          },
+        ]
+      : []),
+  ]
+  // His own profiles, plus the public NMLS record once the mortgage license is live: the one
+  // off-site page that ties the name to the NMLS ID.
+  const sameAs = [
+    ...(founder.sameAs ?? []),
+    ...(state.mlo && licenses ? [nmlsConsumerAccessUrl(licenses.mortgage.nmlsId)] : []),
+  ]
   return {
     '@type': 'Person',
     '@id': FOUNDER_PERSON_ID,
@@ -72,45 +154,15 @@ export function founderPersonJsonLd(live: boolean = LICENSING_LIVE): Record<stri
     url: pageUrl(FOUNDER_PROFILE_PATH),
     ...(image ? { image } : {}),
     description: founder.bio,
-    jobTitle: live ? ['Founder', 'Real Estate Agent', 'Loan Officer'] : 'Founder',
+    jobTitle: jobTitles.length === 1 ? 'Founder' : jobTitles,
     worksFor: { '@id': SITE_ORGANIZATION_ID },
     ...(founder.knowsAbout?.length ? { knowsAbout: [...founder.knowsAbout] } : {}),
     ...(founder.areaServed?.length
       ? { areaServed: founder.areaServed.map((name) => ({ '@type': 'AdministrativeArea', name })) }
       : {}),
-    ...(founder.sameAs?.length ? { sameAs: [...founder.sameAs] } : {}),
-    ...(live && licenses
-      ? {
-          hasCredential: [
-            {
-              '@type': 'EducationalOccupationalCredential',
-              credentialCategory: 'license',
-              name: 'Utah real estate sales agent license',
-              identifier: licenses.realEstate.number,
-              recognizedBy: { '@type': 'GovernmentOrganization', name: 'Utah Division of Real Estate' },
-            },
-            {
-              '@type': 'EducationalOccupationalCredential',
-              credentialCategory: 'license',
-              name: 'Mortgage loan originator license',
-              identifier: `NMLS ${licenses.mortgage.nmlsId}`,
-              recognizedBy: {
-                '@type': 'Organization',
-                name: 'Nationwide Multistate Licensing System (NMLS)',
-                url: NMLS_CONSUMER_ACCESS_URL,
-              },
-            },
-          ],
-          affiliation: [
-            { '@type': 'Organization', name: licenses.realEstate.brokerageName },
-            {
-              '@type': 'Organization',
-              name: licenses.mortgage.lenderName,
-              identifier: `NMLS ${licenses.mortgage.lenderNmlsId}`,
-            },
-          ],
-        }
-      : {}),
+    ...(sameAs.length ? { sameAs } : {}),
+    ...(hasCredential.length ? { hasCredential } : {}),
+    ...(affiliation.length ? { affiliation } : {}),
   }
 }
 
@@ -189,10 +241,13 @@ export function generateServiceJsonLd(service: ServiceData) {
     ...(service.id ? { '@id': service.id } : {}),
     name: service.name,
     description: service.description,
+    // Either form resolves to the one #organization node in the root layout. The named form keeps
+    // the name for consumers that do not follow @id, without minting a second Organization entity.
     provider: service.providerIsSiteOrganization
       ? { '@id': SITE_ORGANIZATION_ID }
       : {
           '@type': 'Organization',
+          '@id': SITE_ORGANIZATION_ID,
           name: SITE_NAME,
           alternateName: [SITE_BRAND_SHORT, "OnDo"],
           url: SITE_URL,
@@ -402,7 +457,9 @@ export function generateRealEstateBusinessJsonLd() {
   const ratingAndReviews = buildBusinessRatingAndReviews()
   return {
     '@context': 'https://schema.org',
-    '@type': ['Organization', 'RealEstateBusiness', 'RealEstateAgent'],
+    // RealEstateAgent is the schema.org LocalBusiness subtype for this business; the earlier
+    // 'RealEstateBusiness' is not a schema.org type and validators flagged it as unknown.
+    '@type': ['Organization', 'LocalBusiness', 'RealEstateAgent'],
     '@id': SITE_ORGANIZATION_ID,
     name: SITE_NAME,
     alternateName: [SITE_BRAND_SHORT, "OnDo", "Ondo RE"],
@@ -933,7 +990,7 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
       ? pathname
       : toAbsoluteSiteUrl(pathname)
 
-  const ogImage = toAbsoluteUrl(image) ?? `${baseSiteUrl}/modern-office-building.webp`
+  const ogImage = toAbsoluteUrl(shareImagePath(image, shareImageKeyForPath(pathname))) as string
 
   const markdownUrl = (() => {
     if (markdownAlternate) {

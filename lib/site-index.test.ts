@@ -308,4 +308,23 @@ describe("Who runs Ondo", () => {
     expect(lines).toMatch(/Utah real estate agent \(license /)
     expect(lines).toMatch(/loan officer \(NMLS 2699085/)
   })
+
+  it("names only the live license and says the other is pending", () => {
+    const agent = buildWhoRunsOndoLines({ re: true, mlo: false, notary: false }).join("\n")
+    expect(agent).toMatch(/Utah real estate agent \(license /)
+    expect(agent).toMatch(/Mortgage licensing in progress/)
+    expect(agent).not.toMatch(/NMLS 2699085|never both/)
+    const loan = buildWhoRunsOndoLines({ re: false, mlo: true, notary: false }).join("\n")
+    expect(loan).toMatch(/^- Point of contact[^\n]*Loan officer \(NMLS 2699085/m)
+    expect(loan).toMatch(/Real estate licensing in progress/)
+    expect(loan).not.toMatch(/real estate agent \(license/)
+  })
+
+  it("adds the one-role-per-deal rule once both licenses are live, and the commission once commissioned", () => {
+    expect(buildWhoRunsOndoLines(true).join("\n")).toMatch(/never both/)
+    const notary = buildWhoRunsOndoLines({ re: false, mlo: false, notary: true }).join("\n")
+    expect(notary).toMatch(/Commissioned Utah notary public \(commission /)
+    expect(notary).toContain("https://secure.utah.gov/notary/search.html")
+    expect(notary).not.toMatch(/never both/)
+  })
 })

@@ -1,5 +1,7 @@
 import {
-  LICENSING_LIVE,
+  LICENSING,
+  licensingState,
+  type LicensingState,
   SITE_BROKERAGE_NAME,
   SITE_COMPANY_NMLS_ID,
   SITE_LENDER_NAME,
@@ -11,7 +13,8 @@ import {
  * Public team roster. Only real people who have agreed to be listed belong here.
  * Do not add titles, license numbers, years of experience, photos or personal
  * mailboxes that are not verified (contact goes through /contact/). License fields are
- * placeholders until licensing and render only when LICENSING_LIVE (lib/site.ts) is on.
+ * placeholders until licensing and render only when that license's switch (RE_LICENSE_LIVE,
+ * MLO_LICENSE_LIVE in lib/site.ts) is on.
  */
 export type TeamMemberLicenses = {
   realEstate: { number: string; brokerageName: string }
@@ -78,7 +81,14 @@ export function getFounder(): TeamMember {
   return founder
 }
 
-/** Role line under the founder's name. License titles appear only once licensing is live. */
-export function founderRoleLabel(live: boolean = LICENSING_LIVE): string {
-  return live ? "Founder · Utah real estate agent and loan officer" : "Founder, Ondo Real Estate"
+/**
+ * Role line under the founder's name. Each license title appears only once that license is live
+ * (RE_LICENSE_LIVE, MLO_LICENSE_LIVE in lib/site.ts); the notary commission is not a role here.
+ */
+export function founderRoleLabel(live: boolean | LicensingState = LICENSING): string {
+  const state = licensingState(live)
+  if (state.re && state.mlo) return "Founder · Utah real estate agent and loan officer"
+  if (state.re) return "Founder · Utah real estate agent"
+  if (state.mlo) return "Founder · Utah loan officer"
+  return "Founder, Ondo Real Estate"
 }

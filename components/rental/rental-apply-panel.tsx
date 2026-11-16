@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { fetchRentalProfile, type RentalPublicProfile } from "@/lib/api/rental"
 import { formatCents, readStoredApplications } from "@/lib/rental-application"
@@ -68,12 +67,12 @@ export function RentalApplyPanel({
             Apply now
           </RentalApplyNowLink>
           {stored ? (
-            <Link
+            <a
               href={`/applications/${stored.id}`}
               className="inline-flex min-h-11 items-center justify-center rounded-md border px-5 font-medium hover:bg-muted"
             >
               Continue application
-            </Link>
+            </a>
           ) : null}
         </div>
         <TourRequestForm propertyId={propertyId} />
@@ -113,12 +112,12 @@ export function RentalApplyPanel({
             Check your application requirements
           </Button>
           {stored ? (
-            <Link
+            <a
               href={`/applications/${stored.id}`}
               className="inline-flex min-h-11 items-center justify-center rounded-md border px-5 font-medium hover:bg-muted"
             >
               Continue application
-            </Link>
+            </a>
           ) : null}
         </div>
       ) : (

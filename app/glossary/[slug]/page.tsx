@@ -87,7 +87,7 @@ export default async function GlossaryTermPage({ params }: { params: Params }) {
         title={`${entry.term}, What It Means`}
         description={entry.short}
         pathname={glossaryHref(entry.slug)}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/guides.jpg`}
         keywords={[entry.term, ...(entry.aliases ?? [])]}
         jsonLd={structuredData}
       />

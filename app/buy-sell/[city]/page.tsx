@@ -6,6 +6,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { SERVICE_HUB_PATHS } from "@/lib/sub-service-content"
 
 type Params = Promise<{ city: string }>
 
@@ -36,10 +37,10 @@ export default async function Page({ params }: { params: Params }) {
         title={`Buy & Sell Homes in ${city.name}, Utah | ${SITE_NAME}`}
         description={`Top local agents in ${city.name}. Expert pricing, marketing, and smooth closings for buyers and sellers.`}
         pathname={`/buy-sell/${citySlug}/`}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Buy & Sell", url: `${SITE_URL}/buy-sell/` },
+          { name: "Buy & Sell", url: `${SITE_URL}${SERVICE_HUB_PATHS["buy-sell"]}` },
           { name: city.name, url: `${SITE_URL}/buy-sell/${citySlug}/` },
         ])}
       />

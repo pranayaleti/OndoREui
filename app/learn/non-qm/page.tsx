@@ -67,7 +67,7 @@ export default function NonQmLearnPage() {
         title="Non-QM besides bank-statement: asset depletion and DSCR"
         description="When agency tax-return income does not match cash flow: bank-statement, DSCR, and asset-depletion files."
         pathname="/learn/non-qm"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

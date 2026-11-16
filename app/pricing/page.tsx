@@ -8,7 +8,7 @@ import { SITE_BRAND_SHORT, SITE_URL, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { GROWTH_MGMT_RATE, GROWTH_MIN_UNITS, PORTFOLIO_MIN_UNITS, STARTER_MAX_UNITS, STARTER_MGMT_RATE } from "@/lib/fee-comparison"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     description:
       "Utah property management pricing: 10% of collected rent for 1 to 4 units, 8% for 5 to 15, a one-time leasing fee, no setup fee and 30 days' notice to cancel.",
     url: `${SITE_URL}/pricing`,
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.manage,
   },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.manage] },
 }
 
 const tiers = [
@@ -167,7 +167,7 @@ export default function PricingPage() {
               </CardContent>
               <CardFooter>
                 <Button asChild className="w-full" variant={tier.highlighted ? "default" : "outline"}>
-                  <Link href="/contact/#book-a-call">{tier.cta}</Link>
+                  <Link href="/contact/">{tier.cta}</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -231,7 +231,7 @@ export default function PricingPage() {
             Book a 30-minute call and we will walk through your units and the fee that applies.
           </p>
           <Button asChild size="lg" className="mt-6">
-            <Link href="/contact/#book-a-call">Book a free consultation</Link>
+            <Link href="/contact/">Book a free consultation</Link>
           </Button>
         </div>
       </section>

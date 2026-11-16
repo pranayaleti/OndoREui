@@ -29,4 +29,10 @@ describe("founder record", () => {
     expect(founderRoleLabel(false)).not.toMatch(/agent|loan officer/i)
     expect(founderRoleLabel(true)).toBe("Founder · Utah real estate agent and loan officer")
   })
+
+  it("shows one title when only one license is live, and none for the notary commission alone", () => {
+    expect(founderRoleLabel({ re: true, mlo: false, notary: false })).toBe("Founder · Utah real estate agent")
+    expect(founderRoleLabel({ re: false, mlo: true, notary: false })).toBe("Founder · Utah loan officer")
+    expect(founderRoleLabel({ re: false, mlo: false, notary: true })).toBe("Founder, Ondo Real Estate")
+  })
 })

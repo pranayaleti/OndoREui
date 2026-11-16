@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useTheme } from "next-themes"
 
 /** Browser chrome colours, matching the page background of each theme (see _design-tokens.css). */
-export const THEME_COLOR_DARK = "#0b1220"
+export const THEME_COLOR_DARK = "#100f0e"
 export const THEME_COLOR_LIGHT = "#fafafa"
 
 export function themeColorFor(resolvedTheme: string | undefined): string {

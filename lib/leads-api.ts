@@ -143,6 +143,29 @@ export interface SubmitContactLeadOptions {
 }
 
 /**
+ * What to tell the visitor about a field they typed that the API refused, in form order. Only the
+ * name rule carries a message written for visitors (why a name was refused), so it is shown as
+ * sent. The rest are stock zod text ("Invalid string: must match pattern /^[+\d\s\-().]+$/"), so
+ * they get a plain sentence. Fields the visitor never typed (source, attribution, propertyId)
+ * are not theirs to fix and fall back to the generic error.
+ */
+const VISITOR_FIELD_ERRORS: ReadonlyArray<readonly [field: string, message: string | null]> = [
+  ["name", null],
+  ["email", "Enter a valid email, like name@example.com."],
+  ["phone", "Enter a valid phone number, like 801-555-0123."],
+]
+
+/** The API answers a rejected field with { error: "Validation failed", details: { name: [msg] } }. */
+function firstFieldError(details: unknown): string | undefined {
+  if (!details || typeof details !== "object") return undefined
+  for (const [field, message] of VISITOR_FIELD_ERRORS) {
+    const sent = (details as Record<string, unknown>)[field]
+    if (Array.isArray(sent) && typeof sent[0] === "string") return message ?? sent[0]
+  }
+  return undefined
+}
+
+/**
  * Submit a website/contact lead to the backend.
  * Use from client components (e.g. contact form). Works with static export ,
  * no Next.js API route required; the UI calls the backend directly.
@@ -163,7 +186,7 @@ export async function submitContactLead(
     if (!res.ok) {
       if (formName) analytics.trackFormSubmission(formName, false)
       return {
-        error: (data.error as string) ?? "Failed to submit",
+        error: firstFieldError(data.details) ?? (data.error as string) ?? "Failed to submit",
         ...(data.details && { details: data.details }),
       }
     }

@@ -26,7 +26,7 @@ describe("printed QR kit (regenerate with node scripts/generate-qr-kit.mjs)", ()
     expect(await scan(join(PUBLIC, "qr", `ondo-links-${id}.png`))).toBe(qrShortUrl(id))
   })
 
-  it("the small code in the footer and on the contact page scans to the web short link", async () => {
+  it("the logo code shown on the site scans to the web short link", async () => {
     expect(await scan(join(PUBLIC, "links-qr.svg"))).toBe(qrShortUrl("web"))
   })
 })

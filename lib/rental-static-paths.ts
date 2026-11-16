@@ -52,3 +52,17 @@ export function rentalClientRouteFromPathname(pathname: string): RentalClientRou
   if (applicationId) return { kind: "application", applicationId }
   return null
 }
+
+/**
+ * True for a rental URL that the static export may not contain: apply links, co-applicant links
+ * and saved applications carry a per-row token, so the only file that serves them is the 404
+ * shell (app/not-found.tsx). /apply/start/<property> is exported only for listings that were
+ * public at build time (just the "_" placeholder when that fetch failed), so a listing published
+ * since the last deploy has none either. A next/link to such a path prefetches "<path>/index.txt",
+ * gets a 404, and then hard-navigates anyway, so these links render as plain anchors. Same-origin
+ * absolute URLs are matched by their path.
+ */
+export function isClientOnlyRentalPath(href: string): boolean {
+  const pathname = href.replace(/^[a-z][a-z\d+.-]*:\/\/[^/?#]*/i, "").replace(/[?#].*$/, "")
+  return rentalClientRouteFromPathname(pathname) !== null
+}

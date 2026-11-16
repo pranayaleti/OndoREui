@@ -110,11 +110,11 @@ const pages: SearchResult[] = [
   },
   {
     id: 'socials',
-    title: 'Socials & Updates',
-    description: 'Curated social posts, profile links, and latest real estate news',
-    href: '/socials',
+    title: 'Socials & Links',
+    description: 'Social profiles and every Ondo link in one place',
+    href: '/links',
     category: 'Page',
-    keywords: ['socials', 'social media', 'updates', 'news', 'linktree']
+    keywords: ['socials', 'social media', 'updates', 'news']
   },
   {
     id: 'calculators',
@@ -128,7 +128,7 @@ const pages: SearchResult[] = [
     id: 'why-utah',
     title: 'Why Utah',
     description: 'Why choose Utah for real estate',
-    href: '/why-utah',
+    href: '/moving-to-utah/#why-utah-heading',
     category: 'Page',
     keywords: ['utah', 'location', 'why utah', 'real estate market']
   },

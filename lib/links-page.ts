@@ -1,4 +1,13 @@
-import { APP_PORTAL_URL, LICENSING_LIVE, SITE_CALENDLY_URL, SITE_LOAN_OFFICER, SITE_SOCIAL_LINKS, type SocialLink } from "@/lib/site"
+import {
+  APP_PORTAL_URL,
+  LICENSING,
+  licensingState,
+  type LicensingState,
+  SITE_CALENDLY_URL,
+  SITE_LOAN_OFFICER,
+  SITE_SOCIAL_LINKS,
+  type SocialLink,
+} from "@/lib/site"
 import { UTAH_CITIES_SERVED } from "@/lib/social-proof-stats"
 
 /**
@@ -46,6 +55,32 @@ const LICENSED_ROLE_PARAGRAPH: readonly IntroSegment[] = [
   ". My team manages rentals too.",
 ]
 
+/** Real estate license active, mortgage license still pending: the agent title only, no NMLS claim. */
+const AGENT_ONLY_ROLE_PARAGRAPH: readonly IntroSegment[] = [
+  "As a Utah ",
+  { highlight: "real estate agent" },
+  ", I help you ",
+  { highlight: "buy a home" },
+  " and ",
+  { highlight: "sell your home" },
+  ", and I'm here to talk ",
+  { highlight: "home loans" },
+  " while my loan officer license finalizes. My team manages rentals too.",
+]
+
+/** Mortgage license active, real estate license still pending: the loan officer title and NMLS ID only. */
+const LOAN_ONLY_ROLE_PARAGRAPH: readonly IntroSegment[] = [
+  "As a ",
+  { highlight: "loan officer" },
+  ` (NMLS #${SITE_LOAN_OFFICER.nmlsId}), I help you `,
+  { highlight: "find the right home loan" },
+  ", and I'm here to talk ",
+  { highlight: "buying" },
+  " and ",
+  { highlight: "selling" },
+  " while my real estate license finalizes. My team manages rentals too.",
+]
+
 /** Placeholder until licensing: same services, no title or NMLS claim. */
 const PENDING_ROLE_PARAGRAPH: readonly IntroSegment[] = [
   "I help Utah ",
@@ -64,18 +99,27 @@ const PENDING_ROLE_PARAGRAPH: readonly IntroSegment[] = [
  * words (adapted from the founder's letter at /founders-letter), with his roles and
  * Ondo's buy, sell and loan services highlighted.
  *
- * LICENSE CLAIMS: "real estate agent", "loan officer" and the NMLS ID are only true
- * once his licenses are active, so they render only when LICENSING_LIVE (lib/site.ts)
- * is on. Until then the pending paragraph names the services without the titles.
+ * LICENSE CLAIMS: "real estate agent" is only true once RE_LICENSE_LIVE is on, and "loan
+ * officer" with the NMLS ID only once MLO_LICENSE_LIVE is on (lib/site.ts). Each paragraph
+ * carries only the titles that are live; the pending paragraph names the services without them.
  */
-export function buildLinksPageIntro(live: boolean = LICENSING_LIVE): LinksPageIntro {
+export function buildLinksPageIntro(live: boolean | LicensingState = LICENSING): LinksPageIntro {
+  const state = licensingState(live)
+  const roles =
+    state.re && state.mlo
+      ? LICENSED_ROLE_PARAGRAPH
+      : state.re
+        ? AGENT_ONLY_ROLE_PARAGRAPH
+        : state.mlo
+          ? LOAN_ONLY_ROLE_PARAGRAPH
+          : PENDING_ROLE_PARAGRAPH
   return {
     heading: "Hi, I'm Pranay",
     paragraphs: [
       [
         "I spent over a decade building software, and I own and manage rental property myself. I built Ondo to make real estate simpler.",
       ],
-      live ? LICENSED_ROLE_PARAGRAPH : PENDING_ROLE_PARAGRAPH,
+      roles,
       ["Everything's in one place here. Start with a free call, or pick your path below."],
     ],
     /** Same numbers the homepage shows (lib/social-proof-stats.ts), so the two never drift apart. */
@@ -180,18 +224,7 @@ export const LINKS_PAGE_SECTIONS: readonly LinksPageSection[] = [
   },
 ]
 
-function isLinktree(url: string): boolean {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "") === "linktr.ee"
-  } catch {
-    return false
-  }
-}
-
-/**
- * Social profile URLs for the icon row: the same `live` flags the footer and
- * JSON-LD use, minus Linktree, which now forwards to /links and would loop.
- */
+/** Social profile URLs for the icon row: the same `live` flags the footer and JSON-LD use. */
 export function linksPageSocials(profiles: readonly SocialLink[] = SITE_SOCIAL_LINKS): string[] {
-  return profiles.filter((profile) => profile.live && !isLinktree(profile.url)).map((profile) => profile.url)
+  return profiles.filter((profile) => profile.live).map((profile) => profile.url)
 }

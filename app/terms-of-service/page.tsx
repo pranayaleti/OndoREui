@@ -90,7 +90,7 @@ export default function TermsOfServicePage() {
         title="Terms of Service | Ondo Real Estate"
         description="Read the terms and conditions for using Ondo Real Estate's services. Understand your rights and responsibilities."
         pathname="/terms-of-service"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Terms of Service", url: `${SITE_URL}/terms-of-service` },

@@ -47,7 +47,7 @@ export default function NeighborhoodsHubPage() {
         title="Utah Neighborhood Guides"
         description="Named Wasatch Front neighborhoods: housing stock, parks, and nearby campuses. Not steering copy."
         pathname="/neighborhoods"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={jsonLd}
       />
       <main className="min-h-screen">

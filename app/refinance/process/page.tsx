@@ -8,7 +8,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 export const metadata: Metadata = {
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     type: "website",
     title: pageTitleText("Utah Refinance Process: Steps From Start to Closing"),
     description: "How a Utah mortgage refinance works, step by step: evaluate your loan, talk through your options, choose a program, apply, underwriting and closing.",
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.loans,
   },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.loans] },
 }
 
 
@@ -72,7 +72,7 @@ export default function RefinanceProcessPage() {
         title="Mortgage Refinance Process"
         description="Step-by-step guide to refinancing your home loan in Utah, from evaluation to closing."
         pathname="/refinance/process"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Refinance", url: `${SITE_URL}/refinance` },

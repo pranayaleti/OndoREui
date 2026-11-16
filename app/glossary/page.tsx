@@ -56,7 +56,7 @@ export default function GlossaryIndexPage() {
         title={TITLE}
         description={DESCRIPTION}
         pathname="/glossary/"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={structuredData}
       />
 

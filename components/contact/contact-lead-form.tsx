@@ -101,6 +101,8 @@ type ContactLeadFormProps = {
    * where a redirect would surprise users mid-scroll.
    */
   routeAfterSubmit?: boolean
+  /** Leave the card's own heading out when the section around the form already has one (as on /contact). */
+  hideTitle?: boolean
 }
 
 export function ContactLeadForm({
@@ -109,6 +111,7 @@ export function ContactLeadForm({
   defaultInquiryType,
   initialInquiryType,
   routeAfterSubmit = false,
+  hideTitle = false,
 }: ContactLeadFormProps = {}) {
   const { t } = useTranslation()
   const router = useRouter()
@@ -348,19 +351,17 @@ export function ContactLeadForm({
 
   return (
     <Card>
-      <CardHeader>
-        {showAudience ? (
-          <h2 className="text-xl font-extrabold uppercase tracking-wide text-foreground dark:text-foreground">
-            {t("contactForm.helpTitle")}
-          </h2>
-        ) : (
-          <CardTitle className="dark:text-foreground">{t("contactForm.title")}</CardTitle>
-        )}
-        {!showAudience ? (
-          <CardDescription>{t("contactForm.subtitle")}</CardDescription>
-        ) : null}
-      </CardHeader>
-      <CardContent>
+      {hideTitle ? null : (
+        <CardHeader>
+          {showAudience ? (
+            <h2 className="text-2xl font-bold text-foreground">{t("contactForm.helpTitle")}</h2>
+          ) : (
+            <CardTitle className="dark:text-foreground">{t("contactForm.title")}</CardTitle>
+          )}
+          {!showAudience ? <CardDescription>{t("contactForm.subtitle")}</CardDescription> : null}
+        </CardHeader>
+      )}
+      <CardContent className={hideTitle ? "pt-6" : undefined}>
         {submitStatus && (
           <div ref={statusRef} tabIndex={-1} className="mb-6 outline-none">
             {submitStatus === "success" ? (
@@ -414,7 +415,7 @@ export function ContactLeadForm({
             >
               <legend className="text-base text-foreground/80">
                 {t("contactForm.audience.legend")}{" "}
-                <span aria-hidden="true" className="text-orange-600">*</span>
+                <span aria-hidden="true" className="text-primary">*</span>
               </legend>
               <div className="grid gap-2">
                 {CONTACT_AUDIENCE_OPTIONS.map((option) => {
@@ -425,12 +426,14 @@ export function ContactLeadForm({
                       key={option.value}
                       htmlFor={inputId}
                       className={cn(
-                        "relative flex cursor-pointer items-center gap-4 rounded-xl border-2 px-4 py-4 text-left",
+                        "relative flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-left",
                         "transition-colors motion-reduce:transition-none",
-                        "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-orange-600 has-[:focus-visible]:ring-offset-2",
+                        "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-background",
+                        // Orange marks the one chosen answer. Unchosen answers stay neutral so eight of them
+                        // do not read as eight alerts.
                         selected
-                          ? "border-transparent bg-gradient-to-r from-orange-500 to-red-800 text-white shadow-md"
-                          : "border-orange-500 bg-card text-foreground hover:bg-orange-50/60 dark:hover:bg-orange-950/30",
+                          ? "border-primary bg-primary/10 text-foreground shadow-[inset_0_0_0_1px_hsl(var(--primary))]"
+                          : "border-border bg-background text-foreground hover:border-foreground/30 hover:bg-foreground/[0.04]",
                       )}
                     >
                       <input
@@ -450,14 +453,12 @@ export function ContactLeadForm({
                         aria-hidden="true"
                         className={cn(
                           "pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                          selected ? "border-white bg-white" : "border-orange-500 bg-transparent",
+                          selected ? "border-primary bg-transparent" : "border-foreground/50 bg-transparent",
                         )}
                       >
-                        {selected ? (
-                          <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-orange-500 to-red-800" />
-                        ) : null}
+                        {selected ? <span className="h-2.5 w-2.5 rounded-full bg-primary" /> : null}
                       </span>
-                      <span className={cn("text-base leading-snug", selected && "font-bold")}>
+                      <span className="text-base leading-snug">
                         {option.before}
                         <strong className="font-bold">{option.emphasis}</strong>
                         {option.after}

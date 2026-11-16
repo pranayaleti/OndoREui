@@ -7,7 +7,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 
 const description =
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   title: pageTitle("Reverse Mortgages in Utah | Ondo Real Estate"),
   description,
   alternates: { canonical: `${SITE_URL}/loans/reverse/` },
-  openGraph: { type: "website", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, url: `${SITE_URL}/loans/reverse/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, url: `${SITE_URL}/loans/reverse/`, images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", title: pageTitleText("Reverse Mortgages in Utah | Ondo Real Estate"), description, images: [OG_IMAGE_URLS.loans] },
 }
 
 export default function ReverseMortgagePage() {
@@ -29,7 +29,7 @@ export default function ReverseMortgagePage() {
         title="Reverse Mortgages in Utah"
         description={description}
         pathname="/loans/reverse"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans` },

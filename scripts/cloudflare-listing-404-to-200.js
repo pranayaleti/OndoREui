@@ -3,7 +3,7 @@
  *
  * Hosting is GitHub Pages behind the ondorealestate.com Cloudflare proxy
  * (cache purge + HTML cache rule). Do not migrate to Cloudflare Pages.
- * A naive /properties/:id → /404.html rewrite would clobber prerendered
+ * A naive /:slug → /404.html rewrite would clobber prerendered
  * listing HTML. Only substitute when origin already returned 404.
  *
  * Apply: python3 scripts/apply-cloudflare-listing-404-to-200.py
@@ -12,12 +12,13 @@
 const listing404To200 = {
   async fetch(request) {
     const url = new URL(request.url);
-    const listing = /^\/properties\/([^/]+)\/?$/.exec(url.pathname);
+    // /{address-slug}/ (street number first) or the legacy /properties/{id}/.
+    const listing = /^\/(?:properties\/([^/]+)|([0-9][a-z0-9-]*))\/?$/.exec(url.pathname);
     const originResponse = await fetch(request);
 
     if (!listing) return originResponse;
 
-    const id = decodeURIComponent(listing[1] ?? "");
+    const id = decodeURIComponent(listing[1] ?? listing[2] ?? "");
     if (!id || id === "_placeholder") return originResponse;
     if (request.method !== "GET" && request.method !== "HEAD") return originResponse;
     if (originResponse.status !== 404) return originResponse;

@@ -39,6 +39,7 @@ export function listingsToPins(properties: Property[]) {
       image: p.image,
       type: p.type,
       city: p.addressParts?.city ?? undefined,
+      addressParts: { line1: p.addressParts?.line1, line2: p.addressParts?.line2 },
     });
   }
   return { pins, skipped };
@@ -107,7 +108,7 @@ export default function ExploreMapClient({ initialProperties }: ExploreMapClient
       </p>
       <PropertySearchMap
         properties={pins}
-        onPropertyClick={(id) => router.push(listingDetailPath(id))}
+        onPropertyClick={(id) => router.push(listingDetailPath(pins.find((pin) => pin.id === id) ?? id))}
       />
     </>
   );

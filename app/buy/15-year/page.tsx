@@ -26,7 +26,7 @@ export default function FifteenYearPage() {
         title="15-Year Mortgage Guide | Utah Real Estate"
         description="Learn about 15-year fixed-rate mortgages in Utah. Build equity faster and pay less interest with shorter loan terms."
         pathname="/buy/15-year"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

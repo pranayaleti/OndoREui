@@ -23,7 +23,7 @@ export default function TeamPage() {
         title="Our Team | Ondo Real Estate"
         description="Meet Pranay Reddy Aleti, the founder of Ondo Real Estate in Utah."
         pathname="/about/team"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "About", url: `${SITE_URL}/about` },

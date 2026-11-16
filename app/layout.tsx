@@ -71,10 +71,10 @@ export const metadata: Metadata = {
       "Ondo RE: Utah property management, mortgages, and real estate services across the Wasatch Front.",
     images: [
       {
-        url: `${SITE_URL}/modern-office-building.webp`,
+        url: `${SITE_URL}/og/ondo-real-estate.jpg`,
         width: 1200,
         height: 630,
-        alt: `${SITE_BRAND_SHORT} (${SITE_NAME}): Utah headquarters and services`,
+        alt: `${SITE_BRAND_SHORT} (${SITE_NAME}): Utah real estate services`,
       },
     ],
   },
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     title: `${SITE_BRAND_SHORT} | ${SITE_NAME}: Utah real estate & property management`,
     description:
       "Ondo RE: Utah property management, mortgages, and real estate services across the Wasatch Front.",
-    images: [`${SITE_URL}/modern-office-building.webp`],
+    images: [`${SITE_URL}/og/ondo-real-estate.jpg`],
   },
   robots: {
     index: true,
@@ -102,7 +102,10 @@ export const metadata: Metadata = {
   verification: {
     google: process.env['NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION'],
     other: {
-      'p:domain_verify': process.env['NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY'] ?? '',
+      // Pinterest domain claim; absent (not empty) when unset, like the Bing tag below.
+      ...(process.env['NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY']
+        ? { 'p:domain_verify': process.env['NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY'] }
+        : {}),
       // Bing Webmaster Tools ownership. Spread conditionally: an EMPTY
       // msvalidate.01 fails verification, whereas an absent tag just falls
       // through to the XML-file / DNS methods.
@@ -142,7 +145,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* RFC 8288 discovery link so agents can find /llms.txt from the HTML shell. */}
         <link rel="describedby" type="text/plain" href={`${SITE_URL.replace(/\/$/, "")}/llms.txt`} />
         {/* Dark is the default theme; ThemeColorSync updates this when the visitor picks light or System. */}
-        <meta name="theme-color" content="#0b1220" />
+        <meta name="theme-color" content="#100f0e" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

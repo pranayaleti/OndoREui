@@ -29,6 +29,12 @@ type RentalListingCardProps = {
   highlighted?: boolean
   onHighlight?: (id: string) => void
   onRequestShowing?: (id: string) => void
+  /**
+   * "row" puts the photo beside the details wherever the list column is wide enough (tablet, and
+   * desktop from xl up), so a list next to the map shows two or three homes per screen instead of one.
+   * "stacked" (default) keeps the photo on top, for multi-column grids.
+   */
+  layout?: "stacked" | "row"
 }
 
 export function RentalListingCard({
@@ -36,7 +42,9 @@ export function RentalListingCard({
   highlighted = false,
   onHighlight,
   onRequestShowing,
+  layout = "stacked",
 }: RentalListingCardProps) {
+  const row = layout === "row"
   const typeLabel = formatPropertyType(property.type)
   const size = formatSqft(property.sqft)
   const market = listingMarketStatus({
@@ -57,12 +65,18 @@ export function RentalListingCard({
       id={`listing-${property.id}`}
       className={cn(
         "h-full overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2",
+        row && "sm:flex lg:block xl:flex",
         highlighted && "ring-2 ring-primary ring-offset-2",
       )}
     >
-      <div className="relative aspect-[4/3]">
+      <div
+        className={cn(
+          "relative aspect-[4/3]",
+          row && "sm:aspect-auto sm:w-2/5 sm:shrink-0 lg:aspect-[4/3] lg:w-auto xl:aspect-auto xl:w-2/5",
+        )}
+      >
         <Link
-          href={listingDetailPath(property.id)}
+          href={listingDetailPath(property)}
           className="absolute inset-0 z-0"
           aria-label={`View photos and details for ${property.title} at ${property.address}`}
         >
@@ -102,14 +116,14 @@ export function RentalListingCard({
           />
         </div>
       </div>
-      <CardContent className="p-4">
+      <CardContent className={cn("p-4", row && "sm:min-w-0 sm:flex-1")}>
         <p className="font-outfit text-xl font-bold tracking-tight">
           {formatMonthlyRent(property.price)}
           <span className="text-sm font-medium text-muted-foreground">/mo</span>
         </p>
         <h3 className="mt-1 text-lg font-semibold leading-snug">
           <Link
-            href={listingDetailPath(property.id)}
+            href={listingDetailPath(property)}
             className="underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {property.title}
@@ -149,15 +163,19 @@ export function RentalListingCard({
             {description && description.length > 90 ? "…" : null}
           </p>
         ) : null}
-        <div className="relative z-10 mt-4 flex flex-col gap-2">
+        <div className={cn("relative z-10 mt-4 flex flex-col gap-2", row && "sm:flex-row sm:flex-wrap lg:flex-col xl:flex-row")}>
           <Link
-            href={listingDetailPath(property.id)}
-            className={cn(buttonVariants(), "min-h-[44px] w-full text-base")}
+            href={listingDetailPath(property)}
+            className={cn(buttonVariants(), "min-h-[44px] w-full text-base", row && "sm:w-auto sm:flex-1 sm:basis-40 lg:w-full lg:flex-none xl:w-auto xl:flex-1")}
             aria-label={`View property: ${property.title} at ${property.address}, ${formatMonthlyRent(property.price)} per month`}
           >
             View property
           </Link>
-          <Button asChild variant="outline" className="min-h-[44px] w-full text-base">
+          <Button
+            asChild
+            variant="outline"
+            className={cn("min-h-[44px] w-full text-base", row && "sm:w-auto sm:flex-1 sm:basis-40 lg:w-full lg:flex-none xl:w-auto xl:flex-1")}
+          >
             <a
               href="#ask-leasing"
               aria-label={`Request a showing for ${property.title}`}
@@ -168,7 +186,7 @@ export function RentalListingCard({
           </Button>
           <Link
             href={listingWorksheetPath(property.id)}
-            className="inline-flex min-h-11 items-center self-start text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 basis-full items-center self-start text-sm font-medium underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             Worksheet
           </Link>

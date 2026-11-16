@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { getGlossaryTerm, glossaryHref } from "@/lib/content/glossary"
 
 const DESCRIPTION =
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     type: "website",
     title: pageTitleText("Resources: Calculators, Guides & Glossary"),
     description: DESCRIPTION,
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.guides,
   },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.guides] },
 }
 
 const groups = [
@@ -79,7 +79,7 @@ export default function ResourcesPage() {
         title="Resources: Calculators, Guides & Glossary"
         description={DESCRIPTION}
         pathname="/resources"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Resources", url: `${SITE_URL}/resources` },

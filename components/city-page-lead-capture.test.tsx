@@ -32,7 +32,26 @@ describe("CityPageLeadCapture", () => {
         source: "website",
         prefillMessage: "I'm interested in Draper.",
         defaultInquiryType: "owner",
+        hideTitle: true,
       }),
     )
+  })
+
+  it("in compact mode links to the form further down instead of printing it again", () => {
+    contactLeadForm.mockClear()
+    render(
+      <CityPageLeadCapture
+        cityName="Draper"
+        heading="Talk with our Draper team"
+        prefillMessage="I'm interested in Draper."
+        formHref="#city-contact"
+      />,
+    )
+
+    expect(screen.getByRole("heading", { name: "Talk with our Draper team" })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /book a call/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Send a note" })).toHaveAttribute("href", "#city-contact")
+    expect(screen.queryByRole("form")).toBeNull()
+    expect(contactLeadForm).not.toHaveBeenCalled()
   })
 })

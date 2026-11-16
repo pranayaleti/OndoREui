@@ -1,6 +1,25 @@
 import { describe, it, expect } from "vitest"
-import { subServiceDefinitions } from "./sub-service-content"
+import { existsSync, readFileSync } from "node:fs"
+import { join } from "node:path"
+import { SERVICE_HUB_PATHS, subServiceDefinitions } from "./sub-service-content"
 import { cityMarketData } from "./city-market-data"
+import { parseRedirects } from "../scripts/generate-legacy-redirects.mjs"
+
+describe("service hub links", () => {
+  // A public/_redirects source is served as a meta-refresh stub: linking it costs a redirect
+  // hop and 404s the next/link prefetch of the stub's RSC payload (/buy-sell/ was one).
+  const root = join(__dirname, "..")
+  const redirected = new Set(parseRedirects(readFileSync(join(root, "public", "_redirects"), "utf8")).map((rule) => rule.from))
+
+  it("point every service and sub-service at a real hub page, never a legacy redirect", () => {
+    const hrefs = [...Object.values(SERVICE_HUB_PATHS), ...Object.values(subServiceDefinitions).map((def) => def.parentHref)]
+    for (const href of hrefs) {
+      expect(redirected.has(href.replace(/\/+$/, "")), href).toBe(false)
+      expect(existsSync(join(root, "app", href, "page.tsx")), href).toBe(true)
+    }
+    expect(SERVICE_HUB_PATHS["buy-sell"]).toBe("/buy/")
+  })
+})
 
 describe("maintenance coordination claims", () => {
   it("does not promise an unverifiable under-4-hour dispatch SLA", () => {

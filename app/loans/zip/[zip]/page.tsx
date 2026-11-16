@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { zipPageCanonical } from "@/lib/zip-pages"
 
 type Params = Promise<{ zip: string }>
@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const description = `Loan options and pre-qualification for borrowers in ${zip} ${cityName}.`
   // Same content as the primary city's page, so that page is the canonical.
   const canonical = zipPageCanonical("loans", zip)
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.loans] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Params }) {
         title={`Mortgage Lenders ${zip} (${city.name}) | ${SITE_NAME}`}
         description={`Loan options and pre-qualification for borrowers in ${zip} ${city.name}.`}
         pathname={`/loans/zip/${zip}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans/` },

@@ -14,7 +14,6 @@ describe("socialPlatformFor", () => {
     ["https://twitter.com/OnDoRealEstate", "X"],
     ["https://www.pinterest.com/ondorealestate", "Pinterest"],
     ["https://yelp.com/biz/ondo-real-estate-lehi", "Yelp"],
-    ["https://linktr.ee/ondorealestate", "Linktree"],
     ["https://g.page/r/CabcDEF/review", "Google Business"],
     ["https://www.google.com/maps/place/Ondo+Real+Estate", "Google Business"],
   ])("names %s as %s", (url, name) => {

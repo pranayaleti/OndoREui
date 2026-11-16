@@ -224,12 +224,6 @@ export async function startRentalApplication(input: {
   return parseJson<RentalApplicationSummary>(res)
 }
 
-export async function listMyRentalApplications(): Promise<RentalApplicationSummary[]> {
-  const res = await fetch(backendUrl("/api/rental/applications/my"), { credentials: "include" })
-  if (res.status === 401) return []
-  return parseJson<RentalApplicationSummary[]>(res)
-}
-
 export async function getRentalApplication(applicationId: string, resumeToken?: string): Promise<ApplicationBundle> {
   const url = new URL(backendUrl(`/api/rental/applications/${encodeURIComponent(applicationId)}`))
   if (resumeToken) url.searchParams.set("resumeToken", resumeToken)

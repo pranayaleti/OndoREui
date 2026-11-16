@@ -34,24 +34,40 @@ const reportPath = path.join(outDir, 'accessibility-contrast.json');
 const tokens = JSON.parse(fs.readFileSync(tokensPath, 'utf8'));
 const c = tokens.color;
 
-const pairs = [
-  { name: 'text-primary on bg-base', fg: c['text-primary'].value, bg: c['bg-base'].value, min: 4.5 },
-  { name: 'text-muted on bg-base', fg: c['text-muted'].value, bg: c['bg-base'].value, min: 4.5 },
-  { name: 'inverse on accent-1', fg: '#FFFFFF', bg: c['accent-1'].value, min: 4.5 },
-  { name: 'link on bg-base', fg: c['link'].value, bg: c['bg-base'].value, min: 4.5 },
-  { name: 'text-primary on bg-elevated', fg: c['text-primary'].value, bg: c['bg-elevated'].value, min: 4.5 },
-  { name: 'accent-1 on bg-base', fg: c['accent-1'].value, bg: c['bg-base'].value, min: 3.0 }
-];
+// Tokens are stored per theme (bg-base-light, bg-base-dark, ...). Check both.
+// The brand orange carries black text (see --primary-foreground), so that is the pair checked on accent-1.
+// accent-1 itself is a fill, ring and large-text colour (3:1). Orange body text on the light page uses the
+// darker --primary-text, which is defined in _design-tokens.css, not in this file.
+const token = (name) => {
+  const entry = c[name];
+  if (!entry) throw new Error(`design-tokens.json has no color "${name}"`);
+  return entry.value;
+};
 
-const results = pairs.map((p) => ({
-  pair: p.name,
-  ratio: Number(contrast(p.fg, p.bg).toFixed(2)),
-  min: p.min,
-  pass: contrast(p.fg, p.bg) >= p.min
-}));
+const pairs = ['light', 'dark'].flatMap((theme) => [
+  { name: `${theme}: text-primary on bg-base`, fg: token(`text-primary-${theme}`), bg: token(`bg-base-${theme}`), min: 4.5 },
+  { name: `${theme}: text-primary on bg-elevated`, fg: token(`text-primary-${theme}`), bg: token(`bg-elevated-${theme}`), min: 4.5 },
+  { name: `${theme}: text-muted on bg-base`, fg: token(`text-muted-${theme}`), bg: token(`bg-base-${theme}`), min: 4.5 },
+  { name: `${theme}: text-muted on bg-elevated`, fg: token(`text-muted-${theme}`), bg: token(`bg-elevated-${theme}`), min: 4.5 },
+  { name: `${theme}: link on bg-base`, fg: token(`link-${theme}`), bg: token(`bg-base-${theme}`), min: 4.5 },
+]).concat([
+  { name: 'black on accent-1 (buttons)', fg: '#000000', bg: token('accent-1'), min: 4.5 },
+  { name: 'dark: accent-1 on bg-base', fg: token('accent-1'), bg: token('bg-base-dark'), min: 4.5 },
+  { name: 'dark: accent-1 on bg-elevated', fg: token('accent-1'), bg: token('bg-elevated-dark'), min: 4.5 },
+]);
+
+const results = pairs.map((p) => {
+  const ratio = contrast(p.fg, p.bg);
+  return { pair: p.name, ratio: Number(ratio.toFixed(2)), min: p.min, pass: ratio >= p.min };
+});
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(reportPath, JSON.stringify({ generatedAt: new Date().toISOString(), results }, null, 2));
+for (const r of results) console.log(`${r.pass ? 'pass' : 'FAIL'}  ${String(r.ratio).padStart(5)} (min ${r.min})  ${r.pair}`);
 console.log('Accessibility contrast report written to', reportPath);
 
-
+const failed = results.filter((r) => !r.pass);
+if (failed.length > 0) {
+  console.error(`${failed.length} contrast pair(s) below the minimum.`);
+  process.exit(1);
+}

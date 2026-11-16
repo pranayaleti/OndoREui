@@ -43,7 +43,7 @@ export default function FirstTimeLearnPage() {
         title="First-time buyer cash, assistance, and closing"
         description="How much cash besides down payment, how DPA stacks with gifts, and how Utah closings actually fund."
         pathname="/learn/first-time"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

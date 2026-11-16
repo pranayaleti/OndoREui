@@ -6,13 +6,16 @@
  *
  *   node scripts/generate-founders-letter-og.mjs
  */
+import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { chromium } from "@playwright/test"
 import sharp from "sharp"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const mark = `file://${path.join(root, "public", "ondo-mark.png")}`
+// Inlined as a data URI: a page made with setContent() cannot load file:// URLs, so the mark used to
+// render as a broken-image box in the committed card.
+const mark = `data:image/png;base64,${(await readFile(path.join(root, "public", "ondo-mark.png"))).toString("base64")}`
 const out = path.join(root, "public", "founders-letter-og.jpg")
 
 const headline = "I came to the United States to study computer science. I stayed to build something of my own."

@@ -26,7 +26,7 @@ export default function FixedRatePage() {
         title="Fixed-Rate Mortgage Guide | Utah Real Estate"
         description="Learn about fixed-rate mortgages in Utah. Understand the benefits, rates, and terms of fixed-rate loans for predictable monthly payments."
         pathname="/buy/fixed-rate"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

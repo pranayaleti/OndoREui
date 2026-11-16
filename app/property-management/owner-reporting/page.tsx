@@ -8,14 +8,14 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Owner Reporting | Property Management Utah | Ondo Real Estate"),
   description: "Real-time owner reporting for Utah rental properties: monthly statements, NOI tracking, maintenance history, and document vault, all in one dashboard.",
   alternates: { canonical: `${SITE_URL}/property-management/owner-reporting/` },
-  openGraph: { type: "website", title: pageTitleText("Owner Reporting | Ondo Real Estate"), description: "Monthly statements, NOI tracking, and document vault for Utah rental owners.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Owner Reporting | Ondo"), description: "Real-time financial and maintenance reporting for Utah rental owners.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Owner Reporting | Ondo Real Estate"), description: "Monthly statements, NOI tracking, and document vault for Utah rental owners.", images: OG_IMAGES.manage },
+  twitter: { card: "summary_large_image", title: pageTitleText("Owner Reporting | Ondo"), description: "Real-time financial and maintenance reporting for Utah rental owners.", images: [OG_IMAGE_URLS.manage] },
 }
 
 const features = [
@@ -32,7 +32,7 @@ export default function OwnerReportingPage() {
         title="Owner Reporting | Property Management Utah"
         description="Monthly statements, NOI tracking, and document vault for Utah rental owners."
         pathname="/property-management/owner-reporting"
-        image={`${SITE_URL}/property-manager-meeting.png`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Property Management", url: `${SITE_URL}/property-management` },

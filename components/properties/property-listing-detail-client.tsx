@@ -6,7 +6,7 @@ import {
   PropertyListingDetail,
   PropertyUnavailable,
 } from "@/components/properties/property-listing-detail"
-import { fetchPublicPropertyByPublicId, fetchPublicPropertyList } from "@/lib/public-property"
+import { fetchPublicPropertyByPublicId, fetchPublicPropertyList, listingDetailPath } from "@/lib/public-property"
 import { pickRelatedListings } from "@/lib/listing-presentation"
 
 /** Bypass the HTTP cache so the refresh reflects the latest dashboard edits. */
@@ -55,7 +55,6 @@ export function PropertyListingDetailLive({
   return (
     <PropertyListingDetail
       property={live?.property ?? initialProperty}
-      publicId={publicId}
       related={live?.related ?? initialRelated}
     />
   )
@@ -81,6 +80,11 @@ export function PropertyListingDetailClient({ publicId }: { publicId: string }) 
       }
       const list = await fetchPublicPropertyList()
       if (cancelled) return
+      // A listing reached by its id or the legacy /properties/ path: show the address URL.
+      const canonical = `${listingDetailPath(property)}/`
+      if (typeof window !== "undefined" && window.location.pathname !== canonical) {
+        window.history.replaceState(window.history.state, "", canonical + window.location.search + window.location.hash)
+      }
       setState({
         status: "ready",
         property,
@@ -111,8 +115,7 @@ export function PropertyListingDetailClient({ publicId }: { publicId: string }) 
       return (
         <PropertyListingDetail
           property={state.property}
-          publicId={publicId}
-          related={state.related}
+              related={state.related}
         />
       )
     case "missing":

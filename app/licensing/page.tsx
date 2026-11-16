@@ -1,10 +1,11 @@
 // NOTE(i18n): server component, licensing disclosures are intentionally English-only.
 // Legal copy translation requires jurisdiction-specific counsel review; the en
 // page is authoritative until then. Reviewed by the license-compliance-guard
-// agent. Do not add NMLS IDs or brokerage license numbers inline. The NMLS wording
-// comes from nmlsIdentification() in lib/site.ts: "NMLS ID on file" until the owner
-// sets LICENSING_LIVE and SITE_COMPANY_NMLS_ID, then the real IDs and the NMLS
-// Consumer Access link. Fair Housing wording comes from FAIR_HOUSING_STATEMENT.
+// agent. Do not add NMLS IDs or brokerage license numbers inline. Each line of business
+// reads its own switch in lib/site.ts: the NMLS wording comes from nmlsIdentification()
+// ("NMLS ID on file" until MLO_LICENSE_LIVE and SITE_COMPANY_NMLS_ID are set), the real
+// estate license number renders with RE_LICENSE_LIVE, the notary commission with
+// NOTARY_COMMISSION_LIVE. Fair Housing wording comes from FAIR_HOUSING_STATEMENT.
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Building2, Landmark, ScrollText, ShieldCheck } from "lucide-react"
@@ -14,7 +15,24 @@ import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { FAIR_HOUSING_STATEMENT } from "@/lib/rental-application"
-import { SITE_URL, SITE_NAME, SITE_EMAILS, SITE_PHONE, SITE_ADDRESS_STREET, SITE_ADDRESS_CITY, SITE_ADDRESS_REGION, SITE_ADDRESS_POSTAL_CODE, nmlsIdentification, pageTitleText } from "@/lib/site"
+import {
+  LICENSING,
+  SITE_URL,
+  SITE_NAME,
+  SITE_EMAILS,
+  SITE_PHONE,
+  SITE_ADDRESS_STREET,
+  SITE_ADDRESS_CITY,
+  SITE_ADDRESS_REGION,
+  SITE_ADDRESS_POSTAL_CODE,
+  SITE_BROKERAGE_NAME,
+  SITE_NOTARY_COMMISSION_NUMBER,
+  SITE_RE_LICENSE_NUMBER,
+  UTAH_DIVISION_OF_REAL_ESTATE_URL,
+  UTAH_NOTARY_SEARCH_URL,
+  nmlsIdentification,
+  pageTitleText,
+} from "@/lib/site"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 
 const title = pageTitleText(`Licensing & Disclosures | ${SITE_NAME}`)
@@ -38,11 +56,11 @@ export default function LicensingPage() {
       <SEO
         title={title}
         description={description}
-        pathname="/licensing"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        pathname="/licensing/"
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Licensing", url: `${SITE_URL}/licensing` },
+          { name: "Licensing", url: `${SITE_URL}/licensing/` },
         ])}
       />
       <PageBanner
@@ -75,13 +93,31 @@ export default function LicensingPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-foreground/80">
-                  <p>
-                    Brokerage services (buyer representation, seller
-                    representation, and listing services) are offered as Ondo Real
-                    Estate. Brokerage licensing is in progress. License numbers
-                    will be published here once active and can be verified with
-                    the Utah Division of Real Estate.
-                  </p>
+                  {LICENSING.re ? (
+                    <p>
+                      Brokerage services (buyer representation, seller
+                      representation, and listing services) are offered through{" "}
+                      {SITE_BROKERAGE_NAME}. Utah real estate sales agent license
+                      #{SITE_RE_LICENSE_NUMBER}, verifiable with the{" "}
+                      <a
+                        href={UTAH_DIVISION_OF_REAL_ESTATE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary underline underline-offset-4 hover:text-primary/80"
+                      >
+                        Utah Division of Real Estate
+                      </a>
+                      .
+                    </p>
+                  ) : (
+                    <p>
+                      Brokerage services (buyer representation, seller
+                      representation, and listing services) are offered as Ondo Real
+                      Estate. Brokerage licensing is in progress. License numbers
+                      will be published here once active and can be verified with
+                      the Utah Division of Real Estate.
+                    </p>
+                  )}
                   <p>{FAIR_HOUSING_STATEMENT}</p>
                 </CardContent>
               </Card>
@@ -167,7 +203,17 @@ export default function LicensingPage() {
                     Notary and remote online notarization (RON) services are
                     performed by commissioned notaries public. Utah notary
                     commissions are issued by the Utah Lieutenant Governor and
-                    are searchable on the state&rsquo;s notary registry.
+                    are searchable on the{" "}
+                    <a
+                      href={UTAH_NOTARY_SEARCH_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary underline underline-offset-4 hover:text-primary/80"
+                    >
+                      state&rsquo;s notary registry
+                    </a>
+                    .
+                    {LICENSING.notary ? ` Utah notary public commission #${SITE_NOTARY_COMMISSION_NUMBER}.` : ""}{" "}
                     Notary services are separate from and do not constitute
                     legal advice.
                   </p>

@@ -17,6 +17,17 @@ export type SubServiceDefinition = {
   baseFaqs: { q: string; a: string }[]
 }
 
+/**
+ * The hub page a service's city pages roll up to, for breadcrumbs and "All {parentName} services".
+ * Buy-sell city pages live under /buy-sell/<city>/, but /buy-sell/ itself is a legacy redirect
+ * to /buy/ (public/_redirects), so linking it would cost a redirect hop and a 404 prefetch.
+ */
+export const SERVICE_HUB_PATHS: Record<SubServiceDefinition["parentService"], string> = {
+  "property-management": "/property-management/",
+  loans: "/loans/",
+  "buy-sell": "/buy/",
+}
+
 function fmt(n: number): string {
   return n.toLocaleString("en-US")
 }
@@ -34,7 +45,7 @@ const tenantScreening: SubServiceDefinition = {
   slug: "tenant-screening",
   parentService: "property-management",
   parentName: "Property Management",
-  parentHref: "/property-management",
+  parentHref: SERVICE_HUB_PATHS["property-management"],
   metaTitle: (city) =>
     fitTitle(
       `${city} Tenant Screening: Credit, Criminal & Eviction`,
@@ -76,7 +87,7 @@ const maintenanceCoordination: SubServiceDefinition = {
   slug: "maintenance-coordination",
   parentService: "property-management",
   parentName: "Property Management",
-  parentHref: "/property-management",
+  parentHref: SERVICE_HUB_PATHS["property-management"],
   metaTitle: (city) =>
     fitTitle(
       `${city} Rental Maintenance Coordination`,
@@ -116,7 +127,7 @@ const ownerReporting: SubServiceDefinition = {
   slug: "owner-reporting",
   parentService: "property-management",
   parentName: "Property Management",
-  parentHref: "/property-management",
+  parentHref: SERVICE_HUB_PATHS["property-management"],
   metaTitle: (city) =>
     fitTitle(
       `${city} Rental Owner Reporting & Statements`,
@@ -158,7 +169,7 @@ const fhaLoans: SubServiceDefinition = {
   slug: "fha",
   parentService: "loans",
   parentName: "Loans",
-  parentHref: "/loans",
+  parentHref: SERVICE_HUB_PATHS.loans,
   metaTitle: (city) =>
     fitTitle(
       `FHA Mortgage in ${city}, UT: 3.5% Down`,
@@ -198,7 +209,7 @@ const conventionalLoans: SubServiceDefinition = {
   slug: "conventional",
   parentService: "loans",
   parentName: "Loans",
-  parentHref: "/loans",
+  parentHref: SERVICE_HUB_PATHS.loans,
   metaTitle: (city) =>
     fitTitle(
       `Conventional Mortgage in ${city}, UT: 3% Down`,
@@ -238,7 +249,7 @@ const vaLoans: SubServiceDefinition = {
   slug: "va",
   parentService: "loans",
   parentName: "Loans",
-  parentHref: "/loans",
+  parentHref: SERVICE_HUB_PATHS.loans,
   metaTitle: (city) =>
     fitTitle(
       `VA Home Loans in ${city}, UT: Zero Down, No PMI`,
@@ -279,7 +290,7 @@ const usdaLoans: SubServiceDefinition = {
   slug: "usda",
   parentService: "loans",
   parentName: "Loans",
-  parentHref: "/loans",
+  parentHref: SERVICE_HUB_PATHS.loans,
   metaTitle: (city) =>
     fitTitle(
       `USDA Mortgage in ${city}, UT: Zero Down`,
@@ -319,7 +330,7 @@ const jumboLoans: SubServiceDefinition = {
   slug: "jumbo",
   parentService: "loans",
   parentName: "Loans",
-  parentHref: "/loans",
+  parentHref: SERVICE_HUB_PATHS.loans,
   metaTitle: (city) =>
     fitTitle(
       `Jumbo Mortgage in ${city}, UT: Rates & Limits`,
@@ -361,7 +372,7 @@ const firstTimeBuyers: SubServiceDefinition = {
   slug: "first-time-buyers",
   parentService: "buy-sell",
   parentName: "Buy & Sell",
-  parentHref: "/buy-sell",
+  parentHref: SERVICE_HUB_PATHS["buy-sell"],
   metaTitle: (city) =>
     fitTitle(
       `${city}, UT First-Time Buyers: Down Payment Help`,
@@ -401,7 +412,7 @@ const investmentProperties: SubServiceDefinition = {
   slug: "investment-properties",
   parentService: "buy-sell",
   parentName: "Buy & Sell",
-  parentHref: "/buy-sell",
+  parentHref: SERVICE_HUB_PATHS["buy-sell"],
   metaTitle: (city) =>
     fitTitle(
       `${city}, UT Investment Property: Rents & Returns`,
@@ -441,7 +452,7 @@ const homeValuation: SubServiceDefinition = {
   slug: "home-valuation",
   parentService: "buy-sell",
   parentName: "Buy & Sell",
-  parentHref: "/buy-sell",
+  parentHref: SERVICE_HUB_PATHS["buy-sell"],
   metaTitle: (city) =>
     fitTitle(
       `What Is My ${city}, UT Home Worth? Free Valuation`,

@@ -77,3 +77,67 @@ describe("findLicenseClaims", () => {
     expect(rules("- Pranay Reddy Aleti, founder.", "text")).toEqual([])
   })
 })
+
+describe("findLicenseClaims per license line", () => {
+  const off = { re: false, mlo: false, notary: false }
+
+  it("allows the agent title but still catches loan officer claims once only the real estate license is live", () => {
+    const state = { ...off, re: true }
+    expect(findLicenseClaims("<p>As a Utah real estate agent, I help you buy.</p>", "html", state)).toEqual([])
+    expect(
+      findLicenseClaims('<script type="application/ld+json">{"jobTitle":["Founder","Real Estate Agent"]}</script>', "html", state),
+    ).toEqual([])
+    expect(findLicenseClaims("<p>Loan officer: Pranay Reddy Aleti, NMLS #2699085</p>", "html", state).map((c) => c.line)).toEqual(
+      expect.arrayContaining(["mlo"]),
+    )
+    expect(findLicenseClaims("<p>I'm a loan officer in Lehi.</p>", "html", state).map((c) => c.rule)).toContain("first-person-title")
+  })
+
+  it("allows NMLS IDs and the loan officer title but still catches agent claims once only the mortgage license is live", () => {
+    const state = { ...off, mlo: true }
+    expect(findLicenseClaims("<p>Loan officer: Pranay Reddy Aleti, NMLS #2699085</p>", "html", state)).toEqual([])
+    expect(findLicenseClaims('{"nmls":"2699085"}', "text", state)).toEqual([])
+    expect(findLicenseClaims("<h1>Pranay Reddy Aleti, Utah real estate agent</h1>", "html", state).map((c) => c.line)).toEqual(["re"])
+  })
+
+  it("tags every claim with its license line", () => {
+    const claims = findLicenseClaims("<p>As a Utah real estate agent and loan officer (NMLS #2699085), I help.</p>", "html", off)
+    expect(new Set(claims.map((c) => c.line))).toEqual(new Set(["re", "mlo"]))
+  })
+})
+
+describe("notary commission claims", () => {
+  const off = { re: false, mlo: false, notary: false }
+  const rulesFor = (content: string, kind: "html" | "text" = "html") => findLicenseClaims(content, kind, off).map((c) => c.rule)
+
+  it("catches the commission tied to his name, a first-person claim and a schema title", () => {
+    expect(rulesFor("<p>Pranay Reddy Aleti, commissioned Utah notary public</p>")).toContain("notary-title-next-to-name")
+    expect(rulesFor("<p>Pranay is a commissioned notary.</p>")).toContain("notary-title-next-to-name")
+    expect(rulesFor("<p>Notary: Pranay Reddy Aleti</p>")).toContain("notary-name-after-title")
+    expect(rulesFor("<p>I&#x27;m a commissioned Utah notary and I sign remotely.</p>")).toContain("notary-first-person")
+    expect(rulesFor("<p>Book today. As a Utah notary, I can help.</p>")).toContain("notary-first-person")
+    expect(rulesFor('<script type="application/ld+json">{"jobTitle":["Founder","Notary Public"]}</script>')).toContain(
+      "notary-schema-title",
+    )
+  })
+
+  // "notary" is the subject of 368 pages, so ordinary notary prose must never trip the scan.
+  it("ignores notary prose that is not a claim about him", () => {
+    for (const html of [
+      "<p>Is RON the same as a notary near me in Lehi?</p>",
+      "<p>Sign on a video call with a commissioned Utah notary. No office visit, no travel.</p>",
+      '<p>Reviewed by <a href="/about/team/pranay-reddy-aleti/">Pranay Reddy Aleti</a>, Founder · Last reviewed August 13, 2026</p><h1>Remote Online Notary in Utah County</h1>',
+      "<h1>Remote Online Notary</h1><p>Reviewed by Pranay Reddy Aleti</p>",
+      "<p>You still work with a commissioned notary; you do not need to drive to a storefront.</p>",
+      "<p>Notary services are performed by commissioned notaries public.</p>",
+    ]) {
+      expect(rulesFor(html), html).toEqual([])
+    }
+  })
+
+  it("lets the commission through once the notary switch is on, while the licenses stay guarded", () => {
+    const state = { ...off, notary: true }
+    expect(findLicenseClaims("<p>Pranay Reddy Aleti, commissioned Utah notary public</p>", "html", state)).toEqual([])
+    expect(findLicenseClaims("<p>I'm a loan officer.</p>", "html", state).map((c) => c.line)).toEqual(["mlo"])
+  })
+})

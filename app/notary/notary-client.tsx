@@ -77,7 +77,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
           </p>
           <Button
             size="lg"
-            className="flex gap-2 bg-primary text-primary-foreground"
+            className="gap-2"
             onClick={() => setIsModalOpen(true)}
           >
             <Calendar className="h-5 w-5" />
@@ -143,7 +143,7 @@ export default function NotaryPage({ imageUrl }: { imageUrl: string }) {
                     <br />
                     <a
                       href={`sms:${SITE_PHONE_TEL}`}
-                      className="text-primary hover:underline"
+                      className="prose-link"
                       {...analyticsAttributes("notary_contact_click", "notary_contact", "text")}
                     >
                       Text us

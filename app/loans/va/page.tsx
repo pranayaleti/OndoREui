@@ -15,14 +15,14 @@ import { ContentFaq } from "@/components/content/content-faq"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { VA_FUNDING_FEE, EXAMPLE_NOTE, EXAMPLE_PURCHASE_PRICE_UTAH, HILL_AFB_VA, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"),
   description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.",
   alternates: { canonical: `${SITE_URL}/loans/va/` },
-  openGraph: { type: "website", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", title: pageTitleText("VA Home Loans in Utah: Zero Down, No PMI, Hill AFB"), description: "Zero down, no PMI VA loans across Utah. Certificate of Eligibility, funding fee, entitlement restoration and Hill AFB buying, explained plainly.", images: [OG_IMAGE_URLS.loans] },
 }
 
 // Illustration only: derived from the published first-use rate so the dollar figure follows the constants.
@@ -45,7 +45,7 @@ export default function VALoanPage() {
         title="VA Home Loans in Utah"
         description="VA loans offer zero down payment and no PMI for eligible veterans in Utah."
         pathname="/loans/va/"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans/` },

@@ -7,7 +7,7 @@ import Link from "next/link"
 import { TemplatesCatalog } from "@/components/resources/templates-catalog"
 import { UtahLandlordEducationSection } from "@/components/resources/utah-landlord-education-section"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Landlord Templates & Seller Listing-Prep | Ondo Real Estate"),
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     title: pageTitleText("Landlord Templates, Addendums & Disclosures | Ondo Real Estate"),
     description:
       "Request Utah-oriented lease, addendum, and disclosure packets, plus a federal lead-paint disclosure. Files are emailed after you request them.",
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.guides,
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitleText("Landlord Templates | Ondo Real Estate"),
     description:
       "Utah lease, addendums, disclosures, and a seller listing-prep checklist. Request the file, not an instant download.",
-    images: [DEFAULT_OG_IMAGE_URL],
+    images: [OG_IMAGE_URLS.guides],
   },
 }
 
@@ -37,7 +37,7 @@ export default function TemplatesPage() {
         title="Landlord Templates, Addendums & Disclosures"
         description="Request Utah landlord templates, addendums, and disclosures, plus a federal lead-paint packet. We email the file after you request it."
         pathname="/resources/templates"
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Resources", url: `${SITE_URL}/resources` },

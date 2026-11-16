@@ -20,7 +20,7 @@ const SELL_NEXT_STEPS: readonly NextStep[] = [
   { href: "/whats-my-home-worth", label: "What’s my home worth?", hint: "City-median estimate first. A CMA is a conversation, not the widget." },
   { href: "/get-matched", label: "Get matched", hint: "Tell us you’re selling and we’ll route a listing conversation." },
   { href: "/faq/buying-selling-faqs", label: "Buying & selling FAQs", hint: "Compensation, agreements, and Utah process questions." },
-  { href: "/contact?audience=seller#book-a-call", label: "Contact (selling)", hint: "Seller inquiry plus Calendly on the same page." },
+  { href: "/contact/?audience=seller", label: "Contact (selling)", hint: "Seller inquiry plus Calendly on the same page." },
   { href: "/calculators/home-sale", label: "Sale proceeds calculator", hint: "Estimate net proceeds. Not a quote." },
   { href: "/resources/templates", label: "Listing-prep checklist", hint: "Request the showing-prep file, we email it, it is not an instant download." },
 ]

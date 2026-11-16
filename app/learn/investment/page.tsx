@@ -63,7 +63,7 @@ export default function InvestmentLearnPage() {
         title="Investment property financing: DSCR, occupancy, and house-hacking"
         description="DSCR vs full-doc rental qualification, occupancy types, cash-out to buy a rental, and FHA duplex house-hacks."
         pathname="/learn/investment"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

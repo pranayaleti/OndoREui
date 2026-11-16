@@ -196,10 +196,10 @@ export const generateMetadata = {
       description: "Utah real estate services: property management, buying, selling, refinancing, and mortgages.",
       images: [
         {
-          url: `${SITE_URL}/modern-office-building.png`,
+          url: `${SITE_URL}/og/ondo-real-estate.jpg`,
           width: 1200,
           height: 630,
-          alt: `${SITE_NAME} office building`,
+          alt: `${SITE_NAME}: Utah real estate services`,
         },
       ],
     },
@@ -207,7 +207,7 @@ export const generateMetadata = {
       card: "summary_large_image",
       title: `${SITE_NAME}: Utah Property Management, Buying, Selling, Loans`,
       description: "Utah real estate services: property management, buying, selling, refinancing, and mortgages.",
-      images: [`${SITE_URL}/modern-office-building.png`],
+      images: [`${SITE_URL}/og/ondo-real-estate.jpg`],
     },
   }),
 
@@ -236,7 +236,6 @@ export const generateMetadata = {
       description: property.description,
       images: [
         {
-          // The shared preview image, with no size claim: the file is not 1200x630.
           url: DEFAULT_OG_IMAGE_URL,
           alt: property.name,
         },

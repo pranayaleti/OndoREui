@@ -41,7 +41,7 @@ export default function QualifyPage() {
         title="Start a mortgage conversation: what you will be asked"
         description="Occupancy, income type, debts, and assets. A conversation is not approval, a lock, or a quote."
         pathname="/qualify"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

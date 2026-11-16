@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest"
-import { render, screen } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 import { CityServicePage } from "./city-service-page"
 import { findCityBySlug, findCityByZip } from "@/lib/utah-cities"
 import { SITE_URL } from "@/lib/site"
@@ -56,6 +56,13 @@ describe("CityServicePage", () => {
     expect(service.areaServed).toMatchObject({ "@type": "City", name: "Lehi" })
     expect(service.url).toBe(`${SITE_URL}/property-management/lehi/`)
     expect(JSON.stringify(service)).not.toMatch(/PostalAddress|LocalBusiness/)
+  })
+
+  // /buy-sell/ is only a legacy redirect to /buy/: a crumb there costs a redirect hop and 404s the prefetch.
+  it("links the Buy & Sell crumb to /buy/, not the /buy-sell/ redirect", () => {
+    render(<CityServicePage city={lehi} service="buy-sell" />)
+    const crumbs = screen.getByRole("navigation", { name: "Breadcrumb" })
+    expect(within(crumbs).getByRole("link", { name: "Buy & Sell" })).toHaveAttribute("href", "/buy/")
   })
 
   it("labels the guide link once for cities whose name already ends in City", () => {

@@ -1,4 +1,4 @@
-// Includes a mortgage-rate calculator and a lead form: ship with the licensed pages (see lib/site.ts LICENSING_LIVE).
+// Includes a mortgage-rate calculator and a lead form: ship with the licensed pages (see lib/site.ts MLO_LICENSE_LIVE).
 // NOTE(i18n): server component, English-only per OndoREui/CLAUDE.md i18n rules.
 import type { Metadata } from "next"
 import { NumbersCalculator } from "@/components/numbers/numbers-calculator"

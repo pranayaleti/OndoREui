@@ -76,7 +76,7 @@ export default function MortgageRatesPage() {
         title="Why Your Quote Is Not the 30-Year Average"
         description="Rate vs APR vs payment, what moves a Loan Estimate, and why a news average is not your quote."
         pathname="/buy/rates"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

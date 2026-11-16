@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: Params }) {
         title={cityGuideTitle(city.name)}
         description={cityGuideDescription(city.name)}
         pathname={`/locations/${citySlug}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Locations", url: `${SITE_URL}/locations/` },

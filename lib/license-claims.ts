@@ -1,46 +1,117 @@
-import { SITE_LOAN_OFFICER, SITE_RE_LICENSE_NUMBER } from "./site"
+import {
+  LICENSING,
+  SITE_LOAN_OFFICER,
+  SITE_NOTARY_COMMISSION_NUMBER,
+  SITE_RE_LICENSE_NUMBER,
+  type LicensingState,
+} from "./site"
 
 /**
  * License-claim patterns for the post-build scan (scripts/check-license-claims.ts).
  *
- * While LICENSING_LIVE (lib/site.ts) is off, no exported page may present Pranay as a licensed
- * real estate agent or loan officer, or print an NMLS number. General prose ("ask a loan officer")
- * is fine: each rule needs an ID, a schema title, the title tied to the name, or a first-person
- * claim. In October 2026 a /links sentence and a loan-page line shipped such claims unchecked.
+ * Each rule belongs to one license line (re, mlo, notary) and runs only while that line's switch
+ * in lib/site.ts is off, so the real estate license can go live without unlocking loan officer
+ * claims, and the other way round. Before the matching switch is on, no exported page may present
+ * Pranay as a licensed real estate agent, a loan officer or a commissioned notary, or print an
+ * NMLS, license or commission number. General prose ("ask a loan officer", "a commissioned notary
+ * completes the act") is fine: each rule needs an ID, a schema title, the title tied to the name,
+ * or a first-person claim. In October 2026 a /links sentence and a loan-page line shipped such
+ * claims unchecked.
  */
-export type LicenseClaim = { rule: string; excerpt: string }
+export type LicenseLine = keyof LicensingState
+export type LicenseClaim = { rule: string; line: LicenseLine; excerpt: string }
 
-const TITLE = String.raw`(?:real estate agent|loan officer|realtor|loan originator)`
+const RE_TITLE = String.raw`(?:real estate agent|realtor)`
+const MLO_TITLE = String.raw`(?:loan officer|loan originator)`
+const NOTARY_TITLE = String.raw`(?:notary public|notary|signing agent)`
 
-/** His own license numbers: never in any export, in any form, while licensing is off. */
-const LITERAL_IDS = [SITE_LOAN_OFFICER.nmlsId, SITE_RE_LICENSE_NUMBER].filter((id) => id.trim() !== "")
+type Rule = { rule: string; line: LicenseLine; pattern: RegExp; scan: "raw" | "text" }
 
-const RULES: { rule: string; pattern: RegExp; scan: "raw" | "text" }[] = [
-  ...LITERAL_IDS.map((id) => ({
-    rule: "nmls-id-literal",
-    pattern: new RegExp(String.raw`(?<![\d])${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![\d])`),
-    scan: "raw" as const,
-  })),
-  { rule: "nmls-number", pattern: /NMLS\s*(?:ID|No\.?|Number)?\s*[#:]?\s*\d{3,}/i, scan: "text" },
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
+/** His own license numbers: never in any export, in any form, while that license is off. */
+function literalIdRule(rule: string, line: LicenseLine, id: string): Rule[] {
+  if (id.trim() === "") return []
+  return [{ rule, line, pattern: new RegExp(String.raw`(?<![\d])${escapeRegExp(id)}(?![\d])`), scan: "raw" }]
+}
+
+/** Title claims whose shape the real estate and loan officer lines share. */
+function titleRules(line: LicenseLine, title: string): Rule[] {
+  return [
+    {
+      rule: "schema-job-title",
+      line,
+      pattern: new RegExp(String.raw`"(?:jobTitle|hasOccupation)"\s*:\s*(?:"[^"]*|\[[^\]]*|\{[^}]*)${title}`, "i"),
+      scan: "raw",
+    },
+    {
+      rule: "title-next-to-name",
+      line,
+      pattern: new RegExp(String.raw`Pranay(?: Reddy)?(?: Aleti)?[^.!?]{0,60}\b${title}\b`, "i"),
+      scan: "text",
+    },
+    { rule: "name-after-title", line, pattern: new RegExp(String.raw`\b${title}\b[^.!?]{0,20}\bPranay`, "i"), scan: "text" },
+    {
+      rule: "first-person-title",
+      line,
+      pattern: new RegExp(
+        String.raw`\b(?:As|I'm|I am|I work as)\s+(?:a|an|your)\s+(?:licensed\s+)?(?:Utah[- ]licensed\s+|Utah\s+)?(?:licensed\s+)?${title}\b`,
+        "i",
+      ),
+      scan: "text",
+    },
+  ]
+}
+
+const NOTARY_QUALIFIERS = String.raw`(?:commissioned\s+|Utah\s+|licensed\s+|remote\s+|online\s+){0,3}`
+
+/**
+ * Notary rules are tighter than the agent and loan officer ones because "notary" is the subject
+ * of 368 notary pages: "the same as a notary near me" and a "Reviewed by Pranay" byline followed
+ * by a notary headline are not claims. A claim must sit right beside the name or open a
+ * first-person sentence.
+ */
+const NOTARY_RULES: Rule[] = [
   {
-    rule: "schema-job-title",
-    pattern: new RegExp(String.raw`"(?:jobTitle|hasOccupation)"\s*:\s*(?:"[^"]*|\[[^\]]*|\{[^}]*)${TITLE}`, "i"),
+    rule: "notary-schema-title",
+    line: "notary",
+    pattern: new RegExp(String.raw`"(?:jobTitle|hasOccupation)"\s*:\s*(?:"[^"]*|\[[^\]]*|\{[^}]*)${NOTARY_TITLE}`, "i"),
     scan: "raw",
   },
   {
-    rule: "title-next-to-name",
-    pattern: new RegExp(String.raw`Pranay(?: Reddy)?(?: Aleti)?[^.!?]{0,60}\b${TITLE}\b`, "i"),
-    scan: "text",
-  },
-  { rule: "name-after-title", pattern: new RegExp(String.raw`\b${TITLE}\b[^.!?]{0,20}\bPranay`, "i"), scan: "text" },
-  {
-    rule: "first-person-title",
+    rule: "notary-title-next-to-name",
+    line: "notary",
     pattern: new RegExp(
-      String.raw`\b(?:As|I'm|I am|I work as)\s+(?:a|an|your)\s+(?:licensed\s+)?(?:Utah[- ]licensed\s+|Utah\s+)?(?:licensed\s+)?${TITLE}\b`,
+      String.raw`Pranay(?: Reddy)?(?: Aleti)?,?\s+(?:is\s+)?(?:a|an|the|our|your)?\s*${NOTARY_QUALIFIERS}${NOTARY_TITLE}\b`,
       "i",
     ),
     scan: "text",
   },
+  {
+    rule: "notary-name-after-title",
+    line: "notary",
+    pattern: new RegExp(String.raw`\b${NOTARY_TITLE}\b[\s,:-]{0,8}Pranay`, "i"),
+    scan: "text",
+  },
+  {
+    rule: "notary-first-person",
+    line: "notary",
+    pattern: new RegExp(
+      String.raw`(?:\b(?:I'm|I am|I work as)\s+(?:a|an|your)\s+|(?:^|[.!?]\s+)As\s+(?:a|an|your)\s+)${NOTARY_QUALIFIERS}${NOTARY_TITLE}\b`,
+      "i",
+    ),
+    scan: "text",
+  },
+]
+
+const RULES: Rule[] = [
+  ...literalIdRule("nmls-id-literal", "mlo", SITE_LOAN_OFFICER.nmlsId),
+  ...literalIdRule("re-license-literal", "re", SITE_RE_LICENSE_NUMBER),
+  ...literalIdRule("notary-commission-literal", "notary", SITE_NOTARY_COMMISSION_NUMBER),
+  { rule: "nmls-number", line: "mlo", pattern: /NMLS\s*(?:ID|No\.?|Number)?\s*[#:]?\s*\d{3,}/i, scan: "text" },
+  ...titleRules("re", RE_TITLE),
+  ...titleRules("mlo", MLO_TITLE),
+  ...NOTARY_RULES,
 ]
 
 /**
@@ -76,15 +147,21 @@ export function htmlToScanText(html: string): string {
   return normalize(`${body} . ${attributes.join(" . ")}`)
 }
 
-export function findLicenseClaims(content: string, kind: "html" | "text"): LicenseClaim[] {
+/** Claims for every license line whose switch is off in `state`; a live line's rules are skipped. */
+export function findLicenseClaims(
+  content: string,
+  kind: "html" | "text",
+  state: LicensingState = LICENSING,
+): LicenseClaim[] {
   const text = VISITOR_PHRASES.reduce(
     (current, phrase) => current.replace(phrase, " "),
     kind === "html" ? htmlToScanText(content) : normalize(content),
   )
   const claims: LicenseClaim[] = []
-  for (const { rule, pattern, scan } of RULES) {
+  for (const { rule, line, pattern, scan } of RULES) {
+    if (state[line]) continue
     const match = pattern.exec(scan === "raw" ? content : text)
-    if (match) claims.push({ rule, excerpt: match[0].slice(0, 140) })
+    if (match) claims.push({ rule, line, excerpt: match[0].slice(0, 140) })
   }
   return claims
 }

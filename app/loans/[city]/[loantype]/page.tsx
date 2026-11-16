@@ -6,7 +6,7 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 type Params = Promise<{ city: string; loantype: string }>
 
@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: pageTitle(title),
     description,
     alternates: { canonical },
-    openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-    twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+    openGraph: { type: "website", title, description, url: canonical, images: OG_IMAGES.loans },
+    twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.loans] },
   }
 }
 
@@ -48,7 +48,7 @@ export default async function Page({ params }: { params: Params }) {
         title={`${def.metaTitle(city.name)} | ${SITE_BRAND_SHORT}`}
         description={def.metaDescription(city.name)}
         pathname={`/loans/${citySlug}/${loantype}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans/` },

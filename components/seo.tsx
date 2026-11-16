@@ -6,6 +6,7 @@ import {
   generateWebPageJsonLd,
 } from "@/lib/seo"
 import { SITE_NAME, SITE_URL } from "@/lib/site"
+import { shareImageKeyForPath, shareImagePath } from "@/lib/share-images"
 
 // NOTE: This component only generates JSON-LD structured data.
 // For <title>, <meta name="description">, robots, and OG tags, use Next.js
@@ -52,7 +53,8 @@ export default function SEO({
 
   // Structured-data URLs must match the canonical, which ends with "/" (trailingSlash: true).
   const url = canonicalCrumbUrl(`${domain}${pathname}`)
-  const ogImage = toAbsolute(image) || `${domain}/modern-office-building.webp`
+  // A page that passes no image, or still names retired stock art, gets the card for its section.
+  const ogImage = toAbsolute(shareImagePath(image, shareImageKeyForPath(pathname))) as string
 
   const providedJsonLd = Array.isArray(jsonLd) ? jsonLd.filter(Boolean) : jsonLd ? [jsonLd] : []
 
@@ -113,10 +115,11 @@ export default function SEO({
 
 /**
  * Path prefixes that have no page of their own, mapped to the hub that covers them.
- * Without this, /vs/buildium/ got a breadcrumb pointing at /vs, which is a 404.
+ * Without this, /vs/buildium/ got a breadcrumb pointing at /vs, which is a 404. A hub must be
+ * a live page, not a legacy redirect from public/_redirects (/compare/ became one in Oct 2026).
  */
 const BREADCRUMB_HUBS: Record<string, { name: string; path: string }> = {
-  "/vs": { name: "Compare", path: "/compare/" },
+  "/vs": { name: "Compare Utah Property Managers", path: "/compare-utah-property-managers/" },
 }
 
 export function buildBreadcrumbItems({

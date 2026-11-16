@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/notary/on-demand/`,
     images: [
       {
-        url: `${SITE_URL}/modern-office-building.webp`,
+        url: `${SITE_URL}/og/notary.jpg`,
         width: 1200,
         height: 630,
         alt: "ONDO Notary: on-demand and same-day when we can",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "On-Demand Notary: Same-Day When We Can",
     description: "Best-effort same-day notarization. Remote online (RON) nationwide.",
-    images: [`${SITE_URL}/modern-office-building.webp`],
+    images: [`${SITE_URL}/og/notary.jpg`],
   },
 }
 
@@ -46,7 +46,7 @@ export default function OnDemandNotaryPage() {
         title={TITLE}
         description="On-demand notarization from ONDO Notary. We try to accommodate same-day appointments when capacity allows, remote online (RON) nationwide."
         pathname="/notary/on-demand/"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/notary.jpg`}
         keywords={[
           "on demand notary",
           "same day notary",

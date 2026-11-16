@@ -6,7 +6,7 @@ import { SITE_URL, SITE_NAME } from "@/lib/site"
 import { UTAH_PM_COMPARISON } from "@/lib/utah-pm-comparison"
 import { FaqAccordion } from "@/components/faq-accordion"
 import { Check } from "lucide-react"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 const title = "Utah Property Management Companies Compared (2026)"
 const ogTitle = `${title} | Ondo RE`
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/compare-utah-property-managers/` },
-  openGraph: { type: "website", title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: ogTitle, description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: ogTitle, description, url: `${SITE_URL}/compare-utah-property-managers/`, images: OG_IMAGES.manage },
+  twitter: { card: "summary_large_image", title: ogTitle, description, images: [OG_IMAGE_URLS.manage] },
   robots: { index: true, follow: true },
 }
 
@@ -72,7 +72,7 @@ export default function CompareUtahPropertyManagersPage() {
         title={title}
         description={description}
         pathname="/compare-utah-property-managers"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
@@ -131,7 +131,8 @@ export default function CompareUtahPropertyManagersPage() {
         </div>
       </section>
 
-      <section className="border-y border-border/40 bg-muted/30 py-12">
+      {/* The retired /vs/buildium/ and /vs/turbotenant/ pages folded into this section; blog posts link here. */}
+      <section id="diy-software" className="scroll-mt-24 border-y border-border/40 bg-muted/30 py-12">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">Doing it yourself with software</h2>
           <p className="text-foreground/80">{ONDO_PRICING_FRAMING}</p>
@@ -171,7 +172,7 @@ export default function CompareUtahPropertyManagersPage() {
           <h2 className="mb-3 text-2xl font-bold text-foreground md:text-3xl">Want a real quote?</h2>
           <p className="mb-6 text-foreground/70">Thirty minutes on the phone, with the fee schedule in front of us both.</p>
           <Link
-            href="/contact/#book-a-call"
+            href="/contact/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Book a 30-minute call

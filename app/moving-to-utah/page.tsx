@@ -20,7 +20,7 @@ export const metadata: Metadata = pageCanonicalMetadata("/moving-to-utah", {
     url: `${SITE_URL}/moving-to-utah/`,
     images: [
       {
-        url: `${SITE_URL}/modern-office-building.webp`,
+        url: `${SITE_URL}/og/ondo-real-estate.jpg`,
         width: 1200,
         height: 630,
         alt: `${SITE_NAME}: New to Utah arrival desk`,
@@ -31,7 +31,7 @@ export const metadata: Metadata = pageCanonicalMetadata("/moving-to-utah", {
     card: "summary_large_image",
     title,
     description,
-    images: [`${SITE_URL}/modern-office-building.webp`],
+    images: [`${SITE_URL}/og/ondo-real-estate.jpg`],
   },
 })
 
@@ -42,7 +42,7 @@ export default function MovingToUtahPage() {
         title={title}
         description={description}
         pathname="/moving-to-utah"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
@@ -72,7 +72,7 @@ export default function MovingToUtahPage() {
       <div className="container mx-auto px-4 py-10 md:py-14">
         <UtahArrivalDesk />
         <section className="mt-14 max-w-3xl" aria-labelledby="why-utah-heading">
-          <h2 id="why-utah-heading" className="mb-3 text-2xl font-bold text-foreground">Why people move here</h2>
+          <h2 id="why-utah-heading" className="mb-3 scroll-mt-24 text-2xl font-bold text-foreground">Why people move here</h2>
           <ul className="list-disc space-y-2 pl-5 text-foreground/70">
             <li>Jobs: the Wasatch Front keeps adding employers, from Silicon Slopes in Lehi to the Salt Lake core.</li>
             <li>Commute math: most of the 55 cities we cover sit within 45 minutes of a major job center.</li>

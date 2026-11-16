@@ -6,6 +6,9 @@
 # next.js
 /.next/
 /out/
+# Dev-only copies of out/'s sitemap (scripts/dev-sitemap.mjs)
+/public/sitemap.xml
+/public/sitemap-*.xml
 
 # production
 /build

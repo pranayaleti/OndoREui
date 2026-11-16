@@ -8,14 +8,14 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_URL, APP_PORTAL_URL, pageTitle, pageTitleText } from "@/lib/site"
 import { CityLinksGrid } from "@/components/city-links-grid"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Utah Rental Maintenance Coordination"),
   description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.",
   alternates: { canonical: `${SITE_URL}/property-management/maintenance-coordination/` },
-  openGraph: { type: "website", title: pageTitleText("Utah Rental Maintenance Coordination"), description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Utah Rental Maintenance Coordination"), description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Utah Rental Maintenance Coordination"), description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: OG_IMAGES.manage },
+  twitter: { card: "summary_large_image", title: pageTitleText("Utah Rental Maintenance Coordination"), description: "Maintenance coordination for Utah rentals: vetted licensed vendors, owner approval limits, photo documentation and no markup on invoices.", images: [OG_IMAGE_URLS.manage] },
 }
 
 const features = [
@@ -32,7 +32,7 @@ export default function MaintenanceCoordinationPage() {
         title="Maintenance Coordination | Property Management Utah"
         description="End-to-end maintenance coordination for Utah rental properties."
         pathname="/property-management/maintenance-coordination"
-        image={`${SITE_URL}/property-manager-meeting.png`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Property Management", url: `${SITE_URL}/property-management` },

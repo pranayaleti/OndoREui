@@ -141,7 +141,7 @@ export default function PrivacyPolicyPage() {
         title="Privacy Policy | Ondo Real Estate"
         description="Learn how Ondo Real Estate protects your personal information and privacy. Read our comprehensive privacy policy."
         pathname="/privacy-policy"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Privacy Policy", url: `${SITE_URL}/privacy-policy` },

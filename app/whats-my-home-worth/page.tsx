@@ -5,7 +5,7 @@ import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME, pageTitleText } from "@/lib/site"
 import { HomeValueEstimator } from "@/components/home-value-estimator"
 import { ListingPacketForm } from "@/components/leads/listing-packet-form"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 const title = pageTitleText("What's My Utah Home Worth?: Free Rent + Sale Estimate | Ondo RE")
 const description =
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: `${SITE_URL}/whats-my-home-worth/` },
-  openGraph: { type: "website", title, description, url: `${SITE_URL}/whats-my-home-worth/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title, description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title, description, url: `${SITE_URL}/whats-my-home-worth/`, images: OG_IMAGES.sell },
+  twitter: { card: "summary_large_image", title, description, images: [OG_IMAGE_URLS.sell] },
   robots: { index: true, follow: true },
 }
 
@@ -27,7 +27,7 @@ export default function WhatsMyHomeWorthPage() {
         title={title}
         description={description}
         pathname="/whats-my-home-worth"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/sell.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

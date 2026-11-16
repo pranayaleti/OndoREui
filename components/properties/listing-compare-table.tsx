@@ -33,6 +33,8 @@ const FIELD_LABELS: Record<(typeof COMPARE_FIELDS)[number], string> = {
 
 type CompareListing = {
   publicId: string
+  addressLine1?: string | null
+  addressLine2?: string | null
   title: string
   photoUrl?: string | null
   price: number
@@ -50,6 +52,8 @@ type CompareListing = {
 export function listingsFromApi(properties: ApiProperty[]): CompareListing[] {
   return properties.map((property) => ({
     publicId: property.publicId,
+    addressLine1: property.addressLine1,
+    addressLine2: property.addressLine2,
     title: property.title,
     photoUrl: [...(property.photos ?? [])].sort(
       (a, b) => (a.orderIndex ?? 0) - (b.orderIndex ?? 0),
@@ -97,7 +101,7 @@ export function ListingCompareTable({ listings, onRemove }: ListingCompareTableP
                   ) : (
                     <div className="mb-2 h-24 w-full rounded-md bg-muted" />
                   )}
-                  <Link href={listingDetailPath(listing.publicId)} className="font-semibold hover:underline">
+                  <Link href={listingDetailPath(listing)} className="font-semibold hover:underline">
                     {listing.title}
                   </Link>
                   <Link

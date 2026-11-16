@@ -1,4 +1,6 @@
 import { Suspense } from "react"
+import Image from "next/image"
+import Link from "next/link"
 import { PageBanner } from "@/components/page-banner"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
@@ -7,8 +9,9 @@ import { ContactLeadForm } from "@/components/contact/contact-lead-form"
 import { ContactPageForm } from "@/components/contact/contact-page-form"
 import { CalendlyInlineEmbed } from "@/components/contact/calendly-inline-embed"
 import { WebMCPContactInfoTool } from "@/components/contact/webmcp-contact-info-tool"
-import { Mail, Phone } from "lucide-react"
+import { Mail, MessageCircle, Phone } from "lucide-react"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { analyticsAttributes } from "@/lib/analytics"
 
 export const metadata = {
   title: "Contact Us",
@@ -38,7 +41,7 @@ export default function ContactPage() {
         title="Contact Us"
         description="Get in touch with Ondo Real Estate. Send a message or call us for property management, investments, and leasing across Utah."
         pathname="/contact"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Contact", url: `${SITE_URL}/contact` },
@@ -57,7 +60,7 @@ export default function ContactPage() {
               <h2 className="text-xl font-semibold dark:text-foreground mb-4">
                 Send a message
               </h2>
-              <Suspense fallback={<ContactLeadForm routeAfterSubmit />}>
+              <Suspense fallback={<ContactLeadForm routeAfterSubmit hideTitle />}>
                 <ContactPageForm />
               </Suspense>
             </div>
@@ -78,7 +81,36 @@ export default function ContactPage() {
                     {SITE_EMAILS.primary}
                   </a>
                 </li>
+                <li className="flex items-center gap-3">
+                  <MessageCircle className="h-5 w-5 flex-shrink-0" aria-hidden />
+                  <Link href="/feedback/" className="hover:underline">
+                    Ideas for this website? Share feedback
+                  </Link>
+                </li>
               </ul>
+              {/* A phone can't scan its own screen, so the code only shows on larger screens. */}
+              <Link
+                href="/links/"
+                className="mt-6 hidden items-center gap-4 text-foreground/70 hover:text-foreground transition-colors md:flex"
+                aria-label="All Ondo links in one place, or scan the code to save them on your phone"
+                {...analyticsAttributes("links_hub_click", "contact", "qr")}
+              >
+                {/* 128px keeps the 33-module code readable by a phone camera (scripts/generate-qr-kit.mjs). */}
+                <Image
+                  src="/links-qr.svg"
+                  alt=""
+                  width={128}
+                  height={128}
+                  className="h-32 w-32 rounded-md bg-white"
+                  sizes="128px"
+                  loading="lazy"
+                />
+                <span className="text-sm leading-snug">
+                  Scan to save all our links{" "}
+                  <br />
+                  on your phone
+                </span>
+              </Link>
               <div id="book-a-call" className="scroll-mt-24">
                 <CalendlyInlineEmbed />
               </div>

@@ -74,7 +74,7 @@ describe("FeaturedPropertiesSection", () => {
     expect(await screen.findByText("Real Downtown Loft")).toBeInTheDocument()
     const detailsLink = screen.getByRole("link", { name: /view details/i })
     expect((detailsLink.getAttribute("href") ?? "").replace(/\/$/, "")).toBe(
-      "/properties/pub-1",
+      "/12-real-st",
     )
     // Zero tolerance for fabricated inventory — a 555 number is the tell.
     expect(screen.queryByText(/555-/)).not.toBeInTheDocument()

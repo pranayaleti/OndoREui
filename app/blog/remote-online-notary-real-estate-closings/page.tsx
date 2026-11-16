@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SITE_EMAILS, SITE_PHONE, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { pageTitle, pageTitleText } from "@/lib/site"
 
 export const metadata: Metadata = {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     publishedTime: "2025-01-10",
     modifiedTime: "2025-01-10",
     authors: ["ONDO Notary Team"],
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.guides,
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitleText("Remote Online Notary for Real Estate Closings | Ondo Real Estate"),
     description: "Use ONDO Remote Online Notary for purchases, refinances, HELOCs, and investor closings with compliant ID checks, audit trails, and title-ready documents.",
-    images: [DEFAULT_OG_IMAGE_URL],
+    images: [OG_IMAGE_URLS.guides],
   },
 }
 
@@ -63,7 +63,7 @@ export default function RemoteOnlineNotaryRealEstateClosings() {
         title="Remote Online Notary for Real Estate Closings"
         description="Use ONDO Remote Online Notary for purchases, refinances, HELOCs, and investor closings with compliant ID checks, audit trails, and title-ready documents."
         pathname={slug}
-        image={`${SITE_URL}/modern-townhouse-garage.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         publishedTime={published}
         modifiedTime={modified}
         author="ONDO Notary Team"

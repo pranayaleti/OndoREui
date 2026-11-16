@@ -63,6 +63,20 @@ describe("/links page", () => {
     expect(text).toMatch(/loan officer \(NMLS #2699085\)/)
   })
 
+  // Each license goes live on its own day; the intro names only the live one.
+  it("names only the live license while the other finalizes", () => {
+    const join = (segments: readonly (string | { highlight: string })[]) =>
+      segments.map((segment) => (typeof segment === "string" ? segment : segment.highlight)).join("")
+    const agentOnly = join(buildLinksPageIntro({ re: true, mlo: false, notary: false }).paragraphs[1]!)
+    expect(agentOnly).toMatch(/^As a Utah real estate agent, I help you buy a home and sell your home/)
+    expect(agentOnly).toMatch(/while my loan officer license finalizes/)
+    expect(agentOnly).not.toMatch(/NMLS #/)
+    const loanOnly = join(buildLinksPageIntro({ re: false, mlo: true, notary: false }).paragraphs[1]!)
+    expect(loanOnly).toMatch(/^As a loan officer \(NMLS #2699085\), I help you find the right home loan/)
+    expect(loanOnly).toMatch(/while my real estate license finalizes/)
+    expect(loanOnly).not.toMatch(/as a utah real estate agent/i)
+  })
+
   it("links the Loan Estimate second look and the rate watch from Home loans", () => {
     render(<LinksPage />)
     const group = screen.getByRole("heading", { level: 2, name: "Home loans" }).closest("section")!

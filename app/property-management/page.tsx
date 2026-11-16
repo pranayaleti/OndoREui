@@ -1,3 +1,4 @@
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { CheckCircle } from "lucide-react"
@@ -6,7 +7,7 @@ import { PageBanner } from "@/components/page-banner"
 import { ServiceFaqSection } from "@/components/service-faq-section"
 import { YourContactCard } from "@/components/people/your-contact-card"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
-import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import {
   GROWTH_MGMT_RATE,
   GROWTH_MIN_UNITS,
@@ -39,14 +40,15 @@ export const metadata: Metadata = {
     title: pageTitleText("Utah Property Management: Fees, Leasing & Screening"),
     description: DESCRIPTION,
     url: `${SITE_URL}/property-management/`,
-    images: [
-      {
-        url: `${SITE_URL}/modern-office-building.webp`,
-        width: 1200,
-        height: 630,
-        alt: `${SITE_NAME}: Utah property management`,
-      },
-    ],
+    images: OG_IMAGES.manage,
+  },
+  // Without its own twitter block the page inherits the root layout's, and shares the homepage's
+  // title and picture on X instead of its own.
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitleText("Utah Property Management: Fees, Leasing & Screening"),
+    description: DESCRIPTION,
+    images: [OG_IMAGE_URLS.manage],
   },
 }
 
@@ -81,7 +83,7 @@ export default function PropertyManagementPage() {
         title="Utah Property Management | Owners & Investors"
         description={DESCRIPTION}
         pathname="/property-management/"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

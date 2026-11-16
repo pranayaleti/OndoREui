@@ -19,6 +19,13 @@ import {
   SITE_EMAILS,
   SITE_SOCIALS,
   LICENSING_LIVE,
+  LICENSING,
+  RE_LICENSE_LIVE,
+  MLO_LICENSE_LIVE,
+  NOTARY_COMMISSION_LIVE,
+  licensingState,
+  blankFieldsForLiveLicenses,
+  nmlsConsumerAccessUrl,
   SITE_COMPANY_NMLS_ID,
   SITE_LOAN_OFFICER,
   NMLS_CONSUMER_ACCESS_URL,
@@ -122,11 +129,62 @@ describe("NMLS identification gate", () => {
     ).toEqual(["SITE_LENDER_NAME"])
   })
 
-  it("never ships live with an empty placeholder or an 'on file' disclosure", () => {
-    if (!LICENSING_LIVE) return
-    expect(missingLicensingFields()).toEqual([])
+  it("never ships a live license with an empty placeholder, or a live mortgage license with an 'on file' disclosure", () => {
+    expect(blankFieldsForLiveLicenses()).toEqual([])
+    if (!MLO_LICENSE_LIVE) return
     expect(SITE_COMPANY_NMLS_ID).toMatch(/^\d+$/)
     expect(ARRIVAL_LENDING_DISCLOSURE).not.toMatch(/on file/i)
     expect(LLMS_DISCLOSURES_BLOCK).not.toMatch(/on file/i)
+  })
+})
+
+describe("per-license switches", () => {
+  it("are all off by default and feed the legacy any-license flag", () => {
+    expect(RE_LICENSE_LIVE).toBe(false)
+    expect(MLO_LICENSE_LIVE).toBe(false)
+    expect(NOTARY_COMMISSION_LIVE).toBe(false)
+    expect(LICENSING).toEqual({ re: false, mlo: false, notary: false })
+    expect(LICENSING_LIVE).toBe(RE_LICENSE_LIVE || MLO_LICENSE_LIVE)
+  })
+
+  it("reads the legacy boolean as both licenses and never the notary commission", () => {
+    expect(licensingState(true)).toEqual({ re: true, mlo: true, notary: false })
+    expect(licensingState(false)).toEqual({ re: false, mlo: false, notary: false })
+    const state = { re: true, mlo: false, notary: true }
+    expect(licensingState(state)).toBe(state)
+  })
+
+  it("lists only the placeholders a live license needs", () => {
+    const blanks = {
+      SITE_COMPANY_NMLS_ID: "",
+      SITE_RE_LICENSE_NUMBER: "",
+      SITE_BROKERAGE_NAME: "",
+      SITE_LENDER_NAME: "",
+      SITE_NOTARY_COMMISSION_NUMBER: "",
+    }
+    expect(blankFieldsForLiveLicenses({ re: false, mlo: false, notary: false }, blanks)).toEqual([])
+    expect(blankFieldsForLiveLicenses({ re: true, mlo: false, notary: false }, blanks)).toEqual([
+      "SITE_RE_LICENSE_NUMBER",
+      "SITE_BROKERAGE_NAME",
+    ])
+    expect(blankFieldsForLiveLicenses({ re: false, mlo: true, notary: false }, blanks)).toEqual([
+      "SITE_COMPANY_NMLS_ID",
+      "SITE_LENDER_NAME",
+    ])
+    expect(blankFieldsForLiveLicenses({ re: false, mlo: false, notary: true }, blanks)).toEqual([
+      "SITE_NOTARY_COMMISSION_NUMBER",
+    ])
+    expect(
+      blankFieldsForLiveLicenses(
+        { re: true, mlo: true, notary: true },
+        { SITE_COMPANY_NMLS_ID: "1", SITE_RE_LICENSE_NUMBER: "RE-1", SITE_BROKERAGE_NAME: "B", SITE_LENDER_NAME: "L", SITE_NOTARY_COMMISSION_NUMBER: "N" },
+      ),
+    ).toEqual([])
+  })
+
+  it("links the individual NMLS Consumer Access record", () => {
+    expect(nmlsConsumerAccessUrl("2699085")).toBe(
+      "https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/2699085",
+    )
   })
 })

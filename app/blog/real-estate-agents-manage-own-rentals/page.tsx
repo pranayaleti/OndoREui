@@ -62,7 +62,7 @@ export default function RealEstateAgentsManageOwnRentals() {
             <p>The reason agents outsource is operations, rent collection, maintenance tickets, accounting. That is exactly the part software should carry. With <Link href="/calculators/cash-on-cash">the numbers modeled</Link> and the busywork automated, self-management becomes a few minutes a month, not a second job.</p>
 
             <h2>Takeaway</h2>
-            <p>You have the hardest parts, market knowledge and licensing, already. Automate the operations and keep the fee, the data, and the relationship. See how the platform is <Link href="/vs/turbotenant">built for the agent-plus-manager</Link> workflow.</p>
+            <p>You have the hardest parts, market knowledge and licensing, already. Automate the operations and keep the fee, the data, and the relationship. See how the platform is <Link href="/compare-utah-property-managers/#diy-software">built for the agent-plus-manager</Link> workflow.</p>
           
     </ArticleShell>
   )

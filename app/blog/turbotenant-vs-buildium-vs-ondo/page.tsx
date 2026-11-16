@@ -63,7 +63,7 @@ export default function TurbotenantVsBuildiumVsOndo() {
             </ul>
 
             <h2>Takeaway</h2>
-            <p>Pick for your actual workflow and total cost, not the brand. If you want the agent + financing + management combination on one login, see <Link href="/vs/buildium">how Ondo compares</Link>, or <Link href="/blog/switch-from-turbotenant-migration-guide">how to switch</Link> without losing data.</p>
+            <p>Pick for your actual workflow and total cost, not the brand. If you want the agent + financing + management combination on one login, see <Link href="/compare-utah-property-managers/#diy-software">how Ondo compares</Link>, or <Link href="/blog/switch-from-turbotenant-migration-guide">how to switch</Link> without losing data.</p>
           
     </ArticleShell>
   )

@@ -299,26 +299,6 @@ export default function FoundersLetter({ modified }: { modified: string }) {
               </div>
             ))}
           </div>
-          <div className={styles.ledger}>
-            <div>
-              <h3 className={styles.ledgerLabel}>{why.ledger.demonstratedLabel}</h3>
-              <ul>
-                {why.ledger.demonstrated.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className={styles.ledgerLabel}>{why.ledger.inProgressLabel}</h3>
-              <ul>
-                {why.ledger.inProgress.map((segments, index) => (
-                  <li key={index}>
-                    <Segments segments={segments} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
 

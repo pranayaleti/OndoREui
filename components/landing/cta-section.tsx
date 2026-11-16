@@ -25,7 +25,7 @@ export function CTASection() {
             </a>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="/contact#book-a-call" className="inline-flex items-center gap-2" {...analyticsAttributes("book_call_click", "home_cta", "book-a-call")}>
+            <Link href="/contact/" className="inline-flex items-center gap-2" {...analyticsAttributes("book_call_click", "home_cta", "book-a-call")}>
               <Calendar className="h-4 w-4" aria-hidden="true" />
               Book a call
             </Link>

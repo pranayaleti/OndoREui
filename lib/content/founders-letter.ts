@@ -17,6 +17,7 @@ import { SITE_ADDRESS_CITY, SITE_PHONE } from "@/lib/site"
 
 export const ARRIVED_IN_US_YEAR = 2011
 export const FIRST_YEAR_IN_SOFTWARE = 2013
+export const TESLA_STOCK_YEAR = 2017
 export const FIRST_UTAH_HOME_YEAR = 2019
 export const FIRST_CRYPTO_YEAR = 2018
 export const FIRST_PARKS_YEAR = 2023
@@ -90,6 +91,7 @@ export const LETTER = {
         items: [
           { year: ARRIVED_IN_US_YEAR, segments: ["Came to the United States for a Master's degree in Computer Science."] },
           { year: FIRST_YEAR_IN_SOFTWARE, segments: [`Started ${years}+ years of building software for large companies.`] },
+          { year: TESLA_STOCK_YEAR, segments: ["Invested in Tesla stock."] },
           { year: FIRST_CRYPTO_YEAR, segments: ["Started investing in Cryptocurrency. Bought ETH at $170."] },
           { year: FIRST_UTAH_HOME_YEAR, segments: ["Bought my first home in Lehi, Utah."] },
           { year: FOUNDED_YEAR, segments: ["Founded OndoSoft and Ondo Real Estate."] },
@@ -98,7 +100,7 @@ export const LETTER = {
             segments: ["Invested $400,000 of my own money into mobile home parks in Utah and Iowa plus an investment property in Saratoga Springs."],
           },
           { year: EB5_YEAR, segments: ["Invested $1 million in a California resort through the EB-5 program."] },
-          { year: VC_INVESTING_YEAR, segments: ["Started venture capital investing Utah startups."] },
+          { year: VC_INVESTING_YEAR, segments: ["Started venture capital investing in Utah startups."] },
           { year: GREEN_CARD_YEAR, segments: ["Green card approved. Now watch what a ", accent("burning desire"), " builds."] },
         ],
       },
@@ -143,6 +145,18 @@ export const LETTER = {
           ],
         },
         quote("You learn to care about the detail nobody thanks you for, because that detail is the product."),
+      ],
+    },
+    {
+      id: "chapter-2017",
+      year: TESLA_STOCK_YEAR,
+      title: "Buying into what a company was building.",
+      temp: "cool",
+      blocks: [
+        p(
+          `In ${TESLA_STOCK_YEAR} I invested in Tesla stock. Years of writing software had taught me to look at what a company is actually building, not just at what its share price did last week.`,
+        ),
+        quote("Look at what a company is building, not just at its share price."),
       ],
     },
     {
@@ -305,7 +319,7 @@ export const LETTER = {
   },
   why: {
     heading: "Why work with me. The case, not the slogans.",
-    intro: "I won't tell you I'm the best. I'll tell you what the record shows, what I'm still building toward, and let you decide.",
+    intro: "I won't tell you I'm the best. I'll tell you how I work, and let you decide.",
     pillars: [
       {
         title: "A builder's mindset.",
@@ -332,30 +346,6 @@ export const LETTER = {
         text: "I use software where it removes friction and pick up the phone where it doesn't. No proprietary magic, and no promises about results I can't show you.",
       },
     ],
-    ledger: {
-      demonstratedLabel: "Demonstrated",
-      demonstrated: [
-        "A master's degree in computer science.",
-        `${years}+ years as a full stack engineer for large companies.`,
-        `A first home in Lehi, Utah, in ${FIRST_UTAH_HOME_YEAR}, then friends and family helped to closing and tenants placed.`,
-        "Rental property I own and manage myself.",
-        `About $400,000 of my own capital in two mobile home parks, in Utah and Iowa, in ${FIRST_PARKS_YEAR}, plus an investment property in Saratoga Springs.`,
-        `About $1 million invested in a California resort project through the EB-5 program in ${EB5_YEAR}, and a green card approved in ${GREEN_CARD_YEAR}.`,
-        `Venture investments in Utah startups only since ${VC_INVESTING_YEAR}, including Mobly, EZ Salt and Stratus.`,
-        "A platform I built and run under the company.",
-        `Two companies started in ${FOUNDED_YEAR}.`,
-      ],
-      inProgressLabel: "In progress",
-      inProgress: [
-        [`Growing a founder-run company across a service area of ${UTAH_CITIES_SERVED} Wasatch Front cities without lowering the standard.`],
-        [
-          "Real estate and mortgage licensing. Until it's active, buying, selling and loans go through Ondo. See ",
-          { text: "licensing and disclosures", href: "/licensing/" },
-          ".",
-        ],
-        ["Numbers worth publishing, once there are enough of them."],
-      ] satisfies Segment[][],
-    },
   },
   restraint: {
     heading: "What I will not claim",
@@ -444,7 +434,6 @@ export function founderLetterText(): string {
   parts.push(mark.heading, mark.lockup.join(" "), mark.decode, ...blocksText(mark.blocks))
   parts.push(midCta.text, midCta.bookLabel, midCta.contactLabel)
   parts.push(why.heading, why.intro, ...why.pillars.map((pillar) => `${pillar.title} ${pillar.text}`))
-  parts.push(why.ledger.demonstratedLabel, ...why.ledger.demonstrated, why.ledger.inProgressLabel, ...why.ledger.inProgress.map(segmentsText))
   parts.push(restraint.heading, ...blocksText(restraint.blocks))
   parts.push(closing.heading, ...blocksText(closing.blocks), closing.signature.name, closing.signature.role)
   parts.push(closing.bookLabel, closing.callLabel, closing.messageLabel)

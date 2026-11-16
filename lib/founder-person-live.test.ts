@@ -13,14 +13,18 @@ import { founderPersonJsonLd } from "./seo"
 describe("founderPersonJsonLd once licensing is live", () => {
   it("adds the license titles, both credentials and both sponsors", () => {
     const person = founderPersonJsonLd(true)
-    expect(person.jobTitle).toEqual(["Founder", "Real Estate Agent", "Loan Officer"])
+    expect(person.jobTitle).toEqual(["Founder", "Real Estate Agent", "Loan Officer", "Mortgage Loan Originator"])
     expect(person.hasCredential).toEqual([
       {
         "@type": "EducationalOccupationalCredential",
         credentialCategory: "license",
         name: "Utah real estate sales agent license",
         identifier: "RE-1234567",
-        recognizedBy: { "@type": "GovernmentOrganization", name: "Utah Division of Real Estate" },
+        recognizedBy: {
+          "@type": "GovernmentOrganization",
+          name: "Utah Division of Real Estate",
+          url: "https://realestate.utah.gov/",
+        },
       },
       {
         "@type": "EducationalOccupationalCredential",
@@ -38,5 +42,7 @@ describe("founderPersonJsonLd once licensing is live", () => {
       { "@type": "Organization", name: "Test Realty" },
       { "@type": "Organization", name: "Test Lending", identifier: "NMLS 123456" },
     ])
+    // The public NMLS record is the one off-site page that ties the name to the NMLS ID.
+    expect(person.sameAs).toEqual(["https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/2699085"])
   })
 })

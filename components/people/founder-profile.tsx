@@ -11,8 +11,13 @@ import {
   SITE_COMPANY_NMLS_ID,
   SITE_LENDER_NAME,
   SITE_LOAN_OFFICER,
+  SITE_NOTARY_COMMISSION_NUMBER,
   SITE_RE_LICENSE_NUMBER,
   SITE_URL,
+  UTAH_DIVISION_OF_REAL_ESTATE_URL,
+  UTAH_NOTARY_SEARCH_URL,
+  licensingState,
+  type LicensingState,
 } from "@/lib/site"
 import { FOUNDED_MONTH_LABEL, FOUNDED_YEAR } from "@/lib/social-proof-stats"
 import { FOUNDER_PROFILE_PATH, founderRoleLabel, getFounder } from "@/lib/team-data"
@@ -24,11 +29,23 @@ const modified = "2026-10-18"
 export const FOUNDER_PROFILE_DESCRIPTION =
   "Pranay Reddy Aleti founded Ondo Real Estate in Lehi, Utah, in July 2022: a software engineer turned Utah landlord building simpler property management."
 
-/** Name first so the page ranks for searches on the name; license titles join once licensing is live. */
-export function founderProfileTitle(live: boolean): string {
-  return live
-    ? "Pranay Reddy Aleti: Utah Real Estate Agent & Loan Officer"
-    : "Pranay Reddy Aleti: Founder of Ondo Real Estate"
+/**
+ * Utah bars one licensee from being the agent and the loan originator on the same deal
+ * (Utah Code 61-2c-301(2)(i)); shown only once both licenses are live, where the two titles sit together.
+ */
+export const DUAL_ROLE_STATEMENT =
+  "Utah does not allow one person to act as the real estate agent and the loan originator on the same transaction (Utah Code 61-2c-301). On any one deal I act in one of the two roles, never both."
+
+/**
+ * Name first so the page ranks for searches on the name; each license title joins once that
+ * license is live. "Mortgage loan originator" is the licensed term people search for an MLO.
+ */
+export function founderProfileTitle(live: boolean | LicensingState): string {
+  const state = licensingState(live)
+  if (state.re && state.mlo) return "Pranay Reddy Aleti: Utah Real Estate Agent & Loan Officer"
+  if (state.re) return "Pranay Reddy Aleti: Utah Real Estate Agent in Lehi"
+  if (state.mlo) return "Pranay Reddy Aleti: Utah Mortgage Loan Originator"
+  return "Pranay Reddy Aleti: Founder of Ondo Real Estate"
 }
 
 const SERVICES = [
@@ -42,11 +59,13 @@ const heading = "text-2xl font-bold text-foreground"
 const body = "mt-4 text-lg leading-relaxed text-foreground/80"
 const inlineLink = "font-semibold text-primary underline underline-offset-4 hover:text-primary/80"
 
-export function FounderProfile({ live }: { live: boolean }) {
+export function FounderProfile({ live }: { live: boolean | LicensingState }) {
+  const state = licensingState(live)
   const founder = getFounder()
   const canonical = toAbsoluteSiteUrl(FOUNDER_PROFILE_PATH)
-  const title = founderProfileTitle(live)
+  const title = founderProfileTitle(state)
   const image = founder.image ?? "/founder-image.webp"
+  const anyLicense = state.re || state.mlo || state.notary
 
   // ProfilePage is a WebPage subtype; the array type keeps <SEO> from adding a second WebPage block.
   const profilePageJsonLd = {
@@ -58,7 +77,7 @@ export function FounderProfile({ live }: { live: boolean }) {
     description: FOUNDER_PROFILE_DESCRIPTION,
     dateModified: modified,
     inLanguage: "en-US",
-    mainEntity: founderPersonJsonLd(live),
+    mainEntity: founderPersonJsonLd(state),
   }
 
   return (
@@ -94,7 +113,7 @@ export function FounderProfile({ live }: { live: boolean }) {
             <h1 id="founder-profile-heading" className="text-4xl font-bold text-foreground md:text-5xl">
               {founder.name}
             </h1>
-            <p className="mt-2 text-lg text-primary">{founderRoleLabel(live)}</p>
+            <p className="mt-2 text-lg text-primary">{founderRoleLabel(state)}</p>
             <p className="mt-1 text-foreground/70">{SITE_ADDRESS_CITY}, Utah</p>
           </div>
         </div>
@@ -122,7 +141,8 @@ export function FounderProfile({ live }: { live: boolean }) {
 
         <section aria-labelledby="profile-services-heading" className="mt-12">
           <h2 id="profile-services-heading" className={heading}>
-            {live ? "How I can help" : "How Ondo can help"}
+            {/* A first-person offer to list, negotiate and originate waits for both licenses. */}
+            {state.re && state.mlo ? "How I can help" : "How Ondo can help"}
           </h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {SERVICES.map((service) => (
@@ -150,17 +170,36 @@ export function FounderProfile({ live }: { live: boolean }) {
           <h2 id="profile-licensing-heading" className={heading}>
             Licensing
           </h2>
-          {live ? (
+          {anyLicense ? (
             <ul className="mt-4 space-y-2 text-foreground/80">
-              <li>
-                Utah real estate sales agent, license #{SITE_RE_LICENSE_NUMBER}, with {SITE_BROKERAGE_NAME}.
-              </li>
-              <li>
-                Loan officer, NMLS #{SITE_LOAN_OFFICER.nmlsId}, with {SITE_LENDER_NAME} (NMLS #{SITE_COMPANY_NMLS_ID}).{" "}
-                <a href={NMLS_CONSUMER_ACCESS_URL} target="_blank" rel="noopener noreferrer" className={inlineLink}>
-                  Verify at NMLS Consumer Access
-                </a>
-              </li>
+              {state.re ? (
+                <li>
+                  Utah real estate sales agent, license #{SITE_RE_LICENSE_NUMBER}, with {SITE_BROKERAGE_NAME}.{" "}
+                  <a href={UTAH_DIVISION_OF_REAL_ESTATE_URL} target="_blank" rel="noopener noreferrer" className={inlineLink}>
+                    Verify with the Utah Division of Real Estate
+                  </a>
+                </li>
+              ) : (
+                <li>Real estate licensing is in progress.</li>
+              )}
+              {state.mlo ? (
+                <li>
+                  Loan officer, NMLS #{SITE_LOAN_OFFICER.nmlsId}, with {SITE_LENDER_NAME} (NMLS #{SITE_COMPANY_NMLS_ID}).{" "}
+                  <a href={NMLS_CONSUMER_ACCESS_URL} target="_blank" rel="noopener noreferrer" className={inlineLink}>
+                    Verify at NMLS Consumer Access
+                  </a>
+                </li>
+              ) : (
+                <li>Mortgage licensing is in progress.</li>
+              )}
+              {state.notary ? (
+                <li>
+                  Utah notary public, commission #{SITE_NOTARY_COMMISSION_NUMBER}.{" "}
+                  <a href={UTAH_NOTARY_SEARCH_URL} target="_blank" rel="noopener noreferrer" className={inlineLink}>
+                    Verify on the Utah notary search
+                  </a>
+                </li>
+              ) : null}
             </ul>
           ) : (
             <p className="mt-4 text-foreground/80">
@@ -168,6 +207,7 @@ export function FounderProfile({ live }: { live: boolean }) {
               active.
             </p>
           )}
+          {state.re && state.mlo ? <p className="mt-4 text-sm text-foreground/70">{DUAL_ROLE_STATEMENT}</p> : null}
           <p className="mt-4 text-sm">
             <Link href="/licensing/" className={inlineLink}>
               Licensing &amp; disclosures

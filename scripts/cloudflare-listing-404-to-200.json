@@ -4,7 +4,7 @@
   "main_module": "main.js",
   "source_file": "cloudflare-listing-404-to-200.js",
   "rule": {
-    "expression": "(http.host in {\"www.ondorealestate.com\" \"ondorealestate.com\"}) and not http.host in {\"api.ondorealestate.com\" \"app.ondorealestate.com\"} and http.request.method in {\"GET\" \"HEAD\"} and http.request.uri.path matches \"^/properties/[^/]+/?$\"",
+    "expression": "(http.host in {\"www.ondorealestate.com\" \"ondorealestate.com\"}) and not http.host in {\"api.ondorealestate.com\" \"app.ondorealestate.com\"} and http.request.method in {\"GET\" \"HEAD\"} and http.request.uri.path matches \"^/(properties/[^/]+|[0-9][a-z0-9-]*)/?$\"",
     "description": "Serve listing detail 200 when GitHub Pages 404s a post-build publicId",
     "enabled": true
   }

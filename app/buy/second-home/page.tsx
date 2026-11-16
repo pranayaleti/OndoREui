@@ -29,7 +29,7 @@ export default function SecondHomePage() {
         title="Buying a Second Home | Utah Real Estate"
         description="Second-home occupancy versus investment occupancy. Education, not a credit decision or occupancy coaching."
         pathname="/buy/second-home"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

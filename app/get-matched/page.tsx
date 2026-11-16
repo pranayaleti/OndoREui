@@ -4,7 +4,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd, generateServiceJsonLd } from "@/lib/seo"
 import { SITE_URL, SITE_NAME, pageTitleText } from "@/lib/site"
 import { LeadQualifierWizard } from "@/components/lead-qualifier-wizard"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 const title = pageTitleText("Get Matched with the Right Ondo RE Service | 60-Second Quiz")
 const description =
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: `${SITE_URL}/get-matched/` },
-  openGraph: { type: "website", title, description, url: `${SITE_URL}/get-matched/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title, description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title, description, url: `${SITE_URL}/get-matched/`, images: OG_IMAGES.buy },
+  twitter: { card: "summary_large_image", title, description, images: [OG_IMAGE_URLS.buy] },
   robots: { index: true, follow: true },
 }
 
@@ -26,7 +26,7 @@ export default function GetMatchedPage() {
         title={title}
         description={description}
         pathname="/get-matched"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

@@ -6,7 +6,7 @@ GitHub Pages is the origin. Cloudflare is the proxy (same zone as the HTML
 cache rule). Do not migrate to Cloudflare Pages. Do not grey-cloud DNS.
 
 A _redirects 200 rewrite is not used: it would replace prerendered
-/properties/{id}/ HTML with the 404 shell. This snippet fetches origin first
+/{address-slug}/ and /properties/{id}/ HTML with the 404 shell. This snippet fetches origin first
 and only substitutes /404.html when origin already returned 404.
 
 Usage:
@@ -27,7 +27,7 @@ If this exits 403 (or you pass --print-dashboard):
     Rules → Snippets → Create  (zone ondorealestate.com)
     Name: listing-404-to-200
     Code: scripts/cloudflare-listing-404-to-200.js
-    Expression: www + apex GET/HEAD, path ^/properties/[^/]+/?$
+    Expression: www + apex GET/HEAD, path ^/(properties/[^/]+|[0-9][a-z0-9-]*)/?$
     Hosts: www.ondorealestate.com and ondorealestate.com only.
     Never match api.ondorealestate.com or app.ondorealestate.com.
 """
@@ -112,7 +112,7 @@ def print_dashboard_steps(spec: dict, desired: dict, js: str, account_id: str | 
     print("----- begin snippet -----")
     print(js.rstrip())
     print("----- end snippet -----")
-    print("After Deploy, a missing /properties/{uuid}/ on www should be HTTP 200")
+    print("After Deploy, a missing /{address-slug}/ or /properties/{uuid}/ on www should be HTTP 200")
     print("with the 404.html shell. A prerendered listing must still 200 from origin.")
 
 

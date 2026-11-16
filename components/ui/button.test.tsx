@@ -16,7 +16,7 @@ describe("Button", () => {
     ["destructive", ["bg-destructive", "text-destructive-foreground"], ["bg-primary", "bg-secondary"]],
     ["outline", ["border", "border-input", "bg-background"], ["bg-primary", "bg-destructive"]],
     ["secondary", ["bg-secondary", "text-secondary-foreground"], ["bg-primary", "bg-destructive"]],
-    ["ghost", ["hover:bg-accent"], ["bg-primary", "bg-destructive", "bg-secondary", "border-input"]],
+    ["ghost", ["hover:bg-foreground/[0.06]"], ["bg-primary", "bg-destructive", "bg-secondary", "border-input"]],
     ["link", ["text-primary", "underline-offset-4", "hover:underline"], ["bg-primary", "bg-secondary"]],
   ] as const)("renders the %s variant with its own classes", (variant, has, lacks) => {
     render(<Button variant={variant}>Go</Button>)
@@ -45,7 +45,7 @@ describe("Button", () => {
   it("renders the child element when asChild is set", () => {
     render(
       <Button asChild>
-        <a href="/contact/">Contact</a>
+        <a href="tel:+14085380420">Contact</a>
       </Button>,
     )
     expect(screen.getByRole("link", { name: "Contact" })).toHaveClass("bg-primary")

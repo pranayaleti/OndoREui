@@ -67,16 +67,29 @@ jobs:
           restore-keys: |
             indexnow-state-
 
+      # Refreshes /instagram from the Graph API (docs/instagram-feed.md). Never fails the deploy:
+      # without the secret, or on an expired token, the committed lib/instagram-feed.json ships.
+      - name: Fetch latest Instagram posts
+        run: npm run fetch:instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ vars.IG_USER_ID }}
+
       - name: Build and export static site
         run: npm run build
         env:
           # Production API (Supabase Edge Function, same value the Dashboard deploy uses).
           # Without it the static export falls back to same-origin /api/* paths that do not
           # exist on GitHub Pages: listings never load, /explore is empty, and
-          # generateStaticParams emits only /properties/_placeholder/.
+          # generateStaticParams emits only /_placeholder/.
           NEXT_PUBLIC_BACKEND_BASE_URL: https://lpklmquhxgbpavjngbby.supabase.co/functions/v1/api
           NEXT_PUBLIC_DASHBOARD_URL: https://app.ondorealestate.com
           NEXT_PUBLIC_SITE_URL: https://www.ondorealestate.com
+          # Search-engine ownership meta tags (app/layout.tsx). Each is a public token from Google
+          # Search Console ("HTML tag" method) or Bing Webmaster Tools ("Meta tag" method); unset means
+          # no tag, which is fine when the property is verified by DNS instead.
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          NEXT_PUBLIC_BING_SITE_VERIFICATION: ${{ vars.NEXT_PUBLIC_BING_SITE_VERIFICATION }}
           # Fail the build when the listings API cannot be reached (after retries) instead of
           # falling back to a placeholder, so an outage cannot publish a site with no listings.
           ONDO_REQUIRE_LISTINGS: "1"

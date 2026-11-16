@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Optimize critical images (logo, Linktree) to their actual display sizes
+ * Optimize critical images (logo) to their actual display sizes
  * This addresses the 24,593 KiB image delivery issue
  */
 
@@ -56,13 +56,6 @@ async function main() {
       height: 180,
       quality: 90,
     },
-    {
-      input: join(PUBLIC_DIR, 'Linktree.png'),
-      output: join(PUBLIC_DIR, 'Linktree-optimized.png'),
-      width: 52, // 2x for retina (actual display is 26px)
-      height: 52,
-      quality: 85,
-    },
   ];
   
   for (const opt of optimizations) {
@@ -79,7 +72,6 @@ async function main() {
   console.log('   1. Review the optimized images');
   console.log('   2. Replace originals if quality is acceptable:');
   console.log('      mv public/logo-optimized.png public/logo.png');
-  console.log('      mv public/Linktree-optimized.png public/Linktree.png');
   console.log('   3. Or update components to use optimized versions');
 }
 

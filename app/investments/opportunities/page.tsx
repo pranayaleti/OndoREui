@@ -40,7 +40,7 @@ export default async function OpportunitiesPage() {
         title="Sample Investment Deals"
         description={DESCRIPTION}
         pathname="/investments/opportunities"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Investments", url: `${SITE_URL}/investments` },

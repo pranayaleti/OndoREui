@@ -59,7 +59,7 @@ export default function InvestmentsPage() {
         title="Commercial & Fractional Real Estate Investing in Utah"
         description={DESCRIPTION}
         pathname="/investments"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Investments", url: `${SITE_URL}/investments` },

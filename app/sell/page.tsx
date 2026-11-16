@@ -1,3 +1,4 @@
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { YourContactCard } from "@/components/people/your-contact-card"
 import { pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
@@ -36,14 +37,15 @@ export const metadata: Metadata = {
     title: "Sell Your Utah Home | CMA, Listing & Negotiation",
     description: DESCRIPTION,
     url: `${SITE_URL}/sell/`,
-    images: [
-      {
-        url: `${SITE_URL}/modern-apartment-balcony.png`,
-        width: 1200,
-        height: 630,
-        alt: "Utah home prepared for listing",
-      },
-    ],
+    images: OG_IMAGES.sell,
+  },
+  // Without its own twitter block the page inherits the root layout's, and shares the homepage's
+  // title and picture on X instead of its own.
+  twitter: {
+    card: "summary_large_image",
+    title: "Sell Your Utah Home | CMA, Listing & Negotiation",
+    description: DESCRIPTION,
+    images: [OG_IMAGE_URLS.sell],
   },
 }
 
@@ -58,7 +60,7 @@ export default function SellPage() {
         title="Sell Your Utah Home | CMA, Listing & Negotiation"
         description={DESCRIPTION}
         pathname="/sell/"
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/og/sell.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },
@@ -117,13 +119,13 @@ export default function SellPage() {
               <p className="text-foreground/70">
                 Send the address and your timing. We follow up with a pricing conversation and a marketing outline.
                 Prefer to talk first?{" "}
-                <Link href="/contact?audience=seller#book-a-call" className="font-medium text-primary underline underline-offset-4">
+                <Link href="/contact/?audience=seller" className="font-medium text-primary underline underline-offset-4">
                   Book a call
                 </Link>
                 .
               </p>
             </div>
-            <ListingPacketForm />
+            <ListingPacketForm showTitle={false} />
           </div>
         </div>
       </section>

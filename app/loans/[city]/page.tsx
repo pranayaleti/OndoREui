@@ -5,7 +5,7 @@ import { SITE_NAME, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 type Params = Promise<{ city: string }>
 
@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = pageTitleText(`Home Loans in ${cityName}, Utah | ${SITE_NAME}`)
   const description = `Conventional, FHA, VA, USDA, and jumbo loans serving ${cityName}. Get pre-qualified.`
   const canonical = `${SITE_URL}/loans/${citySlug}/`
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.loans] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: Params }) {
         title={`Home Loans in ${city.name}, Utah | ${SITE_NAME}`}
         description={`Conventional, FHA, VA, USDA, and jumbo loans serving ${city.name}. Get pre-qualified.`}
         pathname={`/loans/${citySlug}/`}
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans/` },

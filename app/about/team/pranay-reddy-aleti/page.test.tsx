@@ -76,6 +76,52 @@ describe("/about/team/pranay-reddy-aleti/", () => {
     )
   })
 
+  it("shows only the agent line and title when the real estate license is live", () => {
+    const state = { re: true, mlo: false, notary: false }
+    expect(founderProfileTitle(state)).toBe("Pranay Reddy Aleti: Utah Real Estate Agent in Lehi")
+    render(<FounderProfile live={state} />)
+    expect(screen.getByText(/license #RE-1234567, with Test Realty/)).toBeInTheDocument()
+    expect(screen.getByText("Mortgage licensing is in progress.")).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /verify with the utah division of real estate/i })).toHaveAttribute(
+      "href",
+      "https://realestate.utah.gov/",
+    )
+    expect(document.body.textContent).not.toMatch(/NMLS|loan officer|never both/i)
+    expect(screen.getByRole("heading", { level: 2, name: "How Ondo can help" })).toBeInTheDocument()
+  })
+
+  it("shows only the loan officer line and title when the mortgage license is live", () => {
+    const state = { re: false, mlo: true, notary: false }
+    expect(founderProfileTitle(state)).toBe("Pranay Reddy Aleti: Utah Mortgage Loan Originator")
+    render(<FounderProfile live={state} />)
+    expect(screen.getByText(/NMLS #2699085, with Test Lending \(NMLS #123456\)/)).toBeInTheDocument()
+    expect(screen.getByText("Real estate licensing is in progress.")).toBeInTheDocument()
+    expect(document.body.textContent).not.toMatch(/real estate agent|license #RE|never both/i)
+  })
+
+  // Utah bars one person from being the agent and the loan originator on the same deal.
+  it("states the one-role-per-deal rule only once both licenses are live", () => {
+    render(<FounderProfile live />)
+    expect(screen.getByText(/one of the two roles, never both/)).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 2, name: "How I can help" })).toBeInTheDocument()
+  })
+
+  it("adds the notary commission line with the state registry link once the commission is live", () => {
+    render(<FounderProfile live={{ re: false, mlo: false, notary: true }} />)
+    expect(screen.getByText(/Utah notary public, commission #/)).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /verify on the utah notary search/i })).toHaveAttribute(
+      "href",
+      "https://secure.utah.gov/notary/search.html",
+    )
+    expect(document.body.textContent).not.toMatch(/NMLS #|license #RE/)
+  })
+
+  it("keeps every title variant inside the search result budget", () => {
+    for (const state of [false, true, { re: true, mlo: false, notary: false }, { re: false, mlo: true, notary: false }]) {
+      expect(founderProfileTitle(state).length, JSON.stringify(state)).toBeLessThanOrEqual(60)
+    }
+  })
+
   it("links to the founder's letter, the services and booking", () => {
     render(<FounderProfilePage />)
     const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"))

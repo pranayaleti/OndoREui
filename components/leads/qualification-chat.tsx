@@ -133,6 +133,7 @@ export function QualificationChat({ sessionToken, leadType }: Props) {
                 className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
                 placeholder="Type your answer..."
                 value={input}
+                maxLength={1000}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 disabled={loading}

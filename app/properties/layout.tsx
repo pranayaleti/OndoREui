@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 const TITLE = "Utah Rental Properties | Ondo Real Estate"
 const DESCRIPTION =
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: pageTitleText(TITLE),
     description: DESCRIPTION,
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.rent,
   },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.rent] },
 }
 
 export default function PropertiesLayout({

@@ -10,7 +10,7 @@ import { ThemeColorSync, themeColorFor, THEME_COLOR_DARK, THEME_COLOR_LIGHT } fr
 
 describe("ThemeColorSync", () => {
   beforeEach(() => {
-    document.head.innerHTML = '<meta name="theme-color" content="#0b1220">'
+    document.head.innerHTML = '<meta name="theme-color" content="#100f0e">'
   })
 
   it("maps the resolved theme to a browser chrome colour, dark by default", () => {

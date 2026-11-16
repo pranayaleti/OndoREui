@@ -14,7 +14,7 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { CONVENTIONAL_SNAPSHOT } from "@/lib/content"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Conventional Loans in Utah: 3% Down, Credit & PMI"),
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     type: "website",
     title: pageTitleText("Conventional Loans in Utah: 3% Down, Credit & PMI"),
     description: "Conventional mortgages in Utah with as little as 3% down. See typical credit and DTI ranges, down payment options, and how PMI can be removed with equity.",
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.loans,
   },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.loans] },
 }
 
 
@@ -61,7 +61,7 @@ export default function ConventionalLoanPage() {
         title="Conventional Loans in Utah"
         description="Traditional mortgages not backed by FHA, VA, or USDA. Learn typical credit, down payment, and DTI ranges."
         pathname="/loans/conventional"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans` },

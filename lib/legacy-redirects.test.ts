@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, it, expect } from "vitest"
-import { existsSync, readFileSync } from "node:fs"
-import { join } from "node:path"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
+import { join, sep } from "node:path"
 import {
   metaRefreshTarget,
   parseRedirects,
@@ -80,4 +80,51 @@ describe("public/_redirects", () => {
       expect(to === "/" || appRoute(to), `app${to}page.tsx is missing`).toBe(true)
     },
   )
+})
+
+// Next.js prefetches the RSC payload of every <Link> target and a stub has none, so a link to a stub
+// 404s on prefetch, then costs the visitor a redirect hop. Link the destination instead.
+describe("links in the source", () => {
+  const stubs = new Map(rules.map((rule) => [`${rule.from}/`, rule.to]))
+  const noPages = { readPage: () => null }
+
+  /** Where a site path ends up if it is a legacy redirect (a stub or an old calculator URL), else null. */
+  const legacyTarget = (link: string) => {
+    const path = link.replace(/[?#].*$/, "")
+    if (path.includes("${") || /\.[a-z0-9]{2,8}$/i.test(path)) return null
+    const page = path.endsWith("/") ? path : `${path}/`
+    const to = stubs.get(page)
+    if (to) return resolveFinalTarget(to, noPages)
+    const final = resolveFinalTarget(page, noPages)
+    return final === page ? null : final
+  }
+
+  // A site path in an href/url/path-style prop or attribute, bare or after a `${SITE_URL}` origin.
+  const LINK = /\b[A-Za-z]*(?:href|Href|url|Url|path|Path)\s*[:=]\s*\{?\s*(["'`])(?:\$\{\w+\})?(\/[^"'`\s]*)\1/g
+  const legacyLinks = (code: string) =>
+    [...code.matchAll(LINK)].flatMap((match) => {
+      const to = legacyTarget(match[2])
+      return to ? [{ link: match[2], to, line: code.slice(0, match.index).split("\n").length }] : []
+    })
+
+  // Unused leftovers of retired pages (nothing imports them): delete them rather than relink.
+  const UNUSED = new Set(["components/dashboard/dashboard-nav.tsx", "lib/social-posts.ts"])
+  const sources = ["app", "components", "hooks", "lib", "pages"]
+    .flatMap((dir) => readdirSync(join(ROOT, dir), { recursive: true, encoding: "utf8" }).map((file) => `${dir}/${file.split(sep).join("/")}`))
+    .filter((file) => /\.tsx?$/.test(file) && !/\.(test|spec)\.tsx?$|\.d\.ts$/.test(file) && !UNUSED.has(file))
+
+  it("finds stub links written as an href, a `${SITE_URL}` URL or an old calculator path", () => {
+    expect(legacyLinks('<Link href="/vs/turbotenant">').map((hit) => hit.to)).toEqual(["/compare-utah-property-managers/"])
+    expect(legacyLinks('{ name: "Compare", url: `${SITE_URL}/compare/` }').map((hit) => hit.to)).toEqual(["/compare-utah-property-managers/"])
+    expect(legacyLinks('parentHref: "/calculators/roi-calculator"').map((hit) => hit.to)).toEqual(["/calculators/roi/"])
+    expect(legacyLinks('href="/compare-utah-property-managers/#diy-software"')).toEqual([])
+    expect(sources.length).toBeGreaterThan(500)
+  })
+
+  it("points app, components, hooks, lib and pages links at destinations, not legacy redirects", () => {
+    const hits = sources.flatMap((file) =>
+      legacyLinks(readFileSync(join(ROOT, file), "utf8")).map(({ link, to, line }) => `${file}:${line} links ${link}, use ${to}`),
+    )
+    expect(hits).toEqual([])
+  })
 })

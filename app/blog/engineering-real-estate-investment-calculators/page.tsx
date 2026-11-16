@@ -24,7 +24,7 @@ const keywords = [
 
 
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { pageTitle, pageTitleText } from "@/lib/site"
 
 export const metadata: Metadata = {
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     publishedTime: published,
     modifiedTime: modified || published,
     authors: [author],
-    images: DEFAULT_OG_IMAGES,
+    images: OG_IMAGES.guides,
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitleText(`${title} | Ondo Real Estate`),
     description: description,
-    images: [DEFAULT_OG_IMAGE_URL],
+    images: [OG_IMAGE_URLS.guides],
   },
 }
 
@@ -59,7 +59,7 @@ export default function EngineeringInvestmentCalculators() {
         title={title}
         description={description}
         pathname={slug}
-        image={`${SITE_URL}/modern-townhouse-garage.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         publishedTime={published}
         modifiedTime={modified}
         author={author}

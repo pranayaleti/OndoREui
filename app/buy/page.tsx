@@ -1,3 +1,4 @@
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { YourContactCard } from "@/components/people/your-contact-card"
 import { pageTitle } from "@/lib/site"
 import type { Metadata } from "next"
@@ -37,14 +38,15 @@ export const metadata: Metadata = {
     title: "Buy a Home in Utah | Agent-Led Search & Lending",
     description: DESCRIPTION,
     url: `${SITE_URL}/buy/`,
-    images: [
-      {
-        url: `${SITE_URL}/suburban-house-garden.png`,
-        width: 1200,
-        height: 630,
-        alt: "Utah home along the Wasatch Front",
-      },
-    ],
+    images: OG_IMAGES.buy,
+  },
+  // Without its own twitter block the page inherits the root layout's, and shares the homepage's
+  // title and picture on X instead of its own.
+  twitter: {
+    card: "summary_large_image",
+    title: "Buy a Home in Utah | Agent-Led Search & Lending",
+    description: DESCRIPTION,
+    images: [OG_IMAGE_URLS.buy],
   },
 }
 
@@ -64,7 +66,7 @@ export default function BuyPage() {
         title="Buy a Home in Utah | Agent-Led Search & Lending"
         description={DESCRIPTION}
         pathname="/buy/"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

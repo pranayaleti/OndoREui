@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowUpDown, List, Map } from 'lucide-react';
@@ -381,8 +382,8 @@ export default function PropertiesClient({
 
   const handleOpenListing = useCallback((id: string) => {
     setHighlightedId(id);
-    router.push(listingDetailPath(id));
-  }, [router]);
+    router.push(listingDetailPath(allApiProperties.find((p) => p.id === id) ?? id));
+  }, [router, allApiProperties]);
 
   const handleFilterChange = useCallback((f: PropertyFilters) => {
     setFilters(f);
@@ -440,7 +441,7 @@ export default function PropertiesClient({
         title="Browse Rental Properties in Utah"
         description="Explore available rental homes, apartments, condos, and townhomes managed by Ondo Real Estate."
         pathname="/properties"
-        image={`${SITE_URL}/modern-apartment-balcony.webp`}
+        image={`${SITE_URL}/og/rent.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: 'Home', url: SITE_URL },
@@ -613,7 +614,7 @@ export default function PropertiesClient({
                     Try again
                   </Button>
                   <Button asChild variant="outline" className="min-h-11">
-                    <a href="/contact">Contact leasing</a>
+                    <Link href="/contact/">Contact leasing</Link>
                   </Button>
                 </div>
               </div>
@@ -636,6 +637,7 @@ export default function PropertiesClient({
                     <li key={property.id}>
                       <RentalListingCard
                         property={property}
+                        layout={mapProperties.length > 0 ? "row" : "stacked"}
                         highlighted={highlightedId === property.id}
                         onHighlight={handleHighlightListing}
                         onRequestShowing={(id) => {

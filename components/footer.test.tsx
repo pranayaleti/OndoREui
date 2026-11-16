@@ -52,15 +52,27 @@ describe("Footer", () => {
   it("offers a Book a free call link to /contact/ instead of an inline Calendly embed", () => {
     const { container } = render(<Footer />)
     const book = screen.getByRole("link", { name: "Book a free call" })
-    expect(book).toHaveAttribute("href", "/contact/#book-a-call")
+    expect(book).toHaveAttribute("href", "/contact/")
     expect(book).toHaveAttribute("data-analytics-event", "book_call_click")
     expect(container.querySelector("iframe")).toBeNull()
     expect(container.querySelector(".calendly-inline-widget")).toBeNull()
   })
 
-  it("sends the all-links QR to /links/ on our own domain", () => {
+  it("links to /links/ with one text link and leaves the QR to the contact page", () => {
+    const { container } = render(<Footer />)
+    const links = screen.getAllByRole("link", { name: /all ondo links/i })
+    expect(links).toHaveLength(1)
+    expect(links[0]).toHaveAttribute("href", "/links/")
+    expect(links[0]).toHaveTextContent("All links")
+    expect(container.querySelector('img[src*="links-qr.svg"]')).toBeNull()
+  })
+
+  it("links to /feedback/ once, from the bottom row beside Site Map, not from a banner", () => {
     render(<Footer />)
-    expect(screen.getByRole("link", { name: /all ondo links/i })).toHaveAttribute("href", "/links/")
+    const links = screen.getAllByRole("link", { name: /feedback/i })
+    expect(links).toHaveLength(1)
+    expect(links[0].parentElement).toContainElement(screen.getByRole("link", { name: "Site Map" }))
+    expect(links[0]).toHaveAttribute("href", "/feedback/")
   })
 
   it("labels the phone block plainly and shows no REALTOR or MLS marks or servicing label", () => {

@@ -24,7 +24,7 @@ import { NeighborhoodHousingCards } from "@/components/neighborhood-housing-card
 import { OwnerProcessSection } from "@/components/owner-process-section"
 import { CityOwnerOpsSection } from "@/components/city-owner-ops-section"
 import { CityManagementFees } from "@/components/city-management-fees"
-import { getSubServicesForParent } from "@/lib/sub-service-content"
+import { SERVICE_HUB_PATHS, getSubServicesForParent } from "@/lib/sub-service-content"
 import type { ContactInquiryType } from "@/lib/leads-api"
 import { JsonLd } from "@/components/json-ld"
 
@@ -109,14 +109,13 @@ export function CityServicePage({ city, service, zip }: CityServicePageProps) {
   const ownedZips = city.zips.filter((z) => !sharedZips.includes(z))
 
   const serviceLabel = service === "property-management" ? "Property Management" : service === "buy-sell" ? "Buy & Sell" : "Home Loans"
-  const serviceBasePath = service === "property-management" ? "property-management" : service === "buy-sell" ? "buy-sell" : "loans"
 
   return (
     <main className="container mx-auto px-4 py-10 space-y-10">
       <JsonLd id="city-service-jsonld" data={serviceJsonLd} />
 
       <BreadcrumbNav items={[
-        { label: serviceLabel, href: `/${serviceBasePath}/` },
+        { label: serviceLabel, href: SERVICE_HUB_PATHS[service] },
         { label: city.name },
       ]} />
       <Card>

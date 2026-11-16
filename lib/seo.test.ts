@@ -490,3 +490,57 @@ describe("seo", () => {
     })
   })
 })
+
+describe("founder entity per license", () => {
+  const off = { re: false, mlo: false, notary: false }
+
+  it("adds only the agent title and credential when the real estate license is live", () => {
+    const person = founderPersonJsonLd({ ...off, re: true })
+    expect(person.jobTitle).toEqual(["Founder", "Real Estate Agent"])
+    const credentials = person.hasCredential as Array<{ name: string; recognizedBy: { url: string } }>
+    expect(credentials.map((c) => c.name)).toEqual(["Utah real estate sales agent license"])
+    expect(credentials[0].recognizedBy.url).toBe("https://realestate.utah.gov/")
+    expect(JSON.stringify(person)).not.toMatch(/NMLS|Loan Officer|notary/i)
+  })
+
+  it("adds the loan officer titles, the NMLS credential and the Consumer Access record when the mortgage license is live", () => {
+    const person = founderPersonJsonLd({ ...off, mlo: true })
+    expect(person.jobTitle).toEqual(["Founder", "Loan Officer", "Mortgage Loan Originator"])
+    const credentials = person.hasCredential as Array<{ identifier: string }>
+    expect(credentials).toHaveLength(1)
+    expect(credentials[0].identifier).toBe("NMLS 2699085")
+    expect(person.sameAs).toEqual(["https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/2699085"])
+    expect(JSON.stringify(person)).not.toMatch(/Real Estate Agent|real estate sales agent/)
+  })
+
+  it("adds the notary commission as a credential and a title, with no sponsor affiliation", () => {
+    const person = founderPersonJsonLd({ ...off, notary: true })
+    expect(person.jobTitle).toEqual(["Founder", "Notary Public"])
+    const credentials = person.hasCredential as Array<{ credentialCategory: string; recognizedBy: { url: string } }>
+    expect(credentials).toHaveLength(1)
+    expect(credentials[0].credentialCategory).toBe("commission")
+    expect(credentials[0].recognizedBy.url).toBe("https://secure.utah.gov/notary/search.html")
+    expect(person).not.toHaveProperty("affiliation")
+    expect(person).not.toHaveProperty("sameAs")
+  })
+
+  it("reads the legacy boolean as both licenses", () => {
+    const person = founderPersonJsonLd(true)
+    expect(person.jobTitle).toEqual(["Founder", "Real Estate Agent", "Loan Officer", "Mortgage Loan Originator"])
+    expect(person.hasCredential as unknown[]).toHaveLength(2)
+    expect(person.affiliation as unknown[]).toHaveLength(2)
+  })
+})
+
+describe("one Organization entity", () => {
+  it("uses schema.org types only: LocalBusiness, not the invented RealEstateBusiness", () => {
+    expect(generateRealEstateBusinessJsonLd()["@type"]).toEqual(["Organization", "LocalBusiness", "RealEstateAgent"])
+  })
+
+  it("points every Service provider at the one #organization id, named or by reference", () => {
+    const named = generateServiceJsonLd({ name: "PM", description: "d", serviceType: "PropertyManagement" })
+    expect(named.provider).toMatchObject({ "@type": "Organization", "@id": SITE_ORGANIZATION_ID, name: "Ondo Real Estate" })
+    const byRef = generateServiceJsonLd({ name: "PM", description: "d", serviceType: "PropertyManagement", providerIsSiteOrganization: true })
+    expect(byRef.provider).toEqual({ "@id": SITE_ORGANIZATION_ID })
+  })
+})

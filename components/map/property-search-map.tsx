@@ -8,6 +8,7 @@ import PropertyMap from "./property-map";
 
 interface SearchProperty {
   id: string;
+  addressParts?: { line1?: string | null; line2?: string | null };
   title: string;
   price: number;
   bedrooms: number;
@@ -227,7 +228,7 @@ export default function PropertySearchMap({
             <div className="p-3">
               <h3 className="font-semibold text-sm truncate">
                 <Link
-                  href={listingDetailPath(property.id)}
+                  href={listingDetailPath(property)}
                   className="underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 >
                   {property.title}

@@ -1,4 +1,4 @@
-import { LICENSING_LIVE, NMLS_CONSUMER_ACCESS_URL, SITE_COMPANY_NMLS_ID, SITE_LOAN_OFFICER } from "@/lib/site"
+import { MLO_LICENSE_LIVE, NMLS_CONSUMER_ACCESS_URL, SITE_COMPANY_NMLS_ID, SITE_LOAN_OFFICER } from "@/lib/site"
 
 type LoanOfficerLineProps = {
   className?: string
@@ -13,7 +13,7 @@ type LoanOfficerLineProps = {
  */
 export function LoanOfficerLine({
   className = "mt-2 text-sm text-muted-foreground",
-  live = LICENSING_LIVE,
+  live = MLO_LICENSE_LIVE,
   companyId = SITE_COMPANY_NMLS_ID,
 }: LoanOfficerLineProps) {
   if (!live) return null

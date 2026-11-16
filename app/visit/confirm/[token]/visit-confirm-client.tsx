@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { useParams } from "next/navigation"
 import { PageLoading } from "@/components/loading-states"
 import { LoadErrorRetry } from "@/components/load-error-retry"
@@ -112,7 +113,7 @@ function VisitConfirmForm({ visit, token }: { visit: SiteVisitPublic; token: str
             {visit.status === "cancelled" ? "This visit was cancelled" : "This visit link is no longer active"}
           </h1>
           <p className="text-muted-foreground">
-            To book a new time, <a href="/contact/" className="underline">contact us</a> or call{" "}
+            To book a new time, <Link href="/contact/" className="underline">contact us</Link> or call{" "}
             <a href={`tel:${SITE_PHONE_TEL}`} className="underline">
               {SITE_PHONE}
             </a>

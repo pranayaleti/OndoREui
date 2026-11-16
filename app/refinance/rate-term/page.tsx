@@ -11,14 +11,14 @@ import { RelatedContent } from "@/components/content/related-content"
 import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { BreakEvenTable } from "@/components/content/break-even-table"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("Rate-and-Term Refinance in Utah | Ondo Real Estate"),
   description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.",
   alternates: { canonical: `${SITE_URL}/refinance/rate-term/` },
-  openGraph: { type: "website", title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", url: `${SITE_URL}/refinance/rate-term/`, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", url: `${SITE_URL}/refinance/rate-term/`, images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", title: pageTitleText("Rate-and-Term Refinance in Utah | Ondo Real Estate"), description: "A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math.", images: [OG_IMAGE_URLS.loans] },
 }
 
 export default function RateTermRefinancePage() {
@@ -29,7 +29,7 @@ export default function RateTermRefinancePage() {
         title="Rate-and-Term Refinance in Utah"
         description={"A rate-and-term refinance lowers your mortgage rate or changes your loan term without taking cash out. Learn when it pays off and the break-even math."}
         pathname="/refinance/rate-term"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Refinance", url: `${SITE_URL}/refinance` },

@@ -1,3 +1,4 @@
+import { listingDetailPath } from "@/lib/public-property"
 import Link from "next/link"
 import type { ApiProperty } from "@/app/types/property"
 import { Badge } from "@/components/ui/badge"
@@ -76,13 +77,13 @@ export function PropertyUnavailable() {
 
 export function PropertyListingDetail({
   property,
-  publicId,
   related = [],
 }: {
   property: ApiProperty
-  publicId: string
   related?: ApiProperty[]
 }) {
+  // The URL segment may be the address slug; every API call keys on the real publicId.
+  const publicId = property.publicId
   const cityState = [property.city, property.state].filter(Boolean).join(", ")
   const fullAddress = [property.addressLine1, cityState, property.zipcode].filter(Boolean).join(", ")
   const heroImage = property.photos?.[0]?.url
@@ -219,7 +220,7 @@ export function PropertyListingDetail({
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: "Properties", url: `${SITE_URL}/properties/` },
-    { name: property.title, url: `${SITE_URL}/properties/${publicId}/` },
+    { name: property.title, url: `${SITE_URL}${listingDetailPath(property)}/` },
   ])
 
   const navItems = [

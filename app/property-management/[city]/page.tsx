@@ -6,7 +6,7 @@ import { pmCityDescription, pmCityTitle } from "@/lib/seo-titles"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { notFound } from "next/navigation"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 type Params = Promise<{ city: string }>
 
@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = pageTitleText(pmCityTitle(cityName))
   const description = pmCityDescription(cityName)
   const canonical = `${SITE_URL}/property-management/${citySlug}/`
-  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] }, }
+  return { title: pageTitle(title), description, alternates: { canonical }, openGraph: { type: "website", title, description, url: canonical, images: OG_IMAGES.manage },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.manage] }, }
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: Params }) {
         title={pmCityTitle(city.name)}
         description={pmCityDescription(city.name)}
         pathname={`/property-management/${citySlug}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/manage.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Property Management", url: `${SITE_URL}/property-management/` },

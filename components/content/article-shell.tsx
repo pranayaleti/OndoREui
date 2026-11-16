@@ -11,6 +11,7 @@ import { NextStepCta } from "@/components/content/next-step-cta"
 import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { FOUNDER_PERSON_ID, generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
+import { shareImagePath } from "@/lib/share-images"
 import { pageCanonicalMetadata } from "@/lib/page-canonical"
 import { ContentFaq, type ContentFaqItem } from "@/components/content/content-faq"
 import { ArticleToc } from "@/components/content/article-toc"
@@ -124,7 +125,7 @@ export function ArticleShell({ meta, children }: ArticleShellProps) {
         title={meta.title}
         description={meta.description}
         pathname={meta.path}
-        image={`${SITE_URL}${image}`}
+        image={`${SITE_URL}${shareImagePath(meta.image, "guides")}`}
         publishedTime={meta.published}
         modifiedTime={meta.modified || meta.published}
         author={meta.author}

@@ -52,6 +52,7 @@ describe("listingsToPins", () => {
     expect(pins).toEqual([
       {
         id: "pub-123",
+        addressParts: { line1: undefined, line2: undefined },
         title: "Lehi Townhome",
         price: 2100,
         bedrooms: 3,

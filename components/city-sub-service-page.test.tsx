@@ -114,6 +114,14 @@ describe("CitySubServicePage topic ownership", () => {
   })
 })
 
+describe("CitySubServicePage hub link", () => {
+  // /buy-sell/ is only a legacy redirect to /buy/: linking it costs a redirect hop and 404s the prefetch.
+  it("sends All Buy & Sell services to /buy/, not the /buy-sell/ redirect", () => {
+    render(<CitySubServicePage city={lehi} subService={subServiceDefinitions["first-time-buyers"]!} />)
+    expect(screen.getByRole("link", { name: "All Buy & Sell services" })).toHaveAttribute("href", "/buy/")
+  })
+})
+
 function cityContentFaqCount(): number {
   return cityContentByName[lehi.name]?.faq?.length ?? 0
 }

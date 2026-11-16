@@ -48,7 +48,7 @@ export default function VariableIncomePillarPage() {
         title="Mortgages when your income is not the same every month"
         description="How lenders typically average variable income, which documents to gather, and when a bank-statement option enters the conversation."
         pathname="/learn/variable-income"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={[
           generateBreadcrumbJsonLd([
             { name: "Home", url: SITE_URL },

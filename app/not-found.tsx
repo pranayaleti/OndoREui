@@ -267,7 +267,8 @@ export default function NotFound() {
           
           <div className="text-sm text-foreground/70">
             <p>Still can't find what you're looking for?</p>
-            <p>Email us at <a href={`mailto:${SITE_EMAILS.support}`} className="text-primary hover:underline">{SITE_EMAILS.support}</a></p>
+            <p>Email us at <a href={`mailto:${SITE_EMAILS.support}`} className="font-medium text-primary underline underline-offset-4">{SITE_EMAILS.support}</a></p>
+            <p className="mt-2">Found a broken link? <Link href="/feedback/" className="font-medium text-primary underline underline-offset-4">Tell us</Link></p>
           </div>
         </div>
       </div>

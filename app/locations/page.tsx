@@ -43,7 +43,7 @@ export default function LocationsPage() {
         title={`Real Estate Services Across Utah | ${SITE_BRAND_SHORT}`}
         description="Property management, home loans, and buying & selling services across 55 Utah cities."
         pathname="/locations/"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Locations", url: `${SITE_URL}/locations/` },

@@ -4,7 +4,6 @@ import { edgeFunctionUrl } from "@/lib/backend"
 export interface QualifyResponse {
   reply: string;
   completed: boolean;
-  temperature?: "HOT" | "WARM" | "COLD";
 }
 
 /** A non-2xx answer from lead-qualify, with the HTTP status and the server's message. */

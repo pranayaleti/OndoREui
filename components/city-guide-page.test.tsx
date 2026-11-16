@@ -51,8 +51,11 @@ describe("CityGuidePage", () => {
   })
 
   it("mounts lead capture and resource hub links, with no invented testimonials", () => {
-    render(<CityGuidePage city={slc} />)
-    expect(screen.getAllByLabelText(/name/i).length).toBeGreaterThanOrEqual(2)
+    const { container } = render(<CityGuidePage city={slc} />)
+    // One full form at the bottom; the block above the content links down to it instead of repeating it.
+    expect(screen.getAllByLabelText(/name/i)).toHaveLength(1)
+    expect(screen.getByRole("link", { name: "Send a note" })).toHaveAttribute("href", "#city-contact")
+    expect(container.querySelector("#city-contact form")).not.toBeNull()
     expect(screen.queryByText(/Example stories from/i)).not.toBeInTheDocument()
     expect(screen.getByRole("link", { name: /Guides & resources/i })).toHaveAttribute("href", "/resources/")
     expect(screen.getByRole("link", { name: /^Blog$/i })).toHaveAttribute("href", "/blog/")

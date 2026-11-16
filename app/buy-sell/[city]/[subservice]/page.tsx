@@ -1,6 +1,6 @@
 import { CitySubServicePage } from "@/components/city-sub-service-page"
 import { findCityBySlug, allCitySlugs } from "@/lib/utah-cities"
-import { subServiceDefinitions, getSubServiceSlugsForParent } from "@/lib/sub-service-content"
+import { SERVICE_HUB_PATHS, subServiceDefinitions, getSubServiceSlugsForParent } from "@/lib/sub-service-content"
 import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { SITE_BRAND_SHORT, SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
@@ -48,10 +48,10 @@ export default async function Page({ params }: { params: Params }) {
         title={`${def.metaTitle(city.name)} | ${SITE_BRAND_SHORT}`}
         description={def.metaDescription(city.name)}
         pathname={`/buy-sell/${citySlug}/${subservice}/`}
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Buy & Sell", url: `${SITE_URL}/buy-sell/` },
+          { name: "Buy & Sell", url: `${SITE_URL}${SERVICE_HUB_PATHS["buy-sell"]}` },
           { name: city.name, url: `${SITE_URL}/buy-sell/${citySlug}/` },
           { name: def.name, url: `${SITE_URL}/buy-sell/${citySlug}/${subservice}/` },
         ])}

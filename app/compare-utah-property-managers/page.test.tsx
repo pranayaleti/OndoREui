@@ -29,4 +29,11 @@ describe("Compare Utah property managers page", () => {
     expect(screen.queryByText(/waives the setup fee/i)).not.toBeInTheDocument()
     expect(screen.getByText(/none\. onboarding is included/i)).toBeInTheDocument()
   })
+
+  it("keeps the #diy-software section that blog links to the retired /vs/ pages now target", () => {
+    const { container } = render(<CompareUtahPropertyManagersPage />)
+    const section = container.querySelector("section#diy-software")
+    expect(section).toHaveTextContent(/doing it yourself with software/i)
+    expect(section).toHaveTextContent(/Buildium and TurboTenant/)
+  })
 })

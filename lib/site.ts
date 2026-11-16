@@ -84,17 +84,45 @@ export const SITE_ADDRESS_COUNTRY = "US"
 export const SITE_LOAN_OFFICER = { name: "Pranay Reddy Aleti", nmlsId: "2699085" } as const
 
 /**
- * Licensing gate. Off by default: nothing here switches licensed copy on.
- * Before flipping LICENSING_LIVE to true, the owner supplies SITE_COMPANY_NMLS_ID (the
- * sponsoring company's NMLS ID, never invented) and counsel reviews the wording.
- * lib/site.test.ts fails if the flag is on while the company ID is empty or the
- * shipped disclosure still reads "on file".
+ * Licensing gates. Off by default: nothing here switches licensed copy on.
+ *
+ * One switch per license, not one for all of them: the real estate license and the NMLS license
+ * go live on different days (different sponsors), and Utah bars one person from acting as the
+ * real estate agent and the loan originator on the same transaction (Utah Code 61-2c-301(2)(i)),
+ * so copy about one license must never key off the other. RE_LICENSE_LIVE publishes the agent
+ * title and the brokerage; MLO_LICENSE_LIVE publishes the loan officer title, the NMLS IDs and the
+ * lender; NOTARY_COMMISSION_LIVE publishes the notary commission. Before flipping any of them, the
+ * owner supplies that license's placeholders below (never invented) and counsel reviews the
+ * wording. lib/site.test.ts fails if a switch is on while its placeholders are empty or the
+ * shipped lending disclosure still reads "on file".
  */
-export const LICENSING_LIVE = false as boolean
+export const RE_LICENSE_LIVE = false as boolean
+export const MLO_LICENSE_LIVE = false as boolean
+export const NOTARY_COMMISSION_LIVE = false as boolean
+
+export type LicensingState = { readonly re: boolean; readonly mlo: boolean; readonly notary: boolean }
+export const LICENSING: LicensingState = {
+  re: RE_LICENSE_LIVE,
+  mlo: MLO_LICENSE_LIVE,
+  notary: NOTARY_COMMISSION_LIVE,
+}
+/**
+ * True when either license is live. Only for code that means "any license": copy about one
+ * license reads LICENSING.re or LICENSING.mlo, or it goes live with the wrong license.
+ */
+export const LICENSING_LIVE: boolean = RE_LICENSE_LIVE || MLO_LICENSE_LIVE
+/**
+ * Normalises the legacy boolean switch. `true` meant both licenses at once (it never covered
+ * the notary commission); a state object is used as given.
+ */
+export function licensingState(live: boolean | LicensingState = LICENSING): LicensingState {
+  return typeof live === "boolean" ? { re: live, mlo: live, notary: false } : live
+}
 export const SITE_COMPANY_NMLS_ID = "" as string
 /**
  * Licensing placeholders, supplied by the owner on licensing day and never invented.
- * Turning LICENSING_LIVE on with any of these empty fails lib/site.test.ts.
+ * Turning a license's switch on with its placeholders empty fails lib/site.test.ts
+ * (blankFieldsForLiveLicenses).
  *
  * Licensing-day checklist (found by flipping the switch with test values on 2026-10-18):
  * - nmlsIdentification() says "Company NMLS ID <SITE_COMPANY_NMLS_ID>" after "provided by Ondo Real
@@ -112,6 +140,11 @@ export const SITE_RE_LICENSE_NUMBER = "" as string
 export const SITE_BROKERAGE_NAME = "" as string
 /** Mortgage company sponsoring the NMLS license; its NMLS ID is SITE_COMPANY_NMLS_ID. */
 export const SITE_LENDER_NAME = "" as string
+/** Utah notary public commission number (Office of the Lieutenant Governor); blank until supplied. */
+export const SITE_NOTARY_COMMISSION_NUMBER = "" as string
+/** Public registries where each credential can be verified. */
+export const UTAH_DIVISION_OF_REAL_ESTATE_URL = "https://realestate.utah.gov/"
+export const UTAH_NOTARY_SEARCH_URL = "https://secure.utah.gov/notary/search.html"
 
 /** Names of licensing placeholders that are still blank. Must be empty before LICENSING_LIVE goes on. */
 export function missingLicensingFields(
@@ -126,15 +159,41 @@ export function missingLicensingFields(
     .filter(([, value]) => value.trim() === "")
     .map(([name]) => name)
 }
+/**
+ * Placeholders a live license still needs. Empty means every switched-on license is fully
+ * identified; lib/site.test.ts fails the build otherwise.
+ */
+export function blankFieldsForLiveLicenses(
+  state: LicensingState = LICENSING,
+  fields: Record<string, string> = {
+    SITE_COMPANY_NMLS_ID,
+    SITE_RE_LICENSE_NUMBER,
+    SITE_BROKERAGE_NAME,
+    SITE_LENDER_NAME,
+    SITE_NOTARY_COMMISSION_NUMBER,
+  },
+): string[] {
+  const required = [
+    ...(state.re ? ["SITE_RE_LICENSE_NUMBER", "SITE_BROKERAGE_NAME"] : []),
+    ...(state.mlo ? ["SITE_COMPANY_NMLS_ID", "SITE_LENDER_NAME"] : []),
+    ...(state.notary ? ["SITE_NOTARY_COMMISSION_NUMBER"] : []),
+  ]
+  return required.filter((name) => (fields[name] ?? "").trim() === "")
+}
 export const NMLS_CONSUMER_ACCESS_URL = "https://www.nmlsconsumeraccess.org/"
+/** NMLS Consumer Access record for one individual originator; only linked once MLO_LICENSE_LIVE. */
+export function nmlsConsumerAccessUrl(individualNmlsId: string = SITE_LOAN_OFFICER.nmlsId): string {
+  return `${NMLS_CONSUMER_ACCESS_URL}EntityDetails.aspx/INDIVIDUAL/${individualNmlsId}`
+}
 
 /**
- * The NMLS identification phrase used inside every lending disclosure. Until licensing
- * is live it stays the platform-wide "NMLS ID on file"; once live it names the company
- * and loan officer IDs and links NMLS Consumer Access.
+ * The NMLS identification phrase used inside every lending disclosure. Until the mortgage
+ * license is live it stays the platform-wide "NMLS ID on file"; once live it names the company
+ * and loan officer IDs and links NMLS Consumer Access. Keyed to MLO_LICENSE_LIVE only: an active
+ * real estate license does not make the mortgage disclosure true.
  */
 export function nmlsIdentification(
-  live: boolean = LICENSING_LIVE,
+  live: boolean = MLO_LICENSE_LIVE,
   companyId: string = SITE_COMPANY_NMLS_ID,
 ): string {
   if (!live) return "NMLS ID on file"
@@ -217,10 +276,6 @@ export const SITE_SOCIAL_LINKS: readonly SocialLink[] = [
   { url: "https://www.linkedin.com/company/OndoRealEstate", live: true },
   { url: "https://x.com/OndoRealEstate",                 live: true },
   { url: "https://www.pinterest.com/ondorealestate",     live: false },
-  // The "all our links" hub is now /links on our own domain (lib/links-page.ts).
-  // Linktree stays claimed so old bios and printed QR codes still resolve, but
-  // it only forwards to /links, so it is kept out of the footer and sameAs.
-  { url: "https://linktr.ee/ondorealestate",             live: false },
   // TODO: Implement WhatsApp group integration once the group is stable.
   // { url: "https://chat.whatsapp.com/GFnQbVD7kriKlz3kHpTx2c", live: false },
   // { url: "https://www.reddit.com/user/ondorealestate/",      live: false },

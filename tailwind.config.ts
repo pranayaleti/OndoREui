@@ -30,7 +30,8 @@ const config = {
       },
       fontFamily: {
         sans: ['var(--font-family-base)'],
-        outfit: ['Outfit', 'sans-serif'],
+        outfit: ['var(--font-outfit)', 'Outfit', 'sans-serif'],
+        display: ['var(--font-display)'],
       },
       colors: {
         border: "hsl(var(--border))",

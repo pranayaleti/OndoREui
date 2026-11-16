@@ -94,6 +94,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
           cityName={city.name}
           heading={`Talk with our ${city.name} team`}
           prefillMessage={`I'm interested in real estate in ${city.name}.`}
+          formHref="#city-contact"
         />
       </div>
 
@@ -328,6 +329,7 @@ export function CityGuidePage({ city }: CityGuidePageProps) {
 
         <CityPageLeadCapture
           cityName={city.name}
+          id="city-contact"
           heading={`Ready to get started in ${city.name}?`}
           prefillMessage={`I'm interested in real estate in ${city.name}.`}
         />

@@ -9,7 +9,7 @@ export const HOME_PAGE_DESCRIPTION =
 
 export const homeOpenGraphImages = [
   {
-    url: `${SITE_URL}/modern-office-building.webp`,
+    url: `${SITE_URL}/og/ondo-real-estate.jpg`,
     width: 1200,
     height: 630,
     alt: `${SITE_BRAND_SHORT} (${SITE_NAME}): Utah real estate and property management`,

@@ -26,6 +26,10 @@ const AGENT_DISCOVERY_PATHS = [
 ]
 const ROBOTS_COMMENT_RESOURCES = [...AGENT_DISCOVERY_PATHS, '/humans.txt', '/.well-known/security.txt']
 
+// Listings live at /{address-slug} (street number first), e.g. /4323-west-11475-south.
+const ROOT_LISTING_PATH = /^\/[0-9][a-z0-9-]*$/
+const UUID_SEGMENT = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+
 function normalizeSitemapPath(path) {
   if (!path || path === '/') return '/'
   return path.replace(/\/+$/, '') || '/'
@@ -45,7 +49,7 @@ function getPriority(path) {
   if (tier9.includes(p)) return 0.9
   // Individual listing detail pages get tier 8 — they're crawl-worthy but
   // less important than the index.
-  if (/^\/properties\/[^/]+$/.test(p)) return 0.8
+  if (/^\/properties\/[^/]+$/.test(p) || ROOT_LISTING_PATH.test(p)) return 0.8
   const tier8 = ['/investments', '/calculators', '/blog', '/about', '/faq', '/property-management', '/locations', '/market-reports', '/neighborhoods', '/schools', '/glossary']
   if (tier8.some((x) => p === x)) return 0.8
   const tier5 = [
@@ -217,11 +221,16 @@ function isExcludedPath(path) {
   if (/^\/neighborhoods\/[^/]+$/.test(p)) {
     return true
   }
-  // /properties/_placeholder is the build-time stub emitted by
-  // generateStaticParams in app/properties/[publicId]/page.tsx when the
+  // /_placeholder and /properties/_placeholder are the build-time stubs emitted by
+  // generateStaticParams (app/[listing], app/properties/[publicId]) when the
   // backend is unreachable during the build (CI without BACKEND_BASE_URL).
-  // It must never appear in the public sitemap or robots.txt.
-  if (p === '/properties/_placeholder') {
+  // They must never appear in the public sitemap or robots.txt.
+  if (p === '/_placeholder' || p === '/properties/_placeholder') {
+    return true
+  }
+  // /properties/{address-slug}/ is a noindex redirect stub to /{address-slug}/. Only a
+  // UUID segment (a listing with no usable address, canonical there) belongs in the sitemap.
+  if (/^\/properties\/[^/]+$/.test(p) && p !== '/properties/compare' && !UUID_SEGMENT.test(p.slice('/properties/'.length))) {
     return true
   }
 
@@ -318,6 +327,9 @@ module.exports = {
     // Link-in-bio hub for social profiles; noindex, so it must not be submitted either.
     '/links',
     '/links/',
+    // Instagram feed mirror; noindex, the posts themselves live on Instagram.
+    '/instagram',
+    '/instagram/',
     // Example stories were removed (unverifiable); the page is a noindex notice.
     '/about/testimonials',
     '/about/testimonials/',

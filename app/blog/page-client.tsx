@@ -5,13 +5,12 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { analyticsAttributes } from "@/lib/analytics"
 import { SITE_URL } from "@/lib/site"
-import { DEFAULT_BLOG_IMAGE, getBlogPosts, type BlogPostEntry } from "@/lib/blog-posts"
+import { getBlogPosts, type BlogPostEntry } from "@/lib/blog-posts"
 import { formatArticleDate } from "@/components/content/article-byline"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import Image from "next/image"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Calendar, ArrowRight, MapPin } from "lucide-react"
 
@@ -120,7 +119,7 @@ export default function BlogPage() {
         title="Real Estate Blog | Ondo Real Estate"
         description="Stay updated with the latest Utah real estate news, market insights, and expert advice from Ondo Real Estate professionals."
         pathname="/blog"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Blog", url: `${SITE_URL}/blog` },
@@ -138,24 +137,17 @@ export default function BlogPage() {
             {/* Featured Post */}
             <div className="mb-16">
               <h2 className="text-3xl font-bold mb-8">Featured Article</h2>
-              <Card className="overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2">
-                  <div className="relative h-64 lg:h-full">
-                    <Image
-                      src={featuredPost.image ?? DEFAULT_BLOG_IMAGE}
-                      alt=""
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-8">
+              {/* Text-led cards: 49 of the posts shared one stock photo, so the pictures told a reader nothing. */}
+              <Card className="overflow-hidden border-l-4 border-l-primary">
+                <div>
+                  <CardContent className="max-w-3xl p-8">
                     <div className="flex items-center gap-2 mb-4">
                       <Badge variant="secondary">{featuredPost.category}</Badge>
                       {readTimeLabel(featuredPost) ? (
                         <span className="text-sm text-foreground/70">{readTimeLabel(featuredPost)}</span>
                       ) : null}
                     </div>
-                    <h3 className="text-2xl font-semibold leading-none tracking-tight mb-4">{featuredPost.title}</h3>
+                    <h3 className="mb-4 text-3xl font-bold leading-tight tracking-tight md:text-4xl">{featuredPost.title}</h3>
                     <CardDescription className="text-lg mb-6">{featuredPost.excerpt}</CardDescription>
                     <div className="flex items-center gap-4 text-sm text-foreground/70 mb-6">
                       <div className="flex items-center gap-1">
@@ -181,15 +173,7 @@ export default function BlogPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {filteredPosts.map((post) => (
                     <div key={post.slug} className="group relative h-full">
-                      <Card className="h-full hover:shadow-lg transition-shadow group-hover:border-primary/60">
-                      <div className="relative h-48">
-                        <Image
-                          src={post.image ?? DEFAULT_BLOG_IMAGE}
-                          alt=""
-                          fill
-                            className="object-cover transition-transform duration-200 group-hover:scale-[1.01]"
-                        />
-                      </div>
+                      <Card className="h-full transition-colors group-hover:border-primary/60">
                       <CardContent className="p-6">
                         <div className="flex items-center gap-2 mb-3">
                           <Badge variant="outline" className="text-xs">{post.category}</Badge>
@@ -197,7 +181,7 @@ export default function BlogPage() {
                             <span className="text-xs text-foreground/70">{readTimeLabel(post)}</span>
                           ) : null}
                         </div>
-                          <h3 className="text-lg font-semibold leading-none tracking-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                          <h3 className="mb-2 line-clamp-3 text-xl font-semibold leading-snug tracking-tight transition-colors group-hover:text-primary">
                             <Link
                               href={`/blog/${post.slug}`}
                               className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring"
@@ -205,7 +189,7 @@ export default function BlogPage() {
                               {post.title}
                             </Link>
                           </h3>
-                        <CardDescription className="mb-4 line-clamp-2">{post.excerpt}</CardDescription>
+                        <CardDescription className="mb-4 line-clamp-3">{post.excerpt}</CardDescription>
                           <div className="flex items-center gap-4 text-xs text-foreground/70">
                           <div className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />

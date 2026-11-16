@@ -11,12 +11,15 @@ const CALCULATORS = [
 
 export function ToolsSection() {
   return (
-    <section className="bg-background py-16" aria-labelledby="tools-heading">
-      <div className="container mx-auto max-w-4xl px-4">
-        <h2 id="tools-heading" className="mb-8 text-center text-3xl font-bold tracking-tight text-foreground">
-          Run your own numbers
-        </h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <section className="bg-background py-16 md:py-20" aria-labelledby="tools-heading">
+      <div className="container mx-auto grid gap-8 px-4 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-4">
+          <h2 id="tools-heading" className="text-3xl font-bold text-foreground md:text-4xl">
+            Run your own numbers
+          </h2>
+          <p className="mt-4 max-w-sm text-xs leading-relaxed text-foreground/50">{ESTIMATE_DATA_DISCLOSURE}</p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:col-span-8">
           <Link
             href="/whats-my-home-worth"
             className="flex flex-col rounded-xl border border-primary/40 bg-card p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -50,7 +53,6 @@ export function ToolsSection() {
             </ul>
           </div>
         </div>
-        <p className="mt-4 text-center text-xs text-foreground/50">{ESTIMATE_DATA_DISCLOSURE}</p>
       </div>
     </section>
   )

@@ -14,15 +14,15 @@ import { LendingDisclaimer } from "@/components/content/lending-disclaimer"
 import { IsThisRightForMe } from "@/components/content/is-this-right-for-me"
 import { USDA_SNAPSHOT, LENDING_FACTS_AS_OF } from "@/lib/content"
 import type { Metadata } from "next"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 export const metadata: Metadata = {
   title: pageTitle("USDA Loans in Utah: Zero Down in Rural Areas"),
   description:
     "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.",
   alternates: { canonical: `${SITE_URL}/loans/usda/` },
-  openGraph: { type: "website", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: OG_IMAGES.loans },
+  twitter: { card: "summary_large_image", title: pageTitleText("USDA Loans in Utah: Zero Down in Rural Areas"), description: "Buy with no down payment in USDA-eligible Utah areas. Check the eligibility map, income limits and guarantee fee, then get pre-approved locally.", images: [OG_IMAGE_URLS.loans] },
 }
 
 const benefits = [
@@ -40,7 +40,7 @@ export default function USDALoanPage() {
         title="USDA Rural Loans in Utah"
         description="USDA loans can be zero down when map, income, and occupancy tests fit. Confirm current RD tools."
         pathname="/loans/usda"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/loans.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Loans", url: `${SITE_URL}/loans` },

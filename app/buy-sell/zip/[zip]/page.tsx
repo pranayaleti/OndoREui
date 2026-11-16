@@ -6,6 +6,7 @@ import SEO from "@/components/seo"
 import { generateBreadcrumbJsonLd } from "@/lib/seo"
 import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
 import { zipPageCanonical } from "@/lib/zip-pages"
+import { SERVICE_HUB_PATHS } from "@/lib/sub-service-content"
 
 type Params = Promise<{ zip: string }>
 
@@ -35,10 +36,10 @@ export default async function Page({ params }: { params: Params }) {
         title={`Real Estate Agents ${zip} (${city.name}) | ${SITE_NAME}`}
         description={`Buy or sell a home in ${city.name} ${zip}. Local expertise and full-service support.`}
         pathname={`/buy-sell/zip/${zip}/`}
-        image={`${SITE_URL}/modern-apartment-balcony.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Buy & Sell", url: `${SITE_URL}/buy-sell/` },
+          { name: "Buy & Sell", url: `${SITE_URL}${SERVICE_HUB_PATHS["buy-sell"]}` },
           { name: `${zip} (${city.name})`, url: `${SITE_URL}/buy-sell/zip/${zip}/` },
         ])}
       />

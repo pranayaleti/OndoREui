@@ -94,7 +94,7 @@ export default function CaseStudiesPage() {
         title="Case Studies | Ondo Real Estate Utah"
         description="Illustrative scenarios for Utah owners, buyers, and investors: vacancy, FHA financing with down payment assistance, investor yield, and jumbo refinancing. Not actual client results."
         pathname="/about/case-studies"
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/ondo-real-estate.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "About", url: `${SITE_URL}/about` },

@@ -29,7 +29,7 @@ export default function AdjustableRatePage() {
         title="Adjustable-Rate Mortgage (ARM) Guide | Utah Real Estate"
         description="Learn about adjustable-rate mortgages in Utah. Understand ARM benefits, rate caps, and when an ARM might be right for you."
         pathname="/buy/adjustable-rate"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

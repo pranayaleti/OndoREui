@@ -3,7 +3,7 @@ import { YourContactCard } from "@/components/people/your-contact-card"
 import type { Metadata } from "next"
 import SEO from "@/components/seo"
 import { HomebuyerQuiz } from "@/components/homebuyer-quiz"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 import { generateBreadcrumbJsonLd, FOUNDER_PERSON_ID } from "@/lib/seo"
 import { SITE_URL, pageTitle, pageTitleText } from "@/lib/site"
 
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: pageTitle(title),
   description,
   alternates: { canonical },
-  openGraph: { type: "website", title: pageTitleText(title), description, url: canonical, images: DEFAULT_OG_IMAGES },
-  twitter: { card: "summary_large_image", title: pageTitleText(title), description, images: [DEFAULT_OG_IMAGE_URL] },
+  openGraph: { type: "website", title: pageTitleText(title), description, url: canonical, images: OG_IMAGES.buy },
+  twitter: { card: "summary_large_image", title: pageTitleText(title), description, images: [OG_IMAGE_URLS.buy] },
 }
 
 export default function HomebuyerQuizPage() {

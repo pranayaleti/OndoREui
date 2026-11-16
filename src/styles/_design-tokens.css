@@ -86,40 +86,40 @@
 }
 
 .dark {
-	/* Dark mode tokens */
-	--color-bg-base: #0D1117;
-	--color-bg-elevated: #131A25;
+	/* Dark mode tokens: matte black with a trace of warmth so the brand orange sits on it, not a blue slate. */
+	--color-bg-base: #100F0E;
+	--color-bg-elevated: #191817;
 	--color-text-primary: #F2F2F2;
 	--color-text-muted: #8C8C8C;
 	--color-link: #F2F2F2;
-	--color-border: #242E3F;
-	--color-border-strong: #2D3A50;
+	--color-border: #2E2B29;
+	--color-border-strong: #3B3835;
 	--color-category-1-surface: 207 55% 16%;
 	--color-category-2-surface: 269 45% 17%;
 	--color-category-3-surface: 25 55% 16%;
 	--color-category-4-surface: 143 38% 15%;
 
 	/* Gradients */
-	--color-gradient-from: #0D1117;
-	--color-gradient-to: #131A25;
-	--gradient-base: linear-gradient(to bottom, #0D1117 0%, #131A25 100%);
-	--gradient-base-accent: linear-gradient(180deg, rgba(249, 115, 22, 0.18) 0%, rgba(13, 17, 23, 0) 65%);
+	--color-gradient-from: #100F0E;
+	--color-gradient-to: #191817;
+	--gradient-base: linear-gradient(to bottom, #100F0E 0%, #191817 100%);
+	--gradient-base-accent: linear-gradient(180deg, rgba(249, 115, 22, 0.18) 0%, rgba(16, 15, 14, 0) 65%);
 
 	/* Tailwind CSS integration (dark) */
-	--background: 222 20% 7%;
+	--background: 30 6% 6%;
 	--foreground: 0 0% 95%;
-	--card: 222 20% 10%;
+	--card: 30 5% 9.5%;
 	--card-foreground: 0 0% 95%;
-	--popover: 222 20% 10%;
+	--popover: 30 5% 9.5%;
 	--popover-foreground: 0 0% 95%;
 	--primary: 25 95% 53%;
 	/* Dark theme: the fill orange already passes as text (6.8:1 on the page background). */
 	--primary-text: 25 95% 53%;
 	--primary-foreground: 0 0% 0%;
-	--secondary: 222 20% 15%;
+	--secondary: 30 5% 14%;
 	--secondary-foreground: 0 0% 85%;
-	--muted: 222 15% 14%;
-	--muted-foreground: 0 0% 55%;
+	--muted: 30 4% 13%;
+	--muted-foreground: 30 4% 60%;
 	--accent: 25 95% 53%;
 	--accent-foreground: 0 0% 0%;
 	--destructive: 0 62.8% 30.6%;
@@ -128,8 +128,8 @@
 	--destructive-foreground: 0 0% 98%;
 	--success-emphasis: 142 70% 60%;
 	--warning-emphasis: 45 93% 60%;
-	--border: 222 20% 17%;
-	--input: 222 20% 17%;
+	--border: 30 5% 17%;
+	--input: 30 5% 17%;
 	--ring: 25 95% 40%;
 }
 

@@ -5,24 +5,27 @@
  *
  *   node scripts/generate-links-og.mjs
  */
+import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { chromium } from "@playwright/test"
 import sharp from "sharp"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const avatar = `file://${path.join(root, "public", "links-avatar.webp")}`
+// Inlined as a data URI: a page made with setContent() cannot load file:// URLs, so the photo used to
+// be missing from the committed card (an empty orange disc).
+const avatar = `data:image/webp;base64,${(await readFile(path.join(root, "public", "links-avatar.webp"))).toString("base64")}`
 const out = path.join(root, "public", "links-og.jpg")
 
 const html = `<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700&display=block" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; }
-  body { width: 1200px; height: 630px; background: #0e1117; color: #f2f2f2; font-family: Inter, sans-serif;
+  body { width: 1200px; height: 630px; background: #100f0e; color: #f2f2f2; font-family: Inter, sans-serif;
          display: flex; align-items: center; padding: 0 88px; gap: 64px; }
   .ring { flex: none; width: 300px; height: 300px; border-radius: 50%; padding: 8px;
           background: linear-gradient(135deg, #f97316, #991b1b); }
-  .ring img { width: 100%; height: 100%; border-radius: 50%; border: 8px solid #0e1117; object-fit: cover; display: block; }
+  .ring img { width: 100%; height: 100%; border-radius: 50%; border: 8px solid #100f0e; object-fit: cover; display: block; }
   h1 { font-family: Outfit, sans-serif; font-weight: 700; font-size: 76px; letter-spacing: -1.5px; line-height: 1.02; }
   .tag { margin-top: 18px; font-size: 32px; line-height: 1.35; color: #b3b8c2; max-width: 640px; }
   .chips { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }

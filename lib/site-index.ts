@@ -14,7 +14,11 @@ import {
   SITE_SOCIALS,
   SITE_URL,
   nmlsIdentification,
-  LICENSING_LIVE,
+  LICENSING,
+  licensingState,
+  type LicensingState,
+  SITE_NOTARY_COMMISSION_NUMBER,
+  UTAH_NOTARY_SEARCH_URL,
   SITE_BROKERAGE_NAME,
   SITE_COMPANY_NMLS_ID,
   SITE_LENDER_NAME,
@@ -742,16 +746,41 @@ export function getFlatSiteIndexForJsonLd(): Array<{ name: string; url: string; 
   return out
 }
 
-/** "Who runs Ondo" for llms.txt and llms-full.txt. License titles and IDs only once licensing is live. */
-export function buildWhoRunsOndoLines(live: boolean = LICENSING_LIVE): string[] {
+/**
+ * "Who runs Ondo" for llms.txt and llms-full.txt. Each license's title and IDs appear only once
+ * that license is live (lib/site.ts); a pending license is named as pending so an assistant never
+ * infers the other one from it.
+ */
+export function buildWhoRunsOndoLines(live: boolean | LicensingState = LICENSING): string[] {
+  const state = licensingState(live)
   const founder = getFounder()
-  const licensing = live
-    ? `Utah real estate agent (license ${SITE_RE_LICENSE_NUMBER}, ${SITE_BROKERAGE_NAME}) and loan officer (NMLS ${SITE_LOAN_OFFICER.nmlsId}, ${SITE_LENDER_NAME}, company NMLS ${SITE_COMPANY_NMLS_ID}).`
-    : "Real estate and mortgage licensing in progress; check the licensing page before relying on a licensed service."
+  const titles = [
+    ...(state.re ? [`Utah real estate agent (license ${SITE_RE_LICENSE_NUMBER}, ${SITE_BROKERAGE_NAME})`] : []),
+    ...(state.mlo
+      ? [`loan officer (NMLS ${SITE_LOAN_OFFICER.nmlsId}, ${SITE_LENDER_NAME}, company NMLS ${SITE_COMPANY_NMLS_ID})`]
+      : []),
+  ]
+  const pending = [...(state.re ? [] : ["real estate"]), ...(state.mlo ? [] : ["mortgage"])]
+  const licensing =
+    titles.length === 0
+      ? "Real estate and mortgage licensing in progress; check the licensing page before relying on a licensed service."
+      : `${titles.join(" and ").replace(/^./, (c) => c.toUpperCase())}.${
+          pending.length ? ` ${pending.join(" and ").replace(/^./, (c) => c.toUpperCase())} licensing in progress.` : ""
+        }`
   return [
     "## Who runs Ondo",
     `- ${founder.name}, founder. After over a decade in full stack software engineering, and a Utah homeowner since 2019, Pranay started OndoSoft (a software consultancy) in May 2022 and founded Ondo Real Estate in ${FOUNDED_MONTH_LABEL} ${FOUNDED_YEAR}.`,
     `- Point of contact for property management, buying, selling and home loans. ${licensing}`,
+    ...(state.re && state.mlo
+      ? [
+          "- Utah bars one person from acting as the real estate agent and the loan originator on the same transaction (Utah Code 61-2c-301); on any one deal Pranay serves in one of the two roles, never both.",
+        ]
+      : []),
+    ...(state.notary
+      ? [
+          `- Commissioned Utah notary public (commission ${SITE_NOTARY_COMMISSION_NUMBER}); remote online notarization nationwide. Verify: ${UTAH_NOTARY_SEARCH_URL}`,
+        ]
+      : []),
     `- Serves ${(founder.areaServed ?? []).join(", ")} on Utah's Wasatch Front.`,
     `- Profile: ${toAbsoluteSiteUrl(FOUNDER_PROFILE_PATH)}`,
     `- Licensing and disclosures: ${toAbsoluteSiteUrl("/licensing/")}`,

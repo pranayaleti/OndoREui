@@ -13,6 +13,15 @@
  */
 import { z } from "zod"
 
+// Copy of supabase/functions/_shared/visitor-input.ts isSafePersonName (names reach emails we send).
+const PERSON_NAME = /^[\p{L}\p{M}\p{N} .,'’()&-]+$/u
+const LINK_OR_MARKUP =
+  /\b(?:https?|ftp|javascript|data|vbscript|file|mailto):|\bwww\.|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}\b|[<>]/i
+function isSafePersonName(value: string): boolean {
+  const t = value.trim()
+  return t.length > 0 && t.length <= 120 && PERSON_NAME.test(t) && !LINK_OR_MARKUP.test(t)
+}
+
 export const EDGE_INQUIRY_TYPES = [
   "owner",
   "renter",
@@ -54,7 +63,7 @@ export const edgeMarketingAttributionSchema = z
 
 /** POST /api/leads/contact. Unknown top-level keys are stripped by zod, as on the server. */
 export const edgeContactLeadSchema = z.object({
-  name: z.string().min(1).max(120),
+  name: z.string().min(1).max(120).refine(isSafePersonName),
   email: z.string().email().max(254),
   phone: z
     .string()
@@ -75,8 +84,8 @@ const optionalShort = (max: number) => z.string().max(max).optional().transform(
 /** POST /api/leads/intake (client intake questionnaire, components/intake/intake-form.tsx). */
 export const edgeIntakeLeadSchema = z.object({
   intakeType: z.enum(["buyer", "seller", "owner", "tenant"]),
-  firstName: z.string().trim().min(1).max(80),
-  lastName: z.string().trim().min(1).max(80),
+  firstName: z.string().trim().min(1).max(80).refine(isSafePersonName),
+  lastName: z.string().trim().min(1).max(80).refine(isSafePersonName),
   email: z.string().trim().email().max(254).transform((s) => s.toLowerCase()),
   phone: z
     .string()

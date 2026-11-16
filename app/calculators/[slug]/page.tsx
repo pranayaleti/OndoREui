@@ -13,7 +13,7 @@ import { RelatedContent } from "@/components/content/related-content"
 import { CalculatorInputExplainer } from "@/components/content/calculator-input-explainer"
 import { GlossaryTermStrip } from "@/components/content/glossary-terms"
 import { BreakEvenTable } from "@/components/content/break-even-table"
-import { DEFAULT_OG_IMAGES, DEFAULT_OG_IMAGE_URL } from "@/lib/page-canonical"
+import { OG_IMAGES, OG_IMAGE_URLS } from "@/lib/page-canonical"
 
 const slugToComponent: Record<string, ComponentType> = {
   "owner-vs-self": dynamic(() => import("@/pages/calculators/owner-vs-self-calculator"), {
@@ -97,9 +97,9 @@ export async function generateMetadata({
       title: pageTitleText(seoTitle),
       description: seoDescription,
       url: canonical,
-      images: DEFAULT_OG_IMAGES,
+      images: OG_IMAGES.guides,
     },
-    twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE_URL] },
+    twitter: { card: "summary_large_image", images: [OG_IMAGE_URLS.guides] },
   }
 }
 
@@ -138,7 +138,7 @@ export default async function CalculatorBySlugPage({ params }: { params: Promise
         title={detail.name}
         description={detail.description}
         pathname={`/calculators/${slug}`}
-        image={`${SITE_URL}/modern-office-building.png`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={structuredData}
       />
       <CalculatorUsageTracker slug={slug} />

@@ -17,6 +17,8 @@
     "build:full": "npm run optimize:images && npm run optimize:all-images && next build",
     "postbuild": "next-sitemap && npm run copy:headers && npm run generate:legacy-redirects && npm run generate:discovery && npm run generate:html-md && npm run check:llms-txt && npm run check:main-landmark && npm run check:license-claims",
     "generate:agent-md": "npx tsx scripts/generate-agent-markdown.ts",
+    "fetch:instagram": "npx tsx scripts/fetch-instagram.ts",
+    "predev": "node scripts/dev-sitemap.mjs",
     "dev": "next dev",
     "dev:prod-like": "next dev -p 3100",
     "dev:clean": "npm run clean && next dev",
@@ -55,7 +57,8 @@
     "a11y:serve": "next build && npx --yes serve@14 out -l 3000 --no-clipboard",
     "indexnow": "node scripts/submit-indexnow.mjs",
     "indexnow:dry": "node scripts/submit-indexnow.mjs --dry-run",
-    "indexnow:all": "node scripts/submit-indexnow.mjs --all"
+    "indexnow:all": "node scripts/submit-indexnow.mjs --all",
+    "listings:profile": "npx tsx scripts/print-business-profile.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",

@@ -28,7 +28,7 @@ export default function FirstTimeBuyerPage() {
         title="First-Time Homebuyer Guide | Utah Real Estate"
         description="Step-by-step guidance, programs, and calculators for first-time homebuyers in Utah. Learn about down payment assistance, FHA loans, and more."
         pathname="/buy/first-time"
-        image={`${SITE_URL}/suburban-house-garden.png`}
+        image={`${SITE_URL}/og/buy.jpg`}
         jsonLd={generateBreadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
           { name: "Buy", url: `${SITE_URL}/buy` },

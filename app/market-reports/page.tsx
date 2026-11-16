@@ -44,7 +44,7 @@ export default function MarketReportsHubPage() {
         title="Utah City Real Estate Market Reports"
         description="Ondo city-level market snapshots for the Wasatch Front. Not an MLS pull, appraisal, BPO, or CMA."
         pathname="/market-reports"
-        image={`${SITE_URL}/modern-office-building.webp`}
+        image={`${SITE_URL}/og/guides.jpg`}
         jsonLd={jsonLd}
       />
       <main className="min-h-screen">
