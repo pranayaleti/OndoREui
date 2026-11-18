@@ -286,9 +286,10 @@ const Footer = memo(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-foreground/70 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary rounded"
-                  aria-label="Open address in Google Maps"
+                  // WCAG 2.5.3 Label in Name: the accessible name must contain the visible text.
+                  aria-label={`${SITE_ADDRESS_STREET} ${SITE_ADDRESS_CITY}, ${SITE_ADDRESS_REGION} ${SITE_ADDRESS_POSTAL_CODE} (opens in Google Maps)`}
                 >
-                  <span className="block">{SITE_ADDRESS_STREET}</span>
+                  <span className="block">{SITE_ADDRESS_STREET}</span>{" "}
                   <span className="block">{`${SITE_ADDRESS_CITY}, ${SITE_ADDRESS_REGION} ${SITE_ADDRESS_POSTAL_CODE}`}</span>
                 </a>
               </div>
@@ -319,7 +320,7 @@ const Footer = memo(() => {
               <Link
                 href="/links/"
                 className="inline-flex min-h-11 items-center ml-2 pl-4 border-l border-border text-sm text-foreground/70 hover:text-foreground transition-colors"
-                aria-label="All Ondo links in one place"
+                aria-label="All links: all Ondo links in one place"
                 {...analyticsAttributes("links_hub_click", "footer", "links")}
               >
                 All links

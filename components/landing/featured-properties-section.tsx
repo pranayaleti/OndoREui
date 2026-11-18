@@ -75,7 +75,7 @@ export function FeaturedPropertiesSection() {
               type="button"
               onClick={toggle}
               className="inline-flex min-h-11 items-center rounded-full border border-border px-3 py-1 text-xs text-foreground/70 hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label={showValues ? "Hide rental prices" : "Show rental prices"}
+              aria-label={showValues ? "Hide amounts for rental prices" : "Show amounts for rental prices"}
             >
               {showValues ? <EyeOff className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />}
               <span className="hidden sm:inline">

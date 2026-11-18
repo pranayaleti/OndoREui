@@ -528,7 +528,6 @@ export default function PropertiesClient({
                     <Button
                       variant="outline"
                       className="min-h-[44px] justify-start sm:justify-center"
-                      aria-label={`Sort properties by ${sortOptionLabel(sortBy)}`}
                     >
                       <ArrowUpDown className="mr-2 h-4 w-4 flex-shrink-0" aria-hidden="true" />
                       <span className="truncate">
