@@ -9,7 +9,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { LoadingSpinner } from "@/components/loading-states"
 
 interface ValidatedFormProps<T extends FieldValues> {
-  schema: z.ZodType<T, z.ZodTypeDef, T>
+  schema: z.ZodType<T, T>
   onSubmit: SubmitHandler<T>
   children: (form: UseFormReturn<T>) => React.ReactNode
   defaultValues?: DefaultValues<T>
