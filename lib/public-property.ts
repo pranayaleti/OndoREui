@@ -281,16 +281,19 @@ export function listingSegmentsFromListBody(body: unknown): string[] {
 }
 
 /**
- * Segments to prerender under `/properties/`: the legacy address URL (a redirect
- * stub to the root URL, so links already shared keep working on a host with no
- * server redirects) plus the publicId for listings that have no root URL.
+ * Segments to prerender under `/properties/`: every listing's publicId and its
+ * legacy address URL. For a listing with a root URL both are redirect stubs to
+ * `/{address-slug}/`, so links already shared (the publicId URL was canonical
+ * until Nov 2026, and feeds and syndication partners still hold it) answer 200
+ * with a canonical instead of a 404 on a host with no server redirects. A
+ * listing with no root URL renders in full at its publicId.
  */
 export function legacyListingSegmentsFromListBody(body: unknown): string[] {
   const segments = new Set<string>()
   for (const row of listingRows(body)) {
     const slug = listingSlug(row)
     if (slug && !(LISTING_STATIC_SEGMENTS as readonly string[]).includes(slug)) segments.add(slug)
-    if (!rootListingSlug(row)) segments.add(row.publicId)
+    segments.add(row.publicId)
   }
   return [...segments]
 }

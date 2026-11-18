@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +11,7 @@ import { RentalApplicationWizard } from "@/components/rental/rental-application-
 import { FairHousingNotice } from "@/components/rental/fair-housing-notice"
 import { analytics } from "@/lib/analytics"
 import { trackRentalFunnel } from "@/lib/rental-analytics"
+import { referralCodeForThisVisit } from "@/lib/referral-code"
 
 export function RentalStartClient({
   propertyId,
@@ -25,8 +26,16 @@ export function RentalStartClient({
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
+  const [referralCode, setReferralCode] = useState("")
   const [error, setError] = useState("")
   const [busy, setBusy] = useState(false)
+
+  // Fill in a friend's code from ?ref= or an earlier visit to their invite link.
+  // Read after hydration because the page is statically exported.
+  useEffect(() => {
+    const code = referralCodeForThisVisit(window.location.search)
+    if (code) setReferralCode((current) => current || code)
+  }, [])
 
   if (started) {
     return <RentalApplicationWizard applicationId={started.id} resumeToken={started.resumeToken} applyToken={token} />
@@ -51,6 +60,7 @@ export function RentalStartClient({
               firstName,
               lastName,
               email,
+              referralCode: referralCode.trim() || undefined,
             })
             rememberRentalApplication({
               id: app.id,
@@ -80,6 +90,22 @@ export function RentalStartClient({
         <div>
           <Label htmlFor="em">Email</Label>
           <Input id="em" type="email" className="mt-1" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <Label htmlFor="ref">Referral code (optional)</Label>
+          <Input
+            id="ref"
+            className="mt-1 font-mono uppercase"
+            autoComplete="off"
+            maxLength={32}
+            aria-describedby="ref-help"
+            value={referralCode}
+            onChange={(e) => setReferralCode(e.target.value)}
+          />
+          <p id="ref-help" className="mt-1 text-xs text-muted-foreground">
+            If someone referred you to Ondo, enter their code. You get a welcome bonus in Ondo Rewards if you sign a
+            lease.
+          </p>
         </div>
         {error ? <p className="text-sm text-destructive-emphasis">{error}</p> : null}
         <Button type="submit" className="min-h-11 w-full" disabled={busy}>

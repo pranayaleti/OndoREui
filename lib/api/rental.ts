@@ -214,6 +214,8 @@ export async function startRentalApplication(input: {
   firstName: string
   lastName: string
   email: string
+  /** A friend's Ondo referral code. The server drops unknown codes instead of failing. */
+  referralCode?: string
 }): Promise<RentalApplicationSummary> {
   const res = await fetch(backendUrl("/api/rental/applications/start"), {
     method: "POST",

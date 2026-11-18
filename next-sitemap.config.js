@@ -200,6 +200,16 @@ const INVESTMENT_STATIC_SUBPAGES = new Set(
     .map((d) => `/investments/${d.name}`),
 )
 
+/** True when the exported page at `path` carries a robots noindex meta (outDir, trailingSlash). */
+function isNoindexExport(path) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports -- CommonJS config, like the requires above
+  const fs = require('fs')
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const file = require('path').join(__dirname, 'out', path, 'index.html')
+  if (!fs.existsSync(file)) return false
+  return /<meta name="robots" content="noindex/.test(fs.readFileSync(file, 'utf8'))
+}
+
 function isExcludedPath(path) {
   const p = normalizeSitemapPath(path)
   if (SITEMAP_NOINDEX_PATHS.includes(p)) {
@@ -231,6 +241,11 @@ function isExcludedPath(path) {
   // /properties/{address-slug}/ is a noindex redirect stub to /{address-slug}/. Only a
   // UUID segment (a listing with no usable address, canonical there) belongs in the sitemap.
   if (/^\/properties\/[^/]+$/.test(p) && p !== '/properties/compare' && !UUID_SEGMENT.test(p.slice('/properties/'.length))) {
+    return true
+  }
+  // /properties/{publicId}/ of a listing that has an address is also a noindex redirect
+  // stub (old links keep working). Read the exported page to tell it from a canonical one.
+  if (/^\/properties\/[^/]+$/.test(p) && isNoindexExport(p)) {
     return true
   }
 

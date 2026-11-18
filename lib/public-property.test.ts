@@ -398,8 +398,8 @@ describe("listingSlug and address URLs", () => {
       { publicId: "d", title: "D", addressLine1: "Blog" },
     ]
     expect(listingSegmentsFromListBody(rows)).toEqual(["1-elm-st"])
-    // Legacy stubs: the address URL, plus the id of each listing with no root URL.
-    expect(legacyListingSegmentsFromListBody(rows)).toEqual(["1-elm-st", "c", "blog", "d"])
+    // Legacy stubs: every publicId (old links redirect to the address URL) plus the address URL.
+    expect(legacyListingSegmentsFromListBody(rows)).toEqual(["1-elm-st", "a", "b", "c", "blog", "d"])
   })
 
   it("resolves a listing by its address slug from the list fallback", async () => {

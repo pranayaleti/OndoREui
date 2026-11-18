@@ -1,9 +1,11 @@
 "use client"
 
+import { useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { APP_PORTAL_LOGIN_URL } from "@/lib/site"
+import { rememberReferralCode } from "@/lib/referral-code"
 
 /**
  * `?ref=` handling for `/referral/`.
@@ -18,12 +20,10 @@ function useRefCode(): string {
   return searchParams?.get("ref") ?? ""
 }
 
-const SIGNUP_BUTTON_CLASS =
-  "bg-gradient-to-r from-orange-500 to-red-700 hover:from-orange-600 hover:to-red-800 text-white border-0 px-8"
-
+/** The page's main action, so it is the one solid orange button. */
 function SignupButton({ href, label }: { href: string; label: string }) {
   return (
-    <Button asChild size="lg" className={SIGNUP_BUTTON_CLASS}>
+    <Button asChild size="lg" className="px-8">
       <a href={href}>{label}</a>
     </Button>
   )
@@ -47,19 +47,20 @@ export function ReferralSignupButton() {
 export function ReferralBonusBanner() {
   const { t } = useTranslation()
   const refCode = useRefCode()
+  // Remember the code so a rental application started later fills it in.
+  useEffect(() => {
+    if (refCode) rememberReferralCode(refCode)
+  }, [refCode])
   if (!refCode) return null
   return (
     <section
       aria-labelledby="referral-bonus-heading"
-      className="rounded-xl border border-amber-300 bg-amber-50 p-6 dark:border-amber-700 dark:bg-amber-950/40"
+      className="mt-6 border-l-4 border-primary pl-4"
     >
-      <h2
-        id="referral-bonus-heading"
-        className="mb-2 text-lg font-semibold text-amber-900 dark:text-amber-200"
-      >
+      <h2 id="referral-bonus-heading" className="text-base font-semibold text-foreground">
         {t("referral.bonusTitle")}
       </h2>
-      <p className="text-sm text-amber-800 dark:text-amber-300">
+      <p className="mt-1 text-sm text-foreground/80">
         {t("referral.bonusDesc", { code: refCode })}
       </p>
     </section>
