@@ -1,5 +1,16 @@
 import { z } from "zod"
 
+/**
+ * Message for a field that was left unset, matching Zod 3's `required_error`.
+ *
+ * Zod 4 replaced `required_error` with `error`, and a plain string `error` also overrides
+ * the message for *invalid* values. Returning `undefined` for anything but a missing value
+ * keeps Zod's default message for those, as before.
+ */
+const requiredError = (message: string) => ({
+  error: (issue: { input?: unknown }) => (issue.input === undefined ? message : undefined),
+})
+
 // Reusable validation helpers
 
 /**
@@ -51,20 +62,12 @@ export const leadFormSchema = z.object({
 export const maintenanceRequestSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  priority: z.enum(["low", "medium", "high", "emergency"], {
-    required_error: "Please select a priority level",
-  }),
-  category: z.enum(["plumbing", "electrical", "hvac", "appliances", "flooring", "windows", "structural", "pest_control", "cleaning", "other"], {
-    required_error: "Please select a category",
-  }),
+  priority: z.enum(["low", "medium", "high", "emergency"], requiredError("Please select a priority level")),
+  category: z.enum(["plumbing", "electrical", "hvac", "appliances", "flooring", "windows", "structural", "pest_control", "cleaning", "other"], requiredError("Please select a category")),
   preferredDate: z.string().optional(),
   preferredTimeSlot: z.string().optional(),
-  entryPermission: z.enum(["yes", "no"], {
-    required_error: "Please specify entry permission",
-  }),
-  petInHome: z.enum(["yes", "no"], {
-    required_error: "Please specify if pets are in home",
-  }),
+  entryPermission: z.enum(["yes", "no"], requiredError("Please specify entry permission")),
+  petInHome: z.enum(["yes", "no"], requiredError("Please specify if pets are in home")),
 })
 
 // Property form validation
@@ -74,9 +77,7 @@ export const propertyFormSchema = z.object({
   city: z.string().min(2, "Please enter a valid city"),
   state: z.string().min(2, "Please enter a valid state"),
   zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, "Please enter a valid ZIP code"),
-  propertyType: z.enum(["apartment", "house", "condo", "townhouse", "commercial"], {
-    required_error: "Please select a property type",
-  }),
+  propertyType: z.enum(["apartment", "house", "condo", "townhouse", "commercial"], requiredError("Please select a property type")),
   bedrooms: z.number().min(0, "Bedrooms must be 0 or more"),
   bathrooms: z.number().min(0, "Bathrooms must be 0 or more"),
   squareFeet: z.number().min(1, "Square feet must be at least 1"),
@@ -109,9 +110,7 @@ export const loginSchema = z.object({
   password: z.string()
     .min(8, "Password must be at least 8 characters")
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, "Password must contain at least one uppercase letter, one lowercase letter, and one number"),
-  role: z.enum(["tenant", "owner", "admin"], {
-    required_error: "Please select a role",
-  }),
+  role: z.enum(["tenant", "owner", "admin"], requiredError("Please select a role")),
 })
 
 // Registration validation
@@ -124,9 +123,7 @@ export const registrationSchema = z.object({
     .min(8, "Password must be at least 8 characters")
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, "Password must contain at least one uppercase letter, one lowercase letter, and one number"),
   confirmPassword: z.string(),
-  role: z.enum(["tenant", "owner", "admin"], {
-    required_error: "Please select a role",
-  }),
+  role: z.enum(["tenant", "owner", "admin"], requiredError("Please select a role")),
   termsAccepted: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
 }).refine(data => data.password === data.confirmPassword, {
   message: "Passwords don't match",

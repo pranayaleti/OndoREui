@@ -107,7 +107,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
     } else {
       const emailResult = emailValidation.safeParse(formData.email);
       if (!emailResult.success) {
-        next.email = emailResult.error.errors[0]?.message || t("propertyLeadForm.errors.emailInvalid");
+        next.email = emailResult.error.issues[0]?.message || t("propertyLeadForm.errors.emailInvalid");
       }
     }
 
@@ -116,7 +116,7 @@ export function PropertyLeadForm({ open, onClose, propertyName, publicId }: Prop
     } else {
       const phoneResult = phoneValidation.safeParse(formData.phone);
       if (!phoneResult.success) {
-        next.phone = phoneResult.error.errors[0]?.message || t("propertyLeadForm.errors.phoneInvalid");
+        next.phone = phoneResult.error.issues[0]?.message || t("propertyLeadForm.errors.phoneInvalid");
       }
     }
 

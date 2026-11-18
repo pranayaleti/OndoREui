@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   emailValidation,
   phoneValidation,
@@ -214,6 +215,71 @@ describe("validations", () => {
         services: [],
       })
       expect(result.success).toBe(false)
+    })
+  })
+
+  // Zod 4 replaced `required_error` with `error`. These pin the Zod 3 behaviour the forms
+  // rely on: a custom message only when the field is missing, Zod's default otherwise.
+  describe("required enum messages", () => {
+    const valid = {
+      title: "Leaking kitchen tap",
+      description: "The tap in the kitchen leaks constantly.",
+      priority: "high",
+      category: "plumbing",
+      entryPermission: "yes",
+      petInHome: "no",
+    }
+    const messagesFor = (input: Record<string, unknown>, field: string) => {
+      const result = maintenanceRequestSchema.safeParse(input)
+      if (result.success) return []
+      return result.error.issues.filter((i) => i.path[0] === field).map((i) => i.message)
+    }
+
+    it("uses the custom message when the field is missing", () => {
+      const { priority: _priority, ...missing } = valid
+      expect(messagesFor(missing, "priority")).toEqual(["Please select a priority level"])
+    })
+    it("keeps Zod's default message for an invalid value", () => {
+      const messages = messagesFor({ ...valid, priority: "urgent" }, "priority")
+      expect(messages).toHaveLength(1)
+      expect(messages[0]).not.toBe("Please select a priority level")
+    })
+    it("still accepts every valid value", () => {
+      expect(maintenanceRequestSchema.safeParse(valid).success).toBe(true)
+    })
+    it("applies to the other required enums and to the login role", () => {
+      expect(messagesFor({}, "category")).toEqual(["Please select a category"])
+      expect(messagesFor({}, "entryPermission")).toEqual(["Please specify entry permission"])
+      const login = loginSchema.safeParse({ email: "a@b.co", password: "Passw0rdx" })
+      expect(login.success).toBe(false)
+      expect(!login.success && login.error.issues.map((i) => i.message)).toContain("Please select a role")
+    })
+  })
+
+  // Forms use @hookform/resolvers' zodResolver; resolvers 3.x cannot read Zod 4 errors.
+  describe("zodResolver with Zod 4 schemas", () => {
+    it("returns field errors with their messages", async () => {
+      const resolver = zodResolver(loginSchema)
+      const result = await resolver(
+        { email: "not-an-email", password: "short" } as never,
+        undefined,
+        { fields: {}, shouldUseNativeValidation: false } as never,
+      )
+      expect(result.values).toEqual({})
+      const errors = result.errors as Record<string, { message?: string }>
+      expect(errors.email?.message).toBe("Please enter a valid email address")
+      expect(errors.password?.message).toBe("Password must be at least 8 characters")
+      expect(errors.role?.message).toBe("Please select a role")
+    })
+    it("returns parsed values and no errors for valid input", async () => {
+      const resolver = zodResolver(loginSchema)
+      const input = { email: "owner@example.com", password: "Passw0rdx", role: "owner" }
+      const result = await resolver(input as never, undefined, {
+        fields: {},
+        shouldUseNativeValidation: false,
+      } as never)
+      expect(result.errors).toEqual({})
+      expect(result.values).toEqual(input)
     })
   })
 })
