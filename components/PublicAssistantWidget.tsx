@@ -112,7 +112,7 @@ export default function PublicAssistantWidget({ inline = false }: PublicAssistan
                    text-sm font-semibold text-white shadow-lg transition hover:bg-[#1a1a1a]
                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
                    focus-visible:outline-[#FF6A13] md:left-6 md:h-auto md:w-auto md:px-5 md:py-3 ${HIDE_WHILE_NAV_OPEN}`}
-          aria-label="Open the Ondo assistant to ask about property management, renting, buying, or loans"
+          aria-label="Ask Ondo: open the Ondo assistant to ask about property management, renting, buying, or loans"
         >
           <MessageSquare className="h-4 w-4" aria-hidden="true" />
           <span className="sr-only md:not-sr-only">Ask Ondo</span>

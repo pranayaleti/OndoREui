@@ -92,7 +92,7 @@ export default function ContactPage() {
               <Link
                 href="/links/"
                 className="mt-6 hidden items-center gap-4 text-foreground/70 hover:text-foreground transition-colors md:flex"
-                aria-label="All Ondo links in one place, or scan the code to save them on your phone"
+                aria-label="Scan to save all our links on your phone: all Ondo links in one place"
                 {...analyticsAttributes("links_hub_click", "contact", "qr")}
               >
                 {/* 128px keeps the 33-module code readable by a phone camera (scripts/generate-qr-kit.mjs). */}
