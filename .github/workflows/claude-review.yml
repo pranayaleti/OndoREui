@@ -39,13 +39,13 @@ jobs:
     steps:
       - name: Checkout
         if: env.HAS_ANTHROPIC_KEY == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Claude review
         if: env.HAS_ANTHROPIC_KEY == 'true'
-        uses: anthropics/claude-code-action@12dd8d74c712f5f3669365b2369b558c495b1104 # v1
+        uses: anthropics/claude-code-action@6070f08d2b4766348e0acded463606a7b176417b # v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
